@@ -1,0 +1,249 @@
+### YamlMime:TSType
+name: IChatPrompt
+uid: '@microsoft/teams.ai.IChatPrompt'
+package: '@microsoft/teams.ai'
+summary: |-
+  a prompt that can interface with a
+  chat model that provides utility like
+  streaming and function calling
+fullName: IChatPrompt<TOptions, TChatPromptPlugins>
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: description
+    uid: '@microsoft/teams.ai.IChatPrompt.description'
+    package: '@microsoft/teams.ai'
+    summary: the prompt description
+    fullName: description
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'description: string'
+      return:
+        description: ''
+        type: string
+  - name: functions
+    uid: '@microsoft/teams.ai.IChatPrompt.functions'
+    package: '@microsoft/teams.ai'
+    summary: the registered functions
+    fullName: functions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'functions: Function[]'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.ai.Function" />[]
+  - name: messages
+    uid: '@microsoft/teams.ai.IChatPrompt.messages'
+    package: '@microsoft/teams.ai'
+    summary: the chat history
+    fullName: messages
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'messages: IMemory'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.ai.IMemory" />
+  - name: name
+    uid: '@microsoft/teams.ai.IChatPrompt.name'
+    package: '@microsoft/teams.ai'
+    summary: the prompt name
+    fullName: name
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'name: string'
+      return:
+        description: ''
+        type: string
+  - name: plugins
+    uid: '@microsoft/teams.ai.IChatPrompt.plugins'
+    package: '@microsoft/teams.ai'
+    summary: the chat model
+    fullName: plugins
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'plugins: TChatPromptPlugins'
+      return:
+        description: ''
+        type: TChatPromptPlugins
+methods:
+  - name: call<A, R>(string, A)
+    uid: '@microsoft/teams.ai.IChatPrompt.call'
+    package: '@microsoft/teams.ai'
+    summary: call a function
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function call<A, R>(name: string, args?: A): Promise<R>'
+      parameters:
+        - id: name
+          type: string
+          description: ''
+        - id: args
+          type: A
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;R&gt;
+  - name: function(string, string, FunctionHandler<any>)
+    uid: '@microsoft/teams.ai.IChatPrompt.function'
+    package: '@microsoft/teams.ai'
+    summary: |-
+      add a function that can be called
+      by the model
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function function(name: string, description: string, handler:
+        FunctionHandler<any>): IChatPrompt<TOptions, TChatPromptPlugins>
+      parameters:
+        - id: name
+          type: string
+          description: ''
+        - id: description
+          type: string
+          description: ''
+        - id: handler
+          type: <xref uid="@microsoft/teams.ai.FunctionHandler" />&lt;any&gt;
+          description: ''
+      return:
+        description: ''
+        type: >-
+          <xref uid="@microsoft/teams.ai.IChatPrompt" />&lt;TOptions,
+          TChatPromptPlugins&gt;
+  - name: function(string, string, Schema, FunctionHandler<any>)
+    uid: '@microsoft/teams.ai.IChatPrompt.function_1'
+    package: '@microsoft/teams.ai'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function function(name: string, description: string, parameters: Schema,
+        handler: FunctionHandler<any>): IChatPrompt<TOptions,
+        TChatPromptPlugins>
+      parameters:
+        - id: name
+          type: string
+          description: ''
+        - id: description
+          type: string
+          description: ''
+        - id: parameters
+          type: <xref uid="@microsoft/teams.ai.Schema" />
+          description: ''
+        - id: handler
+          type: <xref uid="@microsoft/teams.ai.FunctionHandler" />&lt;any&gt;
+          description: ''
+      return:
+        description: ''
+        type: >-
+          <xref uid="@microsoft/teams.ai.IChatPrompt" />&lt;TOptions,
+          TChatPromptPlugins&gt;
+  - name: send(string | ContentPart[], ChatPromptSendOptions<TOptions>)
+    uid: '@microsoft/teams.ai.IChatPrompt.send'
+    package: '@microsoft/teams.ai'
+    summary: send a message to the model and get a response
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function send(input: string | ContentPart[], options?:
+        ChatPromptSendOptions<TOptions>): Promise<Pick<ModelMessage, "content">
+        & Omit<ModelMessage, "content">>
+      parameters:
+        - id: input
+          type: string | <xref uid="@microsoft/teams.ai.ContentPart" />[]
+          description: ''
+        - id: options
+          type: >-
+            <xref uid="@microsoft/teams.ai.ChatPromptSendOptions"
+            />&lt;TOptions&gt;
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;Pick&lt;<xref uid="@microsoft/teams.ai.ModelMessage" />,
+          "content"&gt; & Omit&lt;<xref uid="@microsoft/teams.ai.ModelMessage"
+          />, "content"&gt;&gt;
+  - name: use(IChatPrompt<Record<string, any>, Object>)
+    uid: '@microsoft/teams.ai.IChatPrompt.use'
+    package: '@microsoft/teams.ai'
+    summary: add another chat prompt as a
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function use(prompt: IChatPrompt<Record<string, any>, Object>):
+        IChatPrompt<TOptions, TChatPromptPlugins>
+      parameters:
+        - id: prompt
+          type: >-
+            <xref uid="@microsoft/teams.ai.IChatPrompt" />&lt;Record&lt;string,
+            any&gt;, Object&gt;
+          description: ''
+      return:
+        description: ''
+        type: >-
+          <xref uid="@microsoft/teams.ai.IChatPrompt" />&lt;TOptions,
+          TChatPromptPlugins&gt;
+  - name: use(string, IChatPrompt<Record<string, any>, Object>)
+    uid: '@microsoft/teams.ai.IChatPrompt.use_1'
+    package: '@microsoft/teams.ai'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function use(name: string, prompt: IChatPrompt<Record<string, any>,
+        Object>): IChatPrompt<TOptions, TChatPromptPlugins>
+      parameters:
+        - id: name
+          type: string
+          description: ''
+        - id: prompt
+          type: >-
+            <xref uid="@microsoft/teams.ai.IChatPrompt" />&lt;Record&lt;string,
+            any&gt;, Object&gt;
+          description: ''
+      return:
+        description: ''
+        type: >-
+          <xref uid="@microsoft/teams.ai.IChatPrompt" />&lt;TOptions,
+          TChatPromptPlugins&gt;
+  - name: >-
+      usePlugin<TPluginName>(TPluginName, (Extract<TChatPromptPlugins[number], {
+      name: TPluginName }>["onUsePlugin"] extends undefined | (args: U) => void
+      ? U : never))
+    uid: '@microsoft/teams.ai.IChatPrompt.usePlugin'
+    package: '@microsoft/teams.ai'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function usePlugin<TPluginName>(name: TPluginName, args:
+        (Extract<TChatPromptPlugins[number], { name: TPluginName
+        }>["onUsePlugin"] extends undefined | (args: U) => void ? U : never)):
+        IChatPrompt<TOptions, TChatPromptPlugins>
+      parameters:
+        - id: name
+          type: TPluginName
+          description: ''
+        - id: args
+          type: >-
+            (Extract&lt;TChatPromptPlugins[number], { name: TPluginName
+            }&gt;["onUsePlugin"] extends undefined | (args: U) =&gt; void ? U :
+            never)
+          description: ''
+      return:
+        description: ''
+        type: >-
+          <xref uid="@microsoft/teams.ai.IChatPrompt" />&lt;TOptions,
+          TChatPromptPlugins&gt;
