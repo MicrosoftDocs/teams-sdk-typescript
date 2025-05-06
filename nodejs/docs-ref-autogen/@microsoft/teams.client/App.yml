@@ -36,6 +36,18 @@ properties:
       return:
         description: ''
         type: string
+  - name: graph
+    uid: '@microsoft/teams.client.App.graph'
+    package: '@microsoft/teams.client'
+    summary: ''
+    fullName: graph
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'graph: Client'
+      return:
+        description: ''
+        type: Client
   - name: http
     uid: '@microsoft/teams.client.App.http'
     package: '@microsoft/teams.client'
@@ -99,6 +111,32 @@ properties:
         description: ''
         type: undefined | Date
 methods:
+  - name: ensureConsentForScopes(string[])
+    uid: '@microsoft/teams.client.App.ensureConsentForScopes'
+    package: '@microsoft/teams.client'
+    summary: >-
+      Tests whether the user has consented to the specified scopes, and prompts
+      them if not. This is useful for ensuring
+
+      that the user has consented to the required scopes before calling a graph
+      API or other resource.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function ensureConsentForScopes(scopes: string[]): Promise<boolean>'
+      parameters:
+        - id: scopes
+          type: string[]
+          description: >-
+            The scopes to prewarm consent for. The scopes should be for a single
+            resource, and they
+
+            should not mix the .default scope with named scopes.
+      return:
+        description: >-
+          A value indicating whether consent has been acquired for the specified
+          scopes.
+        type: Promise&lt;boolean&gt;
   - name: exec<T>(string, unknown, ExecOptions)
     uid: '@microsoft/teams.client.App.exec'
     package: '@microsoft/teams.client'
@@ -117,11 +155,34 @@ methods:
           type: unknown
           description: The data to send
         - id: options
-          type: ExecOptions
+          type: <xref uid="@microsoft/teams.client.ExecOptions" />
           description: Options
       return:
         description: The function response
         type: Promise&lt;T&gt;
+  - name: hasConsentForScopes(string[])
+    uid: '@microsoft/teams.client.App.hasConsentForScopes'
+    package: '@microsoft/teams.client'
+    summary: >-
+      Tests whether the user has consented to the specified scopes without
+      prompting the user for consent.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function hasConsentForScopes(scopes: string[]): Promise<boolean>'
+      parameters:
+        - id: scopes
+          type: string[]
+          description: >-
+            The scopes to check consent for.The scopes should be for a single
+            resource, and they
+
+            should not mix the .default scope with named scopes.
+      return:
+        description: >-
+          A promise that resolves to a boolean indicating whether the user has
+          consented to the scopes.
+        type: Promise&lt;boolean&gt;
   - name: start()
     uid: '@microsoft/teams.client.App.start'
     package: '@microsoft/teams.client'
