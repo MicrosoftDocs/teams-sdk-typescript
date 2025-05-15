@@ -6,7 +6,7 @@ ms.topic: reference
 keywords: sdk msteams teams ai javascript typescript library reference latest
 ---
 
-# Microsoft Teams AI Library v2 Reference: TypeScript
+# Microsoft Teams AI Library v2 Reference (TypeScript)
 
 The Microsoft Teams AI Library v2 provides a Teams-centric interface for integrating GPT-based language models and user intent engines. It simplifies the development process by reducing the need to write and maintain complex conversational bot logic. You can leverage prebuilt, reusable code snippets that allow you to quickly build intelligent apps. This capabilities-driven approach allows you to focus on business logic rather than learning the intricacies of Microsoft Teams conversational frameworks.
 
