@@ -1,18 +1,20 @@
 ---
-title: Microsoft Teams AI Library v2 Reference
-description: Reference documentation for Microsoft Teams AI Library version 2.
-ms.date: 04/28/2025
+title: Microsoft Teams AI Library v2 Reference (TypeScript)
+description: TypeScript reference documentation for Microsoft Teams AI Library version 2.
+ms.date: 05/15/2025
 ms.topic: reference
-keywords: sdk msteams teams ai javascript library reference latest
+keywords: sdk msteams teams ai javascript typescript library reference latest
 ---
 
-# Microsoft Teams AI Library v2 (Teams SDK: Typescript) Reference
+# Microsoft Teams AI Library v2 Reference: TypeScript
 
-The Microsoft Teams AI Library (v2) provides a Teams-centric interface for integrating GPT-based language models and user intent engines. It simplifies the development process by reducing the need to write and maintain complex conversational bot logic. You can leverage prebuilt, reusable code snippets that allow you to quickly build intelligent apps. This capabilities-driven approach allows you to focus on business logic rather than learning the intricacies of Microsoft Teams conversational frameworks.
+The Microsoft Teams AI Library v2 provides a Teams-centric interface for integrating GPT-based language models and user intent engines. It simplifies the development process by reducing the need to write and maintain complex conversational bot logic. You can leverage prebuilt, reusable code snippets that allow you to quickly build intelligent apps. This capabilities-driven approach allows you to focus on business logic rather than learning the intricacies of Microsoft Teams conversational frameworks.
 
 ## Finding the library
 
-The Teams AI library (v2) is available in a number of package formats to support different programming languages, more information is available on the [library GitHub page](https://github.com/microsoft/teams.ts).
+For more about the TypeScript version of Teams AI Library v2, refer to the source repo at [Teams SDK: TypeScript](https://github.com/microsoft/teams.ts.).
+
+For more about the .NET version of Teams AI Library v2, refer to the source repo at [Teams SDK: DotNet](https://github.com/microsoft/teams.net).
 
 ### Library packages
 
