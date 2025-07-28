@@ -2,10 +2,7 @@
 name: TextRun
 uid: '@microsoft/teams.cards.TextRun'
 package: '@microsoft/teams.cards'
-summary: >-
-  Defines a single run of formatted text. A TextRun with no properties set can
-  be represented in the json as string containing the text as a shorthand for
-  the json object. These two representations are equivalent.
+summary: A block of text inside a RichTextBlock element.
 fullName: TextRun
 remarks: ''
 isDeprecated: false
@@ -30,19 +27,34 @@ properties:
   - name: color
     uid: '@microsoft/teams.cards.TextRun.color'
     package: '@microsoft/teams.cards'
-    summary: Controls the color of the text.
+    summary: The color of the text.
     fullName: color
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'color?: Color'
+      content: 'color?: TextColor'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.Color" />
+        type: <xref uid="@microsoft/teams.cards.TextColor" />
+  - name: fallback
+    uid: '@microsoft/teams.cards.TextRun.fallback'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      An alternate element to render if the type of this one is unsupported or
+      if the host application doesn't support all the capabilities specified in
+      the requires property.
+    fullName: fallback
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'fallback?: FallbackElement'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.FallbackElement" />
   - name: fontType
     uid: '@microsoft/teams.cards.TextRun.fontType'
     package: '@microsoft/teams.cards'
-    summary: The type of font to use
+    summary: The type of font to use for rendering.
     fullName: fontType
     remarks: ''
     isDeprecated: false
@@ -51,10 +63,24 @@ properties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.FontType" />
+  - name: grid.area
+    uid: '@microsoft/teams.cards.TextRun.grid.area'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      The area of a Layout.AreaGrid layout in which an element should be
+      displayed.
+    fullName: grid.area
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'grid.area?: string'
+      return:
+        description: ''
+        type: string
   - name: highlight
     uid: '@microsoft/teams.cards.TextRun.highlight'
     package: '@microsoft/teams.cards'
-    summary: If true, displays the text highlighted.
+    summary: Controls if the text should be highlighted.
     fullName: highlight
     remarks: ''
     isDeprecated: false
@@ -63,10 +89,41 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: id
+    uid: '@microsoft/teams.cards.TextRun.id'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      A unique identifier for the element or action. Input elements must have an
+      id, otherwise they will not be validated and their values will not be sent
+      to the Bot.
+    fullName: id
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'id?: string'
+      return:
+        description: ''
+        type: string
+  - name: isSortKey
+    uid: '@microsoft/teams.cards.TextRun.isSortKey'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Controls whether the element should be used as a sort key by elements that
+      allow sorting across a collection of elements.
+    fullName: isSortKey
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'isSortKey?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: isSubtle
     uid: '@microsoft/teams.cards.TextRun.isSubtle'
     package: '@microsoft/teams.cards'
-    summary: If true, displays text slightly toned down to appear less prominent.
+    summary: >-
+      Controls whether the text should be renderer using a subtler variant of
+      the select color.
     fullName: isSubtle
     remarks: ''
     isDeprecated: false
@@ -75,10 +132,22 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: isVisible
+    uid: '@microsoft/teams.cards.TextRun.isVisible'
+    package: '@microsoft/teams.cards'
+    summary: Controls the visibility of the element.
+    fullName: isVisible
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'isVisible?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: italic
     uid: '@microsoft/teams.cards.TextRun.italic'
     package: '@microsoft/teams.cards'
-    summary: If true, displays the text using italic font.
+    summary: Controls if the text should be italicized.
     fullName: italic
     remarks: ''
     isDeprecated: false
@@ -87,36 +156,55 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: lang
+    uid: '@microsoft/teams.cards.TextRun.lang'
+    package: '@microsoft/teams.cards'
+    summary: The locale associated with the element.
+    fullName: lang
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'lang?: string'
+      return:
+        description: ''
+        type: string
   - name: selectAction
     uid: '@microsoft/teams.cards.TextRun.selectAction'
     package: '@microsoft/teams.cards'
     summary: >-
-      Action to invoke when this text run is clicked. Visually changes the text
-      run into a hyperlink. Action.ShowCard is not supported.
+      An Action that will be invoked when the text is tapped or clicked.
+      Action.ShowCard is not supported.
     fullName: selectAction
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'selectAction?: SelectAction'
+      content: >-
+        selectAction?: IExecuteAction | IOpenUrlAction | IResetInputsAction |
+        ISubmitAction | IToggleVisibilityAction
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.SelectAction" />
+        type: >-
+          <xref uid="@microsoft/teams.cards.IExecuteAction" /> | <xref
+          uid="@microsoft/teams.cards.IOpenUrlAction" /> | <xref
+          uid="@microsoft/teams.cards.IResetInputsAction" /> | <xref
+          uid="@microsoft/teams.cards.ISubmitAction" /> | <xref
+          uid="@microsoft/teams.cards.IToggleVisibilityAction" />
   - name: size
     uid: '@microsoft/teams.cards.TextRun.size'
     package: '@microsoft/teams.cards'
-    summary: Controls size of text.
+    summary: The size of the text.
     fullName: size
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'size?: FontSize'
+      content: 'size?: TextSize'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.FontSize" />
+        type: <xref uid="@microsoft/teams.cards.TextSize" />
   - name: strikethrough
     uid: '@microsoft/teams.cards.TextRun.strikethrough'
     package: '@microsoft/teams.cards'
-    summary: If true, displays the text with strikethrough.
+    summary: Controls if the text should be struck through.
     fullName: strikethrough
     remarks: ''
     isDeprecated: false
@@ -128,7 +216,7 @@ properties:
   - name: text
     uid: '@microsoft/teams.cards.TextRun.text'
     package: '@microsoft/teams.cards'
-    summary: Text to display. Markdown is not supported.
+    summary: The text to display. A subset of markdown is supported.
     fullName: text
     remarks: ''
     isDeprecated: false
@@ -140,19 +228,19 @@ properties:
   - name: type
     uid: '@microsoft/teams.cards.TextRun.type'
     package: '@microsoft/teams.cards'
-    summary: ''
+    summary: Must be **TextRun**.
     fullName: type
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'type: "TextRun"'
+      content: 'type: "TextRun" = "TextRun"'
       return:
         description: ''
         type: '"TextRun"'
   - name: underline
     uid: '@microsoft/teams.cards.TextRun.underline'
     package: '@microsoft/teams.cards'
-    summary: If true, displays the text with an underline.
+    summary: Controls if the text should be underlined.
     fullName: underline
     remarks: ''
     isDeprecated: false
@@ -164,31 +252,16 @@ properties:
   - name: weight
     uid: '@microsoft/teams.cards.TextRun.weight'
     package: '@microsoft/teams.cards'
-    summary: Controls the weight of the text.
+    summary: The weight of the text.
     fullName: weight
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'weight?: FontWeight'
+      content: 'weight?: TextWeight'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.FontWeight" />
+        type: <xref uid="@microsoft/teams.cards.TextWeight" />
 methods:
-  - name: addText(string[])
-    uid: '@microsoft/teams.cards.TextRun.addText'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function addText(value: string[]): TextRun'
-      parameters:
-        - id: value
-          type: string[]
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.TextRun" />
   - name: from(Omit<ITextRun, "type">)
     uid: '@microsoft/teams.cards.TextRun.from'
     package: '@microsoft/teams.cards'
@@ -204,28 +277,32 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.TextRun" />
-  - name: toString()
-    uid: '@microsoft/teams.cards.TextRun.toString'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function toString(): string'
-      return:
-        description: ''
-        type: string
-  - name: withColor(Color)
+  - name: withColor(TextColor)
     uid: '@microsoft/teams.cards.TextRun.withColor'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withColor(value: Color): TextRun'
+      content: 'function withColor(color: TextColor): TextRun'
       parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.Color" />
+        - id: color
+          type: <xref uid="@microsoft/teams.cards.TextColor" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.TextRun" />
+  - name: withFallback(FallbackElement)
+    uid: '@microsoft/teams.cards.TextRun.withFallback'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withFallback(fallback: FallbackElement): TextRun'
+      parameters:
+        - id: fallback
+          type: <xref uid="@microsoft/teams.cards.FallbackElement" />
           description: ''
       return:
         description: ''
@@ -237,9 +314,9 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withFontType(value: FontType): TextRun'
+      content: 'function withFontType(fontType: FontType): TextRun'
       parameters:
-        - id: value
+        - id: fontType
           type: <xref uid="@microsoft/teams.cards.FontType" />
           description: ''
       return:
@@ -252,9 +329,69 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withHighlight(value?: boolean): TextRun'
+      content: 'function withHighlight(highlight?: boolean): TextRun'
       parameters:
-        - id: value
+        - id: highlight
+          type: boolean
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.TextRun" />
+  - name: withId(string)
+    uid: '@microsoft/teams.cards.TextRun.withId'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withId(id: string): TextRun'
+      parameters:
+        - id: id
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.TextRun" />
+  - name: withIsSortKey(boolean)
+    uid: '@microsoft/teams.cards.TextRun.withIsSortKey'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withIsSortKey(isSortKey?: boolean): TextRun'
+      parameters:
+        - id: isSortKey
+          type: boolean
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.TextRun" />
+  - name: withIsSubtle(boolean)
+    uid: '@microsoft/teams.cards.TextRun.withIsSubtle'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withIsSubtle(isSubtle: boolean): TextRun'
+      parameters:
+        - id: isSubtle
+          type: boolean
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.TextRun" />
+  - name: withIsVisible(boolean)
+    uid: '@microsoft/teams.cards.TextRun.withIsVisible'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withIsVisible(isVisible?: boolean): TextRun'
+      parameters:
+        - id: isVisible
           type: boolean
           description: ''
       return:
@@ -267,70 +404,94 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withItalic(value?: boolean): TextRun'
+      content: 'function withItalic(italic?: boolean): TextRun'
       parameters:
-        - id: value
+        - id: italic
           type: boolean
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.TextRun" />
-  - name: withSelectAction(SelectAction)
+  - name: withLang(string)
+    uid: '@microsoft/teams.cards.TextRun.withLang'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withLang(lang: string): TextRun'
+      parameters:
+        - id: lang
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.TextRun" />
+  - name: >-
+      withSelectAction(IExecuteAction | IOpenUrlAction | IResetInputsAction |
+      ISubmitAction | IToggleVisibilityAction)
     uid: '@microsoft/teams.cards.TextRun.withSelectAction'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withSelectAction(value: SelectAction): TextRun'
+      content: >-
+        function withSelectAction(selectAction: IExecuteAction | IOpenUrlAction
+        | IResetInputsAction | ISubmitAction | IToggleVisibilityAction): TextRun
       parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.SelectAction" />
+        - id: selectAction
+          type: >-
+            <xref uid="@microsoft/teams.cards.IExecuteAction" /> | <xref
+            uid="@microsoft/teams.cards.IOpenUrlAction" /> | <xref
+            uid="@microsoft/teams.cards.IResetInputsAction" /> | <xref
+            uid="@microsoft/teams.cards.ISubmitAction" /> | <xref
+            uid="@microsoft/teams.cards.IToggleVisibilityAction" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.TextRun" />
-  - name: withSize(FontSize)
+  - name: withSize(TextSize)
     uid: '@microsoft/teams.cards.TextRun.withSize'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withSize(value: FontSize): TextRun'
+      content: 'function withSize(size: TextSize): TextRun'
       parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.FontSize" />
+        - id: size
+          type: <xref uid="@microsoft/teams.cards.TextSize" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.TextRun" />
-  - name: withStrikeThrough(boolean)
-    uid: '@microsoft/teams.cards.TextRun.withStrikeThrough'
+  - name: withStrikethrough(boolean)
+    uid: '@microsoft/teams.cards.TextRun.withStrikethrough'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withStrikeThrough(value?: boolean): TextRun'
+      content: 'function withStrikethrough(strikethrough?: boolean): TextRun'
       parameters:
-        - id: value
+        - id: strikethrough
           type: boolean
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.TextRun" />
-  - name: withSubtle(boolean)
-    uid: '@microsoft/teams.cards.TextRun.withSubtle'
+  - name: withText(string)
+    uid: '@microsoft/teams.cards.TextRun.withText'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withSubtle(value?: boolean): TextRun'
+      content: 'function withText(text: string): TextRun'
       parameters:
-        - id: value
-          type: boolean
+        - id: text
+          type: string
           description: ''
       return:
         description: ''
@@ -342,25 +503,25 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withUnderline(value?: boolean): TextRun'
+      content: 'function withUnderline(underline?: boolean): TextRun'
       parameters:
-        - id: value
+        - id: underline
           type: boolean
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.TextRun" />
-  - name: withWeight(FontWeight)
+  - name: withWeight(TextWeight)
     uid: '@microsoft/teams.cards.TextRun.withWeight'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withWeight(value: FontWeight): TextRun'
+      content: 'function withWeight(weight: TextWeight): TextRun'
       parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.FontWeight" />
+        - id: weight
+          type: <xref uid="@microsoft/teams.cards.TextWeight" />
           description: ''
       return:
         description: ''

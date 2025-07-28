@@ -3,22 +3,22 @@ name: App
 uid: '@microsoft/teams.apps.App'
 package: '@microsoft/teams.apps'
 summary: The orchestrator for receiving/sending activities
-fullName: App
+fullName: App<TPlugin>
 remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: App(AppOptions)
+  - name: App<TPlugin>(AppOptions<TPlugin>)
     uid: '@microsoft/teams.apps.App.constructor'
     package: '@microsoft/teams.apps'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'new App(options?: AppOptions)'
+      content: 'new App(options?: AppOptions<TPlugin>)'
       parameters:
         - id: options
-          type: <xref uid="@microsoft/teams.apps.AppOptions" />
+          type: <xref uid="@microsoft/teams.apps.AppOptions" />&lt;TPlugin&gt;
           description: ''
 properties:
   - name: api
@@ -29,10 +29,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'api: AppClient'
+      content: 'api: Client'
       return:
         description: ''
-        type: AppClient
+        type: <xref uid="@microsoft/teams.api.Client" />
   - name: client
     uid: '@microsoft/teams.apps.App.client'
     package: '@microsoft/teams.apps'
@@ -54,13 +54,14 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        configTab: (this: App, url: string, options?:
-        Partial<Omit<ConfigurableTab, "configurationUrl">>) => App
+        configTab: (this: App<TPlugin>, url: string, options?:
+        Partial<Omit<ConfigurableTab, "configurationUrl">>) => App<TPlugin>
       return:
         description: ''
         type: >-
-          (this: App, url: string, options?: Partial&lt;Omit&lt;ConfigurableTab,
-          "configurationUrl"&gt;&gt;) =&gt; App
+          (this: App&lt;TPlugin&gt;, url: string, options?:
+          Partial&lt;Omit&lt;ConfigurableTab, "configurationUrl"&gt;&gt;) =&gt;
+          App&lt;TPlugin&gt;
   - name: credentials
     uid: '@microsoft/teams.apps.App.credentials'
     package: '@microsoft/teams.apps'
@@ -93,12 +94,15 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'event: (this: App, name: Name, cb: EventHandler<IEvents[Name]>) => App'
+      content: >-
+        event: (this: App<TPlugin>, name: Name, cb:
+        EventHandler<AppEvents<TPlugin>[Name]>) => App<TPlugin>
       return:
         description: ''
         type: >-
-          (this: App, name: Name, cb: EventHandler&lt;IEvents[Name]&gt;) =&gt;
-          App
+          (this: App&lt;TPlugin&gt;, name: Name, cb:
+          EventHandler&lt;AppEvents&lt;TPlugin&gt;[Name]&gt;) =&gt;
+          App&lt;TPlugin&gt;
   - name: function
     uid: '@microsoft/teams.apps.App.function'
     package: '@microsoft/teams.apps'
@@ -108,13 +112,13 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        function: (this: App, name: string, cb: (context:
-        IFunctionContext<TData>) => any) => App
+        function: (this: App<TPlugin>, name: string, cb: (context:
+        IFunctionContext<TData>) => any) => App<TPlugin>
       return:
         description: ''
         type: >-
-          (this: App, name: string, cb: (context: IFunctionContext&lt;TData&gt;)
-          =&gt; any) =&gt; App
+          (this: App&lt;TPlugin&gt;, name: string, cb: (context:
+          IFunctionContext&lt;TData&gt;) =&gt; any) =&gt; App&lt;TPlugin&gt;
   - name: getPlugin
     uid: '@microsoft/teams.apps.App.getPlugin'
     package: '@microsoft/teams.apps'
@@ -123,10 +127,22 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'getPlugin: (this: App, name: PluginName) => IPlugin | undefined'
+      content: 'getPlugin: (this: App<TPlugin>, name: PluginName) => IPlugin | undefined'
       return:
         description: ''
-        type: '(this: App, name: PluginName) =&gt; IPlugin | undefined'
+        type: '(this: App&lt;TPlugin&gt;, name: PluginName) =&gt; IPlugin | undefined'
+  - name: graph
+    uid: '@microsoft/teams.apps.App.graph'
+    package: '@microsoft/teams.apps'
+    summary: ''
+    fullName: graph
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'graph: Client'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.graph.Client" />
   - name: http
     uid: '@microsoft/teams.apps.App.http'
     package: '@microsoft/teams.apps'
@@ -184,14 +200,14 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        message: (this: App, pattern: string | RegExp, cb:
-        RouteHandler<IActivityContext<IMessageActivity>, void>) => App
+        message: (this: App<TPlugin>, pattern: string | RegExp, cb:
+        RouteHandler<IActivityContext<IMessageActivity>, void>) => App<TPlugin>
       return:
         description: ''
         type: >-
-          (this: App, pattern: string | RegExp, cb:
+          (this: App&lt;TPlugin&gt;, pattern: string | RegExp, cb:
           RouteHandler&lt;IActivityContext&lt;IMessageActivity&gt;, void&gt;)
-          =&gt; App
+          =&gt; App&lt;TPlugin&gt;
   - name: name
     uid: '@microsoft/teams.apps.App.name'
     package: '@microsoft/teams.apps'
@@ -225,13 +241,13 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        on: (this: App, name: Name, cb: Exclude<IRoutes[Name], undefined>) =>
-        App
+        on: (this: App<TPlugin>, name: Name, cb: Exclude<IRoutes[Name],
+        undefined>) => App<TPlugin>
       return:
         description: ''
         type: >-
-          (this: App, name: Name, cb: Exclude&lt;IRoutes[Name], undefined&gt;)
-          =&gt; App
+          (this: App&lt;TPlugin&gt;, name: Name, cb: Exclude&lt;IRoutes[Name],
+          undefined&gt;) =&gt; App&lt;TPlugin&gt;
   - name: options
     uid: '@microsoft/teams.apps.App.options'
     package: '@microsoft/teams.apps'
@@ -240,10 +256,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'options: AppOptions'
+      content: 'options: AppOptions<TPlugin>'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.apps.AppOptions" />
+        type: <xref uid="@microsoft/teams.apps.AppOptions" />&lt;TPlugin&gt;
   - name: plugin
     uid: '@microsoft/teams.apps.App.plugin'
     package: '@microsoft/teams.apps'
@@ -252,10 +268,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'plugin: (this: App, plugin: IPlugin) => App'
+      content: 'plugin: (this: App<TPlugin>, plugin: TPlugin) => App<TPlugin>'
       return:
         description: ''
-        type: '(this: App, plugin: IPlugin) =&gt; App'
+        type: '(this: App&lt;TPlugin&gt;, plugin: TPlugin) =&gt; App&lt;TPlugin&gt;'
   - name: process
     uid: '@microsoft/teams.apps.App.process'
     package: '@microsoft/teams.apps'
@@ -265,13 +281,13 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        process: (this: App, sender: ISender, event: IActivityEvent) =>
-        Promise<{ status: number } | undefined>
+        process: (this: App<TPlugin>, sender: ISender<{}>, event:
+        IActivityEvent) => Promise<{ status: number } | undefined>
       return:
         description: ''
         type: >-
-          (this: App, sender: ISender, event: IActivityEvent) =&gt; Promise&lt;{
-          status: number } | undefined&gt;
+          (this: App&lt;TPlugin&gt;, sender: ISender&lt;{}&gt;, event:
+          IActivityEvent) =&gt; Promise&lt;{ status: number } | undefined&gt;
   - name: storage
     uid: '@microsoft/teams.apps.App.storage'
     package: '@microsoft/teams.apps'
@@ -299,14 +315,14 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        tab: (this: App, name: string, path: string, options?:
-        Partial<Omit<StaticTab, "contentUrl" | "entityId">>) => App
+        tab: (this: App<TPlugin>, name: string, path: string, options?:
+        Partial<Omit<StaticTab, "contentUrl" | "entityId">>) => App<TPlugin>
       return:
         description: ''
         type: >-
-          (this: App, name: string, path: string, options?:
+          (this: App&lt;TPlugin&gt;, name: string, path: string, options?:
           Partial&lt;Omit&lt;StaticTab, "contentUrl" | "entityId"&gt;&gt;) =&gt;
-          App
+          App&lt;TPlugin&gt;
   - name: tokens
     uid: '@microsoft/teams.apps.App.tokens'
     package: '@microsoft/teams.apps'
@@ -328,13 +344,14 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        use: (this: App, cb: RouteHandler<IActivityContext<Activity>, void |
-        InvokeResponse<any>>) => App
+        use: (this: App<TPlugin>, cb: RouteHandler<IActivityContext<Activity>,
+        void | InvokeResponse<any>>) => App<TPlugin>
       return:
         description: ''
         type: >-
-          (this: App, cb: RouteHandler&lt;IActivityContext&lt;Activity&gt;, void
-          | InvokeResponse&lt;any&gt;&gt;) =&gt; App
+          (this: App&lt;TPlugin&gt;, cb:
+          RouteHandler&lt;IActivityContext&lt;Activity&gt;, void |
+          InvokeResponse&lt;any&gt;&gt;) =&gt; App&lt;TPlugin&gt;
 methods:
   - name: send(string, ActivityLike)
     uid: '@microsoft/teams.apps.App.send'

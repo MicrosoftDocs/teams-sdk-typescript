@@ -2,76 +2,64 @@
 name: ShowCardAction
 uid: '@microsoft/teams.cards.ShowCardAction'
 package: '@microsoft/teams.cards'
-summary: >-
-  Defines an AdaptiveCard which is shown to the user when the button or link is
-  clicked.
+summary: Expands or collapses an embedded card within the main card.
 fullName: ShowCardAction
 remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: ShowCardAction(ICard, ShowCardOptions)
+  - name: ShowCardAction(ShowCardActionOptions)
     uid: '@microsoft/teams.cards.ShowCardAction.constructor'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'new ShowCardAction(card: ICard, options?: ShowCardOptions)'
+      content: 'new ShowCardAction(options?: ShowCardActionOptions)'
       parameters:
-        - id: card
-          type: <xref uid="@microsoft/teams.cards.ICard" />
-          description: ''
         - id: options
-          type: <xref uid="@microsoft/teams.cards.ShowCardOptions" />
+          type: <xref uid="@microsoft/teams.cards.ShowCardActionOptions" />
           description: ''
 properties:
   - name: card
     uid: '@microsoft/teams.cards.ShowCardAction.card'
     package: '@microsoft/teams.cards'
-    summary: the card to display
+    summary: The card that should be displayed when the action is executed.
     fullName: card
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'card: ICard'
+      content: 'card?: IAdaptiveCard'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.ICard" />
-  - name: type
-    uid: '@microsoft/teams.cards.ShowCardAction.type'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    fullName: type
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'type: "Action.ShowCard"'
-      return:
-        description: ''
-        type: '"<xref uid="Action.ShowCard" />"'
-inheritedProperties:
+        type: <xref uid="@microsoft/teams.cards.IAdaptiveCard" />
   - name: fallback
     uid: '@microsoft/teams.cards.ShowCardAction.fallback'
     package: '@microsoft/teams.cards'
     summary: >-
-      Describes what to do when an unknown element is encountered or the
-      requires of this or any children can’t be met.
+      An alternate action to render if the type of this one is unsupported or if
+      the host application doesn't support all the capabilities specified in the
+      requires property.
     fullName: fallback
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'fallback?: string | IAction'
+      content: 'fallback?: FallbackAction'
       return:
         description: ''
-        type: string | IAction
-    inheritanceDescription: <b>Inherited From</b> Action$1.fallback
+        type: <xref uid="@microsoft/teams.cards.FallbackAction" />
   - name: iconUrl
     uid: '@microsoft/teams.cards.ShowCardAction.iconUrl'
     package: '@microsoft/teams.cards'
     summary: >-
-      Optional icon to be shown on the action in conjunction with the title.
-      Supports data URI in version 1.2+
+      A URL (or Base64-encoded Data URI) to a PNG, GIF, JPEG or SVG image to be
+      displayed on the left of the action's title.
+
+
+      `iconUrl` also accepts the `<icon-name>[,regular|filled]` format to
+      display an icon from the vast [Adaptive Card icon
+      catalog](https://adaptivecards.microsoft.com/?topic=icon-catalog) instead
+      of an image.
     fullName: iconUrl
     remarks: ''
     isDeprecated: false
@@ -80,11 +68,13 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> Action$1.iconUrl
   - name: id
     uid: '@microsoft/teams.cards.ShowCardAction.id'
     package: '@microsoft/teams.cards'
-    summary: A unique identifier associated with this Action.
+    summary: >-
+      A unique identifier for the element or action. Input elements must have an
+      id, otherwise they will not be validated and their values will not be sent
+      to the Bot.
     fullName: id
     remarks: ''
     isDeprecated: false
@@ -93,11 +83,13 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> Action$1.id
   - name: isEnabled
     uid: '@microsoft/teams.cards.ShowCardAction.isEnabled'
     package: '@microsoft/teams.cards'
-    summary: Determines whether the action should be enabled.
+    summary: >-
+      Controls the enabled state of the action. A disabled action cannot be
+      clicked. If the action is represented as a button, the button's style will
+      reflect this state.
     fullName: isEnabled
     remarks: ''
     isDeprecated: false
@@ -106,57 +98,54 @@ inheritedProperties:
       return:
         description: ''
         type: boolean
-    inheritanceDescription: <b>Inherited From</b> Action$1.isEnabled
   - name: mode
     uid: '@microsoft/teams.cards.ShowCardAction.mode'
     package: '@microsoft/teams.cards'
     summary: >-
-      Determines whether an action is displayed with a button or is moved to the
-      overflow menu.
+      Controls if the action is primary or secondary. Secondary actions appear
+      in an overflow menu.
     fullName: mode
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'mode?: "primary" | "secondary"'
+      content: 'mode?: ActionMode'
       return:
         description: ''
-        type: '"primary" | "secondary"'
-    inheritanceDescription: <b>Inherited From</b> Action$1.mode
+        type: <xref uid="@microsoft/teams.cards.ActionMode" />
   - name: requires
     uid: '@microsoft/teams.cards.ShowCardAction.requires'
     package: '@microsoft/teams.cards'
     summary: >-
-      A series of key/value pairs indicating features that the item requires
-      with corresponding minimum version. When a feature is missing or of
-      insufficient version, fallback is triggered.
+      A list of capabilities the element requires the host application to
+      support. If the host application doesn't support at least one of the
+      listed capabilities, the element is not rendered (or its fallback is
+      rendered if provided).
     fullName: requires
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'requires?: Record<string, string>'
+      content: 'requires?: IHostCapabilities'
       return:
         description: ''
-        type: Record&lt;string, string&gt;
-    inheritanceDescription: <b>Inherited From</b> Action$1.requires
+        type: <xref uid="@microsoft/teams.cards.IHostCapabilities" />
   - name: style
     uid: '@microsoft/teams.cards.ShowCardAction.style'
     package: '@microsoft/teams.cards'
     summary: >-
-      Controls the style of an Action, which influences how the action is
-      displayed, spoken, etc.
+      Control the style of the action, affecting its visual and spoken
+      representations.
     fullName: style
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'style?: "default" | "positive" | "destructive"'
+      content: 'style?: ActionStyle'
       return:
         description: ''
-        type: '"default" | "positive" | "destructive"'
-    inheritanceDescription: <b>Inherited From</b> Action$1.style
+        type: <xref uid="@microsoft/teams.cards.ActionStyle" />
   - name: title
     uid: '@microsoft/teams.cards.ShowCardAction.title'
     package: '@microsoft/teams.cards'
-    summary: Label for button or link that represents this action.
+    summary: The title of the action, as it appears on buttons.
     fullName: title
     remarks: ''
     isDeprecated: false
@@ -165,13 +154,10 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> Action$1.title
   - name: tooltip
     uid: '@microsoft/teams.cards.ShowCardAction.tooltip'
     package: '@microsoft/teams.cards'
-    summary: >-
-      Defines text that should be displayed to the end user as they hover the
-      mouse over the action, and read when using narration software.
+    summary: The tooltip text to display when the action is hovered over.
     fullName: tooltip
     remarks: ''
     isDeprecated: false
@@ -180,173 +166,18 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> Action$1.tooltip
-inheritedMethods:
-  - name: withEnabled(boolean)
-    uid: '@microsoft/teams.cards.ShowCardAction.withEnabled'
+  - name: type
+    uid: '@microsoft/teams.cards.ShowCardAction.type'
     package: '@microsoft/teams.cards'
-    summary: ''
+    summary: Must be **Action.ShowCard**.
+    fullName: type
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withEnabled(value?: boolean): ShowCardAction'
-      parameters:
-        - id: value
-          type: boolean
-          description: ''
+      content: 'type: "Action.ShowCard" = "Action.ShowCard"'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.ShowCardAction" />
-    inheritanceDescription: <b>Inherited From</b> Action$1.withEnabled
-  - name: withFallback(string | IAction)
-    uid: '@microsoft/teams.cards.ShowCardAction.withFallback'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withFallback(value: string | IAction): ShowCardAction'
-      parameters:
-        - id: value
-          type: string | IAction
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.ShowCardAction" />
-    inheritanceDescription: <b>Inherited From</b> Action$1.withFallback
-  - name: withIconUrl(string)
-    uid: '@microsoft/teams.cards.ShowCardAction.withIconUrl'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withIconUrl(value: string): ShowCardAction'
-      parameters:
-        - id: value
-          type: string
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.ShowCardAction" />
-    inheritanceDescription: <b>Inherited From</b> Action$1.withIconUrl
-  - name: withId(string)
-    uid: '@microsoft/teams.cards.ShowCardAction.withId'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withId(value: string): ShowCardAction'
-      parameters:
-        - id: value
-          type: string
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.ShowCardAction" />
-    inheritanceDescription: <b>Inherited From</b> Action$1.withId
-  - name: withMode("primary" | "secondary")
-    uid: '@microsoft/teams.cards.ShowCardAction.withMode'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withMode(value: "primary" | "secondary"): ShowCardAction'
-      parameters:
-        - id: value
-          type: '"primary" | "secondary"'
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.ShowCardAction" />
-    inheritanceDescription: <b>Inherited From</b> Action$1.withMode
-  - name: withRequire(string, string)
-    uid: '@microsoft/teams.cards.ShowCardAction.withRequire'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withRequire(key: string, value: string): ShowCardAction'
-      parameters:
-        - id: key
-          type: string
-          description: ''
-        - id: value
-          type: string
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.ShowCardAction" />
-    inheritanceDescription: <b>Inherited From</b> Action$1.withRequire
-  - name: withRequires(Record<string, string>)
-    uid: '@microsoft/teams.cards.ShowCardAction.withRequires'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withRequires(value: Record<string, string>): ShowCardAction'
-      parameters:
-        - id: value
-          type: Record&lt;string, string&gt;
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.ShowCardAction" />
-    inheritanceDescription: <b>Inherited From</b> Action$1.withRequires
-  - name: withStyle("default" | "positive" | "destructive")
-    uid: '@microsoft/teams.cards.ShowCardAction.withStyle'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function withStyle(value: "default" | "positive" | "destructive"):
-        ShowCardAction
-      parameters:
-        - id: value
-          type: '"default" | "positive" | "destructive"'
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.ShowCardAction" />
-    inheritanceDescription: <b>Inherited From</b> Action$1.withStyle
-  - name: withTitle(string)
-    uid: '@microsoft/teams.cards.ShowCardAction.withTitle'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withTitle(value: string): ShowCardAction'
-      parameters:
-        - id: value
-          type: string
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.ShowCardAction" />
-    inheritanceDescription: <b>Inherited From</b> Action$1.withTitle
-  - name: withTooltip(string)
-    uid: '@microsoft/teams.cards.ShowCardAction.withTooltip'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withTooltip(value: string): ShowCardAction'
-      parameters:
-        - id: value
-          type: string
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.ShowCardAction" />
-    inheritanceDescription: <b>Inherited From</b> Action$1.withTooltip
+        type: '"<xref uid="Action.ShowCard" />"'
 methods:
   - name: from(Omit<IShowCardAction, "type">)
     uid: '@microsoft/teams.cards.ShowCardAction.from'
@@ -367,19 +198,153 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ShowCardAction" />
-  - name: withCard(ICard)
+  - name: withCard(IAdaptiveCard)
     uid: '@microsoft/teams.cards.ShowCardAction.withCard'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withCard(value: ICard): ShowCardAction'
+      content: 'function withCard(card: IAdaptiveCard): ShowCardAction'
       parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.ICard" />
+        - id: card
+          type: <xref uid="@microsoft/teams.cards.IAdaptiveCard" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ShowCardAction" />
-extends: Action
+  - name: withFallback(FallbackAction)
+    uid: '@microsoft/teams.cards.ShowCardAction.withFallback'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withFallback(fallback: FallbackAction): ShowCardAction'
+      parameters:
+        - id: fallback
+          type: <xref uid="@microsoft/teams.cards.FallbackAction" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ShowCardAction" />
+  - name: withIconUrl(string)
+    uid: '@microsoft/teams.cards.ShowCardAction.withIconUrl'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withIconUrl(iconUrl: string): ShowCardAction'
+      parameters:
+        - id: iconUrl
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ShowCardAction" />
+  - name: withId(string)
+    uid: '@microsoft/teams.cards.ShowCardAction.withId'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withId(id: string): ShowCardAction'
+      parameters:
+        - id: id
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ShowCardAction" />
+  - name: withIsEnabled(boolean)
+    uid: '@microsoft/teams.cards.ShowCardAction.withIsEnabled'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withIsEnabled(isEnabled?: boolean): ShowCardAction'
+      parameters:
+        - id: isEnabled
+          type: boolean
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ShowCardAction" />
+  - name: withMode(ActionMode)
+    uid: '@microsoft/teams.cards.ShowCardAction.withMode'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withMode(mode: ActionMode): ShowCardAction'
+      parameters:
+        - id: mode
+          type: <xref uid="@microsoft/teams.cards.ActionMode" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ShowCardAction" />
+  - name: withRequires(IHostCapabilities)
+    uid: '@microsoft/teams.cards.ShowCardAction.withRequires'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withRequires(requires: IHostCapabilities): ShowCardAction'
+      parameters:
+        - id: requires
+          type: <xref uid="@microsoft/teams.cards.IHostCapabilities" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ShowCardAction" />
+  - name: withStyle(ActionStyle)
+    uid: '@microsoft/teams.cards.ShowCardAction.withStyle'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withStyle(style: ActionStyle): ShowCardAction'
+      parameters:
+        - id: style
+          type: <xref uid="@microsoft/teams.cards.ActionStyle" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ShowCardAction" />
+  - name: withTitle(string)
+    uid: '@microsoft/teams.cards.ShowCardAction.withTitle'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withTitle(title: string): ShowCardAction'
+      parameters:
+        - id: title
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ShowCardAction" />
+  - name: withTooltip(string)
+    uid: '@microsoft/teams.cards.ShowCardAction.withTooltip'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withTooltip(tooltip: string): ShowCardAction'
+      parameters:
+        - id: tooltip
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ShowCardAction" />

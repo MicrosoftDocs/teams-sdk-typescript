@@ -2,7 +2,7 @@
 name: CodeBlock
 uid: '@microsoft/teams.cards.CodeBlock'
 package: '@microsoft/teams.cards'
-summary: Displays a block of code with syntax highlighting
+summary: A formatted and syntax-colored code block.
 fullName: CodeBlock
 remarks: ''
 isDeprecated: false
@@ -24,7 +24,7 @@ properties:
   - name: codeSnippet
     uid: '@microsoft/teams.cards.CodeBlock.codeSnippet'
     package: '@microsoft/teams.cards'
-    summary: code to display/highlight.
+    summary: The code snippet to display.
     fullName: codeSnippet
     remarks: ''
     isDeprecated: false
@@ -33,65 +33,26 @@ properties:
       return:
         description: ''
         type: string
-  - name: language
-    uid: '@microsoft/teams.cards.CodeBlock.language'
-    package: '@microsoft/teams.cards'
-    summary: which programming language to use.
-    fullName: language
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'language?: CodeLanguage'
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.CodeLanguage" />
-  - name: startLineNumber
-    uid: '@microsoft/teams.cards.CodeBlock.startLineNumber'
-    package: '@microsoft/teams.cards'
-    summary: which line number to display on the first line.
-    fullName: startLineNumber
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'startLineNumber?: number'
-      return:
-        description: ''
-        type: number
-  - name: type
-    uid: '@microsoft/teams.cards.CodeBlock.type'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    fullName: type
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'type: "CodeBlock"'
-      return:
-        description: ''
-        type: '"CodeBlock"'
-inheritedProperties:
   - name: fallback
     uid: '@microsoft/teams.cards.CodeBlock.fallback'
     package: '@microsoft/teams.cards'
     summary: >-
-      Describes what to do when an unknown item is encountered or the requires
-      of this or any children can't be met.
+      An alternate element to render if the type of this one is unsupported or
+      if the host application doesn't support all the capabilities specified in
+      the requires property.
     fullName: fallback
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'fallback?: Element$1 | "drop" | Omit<string, "drop">'
+      content: 'fallback?: FallbackElement'
       return:
         description: ''
-        type: >-
-          <xref uid="@microsoft/teams.cards.Element" /> | "drop" |
-          Omit&lt;string, "drop"&gt;
-    inheritanceDescription: <b>Inherited From</b> Element.fallback
+        type: <xref uid="@microsoft/teams.cards.FallbackElement" />
   - name: grid.area
     uid: '@microsoft/teams.cards.CodeBlock.grid.area'
     package: '@microsoft/teams.cards'
     summary: >-
-      the area of a `Layout.AreaGrid` layout in which an element should be
+      The area of a Layout.AreaGrid layout in which an element should be
       displayed.
     fullName: grid.area
     remarks: ''
@@ -101,37 +62,39 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> Element.grid.area
   - name: height
     uid: '@microsoft/teams.cards.CodeBlock.height'
     package: '@microsoft/teams.cards'
-    summary: Specifies the height of the element.
+    summary: >-
+      The height of the element. When set to stretch, the element will use the
+      remaining vertical space in its container.
     fullName: height
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'height?: "auto" | "stretch" | Omit<string | number, "auto" | "stretch">'
+      content: 'height?: ElementHeight'
       return:
         description: ''
-        type: '"auto" | "stretch" | Omit&lt;string | number, "auto" | "stretch"&gt;'
-    inheritanceDescription: <b>Inherited From</b> Element.height
+        type: <xref uid="@microsoft/teams.cards.ElementHeight" />
   - name: horizontalAlignment
     uid: '@microsoft/teams.cards.CodeBlock.horizontalAlignment'
     package: '@microsoft/teams.cards'
-    summary: controls how the element should be horizontally aligned.
+    summary: Controls how the element should be horizontally aligned.
     fullName: horizontalAlignment
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'horizontalAlignment?: null | HorizontalAlignment'
+      content: 'horizontalAlignment?: HorizontalAlignment'
       return:
         description: ''
-        type: null | <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
-    inheritanceDescription: <b>Inherited From</b> Element.horizontalAlignment
+        type: <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
   - name: id
     uid: '@microsoft/teams.cards.CodeBlock.id'
     package: '@microsoft/teams.cards'
-    summary: A unique identifier associated with the item
+    summary: >-
+      A unique identifier for the element or action. Input elements must have an
+      id, otherwise they will not be validated and their values will not be sent
+      to the Bot.
     fullName: id
     remarks: ''
     isDeprecated: false
@@ -140,11 +103,24 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> Element.id
+  - name: isSortKey
+    uid: '@microsoft/teams.cards.CodeBlock.isSortKey'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Controls whether the element should be used as a sort key by elements that
+      allow sorting across a collection of elements.
+    fullName: isSortKey
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'isSortKey?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: isVisible
     uid: '@microsoft/teams.cards.CodeBlock.isVisible'
     package: '@microsoft/teams.cards'
-    summary: If false, this item will be removed from the visual tree.
+    summary: Controls the visibility of the element.
     fullName: isVisible
     remarks: ''
     isDeprecated: false
@@ -153,7 +129,6 @@ inheritedProperties:
       return:
         description: ''
         type: boolean
-    inheritanceDescription: <b>Inherited From</b> Element.isVisible
   - name: lang
     uid: '@microsoft/teams.cards.CodeBlock.lang'
     package: '@microsoft/teams.cards'
@@ -166,27 +141,50 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> Element.lang
+  - name: language
+    uid: '@microsoft/teams.cards.CodeBlock.language'
+    package: '@microsoft/teams.cards'
+    summary: The language the code snippet is expressed in.
+    fullName: language
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        language?: "Bash" | "C" | "Cpp" | "CSharp" | "Css" | "Dos" | "Go" |
+        "Graphql" | "Html" | "Java" | "JavaScript" | "Json" | "ObjectiveC" |
+        "Perl" | "Php" | "PlainText" | "PowerShell" | "Python" | "Sql" |
+        "TypeScript" | "VbNet" | "Verilog" | "Vhdl" | "Xml"
+      return:
+        description: ''
+        type: >-
+          "Bash" | "C" | "Cpp" | "CSharp" | "Css" | "Dos" | "Go" | "Graphql" |
+          "Html" | "Java" | "JavaScript" | "Json" | "ObjectiveC" | "Perl" |
+          "Php" | "PlainText" | "PowerShell" | "Python" | "Sql" | "TypeScript" |
+          "VbNet" | "Verilog" | "Vhdl" | "Xml"
   - name: requires
     uid: '@microsoft/teams.cards.CodeBlock.requires'
     package: '@microsoft/teams.cards'
     summary: >-
-      A series of key/value pairs indicating features that the item requires
-      with corresponding minimum version. When a feature is missing or of
-      insufficient version, fallback is triggered.
+      A list of capabilities the element requires the host application to
+      support. If the host application doesn't support at least one of the
+      listed capabilities, the element is not rendered (or its fallback is
+      rendered if provided).
     fullName: requires
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'requires?: Record<string, string>'
+      content: 'requires?: IHostCapabilities'
       return:
         description: ''
-        type: Record&lt;string, string&gt;
-    inheritanceDescription: <b>Inherited From</b> Element.requires
+        type: <xref uid="@microsoft/teams.cards.IHostCapabilities" />
   - name: separator
     uid: '@microsoft/teams.cards.CodeBlock.separator'
     package: '@microsoft/teams.cards'
-    summary: When `true`, draw a separating line at the top of the element.
+    summary: >-
+      Controls whether a separator line should be displayed above the element to
+      visually separate it from the previous element. No separator will be
+      displayed for the first element in a container, even if this property is
+      set to true.
     fullName: separator
     remarks: ''
     isDeprecated: false
@@ -195,13 +193,12 @@ inheritedProperties:
       return:
         description: ''
         type: boolean
-    inheritanceDescription: <b>Inherited From</b> Element.separator
   - name: spacing
     uid: '@microsoft/teams.cards.CodeBlock.spacing'
     package: '@microsoft/teams.cards'
     summary: >-
-      Controls the amount of spacing between this element and the preceding
-      element.
+      Controls the amount of space between this element and the previous one. No
+      space will be added for the first element in a container.
     fullName: spacing
     remarks: ''
     isDeprecated: false
@@ -210,7 +207,20 @@ inheritedProperties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Spacing" />
-    inheritanceDescription: <b>Inherited From</b> Element.spacing
+  - name: startLineNumber
+    uid: '@microsoft/teams.cards.CodeBlock.startLineNumber'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      A number that represents the line in the file from where the code snippet
+      was extracted.
+    fullName: startLineNumber
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'startLineNumber?: number'
+      return:
+        description: ''
+        type: number
   - name: targetWidth
     uid: '@microsoft/teams.cards.CodeBlock.targetWidth'
     package: '@microsoft/teams.cards'
@@ -218,7 +228,9 @@ inheritedProperties:
       Controls for which card width the element should be displayed. If
       targetWidth isn't specified, the element is rendered at all card widths.
       Using targetWidth makes it possible to author responsive cards that adapt
-      their layout to the available horizontal space.
+      their layout to the available horizontal space. For more details, see
+      [Responsive
+      layout](https://adaptivecards.microsoft.com/?topic=responsive-layout).
     fullName: targetWidth
     remarks: ''
     isDeprecated: false
@@ -227,59 +239,79 @@ inheritedProperties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.TargetWidth" />
-    inheritanceDescription: <b>Inherited From</b> Element.targetWidth
-inheritedMethods:
-  - name: withFallback(Element$1 | "drop" | Omit<string, "drop">)
+  - name: type
+    uid: '@microsoft/teams.cards.CodeBlock.type'
+    package: '@microsoft/teams.cards'
+    summary: Must be **CodeBlock**.
+    fullName: type
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'type: "CodeBlock" = "CodeBlock"'
+      return:
+        description: ''
+        type: '"CodeBlock"'
+methods:
+  - name: from(Omit<ICodeBlock, "type">)
+    uid: '@microsoft/teams.cards.CodeBlock.from'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'static function from(options: Omit<ICodeBlock, "type">): CodeBlock'
+      parameters:
+        - id: options
+          type: Omit&lt;<xref uid="@microsoft/teams.cards.ICodeBlock" />, "type"&gt;
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.CodeBlock" />
+  - name: withCodeSnippet(string)
+    uid: '@microsoft/teams.cards.CodeBlock.withCodeSnippet'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withCodeSnippet(codeSnippet: string): CodeBlock'
+      parameters:
+        - id: codeSnippet
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.CodeBlock" />
+  - name: withFallback(FallbackElement)
     uid: '@microsoft/teams.cards.CodeBlock.withFallback'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function withFallback(value: Element$1 | "drop" | Omit<string, "drop">):
-        CodeBlock
+      content: 'function withFallback(fallback: FallbackElement): CodeBlock'
       parameters:
-        - id: value
-          type: >-
-            <xref uid="@microsoft/teams.cards.Element" /> | "drop" |
-            Omit&lt;string, "drop"&gt;
+        - id: fallback
+          type: <xref uid="@microsoft/teams.cards.FallbackElement" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.CodeBlock" />
-    inheritanceDescription: <b>Inherited From</b> Element.withFallback
-  - name: withGridArea(string)
-    uid: '@microsoft/teams.cards.CodeBlock.withGridArea'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withGridArea(value: string)'
-      parameters:
-        - id: value
-          type: string
-          description: ''
-    inheritanceDescription: <b>Inherited From</b> Element.withGridArea
-  - name: withHeight("auto" | "stretch" | Omit<string | number, "auto" | "stretch">)
+  - name: withHeight(ElementHeight)
     uid: '@microsoft/teams.cards.CodeBlock.withHeight'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function withHeight(value: "auto" | "stretch" | Omit<string | number,
-        "auto" | "stretch">): CodeBlock
+      content: 'function withHeight(height: ElementHeight): CodeBlock'
       parameters:
-        - id: value
-          type: '"auto" | "stretch" | Omit&lt;string | number, "auto" | "stretch"&gt;'
+        - id: height
+          type: <xref uid="@microsoft/teams.cards.ElementHeight" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.CodeBlock" />
-    inheritanceDescription: <b>Inherited From</b> Element.withHeight
   - name: withHorizontalAlignment(HorizontalAlignment)
     uid: '@microsoft/teams.cards.CodeBlock.withHorizontalAlignment'
     package: '@microsoft/teams.cards'
@@ -287,15 +319,16 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withHorizontalAlignment(value: HorizontalAlignment): CodeBlock'
+      content: >-
+        function withHorizontalAlignment(horizontalAlignment:
+        HorizontalAlignment): CodeBlock
       parameters:
-        - id: value
+        - id: horizontalAlignment
           type: <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.CodeBlock" />
-    inheritanceDescription: <b>Inherited From</b> Element.withHorizontalAlignment
   - name: withId(string)
     uid: '@microsoft/teams.cards.CodeBlock.withId'
     package: '@microsoft/teams.cards'
@@ -303,15 +336,29 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withId(value: string): CodeBlock'
+      content: 'function withId(id: string): CodeBlock'
       parameters:
-        - id: value
+        - id: id
           type: string
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.CodeBlock" />
-    inheritanceDescription: <b>Inherited From</b> Element.withId
+  - name: withIsSortKey(boolean)
+    uid: '@microsoft/teams.cards.CodeBlock.withIsSortKey'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withIsSortKey(isSortKey?: boolean): CodeBlock'
+      parameters:
+        - id: isSortKey
+          type: boolean
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.CodeBlock" />
   - name: withIsVisible(boolean)
     uid: '@microsoft/teams.cards.CodeBlock.withIsVisible'
     package: '@microsoft/teams.cards'
@@ -319,15 +366,14 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withIsVisible(value: boolean): CodeBlock'
+      content: 'function withIsVisible(isVisible?: boolean): CodeBlock'
       parameters:
-        - id: value
+        - id: isVisible
           type: boolean
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.CodeBlock" />
-    inheritanceDescription: <b>Inherited From</b> Element.withIsVisible
   - name: withLang(string)
     uid: '@microsoft/teams.cards.CodeBlock.withLang'
     package: '@microsoft/teams.cards'
@@ -335,66 +381,71 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withLang(value: string): CodeBlock'
+      content: 'function withLang(lang: string): CodeBlock'
       parameters:
-        - id: value
+        - id: lang
           type: string
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.CodeBlock" />
-    inheritanceDescription: <b>Inherited From</b> Element.withLang
-  - name: withRequire(string, string)
-    uid: '@microsoft/teams.cards.CodeBlock.withRequire'
+  - name: >-
+      withLanguage("Bash" | "C" | "Cpp" | "CSharp" | "Css" | "Dos" | "Go" |
+      "Graphql" | "Html" | "Java" | "JavaScript" | "Json" | "ObjectiveC" |
+      "Perl" | "Php" | "PlainText" | "PowerShell" | "Python" | "Sql" |
+      "TypeScript" | "VbNet" | "Verilog" | "Vhdl" | "Xml")
+    uid: '@microsoft/teams.cards.CodeBlock.withLanguage'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withRequire(key: string, value: string): CodeBlock'
+      content: >-
+        function withLanguage(language: "Bash" | "C" | "Cpp" | "CSharp" | "Css"
+        | "Dos" | "Go" | "Graphql" | "Html" | "Java" | "JavaScript" | "Json" |
+        "ObjectiveC" | "Perl" | "Php" | "PlainText" | "PowerShell" | "Python" |
+        "Sql" | "TypeScript" | "VbNet" | "Verilog" | "Vhdl" | "Xml"): CodeBlock
       parameters:
-        - id: key
-          type: string
-          description: ''
-        - id: value
-          type: string
+        - id: language
+          type: >-
+            "Bash" | "C" | "Cpp" | "CSharp" | "Css" | "Dos" | "Go" | "Graphql" |
+            "Html" | "Java" | "JavaScript" | "Json" | "ObjectiveC" | "Perl" |
+            "Php" | "PlainText" | "PowerShell" | "Python" | "Sql" | "TypeScript"
+            | "VbNet" | "Verilog" | "Vhdl" | "Xml"
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.CodeBlock" />
-    inheritanceDescription: <b>Inherited From</b> Element.withRequire
-  - name: withRequires(Record<string, string>)
+  - name: withRequires(IHostCapabilities)
     uid: '@microsoft/teams.cards.CodeBlock.withRequires'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withRequires(value: Record<string, string>): CodeBlock'
+      content: 'function withRequires(requires: IHostCapabilities): CodeBlock'
       parameters:
-        - id: value
-          type: Record&lt;string, string&gt;
+        - id: requires
+          type: <xref uid="@microsoft/teams.cards.IHostCapabilities" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.CodeBlock" />
-    inheritanceDescription: <b>Inherited From</b> Element.withRequires
-  - name: withSeperator(boolean)
-    uid: '@microsoft/teams.cards.CodeBlock.withSeperator'
+  - name: withSeparator(boolean)
+    uid: '@microsoft/teams.cards.CodeBlock.withSeparator'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withSeperator(value: boolean): CodeBlock'
+      content: 'function withSeparator(separator?: boolean): CodeBlock'
       parameters:
-        - id: value
+        - id: separator
           type: boolean
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.CodeBlock" />
-    inheritanceDescription: <b>Inherited From</b> Element.withSeperator
   - name: withSpacing(Spacing)
     uid: '@microsoft/teams.cards.CodeBlock.withSpacing'
     package: '@microsoft/teams.cards'
@@ -402,73 +453,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withSpacing(value: Spacing): CodeBlock'
+      content: 'function withSpacing(spacing: Spacing): CodeBlock'
       parameters:
-        - id: value
+        - id: spacing
           type: <xref uid="@microsoft/teams.cards.Spacing" />
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.CodeBlock" />
-    inheritanceDescription: <b>Inherited From</b> Element.withSpacing
-  - name: withTargetWidth(TargetWidth)
-    uid: '@microsoft/teams.cards.CodeBlock.withTargetWidth'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withTargetWidth(value: TargetWidth): CodeBlock'
-      parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.TargetWidth" />
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.CodeBlock" />
-    inheritanceDescription: <b>Inherited From</b> Element.withTargetWidth
-methods:
-  - name: from(CodeBlockOptions)
-    uid: '@microsoft/teams.cards.CodeBlock.from'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'static function from(options: CodeBlockOptions): CodeBlock'
-      parameters:
-        - id: options
-          type: <xref uid="@microsoft/teams.cards.CodeBlockOptions" />
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.CodeBlock" />
-  - name: withCode(string)
-    uid: '@microsoft/teams.cards.CodeBlock.withCode'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withCode(value: string): CodeBlock'
-      parameters:
-        - id: value
-          type: string
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.CodeBlock" />
-  - name: withLanguage(CodeLanguage)
-    uid: '@microsoft/teams.cards.CodeBlock.withLanguage'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withLanguage(value: CodeLanguage): CodeBlock'
-      parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.CodeLanguage" />
           description: ''
       return:
         description: ''
@@ -480,12 +468,26 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withStartLineNumber(value: number): CodeBlock'
+      content: 'function withStartLineNumber(startLineNumber: number): CodeBlock'
       parameters:
-        - id: value
+        - id: startLineNumber
           type: number
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.CodeBlock" />
-extends: Element
+  - name: withTargetWidth(TargetWidth)
+    uid: '@microsoft/teams.cards.CodeBlock.withTargetWidth'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withTargetWidth(targetWidth: TargetWidth): CodeBlock'
+      parameters:
+        - id: targetWidth
+          type: <xref uid="@microsoft/teams.cards.TargetWidth" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.CodeBlock" />

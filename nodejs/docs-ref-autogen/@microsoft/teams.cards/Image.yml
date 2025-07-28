@@ -2,7 +2,7 @@
 name: Image
 uid: '@microsoft/teams.cards.Image'
 package: '@microsoft/teams.cards'
-summary: Displays an image. Acceptable formats are PNG, JPEG, and GIF
+summary: A standalone image element.
 fullName: Image
 remarks: ''
 isDeprecated: false
@@ -39,7 +39,7 @@ properties:
   - name: altText
     uid: '@microsoft/teams.cards.Image.altText'
     package: '@microsoft/teams.cards'
-    summary: Alternate text describing the image.
+    summary: The alternate text for the image, used for accessibility purposes.
     fullName: altText
     remarks: ''
     isDeprecated: false
@@ -51,9 +51,7 @@ properties:
   - name: backgroundColor
     uid: '@microsoft/teams.cards.Image.backgroundColor'
     package: '@microsoft/teams.cards'
-    summary: >-
-      Applies a background to a transparent image. This property will respect
-      the image style.
+    summary: The background color of the image.
     fullName: backgroundColor
     remarks: ''
     isDeprecated: false
@@ -62,107 +60,26 @@ properties:
       return:
         description: ''
         type: string
-  - name: selectAction
-    uid: '@microsoft/teams.cards.Image.selectAction'
-    package: '@microsoft/teams.cards'
-    summary: >-
-      An Action that will be invoked when the Image is tapped or selected.
-      Action.ShowCard is not supported.
-    fullName: selectAction
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'selectAction?: SelectAction'
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.SelectAction" />
-  - name: size
-    uid: '@microsoft/teams.cards.Image.size'
-    package: '@microsoft/teams.cards'
-    summary: >-
-      Controls the approximate size of the image. The physical dimensions will
-      vary per host.
-    fullName: size
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'size?: ImageSize'
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.ImageSize" />
-  - name: style
-    uid: '@microsoft/teams.cards.Image.style'
-    package: '@microsoft/teams.cards'
-    summary: Controls how this Image is displayed.
-    fullName: style
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'style?: "default" | "person"'
-      return:
-        description: ''
-        type: '"default" | "person"'
-  - name: type
-    uid: '@microsoft/teams.cards.Image.type'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    fullName: type
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'type: "Image"'
-      return:
-        description: ''
-        type: '"Image"'
-  - name: url
-    uid: '@microsoft/teams.cards.Image.url'
-    package: '@microsoft/teams.cards'
-    summary: The URL to the image. Supports data URI in version 1.2+
-    fullName: url
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'url: string'
-      return:
-        description: ''
-        type: string
-  - name: width
-    uid: '@microsoft/teams.cards.Image.width'
-    package: '@microsoft/teams.cards'
-    summary: >-
-      The desired on-screen width of the image, ending in ‘px’. E.g., 50px. This
-      overrides the size property.
-    fullName: width
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'width?: string'
-      return:
-        description: ''
-        type: string
-inheritedProperties:
   - name: fallback
     uid: '@microsoft/teams.cards.Image.fallback'
     package: '@microsoft/teams.cards'
     summary: >-
-      Describes what to do when an unknown item is encountered or the requires
-      of this or any children can't be met.
+      An alternate element to render if the type of this one is unsupported or
+      if the host application doesn't support all the capabilities specified in
+      the requires property.
     fullName: fallback
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'fallback?: Element$1 | "drop" | Omit<string, "drop">'
+      content: 'fallback?: FallbackElement'
       return:
         description: ''
-        type: >-
-          <xref uid="@microsoft/teams.cards.Element" /> | "drop" |
-          Omit&lt;string, "drop"&gt;
-    inheritanceDescription: <b>Inherited From</b> Element.fallback
+        type: <xref uid="@microsoft/teams.cards.FallbackElement" />
   - name: grid.area
     uid: '@microsoft/teams.cards.Image.grid.area'
     package: '@microsoft/teams.cards'
     summary: >-
-      the area of a `Layout.AreaGrid` layout in which an element should be
+      The area of a Layout.AreaGrid layout in which an element should be
       displayed.
     fullName: grid.area
     remarks: ''
@@ -172,37 +89,37 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> Element.grid.area
   - name: height
     uid: '@microsoft/teams.cards.Image.height'
     package: '@microsoft/teams.cards'
-    summary: Specifies the height of the element.
+    summary: The height of the image.
     fullName: height
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'height?: "auto" | "stretch" | Omit<string | number, "auto" | "stretch">'
+      content: 'height?: string'
       return:
         description: ''
-        type: '"auto" | "stretch" | Omit&lt;string | number, "auto" | "stretch"&gt;'
-    inheritanceDescription: <b>Inherited From</b> Element.height
+        type: string
   - name: horizontalAlignment
     uid: '@microsoft/teams.cards.Image.horizontalAlignment'
     package: '@microsoft/teams.cards'
-    summary: controls how the element should be horizontally aligned.
+    summary: Controls how the element should be horizontally aligned.
     fullName: horizontalAlignment
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'horizontalAlignment?: null | HorizontalAlignment'
+      content: 'horizontalAlignment?: HorizontalAlignment'
       return:
         description: ''
-        type: null | <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
-    inheritanceDescription: <b>Inherited From</b> Element.horizontalAlignment
+        type: <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
   - name: id
     uid: '@microsoft/teams.cards.Image.id'
     package: '@microsoft/teams.cards'
-    summary: A unique identifier associated with the item
+    summary: >-
+      A unique identifier for the element or action. Input elements must have an
+      id, otherwise they will not be validated and their values will not be sent
+      to the Bot.
     fullName: id
     remarks: ''
     isDeprecated: false
@@ -211,11 +128,24 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> Element.id
+  - name: isSortKey
+    uid: '@microsoft/teams.cards.Image.isSortKey'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Controls whether the element should be used as a sort key by elements that
+      allow sorting across a collection of elements.
+    fullName: isSortKey
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'isSortKey?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: isVisible
     uid: '@microsoft/teams.cards.Image.isVisible'
     package: '@microsoft/teams.cards'
-    summary: If false, this item will be removed from the visual tree.
+    summary: Controls the visibility of the element.
     fullName: isVisible
     remarks: ''
     isDeprecated: false
@@ -224,7 +154,6 @@ inheritedProperties:
       return:
         description: ''
         type: boolean
-    inheritanceDescription: <b>Inherited From</b> Element.isVisible
   - name: lang
     uid: '@microsoft/teams.cards.Image.lang'
     package: '@microsoft/teams.cards'
@@ -237,27 +166,63 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> Element.lang
+  - name: msTeams
+    uid: '@microsoft/teams.cards.Image.msTeams'
+    package: '@microsoft/teams.cards'
+    summary: Teams-specific metadata associated with the image.
+    fullName: msTeams
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'msTeams?: ITeamsImageProperties'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ITeamsImageProperties" />
   - name: requires
     uid: '@microsoft/teams.cards.Image.requires'
     package: '@microsoft/teams.cards'
     summary: >-
-      A series of key/value pairs indicating features that the item requires
-      with corresponding minimum version. When a feature is missing or of
-      insufficient version, fallback is triggered.
+      A list of capabilities the element requires the host application to
+      support. If the host application doesn't support at least one of the
+      listed capabilities, the element is not rendered (or its fallback is
+      rendered if provided).
     fullName: requires
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'requires?: Record<string, string>'
+      content: 'requires?: IHostCapabilities'
       return:
         description: ''
-        type: Record&lt;string, string&gt;
-    inheritanceDescription: <b>Inherited From</b> Element.requires
+        type: <xref uid="@microsoft/teams.cards.IHostCapabilities" />
+  - name: selectAction
+    uid: '@microsoft/teams.cards.Image.selectAction'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      An Action that will be invoked when the image is tapped or clicked.
+      Action.ShowCard is not supported.
+    fullName: selectAction
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        selectAction?: IExecuteAction | IOpenUrlAction | IResetInputsAction |
+        ISubmitAction | IToggleVisibilityAction
+      return:
+        description: ''
+        type: >-
+          <xref uid="@microsoft/teams.cards.IExecuteAction" /> | <xref
+          uid="@microsoft/teams.cards.IOpenUrlAction" /> | <xref
+          uid="@microsoft/teams.cards.IResetInputsAction" /> | <xref
+          uid="@microsoft/teams.cards.ISubmitAction" /> | <xref
+          uid="@microsoft/teams.cards.IToggleVisibilityAction" />
   - name: separator
     uid: '@microsoft/teams.cards.Image.separator'
     package: '@microsoft/teams.cards'
-    summary: When `true`, draw a separating line at the top of the element.
+    summary: >-
+      Controls whether a separator line should be displayed above the element to
+      visually separate it from the previous element. No separator will be
+      displayed for the first element in a container, even if this property is
+      set to true.
     fullName: separator
     remarks: ''
     isDeprecated: false
@@ -266,13 +231,24 @@ inheritedProperties:
       return:
         description: ''
         type: boolean
-    inheritanceDescription: <b>Inherited From</b> Element.separator
+  - name: size
+    uid: '@microsoft/teams.cards.Image.size'
+    package: '@microsoft/teams.cards'
+    summary: The size of the image.
+    fullName: size
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'size?: Size'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Size" />
   - name: spacing
     uid: '@microsoft/teams.cards.Image.spacing'
     package: '@microsoft/teams.cards'
     summary: >-
-      Controls the amount of spacing between this element and the preceding
-      element.
+      Controls the amount of space between this element and the previous one. No
+      space will be added for the first element in a container.
     fullName: spacing
     remarks: ''
     isDeprecated: false
@@ -281,7 +257,18 @@ inheritedProperties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Spacing" />
-    inheritanceDescription: <b>Inherited From</b> Element.spacing
+  - name: style
+    uid: '@microsoft/teams.cards.Image.style'
+    package: '@microsoft/teams.cards'
+    summary: The style of the image.
+    fullName: style
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'style?: ImageStyle'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ImageStyle" />
   - name: targetWidth
     uid: '@microsoft/teams.cards.Image.targetWidth'
     package: '@microsoft/teams.cards'
@@ -289,7 +276,9 @@ inheritedProperties:
       Controls for which card width the element should be displayed. If
       targetWidth isn't specified, the element is rendered at all card widths.
       Using targetWidth makes it possible to author responsive cards that adapt
-      their layout to the available horizontal space.
+      their layout to the available horizontal space. For more details, see
+      [Responsive
+      layout](https://adaptivecards.microsoft.com/?topic=responsive-layout).
     fullName: targetWidth
     remarks: ''
     isDeprecated: false
@@ -298,206 +287,44 @@ inheritedProperties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.TargetWidth" />
-    inheritanceDescription: <b>Inherited From</b> Element.targetWidth
-inheritedMethods:
-  - name: withFallback(Element$1 | "drop" | Omit<string, "drop">)
-    uid: '@microsoft/teams.cards.Image.withFallback'
+  - name: type
+    uid: '@microsoft/teams.cards.Image.type'
     package: '@microsoft/teams.cards'
-    summary: ''
+    summary: Must be **Image**.
+    fullName: type
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function withFallback(value: Element$1 | "drop" | Omit<string, "drop">):
-        Image
-      parameters:
-        - id: value
-          type: >-
-            <xref uid="@microsoft/teams.cards.Element" /> | "drop" |
-            Omit&lt;string, "drop"&gt;
-          description: ''
+      content: 'type: "Image" = "Image"'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.Image" />
-    inheritanceDescription: <b>Inherited From</b> Element.withFallback
-  - name: withGridArea(string)
-    uid: '@microsoft/teams.cards.Image.withGridArea'
+        type: '"Image"'
+  - name: url
+    uid: '@microsoft/teams.cards.Image.url'
     package: '@microsoft/teams.cards'
-    summary: ''
+    summary: >-
+      The URL (or Base64-encoded Data URI) of the image. Acceptable formats are
+      PNG, JPEG, GIF and SVG.
+    fullName: url
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withGridArea(value: string)'
-      parameters:
-        - id: value
-          type: string
-          description: ''
-    inheritanceDescription: <b>Inherited From</b> Element.withGridArea
-  - name: withHeight("auto" | "stretch" | Omit<string | number, "auto" | "stretch">)
-    uid: '@microsoft/teams.cards.Image.withHeight'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function withHeight(value: "auto" | "stretch" | Omit<string | number,
-        "auto" | "stretch">): Image
-      parameters:
-        - id: value
-          type: '"auto" | "stretch" | Omit&lt;string | number, "auto" | "stretch"&gt;'
-          description: ''
+      content: 'url: string'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.Image" />
-    inheritanceDescription: <b>Inherited From</b> Element.withHeight
-  - name: withHorizontalAlignment(HorizontalAlignment)
-    uid: '@microsoft/teams.cards.Image.withHorizontalAlignment'
+        type: string
+  - name: width
+    uid: '@microsoft/teams.cards.Image.width'
     package: '@microsoft/teams.cards'
-    summary: ''
+    summary: The width of the image.
+    fullName: width
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withHorizontalAlignment(value: HorizontalAlignment): Image'
-      parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
-          description: ''
+      content: 'width?: string'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.Image" />
-    inheritanceDescription: <b>Inherited From</b> Element.withHorizontalAlignment
-  - name: withId(string)
-    uid: '@microsoft/teams.cards.Image.withId'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withId(value: string): Image'
-      parameters:
-        - id: value
-          type: string
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.Image" />
-    inheritanceDescription: <b>Inherited From</b> Element.withId
-  - name: withIsVisible(boolean)
-    uid: '@microsoft/teams.cards.Image.withIsVisible'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withIsVisible(value: boolean): Image'
-      parameters:
-        - id: value
-          type: boolean
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.Image" />
-    inheritanceDescription: <b>Inherited From</b> Element.withIsVisible
-  - name: withLang(string)
-    uid: '@microsoft/teams.cards.Image.withLang'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withLang(value: string): Image'
-      parameters:
-        - id: value
-          type: string
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.Image" />
-    inheritanceDescription: <b>Inherited From</b> Element.withLang
-  - name: withRequire(string, string)
-    uid: '@microsoft/teams.cards.Image.withRequire'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withRequire(key: string, value: string): Image'
-      parameters:
-        - id: key
-          type: string
-          description: ''
-        - id: value
-          type: string
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.Image" />
-    inheritanceDescription: <b>Inherited From</b> Element.withRequire
-  - name: withRequires(Record<string, string>)
-    uid: '@microsoft/teams.cards.Image.withRequires'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withRequires(value: Record<string, string>): Image'
-      parameters:
-        - id: value
-          type: Record&lt;string, string&gt;
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.Image" />
-    inheritanceDescription: <b>Inherited From</b> Element.withRequires
-  - name: withSeperator(boolean)
-    uid: '@microsoft/teams.cards.Image.withSeperator'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withSeperator(value: boolean): Image'
-      parameters:
-        - id: value
-          type: boolean
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.Image" />
-    inheritanceDescription: <b>Inherited From</b> Element.withSeperator
-  - name: withSpacing(Spacing)
-    uid: '@microsoft/teams.cards.Image.withSpacing'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withSpacing(value: Spacing): Image'
-      parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.Spacing" />
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.Image" />
-    inheritanceDescription: <b>Inherited From</b> Element.withSpacing
-  - name: withTargetWidth(TargetWidth)
-    uid: '@microsoft/teams.cards.Image.withTargetWidth'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withTargetWidth(value: TargetWidth): Image'
-      parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.TargetWidth" />
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.Image" />
-    inheritanceDescription: <b>Inherited From</b> Element.withTargetWidth
+        type: string
 methods:
   - name: from(Omit<IImage, "type">)
     uid: '@microsoft/teams.cards.Image.from'
@@ -521,9 +348,9 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withAllowExpand(value?: boolean): Image'
+      content: 'function withAllowExpand(allowExpand?: boolean): Image'
       parameters:
-        - id: value
+        - id: allowExpand
           type: boolean
           description: ''
       return:
@@ -536,9 +363,9 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withAltText(value: string): Image'
+      content: 'function withAltText(altText: string): Image'
       parameters:
-        - id: value
+        - id: altText
           type: string
           description: ''
       return:
@@ -551,55 +378,261 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withBackgroundColor(value: string): Image'
+      content: 'function withBackgroundColor(backgroundColor: string): Image'
       parameters:
-        - id: value
+        - id: backgroundColor
           type: string
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Image" />
-  - name: withSelectAction(SelectAction)
+  - name: withFallback(FallbackElement)
+    uid: '@microsoft/teams.cards.Image.withFallback'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withFallback(fallback: FallbackElement): Image'
+      parameters:
+        - id: fallback
+          type: <xref uid="@microsoft/teams.cards.FallbackElement" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Image" />
+  - name: withHeight(string)
+    uid: '@microsoft/teams.cards.Image.withHeight'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withHeight(height: string): Image'
+      parameters:
+        - id: height
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Image" />
+  - name: withHorizontalAlignment(HorizontalAlignment)
+    uid: '@microsoft/teams.cards.Image.withHorizontalAlignment'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function withHorizontalAlignment(horizontalAlignment:
+        HorizontalAlignment): Image
+      parameters:
+        - id: horizontalAlignment
+          type: <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Image" />
+  - name: withId(string)
+    uid: '@microsoft/teams.cards.Image.withId'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withId(id: string): Image'
+      parameters:
+        - id: id
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Image" />
+  - name: withIsSortKey(boolean)
+    uid: '@microsoft/teams.cards.Image.withIsSortKey'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withIsSortKey(isSortKey?: boolean): Image'
+      parameters:
+        - id: isSortKey
+          type: boolean
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Image" />
+  - name: withIsVisible(boolean)
+    uid: '@microsoft/teams.cards.Image.withIsVisible'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withIsVisible(isVisible?: boolean): Image'
+      parameters:
+        - id: isVisible
+          type: boolean
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Image" />
+  - name: withLang(string)
+    uid: '@microsoft/teams.cards.Image.withLang'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withLang(lang: string): Image'
+      parameters:
+        - id: lang
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Image" />
+  - name: withMsTeams(ITeamsImageProperties)
+    uid: '@microsoft/teams.cards.Image.withMsTeams'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withMsTeams(msTeams: ITeamsImageProperties): Image'
+      parameters:
+        - id: msTeams
+          type: <xref uid="@microsoft/teams.cards.ITeamsImageProperties" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Image" />
+  - name: withRequires(IHostCapabilities)
+    uid: '@microsoft/teams.cards.Image.withRequires'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withRequires(requires: IHostCapabilities): Image'
+      parameters:
+        - id: requires
+          type: <xref uid="@microsoft/teams.cards.IHostCapabilities" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Image" />
+  - name: >-
+      withSelectAction(IExecuteAction | IOpenUrlAction | IResetInputsAction |
+      ISubmitAction | IToggleVisibilityAction)
     uid: '@microsoft/teams.cards.Image.withSelectAction'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withSelectAction(value: SelectAction): Image'
+      content: >-
+        function withSelectAction(selectAction: IExecuteAction | IOpenUrlAction
+        | IResetInputsAction | ISubmitAction | IToggleVisibilityAction): Image
       parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.SelectAction" />
+        - id: selectAction
+          type: >-
+            <xref uid="@microsoft/teams.cards.IExecuteAction" /> | <xref
+            uid="@microsoft/teams.cards.IOpenUrlAction" /> | <xref
+            uid="@microsoft/teams.cards.IResetInputsAction" /> | <xref
+            uid="@microsoft/teams.cards.ISubmitAction" /> | <xref
+            uid="@microsoft/teams.cards.IToggleVisibilityAction" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Image" />
-  - name: withSize(ImageSize)
+  - name: withSeparator(boolean)
+    uid: '@microsoft/teams.cards.Image.withSeparator'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withSeparator(separator?: boolean): Image'
+      parameters:
+        - id: separator
+          type: boolean
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Image" />
+  - name: withSize(Size)
     uid: '@microsoft/teams.cards.Image.withSize'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withSize(value: ImageSize): Image'
+      content: 'function withSize(size: Size): Image'
       parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.ImageSize" />
+        - id: size
+          type: <xref uid="@microsoft/teams.cards.Size" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Image" />
-  - name: withStyle("default" | "person")
+  - name: withSpacing(Spacing)
+    uid: '@microsoft/teams.cards.Image.withSpacing'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withSpacing(spacing: Spacing): Image'
+      parameters:
+        - id: spacing
+          type: <xref uid="@microsoft/teams.cards.Spacing" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Image" />
+  - name: withStyle(ImageStyle)
     uid: '@microsoft/teams.cards.Image.withStyle'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withStyle(value: "default" | "person"): Image'
+      content: 'function withStyle(style: ImageStyle): Image'
       parameters:
-        - id: value
-          type: '"default" | "person"'
+        - id: style
+          type: <xref uid="@microsoft/teams.cards.ImageStyle" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Image" />
+  - name: withTargetWidth(TargetWidth)
+    uid: '@microsoft/teams.cards.Image.withTargetWidth'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withTargetWidth(targetWidth: TargetWidth): Image'
+      parameters:
+        - id: targetWidth
+          type: <xref uid="@microsoft/teams.cards.TargetWidth" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Image" />
+  - name: withUrl(string)
+    uid: '@microsoft/teams.cards.Image.withUrl'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withUrl(url: string): Image'
+      parameters:
+        - id: url
+          type: string
           description: ''
       return:
         description: ''
@@ -611,12 +644,11 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withWidth(value: string): Image'
+      content: 'function withWidth(width: string): Image'
       parameters:
-        - id: value
+        - id: width
           type: string
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Image" />
-extends: Element
