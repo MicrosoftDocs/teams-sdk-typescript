@@ -2,63 +2,41 @@
 name: IToggleVisibilityAction
 uid: '@microsoft/teams.cards.IToggleVisibilityAction'
 package: '@microsoft/teams.cards'
-summary: An action that toggles the visibility of associated card elements.
+summary: >-
+  Toggles the visibility of a set of elements. Action.ToggleVisibility is useful
+  for creating "Show more" type UI patterns.
 fullName: IToggleVisibilityAction
 remarks: ''
 isDeprecated: false
 type: interface
 properties:
-  - name: targetElements
-    uid: '@microsoft/teams.cards.IToggleVisibilityAction.targetElements'
-    package: '@microsoft/teams.cards'
-    summary: >-
-      "The array of TargetElements. It is not recommended to include Input
-      elements with validation under Action.Toggle due to confusion that can
-      arise from invalid inputs that are not currently visible. See
-      https://docs.microsoft.com/en-us/adaptive-cards/authoring-cards/input-validation
-      for more information.
-    fullName: targetElements
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'targetElements: (string | TargetElement)[]'
-      return:
-        description: ''
-        type: (string | <xref uid="@microsoft/teams.cards.TargetElement" />)[]
-  - name: type
-    uid: '@microsoft/teams.cards.IToggleVisibilityAction.type'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    fullName: type
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'type: "Action.ToggleVisibility"'
-      return:
-        description: ''
-        type: '"<xref uid="Action.ToggleVisibility" />"'
-inheritedProperties:
   - name: fallback
     uid: '@microsoft/teams.cards.IToggleVisibilityAction.fallback'
     package: '@microsoft/teams.cards'
     summary: >-
-      Describes what to do when an unknown element is encountered or the
-      requires of this or any children can’t be met.
+      An alternate action to render if the type of this one is unsupported or if
+      the host application doesn't support all the capabilities specified in the
+      requires property.
     fullName: fallback
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'fallback?: string | IAction'
+      content: 'fallback?: FallbackAction'
       return:
         description: ''
-        type: string | IAction
-    inheritanceDescription: <b>Inherited From</b> IAction.fallback
+        type: <xref uid="@microsoft/teams.cards.FallbackAction" />
   - name: iconUrl
     uid: '@microsoft/teams.cards.IToggleVisibilityAction.iconUrl'
     package: '@microsoft/teams.cards'
     summary: >-
-      Optional icon to be shown on the action in conjunction with the title.
-      Supports data URI in version 1.2+
+      A URL (or Base64-encoded Data URI) to a PNG, GIF, JPEG or SVG image to be
+      displayed on the left of the action's title.
+
+
+      `iconUrl` also accepts the `<icon-name>[,regular|filled]` format to
+      display an icon from the vast [Adaptive Card icon
+      catalog](https://adaptivecards.microsoft.com/?topic=icon-catalog) instead
+      of an image.
     fullName: iconUrl
     remarks: ''
     isDeprecated: false
@@ -67,11 +45,13 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> IAction.iconUrl
   - name: id
     uid: '@microsoft/teams.cards.IToggleVisibilityAction.id'
     package: '@microsoft/teams.cards'
-    summary: A unique identifier associated with this Action.
+    summary: >-
+      A unique identifier for the element or action. Input elements must have an
+      id, otherwise they will not be validated and their values will not be sent
+      to the Bot.
     fullName: id
     remarks: ''
     isDeprecated: false
@@ -80,11 +60,13 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> IAction.id
   - name: isEnabled
     uid: '@microsoft/teams.cards.IToggleVisibilityAction.isEnabled'
     package: '@microsoft/teams.cards'
-    summary: Determines whether the action should be enabled.
+    summary: >-
+      Controls the enabled state of the action. A disabled action cannot be
+      clicked. If the action is represented as a button, the button's style will
+      reflect this state.
     fullName: isEnabled
     remarks: ''
     isDeprecated: false
@@ -93,57 +75,66 @@ inheritedProperties:
       return:
         description: ''
         type: boolean
-    inheritanceDescription: <b>Inherited From</b> IAction.isEnabled
   - name: mode
     uid: '@microsoft/teams.cards.IToggleVisibilityAction.mode'
     package: '@microsoft/teams.cards'
     summary: >-
-      Determines whether an action is displayed with a button or is moved to the
-      overflow menu.
+      Controls if the action is primary or secondary. Secondary actions appear
+      in an overflow menu.
     fullName: mode
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'mode?: "primary" | "secondary"'
+      content: 'mode?: ActionMode'
       return:
         description: ''
-        type: '"primary" | "secondary"'
-    inheritanceDescription: <b>Inherited From</b> IAction.mode
+        type: <xref uid="@microsoft/teams.cards.ActionMode" />
   - name: requires
     uid: '@microsoft/teams.cards.IToggleVisibilityAction.requires'
     package: '@microsoft/teams.cards'
     summary: >-
-      A series of key/value pairs indicating features that the item requires
-      with corresponding minimum version. When a feature is missing or of
-      insufficient version, fallback is triggered.
+      A list of capabilities the element requires the host application to
+      support. If the host application doesn't support at least one of the
+      listed capabilities, the element is not rendered (or its fallback is
+      rendered if provided).
     fullName: requires
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'requires?: Record<string, string>'
+      content: 'requires?: IHostCapabilities'
       return:
         description: ''
-        type: Record&lt;string, string&gt;
-    inheritanceDescription: <b>Inherited From</b> IAction.requires
+        type: <xref uid="@microsoft/teams.cards.IHostCapabilities" />
   - name: style
     uid: '@microsoft/teams.cards.IToggleVisibilityAction.style'
     package: '@microsoft/teams.cards'
     summary: >-
-      Controls the style of an Action, which influences how the action is
-      displayed, spoken, etc.
+      Control the style of the action, affecting its visual and spoken
+      representations.
     fullName: style
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'style?: "default" | "positive" | "destructive"'
+      content: 'style?: ActionStyle'
       return:
         description: ''
-        type: '"default" | "positive" | "destructive"'
-    inheritanceDescription: <b>Inherited From</b> IAction.style
+        type: <xref uid="@microsoft/teams.cards.ActionStyle" />
+  - name: targetElements
+    uid: '@microsoft/teams.cards.IToggleVisibilityAction.targetElements'
+    package: '@microsoft/teams.cards'
+    summary: The Ids of the elements to toggle the visibility of.
+    fullName: targetElements
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'targetElements?: (string | ITargetElement)[]'
+      return:
+        description: ''
+        type: (string | <xref uid="@microsoft/teams.cards.ITargetElement" />)[]
   - name: title
     uid: '@microsoft/teams.cards.IToggleVisibilityAction.title'
     package: '@microsoft/teams.cards'
-    summary: Label for button or link that represents this action.
+    summary: The title of the action, as it appears on buttons.
     fullName: title
     remarks: ''
     isDeprecated: false
@@ -152,13 +143,10 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> IAction.title
   - name: tooltip
     uid: '@microsoft/teams.cards.IToggleVisibilityAction.tooltip'
     package: '@microsoft/teams.cards'
-    summary: >-
-      Defines text that should be displayed to the end user as they hover the
-      mouse over the action, and read when using narration software.
+    summary: The tooltip text to display when the action is hovered over.
     fullName: tooltip
     remarks: ''
     isDeprecated: false
@@ -167,5 +155,15 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> IAction.tooltip
-extends: IAction
+  - name: type
+    uid: '@microsoft/teams.cards.IToggleVisibilityAction.type'
+    package: '@microsoft/teams.cards'
+    summary: Must be **Action.ToggleVisibility**.
+    fullName: type
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'type: "Action.ToggleVisibility"'
+      return:
+        description: ''
+        type: '"<xref uid="Action.ToggleVisibility" />"'

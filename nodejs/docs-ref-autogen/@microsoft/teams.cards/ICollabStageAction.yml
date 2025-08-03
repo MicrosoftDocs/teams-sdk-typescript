@@ -24,38 +24,61 @@ properties:
       return:
         description: ''
         type: >-
-          <xref uid="@microsoft/teams.cards.MSTeamsData" />&lt;<xref
-          uid="@microsoft/teams.cards.ICollabStageData" />&gt;
+          MSTeamsData&lt;<xref uid="@microsoft/teams.cards.ICollabStageData"
+          />&gt;
 inheritedProperties:
   - name: associatedInputs
     uid: '@microsoft/teams.cards.ICollabStageAction.associatedInputs'
     package: '@microsoft/teams.cards'
-    summary: Controls which inputs are associated with the action.
+    summary: >-
+      The Ids of the inputs associated with the Action.Submit. When the action
+      is executed, the values of the associated inputs are sent to the Bot. See
+      [Input
+      validation](https://adaptivecards.microsoft.com/?topic=input-validation)
+      for more details.
     fullName: associatedInputs
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'associatedInputs?: AssociatedInputs'
+      content: 'associatedInputs?: "auto" | "none"'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.AssociatedInputs" />
+        type: '"auto" | "none"'
     inheritanceDescription: >-
       <b>Inherited From</b>
       [ISubmitAction.associatedInputs](xref:@microsoft/teams.cards.ISubmitAction.associatedInputs)
+  - name: conditionallyEnabled
+    uid: '@microsoft/teams.cards.ICollabStageAction.conditionallyEnabled'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Controls if the action is enabled only if at least one required input has
+      been filled by the user.
+    fullName: conditionallyEnabled
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'conditionallyEnabled?: boolean'
+      return:
+        description: ''
+        type: boolean
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ISubmitAction.conditionallyEnabled](xref:@microsoft/teams.cards.ISubmitAction.conditionallyEnabled)
   - name: fallback
     uid: '@microsoft/teams.cards.ICollabStageAction.fallback'
     package: '@microsoft/teams.cards'
     summary: >-
-      Describes what to do when an unknown element is encountered or the
-      requires of this or any children can’t be met.
+      An alternate action to render if the type of this one is unsupported or if
+      the host application doesn't support all the capabilities specified in the
+      requires property.
     fullName: fallback
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'fallback?: string | IAction'
+      content: 'fallback?: FallbackAction'
       return:
         description: ''
-        type: string | IAction
+        type: <xref uid="@microsoft/teams.cards.FallbackAction" />
     inheritanceDescription: >-
       <b>Inherited From</b>
       [ISubmitAction.fallback](xref:@microsoft/teams.cards.ISubmitAction.fallback)
@@ -63,8 +86,14 @@ inheritedProperties:
     uid: '@microsoft/teams.cards.ICollabStageAction.iconUrl'
     package: '@microsoft/teams.cards'
     summary: >-
-      Optional icon to be shown on the action in conjunction with the title.
-      Supports data URI in version 1.2+
+      A URL (or Base64-encoded Data URI) to a PNG, GIF, JPEG or SVG image to be
+      displayed on the left of the action's title.
+
+
+      `iconUrl` also accepts the `<icon-name>[,regular|filled]` format to
+      display an icon from the vast [Adaptive Card icon
+      catalog](https://adaptivecards.microsoft.com/?topic=icon-catalog) instead
+      of an image.
     fullName: iconUrl
     remarks: ''
     isDeprecated: false
@@ -79,7 +108,10 @@ inheritedProperties:
   - name: id
     uid: '@microsoft/teams.cards.ICollabStageAction.id'
     package: '@microsoft/teams.cards'
-    summary: A unique identifier associated with this Action.
+    summary: >-
+      A unique identifier for the element or action. Input elements must have an
+      id, otherwise they will not be validated and their values will not be sent
+      to the Bot.
     fullName: id
     remarks: ''
     isDeprecated: false
@@ -94,7 +126,10 @@ inheritedProperties:
   - name: isEnabled
     uid: '@microsoft/teams.cards.ICollabStageAction.isEnabled'
     package: '@microsoft/teams.cards'
-    summary: Determines whether the action should be enabled.
+    summary: >-
+      Controls the enabled state of the action. A disabled action cannot be
+      clicked. If the action is represented as a button, the button's style will
+      reflect this state.
     fullName: isEnabled
     remarks: ''
     isDeprecated: false
@@ -110,34 +145,50 @@ inheritedProperties:
     uid: '@microsoft/teams.cards.ICollabStageAction.mode'
     package: '@microsoft/teams.cards'
     summary: >-
-      Determines whether an action is displayed with a button or is moved to the
-      overflow menu.
+      Controls if the action is primary or secondary. Secondary actions appear
+      in an overflow menu.
     fullName: mode
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'mode?: "primary" | "secondary"'
+      content: 'mode?: ActionMode'
       return:
         description: ''
-        type: '"primary" | "secondary"'
+        type: <xref uid="@microsoft/teams.cards.ActionMode" />
     inheritanceDescription: >-
       <b>Inherited From</b>
       [ISubmitAction.mode](xref:@microsoft/teams.cards.ISubmitAction.mode)
+  - name: msTeams
+    uid: '@microsoft/teams.cards.ICollabStageAction.msTeams'
+    package: '@microsoft/teams.cards'
+    summary: Teams-specific metadata associated with the action.
+    fullName: msTeams
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'msTeams?: ITeamsSubmitActionProperties'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ITeamsSubmitActionProperties" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ISubmitAction.msTeams](xref:@microsoft/teams.cards.ISubmitAction.msTeams)
   - name: requires
     uid: '@microsoft/teams.cards.ICollabStageAction.requires'
     package: '@microsoft/teams.cards'
     summary: >-
-      A series of key/value pairs indicating features that the item requires
-      with corresponding minimum version. When a feature is missing or of
-      insufficient version, fallback is triggered.
+      A list of capabilities the element requires the host application to
+      support. If the host application doesn't support at least one of the
+      listed capabilities, the element is not rendered (or its fallback is
+      rendered if provided).
     fullName: requires
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'requires?: Record<string, string>'
+      content: 'requires?: IHostCapabilities'
       return:
         description: ''
-        type: Record&lt;string, string&gt;
+        type: <xref uid="@microsoft/teams.cards.IHostCapabilities" />
     inheritanceDescription: >-
       <b>Inherited From</b>
       [ISubmitAction.requires](xref:@microsoft/teams.cards.ISubmitAction.requires)
@@ -145,23 +196,23 @@ inheritedProperties:
     uid: '@microsoft/teams.cards.ICollabStageAction.style'
     package: '@microsoft/teams.cards'
     summary: >-
-      Controls the style of an Action, which influences how the action is
-      displayed, spoken, etc.
+      Control the style of the action, affecting its visual and spoken
+      representations.
     fullName: style
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'style?: "default" | "positive" | "destructive"'
+      content: 'style?: ActionStyle'
       return:
         description: ''
-        type: '"default" | "positive" | "destructive"'
+        type: <xref uid="@microsoft/teams.cards.ActionStyle" />
     inheritanceDescription: >-
       <b>Inherited From</b>
       [ISubmitAction.style](xref:@microsoft/teams.cards.ISubmitAction.style)
   - name: title
     uid: '@microsoft/teams.cards.ICollabStageAction.title'
     package: '@microsoft/teams.cards'
-    summary: Label for button or link that represents this action.
+    summary: The title of the action, as it appears on buttons.
     fullName: title
     remarks: ''
     isDeprecated: false
@@ -176,9 +227,7 @@ inheritedProperties:
   - name: tooltip
     uid: '@microsoft/teams.cards.ICollabStageAction.tooltip'
     package: '@microsoft/teams.cards'
-    summary: >-
-      Defines text that should be displayed to the end user as they hover the
-      mouse over the action, and read when using narration software.
+    summary: The tooltip text to display when the action is hovered over.
     fullName: tooltip
     remarks: ''
     isDeprecated: false
@@ -193,7 +242,7 @@ inheritedProperties:
   - name: type
     uid: '@microsoft/teams.cards.ICollabStageAction.type'
     package: '@microsoft/teams.cards'
-    summary: ''
+    summary: Must be **Action.Submit**.
     fullName: type
     remarks: ''
     isDeprecated: false

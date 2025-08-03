@@ -2,12 +2,12 @@
 name: MsalOptions
 uid: '@microsoft/teams.client.MsalOptions'
 package: '@microsoft/teams.client'
-summary: ''
+summary: Options to control how MSAL is initialized and used.
 fullName: MsalOptions
 remarks: ''
 isDeprecated: false
 syntax: |
-  type MsalOptions = {
-    configuration?: msal.Configuration
-    prewarmScopes?: false | string[]
-  }
+  type MsalOptions = (
+    | { configuration?: never; msalInstance?: msal.IPublicClientApplication }
+    | { configuration?: msal.Configuration; msalInstance?: never }
+  ) & { prewarmScopes?: false | string[] }

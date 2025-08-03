@@ -11,9 +11,7 @@ properties:
   - name: backgroundImage
     uid: '@microsoft/teams.cards.ICarouselPage.backgroundImage'
     package: '@microsoft/teams.cards'
-    summary: >-
-      Specifies the background image. Acceptable formats are `PNG`, `JPEG`, and
-      `GIF`
+    summary: Defines the container's background image.
     fullName: backgroundImage
     remarks: ''
     isDeprecated: false
@@ -22,47 +20,141 @@ properties:
       return:
         description: ''
         type: string | <xref uid="@microsoft/teams.cards.IBackgroundImage" />
+  - name: fallback
+    uid: '@microsoft/teams.cards.ICarouselPage.fallback'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      An alternate element to render if the type of this one is unsupported or
+      if the host application doesn't support all the capabilities specified in
+      the requires property.
+    fullName: fallback
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'fallback?: FallbackElement'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.FallbackElement" />
+  - name: grid.area
+    uid: '@microsoft/teams.cards.ICarouselPage.grid.area'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      The area of a Layout.AreaGrid layout in which an element should be
+      displayed.
+    fullName: grid.area
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'grid.area?: string'
+      return:
+        description: ''
+        type: string
+  - name: height
+    uid: '@microsoft/teams.cards.ICarouselPage.height'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      The height of the element. When set to stretch, the element will use the
+      remaining vertical space in its container.
+    fullName: height
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'height?: ElementHeight'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ElementHeight" />
+  - name: id
+    uid: '@microsoft/teams.cards.ICarouselPage.id'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      A unique identifier for the element or action. Input elements must have an
+      id, otherwise they will not be validated and their values will not be sent
+      to the Bot.
+    fullName: id
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'id?: string'
+      return:
+        description: ''
+        type: string
+  - name: isSortKey
+    uid: '@microsoft/teams.cards.ICarouselPage.isSortKey'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Controls whether the element should be used as a sort key by elements that
+      allow sorting across a collection of elements.
+    fullName: isSortKey
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'isSortKey?: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: isVisible
+    uid: '@microsoft/teams.cards.ICarouselPage.isVisible'
+    package: '@microsoft/teams.cards'
+    summary: Controls the visibility of the element.
+    fullName: isVisible
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'isVisible?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: items
     uid: '@microsoft/teams.cards.ICarouselPage.items'
     package: '@microsoft/teams.cards'
-    summary: The card elements to render inside the `CarouselPage`.
+    summary: The elements in the page.
     fullName: items
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'items: Element$1[]'
+      content: 'items: CardElementArray'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.Element" />[]
+        type: <xref uid="@microsoft/teams.cards.CardElementArray" />
+  - name: lang
+    uid: '@microsoft/teams.cards.ICarouselPage.lang'
+    package: '@microsoft/teams.cards'
+    summary: The locale associated with the element.
+    fullName: lang
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'lang?: string'
+      return:
+        description: ''
+        type: string
   - name: layouts
     uid: '@microsoft/teams.cards.ICarouselPage.layouts'
     package: '@microsoft/teams.cards'
     summary: >-
       The layouts associated with the container. The container can dynamically
       switch from one layout to another as the card's width changes. See
-      Container layouts for more details.
+      [Container
+      layouts](https://adaptivecards.microsoft.com/?topic=container-layouts) for
+      more details.
     fullName: layouts
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'layouts?: Layout[]'
+      content: 'layouts?: (IStackLayout | IFlowLayout | IAreaGridLayout)[]'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.Layout" />[]
+        type: >-
+          (<xref uid="@microsoft/teams.cards.IStackLayout" /> | <xref
+          uid="@microsoft/teams.cards.IFlowLayout" /> | <xref
+          uid="@microsoft/teams.cards.IAreaGridLayout" />)[]
   - name: maxHeight
     uid: '@microsoft/teams.cards.ICarouselPage.maxHeight'
     package: '@microsoft/teams.cards'
-    summary: >+
-      The maximum height, in pixels, of the container, in the <number>px format.
-      When the content of a container exceeds the container's maximum height, a
-      vertical scrollbar is displayed.
-
-
-      **Example**
-
-
-      `<number>px`
-
+    summary: >-
+      The maximum height, in pixels, of the container, in the `<number>px`
+      format. When the content of a container exceeds the container's maximum
+      height, a vertical scrollbar is displayed.
     fullName: maxHeight
     remarks: ''
     isDeprecated: false
@@ -74,13 +166,9 @@ properties:
   - name: minHeight
     uid: '@microsoft/teams.cards.ICarouselPage.minHeight'
     package: '@microsoft/teams.cards'
-    summary: |+
-      The minimum height, in pixels, of the container, in the <number>px format.
-
-      **Example**
-
-      `<number>px`
-
+    summary: >-
+      The minimum height, in pixels, of the container, in the `<number>px`
+      format.
     fullName: minHeight
     remarks: ''
     isDeprecated: false
@@ -89,6 +177,22 @@ properties:
       return:
         description: ''
         type: string
+  - name: requires
+    uid: '@microsoft/teams.cards.ICarouselPage.requires'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      A list of capabilities the element requires the host application to
+      support. If the host application doesn't support at least one of the
+      listed capabilities, the element is not rendered (or its fallback is
+      rendered if provided).
+    fullName: requires
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'requires?: IHostCapabilities'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.IHostCapabilities" />
   - name: roundedCorners
     uid: '@microsoft/teams.cards.ICarouselPage.roundedCorners'
     package: '@microsoft/teams.cards'
@@ -125,10 +229,17 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'selectAction?: Action'
+      content: >-
+        selectAction?: IExecuteAction | IOpenUrlAction | IResetInputsAction |
+        ISubmitAction | IToggleVisibilityAction
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.Action" />
+        type: >-
+          <xref uid="@microsoft/teams.cards.IExecuteAction" /> | <xref
+          uid="@microsoft/teams.cards.IOpenUrlAction" /> | <xref
+          uid="@microsoft/teams.cards.IResetInputsAction" /> | <xref
+          uid="@microsoft/teams.cards.ISubmitAction" /> | <xref
+          uid="@microsoft/teams.cards.IToggleVisibilityAction" />
   - name: showBorder
     uid: '@microsoft/teams.cards.ICarouselPage.showBorder'
     package: '@microsoft/teams.cards'
@@ -156,10 +267,28 @@ properties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ContainerStyle" />
+  - name: targetWidth
+    uid: '@microsoft/teams.cards.ICarouselPage.targetWidth'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Controls for which card width the element should be displayed. If
+      targetWidth isn't specified, the element is rendered at all card widths.
+      Using targetWidth makes it possible to author responsive cards that adapt
+      their layout to the available horizontal space. For more details, see
+      [Responsive
+      layout](https://adaptivecards.microsoft.com/?topic=responsive-layout).
+    fullName: targetWidth
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'targetWidth?: TargetWidth'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.TargetWidth" />
   - name: type
     uid: '@microsoft/teams.cards.ICarouselPage.type'
     package: '@microsoft/teams.cards'
-    summary: ''
+    summary: Must be **CarouselPage**.
     fullName: type
     remarks: ''
     isDeprecated: false
@@ -180,163 +309,3 @@ properties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.VerticalAlignment" />
-inheritedProperties:
-  - name: fallback
-    uid: '@microsoft/teams.cards.ICarouselPage.fallback'
-    package: '@microsoft/teams.cards'
-    summary: >-
-      Describes what to do when an unknown item is encountered or the requires
-      of this or any children can't be met.
-    fullName: fallback
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'fallback?: Element$1 | "drop" | Omit<string, "drop">'
-      return:
-        description: ''
-        type: >-
-          <xref uid="@microsoft/teams.cards.Element" /> | "drop" |
-          Omit&lt;string, "drop"&gt;
-    inheritanceDescription: <b>Inherited From</b> IElement.fallback
-  - name: grid.area
-    uid: '@microsoft/teams.cards.ICarouselPage.grid.area'
-    package: '@microsoft/teams.cards'
-    summary: >-
-      the area of a `Layout.AreaGrid` layout in which an element should be
-      displayed.
-    fullName: grid.area
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'grid.area?: string'
-      return:
-        description: ''
-        type: string
-    inheritanceDescription: <b>Inherited From</b> IElement.grid.area
-  - name: height
-    uid: '@microsoft/teams.cards.ICarouselPage.height'
-    package: '@microsoft/teams.cards'
-    summary: Specifies the height of the element.
-    fullName: height
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'height?: "auto" | "stretch" | Omit<string | number, "auto" | "stretch">'
-      return:
-        description: ''
-        type: '"auto" | "stretch" | Omit&lt;string | number, "auto" | "stretch"&gt;'
-    inheritanceDescription: <b>Inherited From</b> IElement.height
-  - name: horizontalAlignment
-    uid: '@microsoft/teams.cards.ICarouselPage.horizontalAlignment'
-    package: '@microsoft/teams.cards'
-    summary: controls how the element should be horizontally aligned.
-    fullName: horizontalAlignment
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'horizontalAlignment?: null | HorizontalAlignment'
-      return:
-        description: ''
-        type: null | <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
-    inheritanceDescription: <b>Inherited From</b> IElement.horizontalAlignment
-  - name: id
-    uid: '@microsoft/teams.cards.ICarouselPage.id'
-    package: '@microsoft/teams.cards'
-    summary: A unique identifier associated with the item
-    fullName: id
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'id?: string'
-      return:
-        description: ''
-        type: string
-    inheritanceDescription: <b>Inherited From</b> IElement.id
-  - name: isVisible
-    uid: '@microsoft/teams.cards.ICarouselPage.isVisible'
-    package: '@microsoft/teams.cards'
-    summary: If false, this item will be removed from the visual tree.
-    fullName: isVisible
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'isVisible?: boolean'
-      return:
-        description: ''
-        type: boolean
-    inheritanceDescription: <b>Inherited From</b> IElement.isVisible
-  - name: lang
-    uid: '@microsoft/teams.cards.ICarouselPage.lang'
-    package: '@microsoft/teams.cards'
-    summary: The locale associated with the element.
-    fullName: lang
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'lang?: string'
-      return:
-        description: ''
-        type: string
-    inheritanceDescription: <b>Inherited From</b> IElement.lang
-  - name: requires
-    uid: '@microsoft/teams.cards.ICarouselPage.requires'
-    package: '@microsoft/teams.cards'
-    summary: >-
-      A series of key/value pairs indicating features that the item requires
-      with corresponding minimum version. When a feature is missing or of
-      insufficient version, fallback is triggered.
-    fullName: requires
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'requires?: Record<string, string>'
-      return:
-        description: ''
-        type: Record&lt;string, string&gt;
-    inheritanceDescription: <b>Inherited From</b> IElement.requires
-  - name: separator
-    uid: '@microsoft/teams.cards.ICarouselPage.separator'
-    package: '@microsoft/teams.cards'
-    summary: When `true`, draw a separating line at the top of the element.
-    fullName: separator
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'separator?: boolean'
-      return:
-        description: ''
-        type: boolean
-    inheritanceDescription: <b>Inherited From</b> IElement.separator
-  - name: spacing
-    uid: '@microsoft/teams.cards.ICarouselPage.spacing'
-    package: '@microsoft/teams.cards'
-    summary: >-
-      Controls the amount of spacing between this element and the preceding
-      element.
-    fullName: spacing
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'spacing?: Spacing'
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.Spacing" />
-    inheritanceDescription: <b>Inherited From</b> IElement.spacing
-  - name: targetWidth
-    uid: '@microsoft/teams.cards.ICarouselPage.targetWidth'
-    package: '@microsoft/teams.cards'
-    summary: >-
-      Controls for which card width the element should be displayed. If
-      targetWidth isn't specified, the element is rendered at all card widths.
-      Using targetWidth makes it possible to author responsive cards that adapt
-      their layout to the available horizontal space.
-    fullName: targetWidth
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'targetWidth?: TargetWidth'
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.TargetWidth" />
-    inheritanceDescription: <b>Inherited From</b> IElement.targetWidth
-extends: IElement

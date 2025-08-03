@@ -55,27 +55,16 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'itemFit?: "Fit" | "Fill"'
+      content: 'itemFit?: FlowLayoutItemFit'
       return:
         description: ''
-        type: '"Fit" | "Fill"'
+        type: <xref uid="@microsoft/teams.cards.FlowLayoutItemFit" />
   - name: itemWidth
     uid: '@microsoft/teams.cards.FlowLayout.itemWidth'
     package: '@microsoft/teams.cards'
-    summary: >+
-      The width, in pixels, of each item, in the <number>px format. Should not
+    summary: >-
+      The width, in pixels, of each item, in the `<number>px` format. Should not
       be used if maxItemWidth and/or minItemWidth are set.
-
-
-      **Example**
-
-
-      ```ts
-
-      '<number>px'
-
-      ```
-
     fullName: itemWidth
     remarks: ''
     isDeprecated: false
@@ -87,20 +76,9 @@ properties:
   - name: maxItemWidth
     uid: '@microsoft/teams.cards.FlowLayout.maxItemWidth'
     package: '@microsoft/teams.cards'
-    summary: >+
-      The maximum width, in pixels, of each item, in the <number>px format.
+    summary: >-
+      The maximum width, in pixels, of each item, in the `<number>px` format.
       Should not be used if itemWidth is set.
-
-
-      **Example**
-
-
-      ```ts
-
-      '<number>px'
-
-      ```
-
     fullName: maxItemWidth
     remarks: ''
     isDeprecated: false
@@ -112,20 +90,9 @@ properties:
   - name: minItemWidth
     uid: '@microsoft/teams.cards.FlowLayout.minItemWidth'
     package: '@microsoft/teams.cards'
-    summary: >+
-      The minimum width, in pixels, of each item, in the <number>px format.
+    summary: >-
+      The minimum width, in pixels, of each item, in the `<number>px` format.
       Should not be used if itemWidth is set.
-
-
-      **Example**
-
-
-      ```ts
-
-      '<number>px'
-
-      ```
-
     fullName: minItemWidth
     remarks: ''
     isDeprecated: false
@@ -161,12 +128,12 @@ properties:
   - name: type
     uid: '@microsoft/teams.cards.FlowLayout.type'
     package: '@microsoft/teams.cards'
-    summary: ''
+    summary: Must be **Layout.Flow**.
     fullName: type
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'type: "Layout.Flow"'
+      content: 'type: "Layout.Flow" = "Layout.Flow"'
       return:
         description: ''
         type: '"<xref uid="Layout.Flow" />"'
@@ -183,17 +150,19 @@ properties:
         description: ''
         type: <xref uid="@microsoft/teams.cards.VerticalAlignment" />
 methods:
-  - name: from(FlowLayoutOptions)
+  - name: from(Omit<IFlowLayout, "type">)
     uid: '@microsoft/teams.cards.FlowLayout.from'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'static function from(options: FlowLayoutOptions): FlowLayout'
+      content: 'static function from(options: Omit<IFlowLayout, "type">): FlowLayout'
       parameters:
         - id: options
-          type: <xref uid="@microsoft/teams.cards.FlowLayoutOptions" />
+          type: >-
+            Omit&lt;<xref uid="@microsoft/teams.cards.IFlowLayout" />,
+            "type"&gt;
           description: ''
       return:
         description: ''
@@ -205,70 +174,42 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withColumnSpacing(value: Spacing): FlowLayout'
+      content: 'function withColumnSpacing(columnSpacing: Spacing): FlowLayout'
       parameters:
-        - id: value
+        - id: columnSpacing
           type: <xref uid="@microsoft/teams.cards.Spacing" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.FlowLayout" />
-  - name: withHorizontalAlignment(HorizontalAlignment)
-    uid: '@microsoft/teams.cards.FlowLayout.withHorizontalAlignment'
+  - name: withHorizontalItemsAlignment(HorizontalAlignment)
+    uid: '@microsoft/teams.cards.FlowLayout.withHorizontalItemsAlignment'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withHorizontalAlignment(value: HorizontalAlignment): FlowLayout'
+      content: >-
+        function withHorizontalItemsAlignment(horizontalItemsAlignment:
+        HorizontalAlignment): FlowLayout
       parameters:
-        - id: value
+        - id: horizontalItemsAlignment
           type: <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.FlowLayout" />
-  - name: withItemFit("Fit" | "Fill")
+  - name: withItemFit(FlowLayoutItemFit)
     uid: '@microsoft/teams.cards.FlowLayout.withItemFit'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withItemFit(value: "Fit" | "Fill"): FlowLayout'
+      content: 'function withItemFit(itemFit: FlowLayoutItemFit): FlowLayout'
       parameters:
-        - id: value
-          type: '"Fit" | "Fill"'
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.FlowLayout" />
-  - name: withItemMaxWidth(string)
-    uid: '@microsoft/teams.cards.FlowLayout.withItemMaxWidth'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withItemMaxWidth(value: string): FlowLayout'
-      parameters:
-        - id: value
-          type: string
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.FlowLayout" />
-  - name: withItemMinWidth(string)
-    uid: '@microsoft/teams.cards.FlowLayout.withItemMinWidth'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withItemMinWidth(value: string): FlowLayout'
-      parameters:
-        - id: value
-          type: string
+        - id: itemFit
+          type: <xref uid="@microsoft/teams.cards.FlowLayoutItemFit" />
           description: ''
       return:
         description: ''
@@ -280,9 +221,39 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withItemWidth(value: string): FlowLayout'
+      content: 'function withItemWidth(itemWidth: string): FlowLayout'
       parameters:
-        - id: value
+        - id: itemWidth
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.FlowLayout" />
+  - name: withMaxItemWidth(string)
+    uid: '@microsoft/teams.cards.FlowLayout.withMaxItemWidth'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withMaxItemWidth(maxItemWidth: string): FlowLayout'
+      parameters:
+        - id: maxItemWidth
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.FlowLayout" />
+  - name: withMinItemWidth(string)
+    uid: '@microsoft/teams.cards.FlowLayout.withMinItemWidth'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withMinItemWidth(minItemWidth: string): FlowLayout'
+      parameters:
+        - id: minItemWidth
           type: string
           description: ''
       return:
@@ -295,9 +266,9 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withRowSpacing(value: Spacing): FlowLayout'
+      content: 'function withRowSpacing(rowSpacing: Spacing): FlowLayout'
       parameters:
-        - id: value
+        - id: rowSpacing
           type: <xref uid="@microsoft/teams.cards.Spacing" />
           description: ''
       return:
@@ -310,24 +281,26 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withTargetWidth(value: TargetWidth): FlowLayout'
+      content: 'function withTargetWidth(targetWidth: TargetWidth): FlowLayout'
       parameters:
-        - id: value
+        - id: targetWidth
           type: <xref uid="@microsoft/teams.cards.TargetWidth" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.FlowLayout" />
-  - name: withVerticalAlignment(VerticalAlignment)
-    uid: '@microsoft/teams.cards.FlowLayout.withVerticalAlignment'
+  - name: withVerticalItemsAlignment(VerticalAlignment)
+    uid: '@microsoft/teams.cards.FlowLayout.withVerticalItemsAlignment'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withVerticalAlignment(value: VerticalAlignment): FlowLayout'
+      content: >-
+        function withVerticalItemsAlignment(verticalItemsAlignment:
+        VerticalAlignment): FlowLayout
       parameters:
-        - id: value
+        - id: verticalItemsAlignment
           type: <xref uid="@microsoft/teams.cards.VerticalAlignment" />
           description: ''
       return:

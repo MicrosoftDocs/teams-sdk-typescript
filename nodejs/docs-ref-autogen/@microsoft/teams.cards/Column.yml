@@ -2,109 +2,29 @@
 name: Column
 uid: '@microsoft/teams.cards.Column'
 package: '@microsoft/teams.cards'
-summary: Defines a container that is part of a ColumnSet.
+summary: A column in a ColumnSet element.
 fullName: Column
 remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: Column(Element$1[])
+  - name: Column(CardElementArray)
     uid: '@microsoft/teams.cards.Column.constructor'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'new Column(items: Element$1[])'
+      content: 'new Column(items: CardElementArray)'
       parameters:
         - id: items
-          type: <xref uid="@microsoft/teams.cards.Element" />[]
+          type: <xref uid="@microsoft/teams.cards.CardElementArray" />
           description: ''
 properties:
-  - name: items
-    uid: '@microsoft/teams.cards.Column.items'
-    package: '@microsoft/teams.cards'
-    summary: The card elements to render inside the `Column`.
-    fullName: items
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'items: Element$1[]'
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.Element" />[]
-  - name: minHeight
-    uid: '@microsoft/teams.cards.Column.minHeight'
-    package: '@microsoft/teams.cards'
-    summary: Specifies the minimum height of the column in pixels, like `\"80px\"`.
-    fullName: minHeight
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'minHeight?: string'
-      return:
-        description: ''
-        type: string
-  - name: style
-    uid: '@microsoft/teams.cards.Column.style'
-    package: '@microsoft/teams.cards'
-    summary: Style hint for `Column`.
-    fullName: style
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'style?: null | ContainerStyle'
-      return:
-        description: ''
-        type: null | <xref uid="@microsoft/teams.cards.ContainerStyle" />
-  - name: type
-    uid: '@microsoft/teams.cards.Column.type'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    fullName: type
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'type: "Column"'
-      return:
-        description: ''
-        type: '"Column"'
-  - name: verticalContentAlignment
-    uid: '@microsoft/teams.cards.Column.verticalContentAlignment'
-    package: '@microsoft/teams.cards'
-    summary: >-
-      Defines how the content should be aligned vertically within the column.
-      When not specified, the value of verticalContentAlignment is inherited
-      from the parent container. If no parent container has
-      verticalContentAlignment set, it defaults to Top.
-    fullName: verticalContentAlignment
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'verticalContentAlignment?: null | VerticalAlignment'
-      return:
-        description: ''
-        type: null | <xref uid="@microsoft/teams.cards.VerticalAlignment" />
-  - name: width
-    uid: '@microsoft/teams.cards.Column.width'
-    package: '@microsoft/teams.cards'
-    summary: >-
-      `\"auto\"`, `\"stretch\"`, a number representing relative width of the
-      column in the column group, or in version 1.1 and higher, a specific pixel
-      width, like `\"50px\"`.
-    fullName: width
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'width?: "auto" | "stretch" | Omit<string | number, "auto" | "stretch">'
-      return:
-        description: ''
-        type: '"auto" | "stretch" | Omit&lt;string | number, "auto" | "stretch"&gt;'
-inheritedProperties:
   - name: backgroundImage
     uid: '@microsoft/teams.cards.Column.backgroundImage'
     package: '@microsoft/teams.cards'
-    summary: Specifies the background image. Acceptable formats are PNG, JPEG, and GIF
+    summary: Defines the container's background image.
     fullName: backgroundImage
     remarks: ''
     isDeprecated: false
@@ -113,11 +33,12 @@ inheritedProperties:
       return:
         description: ''
         type: string | <xref uid="@microsoft/teams.cards.IBackgroundImage" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.backgroundImage
   - name: bleed
     uid: '@microsoft/teams.cards.Column.bleed'
     package: '@microsoft/teams.cards'
-    summary: Determines whether the column should bleed through its parent's padding.
+    summary: >-
+      Controls if the container should bleed into its parent. A bleeding
+      container extends into its parent's padding.
     fullName: bleed
     remarks: ''
     isDeprecated: false
@@ -126,29 +47,26 @@ inheritedProperties:
       return:
         description: ''
         type: boolean
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.bleed
   - name: fallback
     uid: '@microsoft/teams.cards.Column.fallback'
     package: '@microsoft/teams.cards'
     summary: >-
-      Describes what to do when an unknown item is encountered or the requires
-      of this or any children can't be met.
+      An alternate element to render if the type of this one is unsupported or
+      if the host application doesn't support all the capabilities specified in
+      the requires property.
     fullName: fallback
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'fallback?: Element$1 | "drop" | Omit<string, "drop">'
+      content: 'fallback?: FallbackElement'
       return:
         description: ''
-        type: >-
-          <xref uid="@microsoft/teams.cards.Element" /> | "drop" |
-          Omit&lt;string, "drop"&gt;
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.fallback
+        type: <xref uid="@microsoft/teams.cards.FallbackElement" />
   - name: grid.area
     uid: '@microsoft/teams.cards.Column.grid.area'
     package: '@microsoft/teams.cards'
     summary: >-
-      the area of a `Layout.AreaGrid` layout in which an element should be
+      The area of a Layout.AreaGrid layout in which an element should be
       displayed.
     fullName: grid.area
     remarks: ''
@@ -158,37 +76,39 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.grid.area
   - name: height
     uid: '@microsoft/teams.cards.Column.height'
     package: '@microsoft/teams.cards'
-    summary: Specifies the height of the element.
+    summary: >-
+      The height of the element. When set to stretch, the element will use the
+      remaining vertical space in its container.
     fullName: height
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'height?: "auto" | "stretch" | Omit<string | number, "auto" | "stretch">'
+      content: 'height?: ElementHeight'
       return:
         description: ''
-        type: '"auto" | "stretch" | Omit&lt;string | number, "auto" | "stretch"&gt;'
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.height
+        type: <xref uid="@microsoft/teams.cards.ElementHeight" />
   - name: horizontalAlignment
     uid: '@microsoft/teams.cards.Column.horizontalAlignment'
     package: '@microsoft/teams.cards'
-    summary: controls how the element should be horizontally aligned.
+    summary: Controls how the element should be horizontally aligned.
     fullName: horizontalAlignment
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'horizontalAlignment?: null | HorizontalAlignment'
+      content: 'horizontalAlignment?: HorizontalAlignment'
       return:
         description: ''
-        type: null | <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.horizontalAlignment
+        type: <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
   - name: id
     uid: '@microsoft/teams.cards.Column.id'
     package: '@microsoft/teams.cards'
-    summary: A unique identifier associated with the item
+    summary: >-
+      A unique identifier for the element or action. Input elements must have an
+      id, otherwise they will not be validated and their values will not be sent
+      to the Bot.
     fullName: id
     remarks: ''
     isDeprecated: false
@@ -197,11 +117,24 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.id
+  - name: isSortKey
+    uid: '@microsoft/teams.cards.Column.isSortKey'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Controls whether the element should be used as a sort key by elements that
+      allow sorting across a collection of elements.
+    fullName: isSortKey
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'isSortKey?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: isVisible
     uid: '@microsoft/teams.cards.Column.isVisible'
     package: '@microsoft/teams.cards'
-    summary: If false, this item will be removed from the visual tree.
+    summary: Controls the visibility of the element.
     fullName: isVisible
     remarks: ''
     isDeprecated: false
@@ -210,7 +143,18 @@ inheritedProperties:
       return:
         description: ''
         type: boolean
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.isVisible
+  - name: items
+    uid: '@microsoft/teams.cards.Column.items'
+    package: '@microsoft/teams.cards'
+    summary: The elements in the column.
+    fullName: items
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'items: CardElementArray'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.CardElementArray" />
   - name: lang
     uid: '@microsoft/teams.cards.Column.lang'
     package: '@microsoft/teams.cards'
@@ -223,39 +167,71 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.lang
   - name: layouts
     uid: '@microsoft/teams.cards.Column.layouts'
     package: '@microsoft/teams.cards'
     summary: >-
       The layouts associated with the container. The container can dynamically
       switch from one layout to another as the card's width changes. See
-      Container layouts for more details.
+      [Container
+      layouts](https://adaptivecards.microsoft.com/?topic=container-layouts) for
+      more details.
     fullName: layouts
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'layouts?: Layout[]'
+      content: 'layouts?: (IStackLayout | IFlowLayout | IAreaGridLayout)[]'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.Layout" />[]
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.layouts
+        type: >-
+          (<xref uid="@microsoft/teams.cards.IStackLayout" /> | <xref
+          uid="@microsoft/teams.cards.IFlowLayout" /> | <xref
+          uid="@microsoft/teams.cards.IAreaGridLayout" />)[]
+  - name: maxHeight
+    uid: '@microsoft/teams.cards.Column.maxHeight'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      The maximum height, in pixels, of the container, in the `<number>px`
+      format. When the content of a container exceeds the container's maximum
+      height, a vertical scrollbar is displayed.
+    fullName: maxHeight
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'maxHeight?: string'
+      return:
+        description: ''
+        type: string
+  - name: minHeight
+    uid: '@microsoft/teams.cards.Column.minHeight'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      The minimum height, in pixels, of the container, in the `<number>px`
+      format.
+    fullName: minHeight
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'minHeight?: string'
+      return:
+        description: ''
+        type: string
   - name: requires
     uid: '@microsoft/teams.cards.Column.requires'
     package: '@microsoft/teams.cards'
     summary: >-
-      A series of key/value pairs indicating features that the item requires
-      with corresponding minimum version. When a feature is missing or of
-      insufficient version, fallback is triggered.
+      A list of capabilities the element requires the host application to
+      support. If the host application doesn't support at least one of the
+      listed capabilities, the element is not rendered (or its fallback is
+      rendered if provided).
     fullName: requires
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'requires?: Record<string, string>'
+      content: 'requires?: IHostCapabilities'
       return:
         description: ''
-        type: Record&lt;string, string&gt;
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.requires
+        type: <xref uid="@microsoft/teams.cards.IHostCapabilities" />
   - name: roundedCorners
     uid: '@microsoft/teams.cards.Column.roundedCorners'
     package: '@microsoft/teams.cards'
@@ -268,43 +244,49 @@ inheritedProperties:
       return:
         description: ''
         type: boolean
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.roundedCorners
   - name: rtl
     uid: '@microsoft/teams.cards.Column.rtl'
     package: '@microsoft/teams.cards'
     summary: >-
-      When `true` content in this container should be presented right to left.
-      When 'false' content in this container should be presented left to right.
-      When unset layout direction will inherit from parent container or column.
-      If unset in all ancestors, the default platform behavior will apply.
+      Controls if the content of the card is to be rendered left-to-right or
+      right-to-left.
     fullName: rtl
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'rtl?: null | boolean'
+      content: 'rtl?: boolean'
       return:
         description: ''
-        type: null | boolean
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.rtl
+        type: boolean
   - name: selectAction
     uid: '@microsoft/teams.cards.Column.selectAction'
     package: '@microsoft/teams.cards'
     summary: >-
-      An Action that will be invoked when the `Container` is tapped or selected.
-      `Action.ShowCard` is not supported.
+      An Action that will be invoked when the element is tapped or clicked.
+      Action.ShowCard is not supported.
     fullName: selectAction
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'selectAction?: SelectAction'
+      content: >-
+        selectAction?: IExecuteAction | IOpenUrlAction | IResetInputsAction |
+        ISubmitAction | IToggleVisibilityAction
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.SelectAction" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.selectAction
+        type: >-
+          <xref uid="@microsoft/teams.cards.IExecuteAction" /> | <xref
+          uid="@microsoft/teams.cards.IOpenUrlAction" /> | <xref
+          uid="@microsoft/teams.cards.IResetInputsAction" /> | <xref
+          uid="@microsoft/teams.cards.ISubmitAction" /> | <xref
+          uid="@microsoft/teams.cards.IToggleVisibilityAction" />
   - name: separator
     uid: '@microsoft/teams.cards.Column.separator'
     package: '@microsoft/teams.cards'
-    summary: When `true`, draw a separating line at the top of the element.
+    summary: >-
+      Controls whether a separator line should be displayed above the element to
+      visually separate it from the previous element. No separator will be
+      displayed for the first element in a container, even if this property is
+      set to true.
     fullName: separator
     remarks: ''
     isDeprecated: false
@@ -313,7 +295,6 @@ inheritedProperties:
       return:
         description: ''
         type: boolean
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.separator
   - name: showBorder
     uid: '@microsoft/teams.cards.Column.showBorder'
     package: '@microsoft/teams.cards'
@@ -326,13 +307,12 @@ inheritedProperties:
       return:
         description: ''
         type: boolean
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.showBorder
   - name: spacing
     uid: '@microsoft/teams.cards.Column.spacing'
     package: '@microsoft/teams.cards'
     summary: >-
-      Controls the amount of spacing between this element and the preceding
-      element.
+      Controls the amount of space between this element and the previous one. No
+      space will be added for the first element in a container.
     fullName: spacing
     remarks: ''
     isDeprecated: false
@@ -341,7 +321,21 @@ inheritedProperties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Spacing" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.spacing
+  - name: style
+    uid: '@microsoft/teams.cards.Column.style'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      The style of the container. Container styles control the colors of the
+      background, border and text inside the container, in such a way that
+      contrast requirements are always met.
+    fullName: style
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'style?: ContainerStyle'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ContainerStyle" />
   - name: targetWidth
     uid: '@microsoft/teams.cards.Column.targetWidth'
     package: '@microsoft/teams.cards'
@@ -349,7 +343,9 @@ inheritedProperties:
       Controls for which card width the element should be displayed. If
       targetWidth isn't specified, the element is rendered at all card widths.
       Using targetWidth makes it possible to author responsive cards that adapt
-      their layout to the available horizontal space.
+      their layout to the available horizontal space. For more details, see
+      [Responsive
+      layout](https://adaptivecards.microsoft.com/?topic=responsive-layout).
     fullName: targetWidth
     remarks: ''
     isDeprecated: false
@@ -358,8 +354,49 @@ inheritedProperties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.TargetWidth" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.targetWidth
-inheritedMethods:
+  - name: type
+    uid: '@microsoft/teams.cards.Column.type'
+    package: '@microsoft/teams.cards'
+    summary: Optional. If specified, must be **Column**.
+    fullName: type
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'type: "Column" = "Column"'
+      return:
+        description: ''
+        type: '"Column"'
+  - name: verticalContentAlignment
+    uid: '@microsoft/teams.cards.Column.verticalContentAlignment'
+    package: '@microsoft/teams.cards'
+    summary: Controls how the container's content should be vertically aligned.
+    fullName: verticalContentAlignment
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'verticalContentAlignment?: VerticalAlignment'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.VerticalAlignment" />
+  - name: width
+    uid: '@microsoft/teams.cards.Column.width'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      The width of the column. If expressed as a number, represents the relative
+      weight of the column in the set. If expressed as a string, `auto` will
+      automatically adjust the column's width according to its content,
+      `stretch` will make the column use the remaining horizontal space (shared
+      with other columns with width set to `stretch`) and using the `<number>px`
+      format will give the column an explicit width in pixels.
+    fullName: width
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'width?: string | number'
+      return:
+        description: ''
+        type: string | number
+methods:
   - name: withBackgroundImage(string | IBackgroundImage)
     uid: '@microsoft/teams.cards.Column.withBackgroundImage'
     package: '@microsoft/teams.cards'
@@ -367,15 +404,16 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withBackgroundImage(value: string | IBackgroundImage): Column'
+      content: >-
+        function withBackgroundImage(backgroundImage: string |
+        IBackgroundImage): Column
       parameters:
-        - id: value
+        - id: backgroundImage
           type: string | <xref uid="@microsoft/teams.cards.IBackgroundImage" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Column" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.withBackgroundImage
   - name: withBleed(boolean)
     uid: '@microsoft/teams.cards.Column.withBleed'
     package: '@microsoft/teams.cards'
@@ -383,66 +421,44 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withBleed(value?: boolean): Column'
+      content: 'function withBleed(bleed?: boolean): Column'
       parameters:
-        - id: value
+        - id: bleed
           type: boolean
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Column" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.withBleed
-  - name: withFallback(Element$1 | "drop" | Omit<string, "drop">)
+  - name: withFallback(FallbackElement)
     uid: '@microsoft/teams.cards.Column.withFallback'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function withFallback(value: Element$1 | "drop" | Omit<string, "drop">):
-        Column
+      content: 'function withFallback(fallback: FallbackElement): Column'
       parameters:
-        - id: value
-          type: >-
-            <xref uid="@microsoft/teams.cards.Element" /> | "drop" |
-            Omit&lt;string, "drop"&gt;
+        - id: fallback
+          type: <xref uid="@microsoft/teams.cards.FallbackElement" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Column" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.withFallback
-  - name: withGridArea(string)
-    uid: '@microsoft/teams.cards.Column.withGridArea'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withGridArea(value: string)'
-      parameters:
-        - id: value
-          type: string
-          description: ''
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.withGridArea
-  - name: withHeight("auto" | "stretch" | Omit<string | number, "auto" | "stretch">)
+  - name: withHeight(ElementHeight)
     uid: '@microsoft/teams.cards.Column.withHeight'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function withHeight(value: "auto" | "stretch" | Omit<string | number,
-        "auto" | "stretch">): Column
+      content: 'function withHeight(height: ElementHeight): Column'
       parameters:
-        - id: value
-          type: '"auto" | "stretch" | Omit&lt;string | number, "auto" | "stretch"&gt;'
+        - id: height
+          type: <xref uid="@microsoft/teams.cards.ElementHeight" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Column" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.withHeight
   - name: withHorizontalAlignment(HorizontalAlignment)
     uid: '@microsoft/teams.cards.Column.withHorizontalAlignment'
     package: '@microsoft/teams.cards'
@@ -450,15 +466,16 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withHorizontalAlignment(value: HorizontalAlignment): Column'
+      content: >-
+        function withHorizontalAlignment(horizontalAlignment:
+        HorizontalAlignment): Column
       parameters:
-        - id: value
+        - id: horizontalAlignment
           type: <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Column" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.withHorizontalAlignment
   - name: withId(string)
     uid: '@microsoft/teams.cards.Column.withId'
     package: '@microsoft/teams.cards'
@@ -466,15 +483,29 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withId(value: string): Column'
+      content: 'function withId(id: string): Column'
       parameters:
-        - id: value
+        - id: id
           type: string
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Column" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.withId
+  - name: withIsSortKey(boolean)
+    uid: '@microsoft/teams.cards.Column.withIsSortKey'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withIsSortKey(isSortKey?: boolean): Column'
+      parameters:
+        - id: isSortKey
+          type: boolean
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Column" />
   - name: withIsVisible(boolean)
     uid: '@microsoft/teams.cards.Column.withIsVisible'
     package: '@microsoft/teams.cards'
@@ -482,15 +513,29 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withIsVisible(value: boolean): Column'
+      content: 'function withIsVisible(isVisible?: boolean): Column'
       parameters:
-        - id: value
+        - id: isVisible
           type: boolean
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Column" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.withIsVisible
+  - name: withItems(CardElementArray)
+    uid: '@microsoft/teams.cards.Column.withItems'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withItems(items: CardElementArray): Column'
+      parameters:
+        - id: items
+          type: <xref uid="@microsoft/teams.cards.CardElementArray" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Column" />
   - name: withLang(string)
     uid: '@microsoft/teams.cards.Column.withLang'
     package: '@microsoft/teams.cards'
@@ -498,190 +543,45 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withLang(value: string): Column'
+      content: 'function withLang(lang: string): Column'
       parameters:
-        - id: value
+        - id: lang
           type: string
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Column" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.withLang
-  - name: withLayouts(Layout[])
+  - name: withLayouts((IStackLayout | IFlowLayout | IAreaGridLayout)[])
     uid: '@microsoft/teams.cards.Column.withLayouts'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withLayouts(value: Layout[]): Column'
+      content: >-
+        function withLayouts(layouts: (IStackLayout | IFlowLayout |
+        IAreaGridLayout)[]): Column
       parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.Layout" />[]
+        - id: layouts
+          type: >-
+            (<xref uid="@microsoft/teams.cards.IStackLayout" /> | <xref
+            uid="@microsoft/teams.cards.IFlowLayout" /> | <xref
+            uid="@microsoft/teams.cards.IAreaGridLayout" />)[]
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Column" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.withLayouts
-  - name: withRequire(string, string)
-    uid: '@microsoft/teams.cards.Column.withRequire'
+  - name: withMaxHeight(string)
+    uid: '@microsoft/teams.cards.Column.withMaxHeight'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withRequire(key: string, value: string): Column'
+      content: 'function withMaxHeight(maxHeight: string): Column'
       parameters:
-        - id: key
+        - id: maxHeight
           type: string
-          description: ''
-        - id: value
-          type: string
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.Column" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.withRequire
-  - name: withRequires(Record<string, string>)
-    uid: '@microsoft/teams.cards.Column.withRequires'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withRequires(value: Record<string, string>): Column'
-      parameters:
-        - id: value
-          type: Record&lt;string, string&gt;
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.Column" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.withRequires
-  - name: withRoundedCorners(boolean)
-    uid: '@microsoft/teams.cards.Column.withRoundedCorners'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withRoundedCorners(value?: boolean): Column'
-      parameters:
-        - id: value
-          type: boolean
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.Column" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.withRoundedCorners
-  - name: withRtl(boolean)
-    uid: '@microsoft/teams.cards.Column.withRtl'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withRtl(value?: boolean): Column'
-      parameters:
-        - id: value
-          type: boolean
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.Column" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.withRtl
-  - name: withSelectAction(SelectAction)
-    uid: '@microsoft/teams.cards.Column.withSelectAction'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withSelectAction(value: SelectAction): Column'
-      parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.SelectAction" />
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.Column" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.withSelectAction
-  - name: withSeperator(boolean)
-    uid: '@microsoft/teams.cards.Column.withSeperator'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withSeperator(value: boolean): Column'
-      parameters:
-        - id: value
-          type: boolean
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.Column" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.withSeperator
-  - name: withShowBorder(boolean)
-    uid: '@microsoft/teams.cards.Column.withShowBorder'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withShowBorder(value?: boolean): Column'
-      parameters:
-        - id: value
-          type: boolean
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.Column" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.withShowBorder
-  - name: withSpacing(Spacing)
-    uid: '@microsoft/teams.cards.Column.withSpacing'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withSpacing(value: Spacing): Column'
-      parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.Spacing" />
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.Column" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.withSpacing
-  - name: withTargetWidth(TargetWidth)
-    uid: '@microsoft/teams.cards.Column.withTargetWidth'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withTargetWidth(value: TargetWidth): Column'
-      parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.TargetWidth" />
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.Column" />
-    inheritanceDescription: <b>Inherited From</b> ContainerElement$1.withTargetWidth
-methods:
-  - name: addCards(Element$1[])
-    uid: '@microsoft/teams.cards.Column.addCards'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function addCards(value: Element$1[]): Column'
-      parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.Element" />[]
           description: ''
       return:
         description: ''
@@ -693,9 +593,9 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withMinHeight(value: string): Column'
+      content: 'function withMinHeight(minHeight: string): Column'
       parameters:
-        - id: value
+        - id: minHeight
           type: string
           description: ''
       return:
@@ -716,6 +616,120 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Column" />
+  - name: withRequires(IHostCapabilities)
+    uid: '@microsoft/teams.cards.Column.withRequires'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withRequires(requires: IHostCapabilities): Column'
+      parameters:
+        - id: requires
+          type: <xref uid="@microsoft/teams.cards.IHostCapabilities" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Column" />
+  - name: withRoundedCorners(boolean)
+    uid: '@microsoft/teams.cards.Column.withRoundedCorners'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withRoundedCorners(roundedCorners?: boolean): Column'
+      parameters:
+        - id: roundedCorners
+          type: boolean
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Column" />
+  - name: withRtl(boolean)
+    uid: '@microsoft/teams.cards.Column.withRtl'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withRtl(rtl: boolean): Column'
+      parameters:
+        - id: rtl
+          type: boolean
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Column" />
+  - name: >-
+      withSelectAction(IExecuteAction | IOpenUrlAction | IResetInputsAction |
+      ISubmitAction | IToggleVisibilityAction)
+    uid: '@microsoft/teams.cards.Column.withSelectAction'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function withSelectAction(selectAction: IExecuteAction | IOpenUrlAction
+        | IResetInputsAction | ISubmitAction | IToggleVisibilityAction): Column
+      parameters:
+        - id: selectAction
+          type: >-
+            <xref uid="@microsoft/teams.cards.IExecuteAction" /> | <xref
+            uid="@microsoft/teams.cards.IOpenUrlAction" /> | <xref
+            uid="@microsoft/teams.cards.IResetInputsAction" /> | <xref
+            uid="@microsoft/teams.cards.ISubmitAction" /> | <xref
+            uid="@microsoft/teams.cards.IToggleVisibilityAction" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Column" />
+  - name: withSeparator(boolean)
+    uid: '@microsoft/teams.cards.Column.withSeparator'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withSeparator(separator?: boolean): Column'
+      parameters:
+        - id: separator
+          type: boolean
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Column" />
+  - name: withShowBorder(boolean)
+    uid: '@microsoft/teams.cards.Column.withShowBorder'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withShowBorder(showBorder?: boolean): Column'
+      parameters:
+        - id: showBorder
+          type: boolean
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Column" />
+  - name: withSpacing(Spacing)
+    uid: '@microsoft/teams.cards.Column.withSpacing'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withSpacing(spacing: Spacing): Column'
+      parameters:
+        - id: spacing
+          type: <xref uid="@microsoft/teams.cards.Spacing" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Column" />
   - name: withStyle(ContainerStyle)
     uid: '@microsoft/teams.cards.Column.withStyle'
     package: '@microsoft/teams.cards'
@@ -723,44 +737,58 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withStyle(value: ContainerStyle): Column'
+      content: 'function withStyle(style: ContainerStyle): Column'
       parameters:
-        - id: value
+        - id: style
           type: <xref uid="@microsoft/teams.cards.ContainerStyle" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Column" />
-  - name: withVerticalAlignment(VerticalAlignment)
-    uid: '@microsoft/teams.cards.Column.withVerticalAlignment'
+  - name: withTargetWidth(TargetWidth)
+    uid: '@microsoft/teams.cards.Column.withTargetWidth'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withVerticalAlignment(value: VerticalAlignment): Column'
+      content: 'function withTargetWidth(targetWidth: TargetWidth): Column'
       parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.VerticalAlignment" />
+        - id: targetWidth
+          type: <xref uid="@microsoft/teams.cards.TargetWidth" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Column" />
-  - name: withWidth("auto" | "stretch" | Omit<string | number, "auto" | "stretch">)
-    uid: '@microsoft/teams.cards.Column.withWidth'
+  - name: withVerticalContentAlignment(VerticalAlignment)
+    uid: '@microsoft/teams.cards.Column.withVerticalContentAlignment'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function withWidth(value: "auto" | "stretch" | Omit<string | number,
-        "auto" | "stretch">): Column
+        function withVerticalContentAlignment(verticalContentAlignment:
+        VerticalAlignment): Column
       parameters:
-        - id: value
-          type: '"auto" | "stretch" | Omit&lt;string | number, "auto" | "stretch"&gt;'
+        - id: verticalContentAlignment
+          type: <xref uid="@microsoft/teams.cards.VerticalAlignment" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Column" />
-extends: ContainerElement$1
+  - name: withWidth(string | number)
+    uid: '@microsoft/teams.cards.Column.withWidth'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withWidth(width: string | number): Column'
+      parameters:
+        - id: width
+          type: string | number
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Column" />

@@ -2,29 +2,31 @@
 name: LineChart
 uid: '@microsoft/teams.cards.LineChart'
 package: '@microsoft/teams.cards'
-summary: ''
+summary: A line chart.
 fullName: LineChart
 remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: LineChart(ILineChartData[])
+  - name: LineChart(LineChartOptions)
     uid: '@microsoft/teams.cards.LineChart.constructor'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'new LineChart(data: ILineChartData[])'
+      content: 'new LineChart(options?: LineChartOptions)'
       parameters:
-        - id: data
-          type: <xref uid="@microsoft/teams.cards.ILineChartData" />[]
+        - id: options
+          type: <xref uid="@microsoft/teams.cards.LineChartOptions" />
           description: ''
 properties:
   - name: color
     uid: '@microsoft/teams.cards.LineChart.color'
     package: '@microsoft/teams.cards'
-    summary: the color to use for all data points.
+    summary: >-
+      The color to use for all data points. See [Chart colors
+      reference](https://adaptivecards.microsoft.com/?topic=chart-colors-reference).
     fullName: color
     remarks: ''
     isDeprecated: false
@@ -36,74 +38,50 @@ properties:
   - name: colorSet
     uid: '@microsoft/teams.cards.LineChart.colorSet'
     package: '@microsoft/teams.cards'
-    summary: the name of the set of colors to use.
+    summary: >-
+      The name of the set of colors to use to render the chart. See [Chart
+      colors
+      reference](https://adaptivecards.microsoft.com/?topic=chart-colors-reference).
     fullName: colorSet
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'colorSet?: string'
+      content: 'colorSet?: ChartColorSet'
       return:
         description: ''
-        type: string
+        type: <xref uid="@microsoft/teams.cards.ChartColorSet" />
   - name: data
     uid: '@microsoft/teams.cards.LineChart.data'
     package: '@microsoft/teams.cards'
-    summary: the data to display in the chart.
+    summary: The data point series in the line chart.
     fullName: data
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'data: ILineChartData[]'
+      content: 'data?: ILineChartData[]'
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ILineChartData" />[]
-  - name: title
-    uid: '@microsoft/teams.cards.LineChart.title'
-    package: '@microsoft/teams.cards'
-    summary: the title of the chart.
-    fullName: title
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'title?: string'
-      return:
-        description: ''
-        type: string
-  - name: type
-    uid: '@microsoft/teams.cards.LineChart.type'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    fullName: type
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'type: "Chart.Line"'
-      return:
-        description: ''
-        type: '"<xref uid="Chart.Line" />"'
-inheritedProperties:
   - name: fallback
     uid: '@microsoft/teams.cards.LineChart.fallback'
     package: '@microsoft/teams.cards'
     summary: >-
-      Describes what to do when an unknown item is encountered or the requires
-      of this or any children can't be met.
+      An alternate element to render if the type of this one is unsupported or
+      if the host application doesn't support all the capabilities specified in
+      the requires property.
     fullName: fallback
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'fallback?: Element$1 | "drop" | Omit<string, "drop">'
+      content: 'fallback?: FallbackElement'
       return:
         description: ''
-        type: >-
-          <xref uid="@microsoft/teams.cards.Element" /> | "drop" |
-          Omit&lt;string, "drop"&gt;
-    inheritanceDescription: <b>Inherited From</b> Element.fallback
+        type: <xref uid="@microsoft/teams.cards.FallbackElement" />
   - name: grid.area
     uid: '@microsoft/teams.cards.LineChart.grid.area'
     package: '@microsoft/teams.cards'
     summary: >-
-      the area of a `Layout.AreaGrid` layout in which an element should be
+      The area of a Layout.AreaGrid layout in which an element should be
       displayed.
     fullName: grid.area
     remarks: ''
@@ -113,37 +91,39 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> Element.grid.area
   - name: height
     uid: '@microsoft/teams.cards.LineChart.height'
     package: '@microsoft/teams.cards'
-    summary: Specifies the height of the element.
+    summary: >-
+      The height of the element. When set to stretch, the element will use the
+      remaining vertical space in its container.
     fullName: height
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'height?: "auto" | "stretch" | Omit<string | number, "auto" | "stretch">'
+      content: 'height?: ElementHeight'
       return:
         description: ''
-        type: '"auto" | "stretch" | Omit&lt;string | number, "auto" | "stretch"&gt;'
-    inheritanceDescription: <b>Inherited From</b> Element.height
+        type: <xref uid="@microsoft/teams.cards.ElementHeight" />
   - name: horizontalAlignment
     uid: '@microsoft/teams.cards.LineChart.horizontalAlignment'
     package: '@microsoft/teams.cards'
-    summary: controls how the element should be horizontally aligned.
+    summary: Controls how the element should be horizontally aligned.
     fullName: horizontalAlignment
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'horizontalAlignment?: null | HorizontalAlignment'
+      content: 'horizontalAlignment?: HorizontalAlignment'
       return:
         description: ''
-        type: null | <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
-    inheritanceDescription: <b>Inherited From</b> Element.horizontalAlignment
+        type: <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
   - name: id
     uid: '@microsoft/teams.cards.LineChart.id'
     package: '@microsoft/teams.cards'
-    summary: A unique identifier associated with the item
+    summary: >-
+      A unique identifier for the element or action. Input elements must have an
+      id, otherwise they will not be validated and their values will not be sent
+      to the Bot.
     fullName: id
     remarks: ''
     isDeprecated: false
@@ -152,11 +132,24 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> Element.id
+  - name: isSortKey
+    uid: '@microsoft/teams.cards.LineChart.isSortKey'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Controls whether the element should be used as a sort key by elements that
+      allow sorting across a collection of elements.
+    fullName: isSortKey
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'isSortKey?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: isVisible
     uid: '@microsoft/teams.cards.LineChart.isVisible'
     package: '@microsoft/teams.cards'
-    summary: If false, this item will be removed from the visual tree.
+    summary: Controls the visibility of the element.
     fullName: isVisible
     remarks: ''
     isDeprecated: false
@@ -165,7 +158,6 @@ inheritedProperties:
       return:
         description: ''
         type: boolean
-    inheritanceDescription: <b>Inherited From</b> Element.isVisible
   - name: lang
     uid: '@microsoft/teams.cards.LineChart.lang'
     package: '@microsoft/teams.cards'
@@ -178,27 +170,30 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> Element.lang
   - name: requires
     uid: '@microsoft/teams.cards.LineChart.requires'
     package: '@microsoft/teams.cards'
     summary: >-
-      A series of key/value pairs indicating features that the item requires
-      with corresponding minimum version. When a feature is missing or of
-      insufficient version, fallback is triggered.
+      A list of capabilities the element requires the host application to
+      support. If the host application doesn't support at least one of the
+      listed capabilities, the element is not rendered (or its fallback is
+      rendered if provided).
     fullName: requires
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'requires?: Record<string, string>'
+      content: 'requires?: IHostCapabilities'
       return:
         description: ''
-        type: Record&lt;string, string&gt;
-    inheritanceDescription: <b>Inherited From</b> Element.requires
+        type: <xref uid="@microsoft/teams.cards.IHostCapabilities" />
   - name: separator
     uid: '@microsoft/teams.cards.LineChart.separator'
     package: '@microsoft/teams.cards'
-    summary: When `true`, draw a separating line at the top of the element.
+    summary: >-
+      Controls whether a separator line should be displayed above the element to
+      visually separate it from the previous element. No separator will be
+      displayed for the first element in a container, even if this property is
+      set to true.
     fullName: separator
     remarks: ''
     isDeprecated: false
@@ -207,13 +202,12 @@ inheritedProperties:
       return:
         description: ''
         type: boolean
-    inheritanceDescription: <b>Inherited From</b> Element.separator
   - name: spacing
     uid: '@microsoft/teams.cards.LineChart.spacing'
     package: '@microsoft/teams.cards'
     summary: >-
-      Controls the amount of spacing between this element and the preceding
-      element.
+      Controls the amount of space between this element and the previous one. No
+      space will be added for the first element in a container.
     fullName: spacing
     remarks: ''
     isDeprecated: false
@@ -222,7 +216,6 @@ inheritedProperties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Spacing" />
-    inheritanceDescription: <b>Inherited From</b> Element.spacing
   - name: targetWidth
     uid: '@microsoft/teams.cards.LineChart.targetWidth'
     package: '@microsoft/teams.cards'
@@ -230,7 +223,9 @@ inheritedProperties:
       Controls for which card width the element should be displayed. If
       targetWidth isn't specified, the element is rendered at all card widths.
       Using targetWidth makes it possible to author responsive cards that adapt
-      their layout to the available horizontal space.
+      their layout to the available horizontal space. For more details, see
+      [Responsive
+      layout](https://adaptivecards.microsoft.com/?topic=responsive-layout).
     fullName: targetWidth
     remarks: ''
     isDeprecated: false
@@ -239,215 +234,108 @@ inheritedProperties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.TargetWidth" />
-    inheritanceDescription: <b>Inherited From</b> Element.targetWidth
-inheritedMethods:
-  - name: withFallback(Element$1 | "drop" | Omit<string, "drop">)
-    uid: '@microsoft/teams.cards.LineChart.withFallback'
+  - name: title
+    uid: '@microsoft/teams.cards.LineChart.title'
     package: '@microsoft/teams.cards'
-    summary: ''
+    summary: The title of the chart.
+    fullName: title
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function withFallback(value: Element$1 | "drop" | Omit<string, "drop">):
-        LineChart
-      parameters:
-        - id: value
-          type: >-
-            <xref uid="@microsoft/teams.cards.Element" /> | "drop" |
-            Omit&lt;string, "drop"&gt;
-          description: ''
+      content: 'title?: string'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.LineChart" />
-    inheritanceDescription: <b>Inherited From</b> Element.withFallback
-  - name: withGridArea(string)
-    uid: '@microsoft/teams.cards.LineChart.withGridArea'
+        type: string
+  - name: type
+    uid: '@microsoft/teams.cards.LineChart.type'
     package: '@microsoft/teams.cards'
-    summary: ''
+    summary: Must be **Chart.Line**.
+    fullName: type
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withGridArea(value: string)'
-      parameters:
-        - id: value
-          type: string
-          description: ''
-    inheritanceDescription: <b>Inherited From</b> Element.withGridArea
-  - name: withHeight("auto" | "stretch" | Omit<string | number, "auto" | "stretch">)
-    uid: '@microsoft/teams.cards.LineChart.withHeight'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function withHeight(value: "auto" | "stretch" | Omit<string | number,
-        "auto" | "stretch">): LineChart
-      parameters:
-        - id: value
-          type: '"auto" | "stretch" | Omit&lt;string | number, "auto" | "stretch"&gt;'
-          description: ''
+      content: 'type: "Chart.Line" = "Chart.Line"'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.LineChart" />
-    inheritanceDescription: <b>Inherited From</b> Element.withHeight
-  - name: withHorizontalAlignment(HorizontalAlignment)
-    uid: '@microsoft/teams.cards.LineChart.withHorizontalAlignment'
+        type: '"<xref uid="Chart.Line" />"'
+  - name: xAxisTitle
+    uid: '@microsoft/teams.cards.LineChart.xAxisTitle'
     package: '@microsoft/teams.cards'
-    summary: ''
+    summary: The title of the x axis.
+    fullName: xAxisTitle
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withHorizontalAlignment(value: HorizontalAlignment): LineChart'
-      parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
-          description: ''
+      content: 'xAxisTitle?: string'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.LineChart" />
-    inheritanceDescription: <b>Inherited From</b> Element.withHorizontalAlignment
-  - name: withId(string)
-    uid: '@microsoft/teams.cards.LineChart.withId'
+        type: string
+  - name: yAxisTitle
+    uid: '@microsoft/teams.cards.LineChart.yAxisTitle'
     package: '@microsoft/teams.cards'
-    summary: ''
+    summary: The title of the y axis.
+    fullName: yAxisTitle
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withId(value: string): LineChart'
-      parameters:
-        - id: value
-          type: string
-          description: ''
+      content: 'yAxisTitle?: string'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.LineChart" />
-    inheritanceDescription: <b>Inherited From</b> Element.withId
-  - name: withIsVisible(boolean)
-    uid: '@microsoft/teams.cards.LineChart.withIsVisible'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withIsVisible(value: boolean): LineChart'
-      parameters:
-        - id: value
-          type: boolean
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.LineChart" />
-    inheritanceDescription: <b>Inherited From</b> Element.withIsVisible
-  - name: withLang(string)
-    uid: '@microsoft/teams.cards.LineChart.withLang'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withLang(value: string): LineChart'
-      parameters:
-        - id: value
-          type: string
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.LineChart" />
-    inheritanceDescription: <b>Inherited From</b> Element.withLang
-  - name: withRequire(string, string)
-    uid: '@microsoft/teams.cards.LineChart.withRequire'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withRequire(key: string, value: string): LineChart'
-      parameters:
-        - id: key
-          type: string
-          description: ''
-        - id: value
-          type: string
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.LineChart" />
-    inheritanceDescription: <b>Inherited From</b> Element.withRequire
-  - name: withRequires(Record<string, string>)
-    uid: '@microsoft/teams.cards.LineChart.withRequires'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withRequires(value: Record<string, string>): LineChart'
-      parameters:
-        - id: value
-          type: Record&lt;string, string&gt;
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.LineChart" />
-    inheritanceDescription: <b>Inherited From</b> Element.withRequires
-  - name: withSeperator(boolean)
-    uid: '@microsoft/teams.cards.LineChart.withSeperator'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withSeperator(value: boolean): LineChart'
-      parameters:
-        - id: value
-          type: boolean
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.LineChart" />
-    inheritanceDescription: <b>Inherited From</b> Element.withSeperator
-  - name: withSpacing(Spacing)
-    uid: '@microsoft/teams.cards.LineChart.withSpacing'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withSpacing(value: Spacing): LineChart'
-      parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.Spacing" />
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.LineChart" />
-    inheritanceDescription: <b>Inherited From</b> Element.withSpacing
-  - name: withTargetWidth(TargetWidth)
-    uid: '@microsoft/teams.cards.LineChart.withTargetWidth'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withTargetWidth(value: TargetWidth): LineChart'
-      parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.TargetWidth" />
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.LineChart" />
-    inheritanceDescription: <b>Inherited From</b> Element.withTargetWidth
+        type: string
 methods:
-  - name: addData(ILineChartData[])
-    uid: '@microsoft/teams.cards.LineChart.addData'
+  - name: from(Omit<ILineChart, "type">)
+    uid: '@microsoft/teams.cards.LineChart.from'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function addData(data: ILineChartData[]): LineChart'
+      content: 'static function from(options: Omit<ILineChart, "type">): LineChart'
+      parameters:
+        - id: options
+          type: Omit&lt;<xref uid="@microsoft/teams.cards.ILineChart" />, "type"&gt;
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.LineChart" />
+  - name: withColor(ChartColor)
+    uid: '@microsoft/teams.cards.LineChart.withColor'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withColor(color: ChartColor): LineChart'
+      parameters:
+        - id: color
+          type: <xref uid="@microsoft/teams.cards.ChartColor" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.LineChart" />
+  - name: withColorSet(ChartColorSet)
+    uid: '@microsoft/teams.cards.LineChart.withColorSet'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withColorSet(colorSet: ChartColorSet): LineChart'
+      parameters:
+        - id: colorSet
+          type: <xref uid="@microsoft/teams.cards.ChartColorSet" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.LineChart" />
+  - name: withData(ILineChartData[])
+    uid: '@microsoft/teams.cards.LineChart.withData'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withData(data: ILineChartData[]): LineChart'
       parameters:
         - id: data
           type: <xref uid="@microsoft/teams.cards.ILineChartData" />[]
@@ -455,32 +343,169 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.LineChart" />
-  - name: withColorSet(string)
-    uid: '@microsoft/teams.cards.LineChart.withColorSet'
+  - name: withFallback(FallbackElement)
+    uid: '@microsoft/teams.cards.LineChart.withFallback'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withColorSet(value: string): LineChart'
+      content: 'function withFallback(fallback: FallbackElement): LineChart'
       parameters:
-        - id: value
+        - id: fallback
+          type: <xref uid="@microsoft/teams.cards.FallbackElement" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.LineChart" />
+  - name: withHeight(ElementHeight)
+    uid: '@microsoft/teams.cards.LineChart.withHeight'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withHeight(height: ElementHeight): LineChart'
+      parameters:
+        - id: height
+          type: <xref uid="@microsoft/teams.cards.ElementHeight" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.LineChart" />
+  - name: withHorizontalAlignment(HorizontalAlignment)
+    uid: '@microsoft/teams.cards.LineChart.withHorizontalAlignment'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function withHorizontalAlignment(horizontalAlignment:
+        HorizontalAlignment): LineChart
+      parameters:
+        - id: horizontalAlignment
+          type: <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.LineChart" />
+  - name: withId(string)
+    uid: '@microsoft/teams.cards.LineChart.withId'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withId(id: string): LineChart'
+      parameters:
+        - id: id
           type: string
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.LineChart" />
-  - name: withOptions(LineChartOptions)
-    uid: '@microsoft/teams.cards.LineChart.withOptions'
+  - name: withIsSortKey(boolean)
+    uid: '@microsoft/teams.cards.LineChart.withIsSortKey'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withOptions(value: LineChartOptions): LineChart'
+      content: 'function withIsSortKey(isSortKey?: boolean): LineChart'
       parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.LineChartOptions" />
+        - id: isSortKey
+          type: boolean
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.LineChart" />
+  - name: withIsVisible(boolean)
+    uid: '@microsoft/teams.cards.LineChart.withIsVisible'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withIsVisible(isVisible?: boolean): LineChart'
+      parameters:
+        - id: isVisible
+          type: boolean
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.LineChart" />
+  - name: withLang(string)
+    uid: '@microsoft/teams.cards.LineChart.withLang'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withLang(lang: string): LineChart'
+      parameters:
+        - id: lang
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.LineChart" />
+  - name: withRequires(IHostCapabilities)
+    uid: '@microsoft/teams.cards.LineChart.withRequires'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withRequires(requires: IHostCapabilities): LineChart'
+      parameters:
+        - id: requires
+          type: <xref uid="@microsoft/teams.cards.IHostCapabilities" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.LineChart" />
+  - name: withSeparator(boolean)
+    uid: '@microsoft/teams.cards.LineChart.withSeparator'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withSeparator(separator?: boolean): LineChart'
+      parameters:
+        - id: separator
+          type: boolean
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.LineChart" />
+  - name: withSpacing(Spacing)
+    uid: '@microsoft/teams.cards.LineChart.withSpacing'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withSpacing(spacing: Spacing): LineChart'
+      parameters:
+        - id: spacing
+          type: <xref uid="@microsoft/teams.cards.Spacing" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.LineChart" />
+  - name: withTargetWidth(TargetWidth)
+    uid: '@microsoft/teams.cards.LineChart.withTargetWidth'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withTargetWidth(targetWidth: TargetWidth): LineChart'
+      parameters:
+        - id: targetWidth
+          type: <xref uid="@microsoft/teams.cards.TargetWidth" />
           description: ''
       return:
         description: ''
@@ -492,12 +517,41 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withTitle(value: string): LineChart'
+      content: 'function withTitle(title: string): LineChart'
       parameters:
-        - id: value
+        - id: title
           type: string
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.LineChart" />
-extends: Element
+  - name: withXAxisTitle(string)
+    uid: '@microsoft/teams.cards.LineChart.withXAxisTitle'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withXAxisTitle(xAxisTitle: string): LineChart'
+      parameters:
+        - id: xAxisTitle
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.LineChart" />
+  - name: withYAxisTitle(string)
+    uid: '@microsoft/teams.cards.LineChart.withYAxisTitle'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withYAxisTitle(yAxisTitle: string): LineChart'
+      parameters:
+        - id: yAxisTitle
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.LineChart" />

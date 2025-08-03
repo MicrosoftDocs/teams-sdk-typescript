@@ -16,10 +16,22 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'api: AppClient'
+      content: 'api: Client'
       return:
         description: ''
-        type: AppClient
+        type: <xref uid="@microsoft/teams.api.Client" />
+  - name: appGraph
+    uid: '@microsoft/teams.apps.IFunctionContext.appGraph'
+    package: '@microsoft/teams.apps'
+    summary: the app graph client
+    fullName: appGraph
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'appGraph: Client'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.graph.Client" />
   - name: data
     uid: '@microsoft/teams.apps.IFunctionContext.data'
     package: '@microsoft/teams.apps'
@@ -32,6 +44,31 @@ properties:
       return:
         description: ''
         type: T
+  - name: getCurrentConversationId
+    uid: '@microsoft/teams.apps.IFunctionContext.getCurrentConversationId'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Attempts to find the ID of the conversation in which the app is being
+      used, and verifies that the bot and the
+
+      user making the function call are both present in the conversation.
+      Depending on the conversation type, this
+
+      is the ID of a chat (for group chats, 1:1 chats and channel meetings), a
+      channel, a meeting, or a user-bot
+
+      conversation (when the app is hosted in personal scope).
+
+      Returns undefined if the conversation ID cannot be determined or is
+      invalid.
+    fullName: getCurrentConversationId
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'getCurrentConversationId: () => Promise<undefined | string>'
+      return:
+        description: ''
+        type: () =&gt; Promise&lt;undefined | string&gt;
   - name: log
     uid: '@microsoft/teams.apps.IFunctionContext.log'
     package: '@microsoft/teams.apps'
@@ -43,7 +80,21 @@ properties:
       content: 'log: ILogger'
       return:
         description: ''
-        type: ILogger
+        type: <xref uid="@microsoft/teams.common.ILogger" />
+  - name: send
+    uid: '@microsoft/teams.apps.IFunctionContext.send'
+    package: '@microsoft/teams.apps'
+    summary: |-
+      send an activity to the current conversation.
+      Returns null if the conversation ID cannot be determined or is invalid.
+    fullName: send
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'send: (activity: ActivityLike) => Promise<null | SentActivity>'
+      return:
+        description: ''
+        type: '(activity: ActivityLike) =&gt; Promise&lt;null | SentActivity&gt;'
 inheritedProperties:
   - name: appId
     uid: '@microsoft/teams.apps.IFunctionContext.appId'
@@ -90,7 +141,7 @@ inheritedProperties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'authToken?: string'
+      content: 'authToken: string'
       return:
         description: ''
         type: string
@@ -132,7 +183,7 @@ inheritedProperties:
   - name: meetingId
     uid: '@microsoft/teams.apps.IFunctionContext.meetingId'
     package: '@microsoft/teams.apps'
-    summary: Meeting Id used by tab when running in meeting context
+    summary: Meeting ID used by tab when running in meeting context
     fullName: meetingId
     remarks: ''
     isDeprecated: false
@@ -212,12 +263,14 @@ inheritedProperties:
   - name: tenantId
     uid: '@microsoft/teams.apps.IFunctionContext.tenantId'
     package: '@microsoft/teams.apps'
-    summary: The Microsoft Entra tenant ID of the current user.
+    summary: >-
+      The Microsoft Entra tenant ID of the current user, extracted from request
+      auth  token.
     fullName: tenantId
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'tenantId?: string'
+      content: 'tenantId: string'
       return:
         description: ''
         type: string
@@ -227,16 +280,33 @@ inheritedProperties:
   - name: userId
     uid: '@microsoft/teams.apps.IFunctionContext.userId'
     package: '@microsoft/teams.apps'
-    summary: The Microsoft Entra object id of the current user.
+    summary: >-
+      The Microsoft Entra object id of the current user, extracted from the
+      request auth token.
     fullName: userId
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'userId?: string'
+      content: 'userId: string'
       return:
         description: ''
         type: string
     inheritanceDescription: >-
       <b>Inherited From</b>
       [IClientContext.userId](xref:@microsoft/teams.apps.IClientContext.userId)
+  - name: userName
+    uid: '@microsoft/teams.apps.IFunctionContext.userName'
+    package: '@microsoft/teams.apps'
+    summary: The name of the current user, extracted from the request auth token.
+    fullName: userName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'userName: string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [IClientContext.userName](xref:@microsoft/teams.apps.IClientContext.userName)
 extends: <xref uid="@microsoft/teams.apps.IClientContext" />

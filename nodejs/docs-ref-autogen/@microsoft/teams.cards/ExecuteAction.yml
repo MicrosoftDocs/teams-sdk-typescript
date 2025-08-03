@@ -3,13 +3,10 @@ name: ExecuteAction
 uid: '@microsoft/teams.cards.ExecuteAction'
 package: '@microsoft/teams.cards'
 summary: >-
-  Gathers input fields, merges with optional data field, and sends an event to
-  the client. Clients process the event by sending an Invoke activity of type
-  adaptiveCard/action to the target Bot. The inputs that are gathered are those
-  on the current card, and in the case of a show card those on any parent cards.
-  See [Universal Action
-  Model](https://docs.microsoft.com/en-us/adaptive-cards/authoring-cards/universal-action-model)
-  documentation for more details.
+  Gathers input values, merges them with the data property if specified, and
+  sends them to the Bot via an Invoke activity. The Bot can respond
+  synchronously and return an updated Adaptive Card to be displayed by the
+  client. Action.Execute works in all Adaptive Card hosts.
 fullName: ExecuteAction
 remarks: ''
 isDeprecated: false
@@ -31,75 +28,77 @@ properties:
   - name: associatedInputs
     uid: '@microsoft/teams.cards.ExecuteAction.associatedInputs'
     package: '@microsoft/teams.cards'
-    summary: Controls which inputs are associated with the action.
+    summary: >-
+      The Ids of the inputs associated with the Action.Submit. When the action
+      is executed, the values of the associated inputs are sent to the Bot. See
+      [Input
+      validation](https://adaptivecards.microsoft.com/?topic=input-validation)
+      for more details.
     fullName: associatedInputs
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'associatedInputs?: AssociatedInputs'
+      content: 'associatedInputs?: "auto" | "none"'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.AssociatedInputs" />
+        type: '"auto" | "none"'
+  - name: conditionallyEnabled
+    uid: '@microsoft/teams.cards.ExecuteAction.conditionallyEnabled'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Controls if the action is enabled only if at least one required input has
+      been filled by the user.
+    fullName: conditionallyEnabled
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'conditionallyEnabled?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: data
     uid: '@microsoft/teams.cards.ExecuteAction.data'
     package: '@microsoft/teams.cards'
     summary: >-
-      Initial data that input fields will be combined with. These are
-      essentially ‘hidden’ properties.
+      The data to send to the Bot when the action is executed. The data
+      specified in the card payload will be sent back to the Bot as is,
+      alongside the values of the inputs expressed as key/value pairs where the
+      key is the Id of the input.
     fullName: data
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'data?: string | Record<string, any>'
+      content: 'data?: any'
       return:
         description: ''
-        type: string | Record&lt;string, any&gt;
-  - name: type
-    uid: '@microsoft/teams.cards.ExecuteAction.type'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    fullName: type
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'type: "Action.Execute"'
-      return:
-        description: ''
-        type: '"<xref uid="Action.Execute" />"'
-  - name: verb
-    uid: '@microsoft/teams.cards.ExecuteAction.verb'
-    package: '@microsoft/teams.cards'
-    summary: The card author-defined verb associated with this action.
-    fullName: verb
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'verb?: string'
-      return:
-        description: ''
-        type: string
-inheritedProperties:
+        type: any
   - name: fallback
     uid: '@microsoft/teams.cards.ExecuteAction.fallback'
     package: '@microsoft/teams.cards'
     summary: >-
-      Describes what to do when an unknown element is encountered or the
-      requires of this or any children can’t be met.
+      An alternate action to render if the type of this one is unsupported or if
+      the host application doesn't support all the capabilities specified in the
+      requires property.
     fullName: fallback
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'fallback?: string | IAction'
+      content: 'fallback?: FallbackAction'
       return:
         description: ''
-        type: string | IAction
-    inheritanceDescription: <b>Inherited From</b> Action.fallback
+        type: <xref uid="@microsoft/teams.cards.FallbackAction" />
   - name: iconUrl
     uid: '@microsoft/teams.cards.ExecuteAction.iconUrl'
     package: '@microsoft/teams.cards'
     summary: >-
-      Optional icon to be shown on the action in conjunction with the title.
-      Supports data URI in version 1.2+
+      A URL (or Base64-encoded Data URI) to a PNG, GIF, JPEG or SVG image to be
+      displayed on the left of the action's title.
+
+
+      `iconUrl` also accepts the `<icon-name>[,regular|filled]` format to
+      display an icon from the vast [Adaptive Card icon
+      catalog](https://adaptivecards.microsoft.com/?topic=icon-catalog) instead
+      of an image.
     fullName: iconUrl
     remarks: ''
     isDeprecated: false
@@ -108,11 +107,13 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> Action.iconUrl
   - name: id
     uid: '@microsoft/teams.cards.ExecuteAction.id'
     package: '@microsoft/teams.cards'
-    summary: A unique identifier associated with this Action.
+    summary: >-
+      A unique identifier for the element or action. Input elements must have an
+      id, otherwise they will not be validated and their values will not be sent
+      to the Bot.
     fullName: id
     remarks: ''
     isDeprecated: false
@@ -121,11 +122,13 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> Action.id
   - name: isEnabled
     uid: '@microsoft/teams.cards.ExecuteAction.isEnabled'
     package: '@microsoft/teams.cards'
-    summary: Determines whether the action should be enabled.
+    summary: >-
+      Controls the enabled state of the action. A disabled action cannot be
+      clicked. If the action is represented as a button, the button's style will
+      reflect this state.
     fullName: isEnabled
     remarks: ''
     isDeprecated: false
@@ -134,57 +137,54 @@ inheritedProperties:
       return:
         description: ''
         type: boolean
-    inheritanceDescription: <b>Inherited From</b> Action.isEnabled
   - name: mode
     uid: '@microsoft/teams.cards.ExecuteAction.mode'
     package: '@microsoft/teams.cards'
     summary: >-
-      Determines whether an action is displayed with a button or is moved to the
-      overflow menu.
+      Controls if the action is primary or secondary. Secondary actions appear
+      in an overflow menu.
     fullName: mode
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'mode?: "primary" | "secondary"'
+      content: 'mode?: ActionMode'
       return:
         description: ''
-        type: '"primary" | "secondary"'
-    inheritanceDescription: <b>Inherited From</b> Action.mode
+        type: <xref uid="@microsoft/teams.cards.ActionMode" />
   - name: requires
     uid: '@microsoft/teams.cards.ExecuteAction.requires'
     package: '@microsoft/teams.cards'
     summary: >-
-      A series of key/value pairs indicating features that the item requires
-      with corresponding minimum version. When a feature is missing or of
-      insufficient version, fallback is triggered.
+      A list of capabilities the element requires the host application to
+      support. If the host application doesn't support at least one of the
+      listed capabilities, the element is not rendered (or its fallback is
+      rendered if provided).
     fullName: requires
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'requires?: Record<string, string>'
+      content: 'requires?: IHostCapabilities'
       return:
         description: ''
-        type: Record&lt;string, string&gt;
-    inheritanceDescription: <b>Inherited From</b> Action.requires
+        type: <xref uid="@microsoft/teams.cards.IHostCapabilities" />
   - name: style
     uid: '@microsoft/teams.cards.ExecuteAction.style'
     package: '@microsoft/teams.cards'
     summary: >-
-      Controls the style of an Action, which influences how the action is
-      displayed, spoken, etc.
+      Control the style of the action, affecting its visual and spoken
+      representations.
     fullName: style
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'style?: "default" | "positive" | "destructive"'
+      content: 'style?: ActionStyle'
       return:
         description: ''
-        type: '"default" | "positive" | "destructive"'
-    inheritanceDescription: <b>Inherited From</b> Action.style
+        type: <xref uid="@microsoft/teams.cards.ActionStyle" />
   - name: title
     uid: '@microsoft/teams.cards.ExecuteAction.title'
     package: '@microsoft/teams.cards'
-    summary: Label for button or link that represents this action.
+    summary: The title of the action, as it appears on buttons.
     fullName: title
     remarks: ''
     isDeprecated: false
@@ -193,13 +193,10 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> Action.title
   - name: tooltip
     uid: '@microsoft/teams.cards.ExecuteAction.tooltip'
     package: '@microsoft/teams.cards'
-    summary: >-
-      Defines text that should be displayed to the end user as they hover the
-      mouse over the action, and read when using narration software.
+    summary: The tooltip text to display when the action is hovered over.
     fullName: tooltip
     remarks: ''
     isDeprecated: false
@@ -208,40 +205,114 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> Action.tooltip
-inheritedMethods:
-  - name: withEnabled(boolean)
-    uid: '@microsoft/teams.cards.ExecuteAction.withEnabled'
+  - name: type
+    uid: '@microsoft/teams.cards.ExecuteAction.type'
+    package: '@microsoft/teams.cards'
+    summary: Must be **Action.Execute**.
+    fullName: type
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'type: "Action.Execute" = "Action.Execute"'
+      return:
+        description: ''
+        type: '"<xref uid="Action.Execute" />"'
+  - name: verb
+    uid: '@microsoft/teams.cards.ExecuteAction.verb'
+    package: '@microsoft/teams.cards'
+    summary: The verb of the action.
+    fullName: verb
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'verb?: string'
+      return:
+        description: ''
+        type: string
+methods:
+  - name: from(Omit<IExecuteAction, "type">)
+    uid: '@microsoft/teams.cards.ExecuteAction.from'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withEnabled(value?: boolean): ExecuteAction'
+      content: >-
+        static function from(options: Omit<IExecuteAction, "type">):
+        ExecuteAction
       parameters:
-        - id: value
+        - id: options
+          type: >-
+            Omit&lt;<xref uid="@microsoft/teams.cards.IExecuteAction" />,
+            "type"&gt;
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
+  - name: withAssociatedInputs("auto" | "none")
+    uid: '@microsoft/teams.cards.ExecuteAction.withAssociatedInputs'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function withAssociatedInputs(associatedInputs: "auto" | "none"):
+        ExecuteAction
+      parameters:
+        - id: associatedInputs
+          type: '"auto" | "none"'
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
+  - name: withConditionallyEnabled(boolean)
+    uid: '@microsoft/teams.cards.ExecuteAction.withConditionallyEnabled'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function withConditionallyEnabled(conditionallyEnabled?: boolean):
+        ExecuteAction
+      parameters:
+        - id: conditionallyEnabled
           type: boolean
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
-    inheritanceDescription: <b>Inherited From</b> Action.withEnabled
-  - name: withFallback(string | IAction)
+  - name: withData(any)
+    uid: '@microsoft/teams.cards.ExecuteAction.withData'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withData(data: any): ExecuteAction'
+      parameters:
+        - id: data
+          type: any
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
+  - name: withFallback(FallbackAction)
     uid: '@microsoft/teams.cards.ExecuteAction.withFallback'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withFallback(value: string | IAction): ExecuteAction'
+      content: 'function withFallback(fallback: FallbackAction): ExecuteAction'
       parameters:
-        - id: value
-          type: string | IAction
+        - id: fallback
+          type: <xref uid="@microsoft/teams.cards.FallbackAction" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
-    inheritanceDescription: <b>Inherited From</b> Action.withFallback
   - name: withIconUrl(string)
     uid: '@microsoft/teams.cards.ExecuteAction.withIconUrl'
     package: '@microsoft/teams.cards'
@@ -249,15 +320,14 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withIconUrl(value: string): ExecuteAction'
+      content: 'function withIconUrl(iconUrl: string): ExecuteAction'
       parameters:
-        - id: value
+        - id: iconUrl
           type: string
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
-    inheritanceDescription: <b>Inherited From</b> Action.withIconUrl
   - name: withId(string)
     uid: '@microsoft/teams.cards.ExecuteAction.withId'
     package: '@microsoft/teams.cards'
@@ -265,84 +335,74 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withId(value: string): ExecuteAction'
+      content: 'function withId(id: string): ExecuteAction'
       parameters:
-        - id: value
+        - id: id
           type: string
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
-    inheritanceDescription: <b>Inherited From</b> Action.withId
-  - name: withMode("primary" | "secondary")
+  - name: withIsEnabled(boolean)
+    uid: '@microsoft/teams.cards.ExecuteAction.withIsEnabled'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withIsEnabled(isEnabled?: boolean): ExecuteAction'
+      parameters:
+        - id: isEnabled
+          type: boolean
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
+  - name: withMode(ActionMode)
     uid: '@microsoft/teams.cards.ExecuteAction.withMode'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withMode(value: "primary" | "secondary"): ExecuteAction'
+      content: 'function withMode(mode: ActionMode): ExecuteAction'
       parameters:
-        - id: value
-          type: '"primary" | "secondary"'
+        - id: mode
+          type: <xref uid="@microsoft/teams.cards.ActionMode" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
-    inheritanceDescription: <b>Inherited From</b> Action.withMode
-  - name: withRequire(string, string)
-    uid: '@microsoft/teams.cards.ExecuteAction.withRequire'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withRequire(key: string, value: string): ExecuteAction'
-      parameters:
-        - id: key
-          type: string
-          description: ''
-        - id: value
-          type: string
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
-    inheritanceDescription: <b>Inherited From</b> Action.withRequire
-  - name: withRequires(Record<string, string>)
+  - name: withRequires(IHostCapabilities)
     uid: '@microsoft/teams.cards.ExecuteAction.withRequires'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withRequires(value: Record<string, string>): ExecuteAction'
+      content: 'function withRequires(requires: IHostCapabilities): ExecuteAction'
       parameters:
-        - id: value
-          type: Record&lt;string, string&gt;
+        - id: requires
+          type: <xref uid="@microsoft/teams.cards.IHostCapabilities" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
-    inheritanceDescription: <b>Inherited From</b> Action.withRequires
-  - name: withStyle("default" | "positive" | "destructive")
+  - name: withStyle(ActionStyle)
     uid: '@microsoft/teams.cards.ExecuteAction.withStyle'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function withStyle(value: "default" | "positive" | "destructive"):
-        ExecuteAction
+      content: 'function withStyle(style: ActionStyle): ExecuteAction'
       parameters:
-        - id: value
-          type: '"default" | "positive" | "destructive"'
+        - id: style
+          type: <xref uid="@microsoft/teams.cards.ActionStyle" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
-    inheritanceDescription: <b>Inherited From</b> Action.withStyle
   - name: withTitle(string)
     uid: '@microsoft/teams.cards.ExecuteAction.withTitle'
     package: '@microsoft/teams.cards'
@@ -350,15 +410,14 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withTitle(value: string): ExecuteAction'
+      content: 'function withTitle(title: string): ExecuteAction'
       parameters:
-        - id: value
+        - id: title
           type: string
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
-    inheritanceDescription: <b>Inherited From</b> Action.withTitle
   - name: withTooltip(string)
     uid: '@microsoft/teams.cards.ExecuteAction.withTooltip'
     package: '@microsoft/teams.cards'
@@ -366,57 +425,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withTooltip(value: string): ExecuteAction'
+      content: 'function withTooltip(tooltip: string): ExecuteAction'
       parameters:
-        - id: value
+        - id: tooltip
           type: string
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
-    inheritanceDescription: <b>Inherited From</b> Action.withTooltip
-methods:
-  - name: from(ExecuteActionOptions)
-    uid: '@microsoft/teams.cards.ExecuteAction.from'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'static function from(options: ExecuteActionOptions): ExecuteAction'
-      parameters:
-        - id: options
-          type: <xref uid="@microsoft/teams.cards.ExecuteActionOptions" />
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
-  - name: withAssociatedInputs(AssociatedInputs)
-    uid: '@microsoft/teams.cards.ExecuteAction.withAssociatedInputs'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withAssociatedInputs(value: AssociatedInputs): ExecuteAction'
-      parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.cards.AssociatedInputs" />
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
-  - name: withData(string | Record<string, any>)
-    uid: '@microsoft/teams.cards.ExecuteAction.withData'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withData(value: string | Record<string, any>): ExecuteAction'
-      parameters:
-        - id: value
-          type: string | Record&lt;string, any&gt;
           description: ''
       return:
         description: ''
@@ -428,12 +440,11 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withVerb(value: string): ExecuteAction'
+      content: 'function withVerb(verb: string): ExecuteAction'
       parameters:
-        - id: value
+        - id: verb
           type: string
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
-extends: Action
