@@ -8,7 +8,7 @@ remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: ActivityContext<T>(ISender, IActivityContextOptions<Activity>)
+  - name: ActivityContext<T>(ISender<{}>, IActivityContextOptions<Activity>)
     uid: '@microsoft/teams.apps.ActivityContext.constructor'
     package: '@microsoft/teams.apps'
     summary: ''
@@ -16,16 +16,16 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new ActivityContext(plugin: ISender, value:
+        new ActivityContext(plugin: ISender<{}>, value:
         IActivityContextOptions<Activity>)
       parameters:
         - id: plugin
-          type: <xref uid="@microsoft/teams.apps.ISender" />
+          type: <xref uid="@microsoft/teams.apps.ISender" />&lt;{}&gt;
           description: ''
         - id: value
           type: >-
             <xref uid="@microsoft/teams.apps.IActivityContextOptions"
-            />&lt;Activity&gt;
+            />&lt;<xref uid="@microsoft/teams.api.Activity" />&gt;
           description: ''
 properties:
   - name: activity
@@ -48,10 +48,22 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'api: ApiClient'
+      content: 'api: Client'
       return:
         description: ''
-        type: ApiClient
+        type: <xref uid="@microsoft/teams.api.Client" />
+  - name: appGraph
+    uid: '@microsoft/teams.apps.ActivityContext.appGraph'
+    package: '@microsoft/teams.apps'
+    summary: the app graph client
+    fullName: appGraph
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'appGraph: Client'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.graph.Client" />
   - name: appId
     uid: '@microsoft/teams.apps.ActivityContext.appId'
     package: '@microsoft/teams.apps'
@@ -131,7 +143,7 @@ properties:
       content: 'ref: ConversationReference'
       return:
         description: ''
-        type: ConversationReference
+        type: <xref uid="@microsoft/teams.api.ConversationReference" />
   - name: storage
     uid: '@microsoft/teams.apps.ActivityContext.storage'
     package: '@microsoft/teams.apps'
@@ -156,6 +168,18 @@ properties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.apps.IStreamer" />
+  - name: userGraph
+    uid: '@microsoft/teams.apps.ActivityContext.userGraph'
+    package: '@microsoft/teams.apps'
+    summary: the user graph client
+    fullName: userGraph
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'userGraph: Client'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.graph.Client" />
 methods:
   - name: reply(ActivityLike)
     uid: '@microsoft/teams.apps.ActivityContext.reply'
@@ -167,11 +191,11 @@ methods:
       content: 'function reply(activity: ActivityLike): Promise<SentActivity>'
       parameters:
         - id: activity
-          type: ActivityLike
+          type: <xref uid="@microsoft/teams.api.ActivityLike" />
           description: activity to send
       return:
         description: ''
-        type: Promise&lt;SentActivity&gt;
+        type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;
   - name: send(ActivityLike)
     uid: '@microsoft/teams.apps.ActivityContext.send'
     package: '@microsoft/teams.apps'
@@ -182,11 +206,11 @@ methods:
       content: 'function send(activity: ActivityLike): Promise<SentActivity>'
       parameters:
         - id: activity
-          type: ActivityLike
+          type: <xref uid="@microsoft/teams.api.ActivityLike" />
           description: activity to send
       return:
         description: ''
-        type: Promise&lt;SentActivity&gt;
+        type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;
   - name: signin(Partial<SignInOptions>)
     uid: '@microsoft/teams.apps.ActivityContext.signin'
     package: '@microsoft/teams.apps'
@@ -225,4 +249,6 @@ methods:
       content: 'function toInterface(): IActivityContext<Activity>'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.apps.IActivityContext" />&lt;Activity&gt;
+        type: >-
+          <xref uid="@microsoft/teams.apps.IActivityContext" />&lt;<xref
+          uid="@microsoft/teams.api.Activity" />&gt;

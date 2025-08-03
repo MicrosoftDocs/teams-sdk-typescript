@@ -2,48 +2,43 @@
 name: BackgroundImage
 uid: '@microsoft/teams.cards.BackgroundImage'
 package: '@microsoft/teams.cards'
-summary: Specifies a background image. Acceptable formats are PNG, JPEG, and GIF
+summary: Defines a container's background image and the way it should be rendered.
 fullName: BackgroundImage
 remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: BackgroundImage(string, BackgroundImageOptions)
+  - name: BackgroundImage(IBackgroundImage)
     uid: '@microsoft/teams.cards.BackgroundImage.constructor'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'new BackgroundImage(url: string, options?: BackgroundImageOptions)'
+      content: 'new BackgroundImage(options?: IBackgroundImage)'
       parameters:
-        - id: url
-          type: string
-          description: ''
         - id: options
-          type: <xref uid="@microsoft/teams.cards.BackgroundImageOptions" />
+          type: <xref uid="@microsoft/teams.cards.IBackgroundImage" />
           description: ''
 properties:
   - name: fillMode
     uid: '@microsoft/teams.cards.BackgroundImage.fillMode'
     package: '@microsoft/teams.cards'
-    summary: Describes how the image should fill the area.
+    summary: Controls how the image should fill the area.
     fullName: fillMode
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        fillMode?: "repeat" | "cover" | "repeatHorizontally" |
-        "repeatVertically"
+      content: 'fillMode?: FillMode'
       return:
         description: ''
-        type: '"repeat" | "cover" | "repeatHorizontally" | "repeatVertically"'
+        type: <xref uid="@microsoft/teams.cards.FillMode" />
   - name: horizontalAlignment
     uid: '@microsoft/teams.cards.BackgroundImage.horizontalAlignment'
     package: '@microsoft/teams.cards'
     summary: >-
-      Describes how the image should be aligned if it must be cropped or if
-      using repeat fill mode.
+      Controls how the image should be aligned if it must be cropped or if using
+      repeat fill mode.
     fullName: horizontalAlignment
     remarks: ''
     isDeprecated: false
@@ -52,29 +47,17 @@ properties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
-  - name: type
-    uid: '@microsoft/teams.cards.BackgroundImage.type'
-    package: '@microsoft/teams.cards'
-    summary: ''
-    fullName: type
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'type: "BackgroundImage"'
-      return:
-        description: ''
-        type: '"BackgroundImage"'
   - name: url
     uid: '@microsoft/teams.cards.BackgroundImage.url'
     package: '@microsoft/teams.cards'
     summary: >-
-      The URL (or data url) of the image. Acceptable formats are PNG, JPEG, and
-      GIF
+      The URL (or Base64-encoded Data URI) of the image. Acceptable formats are
+      PNG, JPEG, GIF and SVG.
     fullName: url
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'url: string'
+      content: 'url?: string'
       return:
         description: ''
         type: string
@@ -82,8 +65,8 @@ properties:
     uid: '@microsoft/teams.cards.BackgroundImage.verticalAlignment'
     package: '@microsoft/teams.cards'
     summary: >-
-      Describes how the image should be aligned if it must be cropped or if
-      using repeat fill mode.
+      Controls how the image should be aligned if it must be cropped or if using
+      repeat fill mode.
     fullName: verticalAlignment
     remarks: ''
     isDeprecated: false
@@ -93,40 +76,32 @@ properties:
         description: ''
         type: <xref uid="@microsoft/teams.cards.VerticalAlignment" />
 methods:
-  - name: from(Omit<IBackgroundImage, "type">)
+  - name: from(IBackgroundImage)
     uid: '@microsoft/teams.cards.BackgroundImage.from'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        static function from(options: Omit<IBackgroundImage, "type">):
-        BackgroundImage
+      content: 'static function from(options: IBackgroundImage): BackgroundImage'
       parameters:
         - id: options
-          type: >-
-            Omit&lt;<xref uid="@microsoft/teams.cards.IBackgroundImage" />,
-            "type"&gt;
+          type: <xref uid="@microsoft/teams.cards.IBackgroundImage" />
           description: ''
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.BackgroundImage" />
-  - name: >-
-      withFillMode("repeat" | "cover" | "repeatHorizontally" |
-      "repeatVertically")
+  - name: withFillMode(FillMode)
     uid: '@microsoft/teams.cards.BackgroundImage.withFillMode'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function withFillMode(value: "repeat" | "cover" | "repeatHorizontally" |
-        "repeatVertically"): BackgroundImage
+      content: 'function withFillMode(fillMode: FillMode): BackgroundImage'
       parameters:
-        - id: value
-          type: '"repeat" | "cover" | "repeatHorizontally" | "repeatVertically"'
+        - id: fillMode
+          type: <xref uid="@microsoft/teams.cards.FillMode" />
           description: ''
       return:
         description: ''
@@ -139,10 +114,10 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function withHorizontalAlignment(value: HorizontalAlignment):
-        BackgroundImage
+        function withHorizontalAlignment(horizontalAlignment:
+        HorizontalAlignment): BackgroundImage
       parameters:
-        - id: value
+        - id: horizontalAlignment
           type: <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
           description: ''
       return:
@@ -155,9 +130,9 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withUrl(value: string): BackgroundImage'
+      content: 'function withUrl(url: string): BackgroundImage'
       parameters:
-        - id: value
+        - id: url
           type: string
           description: ''
       return:
@@ -171,10 +146,10 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function withVerticalAlignment(value: VerticalAlignment):
+        function withVerticalAlignment(verticalAlignment: VerticalAlignment):
         BackgroundImage
       parameters:
-        - id: value
+        - id: verticalAlignment
           type: <xref uid="@microsoft/teams.cards.VerticalAlignment" />
           description: ''
       return:

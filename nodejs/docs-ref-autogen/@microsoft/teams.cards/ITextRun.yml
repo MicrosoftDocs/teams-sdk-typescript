@@ -2,10 +2,7 @@
 name: ITextRun
 uid: '@microsoft/teams.cards.ITextRun'
 package: '@microsoft/teams.cards'
-summary: >-
-  Defines a single run of formatted text. A TextRun with no properties set can
-  be represented in the json as string containing the text as a shorthand for
-  the json object. These two representations are equivalent.
+summary: A block of text inside a RichTextBlock element.
 fullName: ITextRun
 remarks: ''
 isDeprecated: false
@@ -14,19 +11,34 @@ properties:
   - name: color
     uid: '@microsoft/teams.cards.ITextRun.color'
     package: '@microsoft/teams.cards'
-    summary: Controls the color of the text.
+    summary: The color of the text.
     fullName: color
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'color?: Color'
+      content: 'color?: TextColor'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.Color" />
+        type: <xref uid="@microsoft/teams.cards.TextColor" />
+  - name: fallback
+    uid: '@microsoft/teams.cards.ITextRun.fallback'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      An alternate element to render if the type of this one is unsupported or
+      if the host application doesn't support all the capabilities specified in
+      the requires property.
+    fullName: fallback
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'fallback?: FallbackElement'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.FallbackElement" />
   - name: fontType
     uid: '@microsoft/teams.cards.ITextRun.fontType'
     package: '@microsoft/teams.cards'
-    summary: The type of font to use
+    summary: The type of font to use for rendering.
     fullName: fontType
     remarks: ''
     isDeprecated: false
@@ -35,10 +47,24 @@ properties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.FontType" />
+  - name: grid.area
+    uid: '@microsoft/teams.cards.ITextRun.grid.area'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      The area of a Layout.AreaGrid layout in which an element should be
+      displayed.
+    fullName: grid.area
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'grid.area?: string'
+      return:
+        description: ''
+        type: string
   - name: highlight
     uid: '@microsoft/teams.cards.ITextRun.highlight'
     package: '@microsoft/teams.cards'
-    summary: If true, displays the text highlighted.
+    summary: Controls if the text should be highlighted.
     fullName: highlight
     remarks: ''
     isDeprecated: false
@@ -47,10 +73,41 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: id
+    uid: '@microsoft/teams.cards.ITextRun.id'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      A unique identifier for the element or action. Input elements must have an
+      id, otherwise they will not be validated and their values will not be sent
+      to the Bot.
+    fullName: id
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'id?: string'
+      return:
+        description: ''
+        type: string
+  - name: isSortKey
+    uid: '@microsoft/teams.cards.ITextRun.isSortKey'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Controls whether the element should be used as a sort key by elements that
+      allow sorting across a collection of elements.
+    fullName: isSortKey
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'isSortKey?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: isSubtle
     uid: '@microsoft/teams.cards.ITextRun.isSubtle'
     package: '@microsoft/teams.cards'
-    summary: If true, displays text slightly toned down to appear less prominent.
+    summary: >-
+      Controls whether the text should be renderer using a subtler variant of
+      the select color.
     fullName: isSubtle
     remarks: ''
     isDeprecated: false
@@ -59,10 +116,22 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: isVisible
+    uid: '@microsoft/teams.cards.ITextRun.isVisible'
+    package: '@microsoft/teams.cards'
+    summary: Controls the visibility of the element.
+    fullName: isVisible
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'isVisible?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: italic
     uid: '@microsoft/teams.cards.ITextRun.italic'
     package: '@microsoft/teams.cards'
-    summary: If true, displays the text using italic font.
+    summary: Controls if the text should be italicized.
     fullName: italic
     remarks: ''
     isDeprecated: false
@@ -71,36 +140,55 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: lang
+    uid: '@microsoft/teams.cards.ITextRun.lang'
+    package: '@microsoft/teams.cards'
+    summary: The locale associated with the element.
+    fullName: lang
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'lang?: string'
+      return:
+        description: ''
+        type: string
   - name: selectAction
     uid: '@microsoft/teams.cards.ITextRun.selectAction'
     package: '@microsoft/teams.cards'
     summary: >-
-      Action to invoke when this text run is clicked. Visually changes the text
-      run into a hyperlink. Action.ShowCard is not supported.
+      An Action that will be invoked when the text is tapped or clicked.
+      Action.ShowCard is not supported.
     fullName: selectAction
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'selectAction?: SelectAction'
+      content: >-
+        selectAction?: IExecuteAction | IOpenUrlAction | IResetInputsAction |
+        ISubmitAction | IToggleVisibilityAction
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.SelectAction" />
+        type: >-
+          <xref uid="@microsoft/teams.cards.IExecuteAction" /> | <xref
+          uid="@microsoft/teams.cards.IOpenUrlAction" /> | <xref
+          uid="@microsoft/teams.cards.IResetInputsAction" /> | <xref
+          uid="@microsoft/teams.cards.ISubmitAction" /> | <xref
+          uid="@microsoft/teams.cards.IToggleVisibilityAction" />
   - name: size
     uid: '@microsoft/teams.cards.ITextRun.size'
     package: '@microsoft/teams.cards'
-    summary: Controls size of text.
+    summary: The size of the text.
     fullName: size
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'size?: FontSize'
+      content: 'size?: TextSize'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.FontSize" />
+        type: <xref uid="@microsoft/teams.cards.TextSize" />
   - name: strikethrough
     uid: '@microsoft/teams.cards.ITextRun.strikethrough'
     package: '@microsoft/teams.cards'
-    summary: If true, displays the text with strikethrough.
+    summary: Controls if the text should be struck through.
     fullName: strikethrough
     remarks: ''
     isDeprecated: false
@@ -112,7 +200,7 @@ properties:
   - name: text
     uid: '@microsoft/teams.cards.ITextRun.text'
     package: '@microsoft/teams.cards'
-    summary: Text to display. Markdown is not supported.
+    summary: The text to display. A subset of markdown is supported.
     fullName: text
     remarks: ''
     isDeprecated: false
@@ -124,7 +212,7 @@ properties:
   - name: type
     uid: '@microsoft/teams.cards.ITextRun.type'
     package: '@microsoft/teams.cards'
-    summary: ''
+    summary: Must be **TextRun**.
     fullName: type
     remarks: ''
     isDeprecated: false
@@ -136,7 +224,7 @@ properties:
   - name: underline
     uid: '@microsoft/teams.cards.ITextRun.underline'
     package: '@microsoft/teams.cards'
-    summary: If true, displays the text with an underline.
+    summary: Controls if the text should be underlined.
     fullName: underline
     remarks: ''
     isDeprecated: false
@@ -148,12 +236,12 @@ properties:
   - name: weight
     uid: '@microsoft/teams.cards.ITextRun.weight'
     package: '@microsoft/teams.cards'
-    summary: Controls the weight of the text.
+    summary: The weight of the text.
     fullName: weight
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'weight?: FontWeight'
+      content: 'weight?: TextWeight'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.FontWeight" />
+        type: <xref uid="@microsoft/teams.cards.TextWeight" />
