@@ -12,7 +12,7 @@ The Microsoft Teams AI Library v2 provides a Teams-centric interface for integra
 
 ## Finding the library
 
-For more about the TypeScript version of Teams AI Library v2, refer to the source repo at [Teams SDK: TypeScript](https://github.com/microsoft/teams.ts.).
+For more about the TypeScript version of Teams AI Library v2, refer to the source repo at [Teams SDK: TypeScript](https://github.com/microsoft/teams.ts).
 
 For more about the .NET version of Teams AI Library v2, refer to the source repo at [Teams SDK: DotNet](https://github.com/microsoft/teams.net).
 
