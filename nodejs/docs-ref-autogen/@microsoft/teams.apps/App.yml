@@ -82,10 +82,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'entraTokenValidator?: EntraTokenValidator'
+      content: 'entraTokenValidator?: JwtValidator'
       return:
         description: ''
-        type: EntraTokenValidator
+        type: JwtValidator
   - name: event
     uid: '@microsoft/teams.apps.App.event'
     package: '@microsoft/teams.apps'
@@ -201,13 +201,15 @@ properties:
     syntax:
       content: >-
         message: (this: App<TPlugin>, pattern: string | RegExp, cb:
-        RouteHandler<IActivityContext<IMessageActivity>, void>) => App<TPlugin>
+        RouteHandler<IActivityContext<IMessageActivity,
+        PluginAdditionalContext<TPlugin>>, void>) => App<TPlugin>
       return:
         description: ''
         type: >-
           (this: App&lt;TPlugin&gt;, pattern: string | RegExp, cb:
-          RouteHandler&lt;IActivityContext&lt;IMessageActivity&gt;, void&gt;)
-          =&gt; App&lt;TPlugin&gt;
+          RouteHandler&lt;IActivityContext&lt;IMessageActivity,
+          PluginAdditionalContext&lt;TPlugin&gt;&gt;, void&gt;) =&gt;
+          App&lt;TPlugin&gt;
   - name: name
     uid: '@microsoft/teams.apps.App.name'
     package: '@microsoft/teams.apps'
@@ -241,12 +243,14 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        on: (this: App<TPlugin>, name: Name, cb: Exclude<IRoutes[Name],
-        undefined>) => App<TPlugin>
+        on: (this: App<TPlugin>, name: Name, cb:
+        Exclude<IRoutes<PluginAdditionalContext<TPlugin>>[Name], undefined>) =>
+        App<TPlugin>
       return:
         description: ''
         type: >-
-          (this: App&lt;TPlugin&gt;, name: Name, cb: Exclude&lt;IRoutes[Name],
+          (this: App&lt;TPlugin&gt;, name: Name, cb:
+          Exclude&lt;IRoutes&lt;PluginAdditionalContext&lt;TPlugin&gt;&gt;[Name],
           undefined&gt;) =&gt; App&lt;TPlugin&gt;
   - name: options
     uid: '@microsoft/teams.apps.App.options'
@@ -344,13 +348,15 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        use: (this: App<TPlugin>, cb: RouteHandler<IActivityContext<Activity>,
-        void | InvokeResponse<any>>) => App<TPlugin>
+        use: (this: App<TPlugin>, cb: RouteHandler<IActivityContext<Activity,
+        PluginAdditionalContext<TPlugin>>, void | InvokeResponse<any>>) =>
+        App<TPlugin>
       return:
         description: ''
         type: >-
           (this: App&lt;TPlugin&gt;, cb:
-          RouteHandler&lt;IActivityContext&lt;Activity&gt;, void |
+          RouteHandler&lt;IActivityContext&lt;Activity,
+          PluginAdditionalContext&lt;TPlugin&gt;&gt;, void |
           InvokeResponse&lt;any&gt;&gt;) =&gt; App&lt;TPlugin&gt;
 methods:
   - name: send(string, ActivityLike)
@@ -633,21 +639,23 @@ methods:
         string, team?: TeamInfo, timestamp?: Date, type: "handoff" } | {
         channel?: ChannelInfo, channelData?: ChannelData & { eventType:
         "channelCreated" | "channelDeleted" | "channelRenamed" |
-        "channelRestored" | "teamArchived" | "teamDeleted" | "teamHardDeleted" |
-        "teamRenamed" | "teamRestored" | "teamUnarchived" }, channelId?:
-        ChannelID, conversation?: ConversationAccount, entities?: Entity[],
-        from?: Account<any>, historyDisclosed?: boolean, id: string,
-        isStreaming?: () => boolean, localTimestamp?: Date, locale?: string,
-        meeting?: MeetingInfo, membersAdded?: Account<any>[], membersRemoved?:
-        Account<any>[], notification?: NotificationInfo, recipient?:
-        Account<any>, relatesTo?: ConversationReference, replyToId?: string,
-        serviceUrl?: string, team?: TeamInfo, timestamp?: Date, topicName?:
-        string, type: "conversationUpdate" } | { channel?: ChannelInfo,
-        channelData?: ChannelData, channelId?: ChannelID, code?:
-        EndOfConversationCode, conversation?: ConversationAccount, entities?:
-        Entity[], from?: Account<any>, id: string, isStreaming?: () => boolean,
+        "channelRestored" | "channelShared" | "channelUnshared" |
+        "channelMemberAdded" | "channelMemberRemoved" | "teamArchived" |
+        "teamDeleted" | "teamHardDeleted" | "teamRenamed" | "teamRestored" |
+        "teamUnarchived" }, channelId?: ChannelID, conversation?:
+        ConversationAccount, entities?: Entity[], from?: Account<any>,
+        historyDisclosed?: boolean, id: string, isStreaming?: () => boolean,
         localTimestamp?: Date, locale?: string, meeting?: MeetingInfo,
+        membersAdded?: Account<any>[], membersRemoved?: Account<any>[],
         notification?: NotificationInfo, recipient?: Account<any>, relatesTo?:
+        ConversationReference, replyToId?: string, serviceUrl?: string, team?:
+        TeamInfo, timestamp?: Date, topicName?: string, type:
+        "conversationUpdate" } | { channel?: ChannelInfo, channelData?:
+        ChannelData, channelId?: ChannelID, code?: EndOfConversationCode,
+        conversation?: ConversationAccount, entities?: Entity[], from?:
+        Account<any>, id: string, isStreaming?: () => boolean, localTimestamp?:
+        Date, locale?: string, meeting?: MeetingInfo, notification?:
+        NotificationInfo, recipient?: Account<any>, relatesTo?:
         ConversationReference, replyToId?: string, serviceUrl?: string, team?:
         TeamInfo, text?: string, timestamp?: Date, type: "endOfConversation" } |
         { channel?: ChannelInfo, channelData?: ChannelData, channelId?:
@@ -974,44 +982,45 @@ methods:
           string, team?: TeamInfo, timestamp?: Date, type: "handoff" } | {
           channel?: ChannelInfo, channelData?: ChannelData & { eventType:
           "channelCreated" | "channelDeleted" | "channelRenamed" |
-          "channelRestored" | "teamArchived" | "teamDeleted" | "teamHardDeleted"
-          | "teamRenamed" | "teamRestored" | "teamUnarchived" }, channelId?:
-          ChannelID, conversation?: ConversationAccount, entities?: Entity[],
-          from?: Account&lt;any&gt;, historyDisclosed?: boolean, id: string,
-          isStreaming?: () =&gt; boolean, localTimestamp?: Date, locale?:
-          string, meeting?: MeetingInfo, membersAdded?: Account&lt;any&gt;[],
-          membersRemoved?: Account&lt;any&gt;[], notification?:
-          NotificationInfo, recipient?: Account&lt;any&gt;, relatesTo?:
-          ConversationReference, replyToId?: string, serviceUrl?: string, team?:
-          TeamInfo, timestamp?: Date, topicName?: string, type:
-          "conversationUpdate" } | { channel?: ChannelInfo, channelData?:
-          ChannelData, channelId?: ChannelID, code?: EndOfConversationCode,
-          conversation?: ConversationAccount, entities?: Entity[], from?:
-          Account&lt;any&gt;, id: string, isStreaming?: () =&gt; boolean,
-          localTimestamp?: Date, locale?: string, meeting?: MeetingInfo,
-          notification?: NotificationInfo, recipient?: Account&lt;any&gt;,
-          relatesTo?: ConversationReference, replyToId?: string, serviceUrl?:
-          string, team?: TeamInfo, text?: string, timestamp?: Date, type:
-          "endOfConversation" } | { channel?: ChannelInfo, channelData?:
-          ChannelData, channelId?: ChannelID, conversation?:
+          "channelRestored" | "channelShared" | "channelUnshared" |
+          "channelMemberAdded" | "channelMemberRemoved" | "teamArchived" |
+          "teamDeleted" | "teamHardDeleted" | "teamRenamed" | "teamRestored" |
+          "teamUnarchived" }, channelId?: ChannelID, conversation?:
           ConversationAccount, entities?: Entity[], from?: Account&lt;any&gt;,
-          id: string, isStreaming?: () =&gt; boolean, localTimestamp?: Date,
-          locale?: string, meeting?: MeetingInfo, name?: string, notification?:
-          NotificationInfo, recipient?: Account&lt;any&gt;, relatesTo?:
-          ConversationReference, replyToId?: string, serviceUrl?: string, team?:
-          TeamInfo, timestamp?: Date, type: "command", value?:
-          CommandValue&lt;any&gt; } | { channel?: ChannelInfo, channelData?:
-          ChannelData, channelId?: ChannelID, conversation?:
-          ConversationAccount, entities?: Entity[], from?: Account&lt;any&gt;,
-          id: string, isStreaming?: () =&gt; boolean, localTimestamp?: Date,
-          locale?: string, meeting?: MeetingInfo, name?: string, notification?:
-          NotificationInfo, recipient?: Account&lt;any&gt;, relatesTo?:
-          ConversationReference, replyToId?: string, serviceUrl?: string, team?:
-          TeamInfo, timestamp?: Date, type: "commandResult", value?:
-          CommandResultValue&lt;any&gt; } | { action?: "add", channel?:
+          historyDisclosed?: boolean, id: string, isStreaming?: () =&gt;
+          boolean, localTimestamp?: Date, locale?: string, meeting?:
+          MeetingInfo, membersAdded?: Account&lt;any&gt;[], membersRemoved?:
+          Account&lt;any&gt;[], notification?: NotificationInfo, recipient?:
+          Account&lt;any&gt;, relatesTo?: ConversationReference, replyToId?:
+          string, serviceUrl?: string, team?: TeamInfo, timestamp?: Date,
+          topicName?: string, type: "conversationUpdate" } | { channel?:
+          ChannelInfo, channelData?: ChannelData, channelId?: ChannelID, code?:
+          EndOfConversationCode, conversation?: ConversationAccount, entities?:
+          Entity[], from?: Account&lt;any&gt;, id: string, isStreaming?: ()
+          =&gt; boolean, localTimestamp?: Date, locale?: string, meeting?:
+          MeetingInfo, notification?: NotificationInfo, recipient?:
+          Account&lt;any&gt;, relatesTo?: ConversationReference, replyToId?:
+          string, serviceUrl?: string, team?: TeamInfo, text?: string,
+          timestamp?: Date, type: "endOfConversation" } | { channel?:
           ChannelInfo, channelData?: ChannelData, channelId?: ChannelID,
           conversation?: ConversationAccount, entities?: Entity[], from?:
           Account&lt;any&gt;, id: string, isStreaming?: () =&gt; boolean,
+          localTimestamp?: Date, locale?: string, meeting?: MeetingInfo, name?:
+          string, notification?: NotificationInfo, recipient?:
+          Account&lt;any&gt;, relatesTo?: ConversationReference, replyToId?:
+          string, serviceUrl?: string, team?: TeamInfo, timestamp?: Date, type:
+          "command", value?: CommandValue&lt;any&gt; } | { channel?:
+          ChannelInfo, channelData?: ChannelData, channelId?: ChannelID,
+          conversation?: ConversationAccount, entities?: Entity[], from?:
+          Account&lt;any&gt;, id: string, isStreaming?: () =&gt; boolean,
+          localTimestamp?: Date, locale?: string, meeting?: MeetingInfo, name?:
+          string, notification?: NotificationInfo, recipient?:
+          Account&lt;any&gt;, relatesTo?: ConversationReference, replyToId?:
+          string, serviceUrl?: string, team?: TeamInfo, timestamp?: Date, type:
+          "commandResult", value?: CommandResultValue&lt;any&gt; } | { action?:
+          "add", channel?: ChannelInfo, channelData?: ChannelData, channelId?:
+          ChannelID, conversation?: ConversationAccount, entities?: Entity[],
+          from?: Account&lt;any&gt;, id: string, isStreaming?: () =&gt; boolean,
           localTimestamp?: Date, locale?: string, meeting?: MeetingInfo,
           notification?: NotificationInfo, recipient?: Account&lt;any&gt;,
           relatesTo?: ConversationReference, replyToId?: string, serviceUrl?:

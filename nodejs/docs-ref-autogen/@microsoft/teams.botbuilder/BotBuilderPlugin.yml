@@ -69,6 +69,18 @@ properties:
       return:
         description: ''
         type: Client
+  - name: credentials
+    uid: '@microsoft/teams.botbuilder.BotBuilderPlugin.credentials'
+    package: '@microsoft/teams.botbuilder'
+    summary: ''
+    fullName: credentials
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'credentials?: Credentials'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.api.Credentials" />
   - name: graphToken
     uid: '@microsoft/teams.botbuilder.BotBuilderPlugin.graphToken'
     package: '@microsoft/teams.botbuilder'
@@ -113,10 +125,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: undefined | number port
+      content: undefined | string | number port
       return:
         description: ''
-        type: undefined | number
+        type: undefined | string | number
   - name: server
     uid: '@microsoft/teams.botbuilder.BotBuilderPlugin.server'
     package: '@microsoft/teams.botbuilder'
@@ -130,19 +142,6 @@ properties:
         description: ''
         type: Server&lt;typeof IncomingMessage, typeof ServerResponse&gt;
 inheritedProperties:
-  - name: credentials
-    uid: '@microsoft/teams.botbuilder.BotBuilderPlugin.credentials'
-    package: '@microsoft/teams.botbuilder'
-    summary: ''
-    fullName: credentials
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'credentials?: Credentials'
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.api.Credentials" />
-    inheritanceDescription: <b>Inherited From</b> HttpPlugin.credentials
   - name: delete
     uid: '@microsoft/teams.botbuilder.BotBuilderPlugin.delete'
     package: '@microsoft/teams.botbuilder'
@@ -584,21 +583,23 @@ inheritedMethods:
         string, team?: TeamInfo, timestamp?: Date, type: "handoff" } | {
         channel?: ChannelInfo, channelData?: ChannelData & { eventType:
         "channelCreated" | "channelDeleted" | "channelRenamed" |
-        "channelRestored" | "teamArchived" | "teamDeleted" | "teamHardDeleted" |
-        "teamRenamed" | "teamRestored" | "teamUnarchived" }, channelId?:
-        ChannelID, conversation?: ConversationAccount, entities?: Entity[],
-        from?: Account<any>, historyDisclosed?: boolean, id: string,
-        isStreaming?: () => boolean, localTimestamp?: Date, locale?: string,
-        meeting?: MeetingInfo, membersAdded?: Account<any>[], membersRemoved?:
-        Account<any>[], notification?: NotificationInfo, recipient?:
-        Account<any>, relatesTo?: ConversationReference, replyToId?: string,
-        serviceUrl?: string, team?: TeamInfo, timestamp?: Date, topicName?:
-        string, type: "conversationUpdate" } | { channel?: ChannelInfo,
-        channelData?: ChannelData, channelId?: ChannelID, code?:
-        EndOfConversationCode, conversation?: ConversationAccount, entities?:
-        Entity[], from?: Account<any>, id: string, isStreaming?: () => boolean,
+        "channelRestored" | "channelShared" | "channelUnshared" |
+        "channelMemberAdded" | "channelMemberRemoved" | "teamArchived" |
+        "teamDeleted" | "teamHardDeleted" | "teamRenamed" | "teamRestored" |
+        "teamUnarchived" }, channelId?: ChannelID, conversation?:
+        ConversationAccount, entities?: Entity[], from?: Account<any>,
+        historyDisclosed?: boolean, id: string, isStreaming?: () => boolean,
         localTimestamp?: Date, locale?: string, meeting?: MeetingInfo,
+        membersAdded?: Account<any>[], membersRemoved?: Account<any>[],
         notification?: NotificationInfo, recipient?: Account<any>, relatesTo?:
+        ConversationReference, replyToId?: string, serviceUrl?: string, team?:
+        TeamInfo, timestamp?: Date, topicName?: string, type:
+        "conversationUpdate" } | { channel?: ChannelInfo, channelData?:
+        ChannelData, channelId?: ChannelID, code?: EndOfConversationCode,
+        conversation?: ConversationAccount, entities?: Entity[], from?:
+        Account<any>, id: string, isStreaming?: () => boolean, localTimestamp?:
+        Date, locale?: string, meeting?: MeetingInfo, notification?:
+        NotificationInfo, recipient?: Account<any>, relatesTo?:
         ConversationReference, replyToId?: string, serviceUrl?: string, team?:
         TeamInfo, text?: string, timestamp?: Date, type: "endOfConversation" } |
         { channel?: ChannelInfo, channelData?: ChannelData, channelId?:
@@ -925,44 +926,45 @@ inheritedMethods:
           string, team?: TeamInfo, timestamp?: Date, type: "handoff" } | {
           channel?: ChannelInfo, channelData?: ChannelData & { eventType:
           "channelCreated" | "channelDeleted" | "channelRenamed" |
-          "channelRestored" | "teamArchived" | "teamDeleted" | "teamHardDeleted"
-          | "teamRenamed" | "teamRestored" | "teamUnarchived" }, channelId?:
-          ChannelID, conversation?: ConversationAccount, entities?: Entity[],
-          from?: Account&lt;any&gt;, historyDisclosed?: boolean, id: string,
-          isStreaming?: () =&gt; boolean, localTimestamp?: Date, locale?:
-          string, meeting?: MeetingInfo, membersAdded?: Account&lt;any&gt;[],
-          membersRemoved?: Account&lt;any&gt;[], notification?:
-          NotificationInfo, recipient?: Account&lt;any&gt;, relatesTo?:
-          ConversationReference, replyToId?: string, serviceUrl?: string, team?:
-          TeamInfo, timestamp?: Date, topicName?: string, type:
-          "conversationUpdate" } | { channel?: ChannelInfo, channelData?:
-          ChannelData, channelId?: ChannelID, code?: EndOfConversationCode,
-          conversation?: ConversationAccount, entities?: Entity[], from?:
-          Account&lt;any&gt;, id: string, isStreaming?: () =&gt; boolean,
-          localTimestamp?: Date, locale?: string, meeting?: MeetingInfo,
-          notification?: NotificationInfo, recipient?: Account&lt;any&gt;,
-          relatesTo?: ConversationReference, replyToId?: string, serviceUrl?:
-          string, team?: TeamInfo, text?: string, timestamp?: Date, type:
-          "endOfConversation" } | { channel?: ChannelInfo, channelData?:
-          ChannelData, channelId?: ChannelID, conversation?:
+          "channelRestored" | "channelShared" | "channelUnshared" |
+          "channelMemberAdded" | "channelMemberRemoved" | "teamArchived" |
+          "teamDeleted" | "teamHardDeleted" | "teamRenamed" | "teamRestored" |
+          "teamUnarchived" }, channelId?: ChannelID, conversation?:
           ConversationAccount, entities?: Entity[], from?: Account&lt;any&gt;,
-          id: string, isStreaming?: () =&gt; boolean, localTimestamp?: Date,
-          locale?: string, meeting?: MeetingInfo, name?: string, notification?:
-          NotificationInfo, recipient?: Account&lt;any&gt;, relatesTo?:
-          ConversationReference, replyToId?: string, serviceUrl?: string, team?:
-          TeamInfo, timestamp?: Date, type: "command", value?:
-          CommandValue&lt;any&gt; } | { channel?: ChannelInfo, channelData?:
-          ChannelData, channelId?: ChannelID, conversation?:
-          ConversationAccount, entities?: Entity[], from?: Account&lt;any&gt;,
-          id: string, isStreaming?: () =&gt; boolean, localTimestamp?: Date,
-          locale?: string, meeting?: MeetingInfo, name?: string, notification?:
-          NotificationInfo, recipient?: Account&lt;any&gt;, relatesTo?:
-          ConversationReference, replyToId?: string, serviceUrl?: string, team?:
-          TeamInfo, timestamp?: Date, type: "commandResult", value?:
-          CommandResultValue&lt;any&gt; } | { action?: "add", channel?:
+          historyDisclosed?: boolean, id: string, isStreaming?: () =&gt;
+          boolean, localTimestamp?: Date, locale?: string, meeting?:
+          MeetingInfo, membersAdded?: Account&lt;any&gt;[], membersRemoved?:
+          Account&lt;any&gt;[], notification?: NotificationInfo, recipient?:
+          Account&lt;any&gt;, relatesTo?: ConversationReference, replyToId?:
+          string, serviceUrl?: string, team?: TeamInfo, timestamp?: Date,
+          topicName?: string, type: "conversationUpdate" } | { channel?:
+          ChannelInfo, channelData?: ChannelData, channelId?: ChannelID, code?:
+          EndOfConversationCode, conversation?: ConversationAccount, entities?:
+          Entity[], from?: Account&lt;any&gt;, id: string, isStreaming?: ()
+          =&gt; boolean, localTimestamp?: Date, locale?: string, meeting?:
+          MeetingInfo, notification?: NotificationInfo, recipient?:
+          Account&lt;any&gt;, relatesTo?: ConversationReference, replyToId?:
+          string, serviceUrl?: string, team?: TeamInfo, text?: string,
+          timestamp?: Date, type: "endOfConversation" } | { channel?:
           ChannelInfo, channelData?: ChannelData, channelId?: ChannelID,
           conversation?: ConversationAccount, entities?: Entity[], from?:
           Account&lt;any&gt;, id: string, isStreaming?: () =&gt; boolean,
+          localTimestamp?: Date, locale?: string, meeting?: MeetingInfo, name?:
+          string, notification?: NotificationInfo, recipient?:
+          Account&lt;any&gt;, relatesTo?: ConversationReference, replyToId?:
+          string, serviceUrl?: string, team?: TeamInfo, timestamp?: Date, type:
+          "command", value?: CommandValue&lt;any&gt; } | { channel?:
+          ChannelInfo, channelData?: ChannelData, channelId?: ChannelID,
+          conversation?: ConversationAccount, entities?: Entity[], from?:
+          Account&lt;any&gt;, id: string, isStreaming?: () =&gt; boolean,
+          localTimestamp?: Date, locale?: string, meeting?: MeetingInfo, name?:
+          string, notification?: NotificationInfo, recipient?:
+          Account&lt;any&gt;, relatesTo?: ConversationReference, replyToId?:
+          string, serviceUrl?: string, team?: TeamInfo, timestamp?: Date, type:
+          "commandResult", value?: CommandResultValue&lt;any&gt; } | { action?:
+          "add", channel?: ChannelInfo, channelData?: ChannelData, channelId?:
+          ChannelID, conversation?: ConversationAccount, entities?: Entity[],
+          from?: Account&lt;any&gt;, id: string, isStreaming?: () =&gt; boolean,
           localTimestamp?: Date, locale?: string, meeting?: MeetingInfo,
           notification?: NotificationInfo, recipient?: Account&lt;any&gt;,
           relatesTo?: ConversationReference, replyToId?: string, serviceUrl?:
