@@ -3,12 +3,14 @@ name: ActivityContext
 uid: '@microsoft/teams.apps.ActivityContext'
 package: '@microsoft/teams.apps'
 summary: ''
-fullName: ActivityContext<T>
+fullName: ActivityContext<T, TExtraCtx>
 remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: ActivityContext<T>(ISender<{}>, IActivityContextOptions<Activity>)
+  - name: >-
+      ActivityContext<T, TExtraCtx>(ISender<{}>,
+      IBaseActivityContextOptions<Activity, Record<string, any>>)
     uid: '@microsoft/teams.apps.ActivityContext.constructor'
     package: '@microsoft/teams.apps'
     summary: ''
@@ -17,15 +19,16 @@ constructors:
     syntax:
       content: >-
         new ActivityContext(plugin: ISender<{}>, value:
-        IActivityContextOptions<Activity>)
+        IBaseActivityContextOptions<Activity, Record<string, any>>)
       parameters:
         - id: plugin
           type: <xref uid="@microsoft/teams.apps.ISender" />&lt;{}&gt;
           description: ''
         - id: value
           type: >-
-            <xref uid="@microsoft/teams.apps.IActivityContextOptions"
-            />&lt;<xref uid="@microsoft/teams.api.Activity" />&gt;
+            <xref uid="@microsoft/teams.apps.IBaseActivityContextOptions"
+            />&lt;<xref uid="@microsoft/teams.api.Activity" />,
+            Record&lt;string, any&gt;&gt;
           description: ''
 properties:
   - name: activity
@@ -124,14 +127,14 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        next: (context?: IActivityContext<Activity>) => void |
-        InvokeResponse<any> | Promise<void | InvokeResponse<any>>
+        next: (context?: IBaseActivityContext<Activity, Record<string, any>>) =>
+        void | InvokeResponse<any> | Promise<void | InvokeResponse<any>>
       return:
         description: ''
         type: >-
-          (context?: IActivityContext&lt;Activity&gt;) =&gt; void |
-          InvokeResponse&lt;any&gt; | Promise&lt;void |
-          InvokeResponse&lt;any&gt;&gt;
+          (context?: IBaseActivityContext&lt;Activity, Record&lt;string,
+          any&gt;&gt;) =&gt; void | InvokeResponse&lt;any&gt; | Promise&lt;void
+          | InvokeResponse&lt;any&gt;&gt;
   - name: ref
     uid: '@microsoft/teams.apps.ActivityContext.ref'
     package: '@microsoft/teams.apps'
@@ -196,18 +199,25 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;
-  - name: send(ActivityLike)
+  - name: send(ActivityLike, ConversationReference)
     uid: '@microsoft/teams.apps.ActivityContext.send'
     package: '@microsoft/teams.apps'
     summary: send an activity to the conversation
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function send(activity: ActivityLike): Promise<SentActivity>'
+      content: >-
+        function send(activity: ActivityLike, conversationRef?:
+        ConversationReference): Promise<SentActivity>
       parameters:
         - id: activity
           type: <xref uid="@microsoft/teams.api.ActivityLike" />
           description: activity to send
+        - id: conversationRef
+          type: <xref uid="@microsoft/teams.api.ConversationReference" />
+          description: >-
+            optional conversation reference to send the activity to. By default,
+            it will use the activity's conversation reference.
       return:
         description: ''
         type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;
@@ -228,14 +238,18 @@ methods:
       return:
         description: ''
         type: Promise&lt;undefined | string&gt;
-  - name: signout()
+  - name: signout(string)
     uid: '@microsoft/teams.apps.ActivityContext.signout'
     package: '@microsoft/teams.apps'
     summary: sign the activity sender out
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function signout(): Promise<void>'
+      content: 'function signout(connectionName?: string): Promise<void>'
+      parameters:
+        - id: connectionName
+          type: string
+          description: auth connection name, defaults to `graph`
       return:
         description: ''
         type: Promise&lt;void&gt;
@@ -246,9 +260,11 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function toInterface(): IActivityContext<Activity>'
+      content: >-
+        function toInterface(): IBaseActivityContext<Activity, Record<string,
+        any>>
       return:
         description: ''
         type: >-
-          <xref uid="@microsoft/teams.apps.IActivityContext" />&lt;<xref
-          uid="@microsoft/teams.api.Activity" />&gt;
+          <xref uid="@microsoft/teams.apps.IBaseActivityContext" />&lt;<xref
+          uid="@microsoft/teams.api.Activity" />, Record&lt;string, any&gt;&gt;
