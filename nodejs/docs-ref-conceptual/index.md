@@ -1,7 +1,7 @@
 ---
 title: Microsoft Teams SDK (Teams AI Library) for TypeScript
 description: TypeScript reference documentation for Microsoft Teams SDK (Teams AI Library).
-ms.date: 11/07/2025
+ms.date: 11/17/2025
 ms.topic: reference
 keywords: sdk msteams teams ai javascript typescript library reference latest
 ---
@@ -15,6 +15,8 @@ The Microsoft Teams SDK (formerly known as *Teams AI Library*) for TypeScript pr
 For more about the TypeScript version of Teams SDK, refer to the source repo at [Teams SDK: TypeScript](https://github.com/microsoft/teams.ts).
 
 For more about the .NET version of Teams SDK, refer to the source repo at [Teams SDK: DotNet](https://github.com/microsoft/teams.net).
+
+For more about the Python version of Teams SDK, refer to the source repo at[Teams SDK: Python](https://github.com/microsoft/teams.py).
 
 ### Library packages
 
