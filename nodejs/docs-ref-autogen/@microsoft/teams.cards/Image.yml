@@ -8,20 +8,22 @@ remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: Image(string, ImageOptions)
+  - name: Image(string, Partial<Omit<IImage, "type" | "url">>)
     uid: '@microsoft/teams.cards.Image.constructor'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'new Image(url: string, options?: ImageOptions)'
+      content: 'new Image(url: string, options?: Partial<Omit<IImage, "type" | "url">>)'
       parameters:
         - id: url
           type: string
           description: ''
         - id: options
-          type: <xref uid="@microsoft/teams.cards.ImageOptions" />
+          type: >-
+            Partial&lt;Omit&lt;<xref uid="@microsoft/teams.cards.IImage" />,
+            "type" | "url"&gt;&gt;
           description: ''
 properties:
   - name: allowExpand
@@ -75,6 +77,21 @@ properties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.FallbackElement" />
+  - name: fitMode
+    uid: '@microsoft/teams.cards.Image.fitMode'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Controls how the image should be fitted inside its bounding box. imageFit
+      is only meaningful when both the width and height properties are set. When
+      fitMode is set to contain, the default style is always used.
+    fullName: fitMode
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'fitMode?: ImageFitMode'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ImageFitMode" />
   - name: grid.area
     uid: '@microsoft/teams.cards.Image.grid.area'
     package: '@microsoft/teams.cards'
@@ -110,6 +127,21 @@ properties:
     isDeprecated: false
     syntax:
       content: 'horizontalAlignment?: HorizontalAlignment'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
+  - name: horizontalContentAlignment
+    uid: '@microsoft/teams.cards.Image.horizontalContentAlignment'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Controls the horizontal position of the image within its bounding box.
+      horizontalContentAlignment is only meaningful when both the width and
+      height properties are set and fitMode is set to either cover or contain.
+    fullName: horizontalContentAlignment
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'horizontalContentAlignment?: HorizontalAlignment'
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
@@ -154,6 +186,21 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: key
+    uid: '@microsoft/teams.cards.Image.key'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Defines an optional key for the object. Keys are seldom needed, but in
+      some scenarios, specifying keys can help maintain visual state in the host
+      application.
+    fullName: key
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'key?: string'
+      return:
+        description: ''
+        type: string
   - name: lang
     uid: '@microsoft/teams.cards.Image.lang'
     package: '@microsoft/teams.cards'
@@ -166,15 +213,15 @@ properties:
       return:
         description: ''
         type: string
-  - name: msTeams
-    uid: '@microsoft/teams.cards.Image.msTeams'
+  - name: msteams
+    uid: '@microsoft/teams.cards.Image.msteams'
     package: '@microsoft/teams.cards'
     summary: Teams-specific metadata associated with the image.
-    fullName: msTeams
+    fullName: msteams
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'msTeams?: ITeamsImageProperties'
+      content: 'msteams?: ITeamsImageProperties'
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ITeamsImageProperties" />
@@ -205,16 +252,20 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        selectAction?: IExecuteAction | IOpenUrlAction | IResetInputsAction |
-        ISubmitAction | IToggleVisibilityAction
+        selectAction?: ISubmitAction | IOpenUrlAction | IExecuteAction |
+        IToggleVisibilityAction | IResetInputsAction | IPopoverAction |
+        IOpenUrlDialogAction | IInsertImageAction
       return:
         description: ''
         type: >-
-          <xref uid="@microsoft/teams.cards.IExecuteAction" /> | <xref
+          <xref uid="@microsoft/teams.cards.ISubmitAction" /> | <xref
           uid="@microsoft/teams.cards.IOpenUrlAction" /> | <xref
+          uid="@microsoft/teams.cards.IExecuteAction" /> | <xref
+          uid="@microsoft/teams.cards.IToggleVisibilityAction" /> | <xref
           uid="@microsoft/teams.cards.IResetInputsAction" /> | <xref
-          uid="@microsoft/teams.cards.ISubmitAction" /> | <xref
-          uid="@microsoft/teams.cards.IToggleVisibilityAction" />
+          uid="@microsoft/teams.cards.IPopoverAction" /> | <xref
+          uid="@microsoft/teams.cards.IOpenUrlDialogAction" /> | <xref
+          uid="@microsoft/teams.cards.IInsertImageAction" />
   - name: separator
     uid: '@microsoft/teams.cards.Image.separator'
     package: '@microsoft/teams.cards'
@@ -287,6 +338,18 @@ properties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.TargetWidth" />
+  - name: themedUrls
+    uid: '@microsoft/teams.cards.Image.themedUrls'
+    package: '@microsoft/teams.cards'
+    summary: A set of theme-specific image URLs.
+    fullName: themedUrls
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'themedUrls?: IThemedUrl[]'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.IThemedUrl" />[]
   - name: type
     uid: '@microsoft/teams.cards.Image.type'
     package: '@microsoft/teams.cards'
@@ -313,6 +376,21 @@ properties:
       return:
         description: ''
         type: string
+  - name: verticalContentAlignment
+    uid: '@microsoft/teams.cards.Image.verticalContentAlignment'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Controls the vertical position of the image within its bounding box.
+      verticalContentAlignment is only meaningful when both the width and height
+      properties are set and fitMode is set to either cover or contain.
+    fullName: verticalContentAlignment
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'verticalContentAlignment?: VerticalAlignment'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.VerticalAlignment" />
   - name: width
     uid: '@microsoft/teams.cards.Image.width'
     package: '@microsoft/teams.cards'
@@ -401,6 +479,21 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Image" />
+  - name: withFitMode(ImageFitMode)
+    uid: '@microsoft/teams.cards.Image.withFitMode'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withFitMode(fitMode: ImageFitMode): Image'
+      parameters:
+        - id: fitMode
+          type: <xref uid="@microsoft/teams.cards.ImageFitMode" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Image" />
   - name: withHeight(string)
     uid: '@microsoft/teams.cards.Image.withHeight'
     package: '@microsoft/teams.cards'
@@ -428,6 +521,23 @@ methods:
         HorizontalAlignment): Image
       parameters:
         - id: horizontalAlignment
+          type: <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Image" />
+  - name: withHorizontalContentAlignment(HorizontalAlignment)
+    uid: '@microsoft/teams.cards.Image.withHorizontalContentAlignment'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function withHorizontalContentAlignment(horizontalContentAlignment:
+        HorizontalAlignment): Image
+      parameters:
+        - id: horizontalContentAlignment
           type: <xref uid="@microsoft/teams.cards.HorizontalAlignment" />
           description: ''
       return:
@@ -478,6 +588,21 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Image" />
+  - name: withKey(string)
+    uid: '@microsoft/teams.cards.Image.withKey'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withKey(key: string): Image'
+      parameters:
+        - id: key
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Image" />
   - name: withLang(string)
     uid: '@microsoft/teams.cards.Image.withLang'
     package: '@microsoft/teams.cards'
@@ -493,16 +618,16 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Image" />
-  - name: withMsTeams(ITeamsImageProperties)
-    uid: '@microsoft/teams.cards.Image.withMsTeams'
+  - name: withMsteams(ITeamsImageProperties)
+    uid: '@microsoft/teams.cards.Image.withMsteams'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withMsTeams(msTeams: ITeamsImageProperties): Image'
+      content: 'function withMsteams(msteams: ITeamsImageProperties): Image'
       parameters:
-        - id: msTeams
+        - id: msteams
           type: <xref uid="@microsoft/teams.cards.ITeamsImageProperties" />
           description: ''
       return:
@@ -524,8 +649,9 @@ methods:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Image" />
   - name: >-
-      withSelectAction(IExecuteAction | IOpenUrlAction | IResetInputsAction |
-      ISubmitAction | IToggleVisibilityAction)
+      withSelectAction(ISubmitAction | IOpenUrlAction | IExecuteAction |
+      IToggleVisibilityAction | IResetInputsAction | IPopoverAction |
+      IOpenUrlDialogAction | IInsertImageAction)
     uid: '@microsoft/teams.cards.Image.withSelectAction'
     package: '@microsoft/teams.cards'
     summary: ''
@@ -533,16 +659,20 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function withSelectAction(selectAction: IExecuteAction | IOpenUrlAction
-        | IResetInputsAction | ISubmitAction | IToggleVisibilityAction): Image
+        function withSelectAction(selectAction: ISubmitAction | IOpenUrlAction |
+        IExecuteAction | IToggleVisibilityAction | IResetInputsAction |
+        IPopoverAction | IOpenUrlDialogAction | IInsertImageAction): Image
       parameters:
         - id: selectAction
           type: >-
-            <xref uid="@microsoft/teams.cards.IExecuteAction" /> | <xref
+            <xref uid="@microsoft/teams.cards.ISubmitAction" /> | <xref
             uid="@microsoft/teams.cards.IOpenUrlAction" /> | <xref
+            uid="@microsoft/teams.cards.IExecuteAction" /> | <xref
+            uid="@microsoft/teams.cards.IToggleVisibilityAction" /> | <xref
             uid="@microsoft/teams.cards.IResetInputsAction" /> | <xref
-            uid="@microsoft/teams.cards.ISubmitAction" /> | <xref
-            uid="@microsoft/teams.cards.IToggleVisibilityAction" />
+            uid="@microsoft/teams.cards.IPopoverAction" /> | <xref
+            uid="@microsoft/teams.cards.IOpenUrlDialogAction" /> | <xref
+            uid="@microsoft/teams.cards.IInsertImageAction" />
           description: ''
       return:
         description: ''
@@ -622,6 +752,21 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.Image" />
+  - name: withThemedUrls(IThemedUrl[])
+    uid: '@microsoft/teams.cards.Image.withThemedUrls'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withThemedUrls(themedUrls: IThemedUrl[]): Image'
+      parameters:
+        - id: themedUrls
+          type: <xref uid="@microsoft/teams.cards.IThemedUrl" />[]
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Image" />
   - name: withUrl(string)
     uid: '@microsoft/teams.cards.Image.withUrl'
     package: '@microsoft/teams.cards'
@@ -633,6 +778,23 @@ methods:
       parameters:
         - id: url
           type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.Image" />
+  - name: withVerticalContentAlignment(VerticalAlignment)
+    uid: '@microsoft/teams.cards.Image.withVerticalContentAlignment'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function withVerticalContentAlignment(verticalContentAlignment:
+        VerticalAlignment): Image
+      parameters:
+        - id: verticalContentAlignment
+          type: <xref uid="@microsoft/teams.cards.VerticalAlignment" />
           description: ''
       return:
         description: ''

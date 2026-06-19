@@ -2,15 +2,17 @@
 name: ActivityContext
 uid: '@microsoft/teams.apps.ActivityContext'
 package: '@microsoft/teams.apps'
-summary: ''
+summary: |-
+  Base activity context options
+  These are the public properties exposed on the context
 fullName: ActivityContext<T, TExtraCtx>
 remarks: ''
 isDeprecated: false
 type: class
 constructors:
   - name: >-
-      ActivityContext<T, TExtraCtx>(ISender<{}>,
-      IBaseActivityContextOptions<Activity, Record<string, any>>)
+      ActivityContext<T, TExtraCtx>(IBaseActivityContextOptions<Activity> &
+      IActivityContextConstructorArgs)
     uid: '@microsoft/teams.apps.ActivityContext.constructor'
     package: '@microsoft/teams.apps'
     summary: ''
@@ -18,17 +20,14 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new ActivityContext(plugin: ISender<{}>, value:
-        IBaseActivityContextOptions<Activity, Record<string, any>>)
+        new ActivityContext(value: IBaseActivityContextOptions<Activity> &
+        IActivityContextConstructorArgs)
       parameters:
-        - id: plugin
-          type: <xref uid="@microsoft/teams.apps.ISender" />&lt;{}&gt;
-          description: ''
         - id: value
           type: >-
             <xref uid="@microsoft/teams.apps.IBaseActivityContextOptions"
-            />&lt;<xref uid="@microsoft/teams.api.Activity" />,
-            Record&lt;string, any&gt;&gt;
+            />&lt;<xref uid="@microsoft/teams.api.Activity" />&gt; & <xref
+            uid="@microsoft/teams.apps.IActivityContextConstructorArgs" />
           description: ''
 properties:
   - name: activity
@@ -117,7 +116,7 @@ properties:
       content: 'log: ILogger'
       return:
         description: ''
-        type: ILogger
+        type: <xref uid="@microsoft/teams.common.ILogger" />
   - name: next
     uid: '@microsoft/teams.apps.ActivityContext.next'
     package: '@microsoft/teams.apps'
@@ -155,10 +154,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'storage: IStorage'
+      content: 'storage: IStorage<any, any>'
       return:
         description: ''
-        type: IStorage
+        type: <xref uid="@microsoft/teams.common.IStorage" />&lt;any, any&gt;
   - name: stream
     uid: '@microsoft/teams.apps.ActivityContext.stream'
     package: '@microsoft/teams.apps'
@@ -184,10 +183,51 @@ properties:
         description: ''
         type: <xref uid="@microsoft/teams.graph.Client" />
 methods:
+  - name: quote(string, ActivityLike)
+    uid: '@microsoft/teams.apps.ActivityContext.quote'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Send a message to the conversation with a quoted message reference
+      prepended to the text.
+
+      Teams renders the quoted message as a preview bubble above the response
+      text.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function quote(messageId: string, activity: ActivityLike):
+        Promise<SentActivity>
+      parameters:
+        - id: messageId
+          type: string
+          description: The ID of the message to quote
+        - id: activity
+          type: <xref uid="@microsoft/teams.api.ActivityLike" />
+          description: >-
+            The activity to send — a quote placeholder for messageId will be
+            prepended to its text
+
+             This API is coming soon and may change in the future.
+            Diagnostic: ExperimentalTeamsQuotedReplies
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;
   - name: reply(ActivityLike)
     uid: '@microsoft/teams.apps.ActivityContext.reply'
     package: '@microsoft/teams.apps'
-    summary: reply to the inbound activity
+    summary: >-
+      send an activity in the current conversation with a visual quote
+
+      of the inbound message.
+
+
+      In channels, sends to the current thread with a quoted reply.
+
+      In other scopes, sends with a quoted reply.
+
+      To send without quoting, use
+      [send](xref:@microsoft/teams.apps.ActivityContext.send).
     remarks: ''
     isDeprecated: false
     syntax:
@@ -195,14 +235,23 @@ methods:
       parameters:
         - id: activity
           type: <xref uid="@microsoft/teams.api.ActivityLike" />
-          description: activity to send
+          description: the activity to send
       return:
         description: ''
         type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;
   - name: send(ActivityLike, ConversationReference)
     uid: '@microsoft/teams.apps.ActivityContext.send'
     package: '@microsoft/teams.apps'
-    summary: send an activity to the conversation
+    summary: >-
+      send an activity in the current conversation without quoting.
+
+
+      In channels, sends to the current thread. In scopes that do not
+
+      support threading (group chat, meetings), sends as a normal message.
+
+      To send with a visual quote of the inbound message, use
+      [reply](xref:@microsoft/teams.apps.ActivityContext.reply).
     remarks: ''
     isDeprecated: false
     syntax:
@@ -212,12 +261,12 @@ methods:
       parameters:
         - id: activity
           type: <xref uid="@microsoft/teams.api.ActivityLike" />
-          description: activity to send
+          description: the activity to send
         - id: conversationRef
           type: <xref uid="@microsoft/teams.api.ConversationReference" />
           description: >-
-            optional conversation reference to send the activity to. By default,
-            it will use the activity's conversation reference.
+            optional conversation reference to send to a different conversation
+            or thread
       return:
         description: ''
         type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;

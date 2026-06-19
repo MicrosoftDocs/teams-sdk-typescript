@@ -10,18 +10,65 @@ remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: Client(any)
+  - name: Client(Options, GraphOptions)
     uid: '@microsoft/teams.graph.Client.constructor'
     package: '@microsoft/teams.graph'
-    summary: ''
+    summary: |+
+      Creates a Graph client.
+
+      **Example**
+
+      ```ts
+      // Public cloud (default)
+      new Client({ token });
+      ```
+
+
+
+      **Example**
+
+      ```ts
+      // Sovereign cloud (GCCH)
+      new Client(httpClient, { baseUrlRoot: 'https://graph.microsoft.us' });
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'new Client(options?: any)'
+      content: 'new Client(options?: Options, graphOptions?: GraphOptions)'
       parameters:
         - id: options
-          type: any
-          description: ''
+          type: Options
+          description: >-
+            The HTTP client to use; an existing <xref:HttpClient> will be
+            cloned,
+
+            or an <xref:HttpClientOptions> bag will be used to build a new one.
+
+            HTTP-level settings like headers, interceptors, and timeouts belong
+            here.
+        - id: graphOptions
+          type: GraphOptions
+          description: |-
+            Graph-specific options. Takes precedence over `options.baseUrlRoot`
+            when both are set.
+properties:
+  - name: http
+    uid: '@microsoft/teams.graph.Client.http'
+    package: '@microsoft/teams.graph'
+    summary: >-
+      The underlying HTTP client, pre-configured with Graph base URL and
+      headers.
+
+      Use for raw Graph API requests not covered by endpoint functions.
+    fullName: http
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: Client http
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.common.Client" />
 methods:
   - name: call<F, R>(F, [Object, Object])
     uid: '@microsoft/teams.graph.Client.call'

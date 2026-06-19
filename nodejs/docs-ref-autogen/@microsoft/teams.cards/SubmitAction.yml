@@ -5,23 +5,25 @@ package: '@microsoft/teams.cards'
 summary: >-
   Gathers input values, merges them with the data property if specified, and
   sends them to the Bot via an Invoke activity. The Bot can only acknowledge is
-  has received the request. Action.Submit only works in Teams.
+  has received the request.
 fullName: SubmitAction
 remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: SubmitAction(SubmitActionOptions)
+  - name: SubmitAction(Partial<Omit<ISubmitAction, "type">>)
     uid: '@microsoft/teams.cards.SubmitAction.constructor'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'new SubmitAction(options?: SubmitActionOptions)'
+      content: 'new SubmitAction(options?: Partial<Omit<ISubmitAction, "type">>)'
       parameters:
         - id: options
-          type: <xref uid="@microsoft/teams.cards.SubmitActionOptions" />
+          type: >-
+            Partial&lt;Omit&lt;<xref uid="@microsoft/teams.cards.ISubmitAction"
+            />, "type"&gt;&gt;
           description: ''
 properties:
   - name: associatedInputs
@@ -37,10 +39,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'associatedInputs?: "auto" | "none"'
+      content: 'associatedInputs?: AssociatedInputs'
       return:
         description: ''
-        type: '"auto" | "none"'
+        type: <xref uid="@microsoft/teams.cards.AssociatedInputs" />
   - name: conditionallyEnabled
     uid: '@microsoft/teams.cards.SubmitAction.conditionallyEnabled'
     package: '@microsoft/teams.cards'
@@ -59,18 +61,19 @@ properties:
     uid: '@microsoft/teams.cards.SubmitAction.data'
     package: '@microsoft/teams.cards'
     summary: >-
-      The data to send to the Bot when the action is executed. The data
-      specified in the card payload will be sent back to the Bot as is,
-      alongside the values of the inputs expressed as key/value pairs where the
-      key is the Id of the input.
+      The data to send to the Bot when the action is executed. When expressed as
+      an object, `data` is sent back to the Bot when the action is executed,
+      adorned with the values of the inputs expressed as key/value pairs, where
+      the key is the Id of the input. If `data` is expressed as a string, input
+      values are not sent to the Bot.
     fullName: data
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'data?: any'
+      content: 'data?: string | ISubmitActionData'
       return:
         description: ''
-        type: any
+        type: string | <xref uid="@microsoft/teams.cards.ISubmitActionData" />
   - name: fallback
     uid: '@microsoft/teams.cards.SubmitAction.fallback'
     package: '@microsoft/teams.cards'
@@ -136,6 +139,33 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: key
+    uid: '@microsoft/teams.cards.SubmitAction.key'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Defines an optional key for the object. Keys are seldom needed, but in
+      some scenarios, specifying keys can help maintain visual state in the host
+      application.
+    fullName: key
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'key?: string'
+      return:
+        description: ''
+        type: string
+  - name: menuActions
+    uid: '@microsoft/teams.cards.SubmitAction.menuActions'
+    package: '@microsoft/teams.cards'
+    summary: The actions to display in the overflow menu of a Split action button.
+    fullName: menuActions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'menuActions?: MenuActionArray'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.MenuActionArray" />
   - name: mode
     uid: '@microsoft/teams.cards.SubmitAction.mode'
     package: '@microsoft/teams.cards'
@@ -150,15 +180,15 @@ properties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ActionMode" />
-  - name: msTeams
-    uid: '@microsoft/teams.cards.SubmitAction.msTeams'
+  - name: msteams
+    uid: '@microsoft/teams.cards.SubmitAction.msteams'
     package: '@microsoft/teams.cards'
     summary: Teams-specific metadata associated with the action.
-    fullName: msTeams
+    fullName: msteams
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'msTeams?: ITeamsSubmitActionProperties'
+      content: 'msteams?: ITeamsSubmitActionProperties'
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ITeamsSubmitActionProperties" />
@@ -192,6 +222,18 @@ properties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ActionStyle" />
+  - name: themedIconUrls
+    uid: '@microsoft/teams.cards.SubmitAction.themedIconUrls'
+    package: '@microsoft/teams.cards'
+    summary: A set of theme-specific icon URLs.
+    fullName: themedIconUrls
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'themedIconUrls?: IThemedUrl[]'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.IThemedUrl" />[]
   - name: title
     uid: '@microsoft/teams.cards.SubmitAction.title'
     package: '@microsoft/teams.cards'
@@ -246,7 +288,7 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.SubmitAction" />
-  - name: withAssociatedInputs("auto" | "none")
+  - name: withAssociatedInputs(AssociatedInputs)
     uid: '@microsoft/teams.cards.SubmitAction.withAssociatedInputs'
     package: '@microsoft/teams.cards'
     summary: ''
@@ -254,11 +296,11 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function withAssociatedInputs(associatedInputs: "auto" | "none"):
+        function withAssociatedInputs(associatedInputs: AssociatedInputs):
         SubmitAction
       parameters:
         - id: associatedInputs
-          type: '"auto" | "none"'
+          type: <xref uid="@microsoft/teams.cards.AssociatedInputs" />
           description: ''
       return:
         description: ''
@@ -280,17 +322,17 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.SubmitAction" />
-  - name: withData(any)
+  - name: withData(string | ISubmitActionData)
     uid: '@microsoft/teams.cards.SubmitAction.withData'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withData(data: any): SubmitAction'
+      content: 'function withData(data: string | ISubmitActionData): SubmitAction'
       parameters:
         - id: data
-          type: any
+          type: string | <xref uid="@microsoft/teams.cards.ISubmitActionData" />
           description: ''
       return:
         description: ''
@@ -355,6 +397,36 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.SubmitAction" />
+  - name: withKey(string)
+    uid: '@microsoft/teams.cards.SubmitAction.withKey'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withKey(key: string): SubmitAction'
+      parameters:
+        - id: key
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.SubmitAction" />
+  - name: withMenuActions(MenuActionArray)
+    uid: '@microsoft/teams.cards.SubmitAction.withMenuActions'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withMenuActions(menuActions: MenuActionArray): SubmitAction'
+      parameters:
+        - id: menuActions
+          type: <xref uid="@microsoft/teams.cards.MenuActionArray" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.SubmitAction" />
   - name: withMode(ActionMode)
     uid: '@microsoft/teams.cards.SubmitAction.withMode'
     package: '@microsoft/teams.cards'
@@ -370,18 +442,18 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.SubmitAction" />
-  - name: withMsTeams(ITeamsSubmitActionProperties)
-    uid: '@microsoft/teams.cards.SubmitAction.withMsTeams'
+  - name: withMsteams(ITeamsSubmitActionProperties)
+    uid: '@microsoft/teams.cards.SubmitAction.withMsteams'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function withMsTeams(msTeams: ITeamsSubmitActionProperties):
+        function withMsteams(msteams: ITeamsSubmitActionProperties):
         SubmitAction
       parameters:
-        - id: msTeams
+        - id: msteams
           type: <xref uid="@microsoft/teams.cards.ITeamsSubmitActionProperties" />
           description: ''
       return:
@@ -413,6 +485,21 @@ methods:
       parameters:
         - id: style
           type: <xref uid="@microsoft/teams.cards.ActionStyle" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.SubmitAction" />
+  - name: withThemedIconUrls(IThemedUrl[])
+    uid: '@microsoft/teams.cards.SubmitAction.withThemedIconUrls'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withThemedIconUrls(themedIconUrls: IThemedUrl[]): SubmitAction'
+      parameters:
+        - id: themedIconUrls
+          type: <xref uid="@microsoft/teams.cards.IThemedUrl" />[]
           description: ''
       return:
         description: ''

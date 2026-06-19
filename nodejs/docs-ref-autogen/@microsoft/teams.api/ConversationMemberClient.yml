@@ -8,20 +8,29 @@ remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: ConversationMemberClient(string, any)
+  - name: >-
+      ConversationMemberClient(string, Client | ClientOptions,
+      Partial<ApiClientSettings>)
     uid: '@microsoft/teams.api.ConversationMemberClient.constructor'
     package: '@microsoft/teams.api'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'new ConversationMemberClient(serviceUrl: string, options?: any)'
+      content: >-
+        new ConversationMemberClient(serviceUrl: string, options?: Client |
+        ClientOptions, apiClientSettings?: Partial<ApiClientSettings>)
       parameters:
         - id: serviceUrl
           type: string
           description: ''
         - id: options
-          type: any
+          type: >-
+            <xref uid="@microsoft/teams.common.Client" /> | <xref
+            uid="@microsoft/teams.common.ClientOptions" />
+          description: ''
+        - id: apiClientSettings
+          type: Partial&lt;<xref uid="@microsoft/teams.api.ApiClientSettings" />&gt;
           description: ''
 properties:
   - name: http
@@ -35,7 +44,7 @@ properties:
       content: Client http
       return:
         description: ''
-        type: Client
+        type: <xref uid="@microsoft/teams.common.Client" />
   - name: serviceUrl
     uid: '@microsoft/teams.api.ConversationMemberClient.serviceUrl'
     package: '@microsoft/teams.api'
@@ -54,7 +63,8 @@ methods:
     package: '@microsoft/teams.api'
     summary: ''
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: This will be removed by end of summer 2026.
     syntax:
       content: 'function delete(conversationId: string, id: string): Promise<void>'
       parameters:
@@ -74,7 +84,9 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function get(conversationId: string): Promise<Account<any>[]>'
+      content: >-
+        function get(conversationId: string):
+        Promise<TeamsChannelAccount<any>[]>
       parameters:
         - id: conversationId
           type: string
@@ -82,7 +94,7 @@ methods:
       return:
         description: ''
         type: >-
-          Promise&lt;<xref uid="@microsoft/teams.api.Account"
+          Promise&lt;<xref uid="@microsoft/teams.api.TeamsChannelAccount"
           />&lt;any&gt;[]&gt;
   - name: getById(string, string)
     uid: '@microsoft/teams.api.ConversationMemberClient.getById'
@@ -93,7 +105,7 @@ methods:
     syntax:
       content: >-
         function getById(conversationId: string, id: string):
-        Promise<Account<any>>
+        Promise<TeamsChannelAccount<any>>
       parameters:
         - id: conversationId
           type: string
@@ -103,4 +115,33 @@ methods:
           description: ''
       return:
         description: ''
-        type: Promise&lt;<xref uid="@microsoft/teams.api.Account" />&lt;any&gt;&gt;
+        type: >-
+          Promise&lt;<xref uid="@microsoft/teams.api.TeamsChannelAccount"
+          />&lt;any&gt;&gt;
+  - name: getPaged(string, number, string)
+    uid: '@microsoft/teams.api.ConversationMemberClient.getPaged'
+    package: '@microsoft/teams.api'
+    summary: Get paged members in a conversation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getPaged(conversationId: string, pageSize?: number,
+        continuationToken?: string): Promise<PagedMembersResult>
+      parameters:
+        - id: conversationId
+          type: string
+          description: The ID of the conversation.
+        - id: pageSize
+          type: number
+          description: >-
+            Optional maximum number of members per page (min 50, default 200,
+            max 500).
+        - id: continuationToken
+          type: string
+          description: Optional token from a previous call to fetch the next page.
+      return:
+        description: >-
+          PagedMembersResult containing members and an optional continuation
+          token.
+        type: Promise&lt;<xref uid="@microsoft/teams.api.PagedMembersResult" />&gt;

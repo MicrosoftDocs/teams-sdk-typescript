@@ -8,17 +8,19 @@ remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: TimeInput(TimeInputOptions)
+  - name: TimeInput(Partial<Omit<ITimeInput, "type">>)
     uid: '@microsoft/teams.cards.TimeInput.constructor'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'new TimeInput(options?: TimeInputOptions)'
+      content: 'new TimeInput(options?: Partial<Omit<ITimeInput, "type">>)'
       parameters:
         - id: options
-          type: <xref uid="@microsoft/teams.cards.TimeInputOptions" />
+          type: >-
+            Partial&lt;Omit&lt;<xref uid="@microsoft/teams.cards.ITimeInput" />,
+            "type"&gt;&gt;
           description: ''
 properties:
   - name: errorMessage
@@ -135,6 +137,21 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: key
+    uid: '@microsoft/teams.cards.TimeInput.key'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Defines an optional key for the object. Keys are seldom needed, but in
+      some scenarios, specifying keys can help maintain visual state in the host
+      application.
+    fullName: key
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'key?: string'
+      return:
+        description: ''
+        type: string
   - name: label
     uid: '@microsoft/teams.cards.TimeInput.label'
     package: '@microsoft/teams.cards'
@@ -298,10 +315,15 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'valueChangedAction?: IResetInputsAction'
+      content: >-
+        valueChangedAction?: IResetInputsAction | IPopoverAction |
+        IOpenUrlDialogAction
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.IResetInputsAction" />
+        type: >-
+          <xref uid="@microsoft/teams.cards.IResetInputsAction" /> | <xref
+          uid="@microsoft/teams.cards.IPopoverAction" /> | <xref
+          uid="@microsoft/teams.cards.IOpenUrlDialogAction" />
 methods:
   - name: from(Omit<ITimeInput, "type">)
     uid: '@microsoft/teams.cards.TimeInput.from'
@@ -419,6 +441,21 @@ methods:
       parameters:
         - id: isVisible
           type: boolean
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.TimeInput" />
+  - name: withKey(string)
+    uid: '@microsoft/teams.cards.TimeInput.withKey'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withKey(key: string): TimeInput'
+      parameters:
+        - id: key
+          type: string
           description: ''
       return:
         description: ''
@@ -573,7 +610,9 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.TimeInput" />
-  - name: withValueChangedAction(IResetInputsAction)
+  - name: >-
+      withValueChangedAction(IResetInputsAction | IPopoverAction |
+      IOpenUrlDialogAction)
     uid: '@microsoft/teams.cards.TimeInput.withValueChangedAction'
     package: '@microsoft/teams.cards'
     summary: ''
@@ -581,11 +620,14 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function withValueChangedAction(valueChangedAction: IResetInputsAction):
-        TimeInput
+        function withValueChangedAction(valueChangedAction: IResetInputsAction |
+        IPopoverAction | IOpenUrlDialogAction): TimeInput
       parameters:
         - id: valueChangedAction
-          type: <xref uid="@microsoft/teams.cards.IResetInputsAction" />
+          type: >-
+            <xref uid="@microsoft/teams.cards.IResetInputsAction" /> | <xref
+            uid="@microsoft/teams.cards.IPopoverAction" /> | <xref
+            uid="@microsoft/teams.cards.IOpenUrlDialogAction" />
           description: ''
       return:
         description: ''
