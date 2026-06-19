@@ -8,20 +8,24 @@ remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: TextBlock(string, TextBlockOptions)
+  - name: TextBlock(string, Partial<Omit<ITextBlock, "type" | "text">>)
     uid: '@microsoft/teams.cards.TextBlock.constructor'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'new TextBlock(text: string, options?: TextBlockOptions)'
+      content: >-
+        new TextBlock(text: string, options?: Partial<Omit<ITextBlock, "type" |
+        "text">>)
       parameters:
         - id: text
           type: string
           description: ''
         - id: options
-          type: <xref uid="@microsoft/teams.cards.TextBlockOptions" />
+          type: >-
+            Partial&lt;Omit&lt;<xref uid="@microsoft/teams.cards.ITextBlock" />,
+            "type" | "text"&gt;&gt;
           description: ''
 properties:
   - name: color
@@ -158,6 +162,33 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: key
+    uid: '@microsoft/teams.cards.TextBlock.key'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Defines an optional key for the object. Keys are seldom needed, but in
+      some scenarios, specifying keys can help maintain visual state in the host
+      application.
+    fullName: key
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'key?: string'
+      return:
+        description: ''
+        type: string
+  - name: labelFor
+    uid: '@microsoft/teams.cards.TextBlock.labelFor'
+    package: '@microsoft/teams.cards'
+    summary: The Id of the input the TextBlock should act as the label of.
+    fullName: labelFor
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'labelFor?: string'
+      return:
+        description: ''
+        type: string
   - name: lang
     uid: '@microsoft/teams.cards.TextBlock.lang'
     package: '@microsoft/teams.cards'
@@ -248,10 +279,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'style?: "default" | "columnHeader" | "heading"'
+      content: 'style?: TextBlockStyle'
       return:
         description: ''
-        type: '"default" | "columnHeader" | "heading"'
+        type: <xref uid="@microsoft/teams.cards.TextBlockStyle" />
   - name: targetWidth
     uid: '@microsoft/teams.cards.TextBlock.targetWidth'
     package: '@microsoft/teams.cards'
@@ -471,6 +502,36 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.TextBlock" />
+  - name: withKey(string)
+    uid: '@microsoft/teams.cards.TextBlock.withKey'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withKey(key: string): TextBlock'
+      parameters:
+        - id: key
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.TextBlock" />
+  - name: withLabelFor(string)
+    uid: '@microsoft/teams.cards.TextBlock.withLabelFor'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withLabelFor(labelFor: string): TextBlock'
+      parameters:
+        - id: labelFor
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.TextBlock" />
   - name: withLang(string)
     uid: '@microsoft/teams.cards.TextBlock.withLang'
     package: '@microsoft/teams.cards'
@@ -561,19 +622,17 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.TextBlock" />
-  - name: withStyle("default" | "columnHeader" | "heading")
+  - name: withStyle(TextBlockStyle)
     uid: '@microsoft/teams.cards.TextBlock.withStyle'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function withStyle(style: "default" | "columnHeader" | "heading"):
-        TextBlock
+      content: 'function withStyle(style: TextBlockStyle): TextBlock'
       parameters:
         - id: style
-          type: '"default" | "columnHeader" | "heading"'
+          type: <xref uid="@microsoft/teams.cards.TextBlockStyle" />
           description: ''
       return:
         description: ''

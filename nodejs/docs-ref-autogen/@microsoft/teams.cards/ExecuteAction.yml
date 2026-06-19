@@ -12,17 +12,19 @@ remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: ExecuteAction(ExecuteActionOptions)
+  - name: ExecuteAction(Partial<Omit<IExecuteAction, "type">>)
     uid: '@microsoft/teams.cards.ExecuteAction.constructor'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'new ExecuteAction(options?: ExecuteActionOptions)'
+      content: 'new ExecuteAction(options?: Partial<Omit<IExecuteAction, "type">>)'
       parameters:
         - id: options
-          type: <xref uid="@microsoft/teams.cards.ExecuteActionOptions" />
+          type: >-
+            Partial&lt;Omit&lt;<xref uid="@microsoft/teams.cards.IExecuteAction"
+            />, "type"&gt;&gt;
           description: ''
 properties:
   - name: associatedInputs
@@ -38,10 +40,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'associatedInputs?: "auto" | "none"'
+      content: 'associatedInputs?: AssociatedInputs'
       return:
         description: ''
-        type: '"auto" | "none"'
+        type: <xref uid="@microsoft/teams.cards.AssociatedInputs" />
   - name: conditionallyEnabled
     uid: '@microsoft/teams.cards.ExecuteAction.conditionallyEnabled'
     package: '@microsoft/teams.cards'
@@ -60,18 +62,19 @@ properties:
     uid: '@microsoft/teams.cards.ExecuteAction.data'
     package: '@microsoft/teams.cards'
     summary: >-
-      The data to send to the Bot when the action is executed. The data
-      specified in the card payload will be sent back to the Bot as is,
-      alongside the values of the inputs expressed as key/value pairs where the
-      key is the Id of the input.
+      The data to send to the Bot when the action is executed. When expressed as
+      an object, `data` is sent back to the Bot when the action is executed,
+      adorned with the values of the inputs expressed as key/value pairs, where
+      the key is the Id of the input. If `data` is expressed as a string, input
+      values are not sent to the Bot.
     fullName: data
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'data?: any'
+      content: 'data?: string | ISubmitActionData'
       return:
         description: ''
-        type: any
+        type: string | <xref uid="@microsoft/teams.cards.ISubmitActionData" />
   - name: fallback
     uid: '@microsoft/teams.cards.ExecuteAction.fallback'
     package: '@microsoft/teams.cards'
@@ -137,6 +140,33 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: key
+    uid: '@microsoft/teams.cards.ExecuteAction.key'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Defines an optional key for the object. Keys are seldom needed, but in
+      some scenarios, specifying keys can help maintain visual state in the host
+      application.
+    fullName: key
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'key?: string'
+      return:
+        description: ''
+        type: string
+  - name: menuActions
+    uid: '@microsoft/teams.cards.ExecuteAction.menuActions'
+    package: '@microsoft/teams.cards'
+    summary: The actions to display in the overflow menu of a Split action button.
+    fullName: menuActions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'menuActions?: MenuActionArray'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.MenuActionArray" />
   - name: mode
     uid: '@microsoft/teams.cards.ExecuteAction.mode'
     package: '@microsoft/teams.cards'
@@ -181,6 +211,18 @@ properties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ActionStyle" />
+  - name: themedIconUrls
+    uid: '@microsoft/teams.cards.ExecuteAction.themedIconUrls'
+    package: '@microsoft/teams.cards'
+    summary: A set of theme-specific icon URLs.
+    fullName: themedIconUrls
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'themedIconUrls?: IThemedUrl[]'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.IThemedUrl" />[]
   - name: title
     uid: '@microsoft/teams.cards.ExecuteAction.title'
     package: '@microsoft/teams.cards'
@@ -249,7 +291,7 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
-  - name: withAssociatedInputs("auto" | "none")
+  - name: withAssociatedInputs(AssociatedInputs)
     uid: '@microsoft/teams.cards.ExecuteAction.withAssociatedInputs'
     package: '@microsoft/teams.cards'
     summary: ''
@@ -257,11 +299,11 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function withAssociatedInputs(associatedInputs: "auto" | "none"):
+        function withAssociatedInputs(associatedInputs: AssociatedInputs):
         ExecuteAction
       parameters:
         - id: associatedInputs
-          type: '"auto" | "none"'
+          type: <xref uid="@microsoft/teams.cards.AssociatedInputs" />
           description: ''
       return:
         description: ''
@@ -283,17 +325,17 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
-  - name: withData(any)
+  - name: withData(string | ISubmitActionData)
     uid: '@microsoft/teams.cards.ExecuteAction.withData'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withData(data: any): ExecuteAction'
+      content: 'function withData(data: string | ISubmitActionData): ExecuteAction'
       parameters:
         - id: data
-          type: any
+          type: string | <xref uid="@microsoft/teams.cards.ISubmitActionData" />
           description: ''
       return:
         description: ''
@@ -358,6 +400,36 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
+  - name: withKey(string)
+    uid: '@microsoft/teams.cards.ExecuteAction.withKey'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withKey(key: string): ExecuteAction'
+      parameters:
+        - id: key
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
+  - name: withMenuActions(MenuActionArray)
+    uid: '@microsoft/teams.cards.ExecuteAction.withMenuActions'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withMenuActions(menuActions: MenuActionArray): ExecuteAction'
+      parameters:
+        - id: menuActions
+          type: <xref uid="@microsoft/teams.cards.MenuActionArray" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
   - name: withMode(ActionMode)
     uid: '@microsoft/teams.cards.ExecuteAction.withMode'
     package: '@microsoft/teams.cards'
@@ -399,6 +471,21 @@ methods:
       parameters:
         - id: style
           type: <xref uid="@microsoft/teams.cards.ActionStyle" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ExecuteAction" />
+  - name: withThemedIconUrls(IThemedUrl[])
+    uid: '@microsoft/teams.cards.ExecuteAction.withThemedIconUrls'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withThemedIconUrls(themedIconUrls: IThemedUrl[]): ExecuteAction'
+      parameters:
+        - id: themedIconUrls
+          type: <xref uid="@microsoft/teams.cards.IThemedUrl" />[]
           description: ''
       return:
         description: ''

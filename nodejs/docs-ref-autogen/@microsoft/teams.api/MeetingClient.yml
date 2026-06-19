@@ -8,20 +8,27 @@ remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: MeetingClient(string, any)
+  - name: MeetingClient(string, Client | ClientOptions, Partial<ApiClientSettings>)
     uid: '@microsoft/teams.api.MeetingClient.constructor'
     package: '@microsoft/teams.api'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'new MeetingClient(serviceUrl: string, options?: any)'
+      content: >-
+        new MeetingClient(serviceUrl: string, options?: Client | ClientOptions,
+        apiClientSettings?: Partial<ApiClientSettings>)
       parameters:
         - id: serviceUrl
           type: string
           description: ''
         - id: options
-          type: any
+          type: >-
+            <xref uid="@microsoft/teams.common.Client" /> | <xref
+            uid="@microsoft/teams.common.ClientOptions" />
+          description: ''
+        - id: apiClientSettings
+          type: Partial&lt;<xref uid="@microsoft/teams.api.ApiClientSettings" />&gt;
           description: ''
 properties:
   - name: http
@@ -35,7 +42,7 @@ properties:
       content: Client http
       return:
         description: ''
-        type: Client
+        type: <xref uid="@microsoft/teams.common.Client" />
   - name: serviceUrl
     uid: '@microsoft/teams.api.MeetingClient.serviceUrl'
     package: '@microsoft/teams.api'
@@ -52,7 +59,9 @@ methods:
   - name: getById(string)
     uid: '@microsoft/teams.api.MeetingClient.getById'
     package: '@microsoft/teams.api'
-    summary: ''
+    summary: >-
+      Retrieves meeting information including details, organizer, and
+      conversation.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -60,27 +69,66 @@ methods:
       parameters:
         - id: id
           type: string
-          description: ''
+          description: The meeting ID.
       return:
         description: ''
         type: Promise&lt;<xref uid="@microsoft/teams.api.MeetingInfo" />&gt;
-  - name: getParticipant(string, string)
+  - name: getParticipant(string, string, string)
     uid: '@microsoft/teams.api.MeetingClient.getParticipant'
     package: '@microsoft/teams.api'
-    summary: ''
+    summary: Retrieves information about a specific participant in a meeting.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function getParticipant(meetingId: string, id: string):
-        Promise<MeetingParticipant>
+        function getParticipant(meetingId: string, id: string, tenantId:
+        string): Promise<MeetingParticipant>
       parameters:
         - id: meetingId
           type: string
-          description: ''
+          description: The meeting ID.
         - id: id
           type: string
-          description: ''
+          description: The user AAD object ID
+        - id: tenantId
+          type: string
+          description: The tenant ID of the meeting and user.
+      return:
+        description: The meeting participant information.
+        type: Promise&lt;<xref uid="@microsoft/teams.api.MeetingParticipant" />&gt;
+  - name: sendNotification(string, MeetingNotificationParams)
+    uid: '@microsoft/teams.api.MeetingClient.sendNotification'
+    package: '@microsoft/teams.api'
+    summary: >-
+      Send a targeted in-meeting notification to specific participants.
+
+
+      Returns `undefined` on full success (HTTP 202). Returns a
+      `MeetingNotificationResponse`
+
+      with per-recipient failure info on partial success (HTTP 207).
+
+
+      Requires the RSC permission `OnlineMeetingNotification.Send.Chat` and the
+      ECS flag
+
+      enabled for the tenant/bot.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function sendNotification(meetingId: string, params:
+        MeetingNotificationParams): Promise<undefined |
+        MeetingNotificationResponse>
+      parameters:
+        - id: meetingId
+          type: string
+          description: The BASE64-encoded meeting ID.
+        - id: params
+          type: <xref uid="@microsoft/teams.api.MeetingNotificationParams" />
+          description: The notification parameters including recipients and surfaces.
       return:
         description: ''
-        type: Promise&lt;<xref uid="@microsoft/teams.api.MeetingParticipant" />&gt;
+        type: >-
+          Promise&lt;undefined | <xref
+          uid="@microsoft/teams.api.MeetingNotificationResponse" />&gt;

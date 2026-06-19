@@ -95,7 +95,8 @@ properties:
       presented to the recipient.
     fullName: expiration
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: This will be removed by end of summer 2026.
     syntax:
       content: 'expiration?: Date'
       return:
@@ -109,7 +110,8 @@ properties:
       'high'
     fullName: importance
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: This will be removed by end of summer 2026.
     syntax:
       content: 'importance?: Importance'
       return:
@@ -127,7 +129,8 @@ properties:
       values include: 'acceptingInput', 'ignoringInput', 'expectingInput'
     fullName: inputHint
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: This will be removed by end of summer 2026.
     syntax:
       content: 'inputHint?: InputHint'
       return:
@@ -163,7 +166,8 @@ properties:
     summary: The text to speak.
     fullName: speak
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: This will be removed by end of summer 2026.
     syntax:
       content: 'speak?: string'
       return:
@@ -413,7 +417,8 @@ inheritedProperties:
     summary: A reference to another conversation or activity.
     fullName: relatesTo
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: This will be removed by end of summer 2026.
     syntax:
       content: 'relatesTo?: ConversationReference'
       return:
@@ -560,20 +565,60 @@ inheritedMethods:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [Activity.addEntity](xref:@microsoft/teams.api.$Activity.addEntity)
-  - name: addFeedback()
+  - name: addFeedback("default" | "custom")
     uid: '@microsoft/teams.api.MessageActivity.addFeedback'
     package: '@microsoft/teams.api'
-    summary: Enable message feedback
+    summary: Enable message feedback.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function addFeedback(): MessageActivity'
+      content: 'function addFeedback(mode?: "default" | "custom"): MessageActivity'
+      parameters:
+        - id: mode
+          type: '"default" | "custom"'
+          description: |-
+            `'default'` shows Teams' built-in thumbs up/down UI.
+                          `'custom'` triggers a `message/fetchTask` invoke so the bot can return its own task module dialog.
       return:
         description: ''
         type: <xref uid="@microsoft/teams.api.MessageActivity" />
     inheritanceDescription: >-
       <b>Inherited From</b>
       [Activity.addFeedback](xref:@microsoft/teams.api.$Activity.addFeedback)
+  - name: addTargetedMessageInfo(string)
+    uid: '@microsoft/teams.api.MessageActivity.addTargetedMessageInfo'
+    package: '@microsoft/teams.api'
+    summary: >-
+      Add a targeted message info entity for prompt preview.
+
+      Skips if already present. In reactive flows, `ctx.send()` and
+      `ctx.reply()`
+
+      populate this automatically — use this helper for proactive or deferred
+      sends.
+
+      An invalid or expired messageId causes APX to silently drop the preview
+
+      while still delivering the message.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function addTargetedMessageInfo(messageId: string): MessageActivity'
+      parameters:
+        - id: messageId
+          type: string
+          description: >-
+            the message ID of the targeted message (from the incoming activity's
+            `id`)
+
+             This API is in preview and may change in the future.
+            Diagnostic: ExperimentalTeamsTargeted
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.api.MessageActivity" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Activity.addTargetedMessageInfo](xref:@microsoft/teams.api.$Activity.addTargetedMessageInfo)
   - name: isStreaming()
     uid: '@microsoft/teams.api.MessageActivity.isStreaming'
     package: '@microsoft/teams.api'
@@ -714,30 +759,13 @@ inheritedMethods:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [Activity.withLocalTimestamp](xref:@microsoft/teams.api.$Activity.withLocalTimestamp)
-  - name: withRecipient(Account<any>)
-    uid: '@microsoft/teams.api.MessageActivity.withRecipient'
-    package: '@microsoft/teams.api'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withRecipient(value: Account<any>): MessageActivity'
-      parameters:
-        - id: value
-          type: <xref uid="@microsoft/teams.api.Account" />&lt;any&gt;
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.api.MessageActivity" />
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [Activity.withRecipient](xref:@microsoft/teams.api.$Activity.withRecipient)
   - name: withRelatesTo(ConversationReference)
     uid: '@microsoft/teams.api.MessageActivity.withRelatesTo'
     package: '@microsoft/teams.api'
     summary: ''
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: This will be removed by end of summer 2026.
     syntax:
       content: 'function withRelatesTo(value: ConversationReference): MessageActivity'
       parameters:
@@ -750,24 +778,6 @@ inheritedMethods:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [Activity.withRelatesTo](xref:@microsoft/teams.api.$Activity.withRelatesTo)
-  - name: withReplyToId(string)
-    uid: '@microsoft/teams.api.MessageActivity.withReplyToId'
-    package: '@microsoft/teams.api'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withReplyToId(value: string): MessageActivity'
-      parameters:
-        - id: value
-          type: string
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.api.MessageActivity" />
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [Activity.withReplyToId](xref:@microsoft/teams.api.$Activity.withReplyToId)
   - name: withServiceUrl(string)
     uid: '@microsoft/teams.api.MessageActivity.withServiceUrl'
     package: '@microsoft/teams.api'
@@ -860,6 +870,35 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.api.MessageActivity" />
+  - name: addQuote(string, string)
+    uid: '@microsoft/teams.api.MessageActivity.addQuote'
+    package: '@microsoft/teams.api'
+    summary: >-
+      Add a quoted message reference and append a `<quoted messageId="..."/>`
+      placeholder to text.
+
+      Teams renders the quoted message as a preview bubble above the response
+      text.
+
+      If text is provided, it is appended to the quoted message placeholder.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function addQuote(messageId: string, text?: string): MessageActivity'
+      parameters:
+        - id: messageId
+          type: string
+          description: The ID of the message to quote
+        - id: text
+          type: string
+          description: Optional text, appended to the quoted message placeholder
+      return:
+        description: |-
+          this instance for chaining
+
+           This API is coming soon and may change in the future.
+          Diagnostic: ExperimentalTeamsQuotedReplies
+        type: <xref uid="@microsoft/teams.api.MessageActivity" />
   - name: addStreamFinal()
     uid: '@microsoft/teams.api.MessageActivity.addStreamFinal'
     package: '@microsoft/teams.api'
@@ -937,6 +976,21 @@ methods:
       return:
         description: ''
         type: undefined | <xref uid="@microsoft/teams.api.MentionEntity" />
+  - name: getQuotedMessages()
+    uid: '@microsoft/teams.api.MessageActivity.getQuotedMessages'
+    package: '@microsoft/teams.api'
+    summary: |-
+      get all quoted reply entities from this message
+
+       This API is coming soon and may change in the future.
+      Diagnostic: ExperimentalTeamsQuotedReplies
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getQuotedMessages(): QuotedReplyEntity[]'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.api.QuotedReplyEntity" />[]
   - name: isRecipientMentioned()
     uid: '@microsoft/teams.api.MessageActivity.isRecipientMentioned'
     package: '@microsoft/teams.api'
@@ -948,6 +1002,27 @@ methods:
       return:
         description: ''
         type: boolean
+  - name: prependQuote(string)
+    uid: '@microsoft/teams.api.MessageActivity.prependQuote'
+    package: '@microsoft/teams.api'
+    summary: |-
+      Prepend a quotedReply entity and `<quoted messageId="..."/>` placeholder
+      before existing text. Used by reply()/quote() for quote-above-response.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function prependQuote(messageId: string): MessageActivity'
+      parameters:
+        - id: messageId
+          type: string
+          description: |-
+            The IC3 message ID of the message to quote
+
+             This API is coming soon and may change in the future.
+            Diagnostic: ExperimentalTeamsQuotedReplies
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.api.MessageActivity" />
   - name: stripMentionsText(StripMentionsTextOptions)
     uid: '@microsoft/teams.api.MessageActivity.stripMentionsText'
     package: '@microsoft/teams.api'
@@ -1024,7 +1099,8 @@ methods:
 
       presented to the recipient.
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: This will be removed by end of summer 2026.
     syntax:
       content: 'function withExpiration(value: Date): MessageActivity'
       parameters:
@@ -1041,7 +1117,8 @@ methods:
       The importance of the activity. Possible values include: 'low', 'normal',
       'high'
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: This will be removed by end of summer 2026.
     syntax:
       content: 'function withImportance(value: Importance): MessageActivity'
       parameters:
@@ -1062,7 +1139,8 @@ methods:
 
       values include: 'acceptingInput', 'ignoringInput', 'expectingInput'
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: This will be removed by end of summer 2026.
     syntax:
       content: 'function withInputHint(value: InputHint): MessageActivity'
       parameters:
@@ -1072,12 +1150,44 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.api.MessageActivity" />
+  - name: withRecipient(Account<any>, boolean)
+    uid: '@microsoft/teams.api.MessageActivity.withRecipient'
+    package: '@microsoft/teams.api'
+    summary: >-
+      Set the recipient of this message, optionally marking it as a targeted
+      (ephemeral) message.
+
+      Targeted messages are only visible to the specified recipient in a shared
+      conversation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function withRecipient(account: Account<any>, isTargeted?: boolean):
+        MessageActivity
+      parameters:
+        - id: account
+          type: <xref uid="@microsoft/teams.api.Account" />&lt;any&gt;
+          description: The recipient account
+        - id: isTargeted
+          type: boolean
+          description: >-
+            If true, marks this as a targeted message visible only to the
+            recipient
+      return:
+        description: |-
+          this instance for chaining
+
+           This API is coming soon and may change in the future.
+          Diagnostic: ExperimentalTeamsTargeted
+        type: <xref uid="@microsoft/teams.api.MessageActivity" />
   - name: withSpeak(string)
     uid: '@microsoft/teams.api.MessageActivity.withSpeak'
     package: '@microsoft/teams.api'
     summary: The text to speak.
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: This will be removed by end of summer 2026.
     syntax:
       content: 'function withSpeak(value: string): MessageActivity'
       parameters:

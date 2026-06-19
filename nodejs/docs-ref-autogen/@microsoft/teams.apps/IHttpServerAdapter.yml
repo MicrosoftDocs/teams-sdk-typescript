@@ -1,0 +1,79 @@
+### YamlMime:TSType
+name: IHttpServerAdapter
+uid: '@microsoft/teams.apps.IHttpServerAdapter'
+package: '@microsoft/teams.apps'
+summary: ''
+fullName: IHttpServerAdapter
+remarks: ''
+isDeprecated: false
+type: interface
+methods:
+  - name: registerRoute("POST", string, HttpRouteHandler)
+    uid: '@microsoft/teams.apps.IHttpServerAdapter.registerRoute'
+    package: '@microsoft/teams.apps'
+    summary: Register a route handler for a given HTTP method and path
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function registerRoute(method: "POST", path: string, handler:
+        HttpRouteHandler)
+      parameters:
+        - id: method
+          type: '"POST"'
+          description: HTTP method
+        - id: path
+          type: string
+          description: URL path (e.g., '/api/messages')
+        - id: handler
+          type: <xref uid="@microsoft/teams.apps.HttpRouteHandler" />
+          description: 'Pure function: ({ body, headers }) → { status, body }'
+  - name: serveStatic(string, string)
+    uid: '@microsoft/teams.apps.IHttpServerAdapter.serveStatic'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Serve static files from a directory
+
+      Primarily used for serving static files like for tabs, or static pages via
+      MessageExtensions and Dialogs
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function serveStatic(path: string, directory: string)'
+      parameters:
+        - id: path
+          type: string
+          description: URL path prefix (e.g., '/static')
+        - id: directory
+          type: string
+          description: File system directory to serve from
+  - name: start(string | number)
+    uid: '@microsoft/teams.apps.IHttpServerAdapter.start'
+    package: '@microsoft/teams.apps'
+    summary: |-
+      Start the server listening to incoming requests
+      Not needed if app.start() is not called
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function start(port: string | number): Promise<void>'
+      parameters:
+        - id: port
+          type: string | number
+          description: Port number to listen on
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: stop()
+    uid: '@microsoft/teams.apps.IHttpServerAdapter.stop'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Stop the server from listening and perform any cleanup that needs to be
+      done
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function stop(): Promise<void>'
+      return:
+        description: ''
+        type: Promise&lt;void&gt;

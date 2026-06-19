@@ -194,7 +194,8 @@ properties:
     summary: A reference to another conversation or activity.
     fullName: relatesTo
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: This will be removed by end of summer 2026.
     syntax:
       content: 'relatesTo?: ConversationReference'
       return:
@@ -338,14 +339,51 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.api." />$Activity&lt;T&gt;
-  - name: addFeedback()
+  - name: addFeedback("default" | "custom")
     uid: '@microsoft/teams.api.$Activity.addFeedback'
     package: '@microsoft/teams.api'
-    summary: Enable message feedback
+    summary: Enable message feedback.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function addFeedback(): Activity<T>'
+      content: 'function addFeedback(mode?: "default" | "custom"): Activity<T>'
+      parameters:
+        - id: mode
+          type: '"default" | "custom"'
+          description: |-
+            `'default'` shows Teams' built-in thumbs up/down UI.
+                          `'custom'` triggers a `message/fetchTask` invoke so the bot can return its own task module dialog.
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.api." />$Activity&lt;T&gt;
+  - name: addTargetedMessageInfo(string)
+    uid: '@microsoft/teams.api.$Activity.addTargetedMessageInfo'
+    package: '@microsoft/teams.api'
+    summary: >-
+      Add a targeted message info entity for prompt preview.
+
+      Skips if already present. In reactive flows, `ctx.send()` and
+      `ctx.reply()`
+
+      populate this automatically — use this helper for proactive or deferred
+      sends.
+
+      An invalid or expired messageId causes APX to silently drop the preview
+
+      while still delivering the message.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function addTargetedMessageInfo(messageId: string): Activity<T>'
+      parameters:
+        - id: messageId
+          type: string
+          description: >-
+            the message ID of the targeted message (from the incoming activity's
+            `id`)
+
+             This API is in preview and may change in the future.
+            Diagnostic: ExperimentalTeamsTargeted
       return:
         description: ''
         type: <xref uid="@microsoft/teams.api." />$Activity&lt;T&gt;
@@ -510,47 +548,49 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.api." />$Activity&lt;T&gt;
-  - name: withRecipient(Account<any>)
+  - name: withRecipient(Account<any>, boolean)
     uid: '@microsoft/teams.api.$Activity.withRecipient'
     package: '@microsoft/teams.api'
-    summary: ''
+    summary: >-
+      Set the recipient of this activity, optionally marking it as a targeted
+      message.
+
+      Targeted messages are ephemeral to the specified recipient in a shared
+      conversation.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withRecipient(value: Account<any>): Activity<T>'
+      content: >-
+        function withRecipient(value: Account<any>, isTargeted?: boolean):
+        Activity<T>
       parameters:
         - id: value
           type: <xref uid="@microsoft/teams.api.Account" />&lt;any&gt;
-          description: ''
+          description: The recipient account
+        - id: isTargeted
+          type: boolean
+          description: >-
+            If true, marks this as a targeted message visible only to the
+            recipient (default: false)
       return:
-        description: ''
+        description: |-
+          this instance for chaining
+
+           This API is in preview and may change in the future.
+          Diagnostic: ExperimentalTeamsTargeted
         type: <xref uid="@microsoft/teams.api." />$Activity&lt;T&gt;
   - name: withRelatesTo(ConversationReference)
     uid: '@microsoft/teams.api.$Activity.withRelatesTo'
     package: '@microsoft/teams.api'
     summary: ''
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: This will be removed by end of summer 2026.
     syntax:
       content: 'function withRelatesTo(value: ConversationReference): Activity<T>'
       parameters:
         - id: value
           type: <xref uid="@microsoft/teams.api.ConversationReference" />
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.api." />$Activity&lt;T&gt;
-  - name: withReplyToId(string)
-    uid: '@microsoft/teams.api.$Activity.withReplyToId'
-    package: '@microsoft/teams.api'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function withReplyToId(value: string): Activity<T>'
-      parameters:
-        - id: value
-          type: string
           description: ''
       return:
         description: ''

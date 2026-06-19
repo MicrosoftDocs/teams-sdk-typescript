@@ -173,6 +173,21 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: key
+    uid: '@microsoft/teams.cards.ChoiceSetInput.key'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Defines an optional key for the object. Keys are seldom needed, but in
+      some scenarios, specifying keys can help maintain visual state in the host
+      application.
+    fullName: key
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'key?: string'
+      return:
+        description: ''
+        type: string
   - name: label
     uid: '@microsoft/teams.cards.ChoiceSetInput.label'
     package: '@microsoft/teams.cards'
@@ -199,6 +214,21 @@ properties:
     isDeprecated: false
     syntax:
       content: 'lang?: string'
+      return:
+        description: ''
+        type: string
+  - name: minColumnWidth
+    uid: '@microsoft/teams.cards.ChoiceSetInput.minColumnWidth'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      The minimum width, in pixels, for each column when using a multi-column
+      layout. This ensures that choice items remain readable even when
+      horizontal space is limited. Default is 100 pixels.
+    fullName: minColumnWidth
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'minColumnWidth?: string'
       return:
         description: ''
         type: string
@@ -272,10 +302,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'style?: "compact" | "expanded" | "filtered"'
+      content: 'style?: ChoiceSetInputStyle'
       return:
         description: ''
-        type: '"compact" | "expanded" | "filtered"'
+        type: <xref uid="@microsoft/teams.cards.ChoiceSetInputStyle" />
   - name: targetWidth
     uid: '@microsoft/teams.cards.ChoiceSetInput.targetWidth'
     package: '@microsoft/teams.cards'
@@ -306,6 +336,20 @@ properties:
       return:
         description: ''
         type: '"<xref uid="Input.ChoiceSet" />"'
+  - name: useMultipleColumns
+    uid: '@microsoft/teams.cards.ChoiceSetInput.useMultipleColumns'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Controls whether choice items are arranged in multiple columns in expanded
+      mode, or in a single column. Default is false.
+    fullName: useMultipleColumns
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'useMultipleColumns?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: value
     uid: '@microsoft/teams.cards.ChoiceSetInput.value'
     package: '@microsoft/teams.cards'
@@ -328,10 +372,15 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'valueChangedAction?: IResetInputsAction'
+      content: >-
+        valueChangedAction?: IResetInputsAction | IPopoverAction |
+        IOpenUrlDialogAction
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.IResetInputsAction" />
+        type: >-
+          <xref uid="@microsoft/teams.cards.IResetInputsAction" /> | <xref
+          uid="@microsoft/teams.cards.IPopoverAction" /> | <xref
+          uid="@microsoft/teams.cards.IOpenUrlDialogAction" />
   - name: wrap
     uid: '@microsoft/teams.cards.ChoiceSetInput.wrap'
     package: '@microsoft/teams.cards'
@@ -480,6 +529,21 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ChoiceSetInput" />
+  - name: withKey(string)
+    uid: '@microsoft/teams.cards.ChoiceSetInput.withKey'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withKey(key: string): ChoiceSetInput'
+      parameters:
+        - id: key
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ChoiceSetInput" />
   - name: withLabel(string)
     uid: '@microsoft/teams.cards.ChoiceSetInput.withLabel'
     package: '@microsoft/teams.cards'
@@ -510,17 +574,37 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ChoiceSetInput" />
-  - name: withOptions(ChoiceSetInputOptions)
+  - name: withMinColumnWidth(string)
+    uid: '@microsoft/teams.cards.ChoiceSetInput.withMinColumnWidth'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withMinColumnWidth(minColumnWidth: string): ChoiceSetInput'
+      parameters:
+        - id: minColumnWidth
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ChoiceSetInput" />
+  - name: withOptions(Partial<Omit<IChoiceSetInput, "type" | "choices">>)
     uid: '@microsoft/teams.cards.ChoiceSetInput.withOptions'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function withOptions(value: ChoiceSetInputOptions): ChoiceSetInput'
+      content: >-
+        function withOptions(value: Partial<Omit<IChoiceSetInput, "type" |
+        "choices">>): ChoiceSetInput
       parameters:
         - id: value
-          type: <xref uid="@microsoft/teams.cards.ChoiceSetInputOptions" />
+          type: >-
+            Partial&lt;Omit&lt;<xref
+            uid="@microsoft/teams.cards.IChoiceSetInput" />, "type" |
+            "choices"&gt;&gt;
           description: ''
       return:
         description: ''
@@ -585,19 +669,17 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ChoiceSetInput" />
-  - name: withStyle("compact" | "expanded" | "filtered")
+  - name: withStyle(ChoiceSetInputStyle)
     uid: '@microsoft/teams.cards.ChoiceSetInput.withStyle'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function withStyle(style: "compact" | "expanded" | "filtered"):
-        ChoiceSetInput
+      content: 'function withStyle(style: ChoiceSetInputStyle): ChoiceSetInput'
       parameters:
         - id: style
-          type: '"compact" | "expanded" | "filtered"'
+          type: <xref uid="@microsoft/teams.cards.ChoiceSetInputStyle" />
           description: ''
       return:
         description: ''
@@ -617,6 +699,23 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ChoiceSetInput" />
+  - name: withUseMultipleColumns(boolean)
+    uid: '@microsoft/teams.cards.ChoiceSetInput.withUseMultipleColumns'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function withUseMultipleColumns(useMultipleColumns?: boolean):
+        ChoiceSetInput
+      parameters:
+        - id: useMultipleColumns
+          type: boolean
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ChoiceSetInput" />
   - name: withValue(string)
     uid: '@microsoft/teams.cards.ChoiceSetInput.withValue'
     package: '@microsoft/teams.cards'
@@ -632,7 +731,9 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ChoiceSetInput" />
-  - name: withValueChangedAction(IResetInputsAction)
+  - name: >-
+      withValueChangedAction(IResetInputsAction | IPopoverAction |
+      IOpenUrlDialogAction)
     uid: '@microsoft/teams.cards.ChoiceSetInput.withValueChangedAction'
     package: '@microsoft/teams.cards'
     summary: ''
@@ -640,11 +741,14 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function withValueChangedAction(valueChangedAction: IResetInputsAction):
-        ChoiceSetInput
+        function withValueChangedAction(valueChangedAction: IResetInputsAction |
+        IPopoverAction | IOpenUrlDialogAction): ChoiceSetInput
       parameters:
         - id: valueChangedAction
-          type: <xref uid="@microsoft/teams.cards.IResetInputsAction" />
+          type: >-
+            <xref uid="@microsoft/teams.cards.IResetInputsAction" /> | <xref
+            uid="@microsoft/teams.cards.IPopoverAction" /> | <xref
+            uid="@microsoft/teams.cards.IOpenUrlDialogAction" />
           description: ''
       return:
         description: ''
