@@ -10,17 +10,19 @@ remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: ColumnSet(ColumnSetOptions)
+  - name: ColumnSet(Partial<Omit<IColumnSet, "type">>)
     uid: '@microsoft/teams.cards.ColumnSet.constructor'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'new ColumnSet(options?: ColumnSetOptions)'
+      content: 'new ColumnSet(options?: Partial<Omit<IColumnSet, "type">>)'
       parameters:
         - id: options
-          type: <xref uid="@microsoft/teams.cards.ColumnSetOptions" />
+          type: >-
+            Partial&lt;Omit&lt;<xref uid="@microsoft/teams.cards.IColumnSet" />,
+            "type"&gt;&gt;
           description: ''
 properties:
   - name: bleed
@@ -145,6 +147,21 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: key
+    uid: '@microsoft/teams.cards.ColumnSet.key'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Defines an optional key for the object. Keys are seldom needed, but in
+      some scenarios, specifying keys can help maintain visual state in the host
+      application.
+    fullName: key
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'key?: string'
+      return:
+        description: ''
+        type: string
   - name: lang
     uid: '@microsoft/teams.cards.ColumnSet.lang'
     package: '@microsoft/teams.cards'
@@ -168,6 +185,23 @@ properties:
     isDeprecated: false
     syntax:
       content: 'minHeight?: string'
+      return:
+        description: ''
+        type: string
+  - name: minWidth
+    uid: '@microsoft/teams.cards.ColumnSet.minWidth'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      The minimum width of the column set. `auto` will automatically adjust the
+      column set's minimum width according to its content and using the
+      `<number>px` format will give the column set an explicit minimum width in
+      pixels. A scrollbar will be displayed if the available width is less than
+      the specified minimum width.
+    fullName: minWidth
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'minWidth?: string'
       return:
         description: ''
         type: string
@@ -210,16 +244,20 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        selectAction?: IExecuteAction | IOpenUrlAction | IResetInputsAction |
-        ISubmitAction | IToggleVisibilityAction
+        selectAction?: ISubmitAction | IOpenUrlAction | IExecuteAction |
+        IToggleVisibilityAction | IResetInputsAction | IPopoverAction |
+        IOpenUrlDialogAction | IInsertImageAction
       return:
         description: ''
         type: >-
-          <xref uid="@microsoft/teams.cards.IExecuteAction" /> | <xref
+          <xref uid="@microsoft/teams.cards.ISubmitAction" /> | <xref
           uid="@microsoft/teams.cards.IOpenUrlAction" /> | <xref
+          uid="@microsoft/teams.cards.IExecuteAction" /> | <xref
+          uid="@microsoft/teams.cards.IToggleVisibilityAction" /> | <xref
           uid="@microsoft/teams.cards.IResetInputsAction" /> | <xref
-          uid="@microsoft/teams.cards.ISubmitAction" /> | <xref
-          uid="@microsoft/teams.cards.IToggleVisibilityAction" />
+          uid="@microsoft/teams.cards.IPopoverAction" /> | <xref
+          uid="@microsoft/teams.cards.IOpenUrlDialogAction" /> | <xref
+          uid="@microsoft/teams.cards.IInsertImageAction" />
   - name: separator
     uid: '@microsoft/teams.cards.ColumnSet.separator'
     package: '@microsoft/teams.cards'
@@ -445,6 +483,21 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ColumnSet" />
+  - name: withKey(string)
+    uid: '@microsoft/teams.cards.ColumnSet.withKey'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withKey(key: string): ColumnSet'
+      parameters:
+        - id: key
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ColumnSet" />
   - name: withLang(string)
     uid: '@microsoft/teams.cards.ColumnSet.withLang'
     package: '@microsoft/teams.cards'
@@ -470,6 +523,21 @@ methods:
       content: 'function withMinHeight(minHeight: string): ColumnSet'
       parameters:
         - id: minHeight
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.ColumnSet" />
+  - name: withMinWidth(string)
+    uid: '@microsoft/teams.cards.ColumnSet.withMinWidth'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withMinWidth(minWidth: string): ColumnSet'
+      parameters:
+        - id: minWidth
           type: string
           description: ''
       return:
@@ -506,8 +574,9 @@ methods:
         description: ''
         type: <xref uid="@microsoft/teams.cards.ColumnSet" />
   - name: >-
-      withSelectAction(IExecuteAction | IOpenUrlAction | IResetInputsAction |
-      ISubmitAction | IToggleVisibilityAction)
+      withSelectAction(ISubmitAction | IOpenUrlAction | IExecuteAction |
+      IToggleVisibilityAction | IResetInputsAction | IPopoverAction |
+      IOpenUrlDialogAction | IInsertImageAction)
     uid: '@microsoft/teams.cards.ColumnSet.withSelectAction'
     package: '@microsoft/teams.cards'
     summary: ''
@@ -515,17 +584,20 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function withSelectAction(selectAction: IExecuteAction | IOpenUrlAction
-        | IResetInputsAction | ISubmitAction | IToggleVisibilityAction):
-        ColumnSet
+        function withSelectAction(selectAction: ISubmitAction | IOpenUrlAction |
+        IExecuteAction | IToggleVisibilityAction | IResetInputsAction |
+        IPopoverAction | IOpenUrlDialogAction | IInsertImageAction): ColumnSet
       parameters:
         - id: selectAction
           type: >-
-            <xref uid="@microsoft/teams.cards.IExecuteAction" /> | <xref
+            <xref uid="@microsoft/teams.cards.ISubmitAction" /> | <xref
             uid="@microsoft/teams.cards.IOpenUrlAction" /> | <xref
+            uid="@microsoft/teams.cards.IExecuteAction" /> | <xref
+            uid="@microsoft/teams.cards.IToggleVisibilityAction" /> | <xref
             uid="@microsoft/teams.cards.IResetInputsAction" /> | <xref
-            uid="@microsoft/teams.cards.ISubmitAction" /> | <xref
-            uid="@microsoft/teams.cards.IToggleVisibilityAction" />
+            uid="@microsoft/teams.cards.IPopoverAction" /> | <xref
+            uid="@microsoft/teams.cards.IOpenUrlDialogAction" /> | <xref
+            uid="@microsoft/teams.cards.IInsertImageAction" />
           description: ''
       return:
         description: ''

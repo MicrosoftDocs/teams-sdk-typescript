@@ -8,17 +8,19 @@ remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: TextInput(TextInputOptions)
+  - name: TextInput(Partial<Omit<ITextInput, "type">>)
     uid: '@microsoft/teams.cards.TextInput.constructor'
     package: '@microsoft/teams.cards'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'new TextInput(options?: TextInputOptions)'
+      content: 'new TextInput(options?: Partial<Omit<ITextInput, "type">>)'
       parameters:
         - id: options
-          type: <xref uid="@microsoft/teams.cards.TextInputOptions" />
+          type: >-
+            Partial&lt;Omit&lt;<xref uid="@microsoft/teams.cards.ITextInput" />,
+            "type"&gt;&gt;
           description: ''
 properties:
   - name: errorMessage
@@ -105,16 +107,20 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        inlineAction?: IExecuteAction | IOpenUrlAction | IResetInputsAction |
-        ISubmitAction | IToggleVisibilityAction
+        inlineAction?: ISubmitAction | IOpenUrlAction | IExecuteAction |
+        IToggleVisibilityAction | IResetInputsAction | IPopoverAction |
+        IOpenUrlDialogAction | IInsertImageAction
       return:
         description: ''
         type: >-
-          <xref uid="@microsoft/teams.cards.IExecuteAction" /> | <xref
+          <xref uid="@microsoft/teams.cards.ISubmitAction" /> | <xref
           uid="@microsoft/teams.cards.IOpenUrlAction" /> | <xref
+          uid="@microsoft/teams.cards.IExecuteAction" /> | <xref
+          uid="@microsoft/teams.cards.IToggleVisibilityAction" /> | <xref
           uid="@microsoft/teams.cards.IResetInputsAction" /> | <xref
-          uid="@microsoft/teams.cards.ISubmitAction" /> | <xref
-          uid="@microsoft/teams.cards.IToggleVisibilityAction" />
+          uid="@microsoft/teams.cards.IPopoverAction" /> | <xref
+          uid="@microsoft/teams.cards.IOpenUrlDialogAction" /> | <xref
+          uid="@microsoft/teams.cards.IInsertImageAction" />
   - name: isMultiline
     uid: '@microsoft/teams.cards.TextInput.isMultiline'
     package: '@microsoft/teams.cards'
@@ -168,6 +174,21 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: key
+    uid: '@microsoft/teams.cards.TextInput.key'
+    package: '@microsoft/teams.cards'
+    summary: >-
+      Defines an optional key for the object. Keys are seldom needed, but in
+      some scenarios, specifying keys can help maintain visual state in the host
+      application.
+    fullName: key
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'key?: string'
+      return:
+        description: ''
+        type: string
   - name: label
     uid: '@microsoft/teams.cards.TextInput.label'
     package: '@microsoft/teams.cards'
@@ -343,10 +364,15 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'valueChangedAction?: IResetInputsAction'
+      content: >-
+        valueChangedAction?: IResetInputsAction | IPopoverAction |
+        IOpenUrlDialogAction
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.cards.IResetInputsAction" />
+        type: >-
+          <xref uid="@microsoft/teams.cards.IResetInputsAction" /> | <xref
+          uid="@microsoft/teams.cards.IPopoverAction" /> | <xref
+          uid="@microsoft/teams.cards.IOpenUrlDialogAction" />
 methods:
   - name: from(Omit<ITextInput, "type">)
     uid: '@microsoft/teams.cards.TextInput.from'
@@ -424,8 +450,9 @@ methods:
         description: ''
         type: <xref uid="@microsoft/teams.cards.TextInput" />
   - name: >-
-      withInlineAction(IExecuteAction | IOpenUrlAction | IResetInputsAction |
-      ISubmitAction | IToggleVisibilityAction)
+      withInlineAction(ISubmitAction | IOpenUrlAction | IExecuteAction |
+      IToggleVisibilityAction | IResetInputsAction | IPopoverAction |
+      IOpenUrlDialogAction | IInsertImageAction)
     uid: '@microsoft/teams.cards.TextInput.withInlineAction'
     package: '@microsoft/teams.cards'
     summary: ''
@@ -433,17 +460,20 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function withInlineAction(inlineAction: IExecuteAction | IOpenUrlAction
-        | IResetInputsAction | ISubmitAction | IToggleVisibilityAction):
-        TextInput
+        function withInlineAction(inlineAction: ISubmitAction | IOpenUrlAction |
+        IExecuteAction | IToggleVisibilityAction | IResetInputsAction |
+        IPopoverAction | IOpenUrlDialogAction | IInsertImageAction): TextInput
       parameters:
         - id: inlineAction
           type: >-
-            <xref uid="@microsoft/teams.cards.IExecuteAction" /> | <xref
+            <xref uid="@microsoft/teams.cards.ISubmitAction" /> | <xref
             uid="@microsoft/teams.cards.IOpenUrlAction" /> | <xref
+            uid="@microsoft/teams.cards.IExecuteAction" /> | <xref
+            uid="@microsoft/teams.cards.IToggleVisibilityAction" /> | <xref
             uid="@microsoft/teams.cards.IResetInputsAction" /> | <xref
-            uid="@microsoft/teams.cards.ISubmitAction" /> | <xref
-            uid="@microsoft/teams.cards.IToggleVisibilityAction" />
+            uid="@microsoft/teams.cards.IPopoverAction" /> | <xref
+            uid="@microsoft/teams.cards.IOpenUrlDialogAction" /> | <xref
+            uid="@microsoft/teams.cards.IInsertImageAction" />
           description: ''
       return:
         description: ''
@@ -504,6 +534,21 @@ methods:
       parameters:
         - id: isVisible
           type: boolean
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.cards.TextInput" />
+  - name: withKey(string)
+    uid: '@microsoft/teams.cards.TextInput.withKey'
+    package: '@microsoft/teams.cards'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function withKey(key: string): TextInput'
+      parameters:
+        - id: key
+          type: string
           description: ''
       return:
         description: ''
@@ -673,7 +718,9 @@ methods:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.cards.TextInput" />
-  - name: withValueChangedAction(IResetInputsAction)
+  - name: >-
+      withValueChangedAction(IResetInputsAction | IPopoverAction |
+      IOpenUrlDialogAction)
     uid: '@microsoft/teams.cards.TextInput.withValueChangedAction'
     package: '@microsoft/teams.cards'
     summary: ''
@@ -681,11 +728,14 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function withValueChangedAction(valueChangedAction: IResetInputsAction):
-        TextInput
+        function withValueChangedAction(valueChangedAction: IResetInputsAction |
+        IPopoverAction | IOpenUrlDialogAction): TextInput
       parameters:
         - id: valueChangedAction
-          type: <xref uid="@microsoft/teams.cards.IResetInputsAction" />
+          type: >-
+            <xref uid="@microsoft/teams.cards.IResetInputsAction" /> | <xref
+            uid="@microsoft/teams.cards.IPopoverAction" /> | <xref
+            uid="@microsoft/teams.cards.IOpenUrlDialogAction" />
           description: ''
       return:
         description: ''

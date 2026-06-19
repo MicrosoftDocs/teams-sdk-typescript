@@ -2,16 +2,52 @@
 name: IBaseActivityContext
 uid: '@microsoft/teams.apps.IBaseActivityContext'
 package: '@microsoft/teams.apps'
-summary: ''
+summary: |-
+  Base activity context options
+  These are the public properties exposed on the context
 fullName: IBaseActivityContext<T, TExtraCtx>
 remarks: ''
 isDeprecated: false
 type: interface
 properties:
+  - name: next
+    uid: '@microsoft/teams.apps.IBaseActivityContext.next'
+    package: '@microsoft/teams.apps'
+    summary: call the next event/middleware handler
+    fullName: next
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        next: (context?: IBaseActivityContext<Activity, Record<string, any>> &
+        TExtraCtx) => void | InvokeResponse<any> | Promise<void |
+        InvokeResponse<any>>
+      return:
+        description: ''
+        type: >-
+          (context?: IBaseActivityContext&lt;Activity, Record&lt;string,
+          any&gt;&gt; & TExtraCtx) =&gt; void | InvokeResponse&lt;any&gt; |
+          Promise&lt;void | InvokeResponse&lt;any&gt;&gt;
+  - name: quote
+    uid: '@microsoft/teams.apps.IBaseActivityContext.quote'
+    package: '@microsoft/teams.apps'
+    summary: send a reply quoting a specific message by ID
+    fullName: quote
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        quote: (messageId: string, activity: ActivityLike) =>
+        Promise<SentActivity>
+      return:
+        description: ''
+        type: >-
+          (messageId: string, activity: ActivityLike) =&gt;
+          Promise&lt;SentActivity&gt;
   - name: reply
     uid: '@microsoft/teams.apps.IBaseActivityContext.reply'
     package: '@microsoft/teams.apps'
-    summary: reply to the inbound activity
+    summary: reply to the inbound activity, automatically quoting the inbound message
     fullName: reply
     remarks: ''
     isDeprecated: false
@@ -181,31 +217,10 @@ inheritedProperties:
       content: 'log: ILogger'
       return:
         description: ''
-        type: ILogger
+        type: <xref uid="@microsoft/teams.common.ILogger" />
     inheritanceDescription: >-
       <b>Inherited From</b>
       [IBaseActivityContextOptions.log](xref:@microsoft/teams.apps.IBaseActivityContextOptions.log)
-  - name: next
-    uid: '@microsoft/teams.apps.IBaseActivityContext.next'
-    package: '@microsoft/teams.apps'
-    summary: call the next event/middleware handler
-    fullName: next
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        next: (context?: IBaseActivityContext<Activity, Record<string, any>> &
-        TExtraCtx) => void | InvokeResponse<any> | Promise<void |
-        InvokeResponse<any>>
-      return:
-        description: ''
-        type: >-
-          (context?: IBaseActivityContext&lt;Activity, Record&lt;string,
-          any&gt;&gt; & TExtraCtx) =&gt; void | InvokeResponse&lt;any&gt; |
-          Promise&lt;void | InvokeResponse&lt;any&gt;&gt;
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [IBaseActivityContextOptions.next](xref:@microsoft/teams.apps.IBaseActivityContextOptions.next)
   - name: ref
     uid: '@microsoft/teams.apps.IBaseActivityContext.ref'
     package: '@microsoft/teams.apps'
@@ -229,10 +244,10 @@ inheritedProperties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'storage: IStorage'
+      content: 'storage: IStorage<any, any>'
       return:
         description: ''
-        type: IStorage
+        type: <xref uid="@microsoft/teams.common.IStorage" />&lt;any, any&gt;
     inheritanceDescription: >-
       <b>Inherited From</b>
       [IBaseActivityContextOptions.storage](xref:@microsoft/teams.apps.IBaseActivityContextOptions.storage)
@@ -266,6 +281,4 @@ inheritedProperties:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [IBaseActivityContextOptions.userToken](xref:@microsoft/teams.apps.IBaseActivityContextOptions.userToken)
-extends: >-
-  <xref uid="@microsoft/teams.apps.IBaseActivityContextOptions" />&lt;T,
-  TExtraCtx&gt;
+extends: <xref uid="@microsoft/teams.apps.IBaseActivityContextOptions" />&lt;T&gt;
