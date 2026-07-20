@@ -1,15 +1,39 @@
 ### YamlMime:TSType
-name: IFunctionContext
-uid: '@microsoft/teams.apps.IFunctionContext'
+name: FunctionContext
+uid: '@microsoft/teams.apps.FunctionContext'
 package: '@microsoft/teams.apps'
-summary: ''
-fullName: IFunctionContext<T>
+summary: >-
+  Context handed to a remotely-callable function (`app.function`).
+
+
+  Like [ActivityContext](xref:@microsoft/teams.apps.ActivityContext), this is a
+  "smart" context: it owns conversation
+
+  resolution and sending rather than having `App` wire those up at registration.
+
+  That keeps `App.function` thin and mirrors the Python SDK's `FunctionContext`.
+fullName: FunctionContext<T>
 remarks: ''
 isDeprecated: false
-type: interface
+type: class
+constructors:
+  - name: FunctionContext<T>(IFunctionContextOptions<T>)
+    uid: '@microsoft/teams.apps.FunctionContext.constructor'
+    package: '@microsoft/teams.apps'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'new FunctionContext(options: IFunctionContextOptions<T>)'
+      parameters:
+        - id: options
+          type: >-
+            <xref uid="@microsoft/teams.apps.IFunctionContextOptions"
+            />&lt;T&gt;
+          description: ''
 properties:
   - name: api
-    uid: '@microsoft/teams.apps.IFunctionContext.api'
+    uid: '@microsoft/teams.apps.FunctionContext.api'
     package: '@microsoft/teams.apps'
     summary: the api client
     fullName: api
@@ -21,7 +45,7 @@ properties:
         description: ''
         type: <xref uid="@microsoft/teams.api.Client" />
   - name: appGraph
-    uid: '@microsoft/teams.apps.IFunctionContext.appGraph'
+    uid: '@microsoft/teams.apps.FunctionContext.appGraph'
     package: '@microsoft/teams.apps'
     summary: the app graph client
     fullName: appGraph
@@ -32,58 +56,8 @@ properties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.graph.Client" />
-  - name: data
-    uid: '@microsoft/teams.apps.IFunctionContext.data'
-    package: '@microsoft/teams.apps'
-    summary: the function payload
-    fullName: data
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'data: T'
-      return:
-        description: ''
-        type: T
-  - name: getCurrentConversationId
-    uid: '@microsoft/teams.apps.IFunctionContext.getCurrentConversationId'
-    package: '@microsoft/teams.apps'
-    summary: >-
-      Attempts to find the ID of the conversation in which the app is being
-      used, and verifies that the bot and the
-
-      user making the function call are both present in the conversation.
-      Depending on the conversation type, this
-
-      is the ID of a chat (for group chats, 1:1 chats and channel meetings), a
-      channel, a meeting, or a user-bot
-
-      conversation (when the app is hosted in personal scope).
-
-      Returns undefined if the conversation ID cannot be determined or is
-      invalid.
-    fullName: getCurrentConversationId
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'getCurrentConversationId: () => Promise<undefined | string>'
-      return:
-        description: ''
-        type: () =&gt; Promise&lt;undefined | string&gt;
-  - name: log
-    uid: '@microsoft/teams.apps.IFunctionContext.log'
-    package: '@microsoft/teams.apps'
-    summary: the app logger instance
-    fullName: log
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'log: ILogger'
-      return:
-        description: ''
-        type: <xref uid="@microsoft/teams.common.ILogger" />
-inheritedProperties:
   - name: appId
-    uid: '@microsoft/teams.apps.IFunctionContext.appId'
+    uid: '@microsoft/teams.apps.FunctionContext.appId'
     package: '@microsoft/teams.apps'
     summary: >-
       This ID is the unique identifier assigned to the app after deployment and
@@ -97,11 +71,8 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [IClientContext.appId](xref:@microsoft/teams.apps.IClientContext.appId)
   - name: appSessionId
-    uid: '@microsoft/teams.apps.IFunctionContext.appSessionId'
+    uid: '@microsoft/teams.apps.FunctionContext.appSessionId'
     package: '@microsoft/teams.apps'
     summary: >-
       Unique ID for the current session for use in correlating telemetry data. A
@@ -116,11 +87,8 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [IClientContext.appSessionId](xref:@microsoft/teams.apps.IClientContext.appSessionId)
   - name: authToken
-    uid: '@microsoft/teams.apps.IFunctionContext.authToken'
+    uid: '@microsoft/teams.apps.FunctionContext.authToken'
     package: '@microsoft/teams.apps'
     summary: The MSAL entra token.
     fullName: authToken
@@ -131,11 +99,8 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [IClientContext.authToken](xref:@microsoft/teams.apps.IClientContext.authToken)
   - name: channelId
-    uid: '@microsoft/teams.apps.IFunctionContext.channelId'
+    uid: '@microsoft/teams.apps.FunctionContext.channelId'
     package: '@microsoft/teams.apps'
     summary: >-
       The Microsoft Teams ID for the channel with which the content is
@@ -148,11 +113,8 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [IClientContext.channelId](xref:@microsoft/teams.apps.IClientContext.channelId)
   - name: chatId
-    uid: '@microsoft/teams.apps.IFunctionContext.chatId'
+    uid: '@microsoft/teams.apps.FunctionContext.chatId'
     package: '@microsoft/teams.apps'
     summary: The Microsoft Teams ID for the chat with which the content is associated.
     fullName: chatId
@@ -163,11 +125,44 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [IClientContext.chatId](xref:@microsoft/teams.apps.IClientContext.chatId)
+  - name: data
+    uid: '@microsoft/teams.apps.FunctionContext.data'
+    package: '@microsoft/teams.apps'
+    summary: the function payload
+    fullName: data
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'data: T'
+      return:
+        description: ''
+        type: T
+  - name: getCurrentConversationId
+    uid: '@microsoft/teams.apps.FunctionContext.getCurrentConversationId'
+    package: '@microsoft/teams.apps'
+    summary: ''
+    fullName: getCurrentConversationId
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'getCurrentConversationId: () => Promise<undefined | string>'
+      return:
+        description: ''
+        type: () =&gt; Promise&lt;undefined | string&gt;
+  - name: log
+    uid: '@microsoft/teams.apps.FunctionContext.log'
+    package: '@microsoft/teams.apps'
+    summary: the app logger instance
+    fullName: log
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'log: ILogger'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.common.ILogger" />
   - name: meetingId
-    uid: '@microsoft/teams.apps.IFunctionContext.meetingId'
+    uid: '@microsoft/teams.apps.FunctionContext.meetingId'
     package: '@microsoft/teams.apps'
     summary: Meeting ID used by tab when running in meeting context
     fullName: meetingId
@@ -178,11 +173,8 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [IClientContext.meetingId](xref:@microsoft/teams.apps.IClientContext.meetingId)
   - name: messageId
-    uid: '@microsoft/teams.apps.IFunctionContext.messageId'
+    uid: '@microsoft/teams.apps.FunctionContext.messageId'
     package: '@microsoft/teams.apps'
     summary: |-
       The ID of the parent message from which this task module was launched.
@@ -195,11 +187,8 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [IClientContext.messageId](xref:@microsoft/teams.apps.IClientContext.messageId)
   - name: pageId
-    uid: '@microsoft/teams.apps.IFunctionContext.pageId'
+    uid: '@microsoft/teams.apps.FunctionContext.pageId'
     package: '@microsoft/teams.apps'
     summary: The developer-defined unique ID for the page this content points to.
     fullName: pageId
@@ -210,11 +199,8 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [IClientContext.pageId](xref:@microsoft/teams.apps.IClientContext.pageId)
   - name: subPageId
-    uid: '@microsoft/teams.apps.IFunctionContext.subPageId'
+    uid: '@microsoft/teams.apps.FunctionContext.subPageId'
     package: '@microsoft/teams.apps'
     summary: |-
       The developer-defined unique ID for the sub-page this content points to.
@@ -228,11 +214,8 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [IClientContext.subPageId](xref:@microsoft/teams.apps.IClientContext.subPageId)
   - name: teamId
-    uid: '@microsoft/teams.apps.IFunctionContext.teamId'
+    uid: '@microsoft/teams.apps.FunctionContext.teamId'
     package: '@microsoft/teams.apps'
     summary: The Microsoft Teams ID for the team with which the content is associated.
     fullName: teamId
@@ -243,11 +226,8 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [IClientContext.teamId](xref:@microsoft/teams.apps.IClientContext.teamId)
   - name: tenantId
-    uid: '@microsoft/teams.apps.IFunctionContext.tenantId'
+    uid: '@microsoft/teams.apps.FunctionContext.tenantId'
     package: '@microsoft/teams.apps'
     summary: >-
       The Microsoft Entra tenant ID of the current user, extracted from request
@@ -260,11 +240,8 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [IClientContext.tenantId](xref:@microsoft/teams.apps.IClientContext.tenantId)
   - name: userId
-    uid: '@microsoft/teams.apps.IFunctionContext.userId'
+    uid: '@microsoft/teams.apps.FunctionContext.userId'
     package: '@microsoft/teams.apps'
     summary: >-
       The Microsoft Entra object id of the current user, extracted from the
@@ -277,11 +254,8 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [IClientContext.userId](xref:@microsoft/teams.apps.IClientContext.userId)
   - name: userName
-    uid: '@microsoft/teams.apps.IFunctionContext.userName'
+    uid: '@microsoft/teams.apps.FunctionContext.userName'
     package: '@microsoft/teams.apps'
     summary: The name of the current user, extracted from the request auth token.
     fullName: userName
@@ -292,12 +266,9 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [IClientContext.userName](xref:@microsoft/teams.apps.IClientContext.userName)
 methods:
   - name: send(ActivityLike)
-    uid: '@microsoft/teams.apps.IFunctionContext.send_1'
+    uid: '@microsoft/teams.apps.FunctionContext.send_1'
     package: '@microsoft/teams.apps'
     summary: ''
     remarks: ''
@@ -312,7 +283,7 @@ methods:
         description: ''
         type: Promise&lt;null | <xref uid="@microsoft/teams.api.SentActivity" />&gt;
   - name: send(DeprecatedInputActivity | ActivityLike)
-    uid: '@microsoft/teams.apps.IFunctionContext.send_2'
+    uid: '@microsoft/teams.apps.FunctionContext.send_2'
     package: '@microsoft/teams.apps'
     summary: ''
     remarks: ''
@@ -331,7 +302,7 @@ methods:
         description: ''
         type: Promise&lt;null | <xref uid="@microsoft/teams.api.SentActivity" />&gt;
   - name: send(DeprecatedInputActivity)
-    uid: '@microsoft/teams.apps.IFunctionContext.send'
+    uid: '@microsoft/teams.apps.FunctionContext.send'
     package: '@microsoft/teams.apps'
     summary: ''
     remarks: ''
@@ -348,4 +319,3 @@ methods:
       return:
         description: ''
         type: Promise&lt;null | <xref uid="@microsoft/teams.api.SentActivity" />&gt;
-extends: <xref uid="@microsoft/teams.apps.IClientContext" />

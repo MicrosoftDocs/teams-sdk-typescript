@@ -81,51 +81,6 @@ properties:
       return:
         description: ''
         type: JwtValidator
-  - name: event
-    uid: '@microsoft/teams.apps.App.event'
-    package: '@microsoft/teams.apps'
-    summary: subscribe to an event
-    fullName: event
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        event: (this: App<TPlugin>, name: Name, cb:
-        EventHandler<AppEvents<TPlugin>[Name]>) => App<TPlugin>
-      return:
-        description: ''
-        type: >-
-          (this: App&lt;TPlugin&gt;, name: Name, cb:
-          EventHandler&lt;AppEvents&lt;TPlugin&gt;[Name]&gt;) =&gt;
-          App&lt;TPlugin&gt;
-  - name: function
-    uid: '@microsoft/teams.apps.App.function'
-    package: '@microsoft/teams.apps'
-    summary: add/update a function that can be called remotely
-    fullName: function
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function: (this: App<TPlugin>, name: string, cb: (context:
-        IFunctionContext<TData>) => any) => App<TPlugin>
-      return:
-        description: ''
-        type: >-
-          (this: App&lt;TPlugin&gt;, name: string, cb: (context:
-          IFunctionContext&lt;TData&gt;) =&gt; any) =&gt; App&lt;TPlugin&gt;
-  - name: getPlugin
-    uid: '@microsoft/teams.apps.App.getPlugin'
-    package: '@microsoft/teams.apps'
-    summary: get a plugin
-    fullName: getPlugin
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'getPlugin: (this: App<TPlugin>, name: PluginName) => IPlugin | undefined'
-      return:
-        description: ''
-        type: '(this: App&lt;TPlugin&gt;, name: PluginName) =&gt; IPlugin | undefined'
   - name: graph
     uid: '@microsoft/teams.apps.App.graph'
     package: '@microsoft/teams.apps'
@@ -195,25 +150,6 @@ properties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.common.ILogger" />
-  - name: message
-    uid: '@microsoft/teams.apps.App.message'
-    package: '@microsoft/teams.apps'
-    summary: subscribe to a message event for a specific pattern
-    fullName: message
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        message: (this: App<TPlugin>, pattern: string | RegExp, cb:
-        RouteHandler<IActivityContext<IMessageActivity,
-        PluginAdditionalContext<TPlugin>>, void>) => App<TPlugin>
-      return:
-        description: ''
-        type: >-
-          (this: App&lt;TPlugin&gt;, pattern: string | RegExp, cb:
-          RouteHandler&lt;IActivityContext&lt;IMessageActivity,
-          PluginAdditionalContext&lt;TPlugin&gt;&gt;, void&gt;) =&gt;
-          App&lt;TPlugin&gt;
   - name: oauth
     uid: '@microsoft/teams.apps.App.oauth'
     package: '@microsoft/teams.apps'
@@ -226,24 +162,6 @@ properties:
       return:
         description: ''
         type: '{ defaultConnectionName: string }'
-  - name: 'on'
-    uid: '@microsoft/teams.apps.App.on'
-    package: '@microsoft/teams.apps'
-    summary: subscribe to an event
-    fullName: 'on'
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        on: (this: App<TPlugin>, name: Name, cb:
-        Exclude<IRoutes<PluginAdditionalContext<TPlugin>>[Name], undefined>) =>
-        App<TPlugin>
-      return:
-        description: ''
-        type: >-
-          (this: App&lt;TPlugin&gt;, name: Name, cb:
-          Exclude&lt;IRoutes&lt;PluginAdditionalContext&lt;TPlugin&gt;&gt;[Name],
-          undefined&gt;) =&gt; App&lt;TPlugin&gt;
   - name: options
     uid: '@microsoft/teams.apps.App.options'
     package: '@microsoft/teams.apps'
@@ -256,34 +174,6 @@ properties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.apps.AppOptions" />&lt;TPlugin&gt;
-  - name: plugin
-    uid: '@microsoft/teams.apps.App.plugin'
-    package: '@microsoft/teams.apps'
-    summary: add a plugin
-    fullName: plugin
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'plugin: (this: App<TPlugin>, plugin: TPlugin) => App<TPlugin>'
-      return:
-        description: ''
-        type: '(this: App&lt;TPlugin&gt;, plugin: TPlugin) =&gt; App&lt;TPlugin&gt;'
-  - name: process
-    uid: '@microsoft/teams.apps.App.process'
-    package: '@microsoft/teams.apps'
-    summary: activity handler called when an inbound activity is received
-    fullName: process
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        process: (this: App<TPlugin>, event: IActivityEvent) =>
-        Promise<InvokeResponse>
-      return:
-        description: ''
-        type: >-
-          (this: App&lt;TPlugin&gt;, event: IActivityEvent) =&gt;
-          Promise&lt;InvokeResponse&gt;
   - name: server
     uid: '@microsoft/teams.apps.App.server'
     package: '@microsoft/teams.apps'
@@ -308,58 +198,86 @@ properties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.common.IStorage" />&lt;any, any&gt;
-  - name: tab
-    uid: '@microsoft/teams.apps.App.tab'
+methods:
+  - name: event<Name>(Name, EventHandler<AppEvents<TPlugin>[Name]>)
+    uid: '@microsoft/teams.apps.App.event'
     package: '@microsoft/teams.apps'
-    summary: >-
-      add/update a static tab.
-
-      the tab will be hosted at
-
-      `http://localhost:{{PORT}}/tabs/{{name}}` or
-      `https://{{BOT_DOMAIN}}/tabs/{{name}}`
-    fullName: tab
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'tab: (this: App<TPlugin>, name: string, path: string) => App<TPlugin>'
-      return:
-        description: ''
-        type: >-
-          (this: App&lt;TPlugin&gt;, name: string, path: string) =&gt;
-          App&lt;TPlugin&gt;
-  - name: tokenManager
-    uid: '@microsoft/teams.apps.App.tokenManager'
-    package: '@microsoft/teams.apps'
-    summary: ''
-    fullName: tokenManager
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'tokenManager: TokenManager'
-      return:
-        description: ''
-        type: TokenManager
-  - name: use
-    uid: '@microsoft/teams.apps.App.use'
-    package: '@microsoft/teams.apps'
-    summary: register a middleware
-    fullName: use
+    summary: subscribe to an event
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        use: (this: App<TPlugin>, cb: RouteHandler<IActivityContext<Activity,
-        PluginAdditionalContext<TPlugin>>, void | InvokeResponse<any>>) =>
-        App<TPlugin>
+        function event<Name>(name: Name, cb:
+        EventHandler<AppEvents<TPlugin>[Name]>): App<TPlugin>
+      parameters:
+        - id: name
+          type: Name
+          description: the event to subscribe to
+        - id: cb
+          type: >-
+            <xref uid="@microsoft/teams.common.EventHandler"
+            />&lt;AppEvents&lt;TPlugin&gt;[Name]&gt;
+          description: the callback to invoke
       return:
         description: ''
-        type: >-
-          (this: App&lt;TPlugin&gt;, cb:
-          RouteHandler&lt;IActivityContext&lt;Activity,
-          PluginAdditionalContext&lt;TPlugin&gt;&gt;, void |
-          InvokeResponse&lt;any&gt;&gt;) =&gt; App&lt;TPlugin&gt;
-methods:
+        type: <xref uid="@microsoft/teams.apps.App" />&lt;TPlugin&gt;
+  - name: 'function<TData>(string, (context: IFunctionContext<TData>) => any)'
+    uid: '@microsoft/teams.apps.App.function'
+    package: '@microsoft/teams.apps'
+    summary: add/update a function that can be called remotely
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function function<TData>(name: string, cb: (context:
+        IFunctionContext<TData>) => any): App<TPlugin>
+      parameters:
+        - id: name
+          type: string
+          description: The unique function name
+        - id: cb
+          type: '(context: IFunctionContext&lt;TData&gt;) =&gt; any'
+          description: The callback to handle the function
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.App" />&lt;TPlugin&gt;
+  - name: >-
+      function<TPluginOverride, TData>(string, (context:
+      IFunctionContext<TData>) => any)
+    uid: '@microsoft/teams.apps.App.function_1'
+    package: '@microsoft/teams.apps'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function function<TPluginOverride, TData>(name: string, cb: (context:
+        IFunctionContext<TData>) => any): App<TPlugin>
+      parameters:
+        - id: name
+          type: string
+          description: ''
+        - id: cb
+          type: '(context: IFunctionContext&lt;TData&gt;) =&gt; any'
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.App" />&lt;TPlugin&gt;
+  - name: getPlugin(PluginName)
+    uid: '@microsoft/teams.apps.App.getPlugin'
+    package: '@microsoft/teams.apps'
+    summary: get a plugin
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getPlugin(name: PluginName): undefined | IPlugin<{}, {}>'
+      parameters:
+        - id: name
+          type: <xref uid="@microsoft/teams.apps.PluginName" />
+          description: ''
+      return:
+        description: ''
+        type: undefined | <xref uid="@microsoft/teams.apps.IPlugin" />&lt;{}, {}&gt;
   - name: initialize()
     uid: '@microsoft/teams.apps.App.initialize'
     package: '@microsoft/teams.apps'
@@ -371,6 +289,58 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
+  - name: >-
+      message(string | RegExp, RouteHandler<IActivityContext<IMessageActivity,
+      PluginAdditionalContext<TPlugin>>, void>)
+    uid: '@microsoft/teams.apps.App.message'
+    package: '@microsoft/teams.apps'
+    summary: subscribe to a message event for a specific pattern
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function message(pattern: string | RegExp, cb:
+        RouteHandler<IActivityContext<IMessageActivity,
+        PluginAdditionalContext<TPlugin>>, void>): App<TPlugin>
+      parameters:
+        - id: pattern
+          type: string | RegExp
+          description: pattern to match against message text
+        - id: cb
+          type: >-
+            <xref uid="@microsoft/teams.apps.RouteHandler" />&lt;<xref
+            uid="@microsoft/teams.apps.IActivityContext" />&lt;<xref
+            uid="@microsoft/teams.api.IMessageActivity" />,
+            PluginAdditionalContext&lt;TPlugin&gt;&gt;, void&gt;
+          description: callback to invoke
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.App" />&lt;TPlugin&gt;
+  - name: >-
+      on<Name>(Name, Exclude<IRoutes<PluginAdditionalContext<TPlugin>>[Name],
+      undefined>)
+    uid: '@microsoft/teams.apps.App.on'
+    package: '@microsoft/teams.apps'
+    summary: subscribe to an event
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function on<Name>(name: Name, cb:
+        Exclude<IRoutes<PluginAdditionalContext<TPlugin>>[Name], undefined>):
+        App<TPlugin>
+      parameters:
+        - id: name
+          type: Name
+          description: event to subscribe to
+        - id: cb
+          type: >-
+            Exclude&lt;IRoutes&lt;PluginAdditionalContext&lt;TPlugin&gt;&gt;[Name],
+            undefined&gt;
+          description: callback to invoke
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.App" />&lt;TPlugin&gt;
   - name: onActivity(IActivityEvent)
     uid: '@microsoft/teams.apps.App.onActivity'
     package: '@microsoft/teams.apps'
@@ -388,14 +358,42 @@ methods:
         type: >-
           Promise&lt;<xref uid="@microsoft/teams.api.InvokeResponse"
           />&lt;any&gt;&gt;
-  - name: reply(string, ActivityLike)
-    uid: '@microsoft/teams.apps.App.reply_1'
+  - name: plugin(TPlugin)
+    uid: '@microsoft/teams.apps.App.plugin'
     package: '@microsoft/teams.apps'
-    summary: |-
-      send an activity proactively to a conversation.
-
-      Sends to the exact conversation ID provided - threaded if
-      it contains `;messageid=`, flat otherwise.
+    summary: add a plugin
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function plugin(plugin: TPlugin): App<TPlugin>'
+      parameters:
+        - id: plugin
+          type: TPlugin
+          description: plugin to add
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.App" />&lt;TPlugin&gt;
+  - name: process(IActivityEvent)
+    uid: '@microsoft/teams.apps.App.process'
+    package: '@microsoft/teams.apps'
+    summary: activity handler called when an inbound activity is received
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function process(event: IActivityEvent): Promise<InvokeResponse<any>>'
+      parameters:
+        - id: event
+          type: <xref uid="@microsoft/teams.apps.IActivityEvent" />
+          description: the received activity event
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@microsoft/teams.api.InvokeResponse"
+          />&lt;any&gt;&gt;
+  - name: reply(string, ActivityLike)
+    uid: '@microsoft/teams.apps.App.reply_4'
+    package: '@microsoft/teams.apps'
+    summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
@@ -405,29 +403,60 @@ methods:
       parameters:
         - id: conversationId
           type: string
-          description: the conversation to send to
+          description: ''
         - id: activity
           type: <xref uid="@microsoft/teams.api.ActivityLike" />
-          description: the activity to send
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;any&gt;
+  - name: reply(string, DeprecatedInputActivity | ActivityLike)
+    uid: '@microsoft/teams.apps.App.reply_5'
+    package: '@microsoft/teams.apps'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function reply(conversationId: string, activity: DeprecatedInputActivity
+        | ActivityLike): Promise<any>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: activity
+          type: >-
+            <xref uid="@microsoft/teams.api.DeprecatedInputActivity" /> | <xref
+            uid="@microsoft/teams.api.ActivityLike" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;any&gt;
+  - name: reply(string, DeprecatedInputActivity)
+    uid: '@microsoft/teams.apps.App.reply_3'
+    package: '@microsoft/teams.apps'
+    summary: ''
+    remarks: ''
+    isDeprecated: true
+    customDeprecatedMessage: Use MessageActivityInput or TypingActivityInput instead.
+    syntax:
+      content: >-
+        function reply(conversationId: string, activity:
+        DeprecatedInputActivity): Promise<any>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: activity
+          type: <xref uid="@microsoft/teams.api.DeprecatedInputActivity" />
+          description: ''
       return:
         description: ''
         type: Promise&lt;any&gt;
   - name: reply(string, string, ActivityLike)
-    uid: '@microsoft/teams.apps.App.reply'
+    uid: '@microsoft/teams.apps.App.reply_1'
     package: '@microsoft/teams.apps'
-    summary: >-
-      send an activity proactively as a threaded reply.
-
-
-      Constructs a threaded conversation ID from the conversation ID
-
-      and message ID via
-      [toThreadedConversationId](xref:@microsoft/teams.apps.toThreadedConversationId),
-      then sends
-
-      to that thread. The service determines whether threading is
-
-      supported for the given conversation type.
+    summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
@@ -437,30 +466,69 @@ methods:
       parameters:
         - id: conversationId
           type: string
-          description: the conversation ID
+          description: ''
         - id: messageId
           type: string
-          description: the thread root message ID
+          description: ''
         - id: activity
           type: <xref uid="@microsoft/teams.api.ActivityLike" />
-          description: the activity to send
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;any&gt;
+  - name: reply(string, string, DeprecatedInputActivity | ActivityLike)
+    uid: '@microsoft/teams.apps.App.reply_2'
+    package: '@microsoft/teams.apps'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function reply(conversationId: string, messageId: string, activity:
+        DeprecatedInputActivity | ActivityLike): Promise<any>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: messageId
+          type: string
+          description: ''
+        - id: activity
+          type: >-
+            <xref uid="@microsoft/teams.api.DeprecatedInputActivity" /> | <xref
+            uid="@microsoft/teams.api.ActivityLike" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;any&gt;
+  - name: reply(string, string, DeprecatedInputActivity)
+    uid: '@microsoft/teams.apps.App.reply'
+    package: '@microsoft/teams.apps'
+    summary: ''
+    remarks: ''
+    isDeprecated: true
+    customDeprecatedMessage: Use MessageActivityInput or TypingActivityInput instead.
+    syntax:
+      content: >-
+        function reply(conversationId: string, messageId: string, activity:
+        DeprecatedInputActivity): Promise<any>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: messageId
+          type: string
+          description: ''
+        - id: activity
+          type: <xref uid="@microsoft/teams.api.DeprecatedInputActivity" />
+          description: ''
       return:
         description: ''
         type: Promise&lt;any&gt;
   - name: send(string, ActivityLike)
-    uid: '@microsoft/teams.apps.App.send'
+    uid: '@microsoft/teams.apps.App.send_1'
     package: '@microsoft/teams.apps'
-    summary: >-
-      send an activity proactively to a conversation.
-
-
-      Sends to the exact conversation ID provided. For channel threads,
-
-      the conversation ID must include `;messageid=` - use
-      [toThreadedConversationId](xref:@microsoft/teams.apps.toThreadedConversationId)
-
-      to construct it, or use [reply](xref:@microsoft/teams.apps.App.reply_1)
-      which handles this automatically.
+    summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
@@ -470,10 +538,53 @@ methods:
       parameters:
         - id: conversationId
           type: string
-          description: the conversation to send to
+          description: ''
         - id: activity
           type: <xref uid="@microsoft/teams.api.ActivityLike" />
-          description: the activity to send
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;
+  - name: send(string, DeprecatedInputActivity | ActivityLike)
+    uid: '@microsoft/teams.apps.App.send_2'
+    package: '@microsoft/teams.apps'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function send(conversationId: string, activity: DeprecatedInputActivity
+        | ActivityLike): Promise<SentActivity>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: activity
+          type: >-
+            <xref uid="@microsoft/teams.api.DeprecatedInputActivity" /> | <xref
+            uid="@microsoft/teams.api.ActivityLike" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;
+  - name: send(string, DeprecatedInputActivity)
+    uid: '@microsoft/teams.apps.App.send'
+    package: '@microsoft/teams.apps'
+    summary: ''
+    remarks: ''
+    isDeprecated: true
+    customDeprecatedMessage: Use MessageActivityInput or TypingActivityInput instead.
+    syntax:
+      content: >-
+        function send(conversationId: string, activity:
+        DeprecatedInputActivity): Promise<SentActivity>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: activity
+          type: <xref uid="@microsoft/teams.api.DeprecatedInputActivity" />
+          description: ''
       return:
         description: ''
         type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;
@@ -503,3 +614,52 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
+  - name: tab(string, string)
+    uid: '@microsoft/teams.apps.App.tab'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      add/update a static tab.
+
+      the tab will be hosted at
+
+      `http://localhost:{{PORT}}/tabs/{{name}}` or
+      `https://{{BOT_DOMAIN}}/tabs/{{name}}`
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function tab(name: string, path: string): App<TPlugin>'
+      parameters:
+        - id: name
+          type: string
+          description: A unique identifier for the entity which the tab displays.
+        - id: path
+          type: string
+          description: The path to the web `dist` folder.
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.App" />&lt;TPlugin&gt;
+  - name: >-
+      use(RouteHandler<IActivityContext<Activity,
+      PluginAdditionalContext<TPlugin>>, void | InvokeResponse<any>>)
+    uid: '@microsoft/teams.apps.App.use'
+    package: '@microsoft/teams.apps'
+    summary: register a middleware
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function use(cb: RouteHandler<IActivityContext<Activity,
+        PluginAdditionalContext<TPlugin>>, void | InvokeResponse<any>>):
+        App<TPlugin>
+      parameters:
+        - id: cb
+          type: >-
+            <xref uid="@microsoft/teams.apps.RouteHandler" />&lt;<xref
+            uid="@microsoft/teams.apps.IActivityContext" />&lt;<xref
+            uid="@microsoft/teams.api.Activity" />,
+            PluginAdditionalContext&lt;TPlugin&gt;&gt;, void | <xref
+            uid="@microsoft/teams.api.InvokeResponse" />&lt;any&gt;&gt;
+          description: callback to invoke
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.App" />&lt;TPlugin&gt;
