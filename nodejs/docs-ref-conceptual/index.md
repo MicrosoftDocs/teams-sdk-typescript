@@ -1,37 +1,26 @@
 ---
-title: Microsoft Teams SDK (Teams AI Library) for TypeScript
-description: TypeScript reference documentation for Microsoft Teams SDK (Teams AI Library).
-ms.date: 11/17/2025
+title: Microsoft Teams SDK for TypeScript Reference
+description: Reference documentation for Microsoft Teams SDK for TypeScript.
+ms.date: 07/17/2026
 ms.topic: reference
-keywords: sdk msteams teams ai javascript typescript library reference latest
 ---
 
-# Microsoft Teams SDK (Teams AI Library) for TypeScript
+# Teams SDK for TypeScript 2.0.14
 
-The Microsoft Teams SDK (formerly known as *Teams AI Library*) for TypeScript provides a Teams-centric interface for integrating GPT-based language models and user intent engines. It simplifies the development process by reducing the need to write and maintain complex conversational bot logic. You can leverage prebuilt, reusable code snippets that allow you to quickly build intelligent apps. This capabilities-driven approach allows you to focus on business logic rather than learning the intricacies of Microsoft Teams conversational frameworks.
+Released 7/16/2026 ([release notes](https://github.com/microsoft/teams.ts/releases/tag/v2.0.14))
 
-## Finding the library
+Report issues and explore the source on [GitHub](https://github.com/microsoft/teams.ts).
 
-For more about the TypeScript version of Teams SDK, refer to the source repo at [Teams SDK: TypeScript](https://github.com/microsoft/teams.ts).
+## npm packages
 
-For more about the .NET version of Teams SDK, refer to the source repo at [Teams SDK: DotNet](https://github.com/microsoft/teams.net).
-
-For more about the Python version of Teams SDK, refer to the source repo at[Teams SDK: Python](https://github.com/microsoft/teams.py).
-
-### Library packages
-
-The TypeScript version of the library is provided through a suite of packages available via [npm](https://docs.npmjs.com/about-npm). Those packages are:
-
-| Package  | Description  |
-|---------|---------|
-| [@microsoft/teams.apps](https://www.npmjs.com/package/@microsoft/teams.apps)       | Tools for building server side apps for Microsoft Teams. |
-| [@microsoft/teams.api](https://www.npmjs.com/package/@microsoft/teams.api)        | Core types and client implementation for the Teams Platform API. Used for fetching data, authentication, and sending activities.        |
-| [@microsoft/teams.ai](https://www.npmjs.com/package/@microsoft/teams.ai)         | Tools to facilitate integrating apps with LLM's and enabling multi-agent scenarios.        |
-| [@microsoft/teams.botbuilder](https://www.npmjs.com/package/@microsoft/teams.botbuilder) | A plugin implementation, allowing developers to integrate an existing `botbuilder Adapter` into a project using Teams. This plugin allows you to use `botbuilder` as the `Sender` and `Receiver` of activities, while still being able to leverage Teams's new typings and routing system.        |
-| [@microsoft/teams.cards](https://www.npmjs.com/package/@microsoft/teams.cards)      | Adaptive Cards typings and builders for type safe and intuitive card design.        |
-| [@microsoft/teams.cli](https://www.npmjs.com/package/@microsoft/teams.cli)        | A CLI for building apps using `@microsoft/teams.ts`.        |
-| [@microsoft/teams.client](https://www.npmjs.com/package/@microsoft/teams.client)     | A client used to create app/bot surfaces such as tabs using `@microsoft/teams.ts`.        |
-| [@microsoft/teams.common](https://www.npmjs.com/package/@microsoft/teams.common)    | Common implementations used by all the packages, for example `logging`.        |
-| [@microsoft/teams.dev](https://www.npmjs.com/package/@microsoft/teams.dev)        | Developer tools to streamline the development process.        |
-| [@microsoft/teams.graph](https://www.npmjs.com/package/@microsoft/teams.graph)      | MSGraph api client.  |
-| [@microsoft/teams.openai](https://www.npmjs.com/package/@microsoft/teams.openai)     | AI model implementations for **OpenAI**, allowing you to integrate your models with the core `@microsoft/teams.ai` package.        |
+| Package                                                                                                               | Description                                                                                                                                                                                                                                                                                |
+|-----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [@microsoft/teams.api](https://www.npmjs.com/package/@microsoft/teams.api/v/2.0.14)                                   | Core types and client implementation for the Teams Platform API. Used for fetching data, authentication, and sending activities.                                                                                                                                                           |
+| [@microsoft/teams.apps](https://www.npmjs.com/package/@microsoft/teams.apps/v/2.0.14)                                 | Tools for building server side apps for Microsoft Teams.                                                                                                                                                                                                                                   |
+| [@microsoft/teams.botbuilder](https://www.npmjs.com/package/@microsoft/teams.botbuilder/v/2.0.14)                     | A plugin implementation, allowing developers to integrate an existing `botbuilder Adapter` into a project using Teams. This plugin allows you to use `botbuilder` as the `Sender` and `Receiver` of activities, while still being able to leverage Teams's new typings and routing system. |
+| [@microsoft/teams.cards](https://www.npmjs.com/package/@microsoft/teams.cards/v/2.0.14)                               | Adaptive Cards typings and builders for type safe and intuitive card design.                                                                                                                                                                                                             |
+| [@microsoft/teams.client](https://www.npmjs.com/package/@microsoft/teams.client/v/2.0.14)                             | A client used to create app/bot surfaces such as tabs using `@microsoft/teams.ts`.                                                                                                                                                                                                         |
+| [@microsoft/teams.common](https://www.npmjs.com/package/@microsoft/teams.common/v/2.0.14)                             | Common implementations used by all the packages, for example `logging`.                                                                                                                                                                                                                     |
+| [@microsoft/teams.graph](https://www.npmjs.com/package/@microsoft/teams.graph/v/2.0.14)                               | Microsoft Graph API client.                                                                                                                                                                                                                                                                 |
+| [@microsoft/teams.graph-endpoints](https://www.npmjs.com/package/@microsoft/teams.graph-endpoints/v/2.0.14)           | A collection of strongly typed request configuration builders for Microsoft Graph endpoints, designed to be used together with @microsoft/teams.graph.                                                                                                                                     |
+| [@microsoft/teams.graph-endpoints-beta](https://www.npmjs.com/package/@microsoft/teams.graph-endpoints-beta/v/2.0.14) | A collection of strongly typed request configuration builders for Microsoft Graph preview endpoints, designed to be used together with @microsoft/teams.graph.                                                                                                                             |
