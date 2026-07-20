@@ -63,34 +63,45 @@ methods:
     package: '@microsoft/teams.api'
     summary: ''
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: |-
+      Use the flattened activity methods on `ConversationClient`
+      instead (e.g. `conversations.createActivity(conversationId, ...)`). This
+      grouped accessor will be removed in a future release.
     syntax:
       content: >-
-        function activities(conversationId: string): { create: (params:
-        ActivityParams) => Promise<Resource>, createTargeted: (params:
-        ActivityParams) => Promise<Resource>, delete: (id: string) =>
-        Promise<void>, deleteTargeted: (id: string) => Promise<void>, members:
-        (activityId: string) => Promise<TeamsChannelAccount<any>[]>, reply: (id:
-        string, params: ActivityParams) => Promise<Resource>, update: (id:
-        string, params: ActivityParams) => Promise<Resource>, updateTargeted:
-        (id: string, params: ActivityParams) => Promise<Resource> }
+        function activities(conversationId: string):
+        IConversationActivityOperations
       parameters:
         - id: conversationId
           type: string
           description: ''
       return:
         description: ''
-        type: >-
-          { create: (params: ActivityParams) =&gt; Promise&lt;Resource&gt;,
-          createTargeted: (params: ActivityParams) =&gt;
-          Promise&lt;Resource&gt;, delete: (id: string) =&gt;
-          Promise&lt;void&gt;, deleteTargeted: (id: string) =&gt;
-          Promise&lt;void&gt;, members: (activityId: string) =&gt;
-          Promise&lt;TeamsChannelAccount&lt;any&gt;[]&gt;, reply: (id: string,
-          params: ActivityParams) =&gt; Promise&lt;Resource&gt;, update: (id:
-          string, params: ActivityParams) =&gt; Promise&lt;Resource&gt;,
-          updateTargeted: (id: string, params: ActivityParams) =&gt;
-          Promise&lt;Resource&gt; }
+        type: <xref uid="@microsoft/teams.api.IConversationActivityOperations" />
+  - name: addReaction(string, string, MessageReactionType)
+    uid: '@microsoft/teams.api.ConversationClient.addReaction'
+    package: '@microsoft/teams.api'
+    summary: Add a reaction to an activity in a conversation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function addReaction(conversationId: string, activityId: string,
+        reactionType: MessageReactionType): Promise<void>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: activityId
+          type: string
+          description: ''
+        - id: reactionType
+          type: <xref uid="@microsoft/teams.api.MessageReactionType" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
   - name: create(CreateConversationParams)
     uid: '@microsoft/teams.api.ConversationClient.create'
     package: '@microsoft/teams.api'
@@ -110,6 +121,151 @@ methods:
         type: >-
           Promise&lt;<xref uid="@microsoft/teams.api.ConversationResource"
           />&gt;
+  - name: createActivity(string, ActivityParams)
+    uid: '@microsoft/teams.api.ConversationClient.createActivity_1'
+    package: '@microsoft/teams.api'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createActivity(conversationId: string, params: ActivityParams):
+        Promise<Resource>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: params
+          type: <xref uid="@microsoft/teams.api.ActivityParams" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.api.Resource" />&gt;
+  - name: createActivity(string, DeprecatedInputActivity)
+    uid: '@microsoft/teams.api.ConversationClient.createActivity'
+    package: '@microsoft/teams.api'
+    summary: ''
+    remarks: ''
+    isDeprecated: true
+    customDeprecatedMessage: Use MessageActivityInput or TypingActivityInput instead.
+    syntax:
+      content: >-
+        function createActivity(conversationId: string, params:
+        DeprecatedInputActivity): Promise<Resource>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: params
+          type: <xref uid="@microsoft/teams.api.DeprecatedInputActivity" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.api.Resource" />&gt;
+  - name: createTargetedActivity(string, ActivityParams)
+    uid: '@microsoft/teams.api.ConversationClient.createTargetedActivity_1'
+    package: '@microsoft/teams.api'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createTargetedActivity(conversationId: string, params:
+        ActivityParams): Promise<Resource>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: params
+          type: <xref uid="@microsoft/teams.api.ActivityParams" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.api.Resource" />&gt;
+  - name: createTargetedActivity(string, DeprecatedInputActivity)
+    uid: '@microsoft/teams.api.ConversationClient.createTargetedActivity'
+    package: '@microsoft/teams.api'
+    summary: ''
+    remarks: ''
+    isDeprecated: true
+    customDeprecatedMessage: Use MessageActivityInput or TypingActivityInput instead.
+    syntax:
+      content: >-
+        function createTargetedActivity(conversationId: string, params:
+        DeprecatedInputActivity): Promise<Resource>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: params
+          type: <xref uid="@microsoft/teams.api.DeprecatedInputActivity" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.api.Resource" />&gt;
+  - name: deleteActivity(string, string)
+    uid: '@microsoft/teams.api.ConversationClient.deleteActivity'
+    package: '@microsoft/teams.api'
+    summary: Delete an activity in a conversation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteActivity(conversationId: string, id: string):
+        Promise<void>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: id
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: deleteReaction(string, string, MessageReactionType)
+    uid: '@microsoft/teams.api.ConversationClient.deleteReaction'
+    package: '@microsoft/teams.api'
+    summary: Delete a reaction from an activity in a conversation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteReaction(conversationId: string, activityId: string,
+        reactionType: MessageReactionType): Promise<void>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: activityId
+          type: string
+          description: ''
+        - id: reactionType
+          type: <xref uid="@microsoft/teams.api.MessageReactionType" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: deleteTargetedActivity(string, string)
+    uid: '@microsoft/teams.api.ConversationClient.deleteTargetedActivity'
+    package: '@microsoft/teams.api'
+    summary: Delete a targeted activity in a conversation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteTargetedActivity(conversationId: string, id: string):
+        Promise<void>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: id
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
   - name: get(GetConversationsParams)
     uid: '@microsoft/teams.api.ConversationClient.get'
     package: '@microsoft/teams.api'
@@ -130,12 +286,102 @@ methods:
         type: >-
           Promise&lt;<xref uid="@microsoft/teams.api.GetConversationsResponse"
           />&gt;
+  - name: getActivityMembers(string, string)
+    uid: '@microsoft/teams.api.ConversationClient.getActivityMembers'
+    package: '@microsoft/teams.api'
+    summary: Get the members of an activity in a conversation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getActivityMembers(conversationId: string, id: string):
+        Promise<TeamsChannelAccount<any>[]>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: id
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@microsoft/teams.api.TeamsChannelAccount"
+          />&lt;any&gt;[]&gt;
+  - name: getMemberById(string, string)
+    uid: '@microsoft/teams.api.ConversationClient.getMemberById'
+    package: '@microsoft/teams.api'
+    summary: Get a member of a conversation by id.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getMemberById(conversationId: string, id: string):
+        Promise<TeamsChannelAccount<any>>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: id
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@microsoft/teams.api.TeamsChannelAccount"
+          />&lt;any&gt;&gt;
+  - name: getMembers(string)
+    uid: '@microsoft/teams.api.ConversationClient.getMembers'
+    package: '@microsoft/teams.api'
+    summary: Get the members of a conversation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getMembers(conversationId: string):
+        Promise<TeamsChannelAccount<any>[]>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@microsoft/teams.api.TeamsChannelAccount"
+          />&lt;any&gt;[]&gt;
+  - name: getPagedMembers(string, number, string)
+    uid: '@microsoft/teams.api.ConversationClient.getPagedMembers'
+    package: '@microsoft/teams.api'
+    summary: Get paged members of a conversation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getPagedMembers(conversationId: string, pageSize?: number,
+        continuationToken?: string): Promise<PagedMembersResult>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: pageSize
+          type: number
+          description: ''
+        - id: continuationToken
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.api.PagedMembersResult" />&gt;
   - name: members(string)
     uid: '@microsoft/teams.api.ConversationClient.members'
     package: '@microsoft/teams.api'
     summary: ''
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: |-
+      Use the flattened member methods on `ConversationClient`
+      instead (e.g. `conversations.getMembers(conversationId)`). This grouped
+      accessor will be removed in a future release.
     syntax:
       content: >-
         function members(conversationId: string): { delete: (id: string) =>
@@ -154,3 +400,144 @@ methods:
           =&gt; Promise&lt;TeamsChannelAccount&lt;any&gt;&gt;, getPaged:
           (pageSize?: number, continuationToken?: string) =&gt;
           Promise&lt;PagedMembersResult&gt; }
+  - name: replyToActivity(string, string, ActivityParams)
+    uid: '@microsoft/teams.api.ConversationClient.replyToActivity_1'
+    package: '@microsoft/teams.api'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function replyToActivity(conversationId: string, id: string, params:
+        ActivityParams): Promise<Resource>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: id
+          type: string
+          description: ''
+        - id: params
+          type: <xref uid="@microsoft/teams.api.ActivityParams" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.api.Resource" />&gt;
+  - name: replyToActivity(string, string, DeprecatedInputActivity)
+    uid: '@microsoft/teams.api.ConversationClient.replyToActivity'
+    package: '@microsoft/teams.api'
+    summary: ''
+    remarks: ''
+    isDeprecated: true
+    customDeprecatedMessage: Use MessageActivityInput or TypingActivityInput instead.
+    syntax:
+      content: >-
+        function replyToActivity(conversationId: string, id: string, params:
+        DeprecatedInputActivity): Promise<Resource>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: id
+          type: string
+          description: ''
+        - id: params
+          type: <xref uid="@microsoft/teams.api.DeprecatedInputActivity" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.api.Resource" />&gt;
+  - name: updateActivity(string, string, ActivityParams)
+    uid: '@microsoft/teams.api.ConversationClient.updateActivity_1'
+    package: '@microsoft/teams.api'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function updateActivity(conversationId: string, id: string, params:
+        ActivityParams): Promise<Resource>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: id
+          type: string
+          description: ''
+        - id: params
+          type: <xref uid="@microsoft/teams.api.ActivityParams" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.api.Resource" />&gt;
+  - name: updateActivity(string, string, DeprecatedInputActivity)
+    uid: '@microsoft/teams.api.ConversationClient.updateActivity'
+    package: '@microsoft/teams.api'
+    summary: ''
+    remarks: ''
+    isDeprecated: true
+    customDeprecatedMessage: Use MessageActivityInput or TypingActivityInput instead.
+    syntax:
+      content: >-
+        function updateActivity(conversationId: string, id: string, params:
+        DeprecatedInputActivity): Promise<Resource>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: id
+          type: string
+          description: ''
+        - id: params
+          type: <xref uid="@microsoft/teams.api.DeprecatedInputActivity" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.api.Resource" />&gt;
+  - name: updateTargetedActivity(string, string, ActivityParams)
+    uid: '@microsoft/teams.api.ConversationClient.updateTargetedActivity_1'
+    package: '@microsoft/teams.api'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function updateTargetedActivity(conversationId: string, id: string,
+        params: ActivityParams): Promise<Resource>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: id
+          type: string
+          description: ''
+        - id: params
+          type: <xref uid="@microsoft/teams.api.ActivityParams" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.api.Resource" />&gt;
+  - name: updateTargetedActivity(string, string, DeprecatedInputActivity)
+    uid: '@microsoft/teams.api.ConversationClient.updateTargetedActivity'
+    package: '@microsoft/teams.api'
+    summary: ''
+    remarks: ''
+    isDeprecated: true
+    customDeprecatedMessage: Use MessageActivityInput or TypingActivityInput instead.
+    syntax:
+      content: >-
+        function updateTargetedActivity(conversationId: string, id: string,
+        params: DeprecatedInputActivity): Promise<Resource>
+      parameters:
+        - id: conversationId
+          type: string
+          description: ''
+        - id: id
+          type: string
+          description: ''
+        - id: params
+          type: <xref uid="@microsoft/teams.api.DeprecatedInputActivity" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.api.Resource" />&gt;
