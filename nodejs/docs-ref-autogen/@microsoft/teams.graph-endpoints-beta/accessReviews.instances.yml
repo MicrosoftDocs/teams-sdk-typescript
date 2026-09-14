@@ -16,18 +16,65 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        applyDecisions: { create: (params?: IEndpoints["POST
+        applyDecisions: { /** * `POST
+        /accessReviews/{accessReview-id}/instances/{accessReview-id1}/applyDecisions`
+        * * In the Microsoft Entra access reviews feature, apply the decisions
+        of a completed accessReview. The target object can be either a one-time
+        access review, or an instance of a recurring access review. After an
+        access review is finished, either because it reached the end date or an
+        administrator stopped it manually, and auto-apply wasn&#x27;t configured
+        for the review, you can call Apply to apply the changes. Until apply
+        occurs, the decisions to remove access rights do not appear on the
+        source resource, the users for instance retain their group memberships.
+        By calling apply, the outcome of the review is implemented by updating
+        the group or application. If a user&#x27;s access was denied in the
+        review, when an administrator calls this API, Microsoft Entra ID removes
+        their membership or application assignment. After an access review is
+        finished, and auto-apply was configured, then the status of the review
+        will change from Completed through intermediate states and finally will
+        change to state Applied. You should expect to see denied users, if any,
+        being removed from the resource group membership or app assignment in a
+        few minutes. A configured auto applying review, or selecting Apply
+        doesn&#x27;t have an effect on a group that originates in an on-premises
+        directory or a dynamic group. If you want to change a group that
+        originates on-premises, download the results and apply those changes to
+        the representation of the group in that directory. */ create: (params?:
+        IEndpoints["POST
         /accessReviews/{accessReview-id}/instances/{accessReview-id1}/applyDecisions"]["parameters"])
         => EndpointRequest<IEndpoints["POST
-        /accessReviews/{accessReview-id}/instances/{accessReview-id1}/applyDecisions"]["response"]>
+        /accessReviews/{accessReview-id}/instances/{accessReview-id1}/applyDecisions"]["response"]>;
         }
       return:
         description: ''
         type: >-
-          { create: (params?: IEndpoints["POST
+          { /** * `POST
+          /accessReviews/{accessReview-id}/instances/{accessReview-id1}/applyDecisions`
+          * * In the Microsoft Entra access reviews feature, apply the decisions
+          of a completed accessReview. The target object can be either a
+          one-time access review, or an instance of a recurring access review.
+          After an access review is finished, either because it reached the end
+          date or an administrator stopped it manually, and auto-apply
+          wasn&#x27;t configured for the review, you can call Apply to apply the
+          changes. Until apply occurs, the decisions to remove access rights do
+          not appear on the source resource, the users for instance retain their
+          group memberships. By calling apply, the outcome of the review is
+          implemented by updating the group or application. If a user&#x27;s
+          access was denied in the review, when an administrator calls this API,
+          Microsoft Entra ID removes their membership or application assignment.
+          After an access review is finished, and auto-apply was configured,
+          then the status of the review will change from Completed through
+          intermediate states and finally will change to state Applied. You
+          should expect to see denied users, if any, being removed from the
+          resource group membership or app assignment in a few minutes. A
+          configured auto applying review, or selecting Apply doesn&#x27;t have
+          an effect on a group that originates in an on-premises directory or a
+          dynamic group. If you want to change a group that originates
+          on-premises, download the results and apply those changes to the
+          representation of the group in that directory. */ create: (params?:
+          IEndpoints["POST
           /accessReviews/{accessReview-id}/instances/{accessReview-id1}/applyDecisions"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["POST
-          /accessReviews/{accessReview-id}/instances/{accessReview-id1}/applyDecisions"]["response"]&gt;
+          /accessReviews/{accessReview-id}/instances/{accessReview-id1}/applyDecisions"]["response"]&gt;;
           }
   - name: decisions
     uid: '@microsoft/teams.graph-endpoints-beta.accessReviews.instances.decisions'
@@ -278,8 +325,63 @@ variables:
           }
 functions:
   - name: >-
-      create(Operation<"/accessReviews/{accessReview-id}/instances", "post">,
-      any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, businessFlowTemplateId?: string, createdBy?: (Omit<{
+      @odata.type: string, displayName?: string | null, id?: string | null },
+      "@odata.type"> & Omit<{ @odata.type: string, ipAddress?: string | null,
+      userPrincipalName?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.userIdentity" }) | Record<string, never> | null,
+      decisions?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, accessRecommendation?: string | null,
+      accessReviewId?: string | null, appliedBy?: (Omit<{ @odata.type: string,
+      displayName?: function, id?: function }, "@odata.type"> & Omit<{
+      @odata.type: string, ipAddress?: function, userPrincipalName?: function },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.userIdentity" }) |
+      Record<string, never> | null, appliedDateTime?: string | null,
+      applyResult?: string | null, justification?: string | null, reviewedBy?:
+      (Omit<{ @odata.type: string, displayName?: function, id?: function },
+      "@odata.type"> & Omit<{ @odata.type: string, ipAddress?: function,
+      userPrincipalName?: function }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.userIdentity" }) | Record<string, never> | null,
+      reviewedDateTime?: string | null, reviewResult?: string | null } & {
+      @odata.type: "#microsoft.graph.accessReviewDecision" })[], description?:
+      string | null, displayName?: string, endDateTime?: string, instances?:
+      Omit<{ id?: string | undefined; '@odata.type': string; }, "@odata.type"> &
+      { businessFlowTemplateId?: string | undefined; createdBy?: (Omit<{
+      displayName?: string | null | undefined; id?: string | ... 1 more ... |
+      undefined; '@odata.type': string; }, "@odata.type"> & Omit<...> & { ...;
+      }) | Record<...> | null | unde...[], myDecisions?: (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string,
+      accessRecommendation?: string | null, accessReviewId?: string | null,
+      appliedBy?: (Omit<{ @odata.type: string, displayName?: function, id?:
+      function }, "@odata.type"> & Omit<{ @odata.type: string, ipAddress?:
+      function, userPrincipalName?: function }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.userIdentity" }) | Record<string, never> | null,
+      appliedDateTime?: string | null, applyResult?: string | null,
+      justification?: string | null, reviewedBy?: (Omit<{ @odata.type: string,
+      displayName?: function, id?: function }, "@odata.type"> & Omit<{
+      @odata.type: string, ipAddress?: function, userPrincipalName?: function },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.userIdentity" }) |
+      Record<string, never> | null, reviewedDateTime?: string | null,
+      reviewResult?: string | null } & { @odata.type:
+      "#microsoft.graph.accessReviewDecision" })[], reviewedEntity?: {
+      @odata.type: string, displayName?: string | null, id?: string | null } |
+      Record<string, never> | null, reviewers?: (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string, createdDateTime?:
+      string | null, displayName?: string | null, userPrincipalName?: string |
+      null } & { @odata.type: "#microsoft.graph.accessReviewReviewer" })[],
+      reviewerType?: string | null, settings?: Record<string, never> | {
+      @odata.type: string, accessRecommendationsEnabled?: boolean,
+      activityDurationInDays?: number, autoApplyReviewResultsEnabled?: boolean,
+      autoReviewEnabled?: boolean, autoReviewSettings?: Record<string, never> |
+      { @odata.type: string, notReviewedResult?: string | null } | null,
+      justificationRequiredOnApproval?: boolean, mailNotificationsEnabled?:
+      boolean, recurrenceSettings?: Record<string, never> | { @odata.type:
+      string, durationInDays?: number, recurrenceCount?: number,
+      recurrenceEndType?: string | null, recurrenceType?: string | null } |
+      null, remindersEnabled?: boolean } | null, startDateTime?: string,
+      status?: string | null } & { @odata.type: "#microsoft.graph.accessReview"
+      }, { accessReview-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.accessReviews.instances.create'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`POST /accessReviews/{accessReview-id}/instances`'
@@ -287,25 +389,289 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/accessReviews/{accessReview-id}/instances", "post">,
-        params?: any): EndpointRequest<IEndpoints["POST
-        /accessReviews/{accessReview-id}/instances"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, businessFlowTemplateId?: string,
+        createdBy?: (Omit<{ @odata.type: string, displayName?: string | null,
+        id?: string | null }, "@odata.type"> & Omit<{ @odata.type: string,
+        ipAddress?: string | null, userPrincipalName?: string | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.userIdentity" }) |
+        Record<string, never> | null, decisions?: (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string,
+        accessRecommendation?: string | null, accessReviewId?: string | null,
+        appliedBy?: (Omit<{ @odata.type: string, displayName?: function, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string, ipAddress?:
+        function, userPrincipalName?: function }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.userIdentity" }) | Record<string, never>
+        | null, appliedDateTime?: string | null, applyResult?: string | null,
+        justification?: string | null, reviewedBy?: (Omit<{ @odata.type: string,
+        displayName?: function, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, ipAddress?: function, userPrincipalName?: function
+        }, "@odata.type"> & { @odata.type: "#microsoft.graph.userIdentity" }) |
+        Record<string, never> | null, reviewedDateTime?: string | null,
+        reviewResult?: string | null } & { @odata.type:
+        "#microsoft.graph.accessReviewDecision" })[], description?: string |
+        null, displayName?: string, endDateTime?: string, instances?: Omit<{
+        id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        businessFlowTemplateId?: string | undefined; createdBy?: (Omit<{
+        displayName?: string | null | undefined; id?: string | ... 1 more ... |
+        undefined; '@odata.type': string; }, "@odata.type"> & Omit<...> & { ...;
+        }) | Record<...> | null | unde...[], myDecisions?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        accessRecommendation?: string | null, accessReviewId?: string | null,
+        appliedBy?: (Omit<{ @odata.type: string, displayName?: function, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string, ipAddress?:
+        function, userPrincipalName?: function }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.userIdentity" }) | Record<string, never>
+        | null, appliedDateTime?: string | null, applyResult?: string | null,
+        justification?: string | null, reviewedBy?: (Omit<{ @odata.type: string,
+        displayName?: function, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, ipAddress?: function, userPrincipalName?: function
+        }, "@odata.type"> & { @odata.type: "#microsoft.graph.userIdentity" }) |
+        Record<string, never> | null, reviewedDateTime?: string | null,
+        reviewResult?: string | null } & { @odata.type:
+        "#microsoft.graph.accessReviewDecision" })[], reviewedEntity?: {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        Record<string, never> | null, reviewers?: (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, createdDateTime?:
+        string | null, displayName?: string | null, userPrincipalName?: string |
+        null } & { @odata.type: "#microsoft.graph.accessReviewReviewer" })[],
+        reviewerType?: string | null, settings?: Record<string, never> | {
+        @odata.type: string, accessRecommendationsEnabled?: boolean,
+        activityDurationInDays?: number, autoApplyReviewResultsEnabled?:
+        boolean, autoReviewEnabled?: boolean, autoReviewSettings?:
+        Record<string, never> | { @odata.type: string, notReviewedResult?:
+        string | null } | null, justificationRequiredOnApproval?: boolean,
+        mailNotificationsEnabled?: boolean, recurrenceSettings?: Record<string,
+        never> | { @odata.type: string, durationInDays?: number,
+        recurrenceCount?: number, recurrenceEndType?: string | null,
+        recurrenceType?: string | null } | null, remindersEnabled?: boolean } |
+        null, startDateTime?: string, status?: string | null } & { @odata.type:
+        "#microsoft.graph.accessReview" }, params?: { accessReview-id: string
+        }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, businessFlowTemplateId?: string,
+        createdBy?: (Omit<{ @odata.type: string, displayName?: string | null,
+        id?: string | null }, "@odata.type"> & Omit<{ @odata.type: string,
+        ipAddress?: string | null, userPrincipalName?: string | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.userIdentity" }) |
+        Record<string, never> | null, decisions?: (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string,
+        accessRecommendation?: string | null, accessReviewId?: string | null,
+        appliedBy?: (Omit<{ @odata.type: ..., displayName?: ..., id?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., ipAddress?: ...,
+        userPrincipalName?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.userIdentity" }) | Record<string, never> | null,
+        appliedDateTime?: string | null, applyResult?: string | null,
+        justification?: string | null, reviewedBy?: (Omit<{ @odata.type: ...,
+        displayName?: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        ipAddress?: ..., userPrincipalName?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.userIdentity" }) | Record<string, never>
+        | null, reviewedDateTime?: string | null, reviewResult?: string | null }
+        & { @odata.type: "#microsoft.graph.accessReviewDecision" })[],
+        description?: string | null, displayName?: string, endDateTime?: string,
+        instances?: Omit<{ id?: string | undefined; '@odata.type': string; },
+        "@odata.type"> & { businessFlowTemplateId?: string | undefined;
+        createdBy?: (Omit<{ displayName?: string | null | undefined; id?: string
+        | ... 1 more ... | undefined; '@odata.type': string; }, "@odata.type"> &
+        Omit<...> & { ...; }) | Record<...> | null | unde...[], myDecisions?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, accessRecommendation?: string | null,
+        accessReviewId?: string | null, appliedBy?: (Omit<{ @odata.type: ...,
+        displayName?: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        ipAddress?: ..., userPrincipalName?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.userIdentity" }) | Record<string, never>
+        | null, appliedDateTime?: string | null, applyResult?: string | null,
+        justification?: string | null, reviewedBy?: (Omit<{ @odata.type: ...,
+        displayName?: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        ipAddress?: ..., userPrincipalName?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.userIdentity" }) | Record<string, never>
+        | null, reviewedDateTime?: string | null, reviewResult?: string | null }
+        & { @odata.type: "#microsoft.graph.accessReviewDecision" })[],
+        reviewedEntity?: { @odata.type: string, displayName?: string | null,
+        id?: string | null } | Record<string, never> | null, reviewers?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, createdDateTime?: string | null, displayName?: string | null,
+        userPrincipalName?: string | null } & { @odata.type:
+        "#microsoft.graph.accessReviewReviewer" })[], reviewerType?: string |
+        null, settings?: Record<string, never> | { @odata.type: string,
+        accessRecommendationsEnabled?: boolean, activityDurationInDays?: number,
+        autoApplyReviewResultsEnabled?: boolean, autoReviewEnabled?: boolean,
+        autoReviewSettings?: Record<string, never> | { @odata.type: string,
+        notReviewedResult?: string | null } | null,
+        justificationRequiredOnApproval?: boolean, mailNotificationsEnabled?:
+        boolean, recurrenceSettings?: Record<string, never> | { @odata.type:
+        string, durationInDays?: number, recurrenceCount?: number,
+        recurrenceEndType?: string | null, recurrenceType?: string | null } |
+        null, remindersEnabled?: boolean } | null, startDateTime?: string,
+        status?: string | null } & { @odata.type:
+        "#microsoft.graph.accessReview" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/accessReviews/{accessReview-id}/instances",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            businessFlowTemplateId?: string, createdBy?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, displayName?: string | null, id?:
+            string | null }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, ipAddress?: string | null,
+            userPrincipalName?: string | null }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+            never&gt; | null, decisions?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, accessRecommendation?: string | null,
+            accessReviewId?: string | null, appliedBy?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, ipAddress?: function,
+            userPrincipalName?: function }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+            never&gt; | null, appliedDateTime?: string | null, applyResult?:
+            string | null, justification?: string | null, reviewedBy?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, displayName?:
+            function, id?: function }, "<xref uid="@odata.type" />"&gt; &
+            Omit&lt;{ <xref uid="@odata.type" />: string, ipAddress?: function,
+            userPrincipalName?: function }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+            never&gt; | null, reviewedDateTime?: string | null, reviewResult?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.accessReviewDecision" />" })[], description?:
+            string | null, displayName?: string, endDateTime?: string,
+            instances?: Omit&lt;{ id?: string | undefined; '<xref
+            uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; &
+            { businessFlowTemplateId?: string | undefined; createdBy?:
+            (Omit&lt;{ displayName?: string | null | undefined; id?: string |
+            ... 1 more ... | undefined; '<xref uid="@odata.type" />': string; },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;...&gt; & { ...; }) |
+            Record&lt;...&gt; | null | <xref uid="unde..." />[], myDecisions?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            accessRecommendation?: string | null, accessReviewId?: string |
+            null, appliedBy?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            displayName?: function, id?: function }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string, ipAddress?:
+            function, userPrincipalName?: function }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+            never&gt; | null, appliedDateTime?: string | null, applyResult?:
+            string | null, justification?: string | null, reviewedBy?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, displayName?:
+            function, id?: function }, "<xref uid="@odata.type" />"&gt; &
+            Omit&lt;{ <xref uid="@odata.type" />: string, ipAddress?: function,
+            userPrincipalName?: function }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+            never&gt; | null, reviewedDateTime?: string | null, reviewResult?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.accessReviewDecision" />" })[],
+            reviewedEntity?: { <xref uid="@odata.type" />: string, displayName?:
+            string | null, id?: string | null } | Record&lt;string, never&gt; |
+            null, reviewers?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, createdDateTime?: string | null,
+            displayName?: string | null, userPrincipalName?: string | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.accessReviewReviewer" />" })[], reviewerType?:
+            string | null, settings?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, accessRecommendationsEnabled?:
+            boolean, activityDurationInDays?: number,
+            autoApplyReviewResultsEnabled?: boolean, autoReviewEnabled?:
+            boolean, autoReviewSettings?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, notReviewedResult?: string | null } |
+            null, justificationRequiredOnApproval?: boolean,
+            mailNotificationsEnabled?: boolean, recurrenceSettings?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            durationInDays?: number, recurrenceCount?: number,
+            recurrenceEndType?: string | null, recurrenceType?: string | null }
+            | null, remindersEnabled?: boolean } | null, startDateTime?: string,
+            status?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.accessReview" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ accessReview-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /accessReviews/{accessReview-id}/instances"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, businessFlowTemplateId?: string, createdBy?: (Omit&lt;{
+          <xref uid="@odata.type" />: string, displayName?: string | null, id?:
+          string | null }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, ipAddress?: string | null,
+          userPrincipalName?: string | null }, "<xref uid="@odata.type" />"&gt;
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+          never&gt; | null, decisions?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, accessRecommendation?: string | null,
+          accessReviewId?: string | null, appliedBy?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ...,
+          ipAddress?: ..., userPrincipalName?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+          never&gt; | null, appliedDateTime?: string | null, applyResult?:
+          string | null, justification?: string | null, reviewedBy?: (Omit&lt;{
+          <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ...,
+          ipAddress?: ..., userPrincipalName?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+          never&gt; | null, reviewedDateTime?: string | null, reviewResult?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessReviewDecision" />" })[], description?:
+          string | null, displayName?: string, endDateTime?: string, instances?:
+          Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type" />':
+          string; }, "<xref uid="@odata.type" />"&gt; & {
+          businessFlowTemplateId?: string | undefined; createdBy?: (Omit&lt;{
+          displayName?: string | null | undefined; id?: string | ... 1 more ...
+          | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;...&gt; & { ...; }) |
+          Record&lt;...&gt; | null | <xref uid="unde..." />[], myDecisions?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          accessRecommendation?: string | null, accessReviewId?: string | null,
+          appliedBy?: (Omit&lt;{ <xref uid="@odata.type" />: ..., displayName?:
+          ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ..., ipAddress?: ..., userPrincipalName?: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+          never&gt; | null, appliedDateTime?: string | null, applyResult?:
+          string | null, justification?: string | null, reviewedBy?: (Omit&lt;{
+          <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ...,
+          ipAddress?: ..., userPrincipalName?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+          never&gt; | null, reviewedDateTime?: string | null, reviewResult?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessReviewDecision" />" })[], reviewedEntity?:
+          { <xref uid="@odata.type" />: string, displayName?: string | null,
+          id?: string | null } | Record&lt;string, never&gt; | null, reviewers?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          createdDateTime?: string | null, displayName?: string | null,
+          userPrincipalName?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.accessReviewReviewer" />" })[],
+          reviewerType?: string | null, settings?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string, accessRecommendationsEnabled?:
+          boolean, activityDurationInDays?: number,
+          autoApplyReviewResultsEnabled?: boolean, autoReviewEnabled?: boolean,
+          autoReviewSettings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, notReviewedResult?: string | null } |
+          null, justificationRequiredOnApproval?: boolean,
+          mailNotificationsEnabled?: boolean, recurrenceSettings?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          durationInDays?: number, recurrenceCount?: number, recurrenceEndType?:
+          string | null, recurrenceType?: string | null } | null,
+          remindersEnabled?: boolean } | null, startDateTime?: string, status?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessReview" />" }&gt;
+  - name: >-
+      del({ accessReview-id: string, accessReview-id1: string, If-Match?: string
+      })
     uid: '@microsoft/teams.graph-endpoints-beta.accessReviews.instances.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`DELETE /accessReviews/{accessReview-id}/instances/{accessReview-id1}`'
@@ -313,18 +679,20 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /accessReviews/{accessReview-id}/instances/{accessReview-id1}"]["response"]>
+        function del(params?: { accessReview-id: string, accessReview-id1:
+        string, If-Match?: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { accessReview-id: string, accessReview-id1: string, If-Match?:
+            string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /accessReviews/{accessReview-id}/instances/{accessReview-id1}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], accessReview-id: string,
+      accessReview-id1: string })
     uid: '@microsoft/teams.graph-endpoints-beta.accessReviews.instances.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: >-
@@ -337,18 +705,153 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /accessReviews/{accessReview-id}/instances/{accessReview-id1}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        accessReview-id: string, accessReview-id1: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, businessFlowTemplateId?: string,
+        createdBy?: (Omit<{ @odata.type: string, displayName?: string | null,
+        id?: string | null }, "@odata.type"> & Omit<{ @odata.type: string,
+        ipAddress?: string | null, userPrincipalName?: string | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.userIdentity" }) |
+        Record<string, never> | null, decisions?: (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string,
+        accessRecommendation?: string | null, accessReviewId?: string | null,
+        appliedBy?: (Omit<{ @odata.type: ..., displayName?: ..., id?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., ipAddress?: ...,
+        userPrincipalName?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.userIdentity" }) | Record<string, never> | null,
+        appliedDateTime?: string | null, applyResult?: string | null,
+        justification?: string | null, reviewedBy?: (Omit<{ @odata.type: ...,
+        displayName?: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        ipAddress?: ..., userPrincipalName?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.userIdentity" }) | Record<string, never>
+        | null, reviewedDateTime?: string | null, reviewResult?: string | null }
+        & { @odata.type: "#microsoft.graph.accessReviewDecision" })[],
+        description?: string | null, displayName?: string, endDateTime?: string,
+        instances?: Omit<{ id?: string | undefined; '@odata.type': string; },
+        "@odata.type"> & { businessFlowTemplateId?: string | undefined;
+        createdBy?: (Omit<{ displayName?: string | null | undefined; id?: string
+        | ... 1 more ... | undefined; '@odata.type': string; }, "@odata.type"> &
+        Omit<...> & { ...; }) | Record<...> | null | unde...[], myDecisions?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, accessRecommendation?: string | null,
+        accessReviewId?: string | null, appliedBy?: (Omit<{ @odata.type: ...,
+        displayName?: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        ipAddress?: ..., userPrincipalName?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.userIdentity" }) | Record<string, never>
+        | null, appliedDateTime?: string | null, applyResult?: string | null,
+        justification?: string | null, reviewedBy?: (Omit<{ @odata.type: ...,
+        displayName?: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        ipAddress?: ..., userPrincipalName?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.userIdentity" }) | Record<string, never>
+        | null, reviewedDateTime?: string | null, reviewResult?: string | null }
+        & { @odata.type: "#microsoft.graph.accessReviewDecision" })[],
+        reviewedEntity?: { @odata.type: string, displayName?: string | null,
+        id?: string | null } | Record<string, never> | null, reviewers?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, createdDateTime?: string | null, displayName?: string | null,
+        userPrincipalName?: string | null } & { @odata.type:
+        "#microsoft.graph.accessReviewReviewer" })[], reviewerType?: string |
+        null, settings?: Record<string, never> | { @odata.type: string,
+        accessRecommendationsEnabled?: boolean, activityDurationInDays?: number,
+        autoApplyReviewResultsEnabled?: boolean, autoReviewEnabled?: boolean,
+        autoReviewSettings?: Record<string, never> | { @odata.type: string,
+        notReviewedResult?: string | null } | null,
+        justificationRequiredOnApproval?: boolean, mailNotificationsEnabled?:
+        boolean, recurrenceSettings?: Record<string, never> | { @odata.type:
+        string, durationInDays?: number, recurrenceCount?: number,
+        recurrenceEndType?: string | null, recurrenceType?: string | null } |
+        null, remindersEnabled?: boolean } | null, startDateTime?: string,
+        status?: string | null } & { @odata.type:
+        "#microsoft.graph.accessReview" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], accessReview-id: string,
+            accessReview-id1: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /accessReviews/{accessReview-id}/instances/{accessReview-id1}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, businessFlowTemplateId?: string, createdBy?: (Omit&lt;{
+          <xref uid="@odata.type" />: string, displayName?: string | null, id?:
+          string | null }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, ipAddress?: string | null,
+          userPrincipalName?: string | null }, "<xref uid="@odata.type" />"&gt;
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+          never&gt; | null, decisions?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, accessRecommendation?: string | null,
+          accessReviewId?: string | null, appliedBy?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ...,
+          ipAddress?: ..., userPrincipalName?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+          never&gt; | null, appliedDateTime?: string | null, applyResult?:
+          string | null, justification?: string | null, reviewedBy?: (Omit&lt;{
+          <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ...,
+          ipAddress?: ..., userPrincipalName?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+          never&gt; | null, reviewedDateTime?: string | null, reviewResult?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessReviewDecision" />" })[], description?:
+          string | null, displayName?: string, endDateTime?: string, instances?:
+          Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type" />':
+          string; }, "<xref uid="@odata.type" />"&gt; & {
+          businessFlowTemplateId?: string | undefined; createdBy?: (Omit&lt;{
+          displayName?: string | null | undefined; id?: string | ... 1 more ...
+          | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;...&gt; & { ...; }) |
+          Record&lt;...&gt; | null | <xref uid="unde..." />[], myDecisions?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          accessRecommendation?: string | null, accessReviewId?: string | null,
+          appliedBy?: (Omit&lt;{ <xref uid="@odata.type" />: ..., displayName?:
+          ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ..., ipAddress?: ..., userPrincipalName?: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+          never&gt; | null, appliedDateTime?: string | null, applyResult?:
+          string | null, justification?: string | null, reviewedBy?: (Omit&lt;{
+          <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ...,
+          ipAddress?: ..., userPrincipalName?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+          never&gt; | null, reviewedDateTime?: string | null, reviewResult?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessReviewDecision" />" })[], reviewedEntity?:
+          { <xref uid="@odata.type" />: string, displayName?: string | null,
+          id?: string | null } | Record&lt;string, never&gt; | null, reviewers?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          createdDateTime?: string | null, displayName?: string | null,
+          userPrincipalName?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.accessReviewReviewer" />" })[],
+          reviewerType?: string | null, settings?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string, accessRecommendationsEnabled?:
+          boolean, activityDurationInDays?: number,
+          autoApplyReviewResultsEnabled?: boolean, autoReviewEnabled?: boolean,
+          autoReviewSettings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, notReviewedResult?: string | null } |
+          null, justificationRequiredOnApproval?: boolean,
+          mailNotificationsEnabled?: boolean, recurrenceSettings?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          durationInDays?: number, recurrenceCount?: number, recurrenceEndType?:
+          string | null, recurrenceType?: string | null } | null,
+          remindersEnabled?: boolean } | null, startDateTime?: string, status?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessReview" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, accessReview-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.accessReviews.instances.list'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: >-
@@ -361,20 +864,160 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /accessReviews/{accessReview-id}/instances"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, accessReview-id: string }):
+        EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?: string
+        | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, businessFlowTemplateId?: string,
+        createdBy?: (Omit<{ @odata.type: ..., displayName?: ..., id?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., ipAddress?: ...,
+        userPrincipalName?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.userIdentity" }) | Record<string, never> | null,
+        decisions?: (Omit<..., ...> & { @odata.type: ..., accessRecommendation?:
+        ..., accessReviewId?: ..., appliedBy?: ..., appliedDateTime?: ...,
+        applyResult?: ..., justification?: ..., reviewedBy?: ...,
+        reviewedDateTime?: ..., reviewResult?: ... } & { @odata.type: ... })[],
+        description?: string | null, displayName?: string, endDateTime?: string,
+        instances?: (Omit<{ id?: string | undefined; '@odata.type': string; },
+        "@odata.type"> & { businessFlowTemplateId?: string | undefined;
+        createdBy?: (Omit<{ displayName?: string | null | undefined; id?: string
+        | ... 1 more ... | undefined; '@odata.type': string; }, "@odata.type"> &
+        Omit<...> & { ...; }) | Record<...> | null | und..., myDecisions?:
+        (Omit<..., ...> & { @odata.type: ..., accessRecommendation?: ...,
+        accessReviewId?: ..., appliedBy?: ..., appliedDateTime?: ...,
+        applyResult?: ..., justification?: ..., reviewedBy?: ...,
+        reviewedDateTime?: ..., reviewResult?: ... } & { @odata.type: ... })[],
+        reviewedEntity?: { @odata.type: string, displayName?: string | null,
+        id?: string | null } | Record<string, never> | null, reviewers?:
+        (Omit<..., ...> & { @odata.type: ..., createdDateTime?: ...,
+        displayName?: ..., userPrincipalName?: ... } & { @odata.type: ... })[],
+        reviewerType?: string | null, settings?: Record<string, never> | {
+        @odata.type: string, accessRecommendationsEnabled?: boolean,
+        activityDurationInDays?: number, autoApplyReviewResultsEnabled?:
+        boolean, autoReviewEnabled?: boolean, autoReviewSettings?: Record<...,
+        ...> | { @odata.type: ..., notReviewedResult?: ... } | null,
+        justificationRequiredOnApproval?: boolean, mailNotificationsEnabled?:
+        boolean, recurrenceSettings?: Record<..., ...> | { @odata.type: ...,
+        durationInDays?: ..., recurrenceCount?: ..., recurrenceEndType?: ...,
+        recurrenceType?: ... } | null, remindersEnabled?: boolean } | null,
+        startDateTime?: string, status?: string | null } & { @odata.type:
+        "#microsoft.graph.accessReview" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, accessReview-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /accessReviews/{accessReview-id}/instances"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          businessFlowTemplateId?: string, createdBy?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ...,
+          ipAddress?: ..., userPrincipalName?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+          never&gt; | null, decisions?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., accessRecommendation?: ...,
+          accessReviewId?: ..., appliedBy?: ..., appliedDateTime?: ...,
+          applyResult?: ..., justification?: ..., reviewedBy?: ...,
+          reviewedDateTime?: ..., reviewResult?: ... } & { <xref
+          uid="@odata.type" />: ... })[], description?: string | null,
+          displayName?: string, endDateTime?: string, instances?: (Omit&lt;{
+          id?: string | undefined; '<xref uid="@odata.type" />': string; },
+          "<xref uid="@odata.type" />"&gt; & { businessFlowTemplateId?: string |
+          undefined; createdBy?: (Omit&lt;{ displayName?: string | null |
+          undefined; id?: string | ... 1 more ... | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; &
+          Omit&lt;...&gt; & { ...; }) | Record&lt;...&gt; | null | <xref
+          uid="und..." />, myDecisions?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., accessRecommendation?: ...,
+          accessReviewId?: ..., appliedBy?: ..., appliedDateTime?: ...,
+          applyResult?: ..., justification?: ..., reviewedBy?: ...,
+          reviewedDateTime?: ..., reviewResult?: ... } & { <xref
+          uid="@odata.type" />: ... })[], reviewedEntity?: { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | Record&lt;string, never&gt; | null, reviewers?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          createdDateTime?: ..., displayName?: ..., userPrincipalName?: ... } &
+          { <xref uid="@odata.type" />: ... })[], reviewerType?: string | null,
+          settings?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, accessRecommendationsEnabled?: boolean,
+          activityDurationInDays?: number, autoApplyReviewResultsEnabled?:
+          boolean, autoReviewEnabled?: boolean, autoReviewSettings?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          notReviewedResult?: ... } | null, justificationRequiredOnApproval?:
+          boolean, mailNotificationsEnabled?: boolean, recurrenceSettings?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          durationInDays?: ..., recurrenceCount?: ..., recurrenceEndType?: ...,
+          recurrenceType?: ... } | null, remindersEnabled?: boolean } | null,
+          startDateTime?: string, status?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.accessReview" />"
+          })[] }&gt;
   - name: >-
-      update(Operation<"/accessReviews/{accessReview-id}/instances/{accessReview-id1}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, businessFlowTemplateId?: string, createdBy?: (Omit<{
+      @odata.type: string, displayName?: string | null, id?: string | null },
+      "@odata.type"> & Omit<{ @odata.type: string, ipAddress?: string | null,
+      userPrincipalName?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.userIdentity" }) | Record<string, never> | null,
+      decisions?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, accessRecommendation?: string | null,
+      accessReviewId?: string | null, appliedBy?: (Omit<{ @odata.type: string,
+      displayName?: function, id?: function }, "@odata.type"> & Omit<{
+      @odata.type: string, ipAddress?: function, userPrincipalName?: function },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.userIdentity" }) |
+      Record<string, never> | null, appliedDateTime?: string | null,
+      applyResult?: string | null, justification?: string | null, reviewedBy?:
+      (Omit<{ @odata.type: string, displayName?: function, id?: function },
+      "@odata.type"> & Omit<{ @odata.type: string, ipAddress?: function,
+      userPrincipalName?: function }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.userIdentity" }) | Record<string, never> | null,
+      reviewedDateTime?: string | null, reviewResult?: string | null } & {
+      @odata.type: "#microsoft.graph.accessReviewDecision" })[], description?:
+      string | null, displayName?: string, endDateTime?: string, instances?:
+      Omit<{ id?: string | undefined; '@odata.type': string; }, "@odata.type"> &
+      { businessFlowTemplateId?: string | undefined; createdBy?: (Omit<{
+      displayName?: string | null | undefined; id?: string | ... 1 more ... |
+      undefined; '@odata.type': string; }, "@odata.type"> & Omit<...> & { ...;
+      }) | Record<...> | null | unde...[], myDecisions?: (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string,
+      accessRecommendation?: string | null, accessReviewId?: string | null,
+      appliedBy?: (Omit<{ @odata.type: string, displayName?: function, id?:
+      function }, "@odata.type"> & Omit<{ @odata.type: string, ipAddress?:
+      function, userPrincipalName?: function }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.userIdentity" }) | Record<string, never> | null,
+      appliedDateTime?: string | null, applyResult?: string | null,
+      justification?: string | null, reviewedBy?: (Omit<{ @odata.type: string,
+      displayName?: function, id?: function }, "@odata.type"> & Omit<{
+      @odata.type: string, ipAddress?: function, userPrincipalName?: function },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.userIdentity" }) |
+      Record<string, never> | null, reviewedDateTime?: string | null,
+      reviewResult?: string | null } & { @odata.type:
+      "#microsoft.graph.accessReviewDecision" })[], reviewedEntity?: {
+      @odata.type: string, displayName?: string | null, id?: string | null } |
+      Record<string, never> | null, reviewers?: (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string, createdDateTime?:
+      string | null, displayName?: string | null, userPrincipalName?: string |
+      null } & { @odata.type: "#microsoft.graph.accessReviewReviewer" })[],
+      reviewerType?: string | null, settings?: Record<string, never> | {
+      @odata.type: string, accessRecommendationsEnabled?: boolean,
+      activityDurationInDays?: number, autoApplyReviewResultsEnabled?: boolean,
+      autoReviewEnabled?: boolean, autoReviewSettings?: Record<string, never> |
+      { @odata.type: string, notReviewedResult?: string | null } | null,
+      justificationRequiredOnApproval?: boolean, mailNotificationsEnabled?:
+      boolean, recurrenceSettings?: Record<string, never> | { @odata.type:
+      string, durationInDays?: number, recurrenceCount?: number,
+      recurrenceEndType?: string | null, recurrenceType?: string | null } |
+      null, remindersEnabled?: boolean } | null, startDateTime?: string,
+      status?: string | null } & { @odata.type: "#microsoft.graph.accessReview"
+      }, { accessReview-id: string, accessReview-id1: string })
     uid: '@microsoft/teams.graph-endpoints-beta.accessReviews.instances.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /accessReviews/{accessReview-id}/instances/{accessReview-id1}`'
@@ -382,21 +1025,283 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/accessReviews/{accessReview-id}/instances/{accessReview-id1}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /accessReviews/{accessReview-id}/instances/{accessReview-id1}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, businessFlowTemplateId?: string,
+        createdBy?: (Omit<{ @odata.type: string, displayName?: string | null,
+        id?: string | null }, "@odata.type"> & Omit<{ @odata.type: string,
+        ipAddress?: string | null, userPrincipalName?: string | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.userIdentity" }) |
+        Record<string, never> | null, decisions?: (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string,
+        accessRecommendation?: string | null, accessReviewId?: string | null,
+        appliedBy?: (Omit<{ @odata.type: string, displayName?: function, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string, ipAddress?:
+        function, userPrincipalName?: function }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.userIdentity" }) | Record<string, never>
+        | null, appliedDateTime?: string | null, applyResult?: string | null,
+        justification?: string | null, reviewedBy?: (Omit<{ @odata.type: string,
+        displayName?: function, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, ipAddress?: function, userPrincipalName?: function
+        }, "@odata.type"> & { @odata.type: "#microsoft.graph.userIdentity" }) |
+        Record<string, never> | null, reviewedDateTime?: string | null,
+        reviewResult?: string | null } & { @odata.type:
+        "#microsoft.graph.accessReviewDecision" })[], description?: string |
+        null, displayName?: string, endDateTime?: string, instances?: Omit<{
+        id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        businessFlowTemplateId?: string | undefined; createdBy?: (Omit<{
+        displayName?: string | null | undefined; id?: string | ... 1 more ... |
+        undefined; '@odata.type': string; }, "@odata.type"> & Omit<...> & { ...;
+        }) | Record<...> | null | unde...[], myDecisions?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        accessRecommendation?: string | null, accessReviewId?: string | null,
+        appliedBy?: (Omit<{ @odata.type: string, displayName?: function, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string, ipAddress?:
+        function, userPrincipalName?: function }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.userIdentity" }) | Record<string, never>
+        | null, appliedDateTime?: string | null, applyResult?: string | null,
+        justification?: string | null, reviewedBy?: (Omit<{ @odata.type: string,
+        displayName?: function, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, ipAddress?: function, userPrincipalName?: function
+        }, "@odata.type"> & { @odata.type: "#microsoft.graph.userIdentity" }) |
+        Record<string, never> | null, reviewedDateTime?: string | null,
+        reviewResult?: string | null } & { @odata.type:
+        "#microsoft.graph.accessReviewDecision" })[], reviewedEntity?: {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        Record<string, never> | null, reviewers?: (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, createdDateTime?:
+        string | null, displayName?: string | null, userPrincipalName?: string |
+        null } & { @odata.type: "#microsoft.graph.accessReviewReviewer" })[],
+        reviewerType?: string | null, settings?: Record<string, never> | {
+        @odata.type: string, accessRecommendationsEnabled?: boolean,
+        activityDurationInDays?: number, autoApplyReviewResultsEnabled?:
+        boolean, autoReviewEnabled?: boolean, autoReviewSettings?:
+        Record<string, never> | { @odata.type: string, notReviewedResult?:
+        string | null } | null, justificationRequiredOnApproval?: boolean,
+        mailNotificationsEnabled?: boolean, recurrenceSettings?: Record<string,
+        never> | { @odata.type: string, durationInDays?: number,
+        recurrenceCount?: number, recurrenceEndType?: string | null,
+        recurrenceType?: string | null } | null, remindersEnabled?: boolean } |
+        null, startDateTime?: string, status?: string | null } & { @odata.type:
+        "#microsoft.graph.accessReview" }, params?: { accessReview-id: string,
+        accessReview-id1: string }): EndpointRequest<Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string,
+        businessFlowTemplateId?: string, createdBy?: (Omit<{ @odata.type:
+        string, displayName?: string | null, id?: string | null },
+        "@odata.type"> & Omit<{ @odata.type: string, ipAddress?: string | null,
+        userPrincipalName?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.userIdentity" }) | Record<string, never> | null,
+        decisions?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+        { @odata.type: string, accessRecommendation?: string | null,
+        accessReviewId?: string | null, appliedBy?: (Omit<{ @odata.type: ...,
+        displayName?: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        ipAddress?: ..., userPrincipalName?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.userIdentity" }) | Record<string, never>
+        | null, appliedDateTime?: string | null, applyResult?: string | null,
+        justification?: string | null, reviewedBy?: (Omit<{ @odata.type: ...,
+        displayName?: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        ipAddress?: ..., userPrincipalName?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.userIdentity" }) | Record<string, never>
+        | null, reviewedDateTime?: string | null, reviewResult?: string | null }
+        & { @odata.type: "#microsoft.graph.accessReviewDecision" })[],
+        description?: string | null, displayName?: string, endDateTime?: string,
+        instances?: Omit<{ id?: string | undefined; '@odata.type': string; },
+        "@odata.type"> & { businessFlowTemplateId?: string | undefined;
+        createdBy?: (Omit<{ displayName?: string | null | undefined; id?: string
+        | ... 1 more ... | undefined; '@odata.type': string; }, "@odata.type"> &
+        Omit<...> & { ...; }) | Record<...> | null | unde...[], myDecisions?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, accessRecommendation?: string | null,
+        accessReviewId?: string | null, appliedBy?: (Omit<{ @odata.type: ...,
+        displayName?: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        ipAddress?: ..., userPrincipalName?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.userIdentity" }) | Record<string, never>
+        | null, appliedDateTime?: string | null, applyResult?: string | null,
+        justification?: string | null, reviewedBy?: (Omit<{ @odata.type: ...,
+        displayName?: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        ipAddress?: ..., userPrincipalName?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.userIdentity" }) | Record<string, never>
+        | null, reviewedDateTime?: string | null, reviewResult?: string | null }
+        & { @odata.type: "#microsoft.graph.accessReviewDecision" })[],
+        reviewedEntity?: { @odata.type: string, displayName?: string | null,
+        id?: string | null } | Record<string, never> | null, reviewers?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, createdDateTime?: string | null, displayName?: string | null,
+        userPrincipalName?: string | null } & { @odata.type:
+        "#microsoft.graph.accessReviewReviewer" })[], reviewerType?: string |
+        null, settings?: Record<string, never> | { @odata.type: string,
+        accessRecommendationsEnabled?: boolean, activityDurationInDays?: number,
+        autoApplyReviewResultsEnabled?: boolean, autoReviewEnabled?: boolean,
+        autoReviewSettings?: Record<string, never> | { @odata.type: string,
+        notReviewedResult?: string | null } | null,
+        justificationRequiredOnApproval?: boolean, mailNotificationsEnabled?:
+        boolean, recurrenceSettings?: Record<string, never> | { @odata.type:
+        string, durationInDays?: number, recurrenceCount?: number,
+        recurrenceEndType?: string | null, recurrenceType?: string | null } |
+        null, remindersEnabled?: boolean } | null, startDateTime?: string,
+        status?: string | null } & { @odata.type:
+        "#microsoft.graph.accessReview" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/accessReviews/{accessReview-id}/instances/{accessReview-id1}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            businessFlowTemplateId?: string, createdBy?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, displayName?: string | null, id?:
+            string | null }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, ipAddress?: string | null,
+            userPrincipalName?: string | null }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+            never&gt; | null, decisions?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, accessRecommendation?: string | null,
+            accessReviewId?: string | null, appliedBy?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, ipAddress?: function,
+            userPrincipalName?: function }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+            never&gt; | null, appliedDateTime?: string | null, applyResult?:
+            string | null, justification?: string | null, reviewedBy?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, displayName?:
+            function, id?: function }, "<xref uid="@odata.type" />"&gt; &
+            Omit&lt;{ <xref uid="@odata.type" />: string, ipAddress?: function,
+            userPrincipalName?: function }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+            never&gt; | null, reviewedDateTime?: string | null, reviewResult?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.accessReviewDecision" />" })[], description?:
+            string | null, displayName?: string, endDateTime?: string,
+            instances?: Omit&lt;{ id?: string | undefined; '<xref
+            uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; &
+            { businessFlowTemplateId?: string | undefined; createdBy?:
+            (Omit&lt;{ displayName?: string | null | undefined; id?: string |
+            ... 1 more ... | undefined; '<xref uid="@odata.type" />': string; },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;...&gt; & { ...; }) |
+            Record&lt;...&gt; | null | <xref uid="unde..." />[], myDecisions?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            accessRecommendation?: string | null, accessReviewId?: string |
+            null, appliedBy?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            displayName?: function, id?: function }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string, ipAddress?:
+            function, userPrincipalName?: function }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+            never&gt; | null, appliedDateTime?: string | null, applyResult?:
+            string | null, justification?: string | null, reviewedBy?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, displayName?:
+            function, id?: function }, "<xref uid="@odata.type" />"&gt; &
+            Omit&lt;{ <xref uid="@odata.type" />: string, ipAddress?: function,
+            userPrincipalName?: function }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+            never&gt; | null, reviewedDateTime?: string | null, reviewResult?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.accessReviewDecision" />" })[],
+            reviewedEntity?: { <xref uid="@odata.type" />: string, displayName?:
+            string | null, id?: string | null } | Record&lt;string, never&gt; |
+            null, reviewers?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, createdDateTime?: string | null,
+            displayName?: string | null, userPrincipalName?: string | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.accessReviewReviewer" />" })[], reviewerType?:
+            string | null, settings?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, accessRecommendationsEnabled?:
+            boolean, activityDurationInDays?: number,
+            autoApplyReviewResultsEnabled?: boolean, autoReviewEnabled?:
+            boolean, autoReviewSettings?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, notReviewedResult?: string | null } |
+            null, justificationRequiredOnApproval?: boolean,
+            mailNotificationsEnabled?: boolean, recurrenceSettings?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            durationInDays?: number, recurrenceCount?: number,
+            recurrenceEndType?: string | null, recurrenceType?: string | null }
+            | null, remindersEnabled?: boolean } | null, startDateTime?: string,
+            status?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.accessReview" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ accessReview-id: string, accessReview-id1: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /accessReviews/{accessReview-id}/instances/{accessReview-id1}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, businessFlowTemplateId?: string, createdBy?: (Omit&lt;{
+          <xref uid="@odata.type" />: string, displayName?: string | null, id?:
+          string | null }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, ipAddress?: string | null,
+          userPrincipalName?: string | null }, "<xref uid="@odata.type" />"&gt;
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+          never&gt; | null, decisions?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, accessRecommendation?: string | null,
+          accessReviewId?: string | null, appliedBy?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ...,
+          ipAddress?: ..., userPrincipalName?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+          never&gt; | null, appliedDateTime?: string | null, applyResult?:
+          string | null, justification?: string | null, reviewedBy?: (Omit&lt;{
+          <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ...,
+          ipAddress?: ..., userPrincipalName?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+          never&gt; | null, reviewedDateTime?: string | null, reviewResult?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessReviewDecision" />" })[], description?:
+          string | null, displayName?: string, endDateTime?: string, instances?:
+          Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type" />':
+          string; }, "<xref uid="@odata.type" />"&gt; & {
+          businessFlowTemplateId?: string | undefined; createdBy?: (Omit&lt;{
+          displayName?: string | null | undefined; id?: string | ... 1 more ...
+          | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;...&gt; & { ...; }) |
+          Record&lt;...&gt; | null | <xref uid="unde..." />[], myDecisions?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          accessRecommendation?: string | null, accessReviewId?: string | null,
+          appliedBy?: (Omit&lt;{ <xref uid="@odata.type" />: ..., displayName?:
+          ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ..., ipAddress?: ..., userPrincipalName?: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+          never&gt; | null, appliedDateTime?: string | null, applyResult?:
+          string | null, justification?: string | null, reviewedBy?: (Omit&lt;{
+          <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ...,
+          ipAddress?: ..., userPrincipalName?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userIdentity" />" }) | Record&lt;string,
+          never&gt; | null, reviewedDateTime?: string | null, reviewResult?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessReviewDecision" />" })[], reviewedEntity?:
+          { <xref uid="@odata.type" />: string, displayName?: string | null,
+          id?: string | null } | Record&lt;string, never&gt; | null, reviewers?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          createdDateTime?: string | null, displayName?: string | null,
+          userPrincipalName?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.accessReviewReviewer" />" })[],
+          reviewerType?: string | null, settings?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string, accessRecommendationsEnabled?:
+          boolean, activityDurationInDays?: number,
+          autoApplyReviewResultsEnabled?: boolean, autoReviewEnabled?: boolean,
+          autoReviewSettings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, notReviewedResult?: string | null } |
+          null, justificationRequiredOnApproval?: boolean,
+          mailNotificationsEnabled?: boolean, recurrenceSettings?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          durationInDays?: number, recurrenceCount?: number, recurrenceEndType?:
+          string | null, recurrenceType?: string | null } | null,
+          remindersEnabled?: boolean } | null, startDateTime?: string, status?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessReview" />" }&gt;

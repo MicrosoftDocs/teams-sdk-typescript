@@ -54,7 +54,12 @@ variables:
           /deviceManagement/remoteAssistancePartners/{remoteAssistancePartner-id}/disconnect"]["response"]&gt;
           }
 functions:
-  - name: create(Operation<"/deviceManagement/remoteAssistancePartners", "post">)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, displayName?: string | null, lastConnectionDateTime?:
+      string, onboardingRequestExpiryDateTime?: string, onboardingStatus?:
+      "onboarded" | "notOnboarded" | "onboarding", onboardingUrl?: string | null
+      } & { @odata.type: "#microsoft.graph.remoteAssistancePartner" })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.remoteAssistancePartners.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -63,22 +68,39 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/deviceManagement/remoteAssistancePartners", "post">):
-        EndpointRequest<IEndpoints["POST
-        /deviceManagement/remoteAssistancePartners"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, displayName?: string | null,
+        lastConnectionDateTime?: string, onboardingRequestExpiryDateTime?:
+        string, onboardingStatus?: "onboarded" | "notOnboarded" | "onboarding",
+        onboardingUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.remoteAssistancePartner" }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, displayName?: string | null, lastConnectionDateTime?: string,
+        onboardingRequestExpiryDateTime?: string, onboardingStatus?: "onboarded"
+        | "notOnboarded" | "onboarding", onboardingUrl?: string | null } & {
+        @odata.type: "#microsoft.graph.remoteAssistancePartner" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/remoteAssistancePartners",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            displayName?: string | null, lastConnectionDateTime?: string,
+            onboardingRequestExpiryDateTime?: string, onboardingStatus?:
+            "onboarded" | "notOnboarded" | "onboarding", onboardingUrl?: string
+            | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.remoteAssistancePartner" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /deviceManagement/remoteAssistancePartners"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, displayName?: string | null, lastConnectionDateTime?:
+          string, onboardingRequestExpiryDateTime?: string, onboardingStatus?:
+          "onboarded" | "notOnboarded" | "onboarding", onboardingUrl?: string |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.remoteAssistancePartner" />" }&gt;
+  - name: 'del({ If-Match?: string, remoteAssistancePartner-id: string })'
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.remoteAssistancePartners.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -89,18 +111,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /deviceManagement/remoteAssistancePartners/{remoteAssistancePartner-id}"]["response"]>
+        function del(params?: { If-Match?: string, remoteAssistancePartner-id:
+        string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, remoteAssistancePartner-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /deviceManagement/remoteAssistancePartners/{remoteAssistancePartner-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], remoteAssistancePartner-id:
+      string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.remoteAssistancePartners.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -114,18 +136,33 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/remoteAssistancePartners/{remoteAssistancePartner-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        remoteAssistancePartner-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, displayName?: string | null, lastConnectionDateTime?: string,
+        onboardingRequestExpiryDateTime?: string, onboardingStatus?: "onboarded"
+        | "notOnboarded" | "onboarding", onboardingUrl?: string | null } & {
+        @odata.type: "#microsoft.graph.remoteAssistancePartner" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[],
+            remoteAssistancePartner-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/remoteAssistancePartners/{remoteAssistancePartner-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, displayName?: string | null, lastConnectionDateTime?:
+          string, onboardingRequestExpiryDateTime?: string, onboardingStatus?:
+          "onboarded" | "notOnboarded" | "onboarding", onboardingUrl?: string |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.remoteAssistancePartner" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.remoteAssistancePartners.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -137,20 +174,41 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/remoteAssistancePartners"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, displayName?: string | null, lastConnectionDateTime?: string,
+        onboardingRequestExpiryDateTime?: string, onboardingStatus?: "onboarded"
+        | "notOnboarded" | "onboarding", onboardingUrl?: string | null } & {
+        @odata.type: "#microsoft.graph.remoteAssistancePartner" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/remoteAssistancePartners"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          displayName?: string | null, lastConnectionDateTime?: string,
+          onboardingRequestExpiryDateTime?: string, onboardingStatus?:
+          "onboarded" | "notOnboarded" | "onboarding", onboardingUrl?: string |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.remoteAssistancePartner" />" })[] }&gt;
   - name: >-
-      update(Operation<"/deviceManagement/remoteAssistancePartners/{remoteAssistancePartner-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, displayName?: string | null, lastConnectionDateTime?:
+      string, onboardingRequestExpiryDateTime?: string, onboardingStatus?:
+      "onboarded" | "notOnboarded" | "onboarding", onboardingUrl?: string | null
+      } & { @odata.type: "#microsoft.graph.remoteAssistancePartner" }, {
+      remoteAssistancePartner-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.remoteAssistancePartners.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -161,21 +219,39 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/deviceManagement/remoteAssistancePartners/{remoteAssistancePartner-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /deviceManagement/remoteAssistancePartners/{remoteAssistancePartner-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, displayName?: string | null,
+        lastConnectionDateTime?: string, onboardingRequestExpiryDateTime?:
+        string, onboardingStatus?: "onboarded" | "notOnboarded" | "onboarding",
+        onboardingUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.remoteAssistancePartner" }, params?: {
+        remoteAssistancePartner-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, displayName?: string | null, lastConnectionDateTime?: string,
+        onboardingRequestExpiryDateTime?: string, onboardingStatus?: "onboarded"
+        | "notOnboarded" | "onboarding", onboardingUrl?: string | null } & {
+        @odata.type: "#microsoft.graph.remoteAssistancePartner" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/remoteAssistancePartners/{remoteAssistancePartner-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            displayName?: string | null, lastConnectionDateTime?: string,
+            onboardingRequestExpiryDateTime?: string, onboardingStatus?:
+            "onboarded" | "notOnboarded" | "onboarding", onboardingUrl?: string
+            | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.remoteAssistancePartner" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ remoteAssistancePartner-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /deviceManagement/remoteAssistancePartners/{remoteAssistancePartner-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, displayName?: string | null, lastConnectionDateTime?:
+          string, onboardingRequestExpiryDateTime?: string, onboardingStatus?:
+          "onboarded" | "notOnboarded" | "onboarding", onboardingUrl?: string |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.remoteAssistancePartner" />" }&gt;

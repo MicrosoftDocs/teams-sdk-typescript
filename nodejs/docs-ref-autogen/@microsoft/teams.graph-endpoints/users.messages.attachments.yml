@@ -8,8 +8,11 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints'
 functions:
   - name: >-
-      create(Operation<"/users/{user-id}/messages/{message-id}/attachments",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, contentType?: string | null, isInline?: boolean,
+      lastModifiedDateTime?: string | null, name?: string | null, size?: number
+      }, "@odata.type"> & { @odata.type: "#microsoft.graph.attachment" }, {
+      message-id: string, user-id: string })
     uid: '@microsoft/teams.graph-endpoints.users.messages.attachments.create'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`POST /users/{user-id}/messages/{message-id}/attachments`'
@@ -17,25 +20,42 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/users/{user-id}/messages/{message-id}/attachments", "post">,
-        params?: any): EndpointRequest<IEndpoints["POST
-        /users/{user-id}/messages/{message-id}/attachments"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, contentType?: string |
+        null, isInline?: boolean, lastModifiedDateTime?: string | null, name?:
+        string | null, size?: number }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.attachment" }, params?: { message-id: string, user-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, contentType?: string |
+        null, isInline?: boolean, lastModifiedDateTime?: string | null, name?:
+        string | null, size?: number }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.attachment" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/users/{user-id}/messages/{message-id}/attachments",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, contentType?: string | null, isInline?: boolean,
+            lastModifiedDateTime?: string | null, name?: string | null, size?:
+            number }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.attachment" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ message-id: string, user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /users/{user-id}/messages/{message-id}/attachments"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, contentType?: string | null, isInline?:
+          boolean, lastModifiedDateTime?: string | null, name?: string | null,
+          size?: number }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.attachment" />"
+          }&gt;
+  - name: >-
+      del({ attachment-id: string, If-Match?: string, message-id: string,
+      user-id: string })
     uid: '@microsoft/teams.graph-endpoints.users.messages.attachments.del'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -45,18 +65,20 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /users/{user-id}/messages/{message-id}/attachments/{attachment-id}"]["response"]>
+        function del(params?: { attachment-id: string, If-Match?: string,
+        message-id: string, user-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { attachment-id: string, If-Match?: string, message-id: string,
+            user-id: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /users/{user-id}/messages/{message-id}/attachments/{attachment-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], attachment-id: string,
+      message-id: string, user-id: string })
     uid: '@microsoft/teams.graph-endpoints.users.messages.attachments.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -67,18 +89,33 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/messages/{message-id}/attachments/{attachment-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        attachment-id: string, message-id: string, user-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, contentType?: string |
+        null, isInline?: boolean, lastModifiedDateTime?: string | null, name?:
+        string | null, size?: number }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.attachment" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], attachment-id: string,
+            message-id: string, user-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/messages/{message-id}/attachments/{attachment-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, contentType?: string | null, isInline?:
+          boolean, lastModifiedDateTime?: string | null, name?: string | null,
+          size?: number }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.attachment" />"
+          }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, message-id: string, user-id: string })
     uid: '@microsoft/teams.graph-endpoints.users.messages.attachments.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -89,17 +126,33 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/messages/{message-id}/attachments"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, message-id: string, user-id: string }):
+        EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?: string
+        | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, contentType?: string |
+        null, isInline?: boolean, lastModifiedDateTime?: string | null, name?:
+        string | null, size?: number }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.attachment" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, message-id: string, user-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/messages/{message-id}/attachments"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, contentType?: string | null, isInline?: boolean,
+          lastModifiedDateTime?: string | null, name?: string | null, size?:
+          number }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.attachment" />" })[] }&gt;
 variables:
   - name: createUploadSession
     uid: >-
@@ -110,20 +163,50 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        createUploadSession: { create: (body: IEndpoints["POST
+        createUploadSession: { /** * `POST
+        /users/{user-id}/messages/{message-id}/attachments/createUploadSession`
+        * * Create an upload session that allows an app to iteratively upload
+        ranges of a file, so as to attach the file to the specified Outlook
+        item. The item can be a message or event. Use this approach to attach a
+        file if the file size is between 3 MB and 150 MB. To attach a file
+        that&#x27;s smaller than 3 MB, do a POST operation on the attachments
+        navigation property of the Outlook item; see how to do this for a
+        message or for an event. As part of the response, this action returns an
+        upload URL that you can use in subsequent sequential PUT queries.
+        Request headers for each PUT operation let you specify the exact range
+        of bytes to be uploaded. This allows transfer to be resumed, in case the
+        network connection is dropped during upload. The following are the steps
+        to attach a file to an Outlook item using an upload session: See attach
+        large files to Outlook messages or events for an example. */ create:
+        (body: IEndpoints["POST
         /users/{user-id}/messages/{message-id}/attachments/createUploadSession"]["body"],
         params?: IEndpoints["POST
         /users/{user-id}/messages/{message-id}/attachments/createUploadSession"]["parameters"])
         => EndpointRequest<IEndpoints["POST
-        /users/{user-id}/messages/{message-id}/attachments/createUploadSession"]["response"]>
+        /users/{user-id}/messages/{message-id}/attachments/createUploadSession"]["response"]>;
         }
       return:
         description: ''
         type: >-
-          { create: (body: IEndpoints["POST
+          { /** * `POST
+          /users/{user-id}/messages/{message-id}/attachments/createUploadSession`
+          * * Create an upload session that allows an app to iteratively upload
+          ranges of a file, so as to attach the file to the specified Outlook
+          item. The item can be a message or event. Use this approach to attach
+          a file if the file size is between 3 MB and 150 MB. To attach a file
+          that&#x27;s smaller than 3 MB, do a POST operation on the attachments
+          navigation property of the Outlook item; see how to do this for a
+          message or for an event. As part of the response, this action returns
+          an upload URL that you can use in subsequent sequential PUT queries.
+          Request headers for each PUT operation let you specify the exact range
+          of bytes to be uploaded. This allows transfer to be resumed, in case
+          the network connection is dropped during upload. The following are the
+          steps to attach a file to an Outlook item using an upload session: See
+          attach large files to Outlook messages or events for an example. */
+          create: (body: IEndpoints["POST
           /users/{user-id}/messages/{message-id}/attachments/createUploadSession"]["body"],
           params?: IEndpoints["POST
           /users/{user-id}/messages/{message-id}/attachments/createUploadSession"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["POST
-          /users/{user-id}/messages/{message-id}/attachments/createUploadSession"]["response"]&gt;
+          /users/{user-id}/messages/{message-id}/attachments/createUploadSession"]["response"]&gt;;
           }

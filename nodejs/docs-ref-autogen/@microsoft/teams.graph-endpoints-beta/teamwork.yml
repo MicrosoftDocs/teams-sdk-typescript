@@ -136,7 +136,7 @@ variables:
           /teamwork/workforceIntegrations/{workforceIntegration-id}"]["response"]&gt;
           }
 functions:
-  - name: get(any)
+  - name: 'get({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints-beta.teamwork.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: >-
@@ -149,16 +149,394 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /teamwork"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, deletedChats?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string } & { @odata.type: "#microsoft.graph.deletedChat" })[],
+        deletedTeams?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, channels?: (Omit<..., ...> & {
+        @odata.type: ..., allMembers?: ..., createdDateTime?: ..., description?:
+        ..., displayName?: ..., email?: ..., enabledApps?: ..., filesFolder?:
+        ..., isArchived?: ..., isFavoriteByDefault?: ..., layoutType?: ...,
+        members?: ..., membershipType?: ..., messages?: ...,
+        moderationSettings?: ..., planner?: ..., sharedWithTeams?: ...,
+        summary?: ..., tabs?: ..., tenantId?: ..., webUrl?: ... } & {
+        @odata.type: ... })[] } & { @odata.type: "#microsoft.graph.deletedTeam"
+        })[], devices?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, activity?: Record<string, never>
+        | (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
+        string, activePeripherals?: function, createdBy?: function,
+        createdDateTime?: function, lastModifiedBy?: function,
+        lastModifiedDateTime?: function } & { @odata.type:
+        "#microsoft.graph.teamworkDeviceActivity" }) | null, activityState?:
+        "unknownFutureValue" | Record<string, never> | "unknown" | "busy" |
+        "idle" | "unavailable" | null, companyAssetTag?: string | null,
+        configuration?: Record<string, never> | (Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & { @odata.type: string, cameraConfiguration?:
+        function, createdBy?: function, createdDateTime?: function,
+        displayConfiguration?: function, hardwareConfiguration?: function,
+        lastModifiedBy?: function, lastModifiedDateTime?: function,
+        microphoneConfiguration?: function, softwareVersions?: function,
+        speakerConfiguration?: function, systemConfiguration?: function,
+        teamsClientConfiguration?: function } & { @odata.type:
+        "#microsoft.graph.teamworkDeviceConfiguration" }) | null, createdBy?:
+        Record<string, never> | { @odata.type: string, application?: Record<...,
+        ...> | { @odata.type: ..., displayName?: ..., id?: ... } | null,
+        device?: Record<..., ...> | { @odata.type: ..., displayName?: ..., id?:
+        ... } | null, user?: Record<..., ...> | { @odata.type: ...,
+        displayName?: ..., id?: ... } | null } | null, createdDateTime?: string
+        | null, currentUser?: Record<string, never> | (Omit<{ @odata.type: ...,
+        displayName?: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        userIdentityType?: function, userPrincipalName?: function } & {
+        @odata.type: "#microsoft.graph.teamworkUserIdentity" }) | null,
+        deviceType?: "unknownFutureValue" | "unknown" | "ipPhone" | "teamsRoom"
+        | "surfaceHub" | "collaborationBar" | "teamsDisplay" | "touchConsole" |
+        "lowCostPhone" | "teamsPanel" | "sip", hardwareDetail?: { @odata.type:
+        string, macAddresses?: ...[], manufacturer?: string | null, model?:
+        string | null, serialNumber?: string | null, uniqueId?: string | null },
+        health?: Record<string, never> | (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, connection?: function,
+        createdBy?: function, createdDateTime?: function, hardwareHealth?:
+        function, lastModifiedBy?: function, lastModifiedDateTime?: function,
+        loginStatus?: function, peripheralsHealth?: function,
+        softwareUpdateHealth?: function } & { @odata.type:
+        "#microsoft.graph.teamworkDeviceHealth" }) | null, healthStatus?:
+        "unknownFutureValue" | Record<string, never> | "unknown" | "offline" |
+        "critical" | "nonUrgent" | "healthy" | null, lastModifiedBy?:
+        Record<string, never> | { @odata.type: string, application?: Record<...,
+        ...> | { @odata.type: ..., displayName?: ..., id?: ... } | null,
+        device?: Record<..., ...> | { @odata.type: ..., displayName?: ..., id?:
+        ... } | null, user?: Record<..., ...> | { @odata.type: ...,
+        displayName?: ..., id?: ... } | null } | null, lastModifiedDateTime?:
+        string | null, notes?: string | null, operations?: (Omit<..., ...> & {
+        @odata.type: ..., completedDateTime?: ..., createdBy?: ...,
+        createdDateTime?: ..., error?: ..., lastActionBy?: ...,
+        lastActionDateTime?: ..., operationType?: ..., startedDateTime?: ...,
+        status?: ... } & { @odata.type: ... })[] } & { @odata.type:
+        "#microsoft.graph.teamworkDevice" })[], isTeamsEnabled?: boolean,
+        region?: string | null, teamsAppSettings?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, allowUserRequestsForAppAccess?: boolean | null,
+        customAppSettings?: Record<string, never> | { @odata.type: string,
+        developerToolsForShowingAppUsageMetrics?: "unknownFutureValue" |
+        "developerPortal" } | null, isChatResourceSpecificConsentEnabled?:
+        boolean | null, isUserPersonalScopeResourceSpecificConsentEnabled?:
+        boolean | null } & { @odata.type: "#microsoft.graph.teamsAppSettings" })
+        | null, teamTemplates?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, definitions?: (Omit<..., ...> &
+        { @odata.type: ..., audience?: ..., categories?: ..., description?: ...,
+        displayName?: ..., iconUrl?: ..., languageTag?: ..., lastModifiedBy?:
+        ..., lastModifiedDateTime?: ..., parentTemplateId?: ..., publisherName?:
+        ..., shortDescription?: ..., teamDefinition?: ... } & { @odata.type: ...
+        })[] } & { @odata.type: "#microsoft.graph.teamTemplate" })[],
+        workforceIntegrations?: (Omit<Omit<{ @odata.type: string, id?: function
+        }, "@odata.type"> & Omit<{ @odata.type: string, createdBy?: function,
+        createdDateTime?: function, lastModifiedBy?: function,
+        lastModifiedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & {
+        @odata.type: string, apiVersion?: number | null, displayName?: string |
+        null, eligibilityFilteringEnabledEntities?: "unknownFutureValue" |
+        Record<string, never> | "none" | "swapRequest" | "offerShiftRequest" |
+        "timeOffReason" | null, encryption?: Record<string, never> | {
+        @odata.type: string, protocol?: "unknownFutureValue" | Record<..., ...>
+        | "sharedSecret" | null, secret?: string | null } | null, isActive?:
+        boolean | null, supportedEntities?: "unknownFutureValue" |
+        Record<string, never> | "none" | "swapRequest" | "offerShiftRequest" |
+        "timeOffReason" | "shift" | "userShiftPreferences" | "openShift" |
+        "openShiftRequest" | "timeCard" | "timeOff" | "timeOffRequest" | null,
+        supports?: "unknownFutureValue" | Record<string, never> | "none" |
+        "swapRequest" | "offerShiftRequest" | "timeOffReason" | "shift" |
+        "userShiftPreferences" | "openShift" | "openShiftRequest" | "timeCard" |
+        "timeOff" | "timeOffRequest" | null, url?: string | null } & {
+        @odata.type: "#microsoft.graph.workforceIntegration" })[] } & {
+        @odata.type: "#microsoft.graph.teamwork" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /teamwork"]["response"]&gt;
-  - name: update(Operation<"/teamwork", "patch">)
+        type: >-
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, deletedChats?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deletedChat" />" })[], deletedTeams?: (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          channels?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          allMembers?: ..., createdDateTime?: ..., description?: ...,
+          displayName?: ..., email?: ..., enabledApps?: ..., filesFolder?: ...,
+          isArchived?: ..., isFavoriteByDefault?: ..., layoutType?: ...,
+          members?: ..., membershipType?: ..., messages?: ...,
+          moderationSettings?: ..., planner?: ..., sharedWithTeams?: ...,
+          summary?: ..., tabs?: ..., tenantId?: ..., webUrl?: ... } & { <xref
+          uid="@odata.type" />: ... })[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.deletedTeam" />" })[], devices?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          activity?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, activePeripherals?:
+          function, createdBy?: function, createdDateTime?: function,
+          lastModifiedBy?: function, lastModifiedDateTime?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamworkDeviceActivity" />" }) | null,
+          activityState?: "unknownFutureValue" | Record&lt;string, never&gt; |
+          "unknown" | "busy" | "idle" | "unavailable" | null, companyAssetTag?:
+          string | null, configuration?: Record&lt;string, never&gt; |
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          cameraConfiguration?: function, createdBy?: function,
+          createdDateTime?: function, displayConfiguration?: function,
+          hardwareConfiguration?: function, lastModifiedBy?: function,
+          lastModifiedDateTime?: function, microphoneConfiguration?: function,
+          softwareVersions?: function, speakerConfiguration?: function,
+          systemConfiguration?: function, teamsClientConfiguration?: function }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamworkDeviceConfiguration" />" }) | null,
+          createdBy?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, application?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... } | null,
+          device?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          displayName?: ..., id?: ... } | null, user?: Record&lt;..., ...&gt; |
+          { <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          null } | null, createdDateTime?: string | null, currentUser?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., displayName?: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: string, userIdentityType?: function,
+          userPrincipalName?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamworkUserIdentity" />" }) | null, deviceType?:
+          "unknownFutureValue" | "unknown" | "ipPhone" | "teamsRoom" |
+          "surfaceHub" | "collaborationBar" | "teamsDisplay" | "touchConsole" |
+          "lowCostPhone" | "teamsPanel" | "sip", hardwareDetail?: { <xref
+          uid="@odata.type" />: string, macAddresses?: ...[], manufacturer?:
+          string | null, model?: string | null, serialNumber?: string | null,
+          uniqueId?: string | null }, health?: Record&lt;string, never&gt; |
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          connection?: function, createdBy?: function, createdDateTime?:
+          function, hardwareHealth?: function, lastModifiedBy?: function,
+          lastModifiedDateTime?: function, loginStatus?: function,
+          peripheralsHealth?: function, softwareUpdateHealth?: function } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamworkDeviceHealth" />" }) | null,
+          healthStatus?: "unknownFutureValue" | Record&lt;string, never&gt; |
+          "unknown" | "offline" | "critical" | "nonUrgent" | "healthy" | null,
+          lastModifiedBy?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, application?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } | null,
+          device?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          displayName?: ..., id?: ... } | null, user?: Record&lt;..., ...&gt; |
+          { <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          null } | null, lastModifiedDateTime?: string | null, notes?: string |
+          null, operations?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type"
+          />: ..., completedDateTime?: ..., createdBy?: ..., createdDateTime?:
+          ..., error?: ..., lastActionBy?: ..., lastActionDateTime?: ...,
+          operationType?: ..., startedDateTime?: ..., status?: ... } & { <xref
+          uid="@odata.type" />: ... })[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.teamworkDevice" />" })[],
+          isTeamsEnabled?: boolean, region?: string | null, teamsAppSettings?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, allowUserRequestsForAppAccess?: boolean
+          | null, customAppSettings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string,
+          developerToolsForShowingAppUsageMetrics?: "unknownFutureValue" |
+          "developerPortal" } | null, isChatResourceSpecificConsentEnabled?:
+          boolean | null, isUserPersonalScopeResourceSpecificConsentEnabled?:
+          boolean | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppSettings" />" }) | null, teamTemplates?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          definitions?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+          ..., audience?: ..., categories?: ..., description?: ...,
+          displayName?: ..., iconUrl?: ..., languageTag?: ..., lastModifiedBy?:
+          ..., lastModifiedDateTime?: ..., parentTemplateId?: ...,
+          publisherName?: ..., shortDescription?: ..., teamDefinition?: ... } &
+          { <xref uid="@odata.type" />: ... })[] } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.teamTemplate" />" })[],
+          workforceIntegrations?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, createdBy?: function,
+          createdDateTime?: function, lastModifiedBy?: function,
+          lastModifiedDateTime?: function }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          apiVersion?: number | null, displayName?: string | null,
+          eligibilityFilteringEnabledEntities?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "none" | "swapRequest" |
+          "offerShiftRequest" | "timeOffReason" | null, encryption?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          protocol?: "unknownFutureValue" | Record&lt;..., ...&gt; |
+          "sharedSecret" | null, secret?: string | null } | null, isActive?:
+          boolean | null, supportedEntities?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "none" | "swapRequest" |
+          "offerShiftRequest" | "timeOffReason" | "shift" |
+          "userShiftPreferences" | "openShift" | "openShiftRequest" | "timeCard"
+          | "timeOff" | "timeOffRequest" | null, supports?: "unknownFutureValue"
+          | Record&lt;string, never&gt; | "none" | "swapRequest" |
+          "offerShiftRequest" | "timeOffReason" | "shift" |
+          "userShiftPreferences" | "openShift" | "openShiftRequest" | "timeCard"
+          | "timeOff" | "timeOffRequest" | null, url?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.workforceIntegration" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamwork" />" }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, deletedChats?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string } & { @odata.type:
+      "#microsoft.graph.deletedChat" })[], deletedTeams?: (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string, channels?:
+      (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
+      string, allMembers?: function, createdDateTime?: function, description?:
+      function, displayName?: function, email?: function, enabledApps?:
+      function, filesFolder?: function, isArchived?: function,
+      isFavoriteByDefault?: function, layoutType?: function, members?: function,
+      membershipType?: function, messages?: function, moderationSettings?:
+      function, planner?: function, sharedWithTeams?: function, summary?:
+      function, tabs?: function, tenantId?: function, webUrl?: function } & {
+      @odata.type: "#microsoft.graph.channel" })[] } & { @odata.type:
+      "#microsoft.graph.deletedTeam" })[], devices?: (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string, activity?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+      "@odata.type"> & { @odata.type: string, activePeripherals?: Record<...,
+      ...> | { @odata.type: ..., communicationSpeaker?: ..., contentCamera?:
+      ..., microphone?: ..., roomCamera?: ..., speaker?: ... } | null,
+      createdBy?: Record<..., ...> | { @odata.type: ..., application?: ...,
+      device?: ..., user?: ... } | null, createdDateTime?: string | null,
+      lastModifiedBy?: Record<..., ...> | { @odata.type: ..., application?: ...,
+      device?: ..., user?: ... } | null, lastModifiedDateTime?: string | null }
+      & { @odata.type: "#microsoft.graph.teamworkDeviceActivity" }) | null,
+      activityState?: "unknownFutureValue" | Record<string, never> | "unknown" |
+      "busy" | "idle" | "unavailable" | null, companyAssetTag?: string | null,
+      configuration?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+      function }, "@odata.type"> & { @odata.type: string, cameraConfiguration?:
+      Record<..., ...> | { @odata.type: ..., cameras?: ...,
+      contentCameraConfiguration?: ..., defaultContentCamera?: ... } | null,
+      createdBy?: Record<..., ...> | { @odata.type: ..., application?: ...,
+      device?: ..., user?: ... } | null, createdDateTime?: string | null,
+      displayConfiguration?: Record<..., ...> | { @odata.type: ...,
+      configuredDisplays?: ..., displayCount?: ...,
+      inBuiltDisplayScreenConfiguration?: ..., isContentDuplicationAllowed?:
+      ..., isDualDisplayModeEnabled?: ... } | null, hardwareConfiguration?:
+      Record<..., ...> | { @odata.type: ..., compute?: ..., hdmiIngest?: ...,
+      processorModel?: ... } | null, lastModifiedBy?: Record<..., ...> | {
+      @odata.type: ..., application?: ..., device?: ..., user?: ... } | null,
+      lastModifiedDateTime?: string | null, microphoneConfiguration?:
+      Record<..., ...> | { @odata.type: ..., defaultMicrophone?: ...,
+      isMicrophoneOptional?: ..., microphones?: ... } | null, softwareVersions?:
+      Record<..., ...> | { @odata.type: ..., adminAgentSoftwareVersion?: ...,
+      firmwareSoftwareVersion?: ..., operatingSystemSoftwareVersion?: ...,
+      partnerAgentSoftwareVersion?: ..., teamsClientSoftwareVersion?: ... } |
+      null, speakerConfiguration?: Record<..., ...> | { @odata.type: ...,
+      defaultCommunicationSpeaker?: ..., defaultSpeaker?: ...,
+      isCommunicationSpeakerOptional?: ..., isSpeakerOptional?: ..., speakers?:
+      ... } | null, systemConfiguration?: Record<..., ...> | { @odata.type: ...,
+      dateTimeConfiguration?: ..., defaultPassword?: ..., deviceLockTimeout?:
+      ..., isDeviceLockEnabled?: ..., isLoggingEnabled?: ...,
+      isPowerSavingEnabled?: ..., isScreenCaptureEnabled?: ...,
+      isSilentModeEnabled?: ..., language?: ..., lockPin?: ..., loggingLevel?:
+      ..., networkConfiguration?: ... } | null, teamsClientConfiguration?:
+      Record<..., ...> | { @odata.type: ..., accountConfiguration?: ...,
+      featuresConfiguration?: ... } | null } & { @odata.type:
+      "#microsoft.graph.teamworkDeviceConfiguration" }) | null, createdBy?:
+      Record<string, never> | { @odata.type: string, application?:
+      Record<string, never> | { @odata.type: string, displayName?: function,
+      id?: function } | null, device?: Record<string, never> | { @odata.type:
+      string, displayName?: function, id?: function } | null, user?:
+      Record<string, never> | { @odata.type: string, displayName?: function,
+      id?: function } | null } | null, createdDateTime?: string | null,
+      currentUser?: Record<string, never> | (Omit<{ @odata.type: string,
+      displayName?: function, id?: function }, "@odata.type"> & { @odata.type:
+      string, userIdentityType?: "unknownFutureValue" | Record<..., ...> |
+      "aadUser" | "onPremiseAadUser" | "anonymousGuest" | "federatedUser" |
+      "personalMicrosoftAccountUser" | "skypeUser" | "phoneUser" | "emailUser" |
+      "azureCommunicationServicesUser" | null, userPrincipalName?: string | null
+      } & { @odata.type: "#microsoft.graph.teamworkUserIdentity" }) | null,
+      deviceType?: "unknownFutureValue" | "unknown" | "ipPhone" | "teamsRoom" |
+      "surfaceHub" | "collaborationBar" | "teamsDisplay" | "touchConsole" |
+      "lowCostPhone" | "teamsPanel" | "sip", hardwareDetail?: { @odata.type:
+      string, macAddresses?: function[], manufacturer?: string | null, model?:
+      string | null, serialNumber?: string | null, uniqueId?: string | null },
+      health?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+      function }, "@odata.type"> & { @odata.type: string, connection?: {
+      @odata.type: ..., connectionStatus?: ..., lastModifiedDateTime?: ... },
+      createdBy?: Record<..., ...> | { @odata.type: ..., application?: ...,
+      device?: ..., user?: ... } | null, createdDateTime?: string | null,
+      hardwareHealth?: Record<..., ...> | { @odata.type: ..., computeHealth?:
+      ..., hdmiIngestHealth?: ... } | null, lastModifiedBy?: Record<..., ...> |
+      { @odata.type: ..., application?: ..., device?: ..., user?: ... } | null,
+      lastModifiedDateTime?: string | null, loginStatus?: Record<..., ...> | {
+      @odata.type: ..., exchangeConnection?: ..., skypeConnection?: ...,
+      teamsConnection?: ... } | null, peripheralsHealth?: Record<..., ...> | {
+      @odata.type: ..., communicationSpeakerHealth?: ..., contentCameraHealth?:
+      ..., displayHealthCollection?: ..., microphoneHealth?: ...,
+      roomCameraHealth?: ..., speakerHealth?: ... } | null,
+      softwareUpdateHealth?: Record<..., ...> | { @odata.type: ...,
+      adminAgentSoftwareUpdateStatus?: ..., companyPortalSoftwareUpdateStatus?:
+      ..., firmwareSoftwareUpdateStatus?: ...,
+      operatingSystemSoftwareUpdateStatus?: ...,
+      partnerAgentSoftwareUpdateStatus?: ..., teamsClientSoftwareUpdateStatus?:
+      ... } | null } & { @odata.type: "#microsoft.graph.teamworkDeviceHealth" })
+      | null, healthStatus?: "unknownFutureValue" | Record<string, never> |
+      "unknown" | "offline" | "critical" | "nonUrgent" | "healthy" | null,
+      lastModifiedBy?: Record<string, never> | { @odata.type: string,
+      application?: Record<string, never> | { @odata.type: string, displayName?:
+      function, id?: function } | null, device?: Record<string, never> | {
+      @odata.type: string, displayName?: function, id?: function } | null,
+      user?: Record<string, never> | { @odata.type: string, displayName?:
+      function, id?: function } | null } | null, lastModifiedDateTime?: string |
+      null, notes?: string | null, operations?: (Omit<{ @odata.type: ..., id?:
+      ... }, "@odata.type"> & { @odata.type: string, completedDateTime?:
+      function, createdBy?: function, createdDateTime?: function, error?:
+      function, lastActionBy?: function, lastActionDateTime?: function,
+      operationType?: function, startedDateTime?: function, status?: function }
+      & { @odata.type: "#microsoft.graph.teamworkDeviceOperation" })[] } & {
+      @odata.type: "#microsoft.graph.teamworkDevice" })[], isTeamsEnabled?:
+      boolean, region?: string | null, teamsAppSettings?: Record<string, never>
+      | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, allowUserRequestsForAppAccess?: boolean | null,
+      customAppSettings?: Record<string, never> | { @odata.type: string,
+      developerToolsForShowingAppUsageMetrics?: "unknownFutureValue" |
+      "developerPortal" } | null, isChatResourceSpecificConsentEnabled?: boolean
+      | null, isUserPersonalScopeResourceSpecificConsentEnabled?: boolean | null
+      } & { @odata.type: "#microsoft.graph.teamsAppSettings" }) | null,
+      teamTemplates?: (Omit<{ @odata.type: string, id?: string }, "@odata.type">
+      & { @odata.type: string, definitions?: (Omit<{ @odata.type: ..., id?: ...
+      }, "@odata.type"> & { @odata.type: string, audience?: function,
+      categories?: function, description?: function, displayName?: function,
+      iconUrl?: function, languageTag?: function, lastModifiedBy?: function,
+      lastModifiedDateTime?: function, parentTemplateId?: function,
+      publisherName?: function, shortDescription?: function, teamDefinition?:
+      function } & { @odata.type: "#microsoft.graph.teamTemplateDefinition" })[]
+      } & { @odata.type: "#microsoft.graph.teamTemplate" })[],
+      workforceIntegrations?: (Omit<Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, createdBy?: Record<..., ...>
+      | { @odata.type: ..., application?: ..., device?: ..., user?: ... } |
+      null, createdDateTime?: string | null, lastModifiedBy?: Record<..., ...> |
+      { @odata.type: ..., application?: ..., device?: ..., user?: ... } | null,
+      lastModifiedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & { @odata.type:
+      string, apiVersion?: number | null, displayName?: string | null,
+      eligibilityFilteringEnabledEntities?: "unknownFutureValue" |
+      Record<string, never> | "none" | "swapRequest" | "offerShiftRequest" |
+      "timeOffReason" | null, encryption?: Record<string, never> | {
+      @odata.type: string, protocol?: "unknownFutureValue" | Record<string,
+      never> | "sharedSecret" | null, secret?: string | null } | null,
+      isActive?: boolean | null, supportedEntities?: "unknownFutureValue" |
+      Record<string, never> | "none" | "swapRequest" | "offerShiftRequest" |
+      "timeOffReason" | "shift" | "userShiftPreferences" | "openShift" |
+      "openShiftRequest" | "timeCard" | "timeOff" | "timeOffRequest" | null,
+      supports?: "unknownFutureValue" | Record<string, never> | "none" |
+      "swapRequest" | "offerShiftRequest" | "timeOffReason" | "shift" |
+      "userShiftPreferences" | "openShift" | "openShiftRequest" | "timeCard" |
+      "timeOff" | "timeOffRequest" | null, url?: string | null } & {
+      @odata.type: "#microsoft.graph.workforceIntegration" })[] } & {
+      @odata.type: "#microsoft.graph.teamwork" })
     uid: '@microsoft/teams.graph-endpoints-beta.teamwork.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /teamwork`'
@@ -166,12 +544,593 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/teamwork", "patch">):
-        EndpointRequest<IEndpoints["PATCH /teamwork"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, deletedChats?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string } & { @odata.type: "#microsoft.graph.deletedChat" })[],
+        deletedTeams?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, channels?: (Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & { @odata.type: string, allMembers?:
+        function, createdDateTime?: function, description?: function,
+        displayName?: function, email?: function, enabledApps?: function,
+        filesFolder?: function, isArchived?: function, isFavoriteByDefault?:
+        function, layoutType?: function, members?: function, membershipType?:
+        function, messages?: function, moderationSettings?: function, planner?:
+        function, sharedWithTeams?: function, summary?: function, tabs?:
+        function, tenantId?: function, webUrl?: function } & { @odata.type:
+        "#microsoft.graph.channel" })[] } & { @odata.type:
+        "#microsoft.graph.deletedTeam" })[], devices?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        activity?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & { @odata.type: string, activePeripherals?:
+        Record<..., ...> | { @odata.type: ..., communicationSpeaker?: ...,
+        contentCamera?: ..., microphone?: ..., roomCamera?: ..., speaker?: ... }
+        | null, createdBy?: Record<..., ...> | { @odata.type: ..., application?:
+        ..., device?: ..., user?: ... } | null, createdDateTime?: string | null,
+        lastModifiedBy?: Record<..., ...> | { @odata.type: ..., application?:
+        ..., device?: ..., user?: ... } | null, lastModifiedDateTime?: string |
+        null } & { @odata.type: "#microsoft.graph.teamworkDeviceActivity" }) |
+        null, activityState?: "unknownFutureValue" | Record<string, never> |
+        "unknown" | "busy" | "idle" | "unavailable" | null, companyAssetTag?:
+        string | null, configuration?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, cameraConfiguration?: Record<..., ...> | { @odata.type: ...,
+        cameras?: ..., contentCameraConfiguration?: ..., defaultContentCamera?:
+        ... } | null, createdBy?: Record<..., ...> | { @odata.type: ...,
+        application?: ..., device?: ..., user?: ... } | null, createdDateTime?:
+        string | null, displayConfiguration?: Record<..., ...> | { @odata.type:
+        ..., configuredDisplays?: ..., displayCount?: ...,
+        inBuiltDisplayScreenConfiguration?: ..., isContentDuplicationAllowed?:
+        ..., isDualDisplayModeEnabled?: ... } | null, hardwareConfiguration?:
+        Record<..., ...> | { @odata.type: ..., compute?: ..., hdmiIngest?: ...,
+        processorModel?: ... } | null, lastModifiedBy?: Record<..., ...> | {
+        @odata.type: ..., application?: ..., device?: ..., user?: ... } | null,
+        lastModifiedDateTime?: string | null, microphoneConfiguration?:
+        Record<..., ...> | { @odata.type: ..., defaultMicrophone?: ...,
+        isMicrophoneOptional?: ..., microphones?: ... } | null,
+        softwareVersions?: Record<..., ...> | { @odata.type: ...,
+        adminAgentSoftwareVersion?: ..., firmwareSoftwareVersion?: ...,
+        operatingSystemSoftwareVersion?: ..., partnerAgentSoftwareVersion?: ...,
+        teamsClientSoftwareVersion?: ... } | null, speakerConfiguration?:
+        Record<..., ...> | { @odata.type: ..., defaultCommunicationSpeaker?:
+        ..., defaultSpeaker?: ..., isCommunicationSpeakerOptional?: ...,
+        isSpeakerOptional?: ..., speakers?: ... } | null, systemConfiguration?:
+        Record<..., ...> | { @odata.type: ..., dateTimeConfiguration?: ...,
+        defaultPassword?: ..., deviceLockTimeout?: ..., isDeviceLockEnabled?:
+        ..., isLoggingEnabled?: ..., isPowerSavingEnabled?: ...,
+        isScreenCaptureEnabled?: ..., isSilentModeEnabled?: ..., language?: ...,
+        lockPin?: ..., loggingLevel?: ..., networkConfiguration?: ... } | null,
+        teamsClientConfiguration?: Record<..., ...> | { @odata.type: ...,
+        accountConfiguration?: ..., featuresConfiguration?: ... } | null } & {
+        @odata.type: "#microsoft.graph.teamworkDeviceConfiguration" }) | null,
+        createdBy?: Record<string, never> | { @odata.type: string, application?:
+        Record<string, never> | { @odata.type: string, displayName?: function,
+        id?: function } | null, device?: Record<string, never> | { @odata.type:
+        string, displayName?: function, id?: function } | null, user?:
+        Record<string, never> | { @odata.type: string, displayName?: function,
+        id?: function } | null } | null, createdDateTime?: string | null,
+        currentUser?: Record<string, never> | (Omit<{ @odata.type: string,
+        displayName?: function, id?: function }, "@odata.type"> & { @odata.type:
+        string, userIdentityType?: "unknownFutureValue" | Record<..., ...> |
+        "aadUser" | "onPremiseAadUser" | "anonymousGuest" | "federatedUser" |
+        "personalMicrosoftAccountUser" | "skypeUser" | "phoneUser" | "emailUser"
+        | "azureCommunicationServicesUser" | null, userPrincipalName?: string |
+        null } & { @odata.type: "#microsoft.graph.teamworkUserIdentity" }) |
+        null, deviceType?: "unknownFutureValue" | "unknown" | "ipPhone" |
+        "teamsRoom" | "surfaceHub" | "collaborationBar" | "teamsDisplay" |
+        "touchConsole" | "lowCostPhone" | "teamsPanel" | "sip", hardwareDetail?:
+        { @odata.type: string, macAddresses?: function[], manufacturer?: string
+        | null, model?: string | null, serialNumber?: string | null, uniqueId?:
+        string | null }, health?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & { @odata.type: string,
+        connection?: { @odata.type: ..., connectionStatus?: ...,
+        lastModifiedDateTime?: ... }, createdBy?: Record<..., ...> | {
+        @odata.type: ..., application?: ..., device?: ..., user?: ... } | null,
+        createdDateTime?: string | null, hardwareHealth?: Record<..., ...> | {
+        @odata.type: ..., computeHealth?: ..., hdmiIngestHealth?: ... } | null,
+        lastModifiedBy?: Record<..., ...> | { @odata.type: ..., application?:
+        ..., device?: ..., user?: ... } | null, lastModifiedDateTime?: string |
+        null, loginStatus?: Record<..., ...> | { @odata.type: ...,
+        exchangeConnection?: ..., skypeConnection?: ..., teamsConnection?: ... }
+        | null, peripheralsHealth?: Record<..., ...> | { @odata.type: ...,
+        communicationSpeakerHealth?: ..., contentCameraHealth?: ...,
+        displayHealthCollection?: ..., microphoneHealth?: ...,
+        roomCameraHealth?: ..., speakerHealth?: ... } | null,
+        softwareUpdateHealth?: Record<..., ...> | { @odata.type: ...,
+        adminAgentSoftwareUpdateStatus?: ...,
+        companyPortalSoftwareUpdateStatus?: ..., firmwareSoftwareUpdateStatus?:
+        ..., operatingSystemSoftwareUpdateStatus?: ...,
+        partnerAgentSoftwareUpdateStatus?: ...,
+        teamsClientSoftwareUpdateStatus?: ... } | null } & { @odata.type:
+        "#microsoft.graph.teamworkDeviceHealth" }) | null, healthStatus?:
+        "unknownFutureValue" | Record<string, never> | "unknown" | "offline" |
+        "critical" | "nonUrgent" | "healthy" | null, lastModifiedBy?:
+        Record<string, never> | { @odata.type: string, application?:
+        Record<string, never> | { @odata.type: string, displayName?: function,
+        id?: function } | null, device?: Record<string, never> | { @odata.type:
+        string, displayName?: function, id?: function } | null, user?:
+        Record<string, never> | { @odata.type: string, displayName?: function,
+        id?: function } | null } | null, lastModifiedDateTime?: string | null,
+        notes?: string | null, operations?: (Omit<{ @odata.type: ..., id?: ...
+        }, "@odata.type"> & { @odata.type: string, completedDateTime?: function,
+        createdBy?: function, createdDateTime?: function, error?: function,
+        lastActionBy?: function, lastActionDateTime?: function, operationType?:
+        function, startedDateTime?: function, status?: function } & {
+        @odata.type: "#microsoft.graph.teamworkDeviceOperation" })[] } & {
+        @odata.type: "#microsoft.graph.teamworkDevice" })[], isTeamsEnabled?:
+        boolean, region?: string | null, teamsAppSettings?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, allowUserRequestsForAppAccess?: boolean | null,
+        customAppSettings?: Record<string, never> | { @odata.type: string,
+        developerToolsForShowingAppUsageMetrics?: "unknownFutureValue" |
+        "developerPortal" } | null, isChatResourceSpecificConsentEnabled?:
+        boolean | null, isUserPersonalScopeResourceSpecificConsentEnabled?:
+        boolean | null } & { @odata.type: "#microsoft.graph.teamsAppSettings" })
+        | null, teamTemplates?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, definitions?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        audience?: function, categories?: function, description?: function,
+        displayName?: function, iconUrl?: function, languageTag?: function,
+        lastModifiedBy?: function, lastModifiedDateTime?: function,
+        parentTemplateId?: function, publisherName?: function,
+        shortDescription?: function, teamDefinition?: function } & {
+        @odata.type: "#microsoft.graph.teamTemplateDefinition" })[] } & {
+        @odata.type: "#microsoft.graph.teamTemplate" })[],
+        workforceIntegrations?: (Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdBy?: Record<...,
+        ...> | { @odata.type: ..., application?: ..., device?: ..., user?: ... }
+        | null, createdDateTime?: string | null, lastModifiedBy?: Record<...,
+        ...> | { @odata.type: ..., application?: ..., device?: ..., user?: ... }
+        | null, lastModifiedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> &
+        { @odata.type: string, apiVersion?: number | null, displayName?: string
+        | null, eligibilityFilteringEnabledEntities?: "unknownFutureValue" |
+        Record<string, never> | "none" | "swapRequest" | "offerShiftRequest" |
+        "timeOffReason" | null, encryption?: Record<string, never> | {
+        @odata.type: string, protocol?: "unknownFutureValue" | Record<string,
+        never> | "sharedSecret" | null, secret?: string | null } | null,
+        isActive?: boolean | null, supportedEntities?: "unknownFutureValue" |
+        Record<string, never> | "none" | "swapRequest" | "offerShiftRequest" |
+        "timeOffReason" | "shift" | "userShiftPreferences" | "openShift" |
+        "openShiftRequest" | "timeCard" | "timeOff" | "timeOffRequest" | null,
+        supports?: "unknownFutureValue" | Record<string, never> | "none" |
+        "swapRequest" | "offerShiftRequest" | "timeOffReason" | "shift" |
+        "userShiftPreferences" | "openShift" | "openShiftRequest" | "timeCard" |
+        "timeOff" | "timeOffRequest" | null, url?: string | null } & {
+        @odata.type: "#microsoft.graph.workforceIntegration" })[] } & {
+        @odata.type: "#microsoft.graph.teamwork" }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, deletedChats?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.deletedChat" })[], deletedTeams?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        channels?: (Omit<..., ...> & { @odata.type: ..., allMembers?: ...,
+        createdDateTime?: ..., description?: ..., displayName?: ..., email?:
+        ..., enabledApps?: ..., filesFolder?: ..., isArchived?: ...,
+        isFavoriteByDefault?: ..., layoutType?: ..., members?: ...,
+        membershipType?: ..., messages?: ..., moderationSettings?: ...,
+        planner?: ..., sharedWithTeams?: ..., summary?: ..., tabs?: ...,
+        tenantId?: ..., webUrl?: ... } & { @odata.type: ... })[] } & {
+        @odata.type: "#microsoft.graph.deletedTeam" })[], devices?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, activity?: Record<string, never> | (Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string, activePeripherals?:
+        function, createdBy?: function, createdDateTime?: function,
+        lastModifiedBy?: function, lastModifiedDateTime?: function } & {
+        @odata.type: "#microsoft.graph.teamworkDeviceActivity" }) | null,
+        activityState?: "unknownFutureValue" | Record<string, never> | "unknown"
+        | "busy" | "idle" | "unavailable" | null, companyAssetTag?: string |
+        null, configuration?: Record<string, never> | (Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string,
+        cameraConfiguration?: function, createdBy?: function, createdDateTime?:
+        function, displayConfiguration?: function, hardwareConfiguration?:
+        function, lastModifiedBy?: function, lastModifiedDateTime?: function,
+        microphoneConfiguration?: function, softwareVersions?: function,
+        speakerConfiguration?: function, systemConfiguration?: function,
+        teamsClientConfiguration?: function } & { @odata.type:
+        "#microsoft.graph.teamworkDeviceConfiguration" }) | null, createdBy?:
+        Record<string, never> | { @odata.type: string, application?: Record<...,
+        ...> | { @odata.type: ..., displayName?: ..., id?: ... } | null,
+        device?: Record<..., ...> | { @odata.type: ..., displayName?: ..., id?:
+        ... } | null, user?: Record<..., ...> | { @odata.type: ...,
+        displayName?: ..., id?: ... } | null } | null, createdDateTime?: string
+        | null, currentUser?: Record<string, never> | (Omit<{ @odata.type: ...,
+        displayName?: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        userIdentityType?: function, userPrincipalName?: function } & {
+        @odata.type: "#microsoft.graph.teamworkUserIdentity" }) | null,
+        deviceType?: "unknownFutureValue" | "unknown" | "ipPhone" | "teamsRoom"
+        | "surfaceHub" | "collaborationBar" | "teamsDisplay" | "touchConsole" |
+        "lowCostPhone" | "teamsPanel" | "sip", hardwareDetail?: { @odata.type:
+        string, macAddresses?: ...[], manufacturer?: string | null, model?:
+        string | null, serialNumber?: string | null, uniqueId?: string | null },
+        health?: Record<string, never> | (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, connection?: function,
+        createdBy?: function, createdDateTime?: function, hardwareHealth?:
+        function, lastModifiedBy?: function, lastModifiedDateTime?: function,
+        loginStatus?: function, peripheralsHealth?: function,
+        softwareUpdateHealth?: function } & { @odata.type:
+        "#microsoft.graph.teamworkDeviceHealth" }) | null, healthStatus?:
+        "unknownFutureValue" | Record<string, never> | "unknown" | "offline" |
+        "critical" | "nonUrgent" | "healthy" | null, lastModifiedBy?:
+        Record<string, never> | { @odata.type: string, application?: Record<...,
+        ...> | { @odata.type: ..., displayName?: ..., id?: ... } | null,
+        device?: Record<..., ...> | { @odata.type: ..., displayName?: ..., id?:
+        ... } | null, user?: Record<..., ...> | { @odata.type: ...,
+        displayName?: ..., id?: ... } | null } | null, lastModifiedDateTime?:
+        string | null, notes?: string | null, operations?: (Omit<..., ...> & {
+        @odata.type: ..., completedDateTime?: ..., createdBy?: ...,
+        createdDateTime?: ..., error?: ..., lastActionBy?: ...,
+        lastActionDateTime?: ..., operationType?: ..., startedDateTime?: ...,
+        status?: ... } & { @odata.type: ... })[] } & { @odata.type:
+        "#microsoft.graph.teamworkDevice" })[], isTeamsEnabled?: boolean,
+        region?: string | null, teamsAppSettings?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, allowUserRequestsForAppAccess?: boolean | null,
+        customAppSettings?: Record<string, never> | { @odata.type: string,
+        developerToolsForShowingAppUsageMetrics?: "unknownFutureValue" |
+        "developerPortal" } | null, isChatResourceSpecificConsentEnabled?:
+        boolean | null, isUserPersonalScopeResourceSpecificConsentEnabled?:
+        boolean | null } & { @odata.type: "#microsoft.graph.teamsAppSettings" })
+        | null, teamTemplates?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, definitions?: (Omit<..., ...> &
+        { @odata.type: ..., audience?: ..., categories?: ..., description?: ...,
+        displayName?: ..., iconUrl?: ..., languageTag?: ..., lastModifiedBy?:
+        ..., lastModifiedDateTime?: ..., parentTemplateId?: ..., publisherName?:
+        ..., shortDescription?: ..., teamDefinition?: ... } & { @odata.type: ...
+        })[] } & { @odata.type: "#microsoft.graph.teamTemplate" })[],
+        workforceIntegrations?: (Omit<Omit<{ @odata.type: string, id?: function
+        }, "@odata.type"> & Omit<{ @odata.type: string, createdBy?: function,
+        createdDateTime?: function, lastModifiedBy?: function,
+        lastModifiedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & {
+        @odata.type: string, apiVersion?: number | null, displayName?: string |
+        null, eligibilityFilteringEnabledEntities?: "unknownFutureValue" |
+        Record<string, never> | "none" | "swapRequest" | "offerShiftRequest" |
+        "timeOffReason" | null, encryption?: Record<string, never> | {
+        @odata.type: string, protocol?: "unknownFutureValue" | Record<..., ...>
+        | "sharedSecret" | null, secret?: string | null } | null, isActive?:
+        boolean | null, supportedEntities?: "unknownFutureValue" |
+        Record<string, never> | "none" | "swapRequest" | "offerShiftRequest" |
+        "timeOffReason" | "shift" | "userShiftPreferences" | "openShift" |
+        "openShiftRequest" | "timeCard" | "timeOff" | "timeOffRequest" | null,
+        supports?: "unknownFutureValue" | Record<string, never> | "none" |
+        "swapRequest" | "offerShiftRequest" | "timeOffReason" | "shift" |
+        "userShiftPreferences" | "openShift" | "openShiftRequest" | "timeCard" |
+        "timeOff" | "timeOffRequest" | null, url?: string | null } & {
+        @odata.type: "#microsoft.graph.workforceIntegration" })[] } & {
+        @odata.type: "#microsoft.graph.teamwork" }>
       parameters:
         - id: body
-          type: Operation&lt;"/teamwork", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            deletedChats?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.deletedChat" />" })[], deletedTeams?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            channels?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, allMembers?: function, createdDateTime?: function,
+            description?: function, displayName?: function, email?: function,
+            enabledApps?: function, filesFolder?: function, isArchived?:
+            function, isFavoriteByDefault?: function, layoutType?: function,
+            members?: function, membershipType?: function, messages?: function,
+            moderationSettings?: function, planner?: function, sharedWithTeams?:
+            function, summary?: function, tabs?: function, tenantId?: function,
+            webUrl?: function } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.channel" />" })[] } & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.deletedTeam" />" })[], devices?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            activity?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            activePeripherals?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., communicationSpeaker?: ...,
+            contentCamera?: ..., microphone?: ..., roomCamera?: ..., speaker?:
+            ... } | null, createdBy?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., application?: ..., device?: ..., user?:
+            ... } | null, createdDateTime?: string | null, lastModifiedBy?:
+            Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            application?: ..., device?: ..., user?: ... } | null,
+            lastModifiedDateTime?: string | null } & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.teamworkDeviceActivity" />" }) |
+            null, activityState?: "unknownFutureValue" | Record&lt;string,
+            never&gt; | "unknown" | "busy" | "idle" | "unavailable" | null,
+            companyAssetTag?: string | null, configuration?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, cameraConfiguration?: Record&lt;...,
+            ...&gt; | { <xref uid="@odata.type" />: ..., cameras?: ...,
+            contentCameraConfiguration?: ..., defaultContentCamera?: ... } |
+            null, createdBy?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ..., application?: ..., device?: ..., user?: ... } | null,
+            createdDateTime?: string | null, displayConfiguration?:
+            Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            configuredDisplays?: ..., displayCount?: ...,
+            inBuiltDisplayScreenConfiguration?: ...,
+            isContentDuplicationAllowed?: ..., isDualDisplayModeEnabled?: ... }
+            | null, hardwareConfiguration?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., compute?: ..., hdmiIngest?: ...,
+            processorModel?: ... } | null, lastModifiedBy?: Record&lt;...,
+            ...&gt; | { <xref uid="@odata.type" />: ..., application?: ...,
+            device?: ..., user?: ... } | null, lastModifiedDateTime?: string |
+            null, microphoneConfiguration?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., defaultMicrophone?: ...,
+            isMicrophoneOptional?: ..., microphones?: ... } | null,
+            softwareVersions?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., adminAgentSoftwareVersion?: ...,
+            firmwareSoftwareVersion?: ..., operatingSystemSoftwareVersion?: ...,
+            partnerAgentSoftwareVersion?: ..., teamsClientSoftwareVersion?: ...
+            } | null, speakerConfiguration?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., defaultCommunicationSpeaker?: ...,
+            defaultSpeaker?: ..., isCommunicationSpeakerOptional?: ...,
+            isSpeakerOptional?: ..., speakers?: ... } | null,
+            systemConfiguration?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., dateTimeConfiguration?: ...,
+            defaultPassword?: ..., deviceLockTimeout?: ...,
+            isDeviceLockEnabled?: ..., isLoggingEnabled?: ...,
+            isPowerSavingEnabled?: ..., isScreenCaptureEnabled?: ...,
+            isSilentModeEnabled?: ..., language?: ..., lockPin?: ...,
+            loggingLevel?: ..., networkConfiguration?: ... } | null,
+            teamsClientConfiguration?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., accountConfiguration?: ...,
+            featuresConfiguration?: ... } | null } & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.teamworkDeviceConfiguration" />" })
+            | null, createdBy?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, application?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, displayName?:
+            function, id?: function } | null, device?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, displayName?:
+            function, id?: function } | null, user?: Record&lt;string, never&gt;
+            | { <xref uid="@odata.type" />: string, displayName?: function, id?:
+            function } | null } | null, createdDateTime?: string | null,
+            currentUser?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, userIdentityType?: "unknownFutureValue" | Record&lt;...,
+            ...&gt; | "aadUser" | "onPremiseAadUser" | "anonymousGuest" |
+            "federatedUser" | "personalMicrosoftAccountUser" | "skypeUser" |
+            "phoneUser" | "emailUser" | "azureCommunicationServicesUser" | null,
+            userPrincipalName?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.teamworkUserIdentity" />" }) | null,
+            deviceType?: "unknownFutureValue" | "unknown" | "ipPhone" |
+            "teamsRoom" | "surfaceHub" | "collaborationBar" | "teamsDisplay" |
+            "touchConsole" | "lowCostPhone" | "teamsPanel" | "sip",
+            hardwareDetail?: { <xref uid="@odata.type" />: string,
+            macAddresses?: function[], manufacturer?: string | null, model?:
+            string | null, serialNumber?: string | null, uniqueId?: string |
+            null }, health?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            connection?: { <xref uid="@odata.type" />: ..., connectionStatus?:
+            ..., lastModifiedDateTime?: ... }, createdBy?: Record&lt;...,
+            ...&gt; | { <xref uid="@odata.type" />: ..., application?: ...,
+            device?: ..., user?: ... } | null, createdDateTime?: string | null,
+            hardwareHealth?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ..., computeHealth?: ..., hdmiIngestHealth?: ... } | null,
+            lastModifiedBy?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ..., application?: ..., device?: ..., user?: ... } | null,
+            lastModifiedDateTime?: string | null, loginStatus?: Record&lt;...,
+            ...&gt; | { <xref uid="@odata.type" />: ..., exchangeConnection?:
+            ..., skypeConnection?: ..., teamsConnection?: ... } | null,
+            peripheralsHealth?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., communicationSpeakerHealth?: ...,
+            contentCameraHealth?: ..., displayHealthCollection?: ...,
+            microphoneHealth?: ..., roomCameraHealth?: ..., speakerHealth?: ...
+            } | null, softwareUpdateHealth?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., adminAgentSoftwareUpdateStatus?: ...,
+            companyPortalSoftwareUpdateStatus?: ...,
+            firmwareSoftwareUpdateStatus?: ...,
+            operatingSystemSoftwareUpdateStatus?: ...,
+            partnerAgentSoftwareUpdateStatus?: ...,
+            teamsClientSoftwareUpdateStatus?: ... } | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamworkDeviceHealth" />" }) | null,
+            healthStatus?: "unknownFutureValue" | Record&lt;string, never&gt; |
+            "unknown" | "offline" | "critical" | "nonUrgent" | "healthy" | null,
+            lastModifiedBy?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, application?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, displayName?:
+            function, id?: function } | null, device?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, displayName?:
+            function, id?: function } | null, user?: Record&lt;string, never&gt;
+            | { <xref uid="@odata.type" />: string, displayName?: function, id?:
+            function } | null } | null, lastModifiedDateTime?: string | null,
+            notes?: string | null, operations?: (Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, completedDateTime?:
+            function, createdBy?: function, createdDateTime?: function, error?:
+            function, lastActionBy?: function, lastActionDateTime?: function,
+            operationType?: function, startedDateTime?: function, status?:
+            function } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamworkDeviceOperation" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.teamworkDevice"
+            />" })[], isTeamsEnabled?: boolean, region?: string | null,
+            teamsAppSettings?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            allowUserRequestsForAppAccess?: boolean | null, customAppSettings?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            developerToolsForShowingAppUsageMetrics?: "unknownFutureValue" |
+            "developerPortal" } | null, isChatResourceSpecificConsentEnabled?:
+            boolean | null, isUserPersonalScopeResourceSpecificConsentEnabled?:
+            boolean | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAppSettings" />" }) | null,
+            teamTemplates?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, definitions?: (Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, audience?: function,
+            categories?: function, description?: function, displayName?:
+            function, iconUrl?: function, languageTag?: function,
+            lastModifiedBy?: function, lastModifiedDateTime?: function,
+            parentTemplateId?: function, publisherName?: function,
+            shortDescription?: function, teamDefinition?: function } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamTemplateDefinition" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.teamTemplate" />"
+            })[], workforceIntegrations?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, createdBy?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., application?: ..., device?: ..., user?:
+            ... } | null, createdDateTime?: string | null, lastModifiedBy?:
+            Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            application?: ..., device?: ..., user?: ... } | null,
+            lastModifiedDateTime?: string | null }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            apiVersion?: number | null, displayName?: string | null,
+            eligibilityFilteringEnabledEntities?: "unknownFutureValue" |
+            Record&lt;string, never&gt; | "none" | "swapRequest" |
+            "offerShiftRequest" | "timeOffReason" | null, encryption?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            protocol?: "unknownFutureValue" | Record&lt;string, never&gt; |
+            "sharedSecret" | null, secret?: string | null } | null, isActive?:
+            boolean | null, supportedEntities?: "unknownFutureValue" |
+            Record&lt;string, never&gt; | "none" | "swapRequest" |
+            "offerShiftRequest" | "timeOffReason" | "shift" |
+            "userShiftPreferences" | "openShift" | "openShiftRequest" |
+            "timeCard" | "timeOff" | "timeOffRequest" | null, supports?:
+            "unknownFutureValue" | Record&lt;string, never&gt; | "none" |
+            "swapRequest" | "offerShiftRequest" | "timeOffReason" | "shift" |
+            "userShiftPreferences" | "openShift" | "openShiftRequest" |
+            "timeCard" | "timeOff" | "timeOffRequest" | null, url?: string |
+            null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.workforceIntegration" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.teamwork" />" }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["PATCH /teamwork"]["response"]&gt;
+        type: >-
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, deletedChats?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deletedChat" />" })[], deletedTeams?: (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          channels?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          allMembers?: ..., createdDateTime?: ..., description?: ...,
+          displayName?: ..., email?: ..., enabledApps?: ..., filesFolder?: ...,
+          isArchived?: ..., isFavoriteByDefault?: ..., layoutType?: ...,
+          members?: ..., membershipType?: ..., messages?: ...,
+          moderationSettings?: ..., planner?: ..., sharedWithTeams?: ...,
+          summary?: ..., tabs?: ..., tenantId?: ..., webUrl?: ... } & { <xref
+          uid="@odata.type" />: ... })[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.deletedTeam" />" })[], devices?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          activity?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, activePeripherals?:
+          function, createdBy?: function, createdDateTime?: function,
+          lastModifiedBy?: function, lastModifiedDateTime?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamworkDeviceActivity" />" }) | null,
+          activityState?: "unknownFutureValue" | Record&lt;string, never&gt; |
+          "unknown" | "busy" | "idle" | "unavailable" | null, companyAssetTag?:
+          string | null, configuration?: Record&lt;string, never&gt; |
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          cameraConfiguration?: function, createdBy?: function,
+          createdDateTime?: function, displayConfiguration?: function,
+          hardwareConfiguration?: function, lastModifiedBy?: function,
+          lastModifiedDateTime?: function, microphoneConfiguration?: function,
+          softwareVersions?: function, speakerConfiguration?: function,
+          systemConfiguration?: function, teamsClientConfiguration?: function }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamworkDeviceConfiguration" />" }) | null,
+          createdBy?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, application?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... } | null,
+          device?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          displayName?: ..., id?: ... } | null, user?: Record&lt;..., ...&gt; |
+          { <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          null } | null, createdDateTime?: string | null, currentUser?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., displayName?: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: string, userIdentityType?: function,
+          userPrincipalName?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamworkUserIdentity" />" }) | null, deviceType?:
+          "unknownFutureValue" | "unknown" | "ipPhone" | "teamsRoom" |
+          "surfaceHub" | "collaborationBar" | "teamsDisplay" | "touchConsole" |
+          "lowCostPhone" | "teamsPanel" | "sip", hardwareDetail?: { <xref
+          uid="@odata.type" />: string, macAddresses?: ...[], manufacturer?:
+          string | null, model?: string | null, serialNumber?: string | null,
+          uniqueId?: string | null }, health?: Record&lt;string, never&gt; |
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          connection?: function, createdBy?: function, createdDateTime?:
+          function, hardwareHealth?: function, lastModifiedBy?: function,
+          lastModifiedDateTime?: function, loginStatus?: function,
+          peripheralsHealth?: function, softwareUpdateHealth?: function } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamworkDeviceHealth" />" }) | null,
+          healthStatus?: "unknownFutureValue" | Record&lt;string, never&gt; |
+          "unknown" | "offline" | "critical" | "nonUrgent" | "healthy" | null,
+          lastModifiedBy?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, application?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } | null,
+          device?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          displayName?: ..., id?: ... } | null, user?: Record&lt;..., ...&gt; |
+          { <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          null } | null, lastModifiedDateTime?: string | null, notes?: string |
+          null, operations?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type"
+          />: ..., completedDateTime?: ..., createdBy?: ..., createdDateTime?:
+          ..., error?: ..., lastActionBy?: ..., lastActionDateTime?: ...,
+          operationType?: ..., startedDateTime?: ..., status?: ... } & { <xref
+          uid="@odata.type" />: ... })[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.teamworkDevice" />" })[],
+          isTeamsEnabled?: boolean, region?: string | null, teamsAppSettings?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, allowUserRequestsForAppAccess?: boolean
+          | null, customAppSettings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string,
+          developerToolsForShowingAppUsageMetrics?: "unknownFutureValue" |
+          "developerPortal" } | null, isChatResourceSpecificConsentEnabled?:
+          boolean | null, isUserPersonalScopeResourceSpecificConsentEnabled?:
+          boolean | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppSettings" />" }) | null, teamTemplates?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          definitions?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+          ..., audience?: ..., categories?: ..., description?: ...,
+          displayName?: ..., iconUrl?: ..., languageTag?: ..., lastModifiedBy?:
+          ..., lastModifiedDateTime?: ..., parentTemplateId?: ...,
+          publisherName?: ..., shortDescription?: ..., teamDefinition?: ... } &
+          { <xref uid="@odata.type" />: ... })[] } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.teamTemplate" />" })[],
+          workforceIntegrations?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, createdBy?: function,
+          createdDateTime?: function, lastModifiedBy?: function,
+          lastModifiedDateTime?: function }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          apiVersion?: number | null, displayName?: string | null,
+          eligibilityFilteringEnabledEntities?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "none" | "swapRequest" |
+          "offerShiftRequest" | "timeOffReason" | null, encryption?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          protocol?: "unknownFutureValue" | Record&lt;..., ...&gt; |
+          "sharedSecret" | null, secret?: string | null } | null, isActive?:
+          boolean | null, supportedEntities?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "none" | "swapRequest" |
+          "offerShiftRequest" | "timeOffReason" | "shift" |
+          "userShiftPreferences" | "openShift" | "openShiftRequest" | "timeCard"
+          | "timeOff" | "timeOffRequest" | null, supports?: "unknownFutureValue"
+          | Record&lt;string, never&gt; | "none" | "swapRequest" |
+          "offerShiftRequest" | "timeOffReason" | "shift" |
+          "userShiftPreferences" | "openShift" | "openShiftRequest" | "timeCard"
+          | "timeOff" | "timeOffRequest" | null, url?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.workforceIntegration" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamwork" />" }&gt;

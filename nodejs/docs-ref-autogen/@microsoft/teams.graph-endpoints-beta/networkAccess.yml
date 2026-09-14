@@ -7,7 +7,7 @@ interfaces:
   - '@microsoft/teams.graph-endpoints-beta.networkAccess.IEndpoints'
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: list(any)
+  - name: 'list({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints-beta.networkAccess.list'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`GET /networkAccess`'
@@ -15,16 +15,710 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /networkAccess"]["response"]>
+        function list(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, alerts?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string, actions?:
+        { @odata.type: string, actionLink?: function, actionText?: function }[],
+        alertType?: "unhealthyRemoteNetworks" | "unhealthyConnectors" |
+        "deviceTokenInconsistency" | "crossTenantAnomaly" | "suspiciousProcess"
+        | "threatIntelligenceTransactions" | "unknownFutureValue" |
+        "webContentBlocked" | "malware" | "patientZero" | "dlp", categories?:
+        ("unknownFutureValue" | "initialAccess" | "persistence" |
+        "privilegeEscalation" | "defenseEvasion" | "credentialAccess" |
+        "discovery" | "lateralMovement" | "execution" | "collection" |
+        "exfiltration" | "commandAndControl" | "impact" | "impairProcessControl"
+        | "inhibitResponseFunction" | "reconnaissance" | "resourceDevelopment" |
+        "evasion" | Record<..., ...> | null)[], componentName?: string | null,
+        creationDateTime?: string, description?: string | null,
+        detectionTechnology?: string | null, displayName?: string,
+        extendedProperties?: Record<string, never> | (Omit<{ @odata.type: ... },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.networkaccess.extendedProperties" }) | null,
+        firstActivityDateTime?: string | null, isPreview?: boolean | null,
+        lastActivityDateTime?: string | null, policy?: Record<string, never> |
+        (Omit<... & ... & ..., "@odata.type"> & { @odata.type: string, action?:
+        function, createdDateTime?: function, lastModifiedDateTime?: function })
+        | null, productName?: string | null, relatedResources?: { @odata.type:
+        string }[], severity?: "unknownFutureValue" | "informational" | "low" |
+        "medium" | "high", subTechniques?: (string | null)[], techniques?:
+        (string | null)[], vendorName?: string } & { @odata.type:
+        "#microsoft.graph.networkaccess.alert" })[], connectivity?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, branches?: (Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        bandwidthCapacity?: function, connectivityConfiguration?: function,
+        connectivityState?: function, country?: function, deviceLinks?:
+        function, lastModifiedDateTime?: function, name?: function, region?:
+        function, version?: function } & { @odata.type:
+        "#microsoft.graph.networkaccess.branchSite" })[], webCategories?:
+        (Omit<{ @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        displayName?: function, group?: function, name?: function } & {
+        @odata.type: "#microsoft.graph.networkaccess.webCategory" })[] } & {
+        @odata.type: "#microsoft.graph.networkaccess.connectivity" }) | null,
+        filteringPolicies?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, description?: function,
+        name?: function, policyRules?: function, version?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.networkaccess.policy"
+        }, "@odata.type"> & { @odata.type: string, action?: "unknownFutureValue"
+        | "block" | "allow" | "bypass" | "alert", createdDateTime?: string,
+        lastModifiedDateTime?: string })[], forwardingPolicies?: (Omit<Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, description?: function, name?: function,
+        policyRules?: function, version?: function }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.networkaccess.policy" }, "@odata.type"> &
+        { @odata.type: string, privateAccessAppId?: string | null,
+        trafficForwardingType?: "unknownFutureValue" | "m365" | "internet" |
+        "private" })[], logs?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        connections?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+        @odata.type: string, agentVersion?: function, applicationSnapshot?:
+        function, createdDateTime?: function, destinationFqdn?: function,
+        destinationIp?: function, destinationPort?: function, deviceCategory?:
+        function, deviceId?: function, deviceOperatingSystem?: function,
+        deviceOperatingSystemVersion?: function, endDateTime?: function,
+        initiatingProcessName?: function, lastUpdateDateTime?: function,
+        networkProtocol?: function, popProcessingRegion?: function,
+        privateAccessDetails?: function, receivedBytes?: function, sentBytes?:
+        function, sourceIp?: function, sourcePort?: function, status?: function,
+        tenantId?: function, trafficType?: function, transactionBlockCount?:
+        function, transactionCount?: function, transportProtocol?: function,
+        userId?: function, userPrincipalName?: function } & { @odata.type:
+        "#microsoft.graph.networkaccess.connection" })[], remoteNetworks?:
+        (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
+        string, bgpRoutesAdvertisedCount?: function, createdDateTime?: function,
+        description?: function, destinationIp?: function, receivedBytes?:
+        function, remoteNetworkId?: function, sentBytes?: function, sourceIp?:
+        function, status?: function } & { @odata.type:
+        "#microsoft.graph.networkaccess.remoteNetworkHealthEvent" })[],
+        traffic?: { @odata.type: string, action?: "unknownFutureValue" |
+        Record<..., ...> | "block" | "allow" | "bypass" | "alert" | null,
+        agentVersion?: string | null, applicationSnapshot?: Record<..., ...> | {
+        @odata.type: ..., appId?: ... } | null, cloudApplicationMetadata?:
+        Record<..., ...> | { @odata.type: ..., category?: ...,
+        cloudApplicationCatalogId?: ..., complianceScore?: ..., generalScore?:
+        ..., legalScore?: ..., loginUser?: ..., name?: ..., riskScore?: ...,
+        securityScore?: ..., subactivity?: ... } | null, connectionId?: string |
+        null, createdDateTime?: string, description?: string | null,
+        destinationFQDN?: string | null, destinationIp?: string | null,
+        destinationPort?: number | null, destinationUrl?: string | null,
+        destinationWebCategory?: Record<..., ...> | (... & ... & ...) | null,
+        device?: Record<..., ...> | (... & ...) | null, deviceCategory?:
+        "unknownFutureValue" | Record<..., ...> | "client" | "branch" |
+        "remoteNetwork" | null, deviceId?: string | null,
+        deviceOperatingSystem?: string | null, deviceOperatingSystemVersion?:
+        string | null, filteringProfileId?: string | null,
+        filteringProfileName?: string | null, headers?: Record<..., ...> | {
+        @odata.type: ..., origin?: ..., referrer?: ..., xForwardedFor?: ... } |
+        null, httpMethod?: "get" | "unknownFutureValue" | Record<..., ...> |
+        "post" | "put" | "delete" | "head" | "options" | "connect" | "patch" |
+        "trace" | null, initiatingProcessName?: string | null, networkProtocol?:
+        "unknownFutureValue" | Record<..., ...> | "ip" | "icmp" | "igmp" | "ggp"
+        | "ipv4" | "tcp" | "pup" | "udp" | "idp" | "ipv6" | "ipv6RoutingHeader"
+        | "ipv6FragmentHeader" | "ipSecEncapsulatingSecurityPayload" |
+        "ipSecAuthenticationHeader" | "icmpV6" | "ipv6NoNextHeader" |
+        "ipv6DestinationOptions" | "nd" | "ipx" | "raw" | "spx" | "spxII" |
+        null, operationStatus?: "unknownFutureValue" | Record<..., ...> |
+        "success" | "failure" | null, policyId?: string | null, policyName?:
+        string | null, policyRuleId?: string | null, policyRuleName?: string |
+        null, popProcessingRegion?: string | null, privateAccessDetails?:
+        Record<..., ...> | { @odata.type: ..., accessType?: ..., appSegmentId?:
+        ..., connectionStatus?: ..., connectorId?: ..., connectorIp?: ...,
+        connectorName?: ..., processingRegion?: ..., thirdPartyTokenDetails?:
+        ... } | null, receivedBytes?: number | null, remoteNetworkId?: string |
+        null, resourceTenantId?: string | null, responseCode?: number | null,
+        sentBytes?: number | null, sessionId?: string | null, sourceIp?: string
+        | null, sourcePort?: number | null, tenantId?: string, threatType?:
+        string | null, trafficType?: "unknownFutureValue" | "internet" |
+        "private" | "microsoft365" | "all", transactionId?: string,
+        transportProtocol?: "unknownFutureValue" | Record<..., ...> | "ip" |
+        "icmp" | "igmp" | "ggp" | "ipv4" | "tcp" | "pup" | "udp" | "idp" |
+        "ipv6" | "ipv6RoutingHeader" | "ipv6FragmentHeader" |
+        "ipSecEncapsulatingSecurityPayload" | "ipSecAuthenticationHeader" |
+        "icmpV6" | "ipv6NoNextHeader" | "ipv6DestinationOptions" | "nd" | "ipx"
+        | "raw" | "spx" | "spxII" | null, user?: Record<..., ...> | (... & ... &
+        ...) | null, userId?: string | null, userPrincipalName?: string | null,
+        vendorNames?: ...[] }[] } & { @odata.type:
+        "#microsoft.graph.networkaccess.logs" }) | null, reports?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.networkaccess.reports" }) | null, settings?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, conditionalAccess?: Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, signalingStatus?: "unknownFutureValue" | "enabled" | "disabled"
+        } & { @odata.type:
+        "#microsoft.graph.networkaccess.conditionalAccessSettings" },
+        crossTenantAccess?: Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, networkPacketTaggingStatus?:
+        "unknownFutureValue" | "enabled" | "disabled" } & { @odata.type:
+        "#microsoft.graph.networkaccess.crossTenantAccessSettings" },
+        customBlockPage?: Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, configuration?: Record<..., ...>
+        | { @odata.type: ... } | null, state?: "unknownFutureValue" | "enabled"
+        | "disabled" } & { @odata.type:
+        "#microsoft.graph.networkaccess.customBlockPage" }, forwardingOptions?:
+        Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+        @odata.type: string, skipDnsLookupState?: "unknownFutureValue" |
+        "enabled" | "disabled" } & { @odata.type:
+        "#microsoft.graph.networkaccess.forwardingOptions" } } & { @odata.type:
+        "#microsoft.graph.networkaccess.settings" }) | null, tenantStatus?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, onboardingErrorMessage?: string
+        | null, onboardingStatus?: "unknownFutureValue" | "offboarded" |
+        "offboardingInProgress" | "onboardingInProgress" | "onboarded" |
+        "onboardingErrorOccurred" | "offboardingErrorOccurred" } & {
+        @odata.type: "#microsoft.graph.networkaccess.tenantStatus" }) | null,
+        threatIntelligencePolicies?: (Omit<Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string, description?:
+        function, name?: function, policyRules?: function, version?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.networkaccess.policy"
+        }, "@odata.type"> & { @odata.type: string, lastModifiedDateTime?:
+        string, settings?: { @odata.type: string, defaultAction?:
+        "unknownFutureValue" | "block" | "allow" } } & { @odata.type:
+        "#microsoft.graph.networkaccess.threatIntelligencePolicy" })[], tls?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string,
+        externalCertificateAuthorityCertificates?: (Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string, certificate?:
+        function, certificateSigningRequest?: function, chain?: function,
+        commonName?: function, name?: function, organizationName?: function,
+        status?: function, validity?: function } & { @odata.type:
+        "#microsoft.graph.networkaccess.externalCertificateAuthorityCertificate"
+        })[] } & { @odata.type: "#microsoft.graph.networkaccess.tlsTermination"
+        }) | null, tlsInspectionPolicies?: (Omit<Omit<{ @odata.type: string,
+        id?: function }, "@odata.type"> & Omit<{ @odata.type: string,
+        description?: function, name?: function, policyRules?: function,
+        version?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.networkaccess.policy" }, "@odata.type"> & {
+        @odata.type: string, lastModifiedDateTime?: string, settings?: {
+        @odata.type: string } } & { @odata.type:
+        "#microsoft.graph.networkaccess.tlsInspectionPolicy" })[] } & {
+        @odata.type: "#microsoft.graph.networkaccess.networkAccessRoot" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /networkAccess"]["response"]&gt;
-  - name: update(Operation<"/networkAccess", "patch">)
+        type: >-
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, alerts?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, actions?: { <xref uid="@odata.type" />:
+          string, actionLink?: function, actionText?: function }[], alertType?:
+          "unhealthyRemoteNetworks" | "unhealthyConnectors" |
+          "deviceTokenInconsistency" | "crossTenantAnomaly" |
+          "suspiciousProcess" | "threatIntelligenceTransactions" |
+          "unknownFutureValue" | "webContentBlocked" | "malware" | "patientZero"
+          | "dlp", categories?: ("unknownFutureValue" | "initialAccess" |
+          "persistence" | "privilegeEscalation" | "defenseEvasion" |
+          "credentialAccess" | "discovery" | "lateralMovement" | "execution" |
+          "collection" | "exfiltration" | "commandAndControl" | "impact" |
+          "impairProcessControl" | "inhibitResponseFunction" | "reconnaissance"
+          | "resourceDevelopment" | "evasion" | Record&lt;..., ...&gt; |
+          null)[], componentName?: string | null, creationDateTime?: string,
+          description?: string | null, detectionTechnology?: string | null,
+          displayName?: string, extendedProperties?: Record&lt;string, never&gt;
+          | (Omit&lt;{ <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.extendedProperties" />" }) | null,
+          firstActivityDateTime?: string | null, isPreview?: boolean | null,
+          lastActivityDateTime?: string | null, policy?: Record&lt;string,
+          never&gt; | (Omit&lt;... & ... & ..., "<xref uid="@odata.type" />"&gt;
+          & { <xref uid="@odata.type" />: string, action?: function,
+          createdDateTime?: function, lastModifiedDateTime?: function }) | null,
+          productName?: string | null, relatedResources?: { <xref
+          uid="@odata.type" />: string }[], severity?: "unknownFutureValue" |
+          "informational" | "low" | "medium" | "high", subTechniques?: (string |
+          null)[], techniques?: (string | null)[], vendorName?: string } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.alert" />" })[], connectivity?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, branches?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, bandwidthCapacity?:
+          function, connectivityConfiguration?: function, connectivityState?:
+          function, country?: function, deviceLinks?: function,
+          lastModifiedDateTime?: function, name?: function, region?: function,
+          version?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.branchSite" />" })[],
+          webCategories?: (Omit&lt;{ <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          displayName?: function, group?: function, name?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.webCategory" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.connectivity" />" }) | null,
+          filteringPolicies?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, description?: function, name?:
+          function, policyRules?: function, version?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.policy" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          action?: "unknownFutureValue" | "block" | "allow" | "bypass" |
+          "alert", createdDateTime?: string, lastModifiedDateTime?: string })[],
+          forwardingPolicies?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, description?: function, name?:
+          function, policyRules?: function, version?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.policy" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          privateAccessAppId?: string | null, trafficForwardingType?:
+          "unknownFutureValue" | "m365" | "internet" | "private" })[], logs?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, connections?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, agentVersion?:
+          function, applicationSnapshot?: function, createdDateTime?: function,
+          destinationFqdn?: function, destinationIp?: function,
+          destinationPort?: function, deviceCategory?: function, deviceId?:
+          function, deviceOperatingSystem?: function,
+          deviceOperatingSystemVersion?: function, endDateTime?: function,
+          initiatingProcessName?: function, lastUpdateDateTime?: function,
+          networkProtocol?: function, popProcessingRegion?: function,
+          privateAccessDetails?: function, receivedBytes?: function, sentBytes?:
+          function, sourceIp?: function, sourcePort?: function, status?:
+          function, tenantId?: function, trafficType?: function,
+          transactionBlockCount?: function, transactionCount?: function,
+          transportProtocol?: function, userId?: function, userPrincipalName?:
+          function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.connection" />" })[],
+          remoteNetworks?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, bgpRoutesAdvertisedCount?: function, createdDateTime?:
+          function, description?: function, destinationIp?: function,
+          receivedBytes?: function, remoteNetworkId?: function, sentBytes?:
+          function, sourceIp?: function, status?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.remoteNetworkHealthEvent" />" })[],
+          traffic?: { <xref uid="@odata.type" />: string, action?:
+          "unknownFutureValue" | Record&lt;..., ...&gt; | "block" | "allow" |
+          "bypass" | "alert" | null, agentVersion?: string | null,
+          applicationSnapshot?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., appId?: ... } | null,
+          cloudApplicationMetadata?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., category?: ..., cloudApplicationCatalogId?:
+          ..., complianceScore?: ..., generalScore?: ..., legalScore?: ...,
+          loginUser?: ..., name?: ..., riskScore?: ..., securityScore?: ...,
+          subactivity?: ... } | null, connectionId?: string | null,
+          createdDateTime?: string, description?: string | null,
+          destinationFQDN?: string | null, destinationIp?: string | null,
+          destinationPort?: number | null, destinationUrl?: string | null,
+          destinationWebCategory?: Record&lt;..., ...&gt; | (... & ... & ...) |
+          null, device?: Record&lt;..., ...&gt; | (... & ...) | null,
+          deviceCategory?: "unknownFutureValue" | Record&lt;..., ...&gt; |
+          "client" | "branch" | "remoteNetwork" | null, deviceId?: string |
+          null, deviceOperatingSystem?: string | null,
+          deviceOperatingSystemVersion?: string | null, filteringProfileId?:
+          string | null, filteringProfileName?: string | null, headers?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., origin?:
+          ..., referrer?: ..., xForwardedFor?: ... } | null, httpMethod?: "get"
+          | "unknownFutureValue" | Record&lt;..., ...&gt; | "post" | "put" |
+          "delete" | "head" | "options" | "connect" | "patch" | "trace" | null,
+          initiatingProcessName?: string | null, networkProtocol?:
+          "unknownFutureValue" | Record&lt;..., ...&gt; | "ip" | "icmp" | "igmp"
+          | "ggp" | "ipv4" | "tcp" | "pup" | "udp" | "idp" | "ipv6" |
+          "ipv6RoutingHeader" | "ipv6FragmentHeader" |
+          "ipSecEncapsulatingSecurityPayload" | "ipSecAuthenticationHeader" |
+          "icmpV6" | "ipv6NoNextHeader" | "ipv6DestinationOptions" | "nd" |
+          "ipx" | "raw" | "spx" | "spxII" | null, operationStatus?:
+          "unknownFutureValue" | Record&lt;..., ...&gt; | "success" | "failure"
+          | null, policyId?: string | null, policyName?: string | null,
+          policyRuleId?: string | null, policyRuleName?: string | null,
+          popProcessingRegion?: string | null, privateAccessDetails?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          accessType?: ..., appSegmentId?: ..., connectionStatus?: ...,
+          connectorId?: ..., connectorIp?: ..., connectorName?: ...,
+          processingRegion?: ..., thirdPartyTokenDetails?: ... } | null,
+          receivedBytes?: number | null, remoteNetworkId?: string | null,
+          resourceTenantId?: string | null, responseCode?: number | null,
+          sentBytes?: number | null, sessionId?: string | null, sourceIp?:
+          string | null, sourcePort?: number | null, tenantId?: string,
+          threatType?: string | null, trafficType?: "unknownFutureValue" |
+          "internet" | "private" | "microsoft365" | "all", transactionId?:
+          string, transportProtocol?: "unknownFutureValue" | Record&lt;...,
+          ...&gt; | "ip" | "icmp" | "igmp" | "ggp" | "ipv4" | "tcp" | "pup" |
+          "udp" | "idp" | "ipv6" | "ipv6RoutingHeader" | "ipv6FragmentHeader" |
+          "ipSecEncapsulatingSecurityPayload" | "ipSecAuthenticationHeader" |
+          "icmpV6" | "ipv6NoNextHeader" | "ipv6DestinationOptions" | "nd" |
+          "ipx" | "raw" | "spx" | "spxII" | null, user?: Record&lt;..., ...&gt;
+          | (... & ... & ...) | null, userId?: string | null,
+          userPrincipalName?: string | null, vendorNames?: ...[] }[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.networkaccess.logs"
+          />" }) | null, reports?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.reports" />" }) | null, settings?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, conditionalAccess?: Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          signalingStatus?: "unknownFutureValue" | "enabled" | "disabled" } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.conditionalAccessSettings" />" },
+          crossTenantAccess?: Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, networkPacketTaggingStatus?:
+          "unknownFutureValue" | "enabled" | "disabled" } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.crossTenantAccessSettings" />" },
+          customBlockPage?: Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, configuration?: Record&lt;..., ...&gt; |
+          { <xref uid="@odata.type" />: ... } | null, state?:
+          "unknownFutureValue" | "enabled" | "disabled" } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.customBlockPage" />" },
+          forwardingOptions?: Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, skipDnsLookupState?:
+          "unknownFutureValue" | "enabled" | "disabled" } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.forwardingOptions" />" } } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.settings" />" }) | null,
+          tenantStatus?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string,
+          onboardingErrorMessage?: string | null, onboardingStatus?:
+          "unknownFutureValue" | "offboarded" | "offboardingInProgress" |
+          "onboardingInProgress" | "onboarded" | "onboardingErrorOccurred" |
+          "offboardingErrorOccurred" } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.tenantStatus" />" }) | null,
+          threatIntelligencePolicies?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, description?: function, name?: function, policyRules?:
+          function, version?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.policy" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          lastModifiedDateTime?: string, settings?: { <xref uid="@odata.type"
+          />: string, defaultAction?: "unknownFutureValue" | "block" | "allow" }
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.threatIntelligencePolicy" />" })[],
+          tls?: Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string,
+          externalCertificateAuthorityCertificates?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, certificate?:
+          function, certificateSigningRequest?: function, chain?: function,
+          commonName?: function, name?: function, organizationName?: function,
+          status?: function, validity?: function } & { <xref uid="@odata.type"
+          />: "#<xref
+          uid="microsoft.graph.networkaccess.externalCertificateAuthorityCertificate"
+          />" })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.tlsTermination" />" }) | null,
+          tlsInspectionPolicies?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, description?: function, name?:
+          function, policyRules?: function, version?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.policy" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          lastModifiedDateTime?: string, settings?: { <xref uid="@odata.type"
+          />: string } } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.tlsInspectionPolicy" />" })[] } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.networkAccessRoot" />" }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, alerts?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, actions?: { @odata.type: string,
+      actionLink?: string | null, actionText?: string }[], alertType?:
+      "unhealthyRemoteNetworks" | "unhealthyConnectors" |
+      "deviceTokenInconsistency" | "crossTenantAnomaly" | "suspiciousProcess" |
+      "threatIntelligenceTransactions" | "unknownFutureValue" |
+      "webContentBlocked" | "malware" | "patientZero" | "dlp", categories?:
+      ("unknownFutureValue" | "initialAccess" | "persistence" |
+      "privilegeEscalation" | "defenseEvasion" | "credentialAccess" |
+      "discovery" | "lateralMovement" | "execution" | "collection" |
+      "exfiltration" | "commandAndControl" | "impact" | "impairProcessControl" |
+      "inhibitResponseFunction" | "reconnaissance" | "resourceDevelopment" |
+      "evasion" | Record<string, never> | null)[], componentName?: string |
+      null, creationDateTime?: string, description?: string | null,
+      detectionTechnology?: string | null, displayName?: string,
+      extendedProperties?: Record<string, never> | (Omit<{ @odata.type: string
+      }, "@odata.type"> & { @odata.type: string } & { @odata.type:
+      "#microsoft.graph.networkaccess.extendedProperties" }) | null,
+      firstActivityDateTime?: string | null, isPreview?: boolean | null,
+      lastActivityDateTime?: string | null, policy?: Record<string, never> |
+      (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+      "@odata.type"> & { @odata.type: string, action?: "unknownFutureValue" |
+      "block" | "allow" | "bypass" | "alert", createdDateTime?: string,
+      lastModifiedDateTime?: string }) | null, productName?: string | null,
+      relatedResources?: { @odata.type: string }[], severity?:
+      "unknownFutureValue" | "informational" | "low" | "medium" | "high",
+      subTechniques?: (string | null)[], techniques?: (string | null)[],
+      vendorName?: string } & { @odata.type:
+      "#microsoft.graph.networkaccess.alert" })[], connectivity?: Record<string,
+      never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, branches?: (Omit<{ @odata.type: string, id?: function
+      }, "@odata.type"> & { @odata.type: string, bandwidthCapacity?: number |
+      null, connectivityConfiguration?: Record<..., ...> | { @odata.type: ...,
+      branchId?: ..., branchName?: ..., links?: ... } | null,
+      connectivityState?: "unknownFutureValue" | Record<..., ...> | "pending" |
+      "connected" | "inactive" | "error" | null, country?: string | null,
+      deviceLinks?: ...[], lastModifiedDateTime?: string, name?: string,
+      region?: "unknownFutureValue" | "eastUS" | "eastUS2" | "westUS" |
+      "westUS2" | "westUS3" | "centralUS" | "northCentralUS" | "southCentralUS"
+      | "northEurope" | "westEurope" | "franceCentral" | "germanyWestCentral" |
+      "switzerlandNorth" | "ukSouth" | "canadaEast" | "canadaCentral" |
+      "southAfricaWest" | "southAfricaNorth" | "uaeNorth" | "australiaEast" |
+      "westCentralUS" | "centralIndia" | "southEastAsia" | "swedenCentral" |
+      "southIndia" | "australiaSouthEast" | "koreaCentral" | "polandCentral" |
+      "brazilSouth" | "japanEast" | "japanWest" | "koreaSouth" | "italyNorth" |
+      "franceSouth" | "israelCentral", version?: string } & { @odata.type:
+      "#microsoft.graph.networkaccess.branchSite" })[], webCategories?: (Omit<{
+      @odata.type: string }, "@odata.type"> & { @odata.type: string,
+      displayName?: string | null, group?: string | null, name?: string } & {
+      @odata.type: "#microsoft.graph.networkaccess.webCategory" })[] } & {
+      @odata.type: "#microsoft.graph.networkaccess.connectivity" }) | null,
+      filteringPolicies?: (Omit<Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, description?: string | null,
+      name?: string, policyRules?: ...[], version?: string }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.networkaccess.policy" }, "@odata.type"> & {
+      @odata.type: string, action?: "unknownFutureValue" | "block" | "allow" |
+      "bypass" | "alert", createdDateTime?: string, lastModifiedDateTime?:
+      string })[], forwardingPolicies?: (Omit<Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & Omit<{ @odata.type: string, description?:
+      string | null, name?: string, policyRules?: ...[], version?: string },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.networkaccess.policy" },
+      "@odata.type"> & { @odata.type: string, privateAccessAppId?: string |
+      null, trafficForwardingType?: "unknownFutureValue" | "m365" | "internet" |
+      "private" })[], logs?: Record<string, never> | (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string,
+      connections?: (Omit<{ @odata.type: string, id?: function }, "@odata.type">
+      & { @odata.type: string, agentVersion?: string | null,
+      applicationSnapshot?: Record<..., ...> | { @odata.type: ..., appId?: ... }
+      | null, createdDateTime?: string, destinationFqdn?: string | null,
+      destinationIp?: string | null, destinationPort?: number | null,
+      deviceCategory?: "unknownFutureValue" | Record<..., ...> | "client" |
+      "branch" | "remoteNetwork" | null, deviceId?: string | null,
+      deviceOperatingSystem?: string | null, deviceOperatingSystemVersion?:
+      string | null, endDateTime?: string | null, initiatingProcessName?: string
+      | null, lastUpdateDateTime?: string | null, networkProtocol?:
+      "unknownFutureValue" | Record<..., ...> | "ip" | "icmp" | "igmp" | "ggp" |
+      "ipv4" | "tcp" | "pup" | "udp" | "idp" | "ipv6" | "ipv6RoutingHeader" |
+      "ipv6FragmentHeader" | "ipSecEncapsulatingSecurityPayload" |
+      "ipSecAuthenticationHeader" | "icmpV6" | "ipv6NoNextHeader" |
+      "ipv6DestinationOptions" | "nd" | "ipx" | "raw" | "spx" | "spxII" | null,
+      popProcessingRegion?: string | null, privateAccessDetails?: Record<...,
+      ...> | { @odata.type: ..., accessType?: ..., appSegmentId?: ...,
+      connectionStatus?: ..., connectorId?: ..., connectorIp?: ...,
+      connectorName?: ..., processingRegion?: ..., thirdPartyTokenDetails?: ...
+      } | null, receivedBytes?: number | null, sentBytes?: number | null,
+      sourceIp?: string | null, sourcePort?: number | null, status?:
+      "unknownFutureValue" | Record<..., ...> | "open" | "active" | "closed" |
+      null, tenantId?: string, trafficType?: "unknownFutureValue" | "internet" |
+      "private" | "microsoft365" | "all", transactionBlockCount?: number | null,
+      transactionCount?: number | null, transportProtocol?: "unknownFutureValue"
+      | Record<..., ...> | "ip" | "icmp" | "igmp" | "ggp" | "ipv4" | "tcp" |
+      "pup" | "udp" | "idp" | "ipv6" | "ipv6RoutingHeader" |
+      "ipv6FragmentHeader" | "ipSecEncapsulatingSecurityPayload" |
+      "ipSecAuthenticationHeader" | "icmpV6" | "ipv6NoNextHeader" |
+      "ipv6DestinationOptions" | "nd" | "ipx" | "raw" | "spx" | "spxII" | null,
+      userId?: string | null, userPrincipalName?: string | null } & {
+      @odata.type: "#microsoft.graph.networkaccess.connection" })[],
+      remoteNetworks?: (Omit<{ @odata.type: string, id?: function },
+      "@odata.type"> & { @odata.type: string, bgpRoutesAdvertisedCount?: number
+      | null, createdDateTime?: string, description?: string | null,
+      destinationIp?: string | null, receivedBytes?: number | null,
+      remoteNetworkId?: string, sentBytes?: number | null, sourceIp?: string |
+      null, status?: "unknownFutureValue" | "tunnelDisconnected" |
+      "tunnelConnected" | "bgpDisconnected" | "bgpConnected" |
+      "remoteNetworkAlive" } & { @odata.type:
+      "#microsoft.graph.networkaccess.remoteNetworkHealthEvent" })[], traffic?:
+      { @odata.type: string, action?: "unknownFutureValue" | Record<string,
+      never> | "block" | "allow" | "bypass" | "alert" | null, agentVersion?:
+      string | null, applicationSnapshot?: Record<string, never> | {
+      @odata.type: string, appId?: function } | null, cloudApplicationMetadata?:
+      Record<string, never> | { @odata.type: string, category?: function,
+      cloudApplicationCatalogId?: function, complianceScore?: function,
+      generalScore?: function, legalScore?: function, loginUser?: function,
+      name?: function, riskScore?: function, securityScore?: function,
+      subactivity?: function } | null, connectionId?: string | null,
+      createdDateTime?: string, description?: string | null, destinationFQDN?:
+      string | null, destinationIp?: string | null, destinationPort?: number |
+      null, destinationUrl?: string | null, destinationWebCategory?:
+      Record<string, never> | (Omit<..., ...> & { @odata.type: ...,
+      displayName?: ..., group?: ..., name?: ... } & { @odata.type: ... }) |
+      null, device?: Record<string, never> | (Omit<..., ...> & { @odata.type:
+      ..., accountEnabled?: ..., alternativeNames?: ...,
+      alternativeSecurityIds?: ..., approximateLastSignInDateTime?: ...,
+      commands?: ..., complianceExpirationDateTime?: ..., deviceCategory?: ...,
+      deviceId?: ..., deviceMetadata?: ..., deviceOwnership?: ...,
+      deviceTemplate?: ..., deviceVersion?: ..., displayName?: ..., domainName?:
+      ..., enrollmentProfileName?: ..., enrollmentType?: ...,
+      extensionAttributes?: ..., extensions?: ..., hostnames?: ...,
+      isCompliant?: ..., isManaged?: ..., isManagementRestricted?: ...,
+      isRooted?: ..., kind?: ..., managementType?: ..., manufacturer?: ...,
+      mdmAppId?: ..., memberOf?: ..., model?: ..., name?: ...,
+      onPremisesLastSyncDateTime?: ..., onPremisesSecurityIdentifier?: ...,
+      onPremisesSyncEnabled?: ..., operatingSystem?: ...,
+      operatingSystemVersion?: ..., physicalIds?: ..., platform?: ...,
+      profileType?: ..., registeredOwners?: ..., registeredUsers?: ...,
+      registrationDateTime?: ..., status?: ..., systemLabels?: ...,
+      transitiveMemberOf?: ..., trustType?: ..., usageRights?: ... }) | null,
+      deviceCategory?: "unknownFutureValue" | Record<string, never> | "client" |
+      "branch" | "remoteNetwork" | null, deviceId?: string | null,
+      deviceOperatingSystem?: string | null, deviceOperatingSystemVersion?:
+      string | null, filteringProfileId?: string | null, filteringProfileName?:
+      string | null, headers?: Record<string, never> | { @odata.type: string,
+      origin?: function, referrer?: function, xForwardedFor?: function } | null,
+      httpMethod?: "get" | "unknownFutureValue" | Record<string, never> | "post"
+      | "put" | "delete" | "head" | "options" | "connect" | "patch" | "trace" |
+      null, initiatingProcessName?: string | null, networkProtocol?:
+      "unknownFutureValue" | Record<string, never> | "ip" | "icmp" | "igmp" |
+      "ggp" | "ipv4" | "tcp" | "pup" | "udp" | "idp" | "ipv6" |
+      "ipv6RoutingHeader" | "ipv6FragmentHeader" |
+      "ipSecEncapsulatingSecurityPayload" | "ipSecAuthenticationHeader" |
+      "icmpV6" | "ipv6NoNextHeader" | "ipv6DestinationOptions" | "nd" | "ipx" |
+      "raw" | "spx" | "spxII" | null, operationStatus?: "unknownFutureValue" |
+      Record<string, never> | "success" | "failure" | null, policyId?: string |
+      null, policyName?: string | null, policyRuleId?: string | null,
+      policyRuleName?: string | null, popProcessingRegion?: string | null,
+      privateAccessDetails?: Record<string, never> | { @odata.type: string,
+      accessType?: function, appSegmentId?: function, connectionStatus?:
+      function, connectorId?: function, connectorIp?: function, connectorName?:
+      function, processingRegion?: function, thirdPartyTokenDetails?: function }
+      | null, receivedBytes?: number | null, remoteNetworkId?: string | null,
+      resourceTenantId?: string | null, responseCode?: number | null,
+      sentBytes?: number | null, sessionId?: string | null, sourceIp?: string |
+      null, sourcePort?: number | null, tenantId?: string, threatType?: string |
+      null, trafficType?: "unknownFutureValue" | "internet" | "private" |
+      "microsoft365" | "all", transactionId?: string, transportProtocol?:
+      "unknownFutureValue" | Record<string, never> | "ip" | "icmp" | "igmp" |
+      "ggp" | "ipv4" | "tcp" | "pup" | "udp" | "idp" | "ipv6" |
+      "ipv6RoutingHeader" | "ipv6FragmentHeader" |
+      "ipSecEncapsulatingSecurityPayload" | "ipSecAuthenticationHeader" |
+      "icmpV6" | "ipv6NoNextHeader" | "ipv6DestinationOptions" | "nd" | "ipx" |
+      "raw" | "spx" | "spxII" | null, user?: Record<string, never> | (Omit<...,
+      ...> & { @odata.type: ..., aboutMe?: ..., accountEnabled?: ...,
+      activities?: ..., adhocCalls?: ..., ageGroup?: ..., agreementAcceptances?:
+      ..., analytics?: ..., appConsentRequestsForApproval?: ...,
+      appRoleAssignedResources?: ..., appRoleAssignments?: ..., approvals?: ...,
+      assignedLicenses?: ..., assignedPlans?: ..., authentication?: ...,
+      authorizationInfo?: ..., birthday?: ..., businessPhones?: ..., calendar?:
+      ..., calendarGroups?: ..., calendars?: ..., calendarView?: ..., chats?:
+      ..., city?: ..., cloudClipboard?: ..., cloudLicensing?: ..., cloudPCs?:
+      ..., cloudRealtimeCommunicationInfo?: ..., communications?: ...,
+      companyName?: ..., consentProvidedForMinor?: ..., contactFolders?: ...,
+      contacts?: ..., country?: ..., createdDateTime?: ..., createdObjects?:
+      ..., creationType?: ..., customSecurityAttributes?: ...,
+      dataSecurityAndGovernance?: ..., department?: ...,
+      deviceEnrollmentConfigurations?: ..., deviceEnrollmentLimit?: ...,
+      deviceKeys?: ..., deviceManagementTroubleshootingEvents?: ..., devices?:
+      ..., directReports?: ..., displayName?: ..., drive?: ..., drives?: ...,
+      employeeExperience?: ..., employeeHireDate?: ..., employeeId?: ...,
+      employeeLeaveDateTime?: ..., employeeOrgData?: ..., employeeType?: ...,
+      events?: ..., extensions?: ..., externalUserState?: ...,
+      externalUserStateChangeDateTime?: ..., faxNumber?: ..., followedSites?:
+      ..., givenName?: ..., hireDate?: ..., identities?: ..., imAddresses?: ...,
+      inferenceClassification?: ..., infoCatalogs?: ..., informationProtection?:
+      ..., insights?: ..., interests?: ..., invitedBy?: ...,
+      isLicenseReconciliationNeeded?: ..., isManagementRestricted?: ...,
+      isResourceAccount?: ..., jobTitle?: ..., joinedGroups?: ..., joinedTeams?:
+      ..., lastPasswordChangeDateTime?: ..., legalAgeGroupClassification?: ...,
+      licenseAssignmentStates?: ..., licenseDetails?: ..., mail?: ...,
+      mailboxSettings?: ..., mailFolders?: ..., mailNickname?: ...,
+      managedAppLogCollectionRequests?: ..., managedAppRegistrations?: ...,
+      managedDevices?: ..., manager?: ..., memberOf?: ..., messages?: ...,
+      mobileAppIntentAndStates?: ..., mobileAppTroubleshootingEvents?: ...,
+      mobilePhone?: ..., mySite?: ..., notifications?: ...,
+      oauth2PermissionGrants?: ..., officeLocation?: ..., onenote?: ...,
+      onlineMeetings?: ..., onPremisesDistinguishedName?: ...,
+      onPremisesDomainName?: ..., onPremisesExtensionAttributes?: ...,
+      onPremisesImmutableId?: ..., onPremisesLastSyncDateTime?: ...,
+      onPremisesProvisioningErrors?: ..., onPremisesSamAccountName?: ...,
+      onPremisesSecurityIdentifier?: ..., onPremisesSipInfo?: ...,
+      onPremisesSyncBehavior?: ..., onPremisesSyncEnabled?: ...,
+      onPremisesUserPrincipalName?: ..., otherMails?: ..., outlook?: ...,
+      ownedDevices?: ..., ownedObjects?: ..., passwordPolicies?: ...,
+      passwordProfile?: ..., pastProjects?: ..., pendingAccessReviewInstances?:
+      ..., people?: ..., permissionGrants?: ..., photo?: ..., photos?: ...,
+      planner?: ..., postalCode?: ..., preferredDataLocation?: ...,
+      preferredLanguage?: ..., preferredName?: ..., presence?: ..., print?: ...,
+      profile?: ..., provisionedPlans?: ..., proxyAddresses?: ...,
+      refreshTokensValidFromDateTime?: ..., registeredDevices?: ...,
+      responsibilities?: ..., schools?: ..., scopedRoleMemberOf?: ...,
+      security?: ..., securityIdentifier?: ..., serviceProvisioningErrors?: ...,
+      settings?: ..., showInAddressList?: ..., signInActivity?: ...,
+      signInSessionsValidFromDateTime?: ..., skills?: ..., solutions?: ...,
+      sponsors?: ..., state?: ..., streetAddress?: ..., surname?: ...,
+      teamwork?: ..., todo?: ..., transitiveMemberOf?: ..., transitiveReports?:
+      ..., usageLocation?: ..., usageRights?: ..., userPrincipalName?: ...,
+      userType?: ..., virtualEvents?: ...,
+      windowsInformationProtectionDeviceRegistrations?: ... } & { @odata.type:
+      ... }) | null, userId?: string | null, userPrincipalName?: string | null,
+      vendorNames?: function[] }[] } & { @odata.type:
+      "#microsoft.graph.networkaccess.logs" }) | null, reports?: Record<string,
+      never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string } & { @odata.type:
+      "#microsoft.graph.networkaccess.reports" }) | null, settings?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, conditionalAccess?: Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, signalingStatus?: "unknownFutureValue" | "enabled" | "disabled" }
+      & { @odata.type:
+      "#microsoft.graph.networkaccess.conditionalAccessSettings" },
+      crossTenantAccess?: Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, networkPacketTaggingStatus?:
+      "unknownFutureValue" | "enabled" | "disabled" } & { @odata.type:
+      "#microsoft.graph.networkaccess.crossTenantAccessSettings" },
+      customBlockPage?: Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, configuration?: Record<string,
+      never> | { @odata.type: string } | null, state?: "unknownFutureValue" |
+      "enabled" | "disabled" } & { @odata.type:
+      "#microsoft.graph.networkaccess.customBlockPage" }, forwardingOptions?:
+      Omit<{ @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, skipDnsLookupState?: "unknownFutureValue" | "enabled" | "disabled"
+      } & { @odata.type: "#microsoft.graph.networkaccess.forwardingOptions" } }
+      & { @odata.type: "#microsoft.graph.networkaccess.settings" }) | null,
+      tenantStatus?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, onboardingErrorMessage?:
+      string | null, onboardingStatus?: "unknownFutureValue" | "offboarded" |
+      "offboardingInProgress" | "onboardingInProgress" | "onboarded" |
+      "onboardingErrorOccurred" | "offboardingErrorOccurred" } & { @odata.type:
+      "#microsoft.graph.networkaccess.tenantStatus" }) | null,
+      threatIntelligencePolicies?: (Omit<Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & Omit<{ @odata.type: string, description?: string |
+      null, name?: string, policyRules?: ...[], version?: string },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.networkaccess.policy" },
+      "@odata.type"> & { @odata.type: string, lastModifiedDateTime?: string,
+      settings?: { @odata.type: string, defaultAction?: "unknownFutureValue" |
+      "block" | "allow" } } & { @odata.type:
+      "#microsoft.graph.networkaccess.threatIntelligencePolicy" })[], tls?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string,
+      externalCertificateAuthorityCertificates?: (Omit<{ @odata.type: string,
+      id?: function }, "@odata.type"> & { @odata.type: string, certificate?:
+      string | null, certificateSigningRequest?: string | null, chain?: string |
+      null, commonName?: string, name?: string, organizationName?: string,
+      status?: "unknownFutureValue" | "active" | "enabled" | "disabled" |
+      "csrGenerated" | "enrolling" | "expiring" | "expired", validity?: {
+      @odata.type: ..., endDateTime?: ..., startDateTime?: ... } } & {
+      @odata.type:
+      "#microsoft.graph.networkaccess.externalCertificateAuthorityCertificate"
+      })[] } & { @odata.type: "#microsoft.graph.networkaccess.tlsTermination" })
+      | null, tlsInspectionPolicies?: (Omit<Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & Omit<{ @odata.type: string, description?:
+      string | null, name?: string, policyRules?: ...[], version?: string },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.networkaccess.policy" },
+      "@odata.type"> & { @odata.type: string, lastModifiedDateTime?: string,
+      settings?: { @odata.type: string } } & { @odata.type:
+      "#microsoft.graph.networkaccess.tlsInspectionPolicy" })[] } & {
+      @odata.type: "#microsoft.graph.networkaccess.networkAccessRoot" })
     uid: '@microsoft/teams.graph-endpoints-beta.networkAccess.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /networkAccess`'
@@ -32,15 +726,1068 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/networkAccess", "patch">):
-        EndpointRequest<IEndpoints["PATCH /networkAccess"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, alerts?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string, actions?:
+        { @odata.type: string, actionLink?: string | null, actionText?: string
+        }[], alertType?: "unhealthyRemoteNetworks" | "unhealthyConnectors" |
+        "deviceTokenInconsistency" | "crossTenantAnomaly" | "suspiciousProcess"
+        | "threatIntelligenceTransactions" | "unknownFutureValue" |
+        "webContentBlocked" | "malware" | "patientZero" | "dlp", categories?:
+        ("unknownFutureValue" | "initialAccess" | "persistence" |
+        "privilegeEscalation" | "defenseEvasion" | "credentialAccess" |
+        "discovery" | "lateralMovement" | "execution" | "collection" |
+        "exfiltration" | "commandAndControl" | "impact" | "impairProcessControl"
+        | "inhibitResponseFunction" | "reconnaissance" | "resourceDevelopment" |
+        "evasion" | Record<string, never> | null)[], componentName?: string |
+        null, creationDateTime?: string, description?: string | null,
+        detectionTechnology?: string | null, displayName?: string,
+        extendedProperties?: Record<string, never> | (Omit<{ @odata.type: string
+        }, "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.networkaccess.extendedProperties" }) | null,
+        firstActivityDateTime?: string | null, isPreview?: boolean | null,
+        lastActivityDateTime?: string | null, policy?: Record<string, never> |
+        (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, action?: "unknownFutureValue" |
+        "block" | "allow" | "bypass" | "alert", createdDateTime?: string,
+        lastModifiedDateTime?: string }) | null, productName?: string | null,
+        relatedResources?: { @odata.type: string }[], severity?:
+        "unknownFutureValue" | "informational" | "low" | "medium" | "high",
+        subTechniques?: (string | null)[], techniques?: (string | null)[],
+        vendorName?: string } & { @odata.type:
+        "#microsoft.graph.networkaccess.alert" })[], connectivity?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, branches?: (Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & { @odata.type: string,
+        bandwidthCapacity?: number | null, connectivityConfiguration?:
+        Record<..., ...> | { @odata.type: ..., branchId?: ..., branchName?: ...,
+        links?: ... } | null, connectivityState?: "unknownFutureValue" |
+        Record<..., ...> | "pending" | "connected" | "inactive" | "error" |
+        null, country?: string | null, deviceLinks?: ...[],
+        lastModifiedDateTime?: string, name?: string, region?:
+        "unknownFutureValue" | "eastUS" | "eastUS2" | "westUS" | "westUS2" |
+        "westUS3" | "centralUS" | "northCentralUS" | "southCentralUS" |
+        "northEurope" | "westEurope" | "franceCentral" | "germanyWestCentral" |
+        "switzerlandNorth" | "ukSouth" | "canadaEast" | "canadaCentral" |
+        "southAfricaWest" | "southAfricaNorth" | "uaeNorth" | "australiaEast" |
+        "westCentralUS" | "centralIndia" | "southEastAsia" | "swedenCentral" |
+        "southIndia" | "australiaSouthEast" | "koreaCentral" | "polandCentral" |
+        "brazilSouth" | "japanEast" | "japanWest" | "koreaSouth" | "italyNorth"
+        | "franceSouth" | "israelCentral", version?: string } & { @odata.type:
+        "#microsoft.graph.networkaccess.branchSite" })[], webCategories?:
+        (Omit<{ @odata.type: string }, "@odata.type"> & { @odata.type: string,
+        displayName?: string | null, group?: string | null, name?: string } & {
+        @odata.type: "#microsoft.graph.networkaccess.webCategory" })[] } & {
+        @odata.type: "#microsoft.graph.networkaccess.connectivity" }) | null,
+        filteringPolicies?: (Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, description?: string |
+        null, name?: string, policyRules?: ...[], version?: string },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.networkaccess.policy"
+        }, "@odata.type"> & { @odata.type: string, action?: "unknownFutureValue"
+        | "block" | "allow" | "bypass" | "alert", createdDateTime?: string,
+        lastModifiedDateTime?: string })[], forwardingPolicies?: (Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, description?: string | null, name?: string, policyRules?: ...[],
+        version?: string }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.networkaccess.policy" }, "@odata.type"> & {
+        @odata.type: string, privateAccessAppId?: string | null,
+        trafficForwardingType?: "unknownFutureValue" | "m365" | "internet" |
+        "private" })[], logs?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        connections?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, agentVersion?: string | null,
+        applicationSnapshot?: Record<..., ...> | { @odata.type: ..., appId?: ...
+        } | null, createdDateTime?: string, destinationFqdn?: string | null,
+        destinationIp?: string | null, destinationPort?: number | null,
+        deviceCategory?: "unknownFutureValue" | Record<..., ...> | "client" |
+        "branch" | "remoteNetwork" | null, deviceId?: string | null,
+        deviceOperatingSystem?: string | null, deviceOperatingSystemVersion?:
+        string | null, endDateTime?: string | null, initiatingProcessName?:
+        string | null, lastUpdateDateTime?: string | null, networkProtocol?:
+        "unknownFutureValue" | Record<..., ...> | "ip" | "icmp" | "igmp" | "ggp"
+        | "ipv4" | "tcp" | "pup" | "udp" | "idp" | "ipv6" | "ipv6RoutingHeader"
+        | "ipv6FragmentHeader" | "ipSecEncapsulatingSecurityPayload" |
+        "ipSecAuthenticationHeader" | "icmpV6" | "ipv6NoNextHeader" |
+        "ipv6DestinationOptions" | "nd" | "ipx" | "raw" | "spx" | "spxII" |
+        null, popProcessingRegion?: string | null, privateAccessDetails?:
+        Record<..., ...> | { @odata.type: ..., accessType?: ..., appSegmentId?:
+        ..., connectionStatus?: ..., connectorId?: ..., connectorIp?: ...,
+        connectorName?: ..., processingRegion?: ..., thirdPartyTokenDetails?:
+        ... } | null, receivedBytes?: number | null, sentBytes?: number | null,
+        sourceIp?: string | null, sourcePort?: number | null, status?:
+        "unknownFutureValue" | Record<..., ...> | "open" | "active" | "closed" |
+        null, tenantId?: string, trafficType?: "unknownFutureValue" | "internet"
+        | "private" | "microsoft365" | "all", transactionBlockCount?: number |
+        null, transactionCount?: number | null, transportProtocol?:
+        "unknownFutureValue" | Record<..., ...> | "ip" | "icmp" | "igmp" | "ggp"
+        | "ipv4" | "tcp" | "pup" | "udp" | "idp" | "ipv6" | "ipv6RoutingHeader"
+        | "ipv6FragmentHeader" | "ipSecEncapsulatingSecurityPayload" |
+        "ipSecAuthenticationHeader" | "icmpV6" | "ipv6NoNextHeader" |
+        "ipv6DestinationOptions" | "nd" | "ipx" | "raw" | "spx" | "spxII" |
+        null, userId?: string | null, userPrincipalName?: string | null } & {
+        @odata.type: "#microsoft.graph.networkaccess.connection" })[],
+        remoteNetworks?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, bgpRoutesAdvertisedCount?:
+        number | null, createdDateTime?: string, description?: string | null,
+        destinationIp?: string | null, receivedBytes?: number | null,
+        remoteNetworkId?: string, sentBytes?: number | null, sourceIp?: string |
+        null, status?: "unknownFutureValue" | "tunnelDisconnected" |
+        "tunnelConnected" | "bgpDisconnected" | "bgpConnected" |
+        "remoteNetworkAlive" } & { @odata.type:
+        "#microsoft.graph.networkaccess.remoteNetworkHealthEvent" })[],
+        traffic?: { @odata.type: string, action?: "unknownFutureValue" |
+        Record<string, never> | "block" | "allow" | "bypass" | "alert" | null,
+        agentVersion?: string | null, applicationSnapshot?: Record<string,
+        never> | { @odata.type: string, appId?: function } | null,
+        cloudApplicationMetadata?: Record<string, never> | { @odata.type:
+        string, category?: function, cloudApplicationCatalogId?: function,
+        complianceScore?: function, generalScore?: function, legalScore?:
+        function, loginUser?: function, name?: function, riskScore?: function,
+        securityScore?: function, subactivity?: function } | null,
+        connectionId?: string | null, createdDateTime?: string, description?:
+        string | null, destinationFQDN?: string | null, destinationIp?: string |
+        null, destinationPort?: number | null, destinationUrl?: string | null,
+        destinationWebCategory?: Record<string, never> | (Omit<..., ...> & {
+        @odata.type: ..., displayName?: ..., group?: ..., name?: ... } & {
+        @odata.type: ... }) | null, device?: Record<string, never> | (Omit<...,
+        ...> & { @odata.type: ..., accountEnabled?: ..., alternativeNames?: ...,
+        alternativeSecurityIds?: ..., approximateLastSignInDateTime?: ...,
+        commands?: ..., complianceExpirationDateTime?: ..., deviceCategory?:
+        ..., deviceId?: ..., deviceMetadata?: ..., deviceOwnership?: ...,
+        deviceTemplate?: ..., deviceVersion?: ..., displayName?: ...,
+        domainName?: ..., enrollmentProfileName?: ..., enrollmentType?: ...,
+        extensionAttributes?: ..., extensions?: ..., hostnames?: ...,
+        isCompliant?: ..., isManaged?: ..., isManagementRestricted?: ...,
+        isRooted?: ..., kind?: ..., managementType?: ..., manufacturer?: ...,
+        mdmAppId?: ..., memberOf?: ..., model?: ..., name?: ...,
+        onPremisesLastSyncDateTime?: ..., onPremisesSecurityIdentifier?: ...,
+        onPremisesSyncEnabled?: ..., operatingSystem?: ...,
+        operatingSystemVersion?: ..., physicalIds?: ..., platform?: ...,
+        profileType?: ..., registeredOwners?: ..., registeredUsers?: ...,
+        registrationDateTime?: ..., status?: ..., systemLabels?: ...,
+        transitiveMemberOf?: ..., trustType?: ..., usageRights?: ... }) | null,
+        deviceCategory?: "unknownFutureValue" | Record<string, never> | "client"
+        | "branch" | "remoteNetwork" | null, deviceId?: string | null,
+        deviceOperatingSystem?: string | null, deviceOperatingSystemVersion?:
+        string | null, filteringProfileId?: string | null,
+        filteringProfileName?: string | null, headers?: Record<string, never> |
+        { @odata.type: string, origin?: function, referrer?: function,
+        xForwardedFor?: function } | null, httpMethod?: "get" |
+        "unknownFutureValue" | Record<string, never> | "post" | "put" | "delete"
+        | "head" | "options" | "connect" | "patch" | "trace" | null,
+        initiatingProcessName?: string | null, networkProtocol?:
+        "unknownFutureValue" | Record<string, never> | "ip" | "icmp" | "igmp" |
+        "ggp" | "ipv4" | "tcp" | "pup" | "udp" | "idp" | "ipv6" |
+        "ipv6RoutingHeader" | "ipv6FragmentHeader" |
+        "ipSecEncapsulatingSecurityPayload" | "ipSecAuthenticationHeader" |
+        "icmpV6" | "ipv6NoNextHeader" | "ipv6DestinationOptions" | "nd" | "ipx"
+        | "raw" | "spx" | "spxII" | null, operationStatus?: "unknownFutureValue"
+        | Record<string, never> | "success" | "failure" | null, policyId?:
+        string | null, policyName?: string | null, policyRuleId?: string | null,
+        policyRuleName?: string | null, popProcessingRegion?: string | null,
+        privateAccessDetails?: Record<string, never> | { @odata.type: string,
+        accessType?: function, appSegmentId?: function, connectionStatus?:
+        function, connectorId?: function, connectorIp?: function,
+        connectorName?: function, processingRegion?: function,
+        thirdPartyTokenDetails?: function } | null, receivedBytes?: number |
+        null, remoteNetworkId?: string | null, resourceTenantId?: string | null,
+        responseCode?: number | null, sentBytes?: number | null, sessionId?:
+        string | null, sourceIp?: string | null, sourcePort?: number | null,
+        tenantId?: string, threatType?: string | null, trafficType?:
+        "unknownFutureValue" | "internet" | "private" | "microsoft365" | "all",
+        transactionId?: string, transportProtocol?: "unknownFutureValue" |
+        Record<string, never> | "ip" | "icmp" | "igmp" | "ggp" | "ipv4" | "tcp"
+        | "pup" | "udp" | "idp" | "ipv6" | "ipv6RoutingHeader" |
+        "ipv6FragmentHeader" | "ipSecEncapsulatingSecurityPayload" |
+        "ipSecAuthenticationHeader" | "icmpV6" | "ipv6NoNextHeader" |
+        "ipv6DestinationOptions" | "nd" | "ipx" | "raw" | "spx" | "spxII" |
+        null, user?: Record<string, never> | (Omit<..., ...> & { @odata.type:
+        ..., aboutMe?: ..., accountEnabled?: ..., activities?: ..., adhocCalls?:
+        ..., ageGroup?: ..., agreementAcceptances?: ..., analytics?: ...,
+        appConsentRequestsForApproval?: ..., appRoleAssignedResources?: ...,
+        appRoleAssignments?: ..., approvals?: ..., assignedLicenses?: ...,
+        assignedPlans?: ..., authentication?: ..., authorizationInfo?: ...,
+        birthday?: ..., businessPhones?: ..., calendar?: ..., calendarGroups?:
+        ..., calendars?: ..., calendarView?: ..., chats?: ..., city?: ...,
+        cloudClipboard?: ..., cloudLicensing?: ..., cloudPCs?: ...,
+        cloudRealtimeCommunicationInfo?: ..., communications?: ...,
+        companyName?: ..., consentProvidedForMinor?: ..., contactFolders?: ...,
+        contacts?: ..., country?: ..., createdDateTime?: ..., createdObjects?:
+        ..., creationType?: ..., customSecurityAttributes?: ...,
+        dataSecurityAndGovernance?: ..., department?: ...,
+        deviceEnrollmentConfigurations?: ..., deviceEnrollmentLimit?: ...,
+        deviceKeys?: ..., deviceManagementTroubleshootingEvents?: ..., devices?:
+        ..., directReports?: ..., displayName?: ..., drive?: ..., drives?: ...,
+        employeeExperience?: ..., employeeHireDate?: ..., employeeId?: ...,
+        employeeLeaveDateTime?: ..., employeeOrgData?: ..., employeeType?: ...,
+        events?: ..., extensions?: ..., externalUserState?: ...,
+        externalUserStateChangeDateTime?: ..., faxNumber?: ..., followedSites?:
+        ..., givenName?: ..., hireDate?: ..., identities?: ..., imAddresses?:
+        ..., inferenceClassification?: ..., infoCatalogs?: ...,
+        informationProtection?: ..., insights?: ..., interests?: ...,
+        invitedBy?: ..., isLicenseReconciliationNeeded?: ...,
+        isManagementRestricted?: ..., isResourceAccount?: ..., jobTitle?: ...,
+        joinedGroups?: ..., joinedTeams?: ..., lastPasswordChangeDateTime?: ...,
+        legalAgeGroupClassification?: ..., licenseAssignmentStates?: ...,
+        licenseDetails?: ..., mail?: ..., mailboxSettings?: ..., mailFolders?:
+        ..., mailNickname?: ..., managedAppLogCollectionRequests?: ...,
+        managedAppRegistrations?: ..., managedDevices?: ..., manager?: ...,
+        memberOf?: ..., messages?: ..., mobileAppIntentAndStates?: ...,
+        mobileAppTroubleshootingEvents?: ..., mobilePhone?: ..., mySite?: ...,
+        notifications?: ..., oauth2PermissionGrants?: ..., officeLocation?: ...,
+        onenote?: ..., onlineMeetings?: ..., onPremisesDistinguishedName?: ...,
+        onPremisesDomainName?: ..., onPremisesExtensionAttributes?: ...,
+        onPremisesImmutableId?: ..., onPremisesLastSyncDateTime?: ...,
+        onPremisesProvisioningErrors?: ..., onPremisesSamAccountName?: ...,
+        onPremisesSecurityIdentifier?: ..., onPremisesSipInfo?: ...,
+        onPremisesSyncBehavior?: ..., onPremisesSyncEnabled?: ...,
+        onPremisesUserPrincipalName?: ..., otherMails?: ..., outlook?: ...,
+        ownedDevices?: ..., ownedObjects?: ..., passwordPolicies?: ...,
+        passwordProfile?: ..., pastProjects?: ...,
+        pendingAccessReviewInstances?: ..., people?: ..., permissionGrants?:
+        ..., photo?: ..., photos?: ..., planner?: ..., postalCode?: ...,
+        preferredDataLocation?: ..., preferredLanguage?: ..., preferredName?:
+        ..., presence?: ..., print?: ..., profile?: ..., provisionedPlans?: ...,
+        proxyAddresses?: ..., refreshTokensValidFromDateTime?: ...,
+        registeredDevices?: ..., responsibilities?: ..., schools?: ...,
+        scopedRoleMemberOf?: ..., security?: ..., securityIdentifier?: ...,
+        serviceProvisioningErrors?: ..., settings?: ..., showInAddressList?:
+        ..., signInActivity?: ..., signInSessionsValidFromDateTime?: ...,
+        skills?: ..., solutions?: ..., sponsors?: ..., state?: ...,
+        streetAddress?: ..., surname?: ..., teamwork?: ..., todo?: ...,
+        transitiveMemberOf?: ..., transitiveReports?: ..., usageLocation?: ...,
+        usageRights?: ..., userPrincipalName?: ..., userType?: ...,
+        virtualEvents?: ..., windowsInformationProtectionDeviceRegistrations?:
+        ... } & { @odata.type: ... }) | null, userId?: string | null,
+        userPrincipalName?: string | null, vendorNames?: function[] }[] } & {
+        @odata.type: "#microsoft.graph.networkaccess.logs" }) | null, reports?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.networkaccess.reports" }) | null, settings?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, conditionalAccess?: Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, signalingStatus?: "unknownFutureValue" | "enabled" | "disabled"
+        } & { @odata.type:
+        "#microsoft.graph.networkaccess.conditionalAccessSettings" },
+        crossTenantAccess?: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, networkPacketTaggingStatus?:
+        "unknownFutureValue" | "enabled" | "disabled" } & { @odata.type:
+        "#microsoft.graph.networkaccess.crossTenantAccessSettings" },
+        customBlockPage?: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, configuration?: Record<string,
+        never> | { @odata.type: string } | null, state?: "unknownFutureValue" |
+        "enabled" | "disabled" } & { @odata.type:
+        "#microsoft.graph.networkaccess.customBlockPage" }, forwardingOptions?:
+        Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, skipDnsLookupState?: "unknownFutureValue" |
+        "enabled" | "disabled" } & { @odata.type:
+        "#microsoft.graph.networkaccess.forwardingOptions" } } & { @odata.type:
+        "#microsoft.graph.networkaccess.settings" }) | null, tenantStatus?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, onboardingErrorMessage?: string
+        | null, onboardingStatus?: "unknownFutureValue" | "offboarded" |
+        "offboardingInProgress" | "onboardingInProgress" | "onboarded" |
+        "onboardingErrorOccurred" | "offboardingErrorOccurred" } & {
+        @odata.type: "#microsoft.graph.networkaccess.tenantStatus" }) | null,
+        threatIntelligencePolicies?: (Omit<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, description?:
+        string | null, name?: string, policyRules?: ...[], version?: string },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.networkaccess.policy"
+        }, "@odata.type"> & { @odata.type: string, lastModifiedDateTime?:
+        string, settings?: { @odata.type: string, defaultAction?:
+        "unknownFutureValue" | "block" | "allow" } } & { @odata.type:
+        "#microsoft.graph.networkaccess.threatIntelligencePolicy" })[], tls?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string,
+        externalCertificateAuthorityCertificates?: (Omit<{ @odata.type: string,
+        id?: function }, "@odata.type"> & { @odata.type: string, certificate?:
+        string | null, certificateSigningRequest?: string | null, chain?: string
+        | null, commonName?: string, name?: string, organizationName?: string,
+        status?: "unknownFutureValue" | "active" | "enabled" | "disabled" |
+        "csrGenerated" | "enrolling" | "expiring" | "expired", validity?: {
+        @odata.type: ..., endDateTime?: ..., startDateTime?: ... } } & {
+        @odata.type:
+        "#microsoft.graph.networkaccess.externalCertificateAuthorityCertificate"
+        })[] } & { @odata.type: "#microsoft.graph.networkaccess.tlsTermination"
+        }) | null, tlsInspectionPolicies?: (Omit<Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        description?: string | null, name?: string, policyRules?: ...[],
+        version?: string }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.networkaccess.policy" }, "@odata.type"> & {
+        @odata.type: string, lastModifiedDateTime?: string, settings?: {
+        @odata.type: string } } & { @odata.type:
+        "#microsoft.graph.networkaccess.tlsInspectionPolicy" })[] } & {
+        @odata.type: "#microsoft.graph.networkaccess.networkAccessRoot" }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, alerts?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string, actions?:
+        { @odata.type: string, actionLink?: function, actionText?: function }[],
+        alertType?: "unhealthyRemoteNetworks" | "unhealthyConnectors" |
+        "deviceTokenInconsistency" | "crossTenantAnomaly" | "suspiciousProcess"
+        | "threatIntelligenceTransactions" | "unknownFutureValue" |
+        "webContentBlocked" | "malware" | "patientZero" | "dlp", categories?:
+        ("unknownFutureValue" | "initialAccess" | "persistence" |
+        "privilegeEscalation" | "defenseEvasion" | "credentialAccess" |
+        "discovery" | "lateralMovement" | "execution" | "collection" |
+        "exfiltration" | "commandAndControl" | "impact" | "impairProcessControl"
+        | "inhibitResponseFunction" | "reconnaissance" | "resourceDevelopment" |
+        "evasion" | Record<..., ...> | null)[], componentName?: string | null,
+        creationDateTime?: string, description?: string | null,
+        detectionTechnology?: string | null, displayName?: string,
+        extendedProperties?: Record<string, never> | (Omit<{ @odata.type: ... },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.networkaccess.extendedProperties" }) | null,
+        firstActivityDateTime?: string | null, isPreview?: boolean | null,
+        lastActivityDateTime?: string | null, policy?: Record<string, never> |
+        (Omit<... & ... & ..., "@odata.type"> & { @odata.type: string, action?:
+        function, createdDateTime?: function, lastModifiedDateTime?: function })
+        | null, productName?: string | null, relatedResources?: { @odata.type:
+        string }[], severity?: "unknownFutureValue" | "informational" | "low" |
+        "medium" | "high", subTechniques?: (string | null)[], techniques?:
+        (string | null)[], vendorName?: string } & { @odata.type:
+        "#microsoft.graph.networkaccess.alert" })[], connectivity?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, branches?: (Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        bandwidthCapacity?: function, connectivityConfiguration?: function,
+        connectivityState?: function, country?: function, deviceLinks?:
+        function, lastModifiedDateTime?: function, name?: function, region?:
+        function, version?: function } & { @odata.type:
+        "#microsoft.graph.networkaccess.branchSite" })[], webCategories?:
+        (Omit<{ @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        displayName?: function, group?: function, name?: function } & {
+        @odata.type: "#microsoft.graph.networkaccess.webCategory" })[] } & {
+        @odata.type: "#microsoft.graph.networkaccess.connectivity" }) | null,
+        filteringPolicies?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, description?: function,
+        name?: function, policyRules?: function, version?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.networkaccess.policy"
+        }, "@odata.type"> & { @odata.type: string, action?: "unknownFutureValue"
+        | "block" | "allow" | "bypass" | "alert", createdDateTime?: string,
+        lastModifiedDateTime?: string })[], forwardingPolicies?: (Omit<Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, description?: function, name?: function,
+        policyRules?: function, version?: function }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.networkaccess.policy" }, "@odata.type"> &
+        { @odata.type: string, privateAccessAppId?: string | null,
+        trafficForwardingType?: "unknownFutureValue" | "m365" | "internet" |
+        "private" })[], logs?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        connections?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+        @odata.type: string, agentVersion?: function, applicationSnapshot?:
+        function, createdDateTime?: function, destinationFqdn?: function,
+        destinationIp?: function, destinationPort?: function, deviceCategory?:
+        function, deviceId?: function, deviceOperatingSystem?: function,
+        deviceOperatingSystemVersion?: function, endDateTime?: function,
+        initiatingProcessName?: function, lastUpdateDateTime?: function,
+        networkProtocol?: function, popProcessingRegion?: function,
+        privateAccessDetails?: function, receivedBytes?: function, sentBytes?:
+        function, sourceIp?: function, sourcePort?: function, status?: function,
+        tenantId?: function, trafficType?: function, transactionBlockCount?:
+        function, transactionCount?: function, transportProtocol?: function,
+        userId?: function, userPrincipalName?: function } & { @odata.type:
+        "#microsoft.graph.networkaccess.connection" })[], remoteNetworks?:
+        (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
+        string, bgpRoutesAdvertisedCount?: function, createdDateTime?: function,
+        description?: function, destinationIp?: function, receivedBytes?:
+        function, remoteNetworkId?: function, sentBytes?: function, sourceIp?:
+        function, status?: function } & { @odata.type:
+        "#microsoft.graph.networkaccess.remoteNetworkHealthEvent" })[],
+        traffic?: { @odata.type: string, action?: "unknownFutureValue" |
+        Record<..., ...> | "block" | "allow" | "bypass" | "alert" | null,
+        agentVersion?: string | null, applicationSnapshot?: Record<..., ...> | {
+        @odata.type: ..., appId?: ... } | null, cloudApplicationMetadata?:
+        Record<..., ...> | { @odata.type: ..., category?: ...,
+        cloudApplicationCatalogId?: ..., complianceScore?: ..., generalScore?:
+        ..., legalScore?: ..., loginUser?: ..., name?: ..., riskScore?: ...,
+        securityScore?: ..., subactivity?: ... } | null, connectionId?: string |
+        null, createdDateTime?: string, description?: string | null,
+        destinationFQDN?: string | null, destinationIp?: string | null,
+        destinationPort?: number | null, destinationUrl?: string | null,
+        destinationWebCategory?: Record<..., ...> | (... & ... & ...) | null,
+        device?: Record<..., ...> | (... & ...) | null, deviceCategory?:
+        "unknownFutureValue" | Record<..., ...> | "client" | "branch" |
+        "remoteNetwork" | null, deviceId?: string | null,
+        deviceOperatingSystem?: string | null, deviceOperatingSystemVersion?:
+        string | null, filteringProfileId?: string | null,
+        filteringProfileName?: string | null, headers?: Record<..., ...> | {
+        @odata.type: ..., origin?: ..., referrer?: ..., xForwardedFor?: ... } |
+        null, httpMethod?: "get" | "unknownFutureValue" | Record<..., ...> |
+        "post" | "put" | "delete" | "head" | "options" | "connect" | "patch" |
+        "trace" | null, initiatingProcessName?: string | null, networkProtocol?:
+        "unknownFutureValue" | Record<..., ...> | "ip" | "icmp" | "igmp" | "ggp"
+        | "ipv4" | "tcp" | "pup" | "udp" | "idp" | "ipv6" | "ipv6RoutingHeader"
+        | "ipv6FragmentHeader" | "ipSecEncapsulatingSecurityPayload" |
+        "ipSecAuthenticationHeader" | "icmpV6" | "ipv6NoNextHeader" |
+        "ipv6DestinationOptions" | "nd" | "ipx" | "raw" | "spx" | "spxII" |
+        null, operationStatus?: "unknownFutureValue" | Record<..., ...> |
+        "success" | "failure" | null, policyId?: string | null, policyName?:
+        string | null, policyRuleId?: string | null, policyRuleName?: string |
+        null, popProcessingRegion?: string | null, privateAccessDetails?:
+        Record<..., ...> | { @odata.type: ..., accessType?: ..., appSegmentId?:
+        ..., connectionStatus?: ..., connectorId?: ..., connectorIp?: ...,
+        connectorName?: ..., processingRegion?: ..., thirdPartyTokenDetails?:
+        ... } | null, receivedBytes?: number | null, remoteNetworkId?: string |
+        null, resourceTenantId?: string | null, responseCode?: number | null,
+        sentBytes?: number | null, sessionId?: string | null, sourceIp?: string
+        | null, sourcePort?: number | null, tenantId?: string, threatType?:
+        string | null, trafficType?: "unknownFutureValue" | "internet" |
+        "private" | "microsoft365" | "all", transactionId?: string,
+        transportProtocol?: "unknownFutureValue" | Record<..., ...> | "ip" |
+        "icmp" | "igmp" | "ggp" | "ipv4" | "tcp" | "pup" | "udp" | "idp" |
+        "ipv6" | "ipv6RoutingHeader" | "ipv6FragmentHeader" |
+        "ipSecEncapsulatingSecurityPayload" | "ipSecAuthenticationHeader" |
+        "icmpV6" | "ipv6NoNextHeader" | "ipv6DestinationOptions" | "nd" | "ipx"
+        | "raw" | "spx" | "spxII" | null, user?: Record<..., ...> | (... & ... &
+        ...) | null, userId?: string | null, userPrincipalName?: string | null,
+        vendorNames?: ...[] }[] } & { @odata.type:
+        "#microsoft.graph.networkaccess.logs" }) | null, reports?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.networkaccess.reports" }) | null, settings?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, conditionalAccess?: Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, signalingStatus?: "unknownFutureValue" | "enabled" | "disabled"
+        } & { @odata.type:
+        "#microsoft.graph.networkaccess.conditionalAccessSettings" },
+        crossTenantAccess?: Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, networkPacketTaggingStatus?:
+        "unknownFutureValue" | "enabled" | "disabled" } & { @odata.type:
+        "#microsoft.graph.networkaccess.crossTenantAccessSettings" },
+        customBlockPage?: Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, configuration?: Record<..., ...>
+        | { @odata.type: ... } | null, state?: "unknownFutureValue" | "enabled"
+        | "disabled" } & { @odata.type:
+        "#microsoft.graph.networkaccess.customBlockPage" }, forwardingOptions?:
+        Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+        @odata.type: string, skipDnsLookupState?: "unknownFutureValue" |
+        "enabled" | "disabled" } & { @odata.type:
+        "#microsoft.graph.networkaccess.forwardingOptions" } } & { @odata.type:
+        "#microsoft.graph.networkaccess.settings" }) | null, tenantStatus?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, onboardingErrorMessage?: string
+        | null, onboardingStatus?: "unknownFutureValue" | "offboarded" |
+        "offboardingInProgress" | "onboardingInProgress" | "onboarded" |
+        "onboardingErrorOccurred" | "offboardingErrorOccurred" } & {
+        @odata.type: "#microsoft.graph.networkaccess.tenantStatus" }) | null,
+        threatIntelligencePolicies?: (Omit<Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string, description?:
+        function, name?: function, policyRules?: function, version?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.networkaccess.policy"
+        }, "@odata.type"> & { @odata.type: string, lastModifiedDateTime?:
+        string, settings?: { @odata.type: string, defaultAction?:
+        "unknownFutureValue" | "block" | "allow" } } & { @odata.type:
+        "#microsoft.graph.networkaccess.threatIntelligencePolicy" })[], tls?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string,
+        externalCertificateAuthorityCertificates?: (Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string, certificate?:
+        function, certificateSigningRequest?: function, chain?: function,
+        commonName?: function, name?: function, organizationName?: function,
+        status?: function, validity?: function } & { @odata.type:
+        "#microsoft.graph.networkaccess.externalCertificateAuthorityCertificate"
+        })[] } & { @odata.type: "#microsoft.graph.networkaccess.tlsTermination"
+        }) | null, tlsInspectionPolicies?: (Omit<Omit<{ @odata.type: string,
+        id?: function }, "@odata.type"> & Omit<{ @odata.type: string,
+        description?: function, name?: function, policyRules?: function,
+        version?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.networkaccess.policy" }, "@odata.type"> & {
+        @odata.type: string, lastModifiedDateTime?: string, settings?: {
+        @odata.type: string } } & { @odata.type:
+        "#microsoft.graph.networkaccess.tlsInspectionPolicy" })[] } & {
+        @odata.type: "#microsoft.graph.networkaccess.networkAccessRoot" }>
       parameters:
         - id: body
-          type: Operation&lt;"/networkAccess", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            alerts?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, actions?: { <xref uid="@odata.type" />: string, actionLink?:
+            string | null, actionText?: string }[], alertType?:
+            "unhealthyRemoteNetworks" | "unhealthyConnectors" |
+            "deviceTokenInconsistency" | "crossTenantAnomaly" |
+            "suspiciousProcess" | "threatIntelligenceTransactions" |
+            "unknownFutureValue" | "webContentBlocked" | "malware" |
+            "patientZero" | "dlp", categories?: ("unknownFutureValue" |
+            "initialAccess" | "persistence" | "privilegeEscalation" |
+            "defenseEvasion" | "credentialAccess" | "discovery" |
+            "lateralMovement" | "execution" | "collection" | "exfiltration" |
+            "commandAndControl" | "impact" | "impairProcessControl" |
+            "inhibitResponseFunction" | "reconnaissance" | "resourceDevelopment"
+            | "evasion" | Record&lt;string, never&gt; | null)[], componentName?:
+            string | null, creationDateTime?: string, description?: string |
+            null, detectionTechnology?: string | null, displayName?: string,
+            extendedProperties?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.networkaccess.extendedProperties" />"
+            }) | null, firstActivityDateTime?: string | null, isPreview?:
+            boolean | null, lastActivityDateTime?: string | null, policy?:
+            Record&lt;string, never&gt; | (Omit&lt;Omit&lt;..., ...&gt; &
+            Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            action?: "unknownFutureValue" | "block" | "allow" | "bypass" |
+            "alert", createdDateTime?: string, lastModifiedDateTime?: string })
+            | null, productName?: string | null, relatedResources?: { <xref
+            uid="@odata.type" />: string }[], severity?: "unknownFutureValue" |
+            "informational" | "low" | "medium" | "high", subTechniques?: (string
+            | null)[], techniques?: (string | null)[], vendorName?: string } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.alert" />" })[], connectivity?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, branches?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            bandwidthCapacity?: number | null, connectivityConfiguration?:
+            Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            branchId?: ..., branchName?: ..., links?: ... } | null,
+            connectivityState?: "unknownFutureValue" | Record&lt;..., ...&gt; |
+            "pending" | "connected" | "inactive" | "error" | null, country?:
+            string | null, deviceLinks?: ...[], lastModifiedDateTime?: string,
+            name?: string, region?: "unknownFutureValue" | "eastUS" | "eastUS2"
+            | "westUS" | "westUS2" | "westUS3" | "centralUS" | "northCentralUS"
+            | "southCentralUS" | "northEurope" | "westEurope" | "franceCentral"
+            | "germanyWestCentral" | "switzerlandNorth" | "ukSouth" |
+            "canadaEast" | "canadaCentral" | "southAfricaWest" |
+            "southAfricaNorth" | "uaeNorth" | "australiaEast" | "westCentralUS"
+            | "centralIndia" | "southEastAsia" | "swedenCentral" | "southIndia"
+            | "australiaSouthEast" | "koreaCentral" | "polandCentral" |
+            "brazilSouth" | "japanEast" | "japanWest" | "koreaSouth" |
+            "italyNorth" | "franceSouth" | "israelCentral", version?: string } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.branchSite" />" })[],
+            webCategories?: (Omit&lt;{ <xref uid="@odata.type" />: string },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, displayName?: string | null, group?: string | null, name?:
+            string } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.webCategory" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.connectivity" />" }) | null,
+            filteringPolicies?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: string, description?: string | null,
+            name?: string, policyRules?: ...[], version?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.policy" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            action?: "unknownFutureValue" | "block" | "allow" | "bypass" |
+            "alert", createdDateTime?: string, lastModifiedDateTime?: string
+            })[], forwardingPolicies?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, description?: string | null, name?: string, policyRules?:
+            ...[], version?: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.policy" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            privateAccessAppId?: string | null, trafficForwardingType?:
+            "unknownFutureValue" | "m365" | "internet" | "private" })[], logs?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, connections?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            agentVersion?: string | null, applicationSnapshot?: Record&lt;...,
+            ...&gt; | { <xref uid="@odata.type" />: ..., appId?: ... } | null,
+            createdDateTime?: string, destinationFqdn?: string | null,
+            destinationIp?: string | null, destinationPort?: number | null,
+            deviceCategory?: "unknownFutureValue" | Record&lt;..., ...&gt; |
+            "client" | "branch" | "remoteNetwork" | null, deviceId?: string |
+            null, deviceOperatingSystem?: string | null,
+            deviceOperatingSystemVersion?: string | null, endDateTime?: string |
+            null, initiatingProcessName?: string | null, lastUpdateDateTime?:
+            string | null, networkProtocol?: "unknownFutureValue" |
+            Record&lt;..., ...&gt; | "ip" | "icmp" | "igmp" | "ggp" | "ipv4" |
+            "tcp" | "pup" | "udp" | "idp" | "ipv6" | "ipv6RoutingHeader" |
+            "ipv6FragmentHeader" | "ipSecEncapsulatingSecurityPayload" |
+            "ipSecAuthenticationHeader" | "icmpV6" | "ipv6NoNextHeader" |
+            "ipv6DestinationOptions" | "nd" | "ipx" | "raw" | "spx" | "spxII" |
+            null, popProcessingRegion?: string | null, privateAccessDetails?:
+            Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            accessType?: ..., appSegmentId?: ..., connectionStatus?: ...,
+            connectorId?: ..., connectorIp?: ..., connectorName?: ...,
+            processingRegion?: ..., thirdPartyTokenDetails?: ... } | null,
+            receivedBytes?: number | null, sentBytes?: number | null, sourceIp?:
+            string | null, sourcePort?: number | null, status?:
+            "unknownFutureValue" | Record&lt;..., ...&gt; | "open" | "active" |
+            "closed" | null, tenantId?: string, trafficType?:
+            "unknownFutureValue" | "internet" | "private" | "microsoft365" |
+            "all", transactionBlockCount?: number | null, transactionCount?:
+            number | null, transportProtocol?: "unknownFutureValue" |
+            Record&lt;..., ...&gt; | "ip" | "icmp" | "igmp" | "ggp" | "ipv4" |
+            "tcp" | "pup" | "udp" | "idp" | "ipv6" | "ipv6RoutingHeader" |
+            "ipv6FragmentHeader" | "ipSecEncapsulatingSecurityPayload" |
+            "ipSecAuthenticationHeader" | "icmpV6" | "ipv6NoNextHeader" |
+            "ipv6DestinationOptions" | "nd" | "ipx" | "raw" | "spx" | "spxII" |
+            null, userId?: string | null, userPrincipalName?: string | null } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.connection" />" })[],
+            remoteNetworks?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, bgpRoutesAdvertisedCount?: number |
+            null, createdDateTime?: string, description?: string | null,
+            destinationIp?: string | null, receivedBytes?: number | null,
+            remoteNetworkId?: string, sentBytes?: number | null, sourceIp?:
+            string | null, status?: "unknownFutureValue" | "tunnelDisconnected"
+            | "tunnelConnected" | "bgpDisconnected" | "bgpConnected" |
+            "remoteNetworkAlive" } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.remoteNetworkHealthEvent" />"
+            })[], traffic?: { <xref uid="@odata.type" />: string, action?:
+            "unknownFutureValue" | Record&lt;string, never&gt; | "block" |
+            "allow" | "bypass" | "alert" | null, agentVersion?: string | null,
+            applicationSnapshot?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, appId?: function } | null,
+            cloudApplicationMetadata?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, category?: function,
+            cloudApplicationCatalogId?: function, complianceScore?: function,
+            generalScore?: function, legalScore?: function, loginUser?:
+            function, name?: function, riskScore?: function, securityScore?:
+            function, subactivity?: function } | null, connectionId?: string |
+            null, createdDateTime?: string, description?: string | null,
+            destinationFQDN?: string | null, destinationIp?: string | null,
+            destinationPort?: number | null, destinationUrl?: string | null,
+            destinationWebCategory?: Record&lt;string, never&gt; | (Omit&lt;...,
+            ...&gt; & { <xref uid="@odata.type" />: ..., displayName?: ...,
+            group?: ..., name?: ... } & { <xref uid="@odata.type" />: ... }) |
+            null, device?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; &
+            { <xref uid="@odata.type" />: ..., accountEnabled?: ...,
+            alternativeNames?: ..., alternativeSecurityIds?: ...,
+            approximateLastSignInDateTime?: ..., commands?: ...,
+            complianceExpirationDateTime?: ..., deviceCategory?: ..., deviceId?:
+            ..., deviceMetadata?: ..., deviceOwnership?: ..., deviceTemplate?:
+            ..., deviceVersion?: ..., displayName?: ..., domainName?: ...,
+            enrollmentProfileName?: ..., enrollmentType?: ...,
+            extensionAttributes?: ..., extensions?: ..., hostnames?: ...,
+            isCompliant?: ..., isManaged?: ..., isManagementRestricted?: ...,
+            isRooted?: ..., kind?: ..., managementType?: ..., manufacturer?:
+            ..., mdmAppId?: ..., memberOf?: ..., model?: ..., name?: ...,
+            onPremisesLastSyncDateTime?: ..., onPremisesSecurityIdentifier?:
+            ..., onPremisesSyncEnabled?: ..., operatingSystem?: ...,
+            operatingSystemVersion?: ..., physicalIds?: ..., platform?: ...,
+            profileType?: ..., registeredOwners?: ..., registeredUsers?: ...,
+            registrationDateTime?: ..., status?: ..., systemLabels?: ...,
+            transitiveMemberOf?: ..., trustType?: ..., usageRights?: ... }) |
+            null, deviceCategory?: "unknownFutureValue" | Record&lt;string,
+            never&gt; | "client" | "branch" | "remoteNetwork" | null, deviceId?:
+            string | null, deviceOperatingSystem?: string | null,
+            deviceOperatingSystemVersion?: string | null, filteringProfileId?:
+            string | null, filteringProfileName?: string | null, headers?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            origin?: function, referrer?: function, xForwardedFor?: function } |
+            null, httpMethod?: "get" | "unknownFutureValue" | Record&lt;string,
+            never&gt; | "post" | "put" | "delete" | "head" | "options" |
+            "connect" | "patch" | "trace" | null, initiatingProcessName?: string
+            | null, networkProtocol?: "unknownFutureValue" | Record&lt;string,
+            never&gt; | "ip" | "icmp" | "igmp" | "ggp" | "ipv4" | "tcp" | "pup"
+            | "udp" | "idp" | "ipv6" | "ipv6RoutingHeader" |
+            "ipv6FragmentHeader" | "ipSecEncapsulatingSecurityPayload" |
+            "ipSecAuthenticationHeader" | "icmpV6" | "ipv6NoNextHeader" |
+            "ipv6DestinationOptions" | "nd" | "ipx" | "raw" | "spx" | "spxII" |
+            null, operationStatus?: "unknownFutureValue" | Record&lt;string,
+            never&gt; | "success" | "failure" | null, policyId?: string | null,
+            policyName?: string | null, policyRuleId?: string | null,
+            policyRuleName?: string | null, popProcessingRegion?: string | null,
+            privateAccessDetails?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, accessType?: function, appSegmentId?:
+            function, connectionStatus?: function, connectorId?: function,
+            connectorIp?: function, connectorName?: function, processingRegion?:
+            function, thirdPartyTokenDetails?: function } | null,
+            receivedBytes?: number | null, remoteNetworkId?: string | null,
+            resourceTenantId?: string | null, responseCode?: number | null,
+            sentBytes?: number | null, sessionId?: string | null, sourceIp?:
+            string | null, sourcePort?: number | null, tenantId?: string,
+            threatType?: string | null, trafficType?: "unknownFutureValue" |
+            "internet" | "private" | "microsoft365" | "all", transactionId?:
+            string, transportProtocol?: "unknownFutureValue" | Record&lt;string,
+            never&gt; | "ip" | "icmp" | "igmp" | "ggp" | "ipv4" | "tcp" | "pup"
+            | "udp" | "idp" | "ipv6" | "ipv6RoutingHeader" |
+            "ipv6FragmentHeader" | "ipSecEncapsulatingSecurityPayload" |
+            "ipSecAuthenticationHeader" | "icmpV6" | "ipv6NoNextHeader" |
+            "ipv6DestinationOptions" | "nd" | "ipx" | "raw" | "spx" | "spxII" |
+            null, user?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & {
+            <xref uid="@odata.type" />: ..., aboutMe?: ..., accountEnabled?:
+            ..., activities?: ..., adhocCalls?: ..., ageGroup?: ...,
+            agreementAcceptances?: ..., analytics?: ...,
+            appConsentRequestsForApproval?: ..., appRoleAssignedResources?: ...,
+            appRoleAssignments?: ..., approvals?: ..., assignedLicenses?: ...,
+            assignedPlans?: ..., authentication?: ..., authorizationInfo?: ...,
+            birthday?: ..., businessPhones?: ..., calendar?: ...,
+            calendarGroups?: ..., calendars?: ..., calendarView?: ..., chats?:
+            ..., city?: ..., cloudClipboard?: ..., cloudLicensing?: ...,
+            cloudPCs?: ..., cloudRealtimeCommunicationInfo?: ...,
+            communications?: ..., companyName?: ..., consentProvidedForMinor?:
+            ..., contactFolders?: ..., contacts?: ..., country?: ...,
+            createdDateTime?: ..., createdObjects?: ..., creationType?: ...,
+            customSecurityAttributes?: ..., dataSecurityAndGovernance?: ...,
+            department?: ..., deviceEnrollmentConfigurations?: ...,
+            deviceEnrollmentLimit?: ..., deviceKeys?: ...,
+            deviceManagementTroubleshootingEvents?: ..., devices?: ...,
+            directReports?: ..., displayName?: ..., drive?: ..., drives?: ...,
+            employeeExperience?: ..., employeeHireDate?: ..., employeeId?: ...,
+            employeeLeaveDateTime?: ..., employeeOrgData?: ..., employeeType?:
+            ..., events?: ..., extensions?: ..., externalUserState?: ...,
+            externalUserStateChangeDateTime?: ..., faxNumber?: ...,
+            followedSites?: ..., givenName?: ..., hireDate?: ..., identities?:
+            ..., imAddresses?: ..., inferenceClassification?: ...,
+            infoCatalogs?: ..., informationProtection?: ..., insights?: ...,
+            interests?: ..., invitedBy?: ..., isLicenseReconciliationNeeded?:
+            ..., isManagementRestricted?: ..., isResourceAccount?: ...,
+            jobTitle?: ..., joinedGroups?: ..., joinedTeams?: ...,
+            lastPasswordChangeDateTime?: ..., legalAgeGroupClassification?: ...,
+            licenseAssignmentStates?: ..., licenseDetails?: ..., mail?: ...,
+            mailboxSettings?: ..., mailFolders?: ..., mailNickname?: ...,
+            managedAppLogCollectionRequests?: ..., managedAppRegistrations?:
+            ..., managedDevices?: ..., manager?: ..., memberOf?: ..., messages?:
+            ..., mobileAppIntentAndStates?: ...,
+            mobileAppTroubleshootingEvents?: ..., mobilePhone?: ..., mySite?:
+            ..., notifications?: ..., oauth2PermissionGrants?: ...,
+            officeLocation?: ..., onenote?: ..., onlineMeetings?: ...,
+            onPremisesDistinguishedName?: ..., onPremisesDomainName?: ...,
+            onPremisesExtensionAttributes?: ..., onPremisesImmutableId?: ...,
+            onPremisesLastSyncDateTime?: ..., onPremisesProvisioningErrors?:
+            ..., onPremisesSamAccountName?: ..., onPremisesSecurityIdentifier?:
+            ..., onPremisesSipInfo?: ..., onPremisesSyncBehavior?: ...,
+            onPremisesSyncEnabled?: ..., onPremisesUserPrincipalName?: ...,
+            otherMails?: ..., outlook?: ..., ownedDevices?: ..., ownedObjects?:
+            ..., passwordPolicies?: ..., passwordProfile?: ..., pastProjects?:
+            ..., pendingAccessReviewInstances?: ..., people?: ...,
+            permissionGrants?: ..., photo?: ..., photos?: ..., planner?: ...,
+            postalCode?: ..., preferredDataLocation?: ..., preferredLanguage?:
+            ..., preferredName?: ..., presence?: ..., print?: ..., profile?:
+            ..., provisionedPlans?: ..., proxyAddresses?: ...,
+            refreshTokensValidFromDateTime?: ..., registeredDevices?: ...,
+            responsibilities?: ..., schools?: ..., scopedRoleMemberOf?: ...,
+            security?: ..., securityIdentifier?: ...,
+            serviceProvisioningErrors?: ..., settings?: ..., showInAddressList?:
+            ..., signInActivity?: ..., signInSessionsValidFromDateTime?: ...,
+            skills?: ..., solutions?: ..., sponsors?: ..., state?: ...,
+            streetAddress?: ..., surname?: ..., teamwork?: ..., todo?: ...,
+            transitiveMemberOf?: ..., transitiveReports?: ..., usageLocation?:
+            ..., usageRights?: ..., userPrincipalName?: ..., userType?: ...,
+            virtualEvents?: ...,
+            windowsInformationProtectionDeviceRegistrations?: ... } & { <xref
+            uid="@odata.type" />: ... }) | null, userId?: string | null,
+            userPrincipalName?: string | null, vendorNames?: function[] }[] } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.logs" />" }) | null, reports?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.networkaccess.reports" />" }) | null,
+            settings?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            conditionalAccess?: Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, signalingStatus?: "unknownFutureValue"
+            | "enabled" | "disabled" } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.conditionalAccessSettings" />" },
+            crossTenantAccess?: Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, networkPacketTaggingStatus?:
+            "unknownFutureValue" | "enabled" | "disabled" } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.crossTenantAccessSettings" />" },
+            customBlockPage?: Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, configuration?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string } | null, state?:
+            "unknownFutureValue" | "enabled" | "disabled" } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.customBlockPage" />" },
+            forwardingOptions?: Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, skipDnsLookupState?:
+            "unknownFutureValue" | "enabled" | "disabled" } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.forwardingOptions" />" } } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.settings" />" }) | null,
+            tenantStatus?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            onboardingErrorMessage?: string | null, onboardingStatus?:
+            "unknownFutureValue" | "offboarded" | "offboardingInProgress" |
+            "onboardingInProgress" | "onboarded" | "onboardingErrorOccurred" |
+            "offboardingErrorOccurred" } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.tenantStatus" />" }) | null,
+            threatIntelligencePolicies?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, description?: string | null, name?: string, policyRules?:
+            ...[], version?: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.policy" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            lastModifiedDateTime?: string, settings?: { <xref uid="@odata.type"
+            />: string, defaultAction?: "unknownFutureValue" | "block" | "allow"
+            } } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.threatIntelligencePolicy" />"
+            })[], tls?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            externalCertificateAuthorityCertificates?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            certificate?: string | null, certificateSigningRequest?: string |
+            null, chain?: string | null, commonName?: string, name?: string,
+            organizationName?: string, status?: "unknownFutureValue" | "active"
+            | "enabled" | "disabled" | "csrGenerated" | "enrolling" | "expiring"
+            | "expired", validity?: { <xref uid="@odata.type" />: ...,
+            endDateTime?: ..., startDateTime?: ... } } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.externalCertificateAuthorityCertificate"
+            />" })[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.tlsTermination" />" }) | null,
+            tlsInspectionPolicies?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type"
+            />: string, id?: string }, "<xref uid="@odata.type" />"&gt; &
+            Omit&lt;{ <xref uid="@odata.type" />: string, description?: string |
+            null, name?: string, policyRules?: ...[], version?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.policy" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            lastModifiedDateTime?: string, settings?: { <xref uid="@odata.type"
+            />: string } } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.tlsInspectionPolicy" />" })[] } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.networkAccessRoot" />" }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["PATCH /networkAccess"]["response"]&gt;
+        type: >-
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, alerts?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, actions?: { <xref uid="@odata.type" />:
+          string, actionLink?: function, actionText?: function }[], alertType?:
+          "unhealthyRemoteNetworks" | "unhealthyConnectors" |
+          "deviceTokenInconsistency" | "crossTenantAnomaly" |
+          "suspiciousProcess" | "threatIntelligenceTransactions" |
+          "unknownFutureValue" | "webContentBlocked" | "malware" | "patientZero"
+          | "dlp", categories?: ("unknownFutureValue" | "initialAccess" |
+          "persistence" | "privilegeEscalation" | "defenseEvasion" |
+          "credentialAccess" | "discovery" | "lateralMovement" | "execution" |
+          "collection" | "exfiltration" | "commandAndControl" | "impact" |
+          "impairProcessControl" | "inhibitResponseFunction" | "reconnaissance"
+          | "resourceDevelopment" | "evasion" | Record&lt;..., ...&gt; |
+          null)[], componentName?: string | null, creationDateTime?: string,
+          description?: string | null, detectionTechnology?: string | null,
+          displayName?: string, extendedProperties?: Record&lt;string, never&gt;
+          | (Omit&lt;{ <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.extendedProperties" />" }) | null,
+          firstActivityDateTime?: string | null, isPreview?: boolean | null,
+          lastActivityDateTime?: string | null, policy?: Record&lt;string,
+          never&gt; | (Omit&lt;... & ... & ..., "<xref uid="@odata.type" />"&gt;
+          & { <xref uid="@odata.type" />: string, action?: function,
+          createdDateTime?: function, lastModifiedDateTime?: function }) | null,
+          productName?: string | null, relatedResources?: { <xref
+          uid="@odata.type" />: string }[], severity?: "unknownFutureValue" |
+          "informational" | "low" | "medium" | "high", subTechniques?: (string |
+          null)[], techniques?: (string | null)[], vendorName?: string } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.alert" />" })[], connectivity?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, branches?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, bandwidthCapacity?:
+          function, connectivityConfiguration?: function, connectivityState?:
+          function, country?: function, deviceLinks?: function,
+          lastModifiedDateTime?: function, name?: function, region?: function,
+          version?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.branchSite" />" })[],
+          webCategories?: (Omit&lt;{ <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          displayName?: function, group?: function, name?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.webCategory" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.connectivity" />" }) | null,
+          filteringPolicies?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, description?: function, name?:
+          function, policyRules?: function, version?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.policy" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          action?: "unknownFutureValue" | "block" | "allow" | "bypass" |
+          "alert", createdDateTime?: string, lastModifiedDateTime?: string })[],
+          forwardingPolicies?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, description?: function, name?:
+          function, policyRules?: function, version?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.policy" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          privateAccessAppId?: string | null, trafficForwardingType?:
+          "unknownFutureValue" | "m365" | "internet" | "private" })[], logs?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, connections?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, agentVersion?:
+          function, applicationSnapshot?: function, createdDateTime?: function,
+          destinationFqdn?: function, destinationIp?: function,
+          destinationPort?: function, deviceCategory?: function, deviceId?:
+          function, deviceOperatingSystem?: function,
+          deviceOperatingSystemVersion?: function, endDateTime?: function,
+          initiatingProcessName?: function, lastUpdateDateTime?: function,
+          networkProtocol?: function, popProcessingRegion?: function,
+          privateAccessDetails?: function, receivedBytes?: function, sentBytes?:
+          function, sourceIp?: function, sourcePort?: function, status?:
+          function, tenantId?: function, trafficType?: function,
+          transactionBlockCount?: function, transactionCount?: function,
+          transportProtocol?: function, userId?: function, userPrincipalName?:
+          function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.connection" />" })[],
+          remoteNetworks?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, bgpRoutesAdvertisedCount?: function, createdDateTime?:
+          function, description?: function, destinationIp?: function,
+          receivedBytes?: function, remoteNetworkId?: function, sentBytes?:
+          function, sourceIp?: function, status?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.remoteNetworkHealthEvent" />" })[],
+          traffic?: { <xref uid="@odata.type" />: string, action?:
+          "unknownFutureValue" | Record&lt;..., ...&gt; | "block" | "allow" |
+          "bypass" | "alert" | null, agentVersion?: string | null,
+          applicationSnapshot?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., appId?: ... } | null,
+          cloudApplicationMetadata?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., category?: ..., cloudApplicationCatalogId?:
+          ..., complianceScore?: ..., generalScore?: ..., legalScore?: ...,
+          loginUser?: ..., name?: ..., riskScore?: ..., securityScore?: ...,
+          subactivity?: ... } | null, connectionId?: string | null,
+          createdDateTime?: string, description?: string | null,
+          destinationFQDN?: string | null, destinationIp?: string | null,
+          destinationPort?: number | null, destinationUrl?: string | null,
+          destinationWebCategory?: Record&lt;..., ...&gt; | (... & ... & ...) |
+          null, device?: Record&lt;..., ...&gt; | (... & ...) | null,
+          deviceCategory?: "unknownFutureValue" | Record&lt;..., ...&gt; |
+          "client" | "branch" | "remoteNetwork" | null, deviceId?: string |
+          null, deviceOperatingSystem?: string | null,
+          deviceOperatingSystemVersion?: string | null, filteringProfileId?:
+          string | null, filteringProfileName?: string | null, headers?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., origin?:
+          ..., referrer?: ..., xForwardedFor?: ... } | null, httpMethod?: "get"
+          | "unknownFutureValue" | Record&lt;..., ...&gt; | "post" | "put" |
+          "delete" | "head" | "options" | "connect" | "patch" | "trace" | null,
+          initiatingProcessName?: string | null, networkProtocol?:
+          "unknownFutureValue" | Record&lt;..., ...&gt; | "ip" | "icmp" | "igmp"
+          | "ggp" | "ipv4" | "tcp" | "pup" | "udp" | "idp" | "ipv6" |
+          "ipv6RoutingHeader" | "ipv6FragmentHeader" |
+          "ipSecEncapsulatingSecurityPayload" | "ipSecAuthenticationHeader" |
+          "icmpV6" | "ipv6NoNextHeader" | "ipv6DestinationOptions" | "nd" |
+          "ipx" | "raw" | "spx" | "spxII" | null, operationStatus?:
+          "unknownFutureValue" | Record&lt;..., ...&gt; | "success" | "failure"
+          | null, policyId?: string | null, policyName?: string | null,
+          policyRuleId?: string | null, policyRuleName?: string | null,
+          popProcessingRegion?: string | null, privateAccessDetails?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          accessType?: ..., appSegmentId?: ..., connectionStatus?: ...,
+          connectorId?: ..., connectorIp?: ..., connectorName?: ...,
+          processingRegion?: ..., thirdPartyTokenDetails?: ... } | null,
+          receivedBytes?: number | null, remoteNetworkId?: string | null,
+          resourceTenantId?: string | null, responseCode?: number | null,
+          sentBytes?: number | null, sessionId?: string | null, sourceIp?:
+          string | null, sourcePort?: number | null, tenantId?: string,
+          threatType?: string | null, trafficType?: "unknownFutureValue" |
+          "internet" | "private" | "microsoft365" | "all", transactionId?:
+          string, transportProtocol?: "unknownFutureValue" | Record&lt;...,
+          ...&gt; | "ip" | "icmp" | "igmp" | "ggp" | "ipv4" | "tcp" | "pup" |
+          "udp" | "idp" | "ipv6" | "ipv6RoutingHeader" | "ipv6FragmentHeader" |
+          "ipSecEncapsulatingSecurityPayload" | "ipSecAuthenticationHeader" |
+          "icmpV6" | "ipv6NoNextHeader" | "ipv6DestinationOptions" | "nd" |
+          "ipx" | "raw" | "spx" | "spxII" | null, user?: Record&lt;..., ...&gt;
+          | (... & ... & ...) | null, userId?: string | null,
+          userPrincipalName?: string | null, vendorNames?: ...[] }[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.networkaccess.logs"
+          />" }) | null, reports?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.reports" />" }) | null, settings?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, conditionalAccess?: Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          signalingStatus?: "unknownFutureValue" | "enabled" | "disabled" } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.conditionalAccessSettings" />" },
+          crossTenantAccess?: Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, networkPacketTaggingStatus?:
+          "unknownFutureValue" | "enabled" | "disabled" } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.crossTenantAccessSettings" />" },
+          customBlockPage?: Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, configuration?: Record&lt;..., ...&gt; |
+          { <xref uid="@odata.type" />: ... } | null, state?:
+          "unknownFutureValue" | "enabled" | "disabled" } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.customBlockPage" />" },
+          forwardingOptions?: Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, skipDnsLookupState?:
+          "unknownFutureValue" | "enabled" | "disabled" } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.forwardingOptions" />" } } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.settings" />" }) | null,
+          tenantStatus?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string,
+          onboardingErrorMessage?: string | null, onboardingStatus?:
+          "unknownFutureValue" | "offboarded" | "offboardingInProgress" |
+          "onboardingInProgress" | "onboarded" | "onboardingErrorOccurred" |
+          "offboardingErrorOccurred" } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.tenantStatus" />" }) | null,
+          threatIntelligencePolicies?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, description?: function, name?: function, policyRules?:
+          function, version?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.policy" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          lastModifiedDateTime?: string, settings?: { <xref uid="@odata.type"
+          />: string, defaultAction?: "unknownFutureValue" | "block" | "allow" }
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.threatIntelligencePolicy" />" })[],
+          tls?: Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string,
+          externalCertificateAuthorityCertificates?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, certificate?:
+          function, certificateSigningRequest?: function, chain?: function,
+          commonName?: function, name?: function, organizationName?: function,
+          status?: function, validity?: function } & { <xref uid="@odata.type"
+          />: "#<xref
+          uid="microsoft.graph.networkaccess.externalCertificateAuthorityCertificate"
+          />" })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.tlsTermination" />" }) | null,
+          tlsInspectionPolicies?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, description?: function, name?:
+          function, policyRules?: function, version?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.policy" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          lastModifiedDateTime?: string, settings?: { <xref uid="@odata.type"
+          />: string } } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.tlsInspectionPolicy" />" })[] } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.networkAccessRoot" />" }&gt;
 variables:
   - name: reports
     uid: '@microsoft/teams.graph-endpoints-beta.networkAccess.reports'

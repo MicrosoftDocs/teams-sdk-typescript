@@ -7,7 +7,12 @@ interfaces:
   - '@microsoft/teams.graph-endpoints.print.services.IEndpoints'
 package: '@microsoft/teams.graph-endpoints'
 functions:
-  - name: create(Operation<"/print/services", "post">)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, endpoints?: (Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & { @odata.type: string, displayName?: string, uri?:
+      string } & { @odata.type: "#microsoft.graph.printServiceEndpoint" })[] } &
+      { @odata.type: "#microsoft.graph.printService" })
     uid: '@microsoft/teams.graph-endpoints.print.services.create'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`POST /print/services`'
@@ -15,16 +20,43 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body: Operation<"/print/services", "post">):
-        EndpointRequest<IEndpoints["POST /print/services"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, endpoints?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        displayName?: string, uri?: string } & { @odata.type:
+        "#microsoft.graph.printServiceEndpoint" })[] } & { @odata.type:
+        "#microsoft.graph.printService" }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        endpoints?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+        { @odata.type: string, displayName?: string, uri?: string } & {
+        @odata.type: "#microsoft.graph.printServiceEndpoint" })[] } & {
+        @odata.type: "#microsoft.graph.printService" }>
       parameters:
         - id: body
-          type: Operation&lt;"/print/services", "post"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            endpoints?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, displayName?: string, uri?: string } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.printServiceEndpoint" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.printService" />"
+            }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["POST /print/services"]["response"]&gt;
-  - name: del(any)
+        type: >-
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, endpoints?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, displayName?: string, uri?: string } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printServiceEndpoint" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.printService" />"
+          }&gt;
+  - name: 'del({ If-Match?: string, printService-id: string })'
     uid: '@microsoft/teams.graph-endpoints.print.services.del'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`DELETE /print/services/{printService-id}`'
@@ -32,18 +64,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /print/services/{printService-id}"]["response"]>
+        function del(params?: { If-Match?: string, printService-id: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, printService-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /print/services/{printService-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[], printService-id: string })'
     uid: '@microsoft/teams.graph-endpoints.print.services.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -54,18 +84,33 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /print/services/{printService-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        printService-id: string }): EndpointRequest<Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, endpoints?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, displayName?: string, uri?: string } & {
+        @odata.type: "#microsoft.graph.printServiceEndpoint" })[] } & {
+        @odata.type: "#microsoft.graph.printService" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[], printService-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /print/services/{printService-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, endpoints?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, displayName?: string, uri?: string } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printServiceEndpoint" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.printService" />"
+          }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: '@microsoft/teams.graph-endpoints.print.services.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -78,16 +123,39 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /print/services"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, endpoints?: (Omit<..., ...> & { @odata.type: ..., displayName?:
+        ..., uri?: ... } & { @odata.type: ... })[] } & { @odata.type:
+        "#microsoft.graph.printService" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /print/services"]["response"]&gt;
-  - name: update(Operation<"/print/services/{printService-id}", "patch">, any)
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          endpoints?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          displayName?: ..., uri?: ... } & { <xref uid="@odata.type" />: ...
+          })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printService" />" })[] }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, endpoints?: (Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & { @odata.type: string, displayName?: string, uri?:
+      string } & { @odata.type: "#microsoft.graph.printServiceEndpoint" })[] } &
+      { @odata.type: "#microsoft.graph.printService" }, { printService-id:
+      string })
     uid: '@microsoft/teams.graph-endpoints.print.services.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`PATCH /print/services/{printService-id}`'
@@ -95,21 +163,46 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/print/services/{printService-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /print/services/{printService-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, endpoints?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        displayName?: string, uri?: string } & { @odata.type:
+        "#microsoft.graph.printServiceEndpoint" })[] } & { @odata.type:
+        "#microsoft.graph.printService" }, params?: { printService-id: string
+        }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, endpoints?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        displayName?: string, uri?: string } & { @odata.type:
+        "#microsoft.graph.printServiceEndpoint" })[] } & { @odata.type:
+        "#microsoft.graph.printService" }>
       parameters:
         - id: body
-          type: Operation&lt;"/print/services/{printService-id}", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            endpoints?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, displayName?: string, uri?: string } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.printServiceEndpoint" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.printService" />"
+            }
           description: ''
         - id: params
-          type: any
+          type: '{ printService-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /print/services/{printService-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, endpoints?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, displayName?: string, uri?: string } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printServiceEndpoint" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.printService" />"
+          }&gt;
 variables:
   - name: endpoints
     uid: '@microsoft/teams.graph-endpoints.print.services.endpoints'

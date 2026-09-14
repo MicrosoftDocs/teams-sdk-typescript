@@ -102,7 +102,7 @@ variables:
           /identityGovernance/entitlementManagement/resourceRequests/{accessPackageResourceRequest-id}/catalog/customWorkflowExtensions/{customCalloutExtension-id}"]["response"]&gt;
           }
 functions:
-  - name: del(any)
+  - name: 'del({ accessPackageResourceRequest-id: string, If-Match?: string })'
     uid: >-
       @microsoft/teams.graph-endpoints.identityGovernance.entitlementManagement.resourceRequests.catalog.del
     package: '@microsoft/teams.graph-endpoints'
@@ -113,18 +113,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /identityGovernance/entitlementManagement/resourceRequests/{accessPackageResourceRequest-id}/catalog"]["response"]>
+        function del(params?: { accessPackageResourceRequest-id: string,
+        If-Match?: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ accessPackageResourceRequest-id: string, If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /identityGovernance/entitlementManagement/resourceRequests/{accessPackageResourceRequest-id}/catalog"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[],
+      accessPackageResourceRequest-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.identityGovernance.entitlementManagement.resourceRequests.catalog.get
     package: '@microsoft/teams.graph-endpoints'
@@ -135,20 +135,430 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /identityGovernance/entitlementManagement/resourceRequests/{accessPackageResourceRequest-id}/catalog"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        accessPackageResourceRequest-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, accessPackages?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, accessPackagesIncompatibleWith?:
+        (Omit<{ id?: string | undefined; '@odata.type': string; },
+        "@odata.type"> & { createdDateTime?: string | null | undefined;
+        description?: string | null | undefined; displayName?: string | ... 1
+        more ... | undefined; ... 8 more ...; '@odata.type': string; } & { ...;
+        })[] | undefined, assignmentPolicies?: (Omit<..., ...> & { @odata.type:
+        ..., accessPackage?: ..., allowedTargetScope?: ...,
+        automaticRequestSettings?: ..., catalog?: ..., createdDateTime?: ...,
+        customExtensionStageSettings?: ..., description?: ..., displayName?:
+        ..., expiration?: ..., modifiedDateTime?: ..., notificationSettings?:
+        ..., questions?: ..., requestApprovalSettings?: ..., requestorSettings?:
+        ..., reviewSettings?: ..., specificAllowedTargets?: ... } & {
+        @odata.type: ... })[], catalog?: Record<string, never> | Omit<{ id?:
+        string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        catalogType?: Record<string, never> | "unknownFutureValue" |
+        "userManaged" | "serviceDefault" | "serviceManaged" | null | undefined;
+        ... 11 more ...; '@odata.type': string; } & { ...; } | null,
+        createdDateTime?: string | null, description?: string | null,
+        displayName?: string | null, incompatibleAccessPackages?: (Omit<{ id?:
+        string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        createdDateTime?: string | null | undefined; description?: string | null
+        | undefined; displayName?: string | ... 1 more ... | undefined; ... 8
+        more ...; '@odata.type': string; } & { ...; })[] | undefined,
+        incompatibleGroups?: (Omit<..., ...> & { @odata.type: ...,
+        acceptedSenders?: ..., allowExternalSenders?: ..., appRoleAssignments?:
+        ..., assignedLabels?: ..., assignedLicenses?: ...,
+        autoSubscribeNewMembers?: ..., calendar?: ..., calendarView?: ...,
+        classification?: ..., conversations?: ..., createdDateTime?: ...,
+        createdOnBehalfOf?: ..., description?: ..., displayName?: ..., drive?:
+        ..., drives?: ..., events?: ..., expirationDateTime?: ..., extensions?:
+        ..., groupLifecyclePolicies?: ..., groupTypes?: ...,
+        hasMembersWithLicenseErrors?: ..., hideFromAddressLists?: ...,
+        hideFromOutlookClients?: ..., isArchived?: ..., isAssignableToRole?:
+        ..., isManagementRestricted?: ..., isSubscribedByMail?: ...,
+        licenseProcessingState?: ..., mail?: ..., mailEnabled?: ...,
+        mailNickname?: ..., memberOf?: ..., members?: ..., membershipRule?: ...,
+        membershipRuleProcessingState?: ..., membersWithLicenseErrors?: ...,
+        onenote?: ..., onPremisesDomainName?: ..., onPremisesLastSyncDateTime?:
+        ..., onPremisesNetBiosName?: ..., onPremisesProvisioningErrors?: ...,
+        onPremisesSamAccountName?: ..., onPremisesSecurityIdentifier?: ...,
+        onPremisesSyncBehavior?: ..., onPremisesSyncEnabled?: ..., owners?: ...,
+        permissionGrants?: ..., photo?: ..., photos?: ..., planner?: ...,
+        preferredDataLocation?: ..., preferredLanguage?: ..., proxyAddresses?:
+        ..., rejectedSenders?: ..., renewedDateTime?: ..., securityEnabled?:
+        ..., securityIdentifier?: ..., serviceProvisioningErrors?: ...,
+        settings?: ..., sites?: ..., team?: ..., theme?: ..., threads?: ...,
+        transitiveMemberOf?: ..., transitiveMembers?: ..., uniqueName?: ...,
+        unseenCount?: ..., visibility?: ... } & { @odata.type: ... })[],
+        isHidden?: boolean | null, modifiedDateTime?: string | null,
+        resourceRoleScopes?: (Omit<..., ...> & { @odata.type: ...,
+        createdDateTime?: ..., role?: ..., scope?: ... } & { @odata.type: ...
+        })[] } & { @odata.type: "#microsoft.graph.accessPackage" })[],
+        catalogType?: Record<string, never> | "unknownFutureValue" |
+        "userManaged" | "serviceDefault" | "serviceManaged" | null,
+        createdDateTime?: string | null, customWorkflowExtensions?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, authenticationConfiguration?: Record<string, never> | {
+        @odata.type: string } | null, clientConfiguration?: Record<string,
+        never> | { @odata.type: string, maximumRetries?: function,
+        timeoutInMilliseconds?: function } | null, description?: string | null,
+        displayName?: string | null, endpointConfiguration?: Record<string,
+        never> | { @odata.type: string } | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.customCalloutExtension" })[],
+        description?: string | null, displayName?: string | null,
+        isExternallyVisible?: boolean | null, modifiedDateTime?: string | null,
+        resourceRoles?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, description?: string | null,
+        displayName?: string | null, originId?: string | null, originSystem?:
+        string | null, resource?: Record<string, never> | (Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & { @odata.type: string, attributes?:
+        function, createdDateTime?: function, description?: function,
+        displayName?: function, environment?: function, modifiedDateTime?:
+        function, originId?: function, originSystem?: function, roles?: (Omit<{
+        id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        description?: string | null | undefined; displayName?: string | null |
+        undefined; originId?: string | null | undefined; originSystem?: string |
+        ... 1 more ... | undefined; resource?: Record<...> | ... 2 more ... |
+        undefined; '@odata.type':..., scopes?: function } & { @odata.type:
+        "#microsoft.graph.accessPackageResource" }) | null } & { @odata.type:
+        "#microsoft.graph.accessPackageResourceRole" })[], resources?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, attributes?: { @odata.type: string, destination?: function,
+        isEditable?: function, isPersistedOnAssignmentRemoval?: function, name?:
+        function, source?: function }[], createdDateTime?: string | null,
+        description?: string | null, displayName?: string | null, environment?:
+        Record<string, never> | (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, connectionInfo?: function,
+        createdDateTime?: function, description?: function, displayName?:
+        function, isDefaultEnvironment?: function, modifiedDateTime?: function,
+        originId?: function, originSystem?: function, resources?: (Omit<{ id?:
+        string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        attributes?: { destination?: Record<string, never> | { '@odata.type':
+        string; } | null | undefined; ... 4 more ...; '@odata.type': string; }[]
+        | undefined; ... 9 more ...; '@odata.type': string; } & { ...; })[] |
+        undefined } & { @odata.type:
+        "#microsoft.graph.accessPackageResourceEnvironment" }) | null,
+        modifiedDateTime?: string | null, originId?: string | null,
+        originSystem?: string | null, roles?: (Omit<..., ...> & { @odata.type:
+        ..., description?: ..., displayName?: ..., originId?: ...,
+        originSystem?: ..., resource?: ... } & { @odata.type: ... })[], scopes?:
+        (Omit<..., ...> & { @odata.type: ..., description?: ..., displayName?:
+        ..., isRootScope?: ..., originId?: ..., originSystem?: ..., resource?:
+        ... } & { @odata.type: ... })[] } & { @odata.type:
+        "#microsoft.graph.accessPackageResource" })[], resourceScopes?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, description?: string | null, displayName?: string | null,
+        isRootScope?: boolean | null, originId?: string | null, originSystem?:
+        string | null, resource?: Record<string, never> | (Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & { @odata.type: string, attributes?:
+        function, createdDateTime?: function, description?: function,
+        displayName?: function, environment?: function, modifiedDateTime?:
+        function, originId?: function, originSystem?: function, roles?:
+        function, scopes?: (Omit<{ id?: string | undefined; '@odata.type':
+        string; }, "@odata.type"> & { description?: string | null | undefined;
+        displayName?: string | null | undefined; isRootScope?: boolean | ... 1
+        more ... | undefined; originId?: string | ... 1 more ... | undefined;
+        originSystem?: string | ... 1 more ... | undefined; resou... } & {
+        @odata.type: "#microsoft.graph.accessPackageResource" }) | null } & {
+        @odata.type: "#microsoft.graph.accessPackageResourceScope" })[], state?:
+        Record<string, never> | "unknownFutureValue" | "unpublished" |
+        "published" | null } & { @odata.type:
+        "#microsoft.graph.accessPackageCatalog" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[],
+            accessPackageResourceRequest-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /identityGovernance/entitlementManagement/resourceRequests/{accessPackageResourceRequest-id}/catalog"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, accessPackages?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, accessPackagesIncompatibleWith?:
+          (Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type" />':
+          string; }, "<xref uid="@odata.type" />"&gt; & { createdDateTime?:
+          string | null | undefined; description?: string | null | undefined;
+          displayName?: string | ... 1 more ... | undefined; ... 8 more ...;
+          '<xref uid="@odata.type" />': string; } & { ...; })[] | undefined,
+          assignmentPolicies?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type"
+          />: ..., accessPackage?: ..., allowedTargetScope?: ...,
+          automaticRequestSettings?: ..., catalog?: ..., createdDateTime?: ...,
+          customExtensionStageSettings?: ..., description?: ..., displayName?:
+          ..., expiration?: ..., modifiedDateTime?: ..., notificationSettings?:
+          ..., questions?: ..., requestApprovalSettings?: ...,
+          requestorSettings?: ..., reviewSettings?: ...,
+          specificAllowedTargets?: ... } & { <xref uid="@odata.type" />: ...
+          })[], catalog?: Record&lt;string, never&gt; | Omit&lt;{ id?: string |
+          undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & { catalogType?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "userManaged" | "serviceDefault" |
+          "serviceManaged" | null | undefined; ... 11 more ...; '<xref
+          uid="@odata.type" />': string; } & { ...; } | null, createdDateTime?:
+          string | null, description?: string | null, displayName?: string |
+          null, incompatibleAccessPackages?: (Omit&lt;{ id?: string | undefined;
+          '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+          />"&gt; & { createdDateTime?: string | null | undefined; description?:
+          string | null | undefined; displayName?: string | ... 1 more ... |
+          undefined; ... 8 more ...; '<xref uid="@odata.type" />': string; } & {
+          ...; })[] | undefined, incompatibleGroups?: (Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ..., acceptedSenders?: ...,
+          allowExternalSenders?: ..., appRoleAssignments?: ..., assignedLabels?:
+          ..., assignedLicenses?: ..., autoSubscribeNewMembers?: ..., calendar?:
+          ..., calendarView?: ..., classification?: ..., conversations?: ...,
+          createdDateTime?: ..., createdOnBehalfOf?: ..., description?: ...,
+          displayName?: ..., drive?: ..., drives?: ..., events?: ...,
+          expirationDateTime?: ..., extensions?: ..., groupLifecyclePolicies?:
+          ..., groupTypes?: ..., hasMembersWithLicenseErrors?: ...,
+          hideFromAddressLists?: ..., hideFromOutlookClients?: ..., isArchived?:
+          ..., isAssignableToRole?: ..., isManagementRestricted?: ...,
+          isSubscribedByMail?: ..., licenseProcessingState?: ..., mail?: ...,
+          mailEnabled?: ..., mailNickname?: ..., memberOf?: ..., members?: ...,
+          membershipRule?: ..., membershipRuleProcessingState?: ...,
+          membersWithLicenseErrors?: ..., onenote?: ..., onPremisesDomainName?:
+          ..., onPremisesLastSyncDateTime?: ..., onPremisesNetBiosName?: ...,
+          onPremisesProvisioningErrors?: ..., onPremisesSamAccountName?: ...,
+          onPremisesSecurityIdentifier?: ..., onPremisesSyncBehavior?: ...,
+          onPremisesSyncEnabled?: ..., owners?: ..., permissionGrants?: ...,
+          photo?: ..., photos?: ..., planner?: ..., preferredDataLocation?: ...,
+          preferredLanguage?: ..., proxyAddresses?: ..., rejectedSenders?: ...,
+          renewedDateTime?: ..., securityEnabled?: ..., securityIdentifier?:
+          ..., serviceProvisioningErrors?: ..., settings?: ..., sites?: ...,
+          team?: ..., theme?: ..., threads?: ..., transitiveMemberOf?: ...,
+          transitiveMembers?: ..., uniqueName?: ..., unseenCount?: ...,
+          visibility?: ... } & { <xref uid="@odata.type" />: ... })[],
+          isHidden?: boolean | null, modifiedDateTime?: string | null,
+          resourceRoleScopes?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type"
+          />: ..., createdDateTime?: ..., role?: ..., scope?: ... } & { <xref
+          uid="@odata.type" />: ... })[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.accessPackage" />" })[], catalogType?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "userManaged" |
+          "serviceDefault" | "serviceManaged" | null, createdDateTime?: string |
+          null, customWorkflowExtensions?: (Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: string }, "<xref uid="@odata.type" />"&gt; &
+          Omit&lt;{ <xref uid="@odata.type" />: string,
+          authenticationConfiguration?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string } | null, clientConfiguration?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          maximumRetries?: function, timeoutInMilliseconds?: function } | null,
+          description?: string | null, displayName?: string | null,
+          endpointConfiguration?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string } | null }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.customCalloutExtension" />" })[], description?:
+          string | null, displayName?: string | null, isExternallyVisible?:
+          boolean | null, modifiedDateTime?: string | null, resourceRoles?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          description?: string | null, displayName?: string | null, originId?:
+          string | null, originSystem?: string | null, resource?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, attributes?: function, createdDateTime?:
+          function, description?: function, displayName?: function,
+          environment?: function, modifiedDateTime?: function, originId?:
+          function, originSystem?: function, roles?: (Omit&lt;{ id?: string |
+          undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & { description?: string | null | undefined;
+          displayName?: string | null | undefined; originId?: string | null |
+          undefined; originSystem?: string | ... 1 more ... | undefined;
+          resource?: Record&lt;...&gt; | ... 2 more ... | undefined; '<xref
+          uid="@odata.type" />':..., scopes?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessPackageResource" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessPackageResourceRole" />" })[], resources?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          attributes?: { <xref uid="@odata.type" />: string, destination?:
+          function, isEditable?: function, isPersistedOnAssignmentRemoval?:
+          function, name?: function, source?: function }[], createdDateTime?:
+          string | null, description?: string | null, displayName?: string |
+          null, environment?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, connectionInfo?:
+          function, createdDateTime?: function, description?: function,
+          displayName?: function, isDefaultEnvironment?: function,
+          modifiedDateTime?: function, originId?: function, originSystem?:
+          function, resources?: (Omit&lt;{ id?: string | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; & {
+          attributes?: { destination?: Record&lt;string, never&gt; | { '<xref
+          uid="@odata.type" />': string; } | null | undefined; ... 4 more ...;
+          '<xref uid="@odata.type" />': string; }[] | undefined; ... 9 more ...;
+          '<xref uid="@odata.type" />': string; } & { ...; })[] | undefined } &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessPackageResourceEnvironment" />" }) | null,
+          modifiedDateTime?: string | null, originId?: string | null,
+          originSystem?: string | null, roles?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., description?: ..., displayName?: ...,
+          originId?: ..., originSystem?: ..., resource?: ... } & { <xref
+          uid="@odata.type" />: ... })[], scopes?: (Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ..., description?: ..., displayName?: ...,
+          isRootScope?: ..., originId?: ..., originSystem?: ..., resource?: ...
+          } & { <xref uid="@odata.type" />: ... })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessPackageResource" />" })[], resourceScopes?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          description?: string | null, displayName?: string | null,
+          isRootScope?: boolean | null, originId?: string | null, originSystem?:
+          string | null, resource?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, attributes?: function,
+          createdDateTime?: function, description?: function, displayName?:
+          function, environment?: function, modifiedDateTime?: function,
+          originId?: function, originSystem?: function, roles?: function,
+          scopes?: (Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type"
+          />': string; }, "<xref uid="@odata.type" />"&gt; & { description?:
+          string | null | undefined; displayName?: string | null | undefined;
+          isRootScope?: boolean | ... 1 more ... | undefined; originId?: string
+          | ... 1 more ... | undefined; originSystem?: string | ... 1 more ... |
+          undefined; <xref uid="resou..." /> } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.accessPackageResource" />" }) | null } &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessPackageResourceScope" />" })[], state?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "unpublished" |
+          "published" | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessPackageCatalog" />" }&gt;
   - name: >-
-      update(Operation<"/identityGovernance/entitlementManagement/resourceRequests/{accessPackageResourceRequest-id}/catalog",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, accessPackages?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string,
+      accessPackagesIncompatibleWith?: (Omit<{ id?: string | undefined;
+      '@odata.type': string; }, "@odata.type"> & { createdDateTime?: string |
+      null | undefined; description?: string | null | undefined; displayName?:
+      string | ... 1 more ... | undefined; ... 8 more ...; '@odata.type':
+      string; } & { ...; })[] | undefined, assignmentPolicies?: (Omit<{
+      @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+      accessPackage?: function, allowedTargetScope?: function,
+      automaticRequestSettings?: function, catalog?: function, createdDateTime?:
+      function, customExtensionStageSettings?: function, description?: function,
+      displayName?: function, expiration?: function, modifiedDateTime?:
+      function, notificationSettings?: function, questions?: function,
+      requestApprovalSettings?: function, requestorSettings?: function,
+      reviewSettings?: function, specificAllowedTargets?: function } & {
+      @odata.type: "#microsoft.graph.accessPackageAssignmentPolicy" })[],
+      catalog?: Record<string, never> | Omit<{ id?: string | undefined;
+      '@odata.type': string; }, "@odata.type"> & { catalogType?: Record<string,
+      never> | "unknownFutureValue" | "userManaged" | "serviceDefault" |
+      "serviceManaged" | null | undefined; ... 11 more ...; '@odata.type':
+      string; } & { ...; } | null, createdDateTime?: string | null,
+      description?: string | null, displayName?: string | null,
+      incompatibleAccessPackages?: (Omit<{ id?: string | undefined;
+      '@odata.type': string; }, "@odata.type"> & { createdDateTime?: string |
+      null | undefined; description?: string | null | undefined; displayName?:
+      string | ... 1 more ... | undefined; ... 8 more ...; '@odata.type':
+      string; } & { ...; })[] | undefined, incompatibleGroups?: (Omit<... & ...
+      & ..., "@odata.type"> & { @odata.type: string, acceptedSenders?: function,
+      allowExternalSenders?: function, appRoleAssignments?: function,
+      assignedLabels?: function, assignedLicenses?: function,
+      autoSubscribeNewMembers?: function, calendar?: function, calendarView?:
+      function, classification?: function, conversations?: function,
+      createdDateTime?: function, createdOnBehalfOf?: function, description?:
+      function, displayName?: function, drive?: function, drives?: function,
+      events?: function, expirationDateTime?: function, extensions?: function,
+      groupLifecyclePolicies?: function, groupTypes?: function,
+      hasMembersWithLicenseErrors?: function, hideFromAddressLists?: function,
+      hideFromOutlookClients?: function, isArchived?: function,
+      isAssignableToRole?: function, isManagementRestricted?: function,
+      isSubscribedByMail?: function, licenseProcessingState?: function, mail?:
+      function, mailEnabled?: function, mailNickname?: function, memberOf?:
+      function, members?: function, membershipRule?: function,
+      membershipRuleProcessingState?: function, membersWithLicenseErrors?:
+      function, onenote?: function, onPremisesDomainName?: function,
+      onPremisesLastSyncDateTime?: function, onPremisesNetBiosName?: function,
+      onPremisesProvisioningErrors?: function, onPremisesSamAccountName?:
+      function, onPremisesSecurityIdentifier?: function,
+      onPremisesSyncBehavior?: function, onPremisesSyncEnabled?: function,
+      owners?: function, permissionGrants?: function, photo?: function, photos?:
+      function, planner?: function, preferredDataLocation?: function,
+      preferredLanguage?: function, proxyAddresses?: function, rejectedSenders?:
+      function, renewedDateTime?: function, securityEnabled?: function,
+      securityIdentifier?: function, serviceProvisioningErrors?: function,
+      settings?: function, sites?: function, team?: function, theme?: function,
+      threads?: function, transitiveMemberOf?: function, transitiveMembers?:
+      function, uniqueName?: function, unseenCount?: function, visibility?:
+      function } & { @odata.type: "#microsoft.graph.group" })[], isHidden?:
+      boolean | null, modifiedDateTime?: string | null, resourceRoleScopes?:
+      (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
+      string, createdDateTime?: function, role?: function, scope?: function } &
+      { @odata.type: "#microsoft.graph.accessPackageResourceRoleScope" })[] } &
+      { @odata.type: "#microsoft.graph.accessPackage" })[], catalogType?:
+      Record<string, never> | "unknownFutureValue" | "userManaged" |
+      "serviceDefault" | "serviceManaged" | null, createdDateTime?: string |
+      null, customWorkflowExtensions?: (Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & Omit<{ @odata.type: string,
+      authenticationConfiguration?: Record<string, never> | { @odata.type:
+      string } | null, clientConfiguration?: Record<string, never> | {
+      @odata.type: string, maximumRetries?: number | null,
+      timeoutInMilliseconds?: number | null } | null, description?: string |
+      null, displayName?: string | null, endpointConfiguration?: Record<string,
+      never> | { @odata.type: string } | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.customCalloutExtension" })[], description?: string |
+      null, displayName?: string | null, isExternallyVisible?: boolean | null,
+      modifiedDateTime?: string | null, resourceRoles?: (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string,
+      description?: string | null, displayName?: string | null, originId?:
+      string | null, originSystem?: string | null, resource?: Record<string,
+      never> | (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+      @odata.type: string, attributes?: ...[], createdDateTime?: string | null,
+      description?: string | null, displayName?: string | null, environment?:
+      Record<..., ...> | (... & ... & ...) | null, modifiedDateTime?: string |
+      null, originId?: string | null, originSystem?: string | null, roles?:
+      (Omit<{ id?: string | undefined; '@odata.type': string; }, "@odata.type">
+      & { description?: string | null | undefined; displayName?: string | null |
+      undefined; originId?: string | null | undefined; originSystem?: string |
+      ... 1 more ... | undefined; resource?: Record<...> | ... 2 more ... |
+      undefined; '@odata.type':..., scopes?: ...[] } & { @odata.type:
+      "#microsoft.graph.accessPackageResource" }) | null } & { @odata.type:
+      "#microsoft.graph.accessPackageResourceRole" })[], resources?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, attributes?: { @odata.type: string, destination?: Record<..., ...>
+      | { @odata.type: ... } | null, isEditable?: boolean | null,
+      isPersistedOnAssignmentRemoval?: boolean | null, name?: string | null,
+      source?: Record<..., ...> | { @odata.type: ... } | null }[],
+      createdDateTime?: string | null, description?: string | null,
+      displayName?: string | null, environment?: Record<string, never> | (Omit<{
+      @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+      string, connectionInfo?: Record<..., ...> | { @odata.type: ..., url?: ...
+      } | null, createdDateTime?: string | null, description?: string | null,
+      displayName?: string | null, isDefaultEnvironment?: boolean | null,
+      modifiedDateTime?: string | null, originId?: string | null, originSystem?:
+      string | null, resources?: (Omit<{ id?: string | undefined; '@odata.type':
+      string; }, "@odata.type"> & { attributes?: { destination?: Record<string,
+      never> | { '@odata.type': string; } | null | undefined; ... 4 more ...;
+      '@odata.type': string; }[] | undefined; ... 9 more ...; '@odata.type':
+      string; } & { ...; })[] | undefined } & { @odata.type:
+      "#microsoft.graph.accessPackageResourceEnvironment" }) | null,
+      modifiedDateTime?: string | null, originId?: string | null, originSystem?:
+      string | null, roles?: (Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & { @odata.type: string, description?: function,
+      displayName?: function, originId?: function, originSystem?: function,
+      resource?: function } & { @odata.type:
+      "#microsoft.graph.accessPackageResourceRole" })[], scopes?: (Omit<{
+      @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+      description?: function, displayName?: function, isRootScope?: function,
+      originId?: function, originSystem?: function, resource?: function } & {
+      @odata.type: "#microsoft.graph.accessPackageResourceScope" })[] } & {
+      @odata.type: "#microsoft.graph.accessPackageResource" })[],
+      resourceScopes?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, description?: string | null,
+      displayName?: string | null, isRootScope?: boolean | null, originId?:
+      string | null, originSystem?: string | null, resource?: Record<string,
+      never> | (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+      @odata.type: string, attributes?: ...[], createdDateTime?: string | null,
+      description?: string | null, displayName?: string | null, environment?:
+      Record<..., ...> | (... & ... & ...) | null, modifiedDateTime?: string |
+      null, originId?: string | null, originSystem?: string | null, roles?:
+      ...[], scopes?: (Omit<{ id?: string | undefined; '@odata.type': string; },
+      "@odata.type"> & { description?: string | null | undefined; displayName?:
+      string | null | undefined; isRootScope?: boolean | ... 1 more ... |
+      undefined; originId?: string | ... 1 more ... | undefined; originSystem?:
+      string | ... 1 more ... | undefined; resou... } & { @odata.type:
+      "#microsoft.graph.accessPackageResource" }) | null } & { @odata.type:
+      "#microsoft.graph.accessPackageResourceScope" })[], state?: Record<string,
+      never> | "unknownFutureValue" | "unpublished" | "published" | null } & {
+      @odata.type: "#microsoft.graph.accessPackageCatalog" }, {
+      accessPackageResourceRequest-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.identityGovernance.entitlementManagement.resourceRequests.catalog.update
     package: '@microsoft/teams.graph-endpoints'
@@ -159,21 +569,609 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/identityGovernance/entitlementManagement/resourceRequests/{accessPackageResourceRequest-id}/catalog",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /identityGovernance/entitlementManagement/resourceRequests/{accessPackageResourceRequest-id}/catalog"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, accessPackages?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, accessPackagesIncompatibleWith?: (Omit<{ id?: string |
+        undefined; '@odata.type': string; }, "@odata.type"> & {
+        createdDateTime?: string | null | undefined; description?: string | null
+        | undefined; displayName?: string | ... 1 more ... | undefined; ... 8
+        more ...; '@odata.type': string; } & { ...; })[] | undefined,
+        assignmentPolicies?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, accessPackage?: function,
+        allowedTargetScope?: function, automaticRequestSettings?: function,
+        catalog?: function, createdDateTime?: function,
+        customExtensionStageSettings?: function, description?: function,
+        displayName?: function, expiration?: function, modifiedDateTime?:
+        function, notificationSettings?: function, questions?: function,
+        requestApprovalSettings?: function, requestorSettings?: function,
+        reviewSettings?: function, specificAllowedTargets?: function } & {
+        @odata.type: "#microsoft.graph.accessPackageAssignmentPolicy" })[],
+        catalog?: Record<string, never> | Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { catalogType?:
+        Record<string, never> | "unknownFutureValue" | "userManaged" |
+        "serviceDefault" | "serviceManaged" | null | undefined; ... 11 more ...;
+        '@odata.type': string; } & { ...; } | null, createdDateTime?: string |
+        null, description?: string | null, displayName?: string | null,
+        incompatibleAccessPackages?: (Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { createdDateTime?: string |
+        null | undefined; description?: string | null | undefined; displayName?:
+        string | ... 1 more ... | undefined; ... 8 more ...; '@odata.type':
+        string; } & { ...; })[] | undefined, incompatibleGroups?: (Omit<... &
+        ... & ..., "@odata.type"> & { @odata.type: string, acceptedSenders?:
+        function, allowExternalSenders?: function, appRoleAssignments?:
+        function, assignedLabels?: function, assignedLicenses?: function,
+        autoSubscribeNewMembers?: function, calendar?: function, calendarView?:
+        function, classification?: function, conversations?: function,
+        createdDateTime?: function, createdOnBehalfOf?: function, description?:
+        function, displayName?: function, drive?: function, drives?: function,
+        events?: function, expirationDateTime?: function, extensions?: function,
+        groupLifecyclePolicies?: function, groupTypes?: function,
+        hasMembersWithLicenseErrors?: function, hideFromAddressLists?: function,
+        hideFromOutlookClients?: function, isArchived?: function,
+        isAssignableToRole?: function, isManagementRestricted?: function,
+        isSubscribedByMail?: function, licenseProcessingState?: function, mail?:
+        function, mailEnabled?: function, mailNickname?: function, memberOf?:
+        function, members?: function, membershipRule?: function,
+        membershipRuleProcessingState?: function, membersWithLicenseErrors?:
+        function, onenote?: function, onPremisesDomainName?: function,
+        onPremisesLastSyncDateTime?: function, onPremisesNetBiosName?: function,
+        onPremisesProvisioningErrors?: function, onPremisesSamAccountName?:
+        function, onPremisesSecurityIdentifier?: function,
+        onPremisesSyncBehavior?: function, onPremisesSyncEnabled?: function,
+        owners?: function, permissionGrants?: function, photo?: function,
+        photos?: function, planner?: function, preferredDataLocation?: function,
+        preferredLanguage?: function, proxyAddresses?: function,
+        rejectedSenders?: function, renewedDateTime?: function,
+        securityEnabled?: function, securityIdentifier?: function,
+        serviceProvisioningErrors?: function, settings?: function, sites?:
+        function, team?: function, theme?: function, threads?: function,
+        transitiveMemberOf?: function, transitiveMembers?: function,
+        uniqueName?: function, unseenCount?: function, visibility?: function } &
+        { @odata.type: "#microsoft.graph.group" })[], isHidden?: boolean | null,
+        modifiedDateTime?: string | null, resourceRoleScopes?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        createdDateTime?: function, role?: function, scope?: function } & {
+        @odata.type: "#microsoft.graph.accessPackageResourceRoleScope" })[] } &
+        { @odata.type: "#microsoft.graph.accessPackage" })[], catalogType?:
+        Record<string, never> | "unknownFutureValue" | "userManaged" |
+        "serviceDefault" | "serviceManaged" | null, createdDateTime?: string |
+        null, customWorkflowExtensions?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string,
+        authenticationConfiguration?: Record<string, never> | { @odata.type:
+        string } | null, clientConfiguration?: Record<string, never> | {
+        @odata.type: string, maximumRetries?: number | null,
+        timeoutInMilliseconds?: number | null } | null, description?: string |
+        null, displayName?: string | null, endpointConfiguration?:
+        Record<string, never> | { @odata.type: string } | null }, "@odata.type">
+        & { @odata.type: "#microsoft.graph.customCalloutExtension" })[],
+        description?: string | null, displayName?: string | null,
+        isExternallyVisible?: boolean | null, modifiedDateTime?: string | null,
+        resourceRoles?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, description?: string | null,
+        displayName?: string | null, originId?: string | null, originSystem?:
+        string | null, resource?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & { @odata.type: string,
+        attributes?: ...[], createdDateTime?: string | null, description?:
+        string | null, displayName?: string | null, environment?: Record<...,
+        ...> | (... & ... & ...) | null, modifiedDateTime?: string | null,
+        originId?: string | null, originSystem?: string | null, roles?: (Omit<{
+        id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        description?: string | null | undefined; displayName?: string | null |
+        undefined; originId?: string | null | undefined; originSystem?: string |
+        ... 1 more ... | undefined; resource?: Record<...> | ... 2 more ... |
+        undefined; '@odata.type':..., scopes?: ...[] } & { @odata.type:
+        "#microsoft.graph.accessPackageResource" }) | null } & { @odata.type:
+        "#microsoft.graph.accessPackageResourceRole" })[], resources?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, attributes?: { @odata.type: string, destination?: Record<...,
+        ...> | { @odata.type: ... } | null, isEditable?: boolean | null,
+        isPersistedOnAssignmentRemoval?: boolean | null, name?: string | null,
+        source?: Record<..., ...> | { @odata.type: ... } | null }[],
+        createdDateTime?: string | null, description?: string | null,
+        displayName?: string | null, environment?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+        @odata.type: string, connectionInfo?: Record<..., ...> | { @odata.type:
+        ..., url?: ... } | null, createdDateTime?: string | null, description?:
+        string | null, displayName?: string | null, isDefaultEnvironment?:
+        boolean | null, modifiedDateTime?: string | null, originId?: string |
+        null, originSystem?: string | null, resources?: (Omit<{ id?: string |
+        undefined; '@odata.type': string; }, "@odata.type"> & { attributes?: {
+        destination?: Record<string, never> | { '@odata.type': string; } | null
+        | undefined; ... 4 more ...; '@odata.type': string; }[] | undefined; ...
+        9 more ...; '@odata.type': string; } & { ...; })[] | undefined } & {
+        @odata.type: "#microsoft.graph.accessPackageResourceEnvironment" }) |
+        null, modifiedDateTime?: string | null, originId?: string | null,
+        originSystem?: string | null, roles?: (Omit<{ @odata.type: ..., id?: ...
+        }, "@odata.type"> & { @odata.type: string, description?: function,
+        displayName?: function, originId?: function, originSystem?: function,
+        resource?: function } & { @odata.type:
+        "#microsoft.graph.accessPackageResourceRole" })[], scopes?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        description?: function, displayName?: function, isRootScope?: function,
+        originId?: function, originSystem?: function, resource?: function } & {
+        @odata.type: "#microsoft.graph.accessPackageResourceScope" })[] } & {
+        @odata.type: "#microsoft.graph.accessPackageResource" })[],
+        resourceScopes?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, description?: string | null,
+        displayName?: string | null, isRootScope?: boolean | null, originId?:
+        string | null, originSystem?: string | null, resource?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        { @odata.type: string, attributes?: ...[], createdDateTime?: string |
+        null, description?: string | null, displayName?: string | null,
+        environment?: Record<..., ...> | (... & ... & ...) | null,
+        modifiedDateTime?: string | null, originId?: string | null,
+        originSystem?: string | null, roles?: ...[], scopes?: (Omit<{ id?:
+        string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        description?: string | null | undefined; displayName?: string | null |
+        undefined; isRootScope?: boolean | ... 1 more ... | undefined;
+        originId?: string | ... 1 more ... | undefined; originSystem?: string |
+        ... 1 more ... | undefined; resou... } & { @odata.type:
+        "#microsoft.graph.accessPackageResource" }) | null } & { @odata.type:
+        "#microsoft.graph.accessPackageResourceScope" })[], state?:
+        Record<string, never> | "unknownFutureValue" | "unpublished" |
+        "published" | null } & { @odata.type:
+        "#microsoft.graph.accessPackageCatalog" }, params?: {
+        accessPackageResourceRequest-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, accessPackages?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, accessPackagesIncompatibleWith?:
+        (Omit<{ id?: string | undefined; '@odata.type': string; },
+        "@odata.type"> & { createdDateTime?: string | null | undefined;
+        description?: string | null | undefined; displayName?: string | ... 1
+        more ... | undefined; ... 8 more ...; '@odata.type': string; } & { ...;
+        })[] | undefined, assignmentPolicies?: (Omit<..., ...> & { @odata.type:
+        ..., accessPackage?: ..., allowedTargetScope?: ...,
+        automaticRequestSettings?: ..., catalog?: ..., createdDateTime?: ...,
+        customExtensionStageSettings?: ..., description?: ..., displayName?:
+        ..., expiration?: ..., modifiedDateTime?: ..., notificationSettings?:
+        ..., questions?: ..., requestApprovalSettings?: ..., requestorSettings?:
+        ..., reviewSettings?: ..., specificAllowedTargets?: ... } & {
+        @odata.type: ... })[], catalog?: Record<string, never> | Omit<{ id?:
+        string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        catalogType?: Record<string, never> | "unknownFutureValue" |
+        "userManaged" | "serviceDefault" | "serviceManaged" | null | undefined;
+        ... 11 more ...; '@odata.type': string; } & { ...; } | null,
+        createdDateTime?: string | null, description?: string | null,
+        displayName?: string | null, incompatibleAccessPackages?: (Omit<{ id?:
+        string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        createdDateTime?: string | null | undefined; description?: string | null
+        | undefined; displayName?: string | ... 1 more ... | undefined; ... 8
+        more ...; '@odata.type': string; } & { ...; })[] | undefined,
+        incompatibleGroups?: (Omit<..., ...> & { @odata.type: ...,
+        acceptedSenders?: ..., allowExternalSenders?: ..., appRoleAssignments?:
+        ..., assignedLabels?: ..., assignedLicenses?: ...,
+        autoSubscribeNewMembers?: ..., calendar?: ..., calendarView?: ...,
+        classification?: ..., conversations?: ..., createdDateTime?: ...,
+        createdOnBehalfOf?: ..., description?: ..., displayName?: ..., drive?:
+        ..., drives?: ..., events?: ..., expirationDateTime?: ..., extensions?:
+        ..., groupLifecyclePolicies?: ..., groupTypes?: ...,
+        hasMembersWithLicenseErrors?: ..., hideFromAddressLists?: ...,
+        hideFromOutlookClients?: ..., isArchived?: ..., isAssignableToRole?:
+        ..., isManagementRestricted?: ..., isSubscribedByMail?: ...,
+        licenseProcessingState?: ..., mail?: ..., mailEnabled?: ...,
+        mailNickname?: ..., memberOf?: ..., members?: ..., membershipRule?: ...,
+        membershipRuleProcessingState?: ..., membersWithLicenseErrors?: ...,
+        onenote?: ..., onPremisesDomainName?: ..., onPremisesLastSyncDateTime?:
+        ..., onPremisesNetBiosName?: ..., onPremisesProvisioningErrors?: ...,
+        onPremisesSamAccountName?: ..., onPremisesSecurityIdentifier?: ...,
+        onPremisesSyncBehavior?: ..., onPremisesSyncEnabled?: ..., owners?: ...,
+        permissionGrants?: ..., photo?: ..., photos?: ..., planner?: ...,
+        preferredDataLocation?: ..., preferredLanguage?: ..., proxyAddresses?:
+        ..., rejectedSenders?: ..., renewedDateTime?: ..., securityEnabled?:
+        ..., securityIdentifier?: ..., serviceProvisioningErrors?: ...,
+        settings?: ..., sites?: ..., team?: ..., theme?: ..., threads?: ...,
+        transitiveMemberOf?: ..., transitiveMembers?: ..., uniqueName?: ...,
+        unseenCount?: ..., visibility?: ... } & { @odata.type: ... })[],
+        isHidden?: boolean | null, modifiedDateTime?: string | null,
+        resourceRoleScopes?: (Omit<..., ...> & { @odata.type: ...,
+        createdDateTime?: ..., role?: ..., scope?: ... } & { @odata.type: ...
+        })[] } & { @odata.type: "#microsoft.graph.accessPackage" })[],
+        catalogType?: Record<string, never> | "unknownFutureValue" |
+        "userManaged" | "serviceDefault" | "serviceManaged" | null,
+        createdDateTime?: string | null, customWorkflowExtensions?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, authenticationConfiguration?: Record<string, never> | {
+        @odata.type: string } | null, clientConfiguration?: Record<string,
+        never> | { @odata.type: string, maximumRetries?: function,
+        timeoutInMilliseconds?: function } | null, description?: string | null,
+        displayName?: string | null, endpointConfiguration?: Record<string,
+        never> | { @odata.type: string } | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.customCalloutExtension" })[],
+        description?: string | null, displayName?: string | null,
+        isExternallyVisible?: boolean | null, modifiedDateTime?: string | null,
+        resourceRoles?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, description?: string | null,
+        displayName?: string | null, originId?: string | null, originSystem?:
+        string | null, resource?: Record<string, never> | (Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & { @odata.type: string, attributes?:
+        function, createdDateTime?: function, description?: function,
+        displayName?: function, environment?: function, modifiedDateTime?:
+        function, originId?: function, originSystem?: function, roles?: (Omit<{
+        id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        description?: string | null | undefined; displayName?: string | null |
+        undefined; originId?: string | null | undefined; originSystem?: string |
+        ... 1 more ... | undefined; resource?: Record<...> | ... 2 more ... |
+        undefined; '@odata.type':..., scopes?: function } & { @odata.type:
+        "#microsoft.graph.accessPackageResource" }) | null } & { @odata.type:
+        "#microsoft.graph.accessPackageResourceRole" })[], resources?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, attributes?: { @odata.type: string, destination?: function,
+        isEditable?: function, isPersistedOnAssignmentRemoval?: function, name?:
+        function, source?: function }[], createdDateTime?: string | null,
+        description?: string | null, displayName?: string | null, environment?:
+        Record<string, never> | (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, connectionInfo?: function,
+        createdDateTime?: function, description?: function, displayName?:
+        function, isDefaultEnvironment?: function, modifiedDateTime?: function,
+        originId?: function, originSystem?: function, resources?: (Omit<{ id?:
+        string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        attributes?: { destination?: Record<string, never> | { '@odata.type':
+        string; } | null | undefined; ... 4 more ...; '@odata.type': string; }[]
+        | undefined; ... 9 more ...; '@odata.type': string; } & { ...; })[] |
+        undefined } & { @odata.type:
+        "#microsoft.graph.accessPackageResourceEnvironment" }) | null,
+        modifiedDateTime?: string | null, originId?: string | null,
+        originSystem?: string | null, roles?: (Omit<..., ...> & { @odata.type:
+        ..., description?: ..., displayName?: ..., originId?: ...,
+        originSystem?: ..., resource?: ... } & { @odata.type: ... })[], scopes?:
+        (Omit<..., ...> & { @odata.type: ..., description?: ..., displayName?:
+        ..., isRootScope?: ..., originId?: ..., originSystem?: ..., resource?:
+        ... } & { @odata.type: ... })[] } & { @odata.type:
+        "#microsoft.graph.accessPackageResource" })[], resourceScopes?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, description?: string | null, displayName?: string | null,
+        isRootScope?: boolean | null, originId?: string | null, originSystem?:
+        string | null, resource?: Record<string, never> | (Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & { @odata.type: string, attributes?:
+        function, createdDateTime?: function, description?: function,
+        displayName?: function, environment?: function, modifiedDateTime?:
+        function, originId?: function, originSystem?: function, roles?:
+        function, scopes?: (Omit<{ id?: string | undefined; '@odata.type':
+        string; }, "@odata.type"> & { description?: string | null | undefined;
+        displayName?: string | null | undefined; isRootScope?: boolean | ... 1
+        more ... | undefined; originId?: string | ... 1 more ... | undefined;
+        originSystem?: string | ... 1 more ... | undefined; resou... } & {
+        @odata.type: "#microsoft.graph.accessPackageResource" }) | null } & {
+        @odata.type: "#microsoft.graph.accessPackageResourceScope" })[], state?:
+        Record<string, never> | "unknownFutureValue" | "unpublished" |
+        "published" | null } & { @odata.type:
+        "#microsoft.graph.accessPackageCatalog" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/identityGovernance/entitlementManagement/resourceRequests/{accessPackageResourceRequest-id}/catalog",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            accessPackages?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, accessPackagesIncompatibleWith?:
+            (Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type" />':
+            string; }, "<xref uid="@odata.type" />"&gt; & { createdDateTime?:
+            string | null | undefined; description?: string | null | undefined;
+            displayName?: string | ... 1 more ... | undefined; ... 8 more ...;
+            '<xref uid="@odata.type" />': string; } & { ...; })[] | undefined,
+            assignmentPolicies?: (Omit&lt;{ <xref uid="@odata.type" />: ...,
+            id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, accessPackage?: function,
+            allowedTargetScope?: function, automaticRequestSettings?: function,
+            catalog?: function, createdDateTime?: function,
+            customExtensionStageSettings?: function, description?: function,
+            displayName?: function, expiration?: function, modifiedDateTime?:
+            function, notificationSettings?: function, questions?: function,
+            requestApprovalSettings?: function, requestorSettings?: function,
+            reviewSettings?: function, specificAllowedTargets?: function } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.accessPackageAssignmentPolicy" />" })[],
+            catalog?: Record&lt;string, never&gt; | Omit&lt;{ id?: string |
+            undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { catalogType?: Record&lt;string,
+            never&gt; | "unknownFutureValue" | "userManaged" | "serviceDefault"
+            | "serviceManaged" | null | undefined; ... 11 more ...; '<xref
+            uid="@odata.type" />': string; } & { ...; } | null,
+            createdDateTime?: string | null, description?: string | null,
+            displayName?: string | null, incompatibleAccessPackages?: (Omit&lt;{
+            id?: string | undefined; '<xref uid="@odata.type" />': string; },
+            "<xref uid="@odata.type" />"&gt; & { createdDateTime?: string | null
+            | undefined; description?: string | null | undefined; displayName?:
+            string | ... 1 more ... | undefined; ... 8 more ...; '<xref
+            uid="@odata.type" />': string; } & { ...; })[] | undefined,
+            incompatibleGroups?: (Omit&lt;... & ... & ..., "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            acceptedSenders?: function, allowExternalSenders?: function,
+            appRoleAssignments?: function, assignedLabels?: function,
+            assignedLicenses?: function, autoSubscribeNewMembers?: function,
+            calendar?: function, calendarView?: function, classification?:
+            function, conversations?: function, createdDateTime?: function,
+            createdOnBehalfOf?: function, description?: function, displayName?:
+            function, drive?: function, drives?: function, events?: function,
+            expirationDateTime?: function, extensions?: function,
+            groupLifecyclePolicies?: function, groupTypes?: function,
+            hasMembersWithLicenseErrors?: function, hideFromAddressLists?:
+            function, hideFromOutlookClients?: function, isArchived?: function,
+            isAssignableToRole?: function, isManagementRestricted?: function,
+            isSubscribedByMail?: function, licenseProcessingState?: function,
+            mail?: function, mailEnabled?: function, mailNickname?: function,
+            memberOf?: function, members?: function, membershipRule?: function,
+            membershipRuleProcessingState?: function, membersWithLicenseErrors?:
+            function, onenote?: function, onPremisesDomainName?: function,
+            onPremisesLastSyncDateTime?: function, onPremisesNetBiosName?:
+            function, onPremisesProvisioningErrors?: function,
+            onPremisesSamAccountName?: function, onPremisesSecurityIdentifier?:
+            function, onPremisesSyncBehavior?: function, onPremisesSyncEnabled?:
+            function, owners?: function, permissionGrants?: function, photo?:
+            function, photos?: function, planner?: function,
+            preferredDataLocation?: function, preferredLanguage?: function,
+            proxyAddresses?: function, rejectedSenders?: function,
+            renewedDateTime?: function, securityEnabled?: function,
+            securityIdentifier?: function, serviceProvisioningErrors?: function,
+            settings?: function, sites?: function, team?: function, theme?:
+            function, threads?: function, transitiveMemberOf?: function,
+            transitiveMembers?: function, uniqueName?: function, unseenCount?:
+            function, visibility?: function } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.group" />" })[], isHidden?: boolean |
+            null, modifiedDateTime?: string | null, resourceRoleScopes?:
+            (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            createdDateTime?: function, role?: function, scope?: function } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.accessPackageResourceRoleScope" />" })[] } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.accessPackage" />" })[], catalogType?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "userManaged" |
+            "serviceDefault" | "serviceManaged" | null, createdDateTime?: string
+            | null, customWorkflowExtensions?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, authenticationConfiguration?: Record&lt;string, never&gt; |
+            { <xref uid="@odata.type" />: string } | null, clientConfiguration?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            maximumRetries?: number | null, timeoutInMilliseconds?: number |
+            null } | null, description?: string | null, displayName?: string |
+            null, endpointConfiguration?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string } | null }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.customCalloutExtension" />" })[], description?:
+            string | null, displayName?: string | null, isExternallyVisible?:
+            boolean | null, modifiedDateTime?: string | null, resourceRoles?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            description?: string | null, displayName?: string | null, originId?:
+            string | null, originSystem?: string | null, resource?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, attributes?: ...[], createdDateTime?:
+            string | null, description?: string | null, displayName?: string |
+            null, environment?: Record&lt;..., ...&gt; | (... & ... & ...) |
+            null, modifiedDateTime?: string | null, originId?: string | null,
+            originSystem?: string | null, roles?: (Omit&lt;{ id?: string |
+            undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { description?: string | null |
+            undefined; displayName?: string | null | undefined; originId?:
+            string | null | undefined; originSystem?: string | ... 1 more ... |
+            undefined; resource?: Record&lt;...&gt; | ... 2 more ... |
+            undefined; '<xref uid="@odata.type" />':..., scopes?: ...[] } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.accessPackageResource" />" }) | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.accessPackageResourceRole" />" })[],
+            resources?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, attributes?: { <xref uid="@odata.type"
+            />: string, destination?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ... } | null, isEditable?: boolean | null,
+            isPersistedOnAssignmentRemoval?: boolean | null, name?: string |
+            null, source?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ... } | null }[], createdDateTime?: string | null, description?:
+            string | null, displayName?: string | null, environment?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, connectionInfo?: Record&lt;...,
+            ...&gt; | { <xref uid="@odata.type" />: ..., url?: ... } | null,
+            createdDateTime?: string | null, description?: string | null,
+            displayName?: string | null, isDefaultEnvironment?: boolean | null,
+            modifiedDateTime?: string | null, originId?: string | null,
+            originSystem?: string | null, resources?: (Omit&lt;{ id?: string |
+            undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { attributes?: { destination?:
+            Record&lt;string, never&gt; | { '<xref uid="@odata.type" />':
+            string; } | null | undefined; ... 4 more ...; '<xref
+            uid="@odata.type" />': string; }[] | undefined; ... 9 more ...;
+            '<xref uid="@odata.type" />': string; } & { ...; })[] | undefined }
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.accessPackageResourceEnvironment" />" }) |
+            null, modifiedDateTime?: string | null, originId?: string | null,
+            originSystem?: string | null, roles?: (Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, description?:
+            function, displayName?: function, originId?: function,
+            originSystem?: function, resource?: function } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.accessPackageResourceRole" />" })[], scopes?:
+            (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            description?: function, displayName?: function, isRootScope?:
+            function, originId?: function, originSystem?: function, resource?:
+            function } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.accessPackageResourceScope" />" })[] } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.accessPackageResource" />" })[],
+            resourceScopes?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, description?: string | null,
+            displayName?: string | null, isRootScope?: boolean | null,
+            originId?: string | null, originSystem?: string | null, resource?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, attributes?: ...[], createdDateTime?:
+            string | null, description?: string | null, displayName?: string |
+            null, environment?: Record&lt;..., ...&gt; | (... & ... & ...) |
+            null, modifiedDateTime?: string | null, originId?: string | null,
+            originSystem?: string | null, roles?: ...[], scopes?: (Omit&lt;{
+            id?: string | undefined; '<xref uid="@odata.type" />': string; },
+            "<xref uid="@odata.type" />"&gt; & { description?: string | null |
+            undefined; displayName?: string | null | undefined; isRootScope?:
+            boolean | ... 1 more ... | undefined; originId?: string | ... 1 more
+            ... | undefined; originSystem?: string | ... 1 more ... | undefined;
+            <xref uid="resou..." /> } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.accessPackageResource" />" }) | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.accessPackageResourceScope" />" })[], state?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "unpublished" |
+            "published" | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.accessPackageCatalog" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ accessPackageResourceRequest-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /identityGovernance/entitlementManagement/resourceRequests/{accessPackageResourceRequest-id}/catalog"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, accessPackages?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, accessPackagesIncompatibleWith?:
+          (Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type" />':
+          string; }, "<xref uid="@odata.type" />"&gt; & { createdDateTime?:
+          string | null | undefined; description?: string | null | undefined;
+          displayName?: string | ... 1 more ... | undefined; ... 8 more ...;
+          '<xref uid="@odata.type" />': string; } & { ...; })[] | undefined,
+          assignmentPolicies?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type"
+          />: ..., accessPackage?: ..., allowedTargetScope?: ...,
+          automaticRequestSettings?: ..., catalog?: ..., createdDateTime?: ...,
+          customExtensionStageSettings?: ..., description?: ..., displayName?:
+          ..., expiration?: ..., modifiedDateTime?: ..., notificationSettings?:
+          ..., questions?: ..., requestApprovalSettings?: ...,
+          requestorSettings?: ..., reviewSettings?: ...,
+          specificAllowedTargets?: ... } & { <xref uid="@odata.type" />: ...
+          })[], catalog?: Record&lt;string, never&gt; | Omit&lt;{ id?: string |
+          undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & { catalogType?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "userManaged" | "serviceDefault" |
+          "serviceManaged" | null | undefined; ... 11 more ...; '<xref
+          uid="@odata.type" />': string; } & { ...; } | null, createdDateTime?:
+          string | null, description?: string | null, displayName?: string |
+          null, incompatibleAccessPackages?: (Omit&lt;{ id?: string | undefined;
+          '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+          />"&gt; & { createdDateTime?: string | null | undefined; description?:
+          string | null | undefined; displayName?: string | ... 1 more ... |
+          undefined; ... 8 more ...; '<xref uid="@odata.type" />': string; } & {
+          ...; })[] | undefined, incompatibleGroups?: (Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ..., acceptedSenders?: ...,
+          allowExternalSenders?: ..., appRoleAssignments?: ..., assignedLabels?:
+          ..., assignedLicenses?: ..., autoSubscribeNewMembers?: ..., calendar?:
+          ..., calendarView?: ..., classification?: ..., conversations?: ...,
+          createdDateTime?: ..., createdOnBehalfOf?: ..., description?: ...,
+          displayName?: ..., drive?: ..., drives?: ..., events?: ...,
+          expirationDateTime?: ..., extensions?: ..., groupLifecyclePolicies?:
+          ..., groupTypes?: ..., hasMembersWithLicenseErrors?: ...,
+          hideFromAddressLists?: ..., hideFromOutlookClients?: ..., isArchived?:
+          ..., isAssignableToRole?: ..., isManagementRestricted?: ...,
+          isSubscribedByMail?: ..., licenseProcessingState?: ..., mail?: ...,
+          mailEnabled?: ..., mailNickname?: ..., memberOf?: ..., members?: ...,
+          membershipRule?: ..., membershipRuleProcessingState?: ...,
+          membersWithLicenseErrors?: ..., onenote?: ..., onPremisesDomainName?:
+          ..., onPremisesLastSyncDateTime?: ..., onPremisesNetBiosName?: ...,
+          onPremisesProvisioningErrors?: ..., onPremisesSamAccountName?: ...,
+          onPremisesSecurityIdentifier?: ..., onPremisesSyncBehavior?: ...,
+          onPremisesSyncEnabled?: ..., owners?: ..., permissionGrants?: ...,
+          photo?: ..., photos?: ..., planner?: ..., preferredDataLocation?: ...,
+          preferredLanguage?: ..., proxyAddresses?: ..., rejectedSenders?: ...,
+          renewedDateTime?: ..., securityEnabled?: ..., securityIdentifier?:
+          ..., serviceProvisioningErrors?: ..., settings?: ..., sites?: ...,
+          team?: ..., theme?: ..., threads?: ..., transitiveMemberOf?: ...,
+          transitiveMembers?: ..., uniqueName?: ..., unseenCount?: ...,
+          visibility?: ... } & { <xref uid="@odata.type" />: ... })[],
+          isHidden?: boolean | null, modifiedDateTime?: string | null,
+          resourceRoleScopes?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type"
+          />: ..., createdDateTime?: ..., role?: ..., scope?: ... } & { <xref
+          uid="@odata.type" />: ... })[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.accessPackage" />" })[], catalogType?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "userManaged" |
+          "serviceDefault" | "serviceManaged" | null, createdDateTime?: string |
+          null, customWorkflowExtensions?: (Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: string }, "<xref uid="@odata.type" />"&gt; &
+          Omit&lt;{ <xref uid="@odata.type" />: string,
+          authenticationConfiguration?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string } | null, clientConfiguration?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          maximumRetries?: function, timeoutInMilliseconds?: function } | null,
+          description?: string | null, displayName?: string | null,
+          endpointConfiguration?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string } | null }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.customCalloutExtension" />" })[], description?:
+          string | null, displayName?: string | null, isExternallyVisible?:
+          boolean | null, modifiedDateTime?: string | null, resourceRoles?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          description?: string | null, displayName?: string | null, originId?:
+          string | null, originSystem?: string | null, resource?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, attributes?: function, createdDateTime?:
+          function, description?: function, displayName?: function,
+          environment?: function, modifiedDateTime?: function, originId?:
+          function, originSystem?: function, roles?: (Omit&lt;{ id?: string |
+          undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & { description?: string | null | undefined;
+          displayName?: string | null | undefined; originId?: string | null |
+          undefined; originSystem?: string | ... 1 more ... | undefined;
+          resource?: Record&lt;...&gt; | ... 2 more ... | undefined; '<xref
+          uid="@odata.type" />':..., scopes?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessPackageResource" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessPackageResourceRole" />" })[], resources?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          attributes?: { <xref uid="@odata.type" />: string, destination?:
+          function, isEditable?: function, isPersistedOnAssignmentRemoval?:
+          function, name?: function, source?: function }[], createdDateTime?:
+          string | null, description?: string | null, displayName?: string |
+          null, environment?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, connectionInfo?:
+          function, createdDateTime?: function, description?: function,
+          displayName?: function, isDefaultEnvironment?: function,
+          modifiedDateTime?: function, originId?: function, originSystem?:
+          function, resources?: (Omit&lt;{ id?: string | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; & {
+          attributes?: { destination?: Record&lt;string, never&gt; | { '<xref
+          uid="@odata.type" />': string; } | null | undefined; ... 4 more ...;
+          '<xref uid="@odata.type" />': string; }[] | undefined; ... 9 more ...;
+          '<xref uid="@odata.type" />': string; } & { ...; })[] | undefined } &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessPackageResourceEnvironment" />" }) | null,
+          modifiedDateTime?: string | null, originId?: string | null,
+          originSystem?: string | null, roles?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., description?: ..., displayName?: ...,
+          originId?: ..., originSystem?: ..., resource?: ... } & { <xref
+          uid="@odata.type" />: ... })[], scopes?: (Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ..., description?: ..., displayName?: ...,
+          isRootScope?: ..., originId?: ..., originSystem?: ..., resource?: ...
+          } & { <xref uid="@odata.type" />: ... })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessPackageResource" />" })[], resourceScopes?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          description?: string | null, displayName?: string | null,
+          isRootScope?: boolean | null, originId?: string | null, originSystem?:
+          string | null, resource?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, attributes?: function,
+          createdDateTime?: function, description?: function, displayName?:
+          function, environment?: function, modifiedDateTime?: function,
+          originId?: function, originSystem?: function, roles?: function,
+          scopes?: (Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type"
+          />': string; }, "<xref uid="@odata.type" />"&gt; & { description?:
+          string | null | undefined; displayName?: string | null | undefined;
+          isRootScope?: boolean | ... 1 more ... | undefined; originId?: string
+          | ... 1 more ... | undefined; originSystem?: string | ... 1 more ... |
+          undefined; <xref uid="resou..." /> } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.accessPackageResource" />" }) | null } &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessPackageResourceScope" />" })[], state?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "unpublished" |
+          "published" | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.accessPackageCatalog" />" }&gt;

@@ -10,8 +10,73 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
   - name: >-
-      create(Operation<"/solutions/virtualEvents/events/{virtualEvent-id}/presenters",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, email?: string | null, identity?: Record<string,
+      never> | { @odata.type: string, displayName?: string | null, id?: string |
+      null } | null, presenterDetails?: Record<string, never> | { @odata.type:
+      string, bio?: Record<string, never> | { @odata.type: string, content?:
+      string | null, contentType?: Record<string, never> | "text" | "html" |
+      null } | null, company?: string | null, jobTitle?: string | null,
+      linkedInProfileWebUrl?: string | null, personalSiteWebUrl?: string | null,
+      photo?: string | null, twitterProfileWebUrl?: string | null } | null,
+      sessions?: (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type">
+      & Omit<{ @odata.type: string, allowAttendeeToEnableCamera?: boolean |
+      null, allowAttendeeToEnableMic?: boolean | null, allowBreakoutRooms?:
+      boolean | null, allowCopyingAndSharingMeetingContent?: boolean | null,
+      allowedLobbyAdmitters?: Record<..., ...> | "unknownFutureValue" |
+      "organizerAndCoOrganizersAndPresenters" | "organizerAndCoOrganizers" |
+      null, allowedPresenters?: Record<..., ...> | "unknownFutureValue" |
+      "everyone" | "organization" | "organizer" | "roleIsPresenter" | null,
+      allowLiveShare?: Record<..., ...> | "unknownFutureValue" | "disabled" |
+      "enabled" | null, allowMeetingChat?: Record<..., ...> |
+      "unknownFutureValue" | "disabled" | "enabled" | "limited" | null,
+      allowParticipantsToChangeName?: boolean | null, allowPowerPointSharing?:
+      boolean | null, allowRecording?: boolean | null, allowTeamworkReactions?:
+      boolean | null, allowTranscription?: boolean | null, allowWhiteboard?:
+      boolean | null, anonymizeIdentityForRoles?: ...[], attendanceReports?:
+      ...[], audioConferencing?: Record<..., ...> | { @odata.type: ...,
+      conferenceId?: ..., dialinUrl?: ..., tollFreeNumber?: ...,
+      tollFreeNumbers?: ..., tollNumber?: ..., tollNumbers?: ... } | null,
+      chatInfo?: Record<..., ...> | { @odata.type: ..., messageId?: ...,
+      replyChainMessageId?: ..., threadId?: ... } | null, chatRestrictions?:
+      Record<..., ...> | { @odata.type: ..., allowTextOnly?: ... } | null,
+      isEndToEndEncryptionEnabled?: boolean | null, isEntryExitAnnounced?:
+      boolean | null, joinInformation?: Record<..., ...> | { @odata.type: ...,
+      content?: ..., contentType?: ... } | null, joinMeetingIdSettings?:
+      Record<..., ...> | { @odata.type: ..., isPasscodeRequired?: ...,
+      joinMeetingId?: ..., passcode?: ... } | null, joinWebUrl?: string | null,
+      lobbyBypassSettings?: Record<..., ...> | { @odata.type: ...,
+      isDialInBypassEnabled?: ..., scope?: ... } | null, recordAutomatically?:
+      boolean | null, shareMeetingChatHistoryDefault?: Record<..., ...> |
+      "unknownFutureValue" | "none" | "all" | null, subject?: string | null,
+      videoTeleconferenceId?: string | null, watermarkProtection?: Record<...,
+      ...> | { @odata.type: ..., isEnabledForContentSharing?: ...,
+      isEnabledForVideo?: ... } | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.onlineMeetingBase" }, "@odata.type"> & { @odata.type:
+      string, endDateTime?: Record<string, never> | { @odata.type: string,
+      dateTime?: string, timeZone?: string | null } | null, presenters?: Omit<{
+      id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+      email?: string | null | undefined; identity?: Record<string, never> | {
+      displayName?: string | null | undefined; id?: string | ... 1 more ... |
+      undefined; '@odata.type': string; } | null | undefined; presenterDetails?:
+      Record<...> | ... 2 m...[], registrations?: (Omit<{ @odata.type: ..., id?:
+      ... }, "@odata.type"> & { @odata.type: string, cancelationDateTime?:
+      function, email?: function, externalRegistrationInformation?: function,
+      firstName?: function, lastName?: function, preferredLanguage?: function,
+      preferredTimezone?: function, registrantVideoOnDemandWebUrl?: function,
+      registrationDateTime?: function, registrationQuestionAnswers?: function,
+      sessions?: (Omit<Omit<{ id?: string | undefined; '@odata.type': string; },
+      "@odata.type"> & Omit<{ allowAttendeeToEnableCamera?: boolean | null |
+      undefined; allowAttendeeToEnableMic?: boolean | null | undefined; ... 28
+      more ...; '@odata.type': string; }, "@odata.type"> & { ...; },
+      "@odata.type"> & { ...; } & { ...; })[] | unde..., status?: function,
+      userId?: function } & { @odata.type:
+      "#microsoft.graph.virtualEventRegistration" })[], startDateTime?:
+      Record<string, never> | { @odata.type: string, dateTime?: string,
+      timeZone?: string | null } | null, videoOnDemandWebUrl?: string | null } &
+      { @odata.type: "#microsoft.graph.virtualEventSession" })[] } & {
+      @odata.type: "#microsoft.graph.virtualEventPresenter" }, {
+      virtualEvent-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.solutions.virtualEvents.events.presenters.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -20,25 +85,278 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/solutions/virtualEvents/events/{virtualEvent-id}/presenters",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /solutions/virtualEvents/events/{virtualEvent-id}/presenters"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, email?: string | null,
+        identity?: Record<string, never> | { @odata.type: string, displayName?:
+        string | null, id?: string | null } | null, presenterDetails?:
+        Record<string, never> | { @odata.type: string, bio?: Record<string,
+        never> | { @odata.type: string, content?: string | null, contentType?:
+        Record<string, never> | "text" | "html" | null } | null, company?:
+        string | null, jobTitle?: string | null, linkedInProfileWebUrl?: string
+        | null, personalSiteWebUrl?: string | null, photo?: string | null,
+        twitterProfileWebUrl?: string | null } | null, sessions?: (Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, allowAttendeeToEnableCamera?: boolean | null,
+        allowAttendeeToEnableMic?: boolean | null, allowBreakoutRooms?: boolean
+        | null, allowCopyingAndSharingMeetingContent?: boolean | null,
+        allowedLobbyAdmitters?: Record<..., ...> | "unknownFutureValue" |
+        "organizerAndCoOrganizersAndPresenters" | "organizerAndCoOrganizers" |
+        null, allowedPresenters?: Record<..., ...> | "unknownFutureValue" |
+        "everyone" | "organization" | "organizer" | "roleIsPresenter" | null,
+        allowLiveShare?: Record<..., ...> | "unknownFutureValue" | "disabled" |
+        "enabled" | null, allowMeetingChat?: Record<..., ...> |
+        "unknownFutureValue" | "disabled" | "enabled" | "limited" | null,
+        allowParticipantsToChangeName?: boolean | null, allowPowerPointSharing?:
+        boolean | null, allowRecording?: boolean | null,
+        allowTeamworkReactions?: boolean | null, allowTranscription?: boolean |
+        null, allowWhiteboard?: boolean | null, anonymizeIdentityForRoles?:
+        ...[], attendanceReports?: ...[], audioConferencing?: Record<..., ...> |
+        { @odata.type: ..., conferenceId?: ..., dialinUrl?: ...,
+        tollFreeNumber?: ..., tollFreeNumbers?: ..., tollNumber?: ...,
+        tollNumbers?: ... } | null, chatInfo?: Record<..., ...> | { @odata.type:
+        ..., messageId?: ..., replyChainMessageId?: ..., threadId?: ... } |
+        null, chatRestrictions?: Record<..., ...> | { @odata.type: ...,
+        allowTextOnly?: ... } | null, isEndToEndEncryptionEnabled?: boolean |
+        null, isEntryExitAnnounced?: boolean | null, joinInformation?:
+        Record<..., ...> | { @odata.type: ..., content?: ..., contentType?: ...
+        } | null, joinMeetingIdSettings?: Record<..., ...> | { @odata.type: ...,
+        isPasscodeRequired?: ..., joinMeetingId?: ..., passcode?: ... } | null,
+        joinWebUrl?: string | null, lobbyBypassSettings?: Record<..., ...> | {
+        @odata.type: ..., isDialInBypassEnabled?: ..., scope?: ... } | null,
+        recordAutomatically?: boolean | null, shareMeetingChatHistoryDefault?:
+        Record<..., ...> | "unknownFutureValue" | "none" | "all" | null,
+        subject?: string | null, videoTeleconferenceId?: string | null,
+        watermarkProtection?: Record<..., ...> | { @odata.type: ...,
+        isEnabledForContentSharing?: ..., isEnabledForVideo?: ... } | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.onlineMeetingBase" },
+        "@odata.type"> & { @odata.type: string, endDateTime?: Record<string,
+        never> | { @odata.type: string, dateTime?: string, timeZone?: string |
+        null } | null, presenters?: Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { email?: string | null |
+        undefined; identity?: Record<string, never> | { displayName?: string |
+        null | undefined; id?: string | ... 1 more ... | undefined;
+        '@odata.type': string; } | null | undefined; presenterDetails?:
+        Record<...> | ... 2 m...[], registrations?: (Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string,
+        cancelationDateTime?: function, email?: function,
+        externalRegistrationInformation?: function, firstName?: function,
+        lastName?: function, preferredLanguage?: function, preferredTimezone?:
+        function, registrantVideoOnDemandWebUrl?: function,
+        registrationDateTime?: function, registrationQuestionAnswers?: function,
+        sessions?: (Omit<Omit<{ id?: string | undefined; '@odata.type': string;
+        }, "@odata.type"> & Omit<{ allowAttendeeToEnableCamera?: boolean | null
+        | undefined; allowAttendeeToEnableMic?: boolean | null | undefined; ...
+        28 more ...; '@odata.type': string; }, "@odata.type"> & { ...; },
+        "@odata.type"> & { ...; } & { ...; })[] | unde..., status?: function,
+        userId?: function } & { @odata.type:
+        "#microsoft.graph.virtualEventRegistration" })[], startDateTime?:
+        Record<string, never> | { @odata.type: string, dateTime?: string,
+        timeZone?: string | null } | null, videoOnDemandWebUrl?: string | null }
+        & { @odata.type: "#microsoft.graph.virtualEventSession" })[] } & {
+        @odata.type: "#microsoft.graph.virtualEventPresenter" }, params?: {
+        virtualEvent-id: string }): EndpointRequest<Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, email?: string |
+        null, identity?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null,
+        presenterDetails?: Record<string, never> | { @odata.type: string, bio?:
+        Record<string, never> | { @odata.type: string, content?: string | null,
+        contentType?: Record<string, never> | "text" | "html" | null } | null,
+        company?: string | null, jobTitle?: string | null,
+        linkedInProfileWebUrl?: string | null, personalSiteWebUrl?: string |
+        null, photo?: string | null, twitterProfileWebUrl?: string | null } |
+        null, sessions?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string,
+        allowAttendeeToEnableCamera?: function, allowAttendeeToEnableMic?:
+        function, allowBreakoutRooms?: function,
+        allowCopyingAndSharingMeetingContent?: function, allowedLobbyAdmitters?:
+        function, allowedPresenters?: function, allowLiveShare?: function,
+        allowMeetingChat?: function, allowParticipantsToChangeName?: function,
+        allowPowerPointSharing?: function, allowRecording?: function,
+        allowTeamworkReactions?: function, allowTranscription?: function,
+        allowWhiteboard?: function, anonymizeIdentityForRoles?: function,
+        attendanceReports?: function, audioConferencing?: function, chatInfo?:
+        function, chatRestrictions?: function, isEndToEndEncryptionEnabled?:
+        function, isEntryExitAnnounced?: function, joinInformation?: function,
+        joinMeetingIdSettings?: function, joinWebUrl?: function,
+        lobbyBypassSettings?: function, recordAutomatically?: function,
+        shareMeetingChatHistoryDefault?: function, subject?: function,
+        videoTeleconferenceId?: function, watermarkProtection?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.onlineMeetingBase" },
+        "@odata.type"> & { @odata.type: string, endDateTime?: Record<string,
+        never> | { @odata.type: string, dateTime?: string, timeZone?: string |
+        null } | null, presenters?: Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { email?: string | null |
+        undefined; identity?: Record<string, never> | { displayName?: string |
+        null | undefined; id?: string | ... 1 more ... | undefined;
+        '@odata.type': string; } | null | undefined; presenterDetails?:
+        Record<...> | ... 2 m...[], registrations?: (Omit<..., ...> & {
+        @odata.type: ..., cancelationDateTime?: ..., email?: ...,
+        externalRegistrationInformation?: ..., firstName?: ..., lastName?: ...,
+        preferredLanguage?: ..., preferredTimezone?: ...,
+        registrantVideoOnDemandWebUrl?: ..., registrationDateTime?: ...,
+        registrationQuestionAnswers?: ..., sessions?: ..., status?: ...,
+        userId?: ... } & { @odata.type: ... })[], startDateTime?: Record<string,
+        never> | { @odata.type: string, dateTime?: string, timeZone?: string |
+        null } | null, videoOnDemandWebUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.virtualEventSession" })[] } & { @odata.type:
+        "#microsoft.graph.virtualEventPresenter" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/solutions/virtualEvents/events/{virtualEvent-id}/presenters",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            email?: string | null, identity?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | null, presenterDetails?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, bio?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            content?: string | null, contentType?: Record&lt;string, never&gt; |
+            "text" | "html" | null } | null, company?: string | null, jobTitle?:
+            string | null, linkedInProfileWebUrl?: string | null,
+            personalSiteWebUrl?: string | null, photo?: string | null,
+            twitterProfileWebUrl?: string | null } | null, sessions?:
+            (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+            }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, allowAttendeeToEnableCamera?: boolean
+            | null, allowAttendeeToEnableMic?: boolean | null,
+            allowBreakoutRooms?: boolean | null,
+            allowCopyingAndSharingMeetingContent?: boolean | null,
+            allowedLobbyAdmitters?: Record&lt;..., ...&gt; |
+            "unknownFutureValue" | "organizerAndCoOrganizersAndPresenters" |
+            "organizerAndCoOrganizers" | null, allowedPresenters?:
+            Record&lt;..., ...&gt; | "unknownFutureValue" | "everyone" |
+            "organization" | "organizer" | "roleIsPresenter" | null,
+            allowLiveShare?: Record&lt;..., ...&gt; | "unknownFutureValue" |
+            "disabled" | "enabled" | null, allowMeetingChat?: Record&lt;...,
+            ...&gt; | "unknownFutureValue" | "disabled" | "enabled" | "limited"
+            | null, allowParticipantsToChangeName?: boolean | null,
+            allowPowerPointSharing?: boolean | null, allowRecording?: boolean |
+            null, allowTeamworkReactions?: boolean | null, allowTranscription?:
+            boolean | null, allowWhiteboard?: boolean | null,
+            anonymizeIdentityForRoles?: ...[], attendanceReports?: ...[],
+            audioConferencing?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., conferenceId?: ..., dialinUrl?: ...,
+            tollFreeNumber?: ..., tollFreeNumbers?: ..., tollNumber?: ...,
+            tollNumbers?: ... } | null, chatInfo?: Record&lt;..., ...&gt; | {
+            <xref uid="@odata.type" />: ..., messageId?: ...,
+            replyChainMessageId?: ..., threadId?: ... } | null,
+            chatRestrictions?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., allowTextOnly?: ... } | null,
+            isEndToEndEncryptionEnabled?: boolean | null, isEntryExitAnnounced?:
+            boolean | null, joinInformation?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., content?: ..., contentType?: ... } |
+            null, joinMeetingIdSettings?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., isPasscodeRequired?: ..., joinMeetingId?:
+            ..., passcode?: ... } | null, joinWebUrl?: string | null,
+            lobbyBypassSettings?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., isDialInBypassEnabled?: ..., scope?: ...
+            } | null, recordAutomatically?: boolean | null,
+            shareMeetingChatHistoryDefault?: Record&lt;..., ...&gt; |
+            "unknownFutureValue" | "none" | "all" | null, subject?: string |
+            null, videoTeleconferenceId?: string | null, watermarkProtection?:
+            Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            isEnabledForContentSharing?: ..., isEnabledForVideo?: ... } | null
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.onlineMeetingBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            endDateTime?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+            null } | null, presenters?: Omit&lt;{ id?: string | undefined;
+            '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+            />"&gt; & { email?: string | null | undefined; identity?:
+            Record&lt;string, never&gt; | { displayName?: string | null |
+            undefined; id?: string | ... 1 more ... | undefined; '<xref
+            uid="@odata.type" />': string; } | null | undefined;
+            presenterDetails?: Record&lt;...&gt; | ... 2 <xref uid="m..." />[],
+            registrations?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, cancelationDateTime?: function, email?: function,
+            externalRegistrationInformation?: function, firstName?: function,
+            lastName?: function, preferredLanguage?: function,
+            preferredTimezone?: function, registrantVideoOnDemandWebUrl?:
+            function, registrationDateTime?: function,
+            registrationQuestionAnswers?: function, sessions?:
+            (Omit&lt;Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type"
+            />': string; }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            allowAttendeeToEnableCamera?: boolean | null | undefined;
+            allowAttendeeToEnableMic?: boolean | null | undefined; ... 28 more
+            ...; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { ...; }, "<xref uid="@odata.type"
+            />"&gt; & { ...; } & { ...; })[] | <xref uid="unde..." />, status?:
+            function, userId?: function } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.virtualEventRegistration" />" })[],
+            startDateTime?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+            null } | null, videoOnDemandWebUrl?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.virtualEventSession" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.virtualEventPresenter" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ virtualEvent-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /solutions/virtualEvents/events/{virtualEvent-id}/presenters"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, email?: string | null, identity?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, displayName?: string
+          | null, id?: string | null } | null, presenterDetails?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          bio?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, content?: string | null, contentType?: Record&lt;string,
+          never&gt; | "text" | "html" | null } | null, company?: string | null,
+          jobTitle?: string | null, linkedInProfileWebUrl?: string | null,
+          personalSiteWebUrl?: string | null, photo?: string | null,
+          twitterProfileWebUrl?: string | null } | null, sessions?:
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: function
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, allowAttendeeToEnableCamera?: function,
+          allowAttendeeToEnableMic?: function, allowBreakoutRooms?: function,
+          allowCopyingAndSharingMeetingContent?: function,
+          allowedLobbyAdmitters?: function, allowedPresenters?: function,
+          allowLiveShare?: function, allowMeetingChat?: function,
+          allowParticipantsToChangeName?: function, allowPowerPointSharing?:
+          function, allowRecording?: function, allowTeamworkReactions?:
+          function, allowTranscription?: function, allowWhiteboard?: function,
+          anonymizeIdentityForRoles?: function, attendanceReports?: function,
+          audioConferencing?: function, chatInfo?: function, chatRestrictions?:
+          function, isEndToEndEncryptionEnabled?: function,
+          isEntryExitAnnounced?: function, joinInformation?: function,
+          joinMeetingIdSettings?: function, joinWebUrl?: function,
+          lobbyBypassSettings?: function, recordAutomatically?: function,
+          shareMeetingChatHistoryDefault?: function, subject?: function,
+          videoTeleconferenceId?: function, watermarkProtection?: function },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.onlineMeetingBase" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          endDateTime?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, dateTime?: string, timeZone?: string | null } | null,
+          presenters?: Omit&lt;{ id?: string | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; & {
+          email?: string | null | undefined; identity?: Record&lt;string,
+          never&gt; | { displayName?: string | null | undefined; id?: string |
+          ... 1 more ... | undefined; '<xref uid="@odata.type" />': string; } |
+          null | undefined; presenterDetails?: Record&lt;...&gt; | ... 2 <xref
+          uid="m..." />[], registrations?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., cancelationDateTime?: ..., email?: ...,
+          externalRegistrationInformation?: ..., firstName?: ..., lastName?:
+          ..., preferredLanguage?: ..., preferredTimezone?: ...,
+          registrantVideoOnDemandWebUrl?: ..., registrationDateTime?: ...,
+          registrationQuestionAnswers?: ..., sessions?: ..., status?: ...,
+          userId?: ... } & { <xref uid="@odata.type" />: ... })[],
+          startDateTime?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+          null } | null, videoOnDemandWebUrl?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.virtualEventSession" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.virtualEventPresenter" />" }&gt;
+  - name: >-
+      del({ If-Match?: string, virtualEvent-id: string,
+      virtualEventPresenter-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.solutions.virtualEvents.events.presenters.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -49,18 +367,20 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /solutions/virtualEvents/events/{virtualEvent-id}/presenters/{virtualEventPresenter-id}"]["response"]>
+        function del(params?: { If-Match?: string, virtualEvent-id: string,
+        virtualEventPresenter-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { If-Match?: string, virtualEvent-id: string,
+            virtualEventPresenter-id: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /solutions/virtualEvents/events/{virtualEvent-id}/presenters/{virtualEventPresenter-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], virtualEvent-id: string,
+      virtualEventPresenter-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.solutions.virtualEvents.events.presenters.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -74,18 +394,121 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /solutions/virtualEvents/events/{virtualEvent-id}/presenters/{virtualEventPresenter-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        virtualEvent-id: string, virtualEventPresenter-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, email?: string | null,
+        identity?: Record<string, never> | { @odata.type: string, displayName?:
+        string | null, id?: string | null } | null, presenterDetails?:
+        Record<string, never> | { @odata.type: string, bio?: Record<string,
+        never> | { @odata.type: string, content?: string | null, contentType?:
+        Record<string, never> | "text" | "html" | null } | null, company?:
+        string | null, jobTitle?: string | null, linkedInProfileWebUrl?: string
+        | null, personalSiteWebUrl?: string | null, photo?: string | null,
+        twitterProfileWebUrl?: string | null } | null, sessions?: (Omit<Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, allowAttendeeToEnableCamera?: function,
+        allowAttendeeToEnableMic?: function, allowBreakoutRooms?: function,
+        allowCopyingAndSharingMeetingContent?: function, allowedLobbyAdmitters?:
+        function, allowedPresenters?: function, allowLiveShare?: function,
+        allowMeetingChat?: function, allowParticipantsToChangeName?: function,
+        allowPowerPointSharing?: function, allowRecording?: function,
+        allowTeamworkReactions?: function, allowTranscription?: function,
+        allowWhiteboard?: function, anonymizeIdentityForRoles?: function,
+        attendanceReports?: function, audioConferencing?: function, chatInfo?:
+        function, chatRestrictions?: function, isEndToEndEncryptionEnabled?:
+        function, isEntryExitAnnounced?: function, joinInformation?: function,
+        joinMeetingIdSettings?: function, joinWebUrl?: function,
+        lobbyBypassSettings?: function, recordAutomatically?: function,
+        shareMeetingChatHistoryDefault?: function, subject?: function,
+        videoTeleconferenceId?: function, watermarkProtection?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.onlineMeetingBase" },
+        "@odata.type"> & { @odata.type: string, endDateTime?: Record<string,
+        never> | { @odata.type: string, dateTime?: string, timeZone?: string |
+        null } | null, presenters?: Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { email?: string | null |
+        undefined; identity?: Record<string, never> | { displayName?: string |
+        null | undefined; id?: string | ... 1 more ... | undefined;
+        '@odata.type': string; } | null | undefined; presenterDetails?:
+        Record<...> | ... 2 m...[], registrations?: (Omit<..., ...> & {
+        @odata.type: ..., cancelationDateTime?: ..., email?: ...,
+        externalRegistrationInformation?: ..., firstName?: ..., lastName?: ...,
+        preferredLanguage?: ..., preferredTimezone?: ...,
+        registrantVideoOnDemandWebUrl?: ..., registrationDateTime?: ...,
+        registrationQuestionAnswers?: ..., sessions?: ..., status?: ...,
+        userId?: ... } & { @odata.type: ... })[], startDateTime?: Record<string,
+        never> | { @odata.type: string, dateTime?: string, timeZone?: string |
+        null } | null, videoOnDemandWebUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.virtualEventSession" })[] } & { @odata.type:
+        "#microsoft.graph.virtualEventPresenter" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], virtualEvent-id: string,
+            virtualEventPresenter-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /solutions/virtualEvents/events/{virtualEvent-id}/presenters/{virtualEventPresenter-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, email?: string | null, identity?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, displayName?: string
+          | null, id?: string | null } | null, presenterDetails?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          bio?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, content?: string | null, contentType?: Record&lt;string,
+          never&gt; | "text" | "html" | null } | null, company?: string | null,
+          jobTitle?: string | null, linkedInProfileWebUrl?: string | null,
+          personalSiteWebUrl?: string | null, photo?: string | null,
+          twitterProfileWebUrl?: string | null } | null, sessions?:
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: function
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, allowAttendeeToEnableCamera?: function,
+          allowAttendeeToEnableMic?: function, allowBreakoutRooms?: function,
+          allowCopyingAndSharingMeetingContent?: function,
+          allowedLobbyAdmitters?: function, allowedPresenters?: function,
+          allowLiveShare?: function, allowMeetingChat?: function,
+          allowParticipantsToChangeName?: function, allowPowerPointSharing?:
+          function, allowRecording?: function, allowTeamworkReactions?:
+          function, allowTranscription?: function, allowWhiteboard?: function,
+          anonymizeIdentityForRoles?: function, attendanceReports?: function,
+          audioConferencing?: function, chatInfo?: function, chatRestrictions?:
+          function, isEndToEndEncryptionEnabled?: function,
+          isEntryExitAnnounced?: function, joinInformation?: function,
+          joinMeetingIdSettings?: function, joinWebUrl?: function,
+          lobbyBypassSettings?: function, recordAutomatically?: function,
+          shareMeetingChatHistoryDefault?: function, subject?: function,
+          videoTeleconferenceId?: function, watermarkProtection?: function },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.onlineMeetingBase" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          endDateTime?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, dateTime?: string, timeZone?: string | null } | null,
+          presenters?: Omit&lt;{ id?: string | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; & {
+          email?: string | null | undefined; identity?: Record&lt;string,
+          never&gt; | { displayName?: string | null | undefined; id?: string |
+          ... 1 more ... | undefined; '<xref uid="@odata.type" />': string; } |
+          null | undefined; presenterDetails?: Record&lt;...&gt; | ... 2 <xref
+          uid="m..." />[], registrations?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., cancelationDateTime?: ..., email?: ...,
+          externalRegistrationInformation?: ..., firstName?: ..., lastName?:
+          ..., preferredLanguage?: ..., preferredTimezone?: ...,
+          registrantVideoOnDemandWebUrl?: ..., registrationDateTime?: ...,
+          registrationQuestionAnswers?: ..., sessions?: ..., status?: ...,
+          userId?: ... } & { <xref uid="@odata.type" />: ... })[],
+          startDateTime?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+          null } | null, videoOnDemandWebUrl?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.virtualEventSession" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.virtualEventPresenter" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, virtualEvent-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.solutions.virtualEvents.events.presenters.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -97,20 +520,118 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /solutions/virtualEvents/events/{virtualEvent-id}/presenters"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, virtualEvent-id: string }):
+        EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?: string
+        | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, email?: string | null,
+        identity?: Record<string, never> | { @odata.type: string, displayName?:
+        string | null, id?: string | null } | null, presenterDetails?:
+        Record<string, never> | { @odata.type: string, bio?: Record<..., ...> |
+        { @odata.type: ..., content?: ..., contentType?: ... } | null, company?:
+        string | null, jobTitle?: string | null, linkedInProfileWebUrl?: string
+        | null, personalSiteWebUrl?: string | null, photo?: string | null,
+        twitterProfileWebUrl?: string | null } | null, sessions?: (Omit<...,
+        ...> & { @odata.type: ..., endDateTime?: ..., presenters?: ...,
+        registrations?: ..., startDateTime?: ..., videoOnDemandWebUrl?: ... } &
+        { @odata.type: ... })[] } & { @odata.type:
+        "#microsoft.graph.virtualEventPresenter" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, virtualEvent-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /solutions/virtualEvents/events/{virtualEvent-id}/presenters"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          email?: string | null, identity?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, displayName?: string | null, id?:
+          string | null } | null, presenterDetails?: Record&lt;string, never&gt;
+          | { <xref uid="@odata.type" />: string, bio?: Record&lt;..., ...&gt; |
+          { <xref uid="@odata.type" />: ..., content?: ..., contentType?: ... }
+          | null, company?: string | null, jobTitle?: string | null,
+          linkedInProfileWebUrl?: string | null, personalSiteWebUrl?: string |
+          null, photo?: string | null, twitterProfileWebUrl?: string | null } |
+          null, sessions?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+          ..., endDateTime?: ..., presenters?: ..., registrations?: ...,
+          startDateTime?: ..., videoOnDemandWebUrl?: ... } & { <xref
+          uid="@odata.type" />: ... })[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.virtualEventPresenter" />" })[] }&gt;
   - name: >-
-      update(Operation<"/solutions/virtualEvents/events/{virtualEvent-id}/presenters/{virtualEventPresenter-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, email?: string | null, identity?: Record<string,
+      never> | { @odata.type: string, displayName?: string | null, id?: string |
+      null } | null, presenterDetails?: Record<string, never> | { @odata.type:
+      string, bio?: Record<string, never> | { @odata.type: string, content?:
+      string | null, contentType?: Record<string, never> | "text" | "html" |
+      null } | null, company?: string | null, jobTitle?: string | null,
+      linkedInProfileWebUrl?: string | null, personalSiteWebUrl?: string | null,
+      photo?: string | null, twitterProfileWebUrl?: string | null } | null,
+      sessions?: (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type">
+      & Omit<{ @odata.type: string, allowAttendeeToEnableCamera?: boolean |
+      null, allowAttendeeToEnableMic?: boolean | null, allowBreakoutRooms?:
+      boolean | null, allowCopyingAndSharingMeetingContent?: boolean | null,
+      allowedLobbyAdmitters?: Record<..., ...> | "unknownFutureValue" |
+      "organizerAndCoOrganizersAndPresenters" | "organizerAndCoOrganizers" |
+      null, allowedPresenters?: Record<..., ...> | "unknownFutureValue" |
+      "everyone" | "organization" | "organizer" | "roleIsPresenter" | null,
+      allowLiveShare?: Record<..., ...> | "unknownFutureValue" | "disabled" |
+      "enabled" | null, allowMeetingChat?: Record<..., ...> |
+      "unknownFutureValue" | "disabled" | "enabled" | "limited" | null,
+      allowParticipantsToChangeName?: boolean | null, allowPowerPointSharing?:
+      boolean | null, allowRecording?: boolean | null, allowTeamworkReactions?:
+      boolean | null, allowTranscription?: boolean | null, allowWhiteboard?:
+      boolean | null, anonymizeIdentityForRoles?: ...[], attendanceReports?:
+      ...[], audioConferencing?: Record<..., ...> | { @odata.type: ...,
+      conferenceId?: ..., dialinUrl?: ..., tollFreeNumber?: ...,
+      tollFreeNumbers?: ..., tollNumber?: ..., tollNumbers?: ... } | null,
+      chatInfo?: Record<..., ...> | { @odata.type: ..., messageId?: ...,
+      replyChainMessageId?: ..., threadId?: ... } | null, chatRestrictions?:
+      Record<..., ...> | { @odata.type: ..., allowTextOnly?: ... } | null,
+      isEndToEndEncryptionEnabled?: boolean | null, isEntryExitAnnounced?:
+      boolean | null, joinInformation?: Record<..., ...> | { @odata.type: ...,
+      content?: ..., contentType?: ... } | null, joinMeetingIdSettings?:
+      Record<..., ...> | { @odata.type: ..., isPasscodeRequired?: ...,
+      joinMeetingId?: ..., passcode?: ... } | null, joinWebUrl?: string | null,
+      lobbyBypassSettings?: Record<..., ...> | { @odata.type: ...,
+      isDialInBypassEnabled?: ..., scope?: ... } | null, recordAutomatically?:
+      boolean | null, shareMeetingChatHistoryDefault?: Record<..., ...> |
+      "unknownFutureValue" | "none" | "all" | null, subject?: string | null,
+      videoTeleconferenceId?: string | null, watermarkProtection?: Record<...,
+      ...> | { @odata.type: ..., isEnabledForContentSharing?: ...,
+      isEnabledForVideo?: ... } | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.onlineMeetingBase" }, "@odata.type"> & { @odata.type:
+      string, endDateTime?: Record<string, never> | { @odata.type: string,
+      dateTime?: string, timeZone?: string | null } | null, presenters?: Omit<{
+      id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+      email?: string | null | undefined; identity?: Record<string, never> | {
+      displayName?: string | null | undefined; id?: string | ... 1 more ... |
+      undefined; '@odata.type': string; } | null | undefined; presenterDetails?:
+      Record<...> | ... 2 m...[], registrations?: (Omit<{ @odata.type: ..., id?:
+      ... }, "@odata.type"> & { @odata.type: string, cancelationDateTime?:
+      function, email?: function, externalRegistrationInformation?: function,
+      firstName?: function, lastName?: function, preferredLanguage?: function,
+      preferredTimezone?: function, registrantVideoOnDemandWebUrl?: function,
+      registrationDateTime?: function, registrationQuestionAnswers?: function,
+      sessions?: (Omit<Omit<{ id?: string | undefined; '@odata.type': string; },
+      "@odata.type"> & Omit<{ allowAttendeeToEnableCamera?: boolean | null |
+      undefined; allowAttendeeToEnableMic?: boolean | null | undefined; ... 28
+      more ...; '@odata.type': string; }, "@odata.type"> & { ...; },
+      "@odata.type"> & { ...; } & { ...; })[] | unde..., status?: function,
+      userId?: function } & { @odata.type:
+      "#microsoft.graph.virtualEventRegistration" })[], startDateTime?:
+      Record<string, never> | { @odata.type: string, dateTime?: string,
+      timeZone?: string | null } | null, videoOnDemandWebUrl?: string | null } &
+      { @odata.type: "#microsoft.graph.virtualEventSession" })[] } & {
+      @odata.type: "#microsoft.graph.virtualEventPresenter" }, {
+      virtualEvent-id: string, virtualEventPresenter-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.solutions.virtualEvents.events.presenters.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -121,24 +642,275 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/solutions/virtualEvents/events/{virtualEvent-id}/presenters/{virtualEventPresenter-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /solutions/virtualEvents/events/{virtualEvent-id}/presenters/{virtualEventPresenter-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, email?: string | null,
+        identity?: Record<string, never> | { @odata.type: string, displayName?:
+        string | null, id?: string | null } | null, presenterDetails?:
+        Record<string, never> | { @odata.type: string, bio?: Record<string,
+        never> | { @odata.type: string, content?: string | null, contentType?:
+        Record<string, never> | "text" | "html" | null } | null, company?:
+        string | null, jobTitle?: string | null, linkedInProfileWebUrl?: string
+        | null, personalSiteWebUrl?: string | null, photo?: string | null,
+        twitterProfileWebUrl?: string | null } | null, sessions?: (Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, allowAttendeeToEnableCamera?: boolean | null,
+        allowAttendeeToEnableMic?: boolean | null, allowBreakoutRooms?: boolean
+        | null, allowCopyingAndSharingMeetingContent?: boolean | null,
+        allowedLobbyAdmitters?: Record<..., ...> | "unknownFutureValue" |
+        "organizerAndCoOrganizersAndPresenters" | "organizerAndCoOrganizers" |
+        null, allowedPresenters?: Record<..., ...> | "unknownFutureValue" |
+        "everyone" | "organization" | "organizer" | "roleIsPresenter" | null,
+        allowLiveShare?: Record<..., ...> | "unknownFutureValue" | "disabled" |
+        "enabled" | null, allowMeetingChat?: Record<..., ...> |
+        "unknownFutureValue" | "disabled" | "enabled" | "limited" | null,
+        allowParticipantsToChangeName?: boolean | null, allowPowerPointSharing?:
+        boolean | null, allowRecording?: boolean | null,
+        allowTeamworkReactions?: boolean | null, allowTranscription?: boolean |
+        null, allowWhiteboard?: boolean | null, anonymizeIdentityForRoles?:
+        ...[], attendanceReports?: ...[], audioConferencing?: Record<..., ...> |
+        { @odata.type: ..., conferenceId?: ..., dialinUrl?: ...,
+        tollFreeNumber?: ..., tollFreeNumbers?: ..., tollNumber?: ...,
+        tollNumbers?: ... } | null, chatInfo?: Record<..., ...> | { @odata.type:
+        ..., messageId?: ..., replyChainMessageId?: ..., threadId?: ... } |
+        null, chatRestrictions?: Record<..., ...> | { @odata.type: ...,
+        allowTextOnly?: ... } | null, isEndToEndEncryptionEnabled?: boolean |
+        null, isEntryExitAnnounced?: boolean | null, joinInformation?:
+        Record<..., ...> | { @odata.type: ..., content?: ..., contentType?: ...
+        } | null, joinMeetingIdSettings?: Record<..., ...> | { @odata.type: ...,
+        isPasscodeRequired?: ..., joinMeetingId?: ..., passcode?: ... } | null,
+        joinWebUrl?: string | null, lobbyBypassSettings?: Record<..., ...> | {
+        @odata.type: ..., isDialInBypassEnabled?: ..., scope?: ... } | null,
+        recordAutomatically?: boolean | null, shareMeetingChatHistoryDefault?:
+        Record<..., ...> | "unknownFutureValue" | "none" | "all" | null,
+        subject?: string | null, videoTeleconferenceId?: string | null,
+        watermarkProtection?: Record<..., ...> | { @odata.type: ...,
+        isEnabledForContentSharing?: ..., isEnabledForVideo?: ... } | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.onlineMeetingBase" },
+        "@odata.type"> & { @odata.type: string, endDateTime?: Record<string,
+        never> | { @odata.type: string, dateTime?: string, timeZone?: string |
+        null } | null, presenters?: Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { email?: string | null |
+        undefined; identity?: Record<string, never> | { displayName?: string |
+        null | undefined; id?: string | ... 1 more ... | undefined;
+        '@odata.type': string; } | null | undefined; presenterDetails?:
+        Record<...> | ... 2 m...[], registrations?: (Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string,
+        cancelationDateTime?: function, email?: function,
+        externalRegistrationInformation?: function, firstName?: function,
+        lastName?: function, preferredLanguage?: function, preferredTimezone?:
+        function, registrantVideoOnDemandWebUrl?: function,
+        registrationDateTime?: function, registrationQuestionAnswers?: function,
+        sessions?: (Omit<Omit<{ id?: string | undefined; '@odata.type': string;
+        }, "@odata.type"> & Omit<{ allowAttendeeToEnableCamera?: boolean | null
+        | undefined; allowAttendeeToEnableMic?: boolean | null | undefined; ...
+        28 more ...; '@odata.type': string; }, "@odata.type"> & { ...; },
+        "@odata.type"> & { ...; } & { ...; })[] | unde..., status?: function,
+        userId?: function } & { @odata.type:
+        "#microsoft.graph.virtualEventRegistration" })[], startDateTime?:
+        Record<string, never> | { @odata.type: string, dateTime?: string,
+        timeZone?: string | null } | null, videoOnDemandWebUrl?: string | null }
+        & { @odata.type: "#microsoft.graph.virtualEventSession" })[] } & {
+        @odata.type: "#microsoft.graph.virtualEventPresenter" }, params?: {
+        virtualEvent-id: string, virtualEventPresenter-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, email?: string | null,
+        identity?: Record<string, never> | { @odata.type: string, displayName?:
+        string | null, id?: string | null } | null, presenterDetails?:
+        Record<string, never> | { @odata.type: string, bio?: Record<string,
+        never> | { @odata.type: string, content?: string | null, contentType?:
+        Record<string, never> | "text" | "html" | null } | null, company?:
+        string | null, jobTitle?: string | null, linkedInProfileWebUrl?: string
+        | null, personalSiteWebUrl?: string | null, photo?: string | null,
+        twitterProfileWebUrl?: string | null } | null, sessions?: (Omit<Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, allowAttendeeToEnableCamera?: function,
+        allowAttendeeToEnableMic?: function, allowBreakoutRooms?: function,
+        allowCopyingAndSharingMeetingContent?: function, allowedLobbyAdmitters?:
+        function, allowedPresenters?: function, allowLiveShare?: function,
+        allowMeetingChat?: function, allowParticipantsToChangeName?: function,
+        allowPowerPointSharing?: function, allowRecording?: function,
+        allowTeamworkReactions?: function, allowTranscription?: function,
+        allowWhiteboard?: function, anonymizeIdentityForRoles?: function,
+        attendanceReports?: function, audioConferencing?: function, chatInfo?:
+        function, chatRestrictions?: function, isEndToEndEncryptionEnabled?:
+        function, isEntryExitAnnounced?: function, joinInformation?: function,
+        joinMeetingIdSettings?: function, joinWebUrl?: function,
+        lobbyBypassSettings?: function, recordAutomatically?: function,
+        shareMeetingChatHistoryDefault?: function, subject?: function,
+        videoTeleconferenceId?: function, watermarkProtection?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.onlineMeetingBase" },
+        "@odata.type"> & { @odata.type: string, endDateTime?: Record<string,
+        never> | { @odata.type: string, dateTime?: string, timeZone?: string |
+        null } | null, presenters?: Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { email?: string | null |
+        undefined; identity?: Record<string, never> | { displayName?: string |
+        null | undefined; id?: string | ... 1 more ... | undefined;
+        '@odata.type': string; } | null | undefined; presenterDetails?:
+        Record<...> | ... 2 m...[], registrations?: (Omit<..., ...> & {
+        @odata.type: ..., cancelationDateTime?: ..., email?: ...,
+        externalRegistrationInformation?: ..., firstName?: ..., lastName?: ...,
+        preferredLanguage?: ..., preferredTimezone?: ...,
+        registrantVideoOnDemandWebUrl?: ..., registrationDateTime?: ...,
+        registrationQuestionAnswers?: ..., sessions?: ..., status?: ...,
+        userId?: ... } & { @odata.type: ... })[], startDateTime?: Record<string,
+        never> | { @odata.type: string, dateTime?: string, timeZone?: string |
+        null } | null, videoOnDemandWebUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.virtualEventSession" })[] } & { @odata.type:
+        "#microsoft.graph.virtualEventPresenter" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/solutions/virtualEvents/events/{virtualEvent-id}/presenters/{virtualEventPresenter-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            email?: string | null, identity?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | null, presenterDetails?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, bio?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            content?: string | null, contentType?: Record&lt;string, never&gt; |
+            "text" | "html" | null } | null, company?: string | null, jobTitle?:
+            string | null, linkedInProfileWebUrl?: string | null,
+            personalSiteWebUrl?: string | null, photo?: string | null,
+            twitterProfileWebUrl?: string | null } | null, sessions?:
+            (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+            }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, allowAttendeeToEnableCamera?: boolean
+            | null, allowAttendeeToEnableMic?: boolean | null,
+            allowBreakoutRooms?: boolean | null,
+            allowCopyingAndSharingMeetingContent?: boolean | null,
+            allowedLobbyAdmitters?: Record&lt;..., ...&gt; |
+            "unknownFutureValue" | "organizerAndCoOrganizersAndPresenters" |
+            "organizerAndCoOrganizers" | null, allowedPresenters?:
+            Record&lt;..., ...&gt; | "unknownFutureValue" | "everyone" |
+            "organization" | "organizer" | "roleIsPresenter" | null,
+            allowLiveShare?: Record&lt;..., ...&gt; | "unknownFutureValue" |
+            "disabled" | "enabled" | null, allowMeetingChat?: Record&lt;...,
+            ...&gt; | "unknownFutureValue" | "disabled" | "enabled" | "limited"
+            | null, allowParticipantsToChangeName?: boolean | null,
+            allowPowerPointSharing?: boolean | null, allowRecording?: boolean |
+            null, allowTeamworkReactions?: boolean | null, allowTranscription?:
+            boolean | null, allowWhiteboard?: boolean | null,
+            anonymizeIdentityForRoles?: ...[], attendanceReports?: ...[],
+            audioConferencing?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., conferenceId?: ..., dialinUrl?: ...,
+            tollFreeNumber?: ..., tollFreeNumbers?: ..., tollNumber?: ...,
+            tollNumbers?: ... } | null, chatInfo?: Record&lt;..., ...&gt; | {
+            <xref uid="@odata.type" />: ..., messageId?: ...,
+            replyChainMessageId?: ..., threadId?: ... } | null,
+            chatRestrictions?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., allowTextOnly?: ... } | null,
+            isEndToEndEncryptionEnabled?: boolean | null, isEntryExitAnnounced?:
+            boolean | null, joinInformation?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., content?: ..., contentType?: ... } |
+            null, joinMeetingIdSettings?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., isPasscodeRequired?: ..., joinMeetingId?:
+            ..., passcode?: ... } | null, joinWebUrl?: string | null,
+            lobbyBypassSettings?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., isDialInBypassEnabled?: ..., scope?: ...
+            } | null, recordAutomatically?: boolean | null,
+            shareMeetingChatHistoryDefault?: Record&lt;..., ...&gt; |
+            "unknownFutureValue" | "none" | "all" | null, subject?: string |
+            null, videoTeleconferenceId?: string | null, watermarkProtection?:
+            Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            isEnabledForContentSharing?: ..., isEnabledForVideo?: ... } | null
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.onlineMeetingBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            endDateTime?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+            null } | null, presenters?: Omit&lt;{ id?: string | undefined;
+            '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+            />"&gt; & { email?: string | null | undefined; identity?:
+            Record&lt;string, never&gt; | { displayName?: string | null |
+            undefined; id?: string | ... 1 more ... | undefined; '<xref
+            uid="@odata.type" />': string; } | null | undefined;
+            presenterDetails?: Record&lt;...&gt; | ... 2 <xref uid="m..." />[],
+            registrations?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, cancelationDateTime?: function, email?: function,
+            externalRegistrationInformation?: function, firstName?: function,
+            lastName?: function, preferredLanguage?: function,
+            preferredTimezone?: function, registrantVideoOnDemandWebUrl?:
+            function, registrationDateTime?: function,
+            registrationQuestionAnswers?: function, sessions?:
+            (Omit&lt;Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type"
+            />': string; }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            allowAttendeeToEnableCamera?: boolean | null | undefined;
+            allowAttendeeToEnableMic?: boolean | null | undefined; ... 28 more
+            ...; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { ...; }, "<xref uid="@odata.type"
+            />"&gt; & { ...; } & { ...; })[] | <xref uid="unde..." />, status?:
+            function, userId?: function } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.virtualEventRegistration" />" })[],
+            startDateTime?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+            null } | null, videoOnDemandWebUrl?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.virtualEventSession" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.virtualEventPresenter" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ virtualEvent-id: string, virtualEventPresenter-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /solutions/virtualEvents/events/{virtualEvent-id}/presenters/{virtualEventPresenter-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, email?: string | null, identity?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, displayName?: string
+          | null, id?: string | null } | null, presenterDetails?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          bio?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, content?: string | null, contentType?: Record&lt;string,
+          never&gt; | "text" | "html" | null } | null, company?: string | null,
+          jobTitle?: string | null, linkedInProfileWebUrl?: string | null,
+          personalSiteWebUrl?: string | null, photo?: string | null,
+          twitterProfileWebUrl?: string | null } | null, sessions?:
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: function
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, allowAttendeeToEnableCamera?: function,
+          allowAttendeeToEnableMic?: function, allowBreakoutRooms?: function,
+          allowCopyingAndSharingMeetingContent?: function,
+          allowedLobbyAdmitters?: function, allowedPresenters?: function,
+          allowLiveShare?: function, allowMeetingChat?: function,
+          allowParticipantsToChangeName?: function, allowPowerPointSharing?:
+          function, allowRecording?: function, allowTeamworkReactions?:
+          function, allowTranscription?: function, allowWhiteboard?: function,
+          anonymizeIdentityForRoles?: function, attendanceReports?: function,
+          audioConferencing?: function, chatInfo?: function, chatRestrictions?:
+          function, isEndToEndEncryptionEnabled?: function,
+          isEntryExitAnnounced?: function, joinInformation?: function,
+          joinMeetingIdSettings?: function, joinWebUrl?: function,
+          lobbyBypassSettings?: function, recordAutomatically?: function,
+          shareMeetingChatHistoryDefault?: function, subject?: function,
+          videoTeleconferenceId?: function, watermarkProtection?: function },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.onlineMeetingBase" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          endDateTime?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, dateTime?: string, timeZone?: string | null } | null,
+          presenters?: Omit&lt;{ id?: string | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; & {
+          email?: string | null | undefined; identity?: Record&lt;string,
+          never&gt; | { displayName?: string | null | undefined; id?: string |
+          ... 1 more ... | undefined; '<xref uid="@odata.type" />': string; } |
+          null | undefined; presenterDetails?: Record&lt;...&gt; | ... 2 <xref
+          uid="m..." />[], registrations?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., cancelationDateTime?: ..., email?: ...,
+          externalRegistrationInformation?: ..., firstName?: ..., lastName?:
+          ..., preferredLanguage?: ..., preferredTimezone?: ...,
+          registrantVideoOnDemandWebUrl?: ..., registrationDateTime?: ...,
+          registrationQuestionAnswers?: ..., sessions?: ..., status?: ...,
+          userId?: ... } & { <xref uid="@odata.type" />: ... })[],
+          startDateTime?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+          null } | null, videoOnDemandWebUrl?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.virtualEventSession" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.virtualEventPresenter" />" }&gt;
 variables:
   - name: sessions
     uid: >-

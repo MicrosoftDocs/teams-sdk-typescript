@@ -66,7 +66,7 @@ variables:
           /authenticationMethodsPolicy/authenticationMethodConfigurations/{authenticationMethodConfiguration-id}"]["response"]&gt;
           }
 functions:
-  - name: get(any)
+  - name: 'get({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints.authenticationMethodsPolicy.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`GET /authenticationMethodsPolicy`'
@@ -74,18 +74,83 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /authenticationMethodsPolicy"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string,
+        authenticationMethodConfigurations?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, excludeTargets?:
+        { @odata.type: ..., id?: ..., targetType?: ... }[], state?:
+        Record<string, never> | "enabled" | "disabled" | null }, "@odata.type">
+        & { @odata.type: "#microsoft.graph.authenticationMethodConfiguration"
+        })[], description?: string | null, displayName?: string | null,
+        lastModifiedDateTime?: string | null, policyMigrationState?:
+        Record<string, never> | "unknownFutureValue" | "preMigration" |
+        "migrationInProgress" | "migrationComplete" | null, policyVersion?:
+        string | null, reconfirmationInDays?: number | null,
+        registrationEnforcement?: Record<string, never> | { @odata.type: string,
+        authenticationMethodsRegistrationCampaign?: Record<string, never> | {
+        @odata.type: string, excludeTargets?: { @odata.type: string, id?:
+        function, targetType?: function }[], includeTargets?: { @odata.type:
+        string, id?: function, targetedAuthenticationMethod?: function,
+        targetType?: function }[], snoozeDurationInDays?: number, state?:
+        "unknownFutureValue" | "default" | "enabled" | "disabled" } | null } |
+        null } & { @odata.type: "#microsoft.graph.authenticationMethodsPolicy"
+        }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /authenticationMethodsPolicy"]["response"]&gt;
-  - name: update(Operation<"/authenticationMethodsPolicy", "patch">)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, authenticationMethodConfigurations?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string,
+          excludeTargets?: { <xref uid="@odata.type" />: ..., id?: ...,
+          targetType?: ... }[], state?: Record&lt;string, never&gt; | "enabled"
+          | "disabled" | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethodConfiguration" />" })[],
+          description?: string | null, displayName?: string | null,
+          lastModifiedDateTime?: string | null, policyMigrationState?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "preMigration" |
+          "migrationInProgress" | "migrationComplete" | null, policyVersion?:
+          string | null, reconfirmationInDays?: number | null,
+          registrationEnforcement?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string,
+          authenticationMethodsRegistrationCampaign?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, excludeTargets?: {
+          <xref uid="@odata.type" />: string, id?: function, targetType?:
+          function }[], includeTargets?: { <xref uid="@odata.type" />: string,
+          id?: function, targetedAuthenticationMethod?: function, targetType?:
+          function }[], snoozeDurationInDays?: number, state?:
+          "unknownFutureValue" | "default" | "enabled" | "disabled" } | null } |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethodsPolicy" />" }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, authenticationMethodConfigurations?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+      string, excludeTargets?: { @odata.type: string, id?: function,
+      targetType?: function }[], state?: Record<string, never> | "enabled" |
+      "disabled" | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.authenticationMethodConfiguration" })[], description?:
+      string | null, displayName?: string | null, lastModifiedDateTime?: string
+      | null, policyMigrationState?: Record<string, never> |
+      "unknownFutureValue" | "preMigration" | "migrationInProgress" |
+      "migrationComplete" | null, policyVersion?: string | null,
+      reconfirmationInDays?: number | null, registrationEnforcement?:
+      Record<string, never> | { @odata.type: string,
+      authenticationMethodsRegistrationCampaign?: Record<string, never> | {
+      @odata.type: string, excludeTargets?: { @odata.type: string, id?: string,
+      targetType?: "unknownFutureValue" | "user" | "group" }[], includeTargets?:
+      { @odata.type: string, id?: string, targetedAuthenticationMethod?: string
+      | null, targetType?: "unknownFutureValue" | "user" | "group" }[],
+      snoozeDurationInDays?: number, state?: "unknownFutureValue" | "default" |
+      "enabled" | "disabled" } | null } | null } & { @odata.type:
+      "#microsoft.graph.authenticationMethodsPolicy" })
     uid: '@microsoft/teams.graph-endpoints.authenticationMethodsPolicy.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`PATCH /authenticationMethodsPolicy`'
@@ -93,15 +158,106 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/authenticationMethodsPolicy",
-        "patch">): EndpointRequest<IEndpoints["PATCH
-        /authenticationMethodsPolicy"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string,
+        authenticationMethodConfigurations?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, excludeTargets?:
+        { @odata.type: string, id?: function, targetType?: function }[], state?:
+        Record<string, never> | "enabled" | "disabled" | null }, "@odata.type">
+        & { @odata.type: "#microsoft.graph.authenticationMethodConfiguration"
+        })[], description?: string | null, displayName?: string | null,
+        lastModifiedDateTime?: string | null, policyMigrationState?:
+        Record<string, never> | "unknownFutureValue" | "preMigration" |
+        "migrationInProgress" | "migrationComplete" | null, policyVersion?:
+        string | null, reconfirmationInDays?: number | null,
+        registrationEnforcement?: Record<string, never> | { @odata.type: string,
+        authenticationMethodsRegistrationCampaign?: Record<string, never> | {
+        @odata.type: string, excludeTargets?: { @odata.type: string, id?:
+        string, targetType?: "unknownFutureValue" | "user" | "group" }[],
+        includeTargets?: { @odata.type: string, id?: string,
+        targetedAuthenticationMethod?: string | null, targetType?:
+        "unknownFutureValue" | "user" | "group" }[], snoozeDurationInDays?:
+        number, state?: "unknownFutureValue" | "default" | "enabled" |
+        "disabled" } | null } | null } & { @odata.type:
+        "#microsoft.graph.authenticationMethodsPolicy" }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string,
+        authenticationMethodConfigurations?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, excludeTargets?:
+        { @odata.type: ..., id?: ..., targetType?: ... }[], state?:
+        Record<string, never> | "enabled" | "disabled" | null }, "@odata.type">
+        & { @odata.type: "#microsoft.graph.authenticationMethodConfiguration"
+        })[], description?: string | null, displayName?: string | null,
+        lastModifiedDateTime?: string | null, policyMigrationState?:
+        Record<string, never> | "unknownFutureValue" | "preMigration" |
+        "migrationInProgress" | "migrationComplete" | null, policyVersion?:
+        string | null, reconfirmationInDays?: number | null,
+        registrationEnforcement?: Record<string, never> | { @odata.type: string,
+        authenticationMethodsRegistrationCampaign?: Record<string, never> | {
+        @odata.type: string, excludeTargets?: { @odata.type: string, id?:
+        function, targetType?: function }[], includeTargets?: { @odata.type:
+        string, id?: function, targetedAuthenticationMethod?: function,
+        targetType?: function }[], snoozeDurationInDays?: number, state?:
+        "unknownFutureValue" | "default" | "enabled" | "disabled" } | null } |
+        null } & { @odata.type: "#microsoft.graph.authenticationMethodsPolicy"
+        }>
       parameters:
         - id: body
-          type: Operation&lt;"/authenticationMethodsPolicy", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            authenticationMethodConfigurations?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, excludeTargets?: { <xref uid="@odata.type" />: string, id?:
+            function, targetType?: function }[], state?: Record&lt;string,
+            never&gt; | "enabled" | "disabled" | null }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.authenticationMethodConfiguration" />" })[],
+            description?: string | null, displayName?: string | null,
+            lastModifiedDateTime?: string | null, policyMigrationState?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "preMigration"
+            | "migrationInProgress" | "migrationComplete" | null,
+            policyVersion?: string | null, reconfirmationInDays?: number | null,
+            registrationEnforcement?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string,
+            authenticationMethodsRegistrationCampaign?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, excludeTargets?: {
+            <xref uid="@odata.type" />: string, id?: string, targetType?:
+            "unknownFutureValue" | "user" | "group" }[], includeTargets?: {
+            <xref uid="@odata.type" />: string, id?: string,
+            targetedAuthenticationMethod?: string | null, targetType?:
+            "unknownFutureValue" | "user" | "group" }[], snoozeDurationInDays?:
+            number, state?: "unknownFutureValue" | "default" | "enabled" |
+            "disabled" } | null } | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.authenticationMethodsPolicy" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /authenticationMethodsPolicy"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, authenticationMethodConfigurations?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string,
+          excludeTargets?: { <xref uid="@odata.type" />: ..., id?: ...,
+          targetType?: ... }[], state?: Record&lt;string, never&gt; | "enabled"
+          | "disabled" | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethodConfiguration" />" })[],
+          description?: string | null, displayName?: string | null,
+          lastModifiedDateTime?: string | null, policyMigrationState?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "preMigration" |
+          "migrationInProgress" | "migrationComplete" | null, policyVersion?:
+          string | null, reconfirmationInDays?: number | null,
+          registrationEnforcement?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string,
+          authenticationMethodsRegistrationCampaign?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, excludeTargets?: {
+          <xref uid="@odata.type" />: string, id?: function, targetType?:
+          function }[], includeTargets?: { <xref uid="@odata.type" />: string,
+          id?: function, targetedAuthenticationMethod?: function, targetType?:
+          function }[], snoozeDurationInDays?: number, state?:
+          "unknownFutureValue" | "default" | "enabled" | "disabled" } | null } |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethodsPolicy" />" }&gt;

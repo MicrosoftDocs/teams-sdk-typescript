@@ -440,7 +440,7 @@ variables:
           /dataClassification/sensitiveTypes/{sensitiveType-id}"]["response"]&gt;
           }
 functions:
-  - name: get(any)
+  - name: 'get({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints-beta.dataClassification.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`GET /dataClassification`'
@@ -448,18 +448,292 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /dataClassification"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, classifyFileJobs?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, creationDateTime?: string | null, endDateTime?: string | null,
+        error?: Record<string, never> | (Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }) | null, startDateTime?: string | null, status?:
+        string | null, tenantId?: string | null, type?: string | null, userId?:
+        string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.jobResponseBase" })[], classifyTextJobs?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, creationDateTime?: string | null, endDateTime?: string | null,
+        error?: Record<string, never> | (Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }) | null, startDateTime?: string | null, status?:
+        string | null, tenantId?: string | null, type?: string | null, userId?:
+        string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.jobResponseBase" })[], evaluateDlpPoliciesJobs?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, creationDateTime?: string | null, endDateTime?:
+        string | null, error?: Record<string, never> | (Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... }) | null, startDateTime?: string |
+        null, status?: string | null, tenantId?: string | null, type?: string |
+        null, userId?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.jobResponseBase" })[], evaluateLabelJobs?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, creationDateTime?: string | null, endDateTime?: string | null,
+        error?: Record<string, never> | (Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }) | null, startDateTime?: string | null, status?:
+        string | null, tenantId?: string | null, type?: string | null, userId?:
+        string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.jobResponseBase" })[], exactMatchDataStores?:
+        (Omit<Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string, columns?: function,
+        dataLastUpdatedDateTime?: function, description?: function,
+        displayName?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.exactMatchDataStoreBase" }, "@odata.type"> & {
+        @odata.type: string, sessions?: (Omit<..., ...> & { @odata.type: ...,
+        checksum?: ..., dataUploadURI?: ..., fields?: ..., fileName?: ...,
+        rowsPerBlock?: ..., salt?: ..., uploadAgent?: ..., uploadAgentId?: ...
+        })[] })[], exactMatchUploadAgents?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, creationDateTime?:
+        string | null, description?: string | null } & { @odata.type:
+        "#microsoft.graph.exactMatchUploadAgent" })[], jobs?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, creationDateTime?: string | null, endDateTime?: string | null,
+        error?: Record<string, never> | (Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }) | null, startDateTime?: string | null, status?:
+        string | null, tenantId?: string | null, type?: string | null, userId?:
+        string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.jobResponseBase" })[], sensitiveTypes?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, classificationMethod?: Record<string, never> | "patternMatch" |
+        "exactDataMatch" | "fingerprint" | "machineLearning" | null,
+        description?: string | null, lastModifiedDateTime?: string | null,
+        name?: string | null, publisherName?: string | null, rulePackageId?:
+        string | null, rulePackageType?: string | null, scope?: Record<string,
+        never> | "fullDocument" | "partialDocument" | null,
+        sensitiveTypeSource?: Record<string, never> | "outOfBox" | "tenant" |
+        null, state?: string | null } & { @odata.type:
+        "#microsoft.graph.sensitiveType" })[], sensitivityLabels?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, actionSource?: Record<string, never> | "unknownFutureValue" |
+        "manual" | "automatic" | "recommended" | "none" | null, applicableTo?:
+        Record<string, never> | "unknownFutureValue" | "email" | "site" |
+        "unifiedGroup" | "teamwork" | null, applicationMode?: Record<string,
+        never> | "manual" | "automatic" | "recommended" | null, autoTooltip?:
+        string | null, color?: string | null, description?: string | null,
+        displayName?: string | null, isDefault?: boolean | null, isEnabled?:
+        boolean | null, isEndpointProtectionEnabled?: boolean | null,
+        isScopedToUser?: boolean | null, locale?: string | null, name?: string |
+        null, priority?: number | null, rights?: Record<string, never> | (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        ownerEmail?: function, userEmail?: function, value?: function } & {
+        @odata.type: "#microsoft.graph.usageRightsIncluded" }) | null,
+        sublabels?: (Omit<{ id?: string | undefined; '@odata.type': string; },
+        "@odata.type"> & { actionSource?: Record<string, never> |
+        "unknownFutureValue" | "manual" | "automatic" | "recommended" | "none" |
+        null | undefined; ... 16 more ...; '@odata.type': string; } & { ...;
+        })[] | undefined, toolTip?: string | null } & { @odata.type:
+        "#microsoft.graph.sensitivityLabel" })[] } & { @odata.type:
+        "#microsoft.graph.dataClassificationService" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /dataClassification"]["response"]&gt;
-  - name: update(Operation<"/dataClassification", "patch">)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, classifyFileJobs?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, creationDateTime?: string | null,
+          endDateTime?: string | null, error?: Record&lt;string, never&gt; |
+          (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }) | null, startDateTime?: string | null,
+          status?: string | null, tenantId?: string | null, type?: string |
+          null, userId?: string | null }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.jobResponseBase" />" })[], classifyTextJobs?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, creationDateTime?: string | null, endDateTime?: string | null,
+          error?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }) | null,
+          startDateTime?: string | null, status?: string | null, tenantId?:
+          string | null, type?: string | null, userId?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.jobResponseBase" />" })[],
+          evaluateDlpPoliciesJobs?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, creationDateTime?: string | null,
+          endDateTime?: string | null, error?: Record&lt;string, never&gt; |
+          (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }) | null, startDateTime?: string | null,
+          status?: string | null, tenantId?: string | null, type?: string |
+          null, userId?: string | null }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.jobResponseBase" />" })[], evaluateLabelJobs?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, creationDateTime?: string | null, endDateTime?: string | null,
+          error?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }) | null,
+          startDateTime?: string | null, status?: string | null, tenantId?:
+          string | null, type?: string | null, userId?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.jobResponseBase" />" })[], exactMatchDataStores?:
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: function
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, columns?: function,
+          dataLastUpdatedDateTime?: function, description?: function,
+          displayName?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.exactMatchDataStoreBase" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          sessions?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          checksum?: ..., dataUploadURI?: ..., fields?: ..., fileName?: ...,
+          rowsPerBlock?: ..., salt?: ..., uploadAgent?: ..., uploadAgentId?: ...
+          })[] })[], exactMatchUploadAgents?: (Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, creationDateTime?: string | null,
+          description?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.exactMatchUploadAgent" />" })[], jobs?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, creationDateTime?: string | null, endDateTime?: string | null,
+          error?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }) | null,
+          startDateTime?: string | null, status?: string | null, tenantId?:
+          string | null, type?: string | null, userId?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.jobResponseBase" />" })[], sensitiveTypes?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          classificationMethod?: Record&lt;string, never&gt; | "patternMatch" |
+          "exactDataMatch" | "fingerprint" | "machineLearning" | null,
+          description?: string | null, lastModifiedDateTime?: string | null,
+          name?: string | null, publisherName?: string | null, rulePackageId?:
+          string | null, rulePackageType?: string | null, scope?:
+          Record&lt;string, never&gt; | "fullDocument" | "partialDocument" |
+          null, sensitiveTypeSource?: Record&lt;string, never&gt; | "outOfBox" |
+          "tenant" | null, state?: string | null } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.sensitiveType" />" })[],
+          sensitivityLabels?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, actionSource?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "manual" | "automatic" |
+          "recommended" | "none" | null, applicableTo?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "email" | "site" | "unifiedGroup" |
+          "teamwork" | null, applicationMode?: Record&lt;string, never&gt; |
+          "manual" | "automatic" | "recommended" | null, autoTooltip?: string |
+          null, color?: string | null, description?: string | null,
+          displayName?: string | null, isDefault?: boolean | null, isEnabled?:
+          boolean | null, isEndpointProtectionEnabled?: boolean | null,
+          isScopedToUser?: boolean | null, locale?: string | null, name?: string
+          | null, priority?: number | null, rights?: Record&lt;string, never&gt;
+          | (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          ownerEmail?: function, userEmail?: function, value?: function } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.usageRightsIncluded" />" }) | null, sublabels?:
+          (Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type" />':
+          string; }, "<xref uid="@odata.type" />"&gt; & { actionSource?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "manual" |
+          "automatic" | "recommended" | "none" | null | undefined; ... 16 more
+          ...; '<xref uid="@odata.type" />': string; } & { ...; })[] |
+          undefined, toolTip?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.sensitivityLabel" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.dataClassificationService" />" }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, classifyFileJobs?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & Omit<{ @odata.type: string, creationDateTime?:
+      string | null, endDateTime?: string | null, error?: Record<string, never>
+      | (Omit<{ @odata.type: ..., code?: ..., innerError?: ..., message?: ...,
+      target?: ... }, "@odata.type"> & Omit<{ @odata.type: ..., details?: ... },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.classificationError" })
+      | null, startDateTime?: string | null, status?: string | null, tenantId?:
+      string | null, type?: string | null, userId?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.jobResponseBase" })[],
+      classifyTextJobs?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, creationDateTime?: string |
+      null, endDateTime?: string | null, error?: Record<string, never> | (Omit<{
+      @odata.type: ..., code?: ..., innerError?: ..., message?: ..., target?:
+      ... }, "@odata.type"> & Omit<{ @odata.type: ..., details?: ... },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.classificationError" })
+      | null, startDateTime?: string | null, status?: string | null, tenantId?:
+      string | null, type?: string | null, userId?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.jobResponseBase" })[],
+      evaluateDlpPoliciesJobs?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, creationDateTime?: string |
+      null, endDateTime?: string | null, error?: Record<string, never> | (Omit<{
+      @odata.type: ..., code?: ..., innerError?: ..., message?: ..., target?:
+      ... }, "@odata.type"> & Omit<{ @odata.type: ..., details?: ... },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.classificationError" })
+      | null, startDateTime?: string | null, status?: string | null, tenantId?:
+      string | null, type?: string | null, userId?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.jobResponseBase" })[],
+      evaluateLabelJobs?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, creationDateTime?: string |
+      null, endDateTime?: string | null, error?: Record<string, never> | (Omit<{
+      @odata.type: ..., code?: ..., innerError?: ..., message?: ..., target?:
+      ... }, "@odata.type"> & Omit<{ @odata.type: ..., details?: ... },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.classificationError" })
+      | null, startDateTime?: string | null, status?: string | null, tenantId?:
+      string | null, type?: string | null, userId?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.jobResponseBase" })[],
+      exactMatchDataStores?: (Omit<Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, columns?: ...[],
+      dataLastUpdatedDateTime?: string | null, description?: string | null,
+      displayName?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.exactMatchDataStoreBase" }, "@odata.type"> & {
+      @odata.type: string, sessions?: (Omit<... & ... & ..., "@odata.type"> & {
+      @odata.type: string, checksum?: function, dataUploadURI?: function,
+      fields?: function, fileName?: function, rowsPerBlock?: function, salt?:
+      function, uploadAgent?: function, uploadAgentId?: function })[] })[],
+      exactMatchUploadAgents?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, creationDateTime?: string | null,
+      description?: string | null } & { @odata.type:
+      "#microsoft.graph.exactMatchUploadAgent" })[], jobs?: (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+      creationDateTime?: string | null, endDateTime?: string | null, error?:
+      Record<string, never> | (Omit<{ @odata.type: ..., code?: ..., innerError?:
+      ..., message?: ..., target?: ... }, "@odata.type"> & Omit<{ @odata.type:
+      ..., details?: ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.classificationError" }) | null, startDateTime?: string |
+      null, status?: string | null, tenantId?: string | null, type?: string |
+      null, userId?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.jobResponseBase" })[], sensitiveTypes?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, classificationMethod?: Record<string, never> | "patternMatch" |
+      "exactDataMatch" | "fingerprint" | "machineLearning" | null, description?:
+      string | null, lastModifiedDateTime?: string | null, name?: string | null,
+      publisherName?: string | null, rulePackageId?: string | null,
+      rulePackageType?: string | null, scope?: Record<string, never> |
+      "fullDocument" | "partialDocument" | null, sensitiveTypeSource?:
+      Record<string, never> | "outOfBox" | "tenant" | null, state?: string |
+      null } & { @odata.type: "#microsoft.graph.sensitiveType" })[],
+      sensitivityLabels?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, actionSource?: Record<string,
+      never> | "unknownFutureValue" | "manual" | "automatic" | "recommended" |
+      "none" | null, applicableTo?: Record<string, never> | "unknownFutureValue"
+      | "email" | "site" | "unifiedGroup" | "teamwork" | null, applicationMode?:
+      Record<string, never> | "manual" | "automatic" | "recommended" | null,
+      autoTooltip?: string | null, color?: string | null, description?: string |
+      null, displayName?: string | null, isDefault?: boolean | null, isEnabled?:
+      boolean | null, isEndpointProtectionEnabled?: boolean | null,
+      isScopedToUser?: boolean | null, locale?: string | null, name?: string |
+      null, priority?: number | null, rights?: Record<string, never> | (Omit<{
+      @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+      string, ownerEmail?: string | null, userEmail?: string | null, value?:
+      "unknownFutureValue" | "unknown" | "docEdit" | "edit" | "comment" |
+      "export" | "forward" | "owner" | "print" | "reply" | "replyAll" | "view" |
+      "extract" | "viewRightsData" | "editRightsData" | "objModel" |
+      "accessDenied" | "userDefinedProtectionTypeNotSupportedException" |
+      "encryptedProtectionTypeNotSupportedException" |
+      "purviewClaimsChallengeNotSupportedException" | "exception" } & {
+      @odata.type: "#microsoft.graph.usageRightsIncluded" }) | null, sublabels?:
+      (Omit<{ id?: string | undefined; '@odata.type': string; }, "@odata.type">
+      & { actionSource?: Record<string, never> | "unknownFutureValue" | "manual"
+      | "automatic" | "recommended" | "none" | null | undefined; ... 16 more
+      ...; '@odata.type': string; } & { ...; })[] | undefined, toolTip?: string
+      | null } & { @odata.type: "#microsoft.graph.sensitivityLabel" })[] } & {
+      @odata.type: "#microsoft.graph.dataClassificationService" })
     uid: '@microsoft/teams.graph-endpoints-beta.dataClassification.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /dataClassification`'
@@ -467,14 +741,422 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/dataClassification", "patch">):
-        EndpointRequest<IEndpoints["PATCH /dataClassification"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, classifyFileJobs?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, creationDateTime?: string | null, endDateTime?: string | null,
+        error?: Record<string, never> | (Omit<{ @odata.type: ..., code?: ...,
+        innerError?: ..., message?: ..., target?: ... }, "@odata.type"> & Omit<{
+        @odata.type: ..., details?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.classificationError" }) | null, startDateTime?: string
+        | null, status?: string | null, tenantId?: string | null, type?: string
+        | null, userId?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.jobResponseBase" })[], classifyTextJobs?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, creationDateTime?: string | null, endDateTime?: string | null,
+        error?: Record<string, never> | (Omit<{ @odata.type: ..., code?: ...,
+        innerError?: ..., message?: ..., target?: ... }, "@odata.type"> & Omit<{
+        @odata.type: ..., details?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.classificationError" }) | null, startDateTime?: string
+        | null, status?: string | null, tenantId?: string | null, type?: string
+        | null, userId?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.jobResponseBase" })[], evaluateDlpPoliciesJobs?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, creationDateTime?: string | null, endDateTime?:
+        string | null, error?: Record<string, never> | (Omit<{ @odata.type: ...,
+        code?: ..., innerError?: ..., message?: ..., target?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., details?: ... },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.classificationError"
+        }) | null, startDateTime?: string | null, status?: string | null,
+        tenantId?: string | null, type?: string | null, userId?: string | null
+        }, "@odata.type"> & { @odata.type: "#microsoft.graph.jobResponseBase"
+        })[], evaluateLabelJobs?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, creationDateTime?: string |
+        null, endDateTime?: string | null, error?: Record<string, never> |
+        (Omit<{ @odata.type: ..., code?: ..., innerError?: ..., message?: ...,
+        target?: ... }, "@odata.type"> & Omit<{ @odata.type: ..., details?: ...
+        }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.classificationError" }) | null, startDateTime?: string
+        | null, status?: string | null, tenantId?: string | null, type?: string
+        | null, userId?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.jobResponseBase" })[], exactMatchDataStores?:
+        (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, columns?: ...[], dataLastUpdatedDateTime?: string |
+        null, description?: string | null, displayName?: string | null },
+        "@odata.type"> & { @odata.type:
+        "#microsoft.graph.exactMatchDataStoreBase" }, "@odata.type"> & {
+        @odata.type: string, sessions?: (Omit<... & ... & ..., "@odata.type"> &
+        { @odata.type: string, checksum?: function, dataUploadURI?: function,
+        fields?: function, fileName?: function, rowsPerBlock?: function, salt?:
+        function, uploadAgent?: function, uploadAgentId?: function })[] })[],
+        exactMatchUploadAgents?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, creationDateTime?: string |
+        null, description?: string | null } & { @odata.type:
+        "#microsoft.graph.exactMatchUploadAgent" })[], jobs?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, creationDateTime?: string | null, endDateTime?: string | null,
+        error?: Record<string, never> | (Omit<{ @odata.type: ..., code?: ...,
+        innerError?: ..., message?: ..., target?: ... }, "@odata.type"> & Omit<{
+        @odata.type: ..., details?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.classificationError" }) | null, startDateTime?: string
+        | null, status?: string | null, tenantId?: string | null, type?: string
+        | null, userId?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.jobResponseBase" })[], sensitiveTypes?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, classificationMethod?: Record<string, never> | "patternMatch" |
+        "exactDataMatch" | "fingerprint" | "machineLearning" | null,
+        description?: string | null, lastModifiedDateTime?: string | null,
+        name?: string | null, publisherName?: string | null, rulePackageId?:
+        string | null, rulePackageType?: string | null, scope?: Record<string,
+        never> | "fullDocument" | "partialDocument" | null,
+        sensitiveTypeSource?: Record<string, never> | "outOfBox" | "tenant" |
+        null, state?: string | null } & { @odata.type:
+        "#microsoft.graph.sensitiveType" })[], sensitivityLabels?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, actionSource?: Record<string, never> | "unknownFutureValue" |
+        "manual" | "automatic" | "recommended" | "none" | null, applicableTo?:
+        Record<string, never> | "unknownFutureValue" | "email" | "site" |
+        "unifiedGroup" | "teamwork" | null, applicationMode?: Record<string,
+        never> | "manual" | "automatic" | "recommended" | null, autoTooltip?:
+        string | null, color?: string | null, description?: string | null,
+        displayName?: string | null, isDefault?: boolean | null, isEnabled?:
+        boolean | null, isEndpointProtectionEnabled?: boolean | null,
+        isScopedToUser?: boolean | null, locale?: string | null, name?: string |
+        null, priority?: number | null, rights?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, ownerEmail?: string | null, userEmail?: string | null, value?:
+        "unknownFutureValue" | "unknown" | "docEdit" | "edit" | "comment" |
+        "export" | "forward" | "owner" | "print" | "reply" | "replyAll" | "view"
+        | "extract" | "viewRightsData" | "editRightsData" | "objModel" |
+        "accessDenied" | "userDefinedProtectionTypeNotSupportedException" |
+        "encryptedProtectionTypeNotSupportedException" |
+        "purviewClaimsChallengeNotSupportedException" | "exception" } & {
+        @odata.type: "#microsoft.graph.usageRightsIncluded" }) | null,
+        sublabels?: (Omit<{ id?: string | undefined; '@odata.type': string; },
+        "@odata.type"> & { actionSource?: Record<string, never> |
+        "unknownFutureValue" | "manual" | "automatic" | "recommended" | "none" |
+        null | undefined; ... 16 more ...; '@odata.type': string; } & { ...;
+        })[] | undefined, toolTip?: string | null } & { @odata.type:
+        "#microsoft.graph.sensitivityLabel" })[] } & { @odata.type:
+        "#microsoft.graph.dataClassificationService" }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, classifyFileJobs?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, creationDateTime?: string |
+        null, endDateTime?: string | null, error?: Record<string, never> |
+        (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... }) | null,
+        startDateTime?: string | null, status?: string | null, tenantId?: string
+        | null, type?: string | null, userId?: string | null }, "@odata.type"> &
+        { @odata.type: "#microsoft.graph.jobResponseBase" })[],
+        classifyTextJobs?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, creationDateTime?: string |
+        null, endDateTime?: string | null, error?: Record<string, never> |
+        (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... }) | null,
+        startDateTime?: string | null, status?: string | null, tenantId?: string
+        | null, type?: string | null, userId?: string | null }, "@odata.type"> &
+        { @odata.type: "#microsoft.graph.jobResponseBase" })[],
+        evaluateDlpPoliciesJobs?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, creationDateTime?: string |
+        null, endDateTime?: string | null, error?: Record<string, never> |
+        (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... }) | null,
+        startDateTime?: string | null, status?: string | null, tenantId?: string
+        | null, type?: string | null, userId?: string | null }, "@odata.type"> &
+        { @odata.type: "#microsoft.graph.jobResponseBase" })[],
+        evaluateLabelJobs?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, creationDateTime?: string |
+        null, endDateTime?: string | null, error?: Record<string, never> |
+        (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... }) | null,
+        startDateTime?: string | null, status?: string | null, tenantId?: string
+        | null, type?: string | null, userId?: string | null }, "@odata.type"> &
+        { @odata.type: "#microsoft.graph.jobResponseBase" })[],
+        exactMatchDataStores?: (Omit<Omit<{ @odata.type: string, id?: function
+        }, "@odata.type"> & Omit<{ @odata.type: string, columns?: function,
+        dataLastUpdatedDateTime?: function, description?: function,
+        displayName?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.exactMatchDataStoreBase" }, "@odata.type"> & {
+        @odata.type: string, sessions?: (Omit<..., ...> & { @odata.type: ...,
+        checksum?: ..., dataUploadURI?: ..., fields?: ..., fileName?: ...,
+        rowsPerBlock?: ..., salt?: ..., uploadAgent?: ..., uploadAgentId?: ...
+        })[] })[], exactMatchUploadAgents?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, creationDateTime?:
+        string | null, description?: string | null } & { @odata.type:
+        "#microsoft.graph.exactMatchUploadAgent" })[], jobs?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, creationDateTime?: string | null, endDateTime?: string | null,
+        error?: Record<string, never> | (Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }) | null, startDateTime?: string | null, status?:
+        string | null, tenantId?: string | null, type?: string | null, userId?:
+        string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.jobResponseBase" })[], sensitiveTypes?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, classificationMethod?: Record<string, never> | "patternMatch" |
+        "exactDataMatch" | "fingerprint" | "machineLearning" | null,
+        description?: string | null, lastModifiedDateTime?: string | null,
+        name?: string | null, publisherName?: string | null, rulePackageId?:
+        string | null, rulePackageType?: string | null, scope?: Record<string,
+        never> | "fullDocument" | "partialDocument" | null,
+        sensitiveTypeSource?: Record<string, never> | "outOfBox" | "tenant" |
+        null, state?: string | null } & { @odata.type:
+        "#microsoft.graph.sensitiveType" })[], sensitivityLabels?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, actionSource?: Record<string, never> | "unknownFutureValue" |
+        "manual" | "automatic" | "recommended" | "none" | null, applicableTo?:
+        Record<string, never> | "unknownFutureValue" | "email" | "site" |
+        "unifiedGroup" | "teamwork" | null, applicationMode?: Record<string,
+        never> | "manual" | "automatic" | "recommended" | null, autoTooltip?:
+        string | null, color?: string | null, description?: string | null,
+        displayName?: string | null, isDefault?: boolean | null, isEnabled?:
+        boolean | null, isEndpointProtectionEnabled?: boolean | null,
+        isScopedToUser?: boolean | null, locale?: string | null, name?: string |
+        null, priority?: number | null, rights?: Record<string, never> | (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        ownerEmail?: function, userEmail?: function, value?: function } & {
+        @odata.type: "#microsoft.graph.usageRightsIncluded" }) | null,
+        sublabels?: (Omit<{ id?: string | undefined; '@odata.type': string; },
+        "@odata.type"> & { actionSource?: Record<string, never> |
+        "unknownFutureValue" | "manual" | "automatic" | "recommended" | "none" |
+        null | undefined; ... 16 more ...; '@odata.type': string; } & { ...;
+        })[] | undefined, toolTip?: string | null } & { @odata.type:
+        "#microsoft.graph.sensitivityLabel" })[] } & { @odata.type:
+        "#microsoft.graph.dataClassificationService" }>
       parameters:
         - id: body
-          type: Operation&lt;"/dataClassification", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            classifyFileJobs?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, creationDateTime?: string | null,
+            endDateTime?: string | null, error?: Record&lt;string, never&gt; |
+            (Omit&lt;{ <xref uid="@odata.type" />: ..., code?: ..., innerError?:
+            ..., message?: ..., target?: ... }, "<xref uid="@odata.type" />"&gt;
+            & Omit&lt;{ <xref uid="@odata.type" />: ..., details?: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.classificationError" />" }) | null,
+            startDateTime?: string | null, status?: string | null, tenantId?:
+            string | null, type?: string | null, userId?: string | null },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.jobResponseBase" />" })[],
+            classifyTextJobs?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, creationDateTime?: string | null,
+            endDateTime?: string | null, error?: Record&lt;string, never&gt; |
+            (Omit&lt;{ <xref uid="@odata.type" />: ..., code?: ..., innerError?:
+            ..., message?: ..., target?: ... }, "<xref uid="@odata.type" />"&gt;
+            & Omit&lt;{ <xref uid="@odata.type" />: ..., details?: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.classificationError" />" }) | null,
+            startDateTime?: string | null, status?: string | null, tenantId?:
+            string | null, type?: string | null, userId?: string | null },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.jobResponseBase" />" })[],
+            evaluateDlpPoliciesJobs?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: string, creationDateTime?: string |
+            null, endDateTime?: string | null, error?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: ..., code?: ...,
+            innerError?: ..., message?: ..., target?: ... }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            ..., details?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.classificationError" />" }) | null,
+            startDateTime?: string | null, status?: string | null, tenantId?:
+            string | null, type?: string | null, userId?: string | null },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.jobResponseBase" />" })[],
+            evaluateLabelJobs?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, creationDateTime?: string | null,
+            endDateTime?: string | null, error?: Record&lt;string, never&gt; |
+            (Omit&lt;{ <xref uid="@odata.type" />: ..., code?: ..., innerError?:
+            ..., message?: ..., target?: ... }, "<xref uid="@odata.type" />"&gt;
+            & Omit&lt;{ <xref uid="@odata.type" />: ..., details?: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.classificationError" />" }) | null,
+            startDateTime?: string | null, status?: string | null, tenantId?:
+            string | null, type?: string | null, userId?: string | null },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.jobResponseBase" />" })[],
+            exactMatchDataStores?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type"
+            />: string, id?: string }, "<xref uid="@odata.type" />"&gt; &
+            Omit&lt;{ <xref uid="@odata.type" />: string, columns?: ...[],
+            dataLastUpdatedDateTime?: string | null, description?: string |
+            null, displayName?: string | null }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.exactMatchDataStoreBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            sessions?: (Omit&lt;... & ... & ..., "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, checksum?: function,
+            dataUploadURI?: function, fields?: function, fileName?: function,
+            rowsPerBlock?: function, salt?: function, uploadAgent?: function,
+            uploadAgentId?: function })[] })[], exactMatchUploadAgents?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            creationDateTime?: string | null, description?: string | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.exactMatchUploadAgent" />" })[], jobs?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, creationDateTime?: string | null, endDateTime?: string |
+            null, error?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: ..., code?: ..., innerError?: ..., message?:
+            ..., target?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: ..., details?: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.classificationError" />" }) | null,
+            startDateTime?: string | null, status?: string | null, tenantId?:
+            string | null, type?: string | null, userId?: string | null },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.jobResponseBase" />" })[],
+            sensitiveTypes?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, classificationMethod?:
+            Record&lt;string, never&gt; | "patternMatch" | "exactDataMatch" |
+            "fingerprint" | "machineLearning" | null, description?: string |
+            null, lastModifiedDateTime?: string | null, name?: string | null,
+            publisherName?: string | null, rulePackageId?: string | null,
+            rulePackageType?: string | null, scope?: Record&lt;string, never&gt;
+            | "fullDocument" | "partialDocument" | null, sensitiveTypeSource?:
+            Record&lt;string, never&gt; | "outOfBox" | "tenant" | null, state?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.sensitiveType" />" })[], sensitivityLabels?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            actionSource?: Record&lt;string, never&gt; | "unknownFutureValue" |
+            "manual" | "automatic" | "recommended" | "none" | null,
+            applicableTo?: Record&lt;string, never&gt; | "unknownFutureValue" |
+            "email" | "site" | "unifiedGroup" | "teamwork" | null,
+            applicationMode?: Record&lt;string, never&gt; | "manual" |
+            "automatic" | "recommended" | null, autoTooltip?: string | null,
+            color?: string | null, description?: string | null, displayName?:
+            string | null, isDefault?: boolean | null, isEnabled?: boolean |
+            null, isEndpointProtectionEnabled?: boolean | null, isScopedToUser?:
+            boolean | null, locale?: string | null, name?: string | null,
+            priority?: number | null, rights?: Record&lt;string, never&gt; |
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, ownerEmail?: string | null, userEmail?: string | null,
+            value?: "unknownFutureValue" | "unknown" | "docEdit" | "edit" |
+            "comment" | "export" | "forward" | "owner" | "print" | "reply" |
+            "replyAll" | "view" | "extract" | "viewRightsData" |
+            "editRightsData" | "objModel" | "accessDenied" |
+            "userDefinedProtectionTypeNotSupportedException" |
+            "encryptedProtectionTypeNotSupportedException" |
+            "purviewClaimsChallengeNotSupportedException" | "exception" } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.usageRightsIncluded" />" }) | null, sublabels?:
+            (Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type" />':
+            string; }, "<xref uid="@odata.type" />"&gt; & { actionSource?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "manual" |
+            "automatic" | "recommended" | "none" | null | undefined; ... 16 more
+            ...; '<xref uid="@odata.type" />': string; } & { ...; })[] |
+            undefined, toolTip?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.sensitivityLabel" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.dataClassificationService" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /dataClassification"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, classifyFileJobs?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, creationDateTime?: string | null,
+          endDateTime?: string | null, error?: Record&lt;string, never&gt; |
+          (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }) | null, startDateTime?: string | null,
+          status?: string | null, tenantId?: string | null, type?: string |
+          null, userId?: string | null }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.jobResponseBase" />" })[], classifyTextJobs?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, creationDateTime?: string | null, endDateTime?: string | null,
+          error?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }) | null,
+          startDateTime?: string | null, status?: string | null, tenantId?:
+          string | null, type?: string | null, userId?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.jobResponseBase" />" })[],
+          evaluateDlpPoliciesJobs?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, creationDateTime?: string | null,
+          endDateTime?: string | null, error?: Record&lt;string, never&gt; |
+          (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }) | null, startDateTime?: string | null,
+          status?: string | null, tenantId?: string | null, type?: string |
+          null, userId?: string | null }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.jobResponseBase" />" })[], evaluateLabelJobs?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, creationDateTime?: string | null, endDateTime?: string | null,
+          error?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }) | null,
+          startDateTime?: string | null, status?: string | null, tenantId?:
+          string | null, type?: string | null, userId?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.jobResponseBase" />" })[], exactMatchDataStores?:
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: function
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, columns?: function,
+          dataLastUpdatedDateTime?: function, description?: function,
+          displayName?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.exactMatchDataStoreBase" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          sessions?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          checksum?: ..., dataUploadURI?: ..., fields?: ..., fileName?: ...,
+          rowsPerBlock?: ..., salt?: ..., uploadAgent?: ..., uploadAgentId?: ...
+          })[] })[], exactMatchUploadAgents?: (Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, creationDateTime?: string | null,
+          description?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.exactMatchUploadAgent" />" })[], jobs?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, creationDateTime?: string | null, endDateTime?: string | null,
+          error?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }) | null,
+          startDateTime?: string | null, status?: string | null, tenantId?:
+          string | null, type?: string | null, userId?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.jobResponseBase" />" })[], sensitiveTypes?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          classificationMethod?: Record&lt;string, never&gt; | "patternMatch" |
+          "exactDataMatch" | "fingerprint" | "machineLearning" | null,
+          description?: string | null, lastModifiedDateTime?: string | null,
+          name?: string | null, publisherName?: string | null, rulePackageId?:
+          string | null, rulePackageType?: string | null, scope?:
+          Record&lt;string, never&gt; | "fullDocument" | "partialDocument" |
+          null, sensitiveTypeSource?: Record&lt;string, never&gt; | "outOfBox" |
+          "tenant" | null, state?: string | null } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.sensitiveType" />" })[],
+          sensitivityLabels?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, actionSource?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "manual" | "automatic" |
+          "recommended" | "none" | null, applicableTo?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "email" | "site" | "unifiedGroup" |
+          "teamwork" | null, applicationMode?: Record&lt;string, never&gt; |
+          "manual" | "automatic" | "recommended" | null, autoTooltip?: string |
+          null, color?: string | null, description?: string | null,
+          displayName?: string | null, isDefault?: boolean | null, isEnabled?:
+          boolean | null, isEndpointProtectionEnabled?: boolean | null,
+          isScopedToUser?: boolean | null, locale?: string | null, name?: string
+          | null, priority?: number | null, rights?: Record&lt;string, never&gt;
+          | (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          ownerEmail?: function, userEmail?: function, value?: function } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.usageRightsIncluded" />" }) | null, sublabels?:
+          (Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type" />':
+          string; }, "<xref uid="@odata.type" />"&gt; & { actionSource?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "manual" |
+          "automatic" | "recommended" | "none" | null | undefined; ... 16 more
+          ...; '<xref uid="@odata.type" />': string; } & { ...; })[] |
+          undefined, toolTip?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.sensitivityLabel" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.dataClassificationService" />" }&gt;

@@ -133,18 +133,34 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        start: { create: (params?: IEndpoints["POST
+        start: { /** * `POST
+        /servicePrincipals/{servicePrincipal-id}/synchronization/jobs/{synchronizationJob-id}/start`
+        * * Start an existing synchronization job. If the job is in a paused
+        state, it continues processing changes from the point where it was
+        paused. If the job is in quarantine, the quarantine status is cleared.
+        Don&#x27;t create scripts to call the start job continuously while
+        it&#x27;s running because that can cause the service to stop running.
+        Use the start job only when the job is currently paused or in
+        quarantine. */ create: (params?: IEndpoints["POST
         /servicePrincipals/{servicePrincipal-id}/synchronization/jobs/{synchronizationJob-id}/start"]["parameters"])
         => EndpointRequest<IEndpoints["POST
-        /servicePrincipals/{servicePrincipal-id}/synchronization/jobs/{synchronizationJob-id}/start"]["response"]>
+        /servicePrincipals/{servicePrincipal-id}/synchronization/jobs/{synchronizationJob-id}/start"]["response"]>;
         }
       return:
         description: ''
         type: >-
-          { create: (params?: IEndpoints["POST
+          { /** * `POST
+          /servicePrincipals/{servicePrincipal-id}/synchronization/jobs/{synchronizationJob-id}/start`
+          * * Start an existing synchronization job. If the job is in a paused
+          state, it continues processing changes from the point where it was
+          paused. If the job is in quarantine, the quarantine status is cleared.
+          Don&#x27;t create scripts to call the start job continuously while
+          it&#x27;s running because that can cause the service to stop running.
+          Use the start job only when the job is currently paused or in
+          quarantine. */ create: (params?: IEndpoints["POST
           /servicePrincipals/{servicePrincipal-id}/synchronization/jobs/{synchronizationJob-id}/start"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["POST
-          /servicePrincipals/{servicePrincipal-id}/synchronization/jobs/{synchronizationJob-id}/start"]["response"]&gt;
+          /servicePrincipals/{servicePrincipal-id}/synchronization/jobs/{synchronizationJob-id}/start"]["response"]&gt;;
           }
   - name: validateCredentials
     uid: >-
@@ -186,8 +202,77 @@ variables:
           }
 functions:
   - name: >-
-      create(Operation<"/servicePrincipals/{servicePrincipal-id}/synchronization/jobs",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, bulkUpload?: Record<string, never> | (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type: string
+      } & { @odata.type: "#microsoft.graph.bulkUpload" }) | null, schedule?:
+      Record<string, never> | { @odata.type: string, expiration?: string | null,
+      interval?: string, state?: "Active" | "Disabled" | "Paused" } | null,
+      schema?: Record<string, never> | (Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & { @odata.type: string, directories?: (Omit<{
+      @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+      string, discoverabilities?: "None" | "AttributeNames" |
+      "AttributeDataTypes" | "AttributeReadOnly" | "ReferenceAttributes" |
+      "UnknownFutureValue", discoveryDateTime?: string | null, name?: string |
+      null, objects?: ...[], readOnly?: boolean, version?: string | null } & {
+      @odata.type: "#microsoft.graph.directoryDefinition" })[],
+      synchronizationRules?: { @odata.type: string, containerFilter?:
+      Record<string, never> | { @odata.type: string, includedContainers?:
+      function } | null, editable?: boolean, groupFilter?: Record<string, never>
+      | { @odata.type: string, includedGroups?: function } | null, id?: string |
+      null, metadata?: { @odata.type: ..., key?: ..., value?: ... }[], name?:
+      string | null, objectMappings?: { @odata.type: ..., attributeMappings?:
+      ..., enabled?: ..., flowTypes?: ..., metadata?: ..., name?: ..., scope?:
+      ..., sourceObjectName?: ..., targetObjectName?: ... }[], priority?:
+      number, sourceDirectoryName?: string | null, targetDirectoryName?: string
+      | null }[], version?: string | null } & { @odata.type:
+      "#microsoft.graph.synchronizationSchema" }) | null, status?:
+      Record<string, never> | { @odata.type: string, code?: "Quarantine" |
+      "Active" | "Paused" | "NotConfigured" | "NotRun",
+      countSuccessiveCompleteFailures?: number, escrowsPruned?: boolean,
+      lastExecution?: Record<string, never> | { @odata.type: string,
+      activityIdentifier?: string | null, countEntitled?: number,
+      countEntitledForProvisioning?: number, countEscrowed?: number,
+      countEscrowedRaw?: number, countExported?: number, countExports?: number,
+      countImported?: number, countImportedDeltas?: number,
+      countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+      @odata.type: string, code?: string | null, message?: string | null,
+      tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+      "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+      lastSuccessfulExecution?: Record<string, never> | { @odata.type: string,
+      activityIdentifier?: string | null, countEntitled?: number,
+      countEntitledForProvisioning?: number, countEscrowed?: number,
+      countEscrowedRaw?: number, countExported?: number, countExports?: number,
+      countImported?: number, countImportedDeltas?: number,
+      countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+      @odata.type: string, code?: string | null, message?: string | null,
+      tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+      "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+      lastSuccessfulExecutionWithExports?: Record<string, never> | {
+      @odata.type: string, activityIdentifier?: string | null, countEntitled?:
+      number, countEntitledForProvisioning?: number, countEscrowed?: number,
+      countEscrowedRaw?: number, countExported?: number, countExports?: number,
+      countImported?: number, countImportedDeltas?: number,
+      countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+      @odata.type: string, code?: string | null, message?: string | null,
+      tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+      "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+      progress?: { @odata.type: string, completedUnits?: number,
+      progressObservationDateTime?: string, totalUnits?: number, units?: string
+      | null }[], quarantine?: Record<string, never> | { @odata.type: string,
+      currentBegan?: string, error?: Record<string, never> | { @odata.type:
+      string, code?: string | null, message?: string | null, tenantActionable?:
+      boolean } | null, nextAttempt?: string, reason?:
+      "EncounteredBaseEscrowThreshold" | "EncounteredTotalEscrowThreshold" |
+      "EncounteredEscrowProportionThreshold" | "EncounteredQuarantineException"
+      | "Unknown" | "QuarantinedOnDemand" | "TooManyDeletes" |
+      "IngestionInterrupted", seriesBegan?: string, seriesCount?: number } |
+      null, steadyStateFirstAchievedTime?: string, steadyStateLastAchievedTime?:
+      string, synchronizedEntryCountByType?: { @odata.type: string, key?: string
+      | null, value?: number }[], troubleshootingUrl?: string | null } | null,
+      synchronizationJobSettings?: { @odata.type: string, name?: string, value?:
+      string | null }[], templateId?: string | null } & { @odata.type:
+      "#microsoft.graph.synchronizationJob" }, { servicePrincipal-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.servicePrincipals.synchronization.jobs.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -202,25 +287,326 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/servicePrincipals/{servicePrincipal-id}/synchronization/jobs",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /servicePrincipals/{servicePrincipal-id}/synchronization/jobs"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, bulkUpload?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string } & { @odata.type: "#microsoft.graph.bulkUpload" })
+        | null, schedule?: Record<string, never> | { @odata.type: string,
+        expiration?: string | null, interval?: string, state?: "Active" |
+        "Disabled" | "Paused" } | null, schema?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, directories?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, discoverabilities?: "None" |
+        "AttributeNames" | "AttributeDataTypes" | "AttributeReadOnly" |
+        "ReferenceAttributes" | "UnknownFutureValue", discoveryDateTime?: string
+        | null, name?: string | null, objects?: ...[], readOnly?: boolean,
+        version?: string | null } & { @odata.type:
+        "#microsoft.graph.directoryDefinition" })[], synchronizationRules?: {
+        @odata.type: string, containerFilter?: Record<string, never> | {
+        @odata.type: string, includedContainers?: function } | null, editable?:
+        boolean, groupFilter?: Record<string, never> | { @odata.type: string,
+        includedGroups?: function } | null, id?: string | null, metadata?: {
+        @odata.type: ..., key?: ..., value?: ... }[], name?: string | null,
+        objectMappings?: { @odata.type: ..., attributeMappings?: ..., enabled?:
+        ..., flowTypes?: ..., metadata?: ..., name?: ..., scope?: ...,
+        sourceObjectName?: ..., targetObjectName?: ... }[], priority?: number,
+        sourceDirectoryName?: string | null, targetDirectoryName?: string | null
+        }[], version?: string | null } & { @odata.type:
+        "#microsoft.graph.synchronizationSchema" }) | null, status?:
+        Record<string, never> | { @odata.type: string, code?: "Quarantine" |
+        "Active" | "Paused" | "NotConfigured" | "NotRun",
+        countSuccessiveCompleteFailures?: number, escrowsPruned?: boolean,
+        lastExecution?: Record<string, never> | { @odata.type: string,
+        activityIdentifier?: string | null, countEntitled?: number,
+        countEntitledForProvisioning?: number, countEscrowed?: number,
+        countEscrowedRaw?: number, countExported?: number, countExports?:
+        number, countImported?: number, countImportedDeltas?: number,
+        countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null,
+        tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+        "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+        lastSuccessfulExecution?: Record<string, never> | { @odata.type: string,
+        activityIdentifier?: string | null, countEntitled?: number,
+        countEntitledForProvisioning?: number, countEscrowed?: number,
+        countEscrowedRaw?: number, countExported?: number, countExports?:
+        number, countImported?: number, countImportedDeltas?: number,
+        countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null,
+        tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+        "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+        lastSuccessfulExecutionWithExports?: Record<string, never> | {
+        @odata.type: string, activityIdentifier?: string | null, countEntitled?:
+        number, countEntitledForProvisioning?: number, countEscrowed?: number,
+        countEscrowedRaw?: number, countExported?: number, countExports?:
+        number, countImported?: number, countImportedDeltas?: number,
+        countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null,
+        tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+        "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+        progress?: { @odata.type: string, completedUnits?: number,
+        progressObservationDateTime?: string, totalUnits?: number, units?:
+        string | null }[], quarantine?: Record<string, never> | { @odata.type:
+        string, currentBegan?: string, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null,
+        tenantActionable?: boolean } | null, nextAttempt?: string, reason?:
+        "EncounteredBaseEscrowThreshold" | "EncounteredTotalEscrowThreshold" |
+        "EncounteredEscrowProportionThreshold" |
+        "EncounteredQuarantineException" | "Unknown" | "QuarantinedOnDemand" |
+        "TooManyDeletes" | "IngestionInterrupted", seriesBegan?: string,
+        seriesCount?: number } | null, steadyStateFirstAchievedTime?: string,
+        steadyStateLastAchievedTime?: string, synchronizedEntryCountByType?: {
+        @odata.type: string, key?: string | null, value?: number }[],
+        troubleshootingUrl?: string | null } | null,
+        synchronizationJobSettings?: { @odata.type: string, name?: string,
+        value?: string | null }[], templateId?: string | null } & { @odata.type:
+        "#microsoft.graph.synchronizationJob" }, params?: { servicePrincipal-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, bulkUpload?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string } & { @odata.type: "#microsoft.graph.bulkUpload" })
+        | null, schedule?: Record<string, never> | { @odata.type: string,
+        expiration?: string | null, interval?: string, state?: "Active" |
+        "Disabled" | "Paused" } | null, schema?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, directories?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, discoverabilities?: function,
+        discoveryDateTime?: function, name?: function, objects?: function,
+        readOnly?: function, version?: function } & { @odata.type:
+        "#microsoft.graph.directoryDefinition" })[], synchronizationRules?: {
+        @odata.type: string, containerFilter?: Record<..., ...> | { @odata.type:
+        ..., includedContainers?: ... } | null, editable?: boolean,
+        groupFilter?: Record<..., ...> | { @odata.type: ..., includedGroups?:
+        ... } | null, id?: string | null, metadata?: ...[], name?: string |
+        null, objectMappings?: ...[], priority?: number, sourceDirectoryName?:
+        string | null, targetDirectoryName?: string | null }[], version?: string
+        | null } & { @odata.type: "#microsoft.graph.synchronizationSchema" }) |
+        null, status?: Record<string, never> | { @odata.type: string, code?:
+        "Quarantine" | "Active" | "Paused" | "NotConfigured" | "NotRun",
+        countSuccessiveCompleteFailures?: number, escrowsPruned?: boolean,
+        lastExecution?: Record<string, never> | { @odata.type: string,
+        activityIdentifier?: string | null, countEntitled?: number,
+        countEntitledForProvisioning?: number, countEscrowed?: number,
+        countEscrowedRaw?: number, countExported?: number, countExports?:
+        number, countImported?: number, countImportedDeltas?: number,
+        countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null,
+        tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+        "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+        lastSuccessfulExecution?: Record<string, never> | { @odata.type: string,
+        activityIdentifier?: string | null, countEntitled?: number,
+        countEntitledForProvisioning?: number, countEscrowed?: number,
+        countEscrowedRaw?: number, countExported?: number, countExports?:
+        number, countImported?: number, countImportedDeltas?: number,
+        countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null,
+        tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+        "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+        lastSuccessfulExecutionWithExports?: Record<string, never> | {
+        @odata.type: string, activityIdentifier?: string | null, countEntitled?:
+        number, countEntitledForProvisioning?: number, countEscrowed?: number,
+        countEscrowedRaw?: number, countExported?: number, countExports?:
+        number, countImported?: number, countImportedDeltas?: number,
+        countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null,
+        tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+        "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+        progress?: { @odata.type: string, completedUnits?: number,
+        progressObservationDateTime?: string, totalUnits?: number, units?:
+        string | null }[], quarantine?: Record<string, never> | { @odata.type:
+        string, currentBegan?: string, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null,
+        tenantActionable?: boolean } | null, nextAttempt?: string, reason?:
+        "EncounteredBaseEscrowThreshold" | "EncounteredTotalEscrowThreshold" |
+        "EncounteredEscrowProportionThreshold" |
+        "EncounteredQuarantineException" | "Unknown" | "QuarantinedOnDemand" |
+        "TooManyDeletes" | "IngestionInterrupted", seriesBegan?: string,
+        seriesCount?: number } | null, steadyStateFirstAchievedTime?: string,
+        steadyStateLastAchievedTime?: string, synchronizedEntryCountByType?: {
+        @odata.type: string, key?: string | null, value?: number }[],
+        troubleshootingUrl?: string | null } | null,
+        synchronizationJobSettings?: { @odata.type: string, name?: string,
+        value?: string | null }[], templateId?: string | null } & { @odata.type:
+        "#microsoft.graph.synchronizationJob" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/servicePrincipals/{servicePrincipal-id}/synchronization/jobs",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            bulkUpload?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.bulkUpload" />" }) | null, schedule?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            expiration?: string | null, interval?: string, state?: "Active" |
+            "Disabled" | "Paused" } | null, schema?: Record&lt;string, never&gt;
+            | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, directories?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, discoverabilities?: "None" |
+            "AttributeNames" | "AttributeDataTypes" | "AttributeReadOnly" |
+            "ReferenceAttributes" | "UnknownFutureValue", discoveryDateTime?:
+            string | null, name?: string | null, objects?: ...[], readOnly?:
+            boolean, version?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.directoryDefinition" />" })[],
+            synchronizationRules?: { <xref uid="@odata.type" />: string,
+            containerFilter?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, includedContainers?: function } |
+            null, editable?: boolean, groupFilter?: Record&lt;string, never&gt;
+            | { <xref uid="@odata.type" />: string, includedGroups?: function }
+            | null, id?: string | null, metadata?: { <xref uid="@odata.type" />:
+            ..., key?: ..., value?: ... }[], name?: string | null,
+            objectMappings?: { <xref uid="@odata.type" />: ...,
+            attributeMappings?: ..., enabled?: ..., flowTypes?: ..., metadata?:
+            ..., name?: ..., scope?: ..., sourceObjectName?: ...,
+            targetObjectName?: ... }[], priority?: number, sourceDirectoryName?:
+            string | null, targetDirectoryName?: string | null }[], version?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.synchronizationSchema" />" }) | null, status?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            code?: "Quarantine" | "Active" | "Paused" | "NotConfigured" |
+            "NotRun", countSuccessiveCompleteFailures?: number, escrowsPruned?:
+            boolean, lastExecution?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, activityIdentifier?: string | null,
+            countEntitled?: number, countEntitledForProvisioning?: number,
+            countEscrowed?: number, countEscrowedRaw?: number, countExported?:
+            number, countExports?: number, countImported?: number,
+            countImportedDeltas?: number, countImportedReferenceDeltas?: number,
+            error?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+            string, code?: string | null, message?: string | null,
+            tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded"
+            | "EntryLevelErrors", timeBegan?: string, timeEnded?: string } |
+            null, lastSuccessfulExecution?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, activityIdentifier?: string |
+            null, countEntitled?: number, countEntitledForProvisioning?: number,
+            countEscrowed?: number, countEscrowedRaw?: number, countExported?:
+            number, countExports?: number, countImported?: number,
+            countImportedDeltas?: number, countImportedReferenceDeltas?: number,
+            error?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+            string, code?: string | null, message?: string | null,
+            tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded"
+            | "EntryLevelErrors", timeBegan?: string, timeEnded?: string } |
+            null, lastSuccessfulExecutionWithExports?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string,
+            activityIdentifier?: string | null, countEntitled?: number,
+            countEntitledForProvisioning?: number, countEscrowed?: number,
+            countEscrowedRaw?: number, countExported?: number, countExports?:
+            number, countImported?: number, countImportedDeltas?: number,
+            countImportedReferenceDeltas?: number, error?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, code?: string |
+            null, message?: string | null, tenantActionable?: boolean } | null,
+            state?: "Failed" | "Succeeded" | "EntryLevelErrors", timeBegan?:
+            string, timeEnded?: string } | null, progress?: { <xref
+            uid="@odata.type" />: string, completedUnits?: number,
+            progressObservationDateTime?: string, totalUnits?: number, units?:
+            string | null }[], quarantine?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, currentBegan?: string, error?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            code?: string | null, message?: string | null, tenantActionable?:
+            boolean } | null, nextAttempt?: string, reason?:
+            "EncounteredBaseEscrowThreshold" | "EncounteredTotalEscrowThreshold"
+            | "EncounteredEscrowProportionThreshold" |
+            "EncounteredQuarantineException" | "Unknown" | "QuarantinedOnDemand"
+            | "TooManyDeletes" | "IngestionInterrupted", seriesBegan?: string,
+            seriesCount?: number } | null, steadyStateFirstAchievedTime?:
+            string, steadyStateLastAchievedTime?: string,
+            synchronizedEntryCountByType?: { <xref uid="@odata.type" />: string,
+            key?: string | null, value?: number }[], troubleshootingUrl?: string
+            | null } | null, synchronizationJobSettings?: { <xref
+            uid="@odata.type" />: string, name?: string, value?: string | null
+            }[], templateId?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.synchronizationJob" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ servicePrincipal-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /servicePrincipals/{servicePrincipal-id}/synchronization/jobs"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, bulkUpload?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.bulkUpload"
+          />" }) | null, schedule?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, expiration?: string | null, interval?:
+          string, state?: "Active" | "Disabled" | "Paused" } | null, schema?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, directories?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, discoverabilities?:
+          function, discoveryDateTime?: function, name?: function, objects?:
+          function, readOnly?: function, version?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryDefinition" />" })[],
+          synchronizationRules?: { <xref uid="@odata.type" />: string,
+          containerFilter?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., includedContainers?: ... } | null, editable?: boolean,
+          groupFilter?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., includedGroups?: ... } | null, id?: string | null, metadata?:
+          ...[], name?: string | null, objectMappings?: ...[], priority?:
+          number, sourceDirectoryName?: string | null, targetDirectoryName?:
+          string | null }[], version?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.synchronizationSchema" />" }) | null, status?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          code?: "Quarantine" | "Active" | "Paused" | "NotConfigured" |
+          "NotRun", countSuccessiveCompleteFailures?: number, escrowsPruned?:
+          boolean, lastExecution?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, activityIdentifier?: string | null,
+          countEntitled?: number, countEntitledForProvisioning?: number,
+          countEscrowed?: number, countEscrowedRaw?: number, countExported?:
+          number, countExports?: number, countImported?: number,
+          countImportedDeltas?: number, countImportedReferenceDeltas?: number,
+          error?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, code?: string | null, message?: string | null,
+          tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+          "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+          lastSuccessfulExecution?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, activityIdentifier?: string | null,
+          countEntitled?: number, countEntitledForProvisioning?: number,
+          countEscrowed?: number, countEscrowedRaw?: number, countExported?:
+          number, countExports?: number, countImported?: number,
+          countImportedDeltas?: number, countImportedReferenceDeltas?: number,
+          error?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, code?: string | null, message?: string | null,
+          tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+          "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+          lastSuccessfulExecutionWithExports?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, activityIdentifier?: string |
+          null, countEntitled?: number, countEntitledForProvisioning?: number,
+          countEscrowed?: number, countEscrowedRaw?: number, countExported?:
+          number, countExports?: number, countImported?: number,
+          countImportedDeltas?: number, countImportedReferenceDeltas?: number,
+          error?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, code?: string | null, message?: string | null,
+          tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+          "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+          progress?: { <xref uid="@odata.type" />: string, completedUnits?:
+          number, progressObservationDateTime?: string, totalUnits?: number,
+          units?: string | null }[], quarantine?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string, currentBegan?: string, error?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          code?: string | null, message?: string | null, tenantActionable?:
+          boolean } | null, nextAttempt?: string, reason?:
+          "EncounteredBaseEscrowThreshold" | "EncounteredTotalEscrowThreshold" |
+          "EncounteredEscrowProportionThreshold" |
+          "EncounteredQuarantineException" | "Unknown" | "QuarantinedOnDemand" |
+          "TooManyDeletes" | "IngestionInterrupted", seriesBegan?: string,
+          seriesCount?: number } | null, steadyStateFirstAchievedTime?: string,
+          steadyStateLastAchievedTime?: string, synchronizedEntryCountByType?: {
+          <xref uid="@odata.type" />: string, key?: string | null, value?:
+          number }[], troubleshootingUrl?: string | null } | null,
+          synchronizationJobSettings?: { <xref uid="@odata.type" />: string,
+          name?: string, value?: string | null }[], templateId?: string | null }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.synchronizationJob" />" }&gt;
+  - name: >-
+      del({ If-Match?: string, servicePrincipal-id: string,
+      synchronizationJob-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.servicePrincipals.synchronization.jobs.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -235,18 +621,20 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /servicePrincipals/{servicePrincipal-id}/synchronization/jobs/{synchronizationJob-id}"]["response"]>
+        function del(params?: { If-Match?: string, servicePrincipal-id: string,
+        synchronizationJob-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { If-Match?: string, servicePrincipal-id: string,
+            synchronizationJob-id: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /servicePrincipals/{servicePrincipal-id}/synchronization/jobs/{synchronizationJob-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], servicePrincipal-id: string,
+      synchronizationJob-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.servicePrincipals.synchronization.jobs.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -260,18 +648,168 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /servicePrincipals/{servicePrincipal-id}/synchronization/jobs/{synchronizationJob-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        servicePrincipal-id: string, synchronizationJob-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, bulkUpload?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string } & { @odata.type: "#microsoft.graph.bulkUpload" })
+        | null, schedule?: Record<string, never> | { @odata.type: string,
+        expiration?: string | null, interval?: string, state?: "Active" |
+        "Disabled" | "Paused" } | null, schema?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, directories?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, discoverabilities?: function,
+        discoveryDateTime?: function, name?: function, objects?: function,
+        readOnly?: function, version?: function } & { @odata.type:
+        "#microsoft.graph.directoryDefinition" })[], synchronizationRules?: {
+        @odata.type: string, containerFilter?: Record<..., ...> | { @odata.type:
+        ..., includedContainers?: ... } | null, editable?: boolean,
+        groupFilter?: Record<..., ...> | { @odata.type: ..., includedGroups?:
+        ... } | null, id?: string | null, metadata?: ...[], name?: string |
+        null, objectMappings?: ...[], priority?: number, sourceDirectoryName?:
+        string | null, targetDirectoryName?: string | null }[], version?: string
+        | null } & { @odata.type: "#microsoft.graph.synchronizationSchema" }) |
+        null, status?: Record<string, never> | { @odata.type: string, code?:
+        "Quarantine" | "Active" | "Paused" | "NotConfigured" | "NotRun",
+        countSuccessiveCompleteFailures?: number, escrowsPruned?: boolean,
+        lastExecution?: Record<string, never> | { @odata.type: string,
+        activityIdentifier?: string | null, countEntitled?: number,
+        countEntitledForProvisioning?: number, countEscrowed?: number,
+        countEscrowedRaw?: number, countExported?: number, countExports?:
+        number, countImported?: number, countImportedDeltas?: number,
+        countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null,
+        tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+        "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+        lastSuccessfulExecution?: Record<string, never> | { @odata.type: string,
+        activityIdentifier?: string | null, countEntitled?: number,
+        countEntitledForProvisioning?: number, countEscrowed?: number,
+        countEscrowedRaw?: number, countExported?: number, countExports?:
+        number, countImported?: number, countImportedDeltas?: number,
+        countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null,
+        tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+        "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+        lastSuccessfulExecutionWithExports?: Record<string, never> | {
+        @odata.type: string, activityIdentifier?: string | null, countEntitled?:
+        number, countEntitledForProvisioning?: number, countEscrowed?: number,
+        countEscrowedRaw?: number, countExported?: number, countExports?:
+        number, countImported?: number, countImportedDeltas?: number,
+        countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null,
+        tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+        "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+        progress?: { @odata.type: string, completedUnits?: number,
+        progressObservationDateTime?: string, totalUnits?: number, units?:
+        string | null }[], quarantine?: Record<string, never> | { @odata.type:
+        string, currentBegan?: string, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null,
+        tenantActionable?: boolean } | null, nextAttempt?: string, reason?:
+        "EncounteredBaseEscrowThreshold" | "EncounteredTotalEscrowThreshold" |
+        "EncounteredEscrowProportionThreshold" |
+        "EncounteredQuarantineException" | "Unknown" | "QuarantinedOnDemand" |
+        "TooManyDeletes" | "IngestionInterrupted", seriesBegan?: string,
+        seriesCount?: number } | null, steadyStateFirstAchievedTime?: string,
+        steadyStateLastAchievedTime?: string, synchronizedEntryCountByType?: {
+        @odata.type: string, key?: string | null, value?: number }[],
+        troubleshootingUrl?: string | null } | null,
+        synchronizationJobSettings?: { @odata.type: string, name?: string,
+        value?: string | null }[], templateId?: string | null } & { @odata.type:
+        "#microsoft.graph.synchronizationJob" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], servicePrincipal-id:
+            string, synchronizationJob-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /servicePrincipals/{servicePrincipal-id}/synchronization/jobs/{synchronizationJob-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, bulkUpload?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.bulkUpload"
+          />" }) | null, schedule?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, expiration?: string | null, interval?:
+          string, state?: "Active" | "Disabled" | "Paused" } | null, schema?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, directories?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, discoverabilities?:
+          function, discoveryDateTime?: function, name?: function, objects?:
+          function, readOnly?: function, version?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryDefinition" />" })[],
+          synchronizationRules?: { <xref uid="@odata.type" />: string,
+          containerFilter?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., includedContainers?: ... } | null, editable?: boolean,
+          groupFilter?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., includedGroups?: ... } | null, id?: string | null, metadata?:
+          ...[], name?: string | null, objectMappings?: ...[], priority?:
+          number, sourceDirectoryName?: string | null, targetDirectoryName?:
+          string | null }[], version?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.synchronizationSchema" />" }) | null, status?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          code?: "Quarantine" | "Active" | "Paused" | "NotConfigured" |
+          "NotRun", countSuccessiveCompleteFailures?: number, escrowsPruned?:
+          boolean, lastExecution?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, activityIdentifier?: string | null,
+          countEntitled?: number, countEntitledForProvisioning?: number,
+          countEscrowed?: number, countEscrowedRaw?: number, countExported?:
+          number, countExports?: number, countImported?: number,
+          countImportedDeltas?: number, countImportedReferenceDeltas?: number,
+          error?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, code?: string | null, message?: string | null,
+          tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+          "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+          lastSuccessfulExecution?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, activityIdentifier?: string | null,
+          countEntitled?: number, countEntitledForProvisioning?: number,
+          countEscrowed?: number, countEscrowedRaw?: number, countExported?:
+          number, countExports?: number, countImported?: number,
+          countImportedDeltas?: number, countImportedReferenceDeltas?: number,
+          error?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, code?: string | null, message?: string | null,
+          tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+          "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+          lastSuccessfulExecutionWithExports?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, activityIdentifier?: string |
+          null, countEntitled?: number, countEntitledForProvisioning?: number,
+          countEscrowed?: number, countEscrowedRaw?: number, countExported?:
+          number, countExports?: number, countImported?: number,
+          countImportedDeltas?: number, countImportedReferenceDeltas?: number,
+          error?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, code?: string | null, message?: string | null,
+          tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+          "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+          progress?: { <xref uid="@odata.type" />: string, completedUnits?:
+          number, progressObservationDateTime?: string, totalUnits?: number,
+          units?: string | null }[], quarantine?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string, currentBegan?: string, error?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          code?: string | null, message?: string | null, tenantActionable?:
+          boolean } | null, nextAttempt?: string, reason?:
+          "EncounteredBaseEscrowThreshold" | "EncounteredTotalEscrowThreshold" |
+          "EncounteredEscrowProportionThreshold" |
+          "EncounteredQuarantineException" | "Unknown" | "QuarantinedOnDemand" |
+          "TooManyDeletes" | "IngestionInterrupted", seriesBegan?: string,
+          seriesCount?: number } | null, steadyStateFirstAchievedTime?: string,
+          steadyStateLastAchievedTime?: string, synchronizedEntryCountByType?: {
+          <xref uid="@odata.type" />: string, key?: string | null, value?:
+          number }[], troubleshootingUrl?: string | null } | null,
+          synchronizationJobSettings?: { <xref uid="@odata.type" />: string,
+          name?: string, value?: string | null }[], templateId?: string | null }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.synchronizationJob" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, servicePrincipal-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.servicePrincipals.synchronization.jobs.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -283,20 +821,184 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /servicePrincipals/{servicePrincipal-id}/synchronization/jobs"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, servicePrincipal-id: string }):
+        EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?: string
+        | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, bulkUpload?: Record<string,
+        never> | (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+        @odata.type: string } & { @odata.type: "#microsoft.graph.bulkUpload" })
+        | null, schedule?: Record<string, never> | { @odata.type: string,
+        expiration?: string | null, interval?: string, state?: "Active" |
+        "Disabled" | "Paused" } | null, schema?: Record<string, never> | (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        directories?: function, synchronizationRules?: function, version?:
+        function } & { @odata.type: "#microsoft.graph.synchronizationSchema" })
+        | null, status?: Record<string, never> | { @odata.type: string, code?:
+        "Quarantine" | "Active" | "Paused" | "NotConfigured" | "NotRun",
+        countSuccessiveCompleteFailures?: number, escrowsPruned?: boolean,
+        lastExecution?: Record<..., ...> | { @odata.type: ...,
+        activityIdentifier?: ..., countEntitled?: ...,
+        countEntitledForProvisioning?: ..., countEscrowed?: ...,
+        countEscrowedRaw?: ..., countExported?: ..., countExports?: ...,
+        countImported?: ..., countImportedDeltas?: ...,
+        countImportedReferenceDeltas?: ..., error?: ..., state?: ...,
+        timeBegan?: ..., timeEnded?: ... } | null, lastSuccessfulExecution?:
+        Record<..., ...> | { @odata.type: ..., activityIdentifier?: ...,
+        countEntitled?: ..., countEntitledForProvisioning?: ..., countEscrowed?:
+        ..., countEscrowedRaw?: ..., countExported?: ..., countExports?: ...,
+        countImported?: ..., countImportedDeltas?: ...,
+        countImportedReferenceDeltas?: ..., error?: ..., state?: ...,
+        timeBegan?: ..., timeEnded?: ... } | null,
+        lastSuccessfulExecutionWithExports?: Record<..., ...> | { @odata.type:
+        ..., activityIdentifier?: ..., countEntitled?: ...,
+        countEntitledForProvisioning?: ..., countEscrowed?: ...,
+        countEscrowedRaw?: ..., countExported?: ..., countExports?: ...,
+        countImported?: ..., countImportedDeltas?: ...,
+        countImportedReferenceDeltas?: ..., error?: ..., state?: ...,
+        timeBegan?: ..., timeEnded?: ... } | null, progress?: ...[],
+        quarantine?: Record<..., ...> | { @odata.type: ..., currentBegan?: ...,
+        error?: ..., nextAttempt?: ..., reason?: ..., seriesBegan?: ...,
+        seriesCount?: ... } | null, steadyStateFirstAchievedTime?: string,
+        steadyStateLastAchievedTime?: string, synchronizedEntryCountByType?:
+        ...[], troubleshootingUrl?: string | null } | null,
+        synchronizationJobSettings?: { @odata.type: string, name?: function,
+        value?: function }[], templateId?: string | null } & { @odata.type:
+        "#microsoft.graph.synchronizationJob" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, servicePrincipal-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /servicePrincipals/{servicePrincipal-id}/synchronization/jobs"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          bulkUpload?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.bulkUpload" />" })
+          | null, schedule?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, expiration?: string | null, interval?:
+          string, state?: "Active" | "Disabled" | "Paused" } | null, schema?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, directories?: function,
+          synchronizationRules?: function, version?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.synchronizationSchema" />" }) | null, status?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          code?: "Quarantine" | "Active" | "Paused" | "NotConfigured" |
+          "NotRun", countSuccessiveCompleteFailures?: number, escrowsPruned?:
+          boolean, lastExecution?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., activityIdentifier?: ..., countEntitled?:
+          ..., countEntitledForProvisioning?: ..., countEscrowed?: ...,
+          countEscrowedRaw?: ..., countExported?: ..., countExports?: ...,
+          countImported?: ..., countImportedDeltas?: ...,
+          countImportedReferenceDeltas?: ..., error?: ..., state?: ...,
+          timeBegan?: ..., timeEnded?: ... } | null, lastSuccessfulExecution?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          activityIdentifier?: ..., countEntitled?: ...,
+          countEntitledForProvisioning?: ..., countEscrowed?: ...,
+          countEscrowedRaw?: ..., countExported?: ..., countExports?: ...,
+          countImported?: ..., countImportedDeltas?: ...,
+          countImportedReferenceDeltas?: ..., error?: ..., state?: ...,
+          timeBegan?: ..., timeEnded?: ... } | null,
+          lastSuccessfulExecutionWithExports?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., activityIdentifier?: ..., countEntitled?:
+          ..., countEntitledForProvisioning?: ..., countEscrowed?: ...,
+          countEscrowedRaw?: ..., countExported?: ..., countExports?: ...,
+          countImported?: ..., countImportedDeltas?: ...,
+          countImportedReferenceDeltas?: ..., error?: ..., state?: ...,
+          timeBegan?: ..., timeEnded?: ... } | null, progress?: ...[],
+          quarantine?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., currentBegan?: ..., error?: ..., nextAttempt?: ..., reason?: ...,
+          seriesBegan?: ..., seriesCount?: ... } | null,
+          steadyStateFirstAchievedTime?: string, steadyStateLastAchievedTime?:
+          string, synchronizedEntryCountByType?: ...[], troubleshootingUrl?:
+          string | null } | null, synchronizationJobSettings?: { <xref
+          uid="@odata.type" />: string, name?: function, value?: function }[],
+          templateId?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.synchronizationJob" />" })[] }&gt;
   - name: >-
-      update(Operation<"/servicePrincipals/{servicePrincipal-id}/synchronization/jobs/{synchronizationJob-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, bulkUpload?: Record<string, never> | (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type: string
+      } & { @odata.type: "#microsoft.graph.bulkUpload" }) | null, schedule?:
+      Record<string, never> | { @odata.type: string, expiration?: string | null,
+      interval?: string, state?: "Active" | "Disabled" | "Paused" } | null,
+      schema?: Record<string, never> | (Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & { @odata.type: string, directories?: (Omit<{
+      @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+      string, discoverabilities?: "None" | "AttributeNames" |
+      "AttributeDataTypes" | "AttributeReadOnly" | "ReferenceAttributes" |
+      "UnknownFutureValue", discoveryDateTime?: string | null, name?: string |
+      null, objects?: ...[], readOnly?: boolean, version?: string | null } & {
+      @odata.type: "#microsoft.graph.directoryDefinition" })[],
+      synchronizationRules?: { @odata.type: string, containerFilter?:
+      Record<string, never> | { @odata.type: string, includedContainers?:
+      function } | null, editable?: boolean, groupFilter?: Record<string, never>
+      | { @odata.type: string, includedGroups?: function } | null, id?: string |
+      null, metadata?: { @odata.type: ..., key?: ..., value?: ... }[], name?:
+      string | null, objectMappings?: { @odata.type: ..., attributeMappings?:
+      ..., enabled?: ..., flowTypes?: ..., metadata?: ..., name?: ..., scope?:
+      ..., sourceObjectName?: ..., targetObjectName?: ... }[], priority?:
+      number, sourceDirectoryName?: string | null, targetDirectoryName?: string
+      | null }[], version?: string | null } & { @odata.type:
+      "#microsoft.graph.synchronizationSchema" }) | null, status?:
+      Record<string, never> | { @odata.type: string, code?: "Quarantine" |
+      "Active" | "Paused" | "NotConfigured" | "NotRun",
+      countSuccessiveCompleteFailures?: number, escrowsPruned?: boolean,
+      lastExecution?: Record<string, never> | { @odata.type: string,
+      activityIdentifier?: string | null, countEntitled?: number,
+      countEntitledForProvisioning?: number, countEscrowed?: number,
+      countEscrowedRaw?: number, countExported?: number, countExports?: number,
+      countImported?: number, countImportedDeltas?: number,
+      countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+      @odata.type: string, code?: string | null, message?: string | null,
+      tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+      "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+      lastSuccessfulExecution?: Record<string, never> | { @odata.type: string,
+      activityIdentifier?: string | null, countEntitled?: number,
+      countEntitledForProvisioning?: number, countEscrowed?: number,
+      countEscrowedRaw?: number, countExported?: number, countExports?: number,
+      countImported?: number, countImportedDeltas?: number,
+      countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+      @odata.type: string, code?: string | null, message?: string | null,
+      tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+      "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+      lastSuccessfulExecutionWithExports?: Record<string, never> | {
+      @odata.type: string, activityIdentifier?: string | null, countEntitled?:
+      number, countEntitledForProvisioning?: number, countEscrowed?: number,
+      countEscrowedRaw?: number, countExported?: number, countExports?: number,
+      countImported?: number, countImportedDeltas?: number,
+      countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+      @odata.type: string, code?: string | null, message?: string | null,
+      tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+      "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+      progress?: { @odata.type: string, completedUnits?: number,
+      progressObservationDateTime?: string, totalUnits?: number, units?: string
+      | null }[], quarantine?: Record<string, never> | { @odata.type: string,
+      currentBegan?: string, error?: Record<string, never> | { @odata.type:
+      string, code?: string | null, message?: string | null, tenantActionable?:
+      boolean } | null, nextAttempt?: string, reason?:
+      "EncounteredBaseEscrowThreshold" | "EncounteredTotalEscrowThreshold" |
+      "EncounteredEscrowProportionThreshold" | "EncounteredQuarantineException"
+      | "Unknown" | "QuarantinedOnDemand" | "TooManyDeletes" |
+      "IngestionInterrupted", seriesBegan?: string, seriesCount?: number } |
+      null, steadyStateFirstAchievedTime?: string, steadyStateLastAchievedTime?:
+      string, synchronizedEntryCountByType?: { @odata.type: string, key?: string
+      | null, value?: number }[], troubleshootingUrl?: string | null } | null,
+      synchronizationJobSettings?: { @odata.type: string, name?: string, value?:
+      string | null }[], templateId?: string | null } & { @odata.type:
+      "#microsoft.graph.synchronizationJob" }, { servicePrincipal-id: string,
+      synchronizationJob-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.servicePrincipals.synchronization.jobs.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -307,21 +1009,321 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/servicePrincipals/{servicePrincipal-id}/synchronization/jobs/{synchronizationJob-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /servicePrincipals/{servicePrincipal-id}/synchronization/jobs/{synchronizationJob-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, bulkUpload?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string } & { @odata.type: "#microsoft.graph.bulkUpload" })
+        | null, schedule?: Record<string, never> | { @odata.type: string,
+        expiration?: string | null, interval?: string, state?: "Active" |
+        "Disabled" | "Paused" } | null, schema?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, directories?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, discoverabilities?: "None" |
+        "AttributeNames" | "AttributeDataTypes" | "AttributeReadOnly" |
+        "ReferenceAttributes" | "UnknownFutureValue", discoveryDateTime?: string
+        | null, name?: string | null, objects?: ...[], readOnly?: boolean,
+        version?: string | null } & { @odata.type:
+        "#microsoft.graph.directoryDefinition" })[], synchronizationRules?: {
+        @odata.type: string, containerFilter?: Record<string, never> | {
+        @odata.type: string, includedContainers?: function } | null, editable?:
+        boolean, groupFilter?: Record<string, never> | { @odata.type: string,
+        includedGroups?: function } | null, id?: string | null, metadata?: {
+        @odata.type: ..., key?: ..., value?: ... }[], name?: string | null,
+        objectMappings?: { @odata.type: ..., attributeMappings?: ..., enabled?:
+        ..., flowTypes?: ..., metadata?: ..., name?: ..., scope?: ...,
+        sourceObjectName?: ..., targetObjectName?: ... }[], priority?: number,
+        sourceDirectoryName?: string | null, targetDirectoryName?: string | null
+        }[], version?: string | null } & { @odata.type:
+        "#microsoft.graph.synchronizationSchema" }) | null, status?:
+        Record<string, never> | { @odata.type: string, code?: "Quarantine" |
+        "Active" | "Paused" | "NotConfigured" | "NotRun",
+        countSuccessiveCompleteFailures?: number, escrowsPruned?: boolean,
+        lastExecution?: Record<string, never> | { @odata.type: string,
+        activityIdentifier?: string | null, countEntitled?: number,
+        countEntitledForProvisioning?: number, countEscrowed?: number,
+        countEscrowedRaw?: number, countExported?: number, countExports?:
+        number, countImported?: number, countImportedDeltas?: number,
+        countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null,
+        tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+        "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+        lastSuccessfulExecution?: Record<string, never> | { @odata.type: string,
+        activityIdentifier?: string | null, countEntitled?: number,
+        countEntitledForProvisioning?: number, countEscrowed?: number,
+        countEscrowedRaw?: number, countExported?: number, countExports?:
+        number, countImported?: number, countImportedDeltas?: number,
+        countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null,
+        tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+        "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+        lastSuccessfulExecutionWithExports?: Record<string, never> | {
+        @odata.type: string, activityIdentifier?: string | null, countEntitled?:
+        number, countEntitledForProvisioning?: number, countEscrowed?: number,
+        countEscrowedRaw?: number, countExported?: number, countExports?:
+        number, countImported?: number, countImportedDeltas?: number,
+        countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null,
+        tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+        "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+        progress?: { @odata.type: string, completedUnits?: number,
+        progressObservationDateTime?: string, totalUnits?: number, units?:
+        string | null }[], quarantine?: Record<string, never> | { @odata.type:
+        string, currentBegan?: string, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null,
+        tenantActionable?: boolean } | null, nextAttempt?: string, reason?:
+        "EncounteredBaseEscrowThreshold" | "EncounteredTotalEscrowThreshold" |
+        "EncounteredEscrowProportionThreshold" |
+        "EncounteredQuarantineException" | "Unknown" | "QuarantinedOnDemand" |
+        "TooManyDeletes" | "IngestionInterrupted", seriesBegan?: string,
+        seriesCount?: number } | null, steadyStateFirstAchievedTime?: string,
+        steadyStateLastAchievedTime?: string, synchronizedEntryCountByType?: {
+        @odata.type: string, key?: string | null, value?: number }[],
+        troubleshootingUrl?: string | null } | null,
+        synchronizationJobSettings?: { @odata.type: string, name?: string,
+        value?: string | null }[], templateId?: string | null } & { @odata.type:
+        "#microsoft.graph.synchronizationJob" }, params?: { servicePrincipal-id:
+        string, synchronizationJob-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, bulkUpload?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string } & {
+        @odata.type: "#microsoft.graph.bulkUpload" }) | null, schedule?:
+        Record<string, never> | { @odata.type: string, expiration?: string |
+        null, interval?: string, state?: "Active" | "Disabled" | "Paused" } |
+        null, schema?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, directories?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        discoverabilities?: function, discoveryDateTime?: function, name?:
+        function, objects?: function, readOnly?: function, version?: function }
+        & { @odata.type: "#microsoft.graph.directoryDefinition" })[],
+        synchronizationRules?: { @odata.type: string, containerFilter?:
+        Record<..., ...> | { @odata.type: ..., includedContainers?: ... } |
+        null, editable?: boolean, groupFilter?: Record<..., ...> | {
+        @odata.type: ..., includedGroups?: ... } | null, id?: string | null,
+        metadata?: ...[], name?: string | null, objectMappings?: ...[],
+        priority?: number, sourceDirectoryName?: string | null,
+        targetDirectoryName?: string | null }[], version?: string | null } & {
+        @odata.type: "#microsoft.graph.synchronizationSchema" }) | null,
+        status?: Record<string, never> | { @odata.type: string, code?:
+        "Quarantine" | "Active" | "Paused" | "NotConfigured" | "NotRun",
+        countSuccessiveCompleteFailures?: number, escrowsPruned?: boolean,
+        lastExecution?: Record<string, never> | { @odata.type: string,
+        activityIdentifier?: string | null, countEntitled?: number,
+        countEntitledForProvisioning?: number, countEscrowed?: number,
+        countEscrowedRaw?: number, countExported?: number, countExports?:
+        number, countImported?: number, countImportedDeltas?: number,
+        countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null,
+        tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+        "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+        lastSuccessfulExecution?: Record<string, never> | { @odata.type: string,
+        activityIdentifier?: string | null, countEntitled?: number,
+        countEntitledForProvisioning?: number, countEscrowed?: number,
+        countEscrowedRaw?: number, countExported?: number, countExports?:
+        number, countImported?: number, countImportedDeltas?: number,
+        countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null,
+        tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+        "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+        lastSuccessfulExecutionWithExports?: Record<string, never> | {
+        @odata.type: string, activityIdentifier?: string | null, countEntitled?:
+        number, countEntitledForProvisioning?: number, countEscrowed?: number,
+        countEscrowedRaw?: number, countExported?: number, countExports?:
+        number, countImported?: number, countImportedDeltas?: number,
+        countImportedReferenceDeltas?: number, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null,
+        tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+        "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+        progress?: { @odata.type: string, completedUnits?: number,
+        progressObservationDateTime?: string, totalUnits?: number, units?:
+        string | null }[], quarantine?: Record<string, never> | { @odata.type:
+        string, currentBegan?: string, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null,
+        tenantActionable?: boolean } | null, nextAttempt?: string, reason?:
+        "EncounteredBaseEscrowThreshold" | "EncounteredTotalEscrowThreshold" |
+        "EncounteredEscrowProportionThreshold" |
+        "EncounteredQuarantineException" | "Unknown" | "QuarantinedOnDemand" |
+        "TooManyDeletes" | "IngestionInterrupted", seriesBegan?: string,
+        seriesCount?: number } | null, steadyStateFirstAchievedTime?: string,
+        steadyStateLastAchievedTime?: string, synchronizedEntryCountByType?: {
+        @odata.type: string, key?: string | null, value?: number }[],
+        troubleshootingUrl?: string | null } | null,
+        synchronizationJobSettings?: { @odata.type: string, name?: string,
+        value?: string | null }[], templateId?: string | null } & { @odata.type:
+        "#microsoft.graph.synchronizationJob" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/servicePrincipals/{servicePrincipal-id}/synchronization/jobs/{synchronizationJob-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            bulkUpload?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.bulkUpload" />" }) | null, schedule?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            expiration?: string | null, interval?: string, state?: "Active" |
+            "Disabled" | "Paused" } | null, schema?: Record&lt;string, never&gt;
+            | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, directories?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, discoverabilities?: "None" |
+            "AttributeNames" | "AttributeDataTypes" | "AttributeReadOnly" |
+            "ReferenceAttributes" | "UnknownFutureValue", discoveryDateTime?:
+            string | null, name?: string | null, objects?: ...[], readOnly?:
+            boolean, version?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.directoryDefinition" />" })[],
+            synchronizationRules?: { <xref uid="@odata.type" />: string,
+            containerFilter?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, includedContainers?: function } |
+            null, editable?: boolean, groupFilter?: Record&lt;string, never&gt;
+            | { <xref uid="@odata.type" />: string, includedGroups?: function }
+            | null, id?: string | null, metadata?: { <xref uid="@odata.type" />:
+            ..., key?: ..., value?: ... }[], name?: string | null,
+            objectMappings?: { <xref uid="@odata.type" />: ...,
+            attributeMappings?: ..., enabled?: ..., flowTypes?: ..., metadata?:
+            ..., name?: ..., scope?: ..., sourceObjectName?: ...,
+            targetObjectName?: ... }[], priority?: number, sourceDirectoryName?:
+            string | null, targetDirectoryName?: string | null }[], version?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.synchronizationSchema" />" }) | null, status?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            code?: "Quarantine" | "Active" | "Paused" | "NotConfigured" |
+            "NotRun", countSuccessiveCompleteFailures?: number, escrowsPruned?:
+            boolean, lastExecution?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, activityIdentifier?: string | null,
+            countEntitled?: number, countEntitledForProvisioning?: number,
+            countEscrowed?: number, countEscrowedRaw?: number, countExported?:
+            number, countExports?: number, countImported?: number,
+            countImportedDeltas?: number, countImportedReferenceDeltas?: number,
+            error?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+            string, code?: string | null, message?: string | null,
+            tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded"
+            | "EntryLevelErrors", timeBegan?: string, timeEnded?: string } |
+            null, lastSuccessfulExecution?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, activityIdentifier?: string |
+            null, countEntitled?: number, countEntitledForProvisioning?: number,
+            countEscrowed?: number, countEscrowedRaw?: number, countExported?:
+            number, countExports?: number, countImported?: number,
+            countImportedDeltas?: number, countImportedReferenceDeltas?: number,
+            error?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+            string, code?: string | null, message?: string | null,
+            tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded"
+            | "EntryLevelErrors", timeBegan?: string, timeEnded?: string } |
+            null, lastSuccessfulExecutionWithExports?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string,
+            activityIdentifier?: string | null, countEntitled?: number,
+            countEntitledForProvisioning?: number, countEscrowed?: number,
+            countEscrowedRaw?: number, countExported?: number, countExports?:
+            number, countImported?: number, countImportedDeltas?: number,
+            countImportedReferenceDeltas?: number, error?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, code?: string |
+            null, message?: string | null, tenantActionable?: boolean } | null,
+            state?: "Failed" | "Succeeded" | "EntryLevelErrors", timeBegan?:
+            string, timeEnded?: string } | null, progress?: { <xref
+            uid="@odata.type" />: string, completedUnits?: number,
+            progressObservationDateTime?: string, totalUnits?: number, units?:
+            string | null }[], quarantine?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, currentBegan?: string, error?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            code?: string | null, message?: string | null, tenantActionable?:
+            boolean } | null, nextAttempt?: string, reason?:
+            "EncounteredBaseEscrowThreshold" | "EncounteredTotalEscrowThreshold"
+            | "EncounteredEscrowProportionThreshold" |
+            "EncounteredQuarantineException" | "Unknown" | "QuarantinedOnDemand"
+            | "TooManyDeletes" | "IngestionInterrupted", seriesBegan?: string,
+            seriesCount?: number } | null, steadyStateFirstAchievedTime?:
+            string, steadyStateLastAchievedTime?: string,
+            synchronizedEntryCountByType?: { <xref uid="@odata.type" />: string,
+            key?: string | null, value?: number }[], troubleshootingUrl?: string
+            | null } | null, synchronizationJobSettings?: { <xref
+            uid="@odata.type" />: string, name?: string, value?: string | null
+            }[], templateId?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.synchronizationJob" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ servicePrincipal-id: string, synchronizationJob-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /servicePrincipals/{servicePrincipal-id}/synchronization/jobs/{synchronizationJob-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, bulkUpload?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.bulkUpload"
+          />" }) | null, schedule?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, expiration?: string | null, interval?:
+          string, state?: "Active" | "Disabled" | "Paused" } | null, schema?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, directories?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, discoverabilities?:
+          function, discoveryDateTime?: function, name?: function, objects?:
+          function, readOnly?: function, version?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryDefinition" />" })[],
+          synchronizationRules?: { <xref uid="@odata.type" />: string,
+          containerFilter?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., includedContainers?: ... } | null, editable?: boolean,
+          groupFilter?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., includedGroups?: ... } | null, id?: string | null, metadata?:
+          ...[], name?: string | null, objectMappings?: ...[], priority?:
+          number, sourceDirectoryName?: string | null, targetDirectoryName?:
+          string | null }[], version?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.synchronizationSchema" />" }) | null, status?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          code?: "Quarantine" | "Active" | "Paused" | "NotConfigured" |
+          "NotRun", countSuccessiveCompleteFailures?: number, escrowsPruned?:
+          boolean, lastExecution?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, activityIdentifier?: string | null,
+          countEntitled?: number, countEntitledForProvisioning?: number,
+          countEscrowed?: number, countEscrowedRaw?: number, countExported?:
+          number, countExports?: number, countImported?: number,
+          countImportedDeltas?: number, countImportedReferenceDeltas?: number,
+          error?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, code?: string | null, message?: string | null,
+          tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+          "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+          lastSuccessfulExecution?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, activityIdentifier?: string | null,
+          countEntitled?: number, countEntitledForProvisioning?: number,
+          countEscrowed?: number, countEscrowedRaw?: number, countExported?:
+          number, countExports?: number, countImported?: number,
+          countImportedDeltas?: number, countImportedReferenceDeltas?: number,
+          error?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, code?: string | null, message?: string | null,
+          tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+          "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+          lastSuccessfulExecutionWithExports?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, activityIdentifier?: string |
+          null, countEntitled?: number, countEntitledForProvisioning?: number,
+          countEscrowed?: number, countEscrowedRaw?: number, countExported?:
+          number, countExports?: number, countImported?: number,
+          countImportedDeltas?: number, countImportedReferenceDeltas?: number,
+          error?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, code?: string | null, message?: string | null,
+          tenantActionable?: boolean } | null, state?: "Failed" | "Succeeded" |
+          "EntryLevelErrors", timeBegan?: string, timeEnded?: string } | null,
+          progress?: { <xref uid="@odata.type" />: string, completedUnits?:
+          number, progressObservationDateTime?: string, totalUnits?: number,
+          units?: string | null }[], quarantine?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string, currentBegan?: string, error?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          code?: string | null, message?: string | null, tenantActionable?:
+          boolean } | null, nextAttempt?: string, reason?:
+          "EncounteredBaseEscrowThreshold" | "EncounteredTotalEscrowThreshold" |
+          "EncounteredEscrowProportionThreshold" |
+          "EncounteredQuarantineException" | "Unknown" | "QuarantinedOnDemand" |
+          "TooManyDeletes" | "IngestionInterrupted", seriesBegan?: string,
+          seriesCount?: number } | null, steadyStateFirstAchievedTime?: string,
+          steadyStateLastAchievedTime?: string, synchronizedEntryCountByType?: {
+          <xref uid="@odata.type" />: string, key?: string | null, value?:
+          number }[], troubleshootingUrl?: string | null } | null,
+          synchronizationJobSettings?: { <xref uid="@odata.type" />: string,
+          name?: string, value?: string | null }[], templateId?: string | null }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.synchronizationJob" />" }&gt;

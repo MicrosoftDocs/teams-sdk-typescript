@@ -28,16 +28,19 @@ interfaces:
   - '@microsoft/teams.apps.IErrorEvent'
   - '@microsoft/teams.apps.IEvents'
   - '@microsoft/teams.apps.IFunctionContext'
+  - '@microsoft/teams.apps.IHtmlWidgetMarkdownOptions'
   - '@microsoft/teams.apps.IHttpServer'
   - '@microsoft/teams.apps.IHttpServerAdapter'
   - '@microsoft/teams.apps.IHttpServerRequest'
   - '@microsoft/teams.apps.IHttpServerResponse'
+  - '@microsoft/teams.apps.IInjectWidgetProtocolOptions'
   - '@microsoft/teams.apps.IPlugin'
   - '@microsoft/teams.apps.IPluginActivityEvent'
   - '@microsoft/teams.apps.IPluginActivityResponseEvent'
   - '@microsoft/teams.apps.IPluginActivitySentEvent'
   - '@microsoft/teams.apps.IPluginErrorEvent'
   - '@microsoft/teams.apps.IPluginStartEvent'
+  - '@microsoft/teams.apps.ISecurityPolicyWarning'
   - '@microsoft/teams.apps.IStreamer'
   - '@microsoft/teams.apps.IStreamerEvents'
 typeAliases:
@@ -48,10 +51,12 @@ typeAliases:
   - '@microsoft/teams.apps.EmitPluginEvent'
   - '@microsoft/teams.apps.EventHandler'
   - '@microsoft/teams.apps.HttpMethod'
+  - '@microsoft/teams.apps.HttpPluginOptions'
   - '@microsoft/teams.apps.HttpRouteHandler'
   - '@microsoft/teams.apps.IActivityContext'
   - '@microsoft/teams.apps.IActivityContextOptions'
   - '@microsoft/teams.apps.IFunctionContextOptions'
+  - '@microsoft/teams.apps.IHtmlWidgetPayloadInput'
   - '@microsoft/teams.apps.OAuthSettings'
   - '@microsoft/teams.apps.OnActivityPluginEvent'
   - '@microsoft/teams.apps.OnErrorPluginEvent'
@@ -71,10 +76,14 @@ variables:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'DEFAULT_OAUTH_SETTINGS: Required<OAuthSettings>'
+      content: >-
+        DEFAULT_OAUTH_SETTINGS: Required<Pick<OAuthSettings,
+        "defaultConnectionName">>
       return:
         description: ''
-        type: Required&lt;<xref uid="@microsoft/teams.apps.OAuthSettings" />&gt;
+        type: >-
+          Required&lt;Pick&lt;<xref uid="@microsoft/teams.apps.OAuthSettings"
+          />, "defaultConnectionName"&gt;&gt;
   - name: allIEventKeys
     uid: '@microsoft/teams.apps.allIEventKeys'
     package: '@microsoft/teams.apps'
@@ -87,6 +96,61 @@ variables:
         description: ''
         type: string[]
 functions:
+  - name: >-
+      buildHtmlWidgetMarkdown(IHtmlWidgetPayloadInput,
+      IHtmlWidgetMarkdownOptions)
+    uid: '@microsoft/teams.apps.buildHtmlWidgetMarkdown'
+    package: '@microsoft/teams.apps'
+    summary: |-
+      Wraps an HTML widget payload in the ` ```html-widget ` markdown code fence
+      format required by Teams to render the widget in a message.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function buildHtmlWidgetMarkdown(payload: IHtmlWidgetPayloadInput,
+        options?: IHtmlWidgetMarkdownOptions): string
+      parameters:
+        - id: payload
+          type: <xref uid="@microsoft/teams.apps.IHtmlWidgetPayloadInput" />
+          description: The widget payload to serialize.
+        - id: options
+          type: <xref uid="@microsoft/teams.apps.IHtmlWidgetMarkdownOptions" />
+          description: Optional text to include before/after the widget block.
+      return:
+        description: |-
+          The markdown string containing the widget code block.
+
+           This API is in preview and may change in the future.
+          Diagnostic: ExperimentalTeamsHtmlWidget
+        type: string
+  - name: >-
+      buildHtmlWidgetMessage(IHtmlWidgetPayloadInput,
+      IHtmlWidgetMarkdownOptions)
+    uid: '@microsoft/teams.apps.buildHtmlWidgetMessage'
+    package: '@microsoft/teams.apps'
+    summary: Builds a message activity containing an HTML widget, ready to be sent.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function buildHtmlWidgetMessage(payload: IHtmlWidgetPayloadInput,
+        options?: IHtmlWidgetMarkdownOptions): { text: string, textFormat:
+        "extendedmarkdown", type: "message" }
+      parameters:
+        - id: payload
+          type: <xref uid="@microsoft/teams.apps.IHtmlWidgetPayloadInput" />
+          description: The widget payload to include in the message.
+        - id: options
+          type: <xref uid="@microsoft/teams.apps.IHtmlWidgetMarkdownOptions" />
+          description: Optional text to include before/after the widget block.
+      return:
+        description: |-
+          An activity object with textFormat set to 'extendedmarkdown'.
+
+           This API is in preview and may change in the future.
+          Diagnostic: ExperimentalTeamsHtmlWidget
+        type: '{ text: string, textFormat: "extendedmarkdown", type: "message" }'
   - name: Dependency(DependencyOptions)
     uid: '@microsoft/teams.apps.Dependency'
     package: '@microsoft/teams.apps'
@@ -147,6 +211,51 @@ functions:
         type: >-
           (target: any, propertyKey: string | ClassFieldDecoratorContext) =&gt;
           void
+  - name: injectWidgetProtocol(string, IInjectWidgetProtocolOptions)
+    uid: '@microsoft/teams.apps.injectWidgetProtocol'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Injects the MCP Apps protocol script into widget HTML.
+
+
+      This is a convenience helper - widgets that implement the protocol
+      themselves do not need to use it.
+
+      [buildHtmlWidgetMarkdown](xref:@microsoft/teams.apps.buildHtmlWidgetMarkdown)
+      calls this internally, so most developers won't call it directly.
+
+
+      This sets up:
+
+      - The ui/initialize handshake (required for rendering)
+
+      - Size reporting via ui/notifications/size-changed
+
+      - Optional notification hooks (opt-in via `notifications` option)
+
+
+      If the HTML already contains the protocol (detected by the presence of
+      `ui/initialize`), it is returned unchanged.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function injectWidgetProtocol(html: string, options?:
+        IInjectWidgetProtocolOptions): string
+      parameters:
+        - id: html
+          type: string
+          description: The raw HTML content for the widget.
+        - id: options
+          type: <xref uid="@microsoft/teams.apps.IInjectWidgetProtocolOptions" />
+          description: Optional configuration for the protocol setup.
+      return:
+        description: |-
+          The HTML with the protocol script injected.
+
+           This API is in preview and may change in the future.
+          Diagnostic: ExperimentalTeamsHtmlWidget
+        type: string
   - name: Logger()
     uid: '@microsoft/teams.apps.Logger'
     package: '@microsoft/teams.apps'
@@ -222,3 +331,90 @@ functions:
           the threaded conversation ID (e.g.
           `19:abc@thread.skype;messageid=123`)
         type: string
+  - name: 'tryGetWidgetModelContext({ value?: any } | null | undefined)'
+    uid: '@microsoft/teams.apps.tryGetWidgetModelContext'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Attempts to extract an MCP UI update-model-context request from a message
+
+      activity's `value`. A widget can request that content be added to the
+      model
+
+      context by reusing the messageBack mechanism (like `Action.Submit` for
+
+      adaptive cards). Such a request arrives as a normal message activity whose
+
+      `value` carries the <xref:IMcpUiUpdateModelContextRequest> payload. This
+      is
+
+      fire-and-forget: the bot does not respond.
+
+
+      This helper is tolerant of two wire shapes:
+        1. The raw request object (`{ method: 'ui/update-model-context', params }`).
+        2. An envelope of the form `{ type: 'widgetModelContext', data: <request> }`.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function tryGetWidgetModelContext(activity: { value?: any } | null |
+        undefined): IMcpUiUpdateModelContextRequest | undefined
+      parameters:
+        - id: activity
+          type: '{ value?: any } | null | undefined'
+          description: A message activity (or any object with a `value` field).
+      return:
+        description: |-
+          The parsed request, or `undefined` if `value` is not a valid
+            update-model-context request.
+
+           This API is in preview and may change in the future.
+          Diagnostic: ExperimentalTeamsHtmlWidget
+        type: >-
+          <xref uid="@microsoft/teams.api.IMcpUiUpdateModelContextRequest" /> |
+          undefined
+  - name: validateSecurityPolicy(string, IHtmlWidgetSecurityPolicy)
+    uid: '@microsoft/teams.apps.validateSecurityPolicy'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Validates that external references in widget HTML are covered by the
+
+      declared security policy. Returns an array of warnings for any
+
+      references to origins not present in the appropriate policy field.
+
+
+      This is a static analysis tool - it cannot catch dynamically constructed
+
+      URLs (e.g. `fetch('https://' + domain)`). Use the `debugCspViolations`
+
+      option on
+      [injectWidgetProtocol](xref:@microsoft/teams.apps.injectWidgetProtocol)
+      for runtime detection.
+
+
+      Note: The CSP keyword `'self'` cannot be validated statically because it
+
+      resolves to the iframe's parent origin at runtime. References that would
+
+      be allowed by `'self'` may still produce warnings.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function validateSecurityPolicy(html: string, policy:
+        IHtmlWidgetSecurityPolicy): ISecurityPolicyWarning[]
+      parameters:
+        - id: html
+          type: string
+          description: The raw HTML content of the widget.
+        - id: policy
+          type: <xref uid="@microsoft/teams.api.IHtmlWidgetSecurityPolicy" />
+          description: The security policy to validate against.
+      return:
+        description: |-
+          An array of warnings. Empty array means no issues found.
+
+           This API is in preview and may change in the future.
+          Diagnostic: ExperimentalTeamsHtmlWidget
+        type: <xref uid="@microsoft/teams.apps.ISecurityPolicyWarning" />[]

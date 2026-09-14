@@ -7,7 +7,15 @@ interfaces:
   - '@microsoft/teams.graph-endpoints.deviceAppManagement.vppTokens.IEndpoints'
 package: '@microsoft/teams.graph-endpoints'
 functions:
-  - name: create(Operation<"/deviceAppManagement/vppTokens", "post">)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, appleId?: string | null, automaticallyUpdateApps?:
+      boolean, countryOrRegion?: string | null, expirationDateTime?: string,
+      lastModifiedDateTime?: string, lastSyncDateTime?: string, lastSyncStatus?:
+      "none" | "inProgress" | "completed" | "failed", organizationName?: string
+      | null, state?: "unknown" | "valid" | "expired" | "invalid" |
+      "assignedToExternalMDM", token?: string | null, vppTokenAccountType?:
+      "business" | "education" } & { @odata.type: "#microsoft.graph.vppToken" })
     uid: '@microsoft/teams.graph-endpoints.deviceAppManagement.vppTokens.create'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`POST /deviceAppManagement/vppTokens`'
@@ -15,19 +23,52 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body: Operation<"/deviceAppManagement/vppTokens",
-        "post">): EndpointRequest<IEndpoints["POST
-        /deviceAppManagement/vppTokens"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, appleId?: string | null,
+        automaticallyUpdateApps?: boolean, countryOrRegion?: string | null,
+        expirationDateTime?: string, lastModifiedDateTime?: string,
+        lastSyncDateTime?: string, lastSyncStatus?: "none" | "inProgress" |
+        "completed" | "failed", organizationName?: string | null, state?:
+        "unknown" | "valid" | "expired" | "invalid" | "assignedToExternalMDM",
+        token?: string | null, vppTokenAccountType?: "business" | "education" }
+        & { @odata.type: "#microsoft.graph.vppToken" }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, appleId?: string | null, automaticallyUpdateApps?: boolean,
+        countryOrRegion?: string | null, expirationDateTime?: string,
+        lastModifiedDateTime?: string, lastSyncDateTime?: string,
+        lastSyncStatus?: "none" | "inProgress" | "completed" | "failed",
+        organizationName?: string | null, state?: "unknown" | "valid" |
+        "expired" | "invalid" | "assignedToExternalMDM", token?: string | null,
+        vppTokenAccountType?: "business" | "education" } & { @odata.type:
+        "#microsoft.graph.vppToken" }>
       parameters:
         - id: body
-          type: Operation&lt;"/deviceAppManagement/vppTokens", "post"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            appleId?: string | null, automaticallyUpdateApps?: boolean,
+            countryOrRegion?: string | null, expirationDateTime?: string,
+            lastModifiedDateTime?: string, lastSyncDateTime?: string,
+            lastSyncStatus?: "none" | "inProgress" | "completed" | "failed",
+            organizationName?: string | null, state?: "unknown" | "valid" |
+            "expired" | "invalid" | "assignedToExternalMDM", token?: string |
+            null, vppTokenAccountType?: "business" | "education" } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.vppToken" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /deviceAppManagement/vppTokens"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, appleId?: string | null, automaticallyUpdateApps?:
+          boolean, countryOrRegion?: string | null, expirationDateTime?: string,
+          lastModifiedDateTime?: string, lastSyncDateTime?: string,
+          lastSyncStatus?: "none" | "inProgress" | "completed" | "failed",
+          organizationName?: string | null, state?: "unknown" | "valid" |
+          "expired" | "invalid" | "assignedToExternalMDM", token?: string |
+          null, vppTokenAccountType?: "business" | "education" } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.vppToken" />" }&gt;
+  - name: 'del({ If-Match?: string, vppToken-id: string })'
     uid: '@microsoft/teams.graph-endpoints.deviceAppManagement.vppTokens.del'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`DELETE /deviceAppManagement/vppTokens/{vppToken-id}`'
@@ -35,18 +76,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /deviceAppManagement/vppTokens/{vppToken-id}"]["response"]>
+        function del(params?: { If-Match?: string, vppToken-id: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, vppToken-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /deviceAppManagement/vppTokens/{vppToken-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[], vppToken-id: string })'
     uid: '@microsoft/teams.graph-endpoints.deviceAppManagement.vppTokens.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -57,18 +96,37 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceAppManagement/vppTokens/{vppToken-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        vppToken-id: string }): EndpointRequest<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, appleId?: string |
+        null, automaticallyUpdateApps?: boolean, countryOrRegion?: string |
+        null, expirationDateTime?: string, lastModifiedDateTime?: string,
+        lastSyncDateTime?: string, lastSyncStatus?: "none" | "inProgress" |
+        "completed" | "failed", organizationName?: string | null, state?:
+        "unknown" | "valid" | "expired" | "invalid" | "assignedToExternalMDM",
+        token?: string | null, vppTokenAccountType?: "business" | "education" }
+        & { @odata.type: "#microsoft.graph.vppToken" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[], vppToken-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceAppManagement/vppTokens/{vppToken-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, appleId?: string | null, automaticallyUpdateApps?:
+          boolean, countryOrRegion?: string | null, expirationDateTime?: string,
+          lastModifiedDateTime?: string, lastSyncDateTime?: string,
+          lastSyncStatus?: "none" | "inProgress" | "completed" | "failed",
+          organizationName?: string | null, state?: "unknown" | "valid" |
+          "expired" | "invalid" | "assignedToExternalMDM", token?: string |
+          null, vppTokenAccountType?: "business" | "education" } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.vppToken" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: '@microsoft/teams.graph-endpoints.deviceAppManagement.vppTokens.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -79,20 +137,52 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceAppManagement/vppTokens"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, appleId?: string | null, automaticallyUpdateApps?: boolean,
+        countryOrRegion?: string | null, expirationDateTime?: string,
+        lastModifiedDateTime?: string, lastSyncDateTime?: string,
+        lastSyncStatus?: "none" | "inProgress" | "completed" | "failed",
+        organizationName?: string | null, state?: "unknown" | "valid" |
+        "expired" | "invalid" | "assignedToExternalMDM", token?: string | null,
+        vppTokenAccountType?: "business" | "education" } & { @odata.type:
+        "#microsoft.graph.vppToken" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceAppManagement/vppTokens"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          appleId?: string | null, automaticallyUpdateApps?: boolean,
+          countryOrRegion?: string | null, expirationDateTime?: string,
+          lastModifiedDateTime?: string, lastSyncDateTime?: string,
+          lastSyncStatus?: "none" | "inProgress" | "completed" | "failed",
+          organizationName?: string | null, state?: "unknown" | "valid" |
+          "expired" | "invalid" | "assignedToExternalMDM", token?: string |
+          null, vppTokenAccountType?: "business" | "education" } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.vppToken" />" })[]
+          }&gt;
   - name: >-
-      update(Operation<"/deviceAppManagement/vppTokens/{vppToken-id}", "patch">,
-      any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, appleId?: string | null, automaticallyUpdateApps?:
+      boolean, countryOrRegion?: string | null, expirationDateTime?: string,
+      lastModifiedDateTime?: string, lastSyncDateTime?: string, lastSyncStatus?:
+      "none" | "inProgress" | "completed" | "failed", organizationName?: string
+      | null, state?: "unknown" | "valid" | "expired" | "invalid" |
+      "assignedToExternalMDM", token?: string | null, vppTokenAccountType?:
+      "business" | "education" } & { @odata.type: "#microsoft.graph.vppToken" },
+      { vppToken-id: string })
     uid: '@microsoft/teams.graph-endpoints.deviceAppManagement.vppTokens.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`PATCH /deviceAppManagement/vppTokens/{vppToken-id}`'
@@ -100,24 +190,54 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/deviceAppManagement/vppTokens/{vppToken-id}", "patch">,
-        params?: any): EndpointRequest<IEndpoints["PATCH
-        /deviceAppManagement/vppTokens/{vppToken-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, appleId?: string | null,
+        automaticallyUpdateApps?: boolean, countryOrRegion?: string | null,
+        expirationDateTime?: string, lastModifiedDateTime?: string,
+        lastSyncDateTime?: string, lastSyncStatus?: "none" | "inProgress" |
+        "completed" | "failed", organizationName?: string | null, state?:
+        "unknown" | "valid" | "expired" | "invalid" | "assignedToExternalMDM",
+        token?: string | null, vppTokenAccountType?: "business" | "education" }
+        & { @odata.type: "#microsoft.graph.vppToken" }, params?: { vppToken-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, appleId?: string | null,
+        automaticallyUpdateApps?: boolean, countryOrRegion?: string | null,
+        expirationDateTime?: string, lastModifiedDateTime?: string,
+        lastSyncDateTime?: string, lastSyncStatus?: "none" | "inProgress" |
+        "completed" | "failed", organizationName?: string | null, state?:
+        "unknown" | "valid" | "expired" | "invalid" | "assignedToExternalMDM",
+        token?: string | null, vppTokenAccountType?: "business" | "education" }
+        & { @odata.type: "#microsoft.graph.vppToken" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceAppManagement/vppTokens/{vppToken-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            appleId?: string | null, automaticallyUpdateApps?: boolean,
+            countryOrRegion?: string | null, expirationDateTime?: string,
+            lastModifiedDateTime?: string, lastSyncDateTime?: string,
+            lastSyncStatus?: "none" | "inProgress" | "completed" | "failed",
+            organizationName?: string | null, state?: "unknown" | "valid" |
+            "expired" | "invalid" | "assignedToExternalMDM", token?: string |
+            null, vppTokenAccountType?: "business" | "education" } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.vppToken" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ vppToken-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /deviceAppManagement/vppTokens/{vppToken-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, appleId?: string | null, automaticallyUpdateApps?:
+          boolean, countryOrRegion?: string | null, expirationDateTime?: string,
+          lastModifiedDateTime?: string, lastSyncDateTime?: string,
+          lastSyncStatus?: "none" | "inProgress" | "completed" | "failed",
+          organizationName?: string | null, state?: "unknown" | "valid" |
+          "expired" | "invalid" | "assignedToExternalMDM", token?: string |
+          null, vppTokenAccountType?: "business" | "education" } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.vppToken" />" }&gt;
 variables:
   - name: syncLicenses
     uid: >-

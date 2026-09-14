@@ -7,7 +7,16 @@ interfaces:
   - '@microsoft/teams.graph-endpoints-beta.workplace.sensorDevices.IEndpoints'
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: create(Operation<"/workplace/sensorDevices", "post">)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, description?: string | null, deviceId?: string,
+      displayName?: string | null, ipV4Address?: string | null, ipV6Address?:
+      string | null, macAddress?: string | null, manufacturer?: string,
+      placeId?: string | null, sensors?: { @odata.type: string, displayName?:
+      string | null, placeId?: string | null, sensorId?: string | null,
+      sensorType?: "unknownFutureValue" | "occupancy" | "peopleCount" |
+      "inferredOccupancy" | "heartbeat" | "badge" }[], tags?: (string | null)[]
+      } & { @odata.type: "#microsoft.graph.workplaceSensorDevice" })
     uid: '@microsoft/teams.graph-endpoints-beta.workplace.sensorDevices.create'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -18,18 +27,56 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body: Operation<"/workplace/sensorDevices", "post">):
-        EndpointRequest<IEndpoints["POST /workplace/sensorDevices"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, description?: string | null,
+        deviceId?: string, displayName?: string | null, ipV4Address?: string |
+        null, ipV6Address?: string | null, macAddress?: string | null,
+        manufacturer?: string, placeId?: string | null, sensors?: { @odata.type:
+        string, displayName?: string | null, placeId?: string | null, sensorId?:
+        string | null, sensorType?: "unknownFutureValue" | "occupancy" |
+        "peopleCount" | "inferredOccupancy" | "heartbeat" | "badge" }[], tags?:
+        (string | null)[] } & { @odata.type:
+        "#microsoft.graph.workplaceSensorDevice" }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, description?: string | null, deviceId?: string, displayName?:
+        string | null, ipV4Address?: string | null, ipV6Address?: string | null,
+        macAddress?: string | null, manufacturer?: string, placeId?: string |
+        null, sensors?: { @odata.type: string, displayName?: string | null,
+        placeId?: string | null, sensorId?: string | null, sensorType?:
+        "unknownFutureValue" | "occupancy" | "peopleCount" | "inferredOccupancy"
+        | "heartbeat" | "badge" }[], tags?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.workplaceSensorDevice" }>
       parameters:
         - id: body
-          type: Operation&lt;"/workplace/sensorDevices", "post"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            description?: string | null, deviceId?: string, displayName?: string
+            | null, ipV4Address?: string | null, ipV6Address?: string | null,
+            macAddress?: string | null, manufacturer?: string, placeId?: string
+            | null, sensors?: { <xref uid="@odata.type" />: string,
+            displayName?: string | null, placeId?: string | null, sensorId?:
+            string | null, sensorType?: "unknownFutureValue" | "occupancy" |
+            "peopleCount" | "inferredOccupancy" | "heartbeat" | "badge" }[],
+            tags?: (string | null)[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.workplaceSensorDevice" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /workplace/sensorDevices"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, description?: string | null, deviceId?: string,
+          displayName?: string | null, ipV4Address?: string | null,
+          ipV6Address?: string | null, macAddress?: string | null,
+          manufacturer?: string, placeId?: string | null, sensors?: { <xref
+          uid="@odata.type" />: string, displayName?: string | null, placeId?:
+          string | null, sensorId?: string | null, sensorType?:
+          "unknownFutureValue" | "occupancy" | "peopleCount" |
+          "inferredOccupancy" | "heartbeat" | "badge" }[], tags?: (string |
+          null)[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.workplaceSensorDevice" />" }&gt;
+  - name: 'del({ If-Match?: string, workplaceSensorDevice-id: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.workplace.sensorDevices.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -40,18 +87,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /workplace/sensorDevices/{workplaceSensorDevice-id}"]["response"]>
+        function del(params?: { If-Match?: string, workplaceSensorDevice-id:
+        string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, workplaceSensorDevice-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /workplace/sensorDevices/{workplaceSensorDevice-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], workplaceSensorDevice-id:
+      string })
     uid: '@microsoft/teams.graph-endpoints-beta.workplace.sensorDevices.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: >-
@@ -64,18 +111,42 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /workplace/sensorDevices/{workplaceSensorDevice-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        workplaceSensorDevice-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        description?: string | null, deviceId?: string, displayName?: string |
+        null, ipV4Address?: string | null, ipV6Address?: string | null,
+        macAddress?: string | null, manufacturer?: string, placeId?: string |
+        null, sensors?: { @odata.type: string, displayName?: string | null,
+        placeId?: string | null, sensorId?: string | null, sensorType?:
+        "unknownFutureValue" | "occupancy" | "peopleCount" | "inferredOccupancy"
+        | "heartbeat" | "badge" }[], tags?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.workplaceSensorDevice" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], workplaceSensorDevice-id:
+            string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /workplace/sensorDevices/{workplaceSensorDevice-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, description?: string | null, deviceId?: string,
+          displayName?: string | null, ipV4Address?: string | null,
+          ipV6Address?: string | null, macAddress?: string | null,
+          manufacturer?: string, placeId?: string | null, sensors?: { <xref
+          uid="@odata.type" />: string, displayName?: string | null, placeId?:
+          string | null, sensorId?: string | null, sensorType?:
+          "unknownFutureValue" | "occupancy" | "peopleCount" |
+          "inferredOccupancy" | "heartbeat" | "badge" }[], tags?: (string |
+          null)[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.workplaceSensorDevice" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: '@microsoft/teams.graph-endpoints-beta.workplace.sensorDevices.list'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -86,20 +157,50 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /workplace/sensorDevices"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, description?: string | null, deviceId?: string, displayName?:
+        string | null, ipV4Address?: string | null, ipV6Address?: string | null,
+        macAddress?: string | null, manufacturer?: string, placeId?: string |
+        null, sensors?: { @odata.type: string, displayName?: function, placeId?:
+        function, sensorId?: function, sensorType?: function }[], tags?: (string
+        | null)[] } & { @odata.type: "#microsoft.graph.workplaceSensorDevice"
+        })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /workplace/sensorDevices"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          description?: string | null, deviceId?: string, displayName?: string |
+          null, ipV4Address?: string | null, ipV6Address?: string | null,
+          macAddress?: string | null, manufacturer?: string, placeId?: string |
+          null, sensors?: { <xref uid="@odata.type" />: string, displayName?:
+          function, placeId?: function, sensorId?: function, sensorType?:
+          function }[], tags?: (string | null)[] } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.workplaceSensorDevice" />" })[] }&gt;
   - name: >-
-      update(Operation<"/workplace/sensorDevices/{workplaceSensorDevice-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, description?: string | null, deviceId?: string,
+      displayName?: string | null, ipV4Address?: string | null, ipV6Address?:
+      string | null, macAddress?: string | null, manufacturer?: string,
+      placeId?: string | null, sensors?: { @odata.type: string, displayName?:
+      string | null, placeId?: string | null, sensorId?: string | null,
+      sensorType?: "unknownFutureValue" | "occupancy" | "peopleCount" |
+      "inferredOccupancy" | "heartbeat" | "badge" }[], tags?: (string | null)[]
+      } & { @odata.type: "#microsoft.graph.workplaceSensorDevice" }, {
+      workplaceSensorDevice-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.workplace.sensorDevices.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -110,24 +211,59 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/workplace/sensorDevices/{workplaceSensorDevice-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /workplace/sensorDevices/{workplaceSensorDevice-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, description?: string | null,
+        deviceId?: string, displayName?: string | null, ipV4Address?: string |
+        null, ipV6Address?: string | null, macAddress?: string | null,
+        manufacturer?: string, placeId?: string | null, sensors?: { @odata.type:
+        string, displayName?: string | null, placeId?: string | null, sensorId?:
+        string | null, sensorType?: "unknownFutureValue" | "occupancy" |
+        "peopleCount" | "inferredOccupancy" | "heartbeat" | "badge" }[], tags?:
+        (string | null)[] } & { @odata.type:
+        "#microsoft.graph.workplaceSensorDevice" }, params?: {
+        workplaceSensorDevice-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        description?: string | null, deviceId?: string, displayName?: string |
+        null, ipV4Address?: string | null, ipV6Address?: string | null,
+        macAddress?: string | null, manufacturer?: string, placeId?: string |
+        null, sensors?: { @odata.type: string, displayName?: string | null,
+        placeId?: string | null, sensorId?: string | null, sensorType?:
+        "unknownFutureValue" | "occupancy" | "peopleCount" | "inferredOccupancy"
+        | "heartbeat" | "badge" }[], tags?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.workplaceSensorDevice" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/workplace/sensorDevices/{workplaceSensorDevice-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            description?: string | null, deviceId?: string, displayName?: string
+            | null, ipV4Address?: string | null, ipV6Address?: string | null,
+            macAddress?: string | null, manufacturer?: string, placeId?: string
+            | null, sensors?: { <xref uid="@odata.type" />: string,
+            displayName?: string | null, placeId?: string | null, sensorId?:
+            string | null, sensorType?: "unknownFutureValue" | "occupancy" |
+            "peopleCount" | "inferredOccupancy" | "heartbeat" | "badge" }[],
+            tags?: (string | null)[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.workplaceSensorDevice" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ workplaceSensorDevice-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /workplace/sensorDevices/{workplaceSensorDevice-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, description?: string | null, deviceId?: string,
+          displayName?: string | null, ipV4Address?: string | null,
+          ipV6Address?: string | null, macAddress?: string | null,
+          manufacturer?: string, placeId?: string | null, sensors?: { <xref
+          uid="@odata.type" />: string, displayName?: string | null, placeId?:
+          string | null, sensorId?: string | null, sensorType?:
+          "unknownFutureValue" | "occupancy" | "peopleCount" |
+          "inferredOccupancy" | "heartbeat" | "badge" }[], tags?: (string |
+          null)[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.workplaceSensorDevice" />" }&gt;
 variables:
   - name: ingestTelemetry
     uid: >-

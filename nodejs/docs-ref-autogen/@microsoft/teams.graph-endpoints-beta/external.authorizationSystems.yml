@@ -8,7 +8,15 @@ interfaces:
     @microsoft/teams.graph-endpoints-beta.external.authorizationSystems.IEndpoints
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: create(Operation<"/external/authorizationSystems", "post">)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, authorizationSystemId?: string,
+      authorizationSystemName?: string, authorizationSystemType?: string,
+      dataCollectionInfo?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, entitlements?: { @odata.type:
+      string } } & { @odata.type: "#microsoft.graph.dataCollectionInfo" }) |
+      Record<string, never> | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.authorizationSystem" })
     uid: '@microsoft/teams.graph-endpoints-beta.external.authorizationSystems.create'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`POST /external/authorizationSystems`'
@@ -16,19 +24,54 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body: Operation<"/external/authorizationSystems",
-        "post">): EndpointRequest<IEndpoints["POST
-        /external/authorizationSystems"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, authorizationSystemId?:
+        string, authorizationSystemName?: string, authorizationSystemType?:
+        string, dataCollectionInfo?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, entitlements?: { @odata.type:
+        string } } & { @odata.type: "#microsoft.graph.dataCollectionInfo" }) |
+        Record<string, never> | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authorizationSystem" }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, authorizationSystemId?: string, authorizationSystemName?:
+        string, authorizationSystemType?: string, dataCollectionInfo?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, entitlements?: { @odata.type: string } } & { @odata.type:
+        "#microsoft.graph.dataCollectionInfo" }) | Record<string, never> | null
+        }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authorizationSystem" }>
       parameters:
         - id: body
-          type: Operation&lt;"/external/authorizationSystems", "post"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, authorizationSystemId?: string, authorizationSystemName?:
+            string, authorizationSystemType?: string, dataCollectionInfo?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            entitlements?: { <xref uid="@odata.type" />: string } } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.dataCollectionInfo" />" }) | Record&lt;string,
+            never&gt; | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.authorizationSystem" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /external/authorizationSystems"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, authorizationSystemId?: string,
+          authorizationSystemName?: string, authorizationSystemType?: string,
+          dataCollectionInfo?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, entitlements?: { <xref uid="@odata.type"
+          />: string } } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.dataCollectionInfo" />" }) | Record&lt;string,
+          never&gt; | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authorizationSystem" />" }&gt;
+  - name: 'del({ authorizationSystem-id: string, If-Match?: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.external.authorizationSystems.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`DELETE /external/authorizationSystems/{authorizationSystem-id}`'
@@ -36,18 +79,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /external/authorizationSystems/{authorizationSystem-id}"]["response"]>
+        function del(params?: { authorizationSystem-id: string, If-Match?:
+        string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ authorizationSystem-id: string, If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /external/authorizationSystems/{authorizationSystem-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], authorizationSystem-id:
+      string })
     uid: '@microsoft/teams.graph-endpoints-beta.external.authorizationSystems.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: >-
@@ -61,18 +104,41 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /external/authorizationSystems/{authorizationSystem-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        authorizationSystem-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        authorizationSystemId?: string, authorizationSystemName?: string,
+        authorizationSystemType?: string, dataCollectionInfo?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, entitlements?: { @odata.type: string } } & { @odata.type:
+        "#microsoft.graph.dataCollectionInfo" }) | Record<string, never> | null
+        }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authorizationSystem" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], authorizationSystem-id:
+            string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /external/authorizationSystems/{authorizationSystem-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, authorizationSystemId?: string,
+          authorizationSystemName?: string, authorizationSystemType?: string,
+          dataCollectionInfo?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, entitlements?: { <xref uid="@odata.type"
+          />: string } } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.dataCollectionInfo" />" }) | Record&lt;string,
+          never&gt; | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authorizationSystem" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: '@microsoft/teams.graph-endpoints-beta.external.authorizationSystems.list'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: >-
@@ -85,20 +151,47 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /external/authorizationSystems"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, authorizationSystemId?: string, authorizationSystemName?:
+        string, authorizationSystemType?: string, dataCollectionInfo?:
+        (Omit<..., ...> & { @odata.type: ..., entitlements?: ... } & {
+        @odata.type: ... }) | Record<string, never> | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authorizationSystem" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /external/authorizationSystems"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, authorizationSystemId?: string, authorizationSystemName?:
+          string, authorizationSystemType?: string, dataCollectionInfo?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          entitlements?: ... } & { <xref uid="@odata.type" />: ... }) |
+          Record&lt;string, never&gt; | null }, "<xref uid="@odata.type" />"&gt;
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authorizationSystem" />" })[] }&gt;
   - name: >-
-      update(Operation<"/external/authorizationSystems/{authorizationSystem-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, authorizationSystemId?: string,
+      authorizationSystemName?: string, authorizationSystemType?: string,
+      dataCollectionInfo?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, entitlements?: { @odata.type:
+      string } } & { @odata.type: "#microsoft.graph.dataCollectionInfo" }) |
+      Record<string, never> | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.authorizationSystem" }, { authorizationSystem-id: string
+      })
     uid: '@microsoft/teams.graph-endpoints-beta.external.authorizationSystems.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /external/authorizationSystems/{authorizationSystem-id}`'
@@ -106,24 +199,57 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/external/authorizationSystems/{authorizationSystem-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /external/authorizationSystems/{authorizationSystem-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, authorizationSystemId?:
+        string, authorizationSystemName?: string, authorizationSystemType?:
+        string, dataCollectionInfo?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, entitlements?: { @odata.type:
+        string } } & { @odata.type: "#microsoft.graph.dataCollectionInfo" }) |
+        Record<string, never> | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authorizationSystem" }, params?: {
+        authorizationSystem-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        authorizationSystemId?: string, authorizationSystemName?: string,
+        authorizationSystemType?: string, dataCollectionInfo?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, entitlements?: { @odata.type: string } } & { @odata.type:
+        "#microsoft.graph.dataCollectionInfo" }) | Record<string, never> | null
+        }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authorizationSystem" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/external/authorizationSystems/{authorizationSystem-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, authorizationSystemId?: string, authorizationSystemName?:
+            string, authorizationSystemType?: string, dataCollectionInfo?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            entitlements?: { <xref uid="@odata.type" />: string } } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.dataCollectionInfo" />" }) | Record&lt;string,
+            never&gt; | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.authorizationSystem" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ authorizationSystem-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /external/authorizationSystems/{authorizationSystem-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, authorizationSystemId?: string,
+          authorizationSystemName?: string, authorizationSystemType?: string,
+          dataCollectionInfo?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, entitlements?: { <xref uid="@odata.type"
+          />: string } } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.dataCollectionInfo" />" }) | Record&lt;string,
+          never&gt; | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authorizationSystem" />" }&gt;
 variables:
   - name: dataCollectionInfo
     uid: >-
@@ -134,36 +260,56 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        dataCollectionInfo: { del: (params?: IEndpoints["DELETE
-        /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["parameters"])
-        => EndpointRequest<IEndpoints["DELETE
-        /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["response"]>,
-        get: (params?: IEndpoints["GET
+        dataCollectionInfo: { /** * `GET
+        /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo`
+        * * Defines how and whether Permissions Management collects data from
+        the onboarded authorization system. Supports $filter (eq) as follows:
+        $filter&#x3D;dataCollectionInfo/entitlements/permissionsModificationCapability
+        and $filter&#x3D;dataCollectionInfo/entitlements/status. */ get:
+        (params?: IEndpoints["GET
         /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["parameters"])
         => EndpointRequest<IEndpoints["GET
-        /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["response"]>,
-        update: (body: IEndpoints["PATCH
+        /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["response"]>;
+        /** * `PATCH
+        /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo`
+        * */ update: (body: IEndpoints["PATCH
         /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["body"],
         params?: IEndpoints["PATCH
         /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["parameters"])
         => EndpointRequest<IEndpoints["PATCH
-        /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["response"]>
+        /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["response"]>;
+        /** * `DELETE
+        /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo`
+        * */ del: (params?: IEndpoints["DELETE
+        /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["parameters"])
+        => EndpointRequest<IEndpoints["DELETE
+        /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["response"]>;
         }
       return:
         description: ''
         type: >-
-          { del: (params?: IEndpoints["DELETE
-          /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["parameters"])
-          =&gt; EndpointRequest&lt;IEndpoints["DELETE
-          /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["response"]&gt;,
-          get: (params?: IEndpoints["GET
+          { /** * `GET
+          /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo`
+          * * Defines how and whether Permissions Management collects data from
+          the onboarded authorization system. Supports $filter (eq) as follows:
+          $filter&#x3D;dataCollectionInfo/entitlements/permissionsModificationCapability
+          and $filter&#x3D;dataCollectionInfo/entitlements/status. */ get:
+          (params?: IEndpoints["GET
           /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["GET
-          /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["response"]&gt;,
-          update: (body: IEndpoints["PATCH
+          /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["response"]&gt;;
+          /** * `PATCH
+          /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo`
+          * */ update: (body: IEndpoints["PATCH
           /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["body"],
           params?: IEndpoints["PATCH
           /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["PATCH
-          /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["response"]&gt;
+          /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["response"]&gt;;
+          /** * `DELETE
+          /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo`
+          * */ del: (params?: IEndpoints["DELETE
+          /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["DELETE
+          /external/authorizationSystems/{authorizationSystem-id}/dataCollectionInfo"]["response"]&gt;;
           }

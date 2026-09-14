@@ -7,7 +7,53 @@ interfaces:
   - '@microsoft/teams.graph-endpoints.domains.IEndpoints'
 package: '@microsoft/teams.graph-endpoints'
 functions:
-  - name: create(Operation<"/domains", "post">)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, authenticationType?: string, availabilityStatus?:
+      string | null, domainNameReferences?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & Omit<{ @odata.type: string, deletedDateTime?:
+      string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.directoryObject" })[], federationConfiguration?:
+      (Omit<Omit<Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+      @odata.type: ..., displayName?: ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.identityProviderBase" }, "@odata.type"> & Omit<{
+      @odata.type: string, issuerUri?: string | null, metadataExchangeUri?:
+      string | null, passiveSignInUri?: string | null,
+      preferredAuthenticationProtocol?: Record<..., ...> | "unknownFutureValue"
+      | "wsFed" | "saml" | null, signingCertificate?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.samlOrWsFedProvider" },
+      "@odata.type"> & { @odata.type: string, activeSignInUri?: string | null,
+      federatedIdpMfaBehavior?: Record<string, never> |
+      "acceptIfMfaDoneByFederatedIdp" | "enforceMfaByFederatedIdp" |
+      "rejectMfaByFederatedIdp" | "unknownFutureValue" | null,
+      isSignedAuthenticationRequestRequired?: boolean | null,
+      nextSigningCertificate?: string | null, passwordResetUri?: string | null,
+      promptLoginBehavior?: Record<string, never> | "unknownFutureValue" |
+      "translateToFreshPasswordAuthentication" | "nativeSupport" | "disabled" |
+      null, signingCertificateUpdateStatus?: Record<string, never> | {
+      @odata.type: string, certificateUpdateResult?: string | null,
+      lastRunDateTime?: string | null } | null, signOutUri?: string | null })[],
+      isAdminManaged?: boolean, isDefault?: boolean, isInitial?: boolean,
+      isRoot?: boolean, isVerified?: boolean, manufacturer?: string | null,
+      model?: string | null, passwordNotificationWindowInDays?: number | null,
+      passwordValidityPeriodInDays?: number | null, rootDomain?: Omit<{ id?:
+      string | undefined; '@odata.type': string; }, "@odata.type"> & {
+      authenticationType?: string | undefined; availabilityStatus?: string |
+      null | undefined; isAdminManaged?: boolean | undefined; ... 15 more ...;
+      '@odata.type': string; } & { ...; } | Record<string, never> | null,
+      serviceConfigurationRecords?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, isOptional?: boolean, label?:
+      string, recordType?: string | null, supportedService?: string, ttl?:
+      number }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.domainDnsRecord" })[], state?: { @odata.type: string,
+      lastActionDateTime?: string | null, operation?: string | null, status?:
+      string | null } | Record<string, never> | null, supportedServices?:
+      string[], verificationDnsRecords?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & Omit<{ @odata.type: string, isOptional?:
+      boolean, label?: string, recordType?: string | null, supportedService?:
+      string, ttl?: number }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.domainDnsRecord" })[] } & { @odata.type:
+      "#microsoft.graph.domain" })
     uid: '@microsoft/teams.graph-endpoints.domains.create'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -25,16 +71,221 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body: Operation<"/domains", "post">):
-        EndpointRequest<IEndpoints["POST /domains"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, authenticationType?: string,
+        availabilityStatus?: string | null, domainNameReferences?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, deletedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.directoryObject" })[],
+        federationConfiguration?: (Omit<Omit<Omit<{ @odata.type: ..., id?: ...
+        }, "@odata.type"> & Omit<{ @odata.type: ..., displayName?: ... },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.identityProviderBase"
+        }, "@odata.type"> & Omit<{ @odata.type: string, issuerUri?: string |
+        null, metadataExchangeUri?: string | null, passiveSignInUri?: string |
+        null, preferredAuthenticationProtocol?: Record<..., ...> |
+        "unknownFutureValue" | "wsFed" | "saml" | null, signingCertificate?:
+        string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.samlOrWsFedProvider" }, "@odata.type"> & {
+        @odata.type: string, activeSignInUri?: string | null,
+        federatedIdpMfaBehavior?: Record<string, never> |
+        "acceptIfMfaDoneByFederatedIdp" | "enforceMfaByFederatedIdp" |
+        "rejectMfaByFederatedIdp" | "unknownFutureValue" | null,
+        isSignedAuthenticationRequestRequired?: boolean | null,
+        nextSigningCertificate?: string | null, passwordResetUri?: string |
+        null, promptLoginBehavior?: Record<string, never> | "unknownFutureValue"
+        | "translateToFreshPasswordAuthentication" | "nativeSupport" |
+        "disabled" | null, signingCertificateUpdateStatus?: Record<string,
+        never> | { @odata.type: string, certificateUpdateResult?: string | null,
+        lastRunDateTime?: string | null } | null, signOutUri?: string | null
+        })[], isAdminManaged?: boolean, isDefault?: boolean, isInitial?:
+        boolean, isRoot?: boolean, isVerified?: boolean, manufacturer?: string |
+        null, model?: string | null, passwordNotificationWindowInDays?: number |
+        null, passwordValidityPeriodInDays?: number | null, rootDomain?: Omit<{
+        id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        authenticationType?: string | undefined; availabilityStatus?: string |
+        null | undefined; isAdminManaged?: boolean | undefined; ... 15 more ...;
+        '@odata.type': string; } & { ...; } | Record<string, never> | null,
+        serviceConfigurationRecords?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & Omit<{ @odata.type: string, isOptional?: boolean,
+        label?: string, recordType?: string | null, supportedService?: string,
+        ttl?: number }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.domainDnsRecord" })[], state?: { @odata.type: string,
+        lastActionDateTime?: string | null, operation?: string | null, status?:
+        string | null } | Record<string, never> | null, supportedServices?:
+        string[], verificationDnsRecords?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, isOptional?:
+        boolean, label?: string, recordType?: string | null, supportedService?:
+        string, ttl?: number }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.domainDnsRecord" })[] } & { @odata.type:
+        "#microsoft.graph.domain" }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        authenticationType?: string, availabilityStatus?: string | null,
+        domainNameReferences?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, deletedDateTime?: string |
+        null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" })[], federationConfiguration?:
+        (Omit<Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & Omit<{ @odata.type: string, issuerUri?: function,
+        metadataExchangeUri?: function, passiveSignInUri?: function,
+        preferredAuthenticationProtocol?: function, signingCertificate?:
+        function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.samlOrWsFedProvider" }, "@odata.type"> & {
+        @odata.type: string, activeSignInUri?: string | null,
+        federatedIdpMfaBehavior?: Record<string, never> |
+        "acceptIfMfaDoneByFederatedIdp" | "enforceMfaByFederatedIdp" |
+        "rejectMfaByFederatedIdp" | "unknownFutureValue" | null,
+        isSignedAuthenticationRequestRequired?: boolean | null,
+        nextSigningCertificate?: string | null, passwordResetUri?: string |
+        null, promptLoginBehavior?: Record<string, never> | "unknownFutureValue"
+        | "translateToFreshPasswordAuthentication" | "nativeSupport" |
+        "disabled" | null, signingCertificateUpdateStatus?: Record<string,
+        never> | { @odata.type: string, certificateUpdateResult?: string | null,
+        lastRunDateTime?: string | null } | null, signOutUri?: string | null
+        })[], isAdminManaged?: boolean, isDefault?: boolean, isInitial?:
+        boolean, isRoot?: boolean, isVerified?: boolean, manufacturer?: string |
+        null, model?: string | null, passwordNotificationWindowInDays?: number |
+        null, passwordValidityPeriodInDays?: number | null, rootDomain?: Omit<{
+        id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        authenticationType?: string | undefined; availabilityStatus?: string |
+        null | undefined; isAdminManaged?: boolean | undefined; ... 15 more ...;
+        '@odata.type': string; } & { ...; } | Record<string, never> | null,
+        serviceConfigurationRecords?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & Omit<{ @odata.type: string, isOptional?: boolean,
+        label?: string, recordType?: string | null, supportedService?: string,
+        ttl?: number }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.domainDnsRecord" })[], state?: { @odata.type: string,
+        lastActionDateTime?: string | null, operation?: string | null, status?:
+        string | null } | Record<string, never> | null, supportedServices?:
+        string[], verificationDnsRecords?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, isOptional?:
+        boolean, label?: string, recordType?: string | null, supportedService?:
+        string, ttl?: number }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.domainDnsRecord" })[] } & { @odata.type:
+        "#microsoft.graph.domain" }>
       parameters:
         - id: body
-          type: Operation&lt;"/domains", "post"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            authenticationType?: string, availabilityStatus?: string | null,
+            domainNameReferences?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: string, deletedDateTime?: string | null
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.directoryObject" />" })[],
+            federationConfiguration?: (Omit&lt;Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., displayName?:
+            ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.identityProviderBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, issuerUri?: string | null, metadataExchangeUri?: string |
+            null, passiveSignInUri?: string | null,
+            preferredAuthenticationProtocol?: Record&lt;..., ...&gt; |
+            "unknownFutureValue" | "wsFed" | "saml" | null, signingCertificate?:
+            string | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.samlOrWsFedProvider" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            activeSignInUri?: string | null, federatedIdpMfaBehavior?:
+            Record&lt;string, never&gt; | "acceptIfMfaDoneByFederatedIdp" |
+            "enforceMfaByFederatedIdp" | "rejectMfaByFederatedIdp" |
+            "unknownFutureValue" | null, isSignedAuthenticationRequestRequired?:
+            boolean | null, nextSigningCertificate?: string | null,
+            passwordResetUri?: string | null, promptLoginBehavior?:
+            Record&lt;string, never&gt; | "unknownFutureValue" |
+            "translateToFreshPasswordAuthentication" | "nativeSupport" |
+            "disabled" | null, signingCertificateUpdateStatus?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            certificateUpdateResult?: string | null, lastRunDateTime?: string |
+            null } | null, signOutUri?: string | null })[], isAdminManaged?:
+            boolean, isDefault?: boolean, isInitial?: boolean, isRoot?: boolean,
+            isVerified?: boolean, manufacturer?: string | null, model?: string |
+            null, passwordNotificationWindowInDays?: number | null,
+            passwordValidityPeriodInDays?: number | null, rootDomain?: Omit&lt;{
+            id?: string | undefined; '<xref uid="@odata.type" />': string; },
+            "<xref uid="@odata.type" />"&gt; & { authenticationType?: string |
+            undefined; availabilityStatus?: string | null | undefined;
+            isAdminManaged?: boolean | undefined; ... 15 more ...; '<xref
+            uid="@odata.type" />': string; } & { ...; } | Record&lt;string,
+            never&gt; | null, serviceConfigurationRecords?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, isOptional?: boolean, label?: string, recordType?: string |
+            null, supportedService?: string, ttl?: number }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.domainDnsRecord" />" })[], state?: { <xref
+            uid="@odata.type" />: string, lastActionDateTime?: string | null,
+            operation?: string | null, status?: string | null } |
+            Record&lt;string, never&gt; | null, supportedServices?: string[],
+            verificationDnsRecords?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: string, isOptional?: boolean, label?:
+            string, recordType?: string | null, supportedService?: string, ttl?:
+            number }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.domainDnsRecord"
+            />" })[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.domain" />" }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["POST /domains"]["response"]&gt;
-  - name: del(any)
+        type: >-
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, authenticationType?: string, availabilityStatus?: string |
+          null, domainNameReferences?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, deletedDateTime?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.directoryObject" />" })[],
+          federationConfiguration?: (Omit&lt;Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, issuerUri?: function, metadataExchangeUri?: function,
+          passiveSignInUri?: function, preferredAuthenticationProtocol?:
+          function, signingCertificate?: function }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.samlOrWsFedProvider" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          activeSignInUri?: string | null, federatedIdpMfaBehavior?:
+          Record&lt;string, never&gt; | "acceptIfMfaDoneByFederatedIdp" |
+          "enforceMfaByFederatedIdp" | "rejectMfaByFederatedIdp" |
+          "unknownFutureValue" | null, isSignedAuthenticationRequestRequired?:
+          boolean | null, nextSigningCertificate?: string | null,
+          passwordResetUri?: string | null, promptLoginBehavior?:
+          Record&lt;string, never&gt; | "unknownFutureValue" |
+          "translateToFreshPasswordAuthentication" | "nativeSupport" |
+          "disabled" | null, signingCertificateUpdateStatus?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string,
+          certificateUpdateResult?: string | null, lastRunDateTime?: string |
+          null } | null, signOutUri?: string | null })[], isAdminManaged?:
+          boolean, isDefault?: boolean, isInitial?: boolean, isRoot?: boolean,
+          isVerified?: boolean, manufacturer?: string | null, model?: string |
+          null, passwordNotificationWindowInDays?: number | null,
+          passwordValidityPeriodInDays?: number | null, rootDomain?: Omit&lt;{
+          id?: string | undefined; '<xref uid="@odata.type" />': string; },
+          "<xref uid="@odata.type" />"&gt; & { authenticationType?: string |
+          undefined; availabilityStatus?: string | null | undefined;
+          isAdminManaged?: boolean | undefined; ... 15 more ...; '<xref
+          uid="@odata.type" />': string; } & { ...; } | Record&lt;string,
+          never&gt; | null, serviceConfigurationRecords?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string, isOptional?:
+          boolean, label?: string, recordType?: string | null,
+          supportedService?: string, ttl?: number }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.domainDnsRecord" />" })[], state?: { <xref
+          uid="@odata.type" />: string, lastActionDateTime?: string | null,
+          operation?: string | null, status?: string | null } |
+          Record&lt;string, never&gt; | null, supportedServices?: string[],
+          verificationDnsRecords?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, isOptional?: boolean, label?:
+          string, recordType?: string | null, supportedService?: string, ttl?:
+          number }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.domainDnsRecord" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.domain" />" }&gt;
+  - name: 'del({ domain-id: string, If-Match?: string })'
     uid: '@microsoft/teams.graph-endpoints.domains.del'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -45,18 +296,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /domains/{domain-id}"]["response"]>
+        function del(params?: { domain-id: string, If-Match?: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ domain-id: string, If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /domains/{domain-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[], domain-id: string })'
     uid: '@microsoft/teams.graph-endpoints.domains.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -67,18 +316,117 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /domains/{domain-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        domain-id: string }): EndpointRequest<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, authenticationType?:
+        string, availabilityStatus?: string | null, domainNameReferences?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, deletedDateTime?: string | null }, "@odata.type"> &
+        { @odata.type: "#microsoft.graph.directoryObject" })[],
+        federationConfiguration?: (Omit<Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & Omit<{ @odata.type: string,
+        issuerUri?: function, metadataExchangeUri?: function, passiveSignInUri?:
+        function, preferredAuthenticationProtocol?: function,
+        signingCertificate?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.samlOrWsFedProvider" }, "@odata.type"> & {
+        @odata.type: string, activeSignInUri?: string | null,
+        federatedIdpMfaBehavior?: Record<string, never> |
+        "acceptIfMfaDoneByFederatedIdp" | "enforceMfaByFederatedIdp" |
+        "rejectMfaByFederatedIdp" | "unknownFutureValue" | null,
+        isSignedAuthenticationRequestRequired?: boolean | null,
+        nextSigningCertificate?: string | null, passwordResetUri?: string |
+        null, promptLoginBehavior?: Record<string, never> | "unknownFutureValue"
+        | "translateToFreshPasswordAuthentication" | "nativeSupport" |
+        "disabled" | null, signingCertificateUpdateStatus?: Record<string,
+        never> | { @odata.type: string, certificateUpdateResult?: string | null,
+        lastRunDateTime?: string | null } | null, signOutUri?: string | null
+        })[], isAdminManaged?: boolean, isDefault?: boolean, isInitial?:
+        boolean, isRoot?: boolean, isVerified?: boolean, manufacturer?: string |
+        null, model?: string | null, passwordNotificationWindowInDays?: number |
+        null, passwordValidityPeriodInDays?: number | null, rootDomain?: Omit<{
+        id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        authenticationType?: string | undefined; availabilityStatus?: string |
+        null | undefined; isAdminManaged?: boolean | undefined; ... 15 more ...;
+        '@odata.type': string; } & { ...; } | Record<string, never> | null,
+        serviceConfigurationRecords?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & Omit<{ @odata.type: string, isOptional?: boolean,
+        label?: string, recordType?: string | null, supportedService?: string,
+        ttl?: number }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.domainDnsRecord" })[], state?: { @odata.type: string,
+        lastActionDateTime?: string | null, operation?: string | null, status?:
+        string | null } | Record<string, never> | null, supportedServices?:
+        string[], verificationDnsRecords?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, isOptional?:
+        boolean, label?: string, recordType?: string | null, supportedService?:
+        string, ttl?: number }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.domainDnsRecord" })[] } & { @odata.type:
+        "#microsoft.graph.domain" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[], domain-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /domains/{domain-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, authenticationType?: string, availabilityStatus?: string |
+          null, domainNameReferences?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, deletedDateTime?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.directoryObject" />" })[],
+          federationConfiguration?: (Omit&lt;Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, issuerUri?: function, metadataExchangeUri?: function,
+          passiveSignInUri?: function, preferredAuthenticationProtocol?:
+          function, signingCertificate?: function }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.samlOrWsFedProvider" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          activeSignInUri?: string | null, federatedIdpMfaBehavior?:
+          Record&lt;string, never&gt; | "acceptIfMfaDoneByFederatedIdp" |
+          "enforceMfaByFederatedIdp" | "rejectMfaByFederatedIdp" |
+          "unknownFutureValue" | null, isSignedAuthenticationRequestRequired?:
+          boolean | null, nextSigningCertificate?: string | null,
+          passwordResetUri?: string | null, promptLoginBehavior?:
+          Record&lt;string, never&gt; | "unknownFutureValue" |
+          "translateToFreshPasswordAuthentication" | "nativeSupport" |
+          "disabled" | null, signingCertificateUpdateStatus?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string,
+          certificateUpdateResult?: string | null, lastRunDateTime?: string |
+          null } | null, signOutUri?: string | null })[], isAdminManaged?:
+          boolean, isDefault?: boolean, isInitial?: boolean, isRoot?: boolean,
+          isVerified?: boolean, manufacturer?: string | null, model?: string |
+          null, passwordNotificationWindowInDays?: number | null,
+          passwordValidityPeriodInDays?: number | null, rootDomain?: Omit&lt;{
+          id?: string | undefined; '<xref uid="@odata.type" />': string; },
+          "<xref uid="@odata.type" />"&gt; & { authenticationType?: string |
+          undefined; availabilityStatus?: string | null | undefined;
+          isAdminManaged?: boolean | undefined; ... 15 more ...; '<xref
+          uid="@odata.type" />': string; } & { ...; } | Record&lt;string,
+          never&gt; | null, serviceConfigurationRecords?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string, isOptional?:
+          boolean, label?: string, recordType?: string | null,
+          supportedService?: string, ttl?: number }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.domainDnsRecord" />" })[], state?: { <xref
+          uid="@odata.type" />: string, lastActionDateTime?: string | null,
+          operation?: string | null, status?: string | null } |
+          Record&lt;string, never&gt; | null, supportedServices?: string[],
+          verificationDnsRecords?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, isOptional?: boolean, label?:
+          string, recordType?: string | null, supportedService?: string, ttl?:
+          number }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.domainDnsRecord" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.domain" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: '@microsoft/teams.graph-endpoints.domains.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -89,16 +437,119 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /domains"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, authenticationType?: string, availabilityStatus?: string | null,
+        domainNameReferences?: (Omit<..., ...> & Omit<..., ...> & { @odata.type:
+        ... })[], federationConfiguration?: (Omit<..., ...> & { @odata.type:
+        ..., activeSignInUri?: ..., federatedIdpMfaBehavior?: ...,
+        isSignedAuthenticationRequestRequired?: ..., nextSigningCertificate?:
+        ..., passwordResetUri?: ..., promptLoginBehavior?: ...,
+        signingCertificateUpdateStatus?: ..., signOutUri?: ... })[],
+        isAdminManaged?: boolean, isDefault?: boolean, isInitial?: boolean,
+        isRoot?: boolean, isVerified?: boolean, manufacturer?: string | null,
+        model?: string | null, passwordNotificationWindowInDays?: number | null,
+        passwordValidityPeriodInDays?: number | null, rootDomain?: Omit<{ id?:
+        string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        authenticationType?: string | undefined; availabilityStatus?: string |
+        null | undefined; isAdminManaged?: boolean | undefined; ... 15 more ...;
+        '@odata.type': string; } & { ...; } | Record<string, never> | null,
+        serviceConfigurationRecords?: (Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... })[], state?: { @odata.type: string,
+        lastActionDateTime?: string | null, operation?: string | null, status?:
+        string | null } | Record<string, never> | null, supportedServices?:
+        string[], verificationDnsRecords?: (Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... })[] } & { @odata.type: "#microsoft.graph.domain" })[]
+        }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /domains"]["response"]&gt;
-  - name: update(Operation<"/domains/{domain-id}", "patch">, any)
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          authenticationType?: string, availabilityStatus?: string | null,
+          domainNameReferences?: (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; &
+          { <xref uid="@odata.type" />: ... })[], federationConfiguration?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          activeSignInUri?: ..., federatedIdpMfaBehavior?: ...,
+          isSignedAuthenticationRequestRequired?: ..., nextSigningCertificate?:
+          ..., passwordResetUri?: ..., promptLoginBehavior?: ...,
+          signingCertificateUpdateStatus?: ..., signOutUri?: ... })[],
+          isAdminManaged?: boolean, isDefault?: boolean, isInitial?: boolean,
+          isRoot?: boolean, isVerified?: boolean, manufacturer?: string | null,
+          model?: string | null, passwordNotificationWindowInDays?: number |
+          null, passwordValidityPeriodInDays?: number | null, rootDomain?:
+          Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type" />':
+          string; }, "<xref uid="@odata.type" />"&gt; & { authenticationType?:
+          string | undefined; availabilityStatus?: string | null | undefined;
+          isAdminManaged?: boolean | undefined; ... 15 more ...; '<xref
+          uid="@odata.type" />': string; } & { ...; } | Record&lt;string,
+          never&gt; | null, serviceConfigurationRecords?: (Omit&lt;..., ...&gt;
+          & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... })[],
+          state?: { <xref uid="@odata.type" />: string, lastActionDateTime?:
+          string | null, operation?: string | null, status?: string | null } |
+          Record&lt;string, never&gt; | null, supportedServices?: string[],
+          verificationDnsRecords?: (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt;
+          & { <xref uid="@odata.type" />: ... })[] } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.domain" />" })[] }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, authenticationType?: string, availabilityStatus?:
+      string | null, domainNameReferences?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & Omit<{ @odata.type: string, deletedDateTime?:
+      string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.directoryObject" })[], federationConfiguration?:
+      (Omit<Omit<Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+      @odata.type: ..., displayName?: ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.identityProviderBase" }, "@odata.type"> & Omit<{
+      @odata.type: string, issuerUri?: string | null, metadataExchangeUri?:
+      string | null, passiveSignInUri?: string | null,
+      preferredAuthenticationProtocol?: Record<..., ...> | "unknownFutureValue"
+      | "wsFed" | "saml" | null, signingCertificate?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.samlOrWsFedProvider" },
+      "@odata.type"> & { @odata.type: string, activeSignInUri?: string | null,
+      federatedIdpMfaBehavior?: Record<string, never> |
+      "acceptIfMfaDoneByFederatedIdp" | "enforceMfaByFederatedIdp" |
+      "rejectMfaByFederatedIdp" | "unknownFutureValue" | null,
+      isSignedAuthenticationRequestRequired?: boolean | null,
+      nextSigningCertificate?: string | null, passwordResetUri?: string | null,
+      promptLoginBehavior?: Record<string, never> | "unknownFutureValue" |
+      "translateToFreshPasswordAuthentication" | "nativeSupport" | "disabled" |
+      null, signingCertificateUpdateStatus?: Record<string, never> | {
+      @odata.type: string, certificateUpdateResult?: string | null,
+      lastRunDateTime?: string | null } | null, signOutUri?: string | null })[],
+      isAdminManaged?: boolean, isDefault?: boolean, isInitial?: boolean,
+      isRoot?: boolean, isVerified?: boolean, manufacturer?: string | null,
+      model?: string | null, passwordNotificationWindowInDays?: number | null,
+      passwordValidityPeriodInDays?: number | null, rootDomain?: Omit<{ id?:
+      string | undefined; '@odata.type': string; }, "@odata.type"> & {
+      authenticationType?: string | undefined; availabilityStatus?: string |
+      null | undefined; isAdminManaged?: boolean | undefined; ... 15 more ...;
+      '@odata.type': string; } & { ...; } | Record<string, never> | null,
+      serviceConfigurationRecords?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, isOptional?: boolean, label?:
+      string, recordType?: string | null, supportedService?: string, ttl?:
+      number }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.domainDnsRecord" })[], state?: { @odata.type: string,
+      lastActionDateTime?: string | null, operation?: string | null, status?:
+      string | null } | Record<string, never> | null, supportedServices?:
+      string[], verificationDnsRecords?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & Omit<{ @odata.type: string, isOptional?:
+      boolean, label?: string, recordType?: string | null, supportedService?:
+      string, ttl?: number }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.domainDnsRecord" })[] } & { @odata.type:
+      "#microsoft.graph.domain" }, { domain-id: string })
     uid: '@microsoft/teams.graph-endpoints.domains.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -111,21 +562,223 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/domains/{domain-id}", "patch">,
-        params?: any): EndpointRequest<IEndpoints["PATCH
-        /domains/{domain-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, authenticationType?: string,
+        availabilityStatus?: string | null, domainNameReferences?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, deletedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.directoryObject" })[],
+        federationConfiguration?: (Omit<Omit<Omit<{ @odata.type: ..., id?: ...
+        }, "@odata.type"> & Omit<{ @odata.type: ..., displayName?: ... },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.identityProviderBase"
+        }, "@odata.type"> & Omit<{ @odata.type: string, issuerUri?: string |
+        null, metadataExchangeUri?: string | null, passiveSignInUri?: string |
+        null, preferredAuthenticationProtocol?: Record<..., ...> |
+        "unknownFutureValue" | "wsFed" | "saml" | null, signingCertificate?:
+        string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.samlOrWsFedProvider" }, "@odata.type"> & {
+        @odata.type: string, activeSignInUri?: string | null,
+        federatedIdpMfaBehavior?: Record<string, never> |
+        "acceptIfMfaDoneByFederatedIdp" | "enforceMfaByFederatedIdp" |
+        "rejectMfaByFederatedIdp" | "unknownFutureValue" | null,
+        isSignedAuthenticationRequestRequired?: boolean | null,
+        nextSigningCertificate?: string | null, passwordResetUri?: string |
+        null, promptLoginBehavior?: Record<string, never> | "unknownFutureValue"
+        | "translateToFreshPasswordAuthentication" | "nativeSupport" |
+        "disabled" | null, signingCertificateUpdateStatus?: Record<string,
+        never> | { @odata.type: string, certificateUpdateResult?: string | null,
+        lastRunDateTime?: string | null } | null, signOutUri?: string | null
+        })[], isAdminManaged?: boolean, isDefault?: boolean, isInitial?:
+        boolean, isRoot?: boolean, isVerified?: boolean, manufacturer?: string |
+        null, model?: string | null, passwordNotificationWindowInDays?: number |
+        null, passwordValidityPeriodInDays?: number | null, rootDomain?: Omit<{
+        id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        authenticationType?: string | undefined; availabilityStatus?: string |
+        null | undefined; isAdminManaged?: boolean | undefined; ... 15 more ...;
+        '@odata.type': string; } & { ...; } | Record<string, never> | null,
+        serviceConfigurationRecords?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & Omit<{ @odata.type: string, isOptional?: boolean,
+        label?: string, recordType?: string | null, supportedService?: string,
+        ttl?: number }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.domainDnsRecord" })[], state?: { @odata.type: string,
+        lastActionDateTime?: string | null, operation?: string | null, status?:
+        string | null } | Record<string, never> | null, supportedServices?:
+        string[], verificationDnsRecords?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, isOptional?:
+        boolean, label?: string, recordType?: string | null, supportedService?:
+        string, ttl?: number }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.domainDnsRecord" })[] } & { @odata.type:
+        "#microsoft.graph.domain" }, params?: { domain-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, authenticationType?: string,
+        availabilityStatus?: string | null, domainNameReferences?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, deletedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.directoryObject" })[],
+        federationConfiguration?: (Omit<Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & Omit<{ @odata.type: string,
+        issuerUri?: function, metadataExchangeUri?: function, passiveSignInUri?:
+        function, preferredAuthenticationProtocol?: function,
+        signingCertificate?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.samlOrWsFedProvider" }, "@odata.type"> & {
+        @odata.type: string, activeSignInUri?: string | null,
+        federatedIdpMfaBehavior?: Record<string, never> |
+        "acceptIfMfaDoneByFederatedIdp" | "enforceMfaByFederatedIdp" |
+        "rejectMfaByFederatedIdp" | "unknownFutureValue" | null,
+        isSignedAuthenticationRequestRequired?: boolean | null,
+        nextSigningCertificate?: string | null, passwordResetUri?: string |
+        null, promptLoginBehavior?: Record<string, never> | "unknownFutureValue"
+        | "translateToFreshPasswordAuthentication" | "nativeSupport" |
+        "disabled" | null, signingCertificateUpdateStatus?: Record<string,
+        never> | { @odata.type: string, certificateUpdateResult?: string | null,
+        lastRunDateTime?: string | null } | null, signOutUri?: string | null
+        })[], isAdminManaged?: boolean, isDefault?: boolean, isInitial?:
+        boolean, isRoot?: boolean, isVerified?: boolean, manufacturer?: string |
+        null, model?: string | null, passwordNotificationWindowInDays?: number |
+        null, passwordValidityPeriodInDays?: number | null, rootDomain?: Omit<{
+        id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        authenticationType?: string | undefined; availabilityStatus?: string |
+        null | undefined; isAdminManaged?: boolean | undefined; ... 15 more ...;
+        '@odata.type': string; } & { ...; } | Record<string, never> | null,
+        serviceConfigurationRecords?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & Omit<{ @odata.type: string, isOptional?: boolean,
+        label?: string, recordType?: string | null, supportedService?: string,
+        ttl?: number }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.domainDnsRecord" })[], state?: { @odata.type: string,
+        lastActionDateTime?: string | null, operation?: string | null, status?:
+        string | null } | Record<string, never> | null, supportedServices?:
+        string[], verificationDnsRecords?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, isOptional?:
+        boolean, label?: string, recordType?: string | null, supportedService?:
+        string, ttl?: number }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.domainDnsRecord" })[] } & { @odata.type:
+        "#microsoft.graph.domain" }>
       parameters:
         - id: body
-          type: Operation&lt;"/domains/{domain-id}", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            authenticationType?: string, availabilityStatus?: string | null,
+            domainNameReferences?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: string, deletedDateTime?: string | null
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.directoryObject" />" })[],
+            federationConfiguration?: (Omit&lt;Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., displayName?:
+            ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.identityProviderBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, issuerUri?: string | null, metadataExchangeUri?: string |
+            null, passiveSignInUri?: string | null,
+            preferredAuthenticationProtocol?: Record&lt;..., ...&gt; |
+            "unknownFutureValue" | "wsFed" | "saml" | null, signingCertificate?:
+            string | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.samlOrWsFedProvider" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            activeSignInUri?: string | null, federatedIdpMfaBehavior?:
+            Record&lt;string, never&gt; | "acceptIfMfaDoneByFederatedIdp" |
+            "enforceMfaByFederatedIdp" | "rejectMfaByFederatedIdp" |
+            "unknownFutureValue" | null, isSignedAuthenticationRequestRequired?:
+            boolean | null, nextSigningCertificate?: string | null,
+            passwordResetUri?: string | null, promptLoginBehavior?:
+            Record&lt;string, never&gt; | "unknownFutureValue" |
+            "translateToFreshPasswordAuthentication" | "nativeSupport" |
+            "disabled" | null, signingCertificateUpdateStatus?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            certificateUpdateResult?: string | null, lastRunDateTime?: string |
+            null } | null, signOutUri?: string | null })[], isAdminManaged?:
+            boolean, isDefault?: boolean, isInitial?: boolean, isRoot?: boolean,
+            isVerified?: boolean, manufacturer?: string | null, model?: string |
+            null, passwordNotificationWindowInDays?: number | null,
+            passwordValidityPeriodInDays?: number | null, rootDomain?: Omit&lt;{
+            id?: string | undefined; '<xref uid="@odata.type" />': string; },
+            "<xref uid="@odata.type" />"&gt; & { authenticationType?: string |
+            undefined; availabilityStatus?: string | null | undefined;
+            isAdminManaged?: boolean | undefined; ... 15 more ...; '<xref
+            uid="@odata.type" />': string; } & { ...; } | Record&lt;string,
+            never&gt; | null, serviceConfigurationRecords?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, isOptional?: boolean, label?: string, recordType?: string |
+            null, supportedService?: string, ttl?: number }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.domainDnsRecord" />" })[], state?: { <xref
+            uid="@odata.type" />: string, lastActionDateTime?: string | null,
+            operation?: string | null, status?: string | null } |
+            Record&lt;string, never&gt; | null, supportedServices?: string[],
+            verificationDnsRecords?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: string, isOptional?: boolean, label?:
+            string, recordType?: string | null, supportedService?: string, ttl?:
+            number }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.domainDnsRecord"
+            />" })[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.domain" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ domain-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /domains/{domain-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, authenticationType?: string, availabilityStatus?: string |
+          null, domainNameReferences?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, deletedDateTime?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.directoryObject" />" })[],
+          federationConfiguration?: (Omit&lt;Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, issuerUri?: function, metadataExchangeUri?: function,
+          passiveSignInUri?: function, preferredAuthenticationProtocol?:
+          function, signingCertificate?: function }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.samlOrWsFedProvider" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          activeSignInUri?: string | null, federatedIdpMfaBehavior?:
+          Record&lt;string, never&gt; | "acceptIfMfaDoneByFederatedIdp" |
+          "enforceMfaByFederatedIdp" | "rejectMfaByFederatedIdp" |
+          "unknownFutureValue" | null, isSignedAuthenticationRequestRequired?:
+          boolean | null, nextSigningCertificate?: string | null,
+          passwordResetUri?: string | null, promptLoginBehavior?:
+          Record&lt;string, never&gt; | "unknownFutureValue" |
+          "translateToFreshPasswordAuthentication" | "nativeSupport" |
+          "disabled" | null, signingCertificateUpdateStatus?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string,
+          certificateUpdateResult?: string | null, lastRunDateTime?: string |
+          null } | null, signOutUri?: string | null })[], isAdminManaged?:
+          boolean, isDefault?: boolean, isInitial?: boolean, isRoot?: boolean,
+          isVerified?: boolean, manufacturer?: string | null, model?: string |
+          null, passwordNotificationWindowInDays?: number | null,
+          passwordValidityPeriodInDays?: number | null, rootDomain?: Omit&lt;{
+          id?: string | undefined; '<xref uid="@odata.type" />': string; },
+          "<xref uid="@odata.type" />"&gt; & { authenticationType?: string |
+          undefined; availabilityStatus?: string | null | undefined;
+          isAdminManaged?: boolean | undefined; ... 15 more ...; '<xref
+          uid="@odata.type" />': string; } & { ...; } | Record&lt;string,
+          never&gt; | null, serviceConfigurationRecords?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string, isOptional?:
+          boolean, label?: string, recordType?: string | null,
+          supportedService?: string, ttl?: number }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.domainDnsRecord" />" })[], state?: { <xref
+          uid="@odata.type" />: string, lastActionDateTime?: string | null,
+          operation?: string | null, status?: string | null } |
+          Record&lt;string, never&gt; | null, supportedServices?: string[],
+          verificationDnsRecords?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, isOptional?: boolean, label?:
+          string, recordType?: string | null, supportedService?: string, ttl?:
+          number }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.domainDnsRecord" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.domain" />" }&gt;
 variables:
   - name: domainNameReferences
     uid: '@microsoft/teams.graph-endpoints.domains.domainNameReferences'
@@ -135,25 +788,48 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        domainNameReferences: { get: (params?: IEndpoints["GET
-        /domains/{domain-id}/domainNameReferences/{directoryObject-id}"]["parameters"])
-        => EndpointRequest<IEndpoints["GET
-        /domains/{domain-id}/domainNameReferences/{directoryObject-id}"]["response"]>,
+        domainNameReferences: { /** * `GET
+        /domains/{domain-id}/domainNameReferences` * * Retrieve a list of
+        directoryObject with a reference to the domain. The returned list will
+        contain all directory objects that have a dependency on the domain. */
         list: (params?: IEndpoints["GET
         /domains/{domain-id}/domainNameReferences"]["parameters"]) =>
         EndpointRequest<IEndpoints["GET
-        /domains/{domain-id}/domainNameReferences"]["response"]> }
+        /domains/{domain-id}/domainNameReferences"]["response"]>; /** * `GET
+        /domains/{domain-id}/domainNameReferences/{directoryObject-id}` * * The
+        objects such as users and groups that reference the domain ID.
+        Read-only, Nullable. Doesn&#x27;t support $expand. Supports $filter by
+        the OData type of objects returned. For example,
+        /domains/{domainId}/domainNameReferences/microsoft.graph.user and
+        /domains/{domainId}/domainNameReferences/microsoft.graph.group. */ get:
+        (params?: IEndpoints["GET
+        /domains/{domain-id}/domainNameReferences/{directoryObject-id}"]["parameters"])
+        => EndpointRequest<IEndpoints["GET
+        /domains/{domain-id}/domainNameReferences/{directoryObject-id}"]["response"]>;
+        }
       return:
         description: ''
         type: >-
-          { get: (params?: IEndpoints["GET
-          /domains/{domain-id}/domainNameReferences/{directoryObject-id}"]["parameters"])
-          =&gt; EndpointRequest&lt;IEndpoints["GET
-          /domains/{domain-id}/domainNameReferences/{directoryObject-id}"]["response"]&gt;,
-          list: (params?: IEndpoints["GET
+          { /** * `GET /domains/{domain-id}/domainNameReferences` * * Retrieve a
+          list of directoryObject with a reference to the domain. The returned
+          list will contain all directory objects that have a dependency on the
+          domain. */ list: (params?: IEndpoints["GET
           /domains/{domain-id}/domainNameReferences"]["parameters"]) =&gt;
           EndpointRequest&lt;IEndpoints["GET
-          /domains/{domain-id}/domainNameReferences"]["response"]&gt; }
+          /domains/{domain-id}/domainNameReferences"]["response"]&gt;; /** *
+          `GET /domains/{domain-id}/domainNameReferences/{directoryObject-id}` *
+          * The objects such as users and groups that reference the domain ID.
+          Read-only, Nullable. Doesn&#x27;t support $expand. Supports $filter by
+          the OData type of objects returned. For example,
+          /domains/{domainId}<xref
+          uid="/domainNameReferences/microsoft.graph.user" /> and
+          /domains/{domainId}<xref
+          uid="/domainNameReferences/microsoft.graph.group." /> */ get:
+          (params?: IEndpoints["GET
+          /domains/{domain-id}/domainNameReferences/{directoryObject-id}"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["GET
+          /domains/{domain-id}/domainNameReferences/{directoryObject-id}"]["response"]&gt;;
+          }
   - name: federationConfiguration
     uid: '@microsoft/teams.graph-endpoints.domains.federationConfiguration'
     package: '@microsoft/teams.graph-endpoints'
@@ -282,58 +958,87 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        serviceConfigurationRecords: { create: (body: IEndpoints["POST
+        serviceConfigurationRecords: { /** * `GET
+        /domains/{domain-id}/serviceConfigurationRecords` * * Retrieves a list
+        of domainDnsRecord objects needed to enable services for the domain. Use
+        the returned list to add records to the zone file of the domain. This
+        can be done through the domain registrar or DNS server configuration. */
+        list: (params?: IEndpoints["GET
+        /domains/{domain-id}/serviceConfigurationRecords"]["parameters"]) =>
+        EndpointRequest<IEndpoints["GET
+        /domains/{domain-id}/serviceConfigurationRecords"]["response"]>; /** *
+        `POST /domains/{domain-id}/serviceConfigurationRecords` * */ create:
+        (body: IEndpoints["POST
         /domains/{domain-id}/serviceConfigurationRecords"]["body"], params?:
         IEndpoints["POST
         /domains/{domain-id}/serviceConfigurationRecords"]["parameters"]) =>
         EndpointRequest<IEndpoints["POST
-        /domains/{domain-id}/serviceConfigurationRecords"]["response"]>, del:
-        (params?: IEndpoints["DELETE
-        /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["parameters"])
-        => EndpointRequest<IEndpoints["DELETE
-        /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["response"]>,
-        get: (params?: IEndpoints["GET
+        /domains/{domain-id}/serviceConfigurationRecords"]["response"]>; /** *
+        `GET
+        /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}` *
+        * DNS records the customer adds to the DNS zone file of the domain
+        before the domain can be used by Microsoft Online services. Read-only,
+        Nullable. Doesn&#x27;t support $expand. */ get: (params?:
+        IEndpoints["GET
         /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["parameters"])
         => EndpointRequest<IEndpoints["GET
-        /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["response"]>,
-        list: (params?: IEndpoints["GET
-        /domains/{domain-id}/serviceConfigurationRecords"]["parameters"]) =>
-        EndpointRequest<IEndpoints["GET
-        /domains/{domain-id}/serviceConfigurationRecords"]["response"]>, update:
-        (body: IEndpoints["PATCH
+        /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["response"]>;
+        /** * `PATCH
+        /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}` *
+        */ update: (body: IEndpoints["PATCH
         /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["body"],
         params?: IEndpoints["PATCH
         /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["parameters"])
         => EndpointRequest<IEndpoints["PATCH
-        /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["response"]>
+        /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["response"]>;
+        /** * `DELETE
+        /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}` *
+        */ del: (params?: IEndpoints["DELETE
+        /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["parameters"])
+        => EndpointRequest<IEndpoints["DELETE
+        /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["response"]>;
         }
       return:
         description: ''
         type: >-
-          { create: (body: IEndpoints["POST
+          { /** * `GET /domains/{domain-id}/serviceConfigurationRecords` * *
+          Retrieves a list of domainDnsRecord objects needed to enable services
+          for the domain. Use the returned list to add records to the zone file
+          of the domain. This can be done through the domain registrar or DNS
+          server configuration. */ list: (params?: IEndpoints["GET
+          /domains/{domain-id}/serviceConfigurationRecords"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["GET
+          /domains/{domain-id}/serviceConfigurationRecords"]["response"]&gt;;
+          /** * `POST /domains/{domain-id}/serviceConfigurationRecords` * */
+          create: (body: IEndpoints["POST
           /domains/{domain-id}/serviceConfigurationRecords"]["body"], params?:
           IEndpoints["POST
           /domains/{domain-id}/serviceConfigurationRecords"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["POST
-          /domains/{domain-id}/serviceConfigurationRecords"]["response"]&gt;,
-          del: (params?: IEndpoints["DELETE
-          /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["parameters"])
-          =&gt; EndpointRequest&lt;IEndpoints["DELETE
-          /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["response"]&gt;,
-          get: (params?: IEndpoints["GET
+          /domains/{domain-id}/serviceConfigurationRecords"]["response"]&gt;;
+          /** * `GET
+          /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}`
+          * * DNS records the customer adds to the DNS zone file of the domain
+          before the domain can be used by Microsoft Online services. Read-only,
+          Nullable. Doesn&#x27;t support $expand. */ get: (params?:
+          IEndpoints["GET
           /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["GET
-          /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["response"]&gt;,
-          list: (params?: IEndpoints["GET
-          /domains/{domain-id}/serviceConfigurationRecords"]["parameters"])
-          =&gt; EndpointRequest&lt;IEndpoints["GET
-          /domains/{domain-id}/serviceConfigurationRecords"]["response"]&gt;,
-          update: (body: IEndpoints["PATCH
+          /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["response"]&gt;;
+          /** * `PATCH
+          /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}`
+          * */ update: (body: IEndpoints["PATCH
           /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["body"],
           params?: IEndpoints["PATCH
           /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["PATCH
-          /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["response"]&gt;
+          /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["response"]&gt;;
+          /** * `DELETE
+          /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}`
+          * */ del: (params?: IEndpoints["DELETE
+          /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["DELETE
+          /domains/{domain-id}/serviceConfigurationRecords/{domainDnsRecord-id}"]["response"]&gt;;
           }
   - name: verificationDnsRecords
     uid: '@microsoft/teams.graph-endpoints.domains.verificationDnsRecords'
@@ -343,58 +1048,97 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        verificationDnsRecords: { create: (body: IEndpoints["POST
-        /domains/{domain-id}/verificationDnsRecords"]["body"], params?:
-        IEndpoints["POST
-        /domains/{domain-id}/verificationDnsRecords"]["parameters"]) =>
-        EndpointRequest<IEndpoints["POST
-        /domains/{domain-id}/verificationDnsRecords"]["response"]>, del:
-        (params?: IEndpoints["DELETE
-        /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["parameters"])
-        => EndpointRequest<IEndpoints["DELETE
-        /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["response"]>,
-        get: (params?: IEndpoints["GET
-        /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["parameters"])
-        => EndpointRequest<IEndpoints["GET
-        /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["response"]>,
-        list: (params?: IEndpoints["GET
+        verificationDnsRecords: { /** * `GET
+        /domains/{domain-id}/verificationDnsRecords` * * Retrieve a list of
+        domainDnsRecord objects. You cannot use an associated domain with your
+        Microsoft Entra tenant until ownership is verified. To verify the
+        ownership of the domain, retrieve the domain verification records and
+        add the details to the zone file of the domain. This can be done through
+        the domain registrar or DNS server configuration. Root domains require
+        verification. For example, contoso.com requires verification. If a root
+        domain is verified, subdomains of the root domain are automatically
+        verified. For example, subdomain.contoso.com is automatically be
+        verified if contoso.com has been verified. */ list: (params?:
+        IEndpoints["GET
         /domains/{domain-id}/verificationDnsRecords"]["parameters"]) =>
         EndpointRequest<IEndpoints["GET
-        /domains/{domain-id}/verificationDnsRecords"]["response"]>, update:
-        (body: IEndpoints["PATCH
+        /domains/{domain-id}/verificationDnsRecords"]["response"]>; /** * `POST
+        /domains/{domain-id}/verificationDnsRecords` * */ create: (body:
+        IEndpoints["POST /domains/{domain-id}/verificationDnsRecords"]["body"],
+        params?: IEndpoints["POST
+        /domains/{domain-id}/verificationDnsRecords"]["parameters"]) =>
+        EndpointRequest<IEndpoints["POST
+        /domains/{domain-id}/verificationDnsRecords"]["response"]>; /** * `GET
+        /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}` * *
+        DNS records that the customer adds to the DNS zone file of the domain
+        before the customer can complete domain ownership verification with
+        Microsoft Entra ID. Read-only, Nullable. Doesn&#x27;t support $expand.
+        */ get: (params?: IEndpoints["GET
+        /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["parameters"])
+        => EndpointRequest<IEndpoints["GET
+        /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["response"]>;
+        /** * `PATCH
+        /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}` * */
+        update: (body: IEndpoints["PATCH
         /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["body"],
         params?: IEndpoints["PATCH
         /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["parameters"])
         => EndpointRequest<IEndpoints["PATCH
-        /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["response"]>
+        /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["response"]>;
+        /** * `DELETE
+        /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}` * */
+        del: (params?: IEndpoints["DELETE
+        /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["parameters"])
+        => EndpointRequest<IEndpoints["DELETE
+        /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["response"]>;
         }
       return:
         description: ''
         type: >-
-          { create: (body: IEndpoints["POST
+          { /** * `GET /domains/{domain-id}/verificationDnsRecords` * * Retrieve
+          a list of domainDnsRecord objects. You cannot use an associated domain
+          with your Microsoft Entra tenant until ownership is verified. To
+          verify the ownership of the domain, retrieve the domain verification
+          records and add the details to the zone file of the domain. This can
+          be done through the domain registrar or DNS server configuration. Root
+          domains require verification. For example, <xref uid="contoso.com" />
+          requires verification. If a root domain is verified, subdomains of the
+          root domain are automatically verified. For example, <xref
+          uid="subdomain.contoso.com" /> is automatically be verified if <xref
+          uid="contoso.com" /> has been verified. */ list: (params?:
+          IEndpoints["GET
+          /domains/{domain-id}/verificationDnsRecords"]["parameters"]) =&gt;
+          EndpointRequest&lt;IEndpoints["GET
+          /domains/{domain-id}/verificationDnsRecords"]["response"]&gt;; /** *
+          `POST /domains/{domain-id}/verificationDnsRecords` * */ create: (body:
+          IEndpoints["POST
           /domains/{domain-id}/verificationDnsRecords"]["body"], params?:
           IEndpoints["POST
           /domains/{domain-id}/verificationDnsRecords"]["parameters"]) =&gt;
           EndpointRequest&lt;IEndpoints["POST
-          /domains/{domain-id}/verificationDnsRecords"]["response"]&gt;, del:
-          (params?: IEndpoints["DELETE
-          /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["parameters"])
-          =&gt; EndpointRequest&lt;IEndpoints["DELETE
-          /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["response"]&gt;,
-          get: (params?: IEndpoints["GET
+          /domains/{domain-id}/verificationDnsRecords"]["response"]&gt;; /** *
+          `GET /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}`
+          * * DNS records that the customer adds to the DNS zone file of the
+          domain before the customer can complete domain ownership verification
+          with Microsoft Entra ID. Read-only, Nullable. Doesn&#x27;t support
+          $expand. */ get: (params?: IEndpoints["GET
           /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["GET
-          /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["response"]&gt;,
-          list: (params?: IEndpoints["GET
-          /domains/{domain-id}/verificationDnsRecords"]["parameters"]) =&gt;
-          EndpointRequest&lt;IEndpoints["GET
-          /domains/{domain-id}/verificationDnsRecords"]["response"]&gt;, update:
-          (body: IEndpoints["PATCH
+          /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["response"]&gt;;
+          /** * `PATCH
+          /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}` * */
+          update: (body: IEndpoints["PATCH
           /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["body"],
           params?: IEndpoints["PATCH
           /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["PATCH
-          /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["response"]&gt;
+          /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["response"]&gt;;
+          /** * `DELETE
+          /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}` * */
+          del: (params?: IEndpoints["DELETE
+          /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["DELETE
+          /domains/{domain-id}/verificationDnsRecords/{domainDnsRecord-id}"]["response"]&gt;;
           }
   - name: verify
     uid: '@microsoft/teams.graph-endpoints.domains.verify'

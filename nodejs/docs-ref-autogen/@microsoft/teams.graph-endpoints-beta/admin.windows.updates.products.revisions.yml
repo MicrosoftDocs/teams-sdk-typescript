@@ -94,8 +94,21 @@ variables:
           }
 functions:
   - name: >-
-      create(Operation<"/admin/windows/updates/products/{product-id}/revisions",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, catalogEntry?: Record<string, never> | (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+      string, deployableUntilDateTime?: string | null, displayName?: string |
+      null, releaseDateTime?: string }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.windowsUpdates.catalogEntry" }) | null, displayName?:
+      string, isHotpatchUpdate?: boolean, knowledgeBaseArticle?: Record<string,
+      never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, url?: string } & { @odata.type:
+      "#microsoft.graph.windowsUpdates.knowledgeBaseArticle" }) | null,
+      osBuild?: { @odata.type: string, buildNumber?: number, majorVersion?:
+      number, minorVersion?: number, updateBuildRevision?: number }, product?:
+      string, releaseDateTime?: string, version?: string } & { @odata.type:
+      "#microsoft.graph.windowsUpdates.productRevision" }, { product-id: string
+      })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.admin.windows.updates.products.revisions.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -104,25 +117,87 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/admin/windows/updates/products/{product-id}/revisions",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /admin/windows/updates/products/{product-id}/revisions"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, catalogEntry?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+        Omit<{ @odata.type: string, deployableUntilDateTime?: string | null,
+        displayName?: string | null, releaseDateTime?: string }, "@odata.type">
+        & { @odata.type: "#microsoft.graph.windowsUpdates.catalogEntry" }) |
+        null, displayName?: string, isHotpatchUpdate?: boolean,
+        knowledgeBaseArticle?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string, url?:
+        string } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.knowledgeBaseArticle" }) | null,
+        osBuild?: { @odata.type: string, buildNumber?: number, majorVersion?:
+        number, minorVersion?: number, updateBuildRevision?: number }, product?:
+        string, releaseDateTime?: string, version?: string } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.productRevision" }, params?: {
+        product-id: string }): EndpointRequest<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, catalogEntry?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, deployableUntilDateTime?:
+        string | null, displayName?: string | null, releaseDateTime?: string },
+        "@odata.type"> & { @odata.type:
+        "#microsoft.graph.windowsUpdates.catalogEntry" }) | null, displayName?:
+        string, isHotpatchUpdate?: boolean, knowledgeBaseArticle?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, url?: string } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.knowledgeBaseArticle" }) | null,
+        osBuild?: { @odata.type: string, buildNumber?: number, majorVersion?:
+        number, minorVersion?: number, updateBuildRevision?: number }, product?:
+        string, releaseDateTime?: string, version?: string } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.productRevision" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/admin/windows/updates/products/{product-id}/revisions",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            catalogEntry?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, deployableUntilDateTime?: string | null, displayName?:
+            string | null, releaseDateTime?: string }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsUpdates.catalogEntry" />" }) | null,
+            displayName?: string, isHotpatchUpdate?: boolean,
+            knowledgeBaseArticle?: Record&lt;string, never&gt; | (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            url?: string } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsUpdates.knowledgeBaseArticle" />" }) |
+            null, osBuild?: { <xref uid="@odata.type" />: string, buildNumber?:
+            number, majorVersion?: number, minorVersion?: number,
+            updateBuildRevision?: number }, product?: string, releaseDateTime?:
+            string, version?: string } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsUpdates.productRevision" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ product-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /admin/windows/updates/products/{product-id}/revisions"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, catalogEntry?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, deployableUntilDateTime?: string | null, displayName?: string
+          | null, releaseDateTime?: string }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.catalogEntry" />" }) | null,
+          displayName?: string, isHotpatchUpdate?: boolean,
+          knowledgeBaseArticle?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, url?: string } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.knowledgeBaseArticle" />" }) |
+          null, osBuild?: { <xref uid="@odata.type" />: string, buildNumber?:
+          number, majorVersion?: number, minorVersion?: number,
+          updateBuildRevision?: number }, product?: string, releaseDateTime?:
+          string, version?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.productRevision" />" }&gt;
+  - name: 'del({ If-Match?: string, product-id: string, productRevision-id: string })'
     uid: >-
       @microsoft/teams.graph-endpoints-beta.admin.windows.updates.products.revisions.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -133,18 +208,20 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /admin/windows/updates/products/{product-id}/revisions/{productRevision-id}"]["response"]>
+        function del(params?: { If-Match?: string, product-id: string,
+        productRevision-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { If-Match?: string, product-id: string, productRevision-id: string
+            }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /admin/windows/updates/products/{product-id}/revisions/{productRevision-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], product-id: string,
+      productRevision-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.admin.windows.updates.products.revisions.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -158,18 +235,56 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /admin/windows/updates/products/{product-id}/revisions/{productRevision-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        product-id: string, productRevision-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, catalogEntry?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+        Omit<{ @odata.type: string, deployableUntilDateTime?: string | null,
+        displayName?: string | null, releaseDateTime?: string }, "@odata.type">
+        & { @odata.type: "#microsoft.graph.windowsUpdates.catalogEntry" }) |
+        null, displayName?: string, isHotpatchUpdate?: boolean,
+        knowledgeBaseArticle?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string, url?:
+        string } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.knowledgeBaseArticle" }) | null,
+        osBuild?: { @odata.type: string, buildNumber?: number, majorVersion?:
+        number, minorVersion?: number, updateBuildRevision?: number }, product?:
+        string, releaseDateTime?: string, version?: string } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.productRevision" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], product-id: string,
+            productRevision-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /admin/windows/updates/products/{product-id}/revisions/{productRevision-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, catalogEntry?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, deployableUntilDateTime?: string | null, displayName?: string
+          | null, releaseDateTime?: string }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.catalogEntry" />" }) | null,
+          displayName?: string, isHotpatchUpdate?: boolean,
+          knowledgeBaseArticle?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, url?: string } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.knowledgeBaseArticle" />" }) |
+          null, osBuild?: { <xref uid="@odata.type" />: string, buildNumber?:
+          number, majorVersion?: number, minorVersion?: number,
+          updateBuildRevision?: number }, product?: string, releaseDateTime?:
+          string, version?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.productRevision" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, product-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.admin.windows.updates.products.revisions.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -181,20 +296,72 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /admin/windows/updates/products/{product-id}/revisions"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, product-id: string }): EndpointRequest<{
+        @odata.count?: number | null, @odata.nextLink?: string | null } & {
+        value?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, catalogEntry?: Record<string, never> | (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        deployableUntilDateTime?: ..., displayName?: ..., releaseDateTime?: ...
+        }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.windowsUpdates.catalogEntry" }) | null, displayName?:
+        string, isHotpatchUpdate?: boolean, knowledgeBaseArticle?:
+        Record<string, never> | (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, url?: function } & {
+        @odata.type: "#microsoft.graph.windowsUpdates.knowledgeBaseArticle" }) |
+        null, osBuild?: { @odata.type: string, buildNumber?: number,
+        majorVersion?: number, minorVersion?: number, updateBuildRevision?:
+        number }, product?: string, releaseDateTime?: string, version?: string }
+        & { @odata.type: "#microsoft.graph.windowsUpdates.productRevision" })[]
+        }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, product-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /admin/windows/updates/products/{product-id}/revisions"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          catalogEntry?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ...,
+          deployableUntilDateTime?: ..., displayName?: ..., releaseDateTime?:
+          ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.windowsUpdates.catalogEntry" />" }) |
+          null, displayName?: string, isHotpatchUpdate?: boolean,
+          knowledgeBaseArticle?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, url?: function } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.knowledgeBaseArticle" />" }) |
+          null, osBuild?: { <xref uid="@odata.type" />: string, buildNumber?:
+          number, majorVersion?: number, minorVersion?: number,
+          updateBuildRevision?: number }, product?: string, releaseDateTime?:
+          string, version?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.productRevision" />" })[] }&gt;
   - name: >-
-      update(Operation<"/admin/windows/updates/products/{product-id}/revisions/{productRevision-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, catalogEntry?: Record<string, never> | (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+      string, deployableUntilDateTime?: string | null, displayName?: string |
+      null, releaseDateTime?: string }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.windowsUpdates.catalogEntry" }) | null, displayName?:
+      string, isHotpatchUpdate?: boolean, knowledgeBaseArticle?: Record<string,
+      never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, url?: string } & { @odata.type:
+      "#microsoft.graph.windowsUpdates.knowledgeBaseArticle" }) | null,
+      osBuild?: { @odata.type: string, buildNumber?: number, majorVersion?:
+      number, minorVersion?: number, updateBuildRevision?: number }, product?:
+      string, releaseDateTime?: string, version?: string } & { @odata.type:
+      "#microsoft.graph.windowsUpdates.productRevision" }, { product-id: string,
+      productRevision-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.admin.windows.updates.products.revisions.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -205,21 +372,84 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/admin/windows/updates/products/{product-id}/revisions/{productRevision-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /admin/windows/updates/products/{product-id}/revisions/{productRevision-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, catalogEntry?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+        Omit<{ @odata.type: string, deployableUntilDateTime?: string | null,
+        displayName?: string | null, releaseDateTime?: string }, "@odata.type">
+        & { @odata.type: "#microsoft.graph.windowsUpdates.catalogEntry" }) |
+        null, displayName?: string, isHotpatchUpdate?: boolean,
+        knowledgeBaseArticle?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string, url?:
+        string } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.knowledgeBaseArticle" }) | null,
+        osBuild?: { @odata.type: string, buildNumber?: number, majorVersion?:
+        number, minorVersion?: number, updateBuildRevision?: number }, product?:
+        string, releaseDateTime?: string, version?: string } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.productRevision" }, params?: {
+        product-id: string, productRevision-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, catalogEntry?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+        Omit<{ @odata.type: string, deployableUntilDateTime?: string | null,
+        displayName?: string | null, releaseDateTime?: string }, "@odata.type">
+        & { @odata.type: "#microsoft.graph.windowsUpdates.catalogEntry" }) |
+        null, displayName?: string, isHotpatchUpdate?: boolean,
+        knowledgeBaseArticle?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string, url?:
+        string } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.knowledgeBaseArticle" }) | null,
+        osBuild?: { @odata.type: string, buildNumber?: number, majorVersion?:
+        number, minorVersion?: number, updateBuildRevision?: number }, product?:
+        string, releaseDateTime?: string, version?: string } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.productRevision" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/admin/windows/updates/products/{product-id}/revisions/{productRevision-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            catalogEntry?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, deployableUntilDateTime?: string | null, displayName?:
+            string | null, releaseDateTime?: string }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsUpdates.catalogEntry" />" }) | null,
+            displayName?: string, isHotpatchUpdate?: boolean,
+            knowledgeBaseArticle?: Record&lt;string, never&gt; | (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            url?: string } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsUpdates.knowledgeBaseArticle" />" }) |
+            null, osBuild?: { <xref uid="@odata.type" />: string, buildNumber?:
+            number, majorVersion?: number, minorVersion?: number,
+            updateBuildRevision?: number }, product?: string, releaseDateTime?:
+            string, version?: string } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsUpdates.productRevision" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ product-id: string, productRevision-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /admin/windows/updates/products/{product-id}/revisions/{productRevision-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, catalogEntry?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, deployableUntilDateTime?: string | null, displayName?: string
+          | null, releaseDateTime?: string }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.catalogEntry" />" }) | null,
+          displayName?: string, isHotpatchUpdate?: boolean,
+          knowledgeBaseArticle?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, url?: string } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.knowledgeBaseArticle" />" }) |
+          null, osBuild?: { <xref uid="@odata.type" />: string, buildNumber?:
+          number, majorVersion?: number, minorVersion?: number,
+          updateBuildRevision?: number }, product?: string, releaseDateTime?:
+          string, version?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.productRevision" />" }&gt;

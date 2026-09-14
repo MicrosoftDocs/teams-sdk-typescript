@@ -10,8 +10,12 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
   - name: >-
-      create(Operation<"/deviceAppManagement/managedAppRegistrations/{managedAppRegistration-id}/appliedPolicies",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, createdDateTime?: string, description?: string |
+      null, displayName?: string, lastModifiedDateTime?: string,
+      roleScopeTagIds?: (string | null)[], version?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.managedAppPolicy" }, {
+      managedAppRegistration-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceAppManagement.managedAppRegistrations.appliedPolicies.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -22,25 +26,45 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/deviceAppManagement/managedAppRegistrations/{managedAppRegistration-id}/appliedPolicies",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /deviceAppManagement/managedAppRegistrations/{managedAppRegistration-id}/appliedPolicies"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string,
+        description?: string | null, displayName?: string,
+        lastModifiedDateTime?: string, roleScopeTagIds?: (string | null)[],
+        version?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.managedAppPolicy" }, params?: {
+        managedAppRegistration-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, createdDateTime?: string, description?: string | null,
+        displayName?: string, lastModifiedDateTime?: string, roleScopeTagIds?:
+        (string | null)[], version?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.managedAppPolicy" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceAppManagement/managedAppRegistrations/{managedAppRegistration-id}/appliedPolicies",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, createdDateTime?: string, description?: string | null,
+            displayName?: string, lastModifiedDateTime?: string,
+            roleScopeTagIds?: (string | null)[], version?: string | null },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.managedAppPolicy" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ managedAppRegistration-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /deviceAppManagement/managedAppRegistrations/{managedAppRegistration-id}/appliedPolicies"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdDateTime?: string, description?:
+          string | null, displayName?: string, lastModifiedDateTime?: string,
+          roleScopeTagIds?: (string | null)[], version?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedAppPolicy" />" }&gt;
+  - name: >-
+      del({ If-Match?: string, managedAppPolicy-id: string,
+      managedAppRegistration-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceAppManagement.managedAppRegistrations.appliedPolicies.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -51,18 +75,20 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /deviceAppManagement/managedAppRegistrations/{managedAppRegistration-id}/appliedPolicies/{managedAppPolicy-id}"]["response"]>
+        function del(params?: { If-Match?: string, managedAppPolicy-id: string,
+        managedAppRegistration-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { If-Match?: string, managedAppPolicy-id: string,
+            managedAppRegistration-id: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /deviceAppManagement/managedAppRegistrations/{managedAppRegistration-id}/appliedPolicies/{managedAppPolicy-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], managedAppPolicy-id: string,
+      managedAppRegistration-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceAppManagement.managedAppRegistrations.appliedPolicies.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -77,18 +103,34 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceAppManagement/managedAppRegistrations/{managedAppRegistration-id}/appliedPolicies/{managedAppPolicy-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        managedAppPolicy-id: string, managedAppRegistration-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string,
+        description?: string | null, displayName?: string,
+        lastModifiedDateTime?: string, roleScopeTagIds?: (string | null)[],
+        version?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.managedAppPolicy" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], managedAppPolicy-id:
+            string, managedAppRegistration-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceAppManagement/managedAppRegistrations/{managedAppRegistration-id}/appliedPolicies/{managedAppPolicy-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdDateTime?: string, description?:
+          string | null, displayName?: string, lastModifiedDateTime?: string,
+          roleScopeTagIds?: (string | null)[], version?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedAppPolicy" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, managedAppRegistration-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceAppManagement.managedAppRegistrations.appliedPolicies.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -103,20 +145,42 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceAppManagement/managedAppRegistrations/{managedAppRegistration-id}/appliedPolicies"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, managedAppRegistration-id: string }):
+        EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?: string
+        | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string,
+        description?: string | null, displayName?: string,
+        lastModifiedDateTime?: string, roleScopeTagIds?: function[], version?:
+        string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.managedAppPolicy" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, managedAppRegistration-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceAppManagement/managedAppRegistrations/{managedAppRegistration-id}/appliedPolicies"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdDateTime?: string, description?: string | null,
+          displayName?: string, lastModifiedDateTime?: string, roleScopeTagIds?:
+          function[], version?: string | null }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedAppPolicy" />" })[] }&gt;
   - name: >-
-      update(Operation<"/deviceAppManagement/managedAppRegistrations/{managedAppRegistration-id}/appliedPolicies/{managedAppPolicy-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, createdDateTime?: string, description?: string |
+      null, displayName?: string, lastModifiedDateTime?: string,
+      roleScopeTagIds?: (string | null)[], version?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.managedAppPolicy" }, {
+      managedAppPolicy-id: string, managedAppRegistration-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceAppManagement.managedAppRegistrations.appliedPolicies.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -127,24 +191,42 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/deviceAppManagement/managedAppRegistrations/{managedAppRegistration-id}/appliedPolicies/{managedAppPolicy-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /deviceAppManagement/managedAppRegistrations/{managedAppRegistration-id}/appliedPolicies/{managedAppPolicy-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string,
+        description?: string | null, displayName?: string,
+        lastModifiedDateTime?: string, roleScopeTagIds?: (string | null)[],
+        version?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.managedAppPolicy" }, params?: { managedAppPolicy-id:
+        string, managedAppRegistration-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, createdDateTime?: string, description?: string | null,
+        displayName?: string, lastModifiedDateTime?: string, roleScopeTagIds?:
+        (string | null)[], version?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.managedAppPolicy" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceAppManagement/managedAppRegistrations/{managedAppRegistration-id}/appliedPolicies/{managedAppPolicy-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, createdDateTime?: string, description?: string | null,
+            displayName?: string, lastModifiedDateTime?: string,
+            roleScopeTagIds?: (string | null)[], version?: string | null },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.managedAppPolicy" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ managedAppPolicy-id: string, managedAppRegistration-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /deviceAppManagement/managedAppRegistrations/{managedAppRegistration-id}/appliedPolicies/{managedAppPolicy-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdDateTime?: string, description?:
+          string | null, displayName?: string, lastModifiedDateTime?: string,
+          roleScopeTagIds?: (string | null)[], version?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedAppPolicy" />" }&gt;
 variables:
   - name: targetApps
     uid: >-

@@ -15,21 +15,29 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        clearPresence: { create: (body: IEndpoints["POST
+        clearPresence: { /** * `POST /users/{user-id}/presence/clearPresence` *
+        * Clear the application&#x27;s presence session for a user. If it is the
+        user&#x27;s only presence session, the user&#x27;s presence will change
+        to Offline/Offline. For details about presences sessions, see presence:
+        setPresence. */ create: (body: IEndpoints["POST
         /users/{user-id}/presence/clearPresence"]["body"], params?:
         IEndpoints["POST
         /users/{user-id}/presence/clearPresence"]["parameters"]) =>
         EndpointRequest<IEndpoints["POST
-        /users/{user-id}/presence/clearPresence"]["response"]> }
+        /users/{user-id}/presence/clearPresence"]["response"]>; }
       return:
         description: ''
         type: >-
-          { create: (body: IEndpoints["POST
+          { /** * `POST /users/{user-id}/presence/clearPresence` * * Clear the
+          application&#x27;s presence session for a user. If it is the
+          user&#x27;s only presence session, the user&#x27;s presence will
+          change to Offline/Offline. For details about presences sessions, see
+          presence: setPresence. */ create: (body: IEndpoints["POST
           /users/{user-id}/presence/clearPresence"]["body"], params?:
           IEndpoints["POST
           /users/{user-id}/presence/clearPresence"]["parameters"]) =&gt;
           EndpointRequest&lt;IEndpoints["POST
-          /users/{user-id}/presence/clearPresence"]["response"]&gt; }
+          /users/{user-id}/presence/clearPresence"]["response"]&gt;; }
   - name: clearUserPreferredPresence
     uid: '@microsoft/teams.graph-endpoints.users.presence.clearUserPreferredPresence'
     package: '@microsoft/teams.graph-endpoints'
@@ -58,20 +66,28 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        setPresence: { create: (body: IEndpoints["POST
+        setPresence: { /** * `POST /users/{user-id}/presence/setPresence` * *
+        Set the state of a user&#x27;s presence session as an application. For
+        more information about presence sessions, states permutations, and
+        timeouts, see Manage presence state using the Microsoft Graph API. */
+        create: (body: IEndpoints["POST
         /users/{user-id}/presence/setPresence"]["body"], params?:
         IEndpoints["POST /users/{user-id}/presence/setPresence"]["parameters"])
         => EndpointRequest<IEndpoints["POST
-        /users/{user-id}/presence/setPresence"]["response"]> }
+        /users/{user-id}/presence/setPresence"]["response"]>; }
       return:
         description: ''
         type: >-
-          { create: (body: IEndpoints["POST
+          { /** * `POST /users/{user-id}/presence/setPresence` * * Set the state
+          of a user&#x27;s presence session as an application. For more
+          information about presence sessions, states permutations, and
+          timeouts, see Manage presence state using the Microsoft Graph API. */
+          create: (body: IEndpoints["POST
           /users/{user-id}/presence/setPresence"]["body"], params?:
           IEndpoints["POST
           /users/{user-id}/presence/setPresence"]["parameters"]) =&gt;
           EndpointRequest&lt;IEndpoints["POST
-          /users/{user-id}/presence/setPresence"]["response"]&gt; }
+          /users/{user-id}/presence/setPresence"]["response"]&gt;; }
   - name: setStatusMessage
     uid: '@microsoft/teams.graph-endpoints.users.presence.setStatusMessage'
     package: '@microsoft/teams.graph-endpoints'
@@ -103,23 +119,42 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        setUserPreferredPresence: { create: (body: IEndpoints["POST
+        setUserPreferredPresence: { /** * `POST
+        /users/{user-id}/presence/setUserPreferredPresence` * * Set the
+        preferred availability and activity status for a user. If the preferred
+        presence of a user is set, the user&#x27;s presence shows as the
+        preferred status. Preferred presence takes effect only when at least one
+        presence session exists for the user. Otherwise, the user&#x27;s
+        presence shows as Offline. A presence session is created as a result of
+        a successful setPresence operation, or if the user is signed in on a
+        Microsoft Teams client. For more details, see presence sessions and
+        time-out and expiration. */ create: (body: IEndpoints["POST
         /users/{user-id}/presence/setUserPreferredPresence"]["body"], params?:
         IEndpoints["POST
         /users/{user-id}/presence/setUserPreferredPresence"]["parameters"]) =>
         EndpointRequest<IEndpoints["POST
-        /users/{user-id}/presence/setUserPreferredPresence"]["response"]> }
+        /users/{user-id}/presence/setUserPreferredPresence"]["response"]>; }
       return:
         description: ''
         type: >-
-          { create: (body: IEndpoints["POST
+          { /** * `POST /users/{user-id}/presence/setUserPreferredPresence` * *
+          Set the preferred availability and activity status for a user. If the
+          preferred presence of a user is set, the user&#x27;s presence shows as
+          the preferred status. Preferred presence takes effect only when at
+          least one presence session exists for the user. Otherwise, the
+          user&#x27;s presence shows as Offline. A presence session is created
+          as a result of a successful setPresence operation, or if the user is
+          signed in on a Microsoft Teams client. For more details, see presence
+          sessions and time-out and expiration. */ create: (body:
+          IEndpoints["POST
           /users/{user-id}/presence/setUserPreferredPresence"]["body"], params?:
           IEndpoints["POST
           /users/{user-id}/presence/setUserPreferredPresence"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["POST
-          /users/{user-id}/presence/setUserPreferredPresence"]["response"]&gt; }
+          /users/{user-id}/presence/setUserPreferredPresence"]["response"]&gt;;
+          }
 functions:
-  - name: del(any)
+  - name: 'del({ If-Match?: string, user-id: string })'
     uid: '@microsoft/teams.graph-endpoints.users.presence.del'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`DELETE /users/{user-id}/presence`'
@@ -127,18 +162,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /users/{user-id}/presence"]["response"]>
+        function del(params?: { If-Match?: string, user-id: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, user-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /users/{user-id}/presence"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[], user-id: string })'
     uid: '@microsoft/teams.graph-endpoints.users.presence.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -149,18 +182,52 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/presence"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[], user-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, activity?: string | null,
+        availability?: string | null, outOfOfficeSettings?: Record<string,
+        never> | { @odata.type: string, isOutOfOffice?: boolean | null,
+        message?: string | null } | null, sequenceNumber?: string | null,
+        statusMessage?: Record<string, never> | { @odata.type: string,
+        expiryDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, message?:
+        Record<string, never> | { @odata.type: string, content?: string | null,
+        contentType?: Record<string, never> | "text" | "html" | null } | null,
+        publishedDateTime?: string | null } | null } & { @odata.type:
+        "#microsoft.graph.presence" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[], user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/presence"]["response"]&gt;
-  - name: update(Operation<"/users/{user-id}/presence", "patch">, any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, activity?: string | null, availability?: string | null,
+          outOfOfficeSettings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, isOutOfOffice?: boolean | null,
+          message?: string | null } | null, sequenceNumber?: string | null,
+          statusMessage?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, expiryDateTime?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, dateTime?: string,
+          timeZone?: string | null } | null, message?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, content?: string |
+          null, contentType?: Record&lt;string, never&gt; | "text" | "html" |
+          null } | null, publishedDateTime?: string | null } | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.presence" />" }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, activity?: string | null, availability?: string |
+      null, outOfOfficeSettings?: Record<string, never> | { @odata.type: string,
+      isOutOfOffice?: boolean | null, message?: string | null } | null,
+      sequenceNumber?: string | null, statusMessage?: Record<string, never> | {
+      @odata.type: string, expiryDateTime?: Record<string, never> | {
+      @odata.type: string, dateTime?: string, timeZone?: string | null } | null,
+      message?: Record<string, never> | { @odata.type: string, content?: string
+      | null, contentType?: Record<string, never> | "text" | "html" | null } |
+      null, publishedDateTime?: string | null } | null } & { @odata.type:
+      "#microsoft.graph.presence" }, { user-id: string })
     uid: '@microsoft/teams.graph-endpoints.users.presence.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`PATCH /users/{user-id}/presence`'
@@ -168,18 +235,66 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/users/{user-id}/presence", "patch">,
-        params?: any): EndpointRequest<IEndpoints["PATCH
-        /users/{user-id}/presence"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, activity?: string | null,
+        availability?: string | null, outOfOfficeSettings?: Record<string,
+        never> | { @odata.type: string, isOutOfOffice?: boolean | null,
+        message?: string | null } | null, sequenceNumber?: string | null,
+        statusMessage?: Record<string, never> | { @odata.type: string,
+        expiryDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, message?:
+        Record<string, never> | { @odata.type: string, content?: string | null,
+        contentType?: Record<string, never> | "text" | "html" | null } | null,
+        publishedDateTime?: string | null } | null } & { @odata.type:
+        "#microsoft.graph.presence" }, params?: { user-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, activity?: string | null,
+        availability?: string | null, outOfOfficeSettings?: Record<string,
+        never> | { @odata.type: string, isOutOfOffice?: boolean | null,
+        message?: string | null } | null, sequenceNumber?: string | null,
+        statusMessage?: Record<string, never> | { @odata.type: string,
+        expiryDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, message?:
+        Record<string, never> | { @odata.type: string, content?: string | null,
+        contentType?: Record<string, never> | "text" | "html" | null } | null,
+        publishedDateTime?: string | null } | null } & { @odata.type:
+        "#microsoft.graph.presence" }>
       parameters:
         - id: body
-          type: Operation&lt;"/users/{user-id}/presence", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            activity?: string | null, availability?: string | null,
+            outOfOfficeSettings?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, isOutOfOffice?: boolean | null,
+            message?: string | null } | null, sequenceNumber?: string | null,
+            statusMessage?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, expiryDateTime?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, dateTime?: string,
+            timeZone?: string | null } | null, message?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, content?: string |
+            null, contentType?: Record&lt;string, never&gt; | "text" | "html" |
+            null } | null, publishedDateTime?: string | null } | null } & {
+            <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.presence"
+            />" }
           description: ''
         - id: params
-          type: any
+          type: '{ user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /users/{user-id}/presence"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, activity?: string | null, availability?: string | null,
+          outOfOfficeSettings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, isOutOfOffice?: boolean | null,
+          message?: string | null } | null, sequenceNumber?: string | null,
+          statusMessage?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, expiryDateTime?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, dateTime?: string,
+          timeZone?: string | null } | null, message?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, content?: string |
+          null, contentType?: Record&lt;string, never&gt; | "text" | "html" |
+          null } | null, publishedDateTime?: string | null } | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.presence" />" }&gt;

@@ -65,10 +65,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: undefined | Credentials credentials
+      content: Credentials | undefined credentials
       return:
         description: ''
-        type: undefined | <xref uid="@microsoft/teams.api.Credentials" />
+        type: <xref uid="@microsoft/teams.api.Credentials" /> | undefined
   - name: entraTokenValidator
     uid: '@microsoft/teams.apps.App.entraTokenValidator'
     package: '@microsoft/teams.apps'
@@ -134,10 +134,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: undefined | string id
+      content: string | undefined id
       return:
         description: ''
-        type: undefined | string
+        type: string | undefined
   - name: log
     uid: '@microsoft/teams.apps.App.log'
     package: '@microsoft/teams.apps'
@@ -158,10 +158,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: '{ defaultConnectionName: string } oauth'
+      content: '{ defaultConnectionName: string, fetchUserToken?: boolean } oauth'
       return:
         description: ''
-        type: '{ defaultConnectionName: string }'
+        type: '{ defaultConnectionName: string, fetchUserToken?: boolean }'
   - name: options
     uid: '@microsoft/teams.apps.App.options'
     package: '@microsoft/teams.apps'
@@ -185,7 +185,7 @@ properties:
       content: 'server: HttpServer'
       return:
         description: ''
-        type: HttpServer
+        type: <xref uid="@microsoft/teams.apps.HttpServer" />
   - name: storage
     uid: '@microsoft/teams.apps.App.storage'
     package: '@microsoft/teams.apps'
@@ -194,10 +194,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'storage: IStorage<any, any>'
+      content: 'storage: IStorage'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.common.IStorage" />&lt;any, any&gt;
+        type: <xref uid="@microsoft/teams.common.IStorage" />
 methods:
   - name: event<Name>(Name, EventHandler<AppEvents<TPlugin>[Name]>)
     uid: '@microsoft/teams.apps.App.event'
@@ -208,7 +208,7 @@ methods:
     syntax:
       content: >-
         function event<Name>(name: Name, cb:
-        EventHandler<AppEvents<TPlugin>[Name]>): App<TPlugin>
+        EventHandler<AppEvents<TPlugin>[Name]>): this
       parameters:
         - id: name
           type: Name
@@ -220,7 +220,7 @@ methods:
           description: the callback to invoke
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.apps.App" />&lt;TPlugin&gt;
+        type: this
   - name: 'function<TData>(string, (context: IFunctionContext<TData>) => any)'
     uid: '@microsoft/teams.apps.App.function'
     package: '@microsoft/teams.apps'
@@ -230,7 +230,7 @@ methods:
     syntax:
       content: >-
         function function<TData>(name: string, cb: (context:
-        IFunctionContext<TData>) => any): App<TPlugin>
+        IFunctionContext<TData>) => any): this
       parameters:
         - id: name
           type: string
@@ -240,7 +240,7 @@ methods:
           description: The callback to handle the function
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.apps.App" />&lt;TPlugin&gt;
+        type: this
   - name: >-
       function<TPluginOverride, TData>(string, (context:
       IFunctionContext<TData>) => any)
@@ -252,7 +252,7 @@ methods:
     syntax:
       content: >-
         function function<TPluginOverride, TData>(name: string, cb: (context:
-        IFunctionContext<TData>) => any): App<TPlugin>
+        IFunctionContext<TData>) => any): this
       parameters:
         - id: name
           type: string
@@ -262,7 +262,7 @@ methods:
           description: ''
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.apps.App" />&lt;TPlugin&gt;
+        type: this
   - name: getPlugin(PluginName)
     uid: '@microsoft/teams.apps.App.getPlugin'
     package: '@microsoft/teams.apps'
@@ -270,14 +270,14 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function getPlugin(name: PluginName): undefined | IPlugin<{}, {}>'
+      content: 'function getPlugin(name: PluginName): IPlugin<{}, {}> | undefined'
       parameters:
         - id: name
           type: <xref uid="@microsoft/teams.apps.PluginName" />
           description: ''
       return:
         description: ''
-        type: undefined | <xref uid="@microsoft/teams.apps.IPlugin" />&lt;{}, {}&gt;
+        type: <xref uid="@microsoft/teams.apps.IPlugin" />&lt;{}, {}&gt; | undefined
   - name: initialize()
     uid: '@microsoft/teams.apps.App.initialize'
     package: '@microsoft/teams.apps'
@@ -291,7 +291,7 @@ methods:
         type: Promise&lt;void&gt;
   - name: >-
       message(string | RegExp, RouteHandler<IActivityContext<IMessageActivity,
-      PluginAdditionalContext<TPlugin>>, void>)
+      PluginAdditionalContext<TPlugin>>>)
     uid: '@microsoft/teams.apps.App.message'
     package: '@microsoft/teams.apps'
     summary: subscribe to a message event for a specific pattern
@@ -301,7 +301,7 @@ methods:
       content: >-
         function message(pattern: string | RegExp, cb:
         RouteHandler<IActivityContext<IMessageActivity,
-        PluginAdditionalContext<TPlugin>>, void>): App<TPlugin>
+        PluginAdditionalContext<TPlugin>>>): this
       parameters:
         - id: pattern
           type: string | RegExp
@@ -311,11 +311,11 @@ methods:
             <xref uid="@microsoft/teams.apps.RouteHandler" />&lt;<xref
             uid="@microsoft/teams.apps.IActivityContext" />&lt;<xref
             uid="@microsoft/teams.api.IMessageActivity" />,
-            PluginAdditionalContext&lt;TPlugin&gt;&gt;, void&gt;
+            PluginAdditionalContext&lt;TPlugin&gt;&gt;&gt;
           description: callback to invoke
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.apps.App" />&lt;TPlugin&gt;
+        type: this
   - name: >-
       on<Name>(Name, Exclude<IRoutes<PluginAdditionalContext<TPlugin>>[Name],
       undefined>)
@@ -328,7 +328,7 @@ methods:
       content: >-
         function on<Name>(name: Name, cb:
         Exclude<IRoutes<PluginAdditionalContext<TPlugin>>[Name], undefined>):
-        App<TPlugin>
+        this
       parameters:
         - id: name
           type: Name
@@ -340,7 +340,7 @@ methods:
           description: callback to invoke
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.apps.App" />&lt;TPlugin&gt;
+        type: this
   - name: onActivity(IActivityEvent)
     uid: '@microsoft/teams.apps.App.onActivity'
     package: '@microsoft/teams.apps'
@@ -348,16 +348,14 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function onActivity(event: IActivityEvent): Promise<InvokeResponse<any>>'
+      content: 'function onActivity(event: IActivityEvent): Promise<InvokeResponse>'
       parameters:
         - id: event
           type: <xref uid="@microsoft/teams.apps.IActivityEvent" />
           description: ''
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref uid="@microsoft/teams.api.InvokeResponse"
-          />&lt;any&gt;&gt;
+        type: Promise&lt;<xref uid="@microsoft/teams.api.InvokeResponse" />&gt;
   - name: plugin(TPlugin)
     uid: '@microsoft/teams.apps.App.plugin'
     package: '@microsoft/teams.apps'
@@ -365,14 +363,14 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function plugin(plugin: TPlugin): App<TPlugin>'
+      content: 'function plugin(plugin: TPlugin): this'
       parameters:
         - id: plugin
           type: TPlugin
           description: plugin to add
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.apps.App" />&lt;TPlugin&gt;
+        type: this
   - name: process(IActivityEvent)
     uid: '@microsoft/teams.apps.App.process'
     package: '@microsoft/teams.apps'
@@ -380,16 +378,14 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function process(event: IActivityEvent): Promise<InvokeResponse<any>>'
+      content: 'function process(event: IActivityEvent): Promise<InvokeResponse>'
       parameters:
         - id: event
           type: <xref uid="@microsoft/teams.apps.IActivityEvent" />
           description: the received activity event
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref uid="@microsoft/teams.api.InvokeResponse"
-          />&lt;any&gt;&gt;
+        type: Promise&lt;<xref uid="@microsoft/teams.api.InvokeResponse" />&gt;
   - name: reply(string, ActivityLike)
     uid: '@microsoft/teams.apps.App.reply_4'
     package: '@microsoft/teams.apps'
@@ -627,7 +623,7 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function tab(name: string, path: string): App<TPlugin>'
+      content: 'function tab(name: string, path: string): this'
       parameters:
         - id: name
           type: string
@@ -637,10 +633,10 @@ methods:
           description: The path to the web `dist` folder.
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.apps.App" />&lt;TPlugin&gt;
+        type: this
   - name: >-
       use(RouteHandler<IActivityContext<Activity,
-      PluginAdditionalContext<TPlugin>>, void | InvokeResponse<any>>)
+      PluginAdditionalContext<TPlugin>>, void | InvokeResponse>)
     uid: '@microsoft/teams.apps.App.use'
     package: '@microsoft/teams.apps'
     summary: register a middleware
@@ -649,8 +645,7 @@ methods:
     syntax:
       content: >-
         function use(cb: RouteHandler<IActivityContext<Activity,
-        PluginAdditionalContext<TPlugin>>, void | InvokeResponse<any>>):
-        App<TPlugin>
+        PluginAdditionalContext<TPlugin>>, void | InvokeResponse>): this
       parameters:
         - id: cb
           type: >-
@@ -658,8 +653,8 @@ methods:
             uid="@microsoft/teams.apps.IActivityContext" />&lt;<xref
             uid="@microsoft/teams.api.Activity" />,
             PluginAdditionalContext&lt;TPlugin&gt;&gt;, void | <xref
-            uid="@microsoft/teams.api.InvokeResponse" />&lt;any&gt;&gt;
+            uid="@microsoft/teams.api.InvokeResponse" />&gt;
           description: callback to invoke
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.apps.App" />&lt;TPlugin&gt;
+        type: this

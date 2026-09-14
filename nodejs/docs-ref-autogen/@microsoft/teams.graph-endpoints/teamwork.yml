@@ -7,7 +7,7 @@ interfaces:
   - '@microsoft/teams.graph-endpoints.teamwork.IEndpoints'
 package: '@microsoft/teams.graph-endpoints'
 functions:
-  - name: get(any)
+  - name: 'get({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints.teamwork.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -20,16 +20,134 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /teamwork"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, deletedChats?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string } & { @odata.type: "#microsoft.graph.deletedChat" })[],
+        deletedTeams?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, channels?: (Omit<..., ...> & {
+        @odata.type: ..., allMembers?: ..., createdDateTime?: ..., description?:
+        ..., displayName?: ..., email?: ..., filesFolder?: ..., isArchived?:
+        ..., isFavoriteByDefault?: ..., members?: ..., membershipType?: ...,
+        messages?: ..., sharedWithTeams?: ..., summary?: ..., tabs?: ...,
+        tenantId?: ..., webUrl?: ... } & { @odata.type: ... })[] } & {
+        @odata.type: "#microsoft.graph.deletedTeam" })[], isTeamsEnabled?:
+        boolean, region?: string | null, teamsAppSettings?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, allowUserRequestsForAppAccess?: boolean | null,
+        isUserPersonalScopeResourceSpecificConsentEnabled?: boolean | null } & {
+        @odata.type: "#microsoft.graph.teamsAppSettings" }) | null,
+        workforceIntegrations?: (Omit<Omit<{ @odata.type: string, id?: function
+        }, "@odata.type"> & Omit<{ @odata.type: string, createdBy?: function,
+        createdDateTime?: function, lastModifiedBy?: function,
+        lastModifiedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & {
+        @odata.type: string, apiVersion?: number | null, displayName?: string |
+        null, eligibilityFilteringEnabledEntities?: Record<string, never> |
+        "unknownFutureValue" | "none" | "swapRequest" | "offerShiftRequest" |
+        "timeOffReason" | null, encryption?: Record<string, never> | {
+        @odata.type: string, protocol?: Record<..., ...> | "unknownFutureValue"
+        | "sharedSecret" | null, secret?: string | null } | null, isActive?:
+        boolean | null, supportedEntities?: Record<string, never> |
+        "unknownFutureValue" | "none" | "swapRequest" | "offerShiftRequest" |
+        "timeOffReason" | "shift" | "userShiftPreferences" | "openShift" |
+        "openShiftRequest" | "timeCard" | "timeOff" | "timeOffRequest" | null,
+        url?: string | null } & { @odata.type:
+        "#microsoft.graph.workforceIntegration" })[] } & { @odata.type:
+        "#microsoft.graph.teamwork" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /teamwork"]["response"]&gt;
-  - name: update(Operation<"/teamwork", "patch">)
+        type: >-
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, deletedChats?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deletedChat" />" })[], deletedTeams?: (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          channels?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          allMembers?: ..., createdDateTime?: ..., description?: ...,
+          displayName?: ..., email?: ..., filesFolder?: ..., isArchived?: ...,
+          isFavoriteByDefault?: ..., members?: ..., membershipType?: ...,
+          messages?: ..., sharedWithTeams?: ..., summary?: ..., tabs?: ...,
+          tenantId?: ..., webUrl?: ... } & { <xref uid="@odata.type" />: ...
+          })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deletedTeam" />" })[], isTeamsEnabled?: boolean,
+          region?: string | null, teamsAppSettings?: Record&lt;string, never&gt;
+          | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          allowUserRequestsForAppAccess?: boolean | null,
+          isUserPersonalScopeResourceSpecificConsentEnabled?: boolean | null } &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppSettings" />" }) | null,
+          workforceIntegrations?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, createdBy?: function,
+          createdDateTime?: function, lastModifiedBy?: function,
+          lastModifiedDateTime?: function }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          apiVersion?: number | null, displayName?: string | null,
+          eligibilityFilteringEnabledEntities?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "none" | "swapRequest" | "offerShiftRequest" |
+          "timeOffReason" | null, encryption?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, protocol?: Record&lt;..., ...&gt;
+          | "unknownFutureValue" | "sharedSecret" | null, secret?: string | null
+          } | null, isActive?: boolean | null, supportedEntities?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "none" |
+          "swapRequest" | "offerShiftRequest" | "timeOffReason" | "shift" |
+          "userShiftPreferences" | "openShift" | "openShiftRequest" | "timeCard"
+          | "timeOff" | "timeOffRequest" | null, url?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.workforceIntegration" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamwork" />" }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, deletedChats?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string } & { @odata.type:
+      "#microsoft.graph.deletedChat" })[], deletedTeams?: (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string, channels?:
+      (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
+      string, allMembers?: function, createdDateTime?: function, description?:
+      function, displayName?: function, email?: function, filesFolder?:
+      function, isArchived?: function, isFavoriteByDefault?: function, members?:
+      function, membershipType?: function, messages?: function,
+      sharedWithTeams?: function, summary?: function, tabs?: function,
+      tenantId?: function, webUrl?: function } & { @odata.type:
+      "#microsoft.graph.channel" })[] } & { @odata.type:
+      "#microsoft.graph.deletedTeam" })[], isTeamsEnabled?: boolean, region?:
+      string | null, teamsAppSettings?: Record<string, never> | (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, allowUserRequestsForAppAccess?: boolean | null,
+      isUserPersonalScopeResourceSpecificConsentEnabled?: boolean | null } & {
+      @odata.type: "#microsoft.graph.teamsAppSettings" }) | null,
+      workforceIntegrations?: (Omit<Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, createdBy?: Record<..., ...>
+      | { @odata.type: ..., application?: ..., device?: ..., user?: ... } |
+      null, createdDateTime?: string | null, lastModifiedBy?: Record<..., ...> |
+      { @odata.type: ..., application?: ..., device?: ..., user?: ... } | null,
+      lastModifiedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & { @odata.type:
+      string, apiVersion?: number | null, displayName?: string | null,
+      eligibilityFilteringEnabledEntities?: Record<string, never> |
+      "unknownFutureValue" | "none" | "swapRequest" | "offerShiftRequest" |
+      "timeOffReason" | null, encryption?: Record<string, never> | {
+      @odata.type: string, protocol?: Record<string, never> |
+      "unknownFutureValue" | "sharedSecret" | null, secret?: string | null } |
+      null, isActive?: boolean | null, supportedEntities?: Record<string, never>
+      | "unknownFutureValue" | "none" | "swapRequest" | "offerShiftRequest" |
+      "timeOffReason" | "shift" | "userShiftPreferences" | "openShift" |
+      "openShiftRequest" | "timeCard" | "timeOff" | "timeOffRequest" | null,
+      url?: string | null } & { @odata.type:
+      "#microsoft.graph.workforceIntegration" })[] } & { @odata.type:
+      "#microsoft.graph.teamwork" })
     uid: '@microsoft/teams.graph-endpoints.teamwork.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`PATCH /teamwork`'
@@ -37,15 +155,184 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/teamwork", "patch">):
-        EndpointRequest<IEndpoints["PATCH /teamwork"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, deletedChats?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string } & { @odata.type: "#microsoft.graph.deletedChat" })[],
+        deletedTeams?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, channels?: (Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & { @odata.type: string, allMembers?:
+        function, createdDateTime?: function, description?: function,
+        displayName?: function, email?: function, filesFolder?: function,
+        isArchived?: function, isFavoriteByDefault?: function, members?:
+        function, membershipType?: function, messages?: function,
+        sharedWithTeams?: function, summary?: function, tabs?: function,
+        tenantId?: function, webUrl?: function } & { @odata.type:
+        "#microsoft.graph.channel" })[] } & { @odata.type:
+        "#microsoft.graph.deletedTeam" })[], isTeamsEnabled?: boolean, region?:
+        string | null, teamsAppSettings?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, allowUserRequestsForAppAccess?: boolean | null,
+        isUserPersonalScopeResourceSpecificConsentEnabled?: boolean | null } & {
+        @odata.type: "#microsoft.graph.teamsAppSettings" }) | null,
+        workforceIntegrations?: (Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdBy?: Record<...,
+        ...> | { @odata.type: ..., application?: ..., device?: ..., user?: ... }
+        | null, createdDateTime?: string | null, lastModifiedBy?: Record<...,
+        ...> | { @odata.type: ..., application?: ..., device?: ..., user?: ... }
+        | null, lastModifiedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> &
+        { @odata.type: string, apiVersion?: number | null, displayName?: string
+        | null, eligibilityFilteringEnabledEntities?: Record<string, never> |
+        "unknownFutureValue" | "none" | "swapRequest" | "offerShiftRequest" |
+        "timeOffReason" | null, encryption?: Record<string, never> | {
+        @odata.type: string, protocol?: Record<string, never> |
+        "unknownFutureValue" | "sharedSecret" | null, secret?: string | null } |
+        null, isActive?: boolean | null, supportedEntities?: Record<string,
+        never> | "unknownFutureValue" | "none" | "swapRequest" |
+        "offerShiftRequest" | "timeOffReason" | "shift" | "userShiftPreferences"
+        | "openShift" | "openShiftRequest" | "timeCard" | "timeOff" |
+        "timeOffRequest" | null, url?: string | null } & { @odata.type:
+        "#microsoft.graph.workforceIntegration" })[] } & { @odata.type:
+        "#microsoft.graph.teamwork" }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        deletedChats?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.deletedChat" })[], deletedTeams?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        channels?: (Omit<..., ...> & { @odata.type: ..., allMembers?: ...,
+        createdDateTime?: ..., description?: ..., displayName?: ..., email?:
+        ..., filesFolder?: ..., isArchived?: ..., isFavoriteByDefault?: ...,
+        members?: ..., membershipType?: ..., messages?: ..., sharedWithTeams?:
+        ..., summary?: ..., tabs?: ..., tenantId?: ..., webUrl?: ... } & {
+        @odata.type: ... })[] } & { @odata.type: "#microsoft.graph.deletedTeam"
+        })[], isTeamsEnabled?: boolean, region?: string | null,
+        teamsAppSettings?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string,
+        allowUserRequestsForAppAccess?: boolean | null,
+        isUserPersonalScopeResourceSpecificConsentEnabled?: boolean | null } & {
+        @odata.type: "#microsoft.graph.teamsAppSettings" }) | null,
+        workforceIntegrations?: (Omit<Omit<{ @odata.type: string, id?: function
+        }, "@odata.type"> & Omit<{ @odata.type: string, createdBy?: function,
+        createdDateTime?: function, lastModifiedBy?: function,
+        lastModifiedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & {
+        @odata.type: string, apiVersion?: number | null, displayName?: string |
+        null, eligibilityFilteringEnabledEntities?: Record<string, never> |
+        "unknownFutureValue" | "none" | "swapRequest" | "offerShiftRequest" |
+        "timeOffReason" | null, encryption?: Record<string, never> | {
+        @odata.type: string, protocol?: Record<..., ...> | "unknownFutureValue"
+        | "sharedSecret" | null, secret?: string | null } | null, isActive?:
+        boolean | null, supportedEntities?: Record<string, never> |
+        "unknownFutureValue" | "none" | "swapRequest" | "offerShiftRequest" |
+        "timeOffReason" | "shift" | "userShiftPreferences" | "openShift" |
+        "openShiftRequest" | "timeCard" | "timeOff" | "timeOffRequest" | null,
+        url?: string | null } & { @odata.type:
+        "#microsoft.graph.workforceIntegration" })[] } & { @odata.type:
+        "#microsoft.graph.teamwork" }>
       parameters:
         - id: body
-          type: Operation&lt;"/teamwork", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            deletedChats?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.deletedChat" />" })[], deletedTeams?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            channels?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, allMembers?: function, createdDateTime?: function,
+            description?: function, displayName?: function, email?: function,
+            filesFolder?: function, isArchived?: function, isFavoriteByDefault?:
+            function, members?: function, membershipType?: function, messages?:
+            function, sharedWithTeams?: function, summary?: function, tabs?:
+            function, tenantId?: function, webUrl?: function } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.channel" />" })[]
+            } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deletedTeam" />" })[], isTeamsEnabled?:
+            boolean, region?: string | null, teamsAppSettings?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, allowUserRequestsForAppAccess?:
+            boolean | null, isUserPersonalScopeResourceSpecificConsentEnabled?:
+            boolean | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAppSettings" />" }) | null,
+            workforceIntegrations?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type"
+            />: string, id?: string }, "<xref uid="@odata.type" />"&gt; &
+            Omit&lt;{ <xref uid="@odata.type" />: string, createdBy?:
+            Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            application?: ..., device?: ..., user?: ... } | null,
+            createdDateTime?: string | null, lastModifiedBy?: Record&lt;...,
+            ...&gt; | { <xref uid="@odata.type" />: ..., application?: ...,
+            device?: ..., user?: ... } | null, lastModifiedDateTime?: string |
+            null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            apiVersion?: number | null, displayName?: string | null,
+            eligibilityFilteringEnabledEntities?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "none" | "swapRequest" | "offerShiftRequest"
+            | "timeOffReason" | null, encryption?: Record&lt;string, never&gt; |
+            { <xref uid="@odata.type" />: string, protocol?: Record&lt;string,
+            never&gt; | "unknownFutureValue" | "sharedSecret" | null, secret?:
+            string | null } | null, isActive?: boolean | null,
+            supportedEntities?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "none" | "swapRequest" | "offerShiftRequest"
+            | "timeOffReason" | "shift" | "userShiftPreferences" | "openShift" |
+            "openShiftRequest" | "timeCard" | "timeOff" | "timeOffRequest" |
+            null, url?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.workforceIntegration" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.teamwork" />" }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["PATCH /teamwork"]["response"]&gt;
+        type: >-
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, deletedChats?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deletedChat" />" })[], deletedTeams?: (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          channels?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          allMembers?: ..., createdDateTime?: ..., description?: ...,
+          displayName?: ..., email?: ..., filesFolder?: ..., isArchived?: ...,
+          isFavoriteByDefault?: ..., members?: ..., membershipType?: ...,
+          messages?: ..., sharedWithTeams?: ..., summary?: ..., tabs?: ...,
+          tenantId?: ..., webUrl?: ... } & { <xref uid="@odata.type" />: ...
+          })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deletedTeam" />" })[], isTeamsEnabled?: boolean,
+          region?: string | null, teamsAppSettings?: Record&lt;string, never&gt;
+          | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          allowUserRequestsForAppAccess?: boolean | null,
+          isUserPersonalScopeResourceSpecificConsentEnabled?: boolean | null } &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppSettings" />" }) | null,
+          workforceIntegrations?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, createdBy?: function,
+          createdDateTime?: function, lastModifiedBy?: function,
+          lastModifiedDateTime?: function }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          apiVersion?: number | null, displayName?: string | null,
+          eligibilityFilteringEnabledEntities?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "none" | "swapRequest" | "offerShiftRequest" |
+          "timeOffReason" | null, encryption?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, protocol?: Record&lt;..., ...&gt;
+          | "unknownFutureValue" | "sharedSecret" | null, secret?: string | null
+          } | null, isActive?: boolean | null, supportedEntities?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "none" |
+          "swapRequest" | "offerShiftRequest" | "timeOffReason" | "shift" |
+          "userShiftPreferences" | "openShift" | "openShiftRequest" | "timeCard"
+          | "timeOff" | "timeOffRequest" | null, url?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.workforceIntegration" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamwork" />" }&gt;
 variables:
   - name: sendActivityNotificationToRecipients
     uid: >-

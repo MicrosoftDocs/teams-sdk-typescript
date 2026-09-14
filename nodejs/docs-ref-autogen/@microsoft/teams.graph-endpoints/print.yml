@@ -98,7 +98,7 @@ variables:
           EndpointRequest&lt;IEndpoints["PATCH
           /print/operations/{printOperation-id}"]["response"]&gt; }
 functions:
-  - name: get(any)
+  - name: 'get({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints.print.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`GET /print`'
@@ -106,16 +106,712 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /print"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<{ @odata.type: string, connectors?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        appVersion?: string, displayName?: string, fullyQualifiedDomainName?:
+        string, location?: Record<string, never> | { @odata.type: string,
+        altitudeInMeters?: number | null, building?: string | null, city?:
+        string | null, countryOrRegion?: string | null, floor?: string | null,
+        floorDescription?: string | null, latitude?: string | number | null,
+        longitude?: string | number | null, organization?: function[],
+        postalCode?: string | null, roomDescription?: string | null, roomName?:
+        string | null, site?: string | null, stateOrProvince?: string | null,
+        streetAddress?: string | null, subdivision?: function[], subunit?:
+        function[] } | null, operatingSystem?: string, registeredDateTime?:
+        string } & { @odata.type: "#microsoft.graph.printConnector" })[],
+        operations?: (Omit<{ @odata.type: string, id?: string }, "@odata.type">
+        & Omit<{ @odata.type: string, createdDateTime?: string, status?: {
+        @odata.type: string, description?: string, state?: "unknownFutureValue"
+        | "notStarted" | "running" | "succeeded" | "failed" } }, "@odata.type">
+        & { @odata.type: "#microsoft.graph.printOperation" })[], printers?:
+        (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, capabilities?: Record<..., ...> | { @odata.type:
+        ..., bottomMargins?: ..., collation?: ..., colorModes?: ...,
+        contentTypes?: ..., copiesPerJob?: ..., dpis?: ..., duplexModes?: ...,
+        feedOrientations?: ..., finishings?: ..., inputBins?: ...,
+        isColorPrintingSupported?: ..., isPageRangeSupported?: ...,
+        leftMargins?: ..., mediaColors?: ..., mediaSizes?: ..., mediaTypes?:
+        ..., multipageLayouts?: ..., orientations?: ..., outputBins?: ...,
+        pagesPerSheet?: ..., qualities?: ..., rightMargins?: ..., scalings?:
+        ..., supportsFitPdfToPage?: ..., topMargins?: ... } | null, defaults?:
+        Record<..., ...> | { @odata.type: ..., colorMode?: ..., contentType?:
+        ..., copiesPerJob?: ..., dpi?: ..., duplexMode?: ..., finishings?: ...,
+        fitPdfToPage?: ..., inputBin?: ..., mediaColor?: ..., mediaSize?: ...,
+        mediaType?: ..., multipageLayout?: ..., orientation?: ..., outputBin?:
+        ..., pagesPerSheet?: ..., quality?: ..., scaling?: ... } | null,
+        displayName?: string, isAcceptingJobs?: boolean | null, jobs?: ...[],
+        location?: Record<..., ...> | { @odata.type: ..., altitudeInMeters?:
+        ..., building?: ..., city?: ..., countryOrRegion?: ..., floor?: ...,
+        floorDescription?: ..., latitude?: ..., longitude?: ..., organization?:
+        ..., postalCode?: ..., roomDescription?: ..., roomName?: ..., site?:
+        ..., stateOrProvince?: ..., streetAddress?: ..., subdivision?: ...,
+        subunit?: ... } | null, manufacturer?: string | null, model?: string |
+        null, status?: { @odata.type: ..., description?: ..., details?: ...,
+        state?: ... } }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.printerBase" }, "@odata.type"> & { @odata.type:
+        string, connectors?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, appVersion?: function,
+        displayName?: function, fullyQualifiedDomainName?: function, location?:
+        function, operatingSystem?: function, registeredDateTime?: function } &
+        { @odata.type: "#microsoft.graph.printConnector" })[],
+        hasPhysicalDevice?: boolean, isShared?: boolean, lastSeenDateTime?:
+        string | null, registeredDateTime?: string, shares?: (Omit<... & ... &
+        ..., "@odata.type"> & { @odata.type: string, allowAllUsers?: function,
+        allowedGroups?: function, allowedUsers?: function, createdDateTime?:
+        function, printer?: function, viewPoint?: function } & { @odata.type:
+        "#microsoft.graph.printerShare" })[], taskTriggers?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        definition?: function, event?: function } & { @odata.type:
+        "#microsoft.graph.printTaskTrigger" })[] })[], services?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, endpoints?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type">
+        & { @odata.type: string, displayName?: function, uri?: function } & {
+        @odata.type: "#microsoft.graph.printServiceEndpoint" })[] } & {
+        @odata.type: "#microsoft.graph.printService" })[], settings?:
+        Record<string, never> | { @odata.type: string,
+        documentConversionEnabled?: boolean, printerDiscoverySettings?:
+        Record<string, never> | { @odata.type: string, airPrint?: { @odata.type:
+        string, incompatiblePrinters?: "unknownFutureValue" | "show" | "hide" }
+        } | null } | null, shares?: (Omit<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, capabilities?:
+        Record<..., ...> | { @odata.type: ..., bottomMargins?: ..., collation?:
+        ..., colorModes?: ..., contentTypes?: ..., copiesPerJob?: ..., dpis?:
+        ..., duplexModes?: ..., feedOrientations?: ..., finishings?: ...,
+        inputBins?: ..., isColorPrintingSupported?: ..., isPageRangeSupported?:
+        ..., leftMargins?: ..., mediaColors?: ..., mediaSizes?: ...,
+        mediaTypes?: ..., multipageLayouts?: ..., orientations?: ...,
+        outputBins?: ..., pagesPerSheet?: ..., qualities?: ..., rightMargins?:
+        ..., scalings?: ..., supportsFitPdfToPage?: ..., topMargins?: ... } |
+        null, defaults?: Record<..., ...> | { @odata.type: ..., colorMode?: ...,
+        contentType?: ..., copiesPerJob?: ..., dpi?: ..., duplexMode?: ...,
+        finishings?: ..., fitPdfToPage?: ..., inputBin?: ..., mediaColor?: ...,
+        mediaSize?: ..., mediaType?: ..., multipageLayout?: ..., orientation?:
+        ..., outputBin?: ..., pagesPerSheet?: ..., quality?: ..., scaling?: ...
+        } | null, displayName?: string, isAcceptingJobs?: boolean | null, jobs?:
+        ...[], location?: Record<..., ...> | { @odata.type: ...,
+        altitudeInMeters?: ..., building?: ..., city?: ..., countryOrRegion?:
+        ..., floor?: ..., floorDescription?: ..., latitude?: ..., longitude?:
+        ..., organization?: ..., postalCode?: ..., roomDescription?: ...,
+        roomName?: ..., site?: ..., stateOrProvince?: ..., streetAddress?: ...,
+        subdivision?: ..., subunit?: ... } | null, manufacturer?: string | null,
+        model?: string | null, status?: { @odata.type: ..., description?: ...,
+        details?: ..., state?: ... } }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.printerBase" }, "@odata.type"> & { @odata.type:
+        string, allowAllUsers?: boolean, allowedGroups?: (Omit<... & ... & ...,
+        "@odata.type"> & { @odata.type: string, acceptedSenders?: function,
+        allowExternalSenders?: function, appRoleAssignments?: function,
+        assignedLabels?: function, assignedLicenses?: function,
+        autoSubscribeNewMembers?: function, calendar?: function, calendarView?:
+        function, classification?: function, conversations?: function,
+        createdDateTime?: function, createdOnBehalfOf?: function, description?:
+        function, displayName?: function, drive?: function, drives?: function,
+        events?: function, expirationDateTime?: function, extensions?: function,
+        groupLifecyclePolicies?: function, groupTypes?: function,
+        hasMembersWithLicenseErrors?: function, hideFromAddressLists?: function,
+        hideFromOutlookClients?: function, isArchived?: function,
+        isAssignableToRole?: function, isManagementRestricted?: function,
+        isSubscribedByMail?: function, licenseProcessingState?: function, mail?:
+        function, mailEnabled?: function, mailNickname?: function, memberOf?:
+        function, members?: function, membershipRule?: function,
+        membershipRuleProcessingState?: function, membersWithLicenseErrors?:
+        function, onenote?: function, onPremisesDomainName?: function,
+        onPremisesLastSyncDateTime?: function, onPremisesNetBiosName?: function,
+        onPremisesProvisioningErrors?: function, onPremisesSamAccountName?:
+        function, onPremisesSecurityIdentifier?: function,
+        onPremisesSyncBehavior?: function, onPremisesSyncEnabled?: function,
+        owners?: function, permissionGrants?: function, photo?: function,
+        photos?: function, planner?: function, preferredDataLocation?: function,
+        preferredLanguage?: function, proxyAddresses?: function,
+        rejectedSenders?: function, renewedDateTime?: function,
+        securityEnabled?: function, securityIdentifier?: function,
+        serviceProvisioningErrors?: function, settings?: function, sites?:
+        function, team?: function, theme?: function, threads?: function,
+        transitiveMemberOf?: function, transitiveMembers?: function,
+        uniqueName?: function, unseenCount?: function, visibility?: function } &
+        { @odata.type: "#microsoft.graph.group" })[], allowedUsers?: (Omit<... &
+        ... & ..., "@odata.type"> & { @odata.type: string, aboutMe?: function,
+        accountEnabled?: function, activities?: function, ageGroup?: function,
+        agreementAcceptances?: function, appRoleAssignments?: function,
+        assignedLicenses?: function, assignedPlans?: function, authentication?:
+        function, authorizationInfo?: function, birthday?: function,
+        businessPhones?: function, calendar?: function, calendarGroups?:
+        function, calendars?: function, calendarView?: function, chats?:
+        function, city?: function, cloudClipboard?: function, cloudPCs?:
+        function, companyName?: function, consentProvidedForMinor?: function,
+        contactFolders?: function, contacts?: function, country?: function,
+        createdDateTime?: function, createdObjects?: function, creationType?:
+        function, customSecurityAttributes?: function,
+        dataSecurityAndGovernance?: function, department?: function,
+        deviceEnrollmentLimit?: function,
+        deviceManagementTroubleshootingEvents?: function, directReports?:
+        function, displayName?: function, drive?: function, drives?: function,
+        employeeExperience?: function, employeeHireDate?: function, employeeId?:
+        function, employeeLeaveDateTime?: function, employeeOrgData?: function,
+        employeeType?: function, events?: function, extensions?: function,
+        externalUserState?: function, externalUserStateChangeDateTime?:
+        function, faxNumber?: function, followedSites?: function, givenName?:
+        function, hireDate?: function, identities?: function, imAddresses?:
+        function, inferenceClassification?: function, insights?: function,
+        interests?: function, isManagementRestricted?: function,
+        isResourceAccount?: function, jobTitle?: function, joinedTeams?:
+        function, lastPasswordChangeDateTime?: function,
+        legalAgeGroupClassification?: function, licenseAssignmentStates?:
+        function, licenseDetails?: function, mail?: function, mailboxSettings?:
+        function, mailFolders?: function, mailNickname?: function,
+        managedAppRegistrations?: function, managedDevices?: function, manager?:
+        function, memberOf?: function, messages?: function, mobilePhone?:
+        function, mySite?: function, oauth2PermissionGrants?: function,
+        officeLocation?: function, onenote?: function, onlineMeetings?:
+        function, onPremisesDistinguishedName?: function, onPremisesDomainName?:
+        function, onPremisesExtensionAttributes?: function,
+        onPremisesImmutableId?: function, onPremisesLastSyncDateTime?: function,
+        onPremisesProvisioningErrors?: function, onPremisesSamAccountName?:
+        function, onPremisesSecurityIdentifier?: function,
+        onPremisesSyncEnabled?: function, onPremisesUserPrincipalName?:
+        function, otherMails?: function, outlook?: function, ownedDevices?:
+        function, ownedObjects?: function, passwordPolicies?: function,
+        passwordProfile?: function, pastProjects?: function, people?: function,
+        permissionGrants?: function, photo?: function, photos?: function,
+        planner?: function, postalCode?: function, preferredDataLocation?:
+        function, preferredLanguage?: function, preferredName?: function,
+        presence?: function, print?: function, provisionedPlans?: function,
+        proxyAddresses?: function, registeredDevices?: function,
+        responsibilities?: function, schools?: function, scopedRoleMemberOf?:
+        function, securityIdentifier?: function, serviceProvisioningErrors?:
+        function, settings?: function, showInAddressList?: function,
+        signInActivity?: function, signInSessionsValidFromDateTime?: function,
+        skills?: function, solutions?: function, sponsors?: function, state?:
+        function, streetAddress?: function, surname?: function, teamwork?:
+        function, todo?: function, transitiveMemberOf?: function,
+        usageLocation?: function, userPrincipalName?: function, userType?:
+        function } & { @odata.type: "#microsoft.graph.user" })[],
+        createdDateTime?: string, printer?: Record<string, never> |
+        (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, connectors?: ...[],
+        hasPhysicalDevice?: boolean, isShared?: boolean, lastSeenDateTime?:
+        string | null, registeredDateTime?: string, shares?: (Omit<Omit<{ id?:
+        string | undefined; '@odata.type': string; }, "@odata.type"> & Omit<{
+        capabilities?: Record<string, never> | { bottomMargins?: (number |
+        null)[] | undefined; ... 24 more ...; '@odata.type': string; } | null |
+        undefined; ... 8 more ...; '@odata.type': string; }, "@odata.type"> & {
+        ...; }, "@odata.ty..., taskTriggers?: ...[] }) | null, viewPoint?:
+        Record<string, never> | { @odata.type: string, lastUsedDateTime?: string
+        | null } | null } & { @odata.type: "#microsoft.graph.printerShare" })[],
+        taskDefinitions?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, createdBy?: { @odata.type:
+        string, appId?: string | null, displayName?: string | null,
+        servicePrincipalId?: string | null, servicePrincipalName?: string | null
+        }, displayName?: string, tasks?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, definition?: function,
+        parentUrl?: function, status?: function, trigger?: function } & {
+        @odata.type: "#microsoft.graph.printTask" })[] } & { @odata.type:
+        "#microsoft.graph.printTaskDefinition" })[] }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /print"]["response"]&gt;
-  - name: update(Operation<"/print", "patch">)
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string, connectors?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          appVersion?: string, displayName?: string, fullyQualifiedDomainName?:
+          string, location?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, altitudeInMeters?: number | null,
+          building?: string | null, city?: string | null, countryOrRegion?:
+          string | null, floor?: string | null, floorDescription?: string |
+          null, latitude?: string | number | null, longitude?: string | number |
+          null, organization?: function[], postalCode?: string | null,
+          roomDescription?: string | null, roomName?: string | null, site?:
+          string | null, stateOrProvince?: string | null, streetAddress?: string
+          | null, subdivision?: function[], subunit?: function[] } | null,
+          operatingSystem?: string, registeredDateTime?: string } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.printConnector" />"
+          })[], operations?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdDateTime?: string, status?: {
+          <xref uid="@odata.type" />: string, description?: string, state?:
+          "unknownFutureValue" | "notStarted" | "running" | "succeeded" |
+          "failed" } }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.printOperation" />"
+          })[], printers?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, capabilities?: Record&lt;...,
+          ...&gt; | { <xref uid="@odata.type" />: ..., bottomMargins?: ...,
+          collation?: ..., colorModes?: ..., contentTypes?: ..., copiesPerJob?:
+          ..., dpis?: ..., duplexModes?: ..., feedOrientations?: ...,
+          finishings?: ..., inputBins?: ..., isColorPrintingSupported?: ...,
+          isPageRangeSupported?: ..., leftMargins?: ..., mediaColors?: ...,
+          mediaSizes?: ..., mediaTypes?: ..., multipageLayouts?: ...,
+          orientations?: ..., outputBins?: ..., pagesPerSheet?: ..., qualities?:
+          ..., rightMargins?: ..., scalings?: ..., supportsFitPdfToPage?: ...,
+          topMargins?: ... } | null, defaults?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., colorMode?: ..., contentType?: ...,
+          copiesPerJob?: ..., dpi?: ..., duplexMode?: ..., finishings?: ...,
+          fitPdfToPage?: ..., inputBin?: ..., mediaColor?: ..., mediaSize?: ...,
+          mediaType?: ..., multipageLayout?: ..., orientation?: ..., outputBin?:
+          ..., pagesPerSheet?: ..., quality?: ..., scaling?: ... } | null,
+          displayName?: string, isAcceptingJobs?: boolean | null, jobs?: ...[],
+          location?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          altitudeInMeters?: ..., building?: ..., city?: ..., countryOrRegion?:
+          ..., floor?: ..., floorDescription?: ..., latitude?: ..., longitude?:
+          ..., organization?: ..., postalCode?: ..., roomDescription?: ...,
+          roomName?: ..., site?: ..., stateOrProvince?: ..., streetAddress?:
+          ..., subdivision?: ..., subunit?: ... } | null, manufacturer?: string
+          | null, model?: string | null, status?: { <xref uid="@odata.type" />:
+          ..., description?: ..., details?: ..., state?: ... } }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printerBase" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, connectors?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          appVersion?: function, displayName?: function,
+          fullyQualifiedDomainName?: function, location?: function,
+          operatingSystem?: function, registeredDateTime?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.printConnector" />"
+          })[], hasPhysicalDevice?: boolean, isShared?: boolean,
+          lastSeenDateTime?: string | null, registeredDateTime?: string,
+          shares?: (Omit&lt;... & ... & ..., "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: string, allowAllUsers?: function,
+          allowedGroups?: function, allowedUsers?: function, createdDateTime?:
+          function, printer?: function, viewPoint?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.printerShare" />"
+          })[], taskTriggers?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?:
+          ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, definition?: function, event?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.printTaskTrigger"
+          />" })[] })[], services?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, endpoints?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, displayName?:
+          function, uri?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printServiceEndpoint" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.printService" />"
+          })[], settings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, documentConversionEnabled?: boolean,
+          printerDiscoverySettings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, airPrint?: { <xref uid="@odata.type" />:
+          string, incompatiblePrinters?: "unknownFutureValue" | "show" | "hide"
+          } } | null } | null, shares?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string, capabilities?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          bottomMargins?: ..., collation?: ..., colorModes?: ..., contentTypes?:
+          ..., copiesPerJob?: ..., dpis?: ..., duplexModes?: ...,
+          feedOrientations?: ..., finishings?: ..., inputBins?: ...,
+          isColorPrintingSupported?: ..., isPageRangeSupported?: ...,
+          leftMargins?: ..., mediaColors?: ..., mediaSizes?: ..., mediaTypes?:
+          ..., multipageLayouts?: ..., orientations?: ..., outputBins?: ...,
+          pagesPerSheet?: ..., qualities?: ..., rightMargins?: ..., scalings?:
+          ..., supportsFitPdfToPage?: ..., topMargins?: ... } | null, defaults?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          colorMode?: ..., contentType?: ..., copiesPerJob?: ..., dpi?: ...,
+          duplexMode?: ..., finishings?: ..., fitPdfToPage?: ..., inputBin?:
+          ..., mediaColor?: ..., mediaSize?: ..., mediaType?: ...,
+          multipageLayout?: ..., orientation?: ..., outputBin?: ...,
+          pagesPerSheet?: ..., quality?: ..., scaling?: ... } | null,
+          displayName?: string, isAcceptingJobs?: boolean | null, jobs?: ...[],
+          location?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          altitudeInMeters?: ..., building?: ..., city?: ..., countryOrRegion?:
+          ..., floor?: ..., floorDescription?: ..., latitude?: ..., longitude?:
+          ..., organization?: ..., postalCode?: ..., roomDescription?: ...,
+          roomName?: ..., site?: ..., stateOrProvince?: ..., streetAddress?:
+          ..., subdivision?: ..., subunit?: ... } | null, manufacturer?: string
+          | null, model?: string | null, status?: { <xref uid="@odata.type" />:
+          ..., description?: ..., details?: ..., state?: ... } }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printerBase" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, allowAllUsers?:
+          boolean, allowedGroups?: (Omit&lt;... & ... & ..., "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          acceptedSenders?: function, allowExternalSenders?: function,
+          appRoleAssignments?: function, assignedLabels?: function,
+          assignedLicenses?: function, autoSubscribeNewMembers?: function,
+          calendar?: function, calendarView?: function, classification?:
+          function, conversations?: function, createdDateTime?: function,
+          createdOnBehalfOf?: function, description?: function, displayName?:
+          function, drive?: function, drives?: function, events?: function,
+          expirationDateTime?: function, extensions?: function,
+          groupLifecyclePolicies?: function, groupTypes?: function,
+          hasMembersWithLicenseErrors?: function, hideFromAddressLists?:
+          function, hideFromOutlookClients?: function, isArchived?: function,
+          isAssignableToRole?: function, isManagementRestricted?: function,
+          isSubscribedByMail?: function, licenseProcessingState?: function,
+          mail?: function, mailEnabled?: function, mailNickname?: function,
+          memberOf?: function, members?: function, membershipRule?: function,
+          membershipRuleProcessingState?: function, membersWithLicenseErrors?:
+          function, onenote?: function, onPremisesDomainName?: function,
+          onPremisesLastSyncDateTime?: function, onPremisesNetBiosName?:
+          function, onPremisesProvisioningErrors?: function,
+          onPremisesSamAccountName?: function, onPremisesSecurityIdentifier?:
+          function, onPremisesSyncBehavior?: function, onPremisesSyncEnabled?:
+          function, owners?: function, permissionGrants?: function, photo?:
+          function, photos?: function, planner?: function,
+          preferredDataLocation?: function, preferredLanguage?: function,
+          proxyAddresses?: function, rejectedSenders?: function,
+          renewedDateTime?: function, securityEnabled?: function,
+          securityIdentifier?: function, serviceProvisioningErrors?: function,
+          settings?: function, sites?: function, team?: function, theme?:
+          function, threads?: function, transitiveMemberOf?: function,
+          transitiveMembers?: function, uniqueName?: function, unseenCount?:
+          function, visibility?: function } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.group" />" })[], allowedUsers?:
+          (Omit&lt;... & ... & ..., "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, aboutMe?: function, accountEnabled?:
+          function, activities?: function, ageGroup?: function,
+          agreementAcceptances?: function, appRoleAssignments?: function,
+          assignedLicenses?: function, assignedPlans?: function,
+          authentication?: function, authorizationInfo?: function, birthday?:
+          function, businessPhones?: function, calendar?: function,
+          calendarGroups?: function, calendars?: function, calendarView?:
+          function, chats?: function, city?: function, cloudClipboard?:
+          function, cloudPCs?: function, companyName?: function,
+          consentProvidedForMinor?: function, contactFolders?: function,
+          contacts?: function, country?: function, createdDateTime?: function,
+          createdObjects?: function, creationType?: function,
+          customSecurityAttributes?: function, dataSecurityAndGovernance?:
+          function, department?: function, deviceEnrollmentLimit?: function,
+          deviceManagementTroubleshootingEvents?: function, directReports?:
+          function, displayName?: function, drive?: function, drives?: function,
+          employeeExperience?: function, employeeHireDate?: function,
+          employeeId?: function, employeeLeaveDateTime?: function,
+          employeeOrgData?: function, employeeType?: function, events?:
+          function, extensions?: function, externalUserState?: function,
+          externalUserStateChangeDateTime?: function, faxNumber?: function,
+          followedSites?: function, givenName?: function, hireDate?: function,
+          identities?: function, imAddresses?: function,
+          inferenceClassification?: function, insights?: function, interests?:
+          function, isManagementRestricted?: function, isResourceAccount?:
+          function, jobTitle?: function, joinedTeams?: function,
+          lastPasswordChangeDateTime?: function, legalAgeGroupClassification?:
+          function, licenseAssignmentStates?: function, licenseDetails?:
+          function, mail?: function, mailboxSettings?: function, mailFolders?:
+          function, mailNickname?: function, managedAppRegistrations?: function,
+          managedDevices?: function, manager?: function, memberOf?: function,
+          messages?: function, mobilePhone?: function, mySite?: function,
+          oauth2PermissionGrants?: function, officeLocation?: function,
+          onenote?: function, onlineMeetings?: function,
+          onPremisesDistinguishedName?: function, onPremisesDomainName?:
+          function, onPremisesExtensionAttributes?: function,
+          onPremisesImmutableId?: function, onPremisesLastSyncDateTime?:
+          function, onPremisesProvisioningErrors?: function,
+          onPremisesSamAccountName?: function, onPremisesSecurityIdentifier?:
+          function, onPremisesSyncEnabled?: function,
+          onPremisesUserPrincipalName?: function, otherMails?: function,
+          outlook?: function, ownedDevices?: function, ownedObjects?: function,
+          passwordPolicies?: function, passwordProfile?: function,
+          pastProjects?: function, people?: function, permissionGrants?:
+          function, photo?: function, photos?: function, planner?: function,
+          postalCode?: function, preferredDataLocation?: function,
+          preferredLanguage?: function, preferredName?: function, presence?:
+          function, print?: function, provisionedPlans?: function,
+          proxyAddresses?: function, registeredDevices?: function,
+          responsibilities?: function, schools?: function, scopedRoleMemberOf?:
+          function, securityIdentifier?: function, serviceProvisioningErrors?:
+          function, settings?: function, showInAddressList?: function,
+          signInActivity?: function, signInSessionsValidFromDateTime?: function,
+          skills?: function, solutions?: function, sponsors?: function, state?:
+          function, streetAddress?: function, surname?: function, teamwork?:
+          function, todo?: function, transitiveMemberOf?: function,
+          usageLocation?: function, userPrincipalName?: function, userType?:
+          function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.user" />" })[], createdDateTime?: string,
+          printer?: Record&lt;string, never&gt; | (Omit&lt;Omit&lt;..., ...&gt;
+          & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          connectors?: ...[], hasPhysicalDevice?: boolean, isShared?: boolean,
+          lastSeenDateTime?: string | null, registeredDateTime?: string,
+          shares?: (Omit&lt;Omit&lt;{ id?: string | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; &
+          Omit&lt;{ capabilities?: Record&lt;string, never&gt; | {
+          bottomMargins?: (number | null)[] | undefined; ... 24 more ...; '<xref
+          uid="@odata.type" />': string; } | null | undefined; ... 8 more ...;
+          '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+          />"&gt; & { ...; }, "<xref uid="@odata.ty..." />, taskTriggers?: ...[]
+          }) | null, viewPoint?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, lastUsedDateTime?: string | null } |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printerShare" />" })[], taskDefinitions?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          createdBy?: { <xref uid="@odata.type" />: string, appId?: string |
+          null, displayName?: string | null, servicePrincipalId?: string | null,
+          servicePrincipalName?: string | null }, displayName?: string, tasks?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          definition?: function, parentUrl?: function, status?: function,
+          trigger?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printTask" />" })[] } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.printTaskDefinition" />" })[] }&gt;
+  - name: >-
+      update({ @odata.type: string, connectors?: (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string, appVersion?:
+      string, displayName?: string, fullyQualifiedDomainName?: string,
+      location?: Record<string, never> | { @odata.type: string,
+      altitudeInMeters?: number | null, building?: string | null, city?: string
+      | null, countryOrRegion?: string | null, floor?: string | null,
+      floorDescription?: string | null, latitude?: string | number | null,
+      longitude?: string | number | null, organization?: (string | null)[],
+      postalCode?: string | null, roomDescription?: string | null, roomName?:
+      string | null, site?: string | null, stateOrProvince?: string | null,
+      streetAddress?: string | null, subdivision?: (string | null)[], subunit?:
+      (string | null)[] } | null, operatingSystem?: string, registeredDateTime?:
+      string } & { @odata.type: "#microsoft.graph.printConnector" })[],
+      operations?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+      Omit<{ @odata.type: string, createdDateTime?: string, status?: {
+      @odata.type: string, description?: string, state?: "unknownFutureValue" |
+      "notStarted" | "running" | "succeeded" | "failed" } }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.printOperation" })[], printers?:
+      (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, capabilities?: Record<string, never> | { @odata.type:
+      string, bottomMargins?: function, collation?: function, colorModes?:
+      function, contentTypes?: function, copiesPerJob?: function, dpis?:
+      function, duplexModes?: function, feedOrientations?: function,
+      finishings?: function, inputBins?: function, isColorPrintingSupported?:
+      function, isPageRangeSupported?: function, leftMargins?: function,
+      mediaColors?: function, mediaSizes?: function, mediaTypes?: function,
+      multipageLayouts?: function, orientations?: function, outputBins?:
+      function, pagesPerSheet?: function, qualities?: function, rightMargins?:
+      function, scalings?: function, supportsFitPdfToPage?: function,
+      topMargins?: function } | null, defaults?: Record<string, never> | {
+      @odata.type: string, colorMode?: function, contentType?: function,
+      copiesPerJob?: function, dpi?: function, duplexMode?: function,
+      finishings?: function, fitPdfToPage?: function, inputBin?: function,
+      mediaColor?: function, mediaSize?: function, mediaType?: function,
+      multipageLayout?: function, orientation?: function, outputBin?: function,
+      pagesPerSheet?: function, quality?: function, scaling?: function } | null,
+      displayName?: string, isAcceptingJobs?: boolean | null, jobs?: (... & ...
+      & ...)[], location?: Record<string, never> | { @odata.type: string,
+      altitudeInMeters?: function, building?: function, city?: function,
+      countryOrRegion?: function, floor?: function, floorDescription?: function,
+      latitude?: function, longitude?: function, organization?: function,
+      postalCode?: function, roomDescription?: function, roomName?: function,
+      site?: function, stateOrProvince?: function, streetAddress?: function,
+      subdivision?: function, subunit?: function } | null, manufacturer?: string
+      | null, model?: string | null, status?: { @odata.type: string,
+      description?: function, details?: function, state?: function } },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.printerBase" },
+      "@odata.type"> & { @odata.type: string, connectors?: (Omit<{ @odata.type:
+      string, id?: function }, "@odata.type"> & { @odata.type: string,
+      appVersion?: string, displayName?: string, fullyQualifiedDomainName?:
+      string, location?: Record<..., ...> | { @odata.type: ...,
+      altitudeInMeters?: ..., building?: ..., city?: ..., countryOrRegion?: ...,
+      floor?: ..., floorDescription?: ..., latitude?: ..., longitude?: ...,
+      organization?: ..., postalCode?: ..., roomDescription?: ..., roomName?:
+      ..., site?: ..., stateOrProvince?: ..., streetAddress?: ..., subdivision?:
+      ..., subunit?: ... } | null, operatingSystem?: string,
+      registeredDateTime?: string } & { @odata.type:
+      "#microsoft.graph.printConnector" })[], hasPhysicalDevice?: boolean,
+      isShared?: boolean, lastSeenDateTime?: string | null, registeredDateTime?:
+      string, shares?: (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type:
+      ... }, "@odata.type"> & { @odata.type: string, allowAllUsers?: boolean,
+      allowedGroups?: ...[], allowedUsers?: ...[], createdDateTime?: string,
+      printer?: Record<..., ...> | Omit<Omit<{ id?: string | undefined;
+      '@odata.type': string; }, "@odata.type"> & Omit<{ capabilities?:
+      Record<string, never> | { bottomMargins?: (number | null)[] | undefined;
+      ... 24 more ...; '@odata.type': string; } | null | undefined; ... 8 more
+      ...; '@odata.type': string; }, "@odata.type"> & { ...; }, "@odata.typ... |
+      null, viewPoint?: Record<..., ...> | { @odata.type: ...,
+      lastUsedDateTime?: ... } | null } & { @odata.type:
+      "#microsoft.graph.printerShare" })[], taskTriggers?: (Omit<{ @odata.type:
+      string, id?: function }, "@odata.type"> & { @odata.type: string,
+      definition?: ... & ... & ..., event?: "unknownFutureValue" | "jobStarted"
+      } & { @odata.type: "#microsoft.graph.printTaskTrigger" })[] })[],
+      services?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, endpoints?: (Omit<{ @odata.type: string, id?:
+      function }, "@odata.type"> & { @odata.type: string, displayName?: string,
+      uri?: string } & { @odata.type: "#microsoft.graph.printServiceEndpoint"
+      })[] } & { @odata.type: "#microsoft.graph.printService" })[], settings?:
+      Record<string, never> | { @odata.type: string, documentConversionEnabled?:
+      boolean, printerDiscoverySettings?: Record<string, never> | { @odata.type:
+      string, airPrint?: { @odata.type: string, incompatiblePrinters?:
+      "unknownFutureValue" | "show" | "hide" } } | null } | null, shares?:
+      (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, capabilities?: Record<string, never> | { @odata.type:
+      string, bottomMargins?: function, collation?: function, colorModes?:
+      function, contentTypes?: function, copiesPerJob?: function, dpis?:
+      function, duplexModes?: function, feedOrientations?: function,
+      finishings?: function, inputBins?: function, isColorPrintingSupported?:
+      function, isPageRangeSupported?: function, leftMargins?: function,
+      mediaColors?: function, mediaSizes?: function, mediaTypes?: function,
+      multipageLayouts?: function, orientations?: function, outputBins?:
+      function, pagesPerSheet?: function, qualities?: function, rightMargins?:
+      function, scalings?: function, supportsFitPdfToPage?: function,
+      topMargins?: function } | null, defaults?: Record<string, never> | {
+      @odata.type: string, colorMode?: function, contentType?: function,
+      copiesPerJob?: function, dpi?: function, duplexMode?: function,
+      finishings?: function, fitPdfToPage?: function, inputBin?: function,
+      mediaColor?: function, mediaSize?: function, mediaType?: function,
+      multipageLayout?: function, orientation?: function, outputBin?: function,
+      pagesPerSheet?: function, quality?: function, scaling?: function } | null,
+      displayName?: string, isAcceptingJobs?: boolean | null, jobs?: (... & ...
+      & ...)[], location?: Record<string, never> | { @odata.type: string,
+      altitudeInMeters?: function, building?: function, city?: function,
+      countryOrRegion?: function, floor?: function, floorDescription?: function,
+      latitude?: function, longitude?: function, organization?: function,
+      postalCode?: function, roomDescription?: function, roomName?: function,
+      site?: function, stateOrProvince?: function, streetAddress?: function,
+      subdivision?: function, subunit?: function } | null, manufacturer?: string
+      | null, model?: string | null, status?: { @odata.type: string,
+      description?: function, details?: function, state?: function } },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.printerBase" },
+      "@odata.type"> & { @odata.type: string, allowAllUsers?: boolean,
+      allowedGroups?: (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ...
+      }, "@odata.type"> & { @odata.type: string, acceptedSenders?: ...[],
+      allowExternalSenders?: boolean | null, appRoleAssignments?: ...[],
+      assignedLabels?: ...[], assignedLicenses?: ...[],
+      autoSubscribeNewMembers?: boolean | null, calendar?: Record<..., ...> |
+      (... & ... & ...) | null, calendarView?: ...[], classification?: string |
+      null, conversations?: ...[], createdDateTime?: string | null,
+      createdOnBehalfOf?: (... & ... & ...) | Record<..., ...> | null,
+      description?: string | null, displayName?: string | null, drive?:
+      Record<..., ...> | (... & ... & ...) | null, drives?: ...[], events?:
+      ...[], expirationDateTime?: string | null, extensions?: ...[],
+      groupLifecyclePolicies?: ...[], groupTypes?: ...[],
+      hasMembersWithLicenseErrors?: boolean | null, hideFromAddressLists?:
+      boolean | null, hideFromOutlookClients?: boolean | null, isArchived?:
+      boolean | null, isAssignableToRole?: boolean | null,
+      isManagementRestricted?: boolean | null, isSubscribedByMail?: boolean |
+      null, licenseProcessingState?: Record<..., ...> | { @odata.type: ...,
+      state?: ... } | null, mail?: string | null, mailEnabled?: boolean | null,
+      mailNickname?: string | null, memberOf?: ...[], members?: ...[],
+      membershipRule?: string | null, membershipRuleProcessingState?: string |
+      null, membersWithLicenseErrors?: ...[], onenote?: Record<..., ...> | (...
+      & ... & ...) | null, onPremisesDomainName?: string | null,
+      onPremisesLastSyncDateTime?: string | null, onPremisesNetBiosName?: string
+      | null, onPremisesProvisioningErrors?: ...[], onPremisesSamAccountName?:
+      string | null, onPremisesSecurityIdentifier?: string | null,
+      onPremisesSyncBehavior?: Record<..., ...> | (... & ... & ...) | null,
+      onPremisesSyncEnabled?: boolean | null, owners?: ...[], permissionGrants?:
+      ...[], photo?: Record<..., ...> | (... & ... & ...) | null, photos?:
+      ...[], planner?: Record<..., ...> | (... & ... & ...) | null,
+      preferredDataLocation?: string | null, preferredLanguage?: string | null,
+      proxyAddresses?: ...[], rejectedSenders?: ...[], renewedDateTime?: string
+      | null, securityEnabled?: boolean | null, securityIdentifier?: string |
+      null, serviceProvisioningErrors?: ...[], settings?: ...[], sites?: ...[],
+      team?: Record<..., ...> | (... & ... & ...) | null, theme?: string | null,
+      threads?: ...[], transitiveMemberOf?: ...[], transitiveMembers?: ...[],
+      uniqueName?: string | null, unseenCount?: number | null, visibility?:
+      string | null } & { @odata.type: "#microsoft.graph.group" })[],
+      allowedUsers?: (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ...
+      }, "@odata.type"> & { @odata.type: string, aboutMe?: string | null,
+      accountEnabled?: boolean | null, activities?: ...[], ageGroup?: string |
+      null, agreementAcceptances?: ...[], appRoleAssignments?: ...[],
+      assignedLicenses?: ...[], assignedPlans?: ...[], authentication?:
+      Record<..., ...> | (... & ... & ...) | null, authorizationInfo?:
+      Record<..., ...> | { @odata.type: ..., certificateUserIds?: ... } | null,
+      birthday?: string, businessPhones?: ...[], calendar?: Record<..., ...> |
+      (... & ... & ...) | null, calendarGroups?: ...[], calendars?: ...[],
+      calendarView?: ...[], chats?: ...[], city?: string | null,
+      cloudClipboard?: Record<..., ...> | (... & ... & ...) | null, cloudPCs?:
+      ...[], companyName?: string | null, consentProvidedForMinor?: string |
+      null, contactFolders?: ...[], contacts?: ...[], country?: string | null,
+      createdDateTime?: string | null, createdObjects?: ...[], creationType?:
+      string | null, customSecurityAttributes?: Record<..., ...> | {
+      @odata.type: ... } | null, dataSecurityAndGovernance?: Record<..., ...> |
+      (... & ... & ...) | null, department?: string | null,
+      deviceEnrollmentLimit?: number, deviceManagementTroubleshootingEvents?:
+      ...[], directReports?: ...[], displayName?: string | null, drive?:
+      Record<..., ...> | (... & ... & ...) | null, drives?: ...[],
+      employeeExperience?: Record<..., ...> | (... & ... & ...) | null,
+      employeeHireDate?: string | null, employeeId?: string | null,
+      employeeLeaveDateTime?: string | null, employeeOrgData?: Record<..., ...>
+      | { @odata.type: ..., costCenter?: ..., division?: ... } | null,
+      employeeType?: string | null, events?: ...[], extensions?: ...[],
+      externalUserState?: string | null, externalUserStateChangeDateTime?:
+      string | null, faxNumber?: string | null, followedSites?: ...[],
+      givenName?: string | null, hireDate?: string, identities?: ...[],
+      imAddresses?: ...[], inferenceClassification?: Record<..., ...> | (... &
+      ... & ...) | null, insights?: Record<..., ...> | (... & ...) | null,
+      interests?: ...[], isManagementRestricted?: boolean | null,
+      isResourceAccount?: boolean | null, jobTitle?: string | null,
+      joinedTeams?: ...[], lastPasswordChangeDateTime?: string | null,
+      legalAgeGroupClassification?: string | null, licenseAssignmentStates?:
+      ...[], licenseDetails?: ...[], mail?: string | null, mailboxSettings?:
+      Record<..., ...> | { @odata.type: ..., archiveFolder?: ...,
+      automaticRepliesSetting?: ..., dateFormat?: ...,
+      delegateMeetingMessageDeliveryOptions?: ..., language?: ..., timeFormat?:
+      ..., timeZone?: ..., userPurpose?: ..., workingHours?: ... } | null,
+      mailFolders?: ...[], mailNickname?: string | null,
+      managedAppRegistrations?: ...[], managedDevices?: ...[], manager?: (... &
+      ... & ...) | Record<..., ...> | null, memberOf?: ...[], messages?: ...[],
+      mobilePhone?: string | null, mySite?: string | null,
+      oauth2PermissionGrants?: ...[], officeLocation?: string | null, onenote?:
+      Record<..., ...> | (... & ... & ...) | null, onlineMeetings?: ...[],
+      onPremisesDistinguishedName?: string | null, onPremisesDomainName?: string
+      | null, onPremisesExtensionAttributes?: Record<..., ...> | { @odata.type:
+      ..., extensionAttribute1?: ..., extensionAttribute10?: ...,
+      extensionAttribute11?: ..., extensionAttribute12?: ...,
+      extensionAttribute13?: ..., extensionAttribute14?: ...,
+      extensionAttribute15?: ..., extensionAttribute2?: ...,
+      extensionAttribute3?: ..., extensionAttribute4?: ...,
+      extensionAttribute5?: ..., extensionAttribute6?: ...,
+      extensionAttribute7?: ..., extensionAttribute8?: ...,
+      extensionAttribute9?: ... } | null, onPremisesImmutableId?: string | null,
+      onPremisesLastSyncDateTime?: string | null, onPremisesProvisioningErrors?:
+      ...[], onPremisesSamAccountName?: string | null,
+      onPremisesSecurityIdentifier?: string | null, onPremisesSyncEnabled?:
+      boolean | null, onPremisesUserPrincipalName?: string | null, otherMails?:
+      ...[], outlook?: Record<..., ...> | (... & ... & ...) | null,
+      ownedDevices?: ...[], ownedObjects?: ...[], passwordPolicies?: string |
+      null, passwordProfile?: Record<..., ...> | { @odata.type: ...,
+      forceChangePasswordNextSignIn?: ...,
+      forceChangePasswordNextSignInWithMfa?: ..., password?: ... } | null,
+      pastProjects?: ...[], people?: ...[], permissionGrants?: ...[], photo?:
+      Record<..., ...> | (... & ... & ...) | null, photos?: ...[], planner?:
+      Record<..., ...> | (... & ... & ...) | null, postalCode?: string | null,
+      preferredDataLocation?: string | null, preferredLanguage?: string | null,
+      preferredName?: string | null, presence?: Record<..., ...> | (... & ... &
+      ...) | null, print?: Record<..., ...> | { @odata.type: ...,
+      recentPrinterShares?: ... } | null, provisionedPlans?: ...[],
+      proxyAddresses?: ...[], registeredDevices?: ...[], responsibilities?:
+      ...[], schools?: ...[], scopedRoleMemberOf?: ...[], securityIdentifier?:
+      string | null, serviceProvisioningErrors?: ...[], settings?: Record<...,
+      ...> | (... & ... & ...) | null, showInAddressList?: boolean | null,
+      signInActivity?: Record<..., ...> | { @odata.type: ...,
+      lastNonInteractiveSignInDateTime?: ...,
+      lastNonInteractiveSignInRequestId?: ..., lastSignInDateTime?: ...,
+      lastSignInRequestId?: ..., lastSuccessfulSignInDateTime?: ...,
+      lastSuccessfulSignInRequestId?: ... } | null,
+      signInSessionsValidFromDateTime?: string | null, skills?: ...[],
+      solutions?: Record<..., ...> | (... & ... & ...) | null, sponsors?: ...[],
+      state?: string | null, streetAddress?: string | null, surname?: string |
+      null, teamwork?: Record<..., ...> | (... & ... & ...) | null, todo?:
+      Record<..., ...> | (... & ... & ...) | null, transitiveMemberOf?: ...[],
+      usageLocation?: string | null, userPrincipalName?: string | null,
+      userType?: string | null } & { @odata.type: "#microsoft.graph.user" })[],
+      createdDateTime?: string, printer?: Record<string, never> | (Omit<Omit<{
+      @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+      capabilities?: ..., defaults?: ..., displayName?: ..., isAcceptingJobs?:
+      ..., jobs?: ..., location?: ..., manufacturer?: ..., model?: ..., status?:
+      ... }, "@odata.type"> & { @odata.type: "#microsoft.graph.printerBase" },
+      "@odata.type"> & { @odata.type: string, connectors?: (... & ... & ...)[],
+      hasPhysicalDevice?: boolean, isShared?: boolean, lastSeenDateTime?: string
+      | null, registeredDateTime?: string, shares?: (Omit<Omit<{ id?: string |
+      undefined; '@odata.type': string; }, "@odata.type"> & Omit<{
+      capabilities?: Record<string, never> | { bottomMargins?: (number | null)[]
+      | undefined; ... 24 more ...; '@odata.type': string; } | null | undefined;
+      ... 8 more ...; '@odata.type': string; }, "@odata.type"> & { ...; },
+      "@odata.ty..., taskTriggers?: (... & ... & ...)[] }) | null, viewPoint?:
+      Record<string, never> | { @odata.type: string, lastUsedDateTime?: string |
+      null } | null } & { @odata.type: "#microsoft.graph.printerShare" })[],
+      taskDefinitions?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, createdBy?: { @odata.type: string,
+      appId?: string | null, displayName?: string | null, servicePrincipalId?:
+      string | null, servicePrincipalName?: string | null }, displayName?:
+      string, tasks?: (Omit<{ @odata.type: string, id?: function },
+      "@odata.type"> & { @odata.type: string, definition?: Omit<{ id?: string |
+      undefined; '@odata.type': string; }, "@odata.type"> & { createdBy?: {
+      appId?: string | null | undefined; displayName?: string | null |
+      undefined; servicePrincipalId?: string | ... 1 more ... | undefined;
+      servicePrincipalName?: string | ... 1 more ... | undefined; '@odata.type':
+      string; } | undef..., parentUrl?: string, status?: { @odata.type: ...,
+      description?: ..., state?: ... }, trigger?: ... & ... & ... } & {
+      @odata.type: "#microsoft.graph.printTask" })[] } & { @odata.type:
+      "#microsoft.graph.printTaskDefinition" })[] })
     uid: '@microsoft/teams.graph-endpoints.print.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`PATCH /print`'
@@ -123,12 +819,1042 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/print", "patch">):
-        EndpointRequest<IEndpoints["PATCH /print"]["response"]>
+        function update(body: { @odata.type: string, connectors?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, appVersion?: string, displayName?: string,
+        fullyQualifiedDomainName?: string, location?: Record<string, never> | {
+        @odata.type: string, altitudeInMeters?: number | null, building?: string
+        | null, city?: string | null, countryOrRegion?: string | null, floor?:
+        string | null, floorDescription?: string | null, latitude?: string |
+        number | null, longitude?: string | number | null, organization?:
+        (string | null)[], postalCode?: string | null, roomDescription?: string
+        | null, roomName?: string | null, site?: string | null,
+        stateOrProvince?: string | null, streetAddress?: string | null,
+        subdivision?: (string | null)[], subunit?: (string | null)[] } | null,
+        operatingSystem?: string, registeredDateTime?: string } & { @odata.type:
+        "#microsoft.graph.printConnector" })[], operations?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, createdDateTime?: string, status?: { @odata.type: string,
+        description?: string, state?: "unknownFutureValue" | "notStarted" |
+        "running" | "succeeded" | "failed" } }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.printOperation" })[], printers?: (Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, capabilities?: Record<string, never> | { @odata.type: string,
+        bottomMargins?: function, collation?: function, colorModes?: function,
+        contentTypes?: function, copiesPerJob?: function, dpis?: function,
+        duplexModes?: function, feedOrientations?: function, finishings?:
+        function, inputBins?: function, isColorPrintingSupported?: function,
+        isPageRangeSupported?: function, leftMargins?: function, mediaColors?:
+        function, mediaSizes?: function, mediaTypes?: function,
+        multipageLayouts?: function, orientations?: function, outputBins?:
+        function, pagesPerSheet?: function, qualities?: function, rightMargins?:
+        function, scalings?: function, supportsFitPdfToPage?: function,
+        topMargins?: function } | null, defaults?: Record<string, never> | {
+        @odata.type: string, colorMode?: function, contentType?: function,
+        copiesPerJob?: function, dpi?: function, duplexMode?: function,
+        finishings?: function, fitPdfToPage?: function, inputBin?: function,
+        mediaColor?: function, mediaSize?: function, mediaType?: function,
+        multipageLayout?: function, orientation?: function, outputBin?:
+        function, pagesPerSheet?: function, quality?: function, scaling?:
+        function } | null, displayName?: string, isAcceptingJobs?: boolean |
+        null, jobs?: (... & ... & ...)[], location?: Record<string, never> | {
+        @odata.type: string, altitudeInMeters?: function, building?: function,
+        city?: function, countryOrRegion?: function, floor?: function,
+        floorDescription?: function, latitude?: function, longitude?: function,
+        organization?: function, postalCode?: function, roomDescription?:
+        function, roomName?: function, site?: function, stateOrProvince?:
+        function, streetAddress?: function, subdivision?: function, subunit?:
+        function } | null, manufacturer?: string | null, model?: string | null,
+        status?: { @odata.type: string, description?: function, details?:
+        function, state?: function } }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.printerBase" }, "@odata.type"> & { @odata.type:
+        string, connectors?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, appVersion?: string,
+        displayName?: string, fullyQualifiedDomainName?: string, location?:
+        Record<..., ...> | { @odata.type: ..., altitudeInMeters?: ...,
+        building?: ..., city?: ..., countryOrRegion?: ..., floor?: ...,
+        floorDescription?: ..., latitude?: ..., longitude?: ..., organization?:
+        ..., postalCode?: ..., roomDescription?: ..., roomName?: ..., site?:
+        ..., stateOrProvince?: ..., streetAddress?: ..., subdivision?: ...,
+        subunit?: ... } | null, operatingSystem?: string, registeredDateTime?:
+        string } & { @odata.type: "#microsoft.graph.printConnector" })[],
+        hasPhysicalDevice?: boolean, isShared?: boolean, lastSeenDateTime?:
+        string | null, registeredDateTime?: string, shares?: (Omit<Omit<...,
+        ...> & Omit<..., ...> & { @odata.type: ... }, "@odata.type"> & {
+        @odata.type: string, allowAllUsers?: boolean, allowedGroups?: ...[],
+        allowedUsers?: ...[], createdDateTime?: string, printer?: Record<...,
+        ...> | Omit<Omit<{ id?: string | undefined; '@odata.type': string; },
+        "@odata.type"> & Omit<{ capabilities?: Record<string, never> | {
+        bottomMargins?: (number | null)[] | undefined; ... 24 more ...;
+        '@odata.type': string; } | null | undefined; ... 8 more ...;
+        '@odata.type': string; }, "@odata.type"> & { ...; }, "@odata.typ... |
+        null, viewPoint?: Record<..., ...> | { @odata.type: ...,
+        lastUsedDateTime?: ... } | null } & { @odata.type:
+        "#microsoft.graph.printerShare" })[], taskTriggers?: (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, definition?: ... & ... & ..., event?: "unknownFutureValue" |
+        "jobStarted" } & { @odata.type: "#microsoft.graph.printTaskTrigger" })[]
+        })[], services?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, endpoints?: (Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & { @odata.type: string,
+        displayName?: string, uri?: string } & { @odata.type:
+        "#microsoft.graph.printServiceEndpoint" })[] } & { @odata.type:
+        "#microsoft.graph.printService" })[], settings?: Record<string, never> |
+        { @odata.type: string, documentConversionEnabled?: boolean,
+        printerDiscoverySettings?: Record<string, never> | { @odata.type:
+        string, airPrint?: { @odata.type: string, incompatiblePrinters?:
+        "unknownFutureValue" | "show" | "hide" } } | null } | null, shares?:
+        (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, capabilities?: Record<string, never> | {
+        @odata.type: string, bottomMargins?: function, collation?: function,
+        colorModes?: function, contentTypes?: function, copiesPerJob?: function,
+        dpis?: function, duplexModes?: function, feedOrientations?: function,
+        finishings?: function, inputBins?: function, isColorPrintingSupported?:
+        function, isPageRangeSupported?: function, leftMargins?: function,
+        mediaColors?: function, mediaSizes?: function, mediaTypes?: function,
+        multipageLayouts?: function, orientations?: function, outputBins?:
+        function, pagesPerSheet?: function, qualities?: function, rightMargins?:
+        function, scalings?: function, supportsFitPdfToPage?: function,
+        topMargins?: function } | null, defaults?: Record<string, never> | {
+        @odata.type: string, colorMode?: function, contentType?: function,
+        copiesPerJob?: function, dpi?: function, duplexMode?: function,
+        finishings?: function, fitPdfToPage?: function, inputBin?: function,
+        mediaColor?: function, mediaSize?: function, mediaType?: function,
+        multipageLayout?: function, orientation?: function, outputBin?:
+        function, pagesPerSheet?: function, quality?: function, scaling?:
+        function } | null, displayName?: string, isAcceptingJobs?: boolean |
+        null, jobs?: (... & ... & ...)[], location?: Record<string, never> | {
+        @odata.type: string, altitudeInMeters?: function, building?: function,
+        city?: function, countryOrRegion?: function, floor?: function,
+        floorDescription?: function, latitude?: function, longitude?: function,
+        organization?: function, postalCode?: function, roomDescription?:
+        function, roomName?: function, site?: function, stateOrProvince?:
+        function, streetAddress?: function, subdivision?: function, subunit?:
+        function } | null, manufacturer?: string | null, model?: string | null,
+        status?: { @odata.type: string, description?: function, details?:
+        function, state?: function } }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.printerBase" }, "@odata.type"> & { @odata.type:
+        string, allowAllUsers?: boolean, allowedGroups?: (Omit<Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type:
+        string, acceptedSenders?: ...[], allowExternalSenders?: boolean | null,
+        appRoleAssignments?: ...[], assignedLabels?: ...[], assignedLicenses?:
+        ...[], autoSubscribeNewMembers?: boolean | null, calendar?: Record<...,
+        ...> | (... & ... & ...) | null, calendarView?: ...[], classification?:
+        string | null, conversations?: ...[], createdDateTime?: string | null,
+        createdOnBehalfOf?: (... & ... & ...) | Record<..., ...> | null,
+        description?: string | null, displayName?: string | null, drive?:
+        Record<..., ...> | (... & ... & ...) | null, drives?: ...[], events?:
+        ...[], expirationDateTime?: string | null, extensions?: ...[],
+        groupLifecyclePolicies?: ...[], groupTypes?: ...[],
+        hasMembersWithLicenseErrors?: boolean | null, hideFromAddressLists?:
+        boolean | null, hideFromOutlookClients?: boolean | null, isArchived?:
+        boolean | null, isAssignableToRole?: boolean | null,
+        isManagementRestricted?: boolean | null, isSubscribedByMail?: boolean |
+        null, licenseProcessingState?: Record<..., ...> | { @odata.type: ...,
+        state?: ... } | null, mail?: string | null, mailEnabled?: boolean |
+        null, mailNickname?: string | null, memberOf?: ...[], members?: ...[],
+        membershipRule?: string | null, membershipRuleProcessingState?: string |
+        null, membersWithLicenseErrors?: ...[], onenote?: Record<..., ...> |
+        (... & ... & ...) | null, onPremisesDomainName?: string | null,
+        onPremisesLastSyncDateTime?: string | null, onPremisesNetBiosName?:
+        string | null, onPremisesProvisioningErrors?: ...[],
+        onPremisesSamAccountName?: string | null, onPremisesSecurityIdentifier?:
+        string | null, onPremisesSyncBehavior?: Record<..., ...> | (... & ... &
+        ...) | null, onPremisesSyncEnabled?: boolean | null, owners?: ...[],
+        permissionGrants?: ...[], photo?: Record<..., ...> | (... & ... & ...) |
+        null, photos?: ...[], planner?: Record<..., ...> | (... & ... & ...) |
+        null, preferredDataLocation?: string | null, preferredLanguage?: string
+        | null, proxyAddresses?: ...[], rejectedSenders?: ...[],
+        renewedDateTime?: string | null, securityEnabled?: boolean | null,
+        securityIdentifier?: string | null, serviceProvisioningErrors?: ...[],
+        settings?: ...[], sites?: ...[], team?: Record<..., ...> | (... & ... &
+        ...) | null, theme?: string | null, threads?: ...[],
+        transitiveMemberOf?: ...[], transitiveMembers?: ...[], uniqueName?:
+        string | null, unseenCount?: number | null, visibility?: string | null }
+        & { @odata.type: "#microsoft.graph.group" })[], allowedUsers?:
+        (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, aboutMe?: string | null,
+        accountEnabled?: boolean | null, activities?: ...[], ageGroup?: string |
+        null, agreementAcceptances?: ...[], appRoleAssignments?: ...[],
+        assignedLicenses?: ...[], assignedPlans?: ...[], authentication?:
+        Record<..., ...> | (... & ... & ...) | null, authorizationInfo?:
+        Record<..., ...> | { @odata.type: ..., certificateUserIds?: ... } |
+        null, birthday?: string, businessPhones?: ...[], calendar?: Record<...,
+        ...> | (... & ... & ...) | null, calendarGroups?: ...[], calendars?:
+        ...[], calendarView?: ...[], chats?: ...[], city?: string | null,
+        cloudClipboard?: Record<..., ...> | (... & ... & ...) | null, cloudPCs?:
+        ...[], companyName?: string | null, consentProvidedForMinor?: string |
+        null, contactFolders?: ...[], contacts?: ...[], country?: string | null,
+        createdDateTime?: string | null, createdObjects?: ...[], creationType?:
+        string | null, customSecurityAttributes?: Record<..., ...> | {
+        @odata.type: ... } | null, dataSecurityAndGovernance?: Record<..., ...>
+        | (... & ... & ...) | null, department?: string | null,
+        deviceEnrollmentLimit?: number, deviceManagementTroubleshootingEvents?:
+        ...[], directReports?: ...[], displayName?: string | null, drive?:
+        Record<..., ...> | (... & ... & ...) | null, drives?: ...[],
+        employeeExperience?: Record<..., ...> | (... & ... & ...) | null,
+        employeeHireDate?: string | null, employeeId?: string | null,
+        employeeLeaveDateTime?: string | null, employeeOrgData?: Record<...,
+        ...> | { @odata.type: ..., costCenter?: ..., division?: ... } | null,
+        employeeType?: string | null, events?: ...[], extensions?: ...[],
+        externalUserState?: string | null, externalUserStateChangeDateTime?:
+        string | null, faxNumber?: string | null, followedSites?: ...[],
+        givenName?: string | null, hireDate?: string, identities?: ...[],
+        imAddresses?: ...[], inferenceClassification?: Record<..., ...> | (... &
+        ... & ...) | null, insights?: Record<..., ...> | (... & ...) | null,
+        interests?: ...[], isManagementRestricted?: boolean | null,
+        isResourceAccount?: boolean | null, jobTitle?: string | null,
+        joinedTeams?: ...[], lastPasswordChangeDateTime?: string | null,
+        legalAgeGroupClassification?: string | null, licenseAssignmentStates?:
+        ...[], licenseDetails?: ...[], mail?: string | null, mailboxSettings?:
+        Record<..., ...> | { @odata.type: ..., archiveFolder?: ...,
+        automaticRepliesSetting?: ..., dateFormat?: ...,
+        delegateMeetingMessageDeliveryOptions?: ..., language?: ...,
+        timeFormat?: ..., timeZone?: ..., userPurpose?: ..., workingHours?: ...
+        } | null, mailFolders?: ...[], mailNickname?: string | null,
+        managedAppRegistrations?: ...[], managedDevices?: ...[], manager?: (...
+        & ... & ...) | Record<..., ...> | null, memberOf?: ...[], messages?:
+        ...[], mobilePhone?: string | null, mySite?: string | null,
+        oauth2PermissionGrants?: ...[], officeLocation?: string | null,
+        onenote?: Record<..., ...> | (... & ... & ...) | null, onlineMeetings?:
+        ...[], onPremisesDistinguishedName?: string | null,
+        onPremisesDomainName?: string | null, onPremisesExtensionAttributes?:
+        Record<..., ...> | { @odata.type: ..., extensionAttribute1?: ...,
+        extensionAttribute10?: ..., extensionAttribute11?: ...,
+        extensionAttribute12?: ..., extensionAttribute13?: ...,
+        extensionAttribute14?: ..., extensionAttribute15?: ...,
+        extensionAttribute2?: ..., extensionAttribute3?: ...,
+        extensionAttribute4?: ..., extensionAttribute5?: ...,
+        extensionAttribute6?: ..., extensionAttribute7?: ...,
+        extensionAttribute8?: ..., extensionAttribute9?: ... } | null,
+        onPremisesImmutableId?: string | null, onPremisesLastSyncDateTime?:
+        string | null, onPremisesProvisioningErrors?: ...[],
+        onPremisesSamAccountName?: string | null, onPremisesSecurityIdentifier?:
+        string | null, onPremisesSyncEnabled?: boolean | null,
+        onPremisesUserPrincipalName?: string | null, otherMails?: ...[],
+        outlook?: Record<..., ...> | (... & ... & ...) | null, ownedDevices?:
+        ...[], ownedObjects?: ...[], passwordPolicies?: string | null,
+        passwordProfile?: Record<..., ...> | { @odata.type: ...,
+        forceChangePasswordNextSignIn?: ...,
+        forceChangePasswordNextSignInWithMfa?: ..., password?: ... } | null,
+        pastProjects?: ...[], people?: ...[], permissionGrants?: ...[], photo?:
+        Record<..., ...> | (... & ... & ...) | null, photos?: ...[], planner?:
+        Record<..., ...> | (... & ... & ...) | null, postalCode?: string | null,
+        preferredDataLocation?: string | null, preferredLanguage?: string |
+        null, preferredName?: string | null, presence?: Record<..., ...> | (...
+        & ... & ...) | null, print?: Record<..., ...> | { @odata.type: ...,
+        recentPrinterShares?: ... } | null, provisionedPlans?: ...[],
+        proxyAddresses?: ...[], registeredDevices?: ...[], responsibilities?:
+        ...[], schools?: ...[], scopedRoleMemberOf?: ...[], securityIdentifier?:
+        string | null, serviceProvisioningErrors?: ...[], settings?: Record<...,
+        ...> | (... & ... & ...) | null, showInAddressList?: boolean | null,
+        signInActivity?: Record<..., ...> | { @odata.type: ...,
+        lastNonInteractiveSignInDateTime?: ...,
+        lastNonInteractiveSignInRequestId?: ..., lastSignInDateTime?: ...,
+        lastSignInRequestId?: ..., lastSuccessfulSignInDateTime?: ...,
+        lastSuccessfulSignInRequestId?: ... } | null,
+        signInSessionsValidFromDateTime?: string | null, skills?: ...[],
+        solutions?: Record<..., ...> | (... & ... & ...) | null, sponsors?:
+        ...[], state?: string | null, streetAddress?: string | null, surname?:
+        string | null, teamwork?: Record<..., ...> | (... & ... & ...) | null,
+        todo?: Record<..., ...> | (... & ... & ...) | null, transitiveMemberOf?:
+        ...[], usageLocation?: string | null, userPrincipalName?: string | null,
+        userType?: string | null } & { @odata.type: "#microsoft.graph.user"
+        })[], createdDateTime?: string, printer?: Record<string, never> |
+        (Omit<Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+        @odata.type: ..., capabilities?: ..., defaults?: ..., displayName?: ...,
+        isAcceptingJobs?: ..., jobs?: ..., location?: ..., manufacturer?: ...,
+        model?: ..., status?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.printerBase" }, "@odata.type"> & { @odata.type:
+        string, connectors?: (... & ... & ...)[], hasPhysicalDevice?: boolean,
+        isShared?: boolean, lastSeenDateTime?: string | null,
+        registeredDateTime?: string, shares?: (Omit<Omit<{ id?: string |
+        undefined; '@odata.type': string; }, "@odata.type"> & Omit<{
+        capabilities?: Record<string, never> | { bottomMargins?: (number |
+        null)[] | undefined; ... 24 more ...; '@odata.type': string; } | null |
+        undefined; ... 8 more ...; '@odata.type': string; }, "@odata.type"> & {
+        ...; }, "@odata.ty..., taskTriggers?: (... & ... & ...)[] }) | null,
+        viewPoint?: Record<string, never> | { @odata.type: string,
+        lastUsedDateTime?: string | null } | null } & { @odata.type:
+        "#microsoft.graph.printerShare" })[], taskDefinitions?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, createdBy?: { @odata.type: string, appId?: string | null,
+        displayName?: string | null, servicePrincipalId?: string | null,
+        servicePrincipalName?: string | null }, displayName?: string, tasks?:
+        (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+        @odata.type: string, definition?: Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { createdBy?: { appId?:
+        string | null | undefined; displayName?: string | null | undefined;
+        servicePrincipalId?: string | ... 1 more ... | undefined;
+        servicePrincipalName?: string | ... 1 more ... | undefined;
+        '@odata.type': string; } | undef..., parentUrl?: string, status?: {
+        @odata.type: ..., description?: ..., state?: ... }, trigger?: ... & ...
+        & ... } & { @odata.type: "#microsoft.graph.printTask" })[] } & {
+        @odata.type: "#microsoft.graph.printTaskDefinition" })[] }):
+        EndpointRequest<{ @odata.type: string, connectors?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        appVersion?: string, displayName?: string, fullyQualifiedDomainName?:
+        string, location?: Record<string, never> | { @odata.type: string,
+        altitudeInMeters?: number | null, building?: string | null, city?:
+        string | null, countryOrRegion?: string | null, floor?: string | null,
+        floorDescription?: string | null, latitude?: string | number | null,
+        longitude?: string | number | null, organization?: function[],
+        postalCode?: string | null, roomDescription?: string | null, roomName?:
+        string | null, site?: string | null, stateOrProvince?: string | null,
+        streetAddress?: string | null, subdivision?: function[], subunit?:
+        function[] } | null, operatingSystem?: string, registeredDateTime?:
+        string } & { @odata.type: "#microsoft.graph.printConnector" })[],
+        operations?: (Omit<{ @odata.type: string, id?: string }, "@odata.type">
+        & Omit<{ @odata.type: string, createdDateTime?: string, status?: {
+        @odata.type: string, description?: string, state?: "unknownFutureValue"
+        | "notStarted" | "running" | "succeeded" | "failed" } }, "@odata.type">
+        & { @odata.type: "#microsoft.graph.printOperation" })[], printers?:
+        (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, capabilities?: Record<..., ...> | { @odata.type:
+        ..., bottomMargins?: ..., collation?: ..., colorModes?: ...,
+        contentTypes?: ..., copiesPerJob?: ..., dpis?: ..., duplexModes?: ...,
+        feedOrientations?: ..., finishings?: ..., inputBins?: ...,
+        isColorPrintingSupported?: ..., isPageRangeSupported?: ...,
+        leftMargins?: ..., mediaColors?: ..., mediaSizes?: ..., mediaTypes?:
+        ..., multipageLayouts?: ..., orientations?: ..., outputBins?: ...,
+        pagesPerSheet?: ..., qualities?: ..., rightMargins?: ..., scalings?:
+        ..., supportsFitPdfToPage?: ..., topMargins?: ... } | null, defaults?:
+        Record<..., ...> | { @odata.type: ..., colorMode?: ..., contentType?:
+        ..., copiesPerJob?: ..., dpi?: ..., duplexMode?: ..., finishings?: ...,
+        fitPdfToPage?: ..., inputBin?: ..., mediaColor?: ..., mediaSize?: ...,
+        mediaType?: ..., multipageLayout?: ..., orientation?: ..., outputBin?:
+        ..., pagesPerSheet?: ..., quality?: ..., scaling?: ... } | null,
+        displayName?: string, isAcceptingJobs?: boolean | null, jobs?: ...[],
+        location?: Record<..., ...> | { @odata.type: ..., altitudeInMeters?:
+        ..., building?: ..., city?: ..., countryOrRegion?: ..., floor?: ...,
+        floorDescription?: ..., latitude?: ..., longitude?: ..., organization?:
+        ..., postalCode?: ..., roomDescription?: ..., roomName?: ..., site?:
+        ..., stateOrProvince?: ..., streetAddress?: ..., subdivision?: ...,
+        subunit?: ... } | null, manufacturer?: string | null, model?: string |
+        null, status?: { @odata.type: ..., description?: ..., details?: ...,
+        state?: ... } }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.printerBase" }, "@odata.type"> & { @odata.type:
+        string, connectors?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, appVersion?: function,
+        displayName?: function, fullyQualifiedDomainName?: function, location?:
+        function, operatingSystem?: function, registeredDateTime?: function } &
+        { @odata.type: "#microsoft.graph.printConnector" })[],
+        hasPhysicalDevice?: boolean, isShared?: boolean, lastSeenDateTime?:
+        string | null, registeredDateTime?: string, shares?: (Omit<... & ... &
+        ..., "@odata.type"> & { @odata.type: string, allowAllUsers?: function,
+        allowedGroups?: function, allowedUsers?: function, createdDateTime?:
+        function, printer?: function, viewPoint?: function } & { @odata.type:
+        "#microsoft.graph.printerShare" })[], taskTriggers?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        definition?: function, event?: function } & { @odata.type:
+        "#microsoft.graph.printTaskTrigger" })[] })[], services?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, endpoints?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type">
+        & { @odata.type: string, displayName?: function, uri?: function } & {
+        @odata.type: "#microsoft.graph.printServiceEndpoint" })[] } & {
+        @odata.type: "#microsoft.graph.printService" })[], settings?:
+        Record<string, never> | { @odata.type: string,
+        documentConversionEnabled?: boolean, printerDiscoverySettings?:
+        Record<string, never> | { @odata.type: string, airPrint?: { @odata.type:
+        string, incompatiblePrinters?: "unknownFutureValue" | "show" | "hide" }
+        } | null } | null, shares?: (Omit<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, capabilities?:
+        Record<..., ...> | { @odata.type: ..., bottomMargins?: ..., collation?:
+        ..., colorModes?: ..., contentTypes?: ..., copiesPerJob?: ..., dpis?:
+        ..., duplexModes?: ..., feedOrientations?: ..., finishings?: ...,
+        inputBins?: ..., isColorPrintingSupported?: ..., isPageRangeSupported?:
+        ..., leftMargins?: ..., mediaColors?: ..., mediaSizes?: ...,
+        mediaTypes?: ..., multipageLayouts?: ..., orientations?: ...,
+        outputBins?: ..., pagesPerSheet?: ..., qualities?: ..., rightMargins?:
+        ..., scalings?: ..., supportsFitPdfToPage?: ..., topMargins?: ... } |
+        null, defaults?: Record<..., ...> | { @odata.type: ..., colorMode?: ...,
+        contentType?: ..., copiesPerJob?: ..., dpi?: ..., duplexMode?: ...,
+        finishings?: ..., fitPdfToPage?: ..., inputBin?: ..., mediaColor?: ...,
+        mediaSize?: ..., mediaType?: ..., multipageLayout?: ..., orientation?:
+        ..., outputBin?: ..., pagesPerSheet?: ..., quality?: ..., scaling?: ...
+        } | null, displayName?: string, isAcceptingJobs?: boolean | null, jobs?:
+        ...[], location?: Record<..., ...> | { @odata.type: ...,
+        altitudeInMeters?: ..., building?: ..., city?: ..., countryOrRegion?:
+        ..., floor?: ..., floorDescription?: ..., latitude?: ..., longitude?:
+        ..., organization?: ..., postalCode?: ..., roomDescription?: ...,
+        roomName?: ..., site?: ..., stateOrProvince?: ..., streetAddress?: ...,
+        subdivision?: ..., subunit?: ... } | null, manufacturer?: string | null,
+        model?: string | null, status?: { @odata.type: ..., description?: ...,
+        details?: ..., state?: ... } }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.printerBase" }, "@odata.type"> & { @odata.type:
+        string, allowAllUsers?: boolean, allowedGroups?: (Omit<... & ... & ...,
+        "@odata.type"> & { @odata.type: string, acceptedSenders?: function,
+        allowExternalSenders?: function, appRoleAssignments?: function,
+        assignedLabels?: function, assignedLicenses?: function,
+        autoSubscribeNewMembers?: function, calendar?: function, calendarView?:
+        function, classification?: function, conversations?: function,
+        createdDateTime?: function, createdOnBehalfOf?: function, description?:
+        function, displayName?: function, drive?: function, drives?: function,
+        events?: function, expirationDateTime?: function, extensions?: function,
+        groupLifecyclePolicies?: function, groupTypes?: function,
+        hasMembersWithLicenseErrors?: function, hideFromAddressLists?: function,
+        hideFromOutlookClients?: function, isArchived?: function,
+        isAssignableToRole?: function, isManagementRestricted?: function,
+        isSubscribedByMail?: function, licenseProcessingState?: function, mail?:
+        function, mailEnabled?: function, mailNickname?: function, memberOf?:
+        function, members?: function, membershipRule?: function,
+        membershipRuleProcessingState?: function, membersWithLicenseErrors?:
+        function, onenote?: function, onPremisesDomainName?: function,
+        onPremisesLastSyncDateTime?: function, onPremisesNetBiosName?: function,
+        onPremisesProvisioningErrors?: function, onPremisesSamAccountName?:
+        function, onPremisesSecurityIdentifier?: function,
+        onPremisesSyncBehavior?: function, onPremisesSyncEnabled?: function,
+        owners?: function, permissionGrants?: function, photo?: function,
+        photos?: function, planner?: function, preferredDataLocation?: function,
+        preferredLanguage?: function, proxyAddresses?: function,
+        rejectedSenders?: function, renewedDateTime?: function,
+        securityEnabled?: function, securityIdentifier?: function,
+        serviceProvisioningErrors?: function, settings?: function, sites?:
+        function, team?: function, theme?: function, threads?: function,
+        transitiveMemberOf?: function, transitiveMembers?: function,
+        uniqueName?: function, unseenCount?: function, visibility?: function } &
+        { @odata.type: "#microsoft.graph.group" })[], allowedUsers?: (Omit<... &
+        ... & ..., "@odata.type"> & { @odata.type: string, aboutMe?: function,
+        accountEnabled?: function, activities?: function, ageGroup?: function,
+        agreementAcceptances?: function, appRoleAssignments?: function,
+        assignedLicenses?: function, assignedPlans?: function, authentication?:
+        function, authorizationInfo?: function, birthday?: function,
+        businessPhones?: function, calendar?: function, calendarGroups?:
+        function, calendars?: function, calendarView?: function, chats?:
+        function, city?: function, cloudClipboard?: function, cloudPCs?:
+        function, companyName?: function, consentProvidedForMinor?: function,
+        contactFolders?: function, contacts?: function, country?: function,
+        createdDateTime?: function, createdObjects?: function, creationType?:
+        function, customSecurityAttributes?: function,
+        dataSecurityAndGovernance?: function, department?: function,
+        deviceEnrollmentLimit?: function,
+        deviceManagementTroubleshootingEvents?: function, directReports?:
+        function, displayName?: function, drive?: function, drives?: function,
+        employeeExperience?: function, employeeHireDate?: function, employeeId?:
+        function, employeeLeaveDateTime?: function, employeeOrgData?: function,
+        employeeType?: function, events?: function, extensions?: function,
+        externalUserState?: function, externalUserStateChangeDateTime?:
+        function, faxNumber?: function, followedSites?: function, givenName?:
+        function, hireDate?: function, identities?: function, imAddresses?:
+        function, inferenceClassification?: function, insights?: function,
+        interests?: function, isManagementRestricted?: function,
+        isResourceAccount?: function, jobTitle?: function, joinedTeams?:
+        function, lastPasswordChangeDateTime?: function,
+        legalAgeGroupClassification?: function, licenseAssignmentStates?:
+        function, licenseDetails?: function, mail?: function, mailboxSettings?:
+        function, mailFolders?: function, mailNickname?: function,
+        managedAppRegistrations?: function, managedDevices?: function, manager?:
+        function, memberOf?: function, messages?: function, mobilePhone?:
+        function, mySite?: function, oauth2PermissionGrants?: function,
+        officeLocation?: function, onenote?: function, onlineMeetings?:
+        function, onPremisesDistinguishedName?: function, onPremisesDomainName?:
+        function, onPremisesExtensionAttributes?: function,
+        onPremisesImmutableId?: function, onPremisesLastSyncDateTime?: function,
+        onPremisesProvisioningErrors?: function, onPremisesSamAccountName?:
+        function, onPremisesSecurityIdentifier?: function,
+        onPremisesSyncEnabled?: function, onPremisesUserPrincipalName?:
+        function, otherMails?: function, outlook?: function, ownedDevices?:
+        function, ownedObjects?: function, passwordPolicies?: function,
+        passwordProfile?: function, pastProjects?: function, people?: function,
+        permissionGrants?: function, photo?: function, photos?: function,
+        planner?: function, postalCode?: function, preferredDataLocation?:
+        function, preferredLanguage?: function, preferredName?: function,
+        presence?: function, print?: function, provisionedPlans?: function,
+        proxyAddresses?: function, registeredDevices?: function,
+        responsibilities?: function, schools?: function, scopedRoleMemberOf?:
+        function, securityIdentifier?: function, serviceProvisioningErrors?:
+        function, settings?: function, showInAddressList?: function,
+        signInActivity?: function, signInSessionsValidFromDateTime?: function,
+        skills?: function, solutions?: function, sponsors?: function, state?:
+        function, streetAddress?: function, surname?: function, teamwork?:
+        function, todo?: function, transitiveMemberOf?: function,
+        usageLocation?: function, userPrincipalName?: function, userType?:
+        function } & { @odata.type: "#microsoft.graph.user" })[],
+        createdDateTime?: string, printer?: Record<string, never> |
+        (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, connectors?: ...[],
+        hasPhysicalDevice?: boolean, isShared?: boolean, lastSeenDateTime?:
+        string | null, registeredDateTime?: string, shares?: (Omit<Omit<{ id?:
+        string | undefined; '@odata.type': string; }, "@odata.type"> & Omit<{
+        capabilities?: Record<string, never> | { bottomMargins?: (number |
+        null)[] | undefined; ... 24 more ...; '@odata.type': string; } | null |
+        undefined; ... 8 more ...; '@odata.type': string; }, "@odata.type"> & {
+        ...; }, "@odata.ty..., taskTriggers?: ...[] }) | null, viewPoint?:
+        Record<string, never> | { @odata.type: string, lastUsedDateTime?: string
+        | null } | null } & { @odata.type: "#microsoft.graph.printerShare" })[],
+        taskDefinitions?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, createdBy?: { @odata.type:
+        string, appId?: string | null, displayName?: string | null,
+        servicePrincipalId?: string | null, servicePrincipalName?: string | null
+        }, displayName?: string, tasks?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, definition?: function,
+        parentUrl?: function, status?: function, trigger?: function } & {
+        @odata.type: "#microsoft.graph.printTask" })[] } & { @odata.type:
+        "#microsoft.graph.printTaskDefinition" })[] }>
       parameters:
         - id: body
-          type: Operation&lt;"/print", "patch"&gt;
+          type: >-
+            { <xref uid="@odata.type" />: string, connectors?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            appVersion?: string, displayName?: string,
+            fullyQualifiedDomainName?: string, location?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, altitudeInMeters?:
+            number | null, building?: string | null, city?: string | null,
+            countryOrRegion?: string | null, floor?: string | null,
+            floorDescription?: string | null, latitude?: string | number | null,
+            longitude?: string | number | null, organization?: (string |
+            null)[], postalCode?: string | null, roomDescription?: string |
+            null, roomName?: string | null, site?: string | null,
+            stateOrProvince?: string | null, streetAddress?: string | null,
+            subdivision?: (string | null)[], subunit?: (string | null)[] } |
+            null, operatingSystem?: string, registeredDateTime?: string } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.printConnector" />" })[], operations?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, createdDateTime?: string, status?: { <xref uid="@odata.type"
+            />: string, description?: string, state?: "unknownFutureValue" |
+            "notStarted" | "running" | "succeeded" | "failed" } }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.printOperation" />" })[], printers?:
+            (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+            }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, capabilities?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, bottomMargins?:
+            function, collation?: function, colorModes?: function,
+            contentTypes?: function, copiesPerJob?: function, dpis?: function,
+            duplexModes?: function, feedOrientations?: function, finishings?:
+            function, inputBins?: function, isColorPrintingSupported?: function,
+            isPageRangeSupported?: function, leftMargins?: function,
+            mediaColors?: function, mediaSizes?: function, mediaTypes?:
+            function, multipageLayouts?: function, orientations?: function,
+            outputBins?: function, pagesPerSheet?: function, qualities?:
+            function, rightMargins?: function, scalings?: function,
+            supportsFitPdfToPage?: function, topMargins?: function } | null,
+            defaults?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, colorMode?: function, contentType?: function,
+            copiesPerJob?: function, dpi?: function, duplexMode?: function,
+            finishings?: function, fitPdfToPage?: function, inputBin?: function,
+            mediaColor?: function, mediaSize?: function, mediaType?: function,
+            multipageLayout?: function, orientation?: function, outputBin?:
+            function, pagesPerSheet?: function, quality?: function, scaling?:
+            function } | null, displayName?: string, isAcceptingJobs?: boolean |
+            null, jobs?: (... & ... & ...)[], location?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, altitudeInMeters?:
+            function, building?: function, city?: function, countryOrRegion?:
+            function, floor?: function, floorDescription?: function, latitude?:
+            function, longitude?: function, organization?: function,
+            postalCode?: function, roomDescription?: function, roomName?:
+            function, site?: function, stateOrProvince?: function,
+            streetAddress?: function, subdivision?: function, subunit?: function
+            } | null, manufacturer?: string | null, model?: string | null,
+            status?: { <xref uid="@odata.type" />: string, description?:
+            function, details?: function, state?: function } }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.printerBase" />" }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, connectors?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, appVersion?: string, displayName?: string,
+            fullyQualifiedDomainName?: string, location?: Record&lt;..., ...&gt;
+            | { <xref uid="@odata.type" />: ..., altitudeInMeters?: ...,
+            building?: ..., city?: ..., countryOrRegion?: ..., floor?: ...,
+            floorDescription?: ..., latitude?: ..., longitude?: ...,
+            organization?: ..., postalCode?: ..., roomDescription?: ...,
+            roomName?: ..., site?: ..., stateOrProvince?: ..., streetAddress?:
+            ..., subdivision?: ..., subunit?: ... } | null, operatingSystem?:
+            string, registeredDateTime?: string } & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.printConnector" />" })[],
+            hasPhysicalDevice?: boolean, isShared?: boolean, lastSeenDateTime?:
+            string | null, registeredDateTime?: string, shares?:
+            (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, allowAllUsers?: boolean,
+            allowedGroups?: ...[], allowedUsers?: ...[], createdDateTime?:
+            string, printer?: Record&lt;..., ...&gt; | Omit&lt;Omit&lt;{ id?:
+            string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ capabilities?:
+            Record&lt;string, never&gt; | { bottomMargins?: (number | null)[] |
+            undefined; ... 24 more ...; '<xref uid="@odata.type" />': string; }
+            | null | undefined; ... 8 more ...; '<xref uid="@odata.type" />':
+            string; }, "<xref uid="@odata.type" />"&gt; & { ...; }, "<xref
+            uid="@odata.typ..." /> | null, viewPoint?: Record&lt;..., ...&gt; |
+            { <xref uid="@odata.type" />: ..., lastUsedDateTime?: ... } | null }
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.printerShare" />" })[], taskTriggers?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, definition?: ... & ... & ..., event?: "unknownFutureValue" |
+            "jobStarted" } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.printTaskTrigger" />" })[] })[], services?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            endpoints?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, displayName?: string, uri?: string } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.printServiceEndpoint" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.printService" />"
+            })[], settings?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, documentConversionEnabled?: boolean,
+            printerDiscoverySettings?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, airPrint?: { <xref uid="@odata.type"
+            />: string, incompatiblePrinters?: "unknownFutureValue" | "show" |
+            "hide" } } | null } | null, shares?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, capabilities?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, bottomMargins?: function, collation?:
+            function, colorModes?: function, contentTypes?: function,
+            copiesPerJob?: function, dpis?: function, duplexModes?: function,
+            feedOrientations?: function, finishings?: function, inputBins?:
+            function, isColorPrintingSupported?: function,
+            isPageRangeSupported?: function, leftMargins?: function,
+            mediaColors?: function, mediaSizes?: function, mediaTypes?:
+            function, multipageLayouts?: function, orientations?: function,
+            outputBins?: function, pagesPerSheet?: function, qualities?:
+            function, rightMargins?: function, scalings?: function,
+            supportsFitPdfToPage?: function, topMargins?: function } | null,
+            defaults?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, colorMode?: function, contentType?: function,
+            copiesPerJob?: function, dpi?: function, duplexMode?: function,
+            finishings?: function, fitPdfToPage?: function, inputBin?: function,
+            mediaColor?: function, mediaSize?: function, mediaType?: function,
+            multipageLayout?: function, orientation?: function, outputBin?:
+            function, pagesPerSheet?: function, quality?: function, scaling?:
+            function } | null, displayName?: string, isAcceptingJobs?: boolean |
+            null, jobs?: (... & ... & ...)[], location?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, altitudeInMeters?:
+            function, building?: function, city?: function, countryOrRegion?:
+            function, floor?: function, floorDescription?: function, latitude?:
+            function, longitude?: function, organization?: function,
+            postalCode?: function, roomDescription?: function, roomName?:
+            function, site?: function, stateOrProvince?: function,
+            streetAddress?: function, subdivision?: function, subunit?: function
+            } | null, manufacturer?: string | null, model?: string | null,
+            status?: { <xref uid="@odata.type" />: string, description?:
+            function, details?: function, state?: function } }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.printerBase" />" }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, allowAllUsers?:
+            boolean, allowedGroups?: (Omit&lt;Omit&lt;..., ...&gt; &
+            Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            acceptedSenders?: ...[], allowExternalSenders?: boolean | null,
+            appRoleAssignments?: ...[], assignedLabels?: ...[],
+            assignedLicenses?: ...[], autoSubscribeNewMembers?: boolean | null,
+            calendar?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+            calendarView?: ...[], classification?: string | null,
+            conversations?: ...[], createdDateTime?: string | null,
+            createdOnBehalfOf?: (... & ... & ...) | Record&lt;..., ...&gt; |
+            null, description?: string | null, displayName?: string | null,
+            drive?: Record&lt;..., ...&gt; | (... & ... & ...) | null, drives?:
+            ...[], events?: ...[], expirationDateTime?: string | null,
+            extensions?: ...[], groupLifecyclePolicies?: ...[], groupTypes?:
+            ...[], hasMembersWithLicenseErrors?: boolean | null,
+            hideFromAddressLists?: boolean | null, hideFromOutlookClients?:
+            boolean | null, isArchived?: boolean | null, isAssignableToRole?:
+            boolean | null, isManagementRestricted?: boolean | null,
+            isSubscribedByMail?: boolean | null, licenseProcessingState?:
+            Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., state?:
+            ... } | null, mail?: string | null, mailEnabled?: boolean | null,
+            mailNickname?: string | null, memberOf?: ...[], members?: ...[],
+            membershipRule?: string | null, membershipRuleProcessingState?:
+            string | null, membersWithLicenseErrors?: ...[], onenote?:
+            Record&lt;..., ...&gt; | (... & ... & ...) | null,
+            onPremisesDomainName?: string | null, onPremisesLastSyncDateTime?:
+            string | null, onPremisesNetBiosName?: string | null,
+            onPremisesProvisioningErrors?: ...[], onPremisesSamAccountName?:
+            string | null, onPremisesSecurityIdentifier?: string | null,
+            onPremisesSyncBehavior?: Record&lt;..., ...&gt; | (... & ... & ...)
+            | null, onPremisesSyncEnabled?: boolean | null, owners?: ...[],
+            permissionGrants?: ...[], photo?: Record&lt;..., ...&gt; | (... &
+            ... & ...) | null, photos?: ...[], planner?: Record&lt;..., ...&gt;
+            | (... & ... & ...) | null, preferredDataLocation?: string | null,
+            preferredLanguage?: string | null, proxyAddresses?: ...[],
+            rejectedSenders?: ...[], renewedDateTime?: string | null,
+            securityEnabled?: boolean | null, securityIdentifier?: string |
+            null, serviceProvisioningErrors?: ...[], settings?: ...[], sites?:
+            ...[], team?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+            theme?: string | null, threads?: ...[], transitiveMemberOf?: ...[],
+            transitiveMembers?: ...[], uniqueName?: string | null, unseenCount?:
+            number | null, visibility?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.group" />" })[],
+            allowedUsers?: (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt;
+            & { <xref uid="@odata.type" />: ... }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, aboutMe?: string |
+            null, accountEnabled?: boolean | null, activities?: ...[],
+            ageGroup?: string | null, agreementAcceptances?: ...[],
+            appRoleAssignments?: ...[], assignedLicenses?: ...[],
+            assignedPlans?: ...[], authentication?: Record&lt;..., ...&gt; |
+            (... & ... & ...) | null, authorizationInfo?: Record&lt;..., ...&gt;
+            | { <xref uid="@odata.type" />: ..., certificateUserIds?: ... } |
+            null, birthday?: string, businessPhones?: ...[], calendar?:
+            Record&lt;..., ...&gt; | (... & ... & ...) | null, calendarGroups?:
+            ...[], calendars?: ...[], calendarView?: ...[], chats?: ...[],
+            city?: string | null, cloudClipboard?: Record&lt;..., ...&gt; | (...
+            & ... & ...) | null, cloudPCs?: ...[], companyName?: string | null,
+            consentProvidedForMinor?: string | null, contactFolders?: ...[],
+            contacts?: ...[], country?: string | null, createdDateTime?: string
+            | null, createdObjects?: ...[], creationType?: string | null,
+            customSecurityAttributes?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ... } | null, dataSecurityAndGovernance?:
+            Record&lt;..., ...&gt; | (... & ... & ...) | null, department?:
+            string | null, deviceEnrollmentLimit?: number,
+            deviceManagementTroubleshootingEvents?: ...[], directReports?:
+            ...[], displayName?: string | null, drive?: Record&lt;..., ...&gt; |
+            (... & ... & ...) | null, drives?: ...[], employeeExperience?:
+            Record&lt;..., ...&gt; | (... & ... & ...) | null,
+            employeeHireDate?: string | null, employeeId?: string | null,
+            employeeLeaveDateTime?: string | null, employeeOrgData?:
+            Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            costCenter?: ..., division?: ... } | null, employeeType?: string |
+            null, events?: ...[], extensions?: ...[], externalUserState?: string
+            | null, externalUserStateChangeDateTime?: string | null, faxNumber?:
+            string | null, followedSites?: ...[], givenName?: string | null,
+            hireDate?: string, identities?: ...[], imAddresses?: ...[],
+            inferenceClassification?: Record&lt;..., ...&gt; | (... & ... & ...)
+            | null, insights?: Record&lt;..., ...&gt; | (... & ...) | null,
+            interests?: ...[], isManagementRestricted?: boolean | null,
+            isResourceAccount?: boolean | null, jobTitle?: string | null,
+            joinedTeams?: ...[], lastPasswordChangeDateTime?: string | null,
+            legalAgeGroupClassification?: string | null,
+            licenseAssignmentStates?: ...[], licenseDetails?: ...[], mail?:
+            string | null, mailboxSettings?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., archiveFolder?: ...,
+            automaticRepliesSetting?: ..., dateFormat?: ...,
+            delegateMeetingMessageDeliveryOptions?: ..., language?: ...,
+            timeFormat?: ..., timeZone?: ..., userPurpose?: ..., workingHours?:
+            ... } | null, mailFolders?: ...[], mailNickname?: string | null,
+            managedAppRegistrations?: ...[], managedDevices?: ...[], manager?:
+            (... & ... & ...) | Record&lt;..., ...&gt; | null, memberOf?: ...[],
+            messages?: ...[], mobilePhone?: string | null, mySite?: string |
+            null, oauth2PermissionGrants?: ...[], officeLocation?: string |
+            null, onenote?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+            onlineMeetings?: ...[], onPremisesDistinguishedName?: string | null,
+            onPremisesDomainName?: string | null,
+            onPremisesExtensionAttributes?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., extensionAttribute1?: ...,
+            extensionAttribute10?: ..., extensionAttribute11?: ...,
+            extensionAttribute12?: ..., extensionAttribute13?: ...,
+            extensionAttribute14?: ..., extensionAttribute15?: ...,
+            extensionAttribute2?: ..., extensionAttribute3?: ...,
+            extensionAttribute4?: ..., extensionAttribute5?: ...,
+            extensionAttribute6?: ..., extensionAttribute7?: ...,
+            extensionAttribute8?: ..., extensionAttribute9?: ... } | null,
+            onPremisesImmutableId?: string | null, onPremisesLastSyncDateTime?:
+            string | null, onPremisesProvisioningErrors?: ...[],
+            onPremisesSamAccountName?: string | null,
+            onPremisesSecurityIdentifier?: string | null,
+            onPremisesSyncEnabled?: boolean | null,
+            onPremisesUserPrincipalName?: string | null, otherMails?: ...[],
+            outlook?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+            ownedDevices?: ...[], ownedObjects?: ...[], passwordPolicies?:
+            string | null, passwordProfile?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., forceChangePasswordNextSignIn?: ...,
+            forceChangePasswordNextSignInWithMfa?: ..., password?: ... } | null,
+            pastProjects?: ...[], people?: ...[], permissionGrants?: ...[],
+            photo?: Record&lt;..., ...&gt; | (... & ... & ...) | null, photos?:
+            ...[], planner?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+            postalCode?: string | null, preferredDataLocation?: string | null,
+            preferredLanguage?: string | null, preferredName?: string | null,
+            presence?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+            print?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            recentPrinterShares?: ... } | null, provisionedPlans?: ...[],
+            proxyAddresses?: ...[], registeredDevices?: ...[],
+            responsibilities?: ...[], schools?: ...[], scopedRoleMemberOf?:
+            ...[], securityIdentifier?: string | null,
+            serviceProvisioningErrors?: ...[], settings?: Record&lt;..., ...&gt;
+            | (... & ... & ...) | null, showInAddressList?: boolean | null,
+            signInActivity?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ..., lastNonInteractiveSignInDateTime?: ...,
+            lastNonInteractiveSignInRequestId?: ..., lastSignInDateTime?: ...,
+            lastSignInRequestId?: ..., lastSuccessfulSignInDateTime?: ...,
+            lastSuccessfulSignInRequestId?: ... } | null,
+            signInSessionsValidFromDateTime?: string | null, skills?: ...[],
+            solutions?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+            sponsors?: ...[], state?: string | null, streetAddress?: string |
+            null, surname?: string | null, teamwork?: Record&lt;..., ...&gt; |
+            (... & ... & ...) | null, todo?: Record&lt;..., ...&gt; | (... & ...
+            & ...) | null, transitiveMemberOf?: ...[], usageLocation?: string |
+            null, userPrincipalName?: string | null, userType?: string | null }
+            & { <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.user"
+            />" })[], createdDateTime?: string, printer?: Record&lt;string,
+            never&gt; | (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: ..., id?:
+            ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: ..., capabilities?: ..., defaults?: ...,
+            displayName?: ..., isAcceptingJobs?: ..., jobs?: ..., location?:
+            ..., manufacturer?: ..., model?: ..., status?: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.printerBase" />" }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, connectors?: (... &
+            ... & ...)[], hasPhysicalDevice?: boolean, isShared?: boolean,
+            lastSeenDateTime?: string | null, registeredDateTime?: string,
+            shares?: (Omit&lt;Omit&lt;{ id?: string | undefined; '<xref
+            uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; &
+            Omit&lt;{ capabilities?: Record&lt;string, never&gt; | {
+            bottomMargins?: (number | null)[] | undefined; ... 24 more ...;
+            '<xref uid="@odata.type" />': string; } | null | undefined; ... 8
+            more ...; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { ...; }, "<xref uid="@odata.ty..." />,
+            taskTriggers?: (... & ... & ...)[] }) | null, viewPoint?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            lastUsedDateTime?: string | null } | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.printerShare" />"
+            })[], taskDefinitions?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, createdBy?: { <xref uid="@odata.type"
+            />: string, appId?: string | null, displayName?: string | null,
+            servicePrincipalId?: string | null, servicePrincipalName?: string |
+            null }, displayName?: string, tasks?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            definition?: Omit&lt;{ id?: string | undefined; '<xref
+            uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; &
+            { createdBy?: { appId?: string | null | undefined; displayName?:
+            string | null | undefined; servicePrincipalId?: string | ... 1 more
+            ... | undefined; servicePrincipalName?: string | ... 1 more ... |
+            undefined; '<xref uid="@odata.type" />': string; } | <xref
+            uid="undef..." />, parentUrl?: string, status?: { <xref
+            uid="@odata.type" />: ..., description?: ..., state?: ... },
+            trigger?: ... & ... & ... } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.printTask" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.printTaskDefinition" />" })[] }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["PATCH /print"]["response"]&gt;
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string, connectors?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          appVersion?: string, displayName?: string, fullyQualifiedDomainName?:
+          string, location?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, altitudeInMeters?: number | null,
+          building?: string | null, city?: string | null, countryOrRegion?:
+          string | null, floor?: string | null, floorDescription?: string |
+          null, latitude?: string | number | null, longitude?: string | number |
+          null, organization?: function[], postalCode?: string | null,
+          roomDescription?: string | null, roomName?: string | null, site?:
+          string | null, stateOrProvince?: string | null, streetAddress?: string
+          | null, subdivision?: function[], subunit?: function[] } | null,
+          operatingSystem?: string, registeredDateTime?: string } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.printConnector" />"
+          })[], operations?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdDateTime?: string, status?: {
+          <xref uid="@odata.type" />: string, description?: string, state?:
+          "unknownFutureValue" | "notStarted" | "running" | "succeeded" |
+          "failed" } }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.printOperation" />"
+          })[], printers?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, capabilities?: Record&lt;...,
+          ...&gt; | { <xref uid="@odata.type" />: ..., bottomMargins?: ...,
+          collation?: ..., colorModes?: ..., contentTypes?: ..., copiesPerJob?:
+          ..., dpis?: ..., duplexModes?: ..., feedOrientations?: ...,
+          finishings?: ..., inputBins?: ..., isColorPrintingSupported?: ...,
+          isPageRangeSupported?: ..., leftMargins?: ..., mediaColors?: ...,
+          mediaSizes?: ..., mediaTypes?: ..., multipageLayouts?: ...,
+          orientations?: ..., outputBins?: ..., pagesPerSheet?: ..., qualities?:
+          ..., rightMargins?: ..., scalings?: ..., supportsFitPdfToPage?: ...,
+          topMargins?: ... } | null, defaults?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., colorMode?: ..., contentType?: ...,
+          copiesPerJob?: ..., dpi?: ..., duplexMode?: ..., finishings?: ...,
+          fitPdfToPage?: ..., inputBin?: ..., mediaColor?: ..., mediaSize?: ...,
+          mediaType?: ..., multipageLayout?: ..., orientation?: ..., outputBin?:
+          ..., pagesPerSheet?: ..., quality?: ..., scaling?: ... } | null,
+          displayName?: string, isAcceptingJobs?: boolean | null, jobs?: ...[],
+          location?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          altitudeInMeters?: ..., building?: ..., city?: ..., countryOrRegion?:
+          ..., floor?: ..., floorDescription?: ..., latitude?: ..., longitude?:
+          ..., organization?: ..., postalCode?: ..., roomDescription?: ...,
+          roomName?: ..., site?: ..., stateOrProvince?: ..., streetAddress?:
+          ..., subdivision?: ..., subunit?: ... } | null, manufacturer?: string
+          | null, model?: string | null, status?: { <xref uid="@odata.type" />:
+          ..., description?: ..., details?: ..., state?: ... } }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printerBase" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, connectors?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          appVersion?: function, displayName?: function,
+          fullyQualifiedDomainName?: function, location?: function,
+          operatingSystem?: function, registeredDateTime?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.printConnector" />"
+          })[], hasPhysicalDevice?: boolean, isShared?: boolean,
+          lastSeenDateTime?: string | null, registeredDateTime?: string,
+          shares?: (Omit&lt;... & ... & ..., "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: string, allowAllUsers?: function,
+          allowedGroups?: function, allowedUsers?: function, createdDateTime?:
+          function, printer?: function, viewPoint?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.printerShare" />"
+          })[], taskTriggers?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?:
+          ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, definition?: function, event?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.printTaskTrigger"
+          />" })[] })[], services?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, endpoints?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, displayName?:
+          function, uri?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printServiceEndpoint" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.printService" />"
+          })[], settings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, documentConversionEnabled?: boolean,
+          printerDiscoverySettings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, airPrint?: { <xref uid="@odata.type" />:
+          string, incompatiblePrinters?: "unknownFutureValue" | "show" | "hide"
+          } } | null } | null, shares?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string, capabilities?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          bottomMargins?: ..., collation?: ..., colorModes?: ..., contentTypes?:
+          ..., copiesPerJob?: ..., dpis?: ..., duplexModes?: ...,
+          feedOrientations?: ..., finishings?: ..., inputBins?: ...,
+          isColorPrintingSupported?: ..., isPageRangeSupported?: ...,
+          leftMargins?: ..., mediaColors?: ..., mediaSizes?: ..., mediaTypes?:
+          ..., multipageLayouts?: ..., orientations?: ..., outputBins?: ...,
+          pagesPerSheet?: ..., qualities?: ..., rightMargins?: ..., scalings?:
+          ..., supportsFitPdfToPage?: ..., topMargins?: ... } | null, defaults?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          colorMode?: ..., contentType?: ..., copiesPerJob?: ..., dpi?: ...,
+          duplexMode?: ..., finishings?: ..., fitPdfToPage?: ..., inputBin?:
+          ..., mediaColor?: ..., mediaSize?: ..., mediaType?: ...,
+          multipageLayout?: ..., orientation?: ..., outputBin?: ...,
+          pagesPerSheet?: ..., quality?: ..., scaling?: ... } | null,
+          displayName?: string, isAcceptingJobs?: boolean | null, jobs?: ...[],
+          location?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          altitudeInMeters?: ..., building?: ..., city?: ..., countryOrRegion?:
+          ..., floor?: ..., floorDescription?: ..., latitude?: ..., longitude?:
+          ..., organization?: ..., postalCode?: ..., roomDescription?: ...,
+          roomName?: ..., site?: ..., stateOrProvince?: ..., streetAddress?:
+          ..., subdivision?: ..., subunit?: ... } | null, manufacturer?: string
+          | null, model?: string | null, status?: { <xref uid="@odata.type" />:
+          ..., description?: ..., details?: ..., state?: ... } }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printerBase" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, allowAllUsers?:
+          boolean, allowedGroups?: (Omit&lt;... & ... & ..., "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          acceptedSenders?: function, allowExternalSenders?: function,
+          appRoleAssignments?: function, assignedLabels?: function,
+          assignedLicenses?: function, autoSubscribeNewMembers?: function,
+          calendar?: function, calendarView?: function, classification?:
+          function, conversations?: function, createdDateTime?: function,
+          createdOnBehalfOf?: function, description?: function, displayName?:
+          function, drive?: function, drives?: function, events?: function,
+          expirationDateTime?: function, extensions?: function,
+          groupLifecyclePolicies?: function, groupTypes?: function,
+          hasMembersWithLicenseErrors?: function, hideFromAddressLists?:
+          function, hideFromOutlookClients?: function, isArchived?: function,
+          isAssignableToRole?: function, isManagementRestricted?: function,
+          isSubscribedByMail?: function, licenseProcessingState?: function,
+          mail?: function, mailEnabled?: function, mailNickname?: function,
+          memberOf?: function, members?: function, membershipRule?: function,
+          membershipRuleProcessingState?: function, membersWithLicenseErrors?:
+          function, onenote?: function, onPremisesDomainName?: function,
+          onPremisesLastSyncDateTime?: function, onPremisesNetBiosName?:
+          function, onPremisesProvisioningErrors?: function,
+          onPremisesSamAccountName?: function, onPremisesSecurityIdentifier?:
+          function, onPremisesSyncBehavior?: function, onPremisesSyncEnabled?:
+          function, owners?: function, permissionGrants?: function, photo?:
+          function, photos?: function, planner?: function,
+          preferredDataLocation?: function, preferredLanguage?: function,
+          proxyAddresses?: function, rejectedSenders?: function,
+          renewedDateTime?: function, securityEnabled?: function,
+          securityIdentifier?: function, serviceProvisioningErrors?: function,
+          settings?: function, sites?: function, team?: function, theme?:
+          function, threads?: function, transitiveMemberOf?: function,
+          transitiveMembers?: function, uniqueName?: function, unseenCount?:
+          function, visibility?: function } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.group" />" })[], allowedUsers?:
+          (Omit&lt;... & ... & ..., "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, aboutMe?: function, accountEnabled?:
+          function, activities?: function, ageGroup?: function,
+          agreementAcceptances?: function, appRoleAssignments?: function,
+          assignedLicenses?: function, assignedPlans?: function,
+          authentication?: function, authorizationInfo?: function, birthday?:
+          function, businessPhones?: function, calendar?: function,
+          calendarGroups?: function, calendars?: function, calendarView?:
+          function, chats?: function, city?: function, cloudClipboard?:
+          function, cloudPCs?: function, companyName?: function,
+          consentProvidedForMinor?: function, contactFolders?: function,
+          contacts?: function, country?: function, createdDateTime?: function,
+          createdObjects?: function, creationType?: function,
+          customSecurityAttributes?: function, dataSecurityAndGovernance?:
+          function, department?: function, deviceEnrollmentLimit?: function,
+          deviceManagementTroubleshootingEvents?: function, directReports?:
+          function, displayName?: function, drive?: function, drives?: function,
+          employeeExperience?: function, employeeHireDate?: function,
+          employeeId?: function, employeeLeaveDateTime?: function,
+          employeeOrgData?: function, employeeType?: function, events?:
+          function, extensions?: function, externalUserState?: function,
+          externalUserStateChangeDateTime?: function, faxNumber?: function,
+          followedSites?: function, givenName?: function, hireDate?: function,
+          identities?: function, imAddresses?: function,
+          inferenceClassification?: function, insights?: function, interests?:
+          function, isManagementRestricted?: function, isResourceAccount?:
+          function, jobTitle?: function, joinedTeams?: function,
+          lastPasswordChangeDateTime?: function, legalAgeGroupClassification?:
+          function, licenseAssignmentStates?: function, licenseDetails?:
+          function, mail?: function, mailboxSettings?: function, mailFolders?:
+          function, mailNickname?: function, managedAppRegistrations?: function,
+          managedDevices?: function, manager?: function, memberOf?: function,
+          messages?: function, mobilePhone?: function, mySite?: function,
+          oauth2PermissionGrants?: function, officeLocation?: function,
+          onenote?: function, onlineMeetings?: function,
+          onPremisesDistinguishedName?: function, onPremisesDomainName?:
+          function, onPremisesExtensionAttributes?: function,
+          onPremisesImmutableId?: function, onPremisesLastSyncDateTime?:
+          function, onPremisesProvisioningErrors?: function,
+          onPremisesSamAccountName?: function, onPremisesSecurityIdentifier?:
+          function, onPremisesSyncEnabled?: function,
+          onPremisesUserPrincipalName?: function, otherMails?: function,
+          outlook?: function, ownedDevices?: function, ownedObjects?: function,
+          passwordPolicies?: function, passwordProfile?: function,
+          pastProjects?: function, people?: function, permissionGrants?:
+          function, photo?: function, photos?: function, planner?: function,
+          postalCode?: function, preferredDataLocation?: function,
+          preferredLanguage?: function, preferredName?: function, presence?:
+          function, print?: function, provisionedPlans?: function,
+          proxyAddresses?: function, registeredDevices?: function,
+          responsibilities?: function, schools?: function, scopedRoleMemberOf?:
+          function, securityIdentifier?: function, serviceProvisioningErrors?:
+          function, settings?: function, showInAddressList?: function,
+          signInActivity?: function, signInSessionsValidFromDateTime?: function,
+          skills?: function, solutions?: function, sponsors?: function, state?:
+          function, streetAddress?: function, surname?: function, teamwork?:
+          function, todo?: function, transitiveMemberOf?: function,
+          usageLocation?: function, userPrincipalName?: function, userType?:
+          function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.user" />" })[], createdDateTime?: string,
+          printer?: Record&lt;string, never&gt; | (Omit&lt;Omit&lt;..., ...&gt;
+          & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          connectors?: ...[], hasPhysicalDevice?: boolean, isShared?: boolean,
+          lastSeenDateTime?: string | null, registeredDateTime?: string,
+          shares?: (Omit&lt;Omit&lt;{ id?: string | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; &
+          Omit&lt;{ capabilities?: Record&lt;string, never&gt; | {
+          bottomMargins?: (number | null)[] | undefined; ... 24 more ...; '<xref
+          uid="@odata.type" />': string; } | null | undefined; ... 8 more ...;
+          '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+          />"&gt; & { ...; }, "<xref uid="@odata.ty..." />, taskTriggers?: ...[]
+          }) | null, viewPoint?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, lastUsedDateTime?: string | null } |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printerShare" />" })[], taskDefinitions?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          createdBy?: { <xref uid="@odata.type" />: string, appId?: string |
+          null, displayName?: string | null, servicePrincipalId?: string | null,
+          servicePrincipalName?: string | null }, displayName?: string, tasks?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          definition?: function, parentUrl?: function, status?: function,
+          trigger?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printTask" />" })[] } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.printTaskDefinition" />" })[] }&gt;

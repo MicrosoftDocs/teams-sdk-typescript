@@ -7,7 +7,7 @@ interfaces:
   - '@microsoft/teams.graph-endpoints.informationProtection.bitlocker.IEndpoints'
 package: '@microsoft/teams.graph-endpoints'
 functions:
-  - name: get(any)
+  - name: 'get({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints.informationProtection.bitlocker.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`GET /informationProtection/bitlocker`'
@@ -15,17 +15,34 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /informationProtection/bitlocker"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, recoveryKeys?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, createdDateTime?: string, deviceId?: string | null, key?:
+        string, volumeType?: "unknownFutureValue" | Record<string, never> |
+        "operatingSystemVolume" | "fixedDataVolume" | "removableDataVolume" |
+        null } & { @odata.type: "#microsoft.graph.bitlockerRecoveryKey" })[] } &
+        { @odata.type: "#microsoft.graph.bitlocker" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /informationProtection/bitlocker"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, recoveryKeys?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, createdDateTime?: string, deviceId?:
+          string | null, key?: string, volumeType?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "operatingSystemVolume" |
+          "fixedDataVolume" | "removableDataVolume" | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.bitlockerRecoveryKey" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.bitlocker" />"
+          }&gt;
 variables:
   - name: recoveryKeys
     uid: >-
@@ -36,22 +53,57 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        recoveryKeys: { get: (params?: IEndpoints["GET
-        /informationProtection/bitlocker/recoveryKeys/{bitlockerRecoveryKey-id}"]["parameters"])
-        => EndpointRequest<IEndpoints["GET
-        /informationProtection/bitlocker/recoveryKeys/{bitlockerRecoveryKey-id}"]["response"]>,
-        list: (params?: IEndpoints["GET
+        recoveryKeys: { /** * `GET
+        /informationProtection/bitlocker/recoveryKeys` * * Get a list of the
+        bitlockerRecoveryKey objects and their properties. This operation does
+        not return the key property. For information about how to read the key
+        property, see Get bitlockerRecoveryKey. You can use this API to
+        programmatically iterate through the list of recovery keys in the tenant
+        and identify devices with BitLocker enabled. For more information, see
+        the sample PowerShell code in BitLocker recovery process. */ list:
+        (params?: IEndpoints["GET
         /informationProtection/bitlocker/recoveryKeys"]["parameters"]) =>
         EndpointRequest<IEndpoints["GET
-        /informationProtection/bitlocker/recoveryKeys"]["response"]> }
+        /informationProtection/bitlocker/recoveryKeys"]["response"]>; /** * `GET
+        /informationProtection/bitlocker/recoveryKeys/{bitlockerRecoveryKey-id}`
+        * * Retrieve the properties and relationships of a bitlockerRecoveryKey
+        object. By default, this operation doesn&#x27;t return the key property
+        that represents the actual recovery key. To include the key property in
+        the response, use the $select OData query parameter. Including the
+        $select query parameter triggers a Microsoft Entra audit of the
+        operation and generates an audit log. For more information on audit logs
+        for bitlocker recovery keys, see the KeyManagement category filter of
+        Microsoft Entra audit logs. */ get: (params?: IEndpoints["GET
+        /informationProtection/bitlocker/recoveryKeys/{bitlockerRecoveryKey-id}"]["parameters"])
+        => EndpointRequest<IEndpoints["GET
+        /informationProtection/bitlocker/recoveryKeys/{bitlockerRecoveryKey-id}"]["response"]>;
+        }
       return:
         description: ''
         type: >-
-          { get: (params?: IEndpoints["GET
-          /informationProtection/bitlocker/recoveryKeys/{bitlockerRecoveryKey-id}"]["parameters"])
-          =&gt; EndpointRequest&lt;IEndpoints["GET
-          /informationProtection/bitlocker/recoveryKeys/{bitlockerRecoveryKey-id}"]["response"]&gt;,
-          list: (params?: IEndpoints["GET
+          { /** * `GET /informationProtection/bitlocker/recoveryKeys` * * Get a
+          list of the bitlockerRecoveryKey objects and their properties. This
+          operation does not return the key property. For information about how
+          to read the key property, see Get bitlockerRecoveryKey. You can use
+          this API to programmatically iterate through the list of recovery keys
+          in the tenant and identify devices with BitLocker enabled. For more
+          information, see the sample PowerShell code in BitLocker recovery
+          process. */ list: (params?: IEndpoints["GET
           /informationProtection/bitlocker/recoveryKeys"]["parameters"]) =&gt;
           EndpointRequest&lt;IEndpoints["GET
-          /informationProtection/bitlocker/recoveryKeys"]["response"]&gt; }
+          /informationProtection/bitlocker/recoveryKeys"]["response"]&gt;; /** *
+          `GET
+          /informationProtection/bitlocker/recoveryKeys/{bitlockerRecoveryKey-id}`
+          * * Retrieve the properties and relationships of a
+          bitlockerRecoveryKey object. By default, this operation doesn&#x27;t
+          return the key property that represents the actual recovery key. To
+          include the key property in the response, use the $select OData query
+          parameter. Including the $select query parameter triggers a Microsoft
+          Entra audit of the operation and generates an audit log. For more
+          information on audit logs for bitlocker recovery keys, see the
+          KeyManagement category filter of Microsoft Entra audit logs. */ get:
+          (params?: IEndpoints["GET
+          /informationProtection/bitlocker/recoveryKeys/{bitlockerRecoveryKey-id}"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["GET
+          /informationProtection/bitlocker/recoveryKeys/{bitlockerRecoveryKey-id}"]["response"]&gt;;
+          }

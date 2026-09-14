@@ -7,7 +7,17 @@ interfaces:
   - '@microsoft/teams.graph-endpoints.me.cloudPCs.IEndpoints'
 package: '@microsoft/teams.graph-endpoints'
 functions:
-  - name: create(Operation<"/me/cloudPCs", "post">)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, aadDeviceId?: string | null, displayName?: string |
+      null, gracePeriodEndDateTime?: string | null, imageDisplayName?: string |
+      null, lastModifiedDateTime?: string, managedDeviceId?: string | null,
+      managedDeviceName?: string | null, onPremisesConnectionName?: string |
+      null, provisioningPolicyId?: string | null, provisioningPolicyName?:
+      string | null, provisioningType?: "unknownFutureValue" | Record<string,
+      never> | "shared" | "dedicated" | null, servicePlanId?: string | null,
+      servicePlanName?: string | null, userPrincipalName?: string | null } & {
+      @odata.type: "#microsoft.graph.cloudPC" })
     uid: '@microsoft/teams.graph-endpoints.me.cloudPCs.create'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`POST /me/cloudPCs`'
@@ -15,16 +25,59 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body: Operation<"/me/cloudPCs", "post">):
-        EndpointRequest<IEndpoints["POST /me/cloudPCs"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, aadDeviceId?: string | null,
+        displayName?: string | null, gracePeriodEndDateTime?: string | null,
+        imageDisplayName?: string | null, lastModifiedDateTime?: string,
+        managedDeviceId?: string | null, managedDeviceName?: string | null,
+        onPremisesConnectionName?: string | null, provisioningPolicyId?: string
+        | null, provisioningPolicyName?: string | null, provisioningType?:
+        "unknownFutureValue" | Record<string, never> | "shared" | "dedicated" |
+        null, servicePlanId?: string | null, servicePlanName?: string | null,
+        userPrincipalName?: string | null } & { @odata.type:
+        "#microsoft.graph.cloudPC" }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        aadDeviceId?: string | null, displayName?: string | null,
+        gracePeriodEndDateTime?: string | null, imageDisplayName?: string |
+        null, lastModifiedDateTime?: string, managedDeviceId?: string | null,
+        managedDeviceName?: string | null, onPremisesConnectionName?: string |
+        null, provisioningPolicyId?: string | null, provisioningPolicyName?:
+        string | null, provisioningType?: "unknownFutureValue" | Record<string,
+        never> | "shared" | "dedicated" | null, servicePlanId?: string | null,
+        servicePlanName?: string | null, userPrincipalName?: string | null } & {
+        @odata.type: "#microsoft.graph.cloudPC" }>
       parameters:
         - id: body
-          type: Operation&lt;"/me/cloudPCs", "post"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            aadDeviceId?: string | null, displayName?: string | null,
+            gracePeriodEndDateTime?: string | null, imageDisplayName?: string |
+            null, lastModifiedDateTime?: string, managedDeviceId?: string |
+            null, managedDeviceName?: string | null, onPremisesConnectionName?:
+            string | null, provisioningPolicyId?: string | null,
+            provisioningPolicyName?: string | null, provisioningType?:
+            "unknownFutureValue" | Record&lt;string, never&gt; | "shared" |
+            "dedicated" | null, servicePlanId?: string | null, servicePlanName?:
+            string | null, userPrincipalName?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.cloudPC" />" }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["POST /me/cloudPCs"]["response"]&gt;
-  - name: del(any)
+        type: >-
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, aadDeviceId?: string | null, displayName?: string | null,
+          gracePeriodEndDateTime?: string | null, imageDisplayName?: string |
+          null, lastModifiedDateTime?: string, managedDeviceId?: string | null,
+          managedDeviceName?: string | null, onPremisesConnectionName?: string |
+          null, provisioningPolicyId?: string | null, provisioningPolicyName?:
+          string | null, provisioningType?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "shared" | "dedicated" | null,
+          servicePlanId?: string | null, servicePlanName?: string | null,
+          userPrincipalName?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.cloudPC" />" }&gt;
+  - name: 'del({ cloudPC-id: string, If-Match?: string })'
     uid: '@microsoft/teams.graph-endpoints.me.cloudPCs.del'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`DELETE /me/cloudPCs/{cloudPC-id}`'
@@ -32,18 +85,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /me/cloudPCs/{cloudPC-id}"]["response"]>
+        function del(params?: { cloudPC-id: string, If-Match?: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ cloudPC-id: string, If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /me/cloudPCs/{cloudPC-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[], cloudPC-id: string })'
     uid: '@microsoft/teams.graph-endpoints.me.cloudPCs.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -54,18 +105,41 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /me/cloudPCs/{cloudPC-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        cloudPC-id: string }): EndpointRequest<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, aadDeviceId?: string |
+        null, displayName?: string | null, gracePeriodEndDateTime?: string |
+        null, imageDisplayName?: string | null, lastModifiedDateTime?: string,
+        managedDeviceId?: string | null, managedDeviceName?: string | null,
+        onPremisesConnectionName?: string | null, provisioningPolicyId?: string
+        | null, provisioningPolicyName?: string | null, provisioningType?:
+        "unknownFutureValue" | Record<string, never> | "shared" | "dedicated" |
+        null, servicePlanId?: string | null, servicePlanName?: string | null,
+        userPrincipalName?: string | null } & { @odata.type:
+        "#microsoft.graph.cloudPC" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[], cloudPC-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /me/cloudPCs/{cloudPC-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, aadDeviceId?: string | null, displayName?: string | null,
+          gracePeriodEndDateTime?: string | null, imageDisplayName?: string |
+          null, lastModifiedDateTime?: string, managedDeviceId?: string | null,
+          managedDeviceName?: string | null, onPremisesConnectionName?: string |
+          null, provisioningPolicyId?: string | null, provisioningPolicyName?:
+          string | null, provisioningType?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "shared" | "dedicated" | null,
+          servicePlanId?: string | null, servicePlanName?: string | null,
+          userPrincipalName?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.cloudPC" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: '@microsoft/teams.graph-endpoints.me.cloudPCs.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -76,16 +150,55 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /me/cloudPCs"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, aadDeviceId?: string | null, displayName?: string | null,
+        gracePeriodEndDateTime?: string | null, imageDisplayName?: string |
+        null, lastModifiedDateTime?: string, managedDeviceId?: string | null,
+        managedDeviceName?: string | null, onPremisesConnectionName?: string |
+        null, provisioningPolicyId?: string | null, provisioningPolicyName?:
+        string | null, provisioningType?: "unknownFutureValue" | Record<string,
+        never> | "shared" | "dedicated" | null, servicePlanId?: string | null,
+        servicePlanName?: string | null, userPrincipalName?: string | null } & {
+        @odata.type: "#microsoft.graph.cloudPC" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /me/cloudPCs"]["response"]&gt;
-  - name: update(Operation<"/me/cloudPCs/{cloudPC-id}", "patch">, any)
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          aadDeviceId?: string | null, displayName?: string | null,
+          gracePeriodEndDateTime?: string | null, imageDisplayName?: string |
+          null, lastModifiedDateTime?: string, managedDeviceId?: string | null,
+          managedDeviceName?: string | null, onPremisesConnectionName?: string |
+          null, provisioningPolicyId?: string | null, provisioningPolicyName?:
+          string | null, provisioningType?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "shared" | "dedicated" | null,
+          servicePlanId?: string | null, servicePlanName?: string | null,
+          userPrincipalName?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.cloudPC" />" })[] }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, aadDeviceId?: string | null, displayName?: string |
+      null, gracePeriodEndDateTime?: string | null, imageDisplayName?: string |
+      null, lastModifiedDateTime?: string, managedDeviceId?: string | null,
+      managedDeviceName?: string | null, onPremisesConnectionName?: string |
+      null, provisioningPolicyId?: string | null, provisioningPolicyName?:
+      string | null, provisioningType?: "unknownFutureValue" | Record<string,
+      never> | "shared" | "dedicated" | null, servicePlanId?: string | null,
+      servicePlanName?: string | null, userPrincipalName?: string | null } & {
+      @odata.type: "#microsoft.graph.cloudPC" }, { cloudPC-id: string })
     uid: '@microsoft/teams.graph-endpoints.me.cloudPCs.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`PATCH /me/cloudPCs/{cloudPC-id}`'
@@ -93,21 +206,62 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/me/cloudPCs/{cloudPC-id}", "patch">,
-        params?: any): EndpointRequest<IEndpoints["PATCH
-        /me/cloudPCs/{cloudPC-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, aadDeviceId?: string | null,
+        displayName?: string | null, gracePeriodEndDateTime?: string | null,
+        imageDisplayName?: string | null, lastModifiedDateTime?: string,
+        managedDeviceId?: string | null, managedDeviceName?: string | null,
+        onPremisesConnectionName?: string | null, provisioningPolicyId?: string
+        | null, provisioningPolicyName?: string | null, provisioningType?:
+        "unknownFutureValue" | Record<string, never> | "shared" | "dedicated" |
+        null, servicePlanId?: string | null, servicePlanName?: string | null,
+        userPrincipalName?: string | null } & { @odata.type:
+        "#microsoft.graph.cloudPC" }, params?: { cloudPC-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, aadDeviceId?: string | null,
+        displayName?: string | null, gracePeriodEndDateTime?: string | null,
+        imageDisplayName?: string | null, lastModifiedDateTime?: string,
+        managedDeviceId?: string | null, managedDeviceName?: string | null,
+        onPremisesConnectionName?: string | null, provisioningPolicyId?: string
+        | null, provisioningPolicyName?: string | null, provisioningType?:
+        "unknownFutureValue" | Record<string, never> | "shared" | "dedicated" |
+        null, servicePlanId?: string | null, servicePlanName?: string | null,
+        userPrincipalName?: string | null } & { @odata.type:
+        "#microsoft.graph.cloudPC" }>
       parameters:
         - id: body
-          type: Operation&lt;"/me/cloudPCs/{cloudPC-id}", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            aadDeviceId?: string | null, displayName?: string | null,
+            gracePeriodEndDateTime?: string | null, imageDisplayName?: string |
+            null, lastModifiedDateTime?: string, managedDeviceId?: string |
+            null, managedDeviceName?: string | null, onPremisesConnectionName?:
+            string | null, provisioningPolicyId?: string | null,
+            provisioningPolicyName?: string | null, provisioningType?:
+            "unknownFutureValue" | Record&lt;string, never&gt; | "shared" |
+            "dedicated" | null, servicePlanId?: string | null, servicePlanName?:
+            string | null, userPrincipalName?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.cloudPC" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ cloudPC-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /me/cloudPCs/{cloudPC-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, aadDeviceId?: string | null, displayName?: string | null,
+          gracePeriodEndDateTime?: string | null, imageDisplayName?: string |
+          null, lastModifiedDateTime?: string, managedDeviceId?: string | null,
+          managedDeviceName?: string | null, onPremisesConnectionName?: string |
+          null, provisioningPolicyId?: string | null, provisioningPolicyName?:
+          string | null, provisioningType?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "shared" | "dedicated" | null,
+          servicePlanId?: string | null, servicePlanName?: string | null,
+          userPrincipalName?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.cloudPC" />" }&gt;
 variables:
   - name: endGracePeriod
     uid: '@microsoft/teams.graph-endpoints.me.cloudPCs.endGracePeriod'

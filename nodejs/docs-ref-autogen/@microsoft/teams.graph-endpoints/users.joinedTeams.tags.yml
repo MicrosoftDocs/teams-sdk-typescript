@@ -8,8 +8,15 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints'
 functions:
   - name: >-
-      create(Operation<"/users/{user-id}/joinedTeams/{team-id}/tags", "post">,
-      any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, description?: string | null, displayName?: string |
+      null, memberCount?: number | null, members?: (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string, displayName?:
+      string | null, tenantId?: string | null, userId?: string | null } & {
+      @odata.type: "#microsoft.graph.teamworkTagMember" })[], tagType?:
+      Record<string, never> | "unknownFutureValue" | "standard" | null, teamId?:
+      string | null } & { @odata.type: "#microsoft.graph.teamworkTag" }, {
+      team-id: string, user-id: string })
     uid: '@microsoft/teams.graph-endpoints.users.joinedTeams.tags.create'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`POST /users/{user-id}/joinedTeams/{team-id}/tags`'
@@ -17,25 +24,61 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/users/{user-id}/joinedTeams/{team-id}/tags", "post">,
-        params?: any): EndpointRequest<IEndpoints["POST
-        /users/{user-id}/joinedTeams/{team-id}/tags"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, description?: string | null,
+        displayName?: string | null, memberCount?: number | null, members?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, displayName?: string | null, tenantId?: string |
+        null, userId?: string | null } & { @odata.type:
+        "#microsoft.graph.teamworkTagMember" })[], tagType?: Record<string,
+        never> | "unknownFutureValue" | "standard" | null, teamId?: string |
+        null } & { @odata.type: "#microsoft.graph.teamworkTag" }, params?: {
+        team-id: string, user-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        description?: string | null, displayName?: string | null, memberCount?:
+        number | null, members?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, displayName?: string | null,
+        tenantId?: string | null, userId?: string | null } & { @odata.type:
+        "#microsoft.graph.teamworkTagMember" })[], tagType?: Record<string,
+        never> | "unknownFutureValue" | "standard" | null, teamId?: string |
+        null } & { @odata.type: "#microsoft.graph.teamworkTag" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/users/{user-id}/joinedTeams/{team-id}/tags",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            description?: string | null, displayName?: string | null,
+            memberCount?: number | null, members?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            displayName?: string | null, tenantId?: string | null, userId?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamworkTagMember" />" })[], tagType?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "standard" |
+            null, teamId?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.teamworkTag" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ team-id: string, user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /users/{user-id}/joinedTeams/{team-id}/tags"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, description?: string | null, displayName?: string | null,
+          memberCount?: number | null, members?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, displayName?: string |
+          null, tenantId?: string | null, userId?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamworkTagMember"
+          />" })[], tagType?: Record&lt;string, never&gt; | "unknownFutureValue"
+          | "standard" | null, teamId?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamworkTag" />"
+          }&gt;
+  - name: >-
+      del({ If-Match?: string, team-id: string, teamworkTag-id: string, user-id:
+      string })
     uid: '@microsoft/teams.graph-endpoints.users.joinedTeams.tags.del'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`DELETE /users/{user-id}/joinedTeams/{team-id}/tags/{teamworkTag-id}`'
@@ -43,18 +86,20 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /users/{user-id}/joinedTeams/{team-id}/tags/{teamworkTag-id}"]["response"]>
+        function del(params?: { If-Match?: string, team-id: string,
+        teamworkTag-id: string, user-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { If-Match?: string, team-id: string, teamworkTag-id: string,
+            user-id: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /users/{user-id}/joinedTeams/{team-id}/tags/{teamworkTag-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], team-id: string,
+      teamworkTag-id: string, user-id: string })
     uid: '@microsoft/teams.graph-endpoints.users.joinedTeams.tags.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -65,18 +110,42 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/joinedTeams/{team-id}/tags/{teamworkTag-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[], team-id:
+        string, teamworkTag-id: string, user-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, description?: string | null,
+        displayName?: string | null, memberCount?: number | null, members?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, displayName?: string | null, tenantId?: string |
+        null, userId?: string | null } & { @odata.type:
+        "#microsoft.graph.teamworkTagMember" })[], tagType?: Record<string,
+        never> | "unknownFutureValue" | "standard" | null, teamId?: string |
+        null } & { @odata.type: "#microsoft.graph.teamworkTag" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], team-id: string,
+            teamworkTag-id: string, user-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/joinedTeams/{team-id}/tags/{teamworkTag-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, description?: string | null, displayName?: string | null,
+          memberCount?: number | null, members?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, displayName?: string |
+          null, tenantId?: string | null, userId?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamworkTagMember"
+          />" })[], tagType?: Record&lt;string, never&gt; | "unknownFutureValue"
+          | "standard" | null, teamId?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamworkTag" />"
+          }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, team-id: string, user-id: string })
     uid: '@microsoft/teams.graph-endpoints.users.joinedTeams.tags.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -87,20 +156,48 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/joinedTeams/{team-id}/tags"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, team-id: string, user-id: string }):
+        EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?: string
+        | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, description?: string | null,
+        displayName?: string | null, memberCount?: number | null, members?:
+        (Omit<..., ...> & { @odata.type: ..., displayName?: ..., tenantId?: ...,
+        userId?: ... } & { @odata.type: ... })[], tagType?: Record<string,
+        never> | "unknownFutureValue" | "standard" | null, teamId?: string |
+        null } & { @odata.type: "#microsoft.graph.teamworkTag" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, team-id: string, user-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/joinedTeams/{team-id}/tags"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          description?: string | null, displayName?: string | null,
+          memberCount?: number | null, members?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., displayName?: ..., tenantId?: ..., userId?:
+          ... } & { <xref uid="@odata.type" />: ... })[], tagType?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "standard" |
+          null, teamId?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamworkTag" />" })[] }&gt;
   - name: >-
-      update(Operation<"/users/{user-id}/joinedTeams/{team-id}/tags/{teamworkTag-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, description?: string | null, displayName?: string |
+      null, memberCount?: number | null, members?: (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string, displayName?:
+      string | null, tenantId?: string | null, userId?: string | null } & {
+      @odata.type: "#microsoft.graph.teamworkTagMember" })[], tagType?:
+      Record<string, never> | "unknownFutureValue" | "standard" | null, teamId?:
+      string | null } & { @odata.type: "#microsoft.graph.teamworkTag" }, {
+      team-id: string, teamworkTag-id: string, user-id: string })
     uid: '@microsoft/teams.graph-endpoints.users.joinedTeams.tags.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`PATCH /users/{user-id}/joinedTeams/{team-id}/tags/{teamworkTag-id}`'
@@ -108,24 +205,59 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/users/{user-id}/joinedTeams/{team-id}/tags/{teamworkTag-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /users/{user-id}/joinedTeams/{team-id}/tags/{teamworkTag-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, description?: string | null,
+        displayName?: string | null, memberCount?: number | null, members?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, displayName?: string | null, tenantId?: string |
+        null, userId?: string | null } & { @odata.type:
+        "#microsoft.graph.teamworkTagMember" })[], tagType?: Record<string,
+        never> | "unknownFutureValue" | "standard" | null, teamId?: string |
+        null } & { @odata.type: "#microsoft.graph.teamworkTag" }, params?: {
+        team-id: string, teamworkTag-id: string, user-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, description?: string | null,
+        displayName?: string | null, memberCount?: number | null, members?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, displayName?: string | null, tenantId?: string |
+        null, userId?: string | null } & { @odata.type:
+        "#microsoft.graph.teamworkTagMember" })[], tagType?: Record<string,
+        never> | "unknownFutureValue" | "standard" | null, teamId?: string |
+        null } & { @odata.type: "#microsoft.graph.teamworkTag" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/users/{user-id}/joinedTeams/{team-id}/tags/{teamworkTag-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            description?: string | null, displayName?: string | null,
+            memberCount?: number | null, members?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            displayName?: string | null, tenantId?: string | null, userId?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamworkTagMember" />" })[], tagType?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "standard" |
+            null, teamId?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.teamworkTag" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ team-id: string, teamworkTag-id: string, user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /users/{user-id}/joinedTeams/{team-id}/tags/{teamworkTag-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, description?: string | null, displayName?: string | null,
+          memberCount?: number | null, members?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, displayName?: string |
+          null, tenantId?: string | null, userId?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamworkTagMember"
+          />" })[], tagType?: Record&lt;string, never&gt; | "unknownFutureValue"
+          | "standard" | null, teamId?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamworkTag" />"
+          }&gt;
 variables:
   - name: members
     uid: '@microsoft/teams.graph-endpoints.users.joinedTeams.tags.members'

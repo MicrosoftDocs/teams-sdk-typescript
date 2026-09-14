@@ -99,8 +99,30 @@ variables:
           }
 functions:
   - name: >-
-      create(Operation<"/deviceManagement/virtualEndpoint/userSettings",
-      "post">)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, assignments?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, createdDateTime?: string
+      | null, target?: Record<string, never> | { @odata.type: string } | null }
+      & { @odata.type: "#microsoft.graph.cloudPcUserSettingAssignment" })[],
+      createdDateTime?: string | null, crossRegionDisasterRecoverySetting?:
+      Record<string, never> | { @odata.type: string,
+      crossRegionDisasterRecoveryEnabled?: boolean,
+      disasterRecoveryNetworkSetting?: Record<string, never> | { @odata.type:
+      string } | null, disasterRecoveryType?: Record<string, never> |
+      "unknownFutureValue" | "notConfigured" | "crossRegion" | "premium" | null,
+      maintainCrossRegionRestorePointEnabled?: boolean | null,
+      userInitiatedDisasterRecoveryAllowed?: boolean | null } | null,
+      displayName?: string | null, lastModifiedDateTime?: string | null,
+      localAdminEnabled?: boolean | null, notificationSetting?: Record<string,
+      never> | { @odata.type: string, restartPromptsDisabled?: boolean | null }
+      | null, provisioningSourceType?: Record<string, never> |
+      "unknownFutureValue" | "image" | "snapshot" | null, resetEnabled?: boolean
+      | null, restorePointSetting?: Record<string, never> | { @odata.type:
+      string, frequencyInHours?: number | null, frequencyType?: Record<string,
+      never> | "unknownFutureValue" | "default" | "fourHours" | "sixHours" |
+      "twelveHours" | "sixteenHours" | "twentyFourHours" | null,
+      userRestoreEnabled?: boolean | null } | null, selfServiceEnabled?: boolean
+      | null } & { @odata.type: "#microsoft.graph.cloudPcUserSetting" })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.virtualEndpoint.userSettings.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -112,22 +134,126 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/deviceManagement/virtualEndpoint/userSettings", "post">):
-        EndpointRequest<IEndpoints["POST
-        /deviceManagement/virtualEndpoint/userSettings"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, assignments?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, createdDateTime?: string | null, target?: Record<string, never>
+        | { @odata.type: string } | null } & { @odata.type:
+        "#microsoft.graph.cloudPcUserSettingAssignment" })[], createdDateTime?:
+        string | null, crossRegionDisasterRecoverySetting?: Record<string,
+        never> | { @odata.type: string, crossRegionDisasterRecoveryEnabled?:
+        boolean, disasterRecoveryNetworkSetting?: Record<string, never> | {
+        @odata.type: string } | null, disasterRecoveryType?: Record<string,
+        never> | "unknownFutureValue" | "notConfigured" | "crossRegion" |
+        "premium" | null, maintainCrossRegionRestorePointEnabled?: boolean |
+        null, userInitiatedDisasterRecoveryAllowed?: boolean | null } | null,
+        displayName?: string | null, lastModifiedDateTime?: string | null,
+        localAdminEnabled?: boolean | null, notificationSetting?: Record<string,
+        never> | { @odata.type: string, restartPromptsDisabled?: boolean | null
+        } | null, provisioningSourceType?: Record<string, never> |
+        "unknownFutureValue" | "image" | "snapshot" | null, resetEnabled?:
+        boolean | null, restorePointSetting?: Record<string, never> | {
+        @odata.type: string, frequencyInHours?: number | null, frequencyType?:
+        Record<string, never> | "unknownFutureValue" | "default" | "fourHours" |
+        "sixHours" | "twelveHours" | "sixteenHours" | "twentyFourHours" | null,
+        userRestoreEnabled?: boolean | null } | null, selfServiceEnabled?:
+        boolean | null } & { @odata.type: "#microsoft.graph.cloudPcUserSetting"
+        }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, assignments?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, createdDateTime?: string | null, target?: Record<string, never>
+        | { @odata.type: string } | null } & { @odata.type:
+        "#microsoft.graph.cloudPcUserSettingAssignment" })[], createdDateTime?:
+        string | null, crossRegionDisasterRecoverySetting?: Record<string,
+        never> | { @odata.type: string, crossRegionDisasterRecoveryEnabled?:
+        boolean, disasterRecoveryNetworkSetting?: Record<string, never> | {
+        @odata.type: string } | null, disasterRecoveryType?: Record<string,
+        never> | "unknownFutureValue" | "notConfigured" | "crossRegion" |
+        "premium" | null, maintainCrossRegionRestorePointEnabled?: boolean |
+        null, userInitiatedDisasterRecoveryAllowed?: boolean | null } | null,
+        displayName?: string | null, lastModifiedDateTime?: string | null,
+        localAdminEnabled?: boolean | null, notificationSetting?: Record<string,
+        never> | { @odata.type: string, restartPromptsDisabled?: boolean | null
+        } | null, provisioningSourceType?: Record<string, never> |
+        "unknownFutureValue" | "image" | "snapshot" | null, resetEnabled?:
+        boolean | null, restorePointSetting?: Record<string, never> | {
+        @odata.type: string, frequencyInHours?: number | null, frequencyType?:
+        Record<string, never> | "unknownFutureValue" | "default" | "fourHours" |
+        "sixHours" | "twelveHours" | "sixteenHours" | "twentyFourHours" | null,
+        userRestoreEnabled?: boolean | null } | null, selfServiceEnabled?:
+        boolean | null } & { @odata.type: "#microsoft.graph.cloudPcUserSetting"
+        }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/virtualEndpoint/userSettings",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            assignments?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, createdDateTime?: string | null,
+            target?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+            string } | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.cloudPcUserSettingAssignment" />" })[],
+            createdDateTime?: string | null,
+            crossRegionDisasterRecoverySetting?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string,
+            crossRegionDisasterRecoveryEnabled?: boolean,
+            disasterRecoveryNetworkSetting?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string } | null, disasterRecoveryType?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "notConfigured"
+            | "crossRegion" | "premium" | null,
+            maintainCrossRegionRestorePointEnabled?: boolean | null,
+            userInitiatedDisasterRecoveryAllowed?: boolean | null } | null,
+            displayName?: string | null, lastModifiedDateTime?: string | null,
+            localAdminEnabled?: boolean | null, notificationSetting?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            restartPromptsDisabled?: boolean | null } | null,
+            provisioningSourceType?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "image" | "snapshot" | null, resetEnabled?:
+            boolean | null, restorePointSetting?: Record&lt;string, never&gt; |
+            { <xref uid="@odata.type" />: string, frequencyInHours?: number |
+            null, frequencyType?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "default" | "fourHours" | "sixHours" |
+            "twelveHours" | "sixteenHours" | "twentyFourHours" | null,
+            userRestoreEnabled?: boolean | null } | null, selfServiceEnabled?:
+            boolean | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.cloudPcUserSetting" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /deviceManagement/virtualEndpoint/userSettings"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, assignments?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, createdDateTime?: string | null,
+          target?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.cloudPcUserSettingAssignment" />" })[],
+          createdDateTime?: string | null, crossRegionDisasterRecoverySetting?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          crossRegionDisasterRecoveryEnabled?: boolean,
+          disasterRecoveryNetworkSetting?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string } | null, disasterRecoveryType?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "notConfigured" |
+          "crossRegion" | "premium" | null,
+          maintainCrossRegionRestorePointEnabled?: boolean | null,
+          userInitiatedDisasterRecoveryAllowed?: boolean | null } | null,
+          displayName?: string | null, lastModifiedDateTime?: string | null,
+          localAdminEnabled?: boolean | null, notificationSetting?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          restartPromptsDisabled?: boolean | null } | null,
+          provisioningSourceType?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "image" | "snapshot" | null, resetEnabled?:
+          boolean | null, restorePointSetting?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, frequencyInHours?: number | null,
+          frequencyType?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "default" | "fourHours" | "sixHours" | "twelveHours" | "sixteenHours"
+          | "twentyFourHours" | null, userRestoreEnabled?: boolean | null } |
+          null, selfServiceEnabled?: boolean | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.cloudPcUserSetting"
+          />" }&gt;
+  - name: 'del({ cloudPcUserSetting-id: string, If-Match?: string })'
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.virtualEndpoint.userSettings.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -141,18 +267,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /deviceManagement/virtualEndpoint/userSettings/{cloudPcUserSetting-id}"]["response"]>
+        function del(params?: { cloudPcUserSetting-id: string, If-Match?: string
+        }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ cloudPcUserSetting-id: string, If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /deviceManagement/virtualEndpoint/userSettings/{cloudPcUserSetting-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], cloudPcUserSetting-id:
+      string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.virtualEndpoint.userSettings.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -166,18 +292,77 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/virtualEndpoint/userSettings/{cloudPcUserSetting-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        cloudPcUserSetting-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        assignments?: (Omit<{ @odata.type: string, id?: string }, "@odata.type">
+        & { @odata.type: string, createdDateTime?: string | null, target?:
+        Record<string, never> | { @odata.type: string } | null } & {
+        @odata.type: "#microsoft.graph.cloudPcUserSettingAssignment" })[],
+        createdDateTime?: string | null, crossRegionDisasterRecoverySetting?:
+        Record<string, never> | { @odata.type: string,
+        crossRegionDisasterRecoveryEnabled?: boolean,
+        disasterRecoveryNetworkSetting?: Record<string, never> | { @odata.type:
+        string } | null, disasterRecoveryType?: Record<string, never> |
+        "unknownFutureValue" | "notConfigured" | "crossRegion" | "premium" |
+        null, maintainCrossRegionRestorePointEnabled?: boolean | null,
+        userInitiatedDisasterRecoveryAllowed?: boolean | null } | null,
+        displayName?: string | null, lastModifiedDateTime?: string | null,
+        localAdminEnabled?: boolean | null, notificationSetting?: Record<string,
+        never> | { @odata.type: string, restartPromptsDisabled?: boolean | null
+        } | null, provisioningSourceType?: Record<string, never> |
+        "unknownFutureValue" | "image" | "snapshot" | null, resetEnabled?:
+        boolean | null, restorePointSetting?: Record<string, never> | {
+        @odata.type: string, frequencyInHours?: number | null, frequencyType?:
+        Record<string, never> | "unknownFutureValue" | "default" | "fourHours" |
+        "sixHours" | "twelveHours" | "sixteenHours" | "twentyFourHours" | null,
+        userRestoreEnabled?: boolean | null } | null, selfServiceEnabled?:
+        boolean | null } & { @odata.type: "#microsoft.graph.cloudPcUserSetting"
+        }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], cloudPcUserSetting-id:
+            string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/virtualEndpoint/userSettings/{cloudPcUserSetting-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, assignments?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, createdDateTime?: string | null,
+          target?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.cloudPcUserSettingAssignment" />" })[],
+          createdDateTime?: string | null, crossRegionDisasterRecoverySetting?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          crossRegionDisasterRecoveryEnabled?: boolean,
+          disasterRecoveryNetworkSetting?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string } | null, disasterRecoveryType?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "notConfigured" |
+          "crossRegion" | "premium" | null,
+          maintainCrossRegionRestorePointEnabled?: boolean | null,
+          userInitiatedDisasterRecoveryAllowed?: boolean | null } | null,
+          displayName?: string | null, lastModifiedDateTime?: string | null,
+          localAdminEnabled?: boolean | null, notificationSetting?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          restartPromptsDisabled?: boolean | null } | null,
+          provisioningSourceType?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "image" | "snapshot" | null, resetEnabled?:
+          boolean | null, restorePointSetting?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, frequencyInHours?: number | null,
+          frequencyType?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "default" | "fourHours" | "sixHours" | "twelveHours" | "sixteenHours"
+          | "twentyFourHours" | null, userRestoreEnabled?: boolean | null } |
+          null, selfServiceEnabled?: boolean | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.cloudPcUserSetting"
+          />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.virtualEndpoint.userSettings.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -189,20 +374,99 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/virtualEndpoint/userSettings"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, assignments?: (Omit<..., ...> & { @odata.type: ...,
+        createdDateTime?: ..., target?: ... } & { @odata.type: ... })[],
+        createdDateTime?: string | null, crossRegionDisasterRecoverySetting?:
+        Record<string, never> | { @odata.type: string,
+        crossRegionDisasterRecoveryEnabled?: boolean,
+        disasterRecoveryNetworkSetting?: Record<..., ...> | { @odata.type: ... }
+        | null, disasterRecoveryType?: Record<..., ...> | "unknownFutureValue" |
+        "notConfigured" | "crossRegion" | "premium" | null,
+        maintainCrossRegionRestorePointEnabled?: boolean | null,
+        userInitiatedDisasterRecoveryAllowed?: boolean | null } | null,
+        displayName?: string | null, lastModifiedDateTime?: string | null,
+        localAdminEnabled?: boolean | null, notificationSetting?: Record<string,
+        never> | { @odata.type: string, restartPromptsDisabled?: boolean | null
+        } | null, provisioningSourceType?: Record<string, never> |
+        "unknownFutureValue" | "image" | "snapshot" | null, resetEnabled?:
+        boolean | null, restorePointSetting?: Record<string, never> | {
+        @odata.type: string, frequencyInHours?: number | null, frequencyType?:
+        Record<..., ...> | "unknownFutureValue" | "default" | "fourHours" |
+        "sixHours" | "twelveHours" | "sixteenHours" | "twentyFourHours" | null,
+        userRestoreEnabled?: boolean | null } | null, selfServiceEnabled?:
+        boolean | null } & { @odata.type: "#microsoft.graph.cloudPcUserSetting"
+        })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/virtualEndpoint/userSettings"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          assignments?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+          ..., createdDateTime?: ..., target?: ... } & { <xref uid="@odata.type"
+          />: ... })[], createdDateTime?: string | null,
+          crossRegionDisasterRecoverySetting?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string,
+          crossRegionDisasterRecoveryEnabled?: boolean,
+          disasterRecoveryNetworkSetting?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ... } | null, disasterRecoveryType?:
+          Record&lt;..., ...&gt; | "unknownFutureValue" | "notConfigured" |
+          "crossRegion" | "premium" | null,
+          maintainCrossRegionRestorePointEnabled?: boolean | null,
+          userInitiatedDisasterRecoveryAllowed?: boolean | null } | null,
+          displayName?: string | null, lastModifiedDateTime?: string | null,
+          localAdminEnabled?: boolean | null, notificationSetting?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          restartPromptsDisabled?: boolean | null } | null,
+          provisioningSourceType?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "image" | "snapshot" | null, resetEnabled?:
+          boolean | null, restorePointSetting?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, frequencyInHours?: number | null,
+          frequencyType?: Record&lt;..., ...&gt; | "unknownFutureValue" |
+          "default" | "fourHours" | "sixHours" | "twelveHours" | "sixteenHours"
+          | "twentyFourHours" | null, userRestoreEnabled?: boolean | null } |
+          null, selfServiceEnabled?: boolean | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.cloudPcUserSetting"
+          />" })[] }&gt;
   - name: >-
-      update(Operation<"/deviceManagement/virtualEndpoint/userSettings/{cloudPcUserSetting-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, assignments?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, createdDateTime?: string
+      | null, target?: Record<string, never> | { @odata.type: string } | null }
+      & { @odata.type: "#microsoft.graph.cloudPcUserSettingAssignment" })[],
+      createdDateTime?: string | null, crossRegionDisasterRecoverySetting?:
+      Record<string, never> | { @odata.type: string,
+      crossRegionDisasterRecoveryEnabled?: boolean,
+      disasterRecoveryNetworkSetting?: Record<string, never> | { @odata.type:
+      string } | null, disasterRecoveryType?: Record<string, never> |
+      "unknownFutureValue" | "notConfigured" | "crossRegion" | "premium" | null,
+      maintainCrossRegionRestorePointEnabled?: boolean | null,
+      userInitiatedDisasterRecoveryAllowed?: boolean | null } | null,
+      displayName?: string | null, lastModifiedDateTime?: string | null,
+      localAdminEnabled?: boolean | null, notificationSetting?: Record<string,
+      never> | { @odata.type: string, restartPromptsDisabled?: boolean | null }
+      | null, provisioningSourceType?: Record<string, never> |
+      "unknownFutureValue" | "image" | "snapshot" | null, resetEnabled?: boolean
+      | null, restorePointSetting?: Record<string, never> | { @odata.type:
+      string, frequencyInHours?: number | null, frequencyType?: Record<string,
+      never> | "unknownFutureValue" | "default" | "fourHours" | "sixHours" |
+      "twelveHours" | "sixteenHours" | "twentyFourHours" | null,
+      userRestoreEnabled?: boolean | null } | null, selfServiceEnabled?: boolean
+      | null } & { @odata.type: "#microsoft.graph.cloudPcUserSetting" }, {
+      cloudPcUserSetting-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.virtualEndpoint.userSettings.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -216,21 +480,126 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/deviceManagement/virtualEndpoint/userSettings/{cloudPcUserSetting-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /deviceManagement/virtualEndpoint/userSettings/{cloudPcUserSetting-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, assignments?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, createdDateTime?: string | null, target?: Record<string, never>
+        | { @odata.type: string } | null } & { @odata.type:
+        "#microsoft.graph.cloudPcUserSettingAssignment" })[], createdDateTime?:
+        string | null, crossRegionDisasterRecoverySetting?: Record<string,
+        never> | { @odata.type: string, crossRegionDisasterRecoveryEnabled?:
+        boolean, disasterRecoveryNetworkSetting?: Record<string, never> | {
+        @odata.type: string } | null, disasterRecoveryType?: Record<string,
+        never> | "unknownFutureValue" | "notConfigured" | "crossRegion" |
+        "premium" | null, maintainCrossRegionRestorePointEnabled?: boolean |
+        null, userInitiatedDisasterRecoveryAllowed?: boolean | null } | null,
+        displayName?: string | null, lastModifiedDateTime?: string | null,
+        localAdminEnabled?: boolean | null, notificationSetting?: Record<string,
+        never> | { @odata.type: string, restartPromptsDisabled?: boolean | null
+        } | null, provisioningSourceType?: Record<string, never> |
+        "unknownFutureValue" | "image" | "snapshot" | null, resetEnabled?:
+        boolean | null, restorePointSetting?: Record<string, never> | {
+        @odata.type: string, frequencyInHours?: number | null, frequencyType?:
+        Record<string, never> | "unknownFutureValue" | "default" | "fourHours" |
+        "sixHours" | "twelveHours" | "sixteenHours" | "twentyFourHours" | null,
+        userRestoreEnabled?: boolean | null } | null, selfServiceEnabled?:
+        boolean | null } & { @odata.type: "#microsoft.graph.cloudPcUserSetting"
+        }, params?: { cloudPcUserSetting-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, assignments?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, createdDateTime?: string | null,
+        target?: Record<string, never> | { @odata.type: string } | null } & {
+        @odata.type: "#microsoft.graph.cloudPcUserSettingAssignment" })[],
+        createdDateTime?: string | null, crossRegionDisasterRecoverySetting?:
+        Record<string, never> | { @odata.type: string,
+        crossRegionDisasterRecoveryEnabled?: boolean,
+        disasterRecoveryNetworkSetting?: Record<string, never> | { @odata.type:
+        string } | null, disasterRecoveryType?: Record<string, never> |
+        "unknownFutureValue" | "notConfigured" | "crossRegion" | "premium" |
+        null, maintainCrossRegionRestorePointEnabled?: boolean | null,
+        userInitiatedDisasterRecoveryAllowed?: boolean | null } | null,
+        displayName?: string | null, lastModifiedDateTime?: string | null,
+        localAdminEnabled?: boolean | null, notificationSetting?: Record<string,
+        never> | { @odata.type: string, restartPromptsDisabled?: boolean | null
+        } | null, provisioningSourceType?: Record<string, never> |
+        "unknownFutureValue" | "image" | "snapshot" | null, resetEnabled?:
+        boolean | null, restorePointSetting?: Record<string, never> | {
+        @odata.type: string, frequencyInHours?: number | null, frequencyType?:
+        Record<string, never> | "unknownFutureValue" | "default" | "fourHours" |
+        "sixHours" | "twelveHours" | "sixteenHours" | "twentyFourHours" | null,
+        userRestoreEnabled?: boolean | null } | null, selfServiceEnabled?:
+        boolean | null } & { @odata.type: "#microsoft.graph.cloudPcUserSetting"
+        }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/virtualEndpoint/userSettings/{cloudPcUserSetting-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            assignments?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, createdDateTime?: string | null,
+            target?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+            string } | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.cloudPcUserSettingAssignment" />" })[],
+            createdDateTime?: string | null,
+            crossRegionDisasterRecoverySetting?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string,
+            crossRegionDisasterRecoveryEnabled?: boolean,
+            disasterRecoveryNetworkSetting?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string } | null, disasterRecoveryType?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "notConfigured"
+            | "crossRegion" | "premium" | null,
+            maintainCrossRegionRestorePointEnabled?: boolean | null,
+            userInitiatedDisasterRecoveryAllowed?: boolean | null } | null,
+            displayName?: string | null, lastModifiedDateTime?: string | null,
+            localAdminEnabled?: boolean | null, notificationSetting?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            restartPromptsDisabled?: boolean | null } | null,
+            provisioningSourceType?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "image" | "snapshot" | null, resetEnabled?:
+            boolean | null, restorePointSetting?: Record&lt;string, never&gt; |
+            { <xref uid="@odata.type" />: string, frequencyInHours?: number |
+            null, frequencyType?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "default" | "fourHours" | "sixHours" |
+            "twelveHours" | "sixteenHours" | "twentyFourHours" | null,
+            userRestoreEnabled?: boolean | null } | null, selfServiceEnabled?:
+            boolean | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.cloudPcUserSetting" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ cloudPcUserSetting-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /deviceManagement/virtualEndpoint/userSettings/{cloudPcUserSetting-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, assignments?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, createdDateTime?: string | null,
+          target?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.cloudPcUserSettingAssignment" />" })[],
+          createdDateTime?: string | null, crossRegionDisasterRecoverySetting?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          crossRegionDisasterRecoveryEnabled?: boolean,
+          disasterRecoveryNetworkSetting?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string } | null, disasterRecoveryType?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "notConfigured" |
+          "crossRegion" | "premium" | null,
+          maintainCrossRegionRestorePointEnabled?: boolean | null,
+          userInitiatedDisasterRecoveryAllowed?: boolean | null } | null,
+          displayName?: string | null, lastModifiedDateTime?: string | null,
+          localAdminEnabled?: boolean | null, notificationSetting?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          restartPromptsDisabled?: boolean | null } | null,
+          provisioningSourceType?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "image" | "snapshot" | null, resetEnabled?:
+          boolean | null, restorePointSetting?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, frequencyInHours?: number | null,
+          frequencyType?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "default" | "fourHours" | "sixHours" | "twelveHours" | "sixteenHours"
+          | "twentyFourHours" | null, userRestoreEnabled?: boolean | null } |
+          null, selfServiceEnabled?: boolean | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.cloudPcUserSetting"
+          />" }&gt;

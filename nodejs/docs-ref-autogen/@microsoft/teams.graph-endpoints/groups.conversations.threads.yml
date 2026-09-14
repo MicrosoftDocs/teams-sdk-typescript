@@ -8,8 +8,49 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints'
 functions:
   - name: >-
-      create(Operation<"/groups/{group-id}/conversations/{conversation-id}/threads",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, ccRecipients?: { @odata.type: string, emailAddress?:
+      Record<string, never> | { @odata.type: string, address?: string | null,
+      name?: string | null } | null }[], hasAttachments?: boolean, isLocked?:
+      boolean, lastDeliveredDateTime?: string, posts?: (Omit<Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+      categories?: ...[], changeKey?: string | null, createdDateTime?: string |
+      null, lastModifiedDateTime?: string | null }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.outlookItem" }, "@odata.type"> & {
+      @odata.type: string, attachments?: (Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & Omit<{ @odata.type: ..., contentType?: ..., isInline?:
+      ..., lastModifiedDateTime?: ..., name?: ..., size?: ... }, "@odata.type">
+      & { @odata.type: "#microsoft.graph.attachment" })[], body?: Record<string,
+      never> | { @odata.type: string, content?: string | null, contentType?:
+      Record<string, never> | "text" | "html" | null } | null, conversationId?:
+      string | null, conversationThreadId?: string | null, extensions?: (Omit<{
+      @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ... },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.extension" })[], from?:
+      { @odata.type: string, emailAddress?: Record<string, never> | {
+      @odata.type: string, address?: function, name?: function } | null },
+      hasAttachments?: boolean, inReplyTo?: Record<string, never> | Omit<Omit<{
+      id?: string | undefined; '@odata.type': string; }, "@odata.type"> & Omit<{
+      categories?: (string | null)[] | undefined; changeKey?: string | null |
+      undefined; createdDateTime?: string | ... 1 more ... | undefined;
+      lastModifiedDateTime?: string | ... 1 more ... | undefined; '@odata.type':
+      string; }, "@odat... | null, multiValueExtendedProperties?: (Omit<{
+      @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+      value?: function } & { @odata.type:
+      "#microsoft.graph.multiValueLegacyExtendedProperty" })[],
+      newParticipants?: { @odata.type: string, emailAddress?: Record<..., ...> |
+      { @odata.type: ..., address?: ..., name?: ... } | null }[],
+      receivedDateTime?: string, sender?: Record<string, never> | { @odata.type:
+      string, emailAddress?: Record<string, never> | { @odata.type: string,
+      address?: function, name?: function } | null } | null,
+      singleValueExtendedProperties?: (Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & { @odata.type: string, value?: function } & {
+      @odata.type: "#microsoft.graph.singleValueLegacyExtendedProperty" })[] } &
+      { @odata.type: "#microsoft.graph.post" })[], preview?: string, topic?:
+      string, toRecipients?: { @odata.type: string, emailAddress?:
+      Record<string, never> | { @odata.type: string, address?: string | null,
+      name?: string | null } | null }[], uniqueSenders?: string[] } & {
+      @odata.type: "#microsoft.graph.conversationThread" }, { conversation-id:
+      string, group-id: string })
     uid: '@microsoft/teams.graph-endpoints.groups.conversations.threads.create'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -26,25 +67,207 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/groups/{group-id}/conversations/{conversation-id}/threads",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /groups/{group-id}/conversations/{conversation-id}/threads"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, ccRecipients?: { @odata.type:
+        string, emailAddress?: Record<string, never> | { @odata.type: string,
+        address?: string | null, name?: string | null } | null }[],
+        hasAttachments?: boolean, isLocked?: boolean, lastDeliveredDateTime?:
+        string, posts?: (Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, categories?: ...[],
+        changeKey?: string | null, createdDateTime?: string | null,
+        lastModifiedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.outlookItem" }, "@odata.type"> & { @odata.type:
+        string, attachments?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., contentType?: ..., isInline?:
+        ..., lastModifiedDateTime?: ..., name?: ..., size?: ... },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.attachment" })[],
+        body?: Record<string, never> | { @odata.type: string, content?: string |
+        null, contentType?: Record<string, never> | "text" | "html" | null } |
+        null, conversationId?: string | null, conversationThreadId?: string |
+        null, extensions?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type">
+        & Omit<{ @odata.type: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.extension" })[], from?: { @odata.type: string,
+        emailAddress?: Record<string, never> | { @odata.type: string, address?:
+        function, name?: function } | null }, hasAttachments?: boolean,
+        inReplyTo?: Record<string, never> | Omit<Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & Omit<{ categories?: (string |
+        null)[] | undefined; changeKey?: string | null | undefined;
+        createdDateTime?: string | ... 1 more ... | undefined;
+        lastModifiedDateTime?: string | ... 1 more ... | undefined;
+        '@odata.type': string; }, "@odat... | null,
+        multiValueExtendedProperties?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, value?: function } & {
+        @odata.type: "#microsoft.graph.multiValueLegacyExtendedProperty" })[],
+        newParticipants?: { @odata.type: string, emailAddress?: Record<..., ...>
+        | { @odata.type: ..., address?: ..., name?: ... } | null }[],
+        receivedDateTime?: string, sender?: Record<string, never> | {
+        @odata.type: string, emailAddress?: Record<string, never> | {
+        @odata.type: string, address?: function, name?: function } | null } |
+        null, singleValueExtendedProperties?: (Omit<{ @odata.type: ..., id?: ...
+        }, "@odata.type"> & { @odata.type: string, value?: function } & {
+        @odata.type: "#microsoft.graph.singleValueLegacyExtendedProperty" })[] }
+        & { @odata.type: "#microsoft.graph.post" })[], preview?: string, topic?:
+        string, toRecipients?: { @odata.type: string, emailAddress?:
+        Record<string, never> | { @odata.type: string, address?: string | null,
+        name?: string | null } | null }[], uniqueSenders?: string[] } & {
+        @odata.type: "#microsoft.graph.conversationThread" }, params?: {
+        conversation-id: string, group-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, ccRecipients?: { @odata.type: string, emailAddress?:
+        Record<string, never> | { @odata.type: string, address?: string | null,
+        name?: string | null } | null }[], hasAttachments?: boolean, isLocked?:
+        boolean, lastDeliveredDateTime?: string, posts?: (Omit<Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, categories?: function, changeKey?: function,
+        createdDateTime?: function, lastModifiedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.outlookItem" },
+        "@odata.type"> & { @odata.type: string, attachments?: (Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... })[], body?: Record<string, never> |
+        { @odata.type: string, content?: string | null, contentType?:
+        Record<..., ...> | "text" | "html" | null } | null, conversationId?:
+        string | null, conversationThreadId?: string | null, extensions?:
+        (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... })[], from?: {
+        @odata.type: string, emailAddress?: Record<..., ...> | { @odata.type:
+        ..., address?: ..., name?: ... } | null }, hasAttachments?: boolean,
+        inReplyTo?: Record<string, never> | Omit<Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & Omit<{ categories?: (string |
+        null)[] | undefined; changeKey?: string | null | undefined;
+        createdDateTime?: string | ... 1 more ... | undefined;
+        lastModifiedDateTime?: string | ... 1 more ... | undefined;
+        '@odata.type': string; }, "@odat... | null,
+        multiValueExtendedProperties?: (Omit<..., ...> & { @odata.type: ...,
+        value?: ... } & { @odata.type: ... })[], newParticipants?: {
+        @odata.type: string, emailAddress?: function }[], receivedDateTime?:
+        string, sender?: Record<string, never> | { @odata.type: string,
+        emailAddress?: Record<..., ...> | { @odata.type: ..., address?: ...,
+        name?: ... } | null } | null, singleValueExtendedProperties?: (Omit<...,
+        ...> & { @odata.type: ..., value?: ... } & { @odata.type: ... })[] } & {
+        @odata.type: "#microsoft.graph.post" })[], preview?: string, topic?:
+        string, toRecipients?: { @odata.type: string, emailAddress?:
+        Record<string, never> | { @odata.type: string, address?: string | null,
+        name?: string | null } | null }[], uniqueSenders?: string[] } & {
+        @odata.type: "#microsoft.graph.conversationThread" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/groups/{group-id}/conversations/{conversation-id}/threads",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            ccRecipients?: { <xref uid="@odata.type" />: string, emailAddress?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            address?: string | null, name?: string | null } | null }[],
+            hasAttachments?: boolean, isLocked?: boolean,
+            lastDeliveredDateTime?: string, posts?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, categories?: ...[], changeKey?: string | null,
+            createdDateTime?: string | null, lastModifiedDateTime?: string |
+            null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.outlookItem" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            attachments?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+            }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: ..., contentType?: ..., isInline?: ...,
+            lastModifiedDateTime?: ..., name?: ..., size?: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.attachment" />" })[], body?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, content?: string |
+            null, contentType?: Record&lt;string, never&gt; | "text" | "html" |
+            null } | null, conversationId?: string | null,
+            conversationThreadId?: string | null, extensions?: (Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.extension" />" })[], from?: { <xref
+            uid="@odata.type" />: string, emailAddress?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, address?:
+            function, name?: function } | null }, hasAttachments?: boolean,
+            inReplyTo?: Record&lt;string, never&gt; | Omit&lt;Omit&lt;{ id?:
+            string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ categories?: (string | null)[]
+            | undefined; changeKey?: string | null | undefined;
+            createdDateTime?: string | ... 1 more ... | undefined;
+            lastModifiedDateTime?: string | ... 1 more ... | undefined; '<xref
+            uid="@odata.type" />': string; }, "<xref uid="@odat..." /> | null,
+            multiValueExtendedProperties?: (Omit&lt;{ <xref uid="@odata.type"
+            />: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, value?: function } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.multiValueLegacyExtendedProperty" />" })[],
+            newParticipants?: { <xref uid="@odata.type" />: string,
+            emailAddress?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ..., address?: ..., name?: ... } | null }[], receivedDateTime?:
+            string, sender?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, emailAddress?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, address?:
+            function, name?: function } | null } | null,
+            singleValueExtendedProperties?: (Omit&lt;{ <xref uid="@odata.type"
+            />: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, value?: function } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.singleValueLegacyExtendedProperty" />" })[] } &
+            { <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.post" />"
+            })[], preview?: string, topic?: string, toRecipients?: { <xref
+            uid="@odata.type" />: string, emailAddress?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, address?: string |
+            null, name?: string | null } | null }[], uniqueSenders?: string[] }
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.conversationThread" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ conversation-id: string, group-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /groups/{group-id}/conversations/{conversation-id}/threads"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, ccRecipients?: { <xref uid="@odata.type" />: string,
+          emailAddress?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, address?: string | null, name?: string | null } | null
+          }[], hasAttachments?: boolean, isLocked?: boolean,
+          lastDeliveredDateTime?: string, posts?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, categories?: function, changeKey?: function, createdDateTime?:
+          function, lastModifiedDateTime?: function }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.outlookItem" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, attachments?:
+          (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... })[], body?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, content?: string | null,
+          contentType?: Record&lt;..., ...&gt; | "text" | "html" | null } |
+          null, conversationId?: string | null, conversationThreadId?: string |
+          null, extensions?: (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ... })[], from?: { <xref uid="@odata.type"
+          />: string, emailAddress?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., address?: ..., name?: ... } | null },
+          hasAttachments?: boolean, inReplyTo?: Record&lt;string, never&gt; |
+          Omit&lt;Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type"
+          />': string; }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          categories?: (string | null)[] | undefined; changeKey?: string | null
+          | undefined; createdDateTime?: string | ... 1 more ... | undefined;
+          lastModifiedDateTime?: string | ... 1 more ... | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odat..." /> | null,
+          multiValueExtendedProperties?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., value?: ... } & { <xref uid="@odata.type"
+          />: ... })[], newParticipants?: { <xref uid="@odata.type" />: string,
+          emailAddress?: function }[], receivedDateTime?: string, sender?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          emailAddress?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., address?: ..., name?: ... } | null } | null,
+          singleValueExtendedProperties?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., value?: ... } & { <xref uid="@odata.type"
+          />: ... })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.post" />" })[], preview?: string, topic?: string,
+          toRecipients?: { <xref uid="@odata.type" />: string, emailAddress?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          address?: string | null, name?: string | null } | null }[],
+          uniqueSenders?: string[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.conversationThread" />" }&gt;
+  - name: >-
+      del({ conversation-id: string, conversationThread-id: string, group-id:
+      string, If-Match?: string })
     uid: '@microsoft/teams.graph-endpoints.groups.conversations.threads.del'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -54,18 +277,20 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /groups/{group-id}/conversations/{conversation-id}/threads/{conversationThread-id}"]["response"]>
+        function del(params?: { conversation-id: string, conversationThread-id:
+        string, group-id: string, If-Match?: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { conversation-id: string, conversationThread-id: string, group-id:
+            string, If-Match?: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /groups/{group-id}/conversations/{conversation-id}/threads/{conversationThread-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], conversation-id: string,
+      conversationThread-id: string, group-id: string })
     uid: '@microsoft/teams.graph-endpoints.groups.conversations.threads.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -79,18 +304,103 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /groups/{group-id}/conversations/{conversation-id}/threads/{conversationThread-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        conversation-id: string, conversationThread-id: string, group-id: string
+        }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, ccRecipients?: { @odata.type:
+        string, emailAddress?: Record<string, never> | { @odata.type: string,
+        address?: string | null, name?: string | null } | null }[],
+        hasAttachments?: boolean, isLocked?: boolean, lastDeliveredDateTime?:
+        string, posts?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, categories?: function,
+        changeKey?: function, createdDateTime?: function, lastModifiedDateTime?:
+        function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.outlookItem" }, "@odata.type"> & { @odata.type:
+        string, attachments?: (Omit<..., ...> & Omit<..., ...> & { @odata.type:
+        ... })[], body?: Record<string, never> | { @odata.type: string,
+        content?: string | null, contentType?: Record<..., ...> | "text" |
+        "html" | null } | null, conversationId?: string | null,
+        conversationThreadId?: string | null, extensions?: (Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... })[], from?: { @odata.type: string,
+        emailAddress?: Record<..., ...> | { @odata.type: ..., address?: ...,
+        name?: ... } | null }, hasAttachments?: boolean, inReplyTo?:
+        Record<string, never> | Omit<Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & Omit<{ categories?: (string |
+        null)[] | undefined; changeKey?: string | null | undefined;
+        createdDateTime?: string | ... 1 more ... | undefined;
+        lastModifiedDateTime?: string | ... 1 more ... | undefined;
+        '@odata.type': string; }, "@odat... | null,
+        multiValueExtendedProperties?: (Omit<..., ...> & { @odata.type: ...,
+        value?: ... } & { @odata.type: ... })[], newParticipants?: {
+        @odata.type: string, emailAddress?: function }[], receivedDateTime?:
+        string, sender?: Record<string, never> | { @odata.type: string,
+        emailAddress?: Record<..., ...> | { @odata.type: ..., address?: ...,
+        name?: ... } | null } | null, singleValueExtendedProperties?: (Omit<...,
+        ...> & { @odata.type: ..., value?: ... } & { @odata.type: ... })[] } & {
+        @odata.type: "#microsoft.graph.post" })[], preview?: string, topic?:
+        string, toRecipients?: { @odata.type: string, emailAddress?:
+        Record<string, never> | { @odata.type: string, address?: string | null,
+        name?: string | null } | null }[], uniqueSenders?: string[] } & {
+        @odata.type: "#microsoft.graph.conversationThread" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], conversation-id: string,
+            conversationThread-id: string, group-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /groups/{group-id}/conversations/{conversation-id}/threads/{conversationThread-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, ccRecipients?: { <xref uid="@odata.type" />: string,
+          emailAddress?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, address?: string | null, name?: string | null } | null
+          }[], hasAttachments?: boolean, isLocked?: boolean,
+          lastDeliveredDateTime?: string, posts?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, categories?: function, changeKey?: function, createdDateTime?:
+          function, lastModifiedDateTime?: function }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.outlookItem" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, attachments?:
+          (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... })[], body?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, content?: string | null,
+          contentType?: Record&lt;..., ...&gt; | "text" | "html" | null } |
+          null, conversationId?: string | null, conversationThreadId?: string |
+          null, extensions?: (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ... })[], from?: { <xref uid="@odata.type"
+          />: string, emailAddress?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., address?: ..., name?: ... } | null },
+          hasAttachments?: boolean, inReplyTo?: Record&lt;string, never&gt; |
+          Omit&lt;Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type"
+          />': string; }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          categories?: (string | null)[] | undefined; changeKey?: string | null
+          | undefined; createdDateTime?: string | ... 1 more ... | undefined;
+          lastModifiedDateTime?: string | ... 1 more ... | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odat..." /> | null,
+          multiValueExtendedProperties?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., value?: ... } & { <xref uid="@odata.type"
+          />: ... })[], newParticipants?: { <xref uid="@odata.type" />: string,
+          emailAddress?: function }[], receivedDateTime?: string, sender?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          emailAddress?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., address?: ..., name?: ... } | null } | null,
+          singleValueExtendedProperties?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., value?: ... } & { <xref uid="@odata.type"
+          />: ... })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.post" />" })[], preview?: string, topic?: string,
+          toRecipients?: { <xref uid="@odata.type" />: string, emailAddress?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          address?: string | null, name?: string | null } | null }[],
+          uniqueSenders?: string[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.conversationThread" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, conversation-id: string, group-id: string })
     uid: '@microsoft/teams.graph-endpoints.groups.conversations.threads.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -103,20 +413,94 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /groups/{group-id}/conversations/{conversation-id}/threads"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, conversation-id: string, group-id: string
+        }): EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?:
+        string | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, ccRecipients?: { @odata.type:
+        string, emailAddress?: function }[], hasAttachments?: boolean,
+        isLocked?: boolean, lastDeliveredDateTime?: string, posts?: (Omit<...,
+        ...> & { @odata.type: ..., attachments?: ..., body?: ...,
+        conversationId?: ..., conversationThreadId?: ..., extensions?: ...,
+        from?: ..., hasAttachments?: ..., inReplyTo?: ...,
+        multiValueExtendedProperties?: ..., newParticipants?: ...,
+        receivedDateTime?: ..., sender?: ..., singleValueExtendedProperties?:
+        ... } & { @odata.type: ... })[], preview?: string, topic?: string,
+        toRecipients?: { @odata.type: string, emailAddress?: function }[],
+        uniqueSenders?: string[] } & { @odata.type:
+        "#microsoft.graph.conversationThread" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, conversation-id: string, group-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /groups/{group-id}/conversations/{conversation-id}/threads"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          ccRecipients?: { <xref uid="@odata.type" />: string, emailAddress?:
+          function }[], hasAttachments?: boolean, isLocked?: boolean,
+          lastDeliveredDateTime?: string, posts?: (Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ..., attachments?: ..., body?: ...,
+          conversationId?: ..., conversationThreadId?: ..., extensions?: ...,
+          from?: ..., hasAttachments?: ..., inReplyTo?: ...,
+          multiValueExtendedProperties?: ..., newParticipants?: ...,
+          receivedDateTime?: ..., sender?: ..., singleValueExtendedProperties?:
+          ... } & { <xref uid="@odata.type" />: ... })[], preview?: string,
+          topic?: string, toRecipients?: { <xref uid="@odata.type" />: string,
+          emailAddress?: function }[], uniqueSenders?: string[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.conversationThread"
+          />" })[] }&gt;
   - name: >-
-      update(Operation<"/groups/{group-id}/conversations/{conversation-id}/threads/{conversationThread-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, ccRecipients?: { @odata.type: string, emailAddress?:
+      Record<string, never> | { @odata.type: string, address?: string | null,
+      name?: string | null } | null }[], hasAttachments?: boolean, isLocked?:
+      boolean, lastDeliveredDateTime?: string, posts?: (Omit<Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+      categories?: ...[], changeKey?: string | null, createdDateTime?: string |
+      null, lastModifiedDateTime?: string | null }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.outlookItem" }, "@odata.type"> & {
+      @odata.type: string, attachments?: (Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & Omit<{ @odata.type: ..., contentType?: ..., isInline?:
+      ..., lastModifiedDateTime?: ..., name?: ..., size?: ... }, "@odata.type">
+      & { @odata.type: "#microsoft.graph.attachment" })[], body?: Record<string,
+      never> | { @odata.type: string, content?: string | null, contentType?:
+      Record<string, never> | "text" | "html" | null } | null, conversationId?:
+      string | null, conversationThreadId?: string | null, extensions?: (Omit<{
+      @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ... },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.extension" })[], from?:
+      { @odata.type: string, emailAddress?: Record<string, never> | {
+      @odata.type: string, address?: function, name?: function } | null },
+      hasAttachments?: boolean, inReplyTo?: Record<string, never> | Omit<Omit<{
+      id?: string | undefined; '@odata.type': string; }, "@odata.type"> & Omit<{
+      categories?: (string | null)[] | undefined; changeKey?: string | null |
+      undefined; createdDateTime?: string | ... 1 more ... | undefined;
+      lastModifiedDateTime?: string | ... 1 more ... | undefined; '@odata.type':
+      string; }, "@odat... | null, multiValueExtendedProperties?: (Omit<{
+      @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+      value?: function } & { @odata.type:
+      "#microsoft.graph.multiValueLegacyExtendedProperty" })[],
+      newParticipants?: { @odata.type: string, emailAddress?: Record<..., ...> |
+      { @odata.type: ..., address?: ..., name?: ... } | null }[],
+      receivedDateTime?: string, sender?: Record<string, never> | { @odata.type:
+      string, emailAddress?: Record<string, never> | { @odata.type: string,
+      address?: function, name?: function } | null } | null,
+      singleValueExtendedProperties?: (Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & { @odata.type: string, value?: function } & {
+      @odata.type: "#microsoft.graph.singleValueLegacyExtendedProperty" })[] } &
+      { @odata.type: "#microsoft.graph.post" })[], preview?: string, topic?:
+      string, toRecipients?: { @odata.type: string, emailAddress?:
+      Record<string, never> | { @odata.type: string, address?: string | null,
+      name?: string | null } | null }[], uniqueSenders?: string[] } & {
+      @odata.type: "#microsoft.graph.conversationThread" }, { conversation-id:
+      string, conversationThread-id: string, group-id: string })
     uid: '@microsoft/teams.graph-endpoints.groups.conversations.threads.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -126,24 +510,207 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/groups/{group-id}/conversations/{conversation-id}/threads/{conversationThread-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /groups/{group-id}/conversations/{conversation-id}/threads/{conversationThread-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, ccRecipients?: { @odata.type:
+        string, emailAddress?: Record<string, never> | { @odata.type: string,
+        address?: string | null, name?: string | null } | null }[],
+        hasAttachments?: boolean, isLocked?: boolean, lastDeliveredDateTime?:
+        string, posts?: (Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, categories?: ...[],
+        changeKey?: string | null, createdDateTime?: string | null,
+        lastModifiedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.outlookItem" }, "@odata.type"> & { @odata.type:
+        string, attachments?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., contentType?: ..., isInline?:
+        ..., lastModifiedDateTime?: ..., name?: ..., size?: ... },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.attachment" })[],
+        body?: Record<string, never> | { @odata.type: string, content?: string |
+        null, contentType?: Record<string, never> | "text" | "html" | null } |
+        null, conversationId?: string | null, conversationThreadId?: string |
+        null, extensions?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type">
+        & Omit<{ @odata.type: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.extension" })[], from?: { @odata.type: string,
+        emailAddress?: Record<string, never> | { @odata.type: string, address?:
+        function, name?: function } | null }, hasAttachments?: boolean,
+        inReplyTo?: Record<string, never> | Omit<Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & Omit<{ categories?: (string |
+        null)[] | undefined; changeKey?: string | null | undefined;
+        createdDateTime?: string | ... 1 more ... | undefined;
+        lastModifiedDateTime?: string | ... 1 more ... | undefined;
+        '@odata.type': string; }, "@odat... | null,
+        multiValueExtendedProperties?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, value?: function } & {
+        @odata.type: "#microsoft.graph.multiValueLegacyExtendedProperty" })[],
+        newParticipants?: { @odata.type: string, emailAddress?: Record<..., ...>
+        | { @odata.type: ..., address?: ..., name?: ... } | null }[],
+        receivedDateTime?: string, sender?: Record<string, never> | {
+        @odata.type: string, emailAddress?: Record<string, never> | {
+        @odata.type: string, address?: function, name?: function } | null } |
+        null, singleValueExtendedProperties?: (Omit<{ @odata.type: ..., id?: ...
+        }, "@odata.type"> & { @odata.type: string, value?: function } & {
+        @odata.type: "#microsoft.graph.singleValueLegacyExtendedProperty" })[] }
+        & { @odata.type: "#microsoft.graph.post" })[], preview?: string, topic?:
+        string, toRecipients?: { @odata.type: string, emailAddress?:
+        Record<string, never> | { @odata.type: string, address?: string | null,
+        name?: string | null } | null }[], uniqueSenders?: string[] } & {
+        @odata.type: "#microsoft.graph.conversationThread" }, params?: {
+        conversation-id: string, conversationThread-id: string, group-id: string
+        }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, ccRecipients?: { @odata.type:
+        string, emailAddress?: Record<string, never> | { @odata.type: string,
+        address?: string | null, name?: string | null } | null }[],
+        hasAttachments?: boolean, isLocked?: boolean, lastDeliveredDateTime?:
+        string, posts?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, categories?: function,
+        changeKey?: function, createdDateTime?: function, lastModifiedDateTime?:
+        function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.outlookItem" }, "@odata.type"> & { @odata.type:
+        string, attachments?: (Omit<..., ...> & Omit<..., ...> & { @odata.type:
+        ... })[], body?: Record<string, never> | { @odata.type: string,
+        content?: string | null, contentType?: Record<..., ...> | "text" |
+        "html" | null } | null, conversationId?: string | null,
+        conversationThreadId?: string | null, extensions?: (Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... })[], from?: { @odata.type: string,
+        emailAddress?: Record<..., ...> | { @odata.type: ..., address?: ...,
+        name?: ... } | null }, hasAttachments?: boolean, inReplyTo?:
+        Record<string, never> | Omit<Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & Omit<{ categories?: (string |
+        null)[] | undefined; changeKey?: string | null | undefined;
+        createdDateTime?: string | ... 1 more ... | undefined;
+        lastModifiedDateTime?: string | ... 1 more ... | undefined;
+        '@odata.type': string; }, "@odat... | null,
+        multiValueExtendedProperties?: (Omit<..., ...> & { @odata.type: ...,
+        value?: ... } & { @odata.type: ... })[], newParticipants?: {
+        @odata.type: string, emailAddress?: function }[], receivedDateTime?:
+        string, sender?: Record<string, never> | { @odata.type: string,
+        emailAddress?: Record<..., ...> | { @odata.type: ..., address?: ...,
+        name?: ... } | null } | null, singleValueExtendedProperties?: (Omit<...,
+        ...> & { @odata.type: ..., value?: ... } & { @odata.type: ... })[] } & {
+        @odata.type: "#microsoft.graph.post" })[], preview?: string, topic?:
+        string, toRecipients?: { @odata.type: string, emailAddress?:
+        Record<string, never> | { @odata.type: string, address?: string | null,
+        name?: string | null } | null }[], uniqueSenders?: string[] } & {
+        @odata.type: "#microsoft.graph.conversationThread" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/groups/{group-id}/conversations/{conversation-id}/threads/{conversationThread-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            ccRecipients?: { <xref uid="@odata.type" />: string, emailAddress?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            address?: string | null, name?: string | null } | null }[],
+            hasAttachments?: boolean, isLocked?: boolean,
+            lastDeliveredDateTime?: string, posts?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, categories?: ...[], changeKey?: string | null,
+            createdDateTime?: string | null, lastModifiedDateTime?: string |
+            null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.outlookItem" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            attachments?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+            }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: ..., contentType?: ..., isInline?: ...,
+            lastModifiedDateTime?: ..., name?: ..., size?: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.attachment" />" })[], body?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, content?: string |
+            null, contentType?: Record&lt;string, never&gt; | "text" | "html" |
+            null } | null, conversationId?: string | null,
+            conversationThreadId?: string | null, extensions?: (Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.extension" />" })[], from?: { <xref
+            uid="@odata.type" />: string, emailAddress?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, address?:
+            function, name?: function } | null }, hasAttachments?: boolean,
+            inReplyTo?: Record&lt;string, never&gt; | Omit&lt;Omit&lt;{ id?:
+            string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ categories?: (string | null)[]
+            | undefined; changeKey?: string | null | undefined;
+            createdDateTime?: string | ... 1 more ... | undefined;
+            lastModifiedDateTime?: string | ... 1 more ... | undefined; '<xref
+            uid="@odata.type" />': string; }, "<xref uid="@odat..." /> | null,
+            multiValueExtendedProperties?: (Omit&lt;{ <xref uid="@odata.type"
+            />: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, value?: function } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.multiValueLegacyExtendedProperty" />" })[],
+            newParticipants?: { <xref uid="@odata.type" />: string,
+            emailAddress?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ..., address?: ..., name?: ... } | null }[], receivedDateTime?:
+            string, sender?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, emailAddress?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, address?:
+            function, name?: function } | null } | null,
+            singleValueExtendedProperties?: (Omit&lt;{ <xref uid="@odata.type"
+            />: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, value?: function } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.singleValueLegacyExtendedProperty" />" })[] } &
+            { <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.post" />"
+            })[], preview?: string, topic?: string, toRecipients?: { <xref
+            uid="@odata.type" />: string, emailAddress?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, address?: string |
+            null, name?: string | null } | null }[], uniqueSenders?: string[] }
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.conversationThread" />" }
           description: ''
         - id: params
-          type: any
+          type: >-
+            { conversation-id: string, conversationThread-id: string, group-id:
+            string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /groups/{group-id}/conversations/{conversation-id}/threads/{conversationThread-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, ccRecipients?: { <xref uid="@odata.type" />: string,
+          emailAddress?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, address?: string | null, name?: string | null } | null
+          }[], hasAttachments?: boolean, isLocked?: boolean,
+          lastDeliveredDateTime?: string, posts?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, categories?: function, changeKey?: function, createdDateTime?:
+          function, lastModifiedDateTime?: function }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.outlookItem" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, attachments?:
+          (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... })[], body?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, content?: string | null,
+          contentType?: Record&lt;..., ...&gt; | "text" | "html" | null } |
+          null, conversationId?: string | null, conversationThreadId?: string |
+          null, extensions?: (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ... })[], from?: { <xref uid="@odata.type"
+          />: string, emailAddress?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., address?: ..., name?: ... } | null },
+          hasAttachments?: boolean, inReplyTo?: Record&lt;string, never&gt; |
+          Omit&lt;Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type"
+          />': string; }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          categories?: (string | null)[] | undefined; changeKey?: string | null
+          | undefined; createdDateTime?: string | ... 1 more ... | undefined;
+          lastModifiedDateTime?: string | ... 1 more ... | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odat..." /> | null,
+          multiValueExtendedProperties?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., value?: ... } & { <xref uid="@odata.type"
+          />: ... })[], newParticipants?: { <xref uid="@odata.type" />: string,
+          emailAddress?: function }[], receivedDateTime?: string, sender?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          emailAddress?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., address?: ..., name?: ... } | null } | null,
+          singleValueExtendedProperties?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., value?: ... } & { <xref uid="@odata.type"
+          />: ... })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.post" />" })[], preview?: string, topic?: string,
+          toRecipients?: { <xref uid="@odata.type" />: string, emailAddress?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          address?: string | null, name?: string | null } | null }[],
+          uniqueSenders?: string[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.conversationThread" />" }&gt;
 variables:
   - name: reply
     uid: '@microsoft/teams.graph-endpoints.groups.conversations.threads.reply'

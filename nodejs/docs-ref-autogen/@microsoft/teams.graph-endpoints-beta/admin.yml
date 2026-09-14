@@ -139,7 +139,7 @@ variables:
           update: (body: IEndpoints["PATCH /admin/todo"]["body"]) =&gt;
           EndpointRequest&lt;IEndpoints["PATCH /admin/todo"]["response"]&gt; }
 functions:
-  - name: get(any)
+  - name: 'get({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints-beta.admin.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`GET /admin`'
@@ -147,16 +147,933 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /admin"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<{ @odata.type: string, appsAndServices?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, settings?: { @odata.type: string,
+        isAppAndServicesTrialEnabled?: boolean | null, isOfficeStoreEnabled?:
+        boolean | null } } & { @odata.type:
+        "#microsoft.graph.adminAppsAndServices" }) | null,
+        configurationManagement?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        configurationApplications?: (Omit<{ @odata.type: string, id?: function
+        }, "@odata.type"> & { @odata.type: string, appId?: string,
+        appOwnerOrganizationId?: string | null, clientCredentials?: {
+        @odata.type: ..., certificateName?: ..., keyVaultUri?: ... },
+        createdBy?: { @odata.type: ..., application?: ..., device?: ..., user?:
+        ... }, createdDateTime?: string, description?: string, displayName?:
+        string, lastModifiedBy?: { @odata.type: ..., application?: ..., device?:
+        ..., user?: ... }, lastModifiedDateTime?: string, tenantId?: string } &
+        { @odata.type: "#microsoft.graph.configurationApplication" })[],
+        configurationDrifts?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, baselineResourceDisplayName?:
+        string, driftedProperties?: ...[], firstReportedDateTime?: string,
+        monitorId?: string, resourceInstanceIdentifier?: ... & ... & ...,
+        resourceType?: string, status?: "active" | "fixed" |
+        "unknownFutureValue", tenantId?: string } & { @odata.type:
+        "#microsoft.graph.configurationDrift" })[],
+        configurationMonitoringResults?: (Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & { @odata.type: string, driftsCount?:
+        number, driftsFixed?: number, errorDetails?: ...[], monitorId?: string,
+        runCompletionDateTime?: string, runInitiationDateTime?: string,
+        runStatus?: "unknownFutureValue" | "successful" | "partiallySuccessful"
+        | "failed", runType?: "unknownFutureValue" | "monitor" | "apply",
+        tenantId?: string } & { @odata.type:
+        "#microsoft.graph.configurationMonitoringResult" })[],
+        configurationMonitors?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, baseline?: ... & ... & ...,
+        createdBy?: { @odata.type: ..., application?: ..., device?: ..., user?:
+        ... }, createdDateTime?: string, description?: string, displayName?:
+        string, inactivationReason?: string | null, lastModifiedBy?: {
+        @odata.type: ..., application?: ..., device?: ..., user?: ... },
+        lastModifiedDateTime?: string, mode?: "unknownFutureValue" |
+        "monitorOnce" | "monitorOnly" | "applyOnceAndMonitorContinuous" |
+        "applyOnce" | "applyContinuous", monitorRunFrequencyInHours?: number,
+        parameters?: Record<..., ...> | (... & ... & ...) | null,
+        runAsUTCMServicePrincipal?: boolean, runningOnBehalfOf?: { @odata.type:
+        ..., application?: ..., device?: ..., user?: ... }, status?: "active" |
+        "unknownFutureValue" | "inactive", tenantId?: string } & { @odata.type:
+        "#microsoft.graph.configurationMonitor" })[],
+        configurationSnapshotJobs?: (Omit<{ @odata.type: string, id?: function
+        }, "@odata.type"> & { @odata.type: string, completedDateTime?: string,
+        createdBy?: { @odata.type: ..., application?: ..., device?: ..., user?:
+        ... }, createdDateTime?: string, description?: string, displayName?:
+        string, errorDetails?: ...[], resourceLocation?: string, resources?:
+        ...[], status?: "unknownFutureValue" | "partiallySuccessful" | "failed"
+        | "notStarted" | "running" | "succeeded", tenantId?: string } & {
+        @odata.type: "#microsoft.graph.configurationSnapshotJob" })[],
+        configurationSnapshots?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, description?: string,
+        displayName?: string, parameters?: ...[], resources?: ...[] } & {
+        @odata.type: "#microsoft.graph.configurationBaseline" })[] } & {
+        @odata.type: "#microsoft.graph.configurationManagement" }) | null,
+        dynamics?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, customerVoice?: {
+        @odata.type: string, isInOrgFormsPhishingScanEnabled?: boolean | null,
+        isRecordIdentityByDefaultEnabled?: boolean | null,
+        isRestrictedSurveyAccessEnabled?: boolean | null } } & { @odata.type:
+        "#microsoft.graph.adminDynamics" }) | null, edge?: Record<string, never>
+        | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, internetExplorerMode?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, siteLists?: (... & ... & ...)[] } & { @odata.type:
+        "#microsoft.graph.internetExplorerMode" }) | null } & { @odata.type:
+        "#microsoft.graph.edge" }) | null, entra?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, uxSetting?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, restrictNonAdminAccess?: "unknownFutureValue" | "false" | "true"
+        } & { @odata.type: "#microsoft.graph.uxSetting" }) | null } & {
+        @odata.type: "#microsoft.graph.entra" }) | null, exchange?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, mailboxes?: (Omit<Omit<..., ...>
+        & Omit<..., ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type:
+        string, folders?: ...[] } & { @odata.type: "#microsoft.graph.mailbox"
+        })[], messageTraces?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, destinationIPAddress?: string |
+        null, messageId?: string | null, receivedDateTime?: string, recipients?:
+        ...[], senderEmail?: string | null, size?: number, sourceIPAddress?:
+        string | null, subject?: string | null } & { @odata.type:
+        "#microsoft.graph.messageTrace" })[] } & { @odata.type:
+        "#microsoft.graph.exchangeAdmin" }) | null, forms?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, settings?: { @odata.type: string,
+        isBingImageSearchEnabled?: boolean | null, isExternalSendFormEnabled?:
+        boolean | null, isExternalShareCollaborationEnabled?: boolean | null,
+        isExternalShareResultEnabled?: boolean | null,
+        isExternalShareTemplateEnabled?: boolean | null,
+        isInOrgFormsPhishingScanEnabled?: boolean | null,
+        isRecordIdentityByDefaultEnabled?: boolean | null } } & { @odata.type:
+        "#microsoft.graph.adminForms" }) | null, microsoft365Apps?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, installationOptions?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, appsForMac?: { @odata.type:
+        string, isMicrosoft365AppsEnabled?: function,
+        isSkypeForBusinessEnabled?: function }, appsForWindows?: { @odata.type:
+        string, isMicrosoft365AppsEnabled?: function, isProjectEnabled?:
+        function, isSkypeForBusinessEnabled?: function, isVisioEnabled?:
+        function }, updateChannel?: "unknownFutureValue" | "current" |
+        "monthlyEnterprise" | "semiAnnual" } & { @odata.type:
+        "#microsoft.graph.m365AppsInstallationOptions" }) | null } & {
+        @odata.type: "#microsoft.graph.adminMicrosoft365Apps" }) | null,
+        people?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, itemInsights?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, disabledForGroup?: string |
+        null, isEnabledInOrganization?: boolean | null } & { @odata.type:
+        "#microsoft.graph.insightsSettings" }) | null, namePronunciation?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, isEnabledInOrganization?:
+        boolean } & { @odata.type: "#microsoft.graph.namePronunciationSettings"
+        }) | null, photoUpdateSettings?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, allowedRoles?: function[] } & { @odata.type:
+        "#microsoft.graph.photoUpdateSettings" }) | null,
+        profileCardProperties?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, annotations?: ...[],
+        directoryPropertyName?: string | null } & { @odata.type:
+        "#microsoft.graph.profileCardProperty" })[], profilePropertySettings?:
+        (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+        @odata.type: string, allowedAudiences?: Record<..., ...> |
+        "unknownFutureValue" | "me" | "organization" | "federatedOrganizations"
+        | "everyone" | null, isUserOverrideForAudienceEnabled?: boolean | null,
+        name?: string | null, prioritizedSourceUrls?: ...[] } & { @odata.type:
+        "#microsoft.graph.profilePropertySetting" })[], profileSources?: (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, displayName?: string | null, kind?: string | null,
+        localizations?: ...[], sourceId?: string | null, webUrl?: string | null
+        } & { @odata.type: "#microsoft.graph.profileSource" })[], pronouns?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, isEnabledInOrganization?:
+        boolean } & { @odata.type: "#microsoft.graph.pronounsSettings" }) | null
+        } & { @odata.type: "#microsoft.graph.peopleAdminSettings" }) | null,
+        reportSettings?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string,
+        displayConcealedNames?: boolean } & { @odata.type:
+        "#microsoft.graph.adminReportSettings" }) | null, serviceAnnouncement?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, healthOverviews?: (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, issues?: ...[], service?: string, status?: "unknownFutureValue"
+        | "serviceOperational" | "investigating" | "restoringService" |
+        "verifyingService" | "serviceRestored" | "postIncidentReviewPublished" |
+        "serviceDegradation" | "serviceInterruption" | "extendedRecovery" |
+        "falsePositive" | "investigationSuspended" | "resolved" |
+        "mitigatedExternal" | "mitigated" | "resolvedExternal" | "confirmed" |
+        "reported" } & { @odata.type: "#microsoft.graph.serviceHealth" })[],
+        issues?: (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, classification?:
+        "unknownFutureValue" | "advisory" | "incident", feature?: string | null,
+        featureGroup?: string | null, impactDescription?: string, isResolved?:
+        boolean, origin?: "unknownFutureValue" | "microsoft" | "thirdParty" |
+        "customer", posts?: ...[], service?: string, status?:
+        "unknownFutureValue" | "serviceOperational" | "investigating" |
+        "restoringService" | "verifyingService" | "serviceRestored" |
+        "postIncidentReviewPublished" | "serviceDegradation" |
+        "serviceInterruption" | "extendedRecovery" | "falsePositive" |
+        "investigationSuspended" | "resolved" | "mitigatedExternal" |
+        "mitigated" | "resolvedExternal" | "confirmed" | "reported" } & {
+        @odata.type: "#microsoft.graph.serviceHealthIssue" })[], messages?:
+        (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, actionRequiredByDateTime?:
+        string | null, attachments?: ...[], attachmentsArchive?: string | null,
+        body?: { @odata.type: ..., content?: ..., contentType?: ... },
+        category?: "unknownFutureValue" | "preventOrFixIssue" | "planForChange"
+        | "stayInformed", hasAttachments?: boolean, isMajorChange?: boolean |
+        null, services?: ...[], severity?: "unknownFutureValue" | "normal" |
+        "high" | "critical", tags?: ...[], viewPoint?: Record<..., ...> | {
+        @odata.type: ..., isArchived?: ..., isFavorited?: ..., isRead?: ... } |
+        null } & { @odata.type: "#microsoft.graph.serviceUpdateMessage" })[] } &
+        { @odata.type: "#microsoft.graph.serviceAnnouncement" }) | null,
+        sharepoint?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, settings?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, allowedDomainGuidsForSyncApp?:
+        function[], availableManagedPathsForSiteCreation?: string[],
+        deletedUserPersonalSiteRetentionPeriodInDays?: number | null,
+        excludedFileExtensionsForSyncApp?: function[], idleSessionSignOut?:
+        Record<string, never> | { @odata.type: string, isEnabled?: function,
+        signOutAfterInSeconds?: function, warnAfterInSeconds?: function } |
+        null, imageTaggingOption?: Record<string, never> | "unknownFutureValue"
+        | "disabled" | "basic" | "enhanced" | null,
+        isCommentingOnSitePagesEnabled?: boolean | null,
+        isFileActivityNotificationEnabled?: boolean | null,
+        isLegacyAuthProtocolsEnabled?: boolean | null, isLoopEnabled?: boolean |
+        null, isMacSyncAppEnabled?: boolean | null,
+        isRequireAcceptingUserToMatchInvitedUserEnabled?: boolean | null,
+        isResharingByExternalUsersEnabled?: boolean | null,
+        isSharePointMobileNotificationEnabled?: boolean | null,
+        isSharePointNewsfeedEnabled?: boolean | null, isSiteCreationEnabled?:
+        boolean | null, isSiteCreationUIEnabled?: boolean | null,
+        isSitePagesCreationEnabled?: boolean | null,
+        isSitesStorageLimitAutomatic?: boolean | null,
+        isSyncButtonHiddenOnPersonalSite?: boolean | null,
+        isUnmanagedSyncAppForTenantRestricted?: boolean | null,
+        personalSiteDefaultStorageLimitInMB?: number | null,
+        sharingAllowedDomainList?: function[], sharingBlockedDomainList?:
+        function[], sharingCapability?: Record<string, never> |
+        "unknownFutureValue" | "disabled" | "externalUserSharingOnly" |
+        "externalUserAndGuestSharing" | "existingExternalUserSharingOnly" |
+        null, sharingDomainRestrictionMode?: Record<string, never> |
+        "unknownFutureValue" | "none" | "allowList" | "blockList" | null,
+        siteCreationDefaultManagedPath?: string,
+        siteCreationDefaultStorageLimitInMB?: number | null,
+        tenantDefaultTimezone?: string | null } & { @odata.type:
+        "#microsoft.graph.sharepointSettings" }) | null } & { @odata.type:
+        "#microsoft.graph.sharepoint" }) | null, teams?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, policy?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, userAssignments?: (... & ... & ...)[] } & { @odata.type:
+        "#microsoft.graph.teamsAdministration.teamsPolicyAssignment" }) | null,
+        telephoneNumberManagement?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        numberAssignments?: (... & ... & ...)[], operations?: (... & ... &
+        ...)[] } & { @odata.type:
+        "#microsoft.graph.teamsAdministration.telephoneNumberManagementRoot" })
+        | null, userConfigurations?: (Omit<{ @odata.type: string, id?: function
+        }, "@odata.type"> & { @odata.type: string, accountType?: Record<...,
+        ...> | "unknownFutureValue" | "user" | "resourceAccount" | "guest" |
+        "sfbOnPremUser" | "unknown" | "ineligibleUser" | null, createdDateTime?:
+        string, effectivePolicyAssignments?: ...[], featureTypes?: ...[],
+        isEnterpriseVoiceEnabled?: boolean | null, modifiedDateTime?: string,
+        telephoneNumbers?: ...[], tenantId?: string, user?: Record<..., ...> |
+        (... & ... & ...) | null, userPrincipalName?: string } & { @odata.type:
+        "#microsoft.graph.teamsAdministration.teamsUserConfiguration" })[] } & {
+        @odata.type: "#microsoft.graph.teamsAdministration.teamsAdminRoot" }) |
+        null, todo?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, settings?: {
+        @odata.type: string, isExternalJoinEnabled?: boolean | null,
+        isExternalShareEnabled?: boolean | null, isPushNotificationEnabled?:
+        boolean | null } } & { @odata.type: "#microsoft.graph.adminTodo" }) |
+        null, windows?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, updates?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, catalog?: Record<string, never>
+        | (Omit<..., ...> & { @odata.type: ..., entries?: ... } & { @odata.type:
+        ... }) | null, deploymentAudiences?: (... & ... & ...)[], deployments?:
+        (... & ... & ...)[], products?: (... & ... & ...)[],
+        resourceConnections?: (... & ... & ...)[], updatableAssets?: (... & ...
+        & ...)[], updatePolicies?: (... & ... & ...)[] } & { @odata.type:
+        "#microsoft.graph.adminWindowsUpdates" }) | null } & { @odata.type:
+        "#microsoft.graph.adminWindows" }) | null }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /admin"]["response"]&gt;
-  - name: update(Operation<"/admin", "patch">)
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string,
+          appsAndServices?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, settings?: { <xref
+          uid="@odata.type" />: string, isAppAndServicesTrialEnabled?: boolean |
+          null, isOfficeStoreEnabled?: boolean | null } } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.adminAppsAndServices" />" }) | null,
+          configurationManagement?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          configurationApplications?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, appId?: string, appOwnerOrganizationId?:
+          string | null, clientCredentials?: { <xref uid="@odata.type" />: ...,
+          certificateName?: ..., keyVaultUri?: ... }, createdBy?: { <xref
+          uid="@odata.type" />: ..., application?: ..., device?: ..., user?: ...
+          }, createdDateTime?: string, description?: string, displayName?:
+          string, lastModifiedBy?: { <xref uid="@odata.type" />: ...,
+          application?: ..., device?: ..., user?: ... }, lastModifiedDateTime?:
+          string, tenantId?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationApplication" />" })[],
+          configurationDrifts?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, baselineResourceDisplayName?: string,
+          driftedProperties?: ...[], firstReportedDateTime?: string, monitorId?:
+          string, resourceInstanceIdentifier?: ... & ... & ..., resourceType?:
+          string, status?: "active" | "fixed" | "unknownFutureValue", tenantId?:
+          string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationDrift" />" })[],
+          configurationMonitoringResults?: (Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, driftsCount?: number,
+          driftsFixed?: number, errorDetails?: ...[], monitorId?: string,
+          runCompletionDateTime?: string, runInitiationDateTime?: string,
+          runStatus?: "unknownFutureValue" | "successful" |
+          "partiallySuccessful" | "failed", runType?: "unknownFutureValue" |
+          "monitor" | "apply", tenantId?: string } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.configurationMonitoringResult" />"
+          })[], configurationMonitors?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, baseline?: ... & ... & ..., createdBy?:
+          { <xref uid="@odata.type" />: ..., application?: ..., device?: ...,
+          user?: ... }, createdDateTime?: string, description?: string,
+          displayName?: string, inactivationReason?: string | null,
+          lastModifiedBy?: { <xref uid="@odata.type" />: ..., application?: ...,
+          device?: ..., user?: ... }, lastModifiedDateTime?: string, mode?:
+          "unknownFutureValue" | "monitorOnce" | "monitorOnly" |
+          "applyOnceAndMonitorContinuous" | "applyOnce" | "applyContinuous",
+          monitorRunFrequencyInHours?: number, parameters?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null, runAsUTCMServicePrincipal?:
+          boolean, runningOnBehalfOf?: { <xref uid="@odata.type" />: ...,
+          application?: ..., device?: ..., user?: ... }, status?: "active" |
+          "unknownFutureValue" | "inactive", tenantId?: string } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationMonitor" />" })[],
+          configurationSnapshotJobs?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, completedDateTime?: string, createdBy?:
+          { <xref uid="@odata.type" />: ..., application?: ..., device?: ...,
+          user?: ... }, createdDateTime?: string, description?: string,
+          displayName?: string, errorDetails?: ...[], resourceLocation?: string,
+          resources?: ...[], status?: "unknownFutureValue" |
+          "partiallySuccessful" | "failed" | "notStarted" | "running" |
+          "succeeded", tenantId?: string } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.configurationSnapshotJob" />" })[],
+          configurationSnapshots?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, description?: string, displayName?:
+          string, parameters?: ...[], resources?: ...[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationBaseline" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationManagement" />" }) | null,
+          dynamics?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, customerVoice?: {
+          <xref uid="@odata.type" />: string, isInOrgFormsPhishingScanEnabled?:
+          boolean | null, isRecordIdentityByDefaultEnabled?: boolean | null,
+          isRestrictedSurveyAccessEnabled?: boolean | null } } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.adminDynamics" />"
+          }) | null, edge?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, internetExplorerMode?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, siteLists?: (... & ... & ...)[] } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.internetExplorerMode" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.edge" />" }) |
+          null, entra?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, uxSetting?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, restrictNonAdminAccess?:
+          "unknownFutureValue" | "false" | "true" } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.uxSetting" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.entra" />" }) |
+          null, exchange?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, mailboxes?:
+          (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, folders?: ...[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.mailbox" />" })[],
+          messageTraces?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, destinationIPAddress?: string | null,
+          messageId?: string | null, receivedDateTime?: string, recipients?:
+          ...[], senderEmail?: string | null, size?: number, sourceIPAddress?:
+          string | null, subject?: string | null } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.messageTrace" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.exchangeAdmin" />"
+          }) | null, forms?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, settings?: { <xref
+          uid="@odata.type" />: string, isBingImageSearchEnabled?: boolean |
+          null, isExternalSendFormEnabled?: boolean | null,
+          isExternalShareCollaborationEnabled?: boolean | null,
+          isExternalShareResultEnabled?: boolean | null,
+          isExternalShareTemplateEnabled?: boolean | null,
+          isInOrgFormsPhishingScanEnabled?: boolean | null,
+          isRecordIdentityByDefaultEnabled?: boolean | null } } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.adminForms" />" })
+          | null, microsoft365Apps?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          installationOptions?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, appsForMac?: { <xref
+          uid="@odata.type" />: string, isMicrosoft365AppsEnabled?: function,
+          isSkypeForBusinessEnabled?: function }, appsForWindows?: { <xref
+          uid="@odata.type" />: string, isMicrosoft365AppsEnabled?: function,
+          isProjectEnabled?: function, isSkypeForBusinessEnabled?: function,
+          isVisioEnabled?: function }, updateChannel?: "unknownFutureValue" |
+          "current" | "monthlyEnterprise" | "semiAnnual" } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.m365AppsInstallationOptions" />" }) | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.adminMicrosoft365Apps" />" }) | null, people?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, itemInsights?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, disabledForGroup?: string | null, isEnabledInOrganization?:
+          boolean | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.insightsSettings" />" }) | null,
+          namePronunciation?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string,
+          isEnabledInOrganization?: boolean } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.namePronunciationSettings" />" }) | null,
+          photoUpdateSettings?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, allowedRoles?:
+          function[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.photoUpdateSettings" />" }) | null,
+          profileCardProperties?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, annotations?: ...[],
+          directoryPropertyName?: string | null } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.profileCardProperty" />" })[],
+          profilePropertySettings?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, allowedAudiences?: Record&lt;...,
+          ...&gt; | "unknownFutureValue" | "me" | "organization" |
+          "federatedOrganizations" | "everyone" | null,
+          isUserOverrideForAudienceEnabled?: boolean | null, name?: string |
+          null, prioritizedSourceUrls?: ...[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.profilePropertySetting" />" })[],
+          profileSources?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, displayName?: string | null, kind?:
+          string | null, localizations?: ...[], sourceId?: string | null,
+          webUrl?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.profileSource" />" })[], pronouns?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, isEnabledInOrganization?: boolean } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.pronounsSettings" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.peopleAdminSettings" />" }) | null,
+          reportSettings?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string,
+          displayConcealedNames?: boolean } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.adminReportSettings" />" }) | null,
+          serviceAnnouncement?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, healthOverviews?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          issues?: ...[], service?: string, status?: "unknownFutureValue" |
+          "serviceOperational" | "investigating" | "restoringService" |
+          "verifyingService" | "serviceRestored" | "postIncidentReviewPublished"
+          | "serviceDegradation" | "serviceInterruption" | "extendedRecovery" |
+          "falsePositive" | "investigationSuspended" | "resolved" |
+          "mitigatedExternal" | "mitigated" | "resolvedExternal" | "confirmed" |
+          "reported" } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.serviceHealth" />" })[], issues?:
+          (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, classification?:
+          "unknownFutureValue" | "advisory" | "incident", feature?: string |
+          null, featureGroup?: string | null, impactDescription?: string,
+          isResolved?: boolean, origin?: "unknownFutureValue" | "microsoft" |
+          "thirdParty" | "customer", posts?: ...[], service?: string, status?:
+          "unknownFutureValue" | "serviceOperational" | "investigating" |
+          "restoringService" | "verifyingService" | "serviceRestored" |
+          "postIncidentReviewPublished" | "serviceDegradation" |
+          "serviceInterruption" | "extendedRecovery" | "falsePositive" |
+          "investigationSuspended" | "resolved" | "mitigatedExternal" |
+          "mitigated" | "resolvedExternal" | "confirmed" | "reported" } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.serviceHealthIssue" />" })[], messages?:
+          (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, actionRequiredByDateTime?: string
+          | null, attachments?: ...[], attachmentsArchive?: string | null,
+          body?: { <xref uid="@odata.type" />: ..., content?: ..., contentType?:
+          ... }, category?: "unknownFutureValue" | "preventOrFixIssue" |
+          "planForChange" | "stayInformed", hasAttachments?: boolean,
+          isMajorChange?: boolean | null, services?: ...[], severity?:
+          "unknownFutureValue" | "normal" | "high" | "critical", tags?: ...[],
+          viewPoint?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., isArchived?: ..., isFavorited?: ..., isRead?: ... } | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.serviceUpdateMessage" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.serviceAnnouncement" />" }) | null, sharepoint?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, settings?: Record&lt;string, never&gt; |
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          allowedDomainGuidsForSyncApp?: function[],
+          availableManagedPathsForSiteCreation?: string[],
+          deletedUserPersonalSiteRetentionPeriodInDays?: number | null,
+          excludedFileExtensionsForSyncApp?: function[], idleSessionSignOut?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          isEnabled?: function, signOutAfterInSeconds?: function,
+          warnAfterInSeconds?: function } | null, imageTaggingOption?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "disabled" |
+          "basic" | "enhanced" | null, isCommentingOnSitePagesEnabled?: boolean
+          | null, isFileActivityNotificationEnabled?: boolean | null,
+          isLegacyAuthProtocolsEnabled?: boolean | null, isLoopEnabled?: boolean
+          | null, isMacSyncAppEnabled?: boolean | null,
+          isRequireAcceptingUserToMatchInvitedUserEnabled?: boolean | null,
+          isResharingByExternalUsersEnabled?: boolean | null,
+          isSharePointMobileNotificationEnabled?: boolean | null,
+          isSharePointNewsfeedEnabled?: boolean | null, isSiteCreationEnabled?:
+          boolean | null, isSiteCreationUIEnabled?: boolean | null,
+          isSitePagesCreationEnabled?: boolean | null,
+          isSitesStorageLimitAutomatic?: boolean | null,
+          isSyncButtonHiddenOnPersonalSite?: boolean | null,
+          isUnmanagedSyncAppForTenantRestricted?: boolean | null,
+          personalSiteDefaultStorageLimitInMB?: number | null,
+          sharingAllowedDomainList?: function[], sharingBlockedDomainList?:
+          function[], sharingCapability?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "disabled" | "externalUserSharingOnly" |
+          "externalUserAndGuestSharing" | "existingExternalUserSharingOnly" |
+          null, sharingDomainRestrictionMode?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "none" | "allowList" | "blockList" | null,
+          siteCreationDefaultManagedPath?: string,
+          siteCreationDefaultStorageLimitInMB?: number | null,
+          tenantDefaultTimezone?: string | null } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.sharepointSettings" />" }) | null } &
+          { <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.sharepoint"
+          />" }) | null, teams?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, policy?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, userAssignments?: (... & ... & ...)[] }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAdministration.teamsPolicyAssignment" />" })
+          | null, telephoneNumberManagement?: Record&lt;string, never&gt; |
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          numberAssignments?: (... & ... & ...)[], operations?: (... & ... &
+          ...)[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAdministration.telephoneNumberManagementRoot"
+          />" }) | null, userConfigurations?: (Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, accountType?: Record&lt;...,
+          ...&gt; | "unknownFutureValue" | "user" | "resourceAccount" | "guest"
+          | "sfbOnPremUser" | "unknown" | "ineligibleUser" | null,
+          createdDateTime?: string, effectivePolicyAssignments?: ...[],
+          featureTypes?: ...[], isEnterpriseVoiceEnabled?: boolean | null,
+          modifiedDateTime?: string, telephoneNumbers?: ...[], tenantId?:
+          string, user?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+          userPrincipalName?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAdministration.teamsUserConfiguration" />"
+          })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAdministration.teamsAdminRoot" />" }) |
+          null, todo?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, settings?: { <xref
+          uid="@odata.type" />: string, isExternalJoinEnabled?: boolean | null,
+          isExternalShareEnabled?: boolean | null, isPushNotificationEnabled?:
+          boolean | null } } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.adminTodo" />" }) | null, windows?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, updates?: Record&lt;string, never&gt; |
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          catalog?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ..., entries?: ... } & { <xref
+          uid="@odata.type" />: ... }) | null, deploymentAudiences?: (... & ...
+          & ...)[], deployments?: (... & ... & ...)[], products?: (... & ... &
+          ...)[], resourceConnections?: (... & ... & ...)[], updatableAssets?:
+          (... & ... & ...)[], updatePolicies?: (... & ... & ...)[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.adminWindowsUpdates" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.adminWindows" />"
+          }) | null }&gt;
+  - name: >-
+      update({ @odata.type: string, appsAndServices?: Record<string, never> |
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, settings?: { @odata.type: string,
+      isAppAndServicesTrialEnabled?: boolean | null, isOfficeStoreEnabled?:
+      boolean | null } } & { @odata.type:
+      "#microsoft.graph.adminAppsAndServices" }) | null,
+      configurationManagement?: Record<string, never> | (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string,
+      configurationApplications?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, appId?: string,
+      appOwnerOrganizationId?: string | null, clientCredentials?: { @odata.type:
+      string, certificateName?: function, keyVaultUri?: function }, createdBy?:
+      { @odata.type: string, application?: function, device?: function, user?:
+      function }, createdDateTime?: string, description?: string, displayName?:
+      string, lastModifiedBy?: { @odata.type: string, application?: function,
+      device?: function, user?: function }, lastModifiedDateTime?: string,
+      tenantId?: string } & { @odata.type:
+      "#microsoft.graph.configurationApplication" })[], configurationDrifts?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, baselineResourceDisplayName?: string,
+      driftedProperties?: { @odata.type: ..., currentValue?: ..., desiredValue?:
+      ..., propertyName?: ... }[], firstReportedDateTime?: string, monitorId?:
+      string, resourceInstanceIdentifier?: Omit<..., ...> & { @odata.type: ... }
+      & { @odata.type: ... }, resourceType?: string, status?: "active" | "fixed"
+      | "unknownFutureValue", tenantId?: string } & { @odata.type:
+      "#microsoft.graph.configurationDrift" })[],
+      configurationMonitoringResults?: (Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & { @odata.type: string, driftsCount?: number,
+      driftsFixed?: number, errorDetails?: { @odata.type: ..., errorMessage?:
+      ..., resourceInstanceName?: ..., resourceType?: ... }[], monitorId?:
+      string, runCompletionDateTime?: string, runInitiationDateTime?: string,
+      runStatus?: "unknownFutureValue" | "successful" | "partiallySuccessful" |
+      "failed", runType?: "unknownFutureValue" | "monitor" | "apply", tenantId?:
+      string } & { @odata.type: "#microsoft.graph.configurationMonitoringResult"
+      })[], configurationMonitors?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, baseline?: Omit<..., ...> & {
+      @odata.type: ..., description?: ..., displayName?: ..., parameters?: ...,
+      resources?: ... } & { @odata.type: ... }, createdBy?: { @odata.type:
+      string, application?: function, device?: function, user?: function },
+      createdDateTime?: string, description?: string, displayName?: string,
+      inactivationReason?: string | null, lastModifiedBy?: { @odata.type:
+      string, application?: function, device?: function, user?: function },
+      lastModifiedDateTime?: string, mode?: "unknownFutureValue" | "monitorOnce"
+      | "monitorOnly" | "applyOnceAndMonitorContinuous" | "applyOnce" |
+      "applyContinuous", monitorRunFrequencyInHours?: number, parameters?:
+      Record<string, never> | (Omit<..., ...> & { @odata.type: ... } & {
+      @odata.type: ... }) | null, runAsUTCMServicePrincipal?: boolean,
+      runningOnBehalfOf?: { @odata.type: string, application?: function,
+      device?: function, user?: function }, status?: "active" |
+      "unknownFutureValue" | "inactive", tenantId?: string } & { @odata.type:
+      "#microsoft.graph.configurationMonitor" })[], configurationSnapshotJobs?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, completedDateTime?: string, createdBy?: {
+      @odata.type: string, application?: function, device?: function, user?:
+      function }, createdDateTime?: string, description?: string, displayName?:
+      string, errorDetails?: string[], resourceLocation?: string, resources?:
+      string[], status?: "unknownFutureValue" | "partiallySuccessful" | "failed"
+      | "notStarted" | "running" | "succeeded", tenantId?: string } & {
+      @odata.type: "#microsoft.graph.configurationSnapshotJob" })[],
+      configurationSnapshots?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, description?: string,
+      displayName?: string, parameters?: { @odata.type: ..., description?: ...,
+      displayName?: ..., parameterType?: ... }[], resources?: { @odata.type:
+      ..., displayName?: ..., properties?: ..., resourceType?: ... }[] } & {
+      @odata.type: "#microsoft.graph.configurationBaseline" })[] } & {
+      @odata.type: "#microsoft.graph.configurationManagement" }) | null,
+      dynamics?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, customerVoice?: {
+      @odata.type: string, isInOrgFormsPhishingScanEnabled?: boolean | null,
+      isRecordIdentityByDefaultEnabled?: boolean | null,
+      isRestrictedSurveyAccessEnabled?: boolean | null } } & { @odata.type:
+      "#microsoft.graph.adminDynamics" }) | null, edge?: Record<string, never> |
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, internetExplorerMode?: Record<string, never> |
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, siteLists?: (Omit<..., ...> & { @odata.type: ...,
+      description?: ..., displayName?: ..., lastModifiedBy?: ...,
+      lastModifiedDateTime?: ..., publishedBy?: ..., publishedDateTime?: ...,
+      revision?: ..., sharedCookies?: ..., sites?: ..., status?: ... } & {
+      @odata.type: ... })[] } & { @odata.type:
+      "#microsoft.graph.internetExplorerMode" }) | null } & { @odata.type:
+      "#microsoft.graph.edge" }) | null, entra?: Record<string, never> | (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, uxSetting?: Record<string, never> | (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string,
+      restrictNonAdminAccess?: "unknownFutureValue" | "false" | "true" } & {
+      @odata.type: "#microsoft.graph.uxSetting" }) | null } & { @odata.type:
+      "#microsoft.graph.entra" }) | null, exchange?: Record<string, never> |
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, mailboxes?: (Omit<Omit<{ @odata.type: ..., id?: ...
+      }, "@odata.type"> & Omit<{ @odata.type: ..., deletedDateTime?: ... },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.directoryObject" },
+      "@odata.type"> & { @odata.type: string, folders?: (... & ... & ...)[] } &
+      { @odata.type: "#microsoft.graph.mailbox" })[], messageTraces?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, destinationIPAddress?: string | null, messageId?: string | null,
+      receivedDateTime?: string, recipients?: (... & ... & ...)[], senderEmail?:
+      string | null, size?: number, sourceIPAddress?: string | null, subject?:
+      string | null } & { @odata.type: "#microsoft.graph.messageTrace" })[] } &
+      { @odata.type: "#microsoft.graph.exchangeAdmin" }) | null, forms?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, settings?: { @odata.type: string,
+      isBingImageSearchEnabled?: boolean | null, isExternalSendFormEnabled?:
+      boolean | null, isExternalShareCollaborationEnabled?: boolean | null,
+      isExternalShareResultEnabled?: boolean | null,
+      isExternalShareTemplateEnabled?: boolean | null,
+      isInOrgFormsPhishingScanEnabled?: boolean | null,
+      isRecordIdentityByDefaultEnabled?: boolean | null } } & { @odata.type:
+      "#microsoft.graph.adminForms" }) | null, microsoft365Apps?: Record<string,
+      never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, installationOptions?: Record<string, never> | (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, appsForMac?: { @odata.type: string, isMicrosoft365AppsEnabled?:
+      boolean, isSkypeForBusinessEnabled?: boolean }, appsForWindows?: {
+      @odata.type: string, isMicrosoft365AppsEnabled?: boolean,
+      isProjectEnabled?: boolean, isSkypeForBusinessEnabled?: boolean,
+      isVisioEnabled?: boolean }, updateChannel?: "unknownFutureValue" |
+      "current" | "monthlyEnterprise" | "semiAnnual" } & { @odata.type:
+      "#microsoft.graph.m365AppsInstallationOptions" }) | null } & {
+      @odata.type: "#microsoft.graph.adminMicrosoft365Apps" }) | null, people?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, itemInsights?: Record<string,
+      never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, disabledForGroup?: string | null,
+      isEnabledInOrganization?: boolean | null } & { @odata.type:
+      "#microsoft.graph.insightsSettings" }) | null, namePronunciation?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, isEnabledInOrganization?: boolean
+      } & { @odata.type: "#microsoft.graph.namePronunciationSettings" }) | null,
+      photoUpdateSettings?: Record<string, never> | (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string, allowedRoles?:
+      (string | null)[] } & { @odata.type:
+      "#microsoft.graph.photoUpdateSettings" }) | null, profileCardProperties?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, annotations?: { @odata.type: ..., displayName?: ...,
+      localizations?: ... }[], directoryPropertyName?: string | null } & {
+      @odata.type: "#microsoft.graph.profileCardProperty" })[],
+      profilePropertySettings?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, allowedAudiences?: Record<string,
+      never> | "unknownFutureValue" | "me" | "organization" |
+      "federatedOrganizations" | "everyone" | null,
+      isUserOverrideForAudienceEnabled?: boolean | null, name?: string | null,
+      prioritizedSourceUrls?: function[] } & { @odata.type:
+      "#microsoft.graph.profilePropertySetting" })[], profileSources?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, displayName?: string | null, kind?: string | null, localizations?:
+      { @odata.type: ..., displayName?: ..., languageTag?: ..., webUrl?: ...
+      }[], sourceId?: string | null, webUrl?: string | null } & { @odata.type:
+      "#microsoft.graph.profileSource" })[], pronouns?: Record<string, never> |
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, isEnabledInOrganization?: boolean } & { @odata.type:
+      "#microsoft.graph.pronounsSettings" }) | null } & { @odata.type:
+      "#microsoft.graph.peopleAdminSettings" }) | null, reportSettings?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, displayConcealedNames?: boolean }
+      & { @odata.type: "#microsoft.graph.adminReportSettings" }) | null,
+      serviceAnnouncement?: Record<string, never> | (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string, healthOverviews?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, issues?: (... & ... & ...)[], service?: string,
+      status?: "unknownFutureValue" | "serviceOperational" | "investigating" |
+      "restoringService" | "verifyingService" | "serviceRestored" |
+      "postIncidentReviewPublished" | "serviceDegradation" |
+      "serviceInterruption" | "extendedRecovery" | "falsePositive" |
+      "investigationSuspended" | "resolved" | "mitigatedExternal" | "mitigated"
+      | "resolvedExternal" | "confirmed" | "reported" } & { @odata.type:
+      "#microsoft.graph.serviceHealth" })[], issues?: (Omit<Omit<{ @odata.type:
+      ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ..., details?: ...,
+      endDateTime?: ..., lastModifiedDateTime?: ..., startDateTime?: ...,
+      title?: ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.serviceAnnouncementBase" }, "@odata.type"> & {
+      @odata.type: string, classification?: "unknownFutureValue" | "advisory" |
+      "incident", feature?: string | null, featureGroup?: string | null,
+      impactDescription?: string, isResolved?: boolean, origin?:
+      "unknownFutureValue" | "microsoft" | "thirdParty" | "customer", posts?: {
+      @odata.type: ..., createdDateTime?: ..., description?: ..., postType?: ...
+      }[], service?: string, status?: "unknownFutureValue" |
+      "serviceOperational" | "investigating" | "restoringService" |
+      "verifyingService" | "serviceRestored" | "postIncidentReviewPublished" |
+      "serviceDegradation" | "serviceInterruption" | "extendedRecovery" |
+      "falsePositive" | "investigationSuspended" | "resolved" |
+      "mitigatedExternal" | "mitigated" | "resolvedExternal" | "confirmed" |
+      "reported" } & { @odata.type: "#microsoft.graph.serviceHealthIssue" })[],
+      messages?: (Omit<Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> &
+      Omit<{ @odata.type: ..., details?: ..., endDateTime?: ...,
+      lastModifiedDateTime?: ..., startDateTime?: ..., title?: ... },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.serviceAnnouncementBase"
+      }, "@odata.type"> & { @odata.type: string, actionRequiredByDateTime?:
+      string | null, attachments?: (... & ... & ...)[], attachmentsArchive?:
+      string | null, body?: { @odata.type: string, content?: function,
+      contentType?: function }, category?: "unknownFutureValue" |
+      "preventOrFixIssue" | "planForChange" | "stayInformed", hasAttachments?:
+      boolean, isMajorChange?: boolean | null, services?: function[], severity?:
+      "unknownFutureValue" | "normal" | "high" | "critical", tags?: function[],
+      viewPoint?: Record<string, never> | { @odata.type: string, isArchived?:
+      function, isFavorited?: function, isRead?: function } | null } & {
+      @odata.type: "#microsoft.graph.serviceUpdateMessage" })[] } & {
+      @odata.type: "#microsoft.graph.serviceAnnouncement" }) | null,
+      sharepoint?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, settings?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, allowedDomainGuidsForSyncApp?:
+      (string | null)[], availableManagedPathsForSiteCreation?: string[],
+      deletedUserPersonalSiteRetentionPeriodInDays?: number | null,
+      excludedFileExtensionsForSyncApp?: (string | null)[], idleSessionSignOut?:
+      Record<string, never> | { @odata.type: string, isEnabled?: boolean | null,
+      signOutAfterInSeconds?: number | null, warnAfterInSeconds?: number | null
+      } | null, imageTaggingOption?: Record<string, never> |
+      "unknownFutureValue" | "disabled" | "basic" | "enhanced" | null,
+      isCommentingOnSitePagesEnabled?: boolean | null,
+      isFileActivityNotificationEnabled?: boolean | null,
+      isLegacyAuthProtocolsEnabled?: boolean | null, isLoopEnabled?: boolean |
+      null, isMacSyncAppEnabled?: boolean | null,
+      isRequireAcceptingUserToMatchInvitedUserEnabled?: boolean | null,
+      isResharingByExternalUsersEnabled?: boolean | null,
+      isSharePointMobileNotificationEnabled?: boolean | null,
+      isSharePointNewsfeedEnabled?: boolean | null, isSiteCreationEnabled?:
+      boolean | null, isSiteCreationUIEnabled?: boolean | null,
+      isSitePagesCreationEnabled?: boolean | null,
+      isSitesStorageLimitAutomatic?: boolean | null,
+      isSyncButtonHiddenOnPersonalSite?: boolean | null,
+      isUnmanagedSyncAppForTenantRestricted?: boolean | null,
+      personalSiteDefaultStorageLimitInMB?: number | null,
+      sharingAllowedDomainList?: (string | null)[], sharingBlockedDomainList?:
+      (string | null)[], sharingCapability?: Record<string, never> |
+      "unknownFutureValue" | "disabled" | "externalUserSharingOnly" |
+      "externalUserAndGuestSharing" | "existingExternalUserSharingOnly" | null,
+      sharingDomainRestrictionMode?: Record<string, never> |
+      "unknownFutureValue" | "none" | "allowList" | "blockList" | null,
+      siteCreationDefaultManagedPath?: string,
+      siteCreationDefaultStorageLimitInMB?: number | null,
+      tenantDefaultTimezone?: string | null } & { @odata.type:
+      "#microsoft.graph.sharepointSettings" }) | null } & { @odata.type:
+      "#microsoft.graph.sharepoint" }) | null, teams?: Record<string, never> |
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, policy?: Record<string, never> | (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string,
+      userAssignments?: (Omit<..., ...> & { @odata.type: ..., policyId?: ...,
+      policyType?: ..., userId?: ... } & { @odata.type: ... })[] } & {
+      @odata.type: "#microsoft.graph.teamsAdministration.teamsPolicyAssignment"
+      }) | null, telephoneNumberManagement?: Record<string, never> | (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, numberAssignments?: (Omit<..., ...> & { @odata.type: ...,
+      activationState?: ..., assignmentCategory?: ..., assignmentStatus?: ...,
+      assignmentTargetId?: ..., capabilities?: ..., city?: ..., civicAddressId?:
+      ..., isoCountryCode?: ..., locationId?: ..., networkSiteId?: ...,
+      numberSource?: ..., numberType?: ..., operatorId?: ..., portInStatus?:
+      ..., reverseNumberLookupOptions?: ..., supportedCustomerActions?: ...,
+      telephoneNumber?: ... } & { @odata.type: ... })[], operations?: (Omit<...,
+      ...> & { @odata.type: ..., createdDateTime?: ..., numbers?: ..., status?:
+      ... } & { @odata.type: ... })[] } & { @odata.type:
+      "#microsoft.graph.teamsAdministration.telephoneNumberManagementRoot" }) |
+      null, userConfigurations?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, accountType?: Record<string,
+      never> | "unknownFutureValue" | "user" | "resourceAccount" | "guest" |
+      "sfbOnPremUser" | "unknown" | "ineligibleUser" | null, createdDateTime?:
+      string, effectivePolicyAssignments?: { @odata.type: ...,
+      policyAssignment?: ..., policyType?: ... }[], featureTypes?: function[],
+      isEnterpriseVoiceEnabled?: boolean | null, modifiedDateTime?: string,
+      telephoneNumbers?: { @odata.type: ..., assignmentCategory?: ...,
+      telephoneNumber?: ... }[], tenantId?: string, user?: Record<string, never>
+      | (Omit<..., ...> & { @odata.type: ..., aboutMe?: ..., accountEnabled?:
+      ..., activities?: ..., adhocCalls?: ..., ageGroup?: ...,
+      agreementAcceptances?: ..., analytics?: ...,
+      appConsentRequestsForApproval?: ..., appRoleAssignedResources?: ...,
+      appRoleAssignments?: ..., approvals?: ..., assignedLicenses?: ...,
+      assignedPlans?: ..., authentication?: ..., authorizationInfo?: ...,
+      birthday?: ..., businessPhones?: ..., calendar?: ..., calendarGroups?:
+      ..., calendars?: ..., calendarView?: ..., chats?: ..., city?: ...,
+      cloudClipboard?: ..., cloudLicensing?: ..., cloudPCs?: ...,
+      cloudRealtimeCommunicationInfo?: ..., communications?: ..., companyName?:
+      ..., consentProvidedForMinor?: ..., contactFolders?: ..., contacts?: ...,
+      country?: ..., createdDateTime?: ..., createdObjects?: ..., creationType?:
+      ..., customSecurityAttributes?: ..., dataSecurityAndGovernance?: ...,
+      department?: ..., deviceEnrollmentConfigurations?: ...,
+      deviceEnrollmentLimit?: ..., deviceKeys?: ...,
+      deviceManagementTroubleshootingEvents?: ..., devices?: ...,
+      directReports?: ..., displayName?: ..., drive?: ..., drives?: ...,
+      employeeExperience?: ..., employeeHireDate?: ..., employeeId?: ...,
+      employeeLeaveDateTime?: ..., employeeOrgData?: ..., employeeType?: ...,
+      events?: ..., extensions?: ..., externalUserState?: ...,
+      externalUserStateChangeDateTime?: ..., faxNumber?: ..., followedSites?:
+      ..., givenName?: ..., hireDate?: ..., identities?: ..., imAddresses?: ...,
+      inferenceClassification?: ..., infoCatalogs?: ..., informationProtection?:
+      ..., insights?: ..., interests?: ..., invitedBy?: ...,
+      isLicenseReconciliationNeeded?: ..., isManagementRestricted?: ...,
+      isResourceAccount?: ..., jobTitle?: ..., joinedGroups?: ..., joinedTeams?:
+      ..., lastPasswordChangeDateTime?: ..., legalAgeGroupClassification?: ...,
+      licenseAssignmentStates?: ..., licenseDetails?: ..., mail?: ...,
+      mailboxSettings?: ..., mailFolders?: ..., mailNickname?: ...,
+      managedAppLogCollectionRequests?: ..., managedAppRegistrations?: ...,
+      managedDevices?: ..., manager?: ..., memberOf?: ..., messages?: ...,
+      mobileAppIntentAndStates?: ..., mobileAppTroubleshootingEvents?: ...,
+      mobilePhone?: ..., mySite?: ..., notifications?: ...,
+      oauth2PermissionGrants?: ..., officeLocation?: ..., onenote?: ...,
+      onlineMeetings?: ..., onPremisesDistinguishedName?: ...,
+      onPremisesDomainName?: ..., onPremisesExtensionAttributes?: ...,
+      onPremisesImmutableId?: ..., onPremisesLastSyncDateTime?: ...,
+      onPremisesProvisioningErrors?: ..., onPremisesSamAccountName?: ...,
+      onPremisesSecurityIdentifier?: ..., onPremisesSipInfo?: ...,
+      onPremisesSyncBehavior?: ..., onPremisesSyncEnabled?: ...,
+      onPremisesUserPrincipalName?: ..., otherMails?: ..., outlook?: ...,
+      ownedDevices?: ..., ownedObjects?: ..., passwordPolicies?: ...,
+      passwordProfile?: ..., pastProjects?: ..., pendingAccessReviewInstances?:
+      ..., people?: ..., permissionGrants?: ..., photo?: ..., photos?: ...,
+      planner?: ..., postalCode?: ..., preferredDataLocation?: ...,
+      preferredLanguage?: ..., preferredName?: ..., presence?: ..., print?: ...,
+      profile?: ..., provisionedPlans?: ..., proxyAddresses?: ...,
+      refreshTokensValidFromDateTime?: ..., registeredDevices?: ...,
+      responsibilities?: ..., schools?: ..., scopedRoleMemberOf?: ...,
+      security?: ..., securityIdentifier?: ..., serviceProvisioningErrors?: ...,
+      settings?: ..., showInAddressList?: ..., signInActivity?: ...,
+      signInSessionsValidFromDateTime?: ..., skills?: ..., solutions?: ...,
+      sponsors?: ..., state?: ..., streetAddress?: ..., surname?: ...,
+      teamwork?: ..., todo?: ..., transitiveMemberOf?: ..., transitiveReports?:
+      ..., usageLocation?: ..., usageRights?: ..., userPrincipalName?: ...,
+      userType?: ..., virtualEvents?: ...,
+      windowsInformationProtectionDeviceRegistrations?: ... } & { @odata.type:
+      ... }) | null, userPrincipalName?: string } & { @odata.type:
+      "#microsoft.graph.teamsAdministration.teamsUserConfiguration" })[] } & {
+      @odata.type: "#microsoft.graph.teamsAdministration.teamsAdminRoot" }) |
+      null, todo?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, settings?: {
+      @odata.type: string, isExternalJoinEnabled?: boolean | null,
+      isExternalShareEnabled?: boolean | null, isPushNotificationEnabled?:
+      boolean | null } } & { @odata.type: "#microsoft.graph.adminTodo" }) |
+      null, windows?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, updates?: Record<string,
+      never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, catalog?: Record<string, never> | (Omit<{
+      @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+      entries?: function } & { @odata.type:
+      "#microsoft.graph.windowsUpdates.catalog" }) | null, deploymentAudiences?:
+      (Omit<..., ...> & { @odata.type: ..., applicableContent?: ...,
+      exclusions?: ..., members?: ... } & { @odata.type: ... })[], deployments?:
+      (Omit<..., ...> & { @odata.type: ..., audience?: ..., content?: ...,
+      createdDateTime?: ..., lastModifiedDateTime?: ..., settings?: ..., state?:
+      ... } & { @odata.type: ... })[], products?: (Omit<..., ...> & {
+      @odata.type: ..., editions?: ..., friendlyNames?: ..., groupName?: ...,
+      knownIssues?: ..., name?: ..., revisions?: ... } & { @odata.type: ...
+      })[], resourceConnections?: (Omit<..., ...> & Omit<..., ...> & {
+      @odata.type: ... })[], updatableAssets?: (Omit<..., ...> & Omit<..., ...>
+      & { @odata.type: ... })[], updatePolicies?: (Omit<..., ...> & {
+      @odata.type: ..., audience?: ..., complianceChangeRules?: ...,
+      complianceChanges?: ..., createdDateTime?: ..., deploymentSettings?: ... }
+      & { @odata.type: ... })[] } & { @odata.type:
+      "#microsoft.graph.adminWindowsUpdates" }) | null } & { @odata.type:
+      "#microsoft.graph.adminWindows" }) | null })
     uid: '@microsoft/teams.graph-endpoints-beta.admin.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /admin`'
@@ -164,12 +1081,1404 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/admin", "patch">):
-        EndpointRequest<IEndpoints["PATCH /admin"]["response"]>
+        function update(body: { @odata.type: string, appsAndServices?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, settings?: { @odata.type:
+        string, isAppAndServicesTrialEnabled?: boolean | null,
+        isOfficeStoreEnabled?: boolean | null } } & { @odata.type:
+        "#microsoft.graph.adminAppsAndServices" }) | null,
+        configurationManagement?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        configurationApplications?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, appId?: string,
+        appOwnerOrganizationId?: string | null, clientCredentials?: {
+        @odata.type: string, certificateName?: function, keyVaultUri?: function
+        }, createdBy?: { @odata.type: string, application?: function, device?:
+        function, user?: function }, createdDateTime?: string, description?:
+        string, displayName?: string, lastModifiedBy?: { @odata.type: string,
+        application?: function, device?: function, user?: function },
+        lastModifiedDateTime?: string, tenantId?: string } & { @odata.type:
+        "#microsoft.graph.configurationApplication" })[], configurationDrifts?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, baselineResourceDisplayName?: string,
+        driftedProperties?: { @odata.type: ..., currentValue?: ...,
+        desiredValue?: ..., propertyName?: ... }[], firstReportedDateTime?:
+        string, monitorId?: string, resourceInstanceIdentifier?: Omit<..., ...>
+        & { @odata.type: ... } & { @odata.type: ... }, resourceType?: string,
+        status?: "active" | "fixed" | "unknownFutureValue", tenantId?: string }
+        & { @odata.type: "#microsoft.graph.configurationDrift" })[],
+        configurationMonitoringResults?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, driftsCount?: number,
+        driftsFixed?: number, errorDetails?: { @odata.type: ..., errorMessage?:
+        ..., resourceInstanceName?: ..., resourceType?: ... }[], monitorId?:
+        string, runCompletionDateTime?: string, runInitiationDateTime?: string,
+        runStatus?: "unknownFutureValue" | "successful" | "partiallySuccessful"
+        | "failed", runType?: "unknownFutureValue" | "monitor" | "apply",
+        tenantId?: string } & { @odata.type:
+        "#microsoft.graph.configurationMonitoringResult" })[],
+        configurationMonitors?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, baseline?: Omit<..., ...> & {
+        @odata.type: ..., description?: ..., displayName?: ..., parameters?:
+        ..., resources?: ... } & { @odata.type: ... }, createdBy?: {
+        @odata.type: string, application?: function, device?: function, user?:
+        function }, createdDateTime?: string, description?: string,
+        displayName?: string, inactivationReason?: string | null,
+        lastModifiedBy?: { @odata.type: string, application?: function, device?:
+        function, user?: function }, lastModifiedDateTime?: string, mode?:
+        "unknownFutureValue" | "monitorOnce" | "monitorOnly" |
+        "applyOnceAndMonitorContinuous" | "applyOnce" | "applyContinuous",
+        monitorRunFrequencyInHours?: number, parameters?: Record<string, never>
+        | (Omit<..., ...> & { @odata.type: ... } & { @odata.type: ... }) | null,
+        runAsUTCMServicePrincipal?: boolean, runningOnBehalfOf?: { @odata.type:
+        string, application?: function, device?: function, user?: function },
+        status?: "active" | "unknownFutureValue" | "inactive", tenantId?: string
+        } & { @odata.type: "#microsoft.graph.configurationMonitor" })[],
+        configurationSnapshotJobs?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, completedDateTime?: string,
+        createdBy?: { @odata.type: string, application?: function, device?:
+        function, user?: function }, createdDateTime?: string, description?:
+        string, displayName?: string, errorDetails?: string[],
+        resourceLocation?: string, resources?: string[], status?:
+        "unknownFutureValue" | "partiallySuccessful" | "failed" | "notStarted" |
+        "running" | "succeeded", tenantId?: string } & { @odata.type:
+        "#microsoft.graph.configurationSnapshotJob" })[],
+        configurationSnapshots?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, description?: string,
+        displayName?: string, parameters?: { @odata.type: ..., description?:
+        ..., displayName?: ..., parameterType?: ... }[], resources?: {
+        @odata.type: ..., displayName?: ..., properties?: ..., resourceType?:
+        ... }[] } & { @odata.type: "#microsoft.graph.configurationBaseline" })[]
+        } & { @odata.type: "#microsoft.graph.configurationManagement" }) | null,
+        dynamics?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, customerVoice?: {
+        @odata.type: string, isInOrgFormsPhishingScanEnabled?: boolean | null,
+        isRecordIdentityByDefaultEnabled?: boolean | null,
+        isRestrictedSurveyAccessEnabled?: boolean | null } } & { @odata.type:
+        "#microsoft.graph.adminDynamics" }) | null, edge?: Record<string, never>
+        | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, internetExplorerMode?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, siteLists?: (Omit<..., ...> & { @odata.type: ...,
+        description?: ..., displayName?: ..., lastModifiedBy?: ...,
+        lastModifiedDateTime?: ..., publishedBy?: ..., publishedDateTime?: ...,
+        revision?: ..., sharedCookies?: ..., sites?: ..., status?: ... } & {
+        @odata.type: ... })[] } & { @odata.type:
+        "#microsoft.graph.internetExplorerMode" }) | null } & { @odata.type:
+        "#microsoft.graph.edge" }) | null, entra?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, uxSetting?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, restrictNonAdminAccess?: "unknownFutureValue" | "false" | "true"
+        } & { @odata.type: "#microsoft.graph.uxSetting" }) | null } & {
+        @odata.type: "#microsoft.graph.entra" }) | null, exchange?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, mailboxes?: (Omit<Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        deletedDateTime?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" }, "@odata.type"> & { @odata.type:
+        string, folders?: (... & ... & ...)[] } & { @odata.type:
+        "#microsoft.graph.mailbox" })[], messageTraces?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        destinationIPAddress?: string | null, messageId?: string | null,
+        receivedDateTime?: string, recipients?: (... & ... & ...)[],
+        senderEmail?: string | null, size?: number, sourceIPAddress?: string |
+        null, subject?: string | null } & { @odata.type:
+        "#microsoft.graph.messageTrace" })[] } & { @odata.type:
+        "#microsoft.graph.exchangeAdmin" }) | null, forms?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, settings?: { @odata.type: string,
+        isBingImageSearchEnabled?: boolean | null, isExternalSendFormEnabled?:
+        boolean | null, isExternalShareCollaborationEnabled?: boolean | null,
+        isExternalShareResultEnabled?: boolean | null,
+        isExternalShareTemplateEnabled?: boolean | null,
+        isInOrgFormsPhishingScanEnabled?: boolean | null,
+        isRecordIdentityByDefaultEnabled?: boolean | null } } & { @odata.type:
+        "#microsoft.graph.adminForms" }) | null, microsoft365Apps?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, installationOptions?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, appsForMac?: { @odata.type:
+        string, isMicrosoft365AppsEnabled?: boolean, isSkypeForBusinessEnabled?:
+        boolean }, appsForWindows?: { @odata.type: string,
+        isMicrosoft365AppsEnabled?: boolean, isProjectEnabled?: boolean,
+        isSkypeForBusinessEnabled?: boolean, isVisioEnabled?: boolean },
+        updateChannel?: "unknownFutureValue" | "current" | "monthlyEnterprise" |
+        "semiAnnual" } & { @odata.type:
+        "#microsoft.graph.m365AppsInstallationOptions" }) | null } & {
+        @odata.type: "#microsoft.graph.adminMicrosoft365Apps" }) | null,
+        people?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, itemInsights?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, disabledForGroup?: string |
+        null, isEnabledInOrganization?: boolean | null } & { @odata.type:
+        "#microsoft.graph.insightsSettings" }) | null, namePronunciation?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, isEnabledInOrganization?:
+        boolean } & { @odata.type: "#microsoft.graph.namePronunciationSettings"
+        }) | null, photoUpdateSettings?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, allowedRoles?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.photoUpdateSettings" }) | null,
+        profileCardProperties?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, annotations?: { @odata.type:
+        ..., displayName?: ..., localizations?: ... }[], directoryPropertyName?:
+        string | null } & { @odata.type: "#microsoft.graph.profileCardProperty"
+        })[], profilePropertySettings?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, allowedAudiences?:
+        Record<string, never> | "unknownFutureValue" | "me" | "organization" |
+        "federatedOrganizations" | "everyone" | null,
+        isUserOverrideForAudienceEnabled?: boolean | null, name?: string | null,
+        prioritizedSourceUrls?: function[] } & { @odata.type:
+        "#microsoft.graph.profilePropertySetting" })[], profileSources?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, displayName?: string | null, kind?: string | null,
+        localizations?: { @odata.type: ..., displayName?: ..., languageTag?:
+        ..., webUrl?: ... }[], sourceId?: string | null, webUrl?: string | null
+        } & { @odata.type: "#microsoft.graph.profileSource" })[], pronouns?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, isEnabledInOrganization?:
+        boolean } & { @odata.type: "#microsoft.graph.pronounsSettings" }) | null
+        } & { @odata.type: "#microsoft.graph.peopleAdminSettings" }) | null,
+        reportSettings?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string,
+        displayConcealedNames?: boolean } & { @odata.type:
+        "#microsoft.graph.adminReportSettings" }) | null, serviceAnnouncement?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, healthOverviews?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, issues?: (... & ... & ...)[], service?: string, status?:
+        "unknownFutureValue" | "serviceOperational" | "investigating" |
+        "restoringService" | "verifyingService" | "serviceRestored" |
+        "postIncidentReviewPublished" | "serviceDegradation" |
+        "serviceInterruption" | "extendedRecovery" | "falsePositive" |
+        "investigationSuspended" | "resolved" | "mitigatedExternal" |
+        "mitigated" | "resolvedExternal" | "confirmed" | "reported" } & {
+        @odata.type: "#microsoft.graph.serviceHealth" })[], issues?:
+        (Omit<Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+        @odata.type: ..., details?: ..., endDateTime?: ...,
+        lastModifiedDateTime?: ..., startDateTime?: ..., title?: ... },
+        "@odata.type"> & { @odata.type:
+        "#microsoft.graph.serviceAnnouncementBase" }, "@odata.type"> & {
+        @odata.type: string, classification?: "unknownFutureValue" | "advisory"
+        | "incident", feature?: string | null, featureGroup?: string | null,
+        impactDescription?: string, isResolved?: boolean, origin?:
+        "unknownFutureValue" | "microsoft" | "thirdParty" | "customer", posts?:
+        { @odata.type: ..., createdDateTime?: ..., description?: ..., postType?:
+        ... }[], service?: string, status?: "unknownFutureValue" |
+        "serviceOperational" | "investigating" | "restoringService" |
+        "verifyingService" | "serviceRestored" | "postIncidentReviewPublished" |
+        "serviceDegradation" | "serviceInterruption" | "extendedRecovery" |
+        "falsePositive" | "investigationSuspended" | "resolved" |
+        "mitigatedExternal" | "mitigated" | "resolvedExternal" | "confirmed" |
+        "reported" } & { @odata.type: "#microsoft.graph.serviceHealthIssue"
+        })[], messages?: (Omit<Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., details?: ..., endDateTime?:
+        ..., lastModifiedDateTime?: ..., startDateTime?: ..., title?: ... },
+        "@odata.type"> & { @odata.type:
+        "#microsoft.graph.serviceAnnouncementBase" }, "@odata.type"> & {
+        @odata.type: string, actionRequiredByDateTime?: string | null,
+        attachments?: (... & ... & ...)[], attachmentsArchive?: string | null,
+        body?: { @odata.type: string, content?: function, contentType?: function
+        }, category?: "unknownFutureValue" | "preventOrFixIssue" |
+        "planForChange" | "stayInformed", hasAttachments?: boolean,
+        isMajorChange?: boolean | null, services?: function[], severity?:
+        "unknownFutureValue" | "normal" | "high" | "critical", tags?:
+        function[], viewPoint?: Record<string, never> | { @odata.type: string,
+        isArchived?: function, isFavorited?: function, isRead?: function } |
+        null } & { @odata.type: "#microsoft.graph.serviceUpdateMessage" })[] } &
+        { @odata.type: "#microsoft.graph.serviceAnnouncement" }) | null,
+        sharepoint?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, settings?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, allowedDomainGuidsForSyncApp?:
+        (string | null)[], availableManagedPathsForSiteCreation?: string[],
+        deletedUserPersonalSiteRetentionPeriodInDays?: number | null,
+        excludedFileExtensionsForSyncApp?: (string | null)[],
+        idleSessionSignOut?: Record<string, never> | { @odata.type: string,
+        isEnabled?: boolean | null, signOutAfterInSeconds?: number | null,
+        warnAfterInSeconds?: number | null } | null, imageTaggingOption?:
+        Record<string, never> | "unknownFutureValue" | "disabled" | "basic" |
+        "enhanced" | null, isCommentingOnSitePagesEnabled?: boolean | null,
+        isFileActivityNotificationEnabled?: boolean | null,
+        isLegacyAuthProtocolsEnabled?: boolean | null, isLoopEnabled?: boolean |
+        null, isMacSyncAppEnabled?: boolean | null,
+        isRequireAcceptingUserToMatchInvitedUserEnabled?: boolean | null,
+        isResharingByExternalUsersEnabled?: boolean | null,
+        isSharePointMobileNotificationEnabled?: boolean | null,
+        isSharePointNewsfeedEnabled?: boolean | null, isSiteCreationEnabled?:
+        boolean | null, isSiteCreationUIEnabled?: boolean | null,
+        isSitePagesCreationEnabled?: boolean | null,
+        isSitesStorageLimitAutomatic?: boolean | null,
+        isSyncButtonHiddenOnPersonalSite?: boolean | null,
+        isUnmanagedSyncAppForTenantRestricted?: boolean | null,
+        personalSiteDefaultStorageLimitInMB?: number | null,
+        sharingAllowedDomainList?: (string | null)[], sharingBlockedDomainList?:
+        (string | null)[], sharingCapability?: Record<string, never> |
+        "unknownFutureValue" | "disabled" | "externalUserSharingOnly" |
+        "externalUserAndGuestSharing" | "existingExternalUserSharingOnly" |
+        null, sharingDomainRestrictionMode?: Record<string, never> |
+        "unknownFutureValue" | "none" | "allowList" | "blockList" | null,
+        siteCreationDefaultManagedPath?: string,
+        siteCreationDefaultStorageLimitInMB?: number | null,
+        tenantDefaultTimezone?: string | null } & { @odata.type:
+        "#microsoft.graph.sharepointSettings" }) | null } & { @odata.type:
+        "#microsoft.graph.sharepoint" }) | null, teams?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, policy?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, userAssignments?: (Omit<..., ...> & { @odata.type: ...,
+        policyId?: ..., policyType?: ..., userId?: ... } & { @odata.type: ...
+        })[] } & { @odata.type:
+        "#microsoft.graph.teamsAdministration.teamsPolicyAssignment" }) | null,
+        telephoneNumberManagement?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        numberAssignments?: (Omit<..., ...> & { @odata.type: ...,
+        activationState?: ..., assignmentCategory?: ..., assignmentStatus?: ...,
+        assignmentTargetId?: ..., capabilities?: ..., city?: ...,
+        civicAddressId?: ..., isoCountryCode?: ..., locationId?: ...,
+        networkSiteId?: ..., numberSource?: ..., numberType?: ..., operatorId?:
+        ..., portInStatus?: ..., reverseNumberLookupOptions?: ...,
+        supportedCustomerActions?: ..., telephoneNumber?: ... } & { @odata.type:
+        ... })[], operations?: (Omit<..., ...> & { @odata.type: ...,
+        createdDateTime?: ..., numbers?: ..., status?: ... } & { @odata.type:
+        ... })[] } & { @odata.type:
+        "#microsoft.graph.teamsAdministration.telephoneNumberManagementRoot" })
+        | null, userConfigurations?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, accountType?: Record<string,
+        never> | "unknownFutureValue" | "user" | "resourceAccount" | "guest" |
+        "sfbOnPremUser" | "unknown" | "ineligibleUser" | null, createdDateTime?:
+        string, effectivePolicyAssignments?: { @odata.type: ...,
+        policyAssignment?: ..., policyType?: ... }[], featureTypes?: function[],
+        isEnterpriseVoiceEnabled?: boolean | null, modifiedDateTime?: string,
+        telephoneNumbers?: { @odata.type: ..., assignmentCategory?: ...,
+        telephoneNumber?: ... }[], tenantId?: string, user?: Record<string,
+        never> | (Omit<..., ...> & { @odata.type: ..., aboutMe?: ...,
+        accountEnabled?: ..., activities?: ..., adhocCalls?: ..., ageGroup?:
+        ..., agreementAcceptances?: ..., analytics?: ...,
+        appConsentRequestsForApproval?: ..., appRoleAssignedResources?: ...,
+        appRoleAssignments?: ..., approvals?: ..., assignedLicenses?: ...,
+        assignedPlans?: ..., authentication?: ..., authorizationInfo?: ...,
+        birthday?: ..., businessPhones?: ..., calendar?: ..., calendarGroups?:
+        ..., calendars?: ..., calendarView?: ..., chats?: ..., city?: ...,
+        cloudClipboard?: ..., cloudLicensing?: ..., cloudPCs?: ...,
+        cloudRealtimeCommunicationInfo?: ..., communications?: ...,
+        companyName?: ..., consentProvidedForMinor?: ..., contactFolders?: ...,
+        contacts?: ..., country?: ..., createdDateTime?: ..., createdObjects?:
+        ..., creationType?: ..., customSecurityAttributes?: ...,
+        dataSecurityAndGovernance?: ..., department?: ...,
+        deviceEnrollmentConfigurations?: ..., deviceEnrollmentLimit?: ...,
+        deviceKeys?: ..., deviceManagementTroubleshootingEvents?: ..., devices?:
+        ..., directReports?: ..., displayName?: ..., drive?: ..., drives?: ...,
+        employeeExperience?: ..., employeeHireDate?: ..., employeeId?: ...,
+        employeeLeaveDateTime?: ..., employeeOrgData?: ..., employeeType?: ...,
+        events?: ..., extensions?: ..., externalUserState?: ...,
+        externalUserStateChangeDateTime?: ..., faxNumber?: ..., followedSites?:
+        ..., givenName?: ..., hireDate?: ..., identities?: ..., imAddresses?:
+        ..., inferenceClassification?: ..., infoCatalogs?: ...,
+        informationProtection?: ..., insights?: ..., interests?: ...,
+        invitedBy?: ..., isLicenseReconciliationNeeded?: ...,
+        isManagementRestricted?: ..., isResourceAccount?: ..., jobTitle?: ...,
+        joinedGroups?: ..., joinedTeams?: ..., lastPasswordChangeDateTime?: ...,
+        legalAgeGroupClassification?: ..., licenseAssignmentStates?: ...,
+        licenseDetails?: ..., mail?: ..., mailboxSettings?: ..., mailFolders?:
+        ..., mailNickname?: ..., managedAppLogCollectionRequests?: ...,
+        managedAppRegistrations?: ..., managedDevices?: ..., manager?: ...,
+        memberOf?: ..., messages?: ..., mobileAppIntentAndStates?: ...,
+        mobileAppTroubleshootingEvents?: ..., mobilePhone?: ..., mySite?: ...,
+        notifications?: ..., oauth2PermissionGrants?: ..., officeLocation?: ...,
+        onenote?: ..., onlineMeetings?: ..., onPremisesDistinguishedName?: ...,
+        onPremisesDomainName?: ..., onPremisesExtensionAttributes?: ...,
+        onPremisesImmutableId?: ..., onPremisesLastSyncDateTime?: ...,
+        onPremisesProvisioningErrors?: ..., onPremisesSamAccountName?: ...,
+        onPremisesSecurityIdentifier?: ..., onPremisesSipInfo?: ...,
+        onPremisesSyncBehavior?: ..., onPremisesSyncEnabled?: ...,
+        onPremisesUserPrincipalName?: ..., otherMails?: ..., outlook?: ...,
+        ownedDevices?: ..., ownedObjects?: ..., passwordPolicies?: ...,
+        passwordProfile?: ..., pastProjects?: ...,
+        pendingAccessReviewInstances?: ..., people?: ..., permissionGrants?:
+        ..., photo?: ..., photos?: ..., planner?: ..., postalCode?: ...,
+        preferredDataLocation?: ..., preferredLanguage?: ..., preferredName?:
+        ..., presence?: ..., print?: ..., profile?: ..., provisionedPlans?: ...,
+        proxyAddresses?: ..., refreshTokensValidFromDateTime?: ...,
+        registeredDevices?: ..., responsibilities?: ..., schools?: ...,
+        scopedRoleMemberOf?: ..., security?: ..., securityIdentifier?: ...,
+        serviceProvisioningErrors?: ..., settings?: ..., showInAddressList?:
+        ..., signInActivity?: ..., signInSessionsValidFromDateTime?: ...,
+        skills?: ..., solutions?: ..., sponsors?: ..., state?: ...,
+        streetAddress?: ..., surname?: ..., teamwork?: ..., todo?: ...,
+        transitiveMemberOf?: ..., transitiveReports?: ..., usageLocation?: ...,
+        usageRights?: ..., userPrincipalName?: ..., userType?: ...,
+        virtualEvents?: ..., windowsInformationProtectionDeviceRegistrations?:
+        ... } & { @odata.type: ... }) | null, userPrincipalName?: string } & {
+        @odata.type:
+        "#microsoft.graph.teamsAdministration.teamsUserConfiguration" })[] } & {
+        @odata.type: "#microsoft.graph.teamsAdministration.teamsAdminRoot" }) |
+        null, todo?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, settings?: {
+        @odata.type: string, isExternalJoinEnabled?: boolean | null,
+        isExternalShareEnabled?: boolean | null, isPushNotificationEnabled?:
+        boolean | null } } & { @odata.type: "#microsoft.graph.adminTodo" }) |
+        null, windows?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, updates?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, catalog?: Record<string, never>
+        | (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
+        string, entries?: function } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.catalog" }) | null,
+        deploymentAudiences?: (Omit<..., ...> & { @odata.type: ...,
+        applicableContent?: ..., exclusions?: ..., members?: ... } & {
+        @odata.type: ... })[], deployments?: (Omit<..., ...> & { @odata.type:
+        ..., audience?: ..., content?: ..., createdDateTime?: ...,
+        lastModifiedDateTime?: ..., settings?: ..., state?: ... } & {
+        @odata.type: ... })[], products?: (Omit<..., ...> & { @odata.type: ...,
+        editions?: ..., friendlyNames?: ..., groupName?: ..., knownIssues?: ...,
+        name?: ..., revisions?: ... } & { @odata.type: ... })[],
+        resourceConnections?: (Omit<..., ...> & Omit<..., ...> & { @odata.type:
+        ... })[], updatableAssets?: (Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... })[], updatePolicies?: (Omit<..., ...> & { @odata.type:
+        ..., audience?: ..., complianceChangeRules?: ..., complianceChanges?:
+        ..., createdDateTime?: ..., deploymentSettings?: ... } & { @odata.type:
+        ... })[] } & { @odata.type: "#microsoft.graph.adminWindowsUpdates" }) |
+        null } & { @odata.type: "#microsoft.graph.adminWindows" }) | null }):
+        EndpointRequest<{ @odata.type: string, appsAndServices?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, settings?: { @odata.type: string,
+        isAppAndServicesTrialEnabled?: boolean | null, isOfficeStoreEnabled?:
+        boolean | null } } & { @odata.type:
+        "#microsoft.graph.adminAppsAndServices" }) | null,
+        configurationManagement?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        configurationApplications?: (Omit<{ @odata.type: string, id?: function
+        }, "@odata.type"> & { @odata.type: string, appId?: string,
+        appOwnerOrganizationId?: string | null, clientCredentials?: {
+        @odata.type: ..., certificateName?: ..., keyVaultUri?: ... },
+        createdBy?: { @odata.type: ..., application?: ..., device?: ..., user?:
+        ... }, createdDateTime?: string, description?: string, displayName?:
+        string, lastModifiedBy?: { @odata.type: ..., application?: ..., device?:
+        ..., user?: ... }, lastModifiedDateTime?: string, tenantId?: string } &
+        { @odata.type: "#microsoft.graph.configurationApplication" })[],
+        configurationDrifts?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, baselineResourceDisplayName?:
+        string, driftedProperties?: ...[], firstReportedDateTime?: string,
+        monitorId?: string, resourceInstanceIdentifier?: ... & ... & ...,
+        resourceType?: string, status?: "active" | "fixed" |
+        "unknownFutureValue", tenantId?: string } & { @odata.type:
+        "#microsoft.graph.configurationDrift" })[],
+        configurationMonitoringResults?: (Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & { @odata.type: string, driftsCount?:
+        number, driftsFixed?: number, errorDetails?: ...[], monitorId?: string,
+        runCompletionDateTime?: string, runInitiationDateTime?: string,
+        runStatus?: "unknownFutureValue" | "successful" | "partiallySuccessful"
+        | "failed", runType?: "unknownFutureValue" | "monitor" | "apply",
+        tenantId?: string } & { @odata.type:
+        "#microsoft.graph.configurationMonitoringResult" })[],
+        configurationMonitors?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, baseline?: ... & ... & ...,
+        createdBy?: { @odata.type: ..., application?: ..., device?: ..., user?:
+        ... }, createdDateTime?: string, description?: string, displayName?:
+        string, inactivationReason?: string | null, lastModifiedBy?: {
+        @odata.type: ..., application?: ..., device?: ..., user?: ... },
+        lastModifiedDateTime?: string, mode?: "unknownFutureValue" |
+        "monitorOnce" | "monitorOnly" | "applyOnceAndMonitorContinuous" |
+        "applyOnce" | "applyContinuous", monitorRunFrequencyInHours?: number,
+        parameters?: Record<..., ...> | (... & ... & ...) | null,
+        runAsUTCMServicePrincipal?: boolean, runningOnBehalfOf?: { @odata.type:
+        ..., application?: ..., device?: ..., user?: ... }, status?: "active" |
+        "unknownFutureValue" | "inactive", tenantId?: string } & { @odata.type:
+        "#microsoft.graph.configurationMonitor" })[],
+        configurationSnapshotJobs?: (Omit<{ @odata.type: string, id?: function
+        }, "@odata.type"> & { @odata.type: string, completedDateTime?: string,
+        createdBy?: { @odata.type: ..., application?: ..., device?: ..., user?:
+        ... }, createdDateTime?: string, description?: string, displayName?:
+        string, errorDetails?: ...[], resourceLocation?: string, resources?:
+        ...[], status?: "unknownFutureValue" | "partiallySuccessful" | "failed"
+        | "notStarted" | "running" | "succeeded", tenantId?: string } & {
+        @odata.type: "#microsoft.graph.configurationSnapshotJob" })[],
+        configurationSnapshots?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, description?: string,
+        displayName?: string, parameters?: ...[], resources?: ...[] } & {
+        @odata.type: "#microsoft.graph.configurationBaseline" })[] } & {
+        @odata.type: "#microsoft.graph.configurationManagement" }) | null,
+        dynamics?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, customerVoice?: {
+        @odata.type: string, isInOrgFormsPhishingScanEnabled?: boolean | null,
+        isRecordIdentityByDefaultEnabled?: boolean | null,
+        isRestrictedSurveyAccessEnabled?: boolean | null } } & { @odata.type:
+        "#microsoft.graph.adminDynamics" }) | null, edge?: Record<string, never>
+        | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, internetExplorerMode?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, siteLists?: (... & ... & ...)[] } & { @odata.type:
+        "#microsoft.graph.internetExplorerMode" }) | null } & { @odata.type:
+        "#microsoft.graph.edge" }) | null, entra?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, uxSetting?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, restrictNonAdminAccess?: "unknownFutureValue" | "false" | "true"
+        } & { @odata.type: "#microsoft.graph.uxSetting" }) | null } & {
+        @odata.type: "#microsoft.graph.entra" }) | null, exchange?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, mailboxes?: (Omit<Omit<..., ...>
+        & Omit<..., ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type:
+        string, folders?: ...[] } & { @odata.type: "#microsoft.graph.mailbox"
+        })[], messageTraces?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, destinationIPAddress?: string |
+        null, messageId?: string | null, receivedDateTime?: string, recipients?:
+        ...[], senderEmail?: string | null, size?: number, sourceIPAddress?:
+        string | null, subject?: string | null } & { @odata.type:
+        "#microsoft.graph.messageTrace" })[] } & { @odata.type:
+        "#microsoft.graph.exchangeAdmin" }) | null, forms?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, settings?: { @odata.type: string,
+        isBingImageSearchEnabled?: boolean | null, isExternalSendFormEnabled?:
+        boolean | null, isExternalShareCollaborationEnabled?: boolean | null,
+        isExternalShareResultEnabled?: boolean | null,
+        isExternalShareTemplateEnabled?: boolean | null,
+        isInOrgFormsPhishingScanEnabled?: boolean | null,
+        isRecordIdentityByDefaultEnabled?: boolean | null } } & { @odata.type:
+        "#microsoft.graph.adminForms" }) | null, microsoft365Apps?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, installationOptions?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, appsForMac?: { @odata.type:
+        string, isMicrosoft365AppsEnabled?: function,
+        isSkypeForBusinessEnabled?: function }, appsForWindows?: { @odata.type:
+        string, isMicrosoft365AppsEnabled?: function, isProjectEnabled?:
+        function, isSkypeForBusinessEnabled?: function, isVisioEnabled?:
+        function }, updateChannel?: "unknownFutureValue" | "current" |
+        "monthlyEnterprise" | "semiAnnual" } & { @odata.type:
+        "#microsoft.graph.m365AppsInstallationOptions" }) | null } & {
+        @odata.type: "#microsoft.graph.adminMicrosoft365Apps" }) | null,
+        people?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, itemInsights?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, disabledForGroup?: string |
+        null, isEnabledInOrganization?: boolean | null } & { @odata.type:
+        "#microsoft.graph.insightsSettings" }) | null, namePronunciation?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, isEnabledInOrganization?:
+        boolean } & { @odata.type: "#microsoft.graph.namePronunciationSettings"
+        }) | null, photoUpdateSettings?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, allowedRoles?: function[] } & { @odata.type:
+        "#microsoft.graph.photoUpdateSettings" }) | null,
+        profileCardProperties?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, annotations?: ...[],
+        directoryPropertyName?: string | null } & { @odata.type:
+        "#microsoft.graph.profileCardProperty" })[], profilePropertySettings?:
+        (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+        @odata.type: string, allowedAudiences?: Record<..., ...> |
+        "unknownFutureValue" | "me" | "organization" | "federatedOrganizations"
+        | "everyone" | null, isUserOverrideForAudienceEnabled?: boolean | null,
+        name?: string | null, prioritizedSourceUrls?: ...[] } & { @odata.type:
+        "#microsoft.graph.profilePropertySetting" })[], profileSources?: (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, displayName?: string | null, kind?: string | null,
+        localizations?: ...[], sourceId?: string | null, webUrl?: string | null
+        } & { @odata.type: "#microsoft.graph.profileSource" })[], pronouns?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, isEnabledInOrganization?:
+        boolean } & { @odata.type: "#microsoft.graph.pronounsSettings" }) | null
+        } & { @odata.type: "#microsoft.graph.peopleAdminSettings" }) | null,
+        reportSettings?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string,
+        displayConcealedNames?: boolean } & { @odata.type:
+        "#microsoft.graph.adminReportSettings" }) | null, serviceAnnouncement?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, healthOverviews?: (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, issues?: ...[], service?: string, status?: "unknownFutureValue"
+        | "serviceOperational" | "investigating" | "restoringService" |
+        "verifyingService" | "serviceRestored" | "postIncidentReviewPublished" |
+        "serviceDegradation" | "serviceInterruption" | "extendedRecovery" |
+        "falsePositive" | "investigationSuspended" | "resolved" |
+        "mitigatedExternal" | "mitigated" | "resolvedExternal" | "confirmed" |
+        "reported" } & { @odata.type: "#microsoft.graph.serviceHealth" })[],
+        issues?: (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, classification?:
+        "unknownFutureValue" | "advisory" | "incident", feature?: string | null,
+        featureGroup?: string | null, impactDescription?: string, isResolved?:
+        boolean, origin?: "unknownFutureValue" | "microsoft" | "thirdParty" |
+        "customer", posts?: ...[], service?: string, status?:
+        "unknownFutureValue" | "serviceOperational" | "investigating" |
+        "restoringService" | "verifyingService" | "serviceRestored" |
+        "postIncidentReviewPublished" | "serviceDegradation" |
+        "serviceInterruption" | "extendedRecovery" | "falsePositive" |
+        "investigationSuspended" | "resolved" | "mitigatedExternal" |
+        "mitigated" | "resolvedExternal" | "confirmed" | "reported" } & {
+        @odata.type: "#microsoft.graph.serviceHealthIssue" })[], messages?:
+        (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, actionRequiredByDateTime?:
+        string | null, attachments?: ...[], attachmentsArchive?: string | null,
+        body?: { @odata.type: ..., content?: ..., contentType?: ... },
+        category?: "unknownFutureValue" | "preventOrFixIssue" | "planForChange"
+        | "stayInformed", hasAttachments?: boolean, isMajorChange?: boolean |
+        null, services?: ...[], severity?: "unknownFutureValue" | "normal" |
+        "high" | "critical", tags?: ...[], viewPoint?: Record<..., ...> | {
+        @odata.type: ..., isArchived?: ..., isFavorited?: ..., isRead?: ... } |
+        null } & { @odata.type: "#microsoft.graph.serviceUpdateMessage" })[] } &
+        { @odata.type: "#microsoft.graph.serviceAnnouncement" }) | null,
+        sharepoint?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, settings?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, allowedDomainGuidsForSyncApp?:
+        function[], availableManagedPathsForSiteCreation?: string[],
+        deletedUserPersonalSiteRetentionPeriodInDays?: number | null,
+        excludedFileExtensionsForSyncApp?: function[], idleSessionSignOut?:
+        Record<string, never> | { @odata.type: string, isEnabled?: function,
+        signOutAfterInSeconds?: function, warnAfterInSeconds?: function } |
+        null, imageTaggingOption?: Record<string, never> | "unknownFutureValue"
+        | "disabled" | "basic" | "enhanced" | null,
+        isCommentingOnSitePagesEnabled?: boolean | null,
+        isFileActivityNotificationEnabled?: boolean | null,
+        isLegacyAuthProtocolsEnabled?: boolean | null, isLoopEnabled?: boolean |
+        null, isMacSyncAppEnabled?: boolean | null,
+        isRequireAcceptingUserToMatchInvitedUserEnabled?: boolean | null,
+        isResharingByExternalUsersEnabled?: boolean | null,
+        isSharePointMobileNotificationEnabled?: boolean | null,
+        isSharePointNewsfeedEnabled?: boolean | null, isSiteCreationEnabled?:
+        boolean | null, isSiteCreationUIEnabled?: boolean | null,
+        isSitePagesCreationEnabled?: boolean | null,
+        isSitesStorageLimitAutomatic?: boolean | null,
+        isSyncButtonHiddenOnPersonalSite?: boolean | null,
+        isUnmanagedSyncAppForTenantRestricted?: boolean | null,
+        personalSiteDefaultStorageLimitInMB?: number | null,
+        sharingAllowedDomainList?: function[], sharingBlockedDomainList?:
+        function[], sharingCapability?: Record<string, never> |
+        "unknownFutureValue" | "disabled" | "externalUserSharingOnly" |
+        "externalUserAndGuestSharing" | "existingExternalUserSharingOnly" |
+        null, sharingDomainRestrictionMode?: Record<string, never> |
+        "unknownFutureValue" | "none" | "allowList" | "blockList" | null,
+        siteCreationDefaultManagedPath?: string,
+        siteCreationDefaultStorageLimitInMB?: number | null,
+        tenantDefaultTimezone?: string | null } & { @odata.type:
+        "#microsoft.graph.sharepointSettings" }) | null } & { @odata.type:
+        "#microsoft.graph.sharepoint" }) | null, teams?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, policy?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, userAssignments?: (... & ... & ...)[] } & { @odata.type:
+        "#microsoft.graph.teamsAdministration.teamsPolicyAssignment" }) | null,
+        telephoneNumberManagement?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        numberAssignments?: (... & ... & ...)[], operations?: (... & ... &
+        ...)[] } & { @odata.type:
+        "#microsoft.graph.teamsAdministration.telephoneNumberManagementRoot" })
+        | null, userConfigurations?: (Omit<{ @odata.type: string, id?: function
+        }, "@odata.type"> & { @odata.type: string, accountType?: Record<...,
+        ...> | "unknownFutureValue" | "user" | "resourceAccount" | "guest" |
+        "sfbOnPremUser" | "unknown" | "ineligibleUser" | null, createdDateTime?:
+        string, effectivePolicyAssignments?: ...[], featureTypes?: ...[],
+        isEnterpriseVoiceEnabled?: boolean | null, modifiedDateTime?: string,
+        telephoneNumbers?: ...[], tenantId?: string, user?: Record<..., ...> |
+        (... & ... & ...) | null, userPrincipalName?: string } & { @odata.type:
+        "#microsoft.graph.teamsAdministration.teamsUserConfiguration" })[] } & {
+        @odata.type: "#microsoft.graph.teamsAdministration.teamsAdminRoot" }) |
+        null, todo?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, settings?: {
+        @odata.type: string, isExternalJoinEnabled?: boolean | null,
+        isExternalShareEnabled?: boolean | null, isPushNotificationEnabled?:
+        boolean | null } } & { @odata.type: "#microsoft.graph.adminTodo" }) |
+        null, windows?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, updates?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, catalog?: Record<string, never>
+        | (Omit<..., ...> & { @odata.type: ..., entries?: ... } & { @odata.type:
+        ... }) | null, deploymentAudiences?: (... & ... & ...)[], deployments?:
+        (... & ... & ...)[], products?: (... & ... & ...)[],
+        resourceConnections?: (... & ... & ...)[], updatableAssets?: (... & ...
+        & ...)[], updatePolicies?: (... & ... & ...)[] } & { @odata.type:
+        "#microsoft.graph.adminWindowsUpdates" }) | null } & { @odata.type:
+        "#microsoft.graph.adminWindows" }) | null }>
       parameters:
         - id: body
-          type: Operation&lt;"/admin", "patch"&gt;
+          type: >-
+            { <xref uid="@odata.type" />: string, appsAndServices?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, settings?: { <xref uid="@odata.type"
+            />: string, isAppAndServicesTrialEnabled?: boolean | null,
+            isOfficeStoreEnabled?: boolean | null } } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.adminAppsAndServices" />" }) | null,
+            configurationManagement?: Record&lt;string, never&gt; | (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            configurationApplications?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, appId?: string,
+            appOwnerOrganizationId?: string | null, clientCredentials?: { <xref
+            uid="@odata.type" />: string, certificateName?: function,
+            keyVaultUri?: function }, createdBy?: { <xref uid="@odata.type" />:
+            string, application?: function, device?: function, user?: function
+            }, createdDateTime?: string, description?: string, displayName?:
+            string, lastModifiedBy?: { <xref uid="@odata.type" />: string,
+            application?: function, device?: function, user?: function },
+            lastModifiedDateTime?: string, tenantId?: string } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.configurationApplication" />" })[],
+            configurationDrifts?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, baselineResourceDisplayName?: string,
+            driftedProperties?: { <xref uid="@odata.type" />: ...,
+            currentValue?: ..., desiredValue?: ..., propertyName?: ... }[],
+            firstReportedDateTime?: string, monitorId?: string,
+            resourceInstanceIdentifier?: Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ... } & { <xref uid="@odata.type" />: ... },
+            resourceType?: string, status?: "active" | "fixed" |
+            "unknownFutureValue", tenantId?: string } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.configurationDrift" />" })[],
+            configurationMonitoringResults?: (Omit&lt;{ <xref uid="@odata.type"
+            />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, driftsCount?: number,
+            driftsFixed?: number, errorDetails?: { <xref uid="@odata.type" />:
+            ..., errorMessage?: ..., resourceInstanceName?: ..., resourceType?:
+            ... }[], monitorId?: string, runCompletionDateTime?: string,
+            runInitiationDateTime?: string, runStatus?: "unknownFutureValue" |
+            "successful" | "partiallySuccessful" | "failed", runType?:
+            "unknownFutureValue" | "monitor" | "apply", tenantId?: string } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.configurationMonitoringResult" />" })[],
+            configurationMonitors?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, baseline?: Omit&lt;..., ...&gt; & {
+            <xref uid="@odata.type" />: ..., description?: ..., displayName?:
+            ..., parameters?: ..., resources?: ... } & { <xref uid="@odata.type"
+            />: ... }, createdBy?: { <xref uid="@odata.type" />: string,
+            application?: function, device?: function, user?: function },
+            createdDateTime?: string, description?: string, displayName?:
+            string, inactivationReason?: string | null, lastModifiedBy?: { <xref
+            uid="@odata.type" />: string, application?: function, device?:
+            function, user?: function }, lastModifiedDateTime?: string, mode?:
+            "unknownFutureValue" | "monitorOnce" | "monitorOnly" |
+            "applyOnceAndMonitorContinuous" | "applyOnce" | "applyContinuous",
+            monitorRunFrequencyInHours?: number, parameters?: Record&lt;string,
+            never&gt; | (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+            ... } & { <xref uid="@odata.type" />: ... }) | null,
+            runAsUTCMServicePrincipal?: boolean, runningOnBehalfOf?: { <xref
+            uid="@odata.type" />: string, application?: function, device?:
+            function, user?: function }, status?: "active" |
+            "unknownFutureValue" | "inactive", tenantId?: string } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.configurationMonitor" />" })[],
+            configurationSnapshotJobs?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, completedDateTime?: string,
+            createdBy?: { <xref uid="@odata.type" />: string, application?:
+            function, device?: function, user?: function }, createdDateTime?:
+            string, description?: string, displayName?: string, errorDetails?:
+            string[], resourceLocation?: string, resources?: string[], status?:
+            "unknownFutureValue" | "partiallySuccessful" | "failed" |
+            "notStarted" | "running" | "succeeded", tenantId?: string } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.configurationSnapshotJob" />" })[],
+            configurationSnapshots?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, description?: string, displayName?:
+            string, parameters?: { <xref uid="@odata.type" />: ...,
+            description?: ..., displayName?: ..., parameterType?: ... }[],
+            resources?: { <xref uid="@odata.type" />: ..., displayName?: ...,
+            properties?: ..., resourceType?: ... }[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.configurationBaseline" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.configurationManagement" />" }) | null,
+            dynamics?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            customerVoice?: { <xref uid="@odata.type" />: string,
+            isInOrgFormsPhishingScanEnabled?: boolean | null,
+            isRecordIdentityByDefaultEnabled?: boolean | null,
+            isRestrictedSurveyAccessEnabled?: boolean | null } } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.adminDynamics"
+            />" }) | null, edge?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            internetExplorerMode?: Record&lt;string, never&gt; | (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            siteLists?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+            ..., description?: ..., displayName?: ..., lastModifiedBy?: ...,
+            lastModifiedDateTime?: ..., publishedBy?: ..., publishedDateTime?:
+            ..., revision?: ..., sharedCookies?: ..., sites?: ..., status?: ...
+            } & { <xref uid="@odata.type" />: ... })[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.internetExplorerMode" />" }) | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.edge" />" }) |
+            null, entra?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            uxSetting?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            restrictNonAdminAccess?: "unknownFutureValue" | "false" | "true" } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.uxSetting" />" }) | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.entra" />" }) |
+            null, exchange?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            mailboxes?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: ..., id?:
+            ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: ..., deletedDateTime?: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.directoryObject" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            folders?: (... & ... & ...)[] } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.mailbox" />" })[], messageTraces?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            destinationIPAddress?: string | null, messageId?: string | null,
+            receivedDateTime?: string, recipients?: (... & ... & ...)[],
+            senderEmail?: string | null, size?: number, sourceIPAddress?: string
+            | null, subject?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.messageTrace" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.exchangeAdmin"
+            />" }) | null, forms?: Record&lt;string, never&gt; | (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            settings?: { <xref uid="@odata.type" />: string,
+            isBingImageSearchEnabled?: boolean | null,
+            isExternalSendFormEnabled?: boolean | null,
+            isExternalShareCollaborationEnabled?: boolean | null,
+            isExternalShareResultEnabled?: boolean | null,
+            isExternalShareTemplateEnabled?: boolean | null,
+            isInOrgFormsPhishingScanEnabled?: boolean | null,
+            isRecordIdentityByDefaultEnabled?: boolean | null } } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.adminForms" />"
+            }) | null, microsoft365Apps?: Record&lt;string, never&gt; |
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            installationOptions?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            appsForMac?: { <xref uid="@odata.type" />: string,
+            isMicrosoft365AppsEnabled?: boolean, isSkypeForBusinessEnabled?:
+            boolean }, appsForWindows?: { <xref uid="@odata.type" />: string,
+            isMicrosoft365AppsEnabled?: boolean, isProjectEnabled?: boolean,
+            isSkypeForBusinessEnabled?: boolean, isVisioEnabled?: boolean },
+            updateChannel?: "unknownFutureValue" | "current" |
+            "monthlyEnterprise" | "semiAnnual" } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.m365AppsInstallationOptions" />" }) |
+            null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.adminMicrosoft365Apps" />" }) | null, people?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, itemInsights?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, disabledForGroup?: string | null,
+            isEnabledInOrganization?: boolean | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.insightsSettings"
+            />" }) | null, namePronunciation?: Record&lt;string, never&gt; |
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            isEnabledInOrganization?: boolean } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.namePronunciationSettings" />" }) |
+            null, photoUpdateSettings?: Record&lt;string, never&gt; | (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            allowedRoles?: (string | null)[] } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.photoUpdateSettings" />" }) | null,
+            profileCardProperties?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, annotations?: { <xref
+            uid="@odata.type" />: ..., displayName?: ..., localizations?: ...
+            }[], directoryPropertyName?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.profileCardProperty" />" })[],
+            profilePropertySettings?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, allowedAudiences?: Record&lt;string,
+            never&gt; | "unknownFutureValue" | "me" | "organization" |
+            "federatedOrganizations" | "everyone" | null,
+            isUserOverrideForAudienceEnabled?: boolean | null, name?: string |
+            null, prioritizedSourceUrls?: function[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.profilePropertySetting" />" })[],
+            profileSources?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, displayName?: string | null, kind?:
+            string | null, localizations?: { <xref uid="@odata.type" />: ...,
+            displayName?: ..., languageTag?: ..., webUrl?: ... }[], sourceId?:
+            string | null, webUrl?: string | null } & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.profileSource" />" })[], pronouns?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, isEnabledInOrganization?: boolean } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.pronounsSettings" />" }) | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.peopleAdminSettings" />" }) | null,
+            reportSettings?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            displayConcealedNames?: boolean } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.adminReportSettings" />" }) | null,
+            serviceAnnouncement?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            healthOverviews?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, issues?: (... & ... & ...)[],
+            service?: string, status?: "unknownFutureValue" |
+            "serviceOperational" | "investigating" | "restoringService" |
+            "verifyingService" | "serviceRestored" |
+            "postIncidentReviewPublished" | "serviceDegradation" |
+            "serviceInterruption" | "extendedRecovery" | "falsePositive" |
+            "investigationSuspended" | "resolved" | "mitigatedExternal" |
+            "mitigated" | "resolvedExternal" | "confirmed" | "reported" } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.serviceHealth" />" })[], issues?:
+            (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+            />: ..., details?: ..., endDateTime?: ..., lastModifiedDateTime?:
+            ..., startDateTime?: ..., title?: ... }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.serviceAnnouncementBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            classification?: "unknownFutureValue" | "advisory" | "incident",
+            feature?: string | null, featureGroup?: string | null,
+            impactDescription?: string, isResolved?: boolean, origin?:
+            "unknownFutureValue" | "microsoft" | "thirdParty" | "customer",
+            posts?: { <xref uid="@odata.type" />: ..., createdDateTime?: ...,
+            description?: ..., postType?: ... }[], service?: string, status?:
+            "unknownFutureValue" | "serviceOperational" | "investigating" |
+            "restoringService" | "verifyingService" | "serviceRestored" |
+            "postIncidentReviewPublished" | "serviceDegradation" |
+            "serviceInterruption" | "extendedRecovery" | "falsePositive" |
+            "investigationSuspended" | "resolved" | "mitigatedExternal" |
+            "mitigated" | "resolvedExternal" | "confirmed" | "reported" } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.serviceHealthIssue" />" })[], messages?:
+            (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+            />: ..., details?: ..., endDateTime?: ..., lastModifiedDateTime?:
+            ..., startDateTime?: ..., title?: ... }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.serviceAnnouncementBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            actionRequiredByDateTime?: string | null, attachments?: (... & ... &
+            ...)[], attachmentsArchive?: string | null, body?: { <xref
+            uid="@odata.type" />: string, content?: function, contentType?:
+            function }, category?: "unknownFutureValue" | "preventOrFixIssue" |
+            "planForChange" | "stayInformed", hasAttachments?: boolean,
+            isMajorChange?: boolean | null, services?: function[], severity?:
+            "unknownFutureValue" | "normal" | "high" | "critical", tags?:
+            function[], viewPoint?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, isArchived?: function, isFavorited?:
+            function, isRead?: function } | null } & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.serviceUpdateMessage" />" })[] } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.serviceAnnouncement" />" }) | null,
+            sharepoint?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            settings?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            allowedDomainGuidsForSyncApp?: (string | null)[],
+            availableManagedPathsForSiteCreation?: string[],
+            deletedUserPersonalSiteRetentionPeriodInDays?: number | null,
+            excludedFileExtensionsForSyncApp?: (string | null)[],
+            idleSessionSignOut?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, isEnabled?: boolean | null,
+            signOutAfterInSeconds?: number | null, warnAfterInSeconds?: number |
+            null } | null, imageTaggingOption?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "disabled" | "basic" | "enhanced" | null,
+            isCommentingOnSitePagesEnabled?: boolean | null,
+            isFileActivityNotificationEnabled?: boolean | null,
+            isLegacyAuthProtocolsEnabled?: boolean | null, isLoopEnabled?:
+            boolean | null, isMacSyncAppEnabled?: boolean | null,
+            isRequireAcceptingUserToMatchInvitedUserEnabled?: boolean | null,
+            isResharingByExternalUsersEnabled?: boolean | null,
+            isSharePointMobileNotificationEnabled?: boolean | null,
+            isSharePointNewsfeedEnabled?: boolean | null,
+            isSiteCreationEnabled?: boolean | null, isSiteCreationUIEnabled?:
+            boolean | null, isSitePagesCreationEnabled?: boolean | null,
+            isSitesStorageLimitAutomatic?: boolean | null,
+            isSyncButtonHiddenOnPersonalSite?: boolean | null,
+            isUnmanagedSyncAppForTenantRestricted?: boolean | null,
+            personalSiteDefaultStorageLimitInMB?: number | null,
+            sharingAllowedDomainList?: (string | null)[],
+            sharingBlockedDomainList?: (string | null)[], sharingCapability?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "disabled" |
+            "externalUserSharingOnly" | "externalUserAndGuestSharing" |
+            "existingExternalUserSharingOnly" | null,
+            sharingDomainRestrictionMode?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "none" | "allowList" | "blockList" | null,
+            siteCreationDefaultManagedPath?: string,
+            siteCreationDefaultStorageLimitInMB?: number | null,
+            tenantDefaultTimezone?: string | null } & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.sharepointSettings" />" }) | null }
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.sharepoint" />" }) | null, teams?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, policy?: Record&lt;string, never&gt; |
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            userAssignments?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type"
+            />: ..., policyId?: ..., policyType?: ..., userId?: ... } & { <xref
+            uid="@odata.type" />: ... })[] } & { <xref uid="@odata.type" />:
+            "#<xref
+            uid="microsoft.graph.teamsAdministration.teamsPolicyAssignment" />"
+            }) | null, telephoneNumberManagement?: Record&lt;string, never&gt; |
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            numberAssignments?: (Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ..., activationState?: ...,
+            assignmentCategory?: ..., assignmentStatus?: ...,
+            assignmentTargetId?: ..., capabilities?: ..., city?: ...,
+            civicAddressId?: ..., isoCountryCode?: ..., locationId?: ...,
+            networkSiteId?: ..., numberSource?: ..., numberType?: ...,
+            operatorId?: ..., portInStatus?: ..., reverseNumberLookupOptions?:
+            ..., supportedCustomerActions?: ..., telephoneNumber?: ... } & {
+            <xref uid="@odata.type" />: ... })[], operations?: (Omit&lt;...,
+            ...&gt; & { <xref uid="@odata.type" />: ..., createdDateTime?: ...,
+            numbers?: ..., status?: ... } & { <xref uid="@odata.type" />: ...
+            })[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAdministration.telephoneNumberManagementRoot"
+            />" }) | null, userConfigurations?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            accountType?: Record&lt;string, never&gt; | "unknownFutureValue" |
+            "user" | "resourceAccount" | "guest" | "sfbOnPremUser" | "unknown" |
+            "ineligibleUser" | null, createdDateTime?: string,
+            effectivePolicyAssignments?: { <xref uid="@odata.type" />: ...,
+            policyAssignment?: ..., policyType?: ... }[], featureTypes?:
+            function[], isEnterpriseVoiceEnabled?: boolean | null,
+            modifiedDateTime?: string, telephoneNumbers?: { <xref
+            uid="@odata.type" />: ..., assignmentCategory?: ...,
+            telephoneNumber?: ... }[], tenantId?: string, user?:
+            Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ..., aboutMe?: ..., accountEnabled?: ...,
+            activities?: ..., adhocCalls?: ..., ageGroup?: ...,
+            agreementAcceptances?: ..., analytics?: ...,
+            appConsentRequestsForApproval?: ..., appRoleAssignedResources?: ...,
+            appRoleAssignments?: ..., approvals?: ..., assignedLicenses?: ...,
+            assignedPlans?: ..., authentication?: ..., authorizationInfo?: ...,
+            birthday?: ..., businessPhones?: ..., calendar?: ...,
+            calendarGroups?: ..., calendars?: ..., calendarView?: ..., chats?:
+            ..., city?: ..., cloudClipboard?: ..., cloudLicensing?: ...,
+            cloudPCs?: ..., cloudRealtimeCommunicationInfo?: ...,
+            communications?: ..., companyName?: ..., consentProvidedForMinor?:
+            ..., contactFolders?: ..., contacts?: ..., country?: ...,
+            createdDateTime?: ..., createdObjects?: ..., creationType?: ...,
+            customSecurityAttributes?: ..., dataSecurityAndGovernance?: ...,
+            department?: ..., deviceEnrollmentConfigurations?: ...,
+            deviceEnrollmentLimit?: ..., deviceKeys?: ...,
+            deviceManagementTroubleshootingEvents?: ..., devices?: ...,
+            directReports?: ..., displayName?: ..., drive?: ..., drives?: ...,
+            employeeExperience?: ..., employeeHireDate?: ..., employeeId?: ...,
+            employeeLeaveDateTime?: ..., employeeOrgData?: ..., employeeType?:
+            ..., events?: ..., extensions?: ..., externalUserState?: ...,
+            externalUserStateChangeDateTime?: ..., faxNumber?: ...,
+            followedSites?: ..., givenName?: ..., hireDate?: ..., identities?:
+            ..., imAddresses?: ..., inferenceClassification?: ...,
+            infoCatalogs?: ..., informationProtection?: ..., insights?: ...,
+            interests?: ..., invitedBy?: ..., isLicenseReconciliationNeeded?:
+            ..., isManagementRestricted?: ..., isResourceAccount?: ...,
+            jobTitle?: ..., joinedGroups?: ..., joinedTeams?: ...,
+            lastPasswordChangeDateTime?: ..., legalAgeGroupClassification?: ...,
+            licenseAssignmentStates?: ..., licenseDetails?: ..., mail?: ...,
+            mailboxSettings?: ..., mailFolders?: ..., mailNickname?: ...,
+            managedAppLogCollectionRequests?: ..., managedAppRegistrations?:
+            ..., managedDevices?: ..., manager?: ..., memberOf?: ..., messages?:
+            ..., mobileAppIntentAndStates?: ...,
+            mobileAppTroubleshootingEvents?: ..., mobilePhone?: ..., mySite?:
+            ..., notifications?: ..., oauth2PermissionGrants?: ...,
+            officeLocation?: ..., onenote?: ..., onlineMeetings?: ...,
+            onPremisesDistinguishedName?: ..., onPremisesDomainName?: ...,
+            onPremisesExtensionAttributes?: ..., onPremisesImmutableId?: ...,
+            onPremisesLastSyncDateTime?: ..., onPremisesProvisioningErrors?:
+            ..., onPremisesSamAccountName?: ..., onPremisesSecurityIdentifier?:
+            ..., onPremisesSipInfo?: ..., onPremisesSyncBehavior?: ...,
+            onPremisesSyncEnabled?: ..., onPremisesUserPrincipalName?: ...,
+            otherMails?: ..., outlook?: ..., ownedDevices?: ..., ownedObjects?:
+            ..., passwordPolicies?: ..., passwordProfile?: ..., pastProjects?:
+            ..., pendingAccessReviewInstances?: ..., people?: ...,
+            permissionGrants?: ..., photo?: ..., photos?: ..., planner?: ...,
+            postalCode?: ..., preferredDataLocation?: ..., preferredLanguage?:
+            ..., preferredName?: ..., presence?: ..., print?: ..., profile?:
+            ..., provisionedPlans?: ..., proxyAddresses?: ...,
+            refreshTokensValidFromDateTime?: ..., registeredDevices?: ...,
+            responsibilities?: ..., schools?: ..., scopedRoleMemberOf?: ...,
+            security?: ..., securityIdentifier?: ...,
+            serviceProvisioningErrors?: ..., settings?: ..., showInAddressList?:
+            ..., signInActivity?: ..., signInSessionsValidFromDateTime?: ...,
+            skills?: ..., solutions?: ..., sponsors?: ..., state?: ...,
+            streetAddress?: ..., surname?: ..., teamwork?: ..., todo?: ...,
+            transitiveMemberOf?: ..., transitiveReports?: ..., usageLocation?:
+            ..., usageRights?: ..., userPrincipalName?: ..., userType?: ...,
+            virtualEvents?: ...,
+            windowsInformationProtectionDeviceRegistrations?: ... } & { <xref
+            uid="@odata.type" />: ... }) | null, userPrincipalName?: string } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAdministration.teamsUserConfiguration" />"
+            })[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAdministration.teamsAdminRoot" />" }) |
+            null, todo?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            settings?: { <xref uid="@odata.type" />: string,
+            isExternalJoinEnabled?: boolean | null, isExternalShareEnabled?:
+            boolean | null, isPushNotificationEnabled?: boolean | null } } & {
+            <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.adminTodo"
+            />" }) | null, windows?: Record&lt;string, never&gt; | (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            updates?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            catalog?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, entries?: function }
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsUpdates.catalog" />" }) | null,
+            deploymentAudiences?: (Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ..., applicableContent?: ..., exclusions?:
+            ..., members?: ... } & { <xref uid="@odata.type" />: ... })[],
+            deployments?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+            ..., audience?: ..., content?: ..., createdDateTime?: ...,
+            lastModifiedDateTime?: ..., settings?: ..., state?: ... } & { <xref
+            uid="@odata.type" />: ... })[], products?: (Omit&lt;..., ...&gt; & {
+            <xref uid="@odata.type" />: ..., editions?: ..., friendlyNames?:
+            ..., groupName?: ..., knownIssues?: ..., name?: ..., revisions?: ...
+            } & { <xref uid="@odata.type" />: ... })[], resourceConnections?:
+            (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ... })[], updatableAssets?: (Omit&lt;...,
+            ...&gt; & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...
+            })[], updatePolicies?: (Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ..., audience?: ..., complianceChangeRules?:
+            ..., complianceChanges?: ..., createdDateTime?: ...,
+            deploymentSettings?: ... } & { <xref uid="@odata.type" />: ... })[]
+            } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.adminWindowsUpdates" />" }) | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.adminWindows" />"
+            }) | null }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["PATCH /admin"]["response"]&gt;
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string,
+          appsAndServices?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, settings?: { <xref
+          uid="@odata.type" />: string, isAppAndServicesTrialEnabled?: boolean |
+          null, isOfficeStoreEnabled?: boolean | null } } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.adminAppsAndServices" />" }) | null,
+          configurationManagement?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          configurationApplications?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, appId?: string, appOwnerOrganizationId?:
+          string | null, clientCredentials?: { <xref uid="@odata.type" />: ...,
+          certificateName?: ..., keyVaultUri?: ... }, createdBy?: { <xref
+          uid="@odata.type" />: ..., application?: ..., device?: ..., user?: ...
+          }, createdDateTime?: string, description?: string, displayName?:
+          string, lastModifiedBy?: { <xref uid="@odata.type" />: ...,
+          application?: ..., device?: ..., user?: ... }, lastModifiedDateTime?:
+          string, tenantId?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationApplication" />" })[],
+          configurationDrifts?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, baselineResourceDisplayName?: string,
+          driftedProperties?: ...[], firstReportedDateTime?: string, monitorId?:
+          string, resourceInstanceIdentifier?: ... & ... & ..., resourceType?:
+          string, status?: "active" | "fixed" | "unknownFutureValue", tenantId?:
+          string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationDrift" />" })[],
+          configurationMonitoringResults?: (Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, driftsCount?: number,
+          driftsFixed?: number, errorDetails?: ...[], monitorId?: string,
+          runCompletionDateTime?: string, runInitiationDateTime?: string,
+          runStatus?: "unknownFutureValue" | "successful" |
+          "partiallySuccessful" | "failed", runType?: "unknownFutureValue" |
+          "monitor" | "apply", tenantId?: string } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.configurationMonitoringResult" />"
+          })[], configurationMonitors?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, baseline?: ... & ... & ..., createdBy?:
+          { <xref uid="@odata.type" />: ..., application?: ..., device?: ...,
+          user?: ... }, createdDateTime?: string, description?: string,
+          displayName?: string, inactivationReason?: string | null,
+          lastModifiedBy?: { <xref uid="@odata.type" />: ..., application?: ...,
+          device?: ..., user?: ... }, lastModifiedDateTime?: string, mode?:
+          "unknownFutureValue" | "monitorOnce" | "monitorOnly" |
+          "applyOnceAndMonitorContinuous" | "applyOnce" | "applyContinuous",
+          monitorRunFrequencyInHours?: number, parameters?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null, runAsUTCMServicePrincipal?:
+          boolean, runningOnBehalfOf?: { <xref uid="@odata.type" />: ...,
+          application?: ..., device?: ..., user?: ... }, status?: "active" |
+          "unknownFutureValue" | "inactive", tenantId?: string } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationMonitor" />" })[],
+          configurationSnapshotJobs?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, completedDateTime?: string, createdBy?:
+          { <xref uid="@odata.type" />: ..., application?: ..., device?: ...,
+          user?: ... }, createdDateTime?: string, description?: string,
+          displayName?: string, errorDetails?: ...[], resourceLocation?: string,
+          resources?: ...[], status?: "unknownFutureValue" |
+          "partiallySuccessful" | "failed" | "notStarted" | "running" |
+          "succeeded", tenantId?: string } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.configurationSnapshotJob" />" })[],
+          configurationSnapshots?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, description?: string, displayName?:
+          string, parameters?: ...[], resources?: ...[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationBaseline" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationManagement" />" }) | null,
+          dynamics?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, customerVoice?: {
+          <xref uid="@odata.type" />: string, isInOrgFormsPhishingScanEnabled?:
+          boolean | null, isRecordIdentityByDefaultEnabled?: boolean | null,
+          isRestrictedSurveyAccessEnabled?: boolean | null } } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.adminDynamics" />"
+          }) | null, edge?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, internetExplorerMode?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, siteLists?: (... & ... & ...)[] } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.internetExplorerMode" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.edge" />" }) |
+          null, entra?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, uxSetting?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, restrictNonAdminAccess?:
+          "unknownFutureValue" | "false" | "true" } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.uxSetting" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.entra" />" }) |
+          null, exchange?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, mailboxes?:
+          (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, folders?: ...[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.mailbox" />" })[],
+          messageTraces?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, destinationIPAddress?: string | null,
+          messageId?: string | null, receivedDateTime?: string, recipients?:
+          ...[], senderEmail?: string | null, size?: number, sourceIPAddress?:
+          string | null, subject?: string | null } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.messageTrace" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.exchangeAdmin" />"
+          }) | null, forms?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, settings?: { <xref
+          uid="@odata.type" />: string, isBingImageSearchEnabled?: boolean |
+          null, isExternalSendFormEnabled?: boolean | null,
+          isExternalShareCollaborationEnabled?: boolean | null,
+          isExternalShareResultEnabled?: boolean | null,
+          isExternalShareTemplateEnabled?: boolean | null,
+          isInOrgFormsPhishingScanEnabled?: boolean | null,
+          isRecordIdentityByDefaultEnabled?: boolean | null } } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.adminForms" />" })
+          | null, microsoft365Apps?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          installationOptions?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, appsForMac?: { <xref
+          uid="@odata.type" />: string, isMicrosoft365AppsEnabled?: function,
+          isSkypeForBusinessEnabled?: function }, appsForWindows?: { <xref
+          uid="@odata.type" />: string, isMicrosoft365AppsEnabled?: function,
+          isProjectEnabled?: function, isSkypeForBusinessEnabled?: function,
+          isVisioEnabled?: function }, updateChannel?: "unknownFutureValue" |
+          "current" | "monthlyEnterprise" | "semiAnnual" } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.m365AppsInstallationOptions" />" }) | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.adminMicrosoft365Apps" />" }) | null, people?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, itemInsights?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, disabledForGroup?: string | null, isEnabledInOrganization?:
+          boolean | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.insightsSettings" />" }) | null,
+          namePronunciation?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string,
+          isEnabledInOrganization?: boolean } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.namePronunciationSettings" />" }) | null,
+          photoUpdateSettings?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, allowedRoles?:
+          function[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.photoUpdateSettings" />" }) | null,
+          profileCardProperties?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, annotations?: ...[],
+          directoryPropertyName?: string | null } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.profileCardProperty" />" })[],
+          profilePropertySettings?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, allowedAudiences?: Record&lt;...,
+          ...&gt; | "unknownFutureValue" | "me" | "organization" |
+          "federatedOrganizations" | "everyone" | null,
+          isUserOverrideForAudienceEnabled?: boolean | null, name?: string |
+          null, prioritizedSourceUrls?: ...[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.profilePropertySetting" />" })[],
+          profileSources?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, displayName?: string | null, kind?:
+          string | null, localizations?: ...[], sourceId?: string | null,
+          webUrl?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.profileSource" />" })[], pronouns?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, isEnabledInOrganization?: boolean } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.pronounsSettings" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.peopleAdminSettings" />" }) | null,
+          reportSettings?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string,
+          displayConcealedNames?: boolean } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.adminReportSettings" />" }) | null,
+          serviceAnnouncement?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, healthOverviews?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          issues?: ...[], service?: string, status?: "unknownFutureValue" |
+          "serviceOperational" | "investigating" | "restoringService" |
+          "verifyingService" | "serviceRestored" | "postIncidentReviewPublished"
+          | "serviceDegradation" | "serviceInterruption" | "extendedRecovery" |
+          "falsePositive" | "investigationSuspended" | "resolved" |
+          "mitigatedExternal" | "mitigated" | "resolvedExternal" | "confirmed" |
+          "reported" } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.serviceHealth" />" })[], issues?:
+          (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, classification?:
+          "unknownFutureValue" | "advisory" | "incident", feature?: string |
+          null, featureGroup?: string | null, impactDescription?: string,
+          isResolved?: boolean, origin?: "unknownFutureValue" | "microsoft" |
+          "thirdParty" | "customer", posts?: ...[], service?: string, status?:
+          "unknownFutureValue" | "serviceOperational" | "investigating" |
+          "restoringService" | "verifyingService" | "serviceRestored" |
+          "postIncidentReviewPublished" | "serviceDegradation" |
+          "serviceInterruption" | "extendedRecovery" | "falsePositive" |
+          "investigationSuspended" | "resolved" | "mitigatedExternal" |
+          "mitigated" | "resolvedExternal" | "confirmed" | "reported" } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.serviceHealthIssue" />" })[], messages?:
+          (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, actionRequiredByDateTime?: string
+          | null, attachments?: ...[], attachmentsArchive?: string | null,
+          body?: { <xref uid="@odata.type" />: ..., content?: ..., contentType?:
+          ... }, category?: "unknownFutureValue" | "preventOrFixIssue" |
+          "planForChange" | "stayInformed", hasAttachments?: boolean,
+          isMajorChange?: boolean | null, services?: ...[], severity?:
+          "unknownFutureValue" | "normal" | "high" | "critical", tags?: ...[],
+          viewPoint?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., isArchived?: ..., isFavorited?: ..., isRead?: ... } | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.serviceUpdateMessage" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.serviceAnnouncement" />" }) | null, sharepoint?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, settings?: Record&lt;string, never&gt; |
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          allowedDomainGuidsForSyncApp?: function[],
+          availableManagedPathsForSiteCreation?: string[],
+          deletedUserPersonalSiteRetentionPeriodInDays?: number | null,
+          excludedFileExtensionsForSyncApp?: function[], idleSessionSignOut?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          isEnabled?: function, signOutAfterInSeconds?: function,
+          warnAfterInSeconds?: function } | null, imageTaggingOption?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "disabled" |
+          "basic" | "enhanced" | null, isCommentingOnSitePagesEnabled?: boolean
+          | null, isFileActivityNotificationEnabled?: boolean | null,
+          isLegacyAuthProtocolsEnabled?: boolean | null, isLoopEnabled?: boolean
+          | null, isMacSyncAppEnabled?: boolean | null,
+          isRequireAcceptingUserToMatchInvitedUserEnabled?: boolean | null,
+          isResharingByExternalUsersEnabled?: boolean | null,
+          isSharePointMobileNotificationEnabled?: boolean | null,
+          isSharePointNewsfeedEnabled?: boolean | null, isSiteCreationEnabled?:
+          boolean | null, isSiteCreationUIEnabled?: boolean | null,
+          isSitePagesCreationEnabled?: boolean | null,
+          isSitesStorageLimitAutomatic?: boolean | null,
+          isSyncButtonHiddenOnPersonalSite?: boolean | null,
+          isUnmanagedSyncAppForTenantRestricted?: boolean | null,
+          personalSiteDefaultStorageLimitInMB?: number | null,
+          sharingAllowedDomainList?: function[], sharingBlockedDomainList?:
+          function[], sharingCapability?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "disabled" | "externalUserSharingOnly" |
+          "externalUserAndGuestSharing" | "existingExternalUserSharingOnly" |
+          null, sharingDomainRestrictionMode?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "none" | "allowList" | "blockList" | null,
+          siteCreationDefaultManagedPath?: string,
+          siteCreationDefaultStorageLimitInMB?: number | null,
+          tenantDefaultTimezone?: string | null } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.sharepointSettings" />" }) | null } &
+          { <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.sharepoint"
+          />" }) | null, teams?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, policy?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, userAssignments?: (... & ... & ...)[] }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAdministration.teamsPolicyAssignment" />" })
+          | null, telephoneNumberManagement?: Record&lt;string, never&gt; |
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          numberAssignments?: (... & ... & ...)[], operations?: (... & ... &
+          ...)[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAdministration.telephoneNumberManagementRoot"
+          />" }) | null, userConfigurations?: (Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, accountType?: Record&lt;...,
+          ...&gt; | "unknownFutureValue" | "user" | "resourceAccount" | "guest"
+          | "sfbOnPremUser" | "unknown" | "ineligibleUser" | null,
+          createdDateTime?: string, effectivePolicyAssignments?: ...[],
+          featureTypes?: ...[], isEnterpriseVoiceEnabled?: boolean | null,
+          modifiedDateTime?: string, telephoneNumbers?: ...[], tenantId?:
+          string, user?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+          userPrincipalName?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAdministration.teamsUserConfiguration" />"
+          })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAdministration.teamsAdminRoot" />" }) |
+          null, todo?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, settings?: { <xref
+          uid="@odata.type" />: string, isExternalJoinEnabled?: boolean | null,
+          isExternalShareEnabled?: boolean | null, isPushNotificationEnabled?:
+          boolean | null } } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.adminTodo" />" }) | null, windows?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, updates?: Record&lt;string, never&gt; |
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          catalog?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ..., entries?: ... } & { <xref
+          uid="@odata.type" />: ... }) | null, deploymentAudiences?: (... & ...
+          & ...)[], deployments?: (... & ... & ...)[], products?: (... & ... &
+          ...)[], resourceConnections?: (... & ... & ...)[], updatableAssets?:
+          (... & ... & ...)[], updatePolicies?: (... & ... & ...)[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.adminWindowsUpdates" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.adminWindows" />"
+          }) | null }&gt;

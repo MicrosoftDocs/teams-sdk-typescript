@@ -120,53 +120,72 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        forwardingOptions: { del: (params?: IEndpoints["DELETE
-        /networkAccess/settings/forwardingOptions"]["parameters"]) =>
-        EndpointRequest<IEndpoints["DELETE
-        /networkAccess/settings/forwardingOptions"]["response"]>, list:
-        (params?: IEndpoints["GET
+        forwardingOptions: { /** * `GET
+        /networkAccess/settings/forwardingOptions` * * Retrieve the forwarding
+        options for the tenant, with a specific focus on the
+        &#x27;skipDnsLookupState&#x27; flag. This flag determines whether DNS
+        lookup will be skipped, allowing Microsoft 365 traffic to be forwarded
+        directly to the Front Door using the client-resolved destination. */
+        list: (params?: IEndpoints["GET
         /networkAccess/settings/forwardingOptions"]["parameters"]) =>
         EndpointRequest<IEndpoints["GET
-        /networkAccess/settings/forwardingOptions"]["response"]>, update: (body:
-        IEndpoints["PATCH /networkAccess/settings/forwardingOptions"]["body"])
-        => EndpointRequest<IEndpoints["PATCH
-        /networkAccess/settings/forwardingOptions"]["response"]> }
+        /networkAccess/settings/forwardingOptions"]["response"]>; /** * `PATCH
+        /networkAccess/settings/forwardingOptions` * * the forwarding options
+        for the tenant, with a specific focus on the skipDnsLookupState flag.
+        This flag determines whether DNS lookup will be skipped, allowing
+        Microsoft 365 traffic to be forwarded directly to the Front Door using
+        the client-resolved destination. */ update: (body: IEndpoints["PATCH
+        /networkAccess/settings/forwardingOptions"]["body"]) =>
+        EndpointRequest<IEndpoints["PATCH
+        /networkAccess/settings/forwardingOptions"]["response"]>; /** * `DELETE
+        /networkAccess/settings/forwardingOptions` * */ del: (params?:
+        IEndpoints["DELETE
+        /networkAccess/settings/forwardingOptions"]["parameters"]) =>
+        EndpointRequest<IEndpoints["DELETE
+        /networkAccess/settings/forwardingOptions"]["response"]>; }
       return:
         description: ''
         type: >-
-          { del: (params?: IEndpoints["DELETE
-          /networkAccess/settings/forwardingOptions"]["parameters"]) =&gt;
-          EndpointRequest&lt;IEndpoints["DELETE
-          /networkAccess/settings/forwardingOptions"]["response"]&gt;, list:
-          (params?: IEndpoints["GET
+          { /** * `GET /networkAccess/settings/forwardingOptions` * * Retrieve
+          the forwarding options for the tenant, with a specific focus on the
+          &#x27;skipDnsLookupState&#x27; flag. This flag determines whether DNS
+          lookup will be skipped, allowing Microsoft 365 traffic to be forwarded
+          directly to the Front Door using the client-resolved destination. */
+          list: (params?: IEndpoints["GET
           /networkAccess/settings/forwardingOptions"]["parameters"]) =&gt;
           EndpointRequest&lt;IEndpoints["GET
-          /networkAccess/settings/forwardingOptions"]["response"]&gt;, update:
+          /networkAccess/settings/forwardingOptions"]["response"]&gt;; /** *
+          `PATCH /networkAccess/settings/forwardingOptions` * * the forwarding
+          options for the tenant, with a specific focus on the
+          skipDnsLookupState flag. This flag determines whether DNS lookup will
+          be skipped, allowing Microsoft 365 traffic to be forwarded directly to
+          the Front Door using the client-resolved destination. */ update:
           (body: IEndpoints["PATCH
           /networkAccess/settings/forwardingOptions"]["body"]) =&gt;
           EndpointRequest&lt;IEndpoints["PATCH
-          /networkAccess/settings/forwardingOptions"]["response"]&gt; }
+          /networkAccess/settings/forwardingOptions"]["response"]&gt;; /** *
+          `DELETE /networkAccess/settings/forwardingOptions` * */ del: (params?:
+          IEndpoints["DELETE
+          /networkAccess/settings/forwardingOptions"]["parameters"]) =&gt;
+          EndpointRequest&lt;IEndpoints["DELETE
+          /networkAccess/settings/forwardingOptions"]["response"]&gt;; }
 functions:
-  - name: del(any)
+  - name: 'del({ If-Match?: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.networkAccess.settings.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`DELETE /networkAccess/settings`'
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /networkAccess/settings"]["response"]>
+      content: 'function del(params?: { If-Match?: string }): EndpointRequest<never>'
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /networkAccess/settings"]["response"]&gt;
-  - name: list(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'list({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints-beta.networkAccess.settings.list'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -177,18 +196,78 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /networkAccess/settings"]["response"]>
+        function list(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, conditionalAccess?: Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, signalingStatus?: "unknownFutureValue" | "enabled" | "disabled"
+        } & { @odata.type:
+        "#microsoft.graph.networkaccess.conditionalAccessSettings" },
+        crossTenantAccess?: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, networkPacketTaggingStatus?:
+        "unknownFutureValue" | "enabled" | "disabled" } & { @odata.type:
+        "#microsoft.graph.networkaccess.crossTenantAccessSettings" },
+        customBlockPage?: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, configuration?: Record<string,
+        never> | { @odata.type: string } | null, state?: "unknownFutureValue" |
+        "enabled" | "disabled" } & { @odata.type:
+        "#microsoft.graph.networkaccess.customBlockPage" }, forwardingOptions?:
+        Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, skipDnsLookupState?: "unknownFutureValue" |
+        "enabled" | "disabled" } & { @odata.type:
+        "#microsoft.graph.networkaccess.forwardingOptions" } } & { @odata.type:
+        "#microsoft.graph.networkaccess.settings" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /networkAccess/settings"]["response"]&gt;
-  - name: update(Operation<"/networkAccess/settings", "patch">)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, conditionalAccess?: Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, signalingStatus?: "unknownFutureValue" |
+          "enabled" | "disabled" } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.conditionalAccessSettings" />" },
+          crossTenantAccess?: Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, networkPacketTaggingStatus?: "unknownFutureValue" |
+          "enabled" | "disabled" } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.crossTenantAccessSettings" />" },
+          customBlockPage?: Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, configuration?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string } | null, state?: "unknownFutureValue" |
+          "enabled" | "disabled" } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.customBlockPage" />" },
+          forwardingOptions?: Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, skipDnsLookupState?: "unknownFutureValue" | "enabled" |
+          "disabled" } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.forwardingOptions" />" } } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.settings" />" }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, conditionalAccess?: Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, signalingStatus?:
+      "unknownFutureValue" | "enabled" | "disabled" } & { @odata.type:
+      "#microsoft.graph.networkaccess.conditionalAccessSettings" },
+      crossTenantAccess?: Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, networkPacketTaggingStatus?:
+      "unknownFutureValue" | "enabled" | "disabled" } & { @odata.type:
+      "#microsoft.graph.networkaccess.crossTenantAccessSettings" },
+      customBlockPage?: Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, configuration?: Record<string,
+      never> | { @odata.type: string } | null, state?: "unknownFutureValue" |
+      "enabled" | "disabled" } & { @odata.type:
+      "#microsoft.graph.networkaccess.customBlockPage" }, forwardingOptions?:
+      Omit<{ @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, skipDnsLookupState?: "unknownFutureValue" | "enabled" | "disabled"
+      } & { @odata.type: "#microsoft.graph.networkaccess.forwardingOptions" } }
+      & { @odata.type: "#microsoft.graph.networkaccess.settings" })
     uid: '@microsoft/teams.graph-endpoints-beta.networkAccess.settings.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /networkAccess/settings`'
@@ -196,14 +275,102 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/networkAccess/settings", "patch">):
-        EndpointRequest<IEndpoints["PATCH /networkAccess/settings"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, conditionalAccess?: Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, signalingStatus?: "unknownFutureValue" | "enabled" | "disabled"
+        } & { @odata.type:
+        "#microsoft.graph.networkaccess.conditionalAccessSettings" },
+        crossTenantAccess?: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, networkPacketTaggingStatus?:
+        "unknownFutureValue" | "enabled" | "disabled" } & { @odata.type:
+        "#microsoft.graph.networkaccess.crossTenantAccessSettings" },
+        customBlockPage?: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, configuration?: Record<string,
+        never> | { @odata.type: string } | null, state?: "unknownFutureValue" |
+        "enabled" | "disabled" } & { @odata.type:
+        "#microsoft.graph.networkaccess.customBlockPage" }, forwardingOptions?:
+        Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, skipDnsLookupState?: "unknownFutureValue" |
+        "enabled" | "disabled" } & { @odata.type:
+        "#microsoft.graph.networkaccess.forwardingOptions" } } & { @odata.type:
+        "#microsoft.graph.networkaccess.settings" }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, conditionalAccess?: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, signalingStatus?:
+        "unknownFutureValue" | "enabled" | "disabled" } & { @odata.type:
+        "#microsoft.graph.networkaccess.conditionalAccessSettings" },
+        crossTenantAccess?: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, networkPacketTaggingStatus?:
+        "unknownFutureValue" | "enabled" | "disabled" } & { @odata.type:
+        "#microsoft.graph.networkaccess.crossTenantAccessSettings" },
+        customBlockPage?: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, configuration?: Record<string,
+        never> | { @odata.type: string } | null, state?: "unknownFutureValue" |
+        "enabled" | "disabled" } & { @odata.type:
+        "#microsoft.graph.networkaccess.customBlockPage" }, forwardingOptions?:
+        Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, skipDnsLookupState?: "unknownFutureValue" |
+        "enabled" | "disabled" } & { @odata.type:
+        "#microsoft.graph.networkaccess.forwardingOptions" } } & { @odata.type:
+        "#microsoft.graph.networkaccess.settings" }>
       parameters:
         - id: body
-          type: Operation&lt;"/networkAccess/settings", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            conditionalAccess?: Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, signalingStatus?: "unknownFutureValue"
+            | "enabled" | "disabled" } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.conditionalAccessSettings" />" },
+            crossTenantAccess?: Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, networkPacketTaggingStatus?:
+            "unknownFutureValue" | "enabled" | "disabled" } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.crossTenantAccessSettings" />" },
+            customBlockPage?: Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, configuration?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string } | null, state?:
+            "unknownFutureValue" | "enabled" | "disabled" } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.customBlockPage" />" },
+            forwardingOptions?: Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, skipDnsLookupState?:
+            "unknownFutureValue" | "enabled" | "disabled" } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.forwardingOptions" />" } } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.networkaccess.settings" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /networkAccess/settings"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, conditionalAccess?: Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, signalingStatus?: "unknownFutureValue" |
+          "enabled" | "disabled" } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.conditionalAccessSettings" />" },
+          crossTenantAccess?: Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, networkPacketTaggingStatus?: "unknownFutureValue" |
+          "enabled" | "disabled" } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.crossTenantAccessSettings" />" },
+          customBlockPage?: Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, configuration?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string } | null, state?: "unknownFutureValue" |
+          "enabled" | "disabled" } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.customBlockPage" />" },
+          forwardingOptions?: Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, skipDnsLookupState?: "unknownFutureValue" | "enabled" |
+          "disabled" } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.forwardingOptions" />" } } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.networkaccess.settings" />" }&gt;

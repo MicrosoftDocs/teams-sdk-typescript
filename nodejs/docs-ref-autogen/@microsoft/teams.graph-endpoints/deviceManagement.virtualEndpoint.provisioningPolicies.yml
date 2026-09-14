@@ -37,8 +37,88 @@ variables:
           }
 functions:
   - name: >-
-      create(Operation<"/deviceManagement/virtualEndpoint/provisioningPolicies",
-      "post">)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, alternateResourceUrl?: string | null, assignments?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, assignedUsers?: (Omit<... & ... & ..., "@odata.type">
+      & { @odata.type: string, aboutMe?: function, accountEnabled?: function,
+      activities?: function, ageGroup?: function, agreementAcceptances?:
+      function, appRoleAssignments?: function, assignedLicenses?: function,
+      assignedPlans?: function, authentication?: function, authorizationInfo?:
+      function, birthday?: function, businessPhones?: function, calendar?:
+      function, calendarGroups?: function, calendars?: function, calendarView?:
+      function, chats?: function, city?: function, cloudClipboard?: function,
+      cloudPCs?: function, companyName?: function, consentProvidedForMinor?:
+      function, contactFolders?: function, contacts?: function, country?:
+      function, createdDateTime?: function, createdObjects?: function,
+      creationType?: function, customSecurityAttributes?: function,
+      dataSecurityAndGovernance?: function, department?: function,
+      deviceEnrollmentLimit?: function, deviceManagementTroubleshootingEvents?:
+      function, directReports?: function, displayName?: function, drive?:
+      function, drives?: function, employeeExperience?: function,
+      employeeHireDate?: function, employeeId?: function,
+      employeeLeaveDateTime?: function, employeeOrgData?: function,
+      employeeType?: function, events?: function, extensions?: function,
+      externalUserState?: function, externalUserStateChangeDateTime?: function,
+      faxNumber?: function, followedSites?: function, givenName?: function,
+      hireDate?: function, identities?: function, imAddresses?: function,
+      inferenceClassification?: function, insights?: function, interests?:
+      function, isManagementRestricted?: function, isResourceAccount?: function,
+      jobTitle?: function, joinedTeams?: function, lastPasswordChangeDateTime?:
+      function, legalAgeGroupClassification?: function,
+      licenseAssignmentStates?: function, licenseDetails?: function, mail?:
+      function, mailboxSettings?: function, mailFolders?: function,
+      mailNickname?: function, managedAppRegistrations?: function,
+      managedDevices?: function, manager?: function, memberOf?: function,
+      messages?: function, mobilePhone?: function, mySite?: function,
+      oauth2PermissionGrants?: function, officeLocation?: function, onenote?:
+      function, onlineMeetings?: function, onPremisesDistinguishedName?:
+      function, onPremisesDomainName?: function, onPremisesExtensionAttributes?:
+      function, onPremisesImmutableId?: function, onPremisesLastSyncDateTime?:
+      function, onPremisesProvisioningErrors?: function,
+      onPremisesSamAccountName?: function, onPremisesSecurityIdentifier?:
+      function, onPremisesSyncEnabled?: function, onPremisesUserPrincipalName?:
+      function, otherMails?: function, outlook?: function, ownedDevices?:
+      function, ownedObjects?: function, passwordPolicies?: function,
+      passwordProfile?: function, pastProjects?: function, people?: function,
+      permissionGrants?: function, photo?: function, photos?: function,
+      planner?: function, postalCode?: function, preferredDataLocation?:
+      function, preferredLanguage?: function, preferredName?: function,
+      presence?: function, print?: function, provisionedPlans?: function,
+      proxyAddresses?: function, registeredDevices?: function,
+      responsibilities?: function, schools?: function, scopedRoleMemberOf?:
+      function, securityIdentifier?: function, serviceProvisioningErrors?:
+      function, settings?: function, showInAddressList?: function,
+      signInActivity?: function, signInSessionsValidFromDateTime?: function,
+      skills?: function, solutions?: function, sponsors?: function, state?:
+      function, streetAddress?: function, surname?: function, teamwork?:
+      function, todo?: function, transitiveMemberOf?: function, usageLocation?:
+      function, userPrincipalName?: function, userType?: function } & {
+      @odata.type: "#microsoft.graph.user" })[], target?: Record<string, never>
+      | { @odata.type: string } | null } & { @odata.type:
+      "#microsoft.graph.cloudPcProvisioningPolicyAssignment" })[], autopatch?:
+      Record<string, never> | { @odata.type: string, autopatchGroupId?: string |
+      null } | null, cloudPcGroupDisplayName?: string | null,
+      cloudPcNamingTemplate?: string | null, description?: string | null,
+      displayName?: string, domainJoinConfigurations?: { @odata.type: string,
+      domainJoinType?: Record<string, never> | "unknownFutureValue" |
+      "hybridAzureADJoin" | "azureADJoin" | null, onPremisesConnectionId?:
+      string | null, regionGroup?: Record<string, never> | "unknownFutureValue"
+      | "default" | "australia" | "canada" | "usCentral" | "usEast" | "usWest" |
+      "france" | "germany" | "europeUnion" | "unitedKingdom" | "japan" | "asia"
+      | "india" | "southAmerica" | "euap" | "usGovernment" | "usGovernmentDOD" |
+      "norway" | "switzerland" | "southKorea" | null, regionName?: string | null
+      }[], enableSingleSignOn?: boolean | null, gracePeriodInHours?: number |
+      null, imageDisplayName?: string, imageId?: string, imageType?:
+      "unknownFutureValue" | "gallery" | "custom", localAdminEnabled?: boolean |
+      null, microsoftManagedDesktop?: Record<string, never> | { @odata.type:
+      string, managedType?: Record<string, never> | "unknownFutureValue" |
+      "notManaged" | "premiumManaged" | "standardManaged" | "starterManaged" |
+      null, profile?: string | null } | null, provisioningType?: Record<string,
+      never> | "unknownFutureValue" | "dedicated" | "shared" | null,
+      windowsSetting?: Record<string, never> | { @odata.type: string, locale?:
+      string | null } | null } & { @odata.type:
+      "#microsoft.graph.cloudPcProvisioningPolicy" })
     uid: >-
       @microsoft/teams.graph-endpoints.deviceManagement.virtualEndpoint.provisioningPolicies.create
     package: '@microsoft/teams.graph-endpoints'
@@ -50,22 +130,349 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/deviceManagement/virtualEndpoint/provisioningPolicies",
-        "post">): EndpointRequest<IEndpoints["POST
-        /deviceManagement/virtualEndpoint/provisioningPolicies"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, alternateResourceUrl?: string |
+        null, assignments?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, assignedUsers?: (Omit<... & ...
+        & ..., "@odata.type"> & { @odata.type: string, aboutMe?: function,
+        accountEnabled?: function, activities?: function, ageGroup?: function,
+        agreementAcceptances?: function, appRoleAssignments?: function,
+        assignedLicenses?: function, assignedPlans?: function, authentication?:
+        function, authorizationInfo?: function, birthday?: function,
+        businessPhones?: function, calendar?: function, calendarGroups?:
+        function, calendars?: function, calendarView?: function, chats?:
+        function, city?: function, cloudClipboard?: function, cloudPCs?:
+        function, companyName?: function, consentProvidedForMinor?: function,
+        contactFolders?: function, contacts?: function, country?: function,
+        createdDateTime?: function, createdObjects?: function, creationType?:
+        function, customSecurityAttributes?: function,
+        dataSecurityAndGovernance?: function, department?: function,
+        deviceEnrollmentLimit?: function,
+        deviceManagementTroubleshootingEvents?: function, directReports?:
+        function, displayName?: function, drive?: function, drives?: function,
+        employeeExperience?: function, employeeHireDate?: function, employeeId?:
+        function, employeeLeaveDateTime?: function, employeeOrgData?: function,
+        employeeType?: function, events?: function, extensions?: function,
+        externalUserState?: function, externalUserStateChangeDateTime?:
+        function, faxNumber?: function, followedSites?: function, givenName?:
+        function, hireDate?: function, identities?: function, imAddresses?:
+        function, inferenceClassification?: function, insights?: function,
+        interests?: function, isManagementRestricted?: function,
+        isResourceAccount?: function, jobTitle?: function, joinedTeams?:
+        function, lastPasswordChangeDateTime?: function,
+        legalAgeGroupClassification?: function, licenseAssignmentStates?:
+        function, licenseDetails?: function, mail?: function, mailboxSettings?:
+        function, mailFolders?: function, mailNickname?: function,
+        managedAppRegistrations?: function, managedDevices?: function, manager?:
+        function, memberOf?: function, messages?: function, mobilePhone?:
+        function, mySite?: function, oauth2PermissionGrants?: function,
+        officeLocation?: function, onenote?: function, onlineMeetings?:
+        function, onPremisesDistinguishedName?: function, onPremisesDomainName?:
+        function, onPremisesExtensionAttributes?: function,
+        onPremisesImmutableId?: function, onPremisesLastSyncDateTime?: function,
+        onPremisesProvisioningErrors?: function, onPremisesSamAccountName?:
+        function, onPremisesSecurityIdentifier?: function,
+        onPremisesSyncEnabled?: function, onPremisesUserPrincipalName?:
+        function, otherMails?: function, outlook?: function, ownedDevices?:
+        function, ownedObjects?: function, passwordPolicies?: function,
+        passwordProfile?: function, pastProjects?: function, people?: function,
+        permissionGrants?: function, photo?: function, photos?: function,
+        planner?: function, postalCode?: function, preferredDataLocation?:
+        function, preferredLanguage?: function, preferredName?: function,
+        presence?: function, print?: function, provisionedPlans?: function,
+        proxyAddresses?: function, registeredDevices?: function,
+        responsibilities?: function, schools?: function, scopedRoleMemberOf?:
+        function, securityIdentifier?: function, serviceProvisioningErrors?:
+        function, settings?: function, showInAddressList?: function,
+        signInActivity?: function, signInSessionsValidFromDateTime?: function,
+        skills?: function, solutions?: function, sponsors?: function, state?:
+        function, streetAddress?: function, surname?: function, teamwork?:
+        function, todo?: function, transitiveMemberOf?: function,
+        usageLocation?: function, userPrincipalName?: function, userType?:
+        function } & { @odata.type: "#microsoft.graph.user" })[], target?:
+        Record<string, never> | { @odata.type: string } | null } & {
+        @odata.type: "#microsoft.graph.cloudPcProvisioningPolicyAssignment"
+        })[], autopatch?: Record<string, never> | { @odata.type: string,
+        autopatchGroupId?: string | null } | null, cloudPcGroupDisplayName?:
+        string | null, cloudPcNamingTemplate?: string | null, description?:
+        string | null, displayName?: string, domainJoinConfigurations?: {
+        @odata.type: string, domainJoinType?: Record<string, never> |
+        "unknownFutureValue" | "hybridAzureADJoin" | "azureADJoin" | null,
+        onPremisesConnectionId?: string | null, regionGroup?: Record<string,
+        never> | "unknownFutureValue" | "default" | "australia" | "canada" |
+        "usCentral" | "usEast" | "usWest" | "france" | "germany" | "europeUnion"
+        | "unitedKingdom" | "japan" | "asia" | "india" | "southAmerica" | "euap"
+        | "usGovernment" | "usGovernmentDOD" | "norway" | "switzerland" |
+        "southKorea" | null, regionName?: string | null }[],
+        enableSingleSignOn?: boolean | null, gracePeriodInHours?: number | null,
+        imageDisplayName?: string, imageId?: string, imageType?:
+        "unknownFutureValue" | "gallery" | "custom", localAdminEnabled?: boolean
+        | null, microsoftManagedDesktop?: Record<string, never> | { @odata.type:
+        string, managedType?: Record<string, never> | "unknownFutureValue" |
+        "notManaged" | "premiumManaged" | "standardManaged" | "starterManaged" |
+        null, profile?: string | null } | null, provisioningType?:
+        Record<string, never> | "unknownFutureValue" | "dedicated" | "shared" |
+        null, windowsSetting?: Record<string, never> | { @odata.type: string,
+        locale?: string | null } | null } & { @odata.type:
+        "#microsoft.graph.cloudPcProvisioningPolicy" }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, alternateResourceUrl?: string | null, assignments?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, assignedUsers?: (Omit<..., ...> & { @odata.type: ..., aboutMe?:
+        ..., accountEnabled?: ..., activities?: ..., ageGroup?: ...,
+        agreementAcceptances?: ..., appRoleAssignments?: ..., assignedLicenses?:
+        ..., assignedPlans?: ..., authentication?: ..., authorizationInfo?: ...,
+        birthday?: ..., businessPhones?: ..., calendar?: ..., calendarGroups?:
+        ..., calendars?: ..., calendarView?: ..., chats?: ..., city?: ...,
+        cloudClipboard?: ..., cloudPCs?: ..., companyName?: ...,
+        consentProvidedForMinor?: ..., contactFolders?: ..., contacts?: ...,
+        country?: ..., createdDateTime?: ..., createdObjects?: ...,
+        creationType?: ..., customSecurityAttributes?: ...,
+        dataSecurityAndGovernance?: ..., department?: ...,
+        deviceEnrollmentLimit?: ..., deviceManagementTroubleshootingEvents?:
+        ..., directReports?: ..., displayName?: ..., drive?: ..., drives?: ...,
+        employeeExperience?: ..., employeeHireDate?: ..., employeeId?: ...,
+        employeeLeaveDateTime?: ..., employeeOrgData?: ..., employeeType?: ...,
+        events?: ..., extensions?: ..., externalUserState?: ...,
+        externalUserStateChangeDateTime?: ..., faxNumber?: ..., followedSites?:
+        ..., givenName?: ..., hireDate?: ..., identities?: ..., imAddresses?:
+        ..., inferenceClassification?: ..., insights?: ..., interests?: ...,
+        isManagementRestricted?: ..., isResourceAccount?: ..., jobTitle?: ...,
+        joinedTeams?: ..., lastPasswordChangeDateTime?: ...,
+        legalAgeGroupClassification?: ..., licenseAssignmentStates?: ...,
+        licenseDetails?: ..., mail?: ..., mailboxSettings?: ..., mailFolders?:
+        ..., mailNickname?: ..., managedAppRegistrations?: ..., managedDevices?:
+        ..., manager?: ..., memberOf?: ..., messages?: ..., mobilePhone?: ...,
+        mySite?: ..., oauth2PermissionGrants?: ..., officeLocation?: ...,
+        onenote?: ..., onlineMeetings?: ..., onPremisesDistinguishedName?: ...,
+        onPremisesDomainName?: ..., onPremisesExtensionAttributes?: ...,
+        onPremisesImmutableId?: ..., onPremisesLastSyncDateTime?: ...,
+        onPremisesProvisioningErrors?: ..., onPremisesSamAccountName?: ...,
+        onPremisesSecurityIdentifier?: ..., onPremisesSyncEnabled?: ...,
+        onPremisesUserPrincipalName?: ..., otherMails?: ..., outlook?: ...,
+        ownedDevices?: ..., ownedObjects?: ..., passwordPolicies?: ...,
+        passwordProfile?: ..., pastProjects?: ..., people?: ...,
+        permissionGrants?: ..., photo?: ..., photos?: ..., planner?: ...,
+        postalCode?: ..., preferredDataLocation?: ..., preferredLanguage?: ...,
+        preferredName?: ..., presence?: ..., print?: ..., provisionedPlans?:
+        ..., proxyAddresses?: ..., registeredDevices?: ..., responsibilities?:
+        ..., schools?: ..., scopedRoleMemberOf?: ..., securityIdentifier?: ...,
+        serviceProvisioningErrors?: ..., settings?: ..., showInAddressList?:
+        ..., signInActivity?: ..., signInSessionsValidFromDateTime?: ...,
+        skills?: ..., solutions?: ..., sponsors?: ..., state?: ...,
+        streetAddress?: ..., surname?: ..., teamwork?: ..., todo?: ...,
+        transitiveMemberOf?: ..., usageLocation?: ..., userPrincipalName?: ...,
+        userType?: ... } & { @odata.type: ... })[], target?: Record<string,
+        never> | { @odata.type: string } | null } & { @odata.type:
+        "#microsoft.graph.cloudPcProvisioningPolicyAssignment" })[], autopatch?:
+        Record<string, never> | { @odata.type: string, autopatchGroupId?: string
+        | null } | null, cloudPcGroupDisplayName?: string | null,
+        cloudPcNamingTemplate?: string | null, description?: string | null,
+        displayName?: string, domainJoinConfigurations?: { @odata.type: string,
+        domainJoinType?: Record<string, never> | "unknownFutureValue" |
+        "hybridAzureADJoin" | "azureADJoin" | null, onPremisesConnectionId?:
+        string | null, regionGroup?: Record<string, never> |
+        "unknownFutureValue" | "default" | "australia" | "canada" | "usCentral"
+        | "usEast" | "usWest" | "france" | "germany" | "europeUnion" |
+        "unitedKingdom" | "japan" | "asia" | "india" | "southAmerica" | "euap" |
+        "usGovernment" | "usGovernmentDOD" | "norway" | "switzerland" |
+        "southKorea" | null, regionName?: string | null }[],
+        enableSingleSignOn?: boolean | null, gracePeriodInHours?: number | null,
+        imageDisplayName?: string, imageId?: string, imageType?:
+        "unknownFutureValue" | "gallery" | "custom", localAdminEnabled?: boolean
+        | null, microsoftManagedDesktop?: Record<string, never> | { @odata.type:
+        string, managedType?: Record<string, never> | "unknownFutureValue" |
+        "notManaged" | "premiumManaged" | "standardManaged" | "starterManaged" |
+        null, profile?: string | null } | null, provisioningType?:
+        Record<string, never> | "unknownFutureValue" | "dedicated" | "shared" |
+        null, windowsSetting?: Record<string, never> | { @odata.type: string,
+        locale?: string | null } | null } & { @odata.type:
+        "#microsoft.graph.cloudPcProvisioningPolicy" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/virtualEndpoint/provisioningPolicies",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            alternateResourceUrl?: string | null, assignments?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            assignedUsers?: (Omit&lt;... & ... & ..., "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, aboutMe?: function,
+            accountEnabled?: function, activities?: function, ageGroup?:
+            function, agreementAcceptances?: function, appRoleAssignments?:
+            function, assignedLicenses?: function, assignedPlans?: function,
+            authentication?: function, authorizationInfo?: function, birthday?:
+            function, businessPhones?: function, calendar?: function,
+            calendarGroups?: function, calendars?: function, calendarView?:
+            function, chats?: function, city?: function, cloudClipboard?:
+            function, cloudPCs?: function, companyName?: function,
+            consentProvidedForMinor?: function, contactFolders?: function,
+            contacts?: function, country?: function, createdDateTime?: function,
+            createdObjects?: function, creationType?: function,
+            customSecurityAttributes?: function, dataSecurityAndGovernance?:
+            function, department?: function, deviceEnrollmentLimit?: function,
+            deviceManagementTroubleshootingEvents?: function, directReports?:
+            function, displayName?: function, drive?: function, drives?:
+            function, employeeExperience?: function, employeeHireDate?:
+            function, employeeId?: function, employeeLeaveDateTime?: function,
+            employeeOrgData?: function, employeeType?: function, events?:
+            function, extensions?: function, externalUserState?: function,
+            externalUserStateChangeDateTime?: function, faxNumber?: function,
+            followedSites?: function, givenName?: function, hireDate?: function,
+            identities?: function, imAddresses?: function,
+            inferenceClassification?: function, insights?: function, interests?:
+            function, isManagementRestricted?: function, isResourceAccount?:
+            function, jobTitle?: function, joinedTeams?: function,
+            lastPasswordChangeDateTime?: function, legalAgeGroupClassification?:
+            function, licenseAssignmentStates?: function, licenseDetails?:
+            function, mail?: function, mailboxSettings?: function, mailFolders?:
+            function, mailNickname?: function, managedAppRegistrations?:
+            function, managedDevices?: function, manager?: function, memberOf?:
+            function, messages?: function, mobilePhone?: function, mySite?:
+            function, oauth2PermissionGrants?: function, officeLocation?:
+            function, onenote?: function, onlineMeetings?: function,
+            onPremisesDistinguishedName?: function, onPremisesDomainName?:
+            function, onPremisesExtensionAttributes?: function,
+            onPremisesImmutableId?: function, onPremisesLastSyncDateTime?:
+            function, onPremisesProvisioningErrors?: function,
+            onPremisesSamAccountName?: function, onPremisesSecurityIdentifier?:
+            function, onPremisesSyncEnabled?: function,
+            onPremisesUserPrincipalName?: function, otherMails?: function,
+            outlook?: function, ownedDevices?: function, ownedObjects?:
+            function, passwordPolicies?: function, passwordProfile?: function,
+            pastProjects?: function, people?: function, permissionGrants?:
+            function, photo?: function, photos?: function, planner?: function,
+            postalCode?: function, preferredDataLocation?: function,
+            preferredLanguage?: function, preferredName?: function, presence?:
+            function, print?: function, provisionedPlans?: function,
+            proxyAddresses?: function, registeredDevices?: function,
+            responsibilities?: function, schools?: function,
+            scopedRoleMemberOf?: function, securityIdentifier?: function,
+            serviceProvisioningErrors?: function, settings?: function,
+            showInAddressList?: function, signInActivity?: function,
+            signInSessionsValidFromDateTime?: function, skills?: function,
+            solutions?: function, sponsors?: function, state?: function,
+            streetAddress?: function, surname?: function, teamwork?: function,
+            todo?: function, transitiveMemberOf?: function, usageLocation?:
+            function, userPrincipalName?: function, userType?: function } & {
+            <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.user" />"
+            })[], target?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string } | null } & { <xref uid="@odata.type"
+            />: "#<xref
+            uid="microsoft.graph.cloudPcProvisioningPolicyAssignment" />" })[],
+            autopatch?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, autopatchGroupId?: string | null } | null,
+            cloudPcGroupDisplayName?: string | null, cloudPcNamingTemplate?:
+            string | null, description?: string | null, displayName?: string,
+            domainJoinConfigurations?: { <xref uid="@odata.type" />: string,
+            domainJoinType?: Record&lt;string, never&gt; | "unknownFutureValue"
+            | "hybridAzureADJoin" | "azureADJoin" | null,
+            onPremisesConnectionId?: string | null, regionGroup?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "default" |
+            "australia" | "canada" | "usCentral" | "usEast" | "usWest" |
+            "france" | "germany" | "europeUnion" | "unitedKingdom" | "japan" |
+            "asia" | "india" | "southAmerica" | "euap" | "usGovernment" |
+            "usGovernmentDOD" | "norway" | "switzerland" | "southKorea" | null,
+            regionName?: string | null }[], enableSingleSignOn?: boolean | null,
+            gracePeriodInHours?: number | null, imageDisplayName?: string,
+            imageId?: string, imageType?: "unknownFutureValue" | "gallery" |
+            "custom", localAdminEnabled?: boolean | null,
+            microsoftManagedDesktop?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, managedType?: Record&lt;string,
+            never&gt; | "unknownFutureValue" | "notManaged" | "premiumManaged" |
+            "standardManaged" | "starterManaged" | null, profile?: string | null
+            } | null, provisioningType?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "dedicated" | "shared" | null,
+            windowsSetting?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, locale?: string | null } | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.cloudPcProvisioningPolicy" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /deviceManagement/virtualEndpoint/provisioningPolicies"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, alternateResourceUrl?: string | null, assignments?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          assignedUsers?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+          ..., aboutMe?: ..., accountEnabled?: ..., activities?: ..., ageGroup?:
+          ..., agreementAcceptances?: ..., appRoleAssignments?: ...,
+          assignedLicenses?: ..., assignedPlans?: ..., authentication?: ...,
+          authorizationInfo?: ..., birthday?: ..., businessPhones?: ...,
+          calendar?: ..., calendarGroups?: ..., calendars?: ..., calendarView?:
+          ..., chats?: ..., city?: ..., cloudClipboard?: ..., cloudPCs?: ...,
+          companyName?: ..., consentProvidedForMinor?: ..., contactFolders?:
+          ..., contacts?: ..., country?: ..., createdDateTime?: ...,
+          createdObjects?: ..., creationType?: ..., customSecurityAttributes?:
+          ..., dataSecurityAndGovernance?: ..., department?: ...,
+          deviceEnrollmentLimit?: ..., deviceManagementTroubleshootingEvents?:
+          ..., directReports?: ..., displayName?: ..., drive?: ..., drives?:
+          ..., employeeExperience?: ..., employeeHireDate?: ..., employeeId?:
+          ..., employeeLeaveDateTime?: ..., employeeOrgData?: ...,
+          employeeType?: ..., events?: ..., extensions?: ...,
+          externalUserState?: ..., externalUserStateChangeDateTime?: ...,
+          faxNumber?: ..., followedSites?: ..., givenName?: ..., hireDate?: ...,
+          identities?: ..., imAddresses?: ..., inferenceClassification?: ...,
+          insights?: ..., interests?: ..., isManagementRestricted?: ...,
+          isResourceAccount?: ..., jobTitle?: ..., joinedTeams?: ...,
+          lastPasswordChangeDateTime?: ..., legalAgeGroupClassification?: ...,
+          licenseAssignmentStates?: ..., licenseDetails?: ..., mail?: ...,
+          mailboxSettings?: ..., mailFolders?: ..., mailNickname?: ...,
+          managedAppRegistrations?: ..., managedDevices?: ..., manager?: ...,
+          memberOf?: ..., messages?: ..., mobilePhone?: ..., mySite?: ...,
+          oauth2PermissionGrants?: ..., officeLocation?: ..., onenote?: ...,
+          onlineMeetings?: ..., onPremisesDistinguishedName?: ...,
+          onPremisesDomainName?: ..., onPremisesExtensionAttributes?: ...,
+          onPremisesImmutableId?: ..., onPremisesLastSyncDateTime?: ...,
+          onPremisesProvisioningErrors?: ..., onPremisesSamAccountName?: ...,
+          onPremisesSecurityIdentifier?: ..., onPremisesSyncEnabled?: ...,
+          onPremisesUserPrincipalName?: ..., otherMails?: ..., outlook?: ...,
+          ownedDevices?: ..., ownedObjects?: ..., passwordPolicies?: ...,
+          passwordProfile?: ..., pastProjects?: ..., people?: ...,
+          permissionGrants?: ..., photo?: ..., photos?: ..., planner?: ...,
+          postalCode?: ..., preferredDataLocation?: ..., preferredLanguage?:
+          ..., preferredName?: ..., presence?: ..., print?: ...,
+          provisionedPlans?: ..., proxyAddresses?: ..., registeredDevices?: ...,
+          responsibilities?: ..., schools?: ..., scopedRoleMemberOf?: ...,
+          securityIdentifier?: ..., serviceProvisioningErrors?: ..., settings?:
+          ..., showInAddressList?: ..., signInActivity?: ...,
+          signInSessionsValidFromDateTime?: ..., skills?: ..., solutions?: ...,
+          sponsors?: ..., state?: ..., streetAddress?: ..., surname?: ...,
+          teamwork?: ..., todo?: ..., transitiveMemberOf?: ..., usageLocation?:
+          ..., userPrincipalName?: ..., userType?: ... } & { <xref
+          uid="@odata.type" />: ... })[], target?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string } | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.cloudPcProvisioningPolicyAssignment" />" })[],
+          autopatch?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, autopatchGroupId?: string | null } | null,
+          cloudPcGroupDisplayName?: string | null, cloudPcNamingTemplate?:
+          string | null, description?: string | null, displayName?: string,
+          domainJoinConfigurations?: { <xref uid="@odata.type" />: string,
+          domainJoinType?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "hybridAzureADJoin" | "azureADJoin" | null, onPremisesConnectionId?:
+          string | null, regionGroup?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "default" | "australia" | "canada" |
+          "usCentral" | "usEast" | "usWest" | "france" | "germany" |
+          "europeUnion" | "unitedKingdom" | "japan" | "asia" | "india" |
+          "southAmerica" | "euap" | "usGovernment" | "usGovernmentDOD" |
+          "norway" | "switzerland" | "southKorea" | null, regionName?: string |
+          null }[], enableSingleSignOn?: boolean | null, gracePeriodInHours?:
+          number | null, imageDisplayName?: string, imageId?: string,
+          imageType?: "unknownFutureValue" | "gallery" | "custom",
+          localAdminEnabled?: boolean | null, microsoftManagedDesktop?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          managedType?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "notManaged" | "premiumManaged" | "standardManaged" | "starterManaged"
+          | null, profile?: string | null } | null, provisioningType?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "dedicated" |
+          "shared" | null, windowsSetting?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, locale?: string | null } | null }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.cloudPcProvisioningPolicy" />" }&gt;
+  - name: 'del({ cloudPcProvisioningPolicy-id: string, If-Match?: string })'
     uid: >-
       @microsoft/teams.graph-endpoints.deviceManagement.virtualEndpoint.provisioningPolicies.del
     package: '@microsoft/teams.graph-endpoints'
@@ -80,18 +487,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /deviceManagement/virtualEndpoint/provisioningPolicies/{cloudPcProvisioningPolicy-id}"]["response"]>
+        function del(params?: { cloudPcProvisioningPolicy-id: string, If-Match?:
+        string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ cloudPcProvisioningPolicy-id: string, If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /deviceManagement/virtualEndpoint/provisioningPolicies/{cloudPcProvisioningPolicy-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[],
+      cloudPcProvisioningPolicy-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.deviceManagement.virtualEndpoint.provisioningPolicies.get
     package: '@microsoft/teams.graph-endpoints'
@@ -106,18 +513,175 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/virtualEndpoint/provisioningPolicies/{cloudPcProvisioningPolicy-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        cloudPcProvisioningPolicy-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, alternateResourceUrl?: string | null, assignments?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, assignedUsers?: (Omit<..., ...> & { @odata.type: ..., aboutMe?:
+        ..., accountEnabled?: ..., activities?: ..., ageGroup?: ...,
+        agreementAcceptances?: ..., appRoleAssignments?: ..., assignedLicenses?:
+        ..., assignedPlans?: ..., authentication?: ..., authorizationInfo?: ...,
+        birthday?: ..., businessPhones?: ..., calendar?: ..., calendarGroups?:
+        ..., calendars?: ..., calendarView?: ..., chats?: ..., city?: ...,
+        cloudClipboard?: ..., cloudPCs?: ..., companyName?: ...,
+        consentProvidedForMinor?: ..., contactFolders?: ..., contacts?: ...,
+        country?: ..., createdDateTime?: ..., createdObjects?: ...,
+        creationType?: ..., customSecurityAttributes?: ...,
+        dataSecurityAndGovernance?: ..., department?: ...,
+        deviceEnrollmentLimit?: ..., deviceManagementTroubleshootingEvents?:
+        ..., directReports?: ..., displayName?: ..., drive?: ..., drives?: ...,
+        employeeExperience?: ..., employeeHireDate?: ..., employeeId?: ...,
+        employeeLeaveDateTime?: ..., employeeOrgData?: ..., employeeType?: ...,
+        events?: ..., extensions?: ..., externalUserState?: ...,
+        externalUserStateChangeDateTime?: ..., faxNumber?: ..., followedSites?:
+        ..., givenName?: ..., hireDate?: ..., identities?: ..., imAddresses?:
+        ..., inferenceClassification?: ..., insights?: ..., interests?: ...,
+        isManagementRestricted?: ..., isResourceAccount?: ..., jobTitle?: ...,
+        joinedTeams?: ..., lastPasswordChangeDateTime?: ...,
+        legalAgeGroupClassification?: ..., licenseAssignmentStates?: ...,
+        licenseDetails?: ..., mail?: ..., mailboxSettings?: ..., mailFolders?:
+        ..., mailNickname?: ..., managedAppRegistrations?: ..., managedDevices?:
+        ..., manager?: ..., memberOf?: ..., messages?: ..., mobilePhone?: ...,
+        mySite?: ..., oauth2PermissionGrants?: ..., officeLocation?: ...,
+        onenote?: ..., onlineMeetings?: ..., onPremisesDistinguishedName?: ...,
+        onPremisesDomainName?: ..., onPremisesExtensionAttributes?: ...,
+        onPremisesImmutableId?: ..., onPremisesLastSyncDateTime?: ...,
+        onPremisesProvisioningErrors?: ..., onPremisesSamAccountName?: ...,
+        onPremisesSecurityIdentifier?: ..., onPremisesSyncEnabled?: ...,
+        onPremisesUserPrincipalName?: ..., otherMails?: ..., outlook?: ...,
+        ownedDevices?: ..., ownedObjects?: ..., passwordPolicies?: ...,
+        passwordProfile?: ..., pastProjects?: ..., people?: ...,
+        permissionGrants?: ..., photo?: ..., photos?: ..., planner?: ...,
+        postalCode?: ..., preferredDataLocation?: ..., preferredLanguage?: ...,
+        preferredName?: ..., presence?: ..., print?: ..., provisionedPlans?:
+        ..., proxyAddresses?: ..., registeredDevices?: ..., responsibilities?:
+        ..., schools?: ..., scopedRoleMemberOf?: ..., securityIdentifier?: ...,
+        serviceProvisioningErrors?: ..., settings?: ..., showInAddressList?:
+        ..., signInActivity?: ..., signInSessionsValidFromDateTime?: ...,
+        skills?: ..., solutions?: ..., sponsors?: ..., state?: ...,
+        streetAddress?: ..., surname?: ..., teamwork?: ..., todo?: ...,
+        transitiveMemberOf?: ..., usageLocation?: ..., userPrincipalName?: ...,
+        userType?: ... } & { @odata.type: ... })[], target?: Record<string,
+        never> | { @odata.type: string } | null } & { @odata.type:
+        "#microsoft.graph.cloudPcProvisioningPolicyAssignment" })[], autopatch?:
+        Record<string, never> | { @odata.type: string, autopatchGroupId?: string
+        | null } | null, cloudPcGroupDisplayName?: string | null,
+        cloudPcNamingTemplate?: string | null, description?: string | null,
+        displayName?: string, domainJoinConfigurations?: { @odata.type: string,
+        domainJoinType?: Record<string, never> | "unknownFutureValue" |
+        "hybridAzureADJoin" | "azureADJoin" | null, onPremisesConnectionId?:
+        string | null, regionGroup?: Record<string, never> |
+        "unknownFutureValue" | "default" | "australia" | "canada" | "usCentral"
+        | "usEast" | "usWest" | "france" | "germany" | "europeUnion" |
+        "unitedKingdom" | "japan" | "asia" | "india" | "southAmerica" | "euap" |
+        "usGovernment" | "usGovernmentDOD" | "norway" | "switzerland" |
+        "southKorea" | null, regionName?: string | null }[],
+        enableSingleSignOn?: boolean | null, gracePeriodInHours?: number | null,
+        imageDisplayName?: string, imageId?: string, imageType?:
+        "unknownFutureValue" | "gallery" | "custom", localAdminEnabled?: boolean
+        | null, microsoftManagedDesktop?: Record<string, never> | { @odata.type:
+        string, managedType?: Record<string, never> | "unknownFutureValue" |
+        "notManaged" | "premiumManaged" | "standardManaged" | "starterManaged" |
+        null, profile?: string | null } | null, provisioningType?:
+        Record<string, never> | "unknownFutureValue" | "dedicated" | "shared" |
+        null, windowsSetting?: Record<string, never> | { @odata.type: string,
+        locale?: string | null } | null } & { @odata.type:
+        "#microsoft.graph.cloudPcProvisioningPolicy" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[],
+            cloudPcProvisioningPolicy-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/virtualEndpoint/provisioningPolicies/{cloudPcProvisioningPolicy-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, alternateResourceUrl?: string | null, assignments?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          assignedUsers?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+          ..., aboutMe?: ..., accountEnabled?: ..., activities?: ..., ageGroup?:
+          ..., agreementAcceptances?: ..., appRoleAssignments?: ...,
+          assignedLicenses?: ..., assignedPlans?: ..., authentication?: ...,
+          authorizationInfo?: ..., birthday?: ..., businessPhones?: ...,
+          calendar?: ..., calendarGroups?: ..., calendars?: ..., calendarView?:
+          ..., chats?: ..., city?: ..., cloudClipboard?: ..., cloudPCs?: ...,
+          companyName?: ..., consentProvidedForMinor?: ..., contactFolders?:
+          ..., contacts?: ..., country?: ..., createdDateTime?: ...,
+          createdObjects?: ..., creationType?: ..., customSecurityAttributes?:
+          ..., dataSecurityAndGovernance?: ..., department?: ...,
+          deviceEnrollmentLimit?: ..., deviceManagementTroubleshootingEvents?:
+          ..., directReports?: ..., displayName?: ..., drive?: ..., drives?:
+          ..., employeeExperience?: ..., employeeHireDate?: ..., employeeId?:
+          ..., employeeLeaveDateTime?: ..., employeeOrgData?: ...,
+          employeeType?: ..., events?: ..., extensions?: ...,
+          externalUserState?: ..., externalUserStateChangeDateTime?: ...,
+          faxNumber?: ..., followedSites?: ..., givenName?: ..., hireDate?: ...,
+          identities?: ..., imAddresses?: ..., inferenceClassification?: ...,
+          insights?: ..., interests?: ..., isManagementRestricted?: ...,
+          isResourceAccount?: ..., jobTitle?: ..., joinedTeams?: ...,
+          lastPasswordChangeDateTime?: ..., legalAgeGroupClassification?: ...,
+          licenseAssignmentStates?: ..., licenseDetails?: ..., mail?: ...,
+          mailboxSettings?: ..., mailFolders?: ..., mailNickname?: ...,
+          managedAppRegistrations?: ..., managedDevices?: ..., manager?: ...,
+          memberOf?: ..., messages?: ..., mobilePhone?: ..., mySite?: ...,
+          oauth2PermissionGrants?: ..., officeLocation?: ..., onenote?: ...,
+          onlineMeetings?: ..., onPremisesDistinguishedName?: ...,
+          onPremisesDomainName?: ..., onPremisesExtensionAttributes?: ...,
+          onPremisesImmutableId?: ..., onPremisesLastSyncDateTime?: ...,
+          onPremisesProvisioningErrors?: ..., onPremisesSamAccountName?: ...,
+          onPremisesSecurityIdentifier?: ..., onPremisesSyncEnabled?: ...,
+          onPremisesUserPrincipalName?: ..., otherMails?: ..., outlook?: ...,
+          ownedDevices?: ..., ownedObjects?: ..., passwordPolicies?: ...,
+          passwordProfile?: ..., pastProjects?: ..., people?: ...,
+          permissionGrants?: ..., photo?: ..., photos?: ..., planner?: ...,
+          postalCode?: ..., preferredDataLocation?: ..., preferredLanguage?:
+          ..., preferredName?: ..., presence?: ..., print?: ...,
+          provisionedPlans?: ..., proxyAddresses?: ..., registeredDevices?: ...,
+          responsibilities?: ..., schools?: ..., scopedRoleMemberOf?: ...,
+          securityIdentifier?: ..., serviceProvisioningErrors?: ..., settings?:
+          ..., showInAddressList?: ..., signInActivity?: ...,
+          signInSessionsValidFromDateTime?: ..., skills?: ..., solutions?: ...,
+          sponsors?: ..., state?: ..., streetAddress?: ..., surname?: ...,
+          teamwork?: ..., todo?: ..., transitiveMemberOf?: ..., usageLocation?:
+          ..., userPrincipalName?: ..., userType?: ... } & { <xref
+          uid="@odata.type" />: ... })[], target?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string } | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.cloudPcProvisioningPolicyAssignment" />" })[],
+          autopatch?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, autopatchGroupId?: string | null } | null,
+          cloudPcGroupDisplayName?: string | null, cloudPcNamingTemplate?:
+          string | null, description?: string | null, displayName?: string,
+          domainJoinConfigurations?: { <xref uid="@odata.type" />: string,
+          domainJoinType?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "hybridAzureADJoin" | "azureADJoin" | null, onPremisesConnectionId?:
+          string | null, regionGroup?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "default" | "australia" | "canada" |
+          "usCentral" | "usEast" | "usWest" | "france" | "germany" |
+          "europeUnion" | "unitedKingdom" | "japan" | "asia" | "india" |
+          "southAmerica" | "euap" | "usGovernment" | "usGovernmentDOD" |
+          "norway" | "switzerland" | "southKorea" | null, regionName?: string |
+          null }[], enableSingleSignOn?: boolean | null, gracePeriodInHours?:
+          number | null, imageDisplayName?: string, imageId?: string,
+          imageType?: "unknownFutureValue" | "gallery" | "custom",
+          localAdminEnabled?: boolean | null, microsoftManagedDesktop?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          managedType?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "notManaged" | "premiumManaged" | "standardManaged" | "starterManaged"
+          | null, profile?: string | null } | null, provisioningType?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "dedicated" |
+          "shared" | null, windowsSetting?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, locale?: string | null } | null }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.cloudPcProvisioningPolicy" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: >-
       @microsoft/teams.graph-endpoints.deviceManagement.virtualEndpoint.provisioningPolicies.list
     package: '@microsoft/teams.graph-endpoints'
@@ -131,20 +695,150 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/virtualEndpoint/provisioningPolicies"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, alternateResourceUrl?: string | null, assignments?: (Omit<...,
+        ...> & { @odata.type: ..., assignedUsers?: ..., target?: ... } & {
+        @odata.type: ... })[], autopatch?: Record<string, never> | {
+        @odata.type: string, autopatchGroupId?: string | null } | null,
+        cloudPcGroupDisplayName?: string | null, cloudPcNamingTemplate?: string
+        | null, description?: string | null, displayName?: string,
+        domainJoinConfigurations?: { @odata.type: string, domainJoinType?:
+        function, onPremisesConnectionId?: function, regionGroup?: function,
+        regionName?: function }[], enableSingleSignOn?: boolean | null,
+        gracePeriodInHours?: number | null, imageDisplayName?: string, imageId?:
+        string, imageType?: "unknownFutureValue" | "gallery" | "custom",
+        localAdminEnabled?: boolean | null, microsoftManagedDesktop?:
+        Record<string, never> | { @odata.type: string, managedType?: Record<...,
+        ...> | "unknownFutureValue" | "notManaged" | "premiumManaged" |
+        "standardManaged" | "starterManaged" | null, profile?: string | null } |
+        null, provisioningType?: Record<string, never> | "unknownFutureValue" |
+        "dedicated" | "shared" | null, windowsSetting?: Record<string, never> |
+        { @odata.type: string, locale?: string | null } | null } & {
+        @odata.type: "#microsoft.graph.cloudPcProvisioningPolicy" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/virtualEndpoint/provisioningPolicies"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          alternateResourceUrl?: string | null, assignments?: (Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ..., assignedUsers?: ...,
+          target?: ... } & { <xref uid="@odata.type" />: ... })[], autopatch?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          autopatchGroupId?: string | null } | null, cloudPcGroupDisplayName?:
+          string | null, cloudPcNamingTemplate?: string | null, description?:
+          string | null, displayName?: string, domainJoinConfigurations?: {
+          <xref uid="@odata.type" />: string, domainJoinType?: function,
+          onPremisesConnectionId?: function, regionGroup?: function,
+          regionName?: function }[], enableSingleSignOn?: boolean | null,
+          gracePeriodInHours?: number | null, imageDisplayName?: string,
+          imageId?: string, imageType?: "unknownFutureValue" | "gallery" |
+          "custom", localAdminEnabled?: boolean | null,
+          microsoftManagedDesktop?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, managedType?: Record&lt;..., ...&gt; |
+          "unknownFutureValue" | "notManaged" | "premiumManaged" |
+          "standardManaged" | "starterManaged" | null, profile?: string | null }
+          | null, provisioningType?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "dedicated" | "shared" | null, windowsSetting?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          locale?: string | null } | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.cloudPcProvisioningPolicy" />" })[] }&gt;
   - name: >-
-      update(Operation<"/deviceManagement/virtualEndpoint/provisioningPolicies/{cloudPcProvisioningPolicy-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, alternateResourceUrl?: string | null, assignments?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, assignedUsers?: (Omit<... & ... & ..., "@odata.type">
+      & { @odata.type: string, aboutMe?: function, accountEnabled?: function,
+      activities?: function, ageGroup?: function, agreementAcceptances?:
+      function, appRoleAssignments?: function, assignedLicenses?: function,
+      assignedPlans?: function, authentication?: function, authorizationInfo?:
+      function, birthday?: function, businessPhones?: function, calendar?:
+      function, calendarGroups?: function, calendars?: function, calendarView?:
+      function, chats?: function, city?: function, cloudClipboard?: function,
+      cloudPCs?: function, companyName?: function, consentProvidedForMinor?:
+      function, contactFolders?: function, contacts?: function, country?:
+      function, createdDateTime?: function, createdObjects?: function,
+      creationType?: function, customSecurityAttributes?: function,
+      dataSecurityAndGovernance?: function, department?: function,
+      deviceEnrollmentLimit?: function, deviceManagementTroubleshootingEvents?:
+      function, directReports?: function, displayName?: function, drive?:
+      function, drives?: function, employeeExperience?: function,
+      employeeHireDate?: function, employeeId?: function,
+      employeeLeaveDateTime?: function, employeeOrgData?: function,
+      employeeType?: function, events?: function, extensions?: function,
+      externalUserState?: function, externalUserStateChangeDateTime?: function,
+      faxNumber?: function, followedSites?: function, givenName?: function,
+      hireDate?: function, identities?: function, imAddresses?: function,
+      inferenceClassification?: function, insights?: function, interests?:
+      function, isManagementRestricted?: function, isResourceAccount?: function,
+      jobTitle?: function, joinedTeams?: function, lastPasswordChangeDateTime?:
+      function, legalAgeGroupClassification?: function,
+      licenseAssignmentStates?: function, licenseDetails?: function, mail?:
+      function, mailboxSettings?: function, mailFolders?: function,
+      mailNickname?: function, managedAppRegistrations?: function,
+      managedDevices?: function, manager?: function, memberOf?: function,
+      messages?: function, mobilePhone?: function, mySite?: function,
+      oauth2PermissionGrants?: function, officeLocation?: function, onenote?:
+      function, onlineMeetings?: function, onPremisesDistinguishedName?:
+      function, onPremisesDomainName?: function, onPremisesExtensionAttributes?:
+      function, onPremisesImmutableId?: function, onPremisesLastSyncDateTime?:
+      function, onPremisesProvisioningErrors?: function,
+      onPremisesSamAccountName?: function, onPremisesSecurityIdentifier?:
+      function, onPremisesSyncEnabled?: function, onPremisesUserPrincipalName?:
+      function, otherMails?: function, outlook?: function, ownedDevices?:
+      function, ownedObjects?: function, passwordPolicies?: function,
+      passwordProfile?: function, pastProjects?: function, people?: function,
+      permissionGrants?: function, photo?: function, photos?: function,
+      planner?: function, postalCode?: function, preferredDataLocation?:
+      function, preferredLanguage?: function, preferredName?: function,
+      presence?: function, print?: function, provisionedPlans?: function,
+      proxyAddresses?: function, registeredDevices?: function,
+      responsibilities?: function, schools?: function, scopedRoleMemberOf?:
+      function, securityIdentifier?: function, serviceProvisioningErrors?:
+      function, settings?: function, showInAddressList?: function,
+      signInActivity?: function, signInSessionsValidFromDateTime?: function,
+      skills?: function, solutions?: function, sponsors?: function, state?:
+      function, streetAddress?: function, surname?: function, teamwork?:
+      function, todo?: function, transitiveMemberOf?: function, usageLocation?:
+      function, userPrincipalName?: function, userType?: function } & {
+      @odata.type: "#microsoft.graph.user" })[], target?: Record<string, never>
+      | { @odata.type: string } | null } & { @odata.type:
+      "#microsoft.graph.cloudPcProvisioningPolicyAssignment" })[], autopatch?:
+      Record<string, never> | { @odata.type: string, autopatchGroupId?: string |
+      null } | null, cloudPcGroupDisplayName?: string | null,
+      cloudPcNamingTemplate?: string | null, description?: string | null,
+      displayName?: string, domainJoinConfigurations?: { @odata.type: string,
+      domainJoinType?: Record<string, never> | "unknownFutureValue" |
+      "hybridAzureADJoin" | "azureADJoin" | null, onPremisesConnectionId?:
+      string | null, regionGroup?: Record<string, never> | "unknownFutureValue"
+      | "default" | "australia" | "canada" | "usCentral" | "usEast" | "usWest" |
+      "france" | "germany" | "europeUnion" | "unitedKingdom" | "japan" | "asia"
+      | "india" | "southAmerica" | "euap" | "usGovernment" | "usGovernmentDOD" |
+      "norway" | "switzerland" | "southKorea" | null, regionName?: string | null
+      }[], enableSingleSignOn?: boolean | null, gracePeriodInHours?: number |
+      null, imageDisplayName?: string, imageId?: string, imageType?:
+      "unknownFutureValue" | "gallery" | "custom", localAdminEnabled?: boolean |
+      null, microsoftManagedDesktop?: Record<string, never> | { @odata.type:
+      string, managedType?: Record<string, never> | "unknownFutureValue" |
+      "notManaged" | "premiumManaged" | "standardManaged" | "starterManaged" |
+      null, profile?: string | null } | null, provisioningType?: Record<string,
+      never> | "unknownFutureValue" | "dedicated" | "shared" | null,
+      windowsSetting?: Record<string, never> | { @odata.type: string, locale?:
+      string | null } | null } & { @odata.type:
+      "#microsoft.graph.cloudPcProvisioningPolicy" }, {
+      cloudPcProvisioningPolicy-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.deviceManagement.virtualEndpoint.provisioningPolicies.update
     package: '@microsoft/teams.graph-endpoints'
@@ -158,21 +852,349 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/deviceManagement/virtualEndpoint/provisioningPolicies/{cloudPcProvisioningPolicy-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /deviceManagement/virtualEndpoint/provisioningPolicies/{cloudPcProvisioningPolicy-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, alternateResourceUrl?: string |
+        null, assignments?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, assignedUsers?: (Omit<... & ...
+        & ..., "@odata.type"> & { @odata.type: string, aboutMe?: function,
+        accountEnabled?: function, activities?: function, ageGroup?: function,
+        agreementAcceptances?: function, appRoleAssignments?: function,
+        assignedLicenses?: function, assignedPlans?: function, authentication?:
+        function, authorizationInfo?: function, birthday?: function,
+        businessPhones?: function, calendar?: function, calendarGroups?:
+        function, calendars?: function, calendarView?: function, chats?:
+        function, city?: function, cloudClipboard?: function, cloudPCs?:
+        function, companyName?: function, consentProvidedForMinor?: function,
+        contactFolders?: function, contacts?: function, country?: function,
+        createdDateTime?: function, createdObjects?: function, creationType?:
+        function, customSecurityAttributes?: function,
+        dataSecurityAndGovernance?: function, department?: function,
+        deviceEnrollmentLimit?: function,
+        deviceManagementTroubleshootingEvents?: function, directReports?:
+        function, displayName?: function, drive?: function, drives?: function,
+        employeeExperience?: function, employeeHireDate?: function, employeeId?:
+        function, employeeLeaveDateTime?: function, employeeOrgData?: function,
+        employeeType?: function, events?: function, extensions?: function,
+        externalUserState?: function, externalUserStateChangeDateTime?:
+        function, faxNumber?: function, followedSites?: function, givenName?:
+        function, hireDate?: function, identities?: function, imAddresses?:
+        function, inferenceClassification?: function, insights?: function,
+        interests?: function, isManagementRestricted?: function,
+        isResourceAccount?: function, jobTitle?: function, joinedTeams?:
+        function, lastPasswordChangeDateTime?: function,
+        legalAgeGroupClassification?: function, licenseAssignmentStates?:
+        function, licenseDetails?: function, mail?: function, mailboxSettings?:
+        function, mailFolders?: function, mailNickname?: function,
+        managedAppRegistrations?: function, managedDevices?: function, manager?:
+        function, memberOf?: function, messages?: function, mobilePhone?:
+        function, mySite?: function, oauth2PermissionGrants?: function,
+        officeLocation?: function, onenote?: function, onlineMeetings?:
+        function, onPremisesDistinguishedName?: function, onPremisesDomainName?:
+        function, onPremisesExtensionAttributes?: function,
+        onPremisesImmutableId?: function, onPremisesLastSyncDateTime?: function,
+        onPremisesProvisioningErrors?: function, onPremisesSamAccountName?:
+        function, onPremisesSecurityIdentifier?: function,
+        onPremisesSyncEnabled?: function, onPremisesUserPrincipalName?:
+        function, otherMails?: function, outlook?: function, ownedDevices?:
+        function, ownedObjects?: function, passwordPolicies?: function,
+        passwordProfile?: function, pastProjects?: function, people?: function,
+        permissionGrants?: function, photo?: function, photos?: function,
+        planner?: function, postalCode?: function, preferredDataLocation?:
+        function, preferredLanguage?: function, preferredName?: function,
+        presence?: function, print?: function, provisionedPlans?: function,
+        proxyAddresses?: function, registeredDevices?: function,
+        responsibilities?: function, schools?: function, scopedRoleMemberOf?:
+        function, securityIdentifier?: function, serviceProvisioningErrors?:
+        function, settings?: function, showInAddressList?: function,
+        signInActivity?: function, signInSessionsValidFromDateTime?: function,
+        skills?: function, solutions?: function, sponsors?: function, state?:
+        function, streetAddress?: function, surname?: function, teamwork?:
+        function, todo?: function, transitiveMemberOf?: function,
+        usageLocation?: function, userPrincipalName?: function, userType?:
+        function } & { @odata.type: "#microsoft.graph.user" })[], target?:
+        Record<string, never> | { @odata.type: string } | null } & {
+        @odata.type: "#microsoft.graph.cloudPcProvisioningPolicyAssignment"
+        })[], autopatch?: Record<string, never> | { @odata.type: string,
+        autopatchGroupId?: string | null } | null, cloudPcGroupDisplayName?:
+        string | null, cloudPcNamingTemplate?: string | null, description?:
+        string | null, displayName?: string, domainJoinConfigurations?: {
+        @odata.type: string, domainJoinType?: Record<string, never> |
+        "unknownFutureValue" | "hybridAzureADJoin" | "azureADJoin" | null,
+        onPremisesConnectionId?: string | null, regionGroup?: Record<string,
+        never> | "unknownFutureValue" | "default" | "australia" | "canada" |
+        "usCentral" | "usEast" | "usWest" | "france" | "germany" | "europeUnion"
+        | "unitedKingdom" | "japan" | "asia" | "india" | "southAmerica" | "euap"
+        | "usGovernment" | "usGovernmentDOD" | "norway" | "switzerland" |
+        "southKorea" | null, regionName?: string | null }[],
+        enableSingleSignOn?: boolean | null, gracePeriodInHours?: number | null,
+        imageDisplayName?: string, imageId?: string, imageType?:
+        "unknownFutureValue" | "gallery" | "custom", localAdminEnabled?: boolean
+        | null, microsoftManagedDesktop?: Record<string, never> | { @odata.type:
+        string, managedType?: Record<string, never> | "unknownFutureValue" |
+        "notManaged" | "premiumManaged" | "standardManaged" | "starterManaged" |
+        null, profile?: string | null } | null, provisioningType?:
+        Record<string, never> | "unknownFutureValue" | "dedicated" | "shared" |
+        null, windowsSetting?: Record<string, never> | { @odata.type: string,
+        locale?: string | null } | null } & { @odata.type:
+        "#microsoft.graph.cloudPcProvisioningPolicy" }, params?: {
+        cloudPcProvisioningPolicy-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, alternateResourceUrl?: string | null, assignments?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, assignedUsers?: (Omit<..., ...> & { @odata.type: ..., aboutMe?:
+        ..., accountEnabled?: ..., activities?: ..., ageGroup?: ...,
+        agreementAcceptances?: ..., appRoleAssignments?: ..., assignedLicenses?:
+        ..., assignedPlans?: ..., authentication?: ..., authorizationInfo?: ...,
+        birthday?: ..., businessPhones?: ..., calendar?: ..., calendarGroups?:
+        ..., calendars?: ..., calendarView?: ..., chats?: ..., city?: ...,
+        cloudClipboard?: ..., cloudPCs?: ..., companyName?: ...,
+        consentProvidedForMinor?: ..., contactFolders?: ..., contacts?: ...,
+        country?: ..., createdDateTime?: ..., createdObjects?: ...,
+        creationType?: ..., customSecurityAttributes?: ...,
+        dataSecurityAndGovernance?: ..., department?: ...,
+        deviceEnrollmentLimit?: ..., deviceManagementTroubleshootingEvents?:
+        ..., directReports?: ..., displayName?: ..., drive?: ..., drives?: ...,
+        employeeExperience?: ..., employeeHireDate?: ..., employeeId?: ...,
+        employeeLeaveDateTime?: ..., employeeOrgData?: ..., employeeType?: ...,
+        events?: ..., extensions?: ..., externalUserState?: ...,
+        externalUserStateChangeDateTime?: ..., faxNumber?: ..., followedSites?:
+        ..., givenName?: ..., hireDate?: ..., identities?: ..., imAddresses?:
+        ..., inferenceClassification?: ..., insights?: ..., interests?: ...,
+        isManagementRestricted?: ..., isResourceAccount?: ..., jobTitle?: ...,
+        joinedTeams?: ..., lastPasswordChangeDateTime?: ...,
+        legalAgeGroupClassification?: ..., licenseAssignmentStates?: ...,
+        licenseDetails?: ..., mail?: ..., mailboxSettings?: ..., mailFolders?:
+        ..., mailNickname?: ..., managedAppRegistrations?: ..., managedDevices?:
+        ..., manager?: ..., memberOf?: ..., messages?: ..., mobilePhone?: ...,
+        mySite?: ..., oauth2PermissionGrants?: ..., officeLocation?: ...,
+        onenote?: ..., onlineMeetings?: ..., onPremisesDistinguishedName?: ...,
+        onPremisesDomainName?: ..., onPremisesExtensionAttributes?: ...,
+        onPremisesImmutableId?: ..., onPremisesLastSyncDateTime?: ...,
+        onPremisesProvisioningErrors?: ..., onPremisesSamAccountName?: ...,
+        onPremisesSecurityIdentifier?: ..., onPremisesSyncEnabled?: ...,
+        onPremisesUserPrincipalName?: ..., otherMails?: ..., outlook?: ...,
+        ownedDevices?: ..., ownedObjects?: ..., passwordPolicies?: ...,
+        passwordProfile?: ..., pastProjects?: ..., people?: ...,
+        permissionGrants?: ..., photo?: ..., photos?: ..., planner?: ...,
+        postalCode?: ..., preferredDataLocation?: ..., preferredLanguage?: ...,
+        preferredName?: ..., presence?: ..., print?: ..., provisionedPlans?:
+        ..., proxyAddresses?: ..., registeredDevices?: ..., responsibilities?:
+        ..., schools?: ..., scopedRoleMemberOf?: ..., securityIdentifier?: ...,
+        serviceProvisioningErrors?: ..., settings?: ..., showInAddressList?:
+        ..., signInActivity?: ..., signInSessionsValidFromDateTime?: ...,
+        skills?: ..., solutions?: ..., sponsors?: ..., state?: ...,
+        streetAddress?: ..., surname?: ..., teamwork?: ..., todo?: ...,
+        transitiveMemberOf?: ..., usageLocation?: ..., userPrincipalName?: ...,
+        userType?: ... } & { @odata.type: ... })[], target?: Record<string,
+        never> | { @odata.type: string } | null } & { @odata.type:
+        "#microsoft.graph.cloudPcProvisioningPolicyAssignment" })[], autopatch?:
+        Record<string, never> | { @odata.type: string, autopatchGroupId?: string
+        | null } | null, cloudPcGroupDisplayName?: string | null,
+        cloudPcNamingTemplate?: string | null, description?: string | null,
+        displayName?: string, domainJoinConfigurations?: { @odata.type: string,
+        domainJoinType?: Record<string, never> | "unknownFutureValue" |
+        "hybridAzureADJoin" | "azureADJoin" | null, onPremisesConnectionId?:
+        string | null, regionGroup?: Record<string, never> |
+        "unknownFutureValue" | "default" | "australia" | "canada" | "usCentral"
+        | "usEast" | "usWest" | "france" | "germany" | "europeUnion" |
+        "unitedKingdom" | "japan" | "asia" | "india" | "southAmerica" | "euap" |
+        "usGovernment" | "usGovernmentDOD" | "norway" | "switzerland" |
+        "southKorea" | null, regionName?: string | null }[],
+        enableSingleSignOn?: boolean | null, gracePeriodInHours?: number | null,
+        imageDisplayName?: string, imageId?: string, imageType?:
+        "unknownFutureValue" | "gallery" | "custom", localAdminEnabled?: boolean
+        | null, microsoftManagedDesktop?: Record<string, never> | { @odata.type:
+        string, managedType?: Record<string, never> | "unknownFutureValue" |
+        "notManaged" | "premiumManaged" | "standardManaged" | "starterManaged" |
+        null, profile?: string | null } | null, provisioningType?:
+        Record<string, never> | "unknownFutureValue" | "dedicated" | "shared" |
+        null, windowsSetting?: Record<string, never> | { @odata.type: string,
+        locale?: string | null } | null } & { @odata.type:
+        "#microsoft.graph.cloudPcProvisioningPolicy" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/virtualEndpoint/provisioningPolicies/{cloudPcProvisioningPolicy-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            alternateResourceUrl?: string | null, assignments?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            assignedUsers?: (Omit&lt;... & ... & ..., "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, aboutMe?: function,
+            accountEnabled?: function, activities?: function, ageGroup?:
+            function, agreementAcceptances?: function, appRoleAssignments?:
+            function, assignedLicenses?: function, assignedPlans?: function,
+            authentication?: function, authorizationInfo?: function, birthday?:
+            function, businessPhones?: function, calendar?: function,
+            calendarGroups?: function, calendars?: function, calendarView?:
+            function, chats?: function, city?: function, cloudClipboard?:
+            function, cloudPCs?: function, companyName?: function,
+            consentProvidedForMinor?: function, contactFolders?: function,
+            contacts?: function, country?: function, createdDateTime?: function,
+            createdObjects?: function, creationType?: function,
+            customSecurityAttributes?: function, dataSecurityAndGovernance?:
+            function, department?: function, deviceEnrollmentLimit?: function,
+            deviceManagementTroubleshootingEvents?: function, directReports?:
+            function, displayName?: function, drive?: function, drives?:
+            function, employeeExperience?: function, employeeHireDate?:
+            function, employeeId?: function, employeeLeaveDateTime?: function,
+            employeeOrgData?: function, employeeType?: function, events?:
+            function, extensions?: function, externalUserState?: function,
+            externalUserStateChangeDateTime?: function, faxNumber?: function,
+            followedSites?: function, givenName?: function, hireDate?: function,
+            identities?: function, imAddresses?: function,
+            inferenceClassification?: function, insights?: function, interests?:
+            function, isManagementRestricted?: function, isResourceAccount?:
+            function, jobTitle?: function, joinedTeams?: function,
+            lastPasswordChangeDateTime?: function, legalAgeGroupClassification?:
+            function, licenseAssignmentStates?: function, licenseDetails?:
+            function, mail?: function, mailboxSettings?: function, mailFolders?:
+            function, mailNickname?: function, managedAppRegistrations?:
+            function, managedDevices?: function, manager?: function, memberOf?:
+            function, messages?: function, mobilePhone?: function, mySite?:
+            function, oauth2PermissionGrants?: function, officeLocation?:
+            function, onenote?: function, onlineMeetings?: function,
+            onPremisesDistinguishedName?: function, onPremisesDomainName?:
+            function, onPremisesExtensionAttributes?: function,
+            onPremisesImmutableId?: function, onPremisesLastSyncDateTime?:
+            function, onPremisesProvisioningErrors?: function,
+            onPremisesSamAccountName?: function, onPremisesSecurityIdentifier?:
+            function, onPremisesSyncEnabled?: function,
+            onPremisesUserPrincipalName?: function, otherMails?: function,
+            outlook?: function, ownedDevices?: function, ownedObjects?:
+            function, passwordPolicies?: function, passwordProfile?: function,
+            pastProjects?: function, people?: function, permissionGrants?:
+            function, photo?: function, photos?: function, planner?: function,
+            postalCode?: function, preferredDataLocation?: function,
+            preferredLanguage?: function, preferredName?: function, presence?:
+            function, print?: function, provisionedPlans?: function,
+            proxyAddresses?: function, registeredDevices?: function,
+            responsibilities?: function, schools?: function,
+            scopedRoleMemberOf?: function, securityIdentifier?: function,
+            serviceProvisioningErrors?: function, settings?: function,
+            showInAddressList?: function, signInActivity?: function,
+            signInSessionsValidFromDateTime?: function, skills?: function,
+            solutions?: function, sponsors?: function, state?: function,
+            streetAddress?: function, surname?: function, teamwork?: function,
+            todo?: function, transitiveMemberOf?: function, usageLocation?:
+            function, userPrincipalName?: function, userType?: function } & {
+            <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.user" />"
+            })[], target?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string } | null } & { <xref uid="@odata.type"
+            />: "#<xref
+            uid="microsoft.graph.cloudPcProvisioningPolicyAssignment" />" })[],
+            autopatch?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, autopatchGroupId?: string | null } | null,
+            cloudPcGroupDisplayName?: string | null, cloudPcNamingTemplate?:
+            string | null, description?: string | null, displayName?: string,
+            domainJoinConfigurations?: { <xref uid="@odata.type" />: string,
+            domainJoinType?: Record&lt;string, never&gt; | "unknownFutureValue"
+            | "hybridAzureADJoin" | "azureADJoin" | null,
+            onPremisesConnectionId?: string | null, regionGroup?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "default" |
+            "australia" | "canada" | "usCentral" | "usEast" | "usWest" |
+            "france" | "germany" | "europeUnion" | "unitedKingdom" | "japan" |
+            "asia" | "india" | "southAmerica" | "euap" | "usGovernment" |
+            "usGovernmentDOD" | "norway" | "switzerland" | "southKorea" | null,
+            regionName?: string | null }[], enableSingleSignOn?: boolean | null,
+            gracePeriodInHours?: number | null, imageDisplayName?: string,
+            imageId?: string, imageType?: "unknownFutureValue" | "gallery" |
+            "custom", localAdminEnabled?: boolean | null,
+            microsoftManagedDesktop?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, managedType?: Record&lt;string,
+            never&gt; | "unknownFutureValue" | "notManaged" | "premiumManaged" |
+            "standardManaged" | "starterManaged" | null, profile?: string | null
+            } | null, provisioningType?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "dedicated" | "shared" | null,
+            windowsSetting?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, locale?: string | null } | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.cloudPcProvisioningPolicy" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ cloudPcProvisioningPolicy-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /deviceManagement/virtualEndpoint/provisioningPolicies/{cloudPcProvisioningPolicy-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, alternateResourceUrl?: string | null, assignments?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          assignedUsers?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+          ..., aboutMe?: ..., accountEnabled?: ..., activities?: ..., ageGroup?:
+          ..., agreementAcceptances?: ..., appRoleAssignments?: ...,
+          assignedLicenses?: ..., assignedPlans?: ..., authentication?: ...,
+          authorizationInfo?: ..., birthday?: ..., businessPhones?: ...,
+          calendar?: ..., calendarGroups?: ..., calendars?: ..., calendarView?:
+          ..., chats?: ..., city?: ..., cloudClipboard?: ..., cloudPCs?: ...,
+          companyName?: ..., consentProvidedForMinor?: ..., contactFolders?:
+          ..., contacts?: ..., country?: ..., createdDateTime?: ...,
+          createdObjects?: ..., creationType?: ..., customSecurityAttributes?:
+          ..., dataSecurityAndGovernance?: ..., department?: ...,
+          deviceEnrollmentLimit?: ..., deviceManagementTroubleshootingEvents?:
+          ..., directReports?: ..., displayName?: ..., drive?: ..., drives?:
+          ..., employeeExperience?: ..., employeeHireDate?: ..., employeeId?:
+          ..., employeeLeaveDateTime?: ..., employeeOrgData?: ...,
+          employeeType?: ..., events?: ..., extensions?: ...,
+          externalUserState?: ..., externalUserStateChangeDateTime?: ...,
+          faxNumber?: ..., followedSites?: ..., givenName?: ..., hireDate?: ...,
+          identities?: ..., imAddresses?: ..., inferenceClassification?: ...,
+          insights?: ..., interests?: ..., isManagementRestricted?: ...,
+          isResourceAccount?: ..., jobTitle?: ..., joinedTeams?: ...,
+          lastPasswordChangeDateTime?: ..., legalAgeGroupClassification?: ...,
+          licenseAssignmentStates?: ..., licenseDetails?: ..., mail?: ...,
+          mailboxSettings?: ..., mailFolders?: ..., mailNickname?: ...,
+          managedAppRegistrations?: ..., managedDevices?: ..., manager?: ...,
+          memberOf?: ..., messages?: ..., mobilePhone?: ..., mySite?: ...,
+          oauth2PermissionGrants?: ..., officeLocation?: ..., onenote?: ...,
+          onlineMeetings?: ..., onPremisesDistinguishedName?: ...,
+          onPremisesDomainName?: ..., onPremisesExtensionAttributes?: ...,
+          onPremisesImmutableId?: ..., onPremisesLastSyncDateTime?: ...,
+          onPremisesProvisioningErrors?: ..., onPremisesSamAccountName?: ...,
+          onPremisesSecurityIdentifier?: ..., onPremisesSyncEnabled?: ...,
+          onPremisesUserPrincipalName?: ..., otherMails?: ..., outlook?: ...,
+          ownedDevices?: ..., ownedObjects?: ..., passwordPolicies?: ...,
+          passwordProfile?: ..., pastProjects?: ..., people?: ...,
+          permissionGrants?: ..., photo?: ..., photos?: ..., planner?: ...,
+          postalCode?: ..., preferredDataLocation?: ..., preferredLanguage?:
+          ..., preferredName?: ..., presence?: ..., print?: ...,
+          provisionedPlans?: ..., proxyAddresses?: ..., registeredDevices?: ...,
+          responsibilities?: ..., schools?: ..., scopedRoleMemberOf?: ...,
+          securityIdentifier?: ..., serviceProvisioningErrors?: ..., settings?:
+          ..., showInAddressList?: ..., signInActivity?: ...,
+          signInSessionsValidFromDateTime?: ..., skills?: ..., solutions?: ...,
+          sponsors?: ..., state?: ..., streetAddress?: ..., surname?: ...,
+          teamwork?: ..., todo?: ..., transitiveMemberOf?: ..., usageLocation?:
+          ..., userPrincipalName?: ..., userType?: ... } & { <xref
+          uid="@odata.type" />: ... })[], target?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string } | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.cloudPcProvisioningPolicyAssignment" />" })[],
+          autopatch?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, autopatchGroupId?: string | null } | null,
+          cloudPcGroupDisplayName?: string | null, cloudPcNamingTemplate?:
+          string | null, description?: string | null, displayName?: string,
+          domainJoinConfigurations?: { <xref uid="@odata.type" />: string,
+          domainJoinType?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "hybridAzureADJoin" | "azureADJoin" | null, onPremisesConnectionId?:
+          string | null, regionGroup?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "default" | "australia" | "canada" |
+          "usCentral" | "usEast" | "usWest" | "france" | "germany" |
+          "europeUnion" | "unitedKingdom" | "japan" | "asia" | "india" |
+          "southAmerica" | "euap" | "usGovernment" | "usGovernmentDOD" |
+          "norway" | "switzerland" | "southKorea" | null, regionName?: string |
+          null }[], enableSingleSignOn?: boolean | null, gracePeriodInHours?:
+          number | null, imageDisplayName?: string, imageId?: string,
+          imageType?: "unknownFutureValue" | "gallery" | "custom",
+          localAdminEnabled?: boolean | null, microsoftManagedDesktop?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          managedType?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "notManaged" | "premiumManaged" | "standardManaged" | "starterManaged"
+          | null, profile?: string | null } | null, provisioningType?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "dedicated" |
+          "shared" | null, windowsSetting?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, locale?: string | null } | null }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.cloudPcProvisioningPolicy" />" }&gt;

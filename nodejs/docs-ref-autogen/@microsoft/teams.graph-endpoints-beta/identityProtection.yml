@@ -7,7 +7,7 @@ interfaces:
   - '@microsoft/teams.graph-endpoints-beta.identityProtection.IEndpoints'
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: get(any)
+  - name: 'get({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints-beta.identityProtection.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`GET /identityProtection`'
@@ -15,18 +15,403 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /identityProtection"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<{ @odata.type: string, riskDetections?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, activity?: Record<string, never> | "unknownFutureValue" | "user"
+        | "signin" | "servicePrincipal" | null, activityDateTime?: string |
+        null, additionalInfo?: string | null, correlationId?: string | null,
+        detectedDateTime?: string | null, detectionTimingType?: Record<string,
+        never> | "unknownFutureValue" | "notDefined" | "realtime" |
+        "nearRealtime" | "offline" | null, ipAddress?: string | null,
+        lastUpdatedDateTime?: string | null, location?: Record<string, never> |
+        { @odata.type: string, city?: string | null, countryOrRegion?: string |
+        null, geoCoordinates?: Record<string, never> | { @odata.type: string,
+        altitude?: function, latitude?: function, longitude?: function } | null,
+        state?: string | null } | null, mitreTechniqueId?: string | null,
+        requestId?: string | null, riskDetail?: Record<string, never> |
+        "unknownFutureValue" | "none" | "hidden" |
+        "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange"
+        | "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "adminConfirmedUserCompromised" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+        "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+        riskEventType?: string | null, riskLevel?: Record<string, never> |
+        "unknownFutureValue" | "none" | "low" | "medium" | "high" | "hidden" |
+        null, riskState?: Record<string, never> | "unknownFutureValue" | "none"
+        | "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+        "confirmedCompromised" | null, riskType?: Record<string, never> |
+        "unknownFutureValue" | "adminConfirmedUserCompromised" |
+        "unlikelyTravel" | "anonymizedIPAddress" | "maliciousIPAddress" |
+        "unfamiliarFeatures" | "malwareInfectedIPAddress" |
+        "suspiciousIPAddress" | "leakedCredentials" |
+        "investigationsThreatIntelligence" | "generic" | "mcasImpossibleTravel"
+        | "mcasSuspiciousInboxManipulationRules" |
+        "investigationsThreatIntelligenceSigninLinked" |
+        "maliciousIPAddressValidCredentialsBlockedIP" | null, source?: string |
+        null, tokenIssuerType?: Record<string, never> | "AzureAD" |
+        "ADFederationServices" | "UnknownFutureValue" | "AzureADBackupAuth" |
+        "ADFederationServicesMFAAdapter" | "NPSExtension" | null,
+        userDisplayName?: string | null, userId?: string | null,
+        userPrincipalName?: string | null } & { @odata.type:
+        "#microsoft.graph.riskDetection" })[], riskyServicePrincipals?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, accountEnabled?: boolean | null, appId?: string | null,
+        displayName?: string | null, history?: (Omit<..., ...> & { @odata.type:
+        ..., activity?: ..., initiatedBy?: ..., servicePrincipalId?: ... } & {
+        @odata.type: ... })[], isEnabled?: boolean | null, isProcessing?:
+        boolean | null, riskDetail?: Record<string, never> |
+        "unknownFutureValue" | "none" | "hidden" |
+        "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange"
+        | "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "adminConfirmedUserCompromised" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+        "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+        riskLastUpdatedDateTime?: string | null, riskLevel?: Record<string,
+        never> | "unknownFutureValue" | "none" | "low" | "medium" | "high" |
+        "hidden" | null, riskState?: Record<string, never> |
+        "unknownFutureValue" | "none" | "confirmedSafe" | "remediated" |
+        "dismissed" | "atRisk" | "confirmedCompromised" | null,
+        servicePrincipalType?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.riskyServicePrincipal" })[], riskyUsers?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, history?: (Omit<..., ...> & { @odata.type: ..., activity?: ...,
+        initiatedBy?: ..., userId?: ... } & { @odata.type: ... })[], isDeleted?:
+        boolean | null, isProcessing?: boolean | null, riskDetail?:
+        Record<string, never> | "unknownFutureValue" | "none" | "hidden" |
+        "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange"
+        | "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "adminConfirmedUserCompromised" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+        "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+        riskLastUpdatedDateTime?: string | null, riskLevel?: Record<string,
+        never> | "unknownFutureValue" | "none" | "low" | "medium" | "high" |
+        "hidden" | null, riskState?: Record<string, never> |
+        "unknownFutureValue" | "none" | "confirmedSafe" | "remediated" |
+        "dismissed" | "atRisk" | "confirmedCompromised" | null,
+        userDisplayName?: string | null, userPrincipalName?: string | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.riskyUser" })[],
+        servicePrincipalRiskDetections?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, activity?:
+        Record<string, never> | "unknownFutureValue" | "user" | "signin" |
+        "servicePrincipal" | null, activityDateTime?: string | null,
+        additionalInfo?: string | null, appId?: string | null, correlationId?:
+        string | null, detectedDateTime?: string | null, detectionTimingType?:
+        Record<string, never> | "unknownFutureValue" | "notDefined" | "realtime"
+        | "nearRealtime" | "offline" | null, ipAddress?: string | null, keyIds?:
+        (string | null)[], lastUpdatedDateTime?: string | null, location?:
+        Record<string, never> | { @odata.type: string, city?: string | null,
+        countryOrRegion?: string | null, geoCoordinates?: Record<string, never>
+        | { @odata.type: string, altitude?: function, latitude?: function,
+        longitude?: function } | null, state?: string | null } | null,
+        mitreTechniqueId?: string | null, requestId?: string | null,
+        riskDetail?: Record<string, never> | "unknownFutureValue" | "none" |
+        "hidden" | "adminGeneratedTemporaryPassword" |
+        "userPerformedSecuredPasswordChange" |
+        "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "adminConfirmedUserCompromised" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+        "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+        riskEventType?: string | null, riskLevel?: Record<string, never> |
+        "unknownFutureValue" | "none" | "low" | "medium" | "high" | "hidden" |
+        null, riskState?: Record<string, never> | "unknownFutureValue" | "none"
+        | "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+        "confirmedCompromised" | null, servicePrincipalDisplayName?: string |
+        null, servicePrincipalId?: string | null, source?: string | null,
+        tokenIssuerType?: Record<string, never> | "AzureAD" |
+        "ADFederationServices" | "UnknownFutureValue" | "AzureADBackupAuth" |
+        "ADFederationServicesMFAAdapter" | "NPSExtension" | null } & {
+        @odata.type: "#microsoft.graph.servicePrincipalRiskDetection" })[] }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /identityProtection"]["response"]&gt;
-  - name: update(Operation<"/identityProtection", "patch">)
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string,
+          riskDetections?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, activity?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "user" | "signin" | "servicePrincipal" | null,
+          activityDateTime?: string | null, additionalInfo?: string | null,
+          correlationId?: string | null, detectedDateTime?: string | null,
+          detectionTimingType?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "notDefined" | "realtime" | "nearRealtime" |
+          "offline" | null, ipAddress?: string | null, lastUpdatedDateTime?:
+          string | null, location?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, city?: string | null, countryOrRegion?:
+          string | null, geoCoordinates?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, altitude?: function, latitude?:
+          function, longitude?: function } | null, state?: string | null } |
+          null, mitreTechniqueId?: string | null, requestId?: string | null,
+          riskDetail?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "none" | "hidden" | "adminGeneratedTemporaryPassword" |
+          "userPerformedSecuredPasswordChange" |
+          "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+          "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+          "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+          "adminConfirmedUserCompromised" |
+          "adminConfirmedServicePrincipalCompromised" |
+          "adminDismissedAllRiskForServicePrincipal" |
+          "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+          "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+          riskEventType?: string | null, riskLevel?: Record&lt;string, never&gt;
+          | "unknownFutureValue" | "none" | "low" | "medium" | "high" | "hidden"
+          | null, riskState?: Record&lt;string, never&gt; | "unknownFutureValue"
+          | "none" | "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+          "confirmedCompromised" | null, riskType?: Record&lt;string, never&gt;
+          | "unknownFutureValue" | "adminConfirmedUserCompromised" |
+          "unlikelyTravel" | "anonymizedIPAddress" | "maliciousIPAddress" |
+          "unfamiliarFeatures" | "malwareInfectedIPAddress" |
+          "suspiciousIPAddress" | "leakedCredentials" |
+          "investigationsThreatIntelligence" | "generic" |
+          "mcasImpossibleTravel" | "mcasSuspiciousInboxManipulationRules" |
+          "investigationsThreatIntelligenceSigninLinked" |
+          "maliciousIPAddressValidCredentialsBlockedIP" | null, source?: string
+          | null, tokenIssuerType?: Record&lt;string, never&gt; | "AzureAD" |
+          "ADFederationServices" | "UnknownFutureValue" | "AzureADBackupAuth" |
+          "ADFederationServicesMFAAdapter" | "NPSExtension" | null,
+          userDisplayName?: string | null, userId?: string | null,
+          userPrincipalName?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.riskDetection" />" })[],
+          riskyServicePrincipals?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, accountEnabled?: boolean | null,
+          appId?: string | null, displayName?: string | null, history?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ..., activity?:
+          ..., initiatedBy?: ..., servicePrincipalId?: ... } & { <xref
+          uid="@odata.type" />: ... })[], isEnabled?: boolean | null,
+          isProcessing?: boolean | null, riskDetail?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "none" | "hidden" |
+          "adminGeneratedTemporaryPassword" |
+          "userPerformedSecuredPasswordChange" |
+          "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+          "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+          "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+          "adminConfirmedUserCompromised" |
+          "adminConfirmedServicePrincipalCompromised" |
+          "adminDismissedAllRiskForServicePrincipal" |
+          "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+          "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+          riskLastUpdatedDateTime?: string | null, riskLevel?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "none" | "low" | "medium" | "high"
+          | "hidden" | null, riskState?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "none" | "confirmedSafe" | "remediated" |
+          "dismissed" | "atRisk" | "confirmedCompromised" | null,
+          servicePrincipalType?: string | null }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.riskyServicePrincipal" />" })[], riskyUsers?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, history?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type"
+          />: ..., activity?: ..., initiatedBy?: ..., userId?: ... } & { <xref
+          uid="@odata.type" />: ... })[], isDeleted?: boolean | null,
+          isProcessing?: boolean | null, riskDetail?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "none" | "hidden" |
+          "adminGeneratedTemporaryPassword" |
+          "userPerformedSecuredPasswordChange" |
+          "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+          "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+          "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+          "adminConfirmedUserCompromised" |
+          "adminConfirmedServicePrincipalCompromised" |
+          "adminDismissedAllRiskForServicePrincipal" |
+          "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+          "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+          riskLastUpdatedDateTime?: string | null, riskLevel?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "none" | "low" | "medium" | "high"
+          | "hidden" | null, riskState?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "none" | "confirmedSafe" | "remediated" |
+          "dismissed" | "atRisk" | "confirmedCompromised" | null,
+          userDisplayName?: string | null, userPrincipalName?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.riskyUser" />" })[],
+          servicePrincipalRiskDetections?: (Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, activity?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "user" | "signin" | "servicePrincipal" | null,
+          activityDateTime?: string | null, additionalInfo?: string | null,
+          appId?: string | null, correlationId?: string | null,
+          detectedDateTime?: string | null, detectionTimingType?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "notDefined" |
+          "realtime" | "nearRealtime" | "offline" | null, ipAddress?: string |
+          null, keyIds?: (string | null)[], lastUpdatedDateTime?: string | null,
+          location?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, city?: string | null, countryOrRegion?: string | null,
+          geoCoordinates?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, altitude?: function, latitude?:
+          function, longitude?: function } | null, state?: string | null } |
+          null, mitreTechniqueId?: string | null, requestId?: string | null,
+          riskDetail?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "none" | "hidden" | "adminGeneratedTemporaryPassword" |
+          "userPerformedSecuredPasswordChange" |
+          "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+          "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+          "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+          "adminConfirmedUserCompromised" |
+          "adminConfirmedServicePrincipalCompromised" |
+          "adminDismissedAllRiskForServicePrincipal" |
+          "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+          "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+          riskEventType?: string | null, riskLevel?: Record&lt;string, never&gt;
+          | "unknownFutureValue" | "none" | "low" | "medium" | "high" | "hidden"
+          | null, riskState?: Record&lt;string, never&gt; | "unknownFutureValue"
+          | "none" | "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+          "confirmedCompromised" | null, servicePrincipalDisplayName?: string |
+          null, servicePrincipalId?: string | null, source?: string | null,
+          tokenIssuerType?: Record&lt;string, never&gt; | "AzureAD" |
+          "ADFederationServices" | "UnknownFutureValue" | "AzureADBackupAuth" |
+          "ADFederationServicesMFAAdapter" | "NPSExtension" | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.servicePrincipalRiskDetection" />" })[] }&gt;
+  - name: >-
+      update({ @odata.type: string, riskDetections?: (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string, activity?:
+      Record<string, never> | "unknownFutureValue" | "user" | "signin" |
+      "servicePrincipal" | null, activityDateTime?: string | null,
+      additionalInfo?: string | null, correlationId?: string | null,
+      detectedDateTime?: string | null, detectionTimingType?: Record<string,
+      never> | "unknownFutureValue" | "notDefined" | "realtime" | "nearRealtime"
+      | "offline" | null, ipAddress?: string | null, lastUpdatedDateTime?:
+      string | null, location?: Record<string, never> | { @odata.type: string,
+      city?: string | null, countryOrRegion?: string | null, geoCoordinates?:
+      Record<string, never> | { @odata.type: string, altitude?: string | number
+      | null, latitude?: string | number | null, longitude?: string | number |
+      null } | null, state?: string | null } | null, mitreTechniqueId?: string |
+      null, requestId?: string | null, riskDetail?: Record<string, never> |
+      "unknownFutureValue" | "none" | "hidden" |
+      "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange" |
+      "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+      "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+      "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+      "adminConfirmedUserCompromised" |
+      "adminConfirmedServicePrincipalCompromised" |
+      "adminDismissedAllRiskForServicePrincipal" |
+      "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+      "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+      riskEventType?: string | null, riskLevel?: Record<string, never> |
+      "unknownFutureValue" | "none" | "low" | "medium" | "high" | "hidden" |
+      null, riskState?: Record<string, never> | "unknownFutureValue" | "none" |
+      "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+      "confirmedCompromised" | null, riskType?: Record<string, never> |
+      "unknownFutureValue" | "adminConfirmedUserCompromised" | "unlikelyTravel"
+      | "anonymizedIPAddress" | "maliciousIPAddress" | "unfamiliarFeatures" |
+      "malwareInfectedIPAddress" | "suspiciousIPAddress" | "leakedCredentials" |
+      "investigationsThreatIntelligence" | "generic" | "mcasImpossibleTravel" |
+      "mcasSuspiciousInboxManipulationRules" |
+      "investigationsThreatIntelligenceSigninLinked" |
+      "maliciousIPAddressValidCredentialsBlockedIP" | null, source?: string |
+      null, tokenIssuerType?: Record<string, never> | "AzureAD" |
+      "ADFederationServices" | "UnknownFutureValue" | "AzureADBackupAuth" |
+      "ADFederationServicesMFAAdapter" | "NPSExtension" | null,
+      userDisplayName?: string | null, userId?: string | null,
+      userPrincipalName?: string | null } & { @odata.type:
+      "#microsoft.graph.riskDetection" })[], riskyServicePrincipals?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+      string, accountEnabled?: boolean | null, appId?: string | null,
+      displayName?: string | null, history?: (Omit<Omit<{ id?: string |
+      undefined; '@odata.type': string; }, "@odata.type"> & Omit<{
+      accountEnabled?: boolean | null | undefined; appId?: string | null |
+      undefined; displayName?: string | null | undefined; ... 8 more ...;
+      '@odata.type': string; }, "@odata.type"> & { ...; }, "@odata.type"> & {
+      @odata.type: string, activity?: function, initiatedBy?: function,
+      servicePrincipalId?: function } & { @odata.type:
+      "#microsoft.graph.riskyServicePrincipalHistoryItem" })[], isEnabled?:
+      boolean | null, isProcessing?: boolean | null, riskDetail?: Record<string,
+      never> | "unknownFutureValue" | "none" | "hidden" |
+      "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange" |
+      "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+      "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+      "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+      "adminConfirmedUserCompromised" |
+      "adminConfirmedServicePrincipalCompromised" |
+      "adminDismissedAllRiskForServicePrincipal" |
+      "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+      "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+      riskLastUpdatedDateTime?: string | null, riskLevel?: Record<string, never>
+      | "unknownFutureValue" | "none" | "low" | "medium" | "high" | "hidden" |
+      null, riskState?: Record<string, never> | "unknownFutureValue" | "none" |
+      "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+      "confirmedCompromised" | null, servicePrincipalType?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.riskyServicePrincipal"
+      })[], riskyUsers?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, history?: (Omit<Omit<{ id?:
+      string | undefined; '@odata.type': string; }, "@odata.type"> & Omit<{
+      isDeleted?: boolean | null | undefined; isProcessing?: boolean | null |
+      undefined; riskDetail?: Record<...> | ... 19 more ... | undefined; ... 6
+      more ...; '@odata.type': string; }, "@odata.type"> & { ...; },
+      "@odata.type"> & { @odata.type: string, activity?: function, initiatedBy?:
+      function, userId?: function } & { @odata.type:
+      "#microsoft.graph.riskyUserHistoryItem" })[], isDeleted?: boolean | null,
+      isProcessing?: boolean | null, riskDetail?: Record<string, never> |
+      "unknownFutureValue" | "none" | "hidden" |
+      "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange" |
+      "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+      "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+      "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+      "adminConfirmedUserCompromised" |
+      "adminConfirmedServicePrincipalCompromised" |
+      "adminDismissedAllRiskForServicePrincipal" |
+      "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+      "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+      riskLastUpdatedDateTime?: string | null, riskLevel?: Record<string, never>
+      | "unknownFutureValue" | "none" | "low" | "medium" | "high" | "hidden" |
+      null, riskState?: Record<string, never> | "unknownFutureValue" | "none" |
+      "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+      "confirmedCompromised" | null, userDisplayName?: string | null,
+      userPrincipalName?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.riskyUser" })[], servicePrincipalRiskDetections?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, activity?: Record<string, never> |
+      "unknownFutureValue" | "user" | "signin" | "servicePrincipal" | null,
+      activityDateTime?: string | null, additionalInfo?: string | null, appId?:
+      string | null, correlationId?: string | null, detectedDateTime?: string |
+      null, detectionTimingType?: Record<string, never> | "unknownFutureValue" |
+      "notDefined" | "realtime" | "nearRealtime" | "offline" | null, ipAddress?:
+      string | null, keyIds?: (string | null)[], lastUpdatedDateTime?: string |
+      null, location?: Record<string, never> | { @odata.type: string, city?:
+      string | null, countryOrRegion?: string | null, geoCoordinates?:
+      Record<string, never> | { @odata.type: string, altitude?: string | number
+      | null, latitude?: string | number | null, longitude?: string | number |
+      null } | null, state?: string | null } | null, mitreTechniqueId?: string |
+      null, requestId?: string | null, riskDetail?: Record<string, never> |
+      "unknownFutureValue" | "none" | "hidden" |
+      "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange" |
+      "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+      "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+      "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+      "adminConfirmedUserCompromised" |
+      "adminConfirmedServicePrincipalCompromised" |
+      "adminDismissedAllRiskForServicePrincipal" |
+      "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+      "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+      riskEventType?: string | null, riskLevel?: Record<string, never> |
+      "unknownFutureValue" | "none" | "low" | "medium" | "high" | "hidden" |
+      null, riskState?: Record<string, never> | "unknownFutureValue" | "none" |
+      "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+      "confirmedCompromised" | null, servicePrincipalDisplayName?: string |
+      null, servicePrincipalId?: string | null, source?: string | null,
+      tokenIssuerType?: Record<string, never> | "AzureAD" |
+      "ADFederationServices" | "UnknownFutureValue" | "AzureADBackupAuth" |
+      "ADFederationServicesMFAAdapter" | "NPSExtension" | null } & {
+      @odata.type: "#microsoft.graph.servicePrincipalRiskDetection" })[] })
     uid: '@microsoft/teams.graph-endpoints-beta.identityProtection.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /identityProtection`'
@@ -34,17 +419,559 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/identityProtection", "patch">):
-        EndpointRequest<IEndpoints["PATCH /identityProtection"]["response"]>
+        function update(body: { @odata.type: string, riskDetections?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, activity?: Record<string, never> | "unknownFutureValue" | "user"
+        | "signin" | "servicePrincipal" | null, activityDateTime?: string |
+        null, additionalInfo?: string | null, correlationId?: string | null,
+        detectedDateTime?: string | null, detectionTimingType?: Record<string,
+        never> | "unknownFutureValue" | "notDefined" | "realtime" |
+        "nearRealtime" | "offline" | null, ipAddress?: string | null,
+        lastUpdatedDateTime?: string | null, location?: Record<string, never> |
+        { @odata.type: string, city?: string | null, countryOrRegion?: string |
+        null, geoCoordinates?: Record<string, never> | { @odata.type: string,
+        altitude?: string | number | null, latitude?: string | number | null,
+        longitude?: string | number | null } | null, state?: string | null } |
+        null, mitreTechniqueId?: string | null, requestId?: string | null,
+        riskDetail?: Record<string, never> | "unknownFutureValue" | "none" |
+        "hidden" | "adminGeneratedTemporaryPassword" |
+        "userPerformedSecuredPasswordChange" |
+        "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "adminConfirmedUserCompromised" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+        "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+        riskEventType?: string | null, riskLevel?: Record<string, never> |
+        "unknownFutureValue" | "none" | "low" | "medium" | "high" | "hidden" |
+        null, riskState?: Record<string, never> | "unknownFutureValue" | "none"
+        | "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+        "confirmedCompromised" | null, riskType?: Record<string, never> |
+        "unknownFutureValue" | "adminConfirmedUserCompromised" |
+        "unlikelyTravel" | "anonymizedIPAddress" | "maliciousIPAddress" |
+        "unfamiliarFeatures" | "malwareInfectedIPAddress" |
+        "suspiciousIPAddress" | "leakedCredentials" |
+        "investigationsThreatIntelligence" | "generic" | "mcasImpossibleTravel"
+        | "mcasSuspiciousInboxManipulationRules" |
+        "investigationsThreatIntelligenceSigninLinked" |
+        "maliciousIPAddressValidCredentialsBlockedIP" | null, source?: string |
+        null, tokenIssuerType?: Record<string, never> | "AzureAD" |
+        "ADFederationServices" | "UnknownFutureValue" | "AzureADBackupAuth" |
+        "ADFederationServicesMFAAdapter" | "NPSExtension" | null,
+        userDisplayName?: string | null, userId?: string | null,
+        userPrincipalName?: string | null } & { @odata.type:
+        "#microsoft.graph.riskDetection" })[], riskyServicePrincipals?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, accountEnabled?: boolean | null, appId?: string | null,
+        displayName?: string | null, history?: (Omit<Omit<{ id?: string |
+        undefined; '@odata.type': string; }, "@odata.type"> & Omit<{
+        accountEnabled?: boolean | null | undefined; appId?: string | null |
+        undefined; displayName?: string | null | undefined; ... 8 more ...;
+        '@odata.type': string; }, "@odata.type"> & { ...; }, "@odata.type"> & {
+        @odata.type: string, activity?: function, initiatedBy?: function,
+        servicePrincipalId?: function } & { @odata.type:
+        "#microsoft.graph.riskyServicePrincipalHistoryItem" })[], isEnabled?:
+        boolean | null, isProcessing?: boolean | null, riskDetail?:
+        Record<string, never> | "unknownFutureValue" | "none" | "hidden" |
+        "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange"
+        | "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "adminConfirmedUserCompromised" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+        "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+        riskLastUpdatedDateTime?: string | null, riskLevel?: Record<string,
+        never> | "unknownFutureValue" | "none" | "low" | "medium" | "high" |
+        "hidden" | null, riskState?: Record<string, never> |
+        "unknownFutureValue" | "none" | "confirmedSafe" | "remediated" |
+        "dismissed" | "atRisk" | "confirmedCompromised" | null,
+        servicePrincipalType?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.riskyServicePrincipal" })[], riskyUsers?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, history?: (Omit<Omit<{ id?: string | undefined; '@odata.type':
+        string; }, "@odata.type"> & Omit<{ isDeleted?: boolean | null |
+        undefined; isProcessing?: boolean | null | undefined; riskDetail?:
+        Record<...> | ... 19 more ... | undefined; ... 6 more ...;
+        '@odata.type': string; }, "@odata.type"> & { ...; }, "@odata.type"> & {
+        @odata.type: string, activity?: function, initiatedBy?: function,
+        userId?: function } & { @odata.type:
+        "#microsoft.graph.riskyUserHistoryItem" })[], isDeleted?: boolean |
+        null, isProcessing?: boolean | null, riskDetail?: Record<string, never>
+        | "unknownFutureValue" | "none" | "hidden" |
+        "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange"
+        | "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "adminConfirmedUserCompromised" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+        "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+        riskLastUpdatedDateTime?: string | null, riskLevel?: Record<string,
+        never> | "unknownFutureValue" | "none" | "low" | "medium" | "high" |
+        "hidden" | null, riskState?: Record<string, never> |
+        "unknownFutureValue" | "none" | "confirmedSafe" | "remediated" |
+        "dismissed" | "atRisk" | "confirmedCompromised" | null,
+        userDisplayName?: string | null, userPrincipalName?: string | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.riskyUser" })[],
+        servicePrincipalRiskDetections?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, activity?:
+        Record<string, never> | "unknownFutureValue" | "user" | "signin" |
+        "servicePrincipal" | null, activityDateTime?: string | null,
+        additionalInfo?: string | null, appId?: string | null, correlationId?:
+        string | null, detectedDateTime?: string | null, detectionTimingType?:
+        Record<string, never> | "unknownFutureValue" | "notDefined" | "realtime"
+        | "nearRealtime" | "offline" | null, ipAddress?: string | null, keyIds?:
+        (string | null)[], lastUpdatedDateTime?: string | null, location?:
+        Record<string, never> | { @odata.type: string, city?: string | null,
+        countryOrRegion?: string | null, geoCoordinates?: Record<string, never>
+        | { @odata.type: string, altitude?: string | number | null, latitude?:
+        string | number | null, longitude?: string | number | null } | null,
+        state?: string | null } | null, mitreTechniqueId?: string | null,
+        requestId?: string | null, riskDetail?: Record<string, never> |
+        "unknownFutureValue" | "none" | "hidden" |
+        "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange"
+        | "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "adminConfirmedUserCompromised" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+        "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+        riskEventType?: string | null, riskLevel?: Record<string, never> |
+        "unknownFutureValue" | "none" | "low" | "medium" | "high" | "hidden" |
+        null, riskState?: Record<string, never> | "unknownFutureValue" | "none"
+        | "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+        "confirmedCompromised" | null, servicePrincipalDisplayName?: string |
+        null, servicePrincipalId?: string | null, source?: string | null,
+        tokenIssuerType?: Record<string, never> | "AzureAD" |
+        "ADFederationServices" | "UnknownFutureValue" | "AzureADBackupAuth" |
+        "ADFederationServicesMFAAdapter" | "NPSExtension" | null } & {
+        @odata.type: "#microsoft.graph.servicePrincipalRiskDetection" })[] }):
+        EndpointRequest<{ @odata.type: string, riskDetections?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, activity?: Record<string, never> | "unknownFutureValue" | "user"
+        | "signin" | "servicePrincipal" | null, activityDateTime?: string |
+        null, additionalInfo?: string | null, correlationId?: string | null,
+        detectedDateTime?: string | null, detectionTimingType?: Record<string,
+        never> | "unknownFutureValue" | "notDefined" | "realtime" |
+        "nearRealtime" | "offline" | null, ipAddress?: string | null,
+        lastUpdatedDateTime?: string | null, location?: Record<string, never> |
+        { @odata.type: string, city?: string | null, countryOrRegion?: string |
+        null, geoCoordinates?: Record<string, never> | { @odata.type: string,
+        altitude?: function, latitude?: function, longitude?: function } | null,
+        state?: string | null } | null, mitreTechniqueId?: string | null,
+        requestId?: string | null, riskDetail?: Record<string, never> |
+        "unknownFutureValue" | "none" | "hidden" |
+        "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange"
+        | "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "adminConfirmedUserCompromised" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+        "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+        riskEventType?: string | null, riskLevel?: Record<string, never> |
+        "unknownFutureValue" | "none" | "low" | "medium" | "high" | "hidden" |
+        null, riskState?: Record<string, never> | "unknownFutureValue" | "none"
+        | "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+        "confirmedCompromised" | null, riskType?: Record<string, never> |
+        "unknownFutureValue" | "adminConfirmedUserCompromised" |
+        "unlikelyTravel" | "anonymizedIPAddress" | "maliciousIPAddress" |
+        "unfamiliarFeatures" | "malwareInfectedIPAddress" |
+        "suspiciousIPAddress" | "leakedCredentials" |
+        "investigationsThreatIntelligence" | "generic" | "mcasImpossibleTravel"
+        | "mcasSuspiciousInboxManipulationRules" |
+        "investigationsThreatIntelligenceSigninLinked" |
+        "maliciousIPAddressValidCredentialsBlockedIP" | null, source?: string |
+        null, tokenIssuerType?: Record<string, never> | "AzureAD" |
+        "ADFederationServices" | "UnknownFutureValue" | "AzureADBackupAuth" |
+        "ADFederationServicesMFAAdapter" | "NPSExtension" | null,
+        userDisplayName?: string | null, userId?: string | null,
+        userPrincipalName?: string | null } & { @odata.type:
+        "#microsoft.graph.riskDetection" })[], riskyServicePrincipals?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, accountEnabled?: boolean | null, appId?: string | null,
+        displayName?: string | null, history?: (Omit<..., ...> & { @odata.type:
+        ..., activity?: ..., initiatedBy?: ..., servicePrincipalId?: ... } & {
+        @odata.type: ... })[], isEnabled?: boolean | null, isProcessing?:
+        boolean | null, riskDetail?: Record<string, never> |
+        "unknownFutureValue" | "none" | "hidden" |
+        "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange"
+        | "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "adminConfirmedUserCompromised" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+        "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+        riskLastUpdatedDateTime?: string | null, riskLevel?: Record<string,
+        never> | "unknownFutureValue" | "none" | "low" | "medium" | "high" |
+        "hidden" | null, riskState?: Record<string, never> |
+        "unknownFutureValue" | "none" | "confirmedSafe" | "remediated" |
+        "dismissed" | "atRisk" | "confirmedCompromised" | null,
+        servicePrincipalType?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.riskyServicePrincipal" })[], riskyUsers?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, history?: (Omit<..., ...> & { @odata.type: ..., activity?: ...,
+        initiatedBy?: ..., userId?: ... } & { @odata.type: ... })[], isDeleted?:
+        boolean | null, isProcessing?: boolean | null, riskDetail?:
+        Record<string, never> | "unknownFutureValue" | "none" | "hidden" |
+        "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange"
+        | "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "adminConfirmedUserCompromised" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+        "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+        riskLastUpdatedDateTime?: string | null, riskLevel?: Record<string,
+        never> | "unknownFutureValue" | "none" | "low" | "medium" | "high" |
+        "hidden" | null, riskState?: Record<string, never> |
+        "unknownFutureValue" | "none" | "confirmedSafe" | "remediated" |
+        "dismissed" | "atRisk" | "confirmedCompromised" | null,
+        userDisplayName?: string | null, userPrincipalName?: string | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.riskyUser" })[],
+        servicePrincipalRiskDetections?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, activity?:
+        Record<string, never> | "unknownFutureValue" | "user" | "signin" |
+        "servicePrincipal" | null, activityDateTime?: string | null,
+        additionalInfo?: string | null, appId?: string | null, correlationId?:
+        string | null, detectedDateTime?: string | null, detectionTimingType?:
+        Record<string, never> | "unknownFutureValue" | "notDefined" | "realtime"
+        | "nearRealtime" | "offline" | null, ipAddress?: string | null, keyIds?:
+        (string | null)[], lastUpdatedDateTime?: string | null, location?:
+        Record<string, never> | { @odata.type: string, city?: string | null,
+        countryOrRegion?: string | null, geoCoordinates?: Record<string, never>
+        | { @odata.type: string, altitude?: function, latitude?: function,
+        longitude?: function } | null, state?: string | null } | null,
+        mitreTechniqueId?: string | null, requestId?: string | null,
+        riskDetail?: Record<string, never> | "unknownFutureValue" | "none" |
+        "hidden" | "adminGeneratedTemporaryPassword" |
+        "userPerformedSecuredPasswordChange" |
+        "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "adminConfirmedUserCompromised" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+        "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+        riskEventType?: string | null, riskLevel?: Record<string, never> |
+        "unknownFutureValue" | "none" | "low" | "medium" | "high" | "hidden" |
+        null, riskState?: Record<string, never> | "unknownFutureValue" | "none"
+        | "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+        "confirmedCompromised" | null, servicePrincipalDisplayName?: string |
+        null, servicePrincipalId?: string | null, source?: string | null,
+        tokenIssuerType?: Record<string, never> | "AzureAD" |
+        "ADFederationServices" | "UnknownFutureValue" | "AzureADBackupAuth" |
+        "ADFederationServicesMFAAdapter" | "NPSExtension" | null } & {
+        @odata.type: "#microsoft.graph.servicePrincipalRiskDetection" })[] }>
       parameters:
         - id: body
-          type: Operation&lt;"/identityProtection", "patch"&gt;
+          type: >-
+            { <xref uid="@odata.type" />: string, riskDetections?: (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            activity?: Record&lt;string, never&gt; | "unknownFutureValue" |
+            "user" | "signin" | "servicePrincipal" | null, activityDateTime?:
+            string | null, additionalInfo?: string | null, correlationId?:
+            string | null, detectedDateTime?: string | null,
+            detectionTimingType?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "notDefined" | "realtime" | "nearRealtime" |
+            "offline" | null, ipAddress?: string | null, lastUpdatedDateTime?:
+            string | null, location?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, city?: string | null,
+            countryOrRegion?: string | null, geoCoordinates?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, altitude?: string
+            | number | null, latitude?: string | number | null, longitude?:
+            string | number | null } | null, state?: string | null } | null,
+            mitreTechniqueId?: string | null, requestId?: string | null,
+            riskDetail?: Record&lt;string, never&gt; | "unknownFutureValue" |
+            "none" | "hidden" | "adminGeneratedTemporaryPassword" |
+            "userPerformedSecuredPasswordChange" |
+            "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+            "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+            "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+            "adminConfirmedUserCompromised" |
+            "adminConfirmedServicePrincipalCompromised" |
+            "adminDismissedAllRiskForServicePrincipal" |
+            "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+            "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+            riskEventType?: string | null, riskLevel?: Record&lt;string,
+            never&gt; | "unknownFutureValue" | "none" | "low" | "medium" |
+            "high" | "hidden" | null, riskState?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "none" | "confirmedSafe" | "remediated" |
+            "dismissed" | "atRisk" | "confirmedCompromised" | null, riskType?:
+            Record&lt;string, never&gt; | "unknownFutureValue" |
+            "adminConfirmedUserCompromised" | "unlikelyTravel" |
+            "anonymizedIPAddress" | "maliciousIPAddress" | "unfamiliarFeatures"
+            | "malwareInfectedIPAddress" | "suspiciousIPAddress" |
+            "leakedCredentials" | "investigationsThreatIntelligence" | "generic"
+            | "mcasImpossibleTravel" | "mcasSuspiciousInboxManipulationRules" |
+            "investigationsThreatIntelligenceSigninLinked" |
+            "maliciousIPAddressValidCredentialsBlockedIP" | null, source?:
+            string | null, tokenIssuerType?: Record&lt;string, never&gt; |
+            "AzureAD" | "ADFederationServices" | "UnknownFutureValue" |
+            "AzureADBackupAuth" | "ADFederationServicesMFAAdapter" |
+            "NPSExtension" | null, userDisplayName?: string | null, userId?:
+            string | null, userPrincipalName?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.riskDetection"
+            />" })[], riskyServicePrincipals?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, accountEnabled?: boolean | null, appId?: string | null,
+            displayName?: string | null, history?: (Omit&lt;Omit&lt;{ id?:
+            string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ accountEnabled?: boolean |
+            null | undefined; appId?: string | null | undefined; displayName?:
+            string | null | undefined; ... 8 more ...; '<xref uid="@odata.type"
+            />': string; }, "<xref uid="@odata.type" />"&gt; & { ...; }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            activity?: function, initiatedBy?: function, servicePrincipalId?:
+            function } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.riskyServicePrincipalHistoryItem" />" })[],
+            isEnabled?: boolean | null, isProcessing?: boolean | null,
+            riskDetail?: Record&lt;string, never&gt; | "unknownFutureValue" |
+            "none" | "hidden" | "adminGeneratedTemporaryPassword" |
+            "userPerformedSecuredPasswordChange" |
+            "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+            "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+            "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+            "adminConfirmedUserCompromised" |
+            "adminConfirmedServicePrincipalCompromised" |
+            "adminDismissedAllRiskForServicePrincipal" |
+            "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+            "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+            riskLastUpdatedDateTime?: string | null, riskLevel?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "none" | "low"
+            | "medium" | "high" | "hidden" | null, riskState?: Record&lt;string,
+            never&gt; | "unknownFutureValue" | "none" | "confirmedSafe" |
+            "remediated" | "dismissed" | "atRisk" | "confirmedCompromised" |
+            null, servicePrincipalType?: string | null }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.riskyServicePrincipal" />" })[], riskyUsers?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, history?: (Omit&lt;Omit&lt;{ id?: string | undefined; '<xref
+            uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; &
+            Omit&lt;{ isDeleted?: boolean | null | undefined; isProcessing?:
+            boolean | null | undefined; riskDetail?: Record&lt;...&gt; | ... 19
+            more ... | undefined; ... 6 more ...; '<xref uid="@odata.type" />':
+            string; }, "<xref uid="@odata.type" />"&gt; & { ...; }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            activity?: function, initiatedBy?: function, userId?: function } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.riskyUserHistoryItem" />" })[], isDeleted?:
+            boolean | null, isProcessing?: boolean | null, riskDetail?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "none" |
+            "hidden" | "adminGeneratedTemporaryPassword" |
+            "userPerformedSecuredPasswordChange" |
+            "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+            "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+            "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+            "adminConfirmedUserCompromised" |
+            "adminConfirmedServicePrincipalCompromised" |
+            "adminDismissedAllRiskForServicePrincipal" |
+            "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+            "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+            riskLastUpdatedDateTime?: string | null, riskLevel?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "none" | "low"
+            | "medium" | "high" | "hidden" | null, riskState?: Record&lt;string,
+            never&gt; | "unknownFutureValue" | "none" | "confirmedSafe" |
+            "remediated" | "dismissed" | "atRisk" | "confirmedCompromised" |
+            null, userDisplayName?: string | null, userPrincipalName?: string |
+            null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.riskyUser" />" })[],
+            servicePrincipalRiskDetections?: (Omit&lt;{ <xref uid="@odata.type"
+            />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, activity?: Record&lt;string,
+            never&gt; | "unknownFutureValue" | "user" | "signin" |
+            "servicePrincipal" | null, activityDateTime?: string | null,
+            additionalInfo?: string | null, appId?: string | null,
+            correlationId?: string | null, detectedDateTime?: string | null,
+            detectionTimingType?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "notDefined" | "realtime" | "nearRealtime" |
+            "offline" | null, ipAddress?: string | null, keyIds?: (string |
+            null)[], lastUpdatedDateTime?: string | null, location?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            city?: string | null, countryOrRegion?: string | null,
+            geoCoordinates?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, altitude?: string | number | null,
+            latitude?: string | number | null, longitude?: string | number |
+            null } | null, state?: string | null } | null, mitreTechniqueId?:
+            string | null, requestId?: string | null, riskDetail?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "none" |
+            "hidden" | "adminGeneratedTemporaryPassword" |
+            "userPerformedSecuredPasswordChange" |
+            "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+            "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+            "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+            "adminConfirmedUserCompromised" |
+            "adminConfirmedServicePrincipalCompromised" |
+            "adminDismissedAllRiskForServicePrincipal" |
+            "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+            "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+            riskEventType?: string | null, riskLevel?: Record&lt;string,
+            never&gt; | "unknownFutureValue" | "none" | "low" | "medium" |
+            "high" | "hidden" | null, riskState?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "none" | "confirmedSafe" | "remediated" |
+            "dismissed" | "atRisk" | "confirmedCompromised" | null,
+            servicePrincipalDisplayName?: string | null, servicePrincipalId?:
+            string | null, source?: string | null, tokenIssuerType?:
+            Record&lt;string, never&gt; | "AzureAD" | "ADFederationServices" |
+            "UnknownFutureValue" | "AzureADBackupAuth" |
+            "ADFederationServicesMFAAdapter" | "NPSExtension" | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.servicePrincipalRiskDetection" />" })[] }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /identityProtection"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string,
+          riskDetections?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, activity?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "user" | "signin" | "servicePrincipal" | null,
+          activityDateTime?: string | null, additionalInfo?: string | null,
+          correlationId?: string | null, detectedDateTime?: string | null,
+          detectionTimingType?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "notDefined" | "realtime" | "nearRealtime" |
+          "offline" | null, ipAddress?: string | null, lastUpdatedDateTime?:
+          string | null, location?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, city?: string | null, countryOrRegion?:
+          string | null, geoCoordinates?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, altitude?: function, latitude?:
+          function, longitude?: function } | null, state?: string | null } |
+          null, mitreTechniqueId?: string | null, requestId?: string | null,
+          riskDetail?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "none" | "hidden" | "adminGeneratedTemporaryPassword" |
+          "userPerformedSecuredPasswordChange" |
+          "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+          "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+          "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+          "adminConfirmedUserCompromised" |
+          "adminConfirmedServicePrincipalCompromised" |
+          "adminDismissedAllRiskForServicePrincipal" |
+          "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+          "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+          riskEventType?: string | null, riskLevel?: Record&lt;string, never&gt;
+          | "unknownFutureValue" | "none" | "low" | "medium" | "high" | "hidden"
+          | null, riskState?: Record&lt;string, never&gt; | "unknownFutureValue"
+          | "none" | "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+          "confirmedCompromised" | null, riskType?: Record&lt;string, never&gt;
+          | "unknownFutureValue" | "adminConfirmedUserCompromised" |
+          "unlikelyTravel" | "anonymizedIPAddress" | "maliciousIPAddress" |
+          "unfamiliarFeatures" | "malwareInfectedIPAddress" |
+          "suspiciousIPAddress" | "leakedCredentials" |
+          "investigationsThreatIntelligence" | "generic" |
+          "mcasImpossibleTravel" | "mcasSuspiciousInboxManipulationRules" |
+          "investigationsThreatIntelligenceSigninLinked" |
+          "maliciousIPAddressValidCredentialsBlockedIP" | null, source?: string
+          | null, tokenIssuerType?: Record&lt;string, never&gt; | "AzureAD" |
+          "ADFederationServices" | "UnknownFutureValue" | "AzureADBackupAuth" |
+          "ADFederationServicesMFAAdapter" | "NPSExtension" | null,
+          userDisplayName?: string | null, userId?: string | null,
+          userPrincipalName?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.riskDetection" />" })[],
+          riskyServicePrincipals?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, accountEnabled?: boolean | null,
+          appId?: string | null, displayName?: string | null, history?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ..., activity?:
+          ..., initiatedBy?: ..., servicePrincipalId?: ... } & { <xref
+          uid="@odata.type" />: ... })[], isEnabled?: boolean | null,
+          isProcessing?: boolean | null, riskDetail?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "none" | "hidden" |
+          "adminGeneratedTemporaryPassword" |
+          "userPerformedSecuredPasswordChange" |
+          "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+          "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+          "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+          "adminConfirmedUserCompromised" |
+          "adminConfirmedServicePrincipalCompromised" |
+          "adminDismissedAllRiskForServicePrincipal" |
+          "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+          "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+          riskLastUpdatedDateTime?: string | null, riskLevel?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "none" | "low" | "medium" | "high"
+          | "hidden" | null, riskState?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "none" | "confirmedSafe" | "remediated" |
+          "dismissed" | "atRisk" | "confirmedCompromised" | null,
+          servicePrincipalType?: string | null }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.riskyServicePrincipal" />" })[], riskyUsers?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, history?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type"
+          />: ..., activity?: ..., initiatedBy?: ..., userId?: ... } & { <xref
+          uid="@odata.type" />: ... })[], isDeleted?: boolean | null,
+          isProcessing?: boolean | null, riskDetail?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "none" | "hidden" |
+          "adminGeneratedTemporaryPassword" |
+          "userPerformedSecuredPasswordChange" |
+          "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+          "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+          "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+          "adminConfirmedUserCompromised" |
+          "adminConfirmedServicePrincipalCompromised" |
+          "adminDismissedAllRiskForServicePrincipal" |
+          "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+          "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+          riskLastUpdatedDateTime?: string | null, riskLevel?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "none" | "low" | "medium" | "high"
+          | "hidden" | null, riskState?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "none" | "confirmedSafe" | "remediated" |
+          "dismissed" | "atRisk" | "confirmedCompromised" | null,
+          userDisplayName?: string | null, userPrincipalName?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.riskyUser" />" })[],
+          servicePrincipalRiskDetections?: (Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, activity?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "user" | "signin" | "servicePrincipal" | null,
+          activityDateTime?: string | null, additionalInfo?: string | null,
+          appId?: string | null, correlationId?: string | null,
+          detectedDateTime?: string | null, detectionTimingType?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "notDefined" |
+          "realtime" | "nearRealtime" | "offline" | null, ipAddress?: string |
+          null, keyIds?: (string | null)[], lastUpdatedDateTime?: string | null,
+          location?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, city?: string | null, countryOrRegion?: string | null,
+          geoCoordinates?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, altitude?: function, latitude?:
+          function, longitude?: function } | null, state?: string | null } |
+          null, mitreTechniqueId?: string | null, requestId?: string | null,
+          riskDetail?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "none" | "hidden" | "adminGeneratedTemporaryPassword" |
+          "userPerformedSecuredPasswordChange" |
+          "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+          "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+          "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+          "adminConfirmedUserCompromised" |
+          "adminConfirmedServicePrincipalCompromised" |
+          "adminDismissedAllRiskForServicePrincipal" |
+          "m365DAdminDismissedDetection" | "userChangedPasswordOnPremises" |
+          "adminDismissedRiskForSignIn" | "adminConfirmedAccountSafe" | null,
+          riskEventType?: string | null, riskLevel?: Record&lt;string, never&gt;
+          | "unknownFutureValue" | "none" | "low" | "medium" | "high" | "hidden"
+          | null, riskState?: Record&lt;string, never&gt; | "unknownFutureValue"
+          | "none" | "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+          "confirmedCompromised" | null, servicePrincipalDisplayName?: string |
+          null, servicePrincipalId?: string | null, source?: string | null,
+          tokenIssuerType?: Record&lt;string, never&gt; | "AzureAD" |
+          "ADFederationServices" | "UnknownFutureValue" | "AzureADBackupAuth" |
+          "ADFederationServicesMFAAdapter" | "NPSExtension" | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.servicePrincipalRiskDetection" />" })[] }&gt;
 variables:
   - name: riskDetections
     uid: '@microsoft/teams.graph-endpoints-beta.identityProtection.riskDetections'
