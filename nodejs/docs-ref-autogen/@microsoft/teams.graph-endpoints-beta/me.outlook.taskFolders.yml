@@ -7,7 +7,56 @@ interfaces:
   - '@microsoft/teams.graph-endpoints-beta.me.outlook.taskFolders.IEndpoints'
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: create(Operation<"/me/outlook/taskFolders", "post">)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, changeKey?: string | null, isDefaultFolder?: boolean
+      | null, multiValueExtendedProperties?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, value?: (string |
+      null)[] } & { @odata.type:
+      "#microsoft.graph.multiValueLegacyExtendedProperty" })[], name?: string |
+      null, parentGroupKey?: string | null, singleValueExtendedProperties?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, value?: string | null } & { @odata.type:
+      "#microsoft.graph.singleValueLegacyExtendedProperty" })[], tasks?:
+      (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, categories?: ...[], changeKey?: string | null,
+      createdDateTime?: string | null, lastModifiedDateTime?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.outlookItem" },
+      "@odata.type"> & { @odata.type: string, assignedTo?: string | null,
+      attachments?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> &
+      Omit<{ @odata.type: ..., contentType?: ..., isInline?: ...,
+      lastModifiedDateTime?: ..., name?: ..., size?: ... }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.attachment" })[], body?: Record<string,
+      never> | { @odata.type: string, content?: string | null, contentType?:
+      Record<string, never> | "text" | "html" | null } | null,
+      completedDateTime?: Record<string, never> | { @odata.type: string,
+      dateTime?: string, timeZone?: string | null } | null, dueDateTime?:
+      Record<string, never> | { @odata.type: string, dateTime?: string,
+      timeZone?: string | null } | null, hasAttachments?: boolean | null,
+      importance?: Record<string, never> | "low" | "high" | "normal" | null,
+      isReminderOn?: boolean | null, multiValueExtendedProperties?: (Omit<{
+      @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+      value?: function } & { @odata.type:
+      "#microsoft.graph.multiValueLegacyExtendedProperty" })[], owner?: string |
+      null, parentFolderId?: string | null, recurrence?: Record<string, never> |
+      { @odata.type: string, pattern?: Record<string, never> | { @odata.type:
+      string, dayOfMonth?: function, daysOfWeek?: function, firstDayOfWeek?:
+      function, index?: function, interval?: function, month?: function, type?:
+      function } | null, range?: Record<string, never> | { @odata.type: string,
+      endDate?: function, numberOfOccurrences?: function, recurrenceTimeZone?:
+      function, startDate?: function, type?: function } | null } | null,
+      reminderDateTime?: Record<string, never> | { @odata.type: string,
+      dateTime?: string, timeZone?: string | null } | null, sensitivity?:
+      Record<string, never> | "normal" | "personal" | "private" | "confidential"
+      | null, singleValueExtendedProperties?: (Omit<{ @odata.type: ..., id?: ...
+      }, "@odata.type"> & { @odata.type: string, value?: function } & {
+      @odata.type: "#microsoft.graph.singleValueLegacyExtendedProperty" })[],
+      startDateTime?: Record<string, never> | { @odata.type: string, dateTime?:
+      string, timeZone?: string | null } | null, status?: Record<string, never>
+      | "notStarted" | "inProgress" | "completed" | "waitingOnOthers" |
+      "deferred" | null, subject?: string | null } & { @odata.type:
+      "#microsoft.graph.outlookTask" })[] } & { @odata.type:
+      "#microsoft.graph.outlookTaskFolder" })
     uid: '@microsoft/teams.graph-endpoints-beta.me.outlook.taskFolders.create'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: >-
@@ -21,18 +70,229 @@ functions:
     customDeprecatedMessage: ''
     syntax:
       content: >-
-        function create(body: Operation<"/me/outlook/taskFolders", "post">):
-        EndpointRequest<IEndpoints["POST /me/outlook/taskFolders"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, changeKey?: string | null,
+        isDefaultFolder?: boolean | null, multiValueExtendedProperties?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, value?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.multiValueLegacyExtendedProperty" })[], name?: string
+        | null, parentGroupKey?: string | null, singleValueExtendedProperties?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, value?: string | null } & { @odata.type:
+        "#microsoft.graph.singleValueLegacyExtendedProperty" })[], tasks?:
+        (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, categories?: ...[], changeKey?: string | null,
+        createdDateTime?: string | null, lastModifiedDateTime?: string | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.outlookItem" },
+        "@odata.type"> & { @odata.type: string, assignedTo?: string | null,
+        attachments?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> &
+        Omit<{ @odata.type: ..., contentType?: ..., isInline?: ...,
+        lastModifiedDateTime?: ..., name?: ..., size?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.attachment" })[], body?: Record<string,
+        never> | { @odata.type: string, content?: string | null, contentType?:
+        Record<string, never> | "text" | "html" | null } | null,
+        completedDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, dueDateTime?:
+        Record<string, never> | { @odata.type: string, dateTime?: string,
+        timeZone?: string | null } | null, hasAttachments?: boolean | null,
+        importance?: Record<string, never> | "low" | "high" | "normal" | null,
+        isReminderOn?: boolean | null, multiValueExtendedProperties?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        value?: function } & { @odata.type:
+        "#microsoft.graph.multiValueLegacyExtendedProperty" })[], owner?: string
+        | null, parentFolderId?: string | null, recurrence?: Record<string,
+        never> | { @odata.type: string, pattern?: Record<string, never> | {
+        @odata.type: string, dayOfMonth?: function, daysOfWeek?: function,
+        firstDayOfWeek?: function, index?: function, interval?: function,
+        month?: function, type?: function } | null, range?: Record<string,
+        never> | { @odata.type: string, endDate?: function,
+        numberOfOccurrences?: function, recurrenceTimeZone?: function,
+        startDate?: function, type?: function } | null } | null,
+        reminderDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, sensitivity?:
+        Record<string, never> | "normal" | "personal" | "private" |
+        "confidential" | null, singleValueExtendedProperties?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        value?: function } & { @odata.type:
+        "#microsoft.graph.singleValueLegacyExtendedProperty" })[],
+        startDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, status?:
+        Record<string, never> | "notStarted" | "inProgress" | "completed" |
+        "waitingOnOthers" | "deferred" | null, subject?: string | null } & {
+        @odata.type: "#microsoft.graph.outlookTask" })[] } & { @odata.type:
+        "#microsoft.graph.outlookTaskFolder" }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, changeKey?: string | null, isDefaultFolder?: boolean | null,
+        multiValueExtendedProperties?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, value?: (string | null)[] } &
+        { @odata.type: "#microsoft.graph.multiValueLegacyExtendedProperty" })[],
+        name?: string | null, parentGroupKey?: string | null,
+        singleValueExtendedProperties?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, value?: string | null } & {
+        @odata.type: "#microsoft.graph.singleValueLegacyExtendedProperty" })[],
+        tasks?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, categories?: function,
+        changeKey?: function, createdDateTime?: function, lastModifiedDateTime?:
+        function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.outlookItem" }, "@odata.type"> & { @odata.type:
+        string, assignedTo?: string | null, attachments?: (Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... })[], body?: Record<string, never> |
+        { @odata.type: string, content?: string | null, contentType?:
+        Record<..., ...> | "text" | "html" | null } | null, completedDateTime?:
+        Record<string, never> | { @odata.type: string, dateTime?: string,
+        timeZone?: string | null } | null, dueDateTime?: Record<string, never> |
+        { @odata.type: string, dateTime?: string, timeZone?: string | null } |
+        null, hasAttachments?: boolean | null, importance?: Record<string,
+        never> | "low" | "high" | "normal" | null, isReminderOn?: boolean |
+        null, multiValueExtendedProperties?: (Omit<..., ...> & { @odata.type:
+        ..., value?: ... } & { @odata.type: ... })[], owner?: string | null,
+        parentFolderId?: string | null, recurrence?: Record<string, never> | {
+        @odata.type: string, pattern?: Record<..., ...> | { @odata.type: ...,
+        dayOfMonth?: ..., daysOfWeek?: ..., firstDayOfWeek?: ..., index?: ...,
+        interval?: ..., month?: ..., type?: ... } | null, range?: Record<...,
+        ...> | { @odata.type: ..., endDate?: ..., numberOfOccurrences?: ...,
+        recurrenceTimeZone?: ..., startDate?: ..., type?: ... } | null } | null,
+        reminderDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, sensitivity?:
+        Record<string, never> | "normal" | "personal" | "private" |
+        "confidential" | null, singleValueExtendedProperties?: (Omit<..., ...> &
+        { @odata.type: ..., value?: ... } & { @odata.type: ... })[],
+        startDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, status?:
+        Record<string, never> | "notStarted" | "inProgress" | "completed" |
+        "waitingOnOthers" | "deferred" | null, subject?: string | null } & {
+        @odata.type: "#microsoft.graph.outlookTask" })[] } & { @odata.type:
+        "#microsoft.graph.outlookTaskFolder" }>
       parameters:
         - id: body
-          type: Operation&lt;"/me/outlook/taskFolders", "post"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            changeKey?: string | null, isDefaultFolder?: boolean | null,
+            multiValueExtendedProperties?: (Omit&lt;{ <xref uid="@odata.type"
+            />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, value?: (string | null)[] } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.multiValueLegacyExtendedProperty" />" })[],
+            name?: string | null, parentGroupKey?: string | null,
+            singleValueExtendedProperties?: (Omit&lt;{ <xref uid="@odata.type"
+            />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, value?: string | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.singleValueLegacyExtendedProperty" />" })[],
+            tasks?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, categories?: ...[], changeKey?: string
+            | null, createdDateTime?: string | null, lastModifiedDateTime?:
+            string | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.outlookItem" />"
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, assignedTo?: string | null, attachments?: (Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., contentType?:
+            ..., isInline?: ..., lastModifiedDateTime?: ..., name?: ..., size?:
+            ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.attachment" />" })[], body?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            content?: string | null, contentType?: Record&lt;string, never&gt; |
+            "text" | "html" | null } | null, completedDateTime?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            dateTime?: string, timeZone?: string | null } | null, dueDateTime?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            dateTime?: string, timeZone?: string | null } | null,
+            hasAttachments?: boolean | null, importance?: Record&lt;string,
+            never&gt; | "low" | "high" | "normal" | null, isReminderOn?: boolean
+            | null, multiValueExtendedProperties?: (Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, value?: function } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.multiValueLegacyExtendedProperty" />" })[],
+            owner?: string | null, parentFolderId?: string | null, recurrence?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            pattern?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, dayOfMonth?: function, daysOfWeek?: function,
+            firstDayOfWeek?: function, index?: function, interval?: function,
+            month?: function, type?: function } | null, range?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            endDate?: function, numberOfOccurrences?: function,
+            recurrenceTimeZone?: function, startDate?: function, type?: function
+            } | null } | null, reminderDateTime?: Record&lt;string, never&gt; |
+            { <xref uid="@odata.type" />: string, dateTime?: string, timeZone?:
+            string | null } | null, sensitivity?: Record&lt;string, never&gt; |
+            "normal" | "personal" | "private" | "confidential" | null,
+            singleValueExtendedProperties?: (Omit&lt;{ <xref uid="@odata.type"
+            />: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, value?: function } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.singleValueLegacyExtendedProperty" />" })[],
+            startDateTime?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+            null } | null, status?: Record&lt;string, never&gt; | "notStarted" |
+            "inProgress" | "completed" | "waitingOnOthers" | "deferred" | null,
+            subject?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.outlookTask" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.outlookTaskFolder" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /me/outlook/taskFolders"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, changeKey?: string | null, isDefaultFolder?: boolean |
+          null, multiValueExtendedProperties?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, value?: (string |
+          null)[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.multiValueLegacyExtendedProperty" />" })[],
+          name?: string | null, parentGroupKey?: string | null,
+          singleValueExtendedProperties?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, value?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.singleValueLegacyExtendedProperty" />" })[],
+          tasks?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, categories?: function, changeKey?:
+          function, createdDateTime?: function, lastModifiedDateTime?: function
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.outlookItem" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          assignedTo?: string | null, attachments?: (Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... })[], body?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          content?: string | null, contentType?: Record&lt;..., ...&gt; | "text"
+          | "html" | null } | null, completedDateTime?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, dateTime?: string,
+          timeZone?: string | null } | null, dueDateTime?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, dateTime?: string,
+          timeZone?: string | null } | null, hasAttachments?: boolean | null,
+          importance?: Record&lt;string, never&gt; | "low" | "high" | "normal" |
+          null, isReminderOn?: boolean | null, multiValueExtendedProperties?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ..., value?: ...
+          } & { <xref uid="@odata.type" />: ... })[], owner?: string | null,
+          parentFolderId?: string | null, recurrence?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, pattern?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          dayOfMonth?: ..., daysOfWeek?: ..., firstDayOfWeek?: ..., index?: ...,
+          interval?: ..., month?: ..., type?: ... } | null, range?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., endDate?:
+          ..., numberOfOccurrences?: ..., recurrenceTimeZone?: ..., startDate?:
+          ..., type?: ... } | null } | null, reminderDateTime?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          dateTime?: string, timeZone?: string | null } | null, sensitivity?:
+          Record&lt;string, never&gt; | "normal" | "personal" | "private" |
+          "confidential" | null, singleValueExtendedProperties?: (Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ..., value?: ... } & { <xref
+          uid="@odata.type" />: ... })[], startDateTime?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, dateTime?: string,
+          timeZone?: string | null } | null, status?: Record&lt;string,
+          never&gt; | "notStarted" | "inProgress" | "completed" |
+          "waitingOnOthers" | "deferred" | null, subject?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.outlookTask"
+          />" })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.outlookTaskFolder" />" }&gt;
+  - name: 'del({ If-Match?: string, outlookTaskFolder-id: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.me.outlook.taskFolders.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -44,18 +304,18 @@ functions:
     customDeprecatedMessage: ''
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /me/outlook/taskFolders/{outlookTaskFolder-id}"]["response"]>
+        function del(params?: { If-Match?: string, outlookTaskFolder-id: string
+        }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, outlookTaskFolder-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /me/outlook/taskFolders/{outlookTaskFolder-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], outlookTaskFolder-id: string
+      })
     uid: '@microsoft/teams.graph-endpoints-beta.me.outlook.taskFolders.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -67,18 +327,118 @@ functions:
     customDeprecatedMessage: ''
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /me/outlook/taskFolders/{outlookTaskFolder-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        outlookTaskFolder-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        changeKey?: string | null, isDefaultFolder?: boolean | null,
+        multiValueExtendedProperties?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, value?: (string | null)[] } &
+        { @odata.type: "#microsoft.graph.multiValueLegacyExtendedProperty" })[],
+        name?: string | null, parentGroupKey?: string | null,
+        singleValueExtendedProperties?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, value?: string | null } & {
+        @odata.type: "#microsoft.graph.singleValueLegacyExtendedProperty" })[],
+        tasks?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, categories?: function,
+        changeKey?: function, createdDateTime?: function, lastModifiedDateTime?:
+        function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.outlookItem" }, "@odata.type"> & { @odata.type:
+        string, assignedTo?: string | null, attachments?: (Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... })[], body?: Record<string, never> |
+        { @odata.type: string, content?: string | null, contentType?:
+        Record<..., ...> | "text" | "html" | null } | null, completedDateTime?:
+        Record<string, never> | { @odata.type: string, dateTime?: string,
+        timeZone?: string | null } | null, dueDateTime?: Record<string, never> |
+        { @odata.type: string, dateTime?: string, timeZone?: string | null } |
+        null, hasAttachments?: boolean | null, importance?: Record<string,
+        never> | "low" | "high" | "normal" | null, isReminderOn?: boolean |
+        null, multiValueExtendedProperties?: (Omit<..., ...> & { @odata.type:
+        ..., value?: ... } & { @odata.type: ... })[], owner?: string | null,
+        parentFolderId?: string | null, recurrence?: Record<string, never> | {
+        @odata.type: string, pattern?: Record<..., ...> | { @odata.type: ...,
+        dayOfMonth?: ..., daysOfWeek?: ..., firstDayOfWeek?: ..., index?: ...,
+        interval?: ..., month?: ..., type?: ... } | null, range?: Record<...,
+        ...> | { @odata.type: ..., endDate?: ..., numberOfOccurrences?: ...,
+        recurrenceTimeZone?: ..., startDate?: ..., type?: ... } | null } | null,
+        reminderDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, sensitivity?:
+        Record<string, never> | "normal" | "personal" | "private" |
+        "confidential" | null, singleValueExtendedProperties?: (Omit<..., ...> &
+        { @odata.type: ..., value?: ... } & { @odata.type: ... })[],
+        startDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, status?:
+        Record<string, never> | "notStarted" | "inProgress" | "completed" |
+        "waitingOnOthers" | "deferred" | null, subject?: string | null } & {
+        @odata.type: "#microsoft.graph.outlookTask" })[] } & { @odata.type:
+        "#microsoft.graph.outlookTaskFolder" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], outlookTaskFolder-id:
+            string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /me/outlook/taskFolders/{outlookTaskFolder-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, changeKey?: string | null, isDefaultFolder?: boolean |
+          null, multiValueExtendedProperties?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, value?: (string |
+          null)[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.multiValueLegacyExtendedProperty" />" })[],
+          name?: string | null, parentGroupKey?: string | null,
+          singleValueExtendedProperties?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, value?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.singleValueLegacyExtendedProperty" />" })[],
+          tasks?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, categories?: function, changeKey?:
+          function, createdDateTime?: function, lastModifiedDateTime?: function
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.outlookItem" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          assignedTo?: string | null, attachments?: (Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... })[], body?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          content?: string | null, contentType?: Record&lt;..., ...&gt; | "text"
+          | "html" | null } | null, completedDateTime?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, dateTime?: string,
+          timeZone?: string | null } | null, dueDateTime?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, dateTime?: string,
+          timeZone?: string | null } | null, hasAttachments?: boolean | null,
+          importance?: Record&lt;string, never&gt; | "low" | "high" | "normal" |
+          null, isReminderOn?: boolean | null, multiValueExtendedProperties?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ..., value?: ...
+          } & { <xref uid="@odata.type" />: ... })[], owner?: string | null,
+          parentFolderId?: string | null, recurrence?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, pattern?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          dayOfMonth?: ..., daysOfWeek?: ..., firstDayOfWeek?: ..., index?: ...,
+          interval?: ..., month?: ..., type?: ... } | null, range?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., endDate?:
+          ..., numberOfOccurrences?: ..., recurrenceTimeZone?: ..., startDate?:
+          ..., type?: ... } | null } | null, reminderDateTime?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          dateTime?: string, timeZone?: string | null } | null, sensitivity?:
+          Record&lt;string, never&gt; | "normal" | "personal" | "private" |
+          "confidential" | null, singleValueExtendedProperties?: (Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ..., value?: ... } & { <xref
+          uid="@odata.type" />: ... })[], startDateTime?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, dateTime?: string,
+          timeZone?: string | null } | null, status?: Record&lt;string,
+          never&gt; | "notStarted" | "inProgress" | "completed" |
+          "waitingOnOthers" | "deferred" | null, subject?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.outlookTask"
+          />" })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.outlookTaskFolder" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: '@microsoft/teams.graph-endpoints-beta.me.outlook.taskFolders.list'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -90,20 +450,104 @@ functions:
     customDeprecatedMessage: ''
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /me/outlook/taskFolders"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, changeKey?: string | null, isDefaultFolder?: boolean | null,
+        multiValueExtendedProperties?: (Omit<..., ...> & { @odata.type: ...,
+        value?: ... } & { @odata.type: ... })[], name?: string | null,
+        parentGroupKey?: string | null, singleValueExtendedProperties?:
+        (Omit<..., ...> & { @odata.type: ..., value?: ... } & { @odata.type: ...
+        })[], tasks?: (Omit<..., ...> & { @odata.type: ..., assignedTo?: ...,
+        attachments?: ..., body?: ..., completedDateTime?: ..., dueDateTime?:
+        ..., hasAttachments?: ..., importance?: ..., isReminderOn?: ...,
+        multiValueExtendedProperties?: ..., owner?: ..., parentFolderId?: ...,
+        recurrence?: ..., reminderDateTime?: ..., sensitivity?: ...,
+        singleValueExtendedProperties?: ..., startDateTime?: ..., status?: ...,
+        subject?: ... } & { @odata.type: ... })[] } & { @odata.type:
+        "#microsoft.graph.outlookTaskFolder" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /me/outlook/taskFolders"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          changeKey?: string | null, isDefaultFolder?: boolean | null,
+          multiValueExtendedProperties?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., value?: ... } & { <xref uid="@odata.type"
+          />: ... })[], name?: string | null, parentGroupKey?: string | null,
+          singleValueExtendedProperties?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., value?: ... } & { <xref uid="@odata.type"
+          />: ... })[], tasks?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., assignedTo?: ..., attachments?: ..., body?:
+          ..., completedDateTime?: ..., dueDateTime?: ..., hasAttachments?: ...,
+          importance?: ..., isReminderOn?: ..., multiValueExtendedProperties?:
+          ..., owner?: ..., parentFolderId?: ..., recurrence?: ...,
+          reminderDateTime?: ..., sensitivity?: ...,
+          singleValueExtendedProperties?: ..., startDateTime?: ..., status?:
+          ..., subject?: ... } & { <xref uid="@odata.type" />: ... })[] } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.outlookTaskFolder" />" })[] }&gt;
   - name: >-
-      update(Operation<"/me/outlook/taskFolders/{outlookTaskFolder-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, changeKey?: string | null, isDefaultFolder?: boolean
+      | null, multiValueExtendedProperties?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, value?: (string |
+      null)[] } & { @odata.type:
+      "#microsoft.graph.multiValueLegacyExtendedProperty" })[], name?: string |
+      null, parentGroupKey?: string | null, singleValueExtendedProperties?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, value?: string | null } & { @odata.type:
+      "#microsoft.graph.singleValueLegacyExtendedProperty" })[], tasks?:
+      (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, categories?: ...[], changeKey?: string | null,
+      createdDateTime?: string | null, lastModifiedDateTime?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.outlookItem" },
+      "@odata.type"> & { @odata.type: string, assignedTo?: string | null,
+      attachments?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> &
+      Omit<{ @odata.type: ..., contentType?: ..., isInline?: ...,
+      lastModifiedDateTime?: ..., name?: ..., size?: ... }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.attachment" })[], body?: Record<string,
+      never> | { @odata.type: string, content?: string | null, contentType?:
+      Record<string, never> | "text" | "html" | null } | null,
+      completedDateTime?: Record<string, never> | { @odata.type: string,
+      dateTime?: string, timeZone?: string | null } | null, dueDateTime?:
+      Record<string, never> | { @odata.type: string, dateTime?: string,
+      timeZone?: string | null } | null, hasAttachments?: boolean | null,
+      importance?: Record<string, never> | "low" | "high" | "normal" | null,
+      isReminderOn?: boolean | null, multiValueExtendedProperties?: (Omit<{
+      @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+      value?: function } & { @odata.type:
+      "#microsoft.graph.multiValueLegacyExtendedProperty" })[], owner?: string |
+      null, parentFolderId?: string | null, recurrence?: Record<string, never> |
+      { @odata.type: string, pattern?: Record<string, never> | { @odata.type:
+      string, dayOfMonth?: function, daysOfWeek?: function, firstDayOfWeek?:
+      function, index?: function, interval?: function, month?: function, type?:
+      function } | null, range?: Record<string, never> | { @odata.type: string,
+      endDate?: function, numberOfOccurrences?: function, recurrenceTimeZone?:
+      function, startDate?: function, type?: function } | null } | null,
+      reminderDateTime?: Record<string, never> | { @odata.type: string,
+      dateTime?: string, timeZone?: string | null } | null, sensitivity?:
+      Record<string, never> | "normal" | "personal" | "private" | "confidential"
+      | null, singleValueExtendedProperties?: (Omit<{ @odata.type: ..., id?: ...
+      }, "@odata.type"> & { @odata.type: string, value?: function } & {
+      @odata.type: "#microsoft.graph.singleValueLegacyExtendedProperty" })[],
+      startDateTime?: Record<string, never> | { @odata.type: string, dateTime?:
+      string, timeZone?: string | null } | null, status?: Record<string, never>
+      | "notStarted" | "inProgress" | "completed" | "waitingOnOthers" |
+      "deferred" | null, subject?: string | null } & { @odata.type:
+      "#microsoft.graph.outlookTask" })[] } & { @odata.type:
+      "#microsoft.graph.outlookTaskFolder" }, { outlookTaskFolder-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.me.outlook.taskFolders.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: >-
@@ -118,24 +562,232 @@ functions:
     customDeprecatedMessage: ''
     syntax:
       content: >-
-        function update(body:
-        Operation<"/me/outlook/taskFolders/{outlookTaskFolder-id}", "patch">,
-        params?: any): EndpointRequest<IEndpoints["PATCH
-        /me/outlook/taskFolders/{outlookTaskFolder-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, changeKey?: string | null,
+        isDefaultFolder?: boolean | null, multiValueExtendedProperties?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, value?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.multiValueLegacyExtendedProperty" })[], name?: string
+        | null, parentGroupKey?: string | null, singleValueExtendedProperties?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, value?: string | null } & { @odata.type:
+        "#microsoft.graph.singleValueLegacyExtendedProperty" })[], tasks?:
+        (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, categories?: ...[], changeKey?: string | null,
+        createdDateTime?: string | null, lastModifiedDateTime?: string | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.outlookItem" },
+        "@odata.type"> & { @odata.type: string, assignedTo?: string | null,
+        attachments?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> &
+        Omit<{ @odata.type: ..., contentType?: ..., isInline?: ...,
+        lastModifiedDateTime?: ..., name?: ..., size?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.attachment" })[], body?: Record<string,
+        never> | { @odata.type: string, content?: string | null, contentType?:
+        Record<string, never> | "text" | "html" | null } | null,
+        completedDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, dueDateTime?:
+        Record<string, never> | { @odata.type: string, dateTime?: string,
+        timeZone?: string | null } | null, hasAttachments?: boolean | null,
+        importance?: Record<string, never> | "low" | "high" | "normal" | null,
+        isReminderOn?: boolean | null, multiValueExtendedProperties?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        value?: function } & { @odata.type:
+        "#microsoft.graph.multiValueLegacyExtendedProperty" })[], owner?: string
+        | null, parentFolderId?: string | null, recurrence?: Record<string,
+        never> | { @odata.type: string, pattern?: Record<string, never> | {
+        @odata.type: string, dayOfMonth?: function, daysOfWeek?: function,
+        firstDayOfWeek?: function, index?: function, interval?: function,
+        month?: function, type?: function } | null, range?: Record<string,
+        never> | { @odata.type: string, endDate?: function,
+        numberOfOccurrences?: function, recurrenceTimeZone?: function,
+        startDate?: function, type?: function } | null } | null,
+        reminderDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, sensitivity?:
+        Record<string, never> | "normal" | "personal" | "private" |
+        "confidential" | null, singleValueExtendedProperties?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        value?: function } & { @odata.type:
+        "#microsoft.graph.singleValueLegacyExtendedProperty" })[],
+        startDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, status?:
+        Record<string, never> | "notStarted" | "inProgress" | "completed" |
+        "waitingOnOthers" | "deferred" | null, subject?: string | null } & {
+        @odata.type: "#microsoft.graph.outlookTask" })[] } & { @odata.type:
+        "#microsoft.graph.outlookTaskFolder" }, params?: { outlookTaskFolder-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, changeKey?: string | null,
+        isDefaultFolder?: boolean | null, multiValueExtendedProperties?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, value?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.multiValueLegacyExtendedProperty" })[], name?: string
+        | null, parentGroupKey?: string | null, singleValueExtendedProperties?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, value?: string | null } & { @odata.type:
+        "#microsoft.graph.singleValueLegacyExtendedProperty" })[], tasks?:
+        (Omit<Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string, categories?: function, changeKey?: function,
+        createdDateTime?: function, lastModifiedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.outlookItem" },
+        "@odata.type"> & { @odata.type: string, assignedTo?: string | null,
+        attachments?: (Omit<..., ...> & Omit<..., ...> & { @odata.type: ...
+        })[], body?: Record<string, never> | { @odata.type: string, content?:
+        string | null, contentType?: Record<..., ...> | "text" | "html" | null }
+        | null, completedDateTime?: Record<string, never> | { @odata.type:
+        string, dateTime?: string, timeZone?: string | null } | null,
+        dueDateTime?: Record<string, never> | { @odata.type: string, dateTime?:
+        string, timeZone?: string | null } | null, hasAttachments?: boolean |
+        null, importance?: Record<string, never> | "low" | "high" | "normal" |
+        null, isReminderOn?: boolean | null, multiValueExtendedProperties?:
+        (Omit<..., ...> & { @odata.type: ..., value?: ... } & { @odata.type: ...
+        })[], owner?: string | null, parentFolderId?: string | null,
+        recurrence?: Record<string, never> | { @odata.type: string, pattern?:
+        Record<..., ...> | { @odata.type: ..., dayOfMonth?: ..., daysOfWeek?:
+        ..., firstDayOfWeek?: ..., index?: ..., interval?: ..., month?: ...,
+        type?: ... } | null, range?: Record<..., ...> | { @odata.type: ...,
+        endDate?: ..., numberOfOccurrences?: ..., recurrenceTimeZone?: ...,
+        startDate?: ..., type?: ... } | null } | null, reminderDateTime?:
+        Record<string, never> | { @odata.type: string, dateTime?: string,
+        timeZone?: string | null } | null, sensitivity?: Record<string, never> |
+        "normal" | "personal" | "private" | "confidential" | null,
+        singleValueExtendedProperties?: (Omit<..., ...> & { @odata.type: ...,
+        value?: ... } & { @odata.type: ... })[], startDateTime?: Record<string,
+        never> | { @odata.type: string, dateTime?: string, timeZone?: string |
+        null } | null, status?: Record<string, never> | "notStarted" |
+        "inProgress" | "completed" | "waitingOnOthers" | "deferred" | null,
+        subject?: string | null } & { @odata.type:
+        "#microsoft.graph.outlookTask" })[] } & { @odata.type:
+        "#microsoft.graph.outlookTaskFolder" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/me/outlook/taskFolders/{outlookTaskFolder-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            changeKey?: string | null, isDefaultFolder?: boolean | null,
+            multiValueExtendedProperties?: (Omit&lt;{ <xref uid="@odata.type"
+            />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, value?: (string | null)[] } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.multiValueLegacyExtendedProperty" />" })[],
+            name?: string | null, parentGroupKey?: string | null,
+            singleValueExtendedProperties?: (Omit&lt;{ <xref uid="@odata.type"
+            />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, value?: string | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.singleValueLegacyExtendedProperty" />" })[],
+            tasks?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, categories?: ...[], changeKey?: string
+            | null, createdDateTime?: string | null, lastModifiedDateTime?:
+            string | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.outlookItem" />"
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, assignedTo?: string | null, attachments?: (Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., contentType?:
+            ..., isInline?: ..., lastModifiedDateTime?: ..., name?: ..., size?:
+            ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.attachment" />" })[], body?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            content?: string | null, contentType?: Record&lt;string, never&gt; |
+            "text" | "html" | null } | null, completedDateTime?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            dateTime?: string, timeZone?: string | null } | null, dueDateTime?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            dateTime?: string, timeZone?: string | null } | null,
+            hasAttachments?: boolean | null, importance?: Record&lt;string,
+            never&gt; | "low" | "high" | "normal" | null, isReminderOn?: boolean
+            | null, multiValueExtendedProperties?: (Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, value?: function } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.multiValueLegacyExtendedProperty" />" })[],
+            owner?: string | null, parentFolderId?: string | null, recurrence?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            pattern?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, dayOfMonth?: function, daysOfWeek?: function,
+            firstDayOfWeek?: function, index?: function, interval?: function,
+            month?: function, type?: function } | null, range?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            endDate?: function, numberOfOccurrences?: function,
+            recurrenceTimeZone?: function, startDate?: function, type?: function
+            } | null } | null, reminderDateTime?: Record&lt;string, never&gt; |
+            { <xref uid="@odata.type" />: string, dateTime?: string, timeZone?:
+            string | null } | null, sensitivity?: Record&lt;string, never&gt; |
+            "normal" | "personal" | "private" | "confidential" | null,
+            singleValueExtendedProperties?: (Omit&lt;{ <xref uid="@odata.type"
+            />: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, value?: function } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.singleValueLegacyExtendedProperty" />" })[],
+            startDateTime?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+            null } | null, status?: Record&lt;string, never&gt; | "notStarted" |
+            "inProgress" | "completed" | "waitingOnOthers" | "deferred" | null,
+            subject?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.outlookTask" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.outlookTaskFolder" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ outlookTaskFolder-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /me/outlook/taskFolders/{outlookTaskFolder-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, changeKey?: string | null, isDefaultFolder?: boolean |
+          null, multiValueExtendedProperties?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, value?: (string |
+          null)[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.multiValueLegacyExtendedProperty" />" })[],
+          name?: string | null, parentGroupKey?: string | null,
+          singleValueExtendedProperties?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, value?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.singleValueLegacyExtendedProperty" />" })[],
+          tasks?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, categories?: function, changeKey?:
+          function, createdDateTime?: function, lastModifiedDateTime?: function
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.outlookItem" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          assignedTo?: string | null, attachments?: (Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... })[], body?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          content?: string | null, contentType?: Record&lt;..., ...&gt; | "text"
+          | "html" | null } | null, completedDateTime?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, dateTime?: string,
+          timeZone?: string | null } | null, dueDateTime?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, dateTime?: string,
+          timeZone?: string | null } | null, hasAttachments?: boolean | null,
+          importance?: Record&lt;string, never&gt; | "low" | "high" | "normal" |
+          null, isReminderOn?: boolean | null, multiValueExtendedProperties?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ..., value?: ...
+          } & { <xref uid="@odata.type" />: ... })[], owner?: string | null,
+          parentFolderId?: string | null, recurrence?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, pattern?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          dayOfMonth?: ..., daysOfWeek?: ..., firstDayOfWeek?: ..., index?: ...,
+          interval?: ..., month?: ..., type?: ... } | null, range?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., endDate?:
+          ..., numberOfOccurrences?: ..., recurrenceTimeZone?: ..., startDate?:
+          ..., type?: ... } | null } | null, reminderDateTime?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          dateTime?: string, timeZone?: string | null } | null, sensitivity?:
+          Record&lt;string, never&gt; | "normal" | "personal" | "private" |
+          "confidential" | null, singleValueExtendedProperties?: (Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ..., value?: ... } & { <xref
+          uid="@odata.type" />: ... })[], startDateTime?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, dateTime?: string,
+          timeZone?: string | null } | null, status?: Record&lt;string,
+          never&gt; | "notStarted" | "inProgress" | "completed" |
+          "waitingOnOthers" | "deferred" | null, subject?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.outlookTask"
+          />" })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.outlookTaskFolder" />" }&gt;
 variables:
   - name: permanentDelete
     uid: >-
@@ -146,16 +798,26 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        permanentDelete: { create: (params?: IEndpoints["POST
+        permanentDelete: { /** * `POST
+        /me/outlook/taskFolders/{outlookTaskFolder-id}/permanentDelete` * *
+        Permanently delete an outlook task folder and remove its items from the
+        user&#x27;s mailbox. For more information about item retention, see
+        Configure Deleted Item retention and Recoverable Items quotas. *
+        @deprecated */ create: (params?: IEndpoints["POST
         /me/outlook/taskFolders/{outlookTaskFolder-id}/permanentDelete"]["parameters"])
         => EndpointRequest<IEndpoints["POST
-        /me/outlook/taskFolders/{outlookTaskFolder-id}/permanentDelete"]["response"]>
+        /me/outlook/taskFolders/{outlookTaskFolder-id}/permanentDelete"]["response"]>;
         }
       return:
         description: ''
         type: >-
-          { create: (params?: IEndpoints["POST
+          { /** * `POST
+          /me/outlook/taskFolders/{outlookTaskFolder-id}/permanentDelete` * *
+          Permanently delete an outlook task folder and remove its items from
+          the user&#x27;s mailbox. For more information about item retention,
+          see Configure Deleted Item retention and Recoverable Items quotas. *
+          @deprecated */ create: (params?: IEndpoints["POST
           /me/outlook/taskFolders/{outlookTaskFolder-id}/permanentDelete"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["POST
-          /me/outlook/taskFolders/{outlookTaskFolder-id}/permanentDelete"]["response"]&gt;
+          /me/outlook/taskFolders/{outlookTaskFolder-id}/permanentDelete"]["response"]&gt;;
           }

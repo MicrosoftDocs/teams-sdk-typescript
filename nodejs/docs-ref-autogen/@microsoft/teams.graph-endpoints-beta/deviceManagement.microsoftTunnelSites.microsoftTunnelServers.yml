@@ -10,8 +10,16 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
   - name: >-
-      create(Operation<"/deviceManagement/microsoftTunnelSites/{microsoftTunnelSite-id}/microsoftTunnelServers",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, agentImageDigest?: string | null, deploymentMode?:
+      Record<string, never> | "unknownFutureValue" | "standaloneRootful" |
+      "standaloneRootless" | "podRootful" | "podRootless" | null, displayName?:
+      string | null, lastCheckinDateTime?: string, serverImageDigest?: string |
+      null, tunnelServerHealthStatus?: "unknownFutureValue" | "unknown" |
+      "healthy" | "unhealthy" | "warning" | "offline" | "upgradeInProgress" |
+      "upgradeFailed" } & { @odata.type:
+      "#microsoft.graph.microsoftTunnelServer" }, { microsoftTunnelSite-id:
+      string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.microsoftTunnelSites.microsoftTunnelServers.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -22,25 +30,60 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/deviceManagement/microsoftTunnelSites/{microsoftTunnelSite-id}/microsoftTunnelServers",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /deviceManagement/microsoftTunnelSites/{microsoftTunnelSite-id}/microsoftTunnelServers"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, agentImageDigest?: string |
+        null, deploymentMode?: Record<string, never> | "unknownFutureValue" |
+        "standaloneRootful" | "standaloneRootless" | "podRootful" |
+        "podRootless" | null, displayName?: string | null, lastCheckinDateTime?:
+        string, serverImageDigest?: string | null, tunnelServerHealthStatus?:
+        "unknownFutureValue" | "unknown" | "healthy" | "unhealthy" | "warning" |
+        "offline" | "upgradeInProgress" | "upgradeFailed" } & { @odata.type:
+        "#microsoft.graph.microsoftTunnelServer" }, params?: {
+        microsoftTunnelSite-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        agentImageDigest?: string | null, deploymentMode?: Record<string, never>
+        | "unknownFutureValue" | "standaloneRootful" | "standaloneRootless" |
+        "podRootful" | "podRootless" | null, displayName?: string | null,
+        lastCheckinDateTime?: string, serverImageDigest?: string | null,
+        tunnelServerHealthStatus?: "unknownFutureValue" | "unknown" | "healthy"
+        | "unhealthy" | "warning" | "offline" | "upgradeInProgress" |
+        "upgradeFailed" } & { @odata.type:
+        "#microsoft.graph.microsoftTunnelServer" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/microsoftTunnelSites/{microsoftTunnelSite-id}/microsoftTunnelServers",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            agentImageDigest?: string | null, deploymentMode?: Record&lt;string,
+            never&gt; | "unknownFutureValue" | "standaloneRootful" |
+            "standaloneRootless" | "podRootful" | "podRootless" | null,
+            displayName?: string | null, lastCheckinDateTime?: string,
+            serverImageDigest?: string | null, tunnelServerHealthStatus?:
+            "unknownFutureValue" | "unknown" | "healthy" | "unhealthy" |
+            "warning" | "offline" | "upgradeInProgress" | "upgradeFailed" } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.microsoftTunnelServer" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ microsoftTunnelSite-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /deviceManagement/microsoftTunnelSites/{microsoftTunnelSite-id}/microsoftTunnelServers"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, agentImageDigest?: string | null, deploymentMode?:
+          Record&lt;string, never&gt; | "unknownFutureValue" |
+          "standaloneRootful" | "standaloneRootless" | "podRootful" |
+          "podRootless" | null, displayName?: string | null,
+          lastCheckinDateTime?: string, serverImageDigest?: string | null,
+          tunnelServerHealthStatus?: "unknownFutureValue" | "unknown" |
+          "healthy" | "unhealthy" | "warning" | "offline" | "upgradeInProgress"
+          | "upgradeFailed" } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.microsoftTunnelServer" />" }&gt;
+  - name: >-
+      del({ If-Match?: string, microsoftTunnelServer-id: string,
+      microsoftTunnelSite-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.microsoftTunnelSites.microsoftTunnelServers.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -51,18 +94,20 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /deviceManagement/microsoftTunnelSites/{microsoftTunnelSite-id}/microsoftTunnelServers/{microsoftTunnelServer-id}"]["response"]>
+        function del(params?: { If-Match?: string, microsoftTunnelServer-id:
+        string, microsoftTunnelSite-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { If-Match?: string, microsoftTunnelServer-id: string,
+            microsoftTunnelSite-id: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /deviceManagement/microsoftTunnelSites/{microsoftTunnelSite-id}/microsoftTunnelServers/{microsoftTunnelServer-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], microsoftTunnelServer-id:
+      string, microsoftTunnelSite-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.microsoftTunnelSites.microsoftTunnelServers.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -77,18 +122,41 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/microsoftTunnelSites/{microsoftTunnelSite-id}/microsoftTunnelServers/{microsoftTunnelServer-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        microsoftTunnelServer-id: string, microsoftTunnelSite-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, agentImageDigest?: string |
+        null, deploymentMode?: Record<string, never> | "unknownFutureValue" |
+        "standaloneRootful" | "standaloneRootless" | "podRootful" |
+        "podRootless" | null, displayName?: string | null, lastCheckinDateTime?:
+        string, serverImageDigest?: string | null, tunnelServerHealthStatus?:
+        "unknownFutureValue" | "unknown" | "healthy" | "unhealthy" | "warning" |
+        "offline" | "upgradeInProgress" | "upgradeFailed" } & { @odata.type:
+        "#microsoft.graph.microsoftTunnelServer" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], microsoftTunnelServer-id:
+            string, microsoftTunnelSite-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/microsoftTunnelSites/{microsoftTunnelSite-id}/microsoftTunnelServers/{microsoftTunnelServer-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, agentImageDigest?: string | null, deploymentMode?:
+          Record&lt;string, never&gt; | "unknownFutureValue" |
+          "standaloneRootful" | "standaloneRootless" | "podRootful" |
+          "podRootless" | null, displayName?: string | null,
+          lastCheckinDateTime?: string, serverImageDigest?: string | null,
+          tunnelServerHealthStatus?: "unknownFutureValue" | "unknown" |
+          "healthy" | "unhealthy" | "warning" | "offline" | "upgradeInProgress"
+          | "upgradeFailed" } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.microsoftTunnelServer" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, microsoftTunnelSite-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.microsoftTunnelSites.microsoftTunnelServers.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -103,20 +171,53 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/microsoftTunnelSites/{microsoftTunnelSite-id}/microsoftTunnelServers"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, microsoftTunnelSite-id: string }):
+        EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?: string
+        | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, agentImageDigest?: string |
+        null, deploymentMode?: Record<string, never> | "unknownFutureValue" |
+        "standaloneRootful" | "standaloneRootless" | "podRootful" |
+        "podRootless" | null, displayName?: string | null, lastCheckinDateTime?:
+        string, serverImageDigest?: string | null, tunnelServerHealthStatus?:
+        "unknownFutureValue" | "unknown" | "healthy" | "unhealthy" | "warning" |
+        "offline" | "upgradeInProgress" | "upgradeFailed" } & { @odata.type:
+        "#microsoft.graph.microsoftTunnelServer" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, microsoftTunnelSite-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/microsoftTunnelSites/{microsoftTunnelSite-id}/microsoftTunnelServers"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          agentImageDigest?: string | null, deploymentMode?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "standaloneRootful" |
+          "standaloneRootless" | "podRootful" | "podRootless" | null,
+          displayName?: string | null, lastCheckinDateTime?: string,
+          serverImageDigest?: string | null, tunnelServerHealthStatus?:
+          "unknownFutureValue" | "unknown" | "healthy" | "unhealthy" | "warning"
+          | "offline" | "upgradeInProgress" | "upgradeFailed" } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.microsoftTunnelServer" />" })[] }&gt;
   - name: >-
-      update(Operation<"/deviceManagement/microsoftTunnelSites/{microsoftTunnelSite-id}/microsoftTunnelServers/{microsoftTunnelServer-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, agentImageDigest?: string | null, deploymentMode?:
+      Record<string, never> | "unknownFutureValue" | "standaloneRootful" |
+      "standaloneRootless" | "podRootful" | "podRootless" | null, displayName?:
+      string | null, lastCheckinDateTime?: string, serverImageDigest?: string |
+      null, tunnelServerHealthStatus?: "unknownFutureValue" | "unknown" |
+      "healthy" | "unhealthy" | "warning" | "offline" | "upgradeInProgress" |
+      "upgradeFailed" } & { @odata.type:
+      "#microsoft.graph.microsoftTunnelServer" }, { microsoftTunnelServer-id:
+      string, microsoftTunnelSite-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.microsoftTunnelSites.microsoftTunnelServers.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -127,24 +228,57 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/deviceManagement/microsoftTunnelSites/{microsoftTunnelSite-id}/microsoftTunnelServers/{microsoftTunnelServer-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /deviceManagement/microsoftTunnelSites/{microsoftTunnelSite-id}/microsoftTunnelServers/{microsoftTunnelServer-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, agentImageDigest?: string |
+        null, deploymentMode?: Record<string, never> | "unknownFutureValue" |
+        "standaloneRootful" | "standaloneRootless" | "podRootful" |
+        "podRootless" | null, displayName?: string | null, lastCheckinDateTime?:
+        string, serverImageDigest?: string | null, tunnelServerHealthStatus?:
+        "unknownFutureValue" | "unknown" | "healthy" | "unhealthy" | "warning" |
+        "offline" | "upgradeInProgress" | "upgradeFailed" } & { @odata.type:
+        "#microsoft.graph.microsoftTunnelServer" }, params?: {
+        microsoftTunnelServer-id: string, microsoftTunnelSite-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, agentImageDigest?: string |
+        null, deploymentMode?: Record<string, never> | "unknownFutureValue" |
+        "standaloneRootful" | "standaloneRootless" | "podRootful" |
+        "podRootless" | null, displayName?: string | null, lastCheckinDateTime?:
+        string, serverImageDigest?: string | null, tunnelServerHealthStatus?:
+        "unknownFutureValue" | "unknown" | "healthy" | "unhealthy" | "warning" |
+        "offline" | "upgradeInProgress" | "upgradeFailed" } & { @odata.type:
+        "#microsoft.graph.microsoftTunnelServer" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/microsoftTunnelSites/{microsoftTunnelSite-id}/microsoftTunnelServers/{microsoftTunnelServer-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            agentImageDigest?: string | null, deploymentMode?: Record&lt;string,
+            never&gt; | "unknownFutureValue" | "standaloneRootful" |
+            "standaloneRootless" | "podRootful" | "podRootless" | null,
+            displayName?: string | null, lastCheckinDateTime?: string,
+            serverImageDigest?: string | null, tunnelServerHealthStatus?:
+            "unknownFutureValue" | "unknown" | "healthy" | "unhealthy" |
+            "warning" | "offline" | "upgradeInProgress" | "upgradeFailed" } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.microsoftTunnelServer" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ microsoftTunnelServer-id: string, microsoftTunnelSite-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /deviceManagement/microsoftTunnelSites/{microsoftTunnelSite-id}/microsoftTunnelServers/{microsoftTunnelServer-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, agentImageDigest?: string | null, deploymentMode?:
+          Record&lt;string, never&gt; | "unknownFutureValue" |
+          "standaloneRootful" | "standaloneRootless" | "podRootful" |
+          "podRootless" | null, displayName?: string | null,
+          lastCheckinDateTime?: string, serverImageDigest?: string | null,
+          tunnelServerHealthStatus?: "unknownFutureValue" | "unknown" |
+          "healthy" | "unhealthy" | "warning" | "offline" | "upgradeInProgress"
+          | "upgradeFailed" } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.microsoftTunnelServer" />" }&gt;
 variables:
   - name: createServerLogCollectionRequest
     uid: >-

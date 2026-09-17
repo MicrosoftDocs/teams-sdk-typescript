@@ -22,6 +22,28 @@ properties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.apps.IActivitySender" />
+  - name: filesCredential
+    uid: '@microsoft/teams.apps.IActivityContextConstructorArgs.filesCredential'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Graph credential used by the file path, selected per actor and resolved at
+      fetch time.
+
+
+      Constructor-only, and deliberately absent from
+      [IBaseActivityContextOptions](xref:@microsoft/teams.apps.IBaseActivityContextOptions):
+      it exists so `ctx.files` can reach bytes the pre-authorized download URL
+      cannot, and a handler has no reason to hold it. Declaring it here keeps it
+      off the public context type and out of the instance, rather than
+      advertising a property that is always `undefined`.
+    fullName: filesCredential
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'filesCredential?: GraphCredential'
+      return:
+        description: ''
+        type: GraphCredential
   - name: next
     uid: '@microsoft/teams.apps.IActivityContextConstructorArgs.next'
     package: '@microsoft/teams.apps'
@@ -32,10 +54,10 @@ properties:
     syntax:
       content: >-
         next: (context?: IBaseActivityContext<Activity, Record<string, any>>) =>
-        void | InvokeResponse<any> | Promise<void | InvokeResponse<any>>
+        void | InvokeResponse | Promise<void | InvokeResponse>
       return:
         description: ''
         type: >-
           (context?: IBaseActivityContext&lt;Activity, Record&lt;string,
-          any&gt;&gt;) =&gt; void | InvokeResponse&lt;any&gt; | Promise&lt;void
-          | InvokeResponse&lt;any&gt;&gt;
+          any&gt;&gt;) =&gt; void | InvokeResponse | Promise&lt;void |
+          InvokeResponse&gt;

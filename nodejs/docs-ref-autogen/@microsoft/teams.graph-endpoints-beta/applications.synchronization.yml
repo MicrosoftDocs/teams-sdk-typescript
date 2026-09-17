@@ -59,7 +59,7 @@ variables:
           /applications/{application-id}/synchronization/secrets"]["response"]&gt;
           }
 functions:
-  - name: del(any)
+  - name: 'del({ application-id: string, If-Match?: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.applications.synchronization.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`DELETE /applications/{application-id}/synchronization`'
@@ -67,18 +67,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /applications/{application-id}/synchronization"]["response"]>
+        function del(params?: { application-id: string, If-Match?: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ application-id: string, If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /applications/{application-id}/synchronization"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[], application-id: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.applications.synchronization.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: >-
@@ -91,20 +89,239 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /applications/{application-id}/synchronization"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        application-id: string }): EndpointRequest<Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, jobs?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, bulkUpload?: Record<string, never> | (Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.bulkUpload" }) | null, schedule?: Record<string,
+        never> | { @odata.type: string, expiration?: string | null, interval?:
+        string, state?: "Active" | "Disabled" | "Paused" } | null, schema?:
+        Record<string, never> | (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, directories?: function,
+        synchronizationRules?: function, version?: function } & { @odata.type:
+        "#microsoft.graph.synchronizationSchema" }) | null, status?:
+        Record<string, never> | { @odata.type: string, code?: "Active" |
+        "Paused" | "NotConfigured" | "NotRun" | "Quarantine",
+        countSuccessiveCompleteFailures?: number, escrowsPruned?: boolean,
+        lastExecution?: Record<..., ...> | { @odata.type: ...,
+        activityIdentifier?: ..., countEntitled?: ...,
+        countEntitledForProvisioning?: ..., countEscrowed?: ...,
+        countEscrowedRaw?: ..., countExported?: ..., countExports?: ...,
+        countImported?: ..., countImportedDeltas?: ...,
+        countImportedReferenceDeltas?: ..., error?: ..., state?: ...,
+        timeBegan?: ..., timeEnded?: ... } | null, lastSuccessfulExecution?:
+        Record<..., ...> | { @odata.type: ..., activityIdentifier?: ...,
+        countEntitled?: ..., countEntitledForProvisioning?: ..., countEscrowed?:
+        ..., countEscrowedRaw?: ..., countExported?: ..., countExports?: ...,
+        countImported?: ..., countImportedDeltas?: ...,
+        countImportedReferenceDeltas?: ..., error?: ..., state?: ...,
+        timeBegan?: ..., timeEnded?: ... } | null,
+        lastSuccessfulExecutionWithExports?: Record<..., ...> | { @odata.type:
+        ..., activityIdentifier?: ..., countEntitled?: ...,
+        countEntitledForProvisioning?: ..., countEscrowed?: ...,
+        countEscrowedRaw?: ..., countExported?: ..., countExports?: ...,
+        countImported?: ..., countImportedDeltas?: ...,
+        countImportedReferenceDeltas?: ..., error?: ..., state?: ...,
+        timeBegan?: ..., timeEnded?: ... } | null, progress?: ...[],
+        quarantine?: Record<..., ...> | { @odata.type: ..., currentBegan?: ...,
+        error?: ..., nextAttempt?: ..., reason?: ..., seriesBegan?: ...,
+        seriesCount?: ... } | null, steadyStateFirstAchievedTime?: string,
+        steadyStateLastAchievedTime?: string, synchronizedEntryCountByType?:
+        ...[], troubleshootingUrl?: string | null } | null,
+        synchronizationJobSettings?: { @odata.type: string, name?: function,
+        value?: function }[], templateId?: string | null } & { @odata.type:
+        "#microsoft.graph.synchronizationJob" })[], secrets?: { @odata.type:
+        string, key?: "None" | "UserName" | "Password" | "SecretToken" |
+        "AppKey" | "BaseAddress" | "ClientIdentifier" | "ClientSecret" |
+        "SingleSignOnType" | "Sandbox" | "Url" | "Domain" | "ConsumerKey" |
+        "ConsumerSecret" | "TokenKey" | "TokenExpiration" | "Oauth2AccessToken"
+        | "Oauth2AccessTokenCreationTime" | "Oauth2RefreshToken" | "SyncAll" |
+        "InstanceName" | "Oauth2ClientId" | "Oauth2ClientSecret" | "CompanyId" |
+        "UpdateKeyOnSoftDelete" | "SynchronizationSchedule" | "SystemOfRecord" |
+        "SandboxName" | "EnforceDomain" | "SyncNotificationSettings" |
+        "SkipOutOfScopeDeletions" | "Oauth2AuthorizationCode" |
+        "Oauth2RedirectUri" | "ApplicationTemplateIdentifier" |
+        "Oauth2TokenExchangeUri" | "Oauth2AuthorizationUri" |
+        "AuthenticationType" | "Server" | "PerformInboundEntitlementGrants" |
+        "HardDeletesEnabled" | "SyncAgentCompatibilityKey" |
+        "SyncAgentADContainer" | "ValidateDomain" | "TestReferences" |
+        "ConnectionString", value?: string | null }[], templates?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, applicationId?: string, default?: boolean, description?: string
+        | null, discoverable?: boolean, factoryTag?: string | null, metadata?: {
+        @odata.type: string, key?: function, value?: function }[], schema?:
+        Record<string, never> | (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, directories?: function,
+        synchronizationRules?: function, version?: function } & { @odata.type:
+        "#microsoft.graph.synchronizationSchema" }) | null } & { @odata.type:
+        "#microsoft.graph.synchronizationTemplate" })[] } & { @odata.type:
+        "#microsoft.graph.synchronization" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[], application-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /applications/{application-id}/synchronization"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, jobs?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, bulkUpload?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.bulkUpload" />" })
+          | null, schedule?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, expiration?: string | null, interval?:
+          string, state?: "Active" | "Disabled" | "Paused" } | null, schema?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, directories?: function,
+          synchronizationRules?: function, version?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.synchronizationSchema" />" }) | null, status?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          code?: "Active" | "Paused" | "NotConfigured" | "NotRun" |
+          "Quarantine", countSuccessiveCompleteFailures?: number,
+          escrowsPruned?: boolean, lastExecution?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., activityIdentifier?: ...,
+          countEntitled?: ..., countEntitledForProvisioning?: ...,
+          countEscrowed?: ..., countEscrowedRaw?: ..., countExported?: ...,
+          countExports?: ..., countImported?: ..., countImportedDeltas?: ...,
+          countImportedReferenceDeltas?: ..., error?: ..., state?: ...,
+          timeBegan?: ..., timeEnded?: ... } | null, lastSuccessfulExecution?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          activityIdentifier?: ..., countEntitled?: ...,
+          countEntitledForProvisioning?: ..., countEscrowed?: ...,
+          countEscrowedRaw?: ..., countExported?: ..., countExports?: ...,
+          countImported?: ..., countImportedDeltas?: ...,
+          countImportedReferenceDeltas?: ..., error?: ..., state?: ...,
+          timeBegan?: ..., timeEnded?: ... } | null,
+          lastSuccessfulExecutionWithExports?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., activityIdentifier?: ..., countEntitled?:
+          ..., countEntitledForProvisioning?: ..., countEscrowed?: ...,
+          countEscrowedRaw?: ..., countExported?: ..., countExports?: ...,
+          countImported?: ..., countImportedDeltas?: ...,
+          countImportedReferenceDeltas?: ..., error?: ..., state?: ...,
+          timeBegan?: ..., timeEnded?: ... } | null, progress?: ...[],
+          quarantine?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., currentBegan?: ..., error?: ..., nextAttempt?: ..., reason?: ...,
+          seriesBegan?: ..., seriesCount?: ... } | null,
+          steadyStateFirstAchievedTime?: string, steadyStateLastAchievedTime?:
+          string, synchronizedEntryCountByType?: ...[], troubleshootingUrl?:
+          string | null } | null, synchronizationJobSettings?: { <xref
+          uid="@odata.type" />: string, name?: function, value?: function }[],
+          templateId?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.synchronizationJob" />" })[], secrets?: { <xref
+          uid="@odata.type" />: string, key?: "None" | "UserName" | "Password" |
+          "SecretToken" | "AppKey" | "BaseAddress" | "ClientIdentifier" |
+          "ClientSecret" | "SingleSignOnType" | "Sandbox" | "Url" | "Domain" |
+          "ConsumerKey" | "ConsumerSecret" | "TokenKey" | "TokenExpiration" |
+          "Oauth2AccessToken" | "Oauth2AccessTokenCreationTime" |
+          "Oauth2RefreshToken" | "SyncAll" | "InstanceName" | "Oauth2ClientId" |
+          "Oauth2ClientSecret" | "CompanyId" | "UpdateKeyOnSoftDelete" |
+          "SynchronizationSchedule" | "SystemOfRecord" | "SandboxName" |
+          "EnforceDomain" | "SyncNotificationSettings" |
+          "SkipOutOfScopeDeletions" | "Oauth2AuthorizationCode" |
+          "Oauth2RedirectUri" | "ApplicationTemplateIdentifier" |
+          "Oauth2TokenExchangeUri" | "Oauth2AuthorizationUri" |
+          "AuthenticationType" | "Server" | "PerformInboundEntitlementGrants" |
+          "HardDeletesEnabled" | "SyncAgentCompatibilityKey" |
+          "SyncAgentADContainer" | "ValidateDomain" | "TestReferences" |
+          "ConnectionString", value?: string | null }[], templates?: (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          applicationId?: string, default?: boolean, description?: string |
+          null, discoverable?: boolean, factoryTag?: string | null, metadata?: {
+          <xref uid="@odata.type" />: string, key?: function, value?: function
+          }[], schema?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, directories?:
+          function, synchronizationRules?: function, version?: function } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.synchronizationSchema" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.synchronizationTemplate" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.synchronization"
+          />" }&gt;
   - name: >-
-      set(Operation<"/applications/{application-id}/synchronization", "put">,
-      any)
+      set(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, jobs?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, bulkUpload?: Record<string, never>
+      | (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+      @odata.type: string } & { @odata.type: "#microsoft.graph.bulkUpload" }) |
+      null, schedule?: Record<string, never> | { @odata.type: string,
+      expiration?: string | null, interval?: string, state?: "Active" |
+      "Disabled" | "Paused" } | null, schema?: Record<string, never> | (Omit<{
+      @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+      string, directories?: ...[], synchronizationRules?: ...[], version?:
+      string | null } & { @odata.type: "#microsoft.graph.synchronizationSchema"
+      }) | null, status?: Record<string, never> | { @odata.type: string, code?:
+      "Active" | "Paused" | "NotConfigured" | "NotRun" | "Quarantine",
+      countSuccessiveCompleteFailures?: number, escrowsPruned?: boolean,
+      lastExecution?: Record<string, never> | { @odata.type: string,
+      activityIdentifier?: function, countEntitled?: function,
+      countEntitledForProvisioning?: function, countEscrowed?: function,
+      countEscrowedRaw?: function, countExported?: function, countExports?:
+      function, countImported?: function, countImportedDeltas?: function,
+      countImportedReferenceDeltas?: function, error?: function, state?:
+      function, timeBegan?: function, timeEnded?: function } | null,
+      lastSuccessfulExecution?: Record<string, never> | { @odata.type: string,
+      activityIdentifier?: function, countEntitled?: function,
+      countEntitledForProvisioning?: function, countEscrowed?: function,
+      countEscrowedRaw?: function, countExported?: function, countExports?:
+      function, countImported?: function, countImportedDeltas?: function,
+      countImportedReferenceDeltas?: function, error?: function, state?:
+      function, timeBegan?: function, timeEnded?: function } | null,
+      lastSuccessfulExecutionWithExports?: Record<string, never> | {
+      @odata.type: string, activityIdentifier?: function, countEntitled?:
+      function, countEntitledForProvisioning?: function, countEscrowed?:
+      function, countEscrowedRaw?: function, countExported?: function,
+      countExports?: function, countImported?: function, countImportedDeltas?:
+      function, countImportedReferenceDeltas?: function, error?: function,
+      state?: function, timeBegan?: function, timeEnded?: function } | null,
+      progress?: { @odata.type: ..., completedUnits?: ...,
+      progressObservationDateTime?: ..., totalUnits?: ..., units?: ... }[],
+      quarantine?: Record<string, never> | { @odata.type: string, currentBegan?:
+      function, error?: function, nextAttempt?: function, reason?: function,
+      seriesBegan?: function, seriesCount?: function } | null,
+      steadyStateFirstAchievedTime?: string, steadyStateLastAchievedTime?:
+      string, synchronizedEntryCountByType?: { @odata.type: ..., key?: ...,
+      value?: ... }[], troubleshootingUrl?: string | null } | null,
+      synchronizationJobSettings?: { @odata.type: string, name?: string, value?:
+      string | null }[], templateId?: string | null } & { @odata.type:
+      "#microsoft.graph.synchronizationJob" })[], secrets?: { @odata.type:
+      string, key?: "None" | "UserName" | "Password" | "SecretToken" | "AppKey"
+      | "BaseAddress" | "ClientIdentifier" | "ClientSecret" | "SingleSignOnType"
+      | "Sandbox" | "Url" | "Domain" | "ConsumerKey" | "ConsumerSecret" |
+      "TokenKey" | "TokenExpiration" | "Oauth2AccessToken" |
+      "Oauth2AccessTokenCreationTime" | "Oauth2RefreshToken" | "SyncAll" |
+      "InstanceName" | "Oauth2ClientId" | "Oauth2ClientSecret" | "CompanyId" |
+      "UpdateKeyOnSoftDelete" | "SynchronizationSchedule" | "SystemOfRecord" |
+      "SandboxName" | "EnforceDomain" | "SyncNotificationSettings" |
+      "SkipOutOfScopeDeletions" | "Oauth2AuthorizationCode" |
+      "Oauth2RedirectUri" | "ApplicationTemplateIdentifier" |
+      "Oauth2TokenExchangeUri" | "Oauth2AuthorizationUri" | "AuthenticationType"
+      | "Server" | "PerformInboundEntitlementGrants" | "HardDeletesEnabled" |
+      "SyncAgentCompatibilityKey" | "SyncAgentADContainer" | "ValidateDomain" |
+      "TestReferences" | "ConnectionString", value?: string | null }[],
+      templates?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, applicationId?: string, default?: boolean,
+      description?: string | null, discoverable?: boolean, factoryTag?: string |
+      null, metadata?: { @odata.type: string, key?: Record<..., ...> |
+      "galleryApplicationIdentifier" | "galleryApplicationKey" |
+      "isOAuthEnabled" | "IsSynchronizationAgentAssignmentRequired" |
+      "isSynchronizationAgentRequired" | "isSynchronizationInPreview" |
+      "oAuthSettings" | "synchronizationLearnMoreIbizaFwLink" |
+      "configurationFields" | null, value?: string | null }[], schema?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+      "@odata.type"> & { @odata.type: string, directories?: ...[],
+      synchronizationRules?: ...[], version?: string | null } & { @odata.type:
+      "#microsoft.graph.synchronizationSchema" }) | null } & { @odata.type:
+      "#microsoft.graph.synchronizationTemplate" })[] } & { @odata.type:
+      "#microsoft.graph.synchronization" }, { application-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.applications.synchronization.set'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PUT /applications/{application-id}/synchronization`'
@@ -112,21 +329,332 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function set(body:
-        Operation<"/applications/{application-id}/synchronization", "put">,
-        params?: any): EndpointRequest<IEndpoints["PUT
-        /applications/{application-id}/synchronization"]["response"]>
+        function set(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, jobs?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        bulkUpload?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.bulkUpload" }) | null, schedule?: Record<string,
+        never> | { @odata.type: string, expiration?: string | null, interval?:
+        string, state?: "Active" | "Disabled" | "Paused" } | null, schema?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, directories?: ...[],
+        synchronizationRules?: ...[], version?: string | null } & { @odata.type:
+        "#microsoft.graph.synchronizationSchema" }) | null, status?:
+        Record<string, never> | { @odata.type: string, code?: "Active" |
+        "Paused" | "NotConfigured" | "NotRun" | "Quarantine",
+        countSuccessiveCompleteFailures?: number, escrowsPruned?: boolean,
+        lastExecution?: Record<string, never> | { @odata.type: string,
+        activityIdentifier?: function, countEntitled?: function,
+        countEntitledForProvisioning?: function, countEscrowed?: function,
+        countEscrowedRaw?: function, countExported?: function, countExports?:
+        function, countImported?: function, countImportedDeltas?: function,
+        countImportedReferenceDeltas?: function, error?: function, state?:
+        function, timeBegan?: function, timeEnded?: function } | null,
+        lastSuccessfulExecution?: Record<string, never> | { @odata.type: string,
+        activityIdentifier?: function, countEntitled?: function,
+        countEntitledForProvisioning?: function, countEscrowed?: function,
+        countEscrowedRaw?: function, countExported?: function, countExports?:
+        function, countImported?: function, countImportedDeltas?: function,
+        countImportedReferenceDeltas?: function, error?: function, state?:
+        function, timeBegan?: function, timeEnded?: function } | null,
+        lastSuccessfulExecutionWithExports?: Record<string, never> | {
+        @odata.type: string, activityIdentifier?: function, countEntitled?:
+        function, countEntitledForProvisioning?: function, countEscrowed?:
+        function, countEscrowedRaw?: function, countExported?: function,
+        countExports?: function, countImported?: function, countImportedDeltas?:
+        function, countImportedReferenceDeltas?: function, error?: function,
+        state?: function, timeBegan?: function, timeEnded?: function } | null,
+        progress?: { @odata.type: ..., completedUnits?: ...,
+        progressObservationDateTime?: ..., totalUnits?: ..., units?: ... }[],
+        quarantine?: Record<string, never> | { @odata.type: string,
+        currentBegan?: function, error?: function, nextAttempt?: function,
+        reason?: function, seriesBegan?: function, seriesCount?: function } |
+        null, steadyStateFirstAchievedTime?: string,
+        steadyStateLastAchievedTime?: string, synchronizedEntryCountByType?: {
+        @odata.type: ..., key?: ..., value?: ... }[], troubleshootingUrl?:
+        string | null } | null, synchronizationJobSettings?: { @odata.type:
+        string, name?: string, value?: string | null }[], templateId?: string |
+        null } & { @odata.type: "#microsoft.graph.synchronizationJob" })[],
+        secrets?: { @odata.type: string, key?: "None" | "UserName" | "Password"
+        | "SecretToken" | "AppKey" | "BaseAddress" | "ClientIdentifier" |
+        "ClientSecret" | "SingleSignOnType" | "Sandbox" | "Url" | "Domain" |
+        "ConsumerKey" | "ConsumerSecret" | "TokenKey" | "TokenExpiration" |
+        "Oauth2AccessToken" | "Oauth2AccessTokenCreationTime" |
+        "Oauth2RefreshToken" | "SyncAll" | "InstanceName" | "Oauth2ClientId" |
+        "Oauth2ClientSecret" | "CompanyId" | "UpdateKeyOnSoftDelete" |
+        "SynchronizationSchedule" | "SystemOfRecord" | "SandboxName" |
+        "EnforceDomain" | "SyncNotificationSettings" | "SkipOutOfScopeDeletions"
+        | "Oauth2AuthorizationCode" | "Oauth2RedirectUri" |
+        "ApplicationTemplateIdentifier" | "Oauth2TokenExchangeUri" |
+        "Oauth2AuthorizationUri" | "AuthenticationType" | "Server" |
+        "PerformInboundEntitlementGrants" | "HardDeletesEnabled" |
+        "SyncAgentCompatibilityKey" | "SyncAgentADContainer" | "ValidateDomain"
+        | "TestReferences" | "ConnectionString", value?: string | null }[],
+        templates?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+        { @odata.type: string, applicationId?: string, default?: boolean,
+        description?: string | null, discoverable?: boolean, factoryTag?: string
+        | null, metadata?: { @odata.type: string, key?: Record<..., ...> |
+        "galleryApplicationIdentifier" | "galleryApplicationKey" |
+        "isOAuthEnabled" | "IsSynchronizationAgentAssignmentRequired" |
+        "isSynchronizationAgentRequired" | "isSynchronizationInPreview" |
+        "oAuthSettings" | "synchronizationLearnMoreIbizaFwLink" |
+        "configurationFields" | null, value?: string | null }[], schema?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, directories?: ...[],
+        synchronizationRules?: ...[], version?: string | null } & { @odata.type:
+        "#microsoft.graph.synchronizationSchema" }) | null } & { @odata.type:
+        "#microsoft.graph.synchronizationTemplate" })[] } & { @odata.type:
+        "#microsoft.graph.synchronization" }, params?: { application-id: string
+        }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, jobs?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        bulkUpload?: Record<string, never> | (Omit<{ @odata.type: ..., id?: ...
+        }, "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.bulkUpload" }) | null, schedule?: Record<string,
+        never> | { @odata.type: string, expiration?: string | null, interval?:
+        string, state?: "Active" | "Disabled" | "Paused" } | null, schema?:
+        Record<string, never> | (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, directories?: function,
+        synchronizationRules?: function, version?: function } & { @odata.type:
+        "#microsoft.graph.synchronizationSchema" }) | null, status?:
+        Record<string, never> | { @odata.type: string, code?: "Active" |
+        "Paused" | "NotConfigured" | "NotRun" | "Quarantine",
+        countSuccessiveCompleteFailures?: number, escrowsPruned?: boolean,
+        lastExecution?: Record<..., ...> | { @odata.type: ...,
+        activityIdentifier?: ..., countEntitled?: ...,
+        countEntitledForProvisioning?: ..., countEscrowed?: ...,
+        countEscrowedRaw?: ..., countExported?: ..., countExports?: ...,
+        countImported?: ..., countImportedDeltas?: ...,
+        countImportedReferenceDeltas?: ..., error?: ..., state?: ...,
+        timeBegan?: ..., timeEnded?: ... } | null, lastSuccessfulExecution?:
+        Record<..., ...> | { @odata.type: ..., activityIdentifier?: ...,
+        countEntitled?: ..., countEntitledForProvisioning?: ..., countEscrowed?:
+        ..., countEscrowedRaw?: ..., countExported?: ..., countExports?: ...,
+        countImported?: ..., countImportedDeltas?: ...,
+        countImportedReferenceDeltas?: ..., error?: ..., state?: ...,
+        timeBegan?: ..., timeEnded?: ... } | null,
+        lastSuccessfulExecutionWithExports?: Record<..., ...> | { @odata.type:
+        ..., activityIdentifier?: ..., countEntitled?: ...,
+        countEntitledForProvisioning?: ..., countEscrowed?: ...,
+        countEscrowedRaw?: ..., countExported?: ..., countExports?: ...,
+        countImported?: ..., countImportedDeltas?: ...,
+        countImportedReferenceDeltas?: ..., error?: ..., state?: ...,
+        timeBegan?: ..., timeEnded?: ... } | null, progress?: ...[],
+        quarantine?: Record<..., ...> | { @odata.type: ..., currentBegan?: ...,
+        error?: ..., nextAttempt?: ..., reason?: ..., seriesBegan?: ...,
+        seriesCount?: ... } | null, steadyStateFirstAchievedTime?: string,
+        steadyStateLastAchievedTime?: string, synchronizedEntryCountByType?:
+        ...[], troubleshootingUrl?: string | null } | null,
+        synchronizationJobSettings?: { @odata.type: string, name?: function,
+        value?: function }[], templateId?: string | null } & { @odata.type:
+        "#microsoft.graph.synchronizationJob" })[], secrets?: { @odata.type:
+        string, key?: "None" | "UserName" | "Password" | "SecretToken" |
+        "AppKey" | "BaseAddress" | "ClientIdentifier" | "ClientSecret" |
+        "SingleSignOnType" | "Sandbox" | "Url" | "Domain" | "ConsumerKey" |
+        "ConsumerSecret" | "TokenKey" | "TokenExpiration" | "Oauth2AccessToken"
+        | "Oauth2AccessTokenCreationTime" | "Oauth2RefreshToken" | "SyncAll" |
+        "InstanceName" | "Oauth2ClientId" | "Oauth2ClientSecret" | "CompanyId" |
+        "UpdateKeyOnSoftDelete" | "SynchronizationSchedule" | "SystemOfRecord" |
+        "SandboxName" | "EnforceDomain" | "SyncNotificationSettings" |
+        "SkipOutOfScopeDeletions" | "Oauth2AuthorizationCode" |
+        "Oauth2RedirectUri" | "ApplicationTemplateIdentifier" |
+        "Oauth2TokenExchangeUri" | "Oauth2AuthorizationUri" |
+        "AuthenticationType" | "Server" | "PerformInboundEntitlementGrants" |
+        "HardDeletesEnabled" | "SyncAgentCompatibilityKey" |
+        "SyncAgentADContainer" | "ValidateDomain" | "TestReferences" |
+        "ConnectionString", value?: string | null }[], templates?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, applicationId?: string, default?: boolean, description?: string
+        | null, discoverable?: boolean, factoryTag?: string | null, metadata?: {
+        @odata.type: string, key?: function, value?: function }[], schema?:
+        Record<string, never> | (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, directories?: function,
+        synchronizationRules?: function, version?: function } & { @odata.type:
+        "#microsoft.graph.synchronizationSchema" }) | null } & { @odata.type:
+        "#microsoft.graph.synchronizationTemplate" })[] } & { @odata.type:
+        "#microsoft.graph.synchronization" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/applications/{application-id}/synchronization",
-            "put"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            jobs?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, bulkUpload?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.bulkUpload" />" }) | null, schedule?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            expiration?: string | null, interval?: string, state?: "Active" |
+            "Disabled" | "Paused" } | null, schema?: Record&lt;string, never&gt;
+            | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, directories?: ...[], synchronizationRules?: ...[], version?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.synchronizationSchema" />" }) | null, status?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            code?: "Active" | "Paused" | "NotConfigured" | "NotRun" |
+            "Quarantine", countSuccessiveCompleteFailures?: number,
+            escrowsPruned?: boolean, lastExecution?: Record&lt;string, never&gt;
+            | { <xref uid="@odata.type" />: string, activityIdentifier?:
+            function, countEntitled?: function, countEntitledForProvisioning?:
+            function, countEscrowed?: function, countEscrowedRaw?: function,
+            countExported?: function, countExports?: function, countImported?:
+            function, countImportedDeltas?: function,
+            countImportedReferenceDeltas?: function, error?: function, state?:
+            function, timeBegan?: function, timeEnded?: function } | null,
+            lastSuccessfulExecution?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, activityIdentifier?: function,
+            countEntitled?: function, countEntitledForProvisioning?: function,
+            countEscrowed?: function, countEscrowedRaw?: function,
+            countExported?: function, countExports?: function, countImported?:
+            function, countImportedDeltas?: function,
+            countImportedReferenceDeltas?: function, error?: function, state?:
+            function, timeBegan?: function, timeEnded?: function } | null,
+            lastSuccessfulExecutionWithExports?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, activityIdentifier?: function,
+            countEntitled?: function, countEntitledForProvisioning?: function,
+            countEscrowed?: function, countEscrowedRaw?: function,
+            countExported?: function, countExports?: function, countImported?:
+            function, countImportedDeltas?: function,
+            countImportedReferenceDeltas?: function, error?: function, state?:
+            function, timeBegan?: function, timeEnded?: function } | null,
+            progress?: { <xref uid="@odata.type" />: ..., completedUnits?: ...,
+            progressObservationDateTime?: ..., totalUnits?: ..., units?: ...
+            }[], quarantine?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, currentBegan?: function, error?:
+            function, nextAttempt?: function, reason?: function, seriesBegan?:
+            function, seriesCount?: function } | null,
+            steadyStateFirstAchievedTime?: string, steadyStateLastAchievedTime?:
+            string, synchronizedEntryCountByType?: { <xref uid="@odata.type" />:
+            ..., key?: ..., value?: ... }[], troubleshootingUrl?: string | null
+            } | null, synchronizationJobSettings?: { <xref uid="@odata.type" />:
+            string, name?: string, value?: string | null }[], templateId?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.synchronizationJob" />" })[], secrets?: { <xref
+            uid="@odata.type" />: string, key?: "None" | "UserName" | "Password"
+            | "SecretToken" | "AppKey" | "BaseAddress" | "ClientIdentifier" |
+            "ClientSecret" | "SingleSignOnType" | "Sandbox" | "Url" | "Domain" |
+            "ConsumerKey" | "ConsumerSecret" | "TokenKey" | "TokenExpiration" |
+            "Oauth2AccessToken" | "Oauth2AccessTokenCreationTime" |
+            "Oauth2RefreshToken" | "SyncAll" | "InstanceName" | "Oauth2ClientId"
+            | "Oauth2ClientSecret" | "CompanyId" | "UpdateKeyOnSoftDelete" |
+            "SynchronizationSchedule" | "SystemOfRecord" | "SandboxName" |
+            "EnforceDomain" | "SyncNotificationSettings" |
+            "SkipOutOfScopeDeletions" | "Oauth2AuthorizationCode" |
+            "Oauth2RedirectUri" | "ApplicationTemplateIdentifier" |
+            "Oauth2TokenExchangeUri" | "Oauth2AuthorizationUri" |
+            "AuthenticationType" | "Server" | "PerformInboundEntitlementGrants"
+            | "HardDeletesEnabled" | "SyncAgentCompatibilityKey" |
+            "SyncAgentADContainer" | "ValidateDomain" | "TestReferences" |
+            "ConnectionString", value?: string | null }[], templates?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            applicationId?: string, default?: boolean, description?: string |
+            null, discoverable?: boolean, factoryTag?: string | null, metadata?:
+            { <xref uid="@odata.type" />: string, key?: Record&lt;..., ...&gt; |
+            "galleryApplicationIdentifier" | "galleryApplicationKey" |
+            "isOAuthEnabled" | "IsSynchronizationAgentAssignmentRequired" |
+            "isSynchronizationAgentRequired" | "isSynchronizationInPreview" |
+            "oAuthSettings" | "synchronizationLearnMoreIbizaFwLink" |
+            "configurationFields" | null, value?: string | null }[], schema?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, directories?: ...[],
+            synchronizationRules?: ...[], version?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.synchronizationSchema" />" }) | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.synchronizationTemplate" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.synchronization"
+            />" }
           description: ''
         - id: params
-          type: any
+          type: '{ application-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PUT
-          /applications/{application-id}/synchronization"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, jobs?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, bulkUpload?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.bulkUpload" />" })
+          | null, schedule?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, expiration?: string | null, interval?:
+          string, state?: "Active" | "Disabled" | "Paused" } | null, schema?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, directories?: function,
+          synchronizationRules?: function, version?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.synchronizationSchema" />" }) | null, status?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          code?: "Active" | "Paused" | "NotConfigured" | "NotRun" |
+          "Quarantine", countSuccessiveCompleteFailures?: number,
+          escrowsPruned?: boolean, lastExecution?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., activityIdentifier?: ...,
+          countEntitled?: ..., countEntitledForProvisioning?: ...,
+          countEscrowed?: ..., countEscrowedRaw?: ..., countExported?: ...,
+          countExports?: ..., countImported?: ..., countImportedDeltas?: ...,
+          countImportedReferenceDeltas?: ..., error?: ..., state?: ...,
+          timeBegan?: ..., timeEnded?: ... } | null, lastSuccessfulExecution?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          activityIdentifier?: ..., countEntitled?: ...,
+          countEntitledForProvisioning?: ..., countEscrowed?: ...,
+          countEscrowedRaw?: ..., countExported?: ..., countExports?: ...,
+          countImported?: ..., countImportedDeltas?: ...,
+          countImportedReferenceDeltas?: ..., error?: ..., state?: ...,
+          timeBegan?: ..., timeEnded?: ... } | null,
+          lastSuccessfulExecutionWithExports?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., activityIdentifier?: ..., countEntitled?:
+          ..., countEntitledForProvisioning?: ..., countEscrowed?: ...,
+          countEscrowedRaw?: ..., countExported?: ..., countExports?: ...,
+          countImported?: ..., countImportedDeltas?: ...,
+          countImportedReferenceDeltas?: ..., error?: ..., state?: ...,
+          timeBegan?: ..., timeEnded?: ... } | null, progress?: ...[],
+          quarantine?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., currentBegan?: ..., error?: ..., nextAttempt?: ..., reason?: ...,
+          seriesBegan?: ..., seriesCount?: ... } | null,
+          steadyStateFirstAchievedTime?: string, steadyStateLastAchievedTime?:
+          string, synchronizedEntryCountByType?: ...[], troubleshootingUrl?:
+          string | null } | null, synchronizationJobSettings?: { <xref
+          uid="@odata.type" />: string, name?: function, value?: function }[],
+          templateId?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.synchronizationJob" />" })[], secrets?: { <xref
+          uid="@odata.type" />: string, key?: "None" | "UserName" | "Password" |
+          "SecretToken" | "AppKey" | "BaseAddress" | "ClientIdentifier" |
+          "ClientSecret" | "SingleSignOnType" | "Sandbox" | "Url" | "Domain" |
+          "ConsumerKey" | "ConsumerSecret" | "TokenKey" | "TokenExpiration" |
+          "Oauth2AccessToken" | "Oauth2AccessTokenCreationTime" |
+          "Oauth2RefreshToken" | "SyncAll" | "InstanceName" | "Oauth2ClientId" |
+          "Oauth2ClientSecret" | "CompanyId" | "UpdateKeyOnSoftDelete" |
+          "SynchronizationSchedule" | "SystemOfRecord" | "SandboxName" |
+          "EnforceDomain" | "SyncNotificationSettings" |
+          "SkipOutOfScopeDeletions" | "Oauth2AuthorizationCode" |
+          "Oauth2RedirectUri" | "ApplicationTemplateIdentifier" |
+          "Oauth2TokenExchangeUri" | "Oauth2AuthorizationUri" |
+          "AuthenticationType" | "Server" | "PerformInboundEntitlementGrants" |
+          "HardDeletesEnabled" | "SyncAgentCompatibilityKey" |
+          "SyncAgentADContainer" | "ValidateDomain" | "TestReferences" |
+          "ConnectionString", value?: string | null }[], templates?: (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          applicationId?: string, default?: boolean, description?: string |
+          null, discoverable?: boolean, factoryTag?: string | null, metadata?: {
+          <xref uid="@odata.type" />: string, key?: function, value?: function
+          }[], schema?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, directories?:
+          function, synchronizationRules?: function, version?: function } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.synchronizationSchema" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.synchronizationTemplate" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.synchronization"
+          />" }&gt;

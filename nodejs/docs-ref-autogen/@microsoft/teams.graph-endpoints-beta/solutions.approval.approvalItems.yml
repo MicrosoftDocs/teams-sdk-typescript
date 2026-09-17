@@ -155,7 +155,61 @@ variables:
           /solutions/approval/approvalItems/{approvalItem-id}/responses/{approvalItemResponse-id}"]["response"]&gt;
           }
 functions:
-  - name: create(Operation<"/solutions/approval/approvalItems", "post">)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, allowCancel?: boolean | null,
+      allowEmailNotification?: boolean | null, approvalType?: Record<string,
+      never> | "unknownFutureValue" | "basic" | "basicAwaitAll" | "custom" |
+      "customAwaitAll" | null, approvers?: (Omit<{ @odata.type: string,
+      application?: Record<string, never> | { @odata.type: string, displayName?:
+      string | null, id?: string | null } | null, device?: Record<string, never>
+      | { @odata.type: string, displayName?: string | null, id?: string | null }
+      | null, user?: Record<string, never> | { @odata.type: string,
+      displayName?: string | null, id?: string | null } | null }, "@odata.type">
+      & { @odata.type: string, group?: Record<string, never> | { @odata.type:
+      string, displayName?: string | null, id?: string | null } | null } & {
+      @odata.type: "#microsoft.graph.approvalIdentitySet" })[],
+      completedDateTime?: string | null, createdDateTime?: string | null,
+      description?: string | null, displayName?: string | null, owner?:
+      Record<string, never> | (Omit<{ @odata.type: string, application?:
+      Record<string, never> | { @odata.type: string, displayName?: string |
+      null, id?: string | null } | null, device?: Record<string, never> | {
+      @odata.type: string, displayName?: string | null, id?: string | null } |
+      null, user?: Record<string, never> | { @odata.type: string, displayName?:
+      string | null, id?: string | null } | null }, "@odata.type"> & {
+      @odata.type: string, group?: Record<string, never> | { @odata.type:
+      string, displayName?: string | null, id?: string | null } | null } & {
+      @odata.type: "#microsoft.graph.approvalIdentitySet" }) | null, requests?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, approver?: Record<string, never> | (Omit<{
+      @odata.type: string, application?: function, device?: function, user?:
+      function }, "@odata.type"> & { @odata.type: string, group?: Record<...,
+      ...> | { @odata.type: ..., displayName?: ..., id?: ... } | null } & {
+      @odata.type: "#microsoft.graph.approvalIdentitySet" }) | null,
+      createdDateTime?: string | null, isReassigned?: boolean | null,
+      reassignedFrom?: Record<string, never> | (Omit<{ @odata.type: string,
+      application?: function, device?: function, user?: function },
+      "@odata.type"> & { @odata.type: string, group?: Record<..., ...> | {
+      @odata.type: ..., displayName?: ..., id?: ... } | null } & { @odata.type:
+      "#microsoft.graph.approvalIdentitySet" }) | null } & { @odata.type:
+      "#microsoft.graph.approvalItemRequest" })[], responsePrompts?: (string |
+      null)[], responses?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, comments?: string | null,
+      createdBy?: Record<string, never> | (Omit<{ @odata.type: string,
+      application?: function, device?: function, user?: function },
+      "@odata.type"> & { @odata.type: string, group?: Record<..., ...> | {
+      @odata.type: ..., displayName?: ..., id?: ... } | null } & { @odata.type:
+      "#microsoft.graph.approvalIdentitySet" }) | null, createdDateTime?: string
+      | null, owners?: (Omit<{ @odata.type: ..., application?: ..., device?:
+      ..., user?: ... }, "@odata.type"> & { @odata.type: string, group?:
+      function } & { @odata.type: "#microsoft.graph.approvalIdentitySet" })[],
+      response?: string | null } & { @odata.type:
+      "#microsoft.graph.approvalItemResponse" })[], result?: string | null,
+      state?: Record<string, never> | "unknownFutureValue" | "canceled" |
+      "created" | "pending" | "completed" | null, viewPoint?: Record<string,
+      never> | { @odata.type: string, roles?: (Record<string, never> |
+      "unknownFutureValue" | "owner" | "approver" | null)[] } | null } & {
+      @odata.type: "#microsoft.graph.approvalItem" })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.solutions.approval.approvalItems.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -167,19 +221,259 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body: Operation<"/solutions/approval/approvalItems",
-        "post">): EndpointRequest<IEndpoints["POST
-        /solutions/approval/approvalItems"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, allowCancel?: boolean | null,
+        allowEmailNotification?: boolean | null, approvalType?: Record<string,
+        never> | "unknownFutureValue" | "basic" | "basicAwaitAll" | "custom" |
+        "customAwaitAll" | null, approvers?: (Omit<{ @odata.type: string,
+        application?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, device?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, user?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null }, "@odata.type"> & { @odata.type: string, group?: Record<string,
+        never> | { @odata.type: string, displayName?: string | null, id?: string
+        | null } | null } & { @odata.type:
+        "#microsoft.graph.approvalIdentitySet" })[], completedDateTime?: string
+        | null, createdDateTime?: string | null, description?: string | null,
+        displayName?: string | null, owner?: Record<string, never> | (Omit<{
+        @odata.type: string, application?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, device?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, user?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null }, "@odata.type"> & { @odata.type:
+        string, group?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null } & {
+        @odata.type: "#microsoft.graph.approvalIdentitySet" }) | null,
+        requests?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+        { @odata.type: string, approver?: Record<string, never> | (Omit<{
+        @odata.type: string, application?: function, device?: function, user?:
+        function }, "@odata.type"> & { @odata.type: string, group?: Record<...,
+        ...> | { @odata.type: ..., displayName?: ..., id?: ... } | null } & {
+        @odata.type: "#microsoft.graph.approvalIdentitySet" }) | null,
+        createdDateTime?: string | null, isReassigned?: boolean | null,
+        reassignedFrom?: Record<string, never> | (Omit<{ @odata.type: string,
+        application?: function, device?: function, user?: function },
+        "@odata.type"> & { @odata.type: string, group?: Record<..., ...> | {
+        @odata.type: ..., displayName?: ..., id?: ... } | null } & {
+        @odata.type: "#microsoft.graph.approvalIdentitySet" }) | null } & {
+        @odata.type: "#microsoft.graph.approvalItemRequest" })[],
+        responsePrompts?: (string | null)[], responses?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        comments?: string | null, createdBy?: Record<string, never> | (Omit<{
+        @odata.type: string, application?: function, device?: function, user?:
+        function }, "@odata.type"> & { @odata.type: string, group?: Record<...,
+        ...> | { @odata.type: ..., displayName?: ..., id?: ... } | null } & {
+        @odata.type: "#microsoft.graph.approvalIdentitySet" }) | null,
+        createdDateTime?: string | null, owners?: (Omit<{ @odata.type: ...,
+        application?: ..., device?: ..., user?: ... }, "@odata.type"> & {
+        @odata.type: string, group?: function } & { @odata.type:
+        "#microsoft.graph.approvalIdentitySet" })[], response?: string | null }
+        & { @odata.type: "#microsoft.graph.approvalItemResponse" })[], result?:
+        string | null, state?: Record<string, never> | "unknownFutureValue" |
+        "canceled" | "created" | "pending" | "completed" | null, viewPoint?:
+        Record<string, never> | { @odata.type: string, roles?: (Record<string,
+        never> | "unknownFutureValue" | "owner" | "approver" | null)[] } | null
+        } & { @odata.type: "#microsoft.graph.approvalItem" }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, allowCancel?: boolean | null,
+        allowEmailNotification?: boolean | null, approvalType?: Record<string,
+        never> | "unknownFutureValue" | "basic" | "basicAwaitAll" | "custom" |
+        "customAwaitAll" | null, approvers?: (Omit<{ @odata.type: string,
+        application?: Record<string, never> | { @odata.type: string,
+        displayName?: function, id?: function } | null, device?: Record<string,
+        never> | { @odata.type: string, displayName?: function, id?: function }
+        | null, user?: Record<string, never> | { @odata.type: string,
+        displayName?: function, id?: function } | null }, "@odata.type"> & {
+        @odata.type: string, group?: Record<string, never> | { @odata.type:
+        string, displayName?: string | null, id?: string | null } | null } & {
+        @odata.type: "#microsoft.graph.approvalIdentitySet" })[],
+        completedDateTime?: string | null, createdDateTime?: string | null,
+        description?: string | null, displayName?: string | null, owner?:
+        Record<string, never> | (Omit<{ @odata.type: string, application?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, device?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, user?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null },
+        "@odata.type"> & { @odata.type: string, group?: Record<string, never> |
+        { @odata.type: string, displayName?: string | null, id?: string | null }
+        | null } & { @odata.type: "#microsoft.graph.approvalIdentitySet" }) |
+        null, requests?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, approver?: Record<string, never>
+        | (Omit<{ @odata.type: ..., application?: ..., device?: ..., user?: ...
+        }, "@odata.type"> & { @odata.type: string, group?: function } & {
+        @odata.type: "#microsoft.graph.approvalIdentitySet" }) | null,
+        createdDateTime?: string | null, isReassigned?: boolean | null,
+        reassignedFrom?: Record<string, never> | (Omit<{ @odata.type: ...,
+        application?: ..., device?: ..., user?: ... }, "@odata.type"> & {
+        @odata.type: string, group?: function } & { @odata.type:
+        "#microsoft.graph.approvalIdentitySet" }) | null } & { @odata.type:
+        "#microsoft.graph.approvalItemRequest" })[], responsePrompts?: (string |
+        null)[], responses?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, comments?: string | null,
+        createdBy?: Record<string, never> | (Omit<{ @odata.type: ...,
+        application?: ..., device?: ..., user?: ... }, "@odata.type"> & {
+        @odata.type: string, group?: function } & { @odata.type:
+        "#microsoft.graph.approvalIdentitySet" }) | null, createdDateTime?:
+        string | null, owners?: (Omit<..., ...> & { @odata.type: ..., group?:
+        ... } & { @odata.type: ... })[], response?: string | null } & {
+        @odata.type: "#microsoft.graph.approvalItemResponse" })[], result?:
+        string | null, state?: Record<string, never> | "unknownFutureValue" |
+        "canceled" | "created" | "pending" | "completed" | null, viewPoint?:
+        Record<string, never> | { @odata.type: string, roles?: (Record<string,
+        never> | "unknownFutureValue" | "owner" | "approver" | null)[] } | null
+        } & { @odata.type: "#microsoft.graph.approvalItem" }>
       parameters:
         - id: body
-          type: Operation&lt;"/solutions/approval/approvalItems", "post"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            allowCancel?: boolean | null, allowEmailNotification?: boolean |
+            null, approvalType?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "basic" | "basicAwaitAll" | "custom" |
+            "customAwaitAll" | null, approvers?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, application?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, displayName?:
+            string | null, id?: string | null } | null, device?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, id?: string | null } | null, user?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, id?: string | null } | null }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            group?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+            string, displayName?: string | null, id?: string | null } | null } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.approvalIdentitySet" />" })[],
+            completedDateTime?: string | null, createdDateTime?: string | null,
+            description?: string | null, displayName?: string | null, owner?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, application?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, displayName?: string | null, id?:
+            string | null } | null, device?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | null, user?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | null }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, group?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, displayName?:
+            string | null, id?: string | null } | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.approvalIdentitySet" />" }) | null, requests?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            approver?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, application?: function, device?:
+            function, user?: function }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, group?: Record&lt;..., ...&gt; |
+            { <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+            null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.approvalIdentitySet" />" }) | null,
+            createdDateTime?: string | null, isReassigned?: boolean | null,
+            reassignedFrom?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, application?: function, device?:
+            function, user?: function }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, group?: Record&lt;..., ...&gt; |
+            { <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+            null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.approvalIdentitySet" />" }) | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.approvalItemRequest" />" })[],
+            responsePrompts?: (string | null)[], responses?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            comments?: string | null, createdBy?: Record&lt;string, never&gt; |
+            (Omit&lt;{ <xref uid="@odata.type" />: string, application?:
+            function, device?: function, user?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            group?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            displayName?: ..., id?: ... } | null } & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.approvalIdentitySet" />" }) | null,
+            createdDateTime?: string | null, owners?: (Omit&lt;{ <xref
+            uid="@odata.type" />: ..., application?: ..., device?: ..., user?:
+            ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: string, group?: function } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.approvalIdentitySet" />" })[],
+            response?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.approvalItemResponse" />" })[], result?: string
+            | null, state?: Record&lt;string, never&gt; | "unknownFutureValue" |
+            "canceled" | "created" | "pending" | "completed" | null, viewPoint?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            roles?: (Record&lt;string, never&gt; | "unknownFutureValue" |
+            "owner" | "approver" | null)[] } | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.approvalItem" />"
+            }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /solutions/approval/approvalItems"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, allowCancel?: boolean | null, allowEmailNotification?:
+          boolean | null, approvalType?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "basic" | "basicAwaitAll" | "custom" |
+          "customAwaitAll" | null, approvers?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, application?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, displayName?:
+          function, id?: function } | null, device?: Record&lt;string, never&gt;
+          | { <xref uid="@odata.type" />: string, displayName?: function, id?:
+          function } | null, user?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: function, id?: function }
+          | null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, group?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalIdentitySet" />" })[],
+          completedDateTime?: string | null, createdDateTime?: string | null,
+          description?: string | null, displayName?: string | null, owner?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, application?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null, device?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null, user?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, group?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, displayName?: string | null, id?:
+          string | null } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalIdentitySet" />" }) | null, requests?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          approver?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., application?: ..., device?: ..., user?: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, group?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalIdentitySet" />" }) | null,
+          createdDateTime?: string | null, isReassigned?: boolean | null,
+          reassignedFrom?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., application?: ..., device?: ..., user?: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, group?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalIdentitySet" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalItemRequest" />" })[], responsePrompts?:
+          (string | null)[], responses?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, comments?: string | null, createdBy?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., application?: ..., device?: ..., user?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          group?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalIdentitySet" />" }) | null,
+          createdDateTime?: string | null, owners?: (Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ..., group?: ... } & { <xref
+          uid="@odata.type" />: ... })[], response?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalItemResponse" />" })[], result?: string |
+          null, state?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "canceled" | "created" | "pending" | "completed" | null, viewPoint?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          roles?: (Record&lt;string, never&gt; | "unknownFutureValue" | "owner"
+          | "approver" | null)[] } | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.approvalItem" />" }&gt;
+  - name: 'del({ approvalItem-id: string, If-Match?: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.solutions.approval.approvalItems.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`DELETE /solutions/approval/approvalItems/{approvalItem-id}`'
@@ -187,18 +481,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /solutions/approval/approvalItems/{approvalItem-id}"]["response"]>
+        function del(params?: { approvalItem-id: string, If-Match?: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ approvalItem-id: string, If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /solutions/approval/approvalItems/{approvalItem-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[], approvalItem-id: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.solutions.approval.approvalItems.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -209,18 +501,132 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /solutions/approval/approvalItems/{approvalItem-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        approvalItem-id: string }): EndpointRequest<Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, allowCancel?:
+        boolean | null, allowEmailNotification?: boolean | null, approvalType?:
+        Record<string, never> | "unknownFutureValue" | "basic" | "basicAwaitAll"
+        | "custom" | "customAwaitAll" | null, approvers?: (Omit<{ @odata.type:
+        string, application?: Record<string, never> | { @odata.type: string,
+        displayName?: function, id?: function } | null, device?: Record<string,
+        never> | { @odata.type: string, displayName?: function, id?: function }
+        | null, user?: Record<string, never> | { @odata.type: string,
+        displayName?: function, id?: function } | null }, "@odata.type"> & {
+        @odata.type: string, group?: Record<string, never> | { @odata.type:
+        string, displayName?: string | null, id?: string | null } | null } & {
+        @odata.type: "#microsoft.graph.approvalIdentitySet" })[],
+        completedDateTime?: string | null, createdDateTime?: string | null,
+        description?: string | null, displayName?: string | null, owner?:
+        Record<string, never> | (Omit<{ @odata.type: string, application?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, device?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, user?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null },
+        "@odata.type"> & { @odata.type: string, group?: Record<string, never> |
+        { @odata.type: string, displayName?: string | null, id?: string | null }
+        | null } & { @odata.type: "#microsoft.graph.approvalIdentitySet" }) |
+        null, requests?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, approver?: Record<string, never>
+        | (Omit<{ @odata.type: ..., application?: ..., device?: ..., user?: ...
+        }, "@odata.type"> & { @odata.type: string, group?: function } & {
+        @odata.type: "#microsoft.graph.approvalIdentitySet" }) | null,
+        createdDateTime?: string | null, isReassigned?: boolean | null,
+        reassignedFrom?: Record<string, never> | (Omit<{ @odata.type: ...,
+        application?: ..., device?: ..., user?: ... }, "@odata.type"> & {
+        @odata.type: string, group?: function } & { @odata.type:
+        "#microsoft.graph.approvalIdentitySet" }) | null } & { @odata.type:
+        "#microsoft.graph.approvalItemRequest" })[], responsePrompts?: (string |
+        null)[], responses?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, comments?: string | null,
+        createdBy?: Record<string, never> | (Omit<{ @odata.type: ...,
+        application?: ..., device?: ..., user?: ... }, "@odata.type"> & {
+        @odata.type: string, group?: function } & { @odata.type:
+        "#microsoft.graph.approvalIdentitySet" }) | null, createdDateTime?:
+        string | null, owners?: (Omit<..., ...> & { @odata.type: ..., group?:
+        ... } & { @odata.type: ... })[], response?: string | null } & {
+        @odata.type: "#microsoft.graph.approvalItemResponse" })[], result?:
+        string | null, state?: Record<string, never> | "unknownFutureValue" |
+        "canceled" | "created" | "pending" | "completed" | null, viewPoint?:
+        Record<string, never> | { @odata.type: string, roles?: (Record<string,
+        never> | "unknownFutureValue" | "owner" | "approver" | null)[] } | null
+        } & { @odata.type: "#microsoft.graph.approvalItem" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[], approvalItem-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /solutions/approval/approvalItems/{approvalItem-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, allowCancel?: boolean | null, allowEmailNotification?:
+          boolean | null, approvalType?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "basic" | "basicAwaitAll" | "custom" |
+          "customAwaitAll" | null, approvers?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, application?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, displayName?:
+          function, id?: function } | null, device?: Record&lt;string, never&gt;
+          | { <xref uid="@odata.type" />: string, displayName?: function, id?:
+          function } | null, user?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: function, id?: function }
+          | null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, group?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalIdentitySet" />" })[],
+          completedDateTime?: string | null, createdDateTime?: string | null,
+          description?: string | null, displayName?: string | null, owner?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, application?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null, device?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null, user?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, group?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, displayName?: string | null, id?:
+          string | null } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalIdentitySet" />" }) | null, requests?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          approver?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., application?: ..., device?: ..., user?: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, group?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalIdentitySet" />" }) | null,
+          createdDateTime?: string | null, isReassigned?: boolean | null,
+          reassignedFrom?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., application?: ..., device?: ..., user?: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, group?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalIdentitySet" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalItemRequest" />" })[], responsePrompts?:
+          (string | null)[], responses?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, comments?: string | null, createdBy?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., application?: ..., device?: ..., user?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          group?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalIdentitySet" />" }) | null,
+          createdDateTime?: string | null, owners?: (Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ..., group?: ... } & { <xref
+          uid="@odata.type" />: ... })[], response?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalItemResponse" />" })[], result?: string |
+          null, state?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "canceled" | "created" | "pending" | "completed" | null, viewPoint?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          roles?: (Record&lt;string, never&gt; | "unknownFutureValue" | "owner"
+          | "approver" | null)[] } | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.approvalItem" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.solutions.approval.approvalItems.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -232,20 +638,125 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /solutions/approval/approvalItems"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, allowCancel?: boolean | null, allowEmailNotification?: boolean |
+        null, approvalType?: Record<string, never> | "unknownFutureValue" |
+        "basic" | "basicAwaitAll" | "custom" | "customAwaitAll" | null,
+        approvers?: (Omit<..., ...> & { @odata.type: ..., group?: ... } & {
+        @odata.type: ... })[], completedDateTime?: string | null,
+        createdDateTime?: string | null, description?: string | null,
+        displayName?: string | null, owner?: Record<string, never> | (Omit<{
+        @odata.type: ..., application?: ..., device?: ..., user?: ... },
+        "@odata.type"> & { @odata.type: string, group?: function } & {
+        @odata.type: "#microsoft.graph.approvalIdentitySet" }) | null,
+        requests?: (Omit<..., ...> & { @odata.type: ..., approver?: ...,
+        createdDateTime?: ..., isReassigned?: ..., reassignedFrom?: ... } & {
+        @odata.type: ... })[], responsePrompts?: (string | null)[], responses?:
+        (Omit<..., ...> & { @odata.type: ..., comments?: ..., createdBy?: ...,
+        createdDateTime?: ..., owners?: ..., response?: ... } & { @odata.type:
+        ... })[], result?: string | null, state?: Record<string, never> |
+        "unknownFutureValue" | "canceled" | "created" | "pending" | "completed"
+        | null, viewPoint?: Record<string, never> | { @odata.type: string,
+        roles?: ...[] } | null } & { @odata.type:
+        "#microsoft.graph.approvalItem" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /solutions/approval/approvalItems"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          allowCancel?: boolean | null, allowEmailNotification?: boolean | null,
+          approvalType?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "basic" | "basicAwaitAll" | "custom" | "customAwaitAll" | null,
+          approvers?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          group?: ... } & { <xref uid="@odata.type" />: ... })[],
+          completedDateTime?: string | null, createdDateTime?: string | null,
+          description?: string | null, displayName?: string | null, owner?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., application?: ..., device?: ..., user?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          group?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalIdentitySet" />" }) | null, requests?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ..., approver?:
+          ..., createdDateTime?: ..., isReassigned?: ..., reassignedFrom?: ... }
+          & { <xref uid="@odata.type" />: ... })[], responsePrompts?: (string |
+          null)[], responses?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type"
+          />: ..., comments?: ..., createdBy?: ..., createdDateTime?: ...,
+          owners?: ..., response?: ... } & { <xref uid="@odata.type" />: ...
+          })[], result?: string | null, state?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "canceled" | "created" | "pending" |
+          "completed" | null, viewPoint?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, roles?: ...[] } | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.approvalItem" />"
+          })[] }&gt;
   - name: >-
-      update(Operation<"/solutions/approval/approvalItems/{approvalItem-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, allowCancel?: boolean | null,
+      allowEmailNotification?: boolean | null, approvalType?: Record<string,
+      never> | "unknownFutureValue" | "basic" | "basicAwaitAll" | "custom" |
+      "customAwaitAll" | null, approvers?: (Omit<{ @odata.type: string,
+      application?: Record<string, never> | { @odata.type: string, displayName?:
+      string | null, id?: string | null } | null, device?: Record<string, never>
+      | { @odata.type: string, displayName?: string | null, id?: string | null }
+      | null, user?: Record<string, never> | { @odata.type: string,
+      displayName?: string | null, id?: string | null } | null }, "@odata.type">
+      & { @odata.type: string, group?: Record<string, never> | { @odata.type:
+      string, displayName?: string | null, id?: string | null } | null } & {
+      @odata.type: "#microsoft.graph.approvalIdentitySet" })[],
+      completedDateTime?: string | null, createdDateTime?: string | null,
+      description?: string | null, displayName?: string | null, owner?:
+      Record<string, never> | (Omit<{ @odata.type: string, application?:
+      Record<string, never> | { @odata.type: string, displayName?: string |
+      null, id?: string | null } | null, device?: Record<string, never> | {
+      @odata.type: string, displayName?: string | null, id?: string | null } |
+      null, user?: Record<string, never> | { @odata.type: string, displayName?:
+      string | null, id?: string | null } | null }, "@odata.type"> & {
+      @odata.type: string, group?: Record<string, never> | { @odata.type:
+      string, displayName?: string | null, id?: string | null } | null } & {
+      @odata.type: "#microsoft.graph.approvalIdentitySet" }) | null, requests?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, approver?: Record<string, never> | (Omit<{
+      @odata.type: string, application?: function, device?: function, user?:
+      function }, "@odata.type"> & { @odata.type: string, group?: Record<...,
+      ...> | { @odata.type: ..., displayName?: ..., id?: ... } | null } & {
+      @odata.type: "#microsoft.graph.approvalIdentitySet" }) | null,
+      createdDateTime?: string | null, isReassigned?: boolean | null,
+      reassignedFrom?: Record<string, never> | (Omit<{ @odata.type: string,
+      application?: function, device?: function, user?: function },
+      "@odata.type"> & { @odata.type: string, group?: Record<..., ...> | {
+      @odata.type: ..., displayName?: ..., id?: ... } | null } & { @odata.type:
+      "#microsoft.graph.approvalIdentitySet" }) | null } & { @odata.type:
+      "#microsoft.graph.approvalItemRequest" })[], responsePrompts?: (string |
+      null)[], responses?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, comments?: string | null,
+      createdBy?: Record<string, never> | (Omit<{ @odata.type: string,
+      application?: function, device?: function, user?: function },
+      "@odata.type"> & { @odata.type: string, group?: Record<..., ...> | {
+      @odata.type: ..., displayName?: ..., id?: ... } | null } & { @odata.type:
+      "#microsoft.graph.approvalIdentitySet" }) | null, createdDateTime?: string
+      | null, owners?: (Omit<{ @odata.type: ..., application?: ..., device?:
+      ..., user?: ... }, "@odata.type"> & { @odata.type: string, group?:
+      function } & { @odata.type: "#microsoft.graph.approvalIdentitySet" })[],
+      response?: string | null } & { @odata.type:
+      "#microsoft.graph.approvalItemResponse" })[], result?: string | null,
+      state?: Record<string, never> | "unknownFutureValue" | "canceled" |
+      "created" | "pending" | "completed" | null, viewPoint?: Record<string,
+      never> | { @odata.type: string, roles?: (Record<string, never> |
+      "unknownFutureValue" | "owner" | "approver" | null)[] } | null } & {
+      @odata.type: "#microsoft.graph.approvalItem" }, { approvalItem-id: string
+      })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.solutions.approval.approvalItems.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -254,21 +765,258 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/solutions/approval/approvalItems/{approvalItem-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /solutions/approval/approvalItems/{approvalItem-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, allowCancel?: boolean | null,
+        allowEmailNotification?: boolean | null, approvalType?: Record<string,
+        never> | "unknownFutureValue" | "basic" | "basicAwaitAll" | "custom" |
+        "customAwaitAll" | null, approvers?: (Omit<{ @odata.type: string,
+        application?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, device?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, user?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null }, "@odata.type"> & { @odata.type: string, group?: Record<string,
+        never> | { @odata.type: string, displayName?: string | null, id?: string
+        | null } | null } & { @odata.type:
+        "#microsoft.graph.approvalIdentitySet" })[], completedDateTime?: string
+        | null, createdDateTime?: string | null, description?: string | null,
+        displayName?: string | null, owner?: Record<string, never> | (Omit<{
+        @odata.type: string, application?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, device?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, user?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null }, "@odata.type"> & { @odata.type:
+        string, group?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null } & {
+        @odata.type: "#microsoft.graph.approvalIdentitySet" }) | null,
+        requests?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+        { @odata.type: string, approver?: Record<string, never> | (Omit<{
+        @odata.type: string, application?: function, device?: function, user?:
+        function }, "@odata.type"> & { @odata.type: string, group?: Record<...,
+        ...> | { @odata.type: ..., displayName?: ..., id?: ... } | null } & {
+        @odata.type: "#microsoft.graph.approvalIdentitySet" }) | null,
+        createdDateTime?: string | null, isReassigned?: boolean | null,
+        reassignedFrom?: Record<string, never> | (Omit<{ @odata.type: string,
+        application?: function, device?: function, user?: function },
+        "@odata.type"> & { @odata.type: string, group?: Record<..., ...> | {
+        @odata.type: ..., displayName?: ..., id?: ... } | null } & {
+        @odata.type: "#microsoft.graph.approvalIdentitySet" }) | null } & {
+        @odata.type: "#microsoft.graph.approvalItemRequest" })[],
+        responsePrompts?: (string | null)[], responses?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        comments?: string | null, createdBy?: Record<string, never> | (Omit<{
+        @odata.type: string, application?: function, device?: function, user?:
+        function }, "@odata.type"> & { @odata.type: string, group?: Record<...,
+        ...> | { @odata.type: ..., displayName?: ..., id?: ... } | null } & {
+        @odata.type: "#microsoft.graph.approvalIdentitySet" }) | null,
+        createdDateTime?: string | null, owners?: (Omit<{ @odata.type: ...,
+        application?: ..., device?: ..., user?: ... }, "@odata.type"> & {
+        @odata.type: string, group?: function } & { @odata.type:
+        "#microsoft.graph.approvalIdentitySet" })[], response?: string | null }
+        & { @odata.type: "#microsoft.graph.approvalItemResponse" })[], result?:
+        string | null, state?: Record<string, never> | "unknownFutureValue" |
+        "canceled" | "created" | "pending" | "completed" | null, viewPoint?:
+        Record<string, never> | { @odata.type: string, roles?: (Record<string,
+        never> | "unknownFutureValue" | "owner" | "approver" | null)[] } | null
+        } & { @odata.type: "#microsoft.graph.approvalItem" }, params?: {
+        approvalItem-id: string }): EndpointRequest<Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, allowCancel?:
+        boolean | null, allowEmailNotification?: boolean | null, approvalType?:
+        Record<string, never> | "unknownFutureValue" | "basic" | "basicAwaitAll"
+        | "custom" | "customAwaitAll" | null, approvers?: (Omit<{ @odata.type:
+        string, application?: Record<string, never> | { @odata.type: string,
+        displayName?: function, id?: function } | null, device?: Record<string,
+        never> | { @odata.type: string, displayName?: function, id?: function }
+        | null, user?: Record<string, never> | { @odata.type: string,
+        displayName?: function, id?: function } | null }, "@odata.type"> & {
+        @odata.type: string, group?: Record<string, never> | { @odata.type:
+        string, displayName?: string | null, id?: string | null } | null } & {
+        @odata.type: "#microsoft.graph.approvalIdentitySet" })[],
+        completedDateTime?: string | null, createdDateTime?: string | null,
+        description?: string | null, displayName?: string | null, owner?:
+        Record<string, never> | (Omit<{ @odata.type: string, application?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, device?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, user?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null },
+        "@odata.type"> & { @odata.type: string, group?: Record<string, never> |
+        { @odata.type: string, displayName?: string | null, id?: string | null }
+        | null } & { @odata.type: "#microsoft.graph.approvalIdentitySet" }) |
+        null, requests?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, approver?: Record<string, never>
+        | (Omit<{ @odata.type: ..., application?: ..., device?: ..., user?: ...
+        }, "@odata.type"> & { @odata.type: string, group?: function } & {
+        @odata.type: "#microsoft.graph.approvalIdentitySet" }) | null,
+        createdDateTime?: string | null, isReassigned?: boolean | null,
+        reassignedFrom?: Record<string, never> | (Omit<{ @odata.type: ...,
+        application?: ..., device?: ..., user?: ... }, "@odata.type"> & {
+        @odata.type: string, group?: function } & { @odata.type:
+        "#microsoft.graph.approvalIdentitySet" }) | null } & { @odata.type:
+        "#microsoft.graph.approvalItemRequest" })[], responsePrompts?: (string |
+        null)[], responses?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, comments?: string | null,
+        createdBy?: Record<string, never> | (Omit<{ @odata.type: ...,
+        application?: ..., device?: ..., user?: ... }, "@odata.type"> & {
+        @odata.type: string, group?: function } & { @odata.type:
+        "#microsoft.graph.approvalIdentitySet" }) | null, createdDateTime?:
+        string | null, owners?: (Omit<..., ...> & { @odata.type: ..., group?:
+        ... } & { @odata.type: ... })[], response?: string | null } & {
+        @odata.type: "#microsoft.graph.approvalItemResponse" })[], result?:
+        string | null, state?: Record<string, never> | "unknownFutureValue" |
+        "canceled" | "created" | "pending" | "completed" | null, viewPoint?:
+        Record<string, never> | { @odata.type: string, roles?: (Record<string,
+        never> | "unknownFutureValue" | "owner" | "approver" | null)[] } | null
+        } & { @odata.type: "#microsoft.graph.approvalItem" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/solutions/approval/approvalItems/{approvalItem-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            allowCancel?: boolean | null, allowEmailNotification?: boolean |
+            null, approvalType?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "basic" | "basicAwaitAll" | "custom" |
+            "customAwaitAll" | null, approvers?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, application?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, displayName?:
+            string | null, id?: string | null } | null, device?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, id?: string | null } | null, user?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, id?: string | null } | null }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            group?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+            string, displayName?: string | null, id?: string | null } | null } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.approvalIdentitySet" />" })[],
+            completedDateTime?: string | null, createdDateTime?: string | null,
+            description?: string | null, displayName?: string | null, owner?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, application?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, displayName?: string | null, id?:
+            string | null } | null, device?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | null, user?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | null }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, group?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, displayName?:
+            string | null, id?: string | null } | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.approvalIdentitySet" />" }) | null, requests?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            approver?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, application?: function, device?:
+            function, user?: function }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, group?: Record&lt;..., ...&gt; |
+            { <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+            null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.approvalIdentitySet" />" }) | null,
+            createdDateTime?: string | null, isReassigned?: boolean | null,
+            reassignedFrom?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, application?: function, device?:
+            function, user?: function }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, group?: Record&lt;..., ...&gt; |
+            { <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+            null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.approvalIdentitySet" />" }) | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.approvalItemRequest" />" })[],
+            responsePrompts?: (string | null)[], responses?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            comments?: string | null, createdBy?: Record&lt;string, never&gt; |
+            (Omit&lt;{ <xref uid="@odata.type" />: string, application?:
+            function, device?: function, user?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            group?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            displayName?: ..., id?: ... } | null } & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.approvalIdentitySet" />" }) | null,
+            createdDateTime?: string | null, owners?: (Omit&lt;{ <xref
+            uid="@odata.type" />: ..., application?: ..., device?: ..., user?:
+            ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: string, group?: function } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.approvalIdentitySet" />" })[],
+            response?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.approvalItemResponse" />" })[], result?: string
+            | null, state?: Record&lt;string, never&gt; | "unknownFutureValue" |
+            "canceled" | "created" | "pending" | "completed" | null, viewPoint?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            roles?: (Record&lt;string, never&gt; | "unknownFutureValue" |
+            "owner" | "approver" | null)[] } | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.approvalItem" />"
+            }
           description: ''
         - id: params
-          type: any
+          type: '{ approvalItem-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /solutions/approval/approvalItems/{approvalItem-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, allowCancel?: boolean | null, allowEmailNotification?:
+          boolean | null, approvalType?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "basic" | "basicAwaitAll" | "custom" |
+          "customAwaitAll" | null, approvers?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, application?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, displayName?:
+          function, id?: function } | null, device?: Record&lt;string, never&gt;
+          | { <xref uid="@odata.type" />: string, displayName?: function, id?:
+          function } | null, user?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: function, id?: function }
+          | null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, group?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalIdentitySet" />" })[],
+          completedDateTime?: string | null, createdDateTime?: string | null,
+          description?: string | null, displayName?: string | null, owner?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, application?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null, device?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null, user?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, group?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, displayName?: string | null, id?:
+          string | null } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalIdentitySet" />" }) | null, requests?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          approver?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., application?: ..., device?: ..., user?: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, group?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalIdentitySet" />" }) | null,
+          createdDateTime?: string | null, isReassigned?: boolean | null,
+          reassignedFrom?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., application?: ..., device?: ..., user?: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, group?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalIdentitySet" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalItemRequest" />" })[], responsePrompts?:
+          (string | null)[], responses?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, comments?: string | null, createdBy?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., application?: ..., device?: ..., user?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          group?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalIdentitySet" />" }) | null,
+          createdDateTime?: string | null, owners?: (Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ..., group?: ... } & { <xref
+          uid="@odata.type" />: ... })[], response?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalItemResponse" />" })[], result?: string |
+          null, state?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "canceled" | "created" | "pending" | "completed" | null, viewPoint?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          roles?: (Record&lt;string, never&gt; | "unknownFutureValue" | "owner"
+          | "approver" | null)[] } | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.approvalItem" />" }&gt;

@@ -7,7 +7,7 @@ interfaces:
   - '@microsoft/teams.graph-endpoints-beta.appCatalogs.IEndpoints'
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: list(any)
+  - name: 'list({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints-beta.appCatalogs.list'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`GET /appCatalogs`'
@@ -15,16 +15,66 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /appCatalogs"]["response"]>
+        function list(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<{ @odata.type: string, teamsApps?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        appDefinitions?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> &
+        { @odata.type: string, allowedInstallationScopes?: function,
+        authorization?: function, azureADAppId?: function, bot?: function,
+        colorIcon?: function, createdBy?: function, dashboardCards?: function,
+        description?: function, displayName?: function, lastModifiedDateTime?:
+        function, outlineIcon?: function, publishingState?: function,
+        shortdescription?: function, teamsAppId?: function, version?: function }
+        & { @odata.type: "#microsoft.graph.teamsAppDefinition" })[],
+        displayName?: string | null, distributionMethod?: "store" |
+        "organization" | "sideloaded" | "unknownFutureValue" | Record<string,
+        never> | null, externalId?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsApp" })[] }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /appCatalogs"]["response"]&gt;
-  - name: update(Operation<"/appCatalogs", "patch">)
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string, teamsApps?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          appDefinitions?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, allowedInstallationScopes?: function, authorization?:
+          function, azureADAppId?: function, bot?: function, colorIcon?:
+          function, createdBy?: function, dashboardCards?: function,
+          description?: function, displayName?: function, lastModifiedDateTime?:
+          function, outlineIcon?: function, publishingState?: function,
+          shortdescription?: function, teamsAppId?: function, version?: function
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppDefinition" />" })[], displayName?:
+          string | null, distributionMethod?: "store" | "organization" |
+          "sideloaded" | "unknownFutureValue" | Record&lt;string, never&gt; |
+          null, externalId?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.teamsApp" />" })[] }&gt;
+  - name: >-
+      update({ @odata.type: string, teamsApps?: (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string, appDefinitions?:
+      (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+      @odata.type: string, allowedInstallationScopes?: "unknownFutureValue" |
+      Record<..., ...> | "team" | "groupChat" | "personal" | null,
+      authorization?: Record<..., ...> | { @odata.type: ..., clientAppId?: ...,
+      requiredPermissionSet?: ... } | null, azureADAppId?: string | null, bot?:
+      Record<..., ...> | (... & ... & ...) | null, colorIcon?: Record<..., ...>
+      | (... & ... & ...) | null, createdBy?: Record<..., ...> | { @odata.type:
+      ..., application?: ..., device?: ..., user?: ... } | null,
+      dashboardCards?: ...[], description?: string | null, displayName?: string
+      | null, lastModifiedDateTime?: string | null, outlineIcon?: Record<...,
+      ...> | (... & ... & ...) | null, publishingState?: "unknownFutureValue" |
+      Record<..., ...> | "submitted" | "rejected" | "published" | null,
+      shortdescription?: string | null, teamsAppId?: string | null, version?:
+      string | null } & { @odata.type: "#microsoft.graph.teamsAppDefinition"
+      })[], displayName?: string | null, distributionMethod?: "store" |
+      "organization" | "sideloaded" | "unknownFutureValue" | Record<string,
+      never> | null, externalId?: string | null } & { @odata.type:
+      "#microsoft.graph.teamsApp" })[] })
     uid: '@microsoft/teams.graph-endpoints-beta.appCatalogs.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /appCatalogs`'
@@ -32,12 +82,87 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/appCatalogs", "patch">):
-        EndpointRequest<IEndpoints["PATCH /appCatalogs"]["response"]>
+        function update(body: { @odata.type: string, teamsApps?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, appDefinitions?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, allowedInstallationScopes?:
+        "unknownFutureValue" | Record<..., ...> | "team" | "groupChat" |
+        "personal" | null, authorization?: Record<..., ...> | { @odata.type:
+        ..., clientAppId?: ..., requiredPermissionSet?: ... } | null,
+        azureADAppId?: string | null, bot?: Record<..., ...> | (... & ... & ...)
+        | null, colorIcon?: Record<..., ...> | (... & ... & ...) | null,
+        createdBy?: Record<..., ...> | { @odata.type: ..., application?: ...,
+        device?: ..., user?: ... } | null, dashboardCards?: ...[], description?:
+        string | null, displayName?: string | null, lastModifiedDateTime?:
+        string | null, outlineIcon?: Record<..., ...> | (... & ... & ...) |
+        null, publishingState?: "unknownFutureValue" | Record<..., ...> |
+        "submitted" | "rejected" | "published" | null, shortdescription?: string
+        | null, teamsAppId?: string | null, version?: string | null } & {
+        @odata.type: "#microsoft.graph.teamsAppDefinition" })[], displayName?:
+        string | null, distributionMethod?: "store" | "organization" |
+        "sideloaded" | "unknownFutureValue" | Record<string, never> | null,
+        externalId?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsApp" })[] }): EndpointRequest<{ @odata.type:
+        string, teamsApps?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, appDefinitions?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        allowedInstallationScopes?: function, authorization?: function,
+        azureADAppId?: function, bot?: function, colorIcon?: function,
+        createdBy?: function, dashboardCards?: function, description?: function,
+        displayName?: function, lastModifiedDateTime?: function, outlineIcon?:
+        function, publishingState?: function, shortdescription?: function,
+        teamsAppId?: function, version?: function } & { @odata.type:
+        "#microsoft.graph.teamsAppDefinition" })[], displayName?: string | null,
+        distributionMethod?: "store" | "organization" | "sideloaded" |
+        "unknownFutureValue" | Record<string, never> | null, externalId?: string
+        | null } & { @odata.type: "#microsoft.graph.teamsApp" })[] }>
       parameters:
         - id: body
-          type: Operation&lt;"/appCatalogs", "patch"&gt;
+          type: >-
+            { <xref uid="@odata.type" />: string, teamsApps?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            appDefinitions?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, allowedInstallationScopes?:
+            "unknownFutureValue" | Record&lt;..., ...&gt; | "team" | "groupChat"
+            | "personal" | null, authorization?: Record&lt;..., ...&gt; | {
+            <xref uid="@odata.type" />: ..., clientAppId?: ...,
+            requiredPermissionSet?: ... } | null, azureADAppId?: string | null,
+            bot?: Record&lt;..., ...&gt; | (... & ... & ...) | null, colorIcon?:
+            Record&lt;..., ...&gt; | (... & ... & ...) | null, createdBy?:
+            Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            application?: ..., device?: ..., user?: ... } | null,
+            dashboardCards?: ...[], description?: string | null, displayName?:
+            string | null, lastModifiedDateTime?: string | null, outlineIcon?:
+            Record&lt;..., ...&gt; | (... & ... & ...) | null, publishingState?:
+            "unknownFutureValue" | Record&lt;..., ...&gt; | "submitted" |
+            "rejected" | "published" | null, shortdescription?: string | null,
+            teamsAppId?: string | null, version?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAppDefinition" />" })[], displayName?:
+            string | null, distributionMethod?: "store" | "organization" |
+            "sideloaded" | "unknownFutureValue" | Record&lt;string, never&gt; |
+            null, externalId?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.teamsApp" />" })[] }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["PATCH /appCatalogs"]["response"]&gt;
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string, teamsApps?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          appDefinitions?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, allowedInstallationScopes?: function, authorization?:
+          function, azureADAppId?: function, bot?: function, colorIcon?:
+          function, createdBy?: function, dashboardCards?: function,
+          description?: function, displayName?: function, lastModifiedDateTime?:
+          function, outlineIcon?: function, publishingState?: function,
+          shortdescription?: function, teamsAppId?: function, version?: function
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppDefinition" />" })[], displayName?:
+          string | null, distributionMethod?: "store" | "organization" |
+          "sideloaded" | "unknownFutureValue" | Record&lt;string, never&gt; |
+          null, externalId?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.teamsApp" />" })[] }&gt;

@@ -191,7 +191,59 @@ variables:
           /me/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}/linkedResources/{linkedResource-id}"]["response"]&gt;
           }
 functions:
-  - name: create(Operation<"/me/todo/lists/{todoTaskList-id}/tasks", "post">, any)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, attachments?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & Omit<{ @odata.type: string, contentType?:
+      string | null, lastModifiedDateTime?: string | null, name?: string | null,
+      size?: number }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.attachmentBase" })[], attachmentSessions?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, content?: string | null, expirationDateTime?: string | null,
+      nextExpectedRanges?: (string | null)[] } & { @odata.type:
+      "#microsoft.graph.attachmentSession" })[], body?: Record<string, never> |
+      { @odata.type: string, content?: string | null, contentType?:
+      Record<string, never> | "text" | "html" | null } | null,
+      bodyLastModifiedDateTime?: string, categories?: (string | null)[],
+      checklistItems?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, checkedDateTime?: string | null,
+      createdDateTime?: string, displayName?: string | null, isChecked?: boolean
+      | null } & { @odata.type: "#microsoft.graph.checklistItem" })[],
+      completedDateTime?: Record<string, never> | { @odata.type: string,
+      dateTime?: string, timeZone?: string | null } | null, createdDateTime?:
+      string, dueDateTime?: Record<string, never> | { @odata.type: string,
+      dateTime?: string, timeZone?: string | null } | null, extensions?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+      string }, "@odata.type"> & { @odata.type: "#microsoft.graph.extension"
+      })[], hasAttachments?: boolean | null, importance?: "low" | "high" |
+      "normal", isReminderOn?: boolean, lastModifiedDateTime?: string,
+      linkedResources?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, applicationName?: string | null,
+      displayName?: string | null, externalId?: string | null, webUrl?: string |
+      null } & { @odata.type: "#microsoft.graph.linkedResource" })[],
+      recurrence?: Record<string, never> | { @odata.type: string, pattern?:
+      Record<string, never> | { @odata.type: string, dayOfMonth?: number,
+      daysOfWeek?: (Record<string, never> | "sunday" | "monday" | "tuesday" |
+      "wednesday" | "thursday" | "friday" | "saturday" | null)[],
+      firstDayOfWeek?: Record<string, never> | "sunday" | "monday" | "tuesday" |
+      "wednesday" | "thursday" | "friday" | "saturday" | null, index?:
+      Record<string, never> | "first" | "second" | "third" | "fourth" | "last" |
+      null, interval?: number, month?: number, type?: Record<string, never> |
+      "daily" | "weekly" | "absoluteMonthly" | "relativeMonthly" |
+      "absoluteYearly" | "relativeYearly" | null } | null, range?:
+      Record<string, never> | { @odata.type: string, endDate?: string | null,
+      numberOfOccurrences?: number, recurrenceTimeZone?: string | null,
+      startDate?: string | null, type?: Record<string, never> | "endDate" |
+      "noEnd" | "numbered" | null } | null } | null, reminderDateTime?:
+      Record<string, never> | { @odata.type: string, dateTime?: string,
+      timeZone?: string | null } | null, singleValueExtendedProperties?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, value?: string | null } & { @odata.type:
+      "#microsoft.graph.singleValueExtendedProperty" })[], startDateTime?:
+      Record<string, never> | { @odata.type: string, dateTime?: string,
+      timeZone?: string | null } | null, status?: "notStarted" | "inProgress" |
+      "completed" | "waitingOnOthers" | "deferred", title?: string | null } & {
+      @odata.type: "#microsoft.graph.todoTask" }, { todoTaskList-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.me.todo.lists.tasks.create'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -202,23 +254,257 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/me/todo/lists/{todoTaskList-id}/tasks", "post">, params?:
-        any): EndpointRequest<IEndpoints["POST
-        /me/todo/lists/{todoTaskList-id}/tasks"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, attachments?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, contentType?: string | null, lastModifiedDateTime?: string |
+        null, name?: string | null, size?: number }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.attachmentBase" })[],
+        attachmentSessions?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, content?: string | null,
+        expirationDateTime?: string | null, nextExpectedRanges?: (string |
+        null)[] } & { @odata.type: "#microsoft.graph.attachmentSession" })[],
+        body?: Record<string, never> | { @odata.type: string, content?: string |
+        null, contentType?: Record<string, never> | "text" | "html" | null } |
+        null, bodyLastModifiedDateTime?: string, categories?: (string | null)[],
+        checklistItems?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, checkedDateTime?: string | null,
+        createdDateTime?: string, displayName?: string | null, isChecked?:
+        boolean | null } & { @odata.type: "#microsoft.graph.checklistItem" })[],
+        completedDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, createdDateTime?:
+        string, dueDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, extensions?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.extension" })[], hasAttachments?: boolean | null,
+        importance?: "low" | "high" | "normal", isReminderOn?: boolean,
+        lastModifiedDateTime?: string, linkedResources?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        applicationName?: string | null, displayName?: string | null,
+        externalId?: string | null, webUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.linkedResource" })[], recurrence?: Record<string,
+        never> | { @odata.type: string, pattern?: Record<string, never> | {
+        @odata.type: string, dayOfMonth?: number, daysOfWeek?: (Record<string,
+        never> | "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" |
+        "friday" | "saturday" | null)[], firstDayOfWeek?: Record<string, never>
+        | "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday"
+        | "saturday" | null, index?: Record<string, never> | "first" | "second"
+        | "third" | "fourth" | "last" | null, interval?: number, month?: number,
+        type?: Record<string, never> | "daily" | "weekly" | "absoluteMonthly" |
+        "relativeMonthly" | "absoluteYearly" | "relativeYearly" | null } | null,
+        range?: Record<string, never> | { @odata.type: string, endDate?: string
+        | null, numberOfOccurrences?: number, recurrenceTimeZone?: string |
+        null, startDate?: string | null, type?: Record<string, never> |
+        "endDate" | "noEnd" | "numbered" | null } | null } | null,
+        reminderDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null,
+        singleValueExtendedProperties?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, value?: string | null } & {
+        @odata.type: "#microsoft.graph.singleValueExtendedProperty" })[],
+        startDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, status?:
+        "notStarted" | "inProgress" | "completed" | "waitingOnOthers" |
+        "deferred", title?: string | null } & { @odata.type:
+        "#microsoft.graph.todoTask" }, params?: { todoTaskList-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, attachments?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, contentType?: string | null, lastModifiedDateTime?: string |
+        null, name?: string | null, size?: number }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.attachmentBase" })[],
+        attachmentSessions?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, content?: string | null,
+        expirationDateTime?: string | null, nextExpectedRanges?: (string |
+        null)[] } & { @odata.type: "#microsoft.graph.attachmentSession" })[],
+        body?: Record<string, never> | { @odata.type: string, content?: string |
+        null, contentType?: Record<string, never> | "text" | "html" | null } |
+        null, bodyLastModifiedDateTime?: string, categories?: (string | null)[],
+        checklistItems?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, checkedDateTime?: string | null,
+        createdDateTime?: string, displayName?: string | null, isChecked?:
+        boolean | null } & { @odata.type: "#microsoft.graph.checklistItem" })[],
+        completedDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, createdDateTime?:
+        string, dueDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, extensions?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.extension" })[], hasAttachments?: boolean | null,
+        importance?: "low" | "high" | "normal", isReminderOn?: boolean,
+        lastModifiedDateTime?: string, linkedResources?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        applicationName?: string | null, displayName?: string | null,
+        externalId?: string | null, webUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.linkedResource" })[], recurrence?: Record<string,
+        never> | { @odata.type: string, pattern?: Record<string, never> | {
+        @odata.type: string, dayOfMonth?: number, daysOfWeek?: (Record<..., ...>
+        | "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday"
+        | "saturday" | null)[], firstDayOfWeek?: Record<string, never> |
+        "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday" |
+        "saturday" | null, index?: Record<string, never> | "first" | "second" |
+        "third" | "fourth" | "last" | null, interval?: number, month?: number,
+        type?: Record<string, never> | "daily" | "weekly" | "absoluteMonthly" |
+        "relativeMonthly" | "absoluteYearly" | "relativeYearly" | null } | null,
+        range?: Record<string, never> | { @odata.type: string, endDate?: string
+        | null, numberOfOccurrences?: number, recurrenceTimeZone?: string |
+        null, startDate?: string | null, type?: Record<string, never> |
+        "endDate" | "noEnd" | "numbered" | null } | null } | null,
+        reminderDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null,
+        singleValueExtendedProperties?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, value?: string | null } & {
+        @odata.type: "#microsoft.graph.singleValueExtendedProperty" })[],
+        startDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, status?:
+        "notStarted" | "inProgress" | "completed" | "waitingOnOthers" |
+        "deferred", title?: string | null } & { @odata.type:
+        "#microsoft.graph.todoTask" }>
       parameters:
         - id: body
-          type: Operation&lt;"/me/todo/lists/{todoTaskList-id}/tasks", "post"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            attachments?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, contentType?: string | null,
+            lastModifiedDateTime?: string | null, name?: string | null, size?:
+            number }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.attachmentBase"
+            />" })[], attachmentSessions?: (Omit&lt;{ <xref uid="@odata.type"
+            />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, content?: string | null,
+            expirationDateTime?: string | null, nextExpectedRanges?: (string |
+            null)[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.attachmentSession" />" })[], body?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            content?: string | null, contentType?: Record&lt;string, never&gt; |
+            "text" | "html" | null } | null, bodyLastModifiedDateTime?: string,
+            categories?: (string | null)[], checklistItems?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            checkedDateTime?: string | null, createdDateTime?: string,
+            displayName?: string | null, isChecked?: boolean | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.checklistItem"
+            />" })[], completedDateTime?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+            null } | null, createdDateTime?: string, dueDateTime?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            dateTime?: string, timeZone?: string | null } | null, extensions?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.extension" />"
+            })[], hasAttachments?: boolean | null, importance?: "low" | "high" |
+            "normal", isReminderOn?: boolean, lastModifiedDateTime?: string,
+            linkedResources?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, applicationName?: string | null,
+            displayName?: string | null, externalId?: string | null, webUrl?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.linkedResource" />" })[], recurrence?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            pattern?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, dayOfMonth?: number, daysOfWeek?: (Record&lt;string,
+            never&gt; | "sunday" | "monday" | "tuesday" | "wednesday" |
+            "thursday" | "friday" | "saturday" | null)[], firstDayOfWeek?:
+            Record&lt;string, never&gt; | "sunday" | "monday" | "tuesday" |
+            "wednesday" | "thursday" | "friday" | "saturday" | null, index?:
+            Record&lt;string, never&gt; | "first" | "second" | "third" |
+            "fourth" | "last" | null, interval?: number, month?: number, type?:
+            Record&lt;string, never&gt; | "daily" | "weekly" | "absoluteMonthly"
+            | "relativeMonthly" | "absoluteYearly" | "relativeYearly" | null } |
+            null, range?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, endDate?: string | null,
+            numberOfOccurrences?: number, recurrenceTimeZone?: string | null,
+            startDate?: string | null, type?: Record&lt;string, never&gt; |
+            "endDate" | "noEnd" | "numbered" | null } | null } | null,
+            reminderDateTime?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+            null } | null, singleValueExtendedProperties?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            value?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.singleValueExtendedProperty" />" })[],
+            startDateTime?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+            null } | null, status?: "notStarted" | "inProgress" | "completed" |
+            "waitingOnOthers" | "deferred", title?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.todoTask" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ todoTaskList-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /me/todo/lists/{todoTaskList-id}/tasks"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, attachments?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, contentType?: string | null,
+          lastModifiedDateTime?: string | null, name?: string | null, size?:
+          number }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.attachmentBase" />" })[],
+          attachmentSessions?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, content?: string | null,
+          expirationDateTime?: string | null, nextExpectedRanges?: (string |
+          null)[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.attachmentSession" />" })[], body?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          content?: string | null, contentType?: Record&lt;string, never&gt; |
+          "text" | "html" | null } | null, bodyLastModifiedDateTime?: string,
+          categories?: (string | null)[], checklistItems?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, checkedDateTime?:
+          string | null, createdDateTime?: string, displayName?: string | null,
+          isChecked?: boolean | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.checklistItem" />" })[], completedDateTime?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          dateTime?: string, timeZone?: string | null } | null,
+          createdDateTime?: string, dueDateTime?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string, dateTime?: string, timeZone?:
+          string | null } | null, extensions?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.extension" />" })[], hasAttachments?: boolean |
+          null, importance?: "low" | "high" | "normal", isReminderOn?: boolean,
+          lastModifiedDateTime?: string, linkedResources?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, applicationName?:
+          string | null, displayName?: string | null, externalId?: string |
+          null, webUrl?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.linkedResource" />" })[], recurrence?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          pattern?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, dayOfMonth?: number, daysOfWeek?: (Record&lt;..., ...&gt; |
+          "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday"
+          | "saturday" | null)[], firstDayOfWeek?: Record&lt;string, never&gt; |
+          "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday"
+          | "saturday" | null, index?: Record&lt;string, never&gt; | "first" |
+          "second" | "third" | "fourth" | "last" | null, interval?: number,
+          month?: number, type?: Record&lt;string, never&gt; | "daily" |
+          "weekly" | "absoluteMonthly" | "relativeMonthly" | "absoluteYearly" |
+          "relativeYearly" | null } | null, range?: Record&lt;string, never&gt;
+          | { <xref uid="@odata.type" />: string, endDate?: string | null,
+          numberOfOccurrences?: number, recurrenceTimeZone?: string | null,
+          startDate?: string | null, type?: Record&lt;string, never&gt; |
+          "endDate" | "noEnd" | "numbered" | null } | null } | null,
+          reminderDateTime?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+          null } | null, singleValueExtendedProperties?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, value?: string | null
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.singleValueExtendedProperty" />" })[],
+          startDateTime?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+          null } | null, status?: "notStarted" | "inProgress" | "completed" |
+          "waitingOnOthers" | "deferred", title?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.todoTask" />" }&gt;
+  - name: 'del({ If-Match?: string, todoTask-id: string, todoTaskList-id: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.me.todo.lists.tasks.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -229,18 +515,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /me/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}"]["response"]>
+        function del(params?: { If-Match?: string, todoTask-id: string,
+        todoTaskList-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, todoTask-id: string, todoTaskList-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /me/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], todoTask-id: string,
+      todoTaskList-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.me.todo.lists.tasks.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -251,18 +537,140 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /me/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        todoTask-id: string, todoTaskList-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, attachments?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, contentType?: string |
+        null, lastModifiedDateTime?: string | null, name?: string | null, size?:
+        number }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.attachmentBase" })[], attachmentSessions?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, content?: string | null, expirationDateTime?: string | null,
+        nextExpectedRanges?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.attachmentSession" })[], body?: Record<string, never>
+        | { @odata.type: string, content?: string | null, contentType?:
+        Record<string, never> | "text" | "html" | null } | null,
+        bodyLastModifiedDateTime?: string, categories?: (string | null)[],
+        checklistItems?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, checkedDateTime?: string | null,
+        createdDateTime?: string, displayName?: string | null, isChecked?:
+        boolean | null } & { @odata.type: "#microsoft.graph.checklistItem" })[],
+        completedDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, createdDateTime?:
+        string, dueDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, extensions?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.extension" })[], hasAttachments?: boolean | null,
+        importance?: "low" | "high" | "normal", isReminderOn?: boolean,
+        lastModifiedDateTime?: string, linkedResources?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        applicationName?: string | null, displayName?: string | null,
+        externalId?: string | null, webUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.linkedResource" })[], recurrence?: Record<string,
+        never> | { @odata.type: string, pattern?: Record<string, never> | {
+        @odata.type: string, dayOfMonth?: number, daysOfWeek?: (Record<..., ...>
+        | "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday"
+        | "saturday" | null)[], firstDayOfWeek?: Record<string, never> |
+        "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday" |
+        "saturday" | null, index?: Record<string, never> | "first" | "second" |
+        "third" | "fourth" | "last" | null, interval?: number, month?: number,
+        type?: Record<string, never> | "daily" | "weekly" | "absoluteMonthly" |
+        "relativeMonthly" | "absoluteYearly" | "relativeYearly" | null } | null,
+        range?: Record<string, never> | { @odata.type: string, endDate?: string
+        | null, numberOfOccurrences?: number, recurrenceTimeZone?: string |
+        null, startDate?: string | null, type?: Record<string, never> |
+        "endDate" | "noEnd" | "numbered" | null } | null } | null,
+        reminderDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null,
+        singleValueExtendedProperties?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, value?: string | null } & {
+        @odata.type: "#microsoft.graph.singleValueExtendedProperty" })[],
+        startDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, status?:
+        "notStarted" | "inProgress" | "completed" | "waitingOnOthers" |
+        "deferred", title?: string | null } & { @odata.type:
+        "#microsoft.graph.todoTask" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], todoTask-id: string,
+            todoTaskList-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /me/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, attachments?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, contentType?: string | null,
+          lastModifiedDateTime?: string | null, name?: string | null, size?:
+          number }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.attachmentBase" />" })[],
+          attachmentSessions?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, content?: string | null,
+          expirationDateTime?: string | null, nextExpectedRanges?: (string |
+          null)[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.attachmentSession" />" })[], body?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          content?: string | null, contentType?: Record&lt;string, never&gt; |
+          "text" | "html" | null } | null, bodyLastModifiedDateTime?: string,
+          categories?: (string | null)[], checklistItems?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, checkedDateTime?:
+          string | null, createdDateTime?: string, displayName?: string | null,
+          isChecked?: boolean | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.checklistItem" />" })[], completedDateTime?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          dateTime?: string, timeZone?: string | null } | null,
+          createdDateTime?: string, dueDateTime?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string, dateTime?: string, timeZone?:
+          string | null } | null, extensions?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.extension" />" })[], hasAttachments?: boolean |
+          null, importance?: "low" | "high" | "normal", isReminderOn?: boolean,
+          lastModifiedDateTime?: string, linkedResources?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, applicationName?:
+          string | null, displayName?: string | null, externalId?: string |
+          null, webUrl?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.linkedResource" />" })[], recurrence?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          pattern?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, dayOfMonth?: number, daysOfWeek?: (Record&lt;..., ...&gt; |
+          "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday"
+          | "saturday" | null)[], firstDayOfWeek?: Record&lt;string, never&gt; |
+          "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday"
+          | "saturday" | null, index?: Record&lt;string, never&gt; | "first" |
+          "second" | "third" | "fourth" | "last" | null, interval?: number,
+          month?: number, type?: Record&lt;string, never&gt; | "daily" |
+          "weekly" | "absoluteMonthly" | "relativeMonthly" | "absoluteYearly" |
+          "relativeYearly" | null } | null, range?: Record&lt;string, never&gt;
+          | { <xref uid="@odata.type" />: string, endDate?: string | null,
+          numberOfOccurrences?: number, recurrenceTimeZone?: string | null,
+          startDate?: string | null, type?: Record&lt;string, never&gt; |
+          "endDate" | "noEnd" | "numbered" | null } | null } | null,
+          reminderDateTime?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+          null } | null, singleValueExtendedProperties?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, value?: string | null
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.singleValueExtendedProperty" />" })[],
+          startDateTime?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+          null } | null, status?: "notStarted" | "inProgress" | "completed" |
+          "waitingOnOthers" | "deferred", title?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.todoTask" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, todoTaskList-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.me.todo.lists.tasks.list'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: >-
@@ -275,20 +683,152 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /me/todo/lists/{todoTaskList-id}/tasks"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, todoTaskList-id: string }):
+        EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?: string
+        | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, attachments?: (Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... })[], attachmentSessions?:
+        (Omit<..., ...> & { @odata.type: ..., content?: ...,
+        expirationDateTime?: ..., nextExpectedRanges?: ... } & { @odata.type:
+        ... })[], body?: Record<string, never> | { @odata.type: string,
+        content?: string | null, contentType?: Record<..., ...> | "text" |
+        "html" | null } | null, bodyLastModifiedDateTime?: string, categories?:
+        (string | null)[], checklistItems?: (Omit<..., ...> & { @odata.type:
+        ..., checkedDateTime?: ..., createdDateTime?: ..., displayName?: ...,
+        isChecked?: ... } & { @odata.type: ... })[], completedDateTime?:
+        Record<string, never> | { @odata.type: string, dateTime?: string,
+        timeZone?: string | null } | null, createdDateTime?: string,
+        dueDateTime?: Record<string, never> | { @odata.type: string, dateTime?:
+        string, timeZone?: string | null } | null, extensions?: (Omit<..., ...>
+        & Omit<..., ...> & { @odata.type: ... })[], hasAttachments?: boolean |
+        null, importance?: "low" | "high" | "normal", isReminderOn?: boolean,
+        lastModifiedDateTime?: string, linkedResources?: (Omit<..., ...> & {
+        @odata.type: ..., applicationName?: ..., displayName?: ..., externalId?:
+        ..., webUrl?: ... } & { @odata.type: ... })[], recurrence?:
+        Record<string, never> | { @odata.type: string, pattern?: Record<...,
+        ...> | { @odata.type: ..., dayOfMonth?: ..., daysOfWeek?: ...,
+        firstDayOfWeek?: ..., index?: ..., interval?: ..., month?: ..., type?:
+        ... } | null, range?: Record<..., ...> | { @odata.type: ..., endDate?:
+        ..., numberOfOccurrences?: ..., recurrenceTimeZone?: ..., startDate?:
+        ..., type?: ... } | null } | null, reminderDateTime?: Record<string,
+        never> | { @odata.type: string, dateTime?: string, timeZone?: string |
+        null } | null, singleValueExtendedProperties?: (Omit<..., ...> & {
+        @odata.type: ..., value?: ... } & { @odata.type: ... })[],
+        startDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, status?:
+        "notStarted" | "inProgress" | "completed" | "waitingOnOthers" |
+        "deferred", title?: string | null } & { @odata.type:
+        "#microsoft.graph.todoTask" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, todoTaskList-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /me/todo/lists/{todoTaskList-id}/tasks"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          attachments?: (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... })[], attachmentSessions?: (Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ..., content?: ...,
+          expirationDateTime?: ..., nextExpectedRanges?: ... } & { <xref
+          uid="@odata.type" />: ... })[], body?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, content?: string | null,
+          contentType?: Record&lt;..., ...&gt; | "text" | "html" | null } |
+          null, bodyLastModifiedDateTime?: string, categories?: (string |
+          null)[], checklistItems?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., checkedDateTime?: ..., createdDateTime?:
+          ..., displayName?: ..., isChecked?: ... } & { <xref uid="@odata.type"
+          />: ... })[], completedDateTime?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, dateTime?: string, timeZone?:
+          string | null } | null, createdDateTime?: string, dueDateTime?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          dateTime?: string, timeZone?: string | null } | null, extensions?:
+          (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... })[], hasAttachments?: boolean | null,
+          importance?: "low" | "high" | "normal", isReminderOn?: boolean,
+          lastModifiedDateTime?: string, linkedResources?: (Omit&lt;..., ...&gt;
+          & { <xref uid="@odata.type" />: ..., applicationName?: ...,
+          displayName?: ..., externalId?: ..., webUrl?: ... } & { <xref
+          uid="@odata.type" />: ... })[], recurrence?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, pattern?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          dayOfMonth?: ..., daysOfWeek?: ..., firstDayOfWeek?: ..., index?: ...,
+          interval?: ..., month?: ..., type?: ... } | null, range?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., endDate?:
+          ..., numberOfOccurrences?: ..., recurrenceTimeZone?: ..., startDate?:
+          ..., type?: ... } | null } | null, reminderDateTime?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          dateTime?: string, timeZone?: string | null } | null,
+          singleValueExtendedProperties?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., value?: ... } & { <xref uid="@odata.type"
+          />: ... })[], startDateTime?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+          null } | null, status?: "notStarted" | "inProgress" | "completed" |
+          "waitingOnOthers" | "deferred", title?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.todoTask" />" })[]
+          }&gt;
   - name: >-
-      update(Operation<"/me/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, attachments?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & Omit<{ @odata.type: string, contentType?:
+      string | null, lastModifiedDateTime?: string | null, name?: string | null,
+      size?: number }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.attachmentBase" })[], attachmentSessions?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, content?: string | null, expirationDateTime?: string | null,
+      nextExpectedRanges?: (string | null)[] } & { @odata.type:
+      "#microsoft.graph.attachmentSession" })[], body?: Record<string, never> |
+      { @odata.type: string, content?: string | null, contentType?:
+      Record<string, never> | "text" | "html" | null } | null,
+      bodyLastModifiedDateTime?: string, categories?: (string | null)[],
+      checklistItems?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, checkedDateTime?: string | null,
+      createdDateTime?: string, displayName?: string | null, isChecked?: boolean
+      | null } & { @odata.type: "#microsoft.graph.checklistItem" })[],
+      completedDateTime?: Record<string, never> | { @odata.type: string,
+      dateTime?: string, timeZone?: string | null } | null, createdDateTime?:
+      string, dueDateTime?: Record<string, never> | { @odata.type: string,
+      dateTime?: string, timeZone?: string | null } | null, extensions?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+      string }, "@odata.type"> & { @odata.type: "#microsoft.graph.extension"
+      })[], hasAttachments?: boolean | null, importance?: "low" | "high" |
+      "normal", isReminderOn?: boolean, lastModifiedDateTime?: string,
+      linkedResources?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, applicationName?: string | null,
+      displayName?: string | null, externalId?: string | null, webUrl?: string |
+      null } & { @odata.type: "#microsoft.graph.linkedResource" })[],
+      recurrence?: Record<string, never> | { @odata.type: string, pattern?:
+      Record<string, never> | { @odata.type: string, dayOfMonth?: number,
+      daysOfWeek?: (Record<string, never> | "sunday" | "monday" | "tuesday" |
+      "wednesday" | "thursday" | "friday" | "saturday" | null)[],
+      firstDayOfWeek?: Record<string, never> | "sunday" | "monday" | "tuesday" |
+      "wednesday" | "thursday" | "friday" | "saturday" | null, index?:
+      Record<string, never> | "first" | "second" | "third" | "fourth" | "last" |
+      null, interval?: number, month?: number, type?: Record<string, never> |
+      "daily" | "weekly" | "absoluteMonthly" | "relativeMonthly" |
+      "absoluteYearly" | "relativeYearly" | null } | null, range?:
+      Record<string, never> | { @odata.type: string, endDate?: string | null,
+      numberOfOccurrences?: number, recurrenceTimeZone?: string | null,
+      startDate?: string | null, type?: Record<string, never> | "endDate" |
+      "noEnd" | "numbered" | null } | null } | null, reminderDateTime?:
+      Record<string, never> | { @odata.type: string, dateTime?: string,
+      timeZone?: string | null } | null, singleValueExtendedProperties?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, value?: string | null } & { @odata.type:
+      "#microsoft.graph.singleValueExtendedProperty" })[], startDateTime?:
+      Record<string, never> | { @odata.type: string, dateTime?: string,
+      timeZone?: string | null } | null, status?: "notStarted" | "inProgress" |
+      "completed" | "waitingOnOthers" | "deferred", title?: string | null } & {
+      @odata.type: "#microsoft.graph.todoTask" }, { todoTask-id: string,
+      todoTaskList-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.me.todo.lists.tasks.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -299,21 +839,253 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/me/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /me/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, attachments?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, contentType?: string | null, lastModifiedDateTime?: string |
+        null, name?: string | null, size?: number }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.attachmentBase" })[],
+        attachmentSessions?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, content?: string | null,
+        expirationDateTime?: string | null, nextExpectedRanges?: (string |
+        null)[] } & { @odata.type: "#microsoft.graph.attachmentSession" })[],
+        body?: Record<string, never> | { @odata.type: string, content?: string |
+        null, contentType?: Record<string, never> | "text" | "html" | null } |
+        null, bodyLastModifiedDateTime?: string, categories?: (string | null)[],
+        checklistItems?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, checkedDateTime?: string | null,
+        createdDateTime?: string, displayName?: string | null, isChecked?:
+        boolean | null } & { @odata.type: "#microsoft.graph.checklistItem" })[],
+        completedDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, createdDateTime?:
+        string, dueDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, extensions?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.extension" })[], hasAttachments?: boolean | null,
+        importance?: "low" | "high" | "normal", isReminderOn?: boolean,
+        lastModifiedDateTime?: string, linkedResources?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        applicationName?: string | null, displayName?: string | null,
+        externalId?: string | null, webUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.linkedResource" })[], recurrence?: Record<string,
+        never> | { @odata.type: string, pattern?: Record<string, never> | {
+        @odata.type: string, dayOfMonth?: number, daysOfWeek?: (Record<string,
+        never> | "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" |
+        "friday" | "saturday" | null)[], firstDayOfWeek?: Record<string, never>
+        | "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday"
+        | "saturday" | null, index?: Record<string, never> | "first" | "second"
+        | "third" | "fourth" | "last" | null, interval?: number, month?: number,
+        type?: Record<string, never> | "daily" | "weekly" | "absoluteMonthly" |
+        "relativeMonthly" | "absoluteYearly" | "relativeYearly" | null } | null,
+        range?: Record<string, never> | { @odata.type: string, endDate?: string
+        | null, numberOfOccurrences?: number, recurrenceTimeZone?: string |
+        null, startDate?: string | null, type?: Record<string, never> |
+        "endDate" | "noEnd" | "numbered" | null } | null } | null,
+        reminderDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null,
+        singleValueExtendedProperties?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, value?: string | null } & {
+        @odata.type: "#microsoft.graph.singleValueExtendedProperty" })[],
+        startDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, status?:
+        "notStarted" | "inProgress" | "completed" | "waitingOnOthers" |
+        "deferred", title?: string | null } & { @odata.type:
+        "#microsoft.graph.todoTask" }, params?: { todoTask-id: string,
+        todoTaskList-id: string }): EndpointRequest<Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, attachments?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, contentType?: string | null, lastModifiedDateTime?:
+        string | null, name?: string | null, size?: number }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.attachmentBase" })[],
+        attachmentSessions?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, content?: string | null,
+        expirationDateTime?: string | null, nextExpectedRanges?: (string |
+        null)[] } & { @odata.type: "#microsoft.graph.attachmentSession" })[],
+        body?: Record<string, never> | { @odata.type: string, content?: string |
+        null, contentType?: Record<string, never> | "text" | "html" | null } |
+        null, bodyLastModifiedDateTime?: string, categories?: (string | null)[],
+        checklistItems?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, checkedDateTime?: string | null,
+        createdDateTime?: string, displayName?: string | null, isChecked?:
+        boolean | null } & { @odata.type: "#microsoft.graph.checklistItem" })[],
+        completedDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, createdDateTime?:
+        string, dueDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, extensions?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.extension" })[], hasAttachments?: boolean | null,
+        importance?: "low" | "high" | "normal", isReminderOn?: boolean,
+        lastModifiedDateTime?: string, linkedResources?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        applicationName?: string | null, displayName?: string | null,
+        externalId?: string | null, webUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.linkedResource" })[], recurrence?: Record<string,
+        never> | { @odata.type: string, pattern?: Record<string, never> | {
+        @odata.type: string, dayOfMonth?: number, daysOfWeek?: (Record<..., ...>
+        | "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday"
+        | "saturday" | null)[], firstDayOfWeek?: Record<string, never> |
+        "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday" |
+        "saturday" | null, index?: Record<string, never> | "first" | "second" |
+        "third" | "fourth" | "last" | null, interval?: number, month?: number,
+        type?: Record<string, never> | "daily" | "weekly" | "absoluteMonthly" |
+        "relativeMonthly" | "absoluteYearly" | "relativeYearly" | null } | null,
+        range?: Record<string, never> | { @odata.type: string, endDate?: string
+        | null, numberOfOccurrences?: number, recurrenceTimeZone?: string |
+        null, startDate?: string | null, type?: Record<string, never> |
+        "endDate" | "noEnd" | "numbered" | null } | null } | null,
+        reminderDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null,
+        singleValueExtendedProperties?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, value?: string | null } & {
+        @odata.type: "#microsoft.graph.singleValueExtendedProperty" })[],
+        startDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, status?:
+        "notStarted" | "inProgress" | "completed" | "waitingOnOthers" |
+        "deferred", title?: string | null } & { @odata.type:
+        "#microsoft.graph.todoTask" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/me/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            attachments?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, contentType?: string | null,
+            lastModifiedDateTime?: string | null, name?: string | null, size?:
+            number }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.attachmentBase"
+            />" })[], attachmentSessions?: (Omit&lt;{ <xref uid="@odata.type"
+            />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, content?: string | null,
+            expirationDateTime?: string | null, nextExpectedRanges?: (string |
+            null)[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.attachmentSession" />" })[], body?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            content?: string | null, contentType?: Record&lt;string, never&gt; |
+            "text" | "html" | null } | null, bodyLastModifiedDateTime?: string,
+            categories?: (string | null)[], checklistItems?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            checkedDateTime?: string | null, createdDateTime?: string,
+            displayName?: string | null, isChecked?: boolean | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.checklistItem"
+            />" })[], completedDateTime?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+            null } | null, createdDateTime?: string, dueDateTime?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            dateTime?: string, timeZone?: string | null } | null, extensions?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.extension" />"
+            })[], hasAttachments?: boolean | null, importance?: "low" | "high" |
+            "normal", isReminderOn?: boolean, lastModifiedDateTime?: string,
+            linkedResources?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, applicationName?: string | null,
+            displayName?: string | null, externalId?: string | null, webUrl?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.linkedResource" />" })[], recurrence?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            pattern?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, dayOfMonth?: number, daysOfWeek?: (Record&lt;string,
+            never&gt; | "sunday" | "monday" | "tuesday" | "wednesday" |
+            "thursday" | "friday" | "saturday" | null)[], firstDayOfWeek?:
+            Record&lt;string, never&gt; | "sunday" | "monday" | "tuesday" |
+            "wednesday" | "thursday" | "friday" | "saturday" | null, index?:
+            Record&lt;string, never&gt; | "first" | "second" | "third" |
+            "fourth" | "last" | null, interval?: number, month?: number, type?:
+            Record&lt;string, never&gt; | "daily" | "weekly" | "absoluteMonthly"
+            | "relativeMonthly" | "absoluteYearly" | "relativeYearly" | null } |
+            null, range?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, endDate?: string | null,
+            numberOfOccurrences?: number, recurrenceTimeZone?: string | null,
+            startDate?: string | null, type?: Record&lt;string, never&gt; |
+            "endDate" | "noEnd" | "numbered" | null } | null } | null,
+            reminderDateTime?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+            null } | null, singleValueExtendedProperties?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            value?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.singleValueExtendedProperty" />" })[],
+            startDateTime?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+            null } | null, status?: "notStarted" | "inProgress" | "completed" |
+            "waitingOnOthers" | "deferred", title?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.todoTask" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ todoTask-id: string, todoTaskList-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /me/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, attachments?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, contentType?: string | null,
+          lastModifiedDateTime?: string | null, name?: string | null, size?:
+          number }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.attachmentBase" />" })[],
+          attachmentSessions?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, content?: string | null,
+          expirationDateTime?: string | null, nextExpectedRanges?: (string |
+          null)[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.attachmentSession" />" })[], body?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          content?: string | null, contentType?: Record&lt;string, never&gt; |
+          "text" | "html" | null } | null, bodyLastModifiedDateTime?: string,
+          categories?: (string | null)[], checklistItems?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, checkedDateTime?:
+          string | null, createdDateTime?: string, displayName?: string | null,
+          isChecked?: boolean | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.checklistItem" />" })[], completedDateTime?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          dateTime?: string, timeZone?: string | null } | null,
+          createdDateTime?: string, dueDateTime?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string, dateTime?: string, timeZone?:
+          string | null } | null, extensions?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.extension" />" })[], hasAttachments?: boolean |
+          null, importance?: "low" | "high" | "normal", isReminderOn?: boolean,
+          lastModifiedDateTime?: string, linkedResources?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, applicationName?:
+          string | null, displayName?: string | null, externalId?: string |
+          null, webUrl?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.linkedResource" />" })[], recurrence?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          pattern?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, dayOfMonth?: number, daysOfWeek?: (Record&lt;..., ...&gt; |
+          "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday"
+          | "saturday" | null)[], firstDayOfWeek?: Record&lt;string, never&gt; |
+          "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday"
+          | "saturday" | null, index?: Record&lt;string, never&gt; | "first" |
+          "second" | "third" | "fourth" | "last" | null, interval?: number,
+          month?: number, type?: Record&lt;string, never&gt; | "daily" |
+          "weekly" | "absoluteMonthly" | "relativeMonthly" | "absoluteYearly" |
+          "relativeYearly" | null } | null, range?: Record&lt;string, never&gt;
+          | { <xref uid="@odata.type" />: string, endDate?: string | null,
+          numberOfOccurrences?: number, recurrenceTimeZone?: string | null,
+          startDate?: string | null, type?: Record&lt;string, never&gt; |
+          "endDate" | "noEnd" | "numbered" | null } | null } | null,
+          reminderDateTime?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+          null } | null, singleValueExtendedProperties?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, value?: string | null
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.singleValueExtendedProperty" />" })[],
+          startDateTime?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
+          null } | null, status?: "notStarted" | "inProgress" | "completed" |
+          "waitingOnOthers" | "deferred", title?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.todoTask" />" }&gt;

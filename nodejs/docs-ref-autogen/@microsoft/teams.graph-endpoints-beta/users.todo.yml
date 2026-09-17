@@ -7,7 +7,7 @@ interfaces:
   - '@microsoft/teams.graph-endpoints-beta.users.todo.IEndpoints'
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: del(any)
+  - name: 'del({ If-Match?: string, user-id: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.users.todo.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`DELETE /users/{user-id}/todo`'
@@ -15,18 +15,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /users/{user-id}/todo"]["response"]>
+        function del(params?: { If-Match?: string, user-id: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, user-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /users/{user-id}/todo"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[], user-id: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.users.todo.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -37,18 +35,71 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/todo"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[], user-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, lists?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        displayName?: string | null, extensions?: (Omit<..., ...> & Omit<...,
+        ...> & { @odata.type: ... })[], isOwner?: boolean, isShared?: boolean,
+        tasks?: (Omit<..., ...> & { @odata.type: ..., attachments?: ...,
+        attachmentSessions?: ..., body?: ..., bodyLastModifiedDateTime?: ...,
+        categories?: ..., checklistItems?: ..., completedDateTime?: ...,
+        createdDateTime?: ..., dueDateTime?: ..., extensions?: ...,
+        hasAttachments?: ..., importance?: ..., isReminderOn?: ...,
+        lastModifiedDateTime?: ..., linkedResources?: ..., recurrence?: ...,
+        reminderDateTime?: ..., singleValueExtendedProperties?: ...,
+        startDateTime?: ..., status?: ..., title?: ... } & { @odata.type: ...
+        })[], wellknownListName?: "unknownFutureValue" | "none" | "defaultList"
+        | "flaggedEmails" } & { @odata.type: "#microsoft.graph.todoTaskList"
+        })[] } & { @odata.type: "#microsoft.graph.todo" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[], user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/todo"]["response"]&gt;
-  - name: update(Operation<"/users/{user-id}/todo", "patch">, any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, lists?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, displayName?: string | null,
+          extensions?: (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... })[], isOwner?: boolean, isShared?: boolean,
+          tasks?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          attachments?: ..., attachmentSessions?: ..., body?: ...,
+          bodyLastModifiedDateTime?: ..., categories?: ..., checklistItems?:
+          ..., completedDateTime?: ..., createdDateTime?: ..., dueDateTime?:
+          ..., extensions?: ..., hasAttachments?: ..., importance?: ...,
+          isReminderOn?: ..., lastModifiedDateTime?: ..., linkedResources?: ...,
+          recurrence?: ..., reminderDateTime?: ...,
+          singleValueExtendedProperties?: ..., startDateTime?: ..., status?:
+          ..., title?: ... } & { <xref uid="@odata.type" />: ... })[],
+          wellknownListName?: "unknownFutureValue" | "none" | "defaultList" |
+          "flaggedEmails" } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.todoTaskList" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.todo" />" }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, lists?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, displayName?: string | null,
+      extensions?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+      @odata.type: ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.extension" })[], isOwner?: boolean, isShared?: boolean,
+      tasks?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+      @odata.type: string, attachments?: function, attachmentSessions?:
+      function, body?: function, bodyLastModifiedDateTime?: function,
+      categories?: function, checklistItems?: function, completedDateTime?:
+      function, createdDateTime?: function, dueDateTime?: function, extensions?:
+      function, hasAttachments?: function, importance?: function, isReminderOn?:
+      function, lastModifiedDateTime?: function, linkedResources?: function,
+      recurrence?: function, reminderDateTime?: function,
+      singleValueExtendedProperties?: function, startDateTime?: function,
+      status?: function, title?: function } & { @odata.type:
+      "#microsoft.graph.todoTask" })[], wellknownListName?: "unknownFutureValue"
+      | "none" | "defaultList" | "flaggedEmails" } & { @odata.type:
+      "#microsoft.graph.todoTaskList" })[] } & { @odata.type:
+      "#microsoft.graph.todo" }, { user-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.users.todo.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /users/{user-id}/todo`'
@@ -56,18 +107,97 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/users/{user-id}/todo", "patch">,
-        params?: any): EndpointRequest<IEndpoints["PATCH
-        /users/{user-id}/todo"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, lists?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        displayName?: string | null, extensions?: (Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & Omit<{ @odata.type: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.extension" })[], isOwner?: boolean,
+        isShared?: boolean, tasks?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, attachments?: function,
+        attachmentSessions?: function, body?: function,
+        bodyLastModifiedDateTime?: function, categories?: function,
+        checklistItems?: function, completedDateTime?: function,
+        createdDateTime?: function, dueDateTime?: function, extensions?:
+        function, hasAttachments?: function, importance?: function,
+        isReminderOn?: function, lastModifiedDateTime?: function,
+        linkedResources?: function, recurrence?: function, reminderDateTime?:
+        function, singleValueExtendedProperties?: function, startDateTime?:
+        function, status?: function, title?: function } & { @odata.type:
+        "#microsoft.graph.todoTask" })[], wellknownListName?:
+        "unknownFutureValue" | "none" | "defaultList" | "flaggedEmails" } & {
+        @odata.type: "#microsoft.graph.todoTaskList" })[] } & { @odata.type:
+        "#microsoft.graph.todo" }, params?: { user-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, lists?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        displayName?: string | null, extensions?: (Omit<..., ...> & Omit<...,
+        ...> & { @odata.type: ... })[], isOwner?: boolean, isShared?: boolean,
+        tasks?: (Omit<..., ...> & { @odata.type: ..., attachments?: ...,
+        attachmentSessions?: ..., body?: ..., bodyLastModifiedDateTime?: ...,
+        categories?: ..., checklistItems?: ..., completedDateTime?: ...,
+        createdDateTime?: ..., dueDateTime?: ..., extensions?: ...,
+        hasAttachments?: ..., importance?: ..., isReminderOn?: ...,
+        lastModifiedDateTime?: ..., linkedResources?: ..., recurrence?: ...,
+        reminderDateTime?: ..., singleValueExtendedProperties?: ...,
+        startDateTime?: ..., status?: ..., title?: ... } & { @odata.type: ...
+        })[], wellknownListName?: "unknownFutureValue" | "none" | "defaultList"
+        | "flaggedEmails" } & { @odata.type: "#microsoft.graph.todoTaskList"
+        })[] } & { @odata.type: "#microsoft.graph.todo" }>
       parameters:
         - id: body
-          type: Operation&lt;"/users/{user-id}/todo", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            lists?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, displayName?: string | null, extensions?: (Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.extension" />" })[], isOwner?: boolean,
+            isShared?: boolean, tasks?: (Omit&lt;{ <xref uid="@odata.type" />:
+            ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, attachments?: function,
+            attachmentSessions?: function, body?: function,
+            bodyLastModifiedDateTime?: function, categories?: function,
+            checklistItems?: function, completedDateTime?: function,
+            createdDateTime?: function, dueDateTime?: function, extensions?:
+            function, hasAttachments?: function, importance?: function,
+            isReminderOn?: function, lastModifiedDateTime?: function,
+            linkedResources?: function, recurrence?: function,
+            reminderDateTime?: function, singleValueExtendedProperties?:
+            function, startDateTime?: function, status?: function, title?:
+            function } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.todoTask" />" })[], wellknownListName?:
+            "unknownFutureValue" | "none" | "defaultList" | "flaggedEmails" } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.todoTaskList" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.todo" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /users/{user-id}/todo"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, lists?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, displayName?: string | null,
+          extensions?: (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... })[], isOwner?: boolean, isShared?: boolean,
+          tasks?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          attachments?: ..., attachmentSessions?: ..., body?: ...,
+          bodyLastModifiedDateTime?: ..., categories?: ..., checklistItems?:
+          ..., completedDateTime?: ..., createdDateTime?: ..., dueDateTime?:
+          ..., extensions?: ..., hasAttachments?: ..., importance?: ...,
+          isReminderOn?: ..., lastModifiedDateTime?: ..., linkedResources?: ...,
+          recurrence?: ..., reminderDateTime?: ...,
+          singleValueExtendedProperties?: ..., startDateTime?: ..., status?:
+          ..., title?: ... } & { <xref uid="@odata.type" />: ... })[],
+          wellknownListName?: "unknownFutureValue" | "none" | "defaultList" |
+          "flaggedEmails" } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.todoTaskList" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.todo" />" }&gt;

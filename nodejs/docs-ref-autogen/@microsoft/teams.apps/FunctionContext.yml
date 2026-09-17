@@ -140,15 +140,28 @@ properties:
   - name: getCurrentConversationId
     uid: '@microsoft/teams.apps.FunctionContext.getCurrentConversationId'
     package: '@microsoft/teams.apps'
-    summary: ''
+    summary: >-
+      Attempts to find the ID of the conversation in which the app is being
+      used, and verifies that the bot and the
+
+      user making the function call are both present in the conversation.
+      Depending on the conversation type, this
+
+      is the ID of a chat (for group chats, 1:1 chats and channel meetings), a
+      channel, a meeting, or a user-bot
+
+      conversation (when the app is hosted in personal scope).
+
+      Returns undefined if the conversation ID cannot be determined or is
+      invalid.
     fullName: getCurrentConversationId
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'getCurrentConversationId: () => Promise<undefined | string>'
+      content: 'getCurrentConversationId: () => Promise<string | undefined>'
       return:
         description: ''
-        type: () =&gt; Promise&lt;undefined | string&gt;
+        type: () =&gt; Promise&lt;string | undefined&gt;
   - name: log
     uid: '@microsoft/teams.apps.FunctionContext.log'
     package: '@microsoft/teams.apps'
@@ -274,14 +287,14 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function send(activity: ActivityLike): Promise<null | SentActivity>'
+      content: 'function send(activity: ActivityLike): Promise<SentActivity | null>'
       parameters:
         - id: activity
           type: <xref uid="@microsoft/teams.api.ActivityLike" />
           description: ''
       return:
         description: ''
-        type: Promise&lt;null | <xref uid="@microsoft/teams.api.SentActivity" />&gt;
+        type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" /> | null&gt;
   - name: send(DeprecatedInputActivity | ActivityLike)
     uid: '@microsoft/teams.apps.FunctionContext.send_2'
     package: '@microsoft/teams.apps'
@@ -291,7 +304,7 @@ methods:
     syntax:
       content: >-
         function send(activity: DeprecatedInputActivity | ActivityLike):
-        Promise<null | SentActivity>
+        Promise<SentActivity | null>
       parameters:
         - id: activity
           type: >-
@@ -300,7 +313,7 @@ methods:
           description: ''
       return:
         description: ''
-        type: Promise&lt;null | <xref uid="@microsoft/teams.api.SentActivity" />&gt;
+        type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" /> | null&gt;
   - name: send(DeprecatedInputActivity)
     uid: '@microsoft/teams.apps.FunctionContext.send'
     package: '@microsoft/teams.apps'
@@ -310,12 +323,12 @@ methods:
     customDeprecatedMessage: Use MessageActivityInput or TypingActivityInput instead.
     syntax:
       content: >-
-        function send(activity: DeprecatedInputActivity): Promise<null |
-        SentActivity>
+        function send(activity: DeprecatedInputActivity): Promise<SentActivity |
+        null>
       parameters:
         - id: activity
           type: <xref uid="@microsoft/teams.api.DeprecatedInputActivity" />
           description: ''
       return:
         description: ''
-        type: Promise&lt;null | <xref uid="@microsoft/teams.api.SentActivity" />&gt;
+        type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" /> | null&gt;

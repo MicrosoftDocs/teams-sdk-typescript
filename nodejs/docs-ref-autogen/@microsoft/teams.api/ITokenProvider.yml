@@ -1,0 +1,97 @@
+### YamlMime:TSType
+name: ITokenProvider
+uid: '@microsoft/teams.api.ITokenProvider'
+package: '@microsoft/teams.api'
+summary: >-
+  Named token acquisition, for apps that supply their own tokens and need more
+
+  than one kind. Agentic token helpers are specific to the grant being minted;
+
+  if the SDK needs one and it is missing, it throws rather than falling back to
+
+  [ITokenProvider.getAppToken](xref:@microsoft/teams.api.ITokenProvider.getAppToken)
+  under an identity the caller did not ask for.
+
+
+  Return the raw access token string. The SDK does not cache it.
+fullName: ITokenProvider
+remarks: ''
+isDeprecated: false
+type: interface
+methods:
+  - name: getAgenticAppToken(string, string, string)
+    uid: '@microsoft/teams.api.ITokenProvider.getAgenticAppToken'
+    package: '@microsoft/teams.api'
+    summary: Acquires a token carrying the requested app-backed agentic identity.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getAgenticAppToken(scope: string, agenticAppId: string,
+        tenantId?: string): TokenProviderResult | Promise<TokenProviderResult>
+      parameters:
+        - id: scope
+          type: string
+          description: the scope to request the token for.
+        - id: agenticAppId
+          type: string
+          description: the agentic app ID to act as.
+        - id: tenantId
+          type: string
+          description: the tenant to acquire the token in, when the SDK knows it.
+      return:
+        description: ''
+        type: >-
+          <xref uid="@microsoft/teams.api.TokenProviderResult" /> |
+          Promise&lt;<xref uid="@microsoft/teams.api.TokenProviderResult" />&gt;
+  - name: getAgenticUserToken(string, string, string, string)
+    uid: '@microsoft/teams.api.ITokenProvider.getAgenticUserToken'
+    package: '@microsoft/teams.api'
+    summary: Acquires a token carrying the requested user-backed agentic identity.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getAgenticUserToken(scope: string, agenticAppId: string,
+        agenticUserId: string, tenantId?: string): TokenProviderResult |
+        Promise<TokenProviderResult>
+      parameters:
+        - id: scope
+          type: string
+          description: the scope to request the token for.
+        - id: agenticAppId
+          type: string
+          description: the agentic app ID that owns the user.
+        - id: agenticUserId
+          type: string
+          description: the agentic user ID to act as.
+        - id: tenantId
+          type: string
+          description: the tenant to acquire the token in, when the SDK knows it.
+      return:
+        description: ''
+        type: >-
+          <xref uid="@microsoft/teams.api.TokenProviderResult" /> |
+          Promise&lt;<xref uid="@microsoft/teams.api.TokenProviderResult" />&gt;
+  - name: getAppToken(string, string)
+    uid: '@microsoft/teams.api.ITokenProvider.getAppToken'
+    package: '@microsoft/teams.api'
+    summary: Acquires an app-only (service-to-service) token.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getAppToken(scope: string, tenantId?: string):
+        TokenProviderResult | Promise<TokenProviderResult>
+      parameters:
+        - id: scope
+          type: string
+          description: the scope to request the token for. Always supplied by the SDK.
+        - id: tenantId
+          type: string
+          description: the tenant to acquire the token in, when the SDK knows it.
+      return:
+        description: ''
+        type: >-
+          <xref uid="@microsoft/teams.api.TokenProviderResult" /> |
+          Promise&lt;<xref uid="@microsoft/teams.api.TokenProviderResult" />&gt;

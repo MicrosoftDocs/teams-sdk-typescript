@@ -1,0 +1,70 @@
+### YamlMime:TSType
+name: IFilesAccessor
+uid: '@microsoft/teams.apps.IFilesAccessor'
+package: '@microsoft/teams.apps'
+summary: >-
+  Accessor for the uploaded files on the current inbound activity, exposed as
+  `ctx.files`.
+
+
+  "Files" is the uploaded-file view over the raw `ctx.activity.attachments`
+  array. Uploaded files arrive as attachments where `contentType` is
+  `file.download.info`, carrying file metadata rather than the bytes themselves.
+  The metadata names where the bytes live: a pre-authorized `downloadUrl` when
+  the platform issues one, otherwise a `contentUrl` that locates the item so
+  Graph can resolve it. This accessor maps each to an
+  [IIncomingFile](xref:@microsoft/teams.apps.IIncomingFile), and skips
+  everything else in `attachments` (adaptive cards, mentions, other non-file
+  content) as well as malformed file entries, never throwing. For each file it
+  returns, the original wire attachment (the metadata object, not the bytes) is
+  retained on [IIncomingFile.raw](xref:@microsoft/teams.apps.IIncomingFile.raw).
+  A malformed or non-file attachment is reachable only through the raw
+  `activity.attachments` array.
+
+
+  This covers the file-upload path, not "any uploaded media". What matters is
+  how the content arrived, not the file's MIME type, so file *type* is
+  unrestricted (pdf, docx, png, etc.) as long as it was sent as an uploaded
+  file. An image sent as a file appears here, but the same image pasted inline
+  does not.
+fullName: IFilesAccessor
+remarks: ''
+isDeprecated: false
+type: interface
+methods:
+  - name: first()
+    uid: '@microsoft/teams.apps.IFilesAccessor.first'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Convenience: the first attached file, or `undefined` when none. Sugar over
+      `list()[0]`; shares `list()`'s resolution so it stays correct when later
+      scopes hydrate through Graph.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function first(): Promise<IIncomingFile | undefined>'
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@microsoft/teams.apps.IIncomingFile" /> |
+          undefined&gt;
+  - name: list()
+    uid: '@microsoft/teams.apps.IFilesAccessor.list'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      The files attached to the current inbound activity. Async because later
+      scopes hydrate through Graph; the personal path resolves synchronously
+      from the activity but keeps the async signature so the shape never breaks.
+
+
+      Currently takes no arguments and returns only uploaded files. The
+      signature is reserved to grow an options object later (e.g.
+      `list(options?: { includeInlineImages?; contentTypes?; includeRaw? })`) so
+      coverage can widen opt-in without a break; the default stays narrow.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function list(): Promise<IIncomingFile[]>'
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.apps.IIncomingFile" />[]&gt;

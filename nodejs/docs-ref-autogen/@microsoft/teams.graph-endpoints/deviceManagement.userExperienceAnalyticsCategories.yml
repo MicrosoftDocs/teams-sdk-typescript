@@ -10,8 +10,15 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints'
 functions:
   - name: >-
-      create(Operation<"/deviceManagement/userExperienceAnalyticsCategories",
-      "post">)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, insights?: { @odata.type: string, insightId?: string
+      | null, severity?: "none" | "error" | "warning" | "unknownFutureValue" |
+      "informational", userExperienceAnalyticsMetricId?: string | null, values?:
+      { @odata.type: string }[] }[], metricValues?: (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string, unit?: string |
+      null, value?: string | number | null } & { @odata.type:
+      "#microsoft.graph.userExperienceAnalyticsMetric" })[] } & { @odata.type:
+      "#microsoft.graph.userExperienceAnalyticsCategory" })
     uid: >-
       @microsoft/teams.graph-endpoints.deviceManagement.userExperienceAnalyticsCategories.create
     package: '@microsoft/teams.graph-endpoints'
@@ -20,22 +27,61 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/deviceManagement/userExperienceAnalyticsCategories",
-        "post">): EndpointRequest<IEndpoints["POST
-        /deviceManagement/userExperienceAnalyticsCategories"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, insights?: { @odata.type:
+        string, insightId?: string | null, severity?: "none" | "error" |
+        "warning" | "unknownFutureValue" | "informational",
+        userExperienceAnalyticsMetricId?: string | null, values?: { @odata.type:
+        string }[] }[], metricValues?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, unit?: string | null, value?:
+        string | number | null } & { @odata.type:
+        "#microsoft.graph.userExperienceAnalyticsMetric" })[] } & { @odata.type:
+        "#microsoft.graph.userExperienceAnalyticsCategory" }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, insights?: { @odata.type:
+        string, insightId?: string | null, severity?: "none" | "error" |
+        "warning" | "unknownFutureValue" | "informational",
+        userExperienceAnalyticsMetricId?: string | null, values?: { @odata.type:
+        string }[] }[], metricValues?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, unit?: string | null, value?:
+        string | number | null } & { @odata.type:
+        "#microsoft.graph.userExperienceAnalyticsMetric" })[] } & { @odata.type:
+        "#microsoft.graph.userExperienceAnalyticsCategory" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/userExperienceAnalyticsCategories",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            insights?: { <xref uid="@odata.type" />: string, insightId?: string
+            | null, severity?: "none" | "error" | "warning" |
+            "unknownFutureValue" | "informational",
+            userExperienceAnalyticsMetricId?: string | null, values?: { <xref
+            uid="@odata.type" />: string }[] }[], metricValues?: (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            unit?: string | null, value?: string | number | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.userExperienceAnalyticsMetric" />" })[] } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.userExperienceAnalyticsCategory" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /deviceManagement/userExperienceAnalyticsCategories"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, insights?: { <xref uid="@odata.type" />: string,
+          insightId?: string | null, severity?: "none" | "error" | "warning" |
+          "unknownFutureValue" | "informational",
+          userExperienceAnalyticsMetricId?: string | null, values?: { <xref
+          uid="@odata.type" />: string }[] }[], metricValues?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, unit?: string | null,
+          value?: string | number | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.userExperienceAnalyticsMetric" />" })[] }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userExperienceAnalyticsCategory" />" }&gt;
+  - name: 'del({ If-Match?: string, userExperienceAnalyticsCategory-id: string })'
     uid: >-
       @microsoft/teams.graph-endpoints.deviceManagement.userExperienceAnalyticsCategories.del
     package: '@microsoft/teams.graph-endpoints'
@@ -46,18 +92,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /deviceManagement/userExperienceAnalyticsCategories/{userExperienceAnalyticsCategory-id}"]["response"]>
+        function del(params?: { If-Match?: string,
+        userExperienceAnalyticsCategory-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, userExperienceAnalyticsCategory-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /deviceManagement/userExperienceAnalyticsCategories/{userExperienceAnalyticsCategory-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[],
+      userExperienceAnalyticsCategory-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.deviceManagement.userExperienceAnalyticsCategories.get
     package: '@microsoft/teams.graph-endpoints'
@@ -71,18 +117,43 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/userExperienceAnalyticsCategories/{userExperienceAnalyticsCategory-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        userExperienceAnalyticsCategory-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, insights?: { @odata.type: string, insightId?: string | null,
+        severity?: "none" | "error" | "warning" | "unknownFutureValue" |
+        "informational", userExperienceAnalyticsMetricId?: string | null,
+        values?: { @odata.type: string }[] }[], metricValues?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, unit?: string | null, value?: string | number | null } & {
+        @odata.type: "#microsoft.graph.userExperienceAnalyticsMetric" })[] } & {
+        @odata.type: "#microsoft.graph.userExperienceAnalyticsCategory" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[],
+            userExperienceAnalyticsCategory-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/userExperienceAnalyticsCategories/{userExperienceAnalyticsCategory-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, insights?: { <xref uid="@odata.type" />: string,
+          insightId?: string | null, severity?: "none" | "error" | "warning" |
+          "unknownFutureValue" | "informational",
+          userExperienceAnalyticsMetricId?: string | null, values?: { <xref
+          uid="@odata.type" />: string }[] }[], metricValues?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, unit?: string | null,
+          value?: string | number | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.userExperienceAnalyticsMetric" />" })[] }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userExperienceAnalyticsCategory" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: >-
       @microsoft/teams.graph-endpoints.deviceManagement.userExperienceAnalyticsCategories.list
     package: '@microsoft/teams.graph-endpoints'
@@ -94,20 +165,48 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/userExperienceAnalyticsCategories"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, insights?: { @odata.type: string, insightId?: function,
+        severity?: function, userExperienceAnalyticsMetricId?: function,
+        values?: function }[], metricValues?: (Omit<..., ...> & { @odata.type:
+        ..., unit?: ..., value?: ... } & { @odata.type: ... })[] } & {
+        @odata.type: "#microsoft.graph.userExperienceAnalyticsCategory" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/userExperienceAnalyticsCategories"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          insights?: { <xref uid="@odata.type" />: string, insightId?: function,
+          severity?: function, userExperienceAnalyticsMetricId?: function,
+          values?: function }[], metricValues?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., unit?: ..., value?: ... } & { <xref
+          uid="@odata.type" />: ... })[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.userExperienceAnalyticsCategory" />" })[]
+          }&gt;
   - name: >-
-      update(Operation<"/deviceManagement/userExperienceAnalyticsCategories/{userExperienceAnalyticsCategory-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, insights?: { @odata.type: string, insightId?: string
+      | null, severity?: "none" | "error" | "warning" | "unknownFutureValue" |
+      "informational", userExperienceAnalyticsMetricId?: string | null, values?:
+      { @odata.type: string }[] }[], metricValues?: (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string, unit?: string |
+      null, value?: string | number | null } & { @odata.type:
+      "#microsoft.graph.userExperienceAnalyticsMetric" })[] } & { @odata.type:
+      "#microsoft.graph.userExperienceAnalyticsCategory" }, {
+      userExperienceAnalyticsCategory-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.deviceManagement.userExperienceAnalyticsCategories.update
     package: '@microsoft/teams.graph-endpoints'
@@ -118,24 +217,63 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/deviceManagement/userExperienceAnalyticsCategories/{userExperienceAnalyticsCategory-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /deviceManagement/userExperienceAnalyticsCategories/{userExperienceAnalyticsCategory-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, insights?: { @odata.type:
+        string, insightId?: string | null, severity?: "none" | "error" |
+        "warning" | "unknownFutureValue" | "informational",
+        userExperienceAnalyticsMetricId?: string | null, values?: { @odata.type:
+        string }[] }[], metricValues?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, unit?: string | null, value?:
+        string | number | null } & { @odata.type:
+        "#microsoft.graph.userExperienceAnalyticsMetric" })[] } & { @odata.type:
+        "#microsoft.graph.userExperienceAnalyticsCategory" }, params?: {
+        userExperienceAnalyticsCategory-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, insights?: { @odata.type: string, insightId?: string | null,
+        severity?: "none" | "error" | "warning" | "unknownFutureValue" |
+        "informational", userExperienceAnalyticsMetricId?: string | null,
+        values?: { @odata.type: string }[] }[], metricValues?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, unit?: string | null, value?: string | number | null } & {
+        @odata.type: "#microsoft.graph.userExperienceAnalyticsMetric" })[] } & {
+        @odata.type: "#microsoft.graph.userExperienceAnalyticsCategory" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/userExperienceAnalyticsCategories/{userExperienceAnalyticsCategory-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            insights?: { <xref uid="@odata.type" />: string, insightId?: string
+            | null, severity?: "none" | "error" | "warning" |
+            "unknownFutureValue" | "informational",
+            userExperienceAnalyticsMetricId?: string | null, values?: { <xref
+            uid="@odata.type" />: string }[] }[], metricValues?: (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            unit?: string | null, value?: string | number | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.userExperienceAnalyticsMetric" />" })[] } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.userExperienceAnalyticsCategory" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ userExperienceAnalyticsCategory-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /deviceManagement/userExperienceAnalyticsCategories/{userExperienceAnalyticsCategory-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, insights?: { <xref uid="@odata.type" />: string,
+          insightId?: string | null, severity?: "none" | "error" | "warning" |
+          "unknownFutureValue" | "informational",
+          userExperienceAnalyticsMetricId?: string | null, values?: { <xref
+          uid="@odata.type" />: string }[] }[], metricValues?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, unit?: string | null,
+          value?: string | number | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.userExperienceAnalyticsMetric" />" })[] }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userExperienceAnalyticsCategory" />" }&gt;
 variables:
   - name: metricValues
     uid: >-

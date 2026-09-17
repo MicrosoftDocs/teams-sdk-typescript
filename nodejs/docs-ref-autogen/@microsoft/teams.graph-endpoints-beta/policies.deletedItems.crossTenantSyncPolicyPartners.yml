@@ -10,8 +10,12 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
   - name: >-
-      create(Operation<"/policies/deletedItems/crossTenantSyncPolicyPartners",
-      "post">)
+      create(Omit<{ @odata.type: string, deletedDateTime?: string | null },
+      "@odata.type"> & { @odata.type: string, displayName?: string | null,
+      externalCloudAuthorizedApplicationId?: string | null, tenantId?: string,
+      userSyncInbound?: Record<string, never> | { @odata.type: string,
+      isSyncAllowed?: boolean | null } | null } & { @odata.type:
+      "#microsoft.graph.crossTenantIdentitySyncPolicyPartner" })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.policies.deletedItems.crossTenantSyncPolicyPartners.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -20,22 +24,44 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/policies/deletedItems/crossTenantSyncPolicyPartners",
-        "post">): EndpointRequest<IEndpoints["POST
-        /policies/deletedItems/crossTenantSyncPolicyPartners"]["response"]>
+        function create(body: Omit<{ @odata.type: string, deletedDateTime?:
+        string | null }, "@odata.type"> & { @odata.type: string, displayName?:
+        string | null, externalCloudAuthorizedApplicationId?: string | null,
+        tenantId?: string, userSyncInbound?: Record<string, never> | {
+        @odata.type: string, isSyncAllowed?: boolean | null } | null } & {
+        @odata.type: "#microsoft.graph.crossTenantIdentitySyncPolicyPartner" }):
+        EndpointRequest<Omit<{ @odata.type: string, deletedDateTime?: string |
+        null }, "@odata.type"> & { @odata.type: string, displayName?: string |
+        null, externalCloudAuthorizedApplicationId?: string | null, tenantId?:
+        string, userSyncInbound?: Record<string, never> | { @odata.type: string,
+        isSyncAllowed?: boolean | null } | null } & { @odata.type:
+        "#microsoft.graph.crossTenantIdentitySyncPolicyPartner" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/policies/deletedItems/crossTenantSyncPolicyPartners",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, deletedDateTime?:
+            string | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, displayName?: string | null,
+            externalCloudAuthorizedApplicationId?: string | null, tenantId?:
+            string, userSyncInbound?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, isSyncAllowed?: boolean | null } |
+            null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.crossTenantIdentitySyncPolicyPartner" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /policies/deletedItems/crossTenantSyncPolicyPartners"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string,
+          deletedDateTime?: string | null }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: string, displayName?: string | null,
+          externalCloudAuthorizedApplicationId?: string | null, tenantId?:
+          string, userSyncInbound?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, isSyncAllowed?: boolean | null } | null
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.crossTenantIdentitySyncPolicyPartner" />" }&gt;
+  - name: >-
+      del({ crossTenantIdentitySyncPolicyPartner-tenantId: string, If-Match?:
+      string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.policies.deletedItems.crossTenantSyncPolicyPartners.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -58,18 +84,20 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /policies/deletedItems/crossTenantSyncPolicyPartners/{crossTenantIdentitySyncPolicyPartner-tenantId}"]["response"]>
+        function del(params?: { crossTenantIdentitySyncPolicyPartner-tenantId:
+        string, If-Match?: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { crossTenantIdentitySyncPolicyPartner-tenantId: string, If-Match?:
+            string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /policies/deletedItems/crossTenantSyncPolicyPartners/{crossTenantIdentitySyncPolicyPartner-tenantId}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[],
+      crossTenantIdentitySyncPolicyPartner-tenantId: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.policies.deletedItems.crossTenantSyncPolicyPartners.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -92,18 +120,35 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /policies/deletedItems/crossTenantSyncPolicyPartners/{crossTenantIdentitySyncPolicyPartner-tenantId}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        crossTenantIdentitySyncPolicyPartner-tenantId: string }):
+        EndpointRequest<Omit<{ @odata.type: string, deletedDateTime?: string |
+        null }, "@odata.type"> & { @odata.type: string, displayName?: string |
+        null, externalCloudAuthorizedApplicationId?: string | null, tenantId?:
+        string, userSyncInbound?: Record<string, never> | { @odata.type: string,
+        isSyncAllowed?: boolean | null } | null } & { @odata.type:
+        "#microsoft.graph.crossTenantIdentitySyncPolicyPartner" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[],
+            crossTenantIdentitySyncPolicyPartner-tenantId: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /policies/deletedItems/crossTenantSyncPolicyPartners/{crossTenantIdentitySyncPolicyPartner-tenantId}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string,
+          deletedDateTime?: string | null }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: string, displayName?: string | null,
+          externalCloudAuthorizedApplicationId?: string | null, tenantId?:
+          string, userSyncInbound?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, isSyncAllowed?: boolean | null } | null
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.crossTenantIdentitySyncPolicyPartner" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.policies.deletedItems.crossTenantSyncPolicyPartners.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -125,20 +170,45 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /policies/deletedItems/crossTenantSyncPolicyPartners"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, deletedDateTime?: string | null }, "@odata.type"> &
+        { @odata.type: string, displayName?: string | null,
+        externalCloudAuthorizedApplicationId?: string | null, tenantId?: string,
+        userSyncInbound?: Record<string, never> | { @odata.type: string,
+        isSyncAllowed?: boolean | null } | null } & { @odata.type:
+        "#microsoft.graph.crossTenantIdentitySyncPolicyPartner" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /policies/deletedItems/crossTenantSyncPolicyPartners"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, deletedDateTime?:
+          string | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, displayName?: string | null,
+          externalCloudAuthorizedApplicationId?: string | null, tenantId?:
+          string, userSyncInbound?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, isSyncAllowed?: boolean | null } | null
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.crossTenantIdentitySyncPolicyPartner" />" })[]
+          }&gt;
   - name: >-
-      set(Operation<"/policies/deletedItems/crossTenantSyncPolicyPartners/{crossTenantIdentitySyncPolicyPartner-tenantId}",
-      "put">, any)
+      set(Omit<{ @odata.type: string, deletedDateTime?: string | null },
+      "@odata.type"> & { @odata.type: string, displayName?: string | null,
+      externalCloudAuthorizedApplicationId?: string | null, tenantId?: string,
+      userSyncInbound?: Record<string, never> | { @odata.type: string,
+      isSyncAllowed?: boolean | null } | null } & { @odata.type:
+      "#microsoft.graph.crossTenantIdentitySyncPolicyPartner" }, {
+      crossTenantIdentitySyncPolicyPartner-tenantId: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.policies.deletedItems.crossTenantSyncPolicyPartners.set
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -149,24 +219,45 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function set(body:
-        Operation<"/policies/deletedItems/crossTenantSyncPolicyPartners/{crossTenantIdentitySyncPolicyPartner-tenantId}",
-        "put">, params?: any): EndpointRequest<IEndpoints["PUT
-        /policies/deletedItems/crossTenantSyncPolicyPartners/{crossTenantIdentitySyncPolicyPartner-tenantId}"]["response"]>
+        function set(body: Omit<{ @odata.type: string, deletedDateTime?: string
+        | null }, "@odata.type"> & { @odata.type: string, displayName?: string |
+        null, externalCloudAuthorizedApplicationId?: string | null, tenantId?:
+        string, userSyncInbound?: Record<string, never> | { @odata.type: string,
+        isSyncAllowed?: boolean | null } | null } & { @odata.type:
+        "#microsoft.graph.crossTenantIdentitySyncPolicyPartner" }, params?: {
+        crossTenantIdentitySyncPolicyPartner-tenantId: string }):
+        EndpointRequest<Omit<{ @odata.type: string, deletedDateTime?: string |
+        null }, "@odata.type"> & { @odata.type: string, displayName?: string |
+        null, externalCloudAuthorizedApplicationId?: string | null, tenantId?:
+        string, userSyncInbound?: Record<string, never> | { @odata.type: string,
+        isSyncAllowed?: boolean | null } | null } & { @odata.type:
+        "#microsoft.graph.crossTenantIdentitySyncPolicyPartner" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/policies/deletedItems/crossTenantSyncPolicyPartners/{crossTenantIdentitySyncPolicyPartner-tenantId}",
-            "put"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, deletedDateTime?:
+            string | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, displayName?: string | null,
+            externalCloudAuthorizedApplicationId?: string | null, tenantId?:
+            string, userSyncInbound?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, isSyncAllowed?: boolean | null } |
+            null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.crossTenantIdentitySyncPolicyPartner" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ crossTenantIdentitySyncPolicyPartner-tenantId: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PUT
-          /policies/deletedItems/crossTenantSyncPolicyPartners/{crossTenantIdentitySyncPolicyPartner-tenantId}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string,
+          deletedDateTime?: string | null }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: string, displayName?: string | null,
+          externalCloudAuthorizedApplicationId?: string | null, tenantId?:
+          string, userSyncInbound?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, isSyncAllowed?: boolean | null } | null
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.crossTenantIdentitySyncPolicyPartner" />" }&gt;
 variables:
   - name: restore
     uid: >-

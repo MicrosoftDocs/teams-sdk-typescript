@@ -72,7 +72,15 @@ variables:
           /directory/customSecurityAttributeDefinitions/{customSecurityAttributeDefinition-id}/allowedValues/{allowedValue-id}"]["response"]&gt;
           }
 functions:
-  - name: create(Operation<"/directory/customSecurityAttributeDefinitions", "post">)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, allowedValues?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, isActive?: boolean |
+      null } & { @odata.type: "#microsoft.graph.allowedValue" })[],
+      attributeSet?: string, description?: string | null, isCollection?:
+      boolean, isSearchable?: boolean | null, name?: string, status?: string,
+      type?: string, usePreDefinedValuesOnly?: boolean | null } & { @odata.type:
+      "#microsoft.graph.customSecurityAttributeDefinition" })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.directory.customSecurityAttributeDefinitions.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -84,22 +92,54 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/directory/customSecurityAttributeDefinitions", "post">):
-        EndpointRequest<IEndpoints["POST
-        /directory/customSecurityAttributeDefinitions"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, allowedValues?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, isActive?: boolean | null } & { @odata.type:
+        "#microsoft.graph.allowedValue" })[], attributeSet?: string,
+        description?: string | null, isCollection?: boolean, isSearchable?:
+        boolean | null, name?: string, status?: string, type?: string,
+        usePreDefinedValuesOnly?: boolean | null } & { @odata.type:
+        "#microsoft.graph.customSecurityAttributeDefinition" }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, allowedValues?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, isActive?: boolean | null } & { @odata.type:
+        "#microsoft.graph.allowedValue" })[], attributeSet?: string,
+        description?: string | null, isCollection?: boolean, isSearchable?:
+        boolean | null, name?: string, status?: string, type?: string,
+        usePreDefinedValuesOnly?: boolean | null } & { @odata.type:
+        "#microsoft.graph.customSecurityAttributeDefinition" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/directory/customSecurityAttributeDefinitions",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            allowedValues?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, isActive?: boolean | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.allowedValue" />"
+            })[], attributeSet?: string, description?: string | null,
+            isCollection?: boolean, isSearchable?: boolean | null, name?:
+            string, status?: string, type?: string, usePreDefinedValuesOnly?:
+            boolean | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.customSecurityAttributeDefinition" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /directory/customSecurityAttributeDefinitions"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, allowedValues?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, isActive?: boolean | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.allowedValue" />"
+          })[], attributeSet?: string, description?: string | null,
+          isCollection?: boolean, isSearchable?: boolean | null, name?: string,
+          status?: string, type?: string, usePreDefinedValuesOnly?: boolean |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.customSecurityAttributeDefinition" />" }&gt;
+  - name: 'del({ customSecurityAttributeDefinition-id: string, If-Match?: string })'
     uid: >-
       @microsoft/teams.graph-endpoints-beta.directory.customSecurityAttributeDefinitions.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -110,18 +150,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /directory/customSecurityAttributeDefinitions/{customSecurityAttributeDefinition-id}"]["response"]>
+        function del(params?: { customSecurityAttributeDefinition-id: string,
+        If-Match?: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ customSecurityAttributeDefinition-id: string, If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /directory/customSecurityAttributeDefinitions/{customSecurityAttributeDefinition-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[],
+      customSecurityAttributeDefinition-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.directory.customSecurityAttributeDefinitions.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -136,18 +176,40 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /directory/customSecurityAttributeDefinitions/{customSecurityAttributeDefinition-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        customSecurityAttributeDefinition-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, allowedValues?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, isActive?: boolean | null } & {
+        @odata.type: "#microsoft.graph.allowedValue" })[], attributeSet?:
+        string, description?: string | null, isCollection?: boolean,
+        isSearchable?: boolean | null, name?: string, status?: string, type?:
+        string, usePreDefinedValuesOnly?: boolean | null } & { @odata.type:
+        "#microsoft.graph.customSecurityAttributeDefinition" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[],
+            customSecurityAttributeDefinition-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /directory/customSecurityAttributeDefinitions/{customSecurityAttributeDefinition-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, allowedValues?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, isActive?: boolean | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.allowedValue" />"
+          })[], attributeSet?: string, description?: string | null,
+          isCollection?: boolean, isSearchable?: boolean | null, name?: string,
+          status?: string, type?: string, usePreDefinedValuesOnly?: boolean |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.customSecurityAttributeDefinition" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.directory.customSecurityAttributeDefinitions.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -161,20 +223,48 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /directory/customSecurityAttributeDefinitions"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, allowedValues?: (Omit<..., ...> & { @odata.type: ..., isActive?:
+        ... } & { @odata.type: ... })[], attributeSet?: string, description?:
+        string | null, isCollection?: boolean, isSearchable?: boolean | null,
+        name?: string, status?: string, type?: string, usePreDefinedValuesOnly?:
+        boolean | null } & { @odata.type:
+        "#microsoft.graph.customSecurityAttributeDefinition" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /directory/customSecurityAttributeDefinitions"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          allowedValues?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+          ..., isActive?: ... } & { <xref uid="@odata.type" />: ... })[],
+          attributeSet?: string, description?: string | null, isCollection?:
+          boolean, isSearchable?: boolean | null, name?: string, status?:
+          string, type?: string, usePreDefinedValuesOnly?: boolean | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.customSecurityAttributeDefinition" />" })[] }&gt;
   - name: >-
-      update(Operation<"/directory/customSecurityAttributeDefinitions/{customSecurityAttributeDefinition-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, allowedValues?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, isActive?: boolean |
+      null } & { @odata.type: "#microsoft.graph.allowedValue" })[],
+      attributeSet?: string, description?: string | null, isCollection?:
+      boolean, isSearchable?: boolean | null, name?: string, status?: string,
+      type?: string, usePreDefinedValuesOnly?: boolean | null } & { @odata.type:
+      "#microsoft.graph.customSecurityAttributeDefinition" }, {
+      customSecurityAttributeDefinition-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.directory.customSecurityAttributeDefinitions.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -188,21 +278,53 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/directory/customSecurityAttributeDefinitions/{customSecurityAttributeDefinition-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /directory/customSecurityAttributeDefinitions/{customSecurityAttributeDefinition-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, allowedValues?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, isActive?: boolean | null } & { @odata.type:
+        "#microsoft.graph.allowedValue" })[], attributeSet?: string,
+        description?: string | null, isCollection?: boolean, isSearchable?:
+        boolean | null, name?: string, status?: string, type?: string,
+        usePreDefinedValuesOnly?: boolean | null } & { @odata.type:
+        "#microsoft.graph.customSecurityAttributeDefinition" }, params?: {
+        customSecurityAttributeDefinition-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, allowedValues?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, isActive?: boolean | null } & {
+        @odata.type: "#microsoft.graph.allowedValue" })[], attributeSet?:
+        string, description?: string | null, isCollection?: boolean,
+        isSearchable?: boolean | null, name?: string, status?: string, type?:
+        string, usePreDefinedValuesOnly?: boolean | null } & { @odata.type:
+        "#microsoft.graph.customSecurityAttributeDefinition" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/directory/customSecurityAttributeDefinitions/{customSecurityAttributeDefinition-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            allowedValues?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, isActive?: boolean | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.allowedValue" />"
+            })[], attributeSet?: string, description?: string | null,
+            isCollection?: boolean, isSearchable?: boolean | null, name?:
+            string, status?: string, type?: string, usePreDefinedValuesOnly?:
+            boolean | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.customSecurityAttributeDefinition" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ customSecurityAttributeDefinition-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /directory/customSecurityAttributeDefinitions/{customSecurityAttributeDefinition-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, allowedValues?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, isActive?: boolean | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.allowedValue" />"
+          })[], attributeSet?: string, description?: string | null,
+          isCollection?: boolean, isSearchable?: boolean | null, name?: string,
+          status?: string, type?: string, usePreDefinedValuesOnly?: boolean |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.customSecurityAttributeDefinition" />" }&gt;

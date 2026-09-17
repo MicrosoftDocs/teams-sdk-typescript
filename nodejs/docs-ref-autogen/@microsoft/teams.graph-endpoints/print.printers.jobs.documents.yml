@@ -8,8 +8,12 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints'
 functions:
   - name: >-
-      create(Operation<"/print/printers/{printer-id}/jobs/{printJob-id}/documents",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, contentType?: string | null, displayName?: string |
+      null, downloadedDateTime?: string | null, size?: number,
+      uploadedDateTime?: string | null } & { @odata.type:
+      "#microsoft.graph.printDocument" }, { printer-id: string, printJob-id:
+      string })
     uid: '@microsoft/teams.graph-endpoints.print.printers.jobs.documents.create'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`POST /print/printers/{printer-id}/jobs/{printJob-id}/documents`'
@@ -17,25 +21,41 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/print/printers/{printer-id}/jobs/{printJob-id}/documents",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /print/printers/{printer-id}/jobs/{printJob-id}/documents"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, contentType?: string | null,
+        displayName?: string | null, downloadedDateTime?: string | null, size?:
+        number, uploadedDateTime?: string | null } & { @odata.type:
+        "#microsoft.graph.printDocument" }, params?: { printer-id: string,
+        printJob-id: string }): EndpointRequest<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, contentType?: string |
+        null, displayName?: string | null, downloadedDateTime?: string | null,
+        size?: number, uploadedDateTime?: string | null } & { @odata.type:
+        "#microsoft.graph.printDocument" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/print/printers/{printer-id}/jobs/{printJob-id}/documents",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            contentType?: string | null, displayName?: string | null,
+            downloadedDateTime?: string | null, size?: number,
+            uploadedDateTime?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.printDocument" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ printer-id: string, printJob-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /print/printers/{printer-id}/jobs/{printJob-id}/documents"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, contentType?: string | null, displayName?: string | null,
+          downloadedDateTime?: string | null, size?: number, uploadedDateTime?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printDocument" />" }&gt;
+  - name: >-
+      del({ If-Match?: string, printDocument-id: string, printer-id: string,
+      printJob-id: string })
     uid: '@microsoft/teams.graph-endpoints.print.printers.jobs.documents.del'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -45,18 +65,20 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /print/printers/{printer-id}/jobs/{printJob-id}/documents/{printDocument-id}"]["response"]>
+        function del(params?: { If-Match?: string, printDocument-id: string,
+        printer-id: string, printJob-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { If-Match?: string, printDocument-id: string, printer-id: string,
+            printJob-id: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /print/printers/{printer-id}/jobs/{printJob-id}/documents/{printDocument-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], printDocument-id: string,
+      printer-id: string, printJob-id: string })
     uid: '@microsoft/teams.graph-endpoints.print.printers.jobs.documents.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -66,18 +88,32 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /print/printers/{printer-id}/jobs/{printJob-id}/documents/{printDocument-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        printDocument-id: string, printer-id: string, printJob-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, contentType?: string | null,
+        displayName?: string | null, downloadedDateTime?: string | null, size?:
+        number, uploadedDateTime?: string | null } & { @odata.type:
+        "#microsoft.graph.printDocument" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], printDocument-id: string,
+            printer-id: string, printJob-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /print/printers/{printer-id}/jobs/{printJob-id}/documents/{printDocument-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, contentType?: string | null, displayName?: string | null,
+          downloadedDateTime?: string | null, size?: number, uploadedDateTime?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printDocument" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, printer-id: string, printJob-id: string })
     uid: '@microsoft/teams.graph-endpoints.print.printers.jobs.documents.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -91,20 +127,40 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /print/printers/{printer-id}/jobs/{printJob-id}/documents"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, printer-id: string, printJob-id: string
+        }): EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?:
+        string | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, contentType?: string | null,
+        displayName?: string | null, downloadedDateTime?: string | null, size?:
+        number, uploadedDateTime?: string | null } & { @odata.type:
+        "#microsoft.graph.printDocument" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, printer-id: string, printJob-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /print/printers/{printer-id}/jobs/{printJob-id}/documents"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          contentType?: string | null, displayName?: string | null,
+          downloadedDateTime?: string | null, size?: number, uploadedDateTime?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printDocument" />" })[] }&gt;
   - name: >-
-      update(Operation<"/print/printers/{printer-id}/jobs/{printJob-id}/documents/{printDocument-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, contentType?: string | null, displayName?: string |
+      null, downloadedDateTime?: string | null, size?: number,
+      uploadedDateTime?: string | null } & { @odata.type:
+      "#microsoft.graph.printDocument" }, { printDocument-id: string,
+      printer-id: string, printJob-id: string })
     uid: '@microsoft/teams.graph-endpoints.print.printers.jobs.documents.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -114,24 +170,40 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/print/printers/{printer-id}/jobs/{printJob-id}/documents/{printDocument-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /print/printers/{printer-id}/jobs/{printJob-id}/documents/{printDocument-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, contentType?: string | null,
+        displayName?: string | null, downloadedDateTime?: string | null, size?:
+        number, uploadedDateTime?: string | null } & { @odata.type:
+        "#microsoft.graph.printDocument" }, params?: { printDocument-id: string,
+        printer-id: string, printJob-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, contentType?: string | null, displayName?: string | null,
+        downloadedDateTime?: string | null, size?: number, uploadedDateTime?:
+        string | null } & { @odata.type: "#microsoft.graph.printDocument" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/print/printers/{printer-id}/jobs/{printJob-id}/documents/{printDocument-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            contentType?: string | null, displayName?: string | null,
+            downloadedDateTime?: string | null, size?: number,
+            uploadedDateTime?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.printDocument" />" }
           description: ''
         - id: params
-          type: any
+          type: >-
+            { printDocument-id: string, printer-id: string, printJob-id: string
+            }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /print/printers/{printer-id}/jobs/{printJob-id}/documents/{printDocument-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, contentType?: string | null, displayName?: string | null,
+          downloadedDateTime?: string | null, size?: number, uploadedDateTime?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printDocument" />" }&gt;
 variables:
   - name: createUploadSession
     uid: >-

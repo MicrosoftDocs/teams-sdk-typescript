@@ -8,7 +8,11 @@ interfaces:
     @microsoft/teams.graph-endpoints-beta.users.authentication.methods.IEndpoints
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: create(Operation<"/users/{user-id}/authentication/methods", "post">, any)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, createdDateTime?: string | null, lastUsedDateTime?:
+      string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.authenticationMethod" }, { user-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.users.authentication.methods.create'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`POST /users/{user-id}/authentication/methods`'
@@ -16,23 +20,38 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/users/{user-id}/authentication/methods", "post">, params?:
-        any): EndpointRequest<IEndpoints["POST
-        /users/{user-id}/authentication/methods"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string |
+        null, lastUsedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authenticationMethod" }, params?: {
+        user-id: string }): EndpointRequest<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?:
+        string | null, lastUsedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authenticationMethod" }>
       parameters:
         - id: body
-          type: Operation&lt;"/users/{user-id}/authentication/methods", "post"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, createdDateTime?: string | null, lastUsedDateTime?: string |
+            null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.authenticationMethod" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /users/{user-id}/authentication/methods"]["response"]&gt;
-  - name: get(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdDateTime?: string | null,
+          lastUsedDateTime?: string | null }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethod" />" }&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], authenticationMethod-id:
+      string, user-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.users.authentication.methods.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -43,18 +62,31 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/authentication/methods/{authenticationMethod-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        authenticationMethod-id: string, user-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string |
+        null, lastUsedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authenticationMethod" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], authenticationMethod-id:
+            string, user-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/authentication/methods/{authenticationMethod-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdDateTime?: string | null,
+          lastUsedDateTime?: string | null }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethod" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, user-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.users.authentication.methods.list'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -65,20 +97,37 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/authentication/methods"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, user-id: string }): EndpointRequest<{
+        @odata.count?: number | null, @odata.nextLink?: string | null } & {
+        value?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+        Omit<{ @odata.type: string, createdDateTime?: string | null,
+        lastUsedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authenticationMethod" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, user-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/authentication/methods"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdDateTime?: string | null, lastUsedDateTime?: string |
+          null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.authenticationMethod" />" })[] }&gt;
   - name: >-
-      update(Operation<"/users/{user-id}/authentication/methods/{authenticationMethod-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, createdDateTime?: string | null, lastUsedDateTime?:
+      string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.authenticationMethod" }, { authenticationMethod-id:
+      string, user-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.users.authentication.methods.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /users/{user-id}/authentication/methods/{authenticationMethod-id}`'
@@ -86,24 +135,36 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/users/{user-id}/authentication/methods/{authenticationMethod-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /users/{user-id}/authentication/methods/{authenticationMethod-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string |
+        null, lastUsedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authenticationMethod" }, params?: {
+        authenticationMethod-id: string, user-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string |
+        null, lastUsedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authenticationMethod" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/users/{user-id}/authentication/methods/{authenticationMethod-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, createdDateTime?: string | null, lastUsedDateTime?: string |
+            null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.authenticationMethod" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ authenticationMethod-id: string, user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /users/{user-id}/authentication/methods/{authenticationMethod-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdDateTime?: string | null,
+          lastUsedDateTime?: string | null }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethod" />" }&gt;
 variables:
   - name: disableSmsSignIn
     uid: >-
@@ -158,20 +219,49 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        resetPassword: { create: (body: IEndpoints["POST
+        resetPassword: { /** * `POST
+        /users/{user-id}/authentication/methods/{authenticationMethod-id}/resetPassword`
+        * * Initiate a reset for the password associated with a password
+        authentication method object. This can only be done by an administrator
+        with appropriate permissions and can&#x27;t be performed on a
+        user&#x27;s own account. To reset a user&#x27;s password in in Azure AD
+        B2C, use the Update user API operation and update the passwordProfile
+        &gt; forceChangePasswordNextSignIn object. This flow writes the new
+        password to Microsoft Entra ID and pushes it to on-premises Active
+        Directory if configured using password writeback. The admin can either
+        provide a new password or have the system generate one. The user is
+        prompted to change their password on their next sign in. This reset is a
+        long-running operation and will return a Location header with a link
+        where the caller can periodically check for the status of the reset
+        operation. */ create: (body: IEndpoints["POST
         /users/{user-id}/authentication/methods/{authenticationMethod-id}/resetPassword"]["body"],
         params?: IEndpoints["POST
         /users/{user-id}/authentication/methods/{authenticationMethod-id}/resetPassword"]["parameters"])
         => EndpointRequest<IEndpoints["POST
-        /users/{user-id}/authentication/methods/{authenticationMethod-id}/resetPassword"]["response"]>
+        /users/{user-id}/authentication/methods/{authenticationMethod-id}/resetPassword"]["response"]>;
         }
       return:
         description: ''
         type: >-
-          { create: (body: IEndpoints["POST
+          { /** * `POST
+          /users/{user-id}/authentication/methods/{authenticationMethod-id}/resetPassword`
+          * * Initiate a reset for the password associated with a password
+          authentication method object. This can only be done by an
+          administrator with appropriate permissions and can&#x27;t be performed
+          on a user&#x27;s own account. To reset a user&#x27;s password in in
+          Azure AD B2C, use the Update user API operation and update the
+          passwordProfile &gt; forceChangePasswordNextSignIn object. This flow
+          writes the new password to Microsoft Entra ID and pushes it to
+          on-premises Active Directory if configured using password writeback.
+          The admin can either provide a new password or have the system
+          generate one. The user is prompted to change their password on their
+          next sign in. This reset is a long-running operation and will return a
+          Location header with a link where the caller can periodically check
+          for the status of the reset operation. */ create: (body:
+          IEndpoints["POST
           /users/{user-id}/authentication/methods/{authenticationMethod-id}/resetPassword"]["body"],
           params?: IEndpoints["POST
           /users/{user-id}/authentication/methods/{authenticationMethod-id}/resetPassword"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["POST
-          /users/{user-id}/authentication/methods/{authenticationMethod-id}/resetPassword"]["response"]&gt;
+          /users/{user-id}/authentication/methods/{authenticationMethod-id}/resetPassword"]["response"]&gt;;
           }

@@ -1,0 +1,99 @@
+### YamlMime:TSType
+name: IAppTokenProvider
+uid: '@microsoft/teams.apps.IAppTokenProvider'
+package: '@microsoft/teams.apps'
+summary: |-
+  The app's own token source, backed by the credentials the `App` was
+  configured with. Reach it as `app.tokenProvider` to acquire a token for
+  something the SDK does not call for you, such as an OpenTelemetry exporter.
+
+  Unlike a consumer-supplied <xref:ITokenProvider>, every capability is
+  implemented, so the agentic methods are required rather than optional.
+fullName: IAppTokenProvider
+remarks: ''
+isDeprecated: false
+type: interface
+methods:
+  - name: getAgenticAppToken(string | undefined, string, string)
+    uid: '@microsoft/teams.apps.IAppTokenProvider.getAgenticAppToken'
+    package: '@microsoft/teams.apps'
+    summary: Acquires a token carrying the requested app-backed agentic identity.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getAgenticAppToken(scope: string | undefined, agenticAppId:
+        string, tenantId?: string): Promise<IToken | null>
+      parameters:
+        - id: scope
+          type: string | undefined
+          description: |-
+            the scope to request the token for. Defaults to the configured
+            cloud environment's agentic Bot API scope when `undefined`.
+        - id: agenticAppId
+          type: string
+          description: the agentic app ID to act as.
+        - id: tenantId
+          type: string
+          description: |-
+            the tenant to acquire the token in. Defaults to the tenant
+            configured on the app's credentials.
+      return:
+        description: the token, or `null` when the app has no credentials configured.
+        type: Promise&lt;<xref uid="@microsoft/teams.api.IToken" /> | null&gt;
+  - name: getAgenticUserToken(string | undefined, string, string, string)
+    uid: '@microsoft/teams.apps.IAppTokenProvider.getAgenticUserToken'
+    package: '@microsoft/teams.apps'
+    summary: Acquires a token carrying the requested user-backed agentic identity.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getAgenticUserToken(scope: string | undefined, agenticAppId:
+        string, agenticUserId: string, tenantId?: string): Promise<IToken |
+        null>
+      parameters:
+        - id: scope
+          type: string | undefined
+          description: |-
+            the scope to request the token for. Defaults to the configured
+            cloud environment's agentic Bot API scope when `undefined`.
+        - id: agenticAppId
+          type: string
+          description: the agentic app ID that owns the user.
+        - id: agenticUserId
+          type: string
+          description: the agentic user ID to act as.
+        - id: tenantId
+          type: string
+          description: |-
+            the tenant to acquire the token in. Defaults to the tenant
+            configured on the app's credentials.
+      return:
+        description: the token, or `null` when the app has no credentials configured.
+        type: Promise&lt;<xref uid="@microsoft/teams.api.IToken" /> | null&gt;
+  - name: getAppToken(string, string)
+    uid: '@microsoft/teams.apps.IAppTokenProvider.getAppToken'
+    package: '@microsoft/teams.apps'
+    summary: Acquires an app-only (service-to-service) token.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getAppToken(scope?: string, tenantId?: string): Promise<IToken
+        | null>
+      parameters:
+        - id: scope
+          type: string
+          description: |-
+            the scope to request the token for. Defaults to the configured
+            cloud environment's bot scope.
+        - id: tenantId
+          type: string
+          description: |-
+            the tenant to acquire the token in. Defaults to the tenant
+            configured on the app's credentials.
+      return:
+        description: the token, or `null` when the app has no credentials configured.
+        type: Promise&lt;<xref uid="@microsoft/teams.api.IToken" /> | null&gt;
+extends: <xref uid="@microsoft/teams.api.ITokenProvider" />

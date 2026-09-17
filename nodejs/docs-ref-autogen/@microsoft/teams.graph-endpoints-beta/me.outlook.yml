@@ -7,7 +7,7 @@ interfaces:
   - '@microsoft/teams.graph-endpoints-beta.me.outlook.IEndpoints'
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: get(any)
+  - name: 'get({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints-beta.me.outlook.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -18,15 +18,158 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /me/outlook"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, masterCategories?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, color?: Record<string, never> | "none" | "preset0" | "preset1" |
+        "preset2" | "preset3" | "preset4" | "preset5" | "preset6" | "preset7" |
+        "preset8" | "preset9" | "preset10" | "preset11" | "preset12" |
+        "preset13" | "preset14" | "preset15" | "preset16" | "preset17" |
+        "preset18" | "preset19" | "preset20" | "preset21" | "preset22" |
+        "preset23" | "preset24" | null, displayName?: string | null } & {
+        @odata.type: "#microsoft.graph.outlookCategory" })[], taskFolders?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, changeKey?: string | null, isDefaultFolder?:
+        boolean | null, multiValueExtendedProperties?: (Omit<..., ...> & {
+        @odata.type: ..., value?: ... } & { @odata.type: ... })[], name?: string
+        | null, parentGroupKey?: string | null, singleValueExtendedProperties?:
+        (Omit<..., ...> & { @odata.type: ..., value?: ... } & { @odata.type: ...
+        })[], tasks?: (Omit<..., ...> & { @odata.type: ..., assignedTo?: ...,
+        attachments?: ..., body?: ..., completedDateTime?: ..., dueDateTime?:
+        ..., hasAttachments?: ..., importance?: ..., isReminderOn?: ...,
+        multiValueExtendedProperties?: ..., owner?: ..., parentFolderId?: ...,
+        recurrence?: ..., reminderDateTime?: ..., sensitivity?: ...,
+        singleValueExtendedProperties?: ..., startDateTime?: ..., status?: ...,
+        subject?: ... } & { @odata.type: ... })[] } & { @odata.type:
+        "#microsoft.graph.outlookTaskFolder" })[], taskGroups?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, changeKey?: string | null, groupKey?: string | null,
+        isDefaultGroup?: boolean | null, name?: string | null, taskFolders?:
+        (Omit<..., ...> & { @odata.type: ..., changeKey?: ..., isDefaultFolder?:
+        ..., multiValueExtendedProperties?: ..., name?: ..., parentGroupKey?:
+        ..., singleValueExtendedProperties?: ..., tasks?: ... } & { @odata.type:
+        ... })[] } & { @odata.type: "#microsoft.graph.outlookTaskGroup" })[],
+        tasks?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, categories?: function,
+        changeKey?: function, createdDateTime?: function, lastModifiedDateTime?:
+        function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.outlookItem" }, "@odata.type"> & { @odata.type:
+        string, assignedTo?: string | null, attachments?: (Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... })[], body?: Record<string, never> |
+        { @odata.type: string, content?: string | null, contentType?:
+        Record<..., ...> | "text" | "html" | null } | null, completedDateTime?:
+        Record<string, never> | { @odata.type: string, dateTime?: string,
+        timeZone?: string | null } | null, dueDateTime?: Record<string, never> |
+        { @odata.type: string, dateTime?: string, timeZone?: string | null } |
+        null, hasAttachments?: boolean | null, importance?: Record<string,
+        never> | "low" | "high" | "normal" | null, isReminderOn?: boolean |
+        null, multiValueExtendedProperties?: (Omit<..., ...> & { @odata.type:
+        ..., value?: ... } & { @odata.type: ... })[], owner?: string | null,
+        parentFolderId?: string | null, recurrence?: Record<string, never> | {
+        @odata.type: string, pattern?: Record<..., ...> | { @odata.type: ...,
+        dayOfMonth?: ..., daysOfWeek?: ..., firstDayOfWeek?: ..., index?: ...,
+        interval?: ..., month?: ..., type?: ... } | null, range?: Record<...,
+        ...> | { @odata.type: ..., endDate?: ..., numberOfOccurrences?: ...,
+        recurrenceTimeZone?: ..., startDate?: ..., type?: ... } | null } | null,
+        reminderDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, sensitivity?:
+        Record<string, never> | "normal" | "personal" | "private" |
+        "confidential" | null, singleValueExtendedProperties?: (Omit<..., ...> &
+        { @odata.type: ..., value?: ... } & { @odata.type: ... })[],
+        startDateTime?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, timeZone?: string | null } | null, status?:
+        Record<string, never> | "notStarted" | "inProgress" | "completed" |
+        "waitingOnOthers" | "deferred" | null, subject?: string | null } & {
+        @odata.type: "#microsoft.graph.outlookTask" })[] } & { @odata.type:
+        "#microsoft.graph.outlookUser" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /me/outlook"]["response"]&gt;
+        type: >-
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, masterCategories?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, color?: Record&lt;string, never&gt; |
+          "none" | "preset0" | "preset1" | "preset2" | "preset3" | "preset4" |
+          "preset5" | "preset6" | "preset7" | "preset8" | "preset9" | "preset10"
+          | "preset11" | "preset12" | "preset13" | "preset14" | "preset15" |
+          "preset16" | "preset17" | "preset18" | "preset19" | "preset20" |
+          "preset21" | "preset22" | "preset23" | "preset24" | null,
+          displayName?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.outlookCategory" />" })[], taskFolders?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          changeKey?: string | null, isDefaultFolder?: boolean | null,
+          multiValueExtendedProperties?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., value?: ... } & { <xref uid="@odata.type"
+          />: ... })[], name?: string | null, parentGroupKey?: string | null,
+          singleValueExtendedProperties?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., value?: ... } & { <xref uid="@odata.type"
+          />: ... })[], tasks?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., assignedTo?: ..., attachments?: ..., body?:
+          ..., completedDateTime?: ..., dueDateTime?: ..., hasAttachments?: ...,
+          importance?: ..., isReminderOn?: ..., multiValueExtendedProperties?:
+          ..., owner?: ..., parentFolderId?: ..., recurrence?: ...,
+          reminderDateTime?: ..., sensitivity?: ...,
+          singleValueExtendedProperties?: ..., startDateTime?: ..., status?:
+          ..., subject?: ... } & { <xref uid="@odata.type" />: ... })[] } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.outlookTaskFolder" />" })[], taskGroups?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          changeKey?: string | null, groupKey?: string | null, isDefaultGroup?:
+          boolean | null, name?: string | null, taskFolders?: (Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ..., changeKey?: ...,
+          isDefaultFolder?: ..., multiValueExtendedProperties?: ..., name?: ...,
+          parentGroupKey?: ..., singleValueExtendedProperties?: ..., tasks?: ...
+          } & { <xref uid="@odata.type" />: ... })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.outlookTaskGroup"
+          />" })[], tasks?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, categories?: function, changeKey?:
+          function, createdDateTime?: function, lastModifiedDateTime?: function
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.outlookItem" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          assignedTo?: string | null, attachments?: (Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... })[], body?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          content?: string | null, contentType?: Record&lt;..., ...&gt; | "text"
+          | "html" | null } | null, completedDateTime?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, dateTime?: string,
+          timeZone?: string | null } | null, dueDateTime?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, dateTime?: string,
+          timeZone?: string | null } | null, hasAttachments?: boolean | null,
+          importance?: Record&lt;string, never&gt; | "low" | "high" | "normal" |
+          null, isReminderOn?: boolean | null, multiValueExtendedProperties?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ..., value?: ...
+          } & { <xref uid="@odata.type" />: ... })[], owner?: string | null,
+          parentFolderId?: string | null, recurrence?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, pattern?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          dayOfMonth?: ..., daysOfWeek?: ..., firstDayOfWeek?: ..., index?: ...,
+          interval?: ..., month?: ..., type?: ... } | null, range?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., endDate?:
+          ..., numberOfOccurrences?: ..., recurrenceTimeZone?: ..., startDate?:
+          ..., type?: ... } | null } | null, reminderDateTime?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          dateTime?: string, timeZone?: string | null } | null, sensitivity?:
+          Record&lt;string, never&gt; | "normal" | "personal" | "private" |
+          "confidential" | null, singleValueExtendedProperties?: (Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ..., value?: ... } & { <xref
+          uid="@odata.type" />: ... })[], startDateTime?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, dateTime?: string,
+          timeZone?: string | null } | null, status?: Record&lt;string,
+          never&gt; | "notStarted" | "inProgress" | "completed" |
+          "waitingOnOthers" | "deferred" | null, subject?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.outlookTask"
+          />" })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.outlookUser" />" }&gt;
 variables:
   - name: masterCategories
     uid: '@microsoft/teams.graph-endpoints-beta.me.outlook.masterCategories'
@@ -36,49 +179,68 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        masterCategories: { create: (body: IEndpoints["POST
-        /me/outlook/masterCategories"]["body"]) =>
+        masterCategories: { /** * `GET /me/outlook/masterCategories` * * Get all
+        the categories that have been defined for a user. */ list: (params?:
+        IEndpoints["GET /me/outlook/masterCategories"]["parameters"]) =>
+        EndpointRequest<IEndpoints["GET
+        /me/outlook/masterCategories"]["response"]>; /** * `POST
+        /me/outlook/masterCategories` * * Create an outlookCategory object in
+        the user&#x27;s master list of categories. */ create: (body:
+        IEndpoints["POST /me/outlook/masterCategories"]["body"]) =>
         EndpointRequest<IEndpoints["POST
-        /me/outlook/masterCategories"]["response"]>, del: (params?:
-        IEndpoints["DELETE
-        /me/outlook/masterCategories/{outlookCategory-id}"]["parameters"]) =>
-        EndpointRequest<IEndpoints["DELETE
-        /me/outlook/masterCategories/{outlookCategory-id}"]["response"]>, get:
-        (params?: IEndpoints["GET
+        /me/outlook/masterCategories"]["response"]>; /** * `GET
+        /me/outlook/masterCategories/{outlookCategory-id}` * * Get the
+        properties and relationships of the specified outlookCategory object. */
+        get: (params?: IEndpoints["GET
         /me/outlook/masterCategories/{outlookCategory-id}"]["parameters"]) =>
         EndpointRequest<IEndpoints["GET
-        /me/outlook/masterCategories/{outlookCategory-id}"]["response"]>, list:
-        (params?: IEndpoints["GET /me/outlook/masterCategories"]["parameters"])
-        => EndpointRequest<IEndpoints["GET
-        /me/outlook/masterCategories"]["response"]>, update: (body:
-        IEndpoints["PATCH
+        /me/outlook/masterCategories/{outlookCategory-id}"]["response"]>; /** *
+        `PATCH /me/outlook/masterCategories/{outlookCategory-id}` * * Update the
+        writable property, color, of the specified outlookCategory object. You
+        can&#x27;t modify the displayName property once you have created the
+        category. */ update: (body: IEndpoints["PATCH
         /me/outlook/masterCategories/{outlookCategory-id}"]["body"], params?:
         IEndpoints["PATCH
         /me/outlook/masterCategories/{outlookCategory-id}"]["parameters"]) =>
         EndpointRequest<IEndpoints["PATCH
-        /me/outlook/masterCategories/{outlookCategory-id}"]["response"]> }
+        /me/outlook/masterCategories/{outlookCategory-id}"]["response"]>; /** *
+        `DELETE /me/outlook/masterCategories/{outlookCategory-id}` * * Delete
+        the specified outlookCategory object. */ del: (params?:
+        IEndpoints["DELETE
+        /me/outlook/masterCategories/{outlookCategory-id}"]["parameters"]) =>
+        EndpointRequest<IEndpoints["DELETE
+        /me/outlook/masterCategories/{outlookCategory-id}"]["response"]>; }
       return:
         description: ''
         type: >-
-          { create: (body: IEndpoints["POST
-          /me/outlook/masterCategories"]["body"]) =&gt;
-          EndpointRequest&lt;IEndpoints["POST
-          /me/outlook/masterCategories"]["response"]&gt;, del: (params?:
-          IEndpoints["DELETE
-          /me/outlook/masterCategories/{outlookCategory-id}"]["parameters"])
-          =&gt; EndpointRequest&lt;IEndpoints["DELETE
-          /me/outlook/masterCategories/{outlookCategory-id}"]["response"]&gt;,
-          get: (params?: IEndpoints["GET
-          /me/outlook/masterCategories/{outlookCategory-id}"]["parameters"])
-          =&gt; EndpointRequest&lt;IEndpoints["GET
-          /me/outlook/masterCategories/{outlookCategory-id}"]["response"]&gt;,
-          list: (params?: IEndpoints["GET
+          { /** * `GET /me/outlook/masterCategories` * * Get all the categories
+          that have been defined for a user. */ list: (params?: IEndpoints["GET
           /me/outlook/masterCategories"]["parameters"]) =&gt;
           EndpointRequest&lt;IEndpoints["GET
-          /me/outlook/masterCategories"]["response"]&gt;, update: (body:
-          IEndpoints["PATCH
+          /me/outlook/masterCategories"]["response"]&gt;; /** * `POST
+          /me/outlook/masterCategories` * * Create an outlookCategory object in
+          the user&#x27;s master list of categories. */ create: (body:
+          IEndpoints["POST /me/outlook/masterCategories"]["body"]) =&gt;
+          EndpointRequest&lt;IEndpoints["POST
+          /me/outlook/masterCategories"]["response"]&gt;; /** * `GET
+          /me/outlook/masterCategories/{outlookCategory-id}` * * Get the
+          properties and relationships of the specified outlookCategory object.
+          */ get: (params?: IEndpoints["GET
+          /me/outlook/masterCategories/{outlookCategory-id}"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["GET
+          /me/outlook/masterCategories/{outlookCategory-id}"]["response"]&gt;;
+          /** * `PATCH /me/outlook/masterCategories/{outlookCategory-id}` * *
+          Update the writable property, color, of the specified outlookCategory
+          object. You can&#x27;t modify the displayName property once you have
+          created the category. */ update: (body: IEndpoints["PATCH
           /me/outlook/masterCategories/{outlookCategory-id}"]["body"], params?:
           IEndpoints["PATCH
           /me/outlook/masterCategories/{outlookCategory-id}"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["PATCH
-          /me/outlook/masterCategories/{outlookCategory-id}"]["response"]&gt; }
+          /me/outlook/masterCategories/{outlookCategory-id}"]["response"]&gt;;
+          /** * `DELETE /me/outlook/masterCategories/{outlookCategory-id}` * *
+          Delete the specified outlookCategory object. */ del: (params?:
+          IEndpoints["DELETE
+          /me/outlook/masterCategories/{outlookCategory-id}"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["DELETE
+          /me/outlook/masterCategories/{outlookCategory-id}"]["response"]&gt;; }

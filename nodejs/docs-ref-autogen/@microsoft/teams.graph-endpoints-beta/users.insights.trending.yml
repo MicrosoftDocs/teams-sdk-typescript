@@ -7,7 +7,19 @@ interfaces:
   - '@microsoft/teams.graph-endpoints-beta.users.insights.trending.IEndpoints'
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: create(Operation<"/users/{user-id}/insights/trending", "post">, any)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, lastModifiedDateTime?: string | null, resource?: {
+      @odata.type: string, id?: string } | Record<string, never> | null,
+      resourceReference?: Record<string, never> | { @odata.type: string, id?:
+      string | null, type?: string | null, webUrl?: string | null } | null,
+      resourceVisualization?: Record<string, never> | { @odata.type: string,
+      containerDisplayName?: string | null, containerType?: string | null,
+      containerWebUrl?: string | null, mediaType?: string | null,
+      previewImageUrl?: string | null, previewText?: string | null, title?:
+      string | null, type?: string | null } | null, weight?: string | number |
+      null } & { @odata.type: "#microsoft.graph.trending" }, { user-id: string
+      })
     uid: '@microsoft/teams.graph-endpoints-beta.users.insights.trending.create'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`POST /users/{user-id}/insights/trending`'
@@ -15,22 +27,69 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body: Operation<"/users/{user-id}/insights/trending",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /users/{user-id}/insights/trending"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, lastModifiedDateTime?: string |
+        null, resource?: { @odata.type: string, id?: string } | Record<string,
+        never> | null, resourceReference?: Record<string, never> | {
+        @odata.type: string, id?: string | null, type?: string | null, webUrl?:
+        string | null } | null, resourceVisualization?: Record<string, never> |
+        { @odata.type: string, containerDisplayName?: string | null,
+        containerType?: string | null, containerWebUrl?: string | null,
+        mediaType?: string | null, previewImageUrl?: string | null,
+        previewText?: string | null, title?: string | null, type?: string | null
+        } | null, weight?: string | number | null } & { @odata.type:
+        "#microsoft.graph.trending" }, params?: { user-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, lastModifiedDateTime?: string |
+        null, resource?: { @odata.type: string, id?: string } | Record<string,
+        never> | null, resourceReference?: Record<string, never> | {
+        @odata.type: string, id?: string | null, type?: string | null, webUrl?:
+        string | null } | null, resourceVisualization?: Record<string, never> |
+        { @odata.type: string, containerDisplayName?: string | null,
+        containerType?: string | null, containerWebUrl?: string | null,
+        mediaType?: string | null, previewImageUrl?: string | null,
+        previewText?: string | null, title?: string | null, type?: string | null
+        } | null, weight?: string | number | null } & { @odata.type:
+        "#microsoft.graph.trending" }>
       parameters:
         - id: body
-          type: Operation&lt;"/users/{user-id}/insights/trending", "post"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            lastModifiedDateTime?: string | null, resource?: { <xref
+            uid="@odata.type" />: string, id?: string } | Record&lt;string,
+            never&gt; | null, resourceReference?: Record&lt;string, never&gt; |
+            { <xref uid="@odata.type" />: string, id?: string | null, type?:
+            string | null, webUrl?: string | null } | null,
+            resourceVisualization?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, containerDisplayName?: string | null,
+            containerType?: string | null, containerWebUrl?: string | null,
+            mediaType?: string | null, previewImageUrl?: string | null,
+            previewText?: string | null, title?: string | null, type?: string |
+            null } | null, weight?: string | number | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.trending" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /users/{user-id}/insights/trending"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, lastModifiedDateTime?: string | null, resource?: { <xref
+          uid="@odata.type" />: string, id?: string } | Record&lt;string,
+          never&gt; | null, resourceReference?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, id?: string | null, type?: string
+          | null, webUrl?: string | null } | null, resourceVisualization?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          containerDisplayName?: string | null, containerType?: string | null,
+          containerWebUrl?: string | null, mediaType?: string | null,
+          previewImageUrl?: string | null, previewText?: string | null, title?:
+          string | null, type?: string | null } | null, weight?: string | number
+          | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.trending" />" }&gt;
+  - name: 'del({ If-Match?: string, trending-id: string, user-id: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.users.insights.trending.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`DELETE /users/{user-id}/insights/trending/{trending-id}`'
@@ -38,18 +97,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /users/{user-id}/insights/trending/{trending-id}"]["response"]>
+        function del(params?: { If-Match?: string, trending-id: string, user-id:
+        string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, trending-id: string, user-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /users/{user-id}/insights/trending/{trending-id}"]["response"]&gt;
-  - name: get$1(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get$1({ $expand?: string[], $select?: string[], trending-id: string,
+      user-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.users.insights.trending.get$1'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -60,18 +119,46 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get$1(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/insights/trending/{trending-id}"]["response"]>
+        function get$1(params?: { $expand?: string[], $select?: string[],
+        trending-id: string, user-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, lastModifiedDateTime?: string | null, resource?: { @odata.type:
+        string, id?: string } | Record<string, never> | null,
+        resourceReference?: Record<string, never> | { @odata.type: string, id?:
+        string | null, type?: string | null, webUrl?: string | null } | null,
+        resourceVisualization?: Record<string, never> | { @odata.type: string,
+        containerDisplayName?: string | null, containerType?: string | null,
+        containerWebUrl?: string | null, mediaType?: string | null,
+        previewImageUrl?: string | null, previewText?: string | null, title?:
+        string | null, type?: string | null } | null, weight?: string | number |
+        null } & { @odata.type: "#microsoft.graph.trending" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], trending-id: string,
+            user-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/insights/trending/{trending-id}"]["response"]&gt;
-  - name: get(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, lastModifiedDateTime?: string | null, resource?: { <xref
+          uid="@odata.type" />: string, id?: string } | Record&lt;string,
+          never&gt; | null, resourceReference?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, id?: string | null, type?: string
+          | null, webUrl?: string | null } | null, resourceVisualization?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          containerDisplayName?: string | null, containerType?: string | null,
+          containerWebUrl?: string | null, mediaType?: string | null,
+          previewImageUrl?: string | null, previewText?: string | null, title?:
+          string | null, type?: string | null } | null, weight?: string | number
+          | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.trending" />" }&gt;
+  - name: >-
+      get({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, user-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.users.insights.trending.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -82,20 +169,60 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/insights/trending"]["response"]>
+        function get(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, user-id: string }): EndpointRequest<{
+        @odata.count?: number | null, @odata.nextLink?: string | null } & {
+        value?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, lastModifiedDateTime?: string | null, resource?: {
+        @odata.type: string, id?: string } | Record<string, never> | null,
+        resourceReference?: Record<string, never> | { @odata.type: string, id?:
+        string | null, type?: string | null, webUrl?: string | null } | null,
+        resourceVisualization?: Record<string, never> | { @odata.type: string,
+        containerDisplayName?: string | null, containerType?: string | null,
+        containerWebUrl?: string | null, mediaType?: string | null,
+        previewImageUrl?: string | null, previewText?: string | null, title?:
+        string | null, type?: string | null } | null, weight?: string | number |
+        null } & { @odata.type: "#microsoft.graph.trending" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, user-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/insights/trending"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          lastModifiedDateTime?: string | null, resource?: { <xref
+          uid="@odata.type" />: string, id?: string } | Record&lt;string,
+          never&gt; | null, resourceReference?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, id?: string | null, type?: string
+          | null, webUrl?: string | null } | null, resourceVisualization?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          containerDisplayName?: string | null, containerType?: string | null,
+          containerWebUrl?: string | null, mediaType?: string | null,
+          previewImageUrl?: string | null, previewText?: string | null, title?:
+          string | null, type?: string | null } | null, weight?: string | number
+          | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.trending" />" })[] }&gt;
   - name: >-
-      update(Operation<"/users/{user-id}/insights/trending/{trending-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, lastModifiedDateTime?: string | null, resource?: {
+      @odata.type: string, id?: string } | Record<string, never> | null,
+      resourceReference?: Record<string, never> | { @odata.type: string, id?:
+      string | null, type?: string | null, webUrl?: string | null } | null,
+      resourceVisualization?: Record<string, never> | { @odata.type: string,
+      containerDisplayName?: string | null, containerType?: string | null,
+      containerWebUrl?: string | null, mediaType?: string | null,
+      previewImageUrl?: string | null, previewText?: string | null, title?:
+      string | null, type?: string | null } | null, weight?: string | number |
+      null } & { @odata.type: "#microsoft.graph.trending" }, { trending-id:
+      string, user-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.users.insights.trending.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /users/{user-id}/insights/trending/{trending-id}`'
@@ -103,24 +230,68 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/users/{user-id}/insights/trending/{trending-id}", "patch">,
-        params?: any): EndpointRequest<IEndpoints["PATCH
-        /users/{user-id}/insights/trending/{trending-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, lastModifiedDateTime?: string |
+        null, resource?: { @odata.type: string, id?: string } | Record<string,
+        never> | null, resourceReference?: Record<string, never> | {
+        @odata.type: string, id?: string | null, type?: string | null, webUrl?:
+        string | null } | null, resourceVisualization?: Record<string, never> |
+        { @odata.type: string, containerDisplayName?: string | null,
+        containerType?: string | null, containerWebUrl?: string | null,
+        mediaType?: string | null, previewImageUrl?: string | null,
+        previewText?: string | null, title?: string | null, type?: string | null
+        } | null, weight?: string | number | null } & { @odata.type:
+        "#microsoft.graph.trending" }, params?: { trending-id: string, user-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, lastModifiedDateTime?: string |
+        null, resource?: { @odata.type: string, id?: string } | Record<string,
+        never> | null, resourceReference?: Record<string, never> | {
+        @odata.type: string, id?: string | null, type?: string | null, webUrl?:
+        string | null } | null, resourceVisualization?: Record<string, never> |
+        { @odata.type: string, containerDisplayName?: string | null,
+        containerType?: string | null, containerWebUrl?: string | null,
+        mediaType?: string | null, previewImageUrl?: string | null,
+        previewText?: string | null, title?: string | null, type?: string | null
+        } | null, weight?: string | number | null } & { @odata.type:
+        "#microsoft.graph.trending" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/users/{user-id}/insights/trending/{trending-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            lastModifiedDateTime?: string | null, resource?: { <xref
+            uid="@odata.type" />: string, id?: string } | Record&lt;string,
+            never&gt; | null, resourceReference?: Record&lt;string, never&gt; |
+            { <xref uid="@odata.type" />: string, id?: string | null, type?:
+            string | null, webUrl?: string | null } | null,
+            resourceVisualization?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, containerDisplayName?: string | null,
+            containerType?: string | null, containerWebUrl?: string | null,
+            mediaType?: string | null, previewImageUrl?: string | null,
+            previewText?: string | null, title?: string | null, type?: string |
+            null } | null, weight?: string | number | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.trending" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ trending-id: string, user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /users/{user-id}/insights/trending/{trending-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, lastModifiedDateTime?: string | null, resource?: { <xref
+          uid="@odata.type" />: string, id?: string } | Record&lt;string,
+          never&gt; | null, resourceReference?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, id?: string | null, type?: string
+          | null, webUrl?: string | null } | null, resourceVisualization?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          containerDisplayName?: string | null, containerType?: string | null,
+          containerWebUrl?: string | null, mediaType?: string | null,
+          previewImageUrl?: string | null, previewText?: string | null, title?:
+          string | null, type?: string | null } | null, weight?: string | number
+          | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.trending" />" }&gt;
 variables:
   - name: resource
     uid: '@microsoft/teams.graph-endpoints-beta.users.insights.trending.resource'

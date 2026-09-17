@@ -84,12 +84,29 @@ properties:
     summary: the default connection name to use for the app
     fullName: connectionName
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: Register and retain the required `OAuthFlow` explicitly.
     syntax:
       content: 'connectionName: string'
       return:
         description: ''
         type: string
+  - name: files
+    uid: '@microsoft/teams.apps.ActivityContext.files'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      the uploaded files on the current inbound activity, i.e. `contentType:
+      file.download.info` subset of `activity.attachments`, mapped to
+      `IncomingFile`. See
+      [IFilesAccessor](xref:@microsoft/teams.apps.IFilesAccessor).
+    fullName: files
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'files: IFilesAccessor'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.IFilesAccessor" />
   - name: isSignedIn
     uid: '@microsoft/teams.apps.ActivityContext.isSignedIn'
     package: '@microsoft/teams.apps'
@@ -99,7 +116,8 @@ properties:
       via `api.user.*`
     fullName: isSignedIn
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: Use `app.getOAuthFlow(connectionName).isSignedIn(ctx)`.
     syntax:
       content: 'isSignedIn?: boolean'
       return:
@@ -120,20 +138,20 @@ properties:
   - name: next
     uid: '@microsoft/teams.apps.ActivityContext.next'
     package: '@microsoft/teams.apps'
-    summary: ''
+    summary: call the next event/middleware handler
     fullName: next
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
         next: (context?: IBaseActivityContext<Activity, Record<string, any>>) =>
-        void | InvokeResponse<any> | Promise<void | InvokeResponse<any>>
+        void | InvokeResponse | Promise<void | InvokeResponse>
       return:
         description: ''
         type: >-
           (context?: IBaseActivityContext&lt;Activity, Record&lt;string,
-          any&gt;&gt;) =&gt; void | InvokeResponse&lt;any&gt; | Promise&lt;void
-          | InvokeResponse&lt;any&gt;&gt;
+          any&gt;&gt;) =&gt; void | InvokeResponse | Promise&lt;void |
+          InvokeResponse&gt;
   - name: ref
     uid: '@microsoft/teams.apps.ActivityContext.ref'
     package: '@microsoft/teams.apps'
@@ -146,18 +164,39 @@ properties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.api.ConversationReference" />
-  - name: storage
-    uid: '@microsoft/teams.apps.ActivityContext.storage'
+  - name: state
+    uid: '@microsoft/teams.apps.ActivityContext.state'
     package: '@microsoft/teams.apps'
-    summary: app storage instance
-    fullName: storage
+    summary: >-
+      Conversation and user state loaded for this activity turn.
+
+
+      This is undefined when state is disabled or the activity has no
+      conversation ID.
+
+      Do not retain the container after the handler completes; its scopes are
+      sealed.
+    fullName: state
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'storage: IStorage<any, any>'
+      content: 'state?: TurnStateContainer'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.common.IStorage" />&lt;any, any&gt;
+        type: <xref uid="@microsoft/teams.apps.TurnStateContainer" />
+  - name: storage
+    uid: '@microsoft/teams.apps.ActivityContext.storage'
+    package: '@microsoft/teams.apps'
+    summary: ''
+    fullName: storage
+    remarks: ''
+    isDeprecated: true
+    customDeprecatedMessage: Use `state` for conversation or user state.
+    syntax:
+      content: 'storage: IStorage'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.common.IStorage" />
   - name: stream
     uid: '@microsoft/teams.apps.ActivityContext.stream'
     package: '@microsoft/teams.apps'
@@ -176,13 +215,35 @@ properties:
     summary: the user graph client
     fullName: userGraph
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: >-
+      Use a registered OAuth flow to acquire the token needed by the
+
+      Microsoft Graph operation. This property remains available for
+      compatibility.
     syntax:
       content: 'userGraph: Client'
       return:
         description: ''
         type: <xref uid="@microsoft/teams.graph.Client" />
 methods:
+  - name: getConnectionStatus()
+    uid: '@microsoft/teams.apps.ActivityContext.getConnectionStatus'
+    package: '@microsoft/teams.apps'
+    summary: |-
+      Gets token status for every registered OAuth connection.
+
+      Connections reported as disconnected after silent SSO are verified with a
+      direct token lookup. A connected flow omitted by the status endpoint is
+      returned with an empty `serviceProviderDisplayName` because that value is
+      unavailable from the token response.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getConnectionStatus(): Promise<TokenStatus[]>'
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.api.TokenStatus" />[]&gt;
   - name: quote(string, ActivityLike)
     uid: '@microsoft/teams.apps.ActivityContext.quote_1'
     package: '@microsoft/teams.apps'
@@ -359,35 +420,41 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;
-  - name: signin(Partial<SignInOptions>)
+  - name: signin(OAuthSignInOptions)
     uid: '@microsoft/teams.apps.ActivityContext.signin'
     package: '@microsoft/teams.apps'
     summary: trigger user signin flow for the activity sender
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: |-
+      Register a connection with `app.addOAuthFlow(...)` and call
+      `flow.signIn(ctx, options)` instead.
     syntax:
       content: >-
-        function signin(options?: Partial<SignInOptions>): Promise<undefined |
-        string>
+        function signin(options?: OAuthSignInOptions): Promise<string |
+        undefined>
       parameters:
         - id: options
-          type: Partial&lt;SignInOptions&gt;
+          type: <xref uid="@microsoft/teams.apps.OAuthSignInOptions" />
           description: options for the signin flow
       return:
         description: ''
-        type: Promise&lt;undefined | string&gt;
+        type: Promise&lt;string | undefined&gt;
   - name: signout(string)
     uid: '@microsoft/teams.apps.ActivityContext.signout'
     package: '@microsoft/teams.apps'
     summary: sign the activity sender out
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: |-
+      Register a connection with `app.addOAuthFlow(...)` and call
+      `flow.signOut(ctx)` instead.
     syntax:
       content: 'function signout(connectionName?: string): Promise<void>'
       parameters:
         - id: connectionName
           type: string
-          description: auth connection name, defaults to `graph`
+          description: ''
       return:
         description: ''
         type: Promise&lt;void&gt;
@@ -398,11 +465,7 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function toInterface(): IBaseActivityContext<Activity, Record<string,
-        any>>
+      content: 'function toInterface(): IBaseActivityContext'
       return:
         description: ''
-        type: >-
-          <xref uid="@microsoft/teams.apps.IBaseActivityContext" />&lt;<xref
-          uid="@microsoft/teams.api.Activity" />, Record&lt;string, any&gt;&gt;
+        type: <xref uid="@microsoft/teams.apps.IBaseActivityContext" />

@@ -1,0 +1,174 @@
+### YamlMime:TSType
+name: OAuthFlow
+uid: '@microsoft/teams.apps.OAuthFlow'
+package: '@microsoft/teams.apps'
+summary: |-
+  High-level OAuth lifecycle for one Bot Framework OAuth connection.
+
+  Flows are registered through `AppOptions.oauthFlows` or
+  `app.addOAuthFlow(...)` so inbound sign-in invokes can be dispatched to the
+  correct connection. Apps without registered flows retain their legacy
+  default connection as the same flow type for backward compatibility.
+fullName: OAuthFlow<TPlugin>
+remarks: ''
+isDeprecated: false
+type: class
+constructors:
+  - name: OAuthFlow<TPlugin>(string, OAuthSignInOptions)
+    uid: '@microsoft/teams.apps.OAuthFlow.constructor'
+    package: '@microsoft/teams.apps'
+    summary: |-
+      Creates an OAuth flow for a connection.
+
+      Applications should use `AppOptions.oauthFlows` or
+      `app.addOAuthFlow(...)` so the flow is registered for inbound invokes.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'new OAuthFlow(connectionName: string, options?: OAuthSignInOptions)'
+      parameters:
+        - id: connectionName
+          type: string
+          description: OAuth connection name configured on the bot.
+        - id: options
+          type: <xref uid="@microsoft/teams.apps.OAuthSignInOptions" />
+          description: Optional default card options.
+properties:
+  - name: connectionName
+    uid: '@microsoft/teams.apps.OAuthFlow.connectionName'
+    package: '@microsoft/teams.apps'
+    summary: ''
+    fullName: connectionName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'connectionName: string'
+      return:
+        description: ''
+        type: string
+methods:
+  - name: getToken(IBaseActivityContext)
+    uid: '@microsoft/teams.apps.OAuthFlow.getToken'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Silently gets the current user's token for this connection.
+
+
+      Returns undefined when the token service returns no token or reports
+      `404`.
+
+      Other transport and service failures, including `400` and `412`,
+      propagate.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getToken(context: IBaseActivityContext): Promise<string |
+        undefined>
+      parameters:
+        - id: context
+          type: <xref uid="@microsoft/teams.apps.IBaseActivityContext" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;string | undefined&gt;
+  - name: isSignedIn(IBaseActivityContext)
+    uid: '@microsoft/teams.apps.OAuthFlow.isSignedIn'
+    package: '@microsoft/teams.apps'
+    summary: Returns whether a token is currently available for this connection.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isSignedIn(context: IBaseActivityContext): Promise<boolean>'
+      parameters:
+        - id: context
+          type: <xref uid="@microsoft/teams.apps.IBaseActivityContext" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;boolean&gt;
+  - name: onSignInComplete(OAuthSignInCompleteHandler<TPlugin>)
+    uid: '@microsoft/teams.apps.OAuthFlow.onSignInComplete'
+    package: '@microsoft/teams.apps'
+    summary: |-
+      Registers the callback invoked after interactive sign-in completes.
+
+      Calling this method again replaces the previous callback.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function onSignInComplete(handler: OAuthSignInCompleteHandler<TPlugin>):
+        this
+      parameters:
+        - id: handler
+          type: >-
+            <xref uid="@microsoft/teams.apps.OAuthSignInCompleteHandler"
+            />&lt;TPlugin&gt;
+          description: ''
+      return:
+        description: ''
+        type: this
+  - name: onSignInFailure(OAuthSignInFailureHandler<TPlugin>)
+    uid: '@microsoft/teams.apps.OAuthFlow.onSignInFailure'
+    package: '@microsoft/teams.apps'
+    summary: |-
+      Registers the callback invoked when interactive sign-in fails.
+
+      Calling this method again replaces the previous callback.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function onSignInFailure(handler: OAuthSignInFailureHandler<TPlugin>):
+        this
+      parameters:
+        - id: handler
+          type: >-
+            <xref uid="@microsoft/teams.apps.OAuthSignInFailureHandler"
+            />&lt;TPlugin&gt;
+          description: ''
+      return:
+        description: ''
+        type: this
+  - name: signIn(IBaseActivityContext, OAuthSignInOptions)
+    uid: '@microsoft/teams.apps.OAuthFlow.signIn'
+    package: '@microsoft/teams.apps'
+    summary: |-
+      Gets a cached token or sends an OAuth card to start interactive sign-in.
+
+      Returns the cached token string when already signed in. Returns undefined
+      after sending a card; completion is then delivered to the registered
+      callback and the existing app `signin` event. Cached-token lookup errors
+      other than `404` propagate without sending a card.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function signIn(context: IBaseActivityContext, options?:
+        OAuthSignInOptions): Promise<string | undefined>
+      parameters:
+        - id: context
+          type: <xref uid="@microsoft/teams.apps.IBaseActivityContext" />
+          description: ''
+        - id: options
+          type: <xref uid="@microsoft/teams.apps.OAuthSignInOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;string | undefined&gt;
+  - name: signOut(IBaseActivityContext)
+    uid: '@microsoft/teams.apps.OAuthFlow.signOut'
+    package: '@microsoft/teams.apps'
+    summary: Revokes the current user's token for this connection.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function signOut(context: IBaseActivityContext): Promise<void>'
+      parameters:
+        - id: context
+          type: <xref uid="@microsoft/teams.apps.IBaseActivityContext" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;

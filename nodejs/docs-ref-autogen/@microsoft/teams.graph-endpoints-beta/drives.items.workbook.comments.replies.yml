@@ -9,8 +9,48 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
   - name: >-
-      create(Operation<"/drives/{drive-id}/items/{driveItem-id}/workbook/comments/{workbookComment-id}/replies",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, content?: string | null, contentType?: string,
+      mentions?: { @odata.type: string, email?: string | null, id?: number,
+      name?: string | null }[], richContent?: string | null, task?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, assignees?: { @odata.type: string,
+      displayName?: string | null, email?: string | null, id?: string | null
+      }[], changes?: (Omit<{ @odata.type: string, id?: function },
+      "@odata.type"> & { @odata.type: string, assignee?: Record<..., ...> | {
+      @odata.type: ..., displayName?: ..., email?: ..., id?: ... } | null,
+      changedBy?: { @odata.type: ..., displayName?: ..., email?: ..., id?: ...
+      }, commentId?: string | null, createdDateTime?: string | null,
+      dueDateTime?: string | null, percentComplete?: number | null, priority?:
+      number | null, startDateTime?: string | null, title?: string | null,
+      type?: string, undoChangeId?: string | null } & { @odata.type:
+      "#microsoft.graph.workbookDocumentTaskChange" })[], comment?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, cellAddress?: string | null,
+      content?: string | null, contentType?: string, mentions?: { @odata.type:
+      ..., email?: ..., id?: ..., name?: ... }[], replies?: Omit<{ id?: string |
+      undefined; '@odata.type': string; }, "@odata.type"> & { content?: string |
+      null | undefined; contentType?: string | undefined; mentions?: { email?:
+      string | null | undefined; id?: number | undefined; name?: string | ... 1
+      more ... | undefined; '@odata.type': string; }[] | undefined;
+      richContent?...[], richContent?: string | null, task?: Record<string,
+      never> | (Omit<{ id?: string | undefined; '@odata.type': string; },
+      "@odata.type"> & { assignees?: { displayName?: string | null | undefined;
+      email?: string | ... 1 more ... | undefined; id?: string | ... 1 more ...
+      | undefined; '@odata.type': string; }[] | undefined; ... 10 more ...;
+      '@odata.type': s... } & { @odata.type: "#microsoft.graph.workbookComment"
+      }) | null, completedBy?: Record<string, never> | { @odata.type: string,
+      displayName?: string | null, email?: string | null, id?: string | null } |
+      null, completedDateTime?: string | null, createdBy?: Record<string, never>
+      | { @odata.type: string, displayName?: string | null, email?: string |
+      null, id?: string | null } | null, createdDateTime?: string | null,
+      percentComplete?: number | null, priority?: number | null,
+      startAndDueDateTime?: Record<string, never> | { @odata.type: string,
+      dueDateTime?: string | null, startDateTime?: string | null } | null,
+      title?: string | null } & { @odata.type:
+      "#microsoft.graph.workbookDocumentTask" }) | null } & { @odata.type:
+      "#microsoft.graph.workbookCommentReply" }, { drive-id: string,
+      driveItem-id: string, workbookComment-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.drives.items.workbook.comments.replies.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -21,25 +61,195 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/drives/{drive-id}/items/{driveItem-id}/workbook/comments/{workbookComment-id}/replies",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /drives/{drive-id}/items/{driveItem-id}/workbook/comments/{workbookComment-id}/replies"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, content?: string | null,
+        contentType?: string, mentions?: { @odata.type: string, email?: string |
+        null, id?: number, name?: string | null }[], richContent?: string |
+        null, task?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, assignees?: {
+        @odata.type: string, displayName?: string | null, email?: string | null,
+        id?: string | null }[], changes?: (Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & { @odata.type: string, assignee?:
+        Record<..., ...> | { @odata.type: ..., displayName?: ..., email?: ...,
+        id?: ... } | null, changedBy?: { @odata.type: ..., displayName?: ...,
+        email?: ..., id?: ... }, commentId?: string | null, createdDateTime?:
+        string | null, dueDateTime?: string | null, percentComplete?: number |
+        null, priority?: number | null, startDateTime?: string | null, title?:
+        string | null, type?: string, undoChangeId?: string | null } & {
+        @odata.type: "#microsoft.graph.workbookDocumentTaskChange" })[],
+        comment?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, cellAddress?: string |
+        null, content?: string | null, contentType?: string, mentions?: {
+        @odata.type: ..., email?: ..., id?: ..., name?: ... }[], replies?:
+        Omit<{ id?: string | undefined; '@odata.type': string; }, "@odata.type">
+        & { content?: string | null | undefined; contentType?: string |
+        undefined; mentions?: { email?: string | null | undefined; id?: number |
+        undefined; name?: string | ... 1 more ... | undefined; '@odata.type':
+        string; }[] | undefined; richContent?...[], richContent?: string | null,
+        task?: Record<string, never> | (Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { assignees?: { displayName?:
+        string | null | undefined; email?: string | ... 1 more ... | undefined;
+        id?: string | ... 1 more ... | undefined; '@odata.type': string; }[] |
+        undefined; ... 10 more ...; '@odata.type': s... } & { @odata.type:
+        "#microsoft.graph.workbookComment" }) | null, completedBy?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, email?: string | null, id?: string | null } | null,
+        completedDateTime?: string | null, createdBy?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, email?: string | null,
+        id?: string | null } | null, createdDateTime?: string | null,
+        percentComplete?: number | null, priority?: number | null,
+        startAndDueDateTime?: Record<string, never> | { @odata.type: string,
+        dueDateTime?: string | null, startDateTime?: string | null } | null,
+        title?: string | null } & { @odata.type:
+        "#microsoft.graph.workbookDocumentTask" }) | null } & { @odata.type:
+        "#microsoft.graph.workbookCommentReply" }, params?: { drive-id: string,
+        driveItem-id: string, workbookComment-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, content?: string | null,
+        contentType?: string, mentions?: { @odata.type: string, email?: string |
+        null, id?: number, name?: string | null }[], richContent?: string |
+        null, task?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, assignees?: {
+        @odata.type: string, displayName?: string | null, email?: string | null,
+        id?: string | null }[], changes?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, assignee?: function, changedBy?:
+        function, commentId?: function, createdDateTime?: function,
+        dueDateTime?: function, percentComplete?: function, priority?: function,
+        startDateTime?: function, title?: function, type?: function,
+        undoChangeId?: function } & { @odata.type:
+        "#microsoft.graph.workbookDocumentTaskChange" })[], comment?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, cellAddress?: string | null,
+        content?: string | null, contentType?: string, mentions?: ...[],
+        replies?: ...[], richContent?: string | null, task?: Record<string,
+        never> | (Omit<{ id?: string | undefined; '@odata.type': string; },
+        "@odata.type"> & { assignees?: { displayName?: string | null |
+        undefined; email?: string | ... 1 more ... | undefined; id?: string |
+        ... 1 more ... | undefined; '@odata.type': string; }[] | undefined; ...
+        10 more ...; '@odata.type': s... } & { @odata.type:
+        "#microsoft.graph.workbookComment" }) | null, completedBy?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, email?: string | null, id?: string | null } | null,
+        completedDateTime?: string | null, createdBy?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, email?: string | null,
+        id?: string | null } | null, createdDateTime?: string | null,
+        percentComplete?: number | null, priority?: number | null,
+        startAndDueDateTime?: Record<string, never> | { @odata.type: string,
+        dueDateTime?: string | null, startDateTime?: string | null } | null,
+        title?: string | null } & { @odata.type:
+        "#microsoft.graph.workbookDocumentTask" }) | null } & { @odata.type:
+        "#microsoft.graph.workbookCommentReply" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/drives/{drive-id}/items/{driveItem-id}/workbook/comments/{workbookComment-id}/replies",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            content?: string | null, contentType?: string, mentions?: { <xref
+            uid="@odata.type" />: string, email?: string | null, id?: number,
+            name?: string | null }[], richContent?: string | null, task?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, assignees?: { <xref uid="@odata.type"
+            />: string, displayName?: string | null, email?: string | null, id?:
+            string | null }[], changes?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, assignee?: Record&lt;..., ...&gt; | {
+            <xref uid="@odata.type" />: ..., displayName?: ..., email?: ...,
+            id?: ... } | null, changedBy?: { <xref uid="@odata.type" />: ...,
+            displayName?: ..., email?: ..., id?: ... }, commentId?: string |
+            null, createdDateTime?: string | null, dueDateTime?: string | null,
+            percentComplete?: number | null, priority?: number | null,
+            startDateTime?: string | null, title?: string | null, type?: string,
+            undoChangeId?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.workbookDocumentTaskChange" />" })[],
+            comment?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            cellAddress?: string | null, content?: string | null, contentType?:
+            string, mentions?: { <xref uid="@odata.type" />: ..., email?: ...,
+            id?: ..., name?: ... }[], replies?: Omit&lt;{ id?: string |
+            undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { content?: string | null | undefined;
+            contentType?: string | undefined; mentions?: { email?: string | null
+            | undefined; id?: number | undefined; name?: string | ... 1 more ...
+            | undefined; '<xref uid="@odata.type" />': string; }[] | undefined;
+            richContent?...[], richContent?: string | null, task?:
+            Record&lt;string, never&gt; | (Omit&lt;{ id?: string | undefined;
+            '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+            />"&gt; & { assignees?: { displayName?: string | null | undefined;
+            email?: string | ... 1 more ... | undefined; id?: string | ... 1
+            more ... | undefined; '<xref uid="@odata.type" />': string; }[] |
+            undefined; ... 10 more ...; '<xref uid="@odata.type" />': <xref
+            uid="s..." /> } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.workbookComment" />" }) | null, completedBy?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, email?: string | null, id?: string |
+            null } | null, completedDateTime?: string | null, createdBy?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, email?: string | null, id?: string |
+            null } | null, createdDateTime?: string | null, percentComplete?:
+            number | null, priority?: number | null, startAndDueDateTime?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            dueDateTime?: string | null, startDateTime?: string | null } | null,
+            title?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.workbookDocumentTask" />" }) | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.workbookCommentReply" />" }
           description: ''
         - id: params
-          type: any
+          type: >-
+            { drive-id: string, driveItem-id: string, workbookComment-id: string
+            }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /drives/{drive-id}/items/{driveItem-id}/workbook/comments/{workbookComment-id}/replies"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, content?: string | null, contentType?: string, mentions?:
+          { <xref uid="@odata.type" />: string, email?: string | null, id?:
+          number, name?: string | null }[], richContent?: string | null, task?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, assignees?: { <xref uid="@odata.type"
+          />: string, displayName?: string | null, email?: string | null, id?:
+          string | null }[], changes?: (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, assignee?: function, changedBy?:
+          function, commentId?: function, createdDateTime?: function,
+          dueDateTime?: function, percentComplete?: function, priority?:
+          function, startDateTime?: function, title?: function, type?: function,
+          undoChangeId?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.workbookDocumentTaskChange" />" })[], comment?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, cellAddress?: string | null, content?:
+          string | null, contentType?: string, mentions?: ...[], replies?:
+          ...[], richContent?: string | null, task?: Record&lt;string, never&gt;
+          | (Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type" />':
+          string; }, "<xref uid="@odata.type" />"&gt; & { assignees?: {
+          displayName?: string | null | undefined; email?: string | ... 1 more
+          ... | undefined; id?: string | ... 1 more ... | undefined; '<xref
+          uid="@odata.type" />': string; }[] | undefined; ... 10 more ...;
+          '<xref uid="@odata.type" />': <xref uid="s..." /> } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.workbookComment"
+          />" }) | null, completedBy?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, email?:
+          string | null, id?: string | null } | null, completedDateTime?: string
+          | null, createdBy?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, email?:
+          string | null, id?: string | null } | null, createdDateTime?: string |
+          null, percentComplete?: number | null, priority?: number | null,
+          startAndDueDateTime?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, dueDateTime?: string | null,
+          startDateTime?: string | null } | null, title?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.workbookDocumentTask" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.workbookCommentReply" />" }&gt;
+  - name: >-
+      del({ drive-id: string, driveItem-id: string, If-Match?: string,
+      workbookComment-id: string, workbookCommentReply-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.drives.items.workbook.comments.replies.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -50,18 +260,22 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /drives/{drive-id}/items/{driveItem-id}/workbook/comments/{workbookComment-id}/replies/{workbookCommentReply-id}"]["response"]>
+        function del(params?: { drive-id: string, driveItem-id: string,
+        If-Match?: string, workbookComment-id: string, workbookCommentReply-id:
+        string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { drive-id: string, driveItem-id: string, If-Match?: string,
+            workbookComment-id: string, workbookCommentReply-id: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /drives/{drive-id}/items/{driveItem-id}/workbook/comments/{workbookComment-id}/replies/{workbookCommentReply-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], drive-id: string,
+      driveItem-id: string, workbookComment-id: string, workbookCommentReply-id:
+      string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.drives.items.workbook.comments.replies.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -75,18 +289,101 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /drives/{drive-id}/items/{driveItem-id}/workbook/comments/{workbookComment-id}/replies/{workbookCommentReply-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        drive-id: string, driveItem-id: string, workbookComment-id: string,
+        workbookCommentReply-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string, content?:
+        string | null, contentType?: string, mentions?: { @odata.type: string,
+        email?: string | null, id?: number, name?: string | null }[],
+        richContent?: string | null, task?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, assignees?: { @odata.type: string, displayName?: string | null,
+        email?: string | null, id?: string | null }[], changes?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        assignee?: function, changedBy?: function, commentId?: function,
+        createdDateTime?: function, dueDateTime?: function, percentComplete?:
+        function, priority?: function, startDateTime?: function, title?:
+        function, type?: function, undoChangeId?: function } & { @odata.type:
+        "#microsoft.graph.workbookDocumentTaskChange" })[], comment?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, cellAddress?: string | null,
+        content?: string | null, contentType?: string, mentions?: ...[],
+        replies?: ...[], richContent?: string | null, task?: Record<string,
+        never> | (Omit<{ id?: string | undefined; '@odata.type': string; },
+        "@odata.type"> & { assignees?: { displayName?: string | null |
+        undefined; email?: string | ... 1 more ... | undefined; id?: string |
+        ... 1 more ... | undefined; '@odata.type': string; }[] | undefined; ...
+        10 more ...; '@odata.type': s... } & { @odata.type:
+        "#microsoft.graph.workbookComment" }) | null, completedBy?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, email?: string | null, id?: string | null } | null,
+        completedDateTime?: string | null, createdBy?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, email?: string | null,
+        id?: string | null } | null, createdDateTime?: string | null,
+        percentComplete?: number | null, priority?: number | null,
+        startAndDueDateTime?: Record<string, never> | { @odata.type: string,
+        dueDateTime?: string | null, startDateTime?: string | null } | null,
+        title?: string | null } & { @odata.type:
+        "#microsoft.graph.workbookDocumentTask" }) | null } & { @odata.type:
+        "#microsoft.graph.workbookCommentReply" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], drive-id: string,
+            driveItem-id: string, workbookComment-id: string,
+            workbookCommentReply-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /drives/{drive-id}/items/{driveItem-id}/workbook/comments/{workbookComment-id}/replies/{workbookCommentReply-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, content?: string | null, contentType?: string, mentions?:
+          { <xref uid="@odata.type" />: string, email?: string | null, id?:
+          number, name?: string | null }[], richContent?: string | null, task?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, assignees?: { <xref uid="@odata.type"
+          />: string, displayName?: string | null, email?: string | null, id?:
+          string | null }[], changes?: (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, assignee?: function, changedBy?:
+          function, commentId?: function, createdDateTime?: function,
+          dueDateTime?: function, percentComplete?: function, priority?:
+          function, startDateTime?: function, title?: function, type?: function,
+          undoChangeId?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.workbookDocumentTaskChange" />" })[], comment?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, cellAddress?: string | null, content?:
+          string | null, contentType?: string, mentions?: ...[], replies?:
+          ...[], richContent?: string | null, task?: Record&lt;string, never&gt;
+          | (Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type" />':
+          string; }, "<xref uid="@odata.type" />"&gt; & { assignees?: {
+          displayName?: string | null | undefined; email?: string | ... 1 more
+          ... | undefined; id?: string | ... 1 more ... | undefined; '<xref
+          uid="@odata.type" />': string; }[] | undefined; ... 10 more ...;
+          '<xref uid="@odata.type" />': <xref uid="s..." /> } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.workbookComment"
+          />" }) | null, completedBy?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, email?:
+          string | null, id?: string | null } | null, completedDateTime?: string
+          | null, createdBy?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, email?:
+          string | null, id?: string | null } | null, createdDateTime?: string |
+          null, percentComplete?: number | null, priority?: number | null,
+          startAndDueDateTime?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, dueDateTime?: string | null,
+          startDateTime?: string | null } | null, title?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.workbookDocumentTask" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.workbookCommentReply" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, drive-id: string, driveItem-id: string, workbookComment-id: string
+      })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.drives.items.workbook.comments.replies.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -100,20 +397,94 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /drives/{drive-id}/items/{driveItem-id}/workbook/comments/{workbookComment-id}/replies"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, drive-id: string, driveItem-id: string,
+        workbookComment-id: string }): EndpointRequest<{ @odata.count?: number |
+        null, @odata.nextLink?: string | null } & { value?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string, content?:
+        string | null, contentType?: string, mentions?: { @odata.type: string,
+        email?: function, id?: function, name?: function }[], richContent?:
+        string | null, task?: Record<string, never> | (Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string, assignees?:
+        function, changes?: function, comment?: function, completedBy?:
+        function, completedDateTime?: function, createdBy?: function,
+        createdDateTime?: function, percentComplete?: function, priority?:
+        function, startAndDueDateTime?: function, title?: function } & {
+        @odata.type: "#microsoft.graph.workbookDocumentTask" }) | null } & {
+        @odata.type: "#microsoft.graph.workbookCommentReply" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, drive-id: string, driveItem-id: string,
+            workbookComment-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /drives/{drive-id}/items/{driveItem-id}/workbook/comments/{workbookComment-id}/replies"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          content?: string | null, contentType?: string, mentions?: { <xref
+          uid="@odata.type" />: string, email?: function, id?: function, name?:
+          function }[], richContent?: string | null, task?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, assignees?: function, changes?: function, comment?: function,
+          completedBy?: function, completedDateTime?: function, createdBy?:
+          function, createdDateTime?: function, percentComplete?: function,
+          priority?: function, startAndDueDateTime?: function, title?: function
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.workbookDocumentTask" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.workbookCommentReply" />" })[] }&gt;
   - name: >-
-      update(Operation<"/drives/{drive-id}/items/{driveItem-id}/workbook/comments/{workbookComment-id}/replies/{workbookCommentReply-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, content?: string | null, contentType?: string,
+      mentions?: { @odata.type: string, email?: string | null, id?: number,
+      name?: string | null }[], richContent?: string | null, task?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, assignees?: { @odata.type: string,
+      displayName?: string | null, email?: string | null, id?: string | null
+      }[], changes?: (Omit<{ @odata.type: string, id?: function },
+      "@odata.type"> & { @odata.type: string, assignee?: Record<..., ...> | {
+      @odata.type: ..., displayName?: ..., email?: ..., id?: ... } | null,
+      changedBy?: { @odata.type: ..., displayName?: ..., email?: ..., id?: ...
+      }, commentId?: string | null, createdDateTime?: string | null,
+      dueDateTime?: string | null, percentComplete?: number | null, priority?:
+      number | null, startDateTime?: string | null, title?: string | null,
+      type?: string, undoChangeId?: string | null } & { @odata.type:
+      "#microsoft.graph.workbookDocumentTaskChange" })[], comment?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, cellAddress?: string | null,
+      content?: string | null, contentType?: string, mentions?: { @odata.type:
+      ..., email?: ..., id?: ..., name?: ... }[], replies?: Omit<{ id?: string |
+      undefined; '@odata.type': string; }, "@odata.type"> & { content?: string |
+      null | undefined; contentType?: string | undefined; mentions?: { email?:
+      string | null | undefined; id?: number | undefined; name?: string | ... 1
+      more ... | undefined; '@odata.type': string; }[] | undefined;
+      richContent?...[], richContent?: string | null, task?: Record<string,
+      never> | (Omit<{ id?: string | undefined; '@odata.type': string; },
+      "@odata.type"> & { assignees?: { displayName?: string | null | undefined;
+      email?: string | ... 1 more ... | undefined; id?: string | ... 1 more ...
+      | undefined; '@odata.type': string; }[] | undefined; ... 10 more ...;
+      '@odata.type': s... } & { @odata.type: "#microsoft.graph.workbookComment"
+      }) | null, completedBy?: Record<string, never> | { @odata.type: string,
+      displayName?: string | null, email?: string | null, id?: string | null } |
+      null, completedDateTime?: string | null, createdBy?: Record<string, never>
+      | { @odata.type: string, displayName?: string | null, email?: string |
+      null, id?: string | null } | null, createdDateTime?: string | null,
+      percentComplete?: number | null, priority?: number | null,
+      startAndDueDateTime?: Record<string, never> | { @odata.type: string,
+      dueDateTime?: string | null, startDateTime?: string | null } | null,
+      title?: string | null } & { @odata.type:
+      "#microsoft.graph.workbookDocumentTask" }) | null } & { @odata.type:
+      "#microsoft.graph.workbookCommentReply" }, { drive-id: string,
+      driveItem-id: string, workbookComment-id: string, workbookCommentReply-id:
+      string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.drives.items.workbook.comments.replies.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -124,21 +495,189 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/drives/{drive-id}/items/{driveItem-id}/workbook/comments/{workbookComment-id}/replies/{workbookCommentReply-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /drives/{drive-id}/items/{driveItem-id}/workbook/comments/{workbookComment-id}/replies/{workbookCommentReply-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, content?: string | null,
+        contentType?: string, mentions?: { @odata.type: string, email?: string |
+        null, id?: number, name?: string | null }[], richContent?: string |
+        null, task?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, assignees?: {
+        @odata.type: string, displayName?: string | null, email?: string | null,
+        id?: string | null }[], changes?: (Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & { @odata.type: string, assignee?:
+        Record<..., ...> | { @odata.type: ..., displayName?: ..., email?: ...,
+        id?: ... } | null, changedBy?: { @odata.type: ..., displayName?: ...,
+        email?: ..., id?: ... }, commentId?: string | null, createdDateTime?:
+        string | null, dueDateTime?: string | null, percentComplete?: number |
+        null, priority?: number | null, startDateTime?: string | null, title?:
+        string | null, type?: string, undoChangeId?: string | null } & {
+        @odata.type: "#microsoft.graph.workbookDocumentTaskChange" })[],
+        comment?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, cellAddress?: string |
+        null, content?: string | null, contentType?: string, mentions?: {
+        @odata.type: ..., email?: ..., id?: ..., name?: ... }[], replies?:
+        Omit<{ id?: string | undefined; '@odata.type': string; }, "@odata.type">
+        & { content?: string | null | undefined; contentType?: string |
+        undefined; mentions?: { email?: string | null | undefined; id?: number |
+        undefined; name?: string | ... 1 more ... | undefined; '@odata.type':
+        string; }[] | undefined; richContent?...[], richContent?: string | null,
+        task?: Record<string, never> | (Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { assignees?: { displayName?:
+        string | null | undefined; email?: string | ... 1 more ... | undefined;
+        id?: string | ... 1 more ... | undefined; '@odata.type': string; }[] |
+        undefined; ... 10 more ...; '@odata.type': s... } & { @odata.type:
+        "#microsoft.graph.workbookComment" }) | null, completedBy?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, email?: string | null, id?: string | null } | null,
+        completedDateTime?: string | null, createdBy?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, email?: string | null,
+        id?: string | null } | null, createdDateTime?: string | null,
+        percentComplete?: number | null, priority?: number | null,
+        startAndDueDateTime?: Record<string, never> | { @odata.type: string,
+        dueDateTime?: string | null, startDateTime?: string | null } | null,
+        title?: string | null } & { @odata.type:
+        "#microsoft.graph.workbookDocumentTask" }) | null } & { @odata.type:
+        "#microsoft.graph.workbookCommentReply" }, params?: { drive-id: string,
+        driveItem-id: string, workbookComment-id: string,
+        workbookCommentReply-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string, content?:
+        string | null, contentType?: string, mentions?: { @odata.type: string,
+        email?: string | null, id?: number, name?: string | null }[],
+        richContent?: string | null, task?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, assignees?: { @odata.type: string, displayName?: string | null,
+        email?: string | null, id?: string | null }[], changes?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        assignee?: function, changedBy?: function, commentId?: function,
+        createdDateTime?: function, dueDateTime?: function, percentComplete?:
+        function, priority?: function, startDateTime?: function, title?:
+        function, type?: function, undoChangeId?: function } & { @odata.type:
+        "#microsoft.graph.workbookDocumentTaskChange" })[], comment?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, cellAddress?: string | null,
+        content?: string | null, contentType?: string, mentions?: ...[],
+        replies?: ...[], richContent?: string | null, task?: Record<string,
+        never> | (Omit<{ id?: string | undefined; '@odata.type': string; },
+        "@odata.type"> & { assignees?: { displayName?: string | null |
+        undefined; email?: string | ... 1 more ... | undefined; id?: string |
+        ... 1 more ... | undefined; '@odata.type': string; }[] | undefined; ...
+        10 more ...; '@odata.type': s... } & { @odata.type:
+        "#microsoft.graph.workbookComment" }) | null, completedBy?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, email?: string | null, id?: string | null } | null,
+        completedDateTime?: string | null, createdBy?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, email?: string | null,
+        id?: string | null } | null, createdDateTime?: string | null,
+        percentComplete?: number | null, priority?: number | null,
+        startAndDueDateTime?: Record<string, never> | { @odata.type: string,
+        dueDateTime?: string | null, startDateTime?: string | null } | null,
+        title?: string | null } & { @odata.type:
+        "#microsoft.graph.workbookDocumentTask" }) | null } & { @odata.type:
+        "#microsoft.graph.workbookCommentReply" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/drives/{drive-id}/items/{driveItem-id}/workbook/comments/{workbookComment-id}/replies/{workbookCommentReply-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            content?: string | null, contentType?: string, mentions?: { <xref
+            uid="@odata.type" />: string, email?: string | null, id?: number,
+            name?: string | null }[], richContent?: string | null, task?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, assignees?: { <xref uid="@odata.type"
+            />: string, displayName?: string | null, email?: string | null, id?:
+            string | null }[], changes?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, assignee?: Record&lt;..., ...&gt; | {
+            <xref uid="@odata.type" />: ..., displayName?: ..., email?: ...,
+            id?: ... } | null, changedBy?: { <xref uid="@odata.type" />: ...,
+            displayName?: ..., email?: ..., id?: ... }, commentId?: string |
+            null, createdDateTime?: string | null, dueDateTime?: string | null,
+            percentComplete?: number | null, priority?: number | null,
+            startDateTime?: string | null, title?: string | null, type?: string,
+            undoChangeId?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.workbookDocumentTaskChange" />" })[],
+            comment?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            cellAddress?: string | null, content?: string | null, contentType?:
+            string, mentions?: { <xref uid="@odata.type" />: ..., email?: ...,
+            id?: ..., name?: ... }[], replies?: Omit&lt;{ id?: string |
+            undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { content?: string | null | undefined;
+            contentType?: string | undefined; mentions?: { email?: string | null
+            | undefined; id?: number | undefined; name?: string | ... 1 more ...
+            | undefined; '<xref uid="@odata.type" />': string; }[] | undefined;
+            richContent?...[], richContent?: string | null, task?:
+            Record&lt;string, never&gt; | (Omit&lt;{ id?: string | undefined;
+            '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+            />"&gt; & { assignees?: { displayName?: string | null | undefined;
+            email?: string | ... 1 more ... | undefined; id?: string | ... 1
+            more ... | undefined; '<xref uid="@odata.type" />': string; }[] |
+            undefined; ... 10 more ...; '<xref uid="@odata.type" />': <xref
+            uid="s..." /> } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.workbookComment" />" }) | null, completedBy?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, email?: string | null, id?: string |
+            null } | null, completedDateTime?: string | null, createdBy?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, email?: string | null, id?: string |
+            null } | null, createdDateTime?: string | null, percentComplete?:
+            number | null, priority?: number | null, startAndDueDateTime?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            dueDateTime?: string | null, startDateTime?: string | null } | null,
+            title?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.workbookDocumentTask" />" }) | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.workbookCommentReply" />" }
           description: ''
         - id: params
-          type: any
+          type: >-
+            { drive-id: string, driveItem-id: string, workbookComment-id:
+            string, workbookCommentReply-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /drives/{drive-id}/items/{driveItem-id}/workbook/comments/{workbookComment-id}/replies/{workbookCommentReply-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, content?: string | null, contentType?: string, mentions?:
+          { <xref uid="@odata.type" />: string, email?: string | null, id?:
+          number, name?: string | null }[], richContent?: string | null, task?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, assignees?: { <xref uid="@odata.type"
+          />: string, displayName?: string | null, email?: string | null, id?:
+          string | null }[], changes?: (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, assignee?: function, changedBy?:
+          function, commentId?: function, createdDateTime?: function,
+          dueDateTime?: function, percentComplete?: function, priority?:
+          function, startDateTime?: function, title?: function, type?: function,
+          undoChangeId?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.workbookDocumentTaskChange" />" })[], comment?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, cellAddress?: string | null, content?:
+          string | null, contentType?: string, mentions?: ...[], replies?:
+          ...[], richContent?: string | null, task?: Record&lt;string, never&gt;
+          | (Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type" />':
+          string; }, "<xref uid="@odata.type" />"&gt; & { assignees?: {
+          displayName?: string | null | undefined; email?: string | ... 1 more
+          ... | undefined; id?: string | ... 1 more ... | undefined; '<xref
+          uid="@odata.type" />': string; }[] | undefined; ... 10 more ...;
+          '<xref uid="@odata.type" />': <xref uid="s..." /> } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.workbookComment"
+          />" }) | null, completedBy?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, email?:
+          string | null, id?: string | null } | null, completedDateTime?: string
+          | null, createdBy?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, email?:
+          string | null, id?: string | null } | null, createdDateTime?: string |
+          null, percentComplete?: number | null, priority?: number | null,
+          startAndDueDateTime?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, dueDateTime?: string | null,
+          startDateTime?: string | null } | null, title?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.workbookDocumentTask" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.workbookCommentReply" />" }&gt;

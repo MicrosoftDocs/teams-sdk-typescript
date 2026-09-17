@@ -8,7 +8,15 @@ interfaces:
     @microsoft/teams.graph-endpoints.roleManagement.directory.resourceNamespaces.IEndpoints
 package: '@microsoft/teams.graph-endpoints'
 functions:
-  - name: create(Operation<"/roleManagement/directory/resourceNamespaces", "post">)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, name?: string, resourceActions?: (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string,
+      actionVerb?: string | null, authenticationContextId?: string | null,
+      description?: string | null, isAuthenticationContextSettable?: boolean |
+      null, name?: string, resourceScopeId?: string | null } & { @odata.type:
+      "#microsoft.graph.unifiedRbacResourceAction" })[] } & { @odata.type:
+      "#microsoft.graph.unifiedRbacResourceNamespace" })
     uid: >-
       @microsoft/teams.graph-endpoints.roleManagement.directory.resourceNamespaces.create
     package: '@microsoft/teams.graph-endpoints'
@@ -17,22 +25,55 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/roleManagement/directory/resourceNamespaces", "post">):
-        EndpointRequest<IEndpoints["POST
-        /roleManagement/directory/resourceNamespaces"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, name?: string, resourceActions?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, actionVerb?: string | null,
+        authenticationContextId?: string | null, description?: string | null,
+        isAuthenticationContextSettable?: boolean | null, name?: string,
+        resourceScopeId?: string | null } & { @odata.type:
+        "#microsoft.graph.unifiedRbacResourceAction" })[] } & { @odata.type:
+        "#microsoft.graph.unifiedRbacResourceNamespace" }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, name?: string, resourceActions?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, actionVerb?: string | null,
+        authenticationContextId?: string | null, description?: string | null,
+        isAuthenticationContextSettable?: boolean | null, name?: string,
+        resourceScopeId?: string | null } & { @odata.type:
+        "#microsoft.graph.unifiedRbacResourceAction" })[] } & { @odata.type:
+        "#microsoft.graph.unifiedRbacResourceNamespace" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/roleManagement/directory/resourceNamespaces",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            name?: string, resourceActions?: (Omit&lt;{ <xref uid="@odata.type"
+            />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, actionVerb?: string | null,
+            authenticationContextId?: string | null, description?: string |
+            null, isAuthenticationContextSettable?: boolean | null, name?:
+            string, resourceScopeId?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRbacResourceAction" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRbacResourceNamespace" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /roleManagement/directory/resourceNamespaces"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, name?: string, resourceActions?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, actionVerb?: string |
+          null, authenticationContextId?: string | null, description?: string |
+          null, isAuthenticationContextSettable?: boolean | null, name?: string,
+          resourceScopeId?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.unifiedRbacResourceAction" />" })[] } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.unifiedRbacResourceNamespace" />" }&gt;
+  - name: 'del({ If-Match?: string, unifiedRbacResourceNamespace-id: string })'
     uid: >-
       @microsoft/teams.graph-endpoints.roleManagement.directory.resourceNamespaces.del
     package: '@microsoft/teams.graph-endpoints'
@@ -43,18 +84,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /roleManagement/directory/resourceNamespaces/{unifiedRbacResourceNamespace-id}"]["response"]>
+        function del(params?: { If-Match?: string,
+        unifiedRbacResourceNamespace-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, unifiedRbacResourceNamespace-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /roleManagement/directory/resourceNamespaces/{unifiedRbacResourceNamespace-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[],
+      unifiedRbacResourceNamespace-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.roleManagement.directory.resourceNamespaces.get
     package: '@microsoft/teams.graph-endpoints'
@@ -65,18 +106,40 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /roleManagement/directory/resourceNamespaces/{unifiedRbacResourceNamespace-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        unifiedRbacResourceNamespace-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, name?: string, resourceActions?: (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, actionVerb?:
+        string | null, authenticationContextId?: string | null, description?:
+        string | null, isAuthenticationContextSettable?: boolean | null, name?:
+        string, resourceScopeId?: string | null } & { @odata.type:
+        "#microsoft.graph.unifiedRbacResourceAction" })[] } & { @odata.type:
+        "#microsoft.graph.unifiedRbacResourceNamespace" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[],
+            unifiedRbacResourceNamespace-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /roleManagement/directory/resourceNamespaces/{unifiedRbacResourceNamespace-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, name?: string, resourceActions?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, actionVerb?: string |
+          null, authenticationContextId?: string | null, description?: string |
+          null, isAuthenticationContextSettable?: boolean | null, name?: string,
+          resourceScopeId?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.unifiedRbacResourceAction" />" })[] } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.unifiedRbacResourceNamespace" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: >-
       @microsoft/teams.graph-endpoints.roleManagement.directory.resourceNamespaces.list
     package: '@microsoft/teams.graph-endpoints'
@@ -85,20 +148,46 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /roleManagement/directory/resourceNamespaces"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, name?: string, resourceActions?: (Omit<..., ...> & {
+        @odata.type: ..., actionVerb?: ..., authenticationContextId?: ...,
+        description?: ..., isAuthenticationContextSettable?: ..., name?: ...,
+        resourceScopeId?: ... } & { @odata.type: ... })[] } & { @odata.type:
+        "#microsoft.graph.unifiedRbacResourceNamespace" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /roleManagement/directory/resourceNamespaces"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          name?: string, resourceActions?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., actionVerb?: ..., authenticationContextId?:
+          ..., description?: ..., isAuthenticationContextSettable?: ..., name?:
+          ..., resourceScopeId?: ... } & { <xref uid="@odata.type" />: ... })[]
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.unifiedRbacResourceNamespace" />" })[] }&gt;
   - name: >-
-      update(Operation<"/roleManagement/directory/resourceNamespaces/{unifiedRbacResourceNamespace-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, name?: string, resourceActions?: (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string,
+      actionVerb?: string | null, authenticationContextId?: string | null,
+      description?: string | null, isAuthenticationContextSettable?: boolean |
+      null, name?: string, resourceScopeId?: string | null } & { @odata.type:
+      "#microsoft.graph.unifiedRbacResourceAction" })[] } & { @odata.type:
+      "#microsoft.graph.unifiedRbacResourceNamespace" }, {
+      unifiedRbacResourceNamespace-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.roleManagement.directory.resourceNamespaces.update
     package: '@microsoft/teams.graph-endpoints'
@@ -109,24 +198,57 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/roleManagement/directory/resourceNamespaces/{unifiedRbacResourceNamespace-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /roleManagement/directory/resourceNamespaces/{unifiedRbacResourceNamespace-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, name?: string, resourceActions?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, actionVerb?: string | null,
+        authenticationContextId?: string | null, description?: string | null,
+        isAuthenticationContextSettable?: boolean | null, name?: string,
+        resourceScopeId?: string | null } & { @odata.type:
+        "#microsoft.graph.unifiedRbacResourceAction" })[] } & { @odata.type:
+        "#microsoft.graph.unifiedRbacResourceNamespace" }, params?: {
+        unifiedRbacResourceNamespace-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, name?: string, resourceActions?: (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, actionVerb?:
+        string | null, authenticationContextId?: string | null, description?:
+        string | null, isAuthenticationContextSettable?: boolean | null, name?:
+        string, resourceScopeId?: string | null } & { @odata.type:
+        "#microsoft.graph.unifiedRbacResourceAction" })[] } & { @odata.type:
+        "#microsoft.graph.unifiedRbacResourceNamespace" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/roleManagement/directory/resourceNamespaces/{unifiedRbacResourceNamespace-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            name?: string, resourceActions?: (Omit&lt;{ <xref uid="@odata.type"
+            />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, actionVerb?: string | null,
+            authenticationContextId?: string | null, description?: string |
+            null, isAuthenticationContextSettable?: boolean | null, name?:
+            string, resourceScopeId?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRbacResourceAction" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRbacResourceNamespace" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ unifiedRbacResourceNamespace-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /roleManagement/directory/resourceNamespaces/{unifiedRbacResourceNamespace-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, name?: string, resourceActions?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, actionVerb?: string |
+          null, authenticationContextId?: string | null, description?: string |
+          null, isAuthenticationContextSettable?: boolean | null, name?: string,
+          resourceScopeId?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.unifiedRbacResourceAction" />" })[] } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.unifiedRbacResourceNamespace" />" }&gt;
 variables:
   - name: resourceActions
     uid: >-

@@ -7,7 +7,9 @@ interfaces:
   - '@microsoft/teams.graph-endpoints-beta.teamwork.deletedChats.IEndpoints'
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: create(Operation<"/teamwork/deletedChats", "post">)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string } & { @odata.type: "#microsoft.graph.deletedChat" })
     uid: '@microsoft/teams.graph-endpoints-beta.teamwork.deletedChats.create'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`POST /teamwork/deletedChats`'
@@ -15,18 +17,27 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body: Operation<"/teamwork/deletedChats", "post">):
-        EndpointRequest<IEndpoints["POST /teamwork/deletedChats"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.deletedChat" }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string } & {
+        @odata.type: "#microsoft.graph.deletedChat" }>
       parameters:
         - id: body
-          type: Operation&lt;"/teamwork/deletedChats", "post"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deletedChat" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /teamwork/deletedChats"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deletedChat" />" }&gt;
+  - name: 'del({ deletedChat-id: string, If-Match?: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.teamwork.deletedChats.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`DELETE /teamwork/deletedChats/{deletedChat-id}`'
@@ -34,18 +45,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /teamwork/deletedChats/{deletedChat-id}"]["response"]>
+        function del(params?: { deletedChat-id: string, If-Match?: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ deletedChat-id: string, If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /teamwork/deletedChats/{deletedChat-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[], deletedChat-id: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.teamwork.deletedChats.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -56,18 +65,25 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /teamwork/deletedChats/{deletedChat-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        deletedChat-id: string }): EndpointRequest<Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.deletedChat" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[], deletedChat-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /teamwork/deletedChats/{deletedChat-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deletedChat" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: '@microsoft/teams.graph-endpoints-beta.teamwork.deletedChats.list'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -78,18 +94,32 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /teamwork/deletedChats"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string } & { @odata.type: "#microsoft.graph.deletedChat" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /teamwork/deletedChats"]["response"]&gt;
-  - name: update(Operation<"/teamwork/deletedChats/{deletedChat-id}", "patch">, any)
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.deletedChat"
+          />" })[] }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string } & { @odata.type: "#microsoft.graph.deletedChat" }, {
+      deletedChat-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.teamwork.deletedChats.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /teamwork/deletedChats/{deletedChat-id}`'
@@ -97,22 +127,30 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/teamwork/deletedChats/{deletedChat-id}", "patch">, params?:
-        any): EndpointRequest<IEndpoints["PATCH
-        /teamwork/deletedChats/{deletedChat-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.deletedChat" }, params?: { deletedChat-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.deletedChat" }>
       parameters:
         - id: body
-          type: Operation&lt;"/teamwork/deletedChats/{deletedChat-id}", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deletedChat" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ deletedChat-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /teamwork/deletedChats/{deletedChat-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deletedChat" />" }&gt;
 variables:
   - name: undoDelete
     uid: '@microsoft/teams.graph-endpoints-beta.teamwork.deletedChats.undoDelete'

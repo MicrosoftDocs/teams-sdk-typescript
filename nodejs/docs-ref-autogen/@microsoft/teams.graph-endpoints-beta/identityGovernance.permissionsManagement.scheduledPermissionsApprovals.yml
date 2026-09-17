@@ -10,8 +10,15 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
   - name: >-
-      create(Operation<"/identityGovernance/permissionsManagement/scheduledPermissionsApprovals",
-      "post">)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, steps?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, assignedToMe?: boolean | null,
+      displayName?: string | null, justification?: string | null, reviewedBy?:
+      Record<string, never> | { @odata.type: string, displayName?: string |
+      null, id?: string | null } | null, reviewedDateTime?: string | null,
+      reviewResult?: string | null, status?: string | null } & { @odata.type:
+      "#microsoft.graph.approvalStep" })[] } & { @odata.type:
+      "#microsoft.graph.approval" })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.identityGovernance.permissionsManagement.scheduledPermissionsApprovals.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -22,22 +29,57 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/identityGovernance/permissionsManagement/scheduledPermissionsApprovals",
-        "post">): EndpointRequest<IEndpoints["POST
-        /identityGovernance/permissionsManagement/scheduledPermissionsApprovals"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, steps?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        assignedToMe?: boolean | null, displayName?: string | null,
+        justification?: string | null, reviewedBy?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, reviewedDateTime?: string | null, reviewResult?: string | null,
+        status?: string | null } & { @odata.type:
+        "#microsoft.graph.approvalStep" })[] } & { @odata.type:
+        "#microsoft.graph.approval" }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string, steps?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, assignedToMe?: boolean | null, displayName?: string
+        | null, justification?: string | null, reviewedBy?: Record<string,
+        never> | { @odata.type: string, displayName?: string | null, id?: string
+        | null } | null, reviewedDateTime?: string | null, reviewResult?: string
+        | null, status?: string | null } & { @odata.type:
+        "#microsoft.graph.approvalStep" })[] } & { @odata.type:
+        "#microsoft.graph.approval" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/identityGovernance/permissionsManagement/scheduledPermissionsApprovals",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            steps?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, assignedToMe?: boolean | null, displayName?: string | null,
+            justification?: string | null, reviewedBy?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, displayName?:
+            string | null, id?: string | null } | null, reviewedDateTime?:
+            string | null, reviewResult?: string | null, status?: string | null
+            } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.approvalStep" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.approval" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /identityGovernance/permissionsManagement/scheduledPermissionsApprovals"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, steps?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, assignedToMe?: boolean | null,
+          displayName?: string | null, justification?: string | null,
+          reviewedBy?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } | null,
+          reviewedDateTime?: string | null, reviewResult?: string | null,
+          status?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalStep" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.approval" />" }&gt;
+  - name: 'del({ approval-id: string, If-Match?: string })'
     uid: >-
       @microsoft/teams.graph-endpoints-beta.identityGovernance.permissionsManagement.scheduledPermissionsApprovals.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -48,18 +90,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /identityGovernance/permissionsManagement/scheduledPermissionsApprovals/{approval-id}"]["response"]>
+        function del(params?: { approval-id: string, If-Match?: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ approval-id: string, If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /identityGovernance/permissionsManagement/scheduledPermissionsApprovals/{approval-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[], approval-id: string })'
     uid: >-
       @microsoft/teams.graph-endpoints-beta.identityGovernance.permissionsManagement.scheduledPermissionsApprovals.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -70,18 +110,40 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /identityGovernance/permissionsManagement/scheduledPermissionsApprovals/{approval-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        approval-id: string }): EndpointRequest<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, steps?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, assignedToMe?: boolean | null, displayName?: string | null,
+        justification?: string | null, reviewedBy?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, reviewedDateTime?: string | null, reviewResult?: string | null,
+        status?: string | null } & { @odata.type:
+        "#microsoft.graph.approvalStep" })[] } & { @odata.type:
+        "#microsoft.graph.approval" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[], approval-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /identityGovernance/permissionsManagement/scheduledPermissionsApprovals/{approval-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, steps?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, assignedToMe?: boolean | null,
+          displayName?: string | null, justification?: string | null,
+          reviewedBy?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } | null,
+          reviewedDateTime?: string | null, reviewResult?: string | null,
+          status?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalStep" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.approval" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.identityGovernance.permissionsManagement.scheduledPermissionsApprovals.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -92,20 +154,46 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /identityGovernance/permissionsManagement/scheduledPermissionsApprovals"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, steps?: (Omit<..., ...> & { @odata.type: ..., assignedToMe?:
+        ..., displayName?: ..., justification?: ..., reviewedBy?: ...,
+        reviewedDateTime?: ..., reviewResult?: ..., status?: ... } & {
+        @odata.type: ... })[] } & { @odata.type: "#microsoft.graph.approval"
+        })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /identityGovernance/permissionsManagement/scheduledPermissionsApprovals"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          steps?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          assignedToMe?: ..., displayName?: ..., justification?: ...,
+          reviewedBy?: ..., reviewedDateTime?: ..., reviewResult?: ..., status?:
+          ... } & { <xref uid="@odata.type" />: ... })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.approval" />" })[]
+          }&gt;
   - name: >-
-      update(Operation<"/identityGovernance/permissionsManagement/scheduledPermissionsApprovals/{approval-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, steps?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, assignedToMe?: boolean | null,
+      displayName?: string | null, justification?: string | null, reviewedBy?:
+      Record<string, never> | { @odata.type: string, displayName?: string |
+      null, id?: string | null } | null, reviewedDateTime?: string | null,
+      reviewResult?: string | null, status?: string | null } & { @odata.type:
+      "#microsoft.graph.approvalStep" })[] } & { @odata.type:
+      "#microsoft.graph.approval" }, { approval-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.identityGovernance.permissionsManagement.scheduledPermissionsApprovals.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -116,24 +204,60 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/identityGovernance/permissionsManagement/scheduledPermissionsApprovals/{approval-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /identityGovernance/permissionsManagement/scheduledPermissionsApprovals/{approval-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, steps?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        assignedToMe?: boolean | null, displayName?: string | null,
+        justification?: string | null, reviewedBy?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, reviewedDateTime?: string | null, reviewResult?: string | null,
+        status?: string | null } & { @odata.type:
+        "#microsoft.graph.approvalStep" })[] } & { @odata.type:
+        "#microsoft.graph.approval" }, params?: { approval-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, steps?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        assignedToMe?: boolean | null, displayName?: string | null,
+        justification?: string | null, reviewedBy?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, reviewedDateTime?: string | null, reviewResult?: string | null,
+        status?: string | null } & { @odata.type:
+        "#microsoft.graph.approvalStep" })[] } & { @odata.type:
+        "#microsoft.graph.approval" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/identityGovernance/permissionsManagement/scheduledPermissionsApprovals/{approval-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            steps?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, assignedToMe?: boolean | null, displayName?: string | null,
+            justification?: string | null, reviewedBy?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, displayName?:
+            string | null, id?: string | null } | null, reviewedDateTime?:
+            string | null, reviewResult?: string | null, status?: string | null
+            } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.approvalStep" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.approval" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ approval-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /identityGovernance/permissionsManagement/scheduledPermissionsApprovals/{approval-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, steps?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, assignedToMe?: boolean | null,
+          displayName?: string | null, justification?: string | null,
+          reviewedBy?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } | null,
+          reviewedDateTime?: string | null, reviewResult?: string | null,
+          status?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.approvalStep" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.approval" />" }&gt;
 variables:
   - name: steps
     uid: >-

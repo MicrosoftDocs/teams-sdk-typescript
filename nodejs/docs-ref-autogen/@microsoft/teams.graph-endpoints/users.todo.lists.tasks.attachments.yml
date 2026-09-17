@@ -9,8 +9,11 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints'
 functions:
   - name: >-
-      create(Operation<"/users/{user-id}/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}/attachments",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, contentType?: string | null, lastModifiedDateTime?:
+      string | null, name?: string | null, size?: number }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.attachmentBase" }, { todoTask-id: string,
+      todoTaskList-id: string, user-id: string })
     uid: '@microsoft/teams.graph-endpoints.users.todo.lists.tasks.attachments.create'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -20,25 +23,41 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/users/{user-id}/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}/attachments",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /users/{user-id}/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}/attachments"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, contentType?: string |
+        null, lastModifiedDateTime?: string | null, name?: string | null, size?:
+        number }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.attachmentBase" }, params?: { todoTask-id: string,
+        todoTaskList-id: string, user-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, contentType?: string | null, lastModifiedDateTime?: string |
+        null, name?: string | null, size?: number }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.attachmentBase" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/users/{user-id}/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}/attachments",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, contentType?: string | null, lastModifiedDateTime?: string |
+            null, name?: string | null, size?: number }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.attachmentBase" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ todoTask-id: string, todoTaskList-id: string, user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /users/{user-id}/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}/attachments"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, contentType?: string | null,
+          lastModifiedDateTime?: string | null, name?: string | null, size?:
+          number }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.attachmentBase" />" }&gt;
+  - name: >-
+      del({ attachmentBase-id: string, If-Match?: string, todoTask-id: string,
+      todoTaskList-id: string, user-id: string })
     uid: '@microsoft/teams.graph-endpoints.users.todo.lists.tasks.attachments.del'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -48,18 +67,21 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /users/{user-id}/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}/attachments/{attachmentBase-id}"]["response"]>
+        function del(params?: { attachmentBase-id: string, If-Match?: string,
+        todoTask-id: string, todoTaskList-id: string, user-id: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { attachmentBase-id: string, If-Match?: string, todoTask-id: string,
+            todoTaskList-id: string, user-id: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /users/{user-id}/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}/attachments/{attachmentBase-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], attachmentBase-id: string,
+      todoTask-id: string, todoTaskList-id: string, user-id: string })
     uid: '@microsoft/teams.graph-endpoints.users.todo.lists.tasks.attachments.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -72,18 +94,32 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}/attachments/{attachmentBase-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        attachmentBase-id: string, todoTask-id: string, todoTaskList-id: string,
+        user-id: string }): EndpointRequest<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, contentType?:
+        string | null, lastModifiedDateTime?: string | null, name?: string |
+        null, size?: number }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.attachmentBase" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], attachmentBase-id: string,
+            todoTask-id: string, todoTaskList-id: string, user-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}/attachments/{attachmentBase-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, contentType?: string | null,
+          lastModifiedDateTime?: string | null, name?: string | null, size?:
+          number }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.attachmentBase" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, todoTask-id: string, todoTaskList-id: string, user-id: string })
     uid: '@microsoft/teams.graph-endpoints.users.todo.lists.tasks.attachments.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -96,17 +132,34 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}/attachments"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, todoTask-id: string, todoTaskList-id:
+        string, user-id: string }): EndpointRequest<{ @odata.count?: number |
+        null, @odata.nextLink?: string | null } & { value?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        contentType?: string | null, lastModifiedDateTime?: string | null,
+        name?: string | null, size?: number }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.attachmentBase" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, todoTask-id: string, todoTaskList-id: string,
+            user-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/todo/lists/{todoTaskList-id}/tasks/{todoTask-id}/attachments"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, contentType?: string | null, lastModifiedDateTime?: string |
+          null, name?: string | null, size?: number }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.attachmentBase" />" })[] }&gt;
 variables:
   - name: createUploadSession
     uid: >-

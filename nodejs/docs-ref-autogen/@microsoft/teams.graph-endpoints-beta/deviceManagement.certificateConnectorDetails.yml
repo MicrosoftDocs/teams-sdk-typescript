@@ -9,7 +9,12 @@ interfaces:
     @microsoft/teams.graph-endpoints-beta.deviceManagement.certificateConnectorDetails.IEndpoints
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: create(Operation<"/deviceManagement/certificateConnectorDetails", "post">)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, connectorName?: string | null, connectorVersion?:
+      string | null, enrollmentDateTime?: string, lastCheckinDateTime?: string,
+      machineName?: string | null } & { @odata.type:
+      "#microsoft.graph.certificateConnectorDetails" })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.certificateConnectorDetails.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -18,22 +23,36 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/deviceManagement/certificateConnectorDetails", "post">):
-        EndpointRequest<IEndpoints["POST
-        /deviceManagement/certificateConnectorDetails"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, connectorName?: string | null,
+        connectorVersion?: string | null, enrollmentDateTime?: string,
+        lastCheckinDateTime?: string, machineName?: string | null } & {
+        @odata.type: "#microsoft.graph.certificateConnectorDetails" }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, connectorName?: string | null,
+        connectorVersion?: string | null, enrollmentDateTime?: string,
+        lastCheckinDateTime?: string, machineName?: string | null } & {
+        @odata.type: "#microsoft.graph.certificateConnectorDetails" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/certificateConnectorDetails",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            connectorName?: string | null, connectorVersion?: string | null,
+            enrollmentDateTime?: string, lastCheckinDateTime?: string,
+            machineName?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.certificateConnectorDetails" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /deviceManagement/certificateConnectorDetails"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, connectorName?: string | null, connectorVersion?: string |
+          null, enrollmentDateTime?: string, lastCheckinDateTime?: string,
+          machineName?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.certificateConnectorDetails" />" }&gt;
+  - name: 'del({ certificateConnectorDetails-id: string, If-Match?: string })'
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.certificateConnectorDetails.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -44,18 +63,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /deviceManagement/certificateConnectorDetails/{certificateConnectorDetails-id}"]["response"]>
+        function del(params?: { certificateConnectorDetails-id: string,
+        If-Match?: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ certificateConnectorDetails-id: string, If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /deviceManagement/certificateConnectorDetails/{certificateConnectorDetails-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[],
+      certificateConnectorDetails-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.certificateConnectorDetails.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -70,18 +89,32 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/certificateConnectorDetails/{certificateConnectorDetails-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        certificateConnectorDetails-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, connectorName?: string | null, connectorVersion?: string | null,
+        enrollmentDateTime?: string, lastCheckinDateTime?: string, machineName?:
+        string | null } & { @odata.type:
+        "#microsoft.graph.certificateConnectorDetails" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[],
+            certificateConnectorDetails-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/certificateConnectorDetails/{certificateConnectorDetails-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, connectorName?: string | null, connectorVersion?: string |
+          null, enrollmentDateTime?: string, lastCheckinDateTime?: string,
+          machineName?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.certificateConnectorDetails" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.certificateConnectorDetails.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -95,20 +128,40 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/certificateConnectorDetails"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, connectorName?: string | null, connectorVersion?: string | null,
+        enrollmentDateTime?: string, lastCheckinDateTime?: string, machineName?:
+        string | null } & { @odata.type:
+        "#microsoft.graph.certificateConnectorDetails" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/certificateConnectorDetails"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          connectorName?: string | null, connectorVersion?: string | null,
+          enrollmentDateTime?: string, lastCheckinDateTime?: string,
+          machineName?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.certificateConnectorDetails" />" })[] }&gt;
   - name: >-
-      update(Operation<"/deviceManagement/certificateConnectorDetails/{certificateConnectorDetails-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, connectorName?: string | null, connectorVersion?:
+      string | null, enrollmentDateTime?: string, lastCheckinDateTime?: string,
+      machineName?: string | null } & { @odata.type:
+      "#microsoft.graph.certificateConnectorDetails" }, {
+      certificateConnectorDetails-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.certificateConnectorDetails.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -119,24 +172,39 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/deviceManagement/certificateConnectorDetails/{certificateConnectorDetails-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /deviceManagement/certificateConnectorDetails/{certificateConnectorDetails-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, connectorName?: string | null,
+        connectorVersion?: string | null, enrollmentDateTime?: string,
+        lastCheckinDateTime?: string, machineName?: string | null } & {
+        @odata.type: "#microsoft.graph.certificateConnectorDetails" }, params?:
+        { certificateConnectorDetails-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, connectorName?: string | null, connectorVersion?: string | null,
+        enrollmentDateTime?: string, lastCheckinDateTime?: string, machineName?:
+        string | null } & { @odata.type:
+        "#microsoft.graph.certificateConnectorDetails" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/certificateConnectorDetails/{certificateConnectorDetails-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            connectorName?: string | null, connectorVersion?: string | null,
+            enrollmentDateTime?: string, lastCheckinDateTime?: string,
+            machineName?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.certificateConnectorDetails" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ certificateConnectorDetails-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /deviceManagement/certificateConnectorDetails/{certificateConnectorDetails-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, connectorName?: string | null, connectorVersion?: string |
+          null, enrollmentDateTime?: string, lastCheckinDateTime?: string,
+          machineName?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.certificateConnectorDetails" />" }&gt;
 variables:
   - name: getHealthMetrics
     uid: >-

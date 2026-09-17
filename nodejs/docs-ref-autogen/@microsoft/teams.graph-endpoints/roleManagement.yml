@@ -7,7 +7,7 @@ interfaces:
   - '@microsoft/teams.graph-endpoints.roleManagement.IEndpoints'
 package: '@microsoft/teams.graph-endpoints'
 functions:
-  - name: get(any)
+  - name: 'get({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints.roleManagement.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`GET /roleManagement`'
@@ -15,16 +15,629 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /roleManagement"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<{ @odata.type: string, directory?: Record<string, never>
+        | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, resourceNamespaces?: (Omit<{ @odata.type: string,
+        id?: function }, "@odata.type"> & { @odata.type: string, name?: string,
+        resourceActions?: ...[] } & { @odata.type:
+        "#microsoft.graph.unifiedRbacResourceNamespace" })[], roleAssignments?:
+        (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+        @odata.type: string, appScope?: Record<..., ...> | (... & ... & ...) |
+        null, appScopeId?: string | null, condition?: string | null,
+        directoryScope?: Record<..., ...> | (... & ... & ...) | null,
+        directoryScopeId?: string | null, principal?: Record<..., ...> | (... &
+        ... & ...) | null, principalId?: string | null, roleDefinition?:
+        Record<..., ...> | (... & ... & ...) | null, roleDefinitionId?: string |
+        null } & { @odata.type: "#microsoft.graph.unifiedRoleAssignment" })[],
+        roleAssignmentScheduleInstances?: (Omit<Omit<..., ...> & Omit<..., ...>
+        & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        activatedUsing?: Record<..., ...> | (... & ...) | null, assignmentType?:
+        string | null, endDateTime?: string | null, memberType?: string | null,
+        roleAssignmentOriginId?: string | null, roleAssignmentScheduleId?:
+        string | null, startDateTime?: string | null })[],
+        roleAssignmentScheduleRequests?: (Omit<Omit<..., ...> & Omit<..., ...> &
+        { @odata.type: ... }, "@odata.type"> & { @odata.type: string, action?:
+        Record<..., ...> | "unknownFutureValue" | "adminAssign" | "adminUpdate"
+        | "adminRemove" | "selfActivate" | "selfDeactivate" | "adminExtend" |
+        "adminRenew" | "selfExtend" | "selfRenew" | null, activatedUsing?:
+        Record<..., ...> | (... & ...) | null, appScope?: Record<..., ...> |
+        (... & ... & ...) | null, appScopeId?: string | null, directoryScope?:
+        Record<..., ...> | (... & ... & ...) | null, directoryScopeId?: string |
+        null, isValidationOnly?: boolean | null, justification?: string | null,
+        principal?: Record<..., ...> | (... & ... & ...) | null, principalId?:
+        string | null, roleDefinition?: Record<..., ...> | (... & ... & ...) |
+        null, roleDefinitionId?: string | null, scheduleInfo?: Record<..., ...>
+        | { @odata.type: ..., expiration?: ..., recurrence?: ...,
+        startDateTime?: ... } | null, targetSchedule?: Record<..., ...> | (... &
+        ...) | null, targetScheduleId?: string | null, ticketInfo?: Record<...,
+        ...> | { @odata.type: ..., ticketNumber?: ..., ticketSystem?: ... } |
+        null } & { @odata.type:
+        "#microsoft.graph.unifiedRoleAssignmentScheduleRequest" })[],
+        roleAssignmentSchedules?: (Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        activatedUsing?: Record<..., ...> | (... & ...) | null, assignmentType?:
+        string | null, memberType?: string | null, scheduleInfo?: Record<...,
+        ...> | { @odata.type: ..., expiration?: ..., recurrence?: ...,
+        startDateTime?: ... } | null })[], roleDefinitions?: (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, description?: string | null, displayName?: string | null,
+        inheritsPermissionsFrom?: (Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { description?: string | null
+        | undefined; displayName?: string | null | undefined; isBuiltIn?:
+        boolean | null | undefined; ... 6 more ...; '@odata.type': string; } & {
+        ...; })[] | undefined, isBuiltIn?: boolean | null, isEnabled?: boolean |
+        null, resourceScopes?: ...[], rolePermissions?: ...[], templateId?:
+        string | null, version?: string | null } & { @odata.type:
+        "#microsoft.graph.unifiedRoleDefinition" })[],
+        roleEligibilityScheduleInstances?: (Omit<Omit<..., ...> & Omit<..., ...>
+        & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        endDateTime?: string | null, memberType?: string | null,
+        roleEligibilityScheduleId?: string | null, startDateTime?: string | null
+        })[], roleEligibilityScheduleRequests?: (Omit<Omit<..., ...> & Omit<...,
+        ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        action?: Record<..., ...> | "unknownFutureValue" | "adminAssign" |
+        "adminUpdate" | "adminRemove" | "selfActivate" | "selfDeactivate" |
+        "adminExtend" | "adminRenew" | "selfExtend" | "selfRenew" | null,
+        appScope?: Record<..., ...> | (... & ... & ...) | null, appScopeId?:
+        string | null, directoryScope?: Record<..., ...> | (... & ... & ...) |
+        null, directoryScopeId?: string | null, isValidationOnly?: boolean |
+        null, justification?: string | null, principal?: Record<..., ...> | (...
+        & ... & ...) | null, principalId?: string | null, roleDefinition?:
+        Record<..., ...> | (... & ... & ...) | null, roleDefinitionId?: string |
+        null, scheduleInfo?: Record<..., ...> | { @odata.type: ..., expiration?:
+        ..., recurrence?: ..., startDateTime?: ... } | null, targetSchedule?:
+        Record<..., ...> | (... & ...) | null, targetScheduleId?: string | null,
+        ticketInfo?: Record<..., ...> | { @odata.type: ..., ticketNumber?: ...,
+        ticketSystem?: ... } | null } & { @odata.type:
+        "#microsoft.graph.unifiedRoleEligibilityScheduleRequest" })[],
+        roleEligibilitySchedules?: (Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & { @odata.type: string, memberType?:
+        string | null, scheduleInfo?: Record<..., ...> | { @odata.type: ...,
+        expiration?: ..., recurrence?: ..., startDateTime?: ... } | null })[] }
+        & { @odata.type: "#microsoft.graph.rbacApplication" }) | null,
+        entitlementManagement?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        resourceNamespaces?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, name?: string, resourceActions?:
+        ...[] } & { @odata.type: "#microsoft.graph.unifiedRbacResourceNamespace"
+        })[], roleAssignments?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, appScope?: Record<..., ...> |
+        (... & ... & ...) | null, appScopeId?: string | null, condition?: string
+        | null, directoryScope?: Record<..., ...> | (... & ... & ...) | null,
+        directoryScopeId?: string | null, principal?: Record<..., ...> | (... &
+        ... & ...) | null, principalId?: string | null, roleDefinition?:
+        Record<..., ...> | (... & ... & ...) | null, roleDefinitionId?: string |
+        null } & { @odata.type: "#microsoft.graph.unifiedRoleAssignment" })[],
+        roleAssignmentScheduleInstances?: (Omit<Omit<..., ...> & Omit<..., ...>
+        & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        activatedUsing?: Record<..., ...> | (... & ...) | null, assignmentType?:
+        string | null, endDateTime?: string | null, memberType?: string | null,
+        roleAssignmentOriginId?: string | null, roleAssignmentScheduleId?:
+        string | null, startDateTime?: string | null })[],
+        roleAssignmentScheduleRequests?: (Omit<Omit<..., ...> & Omit<..., ...> &
+        { @odata.type: ... }, "@odata.type"> & { @odata.type: string, action?:
+        Record<..., ...> | "unknownFutureValue" | "adminAssign" | "adminUpdate"
+        | "adminRemove" | "selfActivate" | "selfDeactivate" | "adminExtend" |
+        "adminRenew" | "selfExtend" | "selfRenew" | null, activatedUsing?:
+        Record<..., ...> | (... & ...) | null, appScope?: Record<..., ...> |
+        (... & ... & ...) | null, appScopeId?: string | null, directoryScope?:
+        Record<..., ...> | (... & ... & ...) | null, directoryScopeId?: string |
+        null, isValidationOnly?: boolean | null, justification?: string | null,
+        principal?: Record<..., ...> | (... & ... & ...) | null, principalId?:
+        string | null, roleDefinition?: Record<..., ...> | (... & ... & ...) |
+        null, roleDefinitionId?: string | null, scheduleInfo?: Record<..., ...>
+        | { @odata.type: ..., expiration?: ..., recurrence?: ...,
+        startDateTime?: ... } | null, targetSchedule?: Record<..., ...> | (... &
+        ...) | null, targetScheduleId?: string | null, ticketInfo?: Record<...,
+        ...> | { @odata.type: ..., ticketNumber?: ..., ticketSystem?: ... } |
+        null } & { @odata.type:
+        "#microsoft.graph.unifiedRoleAssignmentScheduleRequest" })[],
+        roleAssignmentSchedules?: (Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        activatedUsing?: Record<..., ...> | (... & ...) | null, assignmentType?:
+        string | null, memberType?: string | null, scheduleInfo?: Record<...,
+        ...> | { @odata.type: ..., expiration?: ..., recurrence?: ...,
+        startDateTime?: ... } | null })[], roleDefinitions?: (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, description?: string | null, displayName?: string | null,
+        inheritsPermissionsFrom?: (Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { description?: string | null
+        | undefined; displayName?: string | null | undefined; isBuiltIn?:
+        boolean | null | undefined; ... 6 more ...; '@odata.type': string; } & {
+        ...; })[] | undefined, isBuiltIn?: boolean | null, isEnabled?: boolean |
+        null, resourceScopes?: ...[], rolePermissions?: ...[], templateId?:
+        string | null, version?: string | null } & { @odata.type:
+        "#microsoft.graph.unifiedRoleDefinition" })[],
+        roleEligibilityScheduleInstances?: (Omit<Omit<..., ...> & Omit<..., ...>
+        & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        endDateTime?: string | null, memberType?: string | null,
+        roleEligibilityScheduleId?: string | null, startDateTime?: string | null
+        })[], roleEligibilityScheduleRequests?: (Omit<Omit<..., ...> & Omit<...,
+        ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        action?: Record<..., ...> | "unknownFutureValue" | "adminAssign" |
+        "adminUpdate" | "adminRemove" | "selfActivate" | "selfDeactivate" |
+        "adminExtend" | "adminRenew" | "selfExtend" | "selfRenew" | null,
+        appScope?: Record<..., ...> | (... & ... & ...) | null, appScopeId?:
+        string | null, directoryScope?: Record<..., ...> | (... & ... & ...) |
+        null, directoryScopeId?: string | null, isValidationOnly?: boolean |
+        null, justification?: string | null, principal?: Record<..., ...> | (...
+        & ... & ...) | null, principalId?: string | null, roleDefinition?:
+        Record<..., ...> | (... & ... & ...) | null, roleDefinitionId?: string |
+        null, scheduleInfo?: Record<..., ...> | { @odata.type: ..., expiration?:
+        ..., recurrence?: ..., startDateTime?: ... } | null, targetSchedule?:
+        Record<..., ...> | (... & ...) | null, targetScheduleId?: string | null,
+        ticketInfo?: Record<..., ...> | { @odata.type: ..., ticketNumber?: ...,
+        ticketSystem?: ... } | null } & { @odata.type:
+        "#microsoft.graph.unifiedRoleEligibilityScheduleRequest" })[],
+        roleEligibilitySchedules?: (Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & { @odata.type: string, memberType?:
+        string | null, scheduleInfo?: Record<..., ...> | { @odata.type: ...,
+        expiration?: ..., recurrence?: ..., startDateTime?: ... } | null })[] }
+        & { @odata.type: "#microsoft.graph.rbacApplication" }) | null }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /roleManagement"]["response"]&gt;
-  - name: update(Operation<"/roleManagement", "patch">)
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string, directory?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, resourceNamespaces?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          name?: string, resourceActions?: ...[] } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.unifiedRbacResourceNamespace" />"
+          })[], roleAssignments?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, appScope?: Record&lt;..., ...&gt; | (...
+          & ... & ...) | null, appScopeId?: string | null, condition?: string |
+          null, directoryScope?: Record&lt;..., ...&gt; | (... & ... & ...) |
+          null, directoryScopeId?: string | null, principal?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null, principalId?: string | null,
+          roleDefinition?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+          roleDefinitionId?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.unifiedRoleAssignment" />" })[],
+          roleAssignmentScheduleInstances?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          activatedUsing?: Record&lt;..., ...&gt; | (... & ...) | null,
+          assignmentType?: string | null, endDateTime?: string | null,
+          memberType?: string | null, roleAssignmentOriginId?: string | null,
+          roleAssignmentScheduleId?: string | null, startDateTime?: string |
+          null })[], roleAssignmentScheduleRequests?: (Omit&lt;Omit&lt;...,
+          ...&gt; & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, action?: Record&lt;..., ...&gt; | "unknownFutureValue" |
+          "adminAssign" | "adminUpdate" | "adminRemove" | "selfActivate" |
+          "selfDeactivate" | "adminExtend" | "adminRenew" | "selfExtend" |
+          "selfRenew" | null, activatedUsing?: Record&lt;..., ...&gt; | (... &
+          ...) | null, appScope?: Record&lt;..., ...&gt; | (... & ... & ...) |
+          null, appScopeId?: string | null, directoryScope?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null, directoryScopeId?: string | null,
+          isValidationOnly?: boolean | null, justification?: string | null,
+          principal?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+          principalId?: string | null, roleDefinition?: Record&lt;..., ...&gt; |
+          (... & ... & ...) | null, roleDefinitionId?: string | null,
+          scheduleInfo?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., expiration?: ..., recurrence?: ..., startDateTime?: ... } | null,
+          targetSchedule?: Record&lt;..., ...&gt; | (... & ...) | null,
+          targetScheduleId?: string | null, ticketInfo?: Record&lt;..., ...&gt;
+          | { <xref uid="@odata.type" />: ..., ticketNumber?: ...,
+          ticketSystem?: ... } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.unifiedRoleAssignmentScheduleRequest" />" })[],
+          roleAssignmentSchedules?: (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          activatedUsing?: Record&lt;..., ...&gt; | (... & ...) | null,
+          assignmentType?: string | null, memberType?: string | null,
+          scheduleInfo?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., expiration?: ..., recurrence?: ..., startDateTime?: ... } | null
+          })[], roleDefinitions?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, description?: string | null,
+          displayName?: string | null, inheritsPermissionsFrom?: (Omit&lt;{ id?:
+          string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & { description?: string | null | undefined;
+          displayName?: string | null | undefined; isBuiltIn?: boolean | null |
+          undefined; ... 6 more ...; '<xref uid="@odata.type" />': string; } & {
+          ...; })[] | undefined, isBuiltIn?: boolean | null, isEnabled?: boolean
+          | null, resourceScopes?: ...[], rolePermissions?: ...[], templateId?:
+          string | null, version?: string | null } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.unifiedRoleDefinition" />" })[],
+          roleEligibilityScheduleInstances?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          endDateTime?: string | null, memberType?: string | null,
+          roleEligibilityScheduleId?: string | null, startDateTime?: string |
+          null })[], roleEligibilityScheduleRequests?: (Omit&lt;Omit&lt;...,
+          ...&gt; & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, action?: Record&lt;..., ...&gt; | "unknownFutureValue" |
+          "adminAssign" | "adminUpdate" | "adminRemove" | "selfActivate" |
+          "selfDeactivate" | "adminExtend" | "adminRenew" | "selfExtend" |
+          "selfRenew" | null, appScope?: Record&lt;..., ...&gt; | (... & ... &
+          ...) | null, appScopeId?: string | null, directoryScope?:
+          Record&lt;..., ...&gt; | (... & ... & ...) | null, directoryScopeId?:
+          string | null, isValidationOnly?: boolean | null, justification?:
+          string | null, principal?: Record&lt;..., ...&gt; | (... & ... & ...)
+          | null, principalId?: string | null, roleDefinition?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null, roleDefinitionId?: string | null,
+          scheduleInfo?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., expiration?: ..., recurrence?: ..., startDateTime?: ... } | null,
+          targetSchedule?: Record&lt;..., ...&gt; | (... & ...) | null,
+          targetScheduleId?: string | null, ticketInfo?: Record&lt;..., ...&gt;
+          | { <xref uid="@odata.type" />: ..., ticketNumber?: ...,
+          ticketSystem?: ... } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.unifiedRoleEligibilityScheduleRequest" />" })[],
+          roleEligibilitySchedules?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          memberType?: string | null, scheduleInfo?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., expiration?: ..., recurrence?: ...,
+          startDateTime?: ... } | null })[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.rbacApplication" />" }) | null,
+          entitlementManagement?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, resourceNamespaces?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          name?: string, resourceActions?: ...[] } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.unifiedRbacResourceNamespace" />"
+          })[], roleAssignments?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, appScope?: Record&lt;..., ...&gt; | (...
+          & ... & ...) | null, appScopeId?: string | null, condition?: string |
+          null, directoryScope?: Record&lt;..., ...&gt; | (... & ... & ...) |
+          null, directoryScopeId?: string | null, principal?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null, principalId?: string | null,
+          roleDefinition?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+          roleDefinitionId?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.unifiedRoleAssignment" />" })[],
+          roleAssignmentScheduleInstances?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          activatedUsing?: Record&lt;..., ...&gt; | (... & ...) | null,
+          assignmentType?: string | null, endDateTime?: string | null,
+          memberType?: string | null, roleAssignmentOriginId?: string | null,
+          roleAssignmentScheduleId?: string | null, startDateTime?: string |
+          null })[], roleAssignmentScheduleRequests?: (Omit&lt;Omit&lt;...,
+          ...&gt; & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, action?: Record&lt;..., ...&gt; | "unknownFutureValue" |
+          "adminAssign" | "adminUpdate" | "adminRemove" | "selfActivate" |
+          "selfDeactivate" | "adminExtend" | "adminRenew" | "selfExtend" |
+          "selfRenew" | null, activatedUsing?: Record&lt;..., ...&gt; | (... &
+          ...) | null, appScope?: Record&lt;..., ...&gt; | (... & ... & ...) |
+          null, appScopeId?: string | null, directoryScope?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null, directoryScopeId?: string | null,
+          isValidationOnly?: boolean | null, justification?: string | null,
+          principal?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+          principalId?: string | null, roleDefinition?: Record&lt;..., ...&gt; |
+          (... & ... & ...) | null, roleDefinitionId?: string | null,
+          scheduleInfo?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., expiration?: ..., recurrence?: ..., startDateTime?: ... } | null,
+          targetSchedule?: Record&lt;..., ...&gt; | (... & ...) | null,
+          targetScheduleId?: string | null, ticketInfo?: Record&lt;..., ...&gt;
+          | { <xref uid="@odata.type" />: ..., ticketNumber?: ...,
+          ticketSystem?: ... } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.unifiedRoleAssignmentScheduleRequest" />" })[],
+          roleAssignmentSchedules?: (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          activatedUsing?: Record&lt;..., ...&gt; | (... & ...) | null,
+          assignmentType?: string | null, memberType?: string | null,
+          scheduleInfo?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., expiration?: ..., recurrence?: ..., startDateTime?: ... } | null
+          })[], roleDefinitions?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, description?: string | null,
+          displayName?: string | null, inheritsPermissionsFrom?: (Omit&lt;{ id?:
+          string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & { description?: string | null | undefined;
+          displayName?: string | null | undefined; isBuiltIn?: boolean | null |
+          undefined; ... 6 more ...; '<xref uid="@odata.type" />': string; } & {
+          ...; })[] | undefined, isBuiltIn?: boolean | null, isEnabled?: boolean
+          | null, resourceScopes?: ...[], rolePermissions?: ...[], templateId?:
+          string | null, version?: string | null } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.unifiedRoleDefinition" />" })[],
+          roleEligibilityScheduleInstances?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          endDateTime?: string | null, memberType?: string | null,
+          roleEligibilityScheduleId?: string | null, startDateTime?: string |
+          null })[], roleEligibilityScheduleRequests?: (Omit&lt;Omit&lt;...,
+          ...&gt; & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, action?: Record&lt;..., ...&gt; | "unknownFutureValue" |
+          "adminAssign" | "adminUpdate" | "adminRemove" | "selfActivate" |
+          "selfDeactivate" | "adminExtend" | "adminRenew" | "selfExtend" |
+          "selfRenew" | null, appScope?: Record&lt;..., ...&gt; | (... & ... &
+          ...) | null, appScopeId?: string | null, directoryScope?:
+          Record&lt;..., ...&gt; | (... & ... & ...) | null, directoryScopeId?:
+          string | null, isValidationOnly?: boolean | null, justification?:
+          string | null, principal?: Record&lt;..., ...&gt; | (... & ... & ...)
+          | null, principalId?: string | null, roleDefinition?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null, roleDefinitionId?: string | null,
+          scheduleInfo?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., expiration?: ..., recurrence?: ..., startDateTime?: ... } | null,
+          targetSchedule?: Record&lt;..., ...&gt; | (... & ...) | null,
+          targetScheduleId?: string | null, ticketInfo?: Record&lt;..., ...&gt;
+          | { <xref uid="@odata.type" />: ..., ticketNumber?: ...,
+          ticketSystem?: ... } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.unifiedRoleEligibilityScheduleRequest" />" })[],
+          roleEligibilitySchedules?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          memberType?: string | null, scheduleInfo?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., expiration?: ..., recurrence?: ...,
+          startDateTime?: ... } | null })[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.rbacApplication" />" }) | null }&gt;
+  - name: >-
+      update({ @odata.type: string, directory?: Record<string, never> | (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, resourceNamespaces?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, name?: string, resourceActions?:
+      (... & ... & ...)[] } & { @odata.type:
+      "#microsoft.graph.unifiedRbacResourceNamespace" })[], roleAssignments?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, appScope?: Record<string, never> | (Omit<..., ...> &
+      { @odata.type: ..., displayName?: ..., type?: ... } & { @odata.type: ...
+      }) | null, appScopeId?: string | null, condition?: string | null,
+      directoryScope?: Record<string, never> | (Omit<..., ...> & Omit<..., ...>
+      & { @odata.type: ... }) | null, directoryScopeId?: string | null,
+      principal?: Record<string, never> | (Omit<..., ...> & Omit<..., ...> & {
+      @odata.type: ... }) | null, principalId?: string | null, roleDefinition?:
+      Record<string, never> | (Omit<..., ...> & { @odata.type: ...,
+      description?: ..., displayName?: ..., inheritsPermissionsFrom?: ...,
+      isBuiltIn?: ..., isEnabled?: ..., resourceScopes?: ..., rolePermissions?:
+      ..., templateId?: ..., version?: ... } & { @odata.type: ... }) | null,
+      roleDefinitionId?: string | null } & { @odata.type:
+      "#microsoft.graph.unifiedRoleAssignment" })[],
+      roleAssignmentScheduleInstances?: (Omit<Omit<{ @odata.type: ..., id?: ...
+      }, "@odata.type"> & Omit<{ @odata.type: ..., appScope?: ..., appScopeId?:
+      ..., directoryScope?: ..., directoryScopeId?: ..., principal?: ...,
+      principalId?: ..., roleDefinition?: ..., roleDefinitionId?: ... },
+      "@odata.type"> & { @odata.type:
+      "#microsoft.graph.unifiedRoleScheduleInstanceBase" }, "@odata.type"> & {
+      @odata.type: string, activatedUsing?: Record<string, never> | (Omit<...,
+      ...> & { @odata.type: ..., endDateTime?: ..., memberType?: ...,
+      roleEligibilityScheduleId?: ..., startDateTime?: ... }) | null,
+      assignmentType?: string | null, endDateTime?: string | null, memberType?:
+      string | null, roleAssignmentOriginId?: string | null,
+      roleAssignmentScheduleId?: string | null, startDateTime?: string | null
+      })[], roleAssignmentScheduleRequests?: (Omit<Omit<{ @odata.type: ..., id?:
+      ... }, "@odata.type"> & Omit<{ @odata.type: ..., approvalId?: ...,
+      completedDateTime?: ..., createdBy?: ..., createdDateTime?: ...,
+      customData?: ..., status?: ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.request" }, "@odata.type"> & { @odata.type: string,
+      action?: Record<string, never> | "unknownFutureValue" | "adminAssign" |
+      "adminUpdate" | "adminRemove" | "selfActivate" | "selfDeactivate" |
+      "adminExtend" | "adminRenew" | "selfExtend" | "selfRenew" | null,
+      activatedUsing?: Record<string, never> | (Omit<..., ...> & { @odata.type:
+      ..., memberType?: ..., scheduleInfo?: ... }) | null, appScope?:
+      Record<string, never> | (Omit<..., ...> & { @odata.type: ...,
+      displayName?: ..., type?: ... } & { @odata.type: ... }) | null,
+      appScopeId?: string | null, directoryScope?: Record<string, never> |
+      (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... }) | null,
+      directoryScopeId?: string | null, isValidationOnly?: boolean | null,
+      justification?: string | null, principal?: Record<string, never> |
+      (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... }) | null,
+      principalId?: string | null, roleDefinition?: Record<string, never> |
+      (Omit<..., ...> & { @odata.type: ..., description?: ..., displayName?:
+      ..., inheritsPermissionsFrom?: ..., isBuiltIn?: ..., isEnabled?: ...,
+      resourceScopes?: ..., rolePermissions?: ..., templateId?: ..., version?:
+      ... } & { @odata.type: ... }) | null, roleDefinitionId?: string | null,
+      scheduleInfo?: Record<string, never> | { @odata.type: string, expiration?:
+      function, recurrence?: function, startDateTime?: function } | null,
+      targetSchedule?: Record<string, never> | (Omit<..., ...> & { @odata.type:
+      ..., activatedUsing?: ..., assignmentType?: ..., memberType?: ...,
+      scheduleInfo?: ... }) | null, targetScheduleId?: string | null,
+      ticketInfo?: Record<string, never> | { @odata.type: string, ticketNumber?:
+      function, ticketSystem?: function } | null } & { @odata.type:
+      "#microsoft.graph.unifiedRoleAssignmentScheduleRequest" })[],
+      roleAssignmentSchedules?: (Omit<Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & Omit<{ @odata.type: ..., appScope?: ..., appScopeId?:
+      ..., createdDateTime?: ..., createdUsing?: ..., directoryScope?: ...,
+      directoryScopeId?: ..., modifiedDateTime?: ..., principal?: ...,
+      principalId?: ..., roleDefinition?: ..., roleDefinitionId?: ..., status?:
+      ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.unifiedRoleScheduleBase" }, "@odata.type"> & {
+      @odata.type: string, activatedUsing?: Record<string, never> | (Omit<...,
+      ...> & { @odata.type: ..., memberType?: ..., scheduleInfo?: ... }) | null,
+      assignmentType?: string | null, memberType?: string | null, scheduleInfo?:
+      Record<string, never> | { @odata.type: string, expiration?: function,
+      recurrence?: function, startDateTime?: function } | null })[],
+      roleDefinitions?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, description?: string | null,
+      displayName?: string | null, inheritsPermissionsFrom?: (Omit<{ id?: string
+      | undefined; '@odata.type': string; }, "@odata.type"> & { description?:
+      string | null | undefined; displayName?: string | null | undefined;
+      isBuiltIn?: boolean | null | undefined; ... 6 more ...; '@odata.type':
+      string; } & { ...; })[] | undefined, isBuiltIn?: boolean | null,
+      isEnabled?: boolean | null, resourceScopes?: string[], rolePermissions?: {
+      @odata.type: ..., allowedResourceActions?: ..., condition?: ...,
+      excludedResourceActions?: ... }[], templateId?: string | null, version?:
+      string | null } & { @odata.type: "#microsoft.graph.unifiedRoleDefinition"
+      })[], roleEligibilityScheduleInstances?: (Omit<Omit<{ @odata.type: ...,
+      id?: ... }, "@odata.type"> & Omit<{ @odata.type: ..., appScope?: ...,
+      appScopeId?: ..., directoryScope?: ..., directoryScopeId?: ...,
+      principal?: ..., principalId?: ..., roleDefinition?: ...,
+      roleDefinitionId?: ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.unifiedRoleScheduleInstanceBase" }, "@odata.type"> & {
+      @odata.type: string, endDateTime?: string | null, memberType?: string |
+      null, roleEligibilityScheduleId?: string | null, startDateTime?: string |
+      null })[], roleEligibilityScheduleRequests?: (Omit<Omit<{ @odata.type:
+      ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ..., approvalId?:
+      ..., completedDateTime?: ..., createdBy?: ..., createdDateTime?: ...,
+      customData?: ..., status?: ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.request" }, "@odata.type"> & { @odata.type: string,
+      action?: Record<string, never> | "unknownFutureValue" | "adminAssign" |
+      "adminUpdate" | "adminRemove" | "selfActivate" | "selfDeactivate" |
+      "adminExtend" | "adminRenew" | "selfExtend" | "selfRenew" | null,
+      appScope?: Record<string, never> | (Omit<..., ...> & { @odata.type: ...,
+      displayName?: ..., type?: ... } & { @odata.type: ... }) | null,
+      appScopeId?: string | null, directoryScope?: Record<string, never> |
+      (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... }) | null,
+      directoryScopeId?: string | null, isValidationOnly?: boolean | null,
+      justification?: string | null, principal?: Record<string, never> |
+      (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... }) | null,
+      principalId?: string | null, roleDefinition?: Record<string, never> |
+      (Omit<..., ...> & { @odata.type: ..., description?: ..., displayName?:
+      ..., inheritsPermissionsFrom?: ..., isBuiltIn?: ..., isEnabled?: ...,
+      resourceScopes?: ..., rolePermissions?: ..., templateId?: ..., version?:
+      ... } & { @odata.type: ... }) | null, roleDefinitionId?: string | null,
+      scheduleInfo?: Record<string, never> | { @odata.type: string, expiration?:
+      function, recurrence?: function, startDateTime?: function } | null,
+      targetSchedule?: Record<string, never> | (Omit<..., ...> & { @odata.type:
+      ..., memberType?: ..., scheduleInfo?: ... }) | null, targetScheduleId?:
+      string | null, ticketInfo?: Record<string, never> | { @odata.type: string,
+      ticketNumber?: function, ticketSystem?: function } | null } & {
+      @odata.type: "#microsoft.graph.unifiedRoleEligibilityScheduleRequest"
+      })[], roleEligibilitySchedules?: (Omit<Omit<{ @odata.type: ..., id?: ...
+      }, "@odata.type"> & Omit<{ @odata.type: ..., appScope?: ..., appScopeId?:
+      ..., createdDateTime?: ..., createdUsing?: ..., directoryScope?: ...,
+      directoryScopeId?: ..., modifiedDateTime?: ..., principal?: ...,
+      principalId?: ..., roleDefinition?: ..., roleDefinitionId?: ..., status?:
+      ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.unifiedRoleScheduleBase" }, "@odata.type"> & {
+      @odata.type: string, memberType?: string | null, scheduleInfo?:
+      Record<string, never> | { @odata.type: string, expiration?: function,
+      recurrence?: function, startDateTime?: function } | null })[] } & {
+      @odata.type: "#microsoft.graph.rbacApplication" }) | null,
+      entitlementManagement?: Record<string, never> | (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string,
+      resourceNamespaces?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, name?: string, resourceActions?:
+      (... & ... & ...)[] } & { @odata.type:
+      "#microsoft.graph.unifiedRbacResourceNamespace" })[], roleAssignments?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, appScope?: Record<string, never> | (Omit<..., ...> &
+      { @odata.type: ..., displayName?: ..., type?: ... } & { @odata.type: ...
+      }) | null, appScopeId?: string | null, condition?: string | null,
+      directoryScope?: Record<string, never> | (Omit<..., ...> & Omit<..., ...>
+      & { @odata.type: ... }) | null, directoryScopeId?: string | null,
+      principal?: Record<string, never> | (Omit<..., ...> & Omit<..., ...> & {
+      @odata.type: ... }) | null, principalId?: string | null, roleDefinition?:
+      Record<string, never> | (Omit<..., ...> & { @odata.type: ...,
+      description?: ..., displayName?: ..., inheritsPermissionsFrom?: ...,
+      isBuiltIn?: ..., isEnabled?: ..., resourceScopes?: ..., rolePermissions?:
+      ..., templateId?: ..., version?: ... } & { @odata.type: ... }) | null,
+      roleDefinitionId?: string | null } & { @odata.type:
+      "#microsoft.graph.unifiedRoleAssignment" })[],
+      roleAssignmentScheduleInstances?: (Omit<Omit<{ @odata.type: ..., id?: ...
+      }, "@odata.type"> & Omit<{ @odata.type: ..., appScope?: ..., appScopeId?:
+      ..., directoryScope?: ..., directoryScopeId?: ..., principal?: ...,
+      principalId?: ..., roleDefinition?: ..., roleDefinitionId?: ... },
+      "@odata.type"> & { @odata.type:
+      "#microsoft.graph.unifiedRoleScheduleInstanceBase" }, "@odata.type"> & {
+      @odata.type: string, activatedUsing?: Record<string, never> | (Omit<...,
+      ...> & { @odata.type: ..., endDateTime?: ..., memberType?: ...,
+      roleEligibilityScheduleId?: ..., startDateTime?: ... }) | null,
+      assignmentType?: string | null, endDateTime?: string | null, memberType?:
+      string | null, roleAssignmentOriginId?: string | null,
+      roleAssignmentScheduleId?: string | null, startDateTime?: string | null
+      })[], roleAssignmentScheduleRequests?: (Omit<Omit<{ @odata.type: ..., id?:
+      ... }, "@odata.type"> & Omit<{ @odata.type: ..., approvalId?: ...,
+      completedDateTime?: ..., createdBy?: ..., createdDateTime?: ...,
+      customData?: ..., status?: ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.request" }, "@odata.type"> & { @odata.type: string,
+      action?: Record<string, never> | "unknownFutureValue" | "adminAssign" |
+      "adminUpdate" | "adminRemove" | "selfActivate" | "selfDeactivate" |
+      "adminExtend" | "adminRenew" | "selfExtend" | "selfRenew" | null,
+      activatedUsing?: Record<string, never> | (Omit<..., ...> & { @odata.type:
+      ..., memberType?: ..., scheduleInfo?: ... }) | null, appScope?:
+      Record<string, never> | (Omit<..., ...> & { @odata.type: ...,
+      displayName?: ..., type?: ... } & { @odata.type: ... }) | null,
+      appScopeId?: string | null, directoryScope?: Record<string, never> |
+      (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... }) | null,
+      directoryScopeId?: string | null, isValidationOnly?: boolean | null,
+      justification?: string | null, principal?: Record<string, never> |
+      (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... }) | null,
+      principalId?: string | null, roleDefinition?: Record<string, never> |
+      (Omit<..., ...> & { @odata.type: ..., description?: ..., displayName?:
+      ..., inheritsPermissionsFrom?: ..., isBuiltIn?: ..., isEnabled?: ...,
+      resourceScopes?: ..., rolePermissions?: ..., templateId?: ..., version?:
+      ... } & { @odata.type: ... }) | null, roleDefinitionId?: string | null,
+      scheduleInfo?: Record<string, never> | { @odata.type: string, expiration?:
+      function, recurrence?: function, startDateTime?: function } | null,
+      targetSchedule?: Record<string, never> | (Omit<..., ...> & { @odata.type:
+      ..., activatedUsing?: ..., assignmentType?: ..., memberType?: ...,
+      scheduleInfo?: ... }) | null, targetScheduleId?: string | null,
+      ticketInfo?: Record<string, never> | { @odata.type: string, ticketNumber?:
+      function, ticketSystem?: function } | null } & { @odata.type:
+      "#microsoft.graph.unifiedRoleAssignmentScheduleRequest" })[],
+      roleAssignmentSchedules?: (Omit<Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & Omit<{ @odata.type: ..., appScope?: ..., appScopeId?:
+      ..., createdDateTime?: ..., createdUsing?: ..., directoryScope?: ...,
+      directoryScopeId?: ..., modifiedDateTime?: ..., principal?: ...,
+      principalId?: ..., roleDefinition?: ..., roleDefinitionId?: ..., status?:
+      ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.unifiedRoleScheduleBase" }, "@odata.type"> & {
+      @odata.type: string, activatedUsing?: Record<string, never> | (Omit<...,
+      ...> & { @odata.type: ..., memberType?: ..., scheduleInfo?: ... }) | null,
+      assignmentType?: string | null, memberType?: string | null, scheduleInfo?:
+      Record<string, never> | { @odata.type: string, expiration?: function,
+      recurrence?: function, startDateTime?: function } | null })[],
+      roleDefinitions?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, description?: string | null,
+      displayName?: string | null, inheritsPermissionsFrom?: (Omit<{ id?: string
+      | undefined; '@odata.type': string; }, "@odata.type"> & { description?:
+      string | null | undefined; displayName?: string | null | undefined;
+      isBuiltIn?: boolean | null | undefined; ... 6 more ...; '@odata.type':
+      string; } & { ...; })[] | undefined, isBuiltIn?: boolean | null,
+      isEnabled?: boolean | null, resourceScopes?: string[], rolePermissions?: {
+      @odata.type: ..., allowedResourceActions?: ..., condition?: ...,
+      excludedResourceActions?: ... }[], templateId?: string | null, version?:
+      string | null } & { @odata.type: "#microsoft.graph.unifiedRoleDefinition"
+      })[], roleEligibilityScheduleInstances?: (Omit<Omit<{ @odata.type: ...,
+      id?: ... }, "@odata.type"> & Omit<{ @odata.type: ..., appScope?: ...,
+      appScopeId?: ..., directoryScope?: ..., directoryScopeId?: ...,
+      principal?: ..., principalId?: ..., roleDefinition?: ...,
+      roleDefinitionId?: ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.unifiedRoleScheduleInstanceBase" }, "@odata.type"> & {
+      @odata.type: string, endDateTime?: string | null, memberType?: string |
+      null, roleEligibilityScheduleId?: string | null, startDateTime?: string |
+      null })[], roleEligibilityScheduleRequests?: (Omit<Omit<{ @odata.type:
+      ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ..., approvalId?:
+      ..., completedDateTime?: ..., createdBy?: ..., createdDateTime?: ...,
+      customData?: ..., status?: ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.request" }, "@odata.type"> & { @odata.type: string,
+      action?: Record<string, never> | "unknownFutureValue" | "adminAssign" |
+      "adminUpdate" | "adminRemove" | "selfActivate" | "selfDeactivate" |
+      "adminExtend" | "adminRenew" | "selfExtend" | "selfRenew" | null,
+      appScope?: Record<string, never> | (Omit<..., ...> & { @odata.type: ...,
+      displayName?: ..., type?: ... } & { @odata.type: ... }) | null,
+      appScopeId?: string | null, directoryScope?: Record<string, never> |
+      (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... }) | null,
+      directoryScopeId?: string | null, isValidationOnly?: boolean | null,
+      justification?: string | null, principal?: Record<string, never> |
+      (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... }) | null,
+      principalId?: string | null, roleDefinition?: Record<string, never> |
+      (Omit<..., ...> & { @odata.type: ..., description?: ..., displayName?:
+      ..., inheritsPermissionsFrom?: ..., isBuiltIn?: ..., isEnabled?: ...,
+      resourceScopes?: ..., rolePermissions?: ..., templateId?: ..., version?:
+      ... } & { @odata.type: ... }) | null, roleDefinitionId?: string | null,
+      scheduleInfo?: Record<string, never> | { @odata.type: string, expiration?:
+      function, recurrence?: function, startDateTime?: function } | null,
+      targetSchedule?: Record<string, never> | (Omit<..., ...> & { @odata.type:
+      ..., memberType?: ..., scheduleInfo?: ... }) | null, targetScheduleId?:
+      string | null, ticketInfo?: Record<string, never> | { @odata.type: string,
+      ticketNumber?: function, ticketSystem?: function } | null } & {
+      @odata.type: "#microsoft.graph.unifiedRoleEligibilityScheduleRequest"
+      })[], roleEligibilitySchedules?: (Omit<Omit<{ @odata.type: ..., id?: ...
+      }, "@odata.type"> & Omit<{ @odata.type: ..., appScope?: ..., appScopeId?:
+      ..., createdDateTime?: ..., createdUsing?: ..., directoryScope?: ...,
+      directoryScopeId?: ..., modifiedDateTime?: ..., principal?: ...,
+      principalId?: ..., roleDefinition?: ..., roleDefinitionId?: ..., status?:
+      ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.unifiedRoleScheduleBase" }, "@odata.type"> & {
+      @odata.type: string, memberType?: string | null, scheduleInfo?:
+      Record<string, never> | { @odata.type: string, expiration?: function,
+      recurrence?: function, startDateTime?: function } | null })[] } & {
+      @odata.type: "#microsoft.graph.rbacApplication" }) | null })
     uid: '@microsoft/teams.graph-endpoints.roleManagement.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`PATCH /roleManagement`'
@@ -32,12 +645,977 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/roleManagement", "patch">):
-        EndpointRequest<IEndpoints["PATCH /roleManagement"]["response"]>
+        function update(body: { @odata.type: string, directory?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, resourceNamespaces?: (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, name?: string,
+        resourceActions?: (... & ... & ...)[] } & { @odata.type:
+        "#microsoft.graph.unifiedRbacResourceNamespace" })[], roleAssignments?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, appScope?: Record<string, never> | (Omit<..., ...>
+        & { @odata.type: ..., displayName?: ..., type?: ... } & { @odata.type:
+        ... }) | null, appScopeId?: string | null, condition?: string | null,
+        directoryScope?: Record<string, never> | (Omit<..., ...> & Omit<...,
+        ...> & { @odata.type: ... }) | null, directoryScopeId?: string | null,
+        principal?: Record<string, never> | (Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }) | null, principalId?: string | null,
+        roleDefinition?: Record<string, never> | (Omit<..., ...> & {
+        @odata.type: ..., description?: ..., displayName?: ...,
+        inheritsPermissionsFrom?: ..., isBuiltIn?: ..., isEnabled?: ...,
+        resourceScopes?: ..., rolePermissions?: ..., templateId?: ..., version?:
+        ... } & { @odata.type: ... }) | null, roleDefinitionId?: string | null }
+        & { @odata.type: "#microsoft.graph.unifiedRoleAssignment" })[],
+        roleAssignmentScheduleInstances?: (Omit<Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & Omit<{ @odata.type: ..., appScope?: ...,
+        appScopeId?: ..., directoryScope?: ..., directoryScopeId?: ...,
+        principal?: ..., principalId?: ..., roleDefinition?: ...,
+        roleDefinitionId?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.unifiedRoleScheduleInstanceBase" }, "@odata.type"> & {
+        @odata.type: string, activatedUsing?: Record<string, never> | (Omit<...,
+        ...> & { @odata.type: ..., endDateTime?: ..., memberType?: ...,
+        roleEligibilityScheduleId?: ..., startDateTime?: ... }) | null,
+        assignmentType?: string | null, endDateTime?: string | null,
+        memberType?: string | null, roleAssignmentOriginId?: string | null,
+        roleAssignmentScheduleId?: string | null, startDateTime?: string | null
+        })[], roleAssignmentScheduleRequests?: (Omit<Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & Omit<{ @odata.type: ..., approvalId?: ...,
+        completedDateTime?: ..., createdBy?: ..., createdDateTime?: ...,
+        customData?: ..., status?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.request" }, "@odata.type"> & { @odata.type: string,
+        action?: Record<string, never> | "unknownFutureValue" | "adminAssign" |
+        "adminUpdate" | "adminRemove" | "selfActivate" | "selfDeactivate" |
+        "adminExtend" | "adminRenew" | "selfExtend" | "selfRenew" | null,
+        activatedUsing?: Record<string, never> | (Omit<..., ...> & {
+        @odata.type: ..., memberType?: ..., scheduleInfo?: ... }) | null,
+        appScope?: Record<string, never> | (Omit<..., ...> & { @odata.type: ...,
+        displayName?: ..., type?: ... } & { @odata.type: ... }) | null,
+        appScopeId?: string | null, directoryScope?: Record<string, never> |
+        (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... }) | null,
+        directoryScopeId?: string | null, isValidationOnly?: boolean | null,
+        justification?: string | null, principal?: Record<string, never> |
+        (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... }) | null,
+        principalId?: string | null, roleDefinition?: Record<string, never> |
+        (Omit<..., ...> & { @odata.type: ..., description?: ..., displayName?:
+        ..., inheritsPermissionsFrom?: ..., isBuiltIn?: ..., isEnabled?: ...,
+        resourceScopes?: ..., rolePermissions?: ..., templateId?: ..., version?:
+        ... } & { @odata.type: ... }) | null, roleDefinitionId?: string | null,
+        scheduleInfo?: Record<string, never> | { @odata.type: string,
+        expiration?: function, recurrence?: function, startDateTime?: function }
+        | null, targetSchedule?: Record<string, never> | (Omit<..., ...> & {
+        @odata.type: ..., activatedUsing?: ..., assignmentType?: ...,
+        memberType?: ..., scheduleInfo?: ... }) | null, targetScheduleId?:
+        string | null, ticketInfo?: Record<string, never> | { @odata.type:
+        string, ticketNumber?: function, ticketSystem?: function } | null } & {
+        @odata.type: "#microsoft.graph.unifiedRoleAssignmentScheduleRequest"
+        })[], roleAssignmentSchedules?: (Omit<Omit<{ @odata.type: ..., id?: ...
+        }, "@odata.type"> & Omit<{ @odata.type: ..., appScope?: ...,
+        appScopeId?: ..., createdDateTime?: ..., createdUsing?: ...,
+        directoryScope?: ..., directoryScopeId?: ..., modifiedDateTime?: ...,
+        principal?: ..., principalId?: ..., roleDefinition?: ...,
+        roleDefinitionId?: ..., status?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.unifiedRoleScheduleBase" }, "@odata.type"> & {
+        @odata.type: string, activatedUsing?: Record<string, never> | (Omit<...,
+        ...> & { @odata.type: ..., memberType?: ..., scheduleInfo?: ... }) |
+        null, assignmentType?: string | null, memberType?: string | null,
+        scheduleInfo?: Record<string, never> | { @odata.type: string,
+        expiration?: function, recurrence?: function, startDateTime?: function }
+        | null })[], roleDefinitions?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, description?: string | null,
+        displayName?: string | null, inheritsPermissionsFrom?: (Omit<{ id?:
+        string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        description?: string | null | undefined; displayName?: string | null |
+        undefined; isBuiltIn?: boolean | null | undefined; ... 6 more ...;
+        '@odata.type': string; } & { ...; })[] | undefined, isBuiltIn?: boolean
+        | null, isEnabled?: boolean | null, resourceScopes?: string[],
+        rolePermissions?: { @odata.type: ..., allowedResourceActions?: ...,
+        condition?: ..., excludedResourceActions?: ... }[], templateId?: string
+        | null, version?: string | null } & { @odata.type:
+        "#microsoft.graph.unifiedRoleDefinition" })[],
+        roleEligibilityScheduleInstances?: (Omit<Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & Omit<{ @odata.type: ..., appScope?: ...,
+        appScopeId?: ..., directoryScope?: ..., directoryScopeId?: ...,
+        principal?: ..., principalId?: ..., roleDefinition?: ...,
+        roleDefinitionId?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.unifiedRoleScheduleInstanceBase" }, "@odata.type"> & {
+        @odata.type: string, endDateTime?: string | null, memberType?: string |
+        null, roleEligibilityScheduleId?: string | null, startDateTime?: string
+        | null })[], roleEligibilityScheduleRequests?: (Omit<Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ..., approvalId?:
+        ..., completedDateTime?: ..., createdBy?: ..., createdDateTime?: ...,
+        customData?: ..., status?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.request" }, "@odata.type"> & { @odata.type: string,
+        action?: Record<string, never> | "unknownFutureValue" | "adminAssign" |
+        "adminUpdate" | "adminRemove" | "selfActivate" | "selfDeactivate" |
+        "adminExtend" | "adminRenew" | "selfExtend" | "selfRenew" | null,
+        appScope?: Record<string, never> | (Omit<..., ...> & { @odata.type: ...,
+        displayName?: ..., type?: ... } & { @odata.type: ... }) | null,
+        appScopeId?: string | null, directoryScope?: Record<string, never> |
+        (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... }) | null,
+        directoryScopeId?: string | null, isValidationOnly?: boolean | null,
+        justification?: string | null, principal?: Record<string, never> |
+        (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... }) | null,
+        principalId?: string | null, roleDefinition?: Record<string, never> |
+        (Omit<..., ...> & { @odata.type: ..., description?: ..., displayName?:
+        ..., inheritsPermissionsFrom?: ..., isBuiltIn?: ..., isEnabled?: ...,
+        resourceScopes?: ..., rolePermissions?: ..., templateId?: ..., version?:
+        ... } & { @odata.type: ... }) | null, roleDefinitionId?: string | null,
+        scheduleInfo?: Record<string, never> | { @odata.type: string,
+        expiration?: function, recurrence?: function, startDateTime?: function }
+        | null, targetSchedule?: Record<string, never> | (Omit<..., ...> & {
+        @odata.type: ..., memberType?: ..., scheduleInfo?: ... }) | null,
+        targetScheduleId?: string | null, ticketInfo?: Record<string, never> | {
+        @odata.type: string, ticketNumber?: function, ticketSystem?: function }
+        | null } & { @odata.type:
+        "#microsoft.graph.unifiedRoleEligibilityScheduleRequest" })[],
+        roleEligibilitySchedules?: (Omit<Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., appScope?: ..., appScopeId?:
+        ..., createdDateTime?: ..., createdUsing?: ..., directoryScope?: ...,
+        directoryScopeId?: ..., modifiedDateTime?: ..., principal?: ...,
+        principalId?: ..., roleDefinition?: ..., roleDefinitionId?: ...,
+        status?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.unifiedRoleScheduleBase" }, "@odata.type"> & {
+        @odata.type: string, memberType?: string | null, scheduleInfo?:
+        Record<string, never> | { @odata.type: string, expiration?: function,
+        recurrence?: function, startDateTime?: function } | null })[] } & {
+        @odata.type: "#microsoft.graph.rbacApplication" }) | null,
+        entitlementManagement?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        resourceNamespaces?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, name?: string, resourceActions?:
+        (... & ... & ...)[] } & { @odata.type:
+        "#microsoft.graph.unifiedRbacResourceNamespace" })[], roleAssignments?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, appScope?: Record<string, never> | (Omit<..., ...>
+        & { @odata.type: ..., displayName?: ..., type?: ... } & { @odata.type:
+        ... }) | null, appScopeId?: string | null, condition?: string | null,
+        directoryScope?: Record<string, never> | (Omit<..., ...> & Omit<...,
+        ...> & { @odata.type: ... }) | null, directoryScopeId?: string | null,
+        principal?: Record<string, never> | (Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }) | null, principalId?: string | null,
+        roleDefinition?: Record<string, never> | (Omit<..., ...> & {
+        @odata.type: ..., description?: ..., displayName?: ...,
+        inheritsPermissionsFrom?: ..., isBuiltIn?: ..., isEnabled?: ...,
+        resourceScopes?: ..., rolePermissions?: ..., templateId?: ..., version?:
+        ... } & { @odata.type: ... }) | null, roleDefinitionId?: string | null }
+        & { @odata.type: "#microsoft.graph.unifiedRoleAssignment" })[],
+        roleAssignmentScheduleInstances?: (Omit<Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & Omit<{ @odata.type: ..., appScope?: ...,
+        appScopeId?: ..., directoryScope?: ..., directoryScopeId?: ...,
+        principal?: ..., principalId?: ..., roleDefinition?: ...,
+        roleDefinitionId?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.unifiedRoleScheduleInstanceBase" }, "@odata.type"> & {
+        @odata.type: string, activatedUsing?: Record<string, never> | (Omit<...,
+        ...> & { @odata.type: ..., endDateTime?: ..., memberType?: ...,
+        roleEligibilityScheduleId?: ..., startDateTime?: ... }) | null,
+        assignmentType?: string | null, endDateTime?: string | null,
+        memberType?: string | null, roleAssignmentOriginId?: string | null,
+        roleAssignmentScheduleId?: string | null, startDateTime?: string | null
+        })[], roleAssignmentScheduleRequests?: (Omit<Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & Omit<{ @odata.type: ..., approvalId?: ...,
+        completedDateTime?: ..., createdBy?: ..., createdDateTime?: ...,
+        customData?: ..., status?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.request" }, "@odata.type"> & { @odata.type: string,
+        action?: Record<string, never> | "unknownFutureValue" | "adminAssign" |
+        "adminUpdate" | "adminRemove" | "selfActivate" | "selfDeactivate" |
+        "adminExtend" | "adminRenew" | "selfExtend" | "selfRenew" | null,
+        activatedUsing?: Record<string, never> | (Omit<..., ...> & {
+        @odata.type: ..., memberType?: ..., scheduleInfo?: ... }) | null,
+        appScope?: Record<string, never> | (Omit<..., ...> & { @odata.type: ...,
+        displayName?: ..., type?: ... } & { @odata.type: ... }) | null,
+        appScopeId?: string | null, directoryScope?: Record<string, never> |
+        (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... }) | null,
+        directoryScopeId?: string | null, isValidationOnly?: boolean | null,
+        justification?: string | null, principal?: Record<string, never> |
+        (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... }) | null,
+        principalId?: string | null, roleDefinition?: Record<string, never> |
+        (Omit<..., ...> & { @odata.type: ..., description?: ..., displayName?:
+        ..., inheritsPermissionsFrom?: ..., isBuiltIn?: ..., isEnabled?: ...,
+        resourceScopes?: ..., rolePermissions?: ..., templateId?: ..., version?:
+        ... } & { @odata.type: ... }) | null, roleDefinitionId?: string | null,
+        scheduleInfo?: Record<string, never> | { @odata.type: string,
+        expiration?: function, recurrence?: function, startDateTime?: function }
+        | null, targetSchedule?: Record<string, never> | (Omit<..., ...> & {
+        @odata.type: ..., activatedUsing?: ..., assignmentType?: ...,
+        memberType?: ..., scheduleInfo?: ... }) | null, targetScheduleId?:
+        string | null, ticketInfo?: Record<string, never> | { @odata.type:
+        string, ticketNumber?: function, ticketSystem?: function } | null } & {
+        @odata.type: "#microsoft.graph.unifiedRoleAssignmentScheduleRequest"
+        })[], roleAssignmentSchedules?: (Omit<Omit<{ @odata.type: ..., id?: ...
+        }, "@odata.type"> & Omit<{ @odata.type: ..., appScope?: ...,
+        appScopeId?: ..., createdDateTime?: ..., createdUsing?: ...,
+        directoryScope?: ..., directoryScopeId?: ..., modifiedDateTime?: ...,
+        principal?: ..., principalId?: ..., roleDefinition?: ...,
+        roleDefinitionId?: ..., status?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.unifiedRoleScheduleBase" }, "@odata.type"> & {
+        @odata.type: string, activatedUsing?: Record<string, never> | (Omit<...,
+        ...> & { @odata.type: ..., memberType?: ..., scheduleInfo?: ... }) |
+        null, assignmentType?: string | null, memberType?: string | null,
+        scheduleInfo?: Record<string, never> | { @odata.type: string,
+        expiration?: function, recurrence?: function, startDateTime?: function }
+        | null })[], roleDefinitions?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, description?: string | null,
+        displayName?: string | null, inheritsPermissionsFrom?: (Omit<{ id?:
+        string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        description?: string | null | undefined; displayName?: string | null |
+        undefined; isBuiltIn?: boolean | null | undefined; ... 6 more ...;
+        '@odata.type': string; } & { ...; })[] | undefined, isBuiltIn?: boolean
+        | null, isEnabled?: boolean | null, resourceScopes?: string[],
+        rolePermissions?: { @odata.type: ..., allowedResourceActions?: ...,
+        condition?: ..., excludedResourceActions?: ... }[], templateId?: string
+        | null, version?: string | null } & { @odata.type:
+        "#microsoft.graph.unifiedRoleDefinition" })[],
+        roleEligibilityScheduleInstances?: (Omit<Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & Omit<{ @odata.type: ..., appScope?: ...,
+        appScopeId?: ..., directoryScope?: ..., directoryScopeId?: ...,
+        principal?: ..., principalId?: ..., roleDefinition?: ...,
+        roleDefinitionId?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.unifiedRoleScheduleInstanceBase" }, "@odata.type"> & {
+        @odata.type: string, endDateTime?: string | null, memberType?: string |
+        null, roleEligibilityScheduleId?: string | null, startDateTime?: string
+        | null })[], roleEligibilityScheduleRequests?: (Omit<Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ..., approvalId?:
+        ..., completedDateTime?: ..., createdBy?: ..., createdDateTime?: ...,
+        customData?: ..., status?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.request" }, "@odata.type"> & { @odata.type: string,
+        action?: Record<string, never> | "unknownFutureValue" | "adminAssign" |
+        "adminUpdate" | "adminRemove" | "selfActivate" | "selfDeactivate" |
+        "adminExtend" | "adminRenew" | "selfExtend" | "selfRenew" | null,
+        appScope?: Record<string, never> | (Omit<..., ...> & { @odata.type: ...,
+        displayName?: ..., type?: ... } & { @odata.type: ... }) | null,
+        appScopeId?: string | null, directoryScope?: Record<string, never> |
+        (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... }) | null,
+        directoryScopeId?: string | null, isValidationOnly?: boolean | null,
+        justification?: string | null, principal?: Record<string, never> |
+        (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... }) | null,
+        principalId?: string | null, roleDefinition?: Record<string, never> |
+        (Omit<..., ...> & { @odata.type: ..., description?: ..., displayName?:
+        ..., inheritsPermissionsFrom?: ..., isBuiltIn?: ..., isEnabled?: ...,
+        resourceScopes?: ..., rolePermissions?: ..., templateId?: ..., version?:
+        ... } & { @odata.type: ... }) | null, roleDefinitionId?: string | null,
+        scheduleInfo?: Record<string, never> | { @odata.type: string,
+        expiration?: function, recurrence?: function, startDateTime?: function }
+        | null, targetSchedule?: Record<string, never> | (Omit<..., ...> & {
+        @odata.type: ..., memberType?: ..., scheduleInfo?: ... }) | null,
+        targetScheduleId?: string | null, ticketInfo?: Record<string, never> | {
+        @odata.type: string, ticketNumber?: function, ticketSystem?: function }
+        | null } & { @odata.type:
+        "#microsoft.graph.unifiedRoleEligibilityScheduleRequest" })[],
+        roleEligibilitySchedules?: (Omit<Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., appScope?: ..., appScopeId?:
+        ..., createdDateTime?: ..., createdUsing?: ..., directoryScope?: ...,
+        directoryScopeId?: ..., modifiedDateTime?: ..., principal?: ...,
+        principalId?: ..., roleDefinition?: ..., roleDefinitionId?: ...,
+        status?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.unifiedRoleScheduleBase" }, "@odata.type"> & {
+        @odata.type: string, memberType?: string | null, scheduleInfo?:
+        Record<string, never> | { @odata.type: string, expiration?: function,
+        recurrence?: function, startDateTime?: function } | null })[] } & {
+        @odata.type: "#microsoft.graph.rbacApplication" }) | null }):
+        EndpointRequest<{ @odata.type: string, directory?: Record<string, never>
+        | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, resourceNamespaces?: (Omit<{ @odata.type: string,
+        id?: function }, "@odata.type"> & { @odata.type: string, name?: string,
+        resourceActions?: ...[] } & { @odata.type:
+        "#microsoft.graph.unifiedRbacResourceNamespace" })[], roleAssignments?:
+        (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+        @odata.type: string, appScope?: Record<..., ...> | (... & ... & ...) |
+        null, appScopeId?: string | null, condition?: string | null,
+        directoryScope?: Record<..., ...> | (... & ... & ...) | null,
+        directoryScopeId?: string | null, principal?: Record<..., ...> | (... &
+        ... & ...) | null, principalId?: string | null, roleDefinition?:
+        Record<..., ...> | (... & ... & ...) | null, roleDefinitionId?: string |
+        null } & { @odata.type: "#microsoft.graph.unifiedRoleAssignment" })[],
+        roleAssignmentScheduleInstances?: (Omit<Omit<..., ...> & Omit<..., ...>
+        & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        activatedUsing?: Record<..., ...> | (... & ...) | null, assignmentType?:
+        string | null, endDateTime?: string | null, memberType?: string | null,
+        roleAssignmentOriginId?: string | null, roleAssignmentScheduleId?:
+        string | null, startDateTime?: string | null })[],
+        roleAssignmentScheduleRequests?: (Omit<Omit<..., ...> & Omit<..., ...> &
+        { @odata.type: ... }, "@odata.type"> & { @odata.type: string, action?:
+        Record<..., ...> | "unknownFutureValue" | "adminAssign" | "adminUpdate"
+        | "adminRemove" | "selfActivate" | "selfDeactivate" | "adminExtend" |
+        "adminRenew" | "selfExtend" | "selfRenew" | null, activatedUsing?:
+        Record<..., ...> | (... & ...) | null, appScope?: Record<..., ...> |
+        (... & ... & ...) | null, appScopeId?: string | null, directoryScope?:
+        Record<..., ...> | (... & ... & ...) | null, directoryScopeId?: string |
+        null, isValidationOnly?: boolean | null, justification?: string | null,
+        principal?: Record<..., ...> | (... & ... & ...) | null, principalId?:
+        string | null, roleDefinition?: Record<..., ...> | (... & ... & ...) |
+        null, roleDefinitionId?: string | null, scheduleInfo?: Record<..., ...>
+        | { @odata.type: ..., expiration?: ..., recurrence?: ...,
+        startDateTime?: ... } | null, targetSchedule?: Record<..., ...> | (... &
+        ...) | null, targetScheduleId?: string | null, ticketInfo?: Record<...,
+        ...> | { @odata.type: ..., ticketNumber?: ..., ticketSystem?: ... } |
+        null } & { @odata.type:
+        "#microsoft.graph.unifiedRoleAssignmentScheduleRequest" })[],
+        roleAssignmentSchedules?: (Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        activatedUsing?: Record<..., ...> | (... & ...) | null, assignmentType?:
+        string | null, memberType?: string | null, scheduleInfo?: Record<...,
+        ...> | { @odata.type: ..., expiration?: ..., recurrence?: ...,
+        startDateTime?: ... } | null })[], roleDefinitions?: (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, description?: string | null, displayName?: string | null,
+        inheritsPermissionsFrom?: (Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { description?: string | null
+        | undefined; displayName?: string | null | undefined; isBuiltIn?:
+        boolean | null | undefined; ... 6 more ...; '@odata.type': string; } & {
+        ...; })[] | undefined, isBuiltIn?: boolean | null, isEnabled?: boolean |
+        null, resourceScopes?: ...[], rolePermissions?: ...[], templateId?:
+        string | null, version?: string | null } & { @odata.type:
+        "#microsoft.graph.unifiedRoleDefinition" })[],
+        roleEligibilityScheduleInstances?: (Omit<Omit<..., ...> & Omit<..., ...>
+        & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        endDateTime?: string | null, memberType?: string | null,
+        roleEligibilityScheduleId?: string | null, startDateTime?: string | null
+        })[], roleEligibilityScheduleRequests?: (Omit<Omit<..., ...> & Omit<...,
+        ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        action?: Record<..., ...> | "unknownFutureValue" | "adminAssign" |
+        "adminUpdate" | "adminRemove" | "selfActivate" | "selfDeactivate" |
+        "adminExtend" | "adminRenew" | "selfExtend" | "selfRenew" | null,
+        appScope?: Record<..., ...> | (... & ... & ...) | null, appScopeId?:
+        string | null, directoryScope?: Record<..., ...> | (... & ... & ...) |
+        null, directoryScopeId?: string | null, isValidationOnly?: boolean |
+        null, justification?: string | null, principal?: Record<..., ...> | (...
+        & ... & ...) | null, principalId?: string | null, roleDefinition?:
+        Record<..., ...> | (... & ... & ...) | null, roleDefinitionId?: string |
+        null, scheduleInfo?: Record<..., ...> | { @odata.type: ..., expiration?:
+        ..., recurrence?: ..., startDateTime?: ... } | null, targetSchedule?:
+        Record<..., ...> | (... & ...) | null, targetScheduleId?: string | null,
+        ticketInfo?: Record<..., ...> | { @odata.type: ..., ticketNumber?: ...,
+        ticketSystem?: ... } | null } & { @odata.type:
+        "#microsoft.graph.unifiedRoleEligibilityScheduleRequest" })[],
+        roleEligibilitySchedules?: (Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & { @odata.type: string, memberType?:
+        string | null, scheduleInfo?: Record<..., ...> | { @odata.type: ...,
+        expiration?: ..., recurrence?: ..., startDateTime?: ... } | null })[] }
+        & { @odata.type: "#microsoft.graph.rbacApplication" }) | null,
+        entitlementManagement?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        resourceNamespaces?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, name?: string, resourceActions?:
+        ...[] } & { @odata.type: "#microsoft.graph.unifiedRbacResourceNamespace"
+        })[], roleAssignments?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, appScope?: Record<..., ...> |
+        (... & ... & ...) | null, appScopeId?: string | null, condition?: string
+        | null, directoryScope?: Record<..., ...> | (... & ... & ...) | null,
+        directoryScopeId?: string | null, principal?: Record<..., ...> | (... &
+        ... & ...) | null, principalId?: string | null, roleDefinition?:
+        Record<..., ...> | (... & ... & ...) | null, roleDefinitionId?: string |
+        null } & { @odata.type: "#microsoft.graph.unifiedRoleAssignment" })[],
+        roleAssignmentScheduleInstances?: (Omit<Omit<..., ...> & Omit<..., ...>
+        & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        activatedUsing?: Record<..., ...> | (... & ...) | null, assignmentType?:
+        string | null, endDateTime?: string | null, memberType?: string | null,
+        roleAssignmentOriginId?: string | null, roleAssignmentScheduleId?:
+        string | null, startDateTime?: string | null })[],
+        roleAssignmentScheduleRequests?: (Omit<Omit<..., ...> & Omit<..., ...> &
+        { @odata.type: ... }, "@odata.type"> & { @odata.type: string, action?:
+        Record<..., ...> | "unknownFutureValue" | "adminAssign" | "adminUpdate"
+        | "adminRemove" | "selfActivate" | "selfDeactivate" | "adminExtend" |
+        "adminRenew" | "selfExtend" | "selfRenew" | null, activatedUsing?:
+        Record<..., ...> | (... & ...) | null, appScope?: Record<..., ...> |
+        (... & ... & ...) | null, appScopeId?: string | null, directoryScope?:
+        Record<..., ...> | (... & ... & ...) | null, directoryScopeId?: string |
+        null, isValidationOnly?: boolean | null, justification?: string | null,
+        principal?: Record<..., ...> | (... & ... & ...) | null, principalId?:
+        string | null, roleDefinition?: Record<..., ...> | (... & ... & ...) |
+        null, roleDefinitionId?: string | null, scheduleInfo?: Record<..., ...>
+        | { @odata.type: ..., expiration?: ..., recurrence?: ...,
+        startDateTime?: ... } | null, targetSchedule?: Record<..., ...> | (... &
+        ...) | null, targetScheduleId?: string | null, ticketInfo?: Record<...,
+        ...> | { @odata.type: ..., ticketNumber?: ..., ticketSystem?: ... } |
+        null } & { @odata.type:
+        "#microsoft.graph.unifiedRoleAssignmentScheduleRequest" })[],
+        roleAssignmentSchedules?: (Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        activatedUsing?: Record<..., ...> | (... & ...) | null, assignmentType?:
+        string | null, memberType?: string | null, scheduleInfo?: Record<...,
+        ...> | { @odata.type: ..., expiration?: ..., recurrence?: ...,
+        startDateTime?: ... } | null })[], roleDefinitions?: (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, description?: string | null, displayName?: string | null,
+        inheritsPermissionsFrom?: (Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { description?: string | null
+        | undefined; displayName?: string | null | undefined; isBuiltIn?:
+        boolean | null | undefined; ... 6 more ...; '@odata.type': string; } & {
+        ...; })[] | undefined, isBuiltIn?: boolean | null, isEnabled?: boolean |
+        null, resourceScopes?: ...[], rolePermissions?: ...[], templateId?:
+        string | null, version?: string | null } & { @odata.type:
+        "#microsoft.graph.unifiedRoleDefinition" })[],
+        roleEligibilityScheduleInstances?: (Omit<Omit<..., ...> & Omit<..., ...>
+        & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        endDateTime?: string | null, memberType?: string | null,
+        roleEligibilityScheduleId?: string | null, startDateTime?: string | null
+        })[], roleEligibilityScheduleRequests?: (Omit<Omit<..., ...> & Omit<...,
+        ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        action?: Record<..., ...> | "unknownFutureValue" | "adminAssign" |
+        "adminUpdate" | "adminRemove" | "selfActivate" | "selfDeactivate" |
+        "adminExtend" | "adminRenew" | "selfExtend" | "selfRenew" | null,
+        appScope?: Record<..., ...> | (... & ... & ...) | null, appScopeId?:
+        string | null, directoryScope?: Record<..., ...> | (... & ... & ...) |
+        null, directoryScopeId?: string | null, isValidationOnly?: boolean |
+        null, justification?: string | null, principal?: Record<..., ...> | (...
+        & ... & ...) | null, principalId?: string | null, roleDefinition?:
+        Record<..., ...> | (... & ... & ...) | null, roleDefinitionId?: string |
+        null, scheduleInfo?: Record<..., ...> | { @odata.type: ..., expiration?:
+        ..., recurrence?: ..., startDateTime?: ... } | null, targetSchedule?:
+        Record<..., ...> | (... & ...) | null, targetScheduleId?: string | null,
+        ticketInfo?: Record<..., ...> | { @odata.type: ..., ticketNumber?: ...,
+        ticketSystem?: ... } | null } & { @odata.type:
+        "#microsoft.graph.unifiedRoleEligibilityScheduleRequest" })[],
+        roleEligibilitySchedules?: (Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & { @odata.type: string, memberType?:
+        string | null, scheduleInfo?: Record<..., ...> | { @odata.type: ...,
+        expiration?: ..., recurrence?: ..., startDateTime?: ... } | null })[] }
+        & { @odata.type: "#microsoft.graph.rbacApplication" }) | null }>
       parameters:
         - id: body
-          type: Operation&lt;"/roleManagement", "patch"&gt;
+          type: >-
+            { <xref uid="@odata.type" />: string, directory?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, resourceNamespaces?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            name?: string, resourceActions?: (... & ... & ...)[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRbacResourceNamespace" />" })[],
+            roleAssignments?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, appScope?: Record&lt;string, never&gt;
+            | (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+            displayName?: ..., type?: ... } & { <xref uid="@odata.type" />: ...
+            }) | null, appScopeId?: string | null, condition?: string | null,
+            directoryScope?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt;
+            & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }) |
+            null, directoryScopeId?: string | null, principal?:
+            Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & Omit&lt;...,
+            ...&gt; & { <xref uid="@odata.type" />: ... }) | null, principalId?:
+            string | null, roleDefinition?: Record&lt;string, never&gt; |
+            (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+            description?: ..., displayName?: ..., inheritsPermissionsFrom?: ...,
+            isBuiltIn?: ..., isEnabled?: ..., resourceScopes?: ...,
+            rolePermissions?: ..., templateId?: ..., version?: ... } & { <xref
+            uid="@odata.type" />: ... }) | null, roleDefinitionId?: string |
+            null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRoleAssignment" />" })[],
+            roleAssignmentScheduleInstances?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., appScope?: ...,
+            appScopeId?: ..., directoryScope?: ..., directoryScopeId?: ...,
+            principal?: ..., principalId?: ..., roleDefinition?: ...,
+            roleDefinitionId?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRoleScheduleInstanceBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            activatedUsing?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt;
+            & { <xref uid="@odata.type" />: ..., endDateTime?: ..., memberType?:
+            ..., roleEligibilityScheduleId?: ..., startDateTime?: ... }) | null,
+            assignmentType?: string | null, endDateTime?: string | null,
+            memberType?: string | null, roleAssignmentOriginId?: string | null,
+            roleAssignmentScheduleId?: string | null, startDateTime?: string |
+            null })[], roleAssignmentScheduleRequests?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., approvalId?:
+            ..., completedDateTime?: ..., createdBy?: ..., createdDateTime?:
+            ..., customData?: ..., status?: ... }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.request" />" }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, action?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "adminAssign" |
+            "adminUpdate" | "adminRemove" | "selfActivate" | "selfDeactivate" |
+            "adminExtend" | "adminRenew" | "selfExtend" | "selfRenew" | null,
+            activatedUsing?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt;
+            & { <xref uid="@odata.type" />: ..., memberType?: ...,
+            scheduleInfo?: ... }) | null, appScope?: Record&lt;string, never&gt;
+            | (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+            displayName?: ..., type?: ... } & { <xref uid="@odata.type" />: ...
+            }) | null, appScopeId?: string | null, directoryScope?:
+            Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & Omit&lt;...,
+            ...&gt; & { <xref uid="@odata.type" />: ... }) | null,
+            directoryScopeId?: string | null, isValidationOnly?: boolean | null,
+            justification?: string | null, principal?: Record&lt;string,
+            never&gt; | (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ... }) | null, principalId?: string | null,
+            roleDefinition?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt;
+            & { <xref uid="@odata.type" />: ..., description?: ...,
+            displayName?: ..., inheritsPermissionsFrom?: ..., isBuiltIn?: ...,
+            isEnabled?: ..., resourceScopes?: ..., rolePermissions?: ...,
+            templateId?: ..., version?: ... } & { <xref uid="@odata.type" />:
+            ... }) | null, roleDefinitionId?: string | null, scheduleInfo?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            expiration?: function, recurrence?: function, startDateTime?:
+            function } | null, targetSchedule?: Record&lt;string, never&gt; |
+            (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+            activatedUsing?: ..., assignmentType?: ..., memberType?: ...,
+            scheduleInfo?: ... }) | null, targetScheduleId?: string | null,
+            ticketInfo?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, ticketNumber?: function, ticketSystem?: function } |
+            null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRoleAssignmentScheduleRequest" />" })[],
+            roleAssignmentSchedules?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type"
+            />: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: ..., appScope?: ..., appScopeId?: ...,
+            createdDateTime?: ..., createdUsing?: ..., directoryScope?: ...,
+            directoryScopeId?: ..., modifiedDateTime?: ..., principal?: ...,
+            principalId?: ..., roleDefinition?: ..., roleDefinitionId?: ...,
+            status?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRoleScheduleBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            activatedUsing?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt;
+            & { <xref uid="@odata.type" />: ..., memberType?: ...,
+            scheduleInfo?: ... }) | null, assignmentType?: string | null,
+            memberType?: string | null, scheduleInfo?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, expiration?:
+            function, recurrence?: function, startDateTime?: function } | null
+            })[], roleDefinitions?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, description?: string | null,
+            displayName?: string | null, inheritsPermissionsFrom?: (Omit&lt;{
+            id?: string | undefined; '<xref uid="@odata.type" />': string; },
+            "<xref uid="@odata.type" />"&gt; & { description?: string | null |
+            undefined; displayName?: string | null | undefined; isBuiltIn?:
+            boolean | null | undefined; ... 6 more ...; '<xref uid="@odata.type"
+            />': string; } & { ...; })[] | undefined, isBuiltIn?: boolean |
+            null, isEnabled?: boolean | null, resourceScopes?: string[],
+            rolePermissions?: { <xref uid="@odata.type" />: ...,
+            allowedResourceActions?: ..., condition?: ...,
+            excludedResourceActions?: ... }[], templateId?: string | null,
+            version?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRoleDefinition" />" })[],
+            roleEligibilityScheduleInstances?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., appScope?: ...,
+            appScopeId?: ..., directoryScope?: ..., directoryScopeId?: ...,
+            principal?: ..., principalId?: ..., roleDefinition?: ...,
+            roleDefinitionId?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRoleScheduleInstanceBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            endDateTime?: string | null, memberType?: string | null,
+            roleEligibilityScheduleId?: string | null, startDateTime?: string |
+            null })[], roleEligibilityScheduleRequests?: (Omit&lt;Omit&lt;{
+            <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            ..., approvalId?: ..., completedDateTime?: ..., createdBy?: ...,
+            createdDateTime?: ..., customData?: ..., status?: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.request" />" }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, action?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "adminAssign" |
+            "adminUpdate" | "adminRemove" | "selfActivate" | "selfDeactivate" |
+            "adminExtend" | "adminRenew" | "selfExtend" | "selfRenew" | null,
+            appScope?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & {
+            <xref uid="@odata.type" />: ..., displayName?: ..., type?: ... } & {
+            <xref uid="@odata.type" />: ... }) | null, appScopeId?: string |
+            null, directoryScope?: Record&lt;string, never&gt; | (Omit&lt;...,
+            ...&gt; & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...
+            }) | null, directoryScopeId?: string | null, isValidationOnly?:
+            boolean | null, justification?: string | null, principal?:
+            Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & Omit&lt;...,
+            ...&gt; & { <xref uid="@odata.type" />: ... }) | null, principalId?:
+            string | null, roleDefinition?: Record&lt;string, never&gt; |
+            (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+            description?: ..., displayName?: ..., inheritsPermissionsFrom?: ...,
+            isBuiltIn?: ..., isEnabled?: ..., resourceScopes?: ...,
+            rolePermissions?: ..., templateId?: ..., version?: ... } & { <xref
+            uid="@odata.type" />: ... }) | null, roleDefinitionId?: string |
+            null, scheduleInfo?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, expiration?: function, recurrence?:
+            function, startDateTime?: function } | null, targetSchedule?:
+            Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ..., memberType?: ..., scheduleInfo?: ... }) |
+            null, targetScheduleId?: string | null, ticketInfo?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            ticketNumber?: function, ticketSystem?: function } | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRoleEligibilityScheduleRequest" />"
+            })[], roleEligibilitySchedules?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., appScope?: ...,
+            appScopeId?: ..., createdDateTime?: ..., createdUsing?: ...,
+            directoryScope?: ..., directoryScopeId?: ..., modifiedDateTime?:
+            ..., principal?: ..., principalId?: ..., roleDefinition?: ...,
+            roleDefinitionId?: ..., status?: ... }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRoleScheduleBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            memberType?: string | null, scheduleInfo?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, expiration?:
+            function, recurrence?: function, startDateTime?: function } | null
+            })[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.rbacApplication" />" }) | null,
+            entitlementManagement?: Record&lt;string, never&gt; | (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            resourceNamespaces?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, name?: string, resourceActions?: (...
+            & ... & ...)[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRbacResourceNamespace" />" })[],
+            roleAssignments?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, appScope?: Record&lt;string, never&gt;
+            | (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+            displayName?: ..., type?: ... } & { <xref uid="@odata.type" />: ...
+            }) | null, appScopeId?: string | null, condition?: string | null,
+            directoryScope?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt;
+            & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }) |
+            null, directoryScopeId?: string | null, principal?:
+            Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & Omit&lt;...,
+            ...&gt; & { <xref uid="@odata.type" />: ... }) | null, principalId?:
+            string | null, roleDefinition?: Record&lt;string, never&gt; |
+            (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+            description?: ..., displayName?: ..., inheritsPermissionsFrom?: ...,
+            isBuiltIn?: ..., isEnabled?: ..., resourceScopes?: ...,
+            rolePermissions?: ..., templateId?: ..., version?: ... } & { <xref
+            uid="@odata.type" />: ... }) | null, roleDefinitionId?: string |
+            null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRoleAssignment" />" })[],
+            roleAssignmentScheduleInstances?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., appScope?: ...,
+            appScopeId?: ..., directoryScope?: ..., directoryScopeId?: ...,
+            principal?: ..., principalId?: ..., roleDefinition?: ...,
+            roleDefinitionId?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRoleScheduleInstanceBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            activatedUsing?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt;
+            & { <xref uid="@odata.type" />: ..., endDateTime?: ..., memberType?:
+            ..., roleEligibilityScheduleId?: ..., startDateTime?: ... }) | null,
+            assignmentType?: string | null, endDateTime?: string | null,
+            memberType?: string | null, roleAssignmentOriginId?: string | null,
+            roleAssignmentScheduleId?: string | null, startDateTime?: string |
+            null })[], roleAssignmentScheduleRequests?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., approvalId?:
+            ..., completedDateTime?: ..., createdBy?: ..., createdDateTime?:
+            ..., customData?: ..., status?: ... }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.request" />" }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, action?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "adminAssign" |
+            "adminUpdate" | "adminRemove" | "selfActivate" | "selfDeactivate" |
+            "adminExtend" | "adminRenew" | "selfExtend" | "selfRenew" | null,
+            activatedUsing?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt;
+            & { <xref uid="@odata.type" />: ..., memberType?: ...,
+            scheduleInfo?: ... }) | null, appScope?: Record&lt;string, never&gt;
+            | (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+            displayName?: ..., type?: ... } & { <xref uid="@odata.type" />: ...
+            }) | null, appScopeId?: string | null, directoryScope?:
+            Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & Omit&lt;...,
+            ...&gt; & { <xref uid="@odata.type" />: ... }) | null,
+            directoryScopeId?: string | null, isValidationOnly?: boolean | null,
+            justification?: string | null, principal?: Record&lt;string,
+            never&gt; | (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ... }) | null, principalId?: string | null,
+            roleDefinition?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt;
+            & { <xref uid="@odata.type" />: ..., description?: ...,
+            displayName?: ..., inheritsPermissionsFrom?: ..., isBuiltIn?: ...,
+            isEnabled?: ..., resourceScopes?: ..., rolePermissions?: ...,
+            templateId?: ..., version?: ... } & { <xref uid="@odata.type" />:
+            ... }) | null, roleDefinitionId?: string | null, scheduleInfo?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            expiration?: function, recurrence?: function, startDateTime?:
+            function } | null, targetSchedule?: Record&lt;string, never&gt; |
+            (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+            activatedUsing?: ..., assignmentType?: ..., memberType?: ...,
+            scheduleInfo?: ... }) | null, targetScheduleId?: string | null,
+            ticketInfo?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, ticketNumber?: function, ticketSystem?: function } |
+            null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRoleAssignmentScheduleRequest" />" })[],
+            roleAssignmentSchedules?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type"
+            />: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: ..., appScope?: ..., appScopeId?: ...,
+            createdDateTime?: ..., createdUsing?: ..., directoryScope?: ...,
+            directoryScopeId?: ..., modifiedDateTime?: ..., principal?: ...,
+            principalId?: ..., roleDefinition?: ..., roleDefinitionId?: ...,
+            status?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRoleScheduleBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            activatedUsing?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt;
+            & { <xref uid="@odata.type" />: ..., memberType?: ...,
+            scheduleInfo?: ... }) | null, assignmentType?: string | null,
+            memberType?: string | null, scheduleInfo?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, expiration?:
+            function, recurrence?: function, startDateTime?: function } | null
+            })[], roleDefinitions?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, description?: string | null,
+            displayName?: string | null, inheritsPermissionsFrom?: (Omit&lt;{
+            id?: string | undefined; '<xref uid="@odata.type" />': string; },
+            "<xref uid="@odata.type" />"&gt; & { description?: string | null |
+            undefined; displayName?: string | null | undefined; isBuiltIn?:
+            boolean | null | undefined; ... 6 more ...; '<xref uid="@odata.type"
+            />': string; } & { ...; })[] | undefined, isBuiltIn?: boolean |
+            null, isEnabled?: boolean | null, resourceScopes?: string[],
+            rolePermissions?: { <xref uid="@odata.type" />: ...,
+            allowedResourceActions?: ..., condition?: ...,
+            excludedResourceActions?: ... }[], templateId?: string | null,
+            version?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRoleDefinition" />" })[],
+            roleEligibilityScheduleInstances?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., appScope?: ...,
+            appScopeId?: ..., directoryScope?: ..., directoryScopeId?: ...,
+            principal?: ..., principalId?: ..., roleDefinition?: ...,
+            roleDefinitionId?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRoleScheduleInstanceBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            endDateTime?: string | null, memberType?: string | null,
+            roleEligibilityScheduleId?: string | null, startDateTime?: string |
+            null })[], roleEligibilityScheduleRequests?: (Omit&lt;Omit&lt;{
+            <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            ..., approvalId?: ..., completedDateTime?: ..., createdBy?: ...,
+            createdDateTime?: ..., customData?: ..., status?: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.request" />" }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, action?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "adminAssign" |
+            "adminUpdate" | "adminRemove" | "selfActivate" | "selfDeactivate" |
+            "adminExtend" | "adminRenew" | "selfExtend" | "selfRenew" | null,
+            appScope?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & {
+            <xref uid="@odata.type" />: ..., displayName?: ..., type?: ... } & {
+            <xref uid="@odata.type" />: ... }) | null, appScopeId?: string |
+            null, directoryScope?: Record&lt;string, never&gt; | (Omit&lt;...,
+            ...&gt; & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...
+            }) | null, directoryScopeId?: string | null, isValidationOnly?:
+            boolean | null, justification?: string | null, principal?:
+            Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & Omit&lt;...,
+            ...&gt; & { <xref uid="@odata.type" />: ... }) | null, principalId?:
+            string | null, roleDefinition?: Record&lt;string, never&gt; |
+            (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+            description?: ..., displayName?: ..., inheritsPermissionsFrom?: ...,
+            isBuiltIn?: ..., isEnabled?: ..., resourceScopes?: ...,
+            rolePermissions?: ..., templateId?: ..., version?: ... } & { <xref
+            uid="@odata.type" />: ... }) | null, roleDefinitionId?: string |
+            null, scheduleInfo?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, expiration?: function, recurrence?:
+            function, startDateTime?: function } | null, targetSchedule?:
+            Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ..., memberType?: ..., scheduleInfo?: ... }) |
+            null, targetScheduleId?: string | null, ticketInfo?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            ticketNumber?: function, ticketSystem?: function } | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRoleEligibilityScheduleRequest" />"
+            })[], roleEligibilitySchedules?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., appScope?: ...,
+            appScopeId?: ..., createdDateTime?: ..., createdUsing?: ...,
+            directoryScope?: ..., directoryScopeId?: ..., modifiedDateTime?:
+            ..., principal?: ..., principalId?: ..., roleDefinition?: ...,
+            roleDefinitionId?: ..., status?: ... }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.unifiedRoleScheduleBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            memberType?: string | null, scheduleInfo?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, expiration?:
+            function, recurrence?: function, startDateTime?: function } | null
+            })[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.rbacApplication" />" }) | null }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["PATCH /roleManagement"]["response"]&gt;
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string, directory?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, resourceNamespaces?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          name?: string, resourceActions?: ...[] } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.unifiedRbacResourceNamespace" />"
+          })[], roleAssignments?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, appScope?: Record&lt;..., ...&gt; | (...
+          & ... & ...) | null, appScopeId?: string | null, condition?: string |
+          null, directoryScope?: Record&lt;..., ...&gt; | (... & ... & ...) |
+          null, directoryScopeId?: string | null, principal?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null, principalId?: string | null,
+          roleDefinition?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+          roleDefinitionId?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.unifiedRoleAssignment" />" })[],
+          roleAssignmentScheduleInstances?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          activatedUsing?: Record&lt;..., ...&gt; | (... & ...) | null,
+          assignmentType?: string | null, endDateTime?: string | null,
+          memberType?: string | null, roleAssignmentOriginId?: string | null,
+          roleAssignmentScheduleId?: string | null, startDateTime?: string |
+          null })[], roleAssignmentScheduleRequests?: (Omit&lt;Omit&lt;...,
+          ...&gt; & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, action?: Record&lt;..., ...&gt; | "unknownFutureValue" |
+          "adminAssign" | "adminUpdate" | "adminRemove" | "selfActivate" |
+          "selfDeactivate" | "adminExtend" | "adminRenew" | "selfExtend" |
+          "selfRenew" | null, activatedUsing?: Record&lt;..., ...&gt; | (... &
+          ...) | null, appScope?: Record&lt;..., ...&gt; | (... & ... & ...) |
+          null, appScopeId?: string | null, directoryScope?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null, directoryScopeId?: string | null,
+          isValidationOnly?: boolean | null, justification?: string | null,
+          principal?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+          principalId?: string | null, roleDefinition?: Record&lt;..., ...&gt; |
+          (... & ... & ...) | null, roleDefinitionId?: string | null,
+          scheduleInfo?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., expiration?: ..., recurrence?: ..., startDateTime?: ... } | null,
+          targetSchedule?: Record&lt;..., ...&gt; | (... & ...) | null,
+          targetScheduleId?: string | null, ticketInfo?: Record&lt;..., ...&gt;
+          | { <xref uid="@odata.type" />: ..., ticketNumber?: ...,
+          ticketSystem?: ... } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.unifiedRoleAssignmentScheduleRequest" />" })[],
+          roleAssignmentSchedules?: (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          activatedUsing?: Record&lt;..., ...&gt; | (... & ...) | null,
+          assignmentType?: string | null, memberType?: string | null,
+          scheduleInfo?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., expiration?: ..., recurrence?: ..., startDateTime?: ... } | null
+          })[], roleDefinitions?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, description?: string | null,
+          displayName?: string | null, inheritsPermissionsFrom?: (Omit&lt;{ id?:
+          string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & { description?: string | null | undefined;
+          displayName?: string | null | undefined; isBuiltIn?: boolean | null |
+          undefined; ... 6 more ...; '<xref uid="@odata.type" />': string; } & {
+          ...; })[] | undefined, isBuiltIn?: boolean | null, isEnabled?: boolean
+          | null, resourceScopes?: ...[], rolePermissions?: ...[], templateId?:
+          string | null, version?: string | null } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.unifiedRoleDefinition" />" })[],
+          roleEligibilityScheduleInstances?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          endDateTime?: string | null, memberType?: string | null,
+          roleEligibilityScheduleId?: string | null, startDateTime?: string |
+          null })[], roleEligibilityScheduleRequests?: (Omit&lt;Omit&lt;...,
+          ...&gt; & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, action?: Record&lt;..., ...&gt; | "unknownFutureValue" |
+          "adminAssign" | "adminUpdate" | "adminRemove" | "selfActivate" |
+          "selfDeactivate" | "adminExtend" | "adminRenew" | "selfExtend" |
+          "selfRenew" | null, appScope?: Record&lt;..., ...&gt; | (... & ... &
+          ...) | null, appScopeId?: string | null, directoryScope?:
+          Record&lt;..., ...&gt; | (... & ... & ...) | null, directoryScopeId?:
+          string | null, isValidationOnly?: boolean | null, justification?:
+          string | null, principal?: Record&lt;..., ...&gt; | (... & ... & ...)
+          | null, principalId?: string | null, roleDefinition?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null, roleDefinitionId?: string | null,
+          scheduleInfo?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., expiration?: ..., recurrence?: ..., startDateTime?: ... } | null,
+          targetSchedule?: Record&lt;..., ...&gt; | (... & ...) | null,
+          targetScheduleId?: string | null, ticketInfo?: Record&lt;..., ...&gt;
+          | { <xref uid="@odata.type" />: ..., ticketNumber?: ...,
+          ticketSystem?: ... } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.unifiedRoleEligibilityScheduleRequest" />" })[],
+          roleEligibilitySchedules?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          memberType?: string | null, scheduleInfo?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., expiration?: ..., recurrence?: ...,
+          startDateTime?: ... } | null })[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.rbacApplication" />" }) | null,
+          entitlementManagement?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, resourceNamespaces?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          name?: string, resourceActions?: ...[] } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.unifiedRbacResourceNamespace" />"
+          })[], roleAssignments?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, appScope?: Record&lt;..., ...&gt; | (...
+          & ... & ...) | null, appScopeId?: string | null, condition?: string |
+          null, directoryScope?: Record&lt;..., ...&gt; | (... & ... & ...) |
+          null, directoryScopeId?: string | null, principal?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null, principalId?: string | null,
+          roleDefinition?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+          roleDefinitionId?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.unifiedRoleAssignment" />" })[],
+          roleAssignmentScheduleInstances?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          activatedUsing?: Record&lt;..., ...&gt; | (... & ...) | null,
+          assignmentType?: string | null, endDateTime?: string | null,
+          memberType?: string | null, roleAssignmentOriginId?: string | null,
+          roleAssignmentScheduleId?: string | null, startDateTime?: string |
+          null })[], roleAssignmentScheduleRequests?: (Omit&lt;Omit&lt;...,
+          ...&gt; & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, action?: Record&lt;..., ...&gt; | "unknownFutureValue" |
+          "adminAssign" | "adminUpdate" | "adminRemove" | "selfActivate" |
+          "selfDeactivate" | "adminExtend" | "adminRenew" | "selfExtend" |
+          "selfRenew" | null, activatedUsing?: Record&lt;..., ...&gt; | (... &
+          ...) | null, appScope?: Record&lt;..., ...&gt; | (... & ... & ...) |
+          null, appScopeId?: string | null, directoryScope?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null, directoryScopeId?: string | null,
+          isValidationOnly?: boolean | null, justification?: string | null,
+          principal?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+          principalId?: string | null, roleDefinition?: Record&lt;..., ...&gt; |
+          (... & ... & ...) | null, roleDefinitionId?: string | null,
+          scheduleInfo?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., expiration?: ..., recurrence?: ..., startDateTime?: ... } | null,
+          targetSchedule?: Record&lt;..., ...&gt; | (... & ...) | null,
+          targetScheduleId?: string | null, ticketInfo?: Record&lt;..., ...&gt;
+          | { <xref uid="@odata.type" />: ..., ticketNumber?: ...,
+          ticketSystem?: ... } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.unifiedRoleAssignmentScheduleRequest" />" })[],
+          roleAssignmentSchedules?: (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          activatedUsing?: Record&lt;..., ...&gt; | (... & ...) | null,
+          assignmentType?: string | null, memberType?: string | null,
+          scheduleInfo?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., expiration?: ..., recurrence?: ..., startDateTime?: ... } | null
+          })[], roleDefinitions?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, description?: string | null,
+          displayName?: string | null, inheritsPermissionsFrom?: (Omit&lt;{ id?:
+          string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & { description?: string | null | undefined;
+          displayName?: string | null | undefined; isBuiltIn?: boolean | null |
+          undefined; ... 6 more ...; '<xref uid="@odata.type" />': string; } & {
+          ...; })[] | undefined, isBuiltIn?: boolean | null, isEnabled?: boolean
+          | null, resourceScopes?: ...[], rolePermissions?: ...[], templateId?:
+          string | null, version?: string | null } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.unifiedRoleDefinition" />" })[],
+          roleEligibilityScheduleInstances?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          endDateTime?: string | null, memberType?: string | null,
+          roleEligibilityScheduleId?: string | null, startDateTime?: string |
+          null })[], roleEligibilityScheduleRequests?: (Omit&lt;Omit&lt;...,
+          ...&gt; & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, action?: Record&lt;..., ...&gt; | "unknownFutureValue" |
+          "adminAssign" | "adminUpdate" | "adminRemove" | "selfActivate" |
+          "selfDeactivate" | "adminExtend" | "adminRenew" | "selfExtend" |
+          "selfRenew" | null, appScope?: Record&lt;..., ...&gt; | (... & ... &
+          ...) | null, appScopeId?: string | null, directoryScope?:
+          Record&lt;..., ...&gt; | (... & ... & ...) | null, directoryScopeId?:
+          string | null, isValidationOnly?: boolean | null, justification?:
+          string | null, principal?: Record&lt;..., ...&gt; | (... & ... & ...)
+          | null, principalId?: string | null, roleDefinition?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null, roleDefinitionId?: string | null,
+          scheduleInfo?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., expiration?: ..., recurrence?: ..., startDateTime?: ... } | null,
+          targetSchedule?: Record&lt;..., ...&gt; | (... & ...) | null,
+          targetScheduleId?: string | null, ticketInfo?: Record&lt;..., ...&gt;
+          | { <xref uid="@odata.type" />: ..., ticketNumber?: ...,
+          ticketSystem?: ... } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.unifiedRoleEligibilityScheduleRequest" />" })[],
+          roleEligibilitySchedules?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          memberType?: string | null, scheduleInfo?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., expiration?: ..., recurrence?: ...,
+          startDateTime?: ... } | null })[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.rbacApplication" />" }) | null }&gt;

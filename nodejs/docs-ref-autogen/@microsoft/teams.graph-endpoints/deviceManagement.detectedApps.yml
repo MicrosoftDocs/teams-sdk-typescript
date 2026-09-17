@@ -7,7 +7,202 @@ interfaces:
   - '@microsoft/teams.graph-endpoints.deviceManagement.detectedApps.IEndpoints'
 package: '@microsoft/teams.graph-endpoints'
 functions:
-  - name: create(Operation<"/deviceManagement/detectedApps", "post">)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, deviceCount?: number, displayName?: string | null,
+      managedDevices?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, activationLockBypassCode?: string
+      | null, androidSecurityPatchLevel?: string | null, azureADDeviceId?:
+      string | null, azureADRegistered?: boolean | null,
+      complianceGracePeriodExpirationDateTime?: string, complianceState?:
+      "unknown" | "compliant" | "error" | "conflict" | "noncompliant" |
+      "inGracePeriod" | "configManager",
+      configurationManagerClientEnabledFeatures?: Record<string, never> | {
+      @odata.type: string, compliancePolicy?: boolean, deviceConfiguration?:
+      boolean, inventory?: boolean, modernApps?: boolean, resourceAccess?:
+      boolean, windowsUpdateForBusiness?: boolean } | null,
+      deviceActionResults?: { @odata.type: string, actionName?: string | null,
+      actionState?: "none" | "failed" | "pending" | "active" | "canceled" |
+      "done" | "notSupported", lastUpdatedDateTime?: string, startDateTime?:
+      string }[], deviceCategory?: Record<string, never> | (Omit<{ @odata.type:
+      string, id?: function }, "@odata.type"> & { @odata.type: string,
+      description?: string | null, displayName?: string | null } & {
+      @odata.type: "#microsoft.graph.deviceCategory" }) | null,
+      deviceCategoryDisplayName?: string | null, deviceCompliancePolicyStates?:
+      (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
+      string, displayName?: function, platformType?: function, settingCount?:
+      function, settingStates?: function, state?: function, version?: function }
+      & { @odata.type: "#microsoft.graph.deviceCompliancePolicyState" })[],
+      deviceConfigurationStates?: (Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & { @odata.type: string, displayName?: function,
+      platformType?: function, settingCount?: function, settingStates?:
+      function, state?: function, version?: function } & { @odata.type:
+      "#microsoft.graph.deviceConfigurationState" })[], deviceEnrollmentType?:
+      "unknown" | "unknownFutureValue" | "userEnrollment" |
+      "deviceEnrollmentManager" | "appleBulkWithUser" | "appleBulkWithoutUser" |
+      "windowsAzureADJoin" | "windowsBulkUserless" | "windowsAutoEnrollment" |
+      "windowsBulkAzureDomainJoin" | "windowsCoManagement" |
+      "windowsAzureADJoinUsingDeviceAuth" | "appleUserEnrollment" |
+      "appleUserEnrollmentWithServiceAccount", deviceHealthAttestationState?:
+      Record<string, never> | { @odata.type: string, attestationIdentityKey?:
+      string | null, bitLockerStatus?: string | null, bootAppSecurityVersion?:
+      string | null, bootDebugging?: string | null, bootManagerSecurityVersion?:
+      string | null, bootManagerVersion?: string | null, bootRevisionListInfo?:
+      string | null, codeIntegrity?: string | null, codeIntegrityCheckVersion?:
+      string | null, codeIntegrityPolicy?: string | null, contentNamespaceUrl?:
+      string | null, contentVersion?: string | null, dataExcutionPolicy?: string
+      | null, deviceHealthAttestationStatus?: string | null,
+      earlyLaunchAntiMalwareDriverProtection?: string | null,
+      healthAttestationSupportedStatus?: string | null,
+      healthStatusMismatchInfo?: string | null, issuedDateTime?: string,
+      lastUpdateDateTime?: string | null, operatingSystemKernelDebugging?:
+      string | null, operatingSystemRevListInfo?: string | null, pcr0?: string |
+      null, pcrHashAlgorithm?: string | null, resetCount?: number,
+      restartCount?: number, safeMode?: string | null, secureBoot?: string |
+      null, secureBootConfigurationPolicyFingerPrint?: string | null,
+      testSigning?: string | null, tpmVersion?: string | null,
+      virtualSecureMode?: string | null, windowsPE?: string | null } | null,
+      deviceName?: string | null, deviceRegistrationState?: "unknown" |
+      "notRegistered" | "registered" | "revoked" | "keyConflict" |
+      "approvalPending" | "certificateReset" | "notRegisteredPendingEnrollment",
+      easActivated?: boolean, easActivationDateTime?: string, easDeviceId?:
+      string | null, emailAddress?: string | null, enrolledDateTime?: string,
+      enrollmentProfileName?: string | null, ethernetMacAddress?: string | null,
+      exchangeAccessState?: "none" | "blocked" | "unknown" | "allowed" |
+      "quarantined", exchangeAccessStateReason?: "other" | "none" | "unknown" |
+      "compliant" | "exchangeGlobalRule" | "exchangeIndividualRule" |
+      "exchangeDeviceRule" | "exchangeUpgrade" | "exchangeMailboxPolicy" |
+      "notCompliant" | "notEnrolled" | "unknownLocation" | "mfaRequired" |
+      "azureADBlockDueToAccessPolicy" | "compromisedPassword" |
+      "deviceNotKnownWithManagedApp", exchangeLastSuccessfulSyncDateTime?:
+      string, freeStorageSpaceInBytes?: number, iccid?: string | null, imei?:
+      string | null, isEncrypted?: boolean, isSupervised?: boolean, jailBroken?:
+      string | null, lastSyncDateTime?: string, logCollectionRequests?: (Omit<{
+      @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+      enrolledByUser?: function, expirationDateTimeUTC?: function,
+      initiatedByUserPrincipalName?: function, managedDeviceId?: function,
+      receivedDateTimeUTC?: function, requestedDateTimeUTC?: function,
+      sizeInKB?: function, status?: function } & { @odata.type:
+      "#microsoft.graph.deviceLogCollectionResponse" })[], managedDeviceName?:
+      string | null, managedDeviceOwnerType?: "unknown" | "unknownFutureValue" |
+      "company" | "personal", managementAgent?: "unknown" | "eas" | "mdm" |
+      "easMdm" | "intuneClient" | "easIntuneClient" |
+      "configurationManagerClient" | "configurationManagerClientMdm" |
+      "configurationManagerClientMdmEas" | "jamf" |
+      "googleCloudDevicePolicyController" | "microsoft365ManagedMdm" |
+      "msSense", managementCertificateExpirationDate?: string, managementState?:
+      "unknownFutureValue" | "managed" | "retirePending" | "retireFailed" |
+      "wipePending" | "wipeFailed" | "unhealthy" | "deletePending" |
+      "retireIssued" | "wipeIssued" | "wipeCanceled" | "retireCanceled" |
+      "discovered", manufacturer?: string | null, meid?: string | null, model?:
+      string | null, notes?: string | null, operatingSystem?: string | null,
+      osVersion?: string | null, partnerReportedThreatState?: "unknown" |
+      "unresponsive" | "activated" | "deactivated" | "secured" | "lowSeverity" |
+      "mediumSeverity" | "highSeverity" | "compromised" | "misconfigured",
+      phoneNumber?: string | null, physicalMemoryInBytes?: number,
+      remoteAssistanceSessionErrorDetails?: string | null,
+      remoteAssistanceSessionUrl?: string | null,
+      requireUserEnrollmentApproval?: boolean | null, serialNumber?: string |
+      null, subscriberCarrier?: string | null, totalStorageSpaceInBytes?:
+      number, udid?: string | null, userDisplayName?: string | null, userId?:
+      string | null, userPrincipalName?: string | null, users?: (Omit<... & ...
+      & ..., "@odata.type"> & { @odata.type: string, aboutMe?: function,
+      accountEnabled?: function, activities?: function, ageGroup?: function,
+      agreementAcceptances?: function, appRoleAssignments?: function,
+      assignedLicenses?: function, assignedPlans?: function, authentication?:
+      function, authorizationInfo?: function, birthday?: function,
+      businessPhones?: function, calendar?: function, calendarGroups?: function,
+      calendars?: function, calendarView?: function, chats?: function, city?:
+      function, cloudClipboard?: function, cloudPCs?: function, companyName?:
+      function, consentProvidedForMinor?: function, contactFolders?: function,
+      contacts?: function, country?: function, createdDateTime?: function,
+      createdObjects?: function, creationType?: function,
+      customSecurityAttributes?: function, dataSecurityAndGovernance?: function,
+      department?: function, deviceEnrollmentLimit?: function,
+      deviceManagementTroubleshootingEvents?: function, directReports?:
+      function, displayName?: function, drive?: function, drives?: function,
+      employeeExperience?: function, employeeHireDate?: function, employeeId?:
+      function, employeeLeaveDateTime?: function, employeeOrgData?: function,
+      employeeType?: function, events?: function, extensions?: function,
+      externalUserState?: function, externalUserStateChangeDateTime?: function,
+      faxNumber?: function, followedSites?: function, givenName?: function,
+      hireDate?: function, identities?: function, imAddresses?: function,
+      inferenceClassification?: function, insights?: function, interests?:
+      function, isManagementRestricted?: function, isResourceAccount?: function,
+      jobTitle?: function, joinedTeams?: function, lastPasswordChangeDateTime?:
+      function, legalAgeGroupClassification?: function,
+      licenseAssignmentStates?: function, licenseDetails?: function, mail?:
+      function, mailboxSettings?: function, mailFolders?: function,
+      mailNickname?: function, managedAppRegistrations?: function,
+      managedDevices?: (Omit<{ id?: string | undefined; '@odata.type': string;
+      }, "@odata.type"> & { readonly activationLockBypassCode?: string | null |
+      undefined; readonly androidSecurityPatchLevel?: string | null | undefined;
+      ... 59 more ...; '@odata.type': string; } & { ...; })[] | undefined,
+      manager?: function, memberOf?: function, messages?: function,
+      mobilePhone?: function, mySite?: function, oauth2PermissionGrants?:
+      function, officeLocation?: function, onenote?: function, onlineMeetings?:
+      function, onPremisesDistinguishedName?: function, onPremisesDomainName?:
+      function, onPremisesExtensionAttributes?: function,
+      onPremisesImmutableId?: function, onPremisesLastSyncDateTime?: function,
+      onPremisesProvisioningErrors?: function, onPremisesSamAccountName?:
+      function, onPremisesSecurityIdentifier?: function, onPremisesSyncEnabled?:
+      function, onPremisesUserPrincipalName?: function, otherMails?: function,
+      outlook?: function, ownedDevices?: function, ownedObjects?: function,
+      passwordPolicies?: function, passwordProfile?: function, pastProjects?:
+      function, people?: function, permissionGrants?: function, photo?:
+      function, photos?: function, planner?: function, postalCode?: function,
+      preferredDataLocation?: function, preferredLanguage?: function,
+      preferredName?: function, presence?: function, print?: function,
+      provisionedPlans?: function, proxyAddresses?: function,
+      registeredDevices?: function, responsibilities?: function, schools?:
+      function, scopedRoleMemberOf?: function, securityIdentifier?: function,
+      serviceProvisioningErrors?: function, settings?: function,
+      showInAddressList?: function, signInActivity?: function,
+      signInSessionsValidFromDateTime?: function, skills?: function, solutions?:
+      function, sponsors?: function, state?: function, streetAddress?: function,
+      surname?: function, teamwork?: function, todo?: function,
+      transitiveMemberOf?: function, usageLocation?: function,
+      userPrincipalName?: function, userType?: function } & { @odata.type:
+      "#microsoft.graph.user" })[], wiFiMacAddress?: string | null,
+      windowsProtectionState?: Record<string, never> | (Omit<{ @odata.type:
+      string, id?: function }, "@odata.type"> & { @odata.type: string,
+      antiMalwareVersion?: string | null, detectedMalwareState?: ...[],
+      deviceState?: Record<..., ...> | "clean" | "fullScanPending" |
+      "rebootPending" | "manualStepsPending" | "offlineScanPending" | "critical"
+      | null, engineVersion?: string | null, fullScanOverdue?: boolean | null,
+      fullScanRequired?: boolean | null, isVirtualMachine?: boolean | null,
+      lastFullScanDateTime?: string | null, lastFullScanSignatureVersion?:
+      string | null, lastQuickScanDateTime?: string | null,
+      lastQuickScanSignatureVersion?: string | null, lastReportedDateTime?:
+      string | null, malwareProtectionEnabled?: boolean | null,
+      networkInspectionSystemEnabled?: boolean | null, productStatus?:
+      Record<..., ...> | "noStatus" | "serviceNotRunning" |
+      "serviceStartedWithoutMalwareProtection" |
+      "pendingFullScanDueToThreatAction" | "pendingRebootDueToThreatAction" |
+      "pendingManualStepsDueToThreatAction" | "avSignaturesOutOfDate" |
+      "asSignaturesOutOfDate" | "noQuickScanHappenedForSpecifiedPeriod" |
+      "noFullScanHappenedForSpecifiedPeriod" | "systemInitiatedScanInProgress" |
+      "systemInitiatedCleanInProgress" | "samplesPendingSubmission" |
+      "productRunningInEvaluationMode" | "productRunningInNonGenuineMode" |
+      "productExpired" | "offlineScanRequired" |
+      "serviceShutdownAsPartOfSystemShutdown" |
+      "threatRemediationFailedCritically" |
+      "threatRemediationFailedNonCritically" | "noStatusFlagsSet" |
+      "platformOutOfDate" | "platformUpdateInProgress" |
+      "platformAboutToBeOutdated" |
+      "signatureOrPlatformEndOfLifeIsPastOrIsImpending" |
+      "windowsSModeSignaturesInUseOnNonWin10SInstall" | null, quickScanOverdue?:
+      boolean | null, realTimeProtectionEnabled?: boolean | null,
+      rebootRequired?: boolean | null, signatureUpdateOverdue?: boolean | null,
+      signatureVersion?: string | null, tamperProtectionEnabled?: boolean | null
+      } & { @odata.type: "#microsoft.graph.windowsProtectionState" }) | null } &
+      { @odata.type: "#microsoft.graph.managedDevice" })[], platform?: "unknown"
+      | "windows" | "windowsMobile" | "windowsHolographic" | "ios" | "macOS" |
+      "chromeOS" | "androidOSP" | "androidDeviceAdministrator" |
+      "androidWorkProfile" | "androidDedicatedAndFullyManaged" |
+      "unknownFutureValue", publisher?: string | null, sizeInByte?: number,
+      version?: string | null } & { @odata.type: "#microsoft.graph.detectedApp"
+      })
     uid: '@microsoft/teams.graph-endpoints.deviceManagement.detectedApps.create'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`POST /deviceManagement/detectedApps`'
@@ -15,19 +210,777 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body: Operation<"/deviceManagement/detectedApps",
-        "post">): EndpointRequest<IEndpoints["POST
-        /deviceManagement/detectedApps"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, deviceCount?: number,
+        displayName?: string | null, managedDevices?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        activationLockBypassCode?: string | null, androidSecurityPatchLevel?:
+        string | null, azureADDeviceId?: string | null, azureADRegistered?:
+        boolean | null, complianceGracePeriodExpirationDateTime?: string,
+        complianceState?: "unknown" | "compliant" | "error" | "conflict" |
+        "noncompliant" | "inGracePeriod" | "configManager",
+        configurationManagerClientEnabledFeatures?: Record<string, never> | {
+        @odata.type: string, compliancePolicy?: boolean, deviceConfiguration?:
+        boolean, inventory?: boolean, modernApps?: boolean, resourceAccess?:
+        boolean, windowsUpdateForBusiness?: boolean } | null,
+        deviceActionResults?: { @odata.type: string, actionName?: string | null,
+        actionState?: "none" | "failed" | "pending" | "active" | "canceled" |
+        "done" | "notSupported", lastUpdatedDateTime?: string, startDateTime?:
+        string }[], deviceCategory?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, description?: string | null, displayName?: string | null } & {
+        @odata.type: "#microsoft.graph.deviceCategory" }) | null,
+        deviceCategoryDisplayName?: string | null,
+        deviceCompliancePolicyStates?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, displayName?: function,
+        platformType?: function, settingCount?: function, settingStates?:
+        function, state?: function, version?: function } & { @odata.type:
+        "#microsoft.graph.deviceCompliancePolicyState" })[],
+        deviceConfigurationStates?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, displayName?: function,
+        platformType?: function, settingCount?: function, settingStates?:
+        function, state?: function, version?: function } & { @odata.type:
+        "#microsoft.graph.deviceConfigurationState" })[], deviceEnrollmentType?:
+        "unknown" | "unknownFutureValue" | "userEnrollment" |
+        "deviceEnrollmentManager" | "appleBulkWithUser" | "appleBulkWithoutUser"
+        | "windowsAzureADJoin" | "windowsBulkUserless" | "windowsAutoEnrollment"
+        | "windowsBulkAzureDomainJoin" | "windowsCoManagement" |
+        "windowsAzureADJoinUsingDeviceAuth" | "appleUserEnrollment" |
+        "appleUserEnrollmentWithServiceAccount", deviceHealthAttestationState?:
+        Record<string, never> | { @odata.type: string, attestationIdentityKey?:
+        string | null, bitLockerStatus?: string | null, bootAppSecurityVersion?:
+        string | null, bootDebugging?: string | null,
+        bootManagerSecurityVersion?: string | null, bootManagerVersion?: string
+        | null, bootRevisionListInfo?: string | null, codeIntegrity?: string |
+        null, codeIntegrityCheckVersion?: string | null, codeIntegrityPolicy?:
+        string | null, contentNamespaceUrl?: string | null, contentVersion?:
+        string | null, dataExcutionPolicy?: string | null,
+        deviceHealthAttestationStatus?: string | null,
+        earlyLaunchAntiMalwareDriverProtection?: string | null,
+        healthAttestationSupportedStatus?: string | null,
+        healthStatusMismatchInfo?: string | null, issuedDateTime?: string,
+        lastUpdateDateTime?: string | null, operatingSystemKernelDebugging?:
+        string | null, operatingSystemRevListInfo?: string | null, pcr0?: string
+        | null, pcrHashAlgorithm?: string | null, resetCount?: number,
+        restartCount?: number, safeMode?: string | null, secureBoot?: string |
+        null, secureBootConfigurationPolicyFingerPrint?: string | null,
+        testSigning?: string | null, tpmVersion?: string | null,
+        virtualSecureMode?: string | null, windowsPE?: string | null } | null,
+        deviceName?: string | null, deviceRegistrationState?: "unknown" |
+        "notRegistered" | "registered" | "revoked" | "keyConflict" |
+        "approvalPending" | "certificateReset" |
+        "notRegisteredPendingEnrollment", easActivated?: boolean,
+        easActivationDateTime?: string, easDeviceId?: string | null,
+        emailAddress?: string | null, enrolledDateTime?: string,
+        enrollmentProfileName?: string | null, ethernetMacAddress?: string |
+        null, exchangeAccessState?: "none" | "blocked" | "unknown" | "allowed" |
+        "quarantined", exchangeAccessStateReason?: "other" | "none" | "unknown"
+        | "compliant" | "exchangeGlobalRule" | "exchangeIndividualRule" |
+        "exchangeDeviceRule" | "exchangeUpgrade" | "exchangeMailboxPolicy" |
+        "notCompliant" | "notEnrolled" | "unknownLocation" | "mfaRequired" |
+        "azureADBlockDueToAccessPolicy" | "compromisedPassword" |
+        "deviceNotKnownWithManagedApp", exchangeLastSuccessfulSyncDateTime?:
+        string, freeStorageSpaceInBytes?: number, iccid?: string | null, imei?:
+        string | null, isEncrypted?: boolean, isSupervised?: boolean,
+        jailBroken?: string | null, lastSyncDateTime?: string,
+        logCollectionRequests?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, enrolledByUser?: function,
+        expirationDateTimeUTC?: function, initiatedByUserPrincipalName?:
+        function, managedDeviceId?: function, receivedDateTimeUTC?: function,
+        requestedDateTimeUTC?: function, sizeInKB?: function, status?: function
+        } & { @odata.type: "#microsoft.graph.deviceLogCollectionResponse" })[],
+        managedDeviceName?: string | null, managedDeviceOwnerType?: "unknown" |
+        "unknownFutureValue" | "company" | "personal", managementAgent?:
+        "unknown" | "eas" | "mdm" | "easMdm" | "intuneClient" |
+        "easIntuneClient" | "configurationManagerClient" |
+        "configurationManagerClientMdm" | "configurationManagerClientMdmEas" |
+        "jamf" | "googleCloudDevicePolicyController" | "microsoft365ManagedMdm"
+        | "msSense", managementCertificateExpirationDate?: string,
+        managementState?: "unknownFutureValue" | "managed" | "retirePending" |
+        "retireFailed" | "wipePending" | "wipeFailed" | "unhealthy" |
+        "deletePending" | "retireIssued" | "wipeIssued" | "wipeCanceled" |
+        "retireCanceled" | "discovered", manufacturer?: string | null, meid?:
+        string | null, model?: string | null, notes?: string | null,
+        operatingSystem?: string | null, osVersion?: string | null,
+        partnerReportedThreatState?: "unknown" | "unresponsive" | "activated" |
+        "deactivated" | "secured" | "lowSeverity" | "mediumSeverity" |
+        "highSeverity" | "compromised" | "misconfigured", phoneNumber?: string |
+        null, physicalMemoryInBytes?: number,
+        remoteAssistanceSessionErrorDetails?: string | null,
+        remoteAssistanceSessionUrl?: string | null,
+        requireUserEnrollmentApproval?: boolean | null, serialNumber?: string |
+        null, subscriberCarrier?: string | null, totalStorageSpaceInBytes?:
+        number, udid?: string | null, userDisplayName?: string | null, userId?:
+        string | null, userPrincipalName?: string | null, users?: (Omit<... &
+        ... & ..., "@odata.type"> & { @odata.type: string, aboutMe?: function,
+        accountEnabled?: function, activities?: function, ageGroup?: function,
+        agreementAcceptances?: function, appRoleAssignments?: function,
+        assignedLicenses?: function, assignedPlans?: function, authentication?:
+        function, authorizationInfo?: function, birthday?: function,
+        businessPhones?: function, calendar?: function, calendarGroups?:
+        function, calendars?: function, calendarView?: function, chats?:
+        function, city?: function, cloudClipboard?: function, cloudPCs?:
+        function, companyName?: function, consentProvidedForMinor?: function,
+        contactFolders?: function, contacts?: function, country?: function,
+        createdDateTime?: function, createdObjects?: function, creationType?:
+        function, customSecurityAttributes?: function,
+        dataSecurityAndGovernance?: function, department?: function,
+        deviceEnrollmentLimit?: function,
+        deviceManagementTroubleshootingEvents?: function, directReports?:
+        function, displayName?: function, drive?: function, drives?: function,
+        employeeExperience?: function, employeeHireDate?: function, employeeId?:
+        function, employeeLeaveDateTime?: function, employeeOrgData?: function,
+        employeeType?: function, events?: function, extensions?: function,
+        externalUserState?: function, externalUserStateChangeDateTime?:
+        function, faxNumber?: function, followedSites?: function, givenName?:
+        function, hireDate?: function, identities?: function, imAddresses?:
+        function, inferenceClassification?: function, insights?: function,
+        interests?: function, isManagementRestricted?: function,
+        isResourceAccount?: function, jobTitle?: function, joinedTeams?:
+        function, lastPasswordChangeDateTime?: function,
+        legalAgeGroupClassification?: function, licenseAssignmentStates?:
+        function, licenseDetails?: function, mail?: function, mailboxSettings?:
+        function, mailFolders?: function, mailNickname?: function,
+        managedAppRegistrations?: function, managedDevices?: (Omit<{ id?: string
+        | undefined; '@odata.type': string; }, "@odata.type"> & { readonly
+        activationLockBypassCode?: string | null | undefined; readonly
+        androidSecurityPatchLevel?: string | null | undefined; ... 59 more ...;
+        '@odata.type': string; } & { ...; })[] | undefined, manager?: function,
+        memberOf?: function, messages?: function, mobilePhone?: function,
+        mySite?: function, oauth2PermissionGrants?: function, officeLocation?:
+        function, onenote?: function, onlineMeetings?: function,
+        onPremisesDistinguishedName?: function, onPremisesDomainName?: function,
+        onPremisesExtensionAttributes?: function, onPremisesImmutableId?:
+        function, onPremisesLastSyncDateTime?: function,
+        onPremisesProvisioningErrors?: function, onPremisesSamAccountName?:
+        function, onPremisesSecurityIdentifier?: function,
+        onPremisesSyncEnabled?: function, onPremisesUserPrincipalName?:
+        function, otherMails?: function, outlook?: function, ownedDevices?:
+        function, ownedObjects?: function, passwordPolicies?: function,
+        passwordProfile?: function, pastProjects?: function, people?: function,
+        permissionGrants?: function, photo?: function, photos?: function,
+        planner?: function, postalCode?: function, preferredDataLocation?:
+        function, preferredLanguage?: function, preferredName?: function,
+        presence?: function, print?: function, provisionedPlans?: function,
+        proxyAddresses?: function, registeredDevices?: function,
+        responsibilities?: function, schools?: function, scopedRoleMemberOf?:
+        function, securityIdentifier?: function, serviceProvisioningErrors?:
+        function, settings?: function, showInAddressList?: function,
+        signInActivity?: function, signInSessionsValidFromDateTime?: function,
+        skills?: function, solutions?: function, sponsors?: function, state?:
+        function, streetAddress?: function, surname?: function, teamwork?:
+        function, todo?: function, transitiveMemberOf?: function,
+        usageLocation?: function, userPrincipalName?: function, userType?:
+        function } & { @odata.type: "#microsoft.graph.user" })[],
+        wiFiMacAddress?: string | null, windowsProtectionState?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        { @odata.type: string, antiMalwareVersion?: string | null,
+        detectedMalwareState?: ...[], deviceState?: Record<..., ...> | "clean" |
+        "fullScanPending" | "rebootPending" | "manualStepsPending" |
+        "offlineScanPending" | "critical" | null, engineVersion?: string | null,
+        fullScanOverdue?: boolean | null, fullScanRequired?: boolean | null,
+        isVirtualMachine?: boolean | null, lastFullScanDateTime?: string | null,
+        lastFullScanSignatureVersion?: string | null, lastQuickScanDateTime?:
+        string | null, lastQuickScanSignatureVersion?: string | null,
+        lastReportedDateTime?: string | null, malwareProtectionEnabled?: boolean
+        | null, networkInspectionSystemEnabled?: boolean | null, productStatus?:
+        Record<..., ...> | "noStatus" | "serviceNotRunning" |
+        "serviceStartedWithoutMalwareProtection" |
+        "pendingFullScanDueToThreatAction" | "pendingRebootDueToThreatAction" |
+        "pendingManualStepsDueToThreatAction" | "avSignaturesOutOfDate" |
+        "asSignaturesOutOfDate" | "noQuickScanHappenedForSpecifiedPeriod" |
+        "noFullScanHappenedForSpecifiedPeriod" | "systemInitiatedScanInProgress"
+        | "systemInitiatedCleanInProgress" | "samplesPendingSubmission" |
+        "productRunningInEvaluationMode" | "productRunningInNonGenuineMode" |
+        "productExpired" | "offlineScanRequired" |
+        "serviceShutdownAsPartOfSystemShutdown" |
+        "threatRemediationFailedCritically" |
+        "threatRemediationFailedNonCritically" | "noStatusFlagsSet" |
+        "platformOutOfDate" | "platformUpdateInProgress" |
+        "platformAboutToBeOutdated" |
+        "signatureOrPlatformEndOfLifeIsPastOrIsImpending" |
+        "windowsSModeSignaturesInUseOnNonWin10SInstall" | null,
+        quickScanOverdue?: boolean | null, realTimeProtectionEnabled?: boolean |
+        null, rebootRequired?: boolean | null, signatureUpdateOverdue?: boolean
+        | null, signatureVersion?: string | null, tamperProtectionEnabled?:
+        boolean | null } & { @odata.type:
+        "#microsoft.graph.windowsProtectionState" }) | null } & { @odata.type:
+        "#microsoft.graph.managedDevice" })[], platform?: "unknown" | "windows"
+        | "windowsMobile" | "windowsHolographic" | "ios" | "macOS" | "chromeOS"
+        | "androidOSP" | "androidDeviceAdministrator" | "androidWorkProfile" |
+        "androidDedicatedAndFullyManaged" | "unknownFutureValue", publisher?:
+        string | null, sizeInByte?: number, version?: string | null } & {
+        @odata.type: "#microsoft.graph.detectedApp" }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, deviceCount?: number, displayName?: string | null,
+        managedDevices?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, activationLockBypassCode?:
+        string | null, androidSecurityPatchLevel?: string | null,
+        azureADDeviceId?: string | null, azureADRegistered?: boolean | null,
+        complianceGracePeriodExpirationDateTime?: string, complianceState?:
+        "unknown" | "compliant" | "error" | "conflict" | "noncompliant" |
+        "inGracePeriod" | "configManager",
+        configurationManagerClientEnabledFeatures?: Record<string, never> | {
+        @odata.type: string, compliancePolicy?: boolean, deviceConfiguration?:
+        boolean, inventory?: boolean, modernApps?: boolean, resourceAccess?:
+        boolean, windowsUpdateForBusiness?: boolean } | null,
+        deviceActionResults?: { @odata.type: string, actionName?: function,
+        actionState?: function, lastUpdatedDateTime?: function, startDateTime?:
+        function }[], deviceCategory?: Record<string, never> | (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        description?: function, displayName?: function } & { @odata.type:
+        "#microsoft.graph.deviceCategory" }) | null, deviceCategoryDisplayName?:
+        string | null, deviceCompliancePolicyStates?: (Omit<..., ...> & {
+        @odata.type: ..., displayName?: ..., platformType?: ..., settingCount?:
+        ..., settingStates?: ..., state?: ..., version?: ... } & { @odata.type:
+        ... })[], deviceConfigurationStates?: (Omit<..., ...> & { @odata.type:
+        ..., displayName?: ..., platformType?: ..., settingCount?: ...,
+        settingStates?: ..., state?: ..., version?: ... } & { @odata.type: ...
+        })[], deviceEnrollmentType?: "unknown" | "unknownFutureValue" |
+        "userEnrollment" | "deviceEnrollmentManager" | "appleBulkWithUser" |
+        "appleBulkWithoutUser" | "windowsAzureADJoin" | "windowsBulkUserless" |
+        "windowsAutoEnrollment" | "windowsBulkAzureDomainJoin" |
+        "windowsCoManagement" | "windowsAzureADJoinUsingDeviceAuth" |
+        "appleUserEnrollment" | "appleUserEnrollmentWithServiceAccount",
+        deviceHealthAttestationState?: Record<string, never> | { @odata.type:
+        string, attestationIdentityKey?: string | null, bitLockerStatus?: string
+        | null, bootAppSecurityVersion?: string | null, bootDebugging?: string |
+        null, bootManagerSecurityVersion?: string | null, bootManagerVersion?:
+        string | null, bootRevisionListInfo?: string | null, codeIntegrity?:
+        string | null, codeIntegrityCheckVersion?: string | null,
+        codeIntegrityPolicy?: string | null, contentNamespaceUrl?: string |
+        null, contentVersion?: string | null, dataExcutionPolicy?: string |
+        null, deviceHealthAttestationStatus?: string | null,
+        earlyLaunchAntiMalwareDriverProtection?: string | null,
+        healthAttestationSupportedStatus?: string | null,
+        healthStatusMismatchInfo?: string | null, issuedDateTime?: string,
+        lastUpdateDateTime?: string | null, operatingSystemKernelDebugging?:
+        string | null, operatingSystemRevListInfo?: string | null, pcr0?: string
+        | null, pcrHashAlgorithm?: string | null, resetCount?: number,
+        restartCount?: number, safeMode?: string | null, secureBoot?: string |
+        null, secureBootConfigurationPolicyFingerPrint?: string | null,
+        testSigning?: string | null, tpmVersion?: string | null,
+        virtualSecureMode?: string | null, windowsPE?: string | null } | null,
+        deviceName?: string | null, deviceRegistrationState?: "unknown" |
+        "notRegistered" | "registered" | "revoked" | "keyConflict" |
+        "approvalPending" | "certificateReset" |
+        "notRegisteredPendingEnrollment", easActivated?: boolean,
+        easActivationDateTime?: string, easDeviceId?: string | null,
+        emailAddress?: string | null, enrolledDateTime?: string,
+        enrollmentProfileName?: string | null, ethernetMacAddress?: string |
+        null, exchangeAccessState?: "none" | "blocked" | "unknown" | "allowed" |
+        "quarantined", exchangeAccessStateReason?: "other" | "none" | "unknown"
+        | "compliant" | "exchangeGlobalRule" | "exchangeIndividualRule" |
+        "exchangeDeviceRule" | "exchangeUpgrade" | "exchangeMailboxPolicy" |
+        "notCompliant" | "notEnrolled" | "unknownLocation" | "mfaRequired" |
+        "azureADBlockDueToAccessPolicy" | "compromisedPassword" |
+        "deviceNotKnownWithManagedApp", exchangeLastSuccessfulSyncDateTime?:
+        string, freeStorageSpaceInBytes?: number, iccid?: string | null, imei?:
+        string | null, isEncrypted?: boolean, isSupervised?: boolean,
+        jailBroken?: string | null, lastSyncDateTime?: string,
+        logCollectionRequests?: (Omit<..., ...> & { @odata.type: ...,
+        enrolledByUser?: ..., expirationDateTimeUTC?: ...,
+        initiatedByUserPrincipalName?: ..., managedDeviceId?: ...,
+        receivedDateTimeUTC?: ..., requestedDateTimeUTC?: ..., sizeInKB?: ...,
+        status?: ... } & { @odata.type: ... })[], managedDeviceName?: string |
+        null, managedDeviceOwnerType?: "unknown" | "unknownFutureValue" |
+        "company" | "personal", managementAgent?: "unknown" | "eas" | "mdm" |
+        "easMdm" | "intuneClient" | "easIntuneClient" |
+        "configurationManagerClient" | "configurationManagerClientMdm" |
+        "configurationManagerClientMdmEas" | "jamf" |
+        "googleCloudDevicePolicyController" | "microsoft365ManagedMdm" |
+        "msSense", managementCertificateExpirationDate?: string,
+        managementState?: "unknownFutureValue" | "managed" | "retirePending" |
+        "retireFailed" | "wipePending" | "wipeFailed" | "unhealthy" |
+        "deletePending" | "retireIssued" | "wipeIssued" | "wipeCanceled" |
+        "retireCanceled" | "discovered", manufacturer?: string | null, meid?:
+        string | null, model?: string | null, notes?: string | null,
+        operatingSystem?: string | null, osVersion?: string | null,
+        partnerReportedThreatState?: "unknown" | "unresponsive" | "activated" |
+        "deactivated" | "secured" | "lowSeverity" | "mediumSeverity" |
+        "highSeverity" | "compromised" | "misconfigured", phoneNumber?: string |
+        null, physicalMemoryInBytes?: number,
+        remoteAssistanceSessionErrorDetails?: string | null,
+        remoteAssistanceSessionUrl?: string | null,
+        requireUserEnrollmentApproval?: boolean | null, serialNumber?: string |
+        null, subscriberCarrier?: string | null, totalStorageSpaceInBytes?:
+        number, udid?: string | null, userDisplayName?: string | null, userId?:
+        string | null, userPrincipalName?: string | null, users?: (Omit<...,
+        ...> & { @odata.type: ..., aboutMe?: ..., accountEnabled?: ...,
+        activities?: ..., ageGroup?: ..., agreementAcceptances?: ...,
+        appRoleAssignments?: ..., assignedLicenses?: ..., assignedPlans?: ...,
+        authentication?: ..., authorizationInfo?: ..., birthday?: ...,
+        businessPhones?: ..., calendar?: ..., calendarGroups?: ..., calendars?:
+        ..., calendarView?: ..., chats?: ..., city?: ..., cloudClipboard?: ...,
+        cloudPCs?: ..., companyName?: ..., consentProvidedForMinor?: ...,
+        contactFolders?: ..., contacts?: ..., country?: ..., createdDateTime?:
+        ..., createdObjects?: ..., creationType?: ...,
+        customSecurityAttributes?: ..., dataSecurityAndGovernance?: ...,
+        department?: ..., deviceEnrollmentLimit?: ...,
+        deviceManagementTroubleshootingEvents?: ..., directReports?: ...,
+        displayName?: ..., drive?: ..., drives?: ..., employeeExperience?: ...,
+        employeeHireDate?: ..., employeeId?: ..., employeeLeaveDateTime?: ...,
+        employeeOrgData?: ..., employeeType?: ..., events?: ..., extensions?:
+        ..., externalUserState?: ..., externalUserStateChangeDateTime?: ...,
+        faxNumber?: ..., followedSites?: ..., givenName?: ..., hireDate?: ...,
+        identities?: ..., imAddresses?: ..., inferenceClassification?: ...,
+        insights?: ..., interests?: ..., isManagementRestricted?: ...,
+        isResourceAccount?: ..., jobTitle?: ..., joinedTeams?: ...,
+        lastPasswordChangeDateTime?: ..., legalAgeGroupClassification?: ...,
+        licenseAssignmentStates?: ..., licenseDetails?: ..., mail?: ...,
+        mailboxSettings?: ..., mailFolders?: ..., mailNickname?: ...,
+        managedAppRegistrations?: ..., managedDevices?: ..., manager?: ...,
+        memberOf?: ..., messages?: ..., mobilePhone?: ..., mySite?: ...,
+        oauth2PermissionGrants?: ..., officeLocation?: ..., onenote?: ...,
+        onlineMeetings?: ..., onPremisesDistinguishedName?: ...,
+        onPremisesDomainName?: ..., onPremisesExtensionAttributes?: ...,
+        onPremisesImmutableId?: ..., onPremisesLastSyncDateTime?: ...,
+        onPremisesProvisioningErrors?: ..., onPremisesSamAccountName?: ...,
+        onPremisesSecurityIdentifier?: ..., onPremisesSyncEnabled?: ...,
+        onPremisesUserPrincipalName?: ..., otherMails?: ..., outlook?: ...,
+        ownedDevices?: ..., ownedObjects?: ..., passwordPolicies?: ...,
+        passwordProfile?: ..., pastProjects?: ..., people?: ...,
+        permissionGrants?: ..., photo?: ..., photos?: ..., planner?: ...,
+        postalCode?: ..., preferredDataLocation?: ..., preferredLanguage?: ...,
+        preferredName?: ..., presence?: ..., print?: ..., provisionedPlans?:
+        ..., proxyAddresses?: ..., registeredDevices?: ..., responsibilities?:
+        ..., schools?: ..., scopedRoleMemberOf?: ..., securityIdentifier?: ...,
+        serviceProvisioningErrors?: ..., settings?: ..., showInAddressList?:
+        ..., signInActivity?: ..., signInSessionsValidFromDateTime?: ...,
+        skills?: ..., solutions?: ..., sponsors?: ..., state?: ...,
+        streetAddress?: ..., surname?: ..., teamwork?: ..., todo?: ...,
+        transitiveMemberOf?: ..., usageLocation?: ..., userPrincipalName?: ...,
+        userType?: ... } & { @odata.type: ... })[], wiFiMacAddress?: string |
+        null, windowsProtectionState?: Record<string, never> | (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        antiMalwareVersion?: function, detectedMalwareState?: function,
+        deviceState?: function, engineVersion?: function, fullScanOverdue?:
+        function, fullScanRequired?: function, isVirtualMachine?: function,
+        lastFullScanDateTime?: function, lastFullScanSignatureVersion?:
+        function, lastQuickScanDateTime?: function,
+        lastQuickScanSignatureVersion?: function, lastReportedDateTime?:
+        function, malwareProtectionEnabled?: function,
+        networkInspectionSystemEnabled?: function, productStatus?: function,
+        quickScanOverdue?: function, realTimeProtectionEnabled?: function,
+        rebootRequired?: function, signatureUpdateOverdue?: function,
+        signatureVersion?: function, tamperProtectionEnabled?: function } & {
+        @odata.type: "#microsoft.graph.windowsProtectionState" }) | null } & {
+        @odata.type: "#microsoft.graph.managedDevice" })[], platform?: "unknown"
+        | "windows" | "windowsMobile" | "windowsHolographic" | "ios" | "macOS" |
+        "chromeOS" | "androidOSP" | "androidDeviceAdministrator" |
+        "androidWorkProfile" | "androidDedicatedAndFullyManaged" |
+        "unknownFutureValue", publisher?: string | null, sizeInByte?: number,
+        version?: string | null } & { @odata.type:
+        "#microsoft.graph.detectedApp" }>
       parameters:
         - id: body
-          type: Operation&lt;"/deviceManagement/detectedApps", "post"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            deviceCount?: number, displayName?: string | null, managedDevices?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            activationLockBypassCode?: string | null,
+            androidSecurityPatchLevel?: string | null, azureADDeviceId?: string
+            | null, azureADRegistered?: boolean | null,
+            complianceGracePeriodExpirationDateTime?: string, complianceState?:
+            "unknown" | "compliant" | "error" | "conflict" | "noncompliant" |
+            "inGracePeriod" | "configManager",
+            configurationManagerClientEnabledFeatures?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, compliancePolicy?:
+            boolean, deviceConfiguration?: boolean, inventory?: boolean,
+            modernApps?: boolean, resourceAccess?: boolean,
+            windowsUpdateForBusiness?: boolean } | null, deviceActionResults?: {
+            <xref uid="@odata.type" />: string, actionName?: string | null,
+            actionState?: "none" | "failed" | "pending" | "active" | "canceled"
+            | "done" | "notSupported", lastUpdatedDateTime?: string,
+            startDateTime?: string }[], deviceCategory?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, description?: string | null,
+            displayName?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.deviceCategory" />" }) | null,
+            deviceCategoryDisplayName?: string | null,
+            deviceCompliancePolicyStates?: (Omit&lt;{ <xref uid="@odata.type"
+            />: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, displayName?: function, platformType?:
+            function, settingCount?: function, settingStates?: function, state?:
+            function, version?: function } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.deviceCompliancePolicyState" />" })[],
+            deviceConfigurationStates?: (Omit&lt;{ <xref uid="@odata.type" />:
+            ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, displayName?: function, platformType?:
+            function, settingCount?: function, settingStates?: function, state?:
+            function, version?: function } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.deviceConfigurationState" />" })[],
+            deviceEnrollmentType?: "unknown" | "unknownFutureValue" |
+            "userEnrollment" | "deviceEnrollmentManager" | "appleBulkWithUser" |
+            "appleBulkWithoutUser" | "windowsAzureADJoin" |
+            "windowsBulkUserless" | "windowsAutoEnrollment" |
+            "windowsBulkAzureDomainJoin" | "windowsCoManagement" |
+            "windowsAzureADJoinUsingDeviceAuth" | "appleUserEnrollment" |
+            "appleUserEnrollmentWithServiceAccount",
+            deviceHealthAttestationState?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, attestationIdentityKey?: string |
+            null, bitLockerStatus?: string | null, bootAppSecurityVersion?:
+            string | null, bootDebugging?: string | null,
+            bootManagerSecurityVersion?: string | null, bootManagerVersion?:
+            string | null, bootRevisionListInfo?: string | null, codeIntegrity?:
+            string | null, codeIntegrityCheckVersion?: string | null,
+            codeIntegrityPolicy?: string | null, contentNamespaceUrl?: string |
+            null, contentVersion?: string | null, dataExcutionPolicy?: string |
+            null, deviceHealthAttestationStatus?: string | null,
+            earlyLaunchAntiMalwareDriverProtection?: string | null,
+            healthAttestationSupportedStatus?: string | null,
+            healthStatusMismatchInfo?: string | null, issuedDateTime?: string,
+            lastUpdateDateTime?: string | null, operatingSystemKernelDebugging?:
+            string | null, operatingSystemRevListInfo?: string | null, pcr0?:
+            string | null, pcrHashAlgorithm?: string | null, resetCount?:
+            number, restartCount?: number, safeMode?: string | null,
+            secureBoot?: string | null,
+            secureBootConfigurationPolicyFingerPrint?: string | null,
+            testSigning?: string | null, tpmVersion?: string | null,
+            virtualSecureMode?: string | null, windowsPE?: string | null } |
+            null, deviceName?: string | null, deviceRegistrationState?:
+            "unknown" | "notRegistered" | "registered" | "revoked" |
+            "keyConflict" | "approvalPending" | "certificateReset" |
+            "notRegisteredPendingEnrollment", easActivated?: boolean,
+            easActivationDateTime?: string, easDeviceId?: string | null,
+            emailAddress?: string | null, enrolledDateTime?: string,
+            enrollmentProfileName?: string | null, ethernetMacAddress?: string |
+            null, exchangeAccessState?: "none" | "blocked" | "unknown" |
+            "allowed" | "quarantined", exchangeAccessStateReason?: "other" |
+            "none" | "unknown" | "compliant" | "exchangeGlobalRule" |
+            "exchangeIndividualRule" | "exchangeDeviceRule" | "exchangeUpgrade"
+            | "exchangeMailboxPolicy" | "notCompliant" | "notEnrolled" |
+            "unknownLocation" | "mfaRequired" | "azureADBlockDueToAccessPolicy"
+            | "compromisedPassword" | "deviceNotKnownWithManagedApp",
+            exchangeLastSuccessfulSyncDateTime?: string,
+            freeStorageSpaceInBytes?: number, iccid?: string | null, imei?:
+            string | null, isEncrypted?: boolean, isSupervised?: boolean,
+            jailBroken?: string | null, lastSyncDateTime?: string,
+            logCollectionRequests?: (Omit&lt;{ <xref uid="@odata.type" />: ...,
+            id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, enrolledByUser?: function,
+            expirationDateTimeUTC?: function, initiatedByUserPrincipalName?:
+            function, managedDeviceId?: function, receivedDateTimeUTC?:
+            function, requestedDateTimeUTC?: function, sizeInKB?: function,
+            status?: function } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deviceLogCollectionResponse" />" })[],
+            managedDeviceName?: string | null, managedDeviceOwnerType?:
+            "unknown" | "unknownFutureValue" | "company" | "personal",
+            managementAgent?: "unknown" | "eas" | "mdm" | "easMdm" |
+            "intuneClient" | "easIntuneClient" | "configurationManagerClient" |
+            "configurationManagerClientMdm" | "configurationManagerClientMdmEas"
+            | "jamf" | "googleCloudDevicePolicyController" |
+            "microsoft365ManagedMdm" | "msSense",
+            managementCertificateExpirationDate?: string, managementState?:
+            "unknownFutureValue" | "managed" | "retirePending" | "retireFailed"
+            | "wipePending" | "wipeFailed" | "unhealthy" | "deletePending" |
+            "retireIssued" | "wipeIssued" | "wipeCanceled" | "retireCanceled" |
+            "discovered", manufacturer?: string | null, meid?: string | null,
+            model?: string | null, notes?: string | null, operatingSystem?:
+            string | null, osVersion?: string | null,
+            partnerReportedThreatState?: "unknown" | "unresponsive" |
+            "activated" | "deactivated" | "secured" | "lowSeverity" |
+            "mediumSeverity" | "highSeverity" | "compromised" | "misconfigured",
+            phoneNumber?: string | null, physicalMemoryInBytes?: number,
+            remoteAssistanceSessionErrorDetails?: string | null,
+            remoteAssistanceSessionUrl?: string | null,
+            requireUserEnrollmentApproval?: boolean | null, serialNumber?:
+            string | null, subscriberCarrier?: string | null,
+            totalStorageSpaceInBytes?: number, udid?: string | null,
+            userDisplayName?: string | null, userId?: string | null,
+            userPrincipalName?: string | null, users?: (Omit&lt;... & ... & ...,
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, aboutMe?: function, accountEnabled?: function, activities?:
+            function, ageGroup?: function, agreementAcceptances?: function,
+            appRoleAssignments?: function, assignedLicenses?: function,
+            assignedPlans?: function, authentication?: function,
+            authorizationInfo?: function, birthday?: function, businessPhones?:
+            function, calendar?: function, calendarGroups?: function,
+            calendars?: function, calendarView?: function, chats?: function,
+            city?: function, cloudClipboard?: function, cloudPCs?: function,
+            companyName?: function, consentProvidedForMinor?: function,
+            contactFolders?: function, contacts?: function, country?: function,
+            createdDateTime?: function, createdObjects?: function,
+            creationType?: function, customSecurityAttributes?: function,
+            dataSecurityAndGovernance?: function, department?: function,
+            deviceEnrollmentLimit?: function,
+            deviceManagementTroubleshootingEvents?: function, directReports?:
+            function, displayName?: function, drive?: function, drives?:
+            function, employeeExperience?: function, employeeHireDate?:
+            function, employeeId?: function, employeeLeaveDateTime?: function,
+            employeeOrgData?: function, employeeType?: function, events?:
+            function, extensions?: function, externalUserState?: function,
+            externalUserStateChangeDateTime?: function, faxNumber?: function,
+            followedSites?: function, givenName?: function, hireDate?: function,
+            identities?: function, imAddresses?: function,
+            inferenceClassification?: function, insights?: function, interests?:
+            function, isManagementRestricted?: function, isResourceAccount?:
+            function, jobTitle?: function, joinedTeams?: function,
+            lastPasswordChangeDateTime?: function, legalAgeGroupClassification?:
+            function, licenseAssignmentStates?: function, licenseDetails?:
+            function, mail?: function, mailboxSettings?: function, mailFolders?:
+            function, mailNickname?: function, managedAppRegistrations?:
+            function, managedDevices?: (Omit&lt;{ id?: string | undefined;
+            '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+            />"&gt; & { readonly activationLockBypassCode?: string | null |
+            undefined; readonly androidSecurityPatchLevel?: string | null |
+            undefined; ... 59 more ...; '<xref uid="@odata.type" />': string; }
+            & { ...; })[] | undefined, manager?: function, memberOf?: function,
+            messages?: function, mobilePhone?: function, mySite?: function,
+            oauth2PermissionGrants?: function, officeLocation?: function,
+            onenote?: function, onlineMeetings?: function,
+            onPremisesDistinguishedName?: function, onPremisesDomainName?:
+            function, onPremisesExtensionAttributes?: function,
+            onPremisesImmutableId?: function, onPremisesLastSyncDateTime?:
+            function, onPremisesProvisioningErrors?: function,
+            onPremisesSamAccountName?: function, onPremisesSecurityIdentifier?:
+            function, onPremisesSyncEnabled?: function,
+            onPremisesUserPrincipalName?: function, otherMails?: function,
+            outlook?: function, ownedDevices?: function, ownedObjects?:
+            function, passwordPolicies?: function, passwordProfile?: function,
+            pastProjects?: function, people?: function, permissionGrants?:
+            function, photo?: function, photos?: function, planner?: function,
+            postalCode?: function, preferredDataLocation?: function,
+            preferredLanguage?: function, preferredName?: function, presence?:
+            function, print?: function, provisionedPlans?: function,
+            proxyAddresses?: function, registeredDevices?: function,
+            responsibilities?: function, schools?: function,
+            scopedRoleMemberOf?: function, securityIdentifier?: function,
+            serviceProvisioningErrors?: function, settings?: function,
+            showInAddressList?: function, signInActivity?: function,
+            signInSessionsValidFromDateTime?: function, skills?: function,
+            solutions?: function, sponsors?: function, state?: function,
+            streetAddress?: function, surname?: function, teamwork?: function,
+            todo?: function, transitiveMemberOf?: function, usageLocation?:
+            function, userPrincipalName?: function, userType?: function } & {
+            <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.user" />"
+            })[], wiFiMacAddress?: string | null, windowsProtectionState?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, antiMalwareVersion?: string | null,
+            detectedMalwareState?: ...[], deviceState?: Record&lt;..., ...&gt; |
+            "clean" | "fullScanPending" | "rebootPending" | "manualStepsPending"
+            | "offlineScanPending" | "critical" | null, engineVersion?: string |
+            null, fullScanOverdue?: boolean | null, fullScanRequired?: boolean |
+            null, isVirtualMachine?: boolean | null, lastFullScanDateTime?:
+            string | null, lastFullScanSignatureVersion?: string | null,
+            lastQuickScanDateTime?: string | null,
+            lastQuickScanSignatureVersion?: string | null,
+            lastReportedDateTime?: string | null, malwareProtectionEnabled?:
+            boolean | null, networkInspectionSystemEnabled?: boolean | null,
+            productStatus?: Record&lt;..., ...&gt; | "noStatus" |
+            "serviceNotRunning" | "serviceStartedWithoutMalwareProtection" |
+            "pendingFullScanDueToThreatAction" |
+            "pendingRebootDueToThreatAction" |
+            "pendingManualStepsDueToThreatAction" | "avSignaturesOutOfDate" |
+            "asSignaturesOutOfDate" | "noQuickScanHappenedForSpecifiedPeriod" |
+            "noFullScanHappenedForSpecifiedPeriod" |
+            "systemInitiatedScanInProgress" | "systemInitiatedCleanInProgress" |
+            "samplesPendingSubmission" | "productRunningInEvaluationMode" |
+            "productRunningInNonGenuineMode" | "productExpired" |
+            "offlineScanRequired" | "serviceShutdownAsPartOfSystemShutdown" |
+            "threatRemediationFailedCritically" |
+            "threatRemediationFailedNonCritically" | "noStatusFlagsSet" |
+            "platformOutOfDate" | "platformUpdateInProgress" |
+            "platformAboutToBeOutdated" |
+            "signatureOrPlatformEndOfLifeIsPastOrIsImpending" |
+            "windowsSModeSignaturesInUseOnNonWin10SInstall" | null,
+            quickScanOverdue?: boolean | null, realTimeProtectionEnabled?:
+            boolean | null, rebootRequired?: boolean | null,
+            signatureUpdateOverdue?: boolean | null, signatureVersion?: string |
+            null, tamperProtectionEnabled?: boolean | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsProtectionState" />" }) | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedDevice" />" })[], platform?: "unknown" |
+            "windows" | "windowsMobile" | "windowsHolographic" | "ios" | "macOS"
+            | "chromeOS" | "androidOSP" | "androidDeviceAdministrator" |
+            "androidWorkProfile" | "androidDedicatedAndFullyManaged" |
+            "unknownFutureValue", publisher?: string | null, sizeInByte?:
+            number, version?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.detectedApp" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /deviceManagement/detectedApps"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, deviceCount?: number, displayName?: string | null,
+          managedDevices?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, activationLockBypassCode?: string | null,
+          androidSecurityPatchLevel?: string | null, azureADDeviceId?: string |
+          null, azureADRegistered?: boolean | null,
+          complianceGracePeriodExpirationDateTime?: string, complianceState?:
+          "unknown" | "compliant" | "error" | "conflict" | "noncompliant" |
+          "inGracePeriod" | "configManager",
+          configurationManagerClientEnabledFeatures?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, compliancePolicy?:
+          boolean, deviceConfiguration?: boolean, inventory?: boolean,
+          modernApps?: boolean, resourceAccess?: boolean,
+          windowsUpdateForBusiness?: boolean } | null, deviceActionResults?: {
+          <xref uid="@odata.type" />: string, actionName?: function,
+          actionState?: function, lastUpdatedDateTime?: function,
+          startDateTime?: function }[], deviceCategory?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, description?: function, displayName?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.deviceCategory" />"
+          }) | null, deviceCategoryDisplayName?: string | null,
+          deviceCompliancePolicyStates?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., displayName?: ..., platformType?: ...,
+          settingCount?: ..., settingStates?: ..., state?: ..., version?: ... }
+          & { <xref uid="@odata.type" />: ... })[], deviceConfigurationStates?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          displayName?: ..., platformType?: ..., settingCount?: ...,
+          settingStates?: ..., state?: ..., version?: ... } & { <xref
+          uid="@odata.type" />: ... })[], deviceEnrollmentType?: "unknown" |
+          "unknownFutureValue" | "userEnrollment" | "deviceEnrollmentManager" |
+          "appleBulkWithUser" | "appleBulkWithoutUser" | "windowsAzureADJoin" |
+          "windowsBulkUserless" | "windowsAutoEnrollment" |
+          "windowsBulkAzureDomainJoin" | "windowsCoManagement" |
+          "windowsAzureADJoinUsingDeviceAuth" | "appleUserEnrollment" |
+          "appleUserEnrollmentWithServiceAccount",
+          deviceHealthAttestationState?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, attestationIdentityKey?: string | null,
+          bitLockerStatus?: string | null, bootAppSecurityVersion?: string |
+          null, bootDebugging?: string | null, bootManagerSecurityVersion?:
+          string | null, bootManagerVersion?: string | null,
+          bootRevisionListInfo?: string | null, codeIntegrity?: string | null,
+          codeIntegrityCheckVersion?: string | null, codeIntegrityPolicy?:
+          string | null, contentNamespaceUrl?: string | null, contentVersion?:
+          string | null, dataExcutionPolicy?: string | null,
+          deviceHealthAttestationStatus?: string | null,
+          earlyLaunchAntiMalwareDriverProtection?: string | null,
+          healthAttestationSupportedStatus?: string | null,
+          healthStatusMismatchInfo?: string | null, issuedDateTime?: string,
+          lastUpdateDateTime?: string | null, operatingSystemKernelDebugging?:
+          string | null, operatingSystemRevListInfo?: string | null, pcr0?:
+          string | null, pcrHashAlgorithm?: string | null, resetCount?: number,
+          restartCount?: number, safeMode?: string | null, secureBoot?: string |
+          null, secureBootConfigurationPolicyFingerPrint?: string | null,
+          testSigning?: string | null, tpmVersion?: string | null,
+          virtualSecureMode?: string | null, windowsPE?: string | null } | null,
+          deviceName?: string | null, deviceRegistrationState?: "unknown" |
+          "notRegistered" | "registered" | "revoked" | "keyConflict" |
+          "approvalPending" | "certificateReset" |
+          "notRegisteredPendingEnrollment", easActivated?: boolean,
+          easActivationDateTime?: string, easDeviceId?: string | null,
+          emailAddress?: string | null, enrolledDateTime?: string,
+          enrollmentProfileName?: string | null, ethernetMacAddress?: string |
+          null, exchangeAccessState?: "none" | "blocked" | "unknown" | "allowed"
+          | "quarantined", exchangeAccessStateReason?: "other" | "none" |
+          "unknown" | "compliant" | "exchangeGlobalRule" |
+          "exchangeIndividualRule" | "exchangeDeviceRule" | "exchangeUpgrade" |
+          "exchangeMailboxPolicy" | "notCompliant" | "notEnrolled" |
+          "unknownLocation" | "mfaRequired" | "azureADBlockDueToAccessPolicy" |
+          "compromisedPassword" | "deviceNotKnownWithManagedApp",
+          exchangeLastSuccessfulSyncDateTime?: string, freeStorageSpaceInBytes?:
+          number, iccid?: string | null, imei?: string | null, isEncrypted?:
+          boolean, isSupervised?: boolean, jailBroken?: string | null,
+          lastSyncDateTime?: string, logCollectionRequests?: (Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ..., enrolledByUser?: ...,
+          expirationDateTimeUTC?: ..., initiatedByUserPrincipalName?: ...,
+          managedDeviceId?: ..., receivedDateTimeUTC?: ...,
+          requestedDateTimeUTC?: ..., sizeInKB?: ..., status?: ... } & { <xref
+          uid="@odata.type" />: ... })[], managedDeviceName?: string | null,
+          managedDeviceOwnerType?: "unknown" | "unknownFutureValue" | "company"
+          | "personal", managementAgent?: "unknown" | "eas" | "mdm" | "easMdm" |
+          "intuneClient" | "easIntuneClient" | "configurationManagerClient" |
+          "configurationManagerClientMdm" | "configurationManagerClientMdmEas" |
+          "jamf" | "googleCloudDevicePolicyController" |
+          "microsoft365ManagedMdm" | "msSense",
+          managementCertificateExpirationDate?: string, managementState?:
+          "unknownFutureValue" | "managed" | "retirePending" | "retireFailed" |
+          "wipePending" | "wipeFailed" | "unhealthy" | "deletePending" |
+          "retireIssued" | "wipeIssued" | "wipeCanceled" | "retireCanceled" |
+          "discovered", manufacturer?: string | null, meid?: string | null,
+          model?: string | null, notes?: string | null, operatingSystem?: string
+          | null, osVersion?: string | null, partnerReportedThreatState?:
+          "unknown" | "unresponsive" | "activated" | "deactivated" | "secured" |
+          "lowSeverity" | "mediumSeverity" | "highSeverity" | "compromised" |
+          "misconfigured", phoneNumber?: string | null, physicalMemoryInBytes?:
+          number, remoteAssistanceSessionErrorDetails?: string | null,
+          remoteAssistanceSessionUrl?: string | null,
+          requireUserEnrollmentApproval?: boolean | null, serialNumber?: string
+          | null, subscriberCarrier?: string | null, totalStorageSpaceInBytes?:
+          number, udid?: string | null, userDisplayName?: string | null,
+          userId?: string | null, userPrincipalName?: string | null, users?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ..., aboutMe?:
+          ..., accountEnabled?: ..., activities?: ..., ageGroup?: ...,
+          agreementAcceptances?: ..., appRoleAssignments?: ...,
+          assignedLicenses?: ..., assignedPlans?: ..., authentication?: ...,
+          authorizationInfo?: ..., birthday?: ..., businessPhones?: ...,
+          calendar?: ..., calendarGroups?: ..., calendars?: ..., calendarView?:
+          ..., chats?: ..., city?: ..., cloudClipboard?: ..., cloudPCs?: ...,
+          companyName?: ..., consentProvidedForMinor?: ..., contactFolders?:
+          ..., contacts?: ..., country?: ..., createdDateTime?: ...,
+          createdObjects?: ..., creationType?: ..., customSecurityAttributes?:
+          ..., dataSecurityAndGovernance?: ..., department?: ...,
+          deviceEnrollmentLimit?: ..., deviceManagementTroubleshootingEvents?:
+          ..., directReports?: ..., displayName?: ..., drive?: ..., drives?:
+          ..., employeeExperience?: ..., employeeHireDate?: ..., employeeId?:
+          ..., employeeLeaveDateTime?: ..., employeeOrgData?: ...,
+          employeeType?: ..., events?: ..., extensions?: ...,
+          externalUserState?: ..., externalUserStateChangeDateTime?: ...,
+          faxNumber?: ..., followedSites?: ..., givenName?: ..., hireDate?: ...,
+          identities?: ..., imAddresses?: ..., inferenceClassification?: ...,
+          insights?: ..., interests?: ..., isManagementRestricted?: ...,
+          isResourceAccount?: ..., jobTitle?: ..., joinedTeams?: ...,
+          lastPasswordChangeDateTime?: ..., legalAgeGroupClassification?: ...,
+          licenseAssignmentStates?: ..., licenseDetails?: ..., mail?: ...,
+          mailboxSettings?: ..., mailFolders?: ..., mailNickname?: ...,
+          managedAppRegistrations?: ..., managedDevices?: ..., manager?: ...,
+          memberOf?: ..., messages?: ..., mobilePhone?: ..., mySite?: ...,
+          oauth2PermissionGrants?: ..., officeLocation?: ..., onenote?: ...,
+          onlineMeetings?: ..., onPremisesDistinguishedName?: ...,
+          onPremisesDomainName?: ..., onPremisesExtensionAttributes?: ...,
+          onPremisesImmutableId?: ..., onPremisesLastSyncDateTime?: ...,
+          onPremisesProvisioningErrors?: ..., onPremisesSamAccountName?: ...,
+          onPremisesSecurityIdentifier?: ..., onPremisesSyncEnabled?: ...,
+          onPremisesUserPrincipalName?: ..., otherMails?: ..., outlook?: ...,
+          ownedDevices?: ..., ownedObjects?: ..., passwordPolicies?: ...,
+          passwordProfile?: ..., pastProjects?: ..., people?: ...,
+          permissionGrants?: ..., photo?: ..., photos?: ..., planner?: ...,
+          postalCode?: ..., preferredDataLocation?: ..., preferredLanguage?:
+          ..., preferredName?: ..., presence?: ..., print?: ...,
+          provisionedPlans?: ..., proxyAddresses?: ..., registeredDevices?: ...,
+          responsibilities?: ..., schools?: ..., scopedRoleMemberOf?: ...,
+          securityIdentifier?: ..., serviceProvisioningErrors?: ..., settings?:
+          ..., showInAddressList?: ..., signInActivity?: ...,
+          signInSessionsValidFromDateTime?: ..., skills?: ..., solutions?: ...,
+          sponsors?: ..., state?: ..., streetAddress?: ..., surname?: ...,
+          teamwork?: ..., todo?: ..., transitiveMemberOf?: ..., usageLocation?:
+          ..., userPrincipalName?: ..., userType?: ... } & { <xref
+          uid="@odata.type" />: ... })[], wiFiMacAddress?: string | null,
+          windowsProtectionState?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, antiMalwareVersion?:
+          function, detectedMalwareState?: function, deviceState?: function,
+          engineVersion?: function, fullScanOverdue?: function,
+          fullScanRequired?: function, isVirtualMachine?: function,
+          lastFullScanDateTime?: function, lastFullScanSignatureVersion?:
+          function, lastQuickScanDateTime?: function,
+          lastQuickScanSignatureVersion?: function, lastReportedDateTime?:
+          function, malwareProtectionEnabled?: function,
+          networkInspectionSystemEnabled?: function, productStatus?: function,
+          quickScanOverdue?: function, realTimeProtectionEnabled?: function,
+          rebootRequired?: function, signatureUpdateOverdue?: function,
+          signatureVersion?: function, tamperProtectionEnabled?: function } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsProtectionState" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.managedDevice" />"
+          })[], platform?: "unknown" | "windows" | "windowsMobile" |
+          "windowsHolographic" | "ios" | "macOS" | "chromeOS" | "androidOSP" |
+          "androidDeviceAdministrator" | "androidWorkProfile" |
+          "androidDedicatedAndFullyManaged" | "unknownFutureValue", publisher?:
+          string | null, sizeInByte?: number, version?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.detectedApp"
+          />" }&gt;
+  - name: 'del({ detectedApp-id: string, If-Match?: string })'
     uid: '@microsoft/teams.graph-endpoints.deviceManagement.detectedApps.del'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`DELETE /deviceManagement/detectedApps/{detectedApp-id}`'
@@ -35,18 +988,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /deviceManagement/detectedApps/{detectedApp-id}"]["response"]>
+        function del(params?: { detectedApp-id: string, If-Match?: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ detectedApp-id: string, If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /deviceManagement/detectedApps/{detectedApp-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[], detectedApp-id: string })'
     uid: '@microsoft/teams.graph-endpoints.deviceManagement.detectedApps.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -57,18 +1008,354 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/detectedApps/{detectedApp-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        detectedApp-id: string }): EndpointRequest<Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, deviceCount?:
+        number, displayName?: string | null, managedDevices?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, activationLockBypassCode?: string | null,
+        androidSecurityPatchLevel?: string | null, azureADDeviceId?: string |
+        null, azureADRegistered?: boolean | null,
+        complianceGracePeriodExpirationDateTime?: string, complianceState?:
+        "unknown" | "compliant" | "error" | "conflict" | "noncompliant" |
+        "inGracePeriod" | "configManager",
+        configurationManagerClientEnabledFeatures?: Record<string, never> | {
+        @odata.type: string, compliancePolicy?: boolean, deviceConfiguration?:
+        boolean, inventory?: boolean, modernApps?: boolean, resourceAccess?:
+        boolean, windowsUpdateForBusiness?: boolean } | null,
+        deviceActionResults?: { @odata.type: string, actionName?: function,
+        actionState?: function, lastUpdatedDateTime?: function, startDateTime?:
+        function }[], deviceCategory?: Record<string, never> | (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        description?: function, displayName?: function } & { @odata.type:
+        "#microsoft.graph.deviceCategory" }) | null, deviceCategoryDisplayName?:
+        string | null, deviceCompliancePolicyStates?: (Omit<..., ...> & {
+        @odata.type: ..., displayName?: ..., platformType?: ..., settingCount?:
+        ..., settingStates?: ..., state?: ..., version?: ... } & { @odata.type:
+        ... })[], deviceConfigurationStates?: (Omit<..., ...> & { @odata.type:
+        ..., displayName?: ..., platformType?: ..., settingCount?: ...,
+        settingStates?: ..., state?: ..., version?: ... } & { @odata.type: ...
+        })[], deviceEnrollmentType?: "unknown" | "unknownFutureValue" |
+        "userEnrollment" | "deviceEnrollmentManager" | "appleBulkWithUser" |
+        "appleBulkWithoutUser" | "windowsAzureADJoin" | "windowsBulkUserless" |
+        "windowsAutoEnrollment" | "windowsBulkAzureDomainJoin" |
+        "windowsCoManagement" | "windowsAzureADJoinUsingDeviceAuth" |
+        "appleUserEnrollment" | "appleUserEnrollmentWithServiceAccount",
+        deviceHealthAttestationState?: Record<string, never> | { @odata.type:
+        string, attestationIdentityKey?: string | null, bitLockerStatus?: string
+        | null, bootAppSecurityVersion?: string | null, bootDebugging?: string |
+        null, bootManagerSecurityVersion?: string | null, bootManagerVersion?:
+        string | null, bootRevisionListInfo?: string | null, codeIntegrity?:
+        string | null, codeIntegrityCheckVersion?: string | null,
+        codeIntegrityPolicy?: string | null, contentNamespaceUrl?: string |
+        null, contentVersion?: string | null, dataExcutionPolicy?: string |
+        null, deviceHealthAttestationStatus?: string | null,
+        earlyLaunchAntiMalwareDriverProtection?: string | null,
+        healthAttestationSupportedStatus?: string | null,
+        healthStatusMismatchInfo?: string | null, issuedDateTime?: string,
+        lastUpdateDateTime?: string | null, operatingSystemKernelDebugging?:
+        string | null, operatingSystemRevListInfo?: string | null, pcr0?: string
+        | null, pcrHashAlgorithm?: string | null, resetCount?: number,
+        restartCount?: number, safeMode?: string | null, secureBoot?: string |
+        null, secureBootConfigurationPolicyFingerPrint?: string | null,
+        testSigning?: string | null, tpmVersion?: string | null,
+        virtualSecureMode?: string | null, windowsPE?: string | null } | null,
+        deviceName?: string | null, deviceRegistrationState?: "unknown" |
+        "notRegistered" | "registered" | "revoked" | "keyConflict" |
+        "approvalPending" | "certificateReset" |
+        "notRegisteredPendingEnrollment", easActivated?: boolean,
+        easActivationDateTime?: string, easDeviceId?: string | null,
+        emailAddress?: string | null, enrolledDateTime?: string,
+        enrollmentProfileName?: string | null, ethernetMacAddress?: string |
+        null, exchangeAccessState?: "none" | "blocked" | "unknown" | "allowed" |
+        "quarantined", exchangeAccessStateReason?: "other" | "none" | "unknown"
+        | "compliant" | "exchangeGlobalRule" | "exchangeIndividualRule" |
+        "exchangeDeviceRule" | "exchangeUpgrade" | "exchangeMailboxPolicy" |
+        "notCompliant" | "notEnrolled" | "unknownLocation" | "mfaRequired" |
+        "azureADBlockDueToAccessPolicy" | "compromisedPassword" |
+        "deviceNotKnownWithManagedApp", exchangeLastSuccessfulSyncDateTime?:
+        string, freeStorageSpaceInBytes?: number, iccid?: string | null, imei?:
+        string | null, isEncrypted?: boolean, isSupervised?: boolean,
+        jailBroken?: string | null, lastSyncDateTime?: string,
+        logCollectionRequests?: (Omit<..., ...> & { @odata.type: ...,
+        enrolledByUser?: ..., expirationDateTimeUTC?: ...,
+        initiatedByUserPrincipalName?: ..., managedDeviceId?: ...,
+        receivedDateTimeUTC?: ..., requestedDateTimeUTC?: ..., sizeInKB?: ...,
+        status?: ... } & { @odata.type: ... })[], managedDeviceName?: string |
+        null, managedDeviceOwnerType?: "unknown" | "unknownFutureValue" |
+        "company" | "personal", managementAgent?: "unknown" | "eas" | "mdm" |
+        "easMdm" | "intuneClient" | "easIntuneClient" |
+        "configurationManagerClient" | "configurationManagerClientMdm" |
+        "configurationManagerClientMdmEas" | "jamf" |
+        "googleCloudDevicePolicyController" | "microsoft365ManagedMdm" |
+        "msSense", managementCertificateExpirationDate?: string,
+        managementState?: "unknownFutureValue" | "managed" | "retirePending" |
+        "retireFailed" | "wipePending" | "wipeFailed" | "unhealthy" |
+        "deletePending" | "retireIssued" | "wipeIssued" | "wipeCanceled" |
+        "retireCanceled" | "discovered", manufacturer?: string | null, meid?:
+        string | null, model?: string | null, notes?: string | null,
+        operatingSystem?: string | null, osVersion?: string | null,
+        partnerReportedThreatState?: "unknown" | "unresponsive" | "activated" |
+        "deactivated" | "secured" | "lowSeverity" | "mediumSeverity" |
+        "highSeverity" | "compromised" | "misconfigured", phoneNumber?: string |
+        null, physicalMemoryInBytes?: number,
+        remoteAssistanceSessionErrorDetails?: string | null,
+        remoteAssistanceSessionUrl?: string | null,
+        requireUserEnrollmentApproval?: boolean | null, serialNumber?: string |
+        null, subscriberCarrier?: string | null, totalStorageSpaceInBytes?:
+        number, udid?: string | null, userDisplayName?: string | null, userId?:
+        string | null, userPrincipalName?: string | null, users?: (Omit<...,
+        ...> & { @odata.type: ..., aboutMe?: ..., accountEnabled?: ...,
+        activities?: ..., ageGroup?: ..., agreementAcceptances?: ...,
+        appRoleAssignments?: ..., assignedLicenses?: ..., assignedPlans?: ...,
+        authentication?: ..., authorizationInfo?: ..., birthday?: ...,
+        businessPhones?: ..., calendar?: ..., calendarGroups?: ..., calendars?:
+        ..., calendarView?: ..., chats?: ..., city?: ..., cloudClipboard?: ...,
+        cloudPCs?: ..., companyName?: ..., consentProvidedForMinor?: ...,
+        contactFolders?: ..., contacts?: ..., country?: ..., createdDateTime?:
+        ..., createdObjects?: ..., creationType?: ...,
+        customSecurityAttributes?: ..., dataSecurityAndGovernance?: ...,
+        department?: ..., deviceEnrollmentLimit?: ...,
+        deviceManagementTroubleshootingEvents?: ..., directReports?: ...,
+        displayName?: ..., drive?: ..., drives?: ..., employeeExperience?: ...,
+        employeeHireDate?: ..., employeeId?: ..., employeeLeaveDateTime?: ...,
+        employeeOrgData?: ..., employeeType?: ..., events?: ..., extensions?:
+        ..., externalUserState?: ..., externalUserStateChangeDateTime?: ...,
+        faxNumber?: ..., followedSites?: ..., givenName?: ..., hireDate?: ...,
+        identities?: ..., imAddresses?: ..., inferenceClassification?: ...,
+        insights?: ..., interests?: ..., isManagementRestricted?: ...,
+        isResourceAccount?: ..., jobTitle?: ..., joinedTeams?: ...,
+        lastPasswordChangeDateTime?: ..., legalAgeGroupClassification?: ...,
+        licenseAssignmentStates?: ..., licenseDetails?: ..., mail?: ...,
+        mailboxSettings?: ..., mailFolders?: ..., mailNickname?: ...,
+        managedAppRegistrations?: ..., managedDevices?: ..., manager?: ...,
+        memberOf?: ..., messages?: ..., mobilePhone?: ..., mySite?: ...,
+        oauth2PermissionGrants?: ..., officeLocation?: ..., onenote?: ...,
+        onlineMeetings?: ..., onPremisesDistinguishedName?: ...,
+        onPremisesDomainName?: ..., onPremisesExtensionAttributes?: ...,
+        onPremisesImmutableId?: ..., onPremisesLastSyncDateTime?: ...,
+        onPremisesProvisioningErrors?: ..., onPremisesSamAccountName?: ...,
+        onPremisesSecurityIdentifier?: ..., onPremisesSyncEnabled?: ...,
+        onPremisesUserPrincipalName?: ..., otherMails?: ..., outlook?: ...,
+        ownedDevices?: ..., ownedObjects?: ..., passwordPolicies?: ...,
+        passwordProfile?: ..., pastProjects?: ..., people?: ...,
+        permissionGrants?: ..., photo?: ..., photos?: ..., planner?: ...,
+        postalCode?: ..., preferredDataLocation?: ..., preferredLanguage?: ...,
+        preferredName?: ..., presence?: ..., print?: ..., provisionedPlans?:
+        ..., proxyAddresses?: ..., registeredDevices?: ..., responsibilities?:
+        ..., schools?: ..., scopedRoleMemberOf?: ..., securityIdentifier?: ...,
+        serviceProvisioningErrors?: ..., settings?: ..., showInAddressList?:
+        ..., signInActivity?: ..., signInSessionsValidFromDateTime?: ...,
+        skills?: ..., solutions?: ..., sponsors?: ..., state?: ...,
+        streetAddress?: ..., surname?: ..., teamwork?: ..., todo?: ...,
+        transitiveMemberOf?: ..., usageLocation?: ..., userPrincipalName?: ...,
+        userType?: ... } & { @odata.type: ... })[], wiFiMacAddress?: string |
+        null, windowsProtectionState?: Record<string, never> | (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        antiMalwareVersion?: function, detectedMalwareState?: function,
+        deviceState?: function, engineVersion?: function, fullScanOverdue?:
+        function, fullScanRequired?: function, isVirtualMachine?: function,
+        lastFullScanDateTime?: function, lastFullScanSignatureVersion?:
+        function, lastQuickScanDateTime?: function,
+        lastQuickScanSignatureVersion?: function, lastReportedDateTime?:
+        function, malwareProtectionEnabled?: function,
+        networkInspectionSystemEnabled?: function, productStatus?: function,
+        quickScanOverdue?: function, realTimeProtectionEnabled?: function,
+        rebootRequired?: function, signatureUpdateOverdue?: function,
+        signatureVersion?: function, tamperProtectionEnabled?: function } & {
+        @odata.type: "#microsoft.graph.windowsProtectionState" }) | null } & {
+        @odata.type: "#microsoft.graph.managedDevice" })[], platform?: "unknown"
+        | "windows" | "windowsMobile" | "windowsHolographic" | "ios" | "macOS" |
+        "chromeOS" | "androidOSP" | "androidDeviceAdministrator" |
+        "androidWorkProfile" | "androidDedicatedAndFullyManaged" |
+        "unknownFutureValue", publisher?: string | null, sizeInByte?: number,
+        version?: string | null } & { @odata.type:
+        "#microsoft.graph.detectedApp" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[], detectedApp-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/detectedApps/{detectedApp-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, deviceCount?: number, displayName?: string | null,
+          managedDevices?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, activationLockBypassCode?: string | null,
+          androidSecurityPatchLevel?: string | null, azureADDeviceId?: string |
+          null, azureADRegistered?: boolean | null,
+          complianceGracePeriodExpirationDateTime?: string, complianceState?:
+          "unknown" | "compliant" | "error" | "conflict" | "noncompliant" |
+          "inGracePeriod" | "configManager",
+          configurationManagerClientEnabledFeatures?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, compliancePolicy?:
+          boolean, deviceConfiguration?: boolean, inventory?: boolean,
+          modernApps?: boolean, resourceAccess?: boolean,
+          windowsUpdateForBusiness?: boolean } | null, deviceActionResults?: {
+          <xref uid="@odata.type" />: string, actionName?: function,
+          actionState?: function, lastUpdatedDateTime?: function,
+          startDateTime?: function }[], deviceCategory?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, description?: function, displayName?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.deviceCategory" />"
+          }) | null, deviceCategoryDisplayName?: string | null,
+          deviceCompliancePolicyStates?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., displayName?: ..., platformType?: ...,
+          settingCount?: ..., settingStates?: ..., state?: ..., version?: ... }
+          & { <xref uid="@odata.type" />: ... })[], deviceConfigurationStates?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          displayName?: ..., platformType?: ..., settingCount?: ...,
+          settingStates?: ..., state?: ..., version?: ... } & { <xref
+          uid="@odata.type" />: ... })[], deviceEnrollmentType?: "unknown" |
+          "unknownFutureValue" | "userEnrollment" | "deviceEnrollmentManager" |
+          "appleBulkWithUser" | "appleBulkWithoutUser" | "windowsAzureADJoin" |
+          "windowsBulkUserless" | "windowsAutoEnrollment" |
+          "windowsBulkAzureDomainJoin" | "windowsCoManagement" |
+          "windowsAzureADJoinUsingDeviceAuth" | "appleUserEnrollment" |
+          "appleUserEnrollmentWithServiceAccount",
+          deviceHealthAttestationState?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, attestationIdentityKey?: string | null,
+          bitLockerStatus?: string | null, bootAppSecurityVersion?: string |
+          null, bootDebugging?: string | null, bootManagerSecurityVersion?:
+          string | null, bootManagerVersion?: string | null,
+          bootRevisionListInfo?: string | null, codeIntegrity?: string | null,
+          codeIntegrityCheckVersion?: string | null, codeIntegrityPolicy?:
+          string | null, contentNamespaceUrl?: string | null, contentVersion?:
+          string | null, dataExcutionPolicy?: string | null,
+          deviceHealthAttestationStatus?: string | null,
+          earlyLaunchAntiMalwareDriverProtection?: string | null,
+          healthAttestationSupportedStatus?: string | null,
+          healthStatusMismatchInfo?: string | null, issuedDateTime?: string,
+          lastUpdateDateTime?: string | null, operatingSystemKernelDebugging?:
+          string | null, operatingSystemRevListInfo?: string | null, pcr0?:
+          string | null, pcrHashAlgorithm?: string | null, resetCount?: number,
+          restartCount?: number, safeMode?: string | null, secureBoot?: string |
+          null, secureBootConfigurationPolicyFingerPrint?: string | null,
+          testSigning?: string | null, tpmVersion?: string | null,
+          virtualSecureMode?: string | null, windowsPE?: string | null } | null,
+          deviceName?: string | null, deviceRegistrationState?: "unknown" |
+          "notRegistered" | "registered" | "revoked" | "keyConflict" |
+          "approvalPending" | "certificateReset" |
+          "notRegisteredPendingEnrollment", easActivated?: boolean,
+          easActivationDateTime?: string, easDeviceId?: string | null,
+          emailAddress?: string | null, enrolledDateTime?: string,
+          enrollmentProfileName?: string | null, ethernetMacAddress?: string |
+          null, exchangeAccessState?: "none" | "blocked" | "unknown" | "allowed"
+          | "quarantined", exchangeAccessStateReason?: "other" | "none" |
+          "unknown" | "compliant" | "exchangeGlobalRule" |
+          "exchangeIndividualRule" | "exchangeDeviceRule" | "exchangeUpgrade" |
+          "exchangeMailboxPolicy" | "notCompliant" | "notEnrolled" |
+          "unknownLocation" | "mfaRequired" | "azureADBlockDueToAccessPolicy" |
+          "compromisedPassword" | "deviceNotKnownWithManagedApp",
+          exchangeLastSuccessfulSyncDateTime?: string, freeStorageSpaceInBytes?:
+          number, iccid?: string | null, imei?: string | null, isEncrypted?:
+          boolean, isSupervised?: boolean, jailBroken?: string | null,
+          lastSyncDateTime?: string, logCollectionRequests?: (Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ..., enrolledByUser?: ...,
+          expirationDateTimeUTC?: ..., initiatedByUserPrincipalName?: ...,
+          managedDeviceId?: ..., receivedDateTimeUTC?: ...,
+          requestedDateTimeUTC?: ..., sizeInKB?: ..., status?: ... } & { <xref
+          uid="@odata.type" />: ... })[], managedDeviceName?: string | null,
+          managedDeviceOwnerType?: "unknown" | "unknownFutureValue" | "company"
+          | "personal", managementAgent?: "unknown" | "eas" | "mdm" | "easMdm" |
+          "intuneClient" | "easIntuneClient" | "configurationManagerClient" |
+          "configurationManagerClientMdm" | "configurationManagerClientMdmEas" |
+          "jamf" | "googleCloudDevicePolicyController" |
+          "microsoft365ManagedMdm" | "msSense",
+          managementCertificateExpirationDate?: string, managementState?:
+          "unknownFutureValue" | "managed" | "retirePending" | "retireFailed" |
+          "wipePending" | "wipeFailed" | "unhealthy" | "deletePending" |
+          "retireIssued" | "wipeIssued" | "wipeCanceled" | "retireCanceled" |
+          "discovered", manufacturer?: string | null, meid?: string | null,
+          model?: string | null, notes?: string | null, operatingSystem?: string
+          | null, osVersion?: string | null, partnerReportedThreatState?:
+          "unknown" | "unresponsive" | "activated" | "deactivated" | "secured" |
+          "lowSeverity" | "mediumSeverity" | "highSeverity" | "compromised" |
+          "misconfigured", phoneNumber?: string | null, physicalMemoryInBytes?:
+          number, remoteAssistanceSessionErrorDetails?: string | null,
+          remoteAssistanceSessionUrl?: string | null,
+          requireUserEnrollmentApproval?: boolean | null, serialNumber?: string
+          | null, subscriberCarrier?: string | null, totalStorageSpaceInBytes?:
+          number, udid?: string | null, userDisplayName?: string | null,
+          userId?: string | null, userPrincipalName?: string | null, users?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ..., aboutMe?:
+          ..., accountEnabled?: ..., activities?: ..., ageGroup?: ...,
+          agreementAcceptances?: ..., appRoleAssignments?: ...,
+          assignedLicenses?: ..., assignedPlans?: ..., authentication?: ...,
+          authorizationInfo?: ..., birthday?: ..., businessPhones?: ...,
+          calendar?: ..., calendarGroups?: ..., calendars?: ..., calendarView?:
+          ..., chats?: ..., city?: ..., cloudClipboard?: ..., cloudPCs?: ...,
+          companyName?: ..., consentProvidedForMinor?: ..., contactFolders?:
+          ..., contacts?: ..., country?: ..., createdDateTime?: ...,
+          createdObjects?: ..., creationType?: ..., customSecurityAttributes?:
+          ..., dataSecurityAndGovernance?: ..., department?: ...,
+          deviceEnrollmentLimit?: ..., deviceManagementTroubleshootingEvents?:
+          ..., directReports?: ..., displayName?: ..., drive?: ..., drives?:
+          ..., employeeExperience?: ..., employeeHireDate?: ..., employeeId?:
+          ..., employeeLeaveDateTime?: ..., employeeOrgData?: ...,
+          employeeType?: ..., events?: ..., extensions?: ...,
+          externalUserState?: ..., externalUserStateChangeDateTime?: ...,
+          faxNumber?: ..., followedSites?: ..., givenName?: ..., hireDate?: ...,
+          identities?: ..., imAddresses?: ..., inferenceClassification?: ...,
+          insights?: ..., interests?: ..., isManagementRestricted?: ...,
+          isResourceAccount?: ..., jobTitle?: ..., joinedTeams?: ...,
+          lastPasswordChangeDateTime?: ..., legalAgeGroupClassification?: ...,
+          licenseAssignmentStates?: ..., licenseDetails?: ..., mail?: ...,
+          mailboxSettings?: ..., mailFolders?: ..., mailNickname?: ...,
+          managedAppRegistrations?: ..., managedDevices?: ..., manager?: ...,
+          memberOf?: ..., messages?: ..., mobilePhone?: ..., mySite?: ...,
+          oauth2PermissionGrants?: ..., officeLocation?: ..., onenote?: ...,
+          onlineMeetings?: ..., onPremisesDistinguishedName?: ...,
+          onPremisesDomainName?: ..., onPremisesExtensionAttributes?: ...,
+          onPremisesImmutableId?: ..., onPremisesLastSyncDateTime?: ...,
+          onPremisesProvisioningErrors?: ..., onPremisesSamAccountName?: ...,
+          onPremisesSecurityIdentifier?: ..., onPremisesSyncEnabled?: ...,
+          onPremisesUserPrincipalName?: ..., otherMails?: ..., outlook?: ...,
+          ownedDevices?: ..., ownedObjects?: ..., passwordPolicies?: ...,
+          passwordProfile?: ..., pastProjects?: ..., people?: ...,
+          permissionGrants?: ..., photo?: ..., photos?: ..., planner?: ...,
+          postalCode?: ..., preferredDataLocation?: ..., preferredLanguage?:
+          ..., preferredName?: ..., presence?: ..., print?: ...,
+          provisionedPlans?: ..., proxyAddresses?: ..., registeredDevices?: ...,
+          responsibilities?: ..., schools?: ..., scopedRoleMemberOf?: ...,
+          securityIdentifier?: ..., serviceProvisioningErrors?: ..., settings?:
+          ..., showInAddressList?: ..., signInActivity?: ...,
+          signInSessionsValidFromDateTime?: ..., skills?: ..., solutions?: ...,
+          sponsors?: ..., state?: ..., streetAddress?: ..., surname?: ...,
+          teamwork?: ..., todo?: ..., transitiveMemberOf?: ..., usageLocation?:
+          ..., userPrincipalName?: ..., userType?: ... } & { <xref
+          uid="@odata.type" />: ... })[], wiFiMacAddress?: string | null,
+          windowsProtectionState?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, antiMalwareVersion?:
+          function, detectedMalwareState?: function, deviceState?: function,
+          engineVersion?: function, fullScanOverdue?: function,
+          fullScanRequired?: function, isVirtualMachine?: function,
+          lastFullScanDateTime?: function, lastFullScanSignatureVersion?:
+          function, lastQuickScanDateTime?: function,
+          lastQuickScanSignatureVersion?: function, lastReportedDateTime?:
+          function, malwareProtectionEnabled?: function,
+          networkInspectionSystemEnabled?: function, productStatus?: function,
+          quickScanOverdue?: function, realTimeProtectionEnabled?: function,
+          rebootRequired?: function, signatureUpdateOverdue?: function,
+          signatureVersion?: function, tamperProtectionEnabled?: function } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsProtectionState" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.managedDevice" />"
+          })[], platform?: "unknown" | "windows" | "windowsMobile" |
+          "windowsHolographic" | "ios" | "macOS" | "chromeOS" | "androidOSP" |
+          "androidDeviceAdministrator" | "androidWorkProfile" |
+          "androidDedicatedAndFullyManaged" | "unknownFutureValue", publisher?:
+          string | null, sizeInByte?: number, version?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.detectedApp"
+          />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: '@microsoft/teams.graph-endpoints.deviceManagement.detectedApps.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -79,20 +1366,289 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/detectedApps"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, deviceCount?: number, displayName?: string | null,
+        managedDevices?: (Omit<..., ...> & { @odata.type: ...,
+        activationLockBypassCode?: ..., androidSecurityPatchLevel?: ...,
+        azureADDeviceId?: ..., azureADRegistered?: ...,
+        complianceGracePeriodExpirationDateTime?: ..., complianceState?: ...,
+        configurationManagerClientEnabledFeatures?: ..., deviceActionResults?:
+        ..., deviceCategory?: ..., deviceCategoryDisplayName?: ...,
+        deviceCompliancePolicyStates?: ..., deviceConfigurationStates?: ...,
+        deviceEnrollmentType?: ..., deviceHealthAttestationState?: ...,
+        deviceName?: ..., deviceRegistrationState?: ..., easActivated?: ...,
+        easActivationDateTime?: ..., easDeviceId?: ..., emailAddress?: ...,
+        enrolledDateTime?: ..., enrollmentProfileName?: ...,
+        ethernetMacAddress?: ..., exchangeAccessState?: ...,
+        exchangeAccessStateReason?: ..., exchangeLastSuccessfulSyncDateTime?:
+        ..., freeStorageSpaceInBytes?: ..., iccid?: ..., imei?: ...,
+        isEncrypted?: ..., isSupervised?: ..., jailBroken?: ...,
+        lastSyncDateTime?: ..., logCollectionRequests?: ..., managedDeviceName?:
+        ..., managedDeviceOwnerType?: ..., managementAgent?: ...,
+        managementCertificateExpirationDate?: ..., managementState?: ...,
+        manufacturer?: ..., meid?: ..., model?: ..., notes?: ...,
+        operatingSystem?: ..., osVersion?: ..., partnerReportedThreatState?:
+        ..., phoneNumber?: ..., physicalMemoryInBytes?: ...,
+        remoteAssistanceSessionErrorDetails?: ..., remoteAssistanceSessionUrl?:
+        ..., requireUserEnrollmentApproval?: ..., serialNumber?: ...,
+        subscriberCarrier?: ..., totalStorageSpaceInBytes?: ..., udid?: ...,
+        userDisplayName?: ..., userId?: ..., userPrincipalName?: ..., users?:
+        ..., wiFiMacAddress?: ..., windowsProtectionState?: ... } & {
+        @odata.type: ... })[], platform?: "unknown" | "windows" |
+        "windowsMobile" | "windowsHolographic" | "ios" | "macOS" | "chromeOS" |
+        "androidOSP" | "androidDeviceAdministrator" | "androidWorkProfile" |
+        "androidDedicatedAndFullyManaged" | "unknownFutureValue", publisher?:
+        string | null, sizeInByte?: number, version?: string | null } & {
+        @odata.type: "#microsoft.graph.detectedApp" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/detectedApps"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          deviceCount?: number, displayName?: string | null, managedDevices?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          activationLockBypassCode?: ..., androidSecurityPatchLevel?: ...,
+          azureADDeviceId?: ..., azureADRegistered?: ...,
+          complianceGracePeriodExpirationDateTime?: ..., complianceState?: ...,
+          configurationManagerClientEnabledFeatures?: ..., deviceActionResults?:
+          ..., deviceCategory?: ..., deviceCategoryDisplayName?: ...,
+          deviceCompliancePolicyStates?: ..., deviceConfigurationStates?: ...,
+          deviceEnrollmentType?: ..., deviceHealthAttestationState?: ...,
+          deviceName?: ..., deviceRegistrationState?: ..., easActivated?: ...,
+          easActivationDateTime?: ..., easDeviceId?: ..., emailAddress?: ...,
+          enrolledDateTime?: ..., enrollmentProfileName?: ...,
+          ethernetMacAddress?: ..., exchangeAccessState?: ...,
+          exchangeAccessStateReason?: ..., exchangeLastSuccessfulSyncDateTime?:
+          ..., freeStorageSpaceInBytes?: ..., iccid?: ..., imei?: ...,
+          isEncrypted?: ..., isSupervised?: ..., jailBroken?: ...,
+          lastSyncDateTime?: ..., logCollectionRequests?: ...,
+          managedDeviceName?: ..., managedDeviceOwnerType?: ...,
+          managementAgent?: ..., managementCertificateExpirationDate?: ...,
+          managementState?: ..., manufacturer?: ..., meid?: ..., model?: ...,
+          notes?: ..., operatingSystem?: ..., osVersion?: ...,
+          partnerReportedThreatState?: ..., phoneNumber?: ...,
+          physicalMemoryInBytes?: ..., remoteAssistanceSessionErrorDetails?:
+          ..., remoteAssistanceSessionUrl?: ..., requireUserEnrollmentApproval?:
+          ..., serialNumber?: ..., subscriberCarrier?: ...,
+          totalStorageSpaceInBytes?: ..., udid?: ..., userDisplayName?: ...,
+          userId?: ..., userPrincipalName?: ..., users?: ..., wiFiMacAddress?:
+          ..., windowsProtectionState?: ... } & { <xref uid="@odata.type" />:
+          ... })[], platform?: "unknown" | "windows" | "windowsMobile" |
+          "windowsHolographic" | "ios" | "macOS" | "chromeOS" | "androidOSP" |
+          "androidDeviceAdministrator" | "androidWorkProfile" |
+          "androidDedicatedAndFullyManaged" | "unknownFutureValue", publisher?:
+          string | null, sizeInByte?: number, version?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.detectedApp"
+          />" })[] }&gt;
   - name: >-
-      update(Operation<"/deviceManagement/detectedApps/{detectedApp-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, deviceCount?: number, displayName?: string | null,
+      managedDevices?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, activationLockBypassCode?: string
+      | null, androidSecurityPatchLevel?: string | null, azureADDeviceId?:
+      string | null, azureADRegistered?: boolean | null,
+      complianceGracePeriodExpirationDateTime?: string, complianceState?:
+      "unknown" | "compliant" | "error" | "conflict" | "noncompliant" |
+      "inGracePeriod" | "configManager",
+      configurationManagerClientEnabledFeatures?: Record<string, never> | {
+      @odata.type: string, compliancePolicy?: boolean, deviceConfiguration?:
+      boolean, inventory?: boolean, modernApps?: boolean, resourceAccess?:
+      boolean, windowsUpdateForBusiness?: boolean } | null,
+      deviceActionResults?: { @odata.type: string, actionName?: string | null,
+      actionState?: "none" | "failed" | "pending" | "active" | "canceled" |
+      "done" | "notSupported", lastUpdatedDateTime?: string, startDateTime?:
+      string }[], deviceCategory?: Record<string, never> | (Omit<{ @odata.type:
+      string, id?: function }, "@odata.type"> & { @odata.type: string,
+      description?: string | null, displayName?: string | null } & {
+      @odata.type: "#microsoft.graph.deviceCategory" }) | null,
+      deviceCategoryDisplayName?: string | null, deviceCompliancePolicyStates?:
+      (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
+      string, displayName?: function, platformType?: function, settingCount?:
+      function, settingStates?: function, state?: function, version?: function }
+      & { @odata.type: "#microsoft.graph.deviceCompliancePolicyState" })[],
+      deviceConfigurationStates?: (Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & { @odata.type: string, displayName?: function,
+      platformType?: function, settingCount?: function, settingStates?:
+      function, state?: function, version?: function } & { @odata.type:
+      "#microsoft.graph.deviceConfigurationState" })[], deviceEnrollmentType?:
+      "unknown" | "unknownFutureValue" | "userEnrollment" |
+      "deviceEnrollmentManager" | "appleBulkWithUser" | "appleBulkWithoutUser" |
+      "windowsAzureADJoin" | "windowsBulkUserless" | "windowsAutoEnrollment" |
+      "windowsBulkAzureDomainJoin" | "windowsCoManagement" |
+      "windowsAzureADJoinUsingDeviceAuth" | "appleUserEnrollment" |
+      "appleUserEnrollmentWithServiceAccount", deviceHealthAttestationState?:
+      Record<string, never> | { @odata.type: string, attestationIdentityKey?:
+      string | null, bitLockerStatus?: string | null, bootAppSecurityVersion?:
+      string | null, bootDebugging?: string | null, bootManagerSecurityVersion?:
+      string | null, bootManagerVersion?: string | null, bootRevisionListInfo?:
+      string | null, codeIntegrity?: string | null, codeIntegrityCheckVersion?:
+      string | null, codeIntegrityPolicy?: string | null, contentNamespaceUrl?:
+      string | null, contentVersion?: string | null, dataExcutionPolicy?: string
+      | null, deviceHealthAttestationStatus?: string | null,
+      earlyLaunchAntiMalwareDriverProtection?: string | null,
+      healthAttestationSupportedStatus?: string | null,
+      healthStatusMismatchInfo?: string | null, issuedDateTime?: string,
+      lastUpdateDateTime?: string | null, operatingSystemKernelDebugging?:
+      string | null, operatingSystemRevListInfo?: string | null, pcr0?: string |
+      null, pcrHashAlgorithm?: string | null, resetCount?: number,
+      restartCount?: number, safeMode?: string | null, secureBoot?: string |
+      null, secureBootConfigurationPolicyFingerPrint?: string | null,
+      testSigning?: string | null, tpmVersion?: string | null,
+      virtualSecureMode?: string | null, windowsPE?: string | null } | null,
+      deviceName?: string | null, deviceRegistrationState?: "unknown" |
+      "notRegistered" | "registered" | "revoked" | "keyConflict" |
+      "approvalPending" | "certificateReset" | "notRegisteredPendingEnrollment",
+      easActivated?: boolean, easActivationDateTime?: string, easDeviceId?:
+      string | null, emailAddress?: string | null, enrolledDateTime?: string,
+      enrollmentProfileName?: string | null, ethernetMacAddress?: string | null,
+      exchangeAccessState?: "none" | "blocked" | "unknown" | "allowed" |
+      "quarantined", exchangeAccessStateReason?: "other" | "none" | "unknown" |
+      "compliant" | "exchangeGlobalRule" | "exchangeIndividualRule" |
+      "exchangeDeviceRule" | "exchangeUpgrade" | "exchangeMailboxPolicy" |
+      "notCompliant" | "notEnrolled" | "unknownLocation" | "mfaRequired" |
+      "azureADBlockDueToAccessPolicy" | "compromisedPassword" |
+      "deviceNotKnownWithManagedApp", exchangeLastSuccessfulSyncDateTime?:
+      string, freeStorageSpaceInBytes?: number, iccid?: string | null, imei?:
+      string | null, isEncrypted?: boolean, isSupervised?: boolean, jailBroken?:
+      string | null, lastSyncDateTime?: string, logCollectionRequests?: (Omit<{
+      @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+      enrolledByUser?: function, expirationDateTimeUTC?: function,
+      initiatedByUserPrincipalName?: function, managedDeviceId?: function,
+      receivedDateTimeUTC?: function, requestedDateTimeUTC?: function,
+      sizeInKB?: function, status?: function } & { @odata.type:
+      "#microsoft.graph.deviceLogCollectionResponse" })[], managedDeviceName?:
+      string | null, managedDeviceOwnerType?: "unknown" | "unknownFutureValue" |
+      "company" | "personal", managementAgent?: "unknown" | "eas" | "mdm" |
+      "easMdm" | "intuneClient" | "easIntuneClient" |
+      "configurationManagerClient" | "configurationManagerClientMdm" |
+      "configurationManagerClientMdmEas" | "jamf" |
+      "googleCloudDevicePolicyController" | "microsoft365ManagedMdm" |
+      "msSense", managementCertificateExpirationDate?: string, managementState?:
+      "unknownFutureValue" | "managed" | "retirePending" | "retireFailed" |
+      "wipePending" | "wipeFailed" | "unhealthy" | "deletePending" |
+      "retireIssued" | "wipeIssued" | "wipeCanceled" | "retireCanceled" |
+      "discovered", manufacturer?: string | null, meid?: string | null, model?:
+      string | null, notes?: string | null, operatingSystem?: string | null,
+      osVersion?: string | null, partnerReportedThreatState?: "unknown" |
+      "unresponsive" | "activated" | "deactivated" | "secured" | "lowSeverity" |
+      "mediumSeverity" | "highSeverity" | "compromised" | "misconfigured",
+      phoneNumber?: string | null, physicalMemoryInBytes?: number,
+      remoteAssistanceSessionErrorDetails?: string | null,
+      remoteAssistanceSessionUrl?: string | null,
+      requireUserEnrollmentApproval?: boolean | null, serialNumber?: string |
+      null, subscriberCarrier?: string | null, totalStorageSpaceInBytes?:
+      number, udid?: string | null, userDisplayName?: string | null, userId?:
+      string | null, userPrincipalName?: string | null, users?: (Omit<... & ...
+      & ..., "@odata.type"> & { @odata.type: string, aboutMe?: function,
+      accountEnabled?: function, activities?: function, ageGroup?: function,
+      agreementAcceptances?: function, appRoleAssignments?: function,
+      assignedLicenses?: function, assignedPlans?: function, authentication?:
+      function, authorizationInfo?: function, birthday?: function,
+      businessPhones?: function, calendar?: function, calendarGroups?: function,
+      calendars?: function, calendarView?: function, chats?: function, city?:
+      function, cloudClipboard?: function, cloudPCs?: function, companyName?:
+      function, consentProvidedForMinor?: function, contactFolders?: function,
+      contacts?: function, country?: function, createdDateTime?: function,
+      createdObjects?: function, creationType?: function,
+      customSecurityAttributes?: function, dataSecurityAndGovernance?: function,
+      department?: function, deviceEnrollmentLimit?: function,
+      deviceManagementTroubleshootingEvents?: function, directReports?:
+      function, displayName?: function, drive?: function, drives?: function,
+      employeeExperience?: function, employeeHireDate?: function, employeeId?:
+      function, employeeLeaveDateTime?: function, employeeOrgData?: function,
+      employeeType?: function, events?: function, extensions?: function,
+      externalUserState?: function, externalUserStateChangeDateTime?: function,
+      faxNumber?: function, followedSites?: function, givenName?: function,
+      hireDate?: function, identities?: function, imAddresses?: function,
+      inferenceClassification?: function, insights?: function, interests?:
+      function, isManagementRestricted?: function, isResourceAccount?: function,
+      jobTitle?: function, joinedTeams?: function, lastPasswordChangeDateTime?:
+      function, legalAgeGroupClassification?: function,
+      licenseAssignmentStates?: function, licenseDetails?: function, mail?:
+      function, mailboxSettings?: function, mailFolders?: function,
+      mailNickname?: function, managedAppRegistrations?: function,
+      managedDevices?: (Omit<{ id?: string | undefined; '@odata.type': string;
+      }, "@odata.type"> & { readonly activationLockBypassCode?: string | null |
+      undefined; readonly androidSecurityPatchLevel?: string | null | undefined;
+      ... 59 more ...; '@odata.type': string; } & { ...; })[] | undefined,
+      manager?: function, memberOf?: function, messages?: function,
+      mobilePhone?: function, mySite?: function, oauth2PermissionGrants?:
+      function, officeLocation?: function, onenote?: function, onlineMeetings?:
+      function, onPremisesDistinguishedName?: function, onPremisesDomainName?:
+      function, onPremisesExtensionAttributes?: function,
+      onPremisesImmutableId?: function, onPremisesLastSyncDateTime?: function,
+      onPremisesProvisioningErrors?: function, onPremisesSamAccountName?:
+      function, onPremisesSecurityIdentifier?: function, onPremisesSyncEnabled?:
+      function, onPremisesUserPrincipalName?: function, otherMails?: function,
+      outlook?: function, ownedDevices?: function, ownedObjects?: function,
+      passwordPolicies?: function, passwordProfile?: function, pastProjects?:
+      function, people?: function, permissionGrants?: function, photo?:
+      function, photos?: function, planner?: function, postalCode?: function,
+      preferredDataLocation?: function, preferredLanguage?: function,
+      preferredName?: function, presence?: function, print?: function,
+      provisionedPlans?: function, proxyAddresses?: function,
+      registeredDevices?: function, responsibilities?: function, schools?:
+      function, scopedRoleMemberOf?: function, securityIdentifier?: function,
+      serviceProvisioningErrors?: function, settings?: function,
+      showInAddressList?: function, signInActivity?: function,
+      signInSessionsValidFromDateTime?: function, skills?: function, solutions?:
+      function, sponsors?: function, state?: function, streetAddress?: function,
+      surname?: function, teamwork?: function, todo?: function,
+      transitiveMemberOf?: function, usageLocation?: function,
+      userPrincipalName?: function, userType?: function } & { @odata.type:
+      "#microsoft.graph.user" })[], wiFiMacAddress?: string | null,
+      windowsProtectionState?: Record<string, never> | (Omit<{ @odata.type:
+      string, id?: function }, "@odata.type"> & { @odata.type: string,
+      antiMalwareVersion?: string | null, detectedMalwareState?: ...[],
+      deviceState?: Record<..., ...> | "clean" | "fullScanPending" |
+      "rebootPending" | "manualStepsPending" | "offlineScanPending" | "critical"
+      | null, engineVersion?: string | null, fullScanOverdue?: boolean | null,
+      fullScanRequired?: boolean | null, isVirtualMachine?: boolean | null,
+      lastFullScanDateTime?: string | null, lastFullScanSignatureVersion?:
+      string | null, lastQuickScanDateTime?: string | null,
+      lastQuickScanSignatureVersion?: string | null, lastReportedDateTime?:
+      string | null, malwareProtectionEnabled?: boolean | null,
+      networkInspectionSystemEnabled?: boolean | null, productStatus?:
+      Record<..., ...> | "noStatus" | "serviceNotRunning" |
+      "serviceStartedWithoutMalwareProtection" |
+      "pendingFullScanDueToThreatAction" | "pendingRebootDueToThreatAction" |
+      "pendingManualStepsDueToThreatAction" | "avSignaturesOutOfDate" |
+      "asSignaturesOutOfDate" | "noQuickScanHappenedForSpecifiedPeriod" |
+      "noFullScanHappenedForSpecifiedPeriod" | "systemInitiatedScanInProgress" |
+      "systemInitiatedCleanInProgress" | "samplesPendingSubmission" |
+      "productRunningInEvaluationMode" | "productRunningInNonGenuineMode" |
+      "productExpired" | "offlineScanRequired" |
+      "serviceShutdownAsPartOfSystemShutdown" |
+      "threatRemediationFailedCritically" |
+      "threatRemediationFailedNonCritically" | "noStatusFlagsSet" |
+      "platformOutOfDate" | "platformUpdateInProgress" |
+      "platformAboutToBeOutdated" |
+      "signatureOrPlatformEndOfLifeIsPastOrIsImpending" |
+      "windowsSModeSignaturesInUseOnNonWin10SInstall" | null, quickScanOverdue?:
+      boolean | null, realTimeProtectionEnabled?: boolean | null,
+      rebootRequired?: boolean | null, signatureUpdateOverdue?: boolean | null,
+      signatureVersion?: string | null, tamperProtectionEnabled?: boolean | null
+      } & { @odata.type: "#microsoft.graph.windowsProtectionState" }) | null } &
+      { @odata.type: "#microsoft.graph.managedDevice" })[], platform?: "unknown"
+      | "windows" | "windowsMobile" | "windowsHolographic" | "ios" | "macOS" |
+      "chromeOS" | "androidOSP" | "androidDeviceAdministrator" |
+      "androidWorkProfile" | "androidDedicatedAndFullyManaged" |
+      "unknownFutureValue", publisher?: string | null, sizeInByte?: number,
+      version?: string | null } & { @odata.type: "#microsoft.graph.detectedApp"
+      }, { detectedApp-id: string })
     uid: '@microsoft/teams.graph-endpoints.deviceManagement.detectedApps.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`PATCH /deviceManagement/detectedApps/{detectedApp-id}`'
@@ -100,24 +1656,780 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/deviceManagement/detectedApps/{detectedApp-id}", "patch">,
-        params?: any): EndpointRequest<IEndpoints["PATCH
-        /deviceManagement/detectedApps/{detectedApp-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, deviceCount?: number,
+        displayName?: string | null, managedDevices?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        activationLockBypassCode?: string | null, androidSecurityPatchLevel?:
+        string | null, azureADDeviceId?: string | null, azureADRegistered?:
+        boolean | null, complianceGracePeriodExpirationDateTime?: string,
+        complianceState?: "unknown" | "compliant" | "error" | "conflict" |
+        "noncompliant" | "inGracePeriod" | "configManager",
+        configurationManagerClientEnabledFeatures?: Record<string, never> | {
+        @odata.type: string, compliancePolicy?: boolean, deviceConfiguration?:
+        boolean, inventory?: boolean, modernApps?: boolean, resourceAccess?:
+        boolean, windowsUpdateForBusiness?: boolean } | null,
+        deviceActionResults?: { @odata.type: string, actionName?: string | null,
+        actionState?: "none" | "failed" | "pending" | "active" | "canceled" |
+        "done" | "notSupported", lastUpdatedDateTime?: string, startDateTime?:
+        string }[], deviceCategory?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, description?: string | null, displayName?: string | null } & {
+        @odata.type: "#microsoft.graph.deviceCategory" }) | null,
+        deviceCategoryDisplayName?: string | null,
+        deviceCompliancePolicyStates?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, displayName?: function,
+        platformType?: function, settingCount?: function, settingStates?:
+        function, state?: function, version?: function } & { @odata.type:
+        "#microsoft.graph.deviceCompliancePolicyState" })[],
+        deviceConfigurationStates?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, displayName?: function,
+        platformType?: function, settingCount?: function, settingStates?:
+        function, state?: function, version?: function } & { @odata.type:
+        "#microsoft.graph.deviceConfigurationState" })[], deviceEnrollmentType?:
+        "unknown" | "unknownFutureValue" | "userEnrollment" |
+        "deviceEnrollmentManager" | "appleBulkWithUser" | "appleBulkWithoutUser"
+        | "windowsAzureADJoin" | "windowsBulkUserless" | "windowsAutoEnrollment"
+        | "windowsBulkAzureDomainJoin" | "windowsCoManagement" |
+        "windowsAzureADJoinUsingDeviceAuth" | "appleUserEnrollment" |
+        "appleUserEnrollmentWithServiceAccount", deviceHealthAttestationState?:
+        Record<string, never> | { @odata.type: string, attestationIdentityKey?:
+        string | null, bitLockerStatus?: string | null, bootAppSecurityVersion?:
+        string | null, bootDebugging?: string | null,
+        bootManagerSecurityVersion?: string | null, bootManagerVersion?: string
+        | null, bootRevisionListInfo?: string | null, codeIntegrity?: string |
+        null, codeIntegrityCheckVersion?: string | null, codeIntegrityPolicy?:
+        string | null, contentNamespaceUrl?: string | null, contentVersion?:
+        string | null, dataExcutionPolicy?: string | null,
+        deviceHealthAttestationStatus?: string | null,
+        earlyLaunchAntiMalwareDriverProtection?: string | null,
+        healthAttestationSupportedStatus?: string | null,
+        healthStatusMismatchInfo?: string | null, issuedDateTime?: string,
+        lastUpdateDateTime?: string | null, operatingSystemKernelDebugging?:
+        string | null, operatingSystemRevListInfo?: string | null, pcr0?: string
+        | null, pcrHashAlgorithm?: string | null, resetCount?: number,
+        restartCount?: number, safeMode?: string | null, secureBoot?: string |
+        null, secureBootConfigurationPolicyFingerPrint?: string | null,
+        testSigning?: string | null, tpmVersion?: string | null,
+        virtualSecureMode?: string | null, windowsPE?: string | null } | null,
+        deviceName?: string | null, deviceRegistrationState?: "unknown" |
+        "notRegistered" | "registered" | "revoked" | "keyConflict" |
+        "approvalPending" | "certificateReset" |
+        "notRegisteredPendingEnrollment", easActivated?: boolean,
+        easActivationDateTime?: string, easDeviceId?: string | null,
+        emailAddress?: string | null, enrolledDateTime?: string,
+        enrollmentProfileName?: string | null, ethernetMacAddress?: string |
+        null, exchangeAccessState?: "none" | "blocked" | "unknown" | "allowed" |
+        "quarantined", exchangeAccessStateReason?: "other" | "none" | "unknown"
+        | "compliant" | "exchangeGlobalRule" | "exchangeIndividualRule" |
+        "exchangeDeviceRule" | "exchangeUpgrade" | "exchangeMailboxPolicy" |
+        "notCompliant" | "notEnrolled" | "unknownLocation" | "mfaRequired" |
+        "azureADBlockDueToAccessPolicy" | "compromisedPassword" |
+        "deviceNotKnownWithManagedApp", exchangeLastSuccessfulSyncDateTime?:
+        string, freeStorageSpaceInBytes?: number, iccid?: string | null, imei?:
+        string | null, isEncrypted?: boolean, isSupervised?: boolean,
+        jailBroken?: string | null, lastSyncDateTime?: string,
+        logCollectionRequests?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, enrolledByUser?: function,
+        expirationDateTimeUTC?: function, initiatedByUserPrincipalName?:
+        function, managedDeviceId?: function, receivedDateTimeUTC?: function,
+        requestedDateTimeUTC?: function, sizeInKB?: function, status?: function
+        } & { @odata.type: "#microsoft.graph.deviceLogCollectionResponse" })[],
+        managedDeviceName?: string | null, managedDeviceOwnerType?: "unknown" |
+        "unknownFutureValue" | "company" | "personal", managementAgent?:
+        "unknown" | "eas" | "mdm" | "easMdm" | "intuneClient" |
+        "easIntuneClient" | "configurationManagerClient" |
+        "configurationManagerClientMdm" | "configurationManagerClientMdmEas" |
+        "jamf" | "googleCloudDevicePolicyController" | "microsoft365ManagedMdm"
+        | "msSense", managementCertificateExpirationDate?: string,
+        managementState?: "unknownFutureValue" | "managed" | "retirePending" |
+        "retireFailed" | "wipePending" | "wipeFailed" | "unhealthy" |
+        "deletePending" | "retireIssued" | "wipeIssued" | "wipeCanceled" |
+        "retireCanceled" | "discovered", manufacturer?: string | null, meid?:
+        string | null, model?: string | null, notes?: string | null,
+        operatingSystem?: string | null, osVersion?: string | null,
+        partnerReportedThreatState?: "unknown" | "unresponsive" | "activated" |
+        "deactivated" | "secured" | "lowSeverity" | "mediumSeverity" |
+        "highSeverity" | "compromised" | "misconfigured", phoneNumber?: string |
+        null, physicalMemoryInBytes?: number,
+        remoteAssistanceSessionErrorDetails?: string | null,
+        remoteAssistanceSessionUrl?: string | null,
+        requireUserEnrollmentApproval?: boolean | null, serialNumber?: string |
+        null, subscriberCarrier?: string | null, totalStorageSpaceInBytes?:
+        number, udid?: string | null, userDisplayName?: string | null, userId?:
+        string | null, userPrincipalName?: string | null, users?: (Omit<... &
+        ... & ..., "@odata.type"> & { @odata.type: string, aboutMe?: function,
+        accountEnabled?: function, activities?: function, ageGroup?: function,
+        agreementAcceptances?: function, appRoleAssignments?: function,
+        assignedLicenses?: function, assignedPlans?: function, authentication?:
+        function, authorizationInfo?: function, birthday?: function,
+        businessPhones?: function, calendar?: function, calendarGroups?:
+        function, calendars?: function, calendarView?: function, chats?:
+        function, city?: function, cloudClipboard?: function, cloudPCs?:
+        function, companyName?: function, consentProvidedForMinor?: function,
+        contactFolders?: function, contacts?: function, country?: function,
+        createdDateTime?: function, createdObjects?: function, creationType?:
+        function, customSecurityAttributes?: function,
+        dataSecurityAndGovernance?: function, department?: function,
+        deviceEnrollmentLimit?: function,
+        deviceManagementTroubleshootingEvents?: function, directReports?:
+        function, displayName?: function, drive?: function, drives?: function,
+        employeeExperience?: function, employeeHireDate?: function, employeeId?:
+        function, employeeLeaveDateTime?: function, employeeOrgData?: function,
+        employeeType?: function, events?: function, extensions?: function,
+        externalUserState?: function, externalUserStateChangeDateTime?:
+        function, faxNumber?: function, followedSites?: function, givenName?:
+        function, hireDate?: function, identities?: function, imAddresses?:
+        function, inferenceClassification?: function, insights?: function,
+        interests?: function, isManagementRestricted?: function,
+        isResourceAccount?: function, jobTitle?: function, joinedTeams?:
+        function, lastPasswordChangeDateTime?: function,
+        legalAgeGroupClassification?: function, licenseAssignmentStates?:
+        function, licenseDetails?: function, mail?: function, mailboxSettings?:
+        function, mailFolders?: function, mailNickname?: function,
+        managedAppRegistrations?: function, managedDevices?: (Omit<{ id?: string
+        | undefined; '@odata.type': string; }, "@odata.type"> & { readonly
+        activationLockBypassCode?: string | null | undefined; readonly
+        androidSecurityPatchLevel?: string | null | undefined; ... 59 more ...;
+        '@odata.type': string; } & { ...; })[] | undefined, manager?: function,
+        memberOf?: function, messages?: function, mobilePhone?: function,
+        mySite?: function, oauth2PermissionGrants?: function, officeLocation?:
+        function, onenote?: function, onlineMeetings?: function,
+        onPremisesDistinguishedName?: function, onPremisesDomainName?: function,
+        onPremisesExtensionAttributes?: function, onPremisesImmutableId?:
+        function, onPremisesLastSyncDateTime?: function,
+        onPremisesProvisioningErrors?: function, onPremisesSamAccountName?:
+        function, onPremisesSecurityIdentifier?: function,
+        onPremisesSyncEnabled?: function, onPremisesUserPrincipalName?:
+        function, otherMails?: function, outlook?: function, ownedDevices?:
+        function, ownedObjects?: function, passwordPolicies?: function,
+        passwordProfile?: function, pastProjects?: function, people?: function,
+        permissionGrants?: function, photo?: function, photos?: function,
+        planner?: function, postalCode?: function, preferredDataLocation?:
+        function, preferredLanguage?: function, preferredName?: function,
+        presence?: function, print?: function, provisionedPlans?: function,
+        proxyAddresses?: function, registeredDevices?: function,
+        responsibilities?: function, schools?: function, scopedRoleMemberOf?:
+        function, securityIdentifier?: function, serviceProvisioningErrors?:
+        function, settings?: function, showInAddressList?: function,
+        signInActivity?: function, signInSessionsValidFromDateTime?: function,
+        skills?: function, solutions?: function, sponsors?: function, state?:
+        function, streetAddress?: function, surname?: function, teamwork?:
+        function, todo?: function, transitiveMemberOf?: function,
+        usageLocation?: function, userPrincipalName?: function, userType?:
+        function } & { @odata.type: "#microsoft.graph.user" })[],
+        wiFiMacAddress?: string | null, windowsProtectionState?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        { @odata.type: string, antiMalwareVersion?: string | null,
+        detectedMalwareState?: ...[], deviceState?: Record<..., ...> | "clean" |
+        "fullScanPending" | "rebootPending" | "manualStepsPending" |
+        "offlineScanPending" | "critical" | null, engineVersion?: string | null,
+        fullScanOverdue?: boolean | null, fullScanRequired?: boolean | null,
+        isVirtualMachine?: boolean | null, lastFullScanDateTime?: string | null,
+        lastFullScanSignatureVersion?: string | null, lastQuickScanDateTime?:
+        string | null, lastQuickScanSignatureVersion?: string | null,
+        lastReportedDateTime?: string | null, malwareProtectionEnabled?: boolean
+        | null, networkInspectionSystemEnabled?: boolean | null, productStatus?:
+        Record<..., ...> | "noStatus" | "serviceNotRunning" |
+        "serviceStartedWithoutMalwareProtection" |
+        "pendingFullScanDueToThreatAction" | "pendingRebootDueToThreatAction" |
+        "pendingManualStepsDueToThreatAction" | "avSignaturesOutOfDate" |
+        "asSignaturesOutOfDate" | "noQuickScanHappenedForSpecifiedPeriod" |
+        "noFullScanHappenedForSpecifiedPeriod" | "systemInitiatedScanInProgress"
+        | "systemInitiatedCleanInProgress" | "samplesPendingSubmission" |
+        "productRunningInEvaluationMode" | "productRunningInNonGenuineMode" |
+        "productExpired" | "offlineScanRequired" |
+        "serviceShutdownAsPartOfSystemShutdown" |
+        "threatRemediationFailedCritically" |
+        "threatRemediationFailedNonCritically" | "noStatusFlagsSet" |
+        "platformOutOfDate" | "platformUpdateInProgress" |
+        "platformAboutToBeOutdated" |
+        "signatureOrPlatformEndOfLifeIsPastOrIsImpending" |
+        "windowsSModeSignaturesInUseOnNonWin10SInstall" | null,
+        quickScanOverdue?: boolean | null, realTimeProtectionEnabled?: boolean |
+        null, rebootRequired?: boolean | null, signatureUpdateOverdue?: boolean
+        | null, signatureVersion?: string | null, tamperProtectionEnabled?:
+        boolean | null } & { @odata.type:
+        "#microsoft.graph.windowsProtectionState" }) | null } & { @odata.type:
+        "#microsoft.graph.managedDevice" })[], platform?: "unknown" | "windows"
+        | "windowsMobile" | "windowsHolographic" | "ios" | "macOS" | "chromeOS"
+        | "androidOSP" | "androidDeviceAdministrator" | "androidWorkProfile" |
+        "androidDedicatedAndFullyManaged" | "unknownFutureValue", publisher?:
+        string | null, sizeInByte?: number, version?: string | null } & {
+        @odata.type: "#microsoft.graph.detectedApp" }, params?: {
+        detectedApp-id: string }): EndpointRequest<Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, deviceCount?:
+        number, displayName?: string | null, managedDevices?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, activationLockBypassCode?: string | null,
+        androidSecurityPatchLevel?: string | null, azureADDeviceId?: string |
+        null, azureADRegistered?: boolean | null,
+        complianceGracePeriodExpirationDateTime?: string, complianceState?:
+        "unknown" | "compliant" | "error" | "conflict" | "noncompliant" |
+        "inGracePeriod" | "configManager",
+        configurationManagerClientEnabledFeatures?: Record<string, never> | {
+        @odata.type: string, compliancePolicy?: boolean, deviceConfiguration?:
+        boolean, inventory?: boolean, modernApps?: boolean, resourceAccess?:
+        boolean, windowsUpdateForBusiness?: boolean } | null,
+        deviceActionResults?: { @odata.type: string, actionName?: function,
+        actionState?: function, lastUpdatedDateTime?: function, startDateTime?:
+        function }[], deviceCategory?: Record<string, never> | (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        description?: function, displayName?: function } & { @odata.type:
+        "#microsoft.graph.deviceCategory" }) | null, deviceCategoryDisplayName?:
+        string | null, deviceCompliancePolicyStates?: (Omit<..., ...> & {
+        @odata.type: ..., displayName?: ..., platformType?: ..., settingCount?:
+        ..., settingStates?: ..., state?: ..., version?: ... } & { @odata.type:
+        ... })[], deviceConfigurationStates?: (Omit<..., ...> & { @odata.type:
+        ..., displayName?: ..., platformType?: ..., settingCount?: ...,
+        settingStates?: ..., state?: ..., version?: ... } & { @odata.type: ...
+        })[], deviceEnrollmentType?: "unknown" | "unknownFutureValue" |
+        "userEnrollment" | "deviceEnrollmentManager" | "appleBulkWithUser" |
+        "appleBulkWithoutUser" | "windowsAzureADJoin" | "windowsBulkUserless" |
+        "windowsAutoEnrollment" | "windowsBulkAzureDomainJoin" |
+        "windowsCoManagement" | "windowsAzureADJoinUsingDeviceAuth" |
+        "appleUserEnrollment" | "appleUserEnrollmentWithServiceAccount",
+        deviceHealthAttestationState?: Record<string, never> | { @odata.type:
+        string, attestationIdentityKey?: string | null, bitLockerStatus?: string
+        | null, bootAppSecurityVersion?: string | null, bootDebugging?: string |
+        null, bootManagerSecurityVersion?: string | null, bootManagerVersion?:
+        string | null, bootRevisionListInfo?: string | null, codeIntegrity?:
+        string | null, codeIntegrityCheckVersion?: string | null,
+        codeIntegrityPolicy?: string | null, contentNamespaceUrl?: string |
+        null, contentVersion?: string | null, dataExcutionPolicy?: string |
+        null, deviceHealthAttestationStatus?: string | null,
+        earlyLaunchAntiMalwareDriverProtection?: string | null,
+        healthAttestationSupportedStatus?: string | null,
+        healthStatusMismatchInfo?: string | null, issuedDateTime?: string,
+        lastUpdateDateTime?: string | null, operatingSystemKernelDebugging?:
+        string | null, operatingSystemRevListInfo?: string | null, pcr0?: string
+        | null, pcrHashAlgorithm?: string | null, resetCount?: number,
+        restartCount?: number, safeMode?: string | null, secureBoot?: string |
+        null, secureBootConfigurationPolicyFingerPrint?: string | null,
+        testSigning?: string | null, tpmVersion?: string | null,
+        virtualSecureMode?: string | null, windowsPE?: string | null } | null,
+        deviceName?: string | null, deviceRegistrationState?: "unknown" |
+        "notRegistered" | "registered" | "revoked" | "keyConflict" |
+        "approvalPending" | "certificateReset" |
+        "notRegisteredPendingEnrollment", easActivated?: boolean,
+        easActivationDateTime?: string, easDeviceId?: string | null,
+        emailAddress?: string | null, enrolledDateTime?: string,
+        enrollmentProfileName?: string | null, ethernetMacAddress?: string |
+        null, exchangeAccessState?: "none" | "blocked" | "unknown" | "allowed" |
+        "quarantined", exchangeAccessStateReason?: "other" | "none" | "unknown"
+        | "compliant" | "exchangeGlobalRule" | "exchangeIndividualRule" |
+        "exchangeDeviceRule" | "exchangeUpgrade" | "exchangeMailboxPolicy" |
+        "notCompliant" | "notEnrolled" | "unknownLocation" | "mfaRequired" |
+        "azureADBlockDueToAccessPolicy" | "compromisedPassword" |
+        "deviceNotKnownWithManagedApp", exchangeLastSuccessfulSyncDateTime?:
+        string, freeStorageSpaceInBytes?: number, iccid?: string | null, imei?:
+        string | null, isEncrypted?: boolean, isSupervised?: boolean,
+        jailBroken?: string | null, lastSyncDateTime?: string,
+        logCollectionRequests?: (Omit<..., ...> & { @odata.type: ...,
+        enrolledByUser?: ..., expirationDateTimeUTC?: ...,
+        initiatedByUserPrincipalName?: ..., managedDeviceId?: ...,
+        receivedDateTimeUTC?: ..., requestedDateTimeUTC?: ..., sizeInKB?: ...,
+        status?: ... } & { @odata.type: ... })[], managedDeviceName?: string |
+        null, managedDeviceOwnerType?: "unknown" | "unknownFutureValue" |
+        "company" | "personal", managementAgent?: "unknown" | "eas" | "mdm" |
+        "easMdm" | "intuneClient" | "easIntuneClient" |
+        "configurationManagerClient" | "configurationManagerClientMdm" |
+        "configurationManagerClientMdmEas" | "jamf" |
+        "googleCloudDevicePolicyController" | "microsoft365ManagedMdm" |
+        "msSense", managementCertificateExpirationDate?: string,
+        managementState?: "unknownFutureValue" | "managed" | "retirePending" |
+        "retireFailed" | "wipePending" | "wipeFailed" | "unhealthy" |
+        "deletePending" | "retireIssued" | "wipeIssued" | "wipeCanceled" |
+        "retireCanceled" | "discovered", manufacturer?: string | null, meid?:
+        string | null, model?: string | null, notes?: string | null,
+        operatingSystem?: string | null, osVersion?: string | null,
+        partnerReportedThreatState?: "unknown" | "unresponsive" | "activated" |
+        "deactivated" | "secured" | "lowSeverity" | "mediumSeverity" |
+        "highSeverity" | "compromised" | "misconfigured", phoneNumber?: string |
+        null, physicalMemoryInBytes?: number,
+        remoteAssistanceSessionErrorDetails?: string | null,
+        remoteAssistanceSessionUrl?: string | null,
+        requireUserEnrollmentApproval?: boolean | null, serialNumber?: string |
+        null, subscriberCarrier?: string | null, totalStorageSpaceInBytes?:
+        number, udid?: string | null, userDisplayName?: string | null, userId?:
+        string | null, userPrincipalName?: string | null, users?: (Omit<...,
+        ...> & { @odata.type: ..., aboutMe?: ..., accountEnabled?: ...,
+        activities?: ..., ageGroup?: ..., agreementAcceptances?: ...,
+        appRoleAssignments?: ..., assignedLicenses?: ..., assignedPlans?: ...,
+        authentication?: ..., authorizationInfo?: ..., birthday?: ...,
+        businessPhones?: ..., calendar?: ..., calendarGroups?: ..., calendars?:
+        ..., calendarView?: ..., chats?: ..., city?: ..., cloudClipboard?: ...,
+        cloudPCs?: ..., companyName?: ..., consentProvidedForMinor?: ...,
+        contactFolders?: ..., contacts?: ..., country?: ..., createdDateTime?:
+        ..., createdObjects?: ..., creationType?: ...,
+        customSecurityAttributes?: ..., dataSecurityAndGovernance?: ...,
+        department?: ..., deviceEnrollmentLimit?: ...,
+        deviceManagementTroubleshootingEvents?: ..., directReports?: ...,
+        displayName?: ..., drive?: ..., drives?: ..., employeeExperience?: ...,
+        employeeHireDate?: ..., employeeId?: ..., employeeLeaveDateTime?: ...,
+        employeeOrgData?: ..., employeeType?: ..., events?: ..., extensions?:
+        ..., externalUserState?: ..., externalUserStateChangeDateTime?: ...,
+        faxNumber?: ..., followedSites?: ..., givenName?: ..., hireDate?: ...,
+        identities?: ..., imAddresses?: ..., inferenceClassification?: ...,
+        insights?: ..., interests?: ..., isManagementRestricted?: ...,
+        isResourceAccount?: ..., jobTitle?: ..., joinedTeams?: ...,
+        lastPasswordChangeDateTime?: ..., legalAgeGroupClassification?: ...,
+        licenseAssignmentStates?: ..., licenseDetails?: ..., mail?: ...,
+        mailboxSettings?: ..., mailFolders?: ..., mailNickname?: ...,
+        managedAppRegistrations?: ..., managedDevices?: ..., manager?: ...,
+        memberOf?: ..., messages?: ..., mobilePhone?: ..., mySite?: ...,
+        oauth2PermissionGrants?: ..., officeLocation?: ..., onenote?: ...,
+        onlineMeetings?: ..., onPremisesDistinguishedName?: ...,
+        onPremisesDomainName?: ..., onPremisesExtensionAttributes?: ...,
+        onPremisesImmutableId?: ..., onPremisesLastSyncDateTime?: ...,
+        onPremisesProvisioningErrors?: ..., onPremisesSamAccountName?: ...,
+        onPremisesSecurityIdentifier?: ..., onPremisesSyncEnabled?: ...,
+        onPremisesUserPrincipalName?: ..., otherMails?: ..., outlook?: ...,
+        ownedDevices?: ..., ownedObjects?: ..., passwordPolicies?: ...,
+        passwordProfile?: ..., pastProjects?: ..., people?: ...,
+        permissionGrants?: ..., photo?: ..., photos?: ..., planner?: ...,
+        postalCode?: ..., preferredDataLocation?: ..., preferredLanguage?: ...,
+        preferredName?: ..., presence?: ..., print?: ..., provisionedPlans?:
+        ..., proxyAddresses?: ..., registeredDevices?: ..., responsibilities?:
+        ..., schools?: ..., scopedRoleMemberOf?: ..., securityIdentifier?: ...,
+        serviceProvisioningErrors?: ..., settings?: ..., showInAddressList?:
+        ..., signInActivity?: ..., signInSessionsValidFromDateTime?: ...,
+        skills?: ..., solutions?: ..., sponsors?: ..., state?: ...,
+        streetAddress?: ..., surname?: ..., teamwork?: ..., todo?: ...,
+        transitiveMemberOf?: ..., usageLocation?: ..., userPrincipalName?: ...,
+        userType?: ... } & { @odata.type: ... })[], wiFiMacAddress?: string |
+        null, windowsProtectionState?: Record<string, never> | (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        antiMalwareVersion?: function, detectedMalwareState?: function,
+        deviceState?: function, engineVersion?: function, fullScanOverdue?:
+        function, fullScanRequired?: function, isVirtualMachine?: function,
+        lastFullScanDateTime?: function, lastFullScanSignatureVersion?:
+        function, lastQuickScanDateTime?: function,
+        lastQuickScanSignatureVersion?: function, lastReportedDateTime?:
+        function, malwareProtectionEnabled?: function,
+        networkInspectionSystemEnabled?: function, productStatus?: function,
+        quickScanOverdue?: function, realTimeProtectionEnabled?: function,
+        rebootRequired?: function, signatureUpdateOverdue?: function,
+        signatureVersion?: function, tamperProtectionEnabled?: function } & {
+        @odata.type: "#microsoft.graph.windowsProtectionState" }) | null } & {
+        @odata.type: "#microsoft.graph.managedDevice" })[], platform?: "unknown"
+        | "windows" | "windowsMobile" | "windowsHolographic" | "ios" | "macOS" |
+        "chromeOS" | "androidOSP" | "androidDeviceAdministrator" |
+        "androidWorkProfile" | "androidDedicatedAndFullyManaged" |
+        "unknownFutureValue", publisher?: string | null, sizeInByte?: number,
+        version?: string | null } & { @odata.type:
+        "#microsoft.graph.detectedApp" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/detectedApps/{detectedApp-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            deviceCount?: number, displayName?: string | null, managedDevices?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            activationLockBypassCode?: string | null,
+            androidSecurityPatchLevel?: string | null, azureADDeviceId?: string
+            | null, azureADRegistered?: boolean | null,
+            complianceGracePeriodExpirationDateTime?: string, complianceState?:
+            "unknown" | "compliant" | "error" | "conflict" | "noncompliant" |
+            "inGracePeriod" | "configManager",
+            configurationManagerClientEnabledFeatures?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, compliancePolicy?:
+            boolean, deviceConfiguration?: boolean, inventory?: boolean,
+            modernApps?: boolean, resourceAccess?: boolean,
+            windowsUpdateForBusiness?: boolean } | null, deviceActionResults?: {
+            <xref uid="@odata.type" />: string, actionName?: string | null,
+            actionState?: "none" | "failed" | "pending" | "active" | "canceled"
+            | "done" | "notSupported", lastUpdatedDateTime?: string,
+            startDateTime?: string }[], deviceCategory?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, description?: string | null,
+            displayName?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.deviceCategory" />" }) | null,
+            deviceCategoryDisplayName?: string | null,
+            deviceCompliancePolicyStates?: (Omit&lt;{ <xref uid="@odata.type"
+            />: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, displayName?: function, platformType?:
+            function, settingCount?: function, settingStates?: function, state?:
+            function, version?: function } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.deviceCompliancePolicyState" />" })[],
+            deviceConfigurationStates?: (Omit&lt;{ <xref uid="@odata.type" />:
+            ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, displayName?: function, platformType?:
+            function, settingCount?: function, settingStates?: function, state?:
+            function, version?: function } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.deviceConfigurationState" />" })[],
+            deviceEnrollmentType?: "unknown" | "unknownFutureValue" |
+            "userEnrollment" | "deviceEnrollmentManager" | "appleBulkWithUser" |
+            "appleBulkWithoutUser" | "windowsAzureADJoin" |
+            "windowsBulkUserless" | "windowsAutoEnrollment" |
+            "windowsBulkAzureDomainJoin" | "windowsCoManagement" |
+            "windowsAzureADJoinUsingDeviceAuth" | "appleUserEnrollment" |
+            "appleUserEnrollmentWithServiceAccount",
+            deviceHealthAttestationState?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, attestationIdentityKey?: string |
+            null, bitLockerStatus?: string | null, bootAppSecurityVersion?:
+            string | null, bootDebugging?: string | null,
+            bootManagerSecurityVersion?: string | null, bootManagerVersion?:
+            string | null, bootRevisionListInfo?: string | null, codeIntegrity?:
+            string | null, codeIntegrityCheckVersion?: string | null,
+            codeIntegrityPolicy?: string | null, contentNamespaceUrl?: string |
+            null, contentVersion?: string | null, dataExcutionPolicy?: string |
+            null, deviceHealthAttestationStatus?: string | null,
+            earlyLaunchAntiMalwareDriverProtection?: string | null,
+            healthAttestationSupportedStatus?: string | null,
+            healthStatusMismatchInfo?: string | null, issuedDateTime?: string,
+            lastUpdateDateTime?: string | null, operatingSystemKernelDebugging?:
+            string | null, operatingSystemRevListInfo?: string | null, pcr0?:
+            string | null, pcrHashAlgorithm?: string | null, resetCount?:
+            number, restartCount?: number, safeMode?: string | null,
+            secureBoot?: string | null,
+            secureBootConfigurationPolicyFingerPrint?: string | null,
+            testSigning?: string | null, tpmVersion?: string | null,
+            virtualSecureMode?: string | null, windowsPE?: string | null } |
+            null, deviceName?: string | null, deviceRegistrationState?:
+            "unknown" | "notRegistered" | "registered" | "revoked" |
+            "keyConflict" | "approvalPending" | "certificateReset" |
+            "notRegisteredPendingEnrollment", easActivated?: boolean,
+            easActivationDateTime?: string, easDeviceId?: string | null,
+            emailAddress?: string | null, enrolledDateTime?: string,
+            enrollmentProfileName?: string | null, ethernetMacAddress?: string |
+            null, exchangeAccessState?: "none" | "blocked" | "unknown" |
+            "allowed" | "quarantined", exchangeAccessStateReason?: "other" |
+            "none" | "unknown" | "compliant" | "exchangeGlobalRule" |
+            "exchangeIndividualRule" | "exchangeDeviceRule" | "exchangeUpgrade"
+            | "exchangeMailboxPolicy" | "notCompliant" | "notEnrolled" |
+            "unknownLocation" | "mfaRequired" | "azureADBlockDueToAccessPolicy"
+            | "compromisedPassword" | "deviceNotKnownWithManagedApp",
+            exchangeLastSuccessfulSyncDateTime?: string,
+            freeStorageSpaceInBytes?: number, iccid?: string | null, imei?:
+            string | null, isEncrypted?: boolean, isSupervised?: boolean,
+            jailBroken?: string | null, lastSyncDateTime?: string,
+            logCollectionRequests?: (Omit&lt;{ <xref uid="@odata.type" />: ...,
+            id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, enrolledByUser?: function,
+            expirationDateTimeUTC?: function, initiatedByUserPrincipalName?:
+            function, managedDeviceId?: function, receivedDateTimeUTC?:
+            function, requestedDateTimeUTC?: function, sizeInKB?: function,
+            status?: function } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deviceLogCollectionResponse" />" })[],
+            managedDeviceName?: string | null, managedDeviceOwnerType?:
+            "unknown" | "unknownFutureValue" | "company" | "personal",
+            managementAgent?: "unknown" | "eas" | "mdm" | "easMdm" |
+            "intuneClient" | "easIntuneClient" | "configurationManagerClient" |
+            "configurationManagerClientMdm" | "configurationManagerClientMdmEas"
+            | "jamf" | "googleCloudDevicePolicyController" |
+            "microsoft365ManagedMdm" | "msSense",
+            managementCertificateExpirationDate?: string, managementState?:
+            "unknownFutureValue" | "managed" | "retirePending" | "retireFailed"
+            | "wipePending" | "wipeFailed" | "unhealthy" | "deletePending" |
+            "retireIssued" | "wipeIssued" | "wipeCanceled" | "retireCanceled" |
+            "discovered", manufacturer?: string | null, meid?: string | null,
+            model?: string | null, notes?: string | null, operatingSystem?:
+            string | null, osVersion?: string | null,
+            partnerReportedThreatState?: "unknown" | "unresponsive" |
+            "activated" | "deactivated" | "secured" | "lowSeverity" |
+            "mediumSeverity" | "highSeverity" | "compromised" | "misconfigured",
+            phoneNumber?: string | null, physicalMemoryInBytes?: number,
+            remoteAssistanceSessionErrorDetails?: string | null,
+            remoteAssistanceSessionUrl?: string | null,
+            requireUserEnrollmentApproval?: boolean | null, serialNumber?:
+            string | null, subscriberCarrier?: string | null,
+            totalStorageSpaceInBytes?: number, udid?: string | null,
+            userDisplayName?: string | null, userId?: string | null,
+            userPrincipalName?: string | null, users?: (Omit&lt;... & ... & ...,
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, aboutMe?: function, accountEnabled?: function, activities?:
+            function, ageGroup?: function, agreementAcceptances?: function,
+            appRoleAssignments?: function, assignedLicenses?: function,
+            assignedPlans?: function, authentication?: function,
+            authorizationInfo?: function, birthday?: function, businessPhones?:
+            function, calendar?: function, calendarGroups?: function,
+            calendars?: function, calendarView?: function, chats?: function,
+            city?: function, cloudClipboard?: function, cloudPCs?: function,
+            companyName?: function, consentProvidedForMinor?: function,
+            contactFolders?: function, contacts?: function, country?: function,
+            createdDateTime?: function, createdObjects?: function,
+            creationType?: function, customSecurityAttributes?: function,
+            dataSecurityAndGovernance?: function, department?: function,
+            deviceEnrollmentLimit?: function,
+            deviceManagementTroubleshootingEvents?: function, directReports?:
+            function, displayName?: function, drive?: function, drives?:
+            function, employeeExperience?: function, employeeHireDate?:
+            function, employeeId?: function, employeeLeaveDateTime?: function,
+            employeeOrgData?: function, employeeType?: function, events?:
+            function, extensions?: function, externalUserState?: function,
+            externalUserStateChangeDateTime?: function, faxNumber?: function,
+            followedSites?: function, givenName?: function, hireDate?: function,
+            identities?: function, imAddresses?: function,
+            inferenceClassification?: function, insights?: function, interests?:
+            function, isManagementRestricted?: function, isResourceAccount?:
+            function, jobTitle?: function, joinedTeams?: function,
+            lastPasswordChangeDateTime?: function, legalAgeGroupClassification?:
+            function, licenseAssignmentStates?: function, licenseDetails?:
+            function, mail?: function, mailboxSettings?: function, mailFolders?:
+            function, mailNickname?: function, managedAppRegistrations?:
+            function, managedDevices?: (Omit&lt;{ id?: string | undefined;
+            '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+            />"&gt; & { readonly activationLockBypassCode?: string | null |
+            undefined; readonly androidSecurityPatchLevel?: string | null |
+            undefined; ... 59 more ...; '<xref uid="@odata.type" />': string; }
+            & { ...; })[] | undefined, manager?: function, memberOf?: function,
+            messages?: function, mobilePhone?: function, mySite?: function,
+            oauth2PermissionGrants?: function, officeLocation?: function,
+            onenote?: function, onlineMeetings?: function,
+            onPremisesDistinguishedName?: function, onPremisesDomainName?:
+            function, onPremisesExtensionAttributes?: function,
+            onPremisesImmutableId?: function, onPremisesLastSyncDateTime?:
+            function, onPremisesProvisioningErrors?: function,
+            onPremisesSamAccountName?: function, onPremisesSecurityIdentifier?:
+            function, onPremisesSyncEnabled?: function,
+            onPremisesUserPrincipalName?: function, otherMails?: function,
+            outlook?: function, ownedDevices?: function, ownedObjects?:
+            function, passwordPolicies?: function, passwordProfile?: function,
+            pastProjects?: function, people?: function, permissionGrants?:
+            function, photo?: function, photos?: function, planner?: function,
+            postalCode?: function, preferredDataLocation?: function,
+            preferredLanguage?: function, preferredName?: function, presence?:
+            function, print?: function, provisionedPlans?: function,
+            proxyAddresses?: function, registeredDevices?: function,
+            responsibilities?: function, schools?: function,
+            scopedRoleMemberOf?: function, securityIdentifier?: function,
+            serviceProvisioningErrors?: function, settings?: function,
+            showInAddressList?: function, signInActivity?: function,
+            signInSessionsValidFromDateTime?: function, skills?: function,
+            solutions?: function, sponsors?: function, state?: function,
+            streetAddress?: function, surname?: function, teamwork?: function,
+            todo?: function, transitiveMemberOf?: function, usageLocation?:
+            function, userPrincipalName?: function, userType?: function } & {
+            <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.user" />"
+            })[], wiFiMacAddress?: string | null, windowsProtectionState?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, antiMalwareVersion?: string | null,
+            detectedMalwareState?: ...[], deviceState?: Record&lt;..., ...&gt; |
+            "clean" | "fullScanPending" | "rebootPending" | "manualStepsPending"
+            | "offlineScanPending" | "critical" | null, engineVersion?: string |
+            null, fullScanOverdue?: boolean | null, fullScanRequired?: boolean |
+            null, isVirtualMachine?: boolean | null, lastFullScanDateTime?:
+            string | null, lastFullScanSignatureVersion?: string | null,
+            lastQuickScanDateTime?: string | null,
+            lastQuickScanSignatureVersion?: string | null,
+            lastReportedDateTime?: string | null, malwareProtectionEnabled?:
+            boolean | null, networkInspectionSystemEnabled?: boolean | null,
+            productStatus?: Record&lt;..., ...&gt; | "noStatus" |
+            "serviceNotRunning" | "serviceStartedWithoutMalwareProtection" |
+            "pendingFullScanDueToThreatAction" |
+            "pendingRebootDueToThreatAction" |
+            "pendingManualStepsDueToThreatAction" | "avSignaturesOutOfDate" |
+            "asSignaturesOutOfDate" | "noQuickScanHappenedForSpecifiedPeriod" |
+            "noFullScanHappenedForSpecifiedPeriod" |
+            "systemInitiatedScanInProgress" | "systemInitiatedCleanInProgress" |
+            "samplesPendingSubmission" | "productRunningInEvaluationMode" |
+            "productRunningInNonGenuineMode" | "productExpired" |
+            "offlineScanRequired" | "serviceShutdownAsPartOfSystemShutdown" |
+            "threatRemediationFailedCritically" |
+            "threatRemediationFailedNonCritically" | "noStatusFlagsSet" |
+            "platformOutOfDate" | "platformUpdateInProgress" |
+            "platformAboutToBeOutdated" |
+            "signatureOrPlatformEndOfLifeIsPastOrIsImpending" |
+            "windowsSModeSignaturesInUseOnNonWin10SInstall" | null,
+            quickScanOverdue?: boolean | null, realTimeProtectionEnabled?:
+            boolean | null, rebootRequired?: boolean | null,
+            signatureUpdateOverdue?: boolean | null, signatureVersion?: string |
+            null, tamperProtectionEnabled?: boolean | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsProtectionState" />" }) | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedDevice" />" })[], platform?: "unknown" |
+            "windows" | "windowsMobile" | "windowsHolographic" | "ios" | "macOS"
+            | "chromeOS" | "androidOSP" | "androidDeviceAdministrator" |
+            "androidWorkProfile" | "androidDedicatedAndFullyManaged" |
+            "unknownFutureValue", publisher?: string | null, sizeInByte?:
+            number, version?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.detectedApp" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ detectedApp-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /deviceManagement/detectedApps/{detectedApp-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, deviceCount?: number, displayName?: string | null,
+          managedDevices?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, activationLockBypassCode?: string | null,
+          androidSecurityPatchLevel?: string | null, azureADDeviceId?: string |
+          null, azureADRegistered?: boolean | null,
+          complianceGracePeriodExpirationDateTime?: string, complianceState?:
+          "unknown" | "compliant" | "error" | "conflict" | "noncompliant" |
+          "inGracePeriod" | "configManager",
+          configurationManagerClientEnabledFeatures?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, compliancePolicy?:
+          boolean, deviceConfiguration?: boolean, inventory?: boolean,
+          modernApps?: boolean, resourceAccess?: boolean,
+          windowsUpdateForBusiness?: boolean } | null, deviceActionResults?: {
+          <xref uid="@odata.type" />: string, actionName?: function,
+          actionState?: function, lastUpdatedDateTime?: function,
+          startDateTime?: function }[], deviceCategory?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, description?: function, displayName?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.deviceCategory" />"
+          }) | null, deviceCategoryDisplayName?: string | null,
+          deviceCompliancePolicyStates?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., displayName?: ..., platformType?: ...,
+          settingCount?: ..., settingStates?: ..., state?: ..., version?: ... }
+          & { <xref uid="@odata.type" />: ... })[], deviceConfigurationStates?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          displayName?: ..., platformType?: ..., settingCount?: ...,
+          settingStates?: ..., state?: ..., version?: ... } & { <xref
+          uid="@odata.type" />: ... })[], deviceEnrollmentType?: "unknown" |
+          "unknownFutureValue" | "userEnrollment" | "deviceEnrollmentManager" |
+          "appleBulkWithUser" | "appleBulkWithoutUser" | "windowsAzureADJoin" |
+          "windowsBulkUserless" | "windowsAutoEnrollment" |
+          "windowsBulkAzureDomainJoin" | "windowsCoManagement" |
+          "windowsAzureADJoinUsingDeviceAuth" | "appleUserEnrollment" |
+          "appleUserEnrollmentWithServiceAccount",
+          deviceHealthAttestationState?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, attestationIdentityKey?: string | null,
+          bitLockerStatus?: string | null, bootAppSecurityVersion?: string |
+          null, bootDebugging?: string | null, bootManagerSecurityVersion?:
+          string | null, bootManagerVersion?: string | null,
+          bootRevisionListInfo?: string | null, codeIntegrity?: string | null,
+          codeIntegrityCheckVersion?: string | null, codeIntegrityPolicy?:
+          string | null, contentNamespaceUrl?: string | null, contentVersion?:
+          string | null, dataExcutionPolicy?: string | null,
+          deviceHealthAttestationStatus?: string | null,
+          earlyLaunchAntiMalwareDriverProtection?: string | null,
+          healthAttestationSupportedStatus?: string | null,
+          healthStatusMismatchInfo?: string | null, issuedDateTime?: string,
+          lastUpdateDateTime?: string | null, operatingSystemKernelDebugging?:
+          string | null, operatingSystemRevListInfo?: string | null, pcr0?:
+          string | null, pcrHashAlgorithm?: string | null, resetCount?: number,
+          restartCount?: number, safeMode?: string | null, secureBoot?: string |
+          null, secureBootConfigurationPolicyFingerPrint?: string | null,
+          testSigning?: string | null, tpmVersion?: string | null,
+          virtualSecureMode?: string | null, windowsPE?: string | null } | null,
+          deviceName?: string | null, deviceRegistrationState?: "unknown" |
+          "notRegistered" | "registered" | "revoked" | "keyConflict" |
+          "approvalPending" | "certificateReset" |
+          "notRegisteredPendingEnrollment", easActivated?: boolean,
+          easActivationDateTime?: string, easDeviceId?: string | null,
+          emailAddress?: string | null, enrolledDateTime?: string,
+          enrollmentProfileName?: string | null, ethernetMacAddress?: string |
+          null, exchangeAccessState?: "none" | "blocked" | "unknown" | "allowed"
+          | "quarantined", exchangeAccessStateReason?: "other" | "none" |
+          "unknown" | "compliant" | "exchangeGlobalRule" |
+          "exchangeIndividualRule" | "exchangeDeviceRule" | "exchangeUpgrade" |
+          "exchangeMailboxPolicy" | "notCompliant" | "notEnrolled" |
+          "unknownLocation" | "mfaRequired" | "azureADBlockDueToAccessPolicy" |
+          "compromisedPassword" | "deviceNotKnownWithManagedApp",
+          exchangeLastSuccessfulSyncDateTime?: string, freeStorageSpaceInBytes?:
+          number, iccid?: string | null, imei?: string | null, isEncrypted?:
+          boolean, isSupervised?: boolean, jailBroken?: string | null,
+          lastSyncDateTime?: string, logCollectionRequests?: (Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ..., enrolledByUser?: ...,
+          expirationDateTimeUTC?: ..., initiatedByUserPrincipalName?: ...,
+          managedDeviceId?: ..., receivedDateTimeUTC?: ...,
+          requestedDateTimeUTC?: ..., sizeInKB?: ..., status?: ... } & { <xref
+          uid="@odata.type" />: ... })[], managedDeviceName?: string | null,
+          managedDeviceOwnerType?: "unknown" | "unknownFutureValue" | "company"
+          | "personal", managementAgent?: "unknown" | "eas" | "mdm" | "easMdm" |
+          "intuneClient" | "easIntuneClient" | "configurationManagerClient" |
+          "configurationManagerClientMdm" | "configurationManagerClientMdmEas" |
+          "jamf" | "googleCloudDevicePolicyController" |
+          "microsoft365ManagedMdm" | "msSense",
+          managementCertificateExpirationDate?: string, managementState?:
+          "unknownFutureValue" | "managed" | "retirePending" | "retireFailed" |
+          "wipePending" | "wipeFailed" | "unhealthy" | "deletePending" |
+          "retireIssued" | "wipeIssued" | "wipeCanceled" | "retireCanceled" |
+          "discovered", manufacturer?: string | null, meid?: string | null,
+          model?: string | null, notes?: string | null, operatingSystem?: string
+          | null, osVersion?: string | null, partnerReportedThreatState?:
+          "unknown" | "unresponsive" | "activated" | "deactivated" | "secured" |
+          "lowSeverity" | "mediumSeverity" | "highSeverity" | "compromised" |
+          "misconfigured", phoneNumber?: string | null, physicalMemoryInBytes?:
+          number, remoteAssistanceSessionErrorDetails?: string | null,
+          remoteAssistanceSessionUrl?: string | null,
+          requireUserEnrollmentApproval?: boolean | null, serialNumber?: string
+          | null, subscriberCarrier?: string | null, totalStorageSpaceInBytes?:
+          number, udid?: string | null, userDisplayName?: string | null,
+          userId?: string | null, userPrincipalName?: string | null, users?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ..., aboutMe?:
+          ..., accountEnabled?: ..., activities?: ..., ageGroup?: ...,
+          agreementAcceptances?: ..., appRoleAssignments?: ...,
+          assignedLicenses?: ..., assignedPlans?: ..., authentication?: ...,
+          authorizationInfo?: ..., birthday?: ..., businessPhones?: ...,
+          calendar?: ..., calendarGroups?: ..., calendars?: ..., calendarView?:
+          ..., chats?: ..., city?: ..., cloudClipboard?: ..., cloudPCs?: ...,
+          companyName?: ..., consentProvidedForMinor?: ..., contactFolders?:
+          ..., contacts?: ..., country?: ..., createdDateTime?: ...,
+          createdObjects?: ..., creationType?: ..., customSecurityAttributes?:
+          ..., dataSecurityAndGovernance?: ..., department?: ...,
+          deviceEnrollmentLimit?: ..., deviceManagementTroubleshootingEvents?:
+          ..., directReports?: ..., displayName?: ..., drive?: ..., drives?:
+          ..., employeeExperience?: ..., employeeHireDate?: ..., employeeId?:
+          ..., employeeLeaveDateTime?: ..., employeeOrgData?: ...,
+          employeeType?: ..., events?: ..., extensions?: ...,
+          externalUserState?: ..., externalUserStateChangeDateTime?: ...,
+          faxNumber?: ..., followedSites?: ..., givenName?: ..., hireDate?: ...,
+          identities?: ..., imAddresses?: ..., inferenceClassification?: ...,
+          insights?: ..., interests?: ..., isManagementRestricted?: ...,
+          isResourceAccount?: ..., jobTitle?: ..., joinedTeams?: ...,
+          lastPasswordChangeDateTime?: ..., legalAgeGroupClassification?: ...,
+          licenseAssignmentStates?: ..., licenseDetails?: ..., mail?: ...,
+          mailboxSettings?: ..., mailFolders?: ..., mailNickname?: ...,
+          managedAppRegistrations?: ..., managedDevices?: ..., manager?: ...,
+          memberOf?: ..., messages?: ..., mobilePhone?: ..., mySite?: ...,
+          oauth2PermissionGrants?: ..., officeLocation?: ..., onenote?: ...,
+          onlineMeetings?: ..., onPremisesDistinguishedName?: ...,
+          onPremisesDomainName?: ..., onPremisesExtensionAttributes?: ...,
+          onPremisesImmutableId?: ..., onPremisesLastSyncDateTime?: ...,
+          onPremisesProvisioningErrors?: ..., onPremisesSamAccountName?: ...,
+          onPremisesSecurityIdentifier?: ..., onPremisesSyncEnabled?: ...,
+          onPremisesUserPrincipalName?: ..., otherMails?: ..., outlook?: ...,
+          ownedDevices?: ..., ownedObjects?: ..., passwordPolicies?: ...,
+          passwordProfile?: ..., pastProjects?: ..., people?: ...,
+          permissionGrants?: ..., photo?: ..., photos?: ..., planner?: ...,
+          postalCode?: ..., preferredDataLocation?: ..., preferredLanguage?:
+          ..., preferredName?: ..., presence?: ..., print?: ...,
+          provisionedPlans?: ..., proxyAddresses?: ..., registeredDevices?: ...,
+          responsibilities?: ..., schools?: ..., scopedRoleMemberOf?: ...,
+          securityIdentifier?: ..., serviceProvisioningErrors?: ..., settings?:
+          ..., showInAddressList?: ..., signInActivity?: ...,
+          signInSessionsValidFromDateTime?: ..., skills?: ..., solutions?: ...,
+          sponsors?: ..., state?: ..., streetAddress?: ..., surname?: ...,
+          teamwork?: ..., todo?: ..., transitiveMemberOf?: ..., usageLocation?:
+          ..., userPrincipalName?: ..., userType?: ... } & { <xref
+          uid="@odata.type" />: ... })[], wiFiMacAddress?: string | null,
+          windowsProtectionState?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, antiMalwareVersion?:
+          function, detectedMalwareState?: function, deviceState?: function,
+          engineVersion?: function, fullScanOverdue?: function,
+          fullScanRequired?: function, isVirtualMachine?: function,
+          lastFullScanDateTime?: function, lastFullScanSignatureVersion?:
+          function, lastQuickScanDateTime?: function,
+          lastQuickScanSignatureVersion?: function, lastReportedDateTime?:
+          function, malwareProtectionEnabled?: function,
+          networkInspectionSystemEnabled?: function, productStatus?: function,
+          quickScanOverdue?: function, realTimeProtectionEnabled?: function,
+          rebootRequired?: function, signatureUpdateOverdue?: function,
+          signatureVersion?: function, tamperProtectionEnabled?: function } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsProtectionState" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.managedDevice" />"
+          })[], platform?: "unknown" | "windows" | "windowsMobile" |
+          "windowsHolographic" | "ios" | "macOS" | "chromeOS" | "androidOSP" |
+          "androidDeviceAdministrator" | "androidWorkProfile" |
+          "androidDedicatedAndFullyManaged" | "unknownFutureValue", publisher?:
+          string | null, sizeInByte?: number, version?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.detectedApp"
+          />" }&gt;
 variables:
   - name: managedDevices
     uid: >-

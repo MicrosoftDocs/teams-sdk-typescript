@@ -101,7 +101,18 @@ variables:
           /directory/impactedResources/{impactedResource-id}/reactivate"]["response"]&gt;
           }
 functions:
-  - name: create(Operation<"/directory/impactedResources", "post">)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, addedDateTime?: string, additionalDetails?: {
+      @odata.type: string, key?: string | null, value?: string | null }[],
+      apiUrl?: string | null, displayName?: string, lastModifiedBy?: string,
+      lastModifiedDateTime?: string, owner?: string | null, portalUrl?: string |
+      null, postponeUntilDateTime?: string | null, rank?: number | null,
+      recommendationId?: string, resourceType?: string, status?: "active" |
+      "unknownFutureValue" | "completedBySystem" | "completedByUser" |
+      "dismissed" | "postponed" | "riskAccepted" | "thirdParty" | "planned" |
+      "alternateMitigation", subjectId?: string } & { @odata.type:
+      "#microsoft.graph.impactedResource" })
     uid: '@microsoft/teams.graph-endpoints-beta.directory.impactedResources.create'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`POST /directory/impactedResources`'
@@ -109,19 +120,62 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body: Operation<"/directory/impactedResources",
-        "post">): EndpointRequest<IEndpoints["POST
-        /directory/impactedResources"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, addedDateTime?: string,
+        additionalDetails?: { @odata.type: string, key?: string | null, value?:
+        string | null }[], apiUrl?: string | null, displayName?: string,
+        lastModifiedBy?: string, lastModifiedDateTime?: string, owner?: string |
+        null, portalUrl?: string | null, postponeUntilDateTime?: string | null,
+        rank?: number | null, recommendationId?: string, resourceType?: string,
+        status?: "active" | "unknownFutureValue" | "completedBySystem" |
+        "completedByUser" | "dismissed" | "postponed" | "riskAccepted" |
+        "thirdParty" | "planned" | "alternateMitigation", subjectId?: string } &
+        { @odata.type: "#microsoft.graph.impactedResource" }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, addedDateTime?: string,
+        additionalDetails?: { @odata.type: string, key?: string | null, value?:
+        string | null }[], apiUrl?: string | null, displayName?: string,
+        lastModifiedBy?: string, lastModifiedDateTime?: string, owner?: string |
+        null, portalUrl?: string | null, postponeUntilDateTime?: string | null,
+        rank?: number | null, recommendationId?: string, resourceType?: string,
+        status?: "active" | "unknownFutureValue" | "completedBySystem" |
+        "completedByUser" | "dismissed" | "postponed" | "riskAccepted" |
+        "thirdParty" | "planned" | "alternateMitigation", subjectId?: string } &
+        { @odata.type: "#microsoft.graph.impactedResource" }>
       parameters:
         - id: body
-          type: Operation&lt;"/directory/impactedResources", "post"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            addedDateTime?: string, additionalDetails?: { <xref
+            uid="@odata.type" />: string, key?: string | null, value?: string |
+            null }[], apiUrl?: string | null, displayName?: string,
+            lastModifiedBy?: string, lastModifiedDateTime?: string, owner?:
+            string | null, portalUrl?: string | null, postponeUntilDateTime?:
+            string | null, rank?: number | null, recommendationId?: string,
+            resourceType?: string, status?: "active" | "unknownFutureValue" |
+            "completedBySystem" | "completedByUser" | "dismissed" | "postponed"
+            | "riskAccepted" | "thirdParty" | "planned" | "alternateMitigation",
+            subjectId?: string } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.impactedResource" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /directory/impactedResources"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, addedDateTime?: string, additionalDetails?: { <xref
+          uid="@odata.type" />: string, key?: string | null, value?: string |
+          null }[], apiUrl?: string | null, displayName?: string,
+          lastModifiedBy?: string, lastModifiedDateTime?: string, owner?: string
+          | null, portalUrl?: string | null, postponeUntilDateTime?: string |
+          null, rank?: number | null, recommendationId?: string, resourceType?:
+          string, status?: "active" | "unknownFutureValue" | "completedBySystem"
+          | "completedByUser" | "dismissed" | "postponed" | "riskAccepted" |
+          "thirdParty" | "planned" | "alternateMitigation", subjectId?: string }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.impactedResource" />" }&gt;
+  - name: 'del({ If-Match?: string, impactedResource-id: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.directory.impactedResources.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`DELETE /directory/impactedResources/{impactedResource-id}`'
@@ -129,18 +183,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /directory/impactedResources/{impactedResource-id}"]["response"]>
+        function del(params?: { If-Match?: string, impactedResource-id: string
+        }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, impactedResource-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /directory/impactedResources/{impactedResource-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], impactedResource-id: string
+      })
     uid: '@microsoft/teams.graph-endpoints-beta.directory.impactedResources.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`GET /directory/impactedResources/{impactedResource-id}`'
@@ -148,18 +202,45 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /directory/impactedResources/{impactedResource-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        impactedResource-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        addedDateTime?: string, additionalDetails?: { @odata.type: string, key?:
+        string | null, value?: string | null }[], apiUrl?: string | null,
+        displayName?: string, lastModifiedBy?: string, lastModifiedDateTime?:
+        string, owner?: string | null, portalUrl?: string | null,
+        postponeUntilDateTime?: string | null, rank?: number | null,
+        recommendationId?: string, resourceType?: string, status?: "active" |
+        "unknownFutureValue" | "completedBySystem" | "completedByUser" |
+        "dismissed" | "postponed" | "riskAccepted" | "thirdParty" | "planned" |
+        "alternateMitigation", subjectId?: string } & { @odata.type:
+        "#microsoft.graph.impactedResource" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], impactedResource-id:
+            string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /directory/impactedResources/{impactedResource-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, addedDateTime?: string, additionalDetails?: { <xref
+          uid="@odata.type" />: string, key?: string | null, value?: string |
+          null }[], apiUrl?: string | null, displayName?: string,
+          lastModifiedBy?: string, lastModifiedDateTime?: string, owner?: string
+          | null, portalUrl?: string | null, postponeUntilDateTime?: string |
+          null, rank?: number | null, recommendationId?: string, resourceType?:
+          string, status?: "active" | "unknownFutureValue" | "completedBySystem"
+          | "completedByUser" | "dismissed" | "postponed" | "riskAccepted" |
+          "thirdParty" | "planned" | "alternateMitigation", subjectId?: string }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.impactedResource" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: '@microsoft/teams.graph-endpoints-beta.directory.impactedResources.list'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`GET /directory/impactedResources`'
@@ -167,20 +248,58 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /directory/impactedResources"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, addedDateTime?: string, additionalDetails?: { @odata.type:
+        string, key?: function, value?: function }[], apiUrl?: string | null,
+        displayName?: string, lastModifiedBy?: string, lastModifiedDateTime?:
+        string, owner?: string | null, portalUrl?: string | null,
+        postponeUntilDateTime?: string | null, rank?: number | null,
+        recommendationId?: string, resourceType?: string, status?: "active" |
+        "unknownFutureValue" | "completedBySystem" | "completedByUser" |
+        "dismissed" | "postponed" | "riskAccepted" | "thirdParty" | "planned" |
+        "alternateMitigation", subjectId?: string } & { @odata.type:
+        "#microsoft.graph.impactedResource" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /directory/impactedResources"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          addedDateTime?: string, additionalDetails?: { <xref uid="@odata.type"
+          />: string, key?: function, value?: function }[], apiUrl?: string |
+          null, displayName?: string, lastModifiedBy?: string,
+          lastModifiedDateTime?: string, owner?: string | null, portalUrl?:
+          string | null, postponeUntilDateTime?: string | null, rank?: number |
+          null, recommendationId?: string, resourceType?: string, status?:
+          "active" | "unknownFutureValue" | "completedBySystem" |
+          "completedByUser" | "dismissed" | "postponed" | "riskAccepted" |
+          "thirdParty" | "planned" | "alternateMitigation", subjectId?: string }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.impactedResource" />" })[] }&gt;
   - name: >-
-      update(Operation<"/directory/impactedResources/{impactedResource-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, addedDateTime?: string, additionalDetails?: {
+      @odata.type: string, key?: string | null, value?: string | null }[],
+      apiUrl?: string | null, displayName?: string, lastModifiedBy?: string,
+      lastModifiedDateTime?: string, owner?: string | null, portalUrl?: string |
+      null, postponeUntilDateTime?: string | null, rank?: number | null,
+      recommendationId?: string, resourceType?: string, status?: "active" |
+      "unknownFutureValue" | "completedBySystem" | "completedByUser" |
+      "dismissed" | "postponed" | "riskAccepted" | "thirdParty" | "planned" |
+      "alternateMitigation", subjectId?: string } & { @odata.type:
+      "#microsoft.graph.impactedResource" }, { impactedResource-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.directory.impactedResources.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /directory/impactedResources/{impactedResource-id}`'
@@ -188,21 +307,62 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/directory/impactedResources/{impactedResource-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /directory/impactedResources/{impactedResource-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, addedDateTime?: string,
+        additionalDetails?: { @odata.type: string, key?: string | null, value?:
+        string | null }[], apiUrl?: string | null, displayName?: string,
+        lastModifiedBy?: string, lastModifiedDateTime?: string, owner?: string |
+        null, portalUrl?: string | null, postponeUntilDateTime?: string | null,
+        rank?: number | null, recommendationId?: string, resourceType?: string,
+        status?: "active" | "unknownFutureValue" | "completedBySystem" |
+        "completedByUser" | "dismissed" | "postponed" | "riskAccepted" |
+        "thirdParty" | "planned" | "alternateMitigation", subjectId?: string } &
+        { @odata.type: "#microsoft.graph.impactedResource" }, params?: {
+        impactedResource-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        addedDateTime?: string, additionalDetails?: { @odata.type: string, key?:
+        string | null, value?: string | null }[], apiUrl?: string | null,
+        displayName?: string, lastModifiedBy?: string, lastModifiedDateTime?:
+        string, owner?: string | null, portalUrl?: string | null,
+        postponeUntilDateTime?: string | null, rank?: number | null,
+        recommendationId?: string, resourceType?: string, status?: "active" |
+        "unknownFutureValue" | "completedBySystem" | "completedByUser" |
+        "dismissed" | "postponed" | "riskAccepted" | "thirdParty" | "planned" |
+        "alternateMitigation", subjectId?: string } & { @odata.type:
+        "#microsoft.graph.impactedResource" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/directory/impactedResources/{impactedResource-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            addedDateTime?: string, additionalDetails?: { <xref
+            uid="@odata.type" />: string, key?: string | null, value?: string |
+            null }[], apiUrl?: string | null, displayName?: string,
+            lastModifiedBy?: string, lastModifiedDateTime?: string, owner?:
+            string | null, portalUrl?: string | null, postponeUntilDateTime?:
+            string | null, rank?: number | null, recommendationId?: string,
+            resourceType?: string, status?: "active" | "unknownFutureValue" |
+            "completedBySystem" | "completedByUser" | "dismissed" | "postponed"
+            | "riskAccepted" | "thirdParty" | "planned" | "alternateMitigation",
+            subjectId?: string } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.impactedResource" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ impactedResource-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /directory/impactedResources/{impactedResource-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, addedDateTime?: string, additionalDetails?: { <xref
+          uid="@odata.type" />: string, key?: string | null, value?: string |
+          null }[], apiUrl?: string | null, displayName?: string,
+          lastModifiedBy?: string, lastModifiedDateTime?: string, owner?: string
+          | null, portalUrl?: string | null, postponeUntilDateTime?: string |
+          null, rank?: number | null, recommendationId?: string, resourceType?:
+          string, status?: "active" | "unknownFutureValue" | "completedBySystem"
+          | "completedByUser" | "dismissed" | "postponed" | "riskAccepted" |
+          "thirdParty" | "planned" | "alternateMitigation", subjectId?: string }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.impactedResource" />" }&gt;

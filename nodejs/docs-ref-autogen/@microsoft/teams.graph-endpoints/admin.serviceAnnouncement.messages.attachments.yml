@@ -53,8 +53,11 @@ variables:
           }
 functions:
   - name: >-
-      create(Operation<"/admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachments",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, content?: string | null, contentType?: string | null,
+      lastModifiedDateTime?: string | null, name?: string | null, size?: number
+      } & { @odata.type: "#microsoft.graph.serviceAnnouncementAttachment" }, {
+      serviceUpdateMessage-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.admin.serviceAnnouncement.messages.attachments.create
     package: '@microsoft/teams.graph-endpoints'
@@ -65,25 +68,41 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachments",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachments"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, content?: string | null,
+        contentType?: string | null, lastModifiedDateTime?: string | null,
+        name?: string | null, size?: number } & { @odata.type:
+        "#microsoft.graph.serviceAnnouncementAttachment" }, params?: {
+        serviceUpdateMessage-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string, content?:
+        string | null, contentType?: string | null, lastModifiedDateTime?:
+        string | null, name?: string | null, size?: number } & { @odata.type:
+        "#microsoft.graph.serviceAnnouncementAttachment" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachments",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            content?: string | null, contentType?: string | null,
+            lastModifiedDateTime?: string | null, name?: string | null, size?:
+            number } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.serviceAnnouncementAttachment" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ serviceUpdateMessage-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachments"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, content?: string | null, contentType?: string | null,
+          lastModifiedDateTime?: string | null, name?: string | null, size?:
+          number } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.serviceAnnouncementAttachment" />" }&gt;
+  - name: >-
+      del({ If-Match?: string, serviceAnnouncementAttachment-id: string,
+      serviceUpdateMessage-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.admin.serviceAnnouncement.messages.attachments.del
     package: '@microsoft/teams.graph-endpoints'
@@ -94,18 +113,22 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachments/{serviceAnnouncementAttachment-id}"]["response"]>
+        function del(params?: { If-Match?: string,
+        serviceAnnouncementAttachment-id: string, serviceUpdateMessage-id:
+        string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { If-Match?: string, serviceAnnouncementAttachment-id: string,
+            serviceUpdateMessage-id: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachments/{serviceAnnouncementAttachment-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[],
+      serviceAnnouncementAttachment-id: string, serviceUpdateMessage-id: string
+      })
     uid: >-
       @microsoft/teams.graph-endpoints.admin.serviceAnnouncement.messages.attachments.get
     package: '@microsoft/teams.graph-endpoints'
@@ -120,18 +143,33 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachments/{serviceAnnouncementAttachment-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        serviceAnnouncementAttachment-id: string, serviceUpdateMessage-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, content?: string | null,
+        contentType?: string | null, lastModifiedDateTime?: string | null,
+        name?: string | null, size?: number } & { @odata.type:
+        "#microsoft.graph.serviceAnnouncementAttachment" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[],
+            serviceAnnouncementAttachment-id: string, serviceUpdateMessage-id:
+            string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachments/{serviceAnnouncementAttachment-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, content?: string | null, contentType?: string | null,
+          lastModifiedDateTime?: string | null, name?: string | null, size?:
+          number } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.serviceAnnouncementAttachment" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, serviceUpdateMessage-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.admin.serviceAnnouncement.messages.attachments.list
     package: '@microsoft/teams.graph-endpoints'
@@ -145,20 +183,40 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachments"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, serviceUpdateMessage-id: string }):
+        EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?: string
+        | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, content?: string | null,
+        contentType?: string | null, lastModifiedDateTime?: string | null,
+        name?: string | null, size?: number } & { @odata.type:
+        "#microsoft.graph.serviceAnnouncementAttachment" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, serviceUpdateMessage-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachments"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          content?: string | null, contentType?: string | null,
+          lastModifiedDateTime?: string | null, name?: string | null, size?:
+          number } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.serviceAnnouncementAttachment" />" })[] }&gt;
   - name: >-
-      update(Operation<"/admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachments/{serviceAnnouncementAttachment-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, content?: string | null, contentType?: string | null,
+      lastModifiedDateTime?: string | null, name?: string | null, size?: number
+      } & { @odata.type: "#microsoft.graph.serviceAnnouncementAttachment" }, {
+      serviceAnnouncementAttachment-id: string, serviceUpdateMessage-id: string
+      })
     uid: >-
       @microsoft/teams.graph-endpoints.admin.serviceAnnouncement.messages.attachments.update
     package: '@microsoft/teams.graph-endpoints'
@@ -169,21 +227,38 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachments/{serviceAnnouncementAttachment-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachments/{serviceAnnouncementAttachment-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, content?: string | null,
+        contentType?: string | null, lastModifiedDateTime?: string | null,
+        name?: string | null, size?: number } & { @odata.type:
+        "#microsoft.graph.serviceAnnouncementAttachment" }, params?: {
+        serviceAnnouncementAttachment-id: string, serviceUpdateMessage-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, content?: string | null,
+        contentType?: string | null, lastModifiedDateTime?: string | null,
+        name?: string | null, size?: number } & { @odata.type:
+        "#microsoft.graph.serviceAnnouncementAttachment" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachments/{serviceAnnouncementAttachment-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            content?: string | null, contentType?: string | null,
+            lastModifiedDateTime?: string | null, name?: string | null, size?:
+            number } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.serviceAnnouncementAttachment" />" }
           description: ''
         - id: params
-          type: any
+          type: >-
+            { serviceAnnouncementAttachment-id: string, serviceUpdateMessage-id:
+            string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachments/{serviceAnnouncementAttachment-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, content?: string | null, contentType?: string | null,
+          lastModifiedDateTime?: string | null, name?: string | null, size?:
+          number } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.serviceAnnouncementAttachment" />" }&gt;

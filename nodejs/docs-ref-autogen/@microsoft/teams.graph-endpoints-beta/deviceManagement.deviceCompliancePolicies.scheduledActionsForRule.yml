@@ -10,8 +10,17 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
   - name: >-
-      create(Operation<"/deviceManagement/deviceCompliancePolicies/{deviceCompliancePolicy-id}/scheduledActionsForRule",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, ruleName?: string | null,
+      scheduledActionConfigurations?: (Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & { @odata.type: string, actionType?: "block" | "wipe" |
+      "noAction" | "notification" | "retire" | "removeResourceAccessProfiles" |
+      "pushNotification" | "remoteLock", gracePeriodHours?: number,
+      notificationMessageCCList?: (string | null)[], notificationTemplateId?:
+      string | null } & { @odata.type:
+      "#microsoft.graph.deviceComplianceActionItem" })[] } & { @odata.type:
+      "#microsoft.graph.deviceComplianceScheduledActionForRule" }, {
+      deviceCompliancePolicy-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.deviceCompliancePolicies.scheduledActionsForRule.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -22,25 +31,66 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/deviceManagement/deviceCompliancePolicies/{deviceCompliancePolicy-id}/scheduledActionsForRule",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /deviceManagement/deviceCompliancePolicies/{deviceCompliancePolicy-id}/scheduledActionsForRule"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, ruleName?: string | null,
+        scheduledActionConfigurations?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, actionType?: "block" | "wipe"
+        | "noAction" | "notification" | "retire" |
+        "removeResourceAccessProfiles" | "pushNotification" | "remoteLock",
+        gracePeriodHours?: number, notificationMessageCCList?: (string |
+        null)[], notificationTemplateId?: string | null } & { @odata.type:
+        "#microsoft.graph.deviceComplianceActionItem" })[] } & { @odata.type:
+        "#microsoft.graph.deviceComplianceScheduledActionForRule" }, params?: {
+        deviceCompliancePolicy-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, ruleName?: string | null, scheduledActionConfigurations?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, actionType?: "block" | "wipe" | "noAction" |
+        "notification" | "retire" | "removeResourceAccessProfiles" |
+        "pushNotification" | "remoteLock", gracePeriodHours?: number,
+        notificationMessageCCList?: (string | null)[], notificationTemplateId?:
+        string | null } & { @odata.type:
+        "#microsoft.graph.deviceComplianceActionItem" })[] } & { @odata.type:
+        "#microsoft.graph.deviceComplianceScheduledActionForRule" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/deviceCompliancePolicies/{deviceCompliancePolicy-id}/scheduledActionsForRule",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            ruleName?: string | null, scheduledActionConfigurations?: (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            actionType?: "block" | "wipe" | "noAction" | "notification" |
+            "retire" | "removeResourceAccessProfiles" | "pushNotification" |
+            "remoteLock", gracePeriodHours?: number, notificationMessageCCList?:
+            (string | null)[], notificationTemplateId?: string | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deviceComplianceActionItem" />" })[] } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deviceComplianceScheduledActionForRule" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ deviceCompliancePolicy-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /deviceManagement/deviceCompliancePolicies/{deviceCompliancePolicy-id}/scheduledActionsForRule"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, ruleName?: string | null, scheduledActionConfigurations?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          actionType?: "block" | "wipe" | "noAction" | "notification" | "retire"
+          | "removeResourceAccessProfiles" | "pushNotification" | "remoteLock",
+          gracePeriodHours?: number, notificationMessageCCList?: (string |
+          null)[], notificationTemplateId?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceComplianceActionItem" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceComplianceScheduledActionForRule" />" }&gt;
+  - name: >-
+      del({ deviceCompliancePolicy-id: string,
+      deviceComplianceScheduledActionForRule-id: string, If-Match?: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.deviceCompliancePolicies.scheduledActionsForRule.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -51,18 +101,22 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /deviceManagement/deviceCompliancePolicies/{deviceCompliancePolicy-id}/scheduledActionsForRule/{deviceComplianceScheduledActionForRule-id}"]["response"]>
+        function del(params?: { deviceCompliancePolicy-id: string,
+        deviceComplianceScheduledActionForRule-id: string, If-Match?: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { deviceCompliancePolicy-id: string,
+            deviceComplianceScheduledActionForRule-id: string, If-Match?: string
+            }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /deviceManagement/deviceCompliancePolicies/{deviceCompliancePolicy-id}/scheduledActionsForRule/{deviceComplianceScheduledActionForRule-id}"]["response"]&gt;
-  - name: get$1(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get$1({ $expand?: string[], $select?: string[], deviceCompliancePolicy-id:
+      string, deviceComplianceScheduledActionForRule-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.deviceCompliancePolicies.scheduledActionsForRule.get$1
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -78,18 +132,45 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get$1(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/deviceCompliancePolicies/{deviceCompliancePolicy-id}/scheduledActionsForRule/{deviceComplianceScheduledActionForRule-id}"]["response"]>
+        function get$1(params?: { $expand?: string[], $select?: string[],
+        deviceCompliancePolicy-id: string,
+        deviceComplianceScheduledActionForRule-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, ruleName?: string | null,
+        scheduledActionConfigurations?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, actionType?: "block" | "wipe"
+        | "noAction" | "notification" | "retire" |
+        "removeResourceAccessProfiles" | "pushNotification" | "remoteLock",
+        gracePeriodHours?: number, notificationMessageCCList?: (string |
+        null)[], notificationTemplateId?: string | null } & { @odata.type:
+        "#microsoft.graph.deviceComplianceActionItem" })[] } & { @odata.type:
+        "#microsoft.graph.deviceComplianceScheduledActionForRule" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], deviceCompliancePolicy-id:
+            string, deviceComplianceScheduledActionForRule-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/deviceCompliancePolicies/{deviceCompliancePolicy-id}/scheduledActionsForRule/{deviceComplianceScheduledActionForRule-id}"]["response"]&gt;
-  - name: get(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, ruleName?: string | null, scheduledActionConfigurations?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          actionType?: "block" | "wipe" | "noAction" | "notification" | "retire"
+          | "removeResourceAccessProfiles" | "pushNotification" | "remoteLock",
+          gracePeriodHours?: number, notificationMessageCCList?: (string |
+          null)[], notificationTemplateId?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceComplianceActionItem" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceComplianceScheduledActionForRule" />" }&gt;
+  - name: >-
+      get({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, deviceCompliancePolicy-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.deviceCompliancePolicies.scheduledActionsForRule.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -105,20 +186,51 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/deviceCompliancePolicies/{deviceCompliancePolicy-id}/scheduledActionsForRule"]["response"]>
+        function get(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, deviceCompliancePolicy-id: string }):
+        EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?: string
+        | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, ruleName?: string | null,
+        scheduledActionConfigurations?: (Omit<..., ...> & { @odata.type: ...,
+        actionType?: ..., gracePeriodHours?: ..., notificationMessageCCList?:
+        ..., notificationTemplateId?: ... } & { @odata.type: ... })[] } & {
+        @odata.type: "#microsoft.graph.deviceComplianceScheduledActionForRule"
+        })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, deviceCompliancePolicy-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/deviceCompliancePolicies/{deviceCompliancePolicy-id}/scheduledActionsForRule"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          ruleName?: string | null, scheduledActionConfigurations?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          actionType?: ..., gracePeriodHours?: ..., notificationMessageCCList?:
+          ..., notificationTemplateId?: ... } & { <xref uid="@odata.type" />:
+          ... })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceComplianceScheduledActionForRule" />" })[]
+          }&gt;
   - name: >-
-      update(Operation<"/deviceManagement/deviceCompliancePolicies/{deviceCompliancePolicy-id}/scheduledActionsForRule/{deviceComplianceScheduledActionForRule-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, ruleName?: string | null,
+      scheduledActionConfigurations?: (Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & { @odata.type: string, actionType?: "block" | "wipe" |
+      "noAction" | "notification" | "retire" | "removeResourceAccessProfiles" |
+      "pushNotification" | "remoteLock", gracePeriodHours?: number,
+      notificationMessageCCList?: (string | null)[], notificationTemplateId?:
+      string | null } & { @odata.type:
+      "#microsoft.graph.deviceComplianceActionItem" })[] } & { @odata.type:
+      "#microsoft.graph.deviceComplianceScheduledActionForRule" }, {
+      deviceCompliancePolicy-id: string,
+      deviceComplianceScheduledActionForRule-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.deviceCompliancePolicies.scheduledActionsForRule.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -129,24 +241,66 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/deviceManagement/deviceCompliancePolicies/{deviceCompliancePolicy-id}/scheduledActionsForRule/{deviceComplianceScheduledActionForRule-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /deviceManagement/deviceCompliancePolicies/{deviceCompliancePolicy-id}/scheduledActionsForRule/{deviceComplianceScheduledActionForRule-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, ruleName?: string | null,
+        scheduledActionConfigurations?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, actionType?: "block" | "wipe"
+        | "noAction" | "notification" | "retire" |
+        "removeResourceAccessProfiles" | "pushNotification" | "remoteLock",
+        gracePeriodHours?: number, notificationMessageCCList?: (string |
+        null)[], notificationTemplateId?: string | null } & { @odata.type:
+        "#microsoft.graph.deviceComplianceActionItem" })[] } & { @odata.type:
+        "#microsoft.graph.deviceComplianceScheduledActionForRule" }, params?: {
+        deviceCompliancePolicy-id: string,
+        deviceComplianceScheduledActionForRule-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, ruleName?: string | null,
+        scheduledActionConfigurations?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, actionType?: "block" | "wipe"
+        | "noAction" | "notification" | "retire" |
+        "removeResourceAccessProfiles" | "pushNotification" | "remoteLock",
+        gracePeriodHours?: number, notificationMessageCCList?: (string |
+        null)[], notificationTemplateId?: string | null } & { @odata.type:
+        "#microsoft.graph.deviceComplianceActionItem" })[] } & { @odata.type:
+        "#microsoft.graph.deviceComplianceScheduledActionForRule" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/deviceCompliancePolicies/{deviceCompliancePolicy-id}/scheduledActionsForRule/{deviceComplianceScheduledActionForRule-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            ruleName?: string | null, scheduledActionConfigurations?: (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            actionType?: "block" | "wipe" | "noAction" | "notification" |
+            "retire" | "removeResourceAccessProfiles" | "pushNotification" |
+            "remoteLock", gracePeriodHours?: number, notificationMessageCCList?:
+            (string | null)[], notificationTemplateId?: string | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deviceComplianceActionItem" />" })[] } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deviceComplianceScheduledActionForRule" />" }
           description: ''
         - id: params
-          type: any
+          type: >-
+            { deviceCompliancePolicy-id: string,
+            deviceComplianceScheduledActionForRule-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /deviceManagement/deviceCompliancePolicies/{deviceCompliancePolicy-id}/scheduledActionsForRule/{deviceComplianceScheduledActionForRule-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, ruleName?: string | null, scheduledActionConfigurations?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          actionType?: "block" | "wipe" | "noAction" | "notification" | "retire"
+          | "removeResourceAccessProfiles" | "pushNotification" | "remoteLock",
+          gracePeriodHours?: number, notificationMessageCCList?: (string |
+          null)[], notificationTemplateId?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceComplianceActionItem" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceComplianceScheduledActionForRule" />" }&gt;
 variables:
   - name: scheduledActionConfigurations
     uid: >-

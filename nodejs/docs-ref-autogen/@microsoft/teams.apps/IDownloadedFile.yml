@@ -1,0 +1,128 @@
+### YamlMime:TSType
+name: IDownloadedFile
+uid: '@microsoft/teams.apps.IDownloadedFile'
+package: '@microsoft/teams.apps'
+summary: >-
+  A buffered, point-in-time snapshot of a downloaded file's bytes that the
+  caller owns.
+
+
+  Returned by
+  [IIncomingFile.download](xref:@microsoft/teams.apps.IIncomingFile.download).
+  The bytes are already in memory, so the convenience readers here are
+  synchronous and never re-download. Because it is a snapshot, holding one and
+  reusing it is the way to read the same file several ways without re-fetching
+  through the live [IIncomingFile](xref:@microsoft/teams.apps.IIncomingFile)
+  handle.
+fullName: IDownloadedFile
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: bytes
+    uid: '@microsoft/teams.apps.IDownloadedFile.bytes'
+    package: '@microsoft/teams.apps'
+    summary: The file bytes, buffered from `stream()` read to completion.
+    fullName: bytes
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'bytes: Uint8Array'
+      return:
+        description: ''
+        type: Uint8Array
+  - name: contentType
+    uid: '@microsoft/teams.apps.IDownloadedFile.contentType'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      MIME type resolved from the download response header, or the incoming
+      file's metadata type if the response omits one. Falls back to
+      `application/octet-stream` when neither provides a type, so this is never
+      empty.
+    fullName: contentType
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'contentType: string'
+      return:
+        description: ''
+        type: string
+  - name: filename
+    uid: '@microsoft/teams.apps.IDownloadedFile.filename'
+    package: '@microsoft/teams.apps'
+    summary: Resolved filename.
+    fullName: filename
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'filename: string'
+      return:
+        description: ''
+        type: string
+  - name: sourceUrl
+    uid: '@microsoft/teams.apps.IDownloadedFile.sourceUrl'
+    package: '@microsoft/teams.apps'
+    summary: The URL the bytes were actually fetched from.
+    fullName: sourceUrl
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'sourceUrl: string'
+      return:
+        description: ''
+        type: string
+methods:
+  - name: arrayBuffer()
+    uid: '@microsoft/teams.apps.IDownloadedFile.arrayBuffer'
+    package: '@microsoft/teams.apps'
+    summary: Return the bytes as an `ArrayBuffer`. Synchronous; no re-download.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function arrayBuffer(): ArrayBuffer'
+      return:
+        description: ''
+        type: ArrayBuffer
+  - name: saveAs(string, IFileReadOptions)
+    uid: '@microsoft/teams.apps.IDownloadedFile.saveAs'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Write the already-buffered bytes to a local file path (no re-fetch, unlike
+      [IIncomingFile.saveAs](xref:@microsoft/teams.apps.IIncomingFile.saveAs)
+      which streams a fresh download).
+
+      Requires Node: it writes to the local filesystem, which is unavailable in
+      the browser.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function saveAs(path: string, options?: IFileReadOptions): Promise<void>'
+      parameters:
+        - id: path
+          type: string
+          description: ''
+        - id: options
+          type: <xref uid="@microsoft/teams.apps.IFileReadOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: text(string)
+    uid: '@microsoft/teams.apps.IDownloadedFile.text'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Decode bytes as UTF-8 (or a provided encoding). No content-type check.
+
+      Lossy: invalid bytes become the U+FFFD replacement character and never
+      throw. For strict or binary-safe reads, use `bytes`/`arrayBuffer()`.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function text(encoding?: string): string'
+      parameters:
+        - id: encoding
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: string

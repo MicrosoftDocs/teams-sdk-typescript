@@ -9,8 +9,21 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
   - name: >-
-      create(Operation<"/admin/exchange/messageTraces/{messageTrace-id}/recipients",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, deliveryStatus?: "unknownFutureValue" | "failed" |
+      "gettingStatus" | "pending" | "delivered" | "expanded" | "quarantined" |
+      "filteredAsSpam", events?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, dateTime?: string, description?:
+      string | null, eventType?: "unknownFutureValue" | "failed" | "delivered" |
+      "resolved" | "received" | "sent" | "processingFailed" |
+      "distributionGroupExpanded" | "submitted" | "delayed" | "redirected" |
+      "dropped" | "recipientsAdded" | "malwareDetected" |
+      "malwareDetectedInMessage" | "malwareDetectedInAttachment" | "ttZapped" |
+      "ttDelivered" | "spamDetected" | "transportRuleTriggered" |
+      "dlpRuleTriggered" | "journaled" } & { @odata.type:
+      "#microsoft.graph.messageEvent" })[], recipientEmail?: string } & {
+      @odata.type: "#microsoft.graph.messageRecipient" }, { messageTrace-id:
+      string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.admin.exchange.messageTraces.recipients.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -20,25 +33,84 @@ functions:
     customDeprecatedMessage: ''
     syntax:
       content: >-
-        function create(body:
-        Operation<"/admin/exchange/messageTraces/{messageTrace-id}/recipients",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /admin/exchange/messageTraces/{messageTrace-id}/recipients"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, deliveryStatus?:
+        "unknownFutureValue" | "failed" | "gettingStatus" | "pending" |
+        "delivered" | "expanded" | "quarantined" | "filteredAsSpam", events?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, dateTime?: string, description?: string | null,
+        eventType?: "unknownFutureValue" | "failed" | "delivered" | "resolved" |
+        "received" | "sent" | "processingFailed" | "distributionGroupExpanded" |
+        "submitted" | "delayed" | "redirected" | "dropped" | "recipientsAdded" |
+        "malwareDetected" | "malwareDetectedInMessage" |
+        "malwareDetectedInAttachment" | "ttZapped" | "ttDelivered" |
+        "spamDetected" | "transportRuleTriggered" | "dlpRuleTriggered" |
+        "journaled" } & { @odata.type: "#microsoft.graph.messageEvent" })[],
+        recipientEmail?: string } & { @odata.type:
+        "#microsoft.graph.messageRecipient" }, params?: { messageTrace-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, deliveryStatus?:
+        "unknownFutureValue" | "failed" | "gettingStatus" | "pending" |
+        "delivered" | "expanded" | "quarantined" | "filteredAsSpam", events?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, dateTime?: string, description?: string | null,
+        eventType?: "unknownFutureValue" | "failed" | "delivered" | "resolved" |
+        "received" | "sent" | "processingFailed" | "distributionGroupExpanded" |
+        "submitted" | "delayed" | "redirected" | "dropped" | "recipientsAdded" |
+        "malwareDetected" | "malwareDetectedInMessage" |
+        "malwareDetectedInAttachment" | "ttZapped" | "ttDelivered" |
+        "spamDetected" | "transportRuleTriggered" | "dlpRuleTriggered" |
+        "journaled" } & { @odata.type: "#microsoft.graph.messageEvent" })[],
+        recipientEmail?: string } & { @odata.type:
+        "#microsoft.graph.messageRecipient" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/admin/exchange/messageTraces/{messageTrace-id}/recipients",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            deliveryStatus?: "unknownFutureValue" | "failed" | "gettingStatus" |
+            "pending" | "delivered" | "expanded" | "quarantined" |
+            "filteredAsSpam", events?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, dateTime?: string, description?:
+            string | null, eventType?: "unknownFutureValue" | "failed" |
+            "delivered" | "resolved" | "received" | "sent" | "processingFailed"
+            | "distributionGroupExpanded" | "submitted" | "delayed" |
+            "redirected" | "dropped" | "recipientsAdded" | "malwareDetected" |
+            "malwareDetectedInMessage" | "malwareDetectedInAttachment" |
+            "ttZapped" | "ttDelivered" | "spamDetected" |
+            "transportRuleTriggered" | "dlpRuleTriggered" | "journaled" } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.messageEvent" />" })[], recipientEmail?: string
+            } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.messageRecipient" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ messageTrace-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /admin/exchange/messageTraces/{messageTrace-id}/recipients"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, deliveryStatus?: "unknownFutureValue" | "failed" |
+          "gettingStatus" | "pending" | "delivered" | "expanded" | "quarantined"
+          | "filteredAsSpam", events?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, dateTime?: string, description?: string
+          | null, eventType?: "unknownFutureValue" | "failed" | "delivered" |
+          "resolved" | "received" | "sent" | "processingFailed" |
+          "distributionGroupExpanded" | "submitted" | "delayed" | "redirected" |
+          "dropped" | "recipientsAdded" | "malwareDetected" |
+          "malwareDetectedInMessage" | "malwareDetectedInAttachment" |
+          "ttZapped" | "ttDelivered" | "spamDetected" | "transportRuleTriggered"
+          | "dlpRuleTriggered" | "journaled" } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.messageEvent" />" })[], recipientEmail?:
+          string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.messageRecipient" />" }&gt;
+  - name: >-
+      del({ If-Match?: string, messageRecipient-id: string, messageTrace-id:
+      string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.admin.exchange.messageTraces.recipients.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -50,18 +122,20 @@ functions:
     customDeprecatedMessage: ''
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /admin/exchange/messageTraces/{messageTrace-id}/recipients/{messageRecipient-id}"]["response"]>
+        function del(params?: { If-Match?: string, messageRecipient-id: string,
+        messageTrace-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { If-Match?: string, messageRecipient-id: string, messageTrace-id:
+            string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /admin/exchange/messageTraces/{messageTrace-id}/recipients/{messageRecipient-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], messageRecipient-id: string,
+      messageTrace-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.admin.exchange.messageTraces.recipients.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -73,18 +147,53 @@ functions:
     customDeprecatedMessage: ''
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /admin/exchange/messageTraces/{messageTrace-id}/recipients/{messageRecipient-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        messageRecipient-id: string, messageTrace-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, deliveryStatus?:
+        "unknownFutureValue" | "failed" | "gettingStatus" | "pending" |
+        "delivered" | "expanded" | "quarantined" | "filteredAsSpam", events?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, dateTime?: string, description?: string | null,
+        eventType?: "unknownFutureValue" | "failed" | "delivered" | "resolved" |
+        "received" | "sent" | "processingFailed" | "distributionGroupExpanded" |
+        "submitted" | "delayed" | "redirected" | "dropped" | "recipientsAdded" |
+        "malwareDetected" | "malwareDetectedInMessage" |
+        "malwareDetectedInAttachment" | "ttZapped" | "ttDelivered" |
+        "spamDetected" | "transportRuleTriggered" | "dlpRuleTriggered" |
+        "journaled" } & { @odata.type: "#microsoft.graph.messageEvent" })[],
+        recipientEmail?: string } & { @odata.type:
+        "#microsoft.graph.messageRecipient" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], messageRecipient-id:
+            string, messageTrace-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /admin/exchange/messageTraces/{messageTrace-id}/recipients/{messageRecipient-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, deliveryStatus?: "unknownFutureValue" | "failed" |
+          "gettingStatus" | "pending" | "delivered" | "expanded" | "quarantined"
+          | "filteredAsSpam", events?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, dateTime?: string, description?: string
+          | null, eventType?: "unknownFutureValue" | "failed" | "delivered" |
+          "resolved" | "received" | "sent" | "processingFailed" |
+          "distributionGroupExpanded" | "submitted" | "delayed" | "redirected" |
+          "dropped" | "recipientsAdded" | "malwareDetected" |
+          "malwareDetectedInMessage" | "malwareDetectedInAttachment" |
+          "ttZapped" | "ttDelivered" | "spamDetected" | "transportRuleTriggered"
+          | "dlpRuleTriggered" | "journaled" } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.messageEvent" />" })[], recipientEmail?:
+          string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.messageRecipient" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, messageTrace-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.admin.exchange.messageTraces.recipients.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -94,20 +203,54 @@ functions:
     customDeprecatedMessage: ''
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /admin/exchange/messageTraces/{messageTrace-id}/recipients"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, messageTrace-id: string }):
+        EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?: string
+        | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, deliveryStatus?:
+        "unknownFutureValue" | "failed" | "gettingStatus" | "pending" |
+        "delivered" | "expanded" | "quarantined" | "filteredAsSpam", events?:
+        (Omit<..., ...> & { @odata.type: ..., dateTime?: ..., description?: ...,
+        eventType?: ... } & { @odata.type: ... })[], recipientEmail?: string } &
+        { @odata.type: "#microsoft.graph.messageRecipient" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, messageTrace-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /admin/exchange/messageTraces/{messageTrace-id}/recipients"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          deliveryStatus?: "unknownFutureValue" | "failed" | "gettingStatus" |
+          "pending" | "delivered" | "expanded" | "quarantined" |
+          "filteredAsSpam", events?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., dateTime?: ..., description?: ...,
+          eventType?: ... } & { <xref uid="@odata.type" />: ... })[],
+          recipientEmail?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.messageRecipient" />" })[] }&gt;
   - name: >-
-      update(Operation<"/admin/exchange/messageTraces/{messageTrace-id}/recipients/{messageRecipient-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, deliveryStatus?: "unknownFutureValue" | "failed" |
+      "gettingStatus" | "pending" | "delivered" | "expanded" | "quarantined" |
+      "filteredAsSpam", events?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, dateTime?: string, description?:
+      string | null, eventType?: "unknownFutureValue" | "failed" | "delivered" |
+      "resolved" | "received" | "sent" | "processingFailed" |
+      "distributionGroupExpanded" | "submitted" | "delayed" | "redirected" |
+      "dropped" | "recipientsAdded" | "malwareDetected" |
+      "malwareDetectedInMessage" | "malwareDetectedInAttachment" | "ttZapped" |
+      "ttDelivered" | "spamDetected" | "transportRuleTriggered" |
+      "dlpRuleTriggered" | "journaled" } & { @odata.type:
+      "#microsoft.graph.messageEvent" })[], recipientEmail?: string } & {
+      @odata.type: "#microsoft.graph.messageRecipient" }, { messageRecipient-id:
+      string, messageTrace-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.admin.exchange.messageTraces.recipients.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -119,24 +262,81 @@ functions:
     customDeprecatedMessage: ''
     syntax:
       content: >-
-        function update(body:
-        Operation<"/admin/exchange/messageTraces/{messageTrace-id}/recipients/{messageRecipient-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /admin/exchange/messageTraces/{messageTrace-id}/recipients/{messageRecipient-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, deliveryStatus?:
+        "unknownFutureValue" | "failed" | "gettingStatus" | "pending" |
+        "delivered" | "expanded" | "quarantined" | "filteredAsSpam", events?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, dateTime?: string, description?: string | null,
+        eventType?: "unknownFutureValue" | "failed" | "delivered" | "resolved" |
+        "received" | "sent" | "processingFailed" | "distributionGroupExpanded" |
+        "submitted" | "delayed" | "redirected" | "dropped" | "recipientsAdded" |
+        "malwareDetected" | "malwareDetectedInMessage" |
+        "malwareDetectedInAttachment" | "ttZapped" | "ttDelivered" |
+        "spamDetected" | "transportRuleTriggered" | "dlpRuleTriggered" |
+        "journaled" } & { @odata.type: "#microsoft.graph.messageEvent" })[],
+        recipientEmail?: string } & { @odata.type:
+        "#microsoft.graph.messageRecipient" }, params?: { messageRecipient-id:
+        string, messageTrace-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        deliveryStatus?: "unknownFutureValue" | "failed" | "gettingStatus" |
+        "pending" | "delivered" | "expanded" | "quarantined" | "filteredAsSpam",
+        events?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, dateTime?: string, description?: string | null,
+        eventType?: "unknownFutureValue" | "failed" | "delivered" | "resolved" |
+        "received" | "sent" | "processingFailed" | "distributionGroupExpanded" |
+        "submitted" | "delayed" | "redirected" | "dropped" | "recipientsAdded" |
+        "malwareDetected" | "malwareDetectedInMessage" |
+        "malwareDetectedInAttachment" | "ttZapped" | "ttDelivered" |
+        "spamDetected" | "transportRuleTriggered" | "dlpRuleTriggered" |
+        "journaled" } & { @odata.type: "#microsoft.graph.messageEvent" })[],
+        recipientEmail?: string } & { @odata.type:
+        "#microsoft.graph.messageRecipient" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/admin/exchange/messageTraces/{messageTrace-id}/recipients/{messageRecipient-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            deliveryStatus?: "unknownFutureValue" | "failed" | "gettingStatus" |
+            "pending" | "delivered" | "expanded" | "quarantined" |
+            "filteredAsSpam", events?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, dateTime?: string, description?:
+            string | null, eventType?: "unknownFutureValue" | "failed" |
+            "delivered" | "resolved" | "received" | "sent" | "processingFailed"
+            | "distributionGroupExpanded" | "submitted" | "delayed" |
+            "redirected" | "dropped" | "recipientsAdded" | "malwareDetected" |
+            "malwareDetectedInMessage" | "malwareDetectedInAttachment" |
+            "ttZapped" | "ttDelivered" | "spamDetected" |
+            "transportRuleTriggered" | "dlpRuleTriggered" | "journaled" } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.messageEvent" />" })[], recipientEmail?: string
+            } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.messageRecipient" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ messageRecipient-id: string, messageTrace-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /admin/exchange/messageTraces/{messageTrace-id}/recipients/{messageRecipient-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, deliveryStatus?: "unknownFutureValue" | "failed" |
+          "gettingStatus" | "pending" | "delivered" | "expanded" | "quarantined"
+          | "filteredAsSpam", events?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, dateTime?: string, description?: string
+          | null, eventType?: "unknownFutureValue" | "failed" | "delivered" |
+          "resolved" | "received" | "sent" | "processingFailed" |
+          "distributionGroupExpanded" | "submitted" | "delayed" | "redirected" |
+          "dropped" | "recipientsAdded" | "malwareDetected" |
+          "malwareDetectedInMessage" | "malwareDetectedInAttachment" |
+          "ttZapped" | "ttDelivered" | "spamDetected" | "transportRuleTriggered"
+          | "dlpRuleTriggered" | "journaled" } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.messageEvent" />" })[], recipientEmail?:
+          string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.messageRecipient" />" }&gt;
 variables:
   - name: events
     uid: >-

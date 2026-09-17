@@ -7,7 +7,10 @@ summary: |-
   store/query iterable data
 fullName: IListStorage<TValue>
 remarks: ''
-isDeprecated: false
+isDeprecated: true
+customDeprecatedMessage: |-
+  Use `IStorage` for persistence and keep ordered collection
+  semantics in an application-specific abstraction.
 type: interface
 inheritedMethods:
   - name: delete(number)
@@ -36,15 +39,15 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function get(key: number): undefined | TValue | Promise<undefined |
-        TValue>
+        function get(key: number): TValue | Promise<TValue | undefined> |
+        undefined
       parameters:
         - id: key
           type: number
           description: ''
       return:
         description: ''
-        type: undefined | TValue | Promise&lt;undefined | TValue&gt;
+        type: TValue | Promise&lt;TValue | undefined&gt; | undefined
     inheritanceDescription: >-
       <b>Inherited From</b>
       [IStorage.get](xref:@microsoft/teams.common.IStorage.get)
@@ -88,10 +91,10 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function pop(): undefined | TValue | Promise<undefined | TValue>'
+      content: 'function pop(): TValue | Promise<TValue | undefined> | undefined'
       return:
         description: ''
-        type: undefined | TValue | Promise&lt;undefined | TValue&gt;
+        type: TValue | Promise&lt;TValue | undefined&gt; | undefined
   - name: push(TValue)
     uid: '@microsoft/teams.common.IListStorage.push'
     package: '@microsoft/teams.common'

@@ -9,8 +9,74 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
   - name: >-
-      create(Operation<"/groups/{group-id}/sites/{site-id}/lists/{list-id}/permissions",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, expirationDateTime?: string | null, grantedTo?:
+      Record<string, never> | { @odata.type: string, application?:
+      Record<string, never> | { @odata.type: string, displayName?: string |
+      null, id?: string | null } | null, device?: Record<string, never> | {
+      @odata.type: string, displayName?: string | null, id?: string | null } |
+      null, user?: Record<string, never> | { @odata.type: string, displayName?:
+      string | null, id?: string | null } | null } | null, grantedToIdentities?:
+      { @odata.type: string, application?: Record<string, never> | {
+      @odata.type: string, displayName?: string | null, id?: string | null } |
+      null, device?: Record<string, never> | { @odata.type: string,
+      displayName?: string | null, id?: string | null } | null, user?:
+      Record<string, never> | { @odata.type: string, displayName?: string |
+      null, id?: string | null } | null }[], grantedToIdentitiesV2?: (Omit<{
+      @odata.type: string, application?: Record<string, never> | { @odata.type:
+      string, displayName?: string | null, id?: string | null } | null, device?:
+      Record<string, never> | { @odata.type: string, displayName?: string |
+      null, id?: string | null } | null, user?: Record<string, never> | {
+      @odata.type: string, displayName?: string | null, id?: string | null } |
+      null }, "@odata.type"> & { @odata.type: string, group?: Record<string,
+      never> | { @odata.type: string, displayName?: string | null, id?: string |
+      null } | null, siteGroup?: Record<string, never> | (Omit<{ @odata.type:
+      string, displayName?: function, id?: function }, "@odata.type"> & {
+      @odata.type: string, loginName?: string | null } & { @odata.type:
+      "#microsoft.graph.sharePointIdentity" }) | null, siteUser?: Record<string,
+      never> | (Omit<{ @odata.type: string, displayName?: function, id?:
+      function }, "@odata.type"> & { @odata.type: string, loginName?: string |
+      null } & { @odata.type: "#microsoft.graph.sharePointIdentity" }) | null }
+      & { @odata.type: "#microsoft.graph.sharePointIdentitySet" })[],
+      grantedToV2?: Record<string, never> | (Omit<{ @odata.type: string,
+      application?: Record<string, never> | { @odata.type: string, displayName?:
+      string | null, id?: string | null } | null, device?: Record<string, never>
+      | { @odata.type: string, displayName?: string | null, id?: string | null }
+      | null, user?: Record<string, never> | { @odata.type: string,
+      displayName?: string | null, id?: string | null } | null }, "@odata.type">
+      & { @odata.type: string, group?: Record<string, never> | { @odata.type:
+      string, displayName?: string | null, id?: string | null } | null,
+      siteGroup?: Record<string, never> | (Omit<{ @odata.type: string,
+      displayName?: string | null, id?: string | null }, "@odata.type"> & {
+      @odata.type: string, loginName?: string | null } & { @odata.type:
+      "#microsoft.graph.sharePointIdentity" }) | null, siteUser?: Record<string,
+      never> | (Omit<{ @odata.type: string, displayName?: string | null, id?:
+      string | null }, "@odata.type"> & { @odata.type: string, loginName?:
+      string | null } & { @odata.type: "#microsoft.graph.sharePointIdentity" })
+      | null } & { @odata.type: "#microsoft.graph.sharePointIdentitySet" }) |
+      null, hasPassword?: boolean | null, inheritedFrom?: Record<string, never>
+      | { @odata.type: string, driveId?: string | null, driveType?: string |
+      null, id?: string | null, name?: string | null, path?: string | null,
+      shareId?: string | null, sharepointIds?: Record<string, never> | {
+      @odata.type: string, listId?: string | null, listItemId?: string | null,
+      listItemUniqueId?: string | null, siteId?: string | null, siteUrl?: string
+      | null, tenantId?: string | null, webId?: string | null } | null, siteId?:
+      string | null } | null, invitation?: Record<string, never> | {
+      @odata.type: string, email?: string | null, invitedBy?: Record<string,
+      never> | { @odata.type: string, application?: Record<string, never> | {
+      @odata.type: string, displayName?: string | null, id?: string | null } |
+      null, device?: Record<string, never> | { @odata.type: string,
+      displayName?: string | null, id?: string | null } | null, user?:
+      Record<string, never> | { @odata.type: string, displayName?: string |
+      null, id?: string | null } | null } | null, redeemedBy?: string | null,
+      signInRequired?: boolean | null } | null, link?: Record<string, never> | {
+      @odata.type: string, application?: Record<string, never> | { @odata.type:
+      string, displayName?: string | null, id?: string | null } | null,
+      configuratorUrl?: string | null, preventsDownload?: boolean | null,
+      scope?: string | null, type?: string | null, webHtml?: string | null,
+      webUrl?: string | null } | null, roles?: (string | null)[], shareId?:
+      string | null } & { @odata.type: "#microsoft.graph.permission" }, {
+      group-id: string, list-id: string, site-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.groups.sites.lists.permissions.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -19,25 +85,336 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/groups/{group-id}/sites/{site-id}/lists/{list-id}/permissions",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /groups/{group-id}/sites/{site-id}/lists/{list-id}/permissions"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, expirationDateTime?: string |
+        null, grantedTo?: Record<string, never> | { @odata.type: string,
+        application?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, device?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, user?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null } | null, grantedToIdentities?: { @odata.type: string,
+        application?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, device?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, user?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null }[], grantedToIdentitiesV2?: (Omit<{ @odata.type: string,
+        application?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, device?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, user?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null }, "@odata.type"> & { @odata.type: string, group?: Record<string,
+        never> | { @odata.type: string, displayName?: string | null, id?: string
+        | null } | null, siteGroup?: Record<string, never> | (Omit<{
+        @odata.type: string, displayName?: function, id?: function },
+        "@odata.type"> & { @odata.type: string, loginName?: string | null } & {
+        @odata.type: "#microsoft.graph.sharePointIdentity" }) | null, siteUser?:
+        Record<string, never> | (Omit<{ @odata.type: string, displayName?:
+        function, id?: function }, "@odata.type"> & { @odata.type: string,
+        loginName?: string | null } & { @odata.type:
+        "#microsoft.graph.sharePointIdentity" }) | null } & { @odata.type:
+        "#microsoft.graph.sharePointIdentitySet" })[], grantedToV2?:
+        Record<string, never> | (Omit<{ @odata.type: string, application?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, device?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, user?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null },
+        "@odata.type"> & { @odata.type: string, group?: Record<string, never> |
+        { @odata.type: string, displayName?: string | null, id?: string | null }
+        | null, siteGroup?: Record<string, never> | (Omit<{ @odata.type: string,
+        displayName?: string | null, id?: string | null }, "@odata.type"> & {
+        @odata.type: string, loginName?: string | null } & { @odata.type:
+        "#microsoft.graph.sharePointIdentity" }) | null, siteUser?:
+        Record<string, never> | (Omit<{ @odata.type: string, displayName?:
+        string | null, id?: string | null }, "@odata.type"> & { @odata.type:
+        string, loginName?: string | null } & { @odata.type:
+        "#microsoft.graph.sharePointIdentity" }) | null } & { @odata.type:
+        "#microsoft.graph.sharePointIdentitySet" }) | null, hasPassword?:
+        boolean | null, inheritedFrom?: Record<string, never> | { @odata.type:
+        string, driveId?: string | null, driveType?: string | null, id?: string
+        | null, name?: string | null, path?: string | null, shareId?: string |
+        null, sharepointIds?: Record<string, never> | { @odata.type: string,
+        listId?: string | null, listItemId?: string | null, listItemUniqueId?:
+        string | null, siteId?: string | null, siteUrl?: string | null,
+        tenantId?: string | null, webId?: string | null } | null, siteId?:
+        string | null } | null, invitation?: Record<string, never> | {
+        @odata.type: string, email?: string | null, invitedBy?: Record<string,
+        never> | { @odata.type: string, application?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, device?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, user?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null } | null, redeemedBy?: string | null,
+        signInRequired?: boolean | null } | null, link?: Record<string, never> |
+        { @odata.type: string, application?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, configuratorUrl?: string | null, preventsDownload?: boolean |
+        null, scope?: string | null, type?: string | null, webHtml?: string |
+        null, webUrl?: string | null } | null, roles?: (string | null)[],
+        shareId?: string | null } & { @odata.type: "#microsoft.graph.permission"
+        }, params?: { group-id: string, list-id: string, site-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, expirationDateTime?: string |
+        null, grantedTo?: Record<string, never> | { @odata.type: string,
+        application?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, device?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, user?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null } | null, grantedToIdentities?: { @odata.type: string,
+        application?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, device?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, user?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null }[], grantedToIdentitiesV2?: (Omit<{ @odata.type: string,
+        application?: Record<string, never> | { @odata.type: string,
+        displayName?: function, id?: function } | null, device?: Record<string,
+        never> | { @odata.type: string, displayName?: function, id?: function }
+        | null, user?: Record<string, never> | { @odata.type: string,
+        displayName?: function, id?: function } | null }, "@odata.type"> & {
+        @odata.type: string, group?: Record<string, never> | { @odata.type:
+        string, displayName?: string | null, id?: string | null } | null,
+        siteGroup?: Record<string, never> | (Omit<{ @odata.type: ...,
+        displayName?: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        loginName?: function } & { @odata.type:
+        "#microsoft.graph.sharePointIdentity" }) | null, siteUser?:
+        Record<string, never> | (Omit<{ @odata.type: ..., displayName?: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string, loginName?: function
+        } & { @odata.type: "#microsoft.graph.sharePointIdentity" }) | null } & {
+        @odata.type: "#microsoft.graph.sharePointIdentitySet" })[],
+        grantedToV2?: Record<string, never> | (Omit<{ @odata.type: string,
+        application?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, device?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, user?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null }, "@odata.type"> & { @odata.type: string, group?: Record<string,
+        never> | { @odata.type: string, displayName?: string | null, id?: string
+        | null } | null, siteGroup?: Record<string, never> | (Omit<{
+        @odata.type: string, displayName?: function, id?: function },
+        "@odata.type"> & { @odata.type: string, loginName?: string | null } & {
+        @odata.type: "#microsoft.graph.sharePointIdentity" }) | null, siteUser?:
+        Record<string, never> | (Omit<{ @odata.type: string, displayName?:
+        function, id?: function }, "@odata.type"> & { @odata.type: string,
+        loginName?: string | null } & { @odata.type:
+        "#microsoft.graph.sharePointIdentity" }) | null } & { @odata.type:
+        "#microsoft.graph.sharePointIdentitySet" }) | null, hasPassword?:
+        boolean | null, inheritedFrom?: Record<string, never> | { @odata.type:
+        string, driveId?: string | null, driveType?: string | null, id?: string
+        | null, name?: string | null, path?: string | null, shareId?: string |
+        null, sharepointIds?: Record<string, never> | { @odata.type: string,
+        listId?: string | null, listItemId?: string | null, listItemUniqueId?:
+        string | null, siteId?: string | null, siteUrl?: string | null,
+        tenantId?: string | null, webId?: string | null } | null, siteId?:
+        string | null } | null, invitation?: Record<string, never> | {
+        @odata.type: string, email?: string | null, invitedBy?: Record<string,
+        never> | { @odata.type: string, application?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, device?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, user?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null } | null, redeemedBy?: string | null,
+        signInRequired?: boolean | null } | null, link?: Record<string, never> |
+        { @odata.type: string, application?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, configuratorUrl?: string | null, preventsDownload?: boolean |
+        null, scope?: string | null, type?: string | null, webHtml?: string |
+        null, webUrl?: string | null } | null, roles?: (string | null)[],
+        shareId?: string | null } & { @odata.type: "#microsoft.graph.permission"
+        }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/groups/{group-id}/sites/{site-id}/lists/{list-id}/permissions",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            expirationDateTime?: string | null, grantedTo?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, application?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, id?: string | null } | null, device?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, id?: string | null } | null, user?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, id?: string | null } | null } | null,
+            grantedToIdentities?: { <xref uid="@odata.type" />: string,
+            application?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, displayName?: string | null, id?:
+            string | null } | null, device?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | null, user?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | null }[], grantedToIdentitiesV2?: (Omit&lt;{
+            <xref uid="@odata.type" />: string, application?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, displayName?:
+            string | null, id?: string | null } | null, device?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, id?: string | null } | null, user?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, id?: string | null } | null }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            group?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+            string, displayName?: string | null, id?: string | null } | null,
+            siteGroup?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, loginName?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.sharePointIdentity" />" }) | null,
+            siteUser?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, loginName?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.sharePointIdentity" />" }) | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.sharePointIdentitySet" />" })[], grantedToV2?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, application?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, displayName?: string | null, id?:
+            string | null } | null, device?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | null, user?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | null }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, group?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, displayName?:
+            string | null, id?: string | null } | null, siteGroup?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, displayName?: string | null, id?: string | null }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            loginName?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.sharePointIdentity" />" }) | null, siteUser?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, displayName?: string | null, id?: string | null }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            loginName?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.sharePointIdentity" />" }) | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.sharePointIdentitySet" />" }) | null,
+            hasPassword?: boolean | null, inheritedFrom?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, driveId?: string |
+            null, driveType?: string | null, id?: string | null, name?: string |
+            null, path?: string | null, shareId?: string | null, sharepointIds?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            listId?: string | null, listItemId?: string | null,
+            listItemUniqueId?: string | null, siteId?: string | null, siteUrl?:
+            string | null, tenantId?: string | null, webId?: string | null } |
+            null, siteId?: string | null } | null, invitation?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            email?: string | null, invitedBy?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, application?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, displayName?:
+            string | null, id?: string | null } | null, device?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, id?: string | null } | null, user?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, id?: string | null } | null } | null,
+            redeemedBy?: string | null, signInRequired?: boolean | null } |
+            null, link?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, application?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, displayName?: string | null, id?:
+            string | null } | null, configuratorUrl?: string | null,
+            preventsDownload?: boolean | null, scope?: string | null, type?:
+            string | null, webHtml?: string | null, webUrl?: string | null } |
+            null, roles?: (string | null)[], shareId?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.permission" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ group-id: string, list-id: string, site-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /groups/{group-id}/sites/{site-id}/lists/{list-id}/permissions"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, expirationDateTime?: string | null, grantedTo?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          application?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } | null,
+          device?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null,
+          user?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null } |
+          null, grantedToIdentities?: { <xref uid="@odata.type" />: string,
+          application?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } | null,
+          device?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null,
+          user?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null }[],
+          grantedToIdentitiesV2?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          application?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, displayName?: function, id?: function } | null, device?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          displayName?: function, id?: function } | null, user?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          displayName?: function, id?: function } | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          group?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null,
+          siteGroup?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          loginName?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.sharePointIdentity" />" }) | null, siteUser?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., displayName?: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: string, loginName?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.sharePointIdentity"
+          />" }) | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.sharePointIdentitySet" />" })[], grantedToV2?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, application?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null, device?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null, user?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, group?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, displayName?: string | null, id?:
+          string | null } | null, siteGroup?: Record&lt;string, never&gt; |
+          (Omit&lt;{ <xref uid="@odata.type" />: string, displayName?: function,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, loginName?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.sharePointIdentity"
+          />" }) | null, siteUser?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, displayName?: function, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, loginName?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.sharePointIdentity"
+          />" }) | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.sharePointIdentitySet" />" }) | null,
+          hasPassword?: boolean | null, inheritedFrom?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, driveId?: string |
+          null, driveType?: string | null, id?: string | null, name?: string |
+          null, path?: string | null, shareId?: string | null, sharepointIds?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          listId?: string | null, listItemId?: string | null, listItemUniqueId?:
+          string | null, siteId?: string | null, siteUrl?: string | null,
+          tenantId?: string | null, webId?: string | null } | null, siteId?:
+          string | null } | null, invitation?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, email?: string | null, invitedBy?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          application?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } | null,
+          device?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null,
+          user?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null } |
+          null, redeemedBy?: string | null, signInRequired?: boolean | null } |
+          null, link?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, application?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null, configuratorUrl?: string | null, preventsDownload?:
+          boolean | null, scope?: string | null, type?: string | null, webHtml?:
+          string | null, webUrl?: string | null } | null, roles?: (string |
+          null)[], shareId?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.permission" />" }&gt;
+  - name: >-
+      del({ group-id: string, If-Match?: string, list-id: string, permission-id:
+      string, site-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.groups.sites.lists.permissions.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: >-
@@ -47,18 +424,21 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /groups/{group-id}/sites/{site-id}/lists/{list-id}/permissions/{permission-id}"]["response"]>
+        function del(params?: { group-id: string, If-Match?: string, list-id:
+        string, permission-id: string, site-id: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { group-id: string, If-Match?: string, list-id: string,
+            permission-id: string, site-id: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /groups/{group-id}/sites/{site-id}/lists/{list-id}/permissions/{permission-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], group-id: string, list-id:
+      string, permission-id: string, site-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.groups.sites.lists.permissions.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: >-
@@ -71,18 +451,177 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /groups/{group-id}/sites/{site-id}/lists/{list-id}/permissions/{permission-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        group-id: string, list-id: string, permission-id: string, site-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, expirationDateTime?: string |
+        null, grantedTo?: Record<string, never> | { @odata.type: string,
+        application?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, device?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, user?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null } | null, grantedToIdentities?: { @odata.type: string,
+        application?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, device?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, user?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null }[], grantedToIdentitiesV2?: (Omit<{ @odata.type: string,
+        application?: Record<string, never> | { @odata.type: string,
+        displayName?: function, id?: function } | null, device?: Record<string,
+        never> | { @odata.type: string, displayName?: function, id?: function }
+        | null, user?: Record<string, never> | { @odata.type: string,
+        displayName?: function, id?: function } | null }, "@odata.type"> & {
+        @odata.type: string, group?: Record<string, never> | { @odata.type:
+        string, displayName?: string | null, id?: string | null } | null,
+        siteGroup?: Record<string, never> | (Omit<{ @odata.type: ...,
+        displayName?: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        loginName?: function } & { @odata.type:
+        "#microsoft.graph.sharePointIdentity" }) | null, siteUser?:
+        Record<string, never> | (Omit<{ @odata.type: ..., displayName?: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string, loginName?: function
+        } & { @odata.type: "#microsoft.graph.sharePointIdentity" }) | null } & {
+        @odata.type: "#microsoft.graph.sharePointIdentitySet" })[],
+        grantedToV2?: Record<string, never> | (Omit<{ @odata.type: string,
+        application?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, device?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, user?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null }, "@odata.type"> & { @odata.type: string, group?: Record<string,
+        never> | { @odata.type: string, displayName?: string | null, id?: string
+        | null } | null, siteGroup?: Record<string, never> | (Omit<{
+        @odata.type: string, displayName?: function, id?: function },
+        "@odata.type"> & { @odata.type: string, loginName?: string | null } & {
+        @odata.type: "#microsoft.graph.sharePointIdentity" }) | null, siteUser?:
+        Record<string, never> | (Omit<{ @odata.type: string, displayName?:
+        function, id?: function }, "@odata.type"> & { @odata.type: string,
+        loginName?: string | null } & { @odata.type:
+        "#microsoft.graph.sharePointIdentity" }) | null } & { @odata.type:
+        "#microsoft.graph.sharePointIdentitySet" }) | null, hasPassword?:
+        boolean | null, inheritedFrom?: Record<string, never> | { @odata.type:
+        string, driveId?: string | null, driveType?: string | null, id?: string
+        | null, name?: string | null, path?: string | null, shareId?: string |
+        null, sharepointIds?: Record<string, never> | { @odata.type: string,
+        listId?: string | null, listItemId?: string | null, listItemUniqueId?:
+        string | null, siteId?: string | null, siteUrl?: string | null,
+        tenantId?: string | null, webId?: string | null } | null, siteId?:
+        string | null } | null, invitation?: Record<string, never> | {
+        @odata.type: string, email?: string | null, invitedBy?: Record<string,
+        never> | { @odata.type: string, application?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, device?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, user?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null } | null, redeemedBy?: string | null,
+        signInRequired?: boolean | null } | null, link?: Record<string, never> |
+        { @odata.type: string, application?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, configuratorUrl?: string | null, preventsDownload?: boolean |
+        null, scope?: string | null, type?: string | null, webHtml?: string |
+        null, webUrl?: string | null } | null, roles?: (string | null)[],
+        shareId?: string | null } & { @odata.type: "#microsoft.graph.permission"
+        }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], group-id: string, list-id:
+            string, permission-id: string, site-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /groups/{group-id}/sites/{site-id}/lists/{list-id}/permissions/{permission-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, expirationDateTime?: string | null, grantedTo?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          application?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } | null,
+          device?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null,
+          user?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null } |
+          null, grantedToIdentities?: { <xref uid="@odata.type" />: string,
+          application?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } | null,
+          device?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null,
+          user?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null }[],
+          grantedToIdentitiesV2?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          application?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, displayName?: function, id?: function } | null, device?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          displayName?: function, id?: function } | null, user?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          displayName?: function, id?: function } | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          group?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null,
+          siteGroup?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          loginName?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.sharePointIdentity" />" }) | null, siteUser?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., displayName?: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: string, loginName?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.sharePointIdentity"
+          />" }) | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.sharePointIdentitySet" />" })[], grantedToV2?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, application?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null, device?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null, user?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, group?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, displayName?: string | null, id?:
+          string | null } | null, siteGroup?: Record&lt;string, never&gt; |
+          (Omit&lt;{ <xref uid="@odata.type" />: string, displayName?: function,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, loginName?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.sharePointIdentity"
+          />" }) | null, siteUser?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, displayName?: function, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, loginName?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.sharePointIdentity"
+          />" }) | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.sharePointIdentitySet" />" }) | null,
+          hasPassword?: boolean | null, inheritedFrom?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, driveId?: string |
+          null, driveType?: string | null, id?: string | null, name?: string |
+          null, path?: string | null, shareId?: string | null, sharepointIds?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          listId?: string | null, listItemId?: string | null, listItemUniqueId?:
+          string | null, siteId?: string | null, siteUrl?: string | null,
+          tenantId?: string | null, webId?: string | null } | null, siteId?:
+          string | null } | null, invitation?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, email?: string | null, invitedBy?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          application?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } | null,
+          device?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null,
+          user?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null } |
+          null, redeemedBy?: string | null, signInRequired?: boolean | null } |
+          null, link?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, application?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null, configuratorUrl?: string | null, preventsDownload?:
+          boolean | null, scope?: string | null, type?: string | null, webHtml?:
+          string | null, webUrl?: string | null } | null, roles?: (string |
+          null)[], shareId?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.permission" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, group-id: string, list-id: string, site-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.groups.sites.lists.permissions.list'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -93,20 +632,164 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /groups/{group-id}/sites/{site-id}/lists/{list-id}/permissions"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, group-id: string, list-id: string,
+        site-id: string }): EndpointRequest<{ @odata.count?: number | null,
+        @odata.nextLink?: string | null } & { value?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        expirationDateTime?: string | null, grantedTo?: Record<string, never> |
+        { @odata.type: string, application?: Record<..., ...> | { @odata.type:
+        ..., displayName?: ..., id?: ... } | null, device?: Record<..., ...> | {
+        @odata.type: ..., displayName?: ..., id?: ... } | null, user?:
+        Record<..., ...> | { @odata.type: ..., displayName?: ..., id?: ... } |
+        null } | null, grantedToIdentities?: { @odata.type: string,
+        application?: function, device?: function, user?: function }[],
+        grantedToIdentitiesV2?: (Omit<..., ...> & { @odata.type: ..., group?:
+        ..., siteGroup?: ..., siteUser?: ... } & { @odata.type: ... })[],
+        grantedToV2?: Record<string, never> | (Omit<{ @odata.type: ...,
+        application?: ..., device?: ..., user?: ... }, "@odata.type"> & {
+        @odata.type: string, group?: function, siteGroup?: function, siteUser?:
+        function } & { @odata.type: "#microsoft.graph.sharePointIdentitySet" })
+        | null, hasPassword?: boolean | null, inheritedFrom?: Record<string,
+        never> | { @odata.type: string, driveId?: string | null, driveType?:
+        string | null, id?: string | null, name?: string | null, path?: string |
+        null, shareId?: string | null, sharepointIds?: Record<..., ...> | {
+        @odata.type: ..., listId?: ..., listItemId?: ..., listItemUniqueId?:
+        ..., siteId?: ..., siteUrl?: ..., tenantId?: ..., webId?: ... } | null,
+        siteId?: string | null } | null, invitation?: Record<string, never> | {
+        @odata.type: string, email?: string | null, invitedBy?: Record<..., ...>
+        | { @odata.type: ..., application?: ..., device?: ..., user?: ... } |
+        null, redeemedBy?: string | null, signInRequired?: boolean | null } |
+        null, link?: Record<string, never> | { @odata.type: string,
+        application?: Record<..., ...> | { @odata.type: ..., displayName?: ...,
+        id?: ... } | null, configuratorUrl?: string | null, preventsDownload?:
+        boolean | null, scope?: string | null, type?: string | null, webHtml?:
+        string | null, webUrl?: string | null } | null, roles?: (string |
+        null)[], shareId?: string | null } & { @odata.type:
+        "#microsoft.graph.permission" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, group-id: string, list-id: string, site-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /groups/{group-id}/sites/{site-id}/lists/{list-id}/permissions"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          expirationDateTime?: string | null, grantedTo?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, application?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          displayName?: ..., id?: ... } | null, device?: Record&lt;..., ...&gt;
+          | { <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          null, user?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., displayName?: ..., id?: ... } | null } | null,
+          grantedToIdentities?: { <xref uid="@odata.type" />: string,
+          application?: function, device?: function, user?: function }[],
+          grantedToIdentitiesV2?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., group?: ..., siteGroup?: ..., siteUser?:
+          ... } & { <xref uid="@odata.type" />: ... })[], grantedToV2?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., application?: ..., device?: ..., user?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          group?: function, siteGroup?: function, siteUser?: function } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.sharePointIdentitySet" />" }) | null,
+          hasPassword?: boolean | null, inheritedFrom?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, driveId?: string |
+          null, driveType?: string | null, id?: string | null, name?: string |
+          null, path?: string | null, shareId?: string | null, sharepointIds?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., listId?:
+          ..., listItemId?: ..., listItemUniqueId?: ..., siteId?: ..., siteUrl?:
+          ..., tenantId?: ..., webId?: ... } | null, siteId?: string | null } |
+          null, invitation?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, email?: string | null, invitedBy?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          application?: ..., device?: ..., user?: ... } | null, redeemedBy?:
+          string | null, signInRequired?: boolean | null } | null, link?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          application?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., displayName?: ..., id?: ... } | null, configuratorUrl?: string |
+          null, preventsDownload?: boolean | null, scope?: string | null, type?:
+          string | null, webHtml?: string | null, webUrl?: string | null } |
+          null, roles?: (string | null)[], shareId?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.permission" />"
+          })[] }&gt;
   - name: >-
-      update(Operation<"/groups/{group-id}/sites/{site-id}/lists/{list-id}/permissions/{permission-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, expirationDateTime?: string | null, grantedTo?:
+      Record<string, never> | { @odata.type: string, application?:
+      Record<string, never> | { @odata.type: string, displayName?: string |
+      null, id?: string | null } | null, device?: Record<string, never> | {
+      @odata.type: string, displayName?: string | null, id?: string | null } |
+      null, user?: Record<string, never> | { @odata.type: string, displayName?:
+      string | null, id?: string | null } | null } | null, grantedToIdentities?:
+      { @odata.type: string, application?: Record<string, never> | {
+      @odata.type: string, displayName?: string | null, id?: string | null } |
+      null, device?: Record<string, never> | { @odata.type: string,
+      displayName?: string | null, id?: string | null } | null, user?:
+      Record<string, never> | { @odata.type: string, displayName?: string |
+      null, id?: string | null } | null }[], grantedToIdentitiesV2?: (Omit<{
+      @odata.type: string, application?: Record<string, never> | { @odata.type:
+      string, displayName?: string | null, id?: string | null } | null, device?:
+      Record<string, never> | { @odata.type: string, displayName?: string |
+      null, id?: string | null } | null, user?: Record<string, never> | {
+      @odata.type: string, displayName?: string | null, id?: string | null } |
+      null }, "@odata.type"> & { @odata.type: string, group?: Record<string,
+      never> | { @odata.type: string, displayName?: string | null, id?: string |
+      null } | null, siteGroup?: Record<string, never> | (Omit<{ @odata.type:
+      string, displayName?: function, id?: function }, "@odata.type"> & {
+      @odata.type: string, loginName?: string | null } & { @odata.type:
+      "#microsoft.graph.sharePointIdentity" }) | null, siteUser?: Record<string,
+      never> | (Omit<{ @odata.type: string, displayName?: function, id?:
+      function }, "@odata.type"> & { @odata.type: string, loginName?: string |
+      null } & { @odata.type: "#microsoft.graph.sharePointIdentity" }) | null }
+      & { @odata.type: "#microsoft.graph.sharePointIdentitySet" })[],
+      grantedToV2?: Record<string, never> | (Omit<{ @odata.type: string,
+      application?: Record<string, never> | { @odata.type: string, displayName?:
+      string | null, id?: string | null } | null, device?: Record<string, never>
+      | { @odata.type: string, displayName?: string | null, id?: string | null }
+      | null, user?: Record<string, never> | { @odata.type: string,
+      displayName?: string | null, id?: string | null } | null }, "@odata.type">
+      & { @odata.type: string, group?: Record<string, never> | { @odata.type:
+      string, displayName?: string | null, id?: string | null } | null,
+      siteGroup?: Record<string, never> | (Omit<{ @odata.type: string,
+      displayName?: string | null, id?: string | null }, "@odata.type"> & {
+      @odata.type: string, loginName?: string | null } & { @odata.type:
+      "#microsoft.graph.sharePointIdentity" }) | null, siteUser?: Record<string,
+      never> | (Omit<{ @odata.type: string, displayName?: string | null, id?:
+      string | null }, "@odata.type"> & { @odata.type: string, loginName?:
+      string | null } & { @odata.type: "#microsoft.graph.sharePointIdentity" })
+      | null } & { @odata.type: "#microsoft.graph.sharePointIdentitySet" }) |
+      null, hasPassword?: boolean | null, inheritedFrom?: Record<string, never>
+      | { @odata.type: string, driveId?: string | null, driveType?: string |
+      null, id?: string | null, name?: string | null, path?: string | null,
+      shareId?: string | null, sharepointIds?: Record<string, never> | {
+      @odata.type: string, listId?: string | null, listItemId?: string | null,
+      listItemUniqueId?: string | null, siteId?: string | null, siteUrl?: string
+      | null, tenantId?: string | null, webId?: string | null } | null, siteId?:
+      string | null } | null, invitation?: Record<string, never> | {
+      @odata.type: string, email?: string | null, invitedBy?: Record<string,
+      never> | { @odata.type: string, application?: Record<string, never> | {
+      @odata.type: string, displayName?: string | null, id?: string | null } |
+      null, device?: Record<string, never> | { @odata.type: string,
+      displayName?: string | null, id?: string | null } | null, user?:
+      Record<string, never> | { @odata.type: string, displayName?: string |
+      null, id?: string | null } | null } | null, redeemedBy?: string | null,
+      signInRequired?: boolean | null } | null, link?: Record<string, never> | {
+      @odata.type: string, application?: Record<string, never> | { @odata.type:
+      string, displayName?: string | null, id?: string | null } | null,
+      configuratorUrl?: string | null, preventsDownload?: boolean | null,
+      scope?: string | null, type?: string | null, webHtml?: string | null,
+      webUrl?: string | null } | null, roles?: (string | null)[], shareId?:
+      string | null } & { @odata.type: "#microsoft.graph.permission" }, {
+      group-id: string, list-id: string, permission-id: string, site-id: string
+      })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.groups.sites.lists.permissions.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -117,24 +800,335 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/groups/{group-id}/sites/{site-id}/lists/{list-id}/permissions/{permission-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /groups/{group-id}/sites/{site-id}/lists/{list-id}/permissions/{permission-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, expirationDateTime?: string |
+        null, grantedTo?: Record<string, never> | { @odata.type: string,
+        application?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, device?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, user?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null } | null, grantedToIdentities?: { @odata.type: string,
+        application?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, device?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, user?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null }[], grantedToIdentitiesV2?: (Omit<{ @odata.type: string,
+        application?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, device?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, user?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null }, "@odata.type"> & { @odata.type: string, group?: Record<string,
+        never> | { @odata.type: string, displayName?: string | null, id?: string
+        | null } | null, siteGroup?: Record<string, never> | (Omit<{
+        @odata.type: string, displayName?: function, id?: function },
+        "@odata.type"> & { @odata.type: string, loginName?: string | null } & {
+        @odata.type: "#microsoft.graph.sharePointIdentity" }) | null, siteUser?:
+        Record<string, never> | (Omit<{ @odata.type: string, displayName?:
+        function, id?: function }, "@odata.type"> & { @odata.type: string,
+        loginName?: string | null } & { @odata.type:
+        "#microsoft.graph.sharePointIdentity" }) | null } & { @odata.type:
+        "#microsoft.graph.sharePointIdentitySet" })[], grantedToV2?:
+        Record<string, never> | (Omit<{ @odata.type: string, application?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, device?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, user?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null },
+        "@odata.type"> & { @odata.type: string, group?: Record<string, never> |
+        { @odata.type: string, displayName?: string | null, id?: string | null }
+        | null, siteGroup?: Record<string, never> | (Omit<{ @odata.type: string,
+        displayName?: string | null, id?: string | null }, "@odata.type"> & {
+        @odata.type: string, loginName?: string | null } & { @odata.type:
+        "#microsoft.graph.sharePointIdentity" }) | null, siteUser?:
+        Record<string, never> | (Omit<{ @odata.type: string, displayName?:
+        string | null, id?: string | null }, "@odata.type"> & { @odata.type:
+        string, loginName?: string | null } & { @odata.type:
+        "#microsoft.graph.sharePointIdentity" }) | null } & { @odata.type:
+        "#microsoft.graph.sharePointIdentitySet" }) | null, hasPassword?:
+        boolean | null, inheritedFrom?: Record<string, never> | { @odata.type:
+        string, driveId?: string | null, driveType?: string | null, id?: string
+        | null, name?: string | null, path?: string | null, shareId?: string |
+        null, sharepointIds?: Record<string, never> | { @odata.type: string,
+        listId?: string | null, listItemId?: string | null, listItemUniqueId?:
+        string | null, siteId?: string | null, siteUrl?: string | null,
+        tenantId?: string | null, webId?: string | null } | null, siteId?:
+        string | null } | null, invitation?: Record<string, never> | {
+        @odata.type: string, email?: string | null, invitedBy?: Record<string,
+        never> | { @odata.type: string, application?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, device?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, user?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null } | null, redeemedBy?: string | null,
+        signInRequired?: boolean | null } | null, link?: Record<string, never> |
+        { @odata.type: string, application?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, configuratorUrl?: string | null, preventsDownload?: boolean |
+        null, scope?: string | null, type?: string | null, webHtml?: string |
+        null, webUrl?: string | null } | null, roles?: (string | null)[],
+        shareId?: string | null } & { @odata.type: "#microsoft.graph.permission"
+        }, params?: { group-id: string, list-id: string, permission-id: string,
+        site-id: string }): EndpointRequest<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, expirationDateTime?:
+        string | null, grantedTo?: Record<string, never> | { @odata.type:
+        string, application?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, device?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, user?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null } | null, grantedToIdentities?: { @odata.type: string,
+        application?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, device?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, user?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null }[], grantedToIdentitiesV2?: (Omit<{ @odata.type: string,
+        application?: Record<string, never> | { @odata.type: string,
+        displayName?: function, id?: function } | null, device?: Record<string,
+        never> | { @odata.type: string, displayName?: function, id?: function }
+        | null, user?: Record<string, never> | { @odata.type: string,
+        displayName?: function, id?: function } | null }, "@odata.type"> & {
+        @odata.type: string, group?: Record<string, never> | { @odata.type:
+        string, displayName?: string | null, id?: string | null } | null,
+        siteGroup?: Record<string, never> | (Omit<{ @odata.type: ...,
+        displayName?: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        loginName?: function } & { @odata.type:
+        "#microsoft.graph.sharePointIdentity" }) | null, siteUser?:
+        Record<string, never> | (Omit<{ @odata.type: ..., displayName?: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string, loginName?: function
+        } & { @odata.type: "#microsoft.graph.sharePointIdentity" }) | null } & {
+        @odata.type: "#microsoft.graph.sharePointIdentitySet" })[],
+        grantedToV2?: Record<string, never> | (Omit<{ @odata.type: string,
+        application?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, device?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, user?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null }, "@odata.type"> & { @odata.type: string, group?: Record<string,
+        never> | { @odata.type: string, displayName?: string | null, id?: string
+        | null } | null, siteGroup?: Record<string, never> | (Omit<{
+        @odata.type: string, displayName?: function, id?: function },
+        "@odata.type"> & { @odata.type: string, loginName?: string | null } & {
+        @odata.type: "#microsoft.graph.sharePointIdentity" }) | null, siteUser?:
+        Record<string, never> | (Omit<{ @odata.type: string, displayName?:
+        function, id?: function }, "@odata.type"> & { @odata.type: string,
+        loginName?: string | null } & { @odata.type:
+        "#microsoft.graph.sharePointIdentity" }) | null } & { @odata.type:
+        "#microsoft.graph.sharePointIdentitySet" }) | null, hasPassword?:
+        boolean | null, inheritedFrom?: Record<string, never> | { @odata.type:
+        string, driveId?: string | null, driveType?: string | null, id?: string
+        | null, name?: string | null, path?: string | null, shareId?: string |
+        null, sharepointIds?: Record<string, never> | { @odata.type: string,
+        listId?: string | null, listItemId?: string | null, listItemUniqueId?:
+        string | null, siteId?: string | null, siteUrl?: string | null,
+        tenantId?: string | null, webId?: string | null } | null, siteId?:
+        string | null } | null, invitation?: Record<string, never> | {
+        @odata.type: string, email?: string | null, invitedBy?: Record<string,
+        never> | { @odata.type: string, application?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, device?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, user?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null } | null, redeemedBy?: string | null,
+        signInRequired?: boolean | null } | null, link?: Record<string, never> |
+        { @odata.type: string, application?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, configuratorUrl?: string | null, preventsDownload?: boolean |
+        null, scope?: string | null, type?: string | null, webHtml?: string |
+        null, webUrl?: string | null } | null, roles?: (string | null)[],
+        shareId?: string | null } & { @odata.type: "#microsoft.graph.permission"
+        }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/groups/{group-id}/sites/{site-id}/lists/{list-id}/permissions/{permission-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            expirationDateTime?: string | null, grantedTo?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, application?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, id?: string | null } | null, device?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, id?: string | null } | null, user?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, id?: string | null } | null } | null,
+            grantedToIdentities?: { <xref uid="@odata.type" />: string,
+            application?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, displayName?: string | null, id?:
+            string | null } | null, device?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | null, user?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | null }[], grantedToIdentitiesV2?: (Omit&lt;{
+            <xref uid="@odata.type" />: string, application?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, displayName?:
+            string | null, id?: string | null } | null, device?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, id?: string | null } | null, user?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, id?: string | null } | null }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            group?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+            string, displayName?: string | null, id?: string | null } | null,
+            siteGroup?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, loginName?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.sharePointIdentity" />" }) | null,
+            siteUser?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, loginName?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.sharePointIdentity" />" }) | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.sharePointIdentitySet" />" })[], grantedToV2?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, application?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, displayName?: string | null, id?:
+            string | null } | null, device?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | null, user?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | null }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, group?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, displayName?:
+            string | null, id?: string | null } | null, siteGroup?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, displayName?: string | null, id?: string | null }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            loginName?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.sharePointIdentity" />" }) | null, siteUser?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, displayName?: string | null, id?: string | null }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            loginName?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.sharePointIdentity" />" }) | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.sharePointIdentitySet" />" }) | null,
+            hasPassword?: boolean | null, inheritedFrom?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, driveId?: string |
+            null, driveType?: string | null, id?: string | null, name?: string |
+            null, path?: string | null, shareId?: string | null, sharepointIds?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            listId?: string | null, listItemId?: string | null,
+            listItemUniqueId?: string | null, siteId?: string | null, siteUrl?:
+            string | null, tenantId?: string | null, webId?: string | null } |
+            null, siteId?: string | null } | null, invitation?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            email?: string | null, invitedBy?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, application?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, displayName?:
+            string | null, id?: string | null } | null, device?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, id?: string | null } | null, user?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: string | null, id?: string | null } | null } | null,
+            redeemedBy?: string | null, signInRequired?: boolean | null } |
+            null, link?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, application?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, displayName?: string | null, id?:
+            string | null } | null, configuratorUrl?: string | null,
+            preventsDownload?: boolean | null, scope?: string | null, type?:
+            string | null, webHtml?: string | null, webUrl?: string | null } |
+            null, roles?: (string | null)[], shareId?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.permission" />" }
           description: ''
         - id: params
-          type: any
+          type: >-
+            { group-id: string, list-id: string, permission-id: string, site-id:
+            string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /groups/{group-id}/sites/{site-id}/lists/{list-id}/permissions/{permission-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, expirationDateTime?: string | null, grantedTo?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          application?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } | null,
+          device?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null,
+          user?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null } |
+          null, grantedToIdentities?: { <xref uid="@odata.type" />: string,
+          application?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } | null,
+          device?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null,
+          user?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null }[],
+          grantedToIdentitiesV2?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          application?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, displayName?: function, id?: function } | null, device?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          displayName?: function, id?: function } | null, user?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          displayName?: function, id?: function } | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          group?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null,
+          siteGroup?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          loginName?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.sharePointIdentity" />" }) | null, siteUser?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., displayName?: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: string, loginName?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.sharePointIdentity"
+          />" }) | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.sharePointIdentitySet" />" })[], grantedToV2?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, application?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null, device?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null, user?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, group?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, displayName?: string | null, id?:
+          string | null } | null, siteGroup?: Record&lt;string, never&gt; |
+          (Omit&lt;{ <xref uid="@odata.type" />: string, displayName?: function,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, loginName?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.sharePointIdentity"
+          />" }) | null, siteUser?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, displayName?: function, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, loginName?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.sharePointIdentity"
+          />" }) | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.sharePointIdentitySet" />" }) | null,
+          hasPassword?: boolean | null, inheritedFrom?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, driveId?: string |
+          null, driveType?: string | null, id?: string | null, name?: string |
+          null, path?: string | null, shareId?: string | null, sharepointIds?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          listId?: string | null, listItemId?: string | null, listItemUniqueId?:
+          string | null, siteId?: string | null, siteUrl?: string | null,
+          tenantId?: string | null, webId?: string | null } | null, siteId?:
+          string | null } | null, invitation?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, email?: string | null, invitedBy?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          application?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } | null,
+          device?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null,
+          user?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null } |
+          null, redeemedBy?: string | null, signInRequired?: boolean | null } |
+          null, link?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, application?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null, id?: string
+          | null } | null, configuratorUrl?: string | null, preventsDownload?:
+          boolean | null, scope?: string | null, type?: string | null, webHtml?:
+          string | null, webUrl?: string | null } | null, roles?: (string |
+          null)[], shareId?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.permission" />" }&gt;
 variables:
   - name: grant
     uid: '@microsoft/teams.graph-endpoints-beta.groups.sites.lists.permissions.grant'

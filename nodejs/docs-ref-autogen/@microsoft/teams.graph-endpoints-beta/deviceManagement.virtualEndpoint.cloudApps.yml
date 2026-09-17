@@ -9,7 +9,20 @@ interfaces:
     @microsoft/teams.graph-endpoints-beta.deviceManagement.virtualEndpoint.cloudApps.IEndpoints
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: create(Operation<"/deviceManagement/virtualEndpoint/cloudApps", "post">)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, actionFailedErrorCode?: Record<string, never> |
+      "unknownFutureValue" | "cloudAppQuotaExceeded" | "cloudPcLicenseNotFound"
+      | "internalServerError" | "appDiscoveryFailed" | null,
+      actionFailedErrorMessage?: string | null, addedDateTime?: string | null,
+      appDetail?: { @odata.type: string, commandLineArguments?: string | null,
+      filePath?: string, iconIndex?: number | null, iconPath?: string },
+      appStatus?: "failed" | "unknownFutureValue" | "published" | "ready" |
+      "preparing" | "publishing" | "unpublishing", availableToUser?: boolean,
+      description?: string | null, discoveredAppName?: string, displayName?:
+      string, lastPublishedDateTime?: string | null, provisioningPolicyId?:
+      string, scopeIds?: (string | null)[] } & { @odata.type:
+      "#microsoft.graph.cloudPcCloudApp" })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.virtualEndpoint.cloudApps.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -18,22 +31,71 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/deviceManagement/virtualEndpoint/cloudApps", "post">):
-        EndpointRequest<IEndpoints["POST
-        /deviceManagement/virtualEndpoint/cloudApps"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, actionFailedErrorCode?:
+        Record<string, never> | "unknownFutureValue" | "cloudAppQuotaExceeded" |
+        "cloudPcLicenseNotFound" | "internalServerError" | "appDiscoveryFailed"
+        | null, actionFailedErrorMessage?: string | null, addedDateTime?: string
+        | null, appDetail?: { @odata.type: string, commandLineArguments?: string
+        | null, filePath?: string, iconIndex?: number | null, iconPath?: string
+        }, appStatus?: "failed" | "unknownFutureValue" | "published" | "ready" |
+        "preparing" | "publishing" | "unpublishing", availableToUser?: boolean,
+        description?: string | null, discoveredAppName?: string, displayName?:
+        string, lastPublishedDateTime?: string | null, provisioningPolicyId?:
+        string, scopeIds?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.cloudPcCloudApp" }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, actionFailedErrorCode?: Record<string, never> |
+        "unknownFutureValue" | "cloudAppQuotaExceeded" |
+        "cloudPcLicenseNotFound" | "internalServerError" | "appDiscoveryFailed"
+        | null, actionFailedErrorMessage?: string | null, addedDateTime?: string
+        | null, appDetail?: { @odata.type: string, commandLineArguments?: string
+        | null, filePath?: string, iconIndex?: number | null, iconPath?: string
+        }, appStatus?: "failed" | "unknownFutureValue" | "published" | "ready" |
+        "preparing" | "publishing" | "unpublishing", availableToUser?: boolean,
+        description?: string | null, discoveredAppName?: string, displayName?:
+        string, lastPublishedDateTime?: string | null, provisioningPolicyId?:
+        string, scopeIds?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.cloudPcCloudApp" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/virtualEndpoint/cloudApps",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            actionFailedErrorCode?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "cloudAppQuotaExceeded" |
+            "cloudPcLicenseNotFound" | "internalServerError" |
+            "appDiscoveryFailed" | null, actionFailedErrorMessage?: string |
+            null, addedDateTime?: string | null, appDetail?: { <xref
+            uid="@odata.type" />: string, commandLineArguments?: string | null,
+            filePath?: string, iconIndex?: number | null, iconPath?: string },
+            appStatus?: "failed" | "unknownFutureValue" | "published" | "ready"
+            | "preparing" | "publishing" | "unpublishing", availableToUser?:
+            boolean, description?: string | null, discoveredAppName?: string,
+            displayName?: string, lastPublishedDateTime?: string | null,
+            provisioningPolicyId?: string, scopeIds?: (string | null)[] } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.cloudPcCloudApp" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /deviceManagement/virtualEndpoint/cloudApps"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, actionFailedErrorCode?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "cloudAppQuotaExceeded" |
+          "cloudPcLicenseNotFound" | "internalServerError" |
+          "appDiscoveryFailed" | null, actionFailedErrorMessage?: string | null,
+          addedDateTime?: string | null, appDetail?: { <xref uid="@odata.type"
+          />: string, commandLineArguments?: string | null, filePath?: string,
+          iconIndex?: number | null, iconPath?: string }, appStatus?: "failed" |
+          "unknownFutureValue" | "published" | "ready" | "preparing" |
+          "publishing" | "unpublishing", availableToUser?: boolean,
+          description?: string | null, discoveredAppName?: string, displayName?:
+          string, lastPublishedDateTime?: string | null, provisioningPolicyId?:
+          string, scopeIds?: (string | null)[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.cloudPcCloudApp" />" }&gt;
+  - name: 'del({ cloudPcCloudApp-id: string, If-Match?: string })'
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.virtualEndpoint.cloudApps.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -42,18 +104,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /deviceManagement/virtualEndpoint/cloudApps/{cloudPcCloudApp-id}"]["response"]>
+        function del(params?: { cloudPcCloudApp-id: string, If-Match?: string
+        }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ cloudPcCloudApp-id: string, If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /deviceManagement/virtualEndpoint/cloudApps/{cloudPcCloudApp-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], cloudPcCloudApp-id: string
+      })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.virtualEndpoint.cloudApps.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -65,18 +127,49 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/virtualEndpoint/cloudApps/{cloudPcCloudApp-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        cloudPcCloudApp-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        actionFailedErrorCode?: Record<string, never> | "unknownFutureValue" |
+        "cloudAppQuotaExceeded" | "cloudPcLicenseNotFound" |
+        "internalServerError" | "appDiscoveryFailed" | null,
+        actionFailedErrorMessage?: string | null, addedDateTime?: string | null,
+        appDetail?: { @odata.type: string, commandLineArguments?: string | null,
+        filePath?: string, iconIndex?: number | null, iconPath?: string },
+        appStatus?: "failed" | "unknownFutureValue" | "published" | "ready" |
+        "preparing" | "publishing" | "unpublishing", availableToUser?: boolean,
+        description?: string | null, discoveredAppName?: string, displayName?:
+        string, lastPublishedDateTime?: string | null, provisioningPolicyId?:
+        string, scopeIds?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.cloudPcCloudApp" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], cloudPcCloudApp-id: string
+            }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/virtualEndpoint/cloudApps/{cloudPcCloudApp-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, actionFailedErrorCode?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "cloudAppQuotaExceeded" |
+          "cloudPcLicenseNotFound" | "internalServerError" |
+          "appDiscoveryFailed" | null, actionFailedErrorMessage?: string | null,
+          addedDateTime?: string | null, appDetail?: { <xref uid="@odata.type"
+          />: string, commandLineArguments?: string | null, filePath?: string,
+          iconIndex?: number | null, iconPath?: string }, appStatus?: "failed" |
+          "unknownFutureValue" | "published" | "ready" | "preparing" |
+          "publishing" | "unpublishing", availableToUser?: boolean,
+          description?: string | null, discoveredAppName?: string, displayName?:
+          string, lastPublishedDateTime?: string | null, provisioningPolicyId?:
+          string, scopeIds?: (string | null)[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.cloudPcCloudApp" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.virtualEndpoint.cloudApps.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -88,20 +181,64 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/virtualEndpoint/cloudApps"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, actionFailedErrorCode?: Record<string, never> |
+        "unknownFutureValue" | "cloudAppQuotaExceeded" |
+        "cloudPcLicenseNotFound" | "internalServerError" | "appDiscoveryFailed"
+        | null, actionFailedErrorMessage?: string | null, addedDateTime?: string
+        | null, appDetail?: { @odata.type: string, commandLineArguments?: string
+        | null, filePath?: string, iconIndex?: number | null, iconPath?: string
+        }, appStatus?: "failed" | "unknownFutureValue" | "published" | "ready" |
+        "preparing" | "publishing" | "unpublishing", availableToUser?: boolean,
+        description?: string | null, discoveredAppName?: string, displayName?:
+        string, lastPublishedDateTime?: string | null, provisioningPolicyId?:
+        string, scopeIds?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.cloudPcCloudApp" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/virtualEndpoint/cloudApps"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          actionFailedErrorCode?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "cloudAppQuotaExceeded" |
+          "cloudPcLicenseNotFound" | "internalServerError" |
+          "appDiscoveryFailed" | null, actionFailedErrorMessage?: string | null,
+          addedDateTime?: string | null, appDetail?: { <xref uid="@odata.type"
+          />: string, commandLineArguments?: string | null, filePath?: string,
+          iconIndex?: number | null, iconPath?: string }, appStatus?: "failed" |
+          "unknownFutureValue" | "published" | "ready" | "preparing" |
+          "publishing" | "unpublishing", availableToUser?: boolean,
+          description?: string | null, discoveredAppName?: string, displayName?:
+          string, lastPublishedDateTime?: string | null, provisioningPolicyId?:
+          string, scopeIds?: (string | null)[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.cloudPcCloudApp" />" })[] }&gt;
   - name: >-
-      update(Operation<"/deviceManagement/virtualEndpoint/cloudApps/{cloudPcCloudApp-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, actionFailedErrorCode?: Record<string, never> |
+      "unknownFutureValue" | "cloudAppQuotaExceeded" | "cloudPcLicenseNotFound"
+      | "internalServerError" | "appDiscoveryFailed" | null,
+      actionFailedErrorMessage?: string | null, addedDateTime?: string | null,
+      appDetail?: { @odata.type: string, commandLineArguments?: string | null,
+      filePath?: string, iconIndex?: number | null, iconPath?: string },
+      appStatus?: "failed" | "unknownFutureValue" | "published" | "ready" |
+      "preparing" | "publishing" | "unpublishing", availableToUser?: boolean,
+      description?: string | null, discoveredAppName?: string, displayName?:
+      string, lastPublishedDateTime?: string | null, provisioningPolicyId?:
+      string, scopeIds?: (string | null)[] } & { @odata.type:
+      "#microsoft.graph.cloudPcCloudApp" }, { cloudPcCloudApp-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.virtualEndpoint.cloudApps.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -115,24 +252,73 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/deviceManagement/virtualEndpoint/cloudApps/{cloudPcCloudApp-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /deviceManagement/virtualEndpoint/cloudApps/{cloudPcCloudApp-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, actionFailedErrorCode?:
+        Record<string, never> | "unknownFutureValue" | "cloudAppQuotaExceeded" |
+        "cloudPcLicenseNotFound" | "internalServerError" | "appDiscoveryFailed"
+        | null, actionFailedErrorMessage?: string | null, addedDateTime?: string
+        | null, appDetail?: { @odata.type: string, commandLineArguments?: string
+        | null, filePath?: string, iconIndex?: number | null, iconPath?: string
+        }, appStatus?: "failed" | "unknownFutureValue" | "published" | "ready" |
+        "preparing" | "publishing" | "unpublishing", availableToUser?: boolean,
+        description?: string | null, discoveredAppName?: string, displayName?:
+        string, lastPublishedDateTime?: string | null, provisioningPolicyId?:
+        string, scopeIds?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.cloudPcCloudApp" }, params?: { cloudPcCloudApp-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, actionFailedErrorCode?:
+        Record<string, never> | "unknownFutureValue" | "cloudAppQuotaExceeded" |
+        "cloudPcLicenseNotFound" | "internalServerError" | "appDiscoveryFailed"
+        | null, actionFailedErrorMessage?: string | null, addedDateTime?: string
+        | null, appDetail?: { @odata.type: string, commandLineArguments?: string
+        | null, filePath?: string, iconIndex?: number | null, iconPath?: string
+        }, appStatus?: "failed" | "unknownFutureValue" | "published" | "ready" |
+        "preparing" | "publishing" | "unpublishing", availableToUser?: boolean,
+        description?: string | null, discoveredAppName?: string, displayName?:
+        string, lastPublishedDateTime?: string | null, provisioningPolicyId?:
+        string, scopeIds?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.cloudPcCloudApp" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/virtualEndpoint/cloudApps/{cloudPcCloudApp-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            actionFailedErrorCode?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "cloudAppQuotaExceeded" |
+            "cloudPcLicenseNotFound" | "internalServerError" |
+            "appDiscoveryFailed" | null, actionFailedErrorMessage?: string |
+            null, addedDateTime?: string | null, appDetail?: { <xref
+            uid="@odata.type" />: string, commandLineArguments?: string | null,
+            filePath?: string, iconIndex?: number | null, iconPath?: string },
+            appStatus?: "failed" | "unknownFutureValue" | "published" | "ready"
+            | "preparing" | "publishing" | "unpublishing", availableToUser?:
+            boolean, description?: string | null, discoveredAppName?: string,
+            displayName?: string, lastPublishedDateTime?: string | null,
+            provisioningPolicyId?: string, scopeIds?: (string | null)[] } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.cloudPcCloudApp" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ cloudPcCloudApp-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /deviceManagement/virtualEndpoint/cloudApps/{cloudPcCloudApp-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, actionFailedErrorCode?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "cloudAppQuotaExceeded" |
+          "cloudPcLicenseNotFound" | "internalServerError" |
+          "appDiscoveryFailed" | null, actionFailedErrorMessage?: string | null,
+          addedDateTime?: string | null, appDetail?: { <xref uid="@odata.type"
+          />: string, commandLineArguments?: string | null, filePath?: string,
+          iconIndex?: number | null, iconPath?: string }, appStatus?: "failed" |
+          "unknownFutureValue" | "published" | "ready" | "preparing" |
+          "publishing" | "unpublishing", availableToUser?: boolean,
+          description?: string | null, discoveredAppName?: string, displayName?:
+          string, lastPublishedDateTime?: string | null, provisioningPolicyId?:
+          string, scopeIds?: (string | null)[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.cloudPcCloudApp" />" }&gt;
 variables:
   - name: publish
     uid: >-
@@ -184,15 +370,25 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        unpublish: { create: (body: IEndpoints["POST
+        unpublish: { /** * `POST
+        /deviceManagement/virtualEndpoint/cloudApps/unpublish` * * Unpublish a
+        cloudPcCloudApp to remove it from the end-user portal, for example, the
+        Windows App. When a cloud app is unpublished, any changes made to its
+        app details are reverted and reset to the values of the discovered app
+        it&#x27;s linked to. */ create: (body: IEndpoints["POST
         /deviceManagement/virtualEndpoint/cloudApps/unpublish"]["body"]) =>
         EndpointRequest<IEndpoints["POST
-        /deviceManagement/virtualEndpoint/cloudApps/unpublish"]["response"]> }
+        /deviceManagement/virtualEndpoint/cloudApps/unpublish"]["response"]>; }
       return:
         description: ''
         type: >-
-          { create: (body: IEndpoints["POST
+          { /** * `POST /deviceManagement/virtualEndpoint/cloudApps/unpublish` *
+          * Unpublish a cloudPcCloudApp to remove it from the end-user portal,
+          for example, the Windows App. When a cloud app is unpublished, any
+          changes made to its app details are reverted and reset to the values
+          of the discovered app it&#x27;s linked to. */ create: (body:
+          IEndpoints["POST
           /deviceManagement/virtualEndpoint/cloudApps/unpublish"]["body"]) =&gt;
           EndpointRequest&lt;IEndpoints["POST
-          /deviceManagement/virtualEndpoint/cloudApps/unpublish"]["response"]&gt;
+          /deviceManagement/virtualEndpoint/cloudApps/unpublish"]["response"]&gt;;
           }

@@ -277,8 +277,47 @@ variables:
           }
 functions:
   - name: >-
-      create(Operation<"/deviceAppManagement/targetedManagedAppConfigurations",
-      "post">)
+      create(Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+      Omit<{ @odata.type: string, createdDateTime?: string, description?: string
+      | null, displayName?: string, lastModifiedDateTime?: string,
+      roleScopeTagIds?: (string | null)[], version?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.managedAppPolicy" },
+      "@odata.type"> & Omit<{ @odata.type: string, customSettings?: {
+      @odata.type: string, name?: string, value?: string | null }[], settings?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, settingDefinitions?: (Omit<..., ...> & Omit<..., ...>
+      & { @odata.type: ... })[], settingInstance?: { @odata.type: string,
+      settingDefinitionId?: string, settingInstanceTemplateReference?:
+      Record<..., ...> | { @odata.type: ..., settingInstanceTemplateId?: ... } |
+      null } } & { @odata.type:
+      "#microsoft.graph.deviceManagementConfigurationSetting" })[] },
+      "@odata.type"> & { @odata.type: string, appGroupType?:
+      "selectedPublicApps" | "allCoreMicrosoftApps" | "allMicrosoftApps" |
+      "allApps", apps?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, mobileAppIdentifier?:
+      Record<string, never> | { @odata.type: string } | null, version?: string |
+      null } & { @odata.type: "#microsoft.graph.managedMobileApp" })[],
+      assignments?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+      { @odata.type: string, source?: "direct" | "policySets", sourceId?: string
+      | null, target?: Record<string, never> | { @odata.type: string,
+      deviceAndAppManagementAssignmentFilterId?: string | null,
+      deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+      "exclude" } | null } & { @odata.type:
+      "#microsoft.graph.targetedManagedAppPolicyAssignment" })[],
+      deployedAppCount?: number, deploymentSummary?: Record<string, never> |
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, configurationDeployedUserCount?: number,
+      configurationDeploymentSummaryPerApp?: { @odata.type: string,
+      configurationAppliedUserCount?: number, mobileAppIdentifier?:
+      Record<string, never> | { @odata.type: string } | null }[], displayName?:
+      string | null, lastRefreshTime?: string, version?: string | null } & {
+      @odata.type: "#microsoft.graph.managedAppPolicyDeploymentSummary" }) |
+      null, isAssigned?: boolean, targetedAppManagementLevels?:
+      "unknownFutureValue" | "unspecified" | "unmanaged" | "mdm" |
+      "androidEnterprise" |
+      "androidEnterpriseDedicatedDevicesWithAzureAdSharedMode" |
+      "androidOpenSourceProjectUserAssociated" |
+      "androidOpenSourceProjectUserless" })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceAppManagement.targetedManagedAppConfigurations.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -287,22 +326,196 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/deviceAppManagement/targetedManagedAppConfigurations",
-        "post">): EndpointRequest<IEndpoints["POST
-        /deviceAppManagement/targetedManagedAppConfigurations"]["response"]>
+        function create(body: Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string,
+        description?: string | null, displayName?: string,
+        lastModifiedDateTime?: string, roleScopeTagIds?: (string | null)[],
+        version?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.managedAppPolicy" }, "@odata.type"> & Omit<{
+        @odata.type: string, customSettings?: { @odata.type: string, name?:
+        string, value?: string | null }[], settings?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        settingDefinitions?: (Omit<..., ...> & Omit<..., ...> & { @odata.type:
+        ... })[], settingInstance?: { @odata.type: string, settingDefinitionId?:
+        string, settingInstanceTemplateReference?: Record<..., ...> | {
+        @odata.type: ..., settingInstanceTemplateId?: ... } | null } } & {
+        @odata.type: "#microsoft.graph.deviceManagementConfigurationSetting"
+        })[] }, "@odata.type"> & { @odata.type: string, appGroupType?:
+        "selectedPublicApps" | "allCoreMicrosoftApps" | "allMicrosoftApps" |
+        "allApps", apps?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, mobileAppIdentifier?:
+        Record<string, never> | { @odata.type: string } | null, version?: string
+        | null } & { @odata.type: "#microsoft.graph.managedMobileApp" })[],
+        assignments?: (Omit<{ @odata.type: string, id?: string }, "@odata.type">
+        & { @odata.type: string, source?: "direct" | "policySets", sourceId?:
+        string | null, target?: Record<string, never> | { @odata.type: string,
+        deviceAndAppManagementAssignmentFilterId?: string | null,
+        deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+        "exclude" } | null } & { @odata.type:
+        "#microsoft.graph.targetedManagedAppPolicyAssignment" })[],
+        deployedAppCount?: number, deploymentSummary?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, configurationDeployedUserCount?: number,
+        configurationDeploymentSummaryPerApp?: { @odata.type: string,
+        configurationAppliedUserCount?: number, mobileAppIdentifier?:
+        Record<string, never> | { @odata.type: string } | null }[],
+        displayName?: string | null, lastRefreshTime?: string, version?: string
+        | null } & { @odata.type:
+        "#microsoft.graph.managedAppPolicyDeploymentSummary" }) | null,
+        isAssigned?: boolean, targetedAppManagementLevels?: "unknownFutureValue"
+        | "unspecified" | "unmanaged" | "mdm" | "androidEnterprise" |
+        "androidEnterpriseDedicatedDevicesWithAzureAdSharedMode" |
+        "androidOpenSourceProjectUserAssociated" |
+        "androidOpenSourceProjectUserless" }): EndpointRequest<Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, createdDateTime?: string, description?: string | null,
+        displayName?: string, lastModifiedDateTime?: string, roleScopeTagIds?:
+        (string | null)[], version?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.managedAppPolicy" }, "@odata.type"> &
+        Omit<{ @odata.type: string, customSettings?: { @odata.type: string,
+        name?: string, value?: string | null }[], settings?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, settingDefinitions?: (... & ... & ...)[], settingInstance?: {
+        @odata.type: string, settingDefinitionId?: function,
+        settingInstanceTemplateReference?: function } } & { @odata.type:
+        "#microsoft.graph.deviceManagementConfigurationSetting" })[] },
+        "@odata.type"> & { @odata.type: string, appGroupType?:
+        "selectedPublicApps" | "allCoreMicrosoftApps" | "allMicrosoftApps" |
+        "allApps", apps?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, mobileAppIdentifier?:
+        Record<string, never> | { @odata.type: string } | null, version?: string
+        | null } & { @odata.type: "#microsoft.graph.managedMobileApp" })[],
+        assignments?: (Omit<{ @odata.type: string, id?: string }, "@odata.type">
+        & { @odata.type: string, source?: "direct" | "policySets", sourceId?:
+        string | null, target?: Record<string, never> | { @odata.type: string,
+        deviceAndAppManagementAssignmentFilterId?: string | null,
+        deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+        "exclude" } | null } & { @odata.type:
+        "#microsoft.graph.targetedManagedAppPolicyAssignment" })[],
+        deployedAppCount?: number, deploymentSummary?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, configurationDeployedUserCount?: number,
+        configurationDeploymentSummaryPerApp?: { @odata.type: string,
+        configurationAppliedUserCount?: number, mobileAppIdentifier?:
+        Record<..., ...> | { @odata.type: ... } | null }[], displayName?: string
+        | null, lastRefreshTime?: string, version?: string | null } & {
+        @odata.type: "#microsoft.graph.managedAppPolicyDeploymentSummary" }) |
+        null, isAssigned?: boolean, targetedAppManagementLevels?:
+        "unknownFutureValue" | "unspecified" | "unmanaged" | "mdm" |
+        "androidEnterprise" |
+        "androidEnterpriseDedicatedDevicesWithAzureAdSharedMode" |
+        "androidOpenSourceProjectUserAssociated" |
+        "androidOpenSourceProjectUserless" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceAppManagement/targetedManagedAppConfigurations",
-            "post"&gt;
+            Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+            />: string, createdDateTime?: string, description?: string | null,
+            displayName?: string, lastModifiedDateTime?: string,
+            roleScopeTagIds?: (string | null)[], version?: string | null },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.managedAppPolicy" />" }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, customSettings?: { <xref uid="@odata.type" />: string,
+            name?: string, value?: string | null }[], settings?: (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            settingDefinitions?: (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; &
+            { <xref uid="@odata.type" />: ... })[], settingInstance?: { <xref
+            uid="@odata.type" />: string, settingDefinitionId?: string,
+            settingInstanceTemplateReference?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., settingInstanceTemplateId?: ... } | null
+            } } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deviceManagementConfigurationSetting" />" })[]
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, appGroupType?: "selectedPublicApps" | "allCoreMicrosoftApps"
+            | "allMicrosoftApps" | "allApps", apps?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            mobileAppIdentifier?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string } | null, version?: string | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedMobileApp" />" })[], assignments?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            source?: "direct" | "policySets", sourceId?: string | null, target?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            deviceAndAppManagementAssignmentFilterId?: string | null,
+            deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+            "exclude" } | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.targetedManagedAppPolicyAssignment" />" })[],
+            deployedAppCount?: number, deploymentSummary?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, configurationDeployedUserCount?:
+            number, configurationDeploymentSummaryPerApp?: { <xref
+            uid="@odata.type" />: string, configurationAppliedUserCount?:
+            number, mobileAppIdentifier?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string } | null }[], displayName?: string |
+            null, lastRefreshTime?: string, version?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedAppPolicyDeploymentSummary" />" }) |
+            null, isAssigned?: boolean, targetedAppManagementLevels?:
+            "unknownFutureValue" | "unspecified" | "unmanaged" | "mdm" |
+            "androidEnterprise" |
+            "androidEnterpriseDedicatedDevicesWithAzureAdSharedMode" |
+            "androidOpenSourceProjectUserAssociated" |
+            "androidOpenSourceProjectUserless" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /deviceAppManagement/targetedManagedAppConfigurations"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, createdDateTime?: string,
+          description?: string | null, displayName?: string,
+          lastModifiedDateTime?: string, roleScopeTagIds?: (string | null)[],
+          version?: string | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.managedAppPolicy"
+          />" }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, customSettings?: { <xref
+          uid="@odata.type" />: string, name?: string, value?: string | null
+          }[], settings?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, settingDefinitions?: (... & ... & ...)[],
+          settingInstance?: { <xref uid="@odata.type" />: string,
+          settingDefinitionId?: function, settingInstanceTemplateReference?:
+          function } } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementConfigurationSetting" />" })[] },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, appGroupType?: "selectedPublicApps" | "allCoreMicrosoftApps" |
+          "allMicrosoftApps" | "allApps", apps?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, mobileAppIdentifier?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string } |
+          null, version?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.managedMobileApp" />" })[], assignments?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          source?: "direct" | "policySets", sourceId?: string | null, target?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          deviceAndAppManagementAssignmentFilterId?: string | null,
+          deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+          "exclude" } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.targetedManagedAppPolicyAssignment" />" })[],
+          deployedAppCount?: number, deploymentSummary?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, configurationDeployedUserCount?: number,
+          configurationDeploymentSummaryPerApp?: { <xref uid="@odata.type" />:
+          string, configurationAppliedUserCount?: number, mobileAppIdentifier?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ... } | null
+          }[], displayName?: string | null, lastRefreshTime?: string, version?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedAppPolicyDeploymentSummary" />" }) | null,
+          isAssigned?: boolean, targetedAppManagementLevels?:
+          "unknownFutureValue" | "unspecified" | "unmanaged" | "mdm" |
+          "androidEnterprise" |
+          "androidEnterpriseDedicatedDevicesWithAzureAdSharedMode" |
+          "androidOpenSourceProjectUserAssociated" |
+          "androidOpenSourceProjectUserless" }&gt;
+  - name: 'del({ If-Match?: string, targetedManagedAppConfiguration-id: string })'
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceAppManagement.targetedManagedAppConfigurations.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -313,18 +526,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /deviceAppManagement/targetedManagedAppConfigurations/{targetedManagedAppConfiguration-id}"]["response"]>
+        function del(params?: { If-Match?: string,
+        targetedManagedAppConfiguration-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, targetedManagedAppConfiguration-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /deviceAppManagement/targetedManagedAppConfigurations/{targetedManagedAppConfiguration-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[],
+      targetedManagedAppConfiguration-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceAppManagement.targetedManagedAppConfigurations.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -338,18 +551,110 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceAppManagement/targetedManagedAppConfigurations/{targetedManagedAppConfiguration-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        targetedManagedAppConfiguration-id: string }):
+        EndpointRequest<Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string,
+        description?: string | null, displayName?: string,
+        lastModifiedDateTime?: string, roleScopeTagIds?: (string | null)[],
+        version?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.managedAppPolicy" }, "@odata.type"> & Omit<{
+        @odata.type: string, customSettings?: { @odata.type: string, name?:
+        string, value?: string | null }[], settings?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        settingDefinitions?: (... & ... & ...)[], settingInstance?: {
+        @odata.type: string, settingDefinitionId?: function,
+        settingInstanceTemplateReference?: function } } & { @odata.type:
+        "#microsoft.graph.deviceManagementConfigurationSetting" })[] },
+        "@odata.type"> & { @odata.type: string, appGroupType?:
+        "selectedPublicApps" | "allCoreMicrosoftApps" | "allMicrosoftApps" |
+        "allApps", apps?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, mobileAppIdentifier?:
+        Record<string, never> | { @odata.type: string } | null, version?: string
+        | null } & { @odata.type: "#microsoft.graph.managedMobileApp" })[],
+        assignments?: (Omit<{ @odata.type: string, id?: string }, "@odata.type">
+        & { @odata.type: string, source?: "direct" | "policySets", sourceId?:
+        string | null, target?: Record<string, never> | { @odata.type: string,
+        deviceAndAppManagementAssignmentFilterId?: string | null,
+        deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+        "exclude" } | null } & { @odata.type:
+        "#microsoft.graph.targetedManagedAppPolicyAssignment" })[],
+        deployedAppCount?: number, deploymentSummary?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, configurationDeployedUserCount?: number,
+        configurationDeploymentSummaryPerApp?: { @odata.type: string,
+        configurationAppliedUserCount?: number, mobileAppIdentifier?:
+        Record<..., ...> | { @odata.type: ... } | null }[], displayName?: string
+        | null, lastRefreshTime?: string, version?: string | null } & {
+        @odata.type: "#microsoft.graph.managedAppPolicyDeploymentSummary" }) |
+        null, isAssigned?: boolean, targetedAppManagementLevels?:
+        "unknownFutureValue" | "unspecified" | "unmanaged" | "mdm" |
+        "androidEnterprise" |
+        "androidEnterpriseDedicatedDevicesWithAzureAdSharedMode" |
+        "androidOpenSourceProjectUserAssociated" |
+        "androidOpenSourceProjectUserless" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[],
+            targetedManagedAppConfiguration-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceAppManagement/targetedManagedAppConfigurations/{targetedManagedAppConfiguration-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, createdDateTime?: string,
+          description?: string | null, displayName?: string,
+          lastModifiedDateTime?: string, roleScopeTagIds?: (string | null)[],
+          version?: string | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.managedAppPolicy"
+          />" }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, customSettings?: { <xref
+          uid="@odata.type" />: string, name?: string, value?: string | null
+          }[], settings?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, settingDefinitions?: (... & ... & ...)[],
+          settingInstance?: { <xref uid="@odata.type" />: string,
+          settingDefinitionId?: function, settingInstanceTemplateReference?:
+          function } } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementConfigurationSetting" />" })[] },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, appGroupType?: "selectedPublicApps" | "allCoreMicrosoftApps" |
+          "allMicrosoftApps" | "allApps", apps?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, mobileAppIdentifier?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string } |
+          null, version?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.managedMobileApp" />" })[], assignments?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          source?: "direct" | "policySets", sourceId?: string | null, target?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          deviceAndAppManagementAssignmentFilterId?: string | null,
+          deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+          "exclude" } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.targetedManagedAppPolicyAssignment" />" })[],
+          deployedAppCount?: number, deploymentSummary?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, configurationDeployedUserCount?: number,
+          configurationDeploymentSummaryPerApp?: { <xref uid="@odata.type" />:
+          string, configurationAppliedUserCount?: number, mobileAppIdentifier?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ... } | null
+          }[], displayName?: string | null, lastRefreshTime?: string, version?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedAppPolicyDeploymentSummary" />" }) | null,
+          isAssigned?: boolean, targetedAppManagementLevels?:
+          "unknownFutureValue" | "unspecified" | "unmanaged" | "mdm" |
+          "androidEnterprise" |
+          "androidEnterpriseDedicatedDevicesWithAzureAdSharedMode" |
+          "androidOpenSourceProjectUserAssociated" |
+          "androidOpenSourceProjectUserless" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceAppManagement.targetedManagedAppConfigurations.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -361,20 +666,120 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceAppManagement/targetedManagedAppConfigurations"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?:
+        (Omit<Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string, createdDateTime?: function, description?:
+        function, displayName?: function, lastModifiedDateTime?: function,
+        roleScopeTagIds?: function, version?: function }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.managedAppPolicy" }, "@odata.type"> &
+        Omit<{ @odata.type: string, customSettings?: { @odata.type: ..., name?:
+        ..., value?: ... }[], settings?: (... & ... & ...)[] }, "@odata.type"> &
+        { @odata.type: string, appGroupType?: "selectedPublicApps" |
+        "allCoreMicrosoftApps" | "allMicrosoftApps" | "allApps", apps?:
+        (Omit<..., ...> & { @odata.type: ..., mobileAppIdentifier?: ...,
+        version?: ... } & { @odata.type: ... })[], assignments?: (Omit<..., ...>
+        & { @odata.type: ..., source?: ..., sourceId?: ..., target?: ... } & {
+        @odata.type: ... })[], deployedAppCount?: number, deploymentSummary?:
+        Record<string, never> | (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, configurationDeployedUserCount?:
+        function, configurationDeploymentSummaryPerApp?: function, displayName?:
+        function, lastRefreshTime?: function, version?: function } & {
+        @odata.type: "#microsoft.graph.managedAppPolicyDeploymentSummary" }) |
+        null, isAssigned?: boolean, targetedAppManagementLevels?:
+        "unknownFutureValue" | "unspecified" | "unmanaged" | "mdm" |
+        "androidEnterprise" |
+        "androidEnterpriseDedicatedDevicesWithAzureAdSharedMode" |
+        "androidOpenSourceProjectUserAssociated" |
+        "androidOpenSourceProjectUserless" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceAppManagement/targetedManagedAppConfigurations"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: function
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdDateTime?: function,
+          description?: function, displayName?: function, lastModifiedDateTime?:
+          function, roleScopeTagIds?: function, version?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedAppPolicy" />" }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string,
+          customSettings?: { <xref uid="@odata.type" />: ..., name?: ...,
+          value?: ... }[], settings?: (... & ... & ...)[] }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          appGroupType?: "selectedPublicApps" | "allCoreMicrosoftApps" |
+          "allMicrosoftApps" | "allApps", apps?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., mobileAppIdentifier?: ..., version?: ... }
+          & { <xref uid="@odata.type" />: ... })[], assignments?: (Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ..., source?: ..., sourceId?:
+          ..., target?: ... } & { <xref uid="@odata.type" />: ... })[],
+          deployedAppCount?: number, deploymentSummary?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, configurationDeployedUserCount?: function,
+          configurationDeploymentSummaryPerApp?: function, displayName?:
+          function, lastRefreshTime?: function, version?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedAppPolicyDeploymentSummary" />" }) | null,
+          isAssigned?: boolean, targetedAppManagementLevels?:
+          "unknownFutureValue" | "unspecified" | "unmanaged" | "mdm" |
+          "androidEnterprise" |
+          "androidEnterpriseDedicatedDevicesWithAzureAdSharedMode" |
+          "androidOpenSourceProjectUserAssociated" |
+          "androidOpenSourceProjectUserless" })[] }&gt;
   - name: >-
-      update(Operation<"/deviceAppManagement/targetedManagedAppConfigurations/{targetedManagedAppConfiguration-id}",
-      "patch">, any)
+      update(Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+      Omit<{ @odata.type: string, createdDateTime?: string, description?: string
+      | null, displayName?: string, lastModifiedDateTime?: string,
+      roleScopeTagIds?: (string | null)[], version?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.managedAppPolicy" },
+      "@odata.type"> & Omit<{ @odata.type: string, customSettings?: {
+      @odata.type: string, name?: string, value?: string | null }[], settings?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, settingDefinitions?: (Omit<..., ...> & Omit<..., ...>
+      & { @odata.type: ... })[], settingInstance?: { @odata.type: string,
+      settingDefinitionId?: string, settingInstanceTemplateReference?:
+      Record<..., ...> | { @odata.type: ..., settingInstanceTemplateId?: ... } |
+      null } } & { @odata.type:
+      "#microsoft.graph.deviceManagementConfigurationSetting" })[] },
+      "@odata.type"> & { @odata.type: string, appGroupType?:
+      "selectedPublicApps" | "allCoreMicrosoftApps" | "allMicrosoftApps" |
+      "allApps", apps?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, mobileAppIdentifier?:
+      Record<string, never> | { @odata.type: string } | null, version?: string |
+      null } & { @odata.type: "#microsoft.graph.managedMobileApp" })[],
+      assignments?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+      { @odata.type: string, source?: "direct" | "policySets", sourceId?: string
+      | null, target?: Record<string, never> | { @odata.type: string,
+      deviceAndAppManagementAssignmentFilterId?: string | null,
+      deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+      "exclude" } | null } & { @odata.type:
+      "#microsoft.graph.targetedManagedAppPolicyAssignment" })[],
+      deployedAppCount?: number, deploymentSummary?: Record<string, never> |
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, configurationDeployedUserCount?: number,
+      configurationDeploymentSummaryPerApp?: { @odata.type: string,
+      configurationAppliedUserCount?: number, mobileAppIdentifier?:
+      Record<string, never> | { @odata.type: string } | null }[], displayName?:
+      string | null, lastRefreshTime?: string, version?: string | null } & {
+      @odata.type: "#microsoft.graph.managedAppPolicyDeploymentSummary" }) |
+      null, isAssigned?: boolean, targetedAppManagementLevels?:
+      "unknownFutureValue" | "unspecified" | "unmanaged" | "mdm" |
+      "androidEnterprise" |
+      "androidEnterpriseDedicatedDevicesWithAzureAdSharedMode" |
+      "androidOpenSourceProjectUserAssociated" |
+      "androidOpenSourceProjectUserless" }, {
+      targetedManagedAppConfiguration-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceAppManagement.targetedManagedAppConfigurations.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -385,21 +790,197 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/deviceAppManagement/targetedManagedAppConfigurations/{targetedManagedAppConfiguration-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /deviceAppManagement/targetedManagedAppConfigurations/{targetedManagedAppConfiguration-id}"]["response"]>
+        function update(body: Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string,
+        description?: string | null, displayName?: string,
+        lastModifiedDateTime?: string, roleScopeTagIds?: (string | null)[],
+        version?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.managedAppPolicy" }, "@odata.type"> & Omit<{
+        @odata.type: string, customSettings?: { @odata.type: string, name?:
+        string, value?: string | null }[], settings?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        settingDefinitions?: (Omit<..., ...> & Omit<..., ...> & { @odata.type:
+        ... })[], settingInstance?: { @odata.type: string, settingDefinitionId?:
+        string, settingInstanceTemplateReference?: Record<..., ...> | {
+        @odata.type: ..., settingInstanceTemplateId?: ... } | null } } & {
+        @odata.type: "#microsoft.graph.deviceManagementConfigurationSetting"
+        })[] }, "@odata.type"> & { @odata.type: string, appGroupType?:
+        "selectedPublicApps" | "allCoreMicrosoftApps" | "allMicrosoftApps" |
+        "allApps", apps?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, mobileAppIdentifier?:
+        Record<string, never> | { @odata.type: string } | null, version?: string
+        | null } & { @odata.type: "#microsoft.graph.managedMobileApp" })[],
+        assignments?: (Omit<{ @odata.type: string, id?: string }, "@odata.type">
+        & { @odata.type: string, source?: "direct" | "policySets", sourceId?:
+        string | null, target?: Record<string, never> | { @odata.type: string,
+        deviceAndAppManagementAssignmentFilterId?: string | null,
+        deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+        "exclude" } | null } & { @odata.type:
+        "#microsoft.graph.targetedManagedAppPolicyAssignment" })[],
+        deployedAppCount?: number, deploymentSummary?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, configurationDeployedUserCount?: number,
+        configurationDeploymentSummaryPerApp?: { @odata.type: string,
+        configurationAppliedUserCount?: number, mobileAppIdentifier?:
+        Record<string, never> | { @odata.type: string } | null }[],
+        displayName?: string | null, lastRefreshTime?: string, version?: string
+        | null } & { @odata.type:
+        "#microsoft.graph.managedAppPolicyDeploymentSummary" }) | null,
+        isAssigned?: boolean, targetedAppManagementLevels?: "unknownFutureValue"
+        | "unspecified" | "unmanaged" | "mdm" | "androidEnterprise" |
+        "androidEnterpriseDedicatedDevicesWithAzureAdSharedMode" |
+        "androidOpenSourceProjectUserAssociated" |
+        "androidOpenSourceProjectUserless" }, params?: {
+        targetedManagedAppConfiguration-id: string }):
+        EndpointRequest<Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string,
+        description?: string | null, displayName?: string,
+        lastModifiedDateTime?: string, roleScopeTagIds?: (string | null)[],
+        version?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.managedAppPolicy" }, "@odata.type"> & Omit<{
+        @odata.type: string, customSettings?: { @odata.type: string, name?:
+        string, value?: string | null }[], settings?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        settingDefinitions?: (... & ... & ...)[], settingInstance?: {
+        @odata.type: string, settingDefinitionId?: function,
+        settingInstanceTemplateReference?: function } } & { @odata.type:
+        "#microsoft.graph.deviceManagementConfigurationSetting" })[] },
+        "@odata.type"> & { @odata.type: string, appGroupType?:
+        "selectedPublicApps" | "allCoreMicrosoftApps" | "allMicrosoftApps" |
+        "allApps", apps?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, mobileAppIdentifier?:
+        Record<string, never> | { @odata.type: string } | null, version?: string
+        | null } & { @odata.type: "#microsoft.graph.managedMobileApp" })[],
+        assignments?: (Omit<{ @odata.type: string, id?: string }, "@odata.type">
+        & { @odata.type: string, source?: "direct" | "policySets", sourceId?:
+        string | null, target?: Record<string, never> | { @odata.type: string,
+        deviceAndAppManagementAssignmentFilterId?: string | null,
+        deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+        "exclude" } | null } & { @odata.type:
+        "#microsoft.graph.targetedManagedAppPolicyAssignment" })[],
+        deployedAppCount?: number, deploymentSummary?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, configurationDeployedUserCount?: number,
+        configurationDeploymentSummaryPerApp?: { @odata.type: string,
+        configurationAppliedUserCount?: number, mobileAppIdentifier?:
+        Record<..., ...> | { @odata.type: ... } | null }[], displayName?: string
+        | null, lastRefreshTime?: string, version?: string | null } & {
+        @odata.type: "#microsoft.graph.managedAppPolicyDeploymentSummary" }) |
+        null, isAssigned?: boolean, targetedAppManagementLevels?:
+        "unknownFutureValue" | "unspecified" | "unmanaged" | "mdm" |
+        "androidEnterprise" |
+        "androidEnterpriseDedicatedDevicesWithAzureAdSharedMode" |
+        "androidOpenSourceProjectUserAssociated" |
+        "androidOpenSourceProjectUserless" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceAppManagement/targetedManagedAppConfigurations/{targetedManagedAppConfiguration-id}",
-            "patch"&gt;
+            Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+            />: string, createdDateTime?: string, description?: string | null,
+            displayName?: string, lastModifiedDateTime?: string,
+            roleScopeTagIds?: (string | null)[], version?: string | null },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.managedAppPolicy" />" }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, customSettings?: { <xref uid="@odata.type" />: string,
+            name?: string, value?: string | null }[], settings?: (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            settingDefinitions?: (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; &
+            { <xref uid="@odata.type" />: ... })[], settingInstance?: { <xref
+            uid="@odata.type" />: string, settingDefinitionId?: string,
+            settingInstanceTemplateReference?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., settingInstanceTemplateId?: ... } | null
+            } } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deviceManagementConfigurationSetting" />" })[]
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, appGroupType?: "selectedPublicApps" | "allCoreMicrosoftApps"
+            | "allMicrosoftApps" | "allApps", apps?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            mobileAppIdentifier?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string } | null, version?: string | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedMobileApp" />" })[], assignments?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            source?: "direct" | "policySets", sourceId?: string | null, target?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            deviceAndAppManagementAssignmentFilterId?: string | null,
+            deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+            "exclude" } | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.targetedManagedAppPolicyAssignment" />" })[],
+            deployedAppCount?: number, deploymentSummary?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, configurationDeployedUserCount?:
+            number, configurationDeploymentSummaryPerApp?: { <xref
+            uid="@odata.type" />: string, configurationAppliedUserCount?:
+            number, mobileAppIdentifier?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string } | null }[], displayName?: string |
+            null, lastRefreshTime?: string, version?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedAppPolicyDeploymentSummary" />" }) |
+            null, isAssigned?: boolean, targetedAppManagementLevels?:
+            "unknownFutureValue" | "unspecified" | "unmanaged" | "mdm" |
+            "androidEnterprise" |
+            "androidEnterpriseDedicatedDevicesWithAzureAdSharedMode" |
+            "androidOpenSourceProjectUserAssociated" |
+            "androidOpenSourceProjectUserless" }
           description: ''
         - id: params
-          type: any
+          type: '{ targetedManagedAppConfiguration-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /deviceAppManagement/targetedManagedAppConfigurations/{targetedManagedAppConfiguration-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, createdDateTime?: string,
+          description?: string | null, displayName?: string,
+          lastModifiedDateTime?: string, roleScopeTagIds?: (string | null)[],
+          version?: string | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.managedAppPolicy"
+          />" }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, customSettings?: { <xref
+          uid="@odata.type" />: string, name?: string, value?: string | null
+          }[], settings?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, settingDefinitions?: (... & ... & ...)[],
+          settingInstance?: { <xref uid="@odata.type" />: string,
+          settingDefinitionId?: function, settingInstanceTemplateReference?:
+          function } } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementConfigurationSetting" />" })[] },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, appGroupType?: "selectedPublicApps" | "allCoreMicrosoftApps" |
+          "allMicrosoftApps" | "allApps", apps?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, mobileAppIdentifier?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string } |
+          null, version?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.managedMobileApp" />" })[], assignments?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          source?: "direct" | "policySets", sourceId?: string | null, target?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          deviceAndAppManagementAssignmentFilterId?: string | null,
+          deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+          "exclude" } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.targetedManagedAppPolicyAssignment" />" })[],
+          deployedAppCount?: number, deploymentSummary?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, configurationDeployedUserCount?: number,
+          configurationDeploymentSummaryPerApp?: { <xref uid="@odata.type" />:
+          string, configurationAppliedUserCount?: number, mobileAppIdentifier?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ... } | null
+          }[], displayName?: string | null, lastRefreshTime?: string, version?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedAppPolicyDeploymentSummary" />" }) | null,
+          isAssigned?: boolean, targetedAppManagementLevels?:
+          "unknownFutureValue" | "unspecified" | "unmanaged" | "mdm" |
+          "androidEnterprise" |
+          "androidEnterpriseDedicatedDevicesWithAzureAdSharedMode" |
+          "androidOpenSourceProjectUserAssociated" |
+          "androidOpenSourceProjectUserless" }&gt;

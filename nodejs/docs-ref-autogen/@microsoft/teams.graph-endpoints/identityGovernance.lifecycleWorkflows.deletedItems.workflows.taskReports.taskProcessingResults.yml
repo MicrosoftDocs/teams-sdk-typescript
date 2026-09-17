@@ -9,7 +9,9 @@ interfaces:
     @microsoft/teams.graph-endpoints.identityGovernance.lifecycleWorkflows.deletedItems.workflows.taskReports.taskProcessingResults.IEndpoints
 package: '@microsoft/teams.graph-endpoints'
 functions:
-  - name: get(any)
+  - name: >-
+      get({ $expand?: string[], $select?: string[], taskProcessingResult-id:
+      string, taskReport-id: string, workflow-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.identityGovernance.lifecycleWorkflows.deletedItems.workflows.taskReports.taskProcessingResults.get
     package: '@microsoft/teams.graph-endpoints'
@@ -23,18 +25,1096 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /identityGovernance/lifecycleWorkflows/deletedItems/workflows/{workflow-id}/taskReports/{taskReport-id}/taskProcessingResults/{taskProcessingResult-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        taskProcessingResult-id: string, taskReport-id: string, workflow-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, completedDateTime?: string |
+        null, createdDateTime?: string, failureReason?: string | null,
+        processingStatus?: "unknownFutureValue" | "canceled" | "queued" |
+        "inProgress" | "completed" | "completedWithErrors" | "failed",
+        startedDateTime?: string | null, subject?: Omit<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        deletedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" }, "@odata.type"> & { @odata.type:
+        string, aboutMe?: string | null, accountEnabled?: boolean | null,
+        activities?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+        @odata.type: string, activationUrl?: function, activitySourceHost?:
+        function, appActivityId?: function, appDisplayName?: function,
+        contentInfo?: unknown, contentUrl?: function, createdDateTime?:
+        function, expirationDateTime?: function, fallbackUrl?: function,
+        historyItems?: function, lastModifiedDateTime?: function, status?:
+        function, userTimezone?: function, visualElements?: function } & {
+        @odata.type: "#microsoft.graph.userActivity" })[], ageGroup?: string |
+        null, agreementAcceptances?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, agreementFileId?: function,
+        agreementId?: function, deviceDisplayName?: function, deviceId?:
+        function, deviceOSType?: function, deviceOSVersion?: function,
+        expirationDateTime?: function, recordedDateTime?: function, state?:
+        function, userDisplayName?: function, userEmail?: function, userId?:
+        function, userPrincipalName?: function } & { @odata.type:
+        "#microsoft.graph.agreementAcceptance" })[], appRoleAssignments?:
+        (Omit<... & ... & ..., "@odata.type"> & { @odata.type: string,
+        appRoleId?: function, createdDateTime?: function, principalDisplayName?:
+        function, principalId?: function, principalType?: function,
+        resourceDisplayName?: function, resourceId?: function })[],
+        assignedLicenses?: { @odata.type: string, disabledPlans?: ...[], skuId?:
+        string | null }[], assignedPlans?: { @odata.type: string,
+        assignedDateTime?: string | null, capabilityStatus?: string | null,
+        service?: string | null, servicePlanId?: string | null }[],
+        authentication?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: function }, "@odata.type"> & { @odata.type: string, emailMethods?:
+        ...[], fido2Methods?: ...[], methods?: ...[],
+        microsoftAuthenticatorMethods?: ...[], operations?: ...[],
+        passwordMethods?: ...[], phoneMethods?: ...[],
+        platformCredentialMethods?: ...[], softwareOathMethods?: ...[],
+        temporaryAccessPassMethods?: ...[], windowsHelloForBusinessMethods?:
+        ...[] } & { @odata.type: "#microsoft.graph.authentication" }) | null,
+        authorizationInfo?: Record<string, never> | { @odata.type: string,
+        certificateUserIds?: function[] } | null, birthday?: string,
+        businessPhones?: string[], calendar?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, allowedOnlineMeetingProviders?: ...[], calendarPermissions?:
+        ...[], calendarView?: ...[], canEdit?: boolean | null, canShare?:
+        boolean | null, canViewPrivateItems?: boolean | null, changeKey?: string
+        | null, color?: Record<..., ...> | "auto" | "lightBlue" | "lightGreen" |
+        "lightOrange" | "lightGray" | "lightYellow" | "lightTeal" | "lightPink"
+        | "lightBrown" | "lightRed" | "maxColor" | null,
+        defaultOnlineMeetingProvider?: Record<..., ...> | "unknown" |
+        "skypeForBusiness" | "skypeForConsumer" | "teamsForBusiness" | null,
+        events?: ...[], hexColor?: string | null, isDefaultCalendar?: boolean |
+        null, isRemovable?: boolean | null, isTallyingResponses?: boolean |
+        null, multiValueExtendedProperties?: ...[], name?: string | null,
+        owner?: Record<..., ...> | { @odata.type: ..., address?: ..., name?: ...
+        } | null, singleValueExtendedProperties?: ...[] } & { @odata.type:
+        "#microsoft.graph.calendar" }) | null, calendarGroups?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        calendars?: function, changeKey?: function, classId?: function, name?:
+        function } & { @odata.type: "#microsoft.graph.calendarGroup" })[],
+        calendars?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+        @odata.type: string, allowedOnlineMeetingProviders?: function,
+        calendarPermissions?: function, calendarView?: function, canEdit?:
+        function, canShare?: function, canViewPrivateItems?: function,
+        changeKey?: function, color?: function, defaultOnlineMeetingProvider?:
+        function, events?: function, hexColor?: function, isDefaultCalendar?:
+        function, isRemovable?: function, isTallyingResponses?: function,
+        multiValueExtendedProperties?: function, name?: function, owner?:
+        function, singleValueExtendedProperties?: function } & { @odata.type:
+        "#microsoft.graph.calendar" })[], calendarView?: (Omit<... & ... & ...,
+        "@odata.type"> & { @odata.type: string, allowNewTimeProposals?:
+        function, attachments?: function, attendees?: function, body?: function,
+        bodyPreview?: function, calendar?: function, cancelledOccurrences?:
+        function, end?: function, exceptionOccurrences?: (Omit<Omit<{ id?:
+        string | undefined; '@odata.type': string; }, "@odata.type"> & Omit<{
+        categories?: (string | null)[] | undefined; changeKey?: string | null |
+        undefined; createdDateTime?: string | ... 1 more ... | undefined;
+        lastModifiedDateTime?: string | ... 1 more ... | undefined;
+        '@odata.type': string; }, "@oda..., extensions?: function,
+        hasAttachments?: function, hideAttendees?: function, iCalUId?: function,
+        importance?: function, instances?: (Omit<Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & Omit<{ categories?: (string |
+        null)[] | undefined; changeKey?: string | null | undefined;
+        createdDateTime?: string | ... 1 more ... | undefined;
+        lastModifiedDateTime?: string | ... 1 more ... | undefined;
+        '@odata.type': string; }, "@oda..., isAllDay?: function, isCancelled?:
+        function, isDraft?: function, isOnlineMeeting?: function, isOrganizer?:
+        function, isReminderOn?: function, location?: function, locations?:
+        function, multiValueExtendedProperties?: function, onlineMeeting?:
+        function, onlineMeetingProvider?: function, onlineMeetingUrl?: function,
+        organizer?: function, originalEndTimeZone?: function, originalStart?:
+        function, originalStartTimeZone?: function, recurrence?: function,
+        reminderMinutesBeforeStart?: function, responseRequested?: function,
+        responseStatus?: function, sensitivity?: function, seriesMasterId?:
+        function, showAs?: function, singleValueExtendedProperties?: function,
+        start?: function, subject?: function, transactionId?: function, type?:
+        function, webLink?: function })[], chats?: (Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string, chatType?: function,
+        createdDateTime?: function, installedApps?: function,
+        isHiddenForAllMembers?: function, lastMessagePreview?: function,
+        lastUpdatedDateTime?: function, members?: function, messages?: function,
+        onlineMeetingInfo?: function, permissionGrants?: function,
+        pinnedMessages?: function, tabs?: function, tenantId?: function, topic?:
+        function, viewpoint?: function, webUrl?: function } & { @odata.type:
+        "#microsoft.graph.chat" })[], city?: string | null, cloudClipboard?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, items?: ...[] } & { @odata.type:
+        "#microsoft.graph.cloudClipboardRoot" }) | null, cloudPCs?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        aadDeviceId?: function, displayName?: function, gracePeriodEndDateTime?:
+        function, imageDisplayName?: function, lastModifiedDateTime?: function,
+        managedDeviceId?: function, managedDeviceName?: function,
+        onPremisesConnectionName?: function, provisioningPolicyId?: function,
+        provisioningPolicyName?: function, provisioningType?: function,
+        servicePlanId?: function, servicePlanName?: function,
+        userPrincipalName?: function } & { @odata.type:
+        "#microsoft.graph.cloudPC" })[], companyName?: string | null,
+        consentProvidedForMinor?: string | null, contactFolders?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        childFolders?: (Omit<{ id?: string | undefined; '@odata.type': string;
+        }, "@odata.type"> & { displayName?: string | null | undefined;
+        parentFolderId?: string | null | undefined; childFolders?: (Omit<...> &
+        ... 1 more ... & { ...; })[] | undefined; contacts?: (Omit<...> & { ...;
+        })[] | undefined; multiValueExtendedProperties?: (Omi..., contacts?:
+        function, displayName?: function, multiValueExtendedProperties?:
+        function, parentFolderId?: function, singleValueExtendedProperties?:
+        function } & { @odata.type: "#microsoft.graph.contactFolder" })[],
+        contacts?: (Omit<... & ... & ..., "@odata.type"> & { @odata.type:
+        string, assistantName?: function, birthday?: function, businessAddress?:
+        function, businessHomePage?: function, businessPhones?: function,
+        children?: function, companyName?: function, department?: function,
+        displayName?: function, emailAddresses?: function, extensions?:
+        function, fileAs?: function, generation?: function, givenName?:
+        function, homeAddress?: function, homePhones?: function, imAddresses?:
+        function, initials?: function, jobTitle?: function, manager?: function,
+        middleName?: function, mobilePhone?: function,
+        multiValueExtendedProperties?: function, nickName?: function,
+        officeLocation?: function, otherAddress?: function, parentFolderId?:
+        function, personalNotes?: function, photo?: function, profession?:
+        function, singleValueExtendedProperties?: function, spouseName?:
+        function, surname?: function, title?: function, yomiCompanyName?:
+        function, yomiGivenName?: function, yomiSurname?: function })[],
+        country?: string | null, createdDateTime?: string | null,
+        createdObjects?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> &
+        Omit<{ @odata.type: ..., deletedDateTime?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.directoryObject" })[], creationType?:
+        string | null, customSecurityAttributes?: Record<string, never> | {
+        @odata.type: string } | null, dataSecurityAndGovernance?: Record<string,
+        never> | (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, activities?: Record<..., ...> |
+        (... & ... & ...) | null, protectionScopes?: Record<..., ...> | (... &
+        ... & ...) | null } & { @odata.type:
+        "#microsoft.graph.userDataSecurityAndGovernance" }) | null, department?:
+        string | null, deviceEnrollmentLimit?: number,
+        deviceManagementTroubleshootingEvents?: (Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & Omit<{ @odata.type: ..., correlationId?: ...,
+        eventDateTime?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.deviceManagementTroubleshootingEvent" })[],
+        directReports?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> &
+        Omit<{ @odata.type: ..., deletedDateTime?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.directoryObject" })[], displayName?:
+        string | null, drive?: Record<string, never> | (Omit<Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type:
+        string, bundles?: ...[], driveType?: string | null, following?: ...[],
+        items?: ...[], list?: Record<..., ...> | (... & ... & ...) | null,
+        owner?: Record<..., ...> | { @odata.type: ..., application?: ...,
+        device?: ..., user?: ... } | null, quota?: Record<..., ...> | {
+        @odata.type: ..., deleted?: ..., remaining?: ..., state?: ...,
+        storagePlanInformation?: ..., total?: ..., used?: ... } | null, root?:
+        Record<..., ...> | (... & ... & ...) | null, sharePointIds?: Record<...,
+        ...> | { @odata.type: ..., listId?: ..., listItemId?: ...,
+        listItemUniqueId?: ..., siteId?: ..., siteUrl?: ..., tenantId?: ...,
+        webId?: ... } | null, special?: ...[], system?: Record<..., ...> | {
+        @odata.type: ... } | null } & { @odata.type: "#microsoft.graph.drive" })
+        | null, drives?: (Omit<... & ... & ..., "@odata.type"> & { @odata.type:
+        string, bundles?: function, driveType?: function, following?: function,
+        items?: function, list?: function, owner?: function, quota?: function,
+        root?: function, sharePointIds?: function, special?: function, system?:
+        function } & { @odata.type: "#microsoft.graph.drive" })[],
+        employeeExperience?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & { @odata.type: string,
+        learningCourseActivities?: ...[] } & { @odata.type:
+        "#microsoft.graph.employeeExperienceUser" }) | null, employeeHireDate?:
+        string | null, employeeId?: string | null, employeeLeaveDateTime?:
+        string | null, employeeOrgData?: Record<string, never> | { @odata.type:
+        string, costCenter?: string | null, division?: string | null } | null,
+        employeeType?: string | null, events?: (Omit<... & ... & ...,
+        "@odata.type"> & { @odata.type: string, allowNewTimeProposals?:
+        function, attachments?: function, attendees?: function, body?: function,
+        bodyPreview?: function, calendar?: function, cancelledOccurrences?:
+        function, end?: function, exceptionOccurrences?: (Omit<Omit<{ id?:
+        string | undefined; '@odata.type': string; }, "@odata.type"> & Omit<{
+        categories?: (string | null)[] | undefined; changeKey?: string | null |
+        undefined; createdDateTime?: string | ... 1 more ... | undefined;
+        lastModifiedDateTime?: string | ... 1 more ... | undefined;
+        '@odata.type': string; }, "@oda..., extensions?: function,
+        hasAttachments?: function, hideAttendees?: function, iCalUId?: function,
+        importance?: function, instances?: (Omit<Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & Omit<{ categories?: (string |
+        null)[] | undefined; changeKey?: string | null | undefined;
+        createdDateTime?: string | ... 1 more ... | undefined;
+        lastModifiedDateTime?: string | ... 1 more ... | undefined;
+        '@odata.type': string; }, "@oda..., isAllDay?: function, isCancelled?:
+        function, isDraft?: function, isOnlineMeeting?: function, isOrganizer?:
+        function, isReminderOn?: function, location?: function, locations?:
+        function, multiValueExtendedProperties?: function, onlineMeeting?:
+        function, onlineMeetingProvider?: function, onlineMeetingUrl?: function,
+        organizer?: function, originalEndTimeZone?: function, originalStart?:
+        function, originalStartTimeZone?: function, recurrence?: function,
+        reminderMinutesBeforeStart?: function, responseRequested?: function,
+        responseStatus?: function, sensitivity?: function, seriesMasterId?:
+        function, showAs?: function, singleValueExtendedProperties?: function,
+        start?: function, subject?: function, transactionId?: function, type?:
+        function, webLink?: function })[], extensions?: (Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ... },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.extension" })[],
+        externalUserState?: string | null, externalUserStateChangeDateTime?:
+        string | null, faxNumber?: string | null, followedSites?: (Omit<... &
+        ... & ..., "@odata.type"> & { @odata.type: string, analytics?: function,
+        columns?: function, contentTypes?: function, displayName?: function,
+        drive?: function, drives?: function, error?: function, externalColumns?:
+        function, isPersonalSite?: function, items?: function, lists?: function,
+        onenote?: function, operations?: function, pages?: function,
+        permissions?: function, root?: function, sharepointIds?: function,
+        siteCollection?: function, sites?: (Omit<Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & Omit<{ createdBy?:
+        Record<string, never> | { application?: Record<string, never> | { ...; }
+        | null | undefined; device?: Record<...> | ... 2 more ... | undefined;
+        user?: Record<...> | ... 2 more ... | undefined; '@odata.type': string;
+        }..., termStore?: function, termStores?: function } & { @odata.type:
+        "#microsoft.graph.site" })[], givenName?: string | null, hireDate?:
+        string, identities?: { @odata.type: string, issuer?: string | null,
+        issuerAssignedId?: string | null, signInType?: string | null }[],
+        imAddresses?: (string | null)[], inferenceClassification?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, overrides?: ...[] } & {
+        @odata.type: "#microsoft.graph.inferenceClassification" }) | null,
+        insights?: Record<string, never> | (Omit<Omit<..., ...> & Omit<..., ...>
+        & { @odata.type: ... }, "@odata.type"> & { @odata.type: string }) |
+        null, interests?: (string | null)[], isManagementRestricted?: boolean |
+        null, isResourceAccount?: boolean | null, jobTitle?: string | null,
+        joinedTeams?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+        @odata.type: string, allChannels?: function, channels?: function,
+        classification?: function, createdDateTime?: function, description?:
+        function, displayName?: function, firstChannelName?: function,
+        funSettings?: function, group?: function, guestSettings?: function,
+        incomingChannels?: function, installedApps?: function, internalId?:
+        function, isArchived?: function, members?: function, memberSettings?:
+        function, messagingSettings?: function, operations?: function,
+        permissionGrants?: function, photo?: function, primaryChannel?:
+        function, schedule?: function, specialization?: function, summary?:
+        function, tags?: function, template?: function, tenantId?: function,
+        visibility?: function, webUrl?: function } & { @odata.type:
+        "#microsoft.graph.team" })[], lastPasswordChangeDateTime?: string |
+        null, legalAgeGroupClassification?: string | null,
+        licenseAssignmentStates?: { @odata.type: string, assignedByGroup?:
+        string | null, disabledPlans?: ...[], error?: string | null,
+        lastUpdatedDateTime?: string | null, skuId?: string | null, state?:
+        string | null }[], licenseDetails?: (Omit<{ @odata.type: ..., id?: ...
+        }, "@odata.type"> & { @odata.type: string, servicePlans?: function,
+        skuId?: function, skuPartNumber?: function } & { @odata.type:
+        "#microsoft.graph.licenseDetails" })[], mail?: string | null,
+        mailboxSettings?: Record<string, never> | { @odata.type: string,
+        archiveFolder?: string | null, automaticRepliesSetting?: Record<string,
+        never> | { @odata.type: string, externalAudience?: function,
+        externalReplyMessage?: function, internalReplyMessage?: function,
+        scheduledEndDateTime?: function, scheduledStartDateTime?: function,
+        status?: function } | null, dateFormat?: string | null,
+        delegateMeetingMessageDeliveryOptions?: Record<string, never> |
+        "sendToDelegateAndInformationToPrincipal" | "sendToDelegateAndPrincipal"
+        | "sendToDelegateOnly" | null, language?: Record<string, never> | {
+        @odata.type: string, displayName?: function, locale?: function } | null,
+        timeFormat?: string | null, timeZone?: string | null, userPurpose?:
+        Record<string, never> | "unknownFutureValue" | "user" | "shared" |
+        "linked" | "room" | "equipment" | "others" | null, workingHours?:
+        Record<string, never> | { @odata.type: string, daysOfWeek?: function,
+        endTime?: function, startTime?: function, timeZone?: function } | null }
+        | null, mailFolders?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., childFolderCount?: ...,
+        childFolders?: ..., displayName?: ..., isHidden?: ..., messageRules?:
+        ..., messages?: ..., multiValueExtendedProperties?: ...,
+        parentFolderId?: ..., singleValueExtendedProperties?: ...,
+        totalItemCount?: ..., unreadItemCount?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.mailFolder" })[], mailNickname?: string |
+        null, managedAppRegistrations?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., appIdentifier?: ...,
+        applicationVersion?: ..., appliedPolicies?: ..., createdDateTime?: ...,
+        deviceName?: ..., deviceTag?: ..., deviceType?: ..., flaggedReasons?:
+        ..., intendedPolicies?: ..., lastSyncDateTime?: ...,
+        managementSdkVersion?: ..., operations?: ..., platformVersion?: ...,
+        userId?: ..., version?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.managedAppRegistration" })[], managedDevices?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        activationLockBypassCode?: function, androidSecurityPatchLevel?:
+        function, azureADDeviceId?: function, azureADRegistered?: function,
+        complianceGracePeriodExpirationDateTime?: function, complianceState?:
+        function, configurationManagerClientEnabledFeatures?: function,
+        deviceActionResults?: function, deviceCategory?: function,
+        deviceCategoryDisplayName?: function, deviceCompliancePolicyStates?:
+        function, deviceConfigurationStates?: function, deviceEnrollmentType?:
+        function, deviceHealthAttestationState?: function, deviceName?:
+        function, deviceRegistrationState?: function, easActivated?: function,
+        easActivationDateTime?: function, easDeviceId?: function, emailAddress?:
+        function, enrolledDateTime?: function, enrollmentProfileName?: function,
+        ethernetMacAddress?: function, exchangeAccessState?: function,
+        exchangeAccessStateReason?: function,
+        exchangeLastSuccessfulSyncDateTime?: function, freeStorageSpaceInBytes?:
+        function, iccid?: function, imei?: function, isEncrypted?: function,
+        isSupervised?: function, jailBroken?: function, lastSyncDateTime?:
+        function, logCollectionRequests?: function, managedDeviceName?:
+        function, managedDeviceOwnerType?: function, managementAgent?: function,
+        managementCertificateExpirationDate?: function, managementState?:
+        function, manufacturer?: function, meid?: function, model?: function,
+        notes?: function, operatingSystem?: function, osVersion?: function,
+        partnerReportedThreatState?: function, phoneNumber?: function,
+        physicalMemoryInBytes?: function, remoteAssistanceSessionErrorDetails?:
+        function, remoteAssistanceSessionUrl?: function,
+        requireUserEnrollmentApproval?: function, serialNumber?: function,
+        subscriberCarrier?: function, totalStorageSpaceInBytes?: function,
+        udid?: function, userDisplayName?: function, userId?: function,
+        userPrincipalName?: function, users?: function, wiFiMacAddress?:
+        function, windowsProtectionState?: function } & { @odata.type:
+        "#microsoft.graph.managedDevice" })[], manager?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, deletedDateTime?: function }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.directoryObject" }) | null, memberOf?:
+        (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+        @odata.type: ..., deletedDateTime?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.directoryObject" })[], messages?:
+        (Omit<... & ... & ..., "@odata.type"> & Omit<{ @odata.type: ...,
+        attachments?: ..., bccRecipients?: ..., body?: ..., bodyPreview?: ...,
+        ccRecipients?: ..., conversationId?: ..., conversationIndex?: ...,
+        extensions?: ..., flag?: ..., from?: ..., hasAttachments?: ...,
+        importance?: ..., inferenceClassification?: ...,
+        internetMessageHeaders?: ..., internetMessageId?: ...,
+        isDeliveryReceiptRequested?: ..., isDraft?: ..., isRead?: ...,
+        isReadReceiptRequested?: ..., multiValueExtendedProperties?: ...,
+        parentFolderId?: ..., receivedDateTime?: ..., replyTo?: ..., sender?:
+        ..., sentDateTime?: ..., singleValueExtendedProperties?: ..., subject?:
+        ..., toRecipients?: ..., uniqueBody?: ..., webLink?: ... },
+        "@odata.type">)[], mobilePhone?: string | null, mySite?: string | null,
+        oauth2PermissionGrants?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, clientId?: function,
+        consentType?: function, principalId?: function, resourceId?: function,
+        scope?: function } & { @odata.type:
+        "#microsoft.graph.oAuth2PermissionGrant" })[], officeLocation?: string |
+        null, onenote?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: function }, "@odata.type"> & { @odata.type: string, notebooks?:
+        ...[], operations?: ...[], pages?: ...[], resources?: ...[],
+        sectionGroups?: ...[], sections?: ...[] } & { @odata.type:
+        "#microsoft.graph.onenote" }) | null, onlineMeetings?: (Omit<... & ... &
+        ..., "@odata.type"> & { @odata.type: string, attendeeReport?: function,
+        broadcastSettings?: function, creationDateTime?: function, endDateTime?:
+        function, externalId?: function, isBroadcast?: function,
+        meetingTemplateId?: function, participants?: function, recordings?:
+        function, startDateTime?: function, transcripts?: function })[],
+        onPremisesDistinguishedName?: string | null, onPremisesDomainName?:
+        string | null, onPremisesExtensionAttributes?: Record<string, never> | {
+        @odata.type: string, extensionAttribute1?: string | null,
+        extensionAttribute10?: string | null, extensionAttribute11?: string |
+        null, extensionAttribute12?: string | null, extensionAttribute13?:
+        string | null, extensionAttribute14?: string | null,
+        extensionAttribute15?: string | null, extensionAttribute2?: string |
+        null, extensionAttribute3?: string | null, extensionAttribute4?: string
+        | null, extensionAttribute5?: string | null, extensionAttribute6?:
+        string | null, extensionAttribute7?: string | null,
+        extensionAttribute8?: string | null, extensionAttribute9?: string | null
+        } | null, onPremisesImmutableId?: string | null,
+        onPremisesLastSyncDateTime?: string | null,
+        onPremisesProvisioningErrors?: { @odata.type: string, category?: string
+        | null, occurredDateTime?: string | null, propertyCausingError?: string
+        | null, value?: string | null }[], onPremisesSamAccountName?: string |
+        null, onPremisesSecurityIdentifier?: string | null,
+        onPremisesSyncEnabled?: boolean | null, onPremisesUserPrincipalName?:
+        string | null, otherMails?: string[], outlook?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+        @odata.type: string, masterCategories?: ...[] } & { @odata.type:
+        "#microsoft.graph.outlookUser" }) | null, ownedDevices?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        deletedDateTime?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" })[], ownedObjects?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        deletedDateTime?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" })[], passwordPolicies?: string |
+        null, passwordProfile?: Record<string, never> | { @odata.type: string,
+        forceChangePasswordNextSignIn?: boolean | null,
+        forceChangePasswordNextSignInWithMfa?: boolean | null, password?: string
+        | null } | null, pastProjects?: (string | null)[], people?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        birthday?: function, companyName?: function, department?: function,
+        displayName?: function, givenName?: function, imAddress?: function,
+        isFavorite?: function, jobTitle?: function, officeLocation?: function,
+        personNotes?: function, personType?: function, phones?: function,
+        postalAddresses?: function, profession?: function,
+        scoredEmailAddresses?: function, surname?: function, userPrincipalName?:
+        function, websites?: function, yomiCompany?: function } & { @odata.type:
+        "#microsoft.graph.person" })[], permissionGrants?: (Omit<... & ... &
+        ..., "@odata.type"> & { @odata.type: string, clientAppId?: function,
+        clientId?: function, permission?: function, permissionType?: function,
+        resourceAppId?: function } & { @odata.type:
+        "#microsoft.graph.resourceSpecificPermissionGrant" })[], photo?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, height?: number | null, width?:
+        number | null } & { @odata.type: "#microsoft.graph.profilePhoto" }) |
+        null, photos?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+        @odata.type: string, height?: function, width?: function } & {
+        @odata.type: "#microsoft.graph.profilePhoto" })[], planner?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, plans?: ...[], tasks?: ...[] } &
+        { @odata.type: "#microsoft.graph.plannerUser" }) | null, postalCode?:
+        string | null, preferredDataLocation?: string | null,
+        preferredLanguage?: string | null, preferredName?: string | null,
+        presence?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & { @odata.type: string, activity?: string |
+        null, availability?: string | null, outOfOfficeSettings?: Record<...,
+        ...> | { @odata.type: ..., isOutOfOffice?: ..., message?: ... } | null,
+        sequenceNumber?: string | null, statusMessage?: Record<..., ...> | {
+        @odata.type: ..., expiryDateTime?: ..., message?: ...,
+        publishedDateTime?: ... } | null } & { @odata.type:
+        "#microsoft.graph.presence" }) | null, print?: Record<string, never> | {
+        @odata.type: string, recentPrinterShares?: (... & ... & ...)[] } | null,
+        provisionedPlans?: { @odata.type: string, capabilityStatus?: string |
+        null, provisioningStatus?: string | null, service?: string | null }[],
+        proxyAddresses?: string[], registeredDevices?: (Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & Omit<{ @odata.type: ..., deletedDateTime?:
+        ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" })[], responsibilities?: (string |
+        null)[], schools?: (string | null)[], scopedRoleMemberOf?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        administrativeUnitId?: function, roleId?: function, roleMemberInfo?:
+        function } & { @odata.type: "#microsoft.graph.scopedRoleMembership"
+        })[], securityIdentifier?: string | null, serviceProvisioningErrors?: {
+        @odata.type: string, createdDateTime?: string | null, isResolved?:
+        boolean | null, serviceInstance?: string | null }[], settings?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string,
+        contributionToContentDiscoveryAsOrganizationDisabled?: boolean,
+        contributionToContentDiscoveryDisabled?: boolean, itemInsights?:
+        Record<..., ...> | (... & ... & ...) | null, shiftPreferences?:
+        Record<..., ...> | (... & ... & ...) | null, storage?: Record<..., ...>
+        | (... & ... & ...) | null, windows?: ...[] } & { @odata.type:
+        "#microsoft.graph.userSettings" }) | null, showInAddressList?: boolean |
+        null, signInActivity?: Record<string, never> | { @odata.type: string,
+        lastNonInteractiveSignInDateTime?: string | null,
+        lastNonInteractiveSignInRequestId?: string | null, lastSignInDateTime?:
+        string | null, lastSignInRequestId?: string | null,
+        lastSuccessfulSignInDateTime?: string | null,
+        lastSuccessfulSignInRequestId?: string | null } | null,
+        signInSessionsValidFromDateTime?: string | null, skills?: (string |
+        null)[], solutions?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & { @odata.type: string,
+        workingTimeSchedule?: Record<..., ...> | (... & ... & ...) | null } & {
+        @odata.type: "#microsoft.graph.userSolutionRoot" }) | null, sponsors?:
+        (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+        @odata.type: ..., deletedDateTime?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.directoryObject" })[], state?: string |
+        null, streetAddress?: string | null, surname?: string | null, teamwork?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, associatedTeams?: ...[],
+        installedApps?: ...[], locale?: string | null, region?: string | null }
+        & { @odata.type: "#microsoft.graph.userTeamwork" }) | null, todo?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, lists?: ...[] } & { @odata.type:
+        "#microsoft.graph.todo" }) | null, transitiveMemberOf?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        deletedDateTime?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" })[], usageLocation?: string | null,
+        userPrincipalName?: string | null, userType?: string | null } & {
+        @odata.type: "#microsoft.graph.user" }, task?: Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        arguments?: { @odata.type: string, name?: string, value?: string | null
+        }[], category?: "unknownFutureValue" | "joiner" | "leaver" | "mover",
+        continueOnError?: boolean, description?: string | null, displayName?:
+        string, executionSequence?: number, isEnabled?: boolean,
+        taskDefinitionId?: string, taskProcessingResults?: Omit<{ id?: string |
+        undefined; '@odata.type': string; }, "@odata.type"> & {
+        completedDateTime?: string | null | undefined; createdDateTime?: string
+        | undefined; failureReason?: string | ... 1 more ... | undefined; ... 4
+        more ...; '@odata.type': string; } & { ...; }[] } & { @odata.type:
+        "#microsoft.graph.identityGovernance.task" } } & { @odata.type:
+        "#microsoft.graph.identityGovernance.taskProcessingResult" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], taskProcessingResult-id:
+            string, taskReport-id: string, workflow-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /identityGovernance/lifecycleWorkflows/deletedItems/workflows/{workflow-id}/taskReports/{taskReport-id}/taskProcessingResults/{taskProcessingResult-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, completedDateTime?: string | null, createdDateTime?:
+          string, failureReason?: string | null, processingStatus?:
+          "unknownFutureValue" | "canceled" | "queued" | "inProgress" |
+          "completed" | "completedWithErrors" | "failed", startedDateTime?:
+          string | null, subject?: Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, deletedDateTime?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.directoryObject" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          aboutMe?: string | null, accountEnabled?: boolean | null, activities?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          activationUrl?: function, activitySourceHost?: function,
+          appActivityId?: function, appDisplayName?: function, contentInfo?:
+          unknown, contentUrl?: function, createdDateTime?: function,
+          expirationDateTime?: function, fallbackUrl?: function, historyItems?:
+          function, lastModifiedDateTime?: function, status?: function,
+          userTimezone?: function, visualElements?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.userActivity" />"
+          })[], ageGroup?: string | null, agreementAcceptances?: (Omit&lt;{
+          <xref uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, agreementFileId?:
+          function, agreementId?: function, deviceDisplayName?: function,
+          deviceId?: function, deviceOSType?: function, deviceOSVersion?:
+          function, expirationDateTime?: function, recordedDateTime?: function,
+          state?: function, userDisplayName?: function, userEmail?: function,
+          userId?: function, userPrincipalName?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.agreementAcceptance" />" })[],
+          appRoleAssignments?: (Omit&lt;... & ... & ..., "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          appRoleId?: function, createdDateTime?: function,
+          principalDisplayName?: function, principalId?: function,
+          principalType?: function, resourceDisplayName?: function, resourceId?:
+          function })[], assignedLicenses?: { <xref uid="@odata.type" />:
+          string, disabledPlans?: ...[], skuId?: string | null }[],
+          assignedPlans?: { <xref uid="@odata.type" />: string,
+          assignedDateTime?: string | null, capabilityStatus?: string | null,
+          service?: string | null, servicePlanId?: string | null }[],
+          authentication?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          emailMethods?: ...[], fido2Methods?: ...[], methods?: ...[],
+          microsoftAuthenticatorMethods?: ...[], operations?: ...[],
+          passwordMethods?: ...[], phoneMethods?: ...[],
+          platformCredentialMethods?: ...[], softwareOathMethods?: ...[],
+          temporaryAccessPassMethods?: ...[], windowsHelloForBusinessMethods?:
+          ...[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authentication" />" }) | null,
+          authorizationInfo?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, certificateUserIds?: function[] } |
+          null, birthday?: string, businessPhones?: string[], calendar?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, allowedOnlineMeetingProviders?: ...[],
+          calendarPermissions?: ...[], calendarView?: ...[], canEdit?: boolean |
+          null, canShare?: boolean | null, canViewPrivateItems?: boolean | null,
+          changeKey?: string | null, color?: Record&lt;..., ...&gt; | "auto" |
+          "lightBlue" | "lightGreen" | "lightOrange" | "lightGray" |
+          "lightYellow" | "lightTeal" | "lightPink" | "lightBrown" | "lightRed"
+          | "maxColor" | null, defaultOnlineMeetingProvider?: Record&lt;...,
+          ...&gt; | "unknown" | "skypeForBusiness" | "skypeForConsumer" |
+          "teamsForBusiness" | null, events?: ...[], hexColor?: string | null,
+          isDefaultCalendar?: boolean | null, isRemovable?: boolean | null,
+          isTallyingResponses?: boolean | null, multiValueExtendedProperties?:
+          ...[], name?: string | null, owner?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., address?: ..., name?: ... } | null,
+          singleValueExtendedProperties?: ...[] } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.calendar" />" }) | null,
+          calendarGroups?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, calendars?: function, changeKey?: function, classId?:
+          function, name?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.calendarGroup" />" })[], calendars?: (Omit&lt;{
+          <xref uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string,
+          allowedOnlineMeetingProviders?: function, calendarPermissions?:
+          function, calendarView?: function, canEdit?: function, canShare?:
+          function, canViewPrivateItems?: function, changeKey?: function,
+          color?: function, defaultOnlineMeetingProvider?: function, events?:
+          function, hexColor?: function, isDefaultCalendar?: function,
+          isRemovable?: function, isTallyingResponses?: function,
+          multiValueExtendedProperties?: function, name?: function, owner?:
+          function, singleValueExtendedProperties?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.calendar" />" })[],
+          calendarView?: (Omit&lt;... & ... & ..., "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string,
+          allowNewTimeProposals?: function, attachments?: function, attendees?:
+          function, body?: function, bodyPreview?: function, calendar?:
+          function, cancelledOccurrences?: function, end?: function,
+          exceptionOccurrences?: (Omit&lt;Omit&lt;{ id?: string | undefined;
+          '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ categories?: (string | null)[] | undefined;
+          changeKey?: string | null | undefined; createdDateTime?: string | ...
+          1 more ... | undefined; lastModifiedDateTime?: string | ... 1 more ...
+          | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@oda..." />, extensions?: function, hasAttachments?: function,
+          hideAttendees?: function, iCalUId?: function, importance?: function,
+          instances?: (Omit&lt;Omit&lt;{ id?: string | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; &
+          Omit&lt;{ categories?: (string | null)[] | undefined; changeKey?:
+          string | null | undefined; createdDateTime?: string | ... 1 more ... |
+          undefined; lastModifiedDateTime?: string | ... 1 more ... | undefined;
+          '<xref uid="@odata.type" />': string; }, "<xref uid="@oda..." />,
+          isAllDay?: function, isCancelled?: function, isDraft?: function,
+          isOnlineMeeting?: function, isOrganizer?: function, isReminderOn?:
+          function, location?: function, locations?: function,
+          multiValueExtendedProperties?: function, onlineMeeting?: function,
+          onlineMeetingProvider?: function, onlineMeetingUrl?: function,
+          organizer?: function, originalEndTimeZone?: function, originalStart?:
+          function, originalStartTimeZone?: function, recurrence?: function,
+          reminderMinutesBeforeStart?: function, responseRequested?: function,
+          responseStatus?: function, sensitivity?: function, seriesMasterId?:
+          function, showAs?: function, singleValueExtendedProperties?: function,
+          start?: function, subject?: function, transactionId?: function, type?:
+          function, webLink?: function })[], chats?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, chatType?: function,
+          createdDateTime?: function, installedApps?: function,
+          isHiddenForAllMembers?: function, lastMessagePreview?: function,
+          lastUpdatedDateTime?: function, members?: function, messages?:
+          function, onlineMeetingInfo?: function, permissionGrants?: function,
+          pinnedMessages?: function, tabs?: function, tenantId?: function,
+          topic?: function, viewpoint?: function, webUrl?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.chat" />" })[],
+          city?: string | null, cloudClipboard?: Record&lt;string, never&gt; |
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          items?: ...[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.cloudClipboardRoot" />" }) | null, cloudPCs?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          aadDeviceId?: function, displayName?: function,
+          gracePeriodEndDateTime?: function, imageDisplayName?: function,
+          lastModifiedDateTime?: function, managedDeviceId?: function,
+          managedDeviceName?: function, onPremisesConnectionName?: function,
+          provisioningPolicyId?: function, provisioningPolicyName?: function,
+          provisioningType?: function, servicePlanId?: function,
+          servicePlanName?: function, userPrincipalName?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.cloudPC" />" })[],
+          companyName?: string | null, consentProvidedForMinor?: string | null,
+          contactFolders?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, childFolders?: (Omit&lt;{ id?: string | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; & {
+          displayName?: string | null | undefined; parentFolderId?: string |
+          null | undefined; childFolders?: (Omit&lt;...&gt; & ... 1 more ... & {
+          ...; })[] | undefined; contacts?: (Omit&lt;...&gt; & { ...; })[] |
+          undefined; multiValueExtendedProperties?: (<xref uid="Omi..." />,
+          contacts?: function, displayName?: function,
+          multiValueExtendedProperties?: function, parentFolderId?: function,
+          singleValueExtendedProperties?: function } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.contactFolder" />" })[], contacts?:
+          (Omit&lt;... & ... & ..., "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, assistantName?: function, birthday?:
+          function, businessAddress?: function, businessHomePage?: function,
+          businessPhones?: function, children?: function, companyName?:
+          function, department?: function, displayName?: function,
+          emailAddresses?: function, extensions?: function, fileAs?: function,
+          generation?: function, givenName?: function, homeAddress?: function,
+          homePhones?: function, imAddresses?: function, initials?: function,
+          jobTitle?: function, manager?: function, middleName?: function,
+          mobilePhone?: function, multiValueExtendedProperties?: function,
+          nickName?: function, officeLocation?: function, otherAddress?:
+          function, parentFolderId?: function, personalNotes?: function, photo?:
+          function, profession?: function, singleValueExtendedProperties?:
+          function, spouseName?: function, surname?: function, title?: function,
+          yomiCompanyName?: function, yomiGivenName?: function, yomiSurname?:
+          function })[], country?: string | null, createdDateTime?: string |
+          null, createdObjects?: (Omit&lt;{ <xref uid="@odata.type" />: ...,
+          id?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ..., deletedDateTime?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryObject" />" })[], creationType?: string
+          | null, customSecurityAttributes?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string } | null,
+          dataSecurityAndGovernance?: Record&lt;string, never&gt; |
+          (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, activities?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null, protectionScopes?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.userDataSecurityAndGovernance" />" }) |
+          null, department?: string | null, deviceEnrollmentLimit?: number,
+          deviceManagementTroubleshootingEvents?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., correlationId?:
+          ..., eventDateTime?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementTroubleshootingEvent" />" })[],
+          directReports?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ..., deletedDateTime?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryObject" />" })[], displayName?: string |
+          null, drive?: Record&lt;string, never&gt; | (Omit&lt;Omit&lt;...,
+          ...&gt; & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, bundles?: ...[], driveType?: string | null, following?: ...[],
+          items?: ...[], list?: Record&lt;..., ...&gt; | (... & ... & ...) |
+          null, owner?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., application?: ..., device?: ..., user?: ... } | null, quota?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., deleted?:
+          ..., remaining?: ..., state?: ..., storagePlanInformation?: ...,
+          total?: ..., used?: ... } | null, root?: Record&lt;..., ...&gt; | (...
+          & ... & ...) | null, sharePointIds?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., listId?: ..., listItemId?: ...,
+          listItemUniqueId?: ..., siteId?: ..., siteUrl?: ..., tenantId?: ...,
+          webId?: ... } | null, special?: ...[], system?: Record&lt;..., ...&gt;
+          | { <xref uid="@odata.type" />: ... } | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.drive" />" }) |
+          null, drives?: (Omit&lt;... & ... & ..., "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, bundles?: function,
+          driveType?: function, following?: function, items?: function, list?:
+          function, owner?: function, quota?: function, root?: function,
+          sharePointIds?: function, special?: function, system?: function } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.drive" />"
+          })[], employeeExperience?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          learningCourseActivities?: ...[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.employeeExperienceUser" />" }) | null,
+          employeeHireDate?: string | null, employeeId?: string | null,
+          employeeLeaveDateTime?: string | null, employeeOrgData?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          costCenter?: string | null, division?: string | null } | null,
+          employeeType?: string | null, events?: (Omit&lt;... & ... & ...,
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, allowNewTimeProposals?: function, attachments?: function,
+          attendees?: function, body?: function, bodyPreview?: function,
+          calendar?: function, cancelledOccurrences?: function, end?: function,
+          exceptionOccurrences?: (Omit&lt;Omit&lt;{ id?: string | undefined;
+          '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ categories?: (string | null)[] | undefined;
+          changeKey?: string | null | undefined; createdDateTime?: string | ...
+          1 more ... | undefined; lastModifiedDateTime?: string | ... 1 more ...
+          | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@oda..." />, extensions?: function, hasAttachments?: function,
+          hideAttendees?: function, iCalUId?: function, importance?: function,
+          instances?: (Omit&lt;Omit&lt;{ id?: string | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; &
+          Omit&lt;{ categories?: (string | null)[] | undefined; changeKey?:
+          string | null | undefined; createdDateTime?: string | ... 1 more ... |
+          undefined; lastModifiedDateTime?: string | ... 1 more ... | undefined;
+          '<xref uid="@odata.type" />': string; }, "<xref uid="@oda..." />,
+          isAllDay?: function, isCancelled?: function, isDraft?: function,
+          isOnlineMeeting?: function, isOrganizer?: function, isReminderOn?:
+          function, location?: function, locations?: function,
+          multiValueExtendedProperties?: function, onlineMeeting?: function,
+          onlineMeetingProvider?: function, onlineMeetingUrl?: function,
+          organizer?: function, originalEndTimeZone?: function, originalStart?:
+          function, originalStartTimeZone?: function, recurrence?: function,
+          reminderMinutesBeforeStart?: function, responseRequested?: function,
+          responseStatus?: function, sensitivity?: function, seriesMasterId?:
+          function, showAs?: function, singleValueExtendedProperties?: function,
+          start?: function, subject?: function, transactionId?: function, type?:
+          function, webLink?: function })[], extensions?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.extension" />" })[], externalUserState?: string |
+          null, externalUserStateChangeDateTime?: string | null, faxNumber?:
+          string | null, followedSites?: (Omit&lt;... & ... & ..., "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          analytics?: function, columns?: function, contentTypes?: function,
+          displayName?: function, drive?: function, drives?: function, error?:
+          function, externalColumns?: function, isPersonalSite?: function,
+          items?: function, lists?: function, onenote?: function, operations?:
+          function, pages?: function, permissions?: function, root?: function,
+          sharepointIds?: function, siteCollection?: function, sites?:
+          (Omit&lt;Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type"
+          />': string; }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          createdBy?: Record&lt;string, never&gt; | { application?:
+          Record&lt;string, never&gt; | { ...; } | null | undefined; device?:
+          Record&lt;...&gt; | ... 2 more ... | undefined; user?:
+          Record&lt;...&gt; | ... 2 more ... | undefined; '<xref
+          uid="@odata.type" />': string; }..., termStore?: function,
+          termStores?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.site" />" })[], givenName?: string | null,
+          hireDate?: string, identities?: { <xref uid="@odata.type" />: string,
+          issuer?: string | null, issuerAssignedId?: string | null, signInType?:
+          string | null }[], imAddresses?: (string | null)[],
+          inferenceClassification?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          overrides?: ...[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.inferenceClassification" />" }) | null,
+          insights?: Record&lt;string, never&gt; | (Omit&lt;Omit&lt;..., ...&gt;
+          & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string }) |
+          null, interests?: (string | null)[], isManagementRestricted?: boolean
+          | null, isResourceAccount?: boolean | null, jobTitle?: string | null,
+          joinedTeams?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, allChannels?: function, channels?: function, classification?:
+          function, createdDateTime?: function, description?: function,
+          displayName?: function, firstChannelName?: function, funSettings?:
+          function, group?: function, guestSettings?: function,
+          incomingChannels?: function, installedApps?: function, internalId?:
+          function, isArchived?: function, members?: function, memberSettings?:
+          function, messagingSettings?: function, operations?: function,
+          permissionGrants?: function, photo?: function, primaryChannel?:
+          function, schedule?: function, specialization?: function, summary?:
+          function, tags?: function, template?: function, tenantId?: function,
+          visibility?: function, webUrl?: function } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.team" />" })[],
+          lastPasswordChangeDateTime?: string | null,
+          legalAgeGroupClassification?: string | null, licenseAssignmentStates?:
+          { <xref uid="@odata.type" />: string, assignedByGroup?: string | null,
+          disabledPlans?: ...[], error?: string | null, lastUpdatedDateTime?:
+          string | null, skuId?: string | null, state?: string | null }[],
+          licenseDetails?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, servicePlans?: function, skuId?: function, skuPartNumber?:
+          function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.licenseDetails" />" })[], mail?: string | null,
+          mailboxSettings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, archiveFolder?: string | null,
+          automaticRepliesSetting?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, externalAudience?: function,
+          externalReplyMessage?: function, internalReplyMessage?: function,
+          scheduledEndDateTime?: function, scheduledStartDateTime?: function,
+          status?: function } | null, dateFormat?: string | null,
+          delegateMeetingMessageDeliveryOptions?: Record&lt;string, never&gt; |
+          "sendToDelegateAndInformationToPrincipal" |
+          "sendToDelegateAndPrincipal" | "sendToDelegateOnly" | null, language?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          displayName?: function, locale?: function } | null, timeFormat?:
+          string | null, timeZone?: string | null, userPurpose?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "user" | "shared"
+          | "linked" | "room" | "equipment" | "others" | null, workingHours?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          daysOfWeek?: function, endTime?: function, startTime?: function,
+          timeZone?: function } | null } | null, mailFolders?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ...,
+          childFolderCount?: ..., childFolders?: ..., displayName?: ...,
+          isHidden?: ..., messageRules?: ..., messages?: ...,
+          multiValueExtendedProperties?: ..., parentFolderId?: ...,
+          singleValueExtendedProperties?: ..., totalItemCount?: ...,
+          unreadItemCount?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.mailFolder" />"
+          })[], mailNickname?: string | null, managedAppRegistrations?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ...,
+          appIdentifier?: ..., applicationVersion?: ..., appliedPolicies?: ...,
+          createdDateTime?: ..., deviceName?: ..., deviceTag?: ..., deviceType?:
+          ..., flaggedReasons?: ..., intendedPolicies?: ..., lastSyncDateTime?:
+          ..., managementSdkVersion?: ..., operations?: ..., platformVersion?:
+          ..., userId?: ..., version?: ... }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedAppRegistration" />" })[],
+          managedDevices?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, activationLockBypassCode?: function,
+          androidSecurityPatchLevel?: function, azureADDeviceId?: function,
+          azureADRegistered?: function,
+          complianceGracePeriodExpirationDateTime?: function, complianceState?:
+          function, configurationManagerClientEnabledFeatures?: function,
+          deviceActionResults?: function, deviceCategory?: function,
+          deviceCategoryDisplayName?: function, deviceCompliancePolicyStates?:
+          function, deviceConfigurationStates?: function, deviceEnrollmentType?:
+          function, deviceHealthAttestationState?: function, deviceName?:
+          function, deviceRegistrationState?: function, easActivated?: function,
+          easActivationDateTime?: function, easDeviceId?: function,
+          emailAddress?: function, enrolledDateTime?: function,
+          enrollmentProfileName?: function, ethernetMacAddress?: function,
+          exchangeAccessState?: function, exchangeAccessStateReason?: function,
+          exchangeLastSuccessfulSyncDateTime?: function,
+          freeStorageSpaceInBytes?: function, iccid?: function, imei?: function,
+          isEncrypted?: function, isSupervised?: function, jailBroken?:
+          function, lastSyncDateTime?: function, logCollectionRequests?:
+          function, managedDeviceName?: function, managedDeviceOwnerType?:
+          function, managementAgent?: function,
+          managementCertificateExpirationDate?: function, managementState?:
+          function, manufacturer?: function, meid?: function, model?: function,
+          notes?: function, operatingSystem?: function, osVersion?: function,
+          partnerReportedThreatState?: function, phoneNumber?: function,
+          physicalMemoryInBytes?: function,
+          remoteAssistanceSessionErrorDetails?: function,
+          remoteAssistanceSessionUrl?: function, requireUserEnrollmentApproval?:
+          function, serialNumber?: function, subscriberCarrier?: function,
+          totalStorageSpaceInBytes?: function, udid?: function,
+          userDisplayName?: function, userId?: function, userPrincipalName?:
+          function, users?: function, wiFiMacAddress?: function,
+          windowsProtectionState?: function } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.managedDevice" />" })[], manager?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, deletedDateTime?: function },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.directoryObject" />" }) | null,
+          memberOf?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+          "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+          />: ..., deletedDateTime?: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryObject" />" })[], messages?:
+          (Omit&lt;... & ... & ..., "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: ..., attachments?: ..., bccRecipients?:
+          ..., body?: ..., bodyPreview?: ..., ccRecipients?: ...,
+          conversationId?: ..., conversationIndex?: ..., extensions?: ...,
+          flag?: ..., from?: ..., hasAttachments?: ..., importance?: ...,
+          inferenceClassification?: ..., internetMessageHeaders?: ...,
+          internetMessageId?: ..., isDeliveryReceiptRequested?: ..., isDraft?:
+          ..., isRead?: ..., isReadReceiptRequested?: ...,
+          multiValueExtendedProperties?: ..., parentFolderId?: ...,
+          receivedDateTime?: ..., replyTo?: ..., sender?: ..., sentDateTime?:
+          ..., singleValueExtendedProperties?: ..., subject?: ...,
+          toRecipients?: ..., uniqueBody?: ..., webLink?: ... }, "<xref
+          uid="@odata.type" />"&gt;)[], mobilePhone?: string | null, mySite?:
+          string | null, oauth2PermissionGrants?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, clientId?: function,
+          consentType?: function, principalId?: function, resourceId?: function,
+          scope?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.oAuth2PermissionGrant" />" })[], officeLocation?:
+          string | null, onenote?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          notebooks?: ...[], operations?: ...[], pages?: ...[], resources?:
+          ...[], sectionGroups?: ...[], sections?: ...[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.onenote" />" }) |
+          null, onlineMeetings?: (Omit&lt;... & ... & ..., "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          attendeeReport?: function, broadcastSettings?: function,
+          creationDateTime?: function, endDateTime?: function, externalId?:
+          function, isBroadcast?: function, meetingTemplateId?: function,
+          participants?: function, recordings?: function, startDateTime?:
+          function, transcripts?: function })[], onPremisesDistinguishedName?:
+          string | null, onPremisesDomainName?: string | null,
+          onPremisesExtensionAttributes?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, extensionAttribute1?: string | null,
+          extensionAttribute10?: string | null, extensionAttribute11?: string |
+          null, extensionAttribute12?: string | null, extensionAttribute13?:
+          string | null, extensionAttribute14?: string | null,
+          extensionAttribute15?: string | null, extensionAttribute2?: string |
+          null, extensionAttribute3?: string | null, extensionAttribute4?:
+          string | null, extensionAttribute5?: string | null,
+          extensionAttribute6?: string | null, extensionAttribute7?: string |
+          null, extensionAttribute8?: string | null, extensionAttribute9?:
+          string | null } | null, onPremisesImmutableId?: string | null,
+          onPremisesLastSyncDateTime?: string | null,
+          onPremisesProvisioningErrors?: { <xref uid="@odata.type" />: string,
+          category?: string | null, occurredDateTime?: string | null,
+          propertyCausingError?: string | null, value?: string | null }[],
+          onPremisesSamAccountName?: string | null,
+          onPremisesSecurityIdentifier?: string | null, onPremisesSyncEnabled?:
+          boolean | null, onPremisesUserPrincipalName?: string | null,
+          otherMails?: string[], outlook?: Record&lt;string, never&gt; |
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          masterCategories?: ...[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.outlookUser" />" }) | null, ownedDevices?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ...,
+          deletedDateTime?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.directoryObject"
+          />" })[], ownedObjects?: (Omit&lt;{ <xref uid="@odata.type" />: ...,
+          id?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ..., deletedDateTime?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryObject" />" })[], passwordPolicies?:
+          string | null, passwordProfile?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, forceChangePasswordNextSignIn?: boolean
+          | null, forceChangePasswordNextSignInWithMfa?: boolean | null,
+          password?: string | null } | null, pastProjects?: (string | null)[],
+          people?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, birthday?: function, companyName?: function, department?:
+          function, displayName?: function, givenName?: function, imAddress?:
+          function, isFavorite?: function, jobTitle?: function, officeLocation?:
+          function, personNotes?: function, personType?: function, phones?:
+          function, postalAddresses?: function, profession?: function,
+          scoredEmailAddresses?: function, surname?: function,
+          userPrincipalName?: function, websites?: function, yomiCompany?:
+          function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.person" />" })[], permissionGrants?: (Omit&lt;...
+          & ... & ..., "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, clientAppId?: function, clientId?:
+          function, permission?: function, permissionType?: function,
+          resourceAppId?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.resourceSpecificPermissionGrant" />" })[],
+          photo?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          height?: number | null, width?: number | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.profilePhoto" />"
+          }) | null, photos?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?:
+          ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, height?: function, width?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.profilePhoto" />"
+          })[], planner?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          plans?: ...[], tasks?: ...[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.plannerUser" />" }) | null, postalCode?: string |
+          null, preferredDataLocation?: string | null, preferredLanguage?:
+          string | null, preferredName?: string | null, presence?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, activity?: string | null, availability?:
+          string | null, outOfOfficeSettings?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., isOutOfOffice?: ..., message?: ... } |
+          null, sequenceNumber?: string | null, statusMessage?: Record&lt;...,
+          ...&gt; | { <xref uid="@odata.type" />: ..., expiryDateTime?: ...,
+          message?: ..., publishedDateTime?: ... } | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.presence" />" }) |
+          null, print?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, recentPrinterShares?: (... & ... & ...)[] } | null,
+          provisionedPlans?: { <xref uid="@odata.type" />: string,
+          capabilityStatus?: string | null, provisioningStatus?: string | null,
+          service?: string | null }[], proxyAddresses?: string[],
+          registeredDevices?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?:
+          ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ..., deletedDateTime?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryObject" />" })[], responsibilities?:
+          (string | null)[], schools?: (string | null)[], scopedRoleMemberOf?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          administrativeUnitId?: function, roleId?: function, roleMemberInfo?:
+          function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.scopedRoleMembership" />" })[],
+          securityIdentifier?: string | null, serviceProvisioningErrors?: {
+          <xref uid="@odata.type" />: string, createdDateTime?: string | null,
+          isResolved?: boolean | null, serviceInstance?: string | null }[],
+          settings?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          contributionToContentDiscoveryAsOrganizationDisabled?: boolean,
+          contributionToContentDiscoveryDisabled?: boolean, itemInsights?:
+          Record&lt;..., ...&gt; | (... & ... & ...) | null, shiftPreferences?:
+          Record&lt;..., ...&gt; | (... & ... & ...) | null, storage?:
+          Record&lt;..., ...&gt; | (... & ... & ...) | null, windows?: ...[] } &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userSettings" />" }) | null, showInAddressList?:
+          boolean | null, signInActivity?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, lastNonInteractiveSignInDateTime?:
+          string | null, lastNonInteractiveSignInRequestId?: string | null,
+          lastSignInDateTime?: string | null, lastSignInRequestId?: string |
+          null, lastSuccessfulSignInDateTime?: string | null,
+          lastSuccessfulSignInRequestId?: string | null } | null,
+          signInSessionsValidFromDateTime?: string | null, skills?: (string |
+          null)[], solutions?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          workingTimeSchedule?: Record&lt;..., ...&gt; | (... & ... & ...) |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userSolutionRoot" />" }) | null, sponsors?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ...,
+          deletedDateTime?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.directoryObject"
+          />" })[], state?: string | null, streetAddress?: string | null,
+          surname?: string | null, teamwork?: Record&lt;string, never&gt; |
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          associatedTeams?: ...[], installedApps?: ...[], locale?: string |
+          null, region?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userTeamwork" />" }) | null, todo?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, lists?: ...[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.todo" />" }) |
+          null, transitiveMemberOf?: (Omit&lt;{ <xref uid="@odata.type" />: ...,
+          id?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ..., deletedDateTime?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryObject" />" })[], usageLocation?: string
+          | null, userPrincipalName?: string | null, userType?: string | null }
+          & { <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.user" />"
+          }, task?: Omit&lt;{ <xref uid="@odata.type" />: string, id?: string },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, arguments?: { <xref uid="@odata.type" />: string, name?:
+          string, value?: string | null }[], category?: "unknownFutureValue" |
+          "joiner" | "leaver" | "mover", continueOnError?: boolean,
+          description?: string | null, displayName?: string, executionSequence?:
+          number, isEnabled?: boolean, taskDefinitionId?: string,
+          taskProcessingResults?: Omit&lt;{ id?: string | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; & {
+          completedDateTime?: string | null | undefined; createdDateTime?:
+          string | undefined; failureReason?: string | ... 1 more ... |
+          undefined; ... 4 more ...; '<xref uid="@odata.type" />': string; } & {
+          ...; }[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityGovernance.task" />" } } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityGovernance.taskProcessingResult" />"
+          }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, taskReport-id: string, workflow-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.identityGovernance.lifecycleWorkflows.deletedItems.workflows.taskReports.taskProcessingResults.list
     package: '@microsoft/teams.graph-endpoints'
@@ -48,17 +1128,176 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /identityGovernance/lifecycleWorkflows/deletedItems/workflows/{workflow-id}/taskReports/{taskReport-id}/taskProcessingResults"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, taskReport-id: string, workflow-id:
+        string }): EndpointRequest<{ @odata.count?: number | null,
+        @odata.nextLink?: string | null } & { value?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        completedDateTime?: string | null, createdDateTime?: string,
+        failureReason?: string | null, processingStatus?: "unknownFutureValue" |
+        "canceled" | "queued" | "inProgress" | "completed" |
+        "completedWithErrors" | "failed", startedDateTime?: string | null,
+        subject?: Omit<... & ... & ..., "@odata.type"> & { @odata.type: string,
+        aboutMe?: function, accountEnabled?: function, activities?: function,
+        ageGroup?: function, agreementAcceptances?: function,
+        appRoleAssignments?: function, assignedLicenses?: function,
+        assignedPlans?: function, authentication?: function, authorizationInfo?:
+        function, birthday?: function, businessPhones?: function, calendar?:
+        function, calendarGroups?: function, calendars?: function,
+        calendarView?: function, chats?: function, city?: function,
+        cloudClipboard?: function, cloudPCs?: function, companyName?: function,
+        consentProvidedForMinor?: function, contactFolders?: function,
+        contacts?: function, country?: function, createdDateTime?: function,
+        createdObjects?: function, creationType?: function,
+        customSecurityAttributes?: function, dataSecurityAndGovernance?:
+        function, department?: function, deviceEnrollmentLimit?: function,
+        deviceManagementTroubleshootingEvents?: function, directReports?:
+        function, displayName?: function, drive?: function, drives?: function,
+        employeeExperience?: function, employeeHireDate?: function, employeeId?:
+        function, employeeLeaveDateTime?: function, employeeOrgData?: function,
+        employeeType?: function, events?: function, extensions?: function,
+        externalUserState?: function, externalUserStateChangeDateTime?:
+        function, faxNumber?: function, followedSites?: function, givenName?:
+        function, hireDate?: function, identities?: function, imAddresses?:
+        function, inferenceClassification?: function, insights?: function,
+        interests?: function, isManagementRestricted?: function,
+        isResourceAccount?: function, jobTitle?: function, joinedTeams?:
+        function, lastPasswordChangeDateTime?: function,
+        legalAgeGroupClassification?: function, licenseAssignmentStates?:
+        function, licenseDetails?: function, mail?: function, mailboxSettings?:
+        function, mailFolders?: function, mailNickname?: function,
+        managedAppRegistrations?: function, managedDevices?: function, manager?:
+        function, memberOf?: function, messages?: function, mobilePhone?:
+        function, mySite?: function, oauth2PermissionGrants?: function,
+        officeLocation?: function, onenote?: function, onlineMeetings?:
+        function, onPremisesDistinguishedName?: function, onPremisesDomainName?:
+        function, onPremisesExtensionAttributes?: function,
+        onPremisesImmutableId?: function, onPremisesLastSyncDateTime?: function,
+        onPremisesProvisioningErrors?: function, onPremisesSamAccountName?:
+        function, onPremisesSecurityIdentifier?: function,
+        onPremisesSyncEnabled?: function, onPremisesUserPrincipalName?:
+        function, otherMails?: function, outlook?: function, ownedDevices?:
+        function, ownedObjects?: function, passwordPolicies?: function,
+        passwordProfile?: function, pastProjects?: function, people?: function,
+        permissionGrants?: function, photo?: function, photos?: function,
+        planner?: function, postalCode?: function, preferredDataLocation?:
+        function, preferredLanguage?: function, preferredName?: function,
+        presence?: function, print?: function, provisionedPlans?: function,
+        proxyAddresses?: function, registeredDevices?: function,
+        responsibilities?: function, schools?: function, scopedRoleMemberOf?:
+        function, securityIdentifier?: function, serviceProvisioningErrors?:
+        function, settings?: function, showInAddressList?: function,
+        signInActivity?: function, signInSessionsValidFromDateTime?: function,
+        skills?: function, solutions?: function, sponsors?: function, state?:
+        function, streetAddress?: function, surname?: function, teamwork?:
+        function, todo?: function, transitiveMemberOf?: function,
+        usageLocation?: function, userPrincipalName?: function, userType?:
+        function } & { @odata.type: "#microsoft.graph.user" }, task?: Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        arguments?: function, category?: function, continueOnError?: function,
+        description?: function, displayName?: function, executionSequence?:
+        function, isEnabled?: function, taskDefinitionId?: function,
+        taskProcessingResults?: (Omit<{ id?: string | undefined; '@odata.type':
+        string; }, "@odata.type"> & { completedDateTime?: string | null |
+        undefined; createdDateTime?: string | undefined; failureReason?: string
+        | ... 1 more ... | undefined; ... 4 more ...; '@odata.type': string; } &
+        { ...; })[] | undefined } & { @odata.type:
+        "#microsoft.graph.identityGovernance.task" } } & { @odata.type:
+        "#microsoft.graph.identityGovernance.taskProcessingResult" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, taskReport-id: string, workflow-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /identityGovernance/lifecycleWorkflows/deletedItems/workflows/{workflow-id}/taskReports/{taskReport-id}/taskProcessingResults"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          completedDateTime?: string | null, createdDateTime?: string,
+          failureReason?: string | null, processingStatus?: "unknownFutureValue"
+          | "canceled" | "queued" | "inProgress" | "completed" |
+          "completedWithErrors" | "failed", startedDateTime?: string | null,
+          subject?: Omit&lt;... & ... & ..., "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: string, aboutMe?: function,
+          accountEnabled?: function, activities?: function, ageGroup?: function,
+          agreementAcceptances?: function, appRoleAssignments?: function,
+          assignedLicenses?: function, assignedPlans?: function,
+          authentication?: function, authorizationInfo?: function, birthday?:
+          function, businessPhones?: function, calendar?: function,
+          calendarGroups?: function, calendars?: function, calendarView?:
+          function, chats?: function, city?: function, cloudClipboard?:
+          function, cloudPCs?: function, companyName?: function,
+          consentProvidedForMinor?: function, contactFolders?: function,
+          contacts?: function, country?: function, createdDateTime?: function,
+          createdObjects?: function, creationType?: function,
+          customSecurityAttributes?: function, dataSecurityAndGovernance?:
+          function, department?: function, deviceEnrollmentLimit?: function,
+          deviceManagementTroubleshootingEvents?: function, directReports?:
+          function, displayName?: function, drive?: function, drives?: function,
+          employeeExperience?: function, employeeHireDate?: function,
+          employeeId?: function, employeeLeaveDateTime?: function,
+          employeeOrgData?: function, employeeType?: function, events?:
+          function, extensions?: function, externalUserState?: function,
+          externalUserStateChangeDateTime?: function, faxNumber?: function,
+          followedSites?: function, givenName?: function, hireDate?: function,
+          identities?: function, imAddresses?: function,
+          inferenceClassification?: function, insights?: function, interests?:
+          function, isManagementRestricted?: function, isResourceAccount?:
+          function, jobTitle?: function, joinedTeams?: function,
+          lastPasswordChangeDateTime?: function, legalAgeGroupClassification?:
+          function, licenseAssignmentStates?: function, licenseDetails?:
+          function, mail?: function, mailboxSettings?: function, mailFolders?:
+          function, mailNickname?: function, managedAppRegistrations?: function,
+          managedDevices?: function, manager?: function, memberOf?: function,
+          messages?: function, mobilePhone?: function, mySite?: function,
+          oauth2PermissionGrants?: function, officeLocation?: function,
+          onenote?: function, onlineMeetings?: function,
+          onPremisesDistinguishedName?: function, onPremisesDomainName?:
+          function, onPremisesExtensionAttributes?: function,
+          onPremisesImmutableId?: function, onPremisesLastSyncDateTime?:
+          function, onPremisesProvisioningErrors?: function,
+          onPremisesSamAccountName?: function, onPremisesSecurityIdentifier?:
+          function, onPremisesSyncEnabled?: function,
+          onPremisesUserPrincipalName?: function, otherMails?: function,
+          outlook?: function, ownedDevices?: function, ownedObjects?: function,
+          passwordPolicies?: function, passwordProfile?: function,
+          pastProjects?: function, people?: function, permissionGrants?:
+          function, photo?: function, photos?: function, planner?: function,
+          postalCode?: function, preferredDataLocation?: function,
+          preferredLanguage?: function, preferredName?: function, presence?:
+          function, print?: function, provisionedPlans?: function,
+          proxyAddresses?: function, registeredDevices?: function,
+          responsibilities?: function, schools?: function, scopedRoleMemberOf?:
+          function, securityIdentifier?: function, serviceProvisioningErrors?:
+          function, settings?: function, showInAddressList?: function,
+          signInActivity?: function, signInSessionsValidFromDateTime?: function,
+          skills?: function, solutions?: function, sponsors?: function, state?:
+          function, streetAddress?: function, surname?: function, teamwork?:
+          function, todo?: function, transitiveMemberOf?: function,
+          usageLocation?: function, userPrincipalName?: function, userType?:
+          function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.user" />" }, task?: Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, arguments?: function,
+          category?: function, continueOnError?: function, description?:
+          function, displayName?: function, executionSequence?: function,
+          isEnabled?: function, taskDefinitionId?: function,
+          taskProcessingResults?: (Omit&lt;{ id?: string | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; & {
+          completedDateTime?: string | null | undefined; createdDateTime?:
+          string | undefined; failureReason?: string | ... 1 more ... |
+          undefined; ... 4 more ...; '<xref uid="@odata.type" />': string; } & {
+          ...; })[] | undefined } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityGovernance.task" />" } } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityGovernance.taskProcessingResult" />" })[]
+          }&gt;
 variables:
   - name: task
     uid: >-
