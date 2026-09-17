@@ -7,12 +7,22 @@ classes:
   - '@microsoft/teams.apps.ActivityContext'
   - '@microsoft/teams.apps.App'
   - '@microsoft/teams.apps.ExpressAdapter'
+  - '@microsoft/teams.apps.FileAccessError'
+  - '@microsoft/teams.apps.FileCredentialError'
+  - '@microsoft/teams.apps.FileError'
+  - '@microsoft/teams.apps.FileScopeNotSupportedError'
+  - '@microsoft/teams.apps.FileUrlExpiredError'
   - '@microsoft/teams.apps.FunctionContext'
   - '@microsoft/teams.apps.HttpPlugin'
+  - '@microsoft/teams.apps.OAuthFlow'
   - '@microsoft/teams.apps.StreamCancelledError'
   - '@microsoft/teams.apps.StreamNotAllowedError'
   - '@microsoft/teams.apps.StreamTimedOutError'
   - '@microsoft/teams.apps.TerminalStreamError'
+  - '@microsoft/teams.apps.TurnState'
+  - '@microsoft/teams.apps.TurnStateContainer'
+  - '@microsoft/teams.apps.TurnStateLoader'
+  - '@microsoft/teams.apps.TurnStateSealedError'
 interfaces:
   - '@microsoft/teams.apps.IActivityContextConstructorArgs'
   - '@microsoft/teams.apps.IActivityErrorContext'
@@ -21,38 +31,64 @@ interfaces:
   - '@microsoft/teams.apps.IActivitySender'
   - '@microsoft/teams.apps.IActivitySentEvent'
   - '@microsoft/teams.apps.IActivitySignInContext'
+  - '@microsoft/teams.apps.IAgent365BaggageOptions'
+  - '@microsoft/teams.apps.IAgent365Scope'
+  - '@microsoft/teams.apps.IAgent365ScopeOptions'
+  - '@microsoft/teams.apps.IAppTokenProvider'
   - '@microsoft/teams.apps.IBaseActivityContext'
   - '@microsoft/teams.apps.IBaseActivityContextOptions'
   - '@microsoft/teams.apps.IClientContext'
   - '@microsoft/teams.apps.ICoreActivity'
+  - '@microsoft/teams.apps.IDownloadedFile'
   - '@microsoft/teams.apps.IErrorEvent'
   - '@microsoft/teams.apps.IEvents'
+  - '@microsoft/teams.apps.IFileReadOptions'
+  - '@microsoft/teams.apps.IFilesAccessor'
   - '@microsoft/teams.apps.IFunctionContext'
+  - '@microsoft/teams.apps.IHtmlWidgetMarkdownOptions'
   - '@microsoft/teams.apps.IHttpServer'
   - '@microsoft/teams.apps.IHttpServerAdapter'
   - '@microsoft/teams.apps.IHttpServerRequest'
   - '@microsoft/teams.apps.IHttpServerResponse'
+  - '@microsoft/teams.apps.IIncomingFile'
+  - '@microsoft/teams.apps.IInjectWidgetProtocolOptions'
   - '@microsoft/teams.apps.IPlugin'
   - '@microsoft/teams.apps.IPluginActivityEvent'
   - '@microsoft/teams.apps.IPluginActivityResponseEvent'
   - '@microsoft/teams.apps.IPluginActivitySentEvent'
   - '@microsoft/teams.apps.IPluginErrorEvent'
   - '@microsoft/teams.apps.IPluginStartEvent'
+  - '@microsoft/teams.apps.ISecurityPolicyWarning'
   - '@microsoft/teams.apps.IStreamer'
   - '@microsoft/teams.apps.IStreamerEvents'
 typeAliases:
+  - '@microsoft/teams.apps.ActivitySenderOptions'
+  - '@microsoft/teams.apps.Agent365BaggageEntries'
+  - '@microsoft/teams.apps.Agent365BaggageInclude'
+  - '@microsoft/teams.apps.Agent365BaggageValue'
+  - '@microsoft/teams.apps.Agent365ScopeOpener'
   - '@microsoft/teams.apps.AppActivityOptions'
   - '@microsoft/teams.apps.AppEvents'
+  - '@microsoft/teams.apps.AppGetAgenticIdentityOptions'
   - '@microsoft/teams.apps.AppOptions'
+  - '@microsoft/teams.apps.AppSendOptions'
+  - '@microsoft/teams.apps.AppTelemetryOptions'
   - '@microsoft/teams.apps.DependencyOptions'
   - '@microsoft/teams.apps.EmitPluginEvent'
   - '@microsoft/teams.apps.EventHandler'
+  - '@microsoft/teams.apps.FileActor'
+  - '@microsoft/teams.apps.FileSource'
   - '@microsoft/teams.apps.HttpMethod'
+  - '@microsoft/teams.apps.HttpPluginOptions'
   - '@microsoft/teams.apps.HttpRouteHandler'
   - '@microsoft/teams.apps.IActivityContext'
   - '@microsoft/teams.apps.IActivityContextOptions'
   - '@microsoft/teams.apps.IFunctionContextOptions'
+  - '@microsoft/teams.apps.IHtmlWidgetPayloadInput'
   - '@microsoft/teams.apps.OAuthSettings'
+  - '@microsoft/teams.apps.OAuthSignInCompleteHandler'
+  - '@microsoft/teams.apps.OAuthSignInFailureHandler'
+  - '@microsoft/teams.apps.OAuthSignInOptions'
   - '@microsoft/teams.apps.OnActivityPluginEvent'
   - '@microsoft/teams.apps.OnErrorPluginEvent'
   - '@microsoft/teams.apps.PluginEvents'
@@ -61,20 +97,73 @@ typeAliases:
   - '@microsoft/teams.apps.PluginWithEvents'
   - '@microsoft/teams.apps.Prefixed'
   - '@microsoft/teams.apps.RouteHandler'
+  - '@microsoft/teams.apps.StateOptions'
   - '@microsoft/teams.apps.Suffixed'
   - '@microsoft/teams.apps.UnionToIntersection'
 variables:
-  - name: DEFAULT_OAUTH_SETTINGS
-    uid: '@microsoft/teams.apps.DEFAULT_OAUTH_SETTINGS'
+  - name: Agent365BaggageKeys
+    uid: '@microsoft/teams.apps.Agent365BaggageKeys'
     package: '@microsoft/teams.apps'
-    summary: ''
+    summary: >-
+      Agent365-compatible baggage keys populated by the SDK. Exported so app
+      code
+
+      can read or extend the same shape when creating scopes with an
+      OpenTelemetry distro.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'DEFAULT_OAUTH_SETTINGS: Required<OAuthSettings>'
+      content: >-
+        Agent365BaggageKeys: { agentBlueprintId:
+        "microsoft.a365.agent.blueprint.id", agentDescription:
+        "gen_ai.agent.description", agenticUserEmail:
+        "microsoft.agent.user.email", agenticUserId: "microsoft.agent.user.id",
+        agentId: "gen_ai.agent.id", agentName: "gen_ai.agent.name", channelLink:
+        "microsoft.channel.link", channelName: "microsoft.channel.name",
+        conversationId: "gen_ai.conversation.id", conversationItemLink:
+        "microsoft.conversation.item.link", operationSource: "service.name",
+        tenantId: "microsoft.tenant.id", userEmail: "user.email", userId:
+        "user.id", userName: "user.name" }
       return:
         description: ''
-        type: Required&lt;<xref uid="@microsoft/teams.apps.OAuthSettings" />&gt;
+        type: >-
+          { agentBlueprintId: "<xref uid="microsoft.a365.agent.blueprint.id"
+          />", agentDescription: "<xref uid="gen_ai.agent.description" />",
+          agenticUserEmail: "<xref uid="microsoft.agent.user.email" />",
+          agenticUserId: "<xref uid="microsoft.agent.user.id" />", agentId:
+          "<xref uid="gen_ai.agent.id" />", agentName: "<xref
+          uid="gen_ai.agent.name" />", channelLink: "<xref
+          uid="microsoft.channel.link" />", channelName: "<xref
+          uid="microsoft.channel.name" />", conversationId: "<xref
+          uid="gen_ai.conversation.id" />", conversationItemLink: "<xref
+          uid="microsoft.conversation.item.link" />", operationSource: "<xref
+          uid="service.name" />", tenantId: "<xref uid="microsoft.tenant.id"
+          />", userEmail: "<xref uid="user.email" />", userId: "<xref
+          uid="user.id" />", userName: "<xref uid="user.name" />" }
+  - name: TeamsBotApplicationTelemetry
+    uid: '@microsoft/teams.apps.TeamsBotApplicationTelemetry'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      OpenTelemetry source names used by the Teams bot application orchestration
+      package.
+
+
+      The SDK does not configure OpenTelemetry providers or exporters. Consumers
+      configure
+
+      their OpenTelemetry SDK/exporters and can use these names to filter
+      app-layer signals.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        TeamsBotApplicationTelemetry: { meterName: "Microsoft.Teams.Apps",
+        tracerName: "Microsoft.Teams.Apps" }
+      return:
+        description: ''
+        type: >-
+          { meterName: "<xref uid="Microsoft.Teams.Apps" />", tracerName: "<xref
+          uid="Microsoft.Teams.Apps" />" }
   - name: allIEventKeys
     uid: '@microsoft/teams.apps.allIEventKeys'
     package: '@microsoft/teams.apps'
@@ -87,6 +176,125 @@ variables:
         description: ''
         type: string[]
 functions:
+  - name: >-
+      buildHtmlWidgetMarkdown(IHtmlWidgetPayloadInput,
+      IHtmlWidgetMarkdownOptions)
+    uid: '@microsoft/teams.apps.buildHtmlWidgetMarkdown'
+    package: '@microsoft/teams.apps'
+    summary: |-
+      Wraps an HTML widget payload in the ` ```html-widget ` markdown code fence
+      format required by Teams to render the widget in a message.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function buildHtmlWidgetMarkdown(payload: IHtmlWidgetPayloadInput,
+        options?: IHtmlWidgetMarkdownOptions): string
+      parameters:
+        - id: payload
+          type: <xref uid="@microsoft/teams.apps.IHtmlWidgetPayloadInput" />
+          description: The widget payload to serialize.
+        - id: options
+          type: <xref uid="@microsoft/teams.apps.IHtmlWidgetMarkdownOptions" />
+          description: Optional text to include before/after the widget block.
+      return:
+        description: |-
+          The markdown string containing the widget code block.
+
+           This API is in preview and may change in the future.
+          Diagnostic: ExperimentalTeamsHtmlWidget
+        type: string
+  - name: >-
+      buildHtmlWidgetMessage(IHtmlWidgetPayloadInput,
+      IHtmlWidgetMarkdownOptions)
+    uid: '@microsoft/teams.apps.buildHtmlWidgetMessage'
+    package: '@microsoft/teams.apps'
+    summary: Builds a message activity containing an HTML widget, ready to be sent.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function buildHtmlWidgetMessage(payload: IHtmlWidgetPayloadInput,
+        options?: IHtmlWidgetMarkdownOptions): { text: string, textFormat:
+        "extendedmarkdown", type: "message" }
+      parameters:
+        - id: payload
+          type: <xref uid="@microsoft/teams.apps.IHtmlWidgetPayloadInput" />
+          description: The widget payload to include in the message.
+        - id: options
+          type: <xref uid="@microsoft/teams.apps.IHtmlWidgetMarkdownOptions" />
+          description: Optional text to include before/after the widget block.
+      return:
+        description: |-
+          An activity object with textFormat set to 'extendedmarkdown'.
+
+           This API is in preview and may change in the future.
+          Diagnostic: ExperimentalTeamsHtmlWidget
+        type: '{ text: string, textFormat: "extendedmarkdown", type: "message" }'
+  - name: createAgent365Scope(false | IAgent365ScopeOptions)
+    uid: '@microsoft/teams.apps.createAgent365Scope'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Builds a reusable
+      [Agent365ScopeOpener](xref:@microsoft/teams.apps.Agent365ScopeOpener)
+      bound to one set of options.
+
+      Pass the same options given to `App`'s `telemetry.agent365` so proactive
+
+      baggage matches reactive baggage, and build one per host to share.
+
+
+      ```ts
+
+      const withScope = createAgent365Scope({ operationSource: 'nightly-digest'
+      });
+
+      await withScope({ agenticIdentity, conversationId }, () => runJob());
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createAgent365Scope(options?: false | IAgent365ScopeOptions):
+        Agent365ScopeOpener
+      parameters:
+        - id: options
+          type: false | <xref uid="@microsoft/teams.apps.IAgent365ScopeOptions" />
+          description: >-
+            host-wide baggage defaults and personal-data policy. Pass
+
+            `false` to disable the bridge, which returns an opener that runs
+            `fn`
+
+            without touching the ambient context.
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.Agent365ScopeOpener" />
+  - name: createStateLoader(boolean | StateOptions | undefined, ILogger)
+    uid: '@microsoft/teams.apps.createStateLoader'
+    package: '@microsoft/teams.apps'
+    summary: Creates the app state loader when state is enabled.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createStateLoader(state: boolean | StateOptions | undefined,
+        logger: ILogger): TurnStateLoader | undefined
+      parameters:
+        - id: state
+          type: >-
+            boolean | <xref uid="@microsoft/teams.apps.StateOptions" /> |
+            undefined
+          description: >-
+            `true` for defaults, options for custom behavior, or a falsy value
+            to disable state.
+        - id: logger
+          type: <xref uid="@microsoft/teams.common.ILogger" />
+          description: Logger used to warn about process-local storage.
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.TurnStateLoader" /> | undefined
   - name: Dependency(DependencyOptions)
     uid: '@microsoft/teams.apps.Dependency'
     package: '@microsoft/teams.apps'
@@ -147,6 +355,51 @@ functions:
         type: >-
           (target: any, propertyKey: string | ClassFieldDecoratorContext) =&gt;
           void
+  - name: injectWidgetProtocol(string, IInjectWidgetProtocolOptions)
+    uid: '@microsoft/teams.apps.injectWidgetProtocol'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Injects the MCP Apps protocol script into widget HTML.
+
+
+      This is a convenience helper - widgets that implement the protocol
+      themselves do not need to use it.
+
+      [buildHtmlWidgetMarkdown](xref:@microsoft/teams.apps.buildHtmlWidgetMarkdown)
+      calls this internally, so most developers won't call it directly.
+
+
+      This sets up:
+
+      - The ui/initialize handshake (required for rendering)
+
+      - Size reporting via ui/notifications/size-changed
+
+      - Optional notification hooks (opt-in via `notifications` option)
+
+
+      If the HTML already contains the protocol (detected by the presence of
+      `ui/initialize`), it is returned unchanged.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function injectWidgetProtocol(html: string, options?:
+        IInjectWidgetProtocolOptions): string
+      parameters:
+        - id: html
+          type: string
+          description: The raw HTML content for the widget.
+        - id: options
+          type: <xref uid="@microsoft/teams.apps.IInjectWidgetProtocolOptions" />
+          description: Optional configuration for the protocol setup.
+      return:
+        description: |-
+          The HTML with the protocol script injected.
+
+           This API is in preview and may change in the future.
+          Diagnostic: ExperimentalTeamsHtmlWidget
+        type: string
   - name: Logger()
     uid: '@microsoft/teams.apps.Logger'
     package: '@microsoft/teams.apps'
@@ -201,7 +454,8 @@ functions:
       Constructs a threaded conversation ID by appending
       `;messageid={messageId}`
 
-      to the conversation ID. This is the format APX uses to route messages
+      to the conversation ID. This is the format the Teams service uses to route
+      messages
 
       to a specific thread.
     remarks: ''
@@ -222,3 +476,119 @@ functions:
           the threaded conversation ID (e.g.
           `19:abc@thread.skype;messageid=123`)
         type: string
+  - name: 'tryGetWidgetModelContext({ value?: any } | null | undefined)'
+    uid: '@microsoft/teams.apps.tryGetWidgetModelContext'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Attempts to extract an MCP UI update-model-context request from a message
+
+      activity's `value`. A widget can request that content be added to the
+      model
+
+      context by reusing the messageBack mechanism (like `Action.Submit` for
+
+      adaptive cards). Such a request arrives as a normal message activity whose
+
+      `value` carries the <xref:IMcpUiUpdateModelContextRequest> payload. This
+      is
+
+      fire-and-forget: the bot does not respond.
+
+
+      This helper is tolerant of two wire shapes:
+        1. The raw request object (`{ method: 'ui/update-model-context', params }`).
+        2. An envelope of the form `{ type: 'widgetModelContext', data: <request> }`.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function tryGetWidgetModelContext(activity: { value?: any } | null |
+        undefined): IMcpUiUpdateModelContextRequest | undefined
+      parameters:
+        - id: activity
+          type: '{ value?: any } | null | undefined'
+          description: A message activity (or any object with a `value` field).
+      return:
+        description: |-
+          The parsed request, or `undefined` if `value` is not a valid
+            update-model-context request.
+
+           This API is in preview and may change in the future.
+          Diagnostic: ExperimentalTeamsHtmlWidget
+        type: >-
+          <xref uid="@microsoft/teams.api.IMcpUiUpdateModelContextRequest" /> |
+          undefined
+  - name: validateSecurityPolicy(string, IHtmlWidgetSecurityPolicy)
+    uid: '@microsoft/teams.apps.validateSecurityPolicy'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Validates that external references in widget HTML are covered by the
+
+      declared security policy. Returns an array of warnings for any
+
+      references to origins not present in the appropriate policy field.
+
+
+      This is a static analysis tool - it cannot catch dynamically constructed
+
+      URLs (e.g. `fetch('https://' + domain)`). Use the `debugCspViolations`
+
+      option on
+      [injectWidgetProtocol](xref:@microsoft/teams.apps.injectWidgetProtocol)
+      for runtime detection.
+
+
+      Note: The CSP keyword `'self'` cannot be validated statically because it
+
+      resolves to the iframe's parent origin at runtime. References that would
+
+      be allowed by `'self'` may still produce warnings.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function validateSecurityPolicy(html: string, policy:
+        IHtmlWidgetSecurityPolicy): ISecurityPolicyWarning[]
+      parameters:
+        - id: html
+          type: string
+          description: The raw HTML content of the widget.
+        - id: policy
+          type: <xref uid="@microsoft/teams.api.IHtmlWidgetSecurityPolicy" />
+          description: The security policy to validate against.
+      return:
+        description: |-
+          An array of warnings. Empty array means no issues found.
+
+           This API is in preview and may change in the future.
+          Diagnostic: ExperimentalTeamsHtmlWidget
+        type: <xref uid="@microsoft/teams.apps.ISecurityPolicyWarning" />[]
+  - name: withAgent365Baggage<T>(Agent365BaggageEntries, () => T)
+    uid: '@microsoft/teams.apps.withAgent365Baggage'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Runs `fn` with the supplied Agent365 baggage layered onto the active
+      context.
+
+      Supplied values win over existing baggage. Use in proactive flows to open
+      an
+
+      identity scope before creating the span it should describe.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function withAgent365Baggage<T>(values: Agent365BaggageEntries, fn: ()
+        => T): T
+      parameters:
+        - id: values
+          type: <xref uid="@microsoft/teams.apps.Agent365BaggageEntries" />
+          description: the baggage entries to set. Blank and non-finite values are skipped.
+        - id: fn
+          type: () =&gt; T
+          description: >-
+            the function to run inside the scope. Its return value is passed
+            through.
+      return:
+        description: ''
+        type: T

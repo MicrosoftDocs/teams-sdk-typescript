@@ -65,7 +65,57 @@ variables:
           EndpointRequest&lt;IEndpoints["POST
           /auditLogs/signIns/dismiss"]["response"]&gt; }
 functions:
-  - name: create(Operation<"/auditLogs/signIns", "post">)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, appDisplayName?: string | null, appId?: string |
+      null, appliedConditionalAccessPolicies?: { @odata.type: string,
+      displayName?: string | null, enforcedGrantControls?: (string | null)[],
+      enforcedSessionControls?: (string | null)[], id?: string | null, result?:
+      Record<string, never> | "success" | "failure" | "unknownFutureValue" |
+      "notApplied" | "notEnabled" | "unknown" | "reportOnlySuccess" |
+      "reportOnlyFailure" | "reportOnlyNotApplied" | "reportOnlyInterrupted" |
+      null }[], clientAppUsed?: string | null, conditionalAccessStatus?:
+      Record<string, never> | "success" | "failure" | "unknownFutureValue" |
+      "notApplied" | null, correlationId?: string | null, createdDateTime?:
+      string, deviceDetail?: Record<string, never> | { @odata.type: string,
+      browser?: string | null, deviceId?: string | null, displayName?: string |
+      null, isCompliant?: boolean | null, isManaged?: boolean | null,
+      operatingSystem?: string | null, trustType?: string | null } | null,
+      ipAddress?: string | null, isInteractive?: boolean | null, location?:
+      Record<string, never> | { @odata.type: string, city?: string | null,
+      countryOrRegion?: string | null, geoCoordinates?: Record<string, never> |
+      { @odata.type: string, altitude?: string | number | null, latitude?:
+      string | number | null, longitude?: string | number | null } | null,
+      state?: string | null } | null, resourceDisplayName?: string | null,
+      resourceId?: string | null, riskDetail?: Record<string, never> |
+      "unknownFutureValue" | "none" | "adminGeneratedTemporaryPassword" |
+      "userPerformedSecuredPasswordChange" | "userPerformedSecuredPasswordReset"
+      | "adminConfirmedSigninSafe" | "aiConfirmedSigninSafe" |
+      "userPassedMFADrivenByRiskBasedPolicy" | "adminDismissedAllRiskForUser" |
+      "adminConfirmedSigninCompromised" | "hidden" |
+      "adminConfirmedUserCompromised" | "m365DAdminDismissedDetection" |
+      "adminConfirmedServicePrincipalCompromised" |
+      "adminDismissedAllRiskForServicePrincipal" |
+      "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+      "adminConfirmedAccountSafe" | null, riskEventTypes?: (Record<string,
+      never> | "unknownFutureValue" | "adminConfirmedUserCompromised" |
+      "unlikelyTravel" | "anonymizedIPAddress" | "maliciousIPAddress" |
+      "unfamiliarFeatures" | "malwareInfectedIPAddress" | "suspiciousIPAddress"
+      | "leakedCredentials" | "investigationsThreatIntelligence" | "generic" |
+      "mcasImpossibleTravel" | "mcasSuspiciousInboxManipulationRules" |
+      "investigationsThreatIntelligenceSigninLinked" |
+      "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+      riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+      Record<string, never> | "unknownFutureValue" | "none" | "hidden" | "low" |
+      "medium" | "high" | null, riskLevelDuringSignIn?: Record<string, never> |
+      "unknownFutureValue" | "none" | "hidden" | "low" | "medium" | "high" |
+      null, riskState?: Record<string, never> | "unknownFutureValue" | "none" |
+      "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+      "confirmedCompromised" | null, status?: Record<string, never> | {
+      @odata.type: string, additionalDetails?: string | null, errorCode?: number
+      | null, failureReason?: string | null } | null, userDisplayName?: string |
+      null, userId?: string, userPrincipalName?: string | null } & {
+      @odata.type: "#microsoft.graph.signIn" })
     uid: '@microsoft/teams.graph-endpoints.auditLogs.signIns.create'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`POST /auditLogs/signIns`'
@@ -73,18 +123,233 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body: Operation<"/auditLogs/signIns", "post">):
-        EndpointRequest<IEndpoints["POST /auditLogs/signIns"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, appDisplayName?: string | null,
+        appId?: string | null, appliedConditionalAccessPolicies?: { @odata.type:
+        string, displayName?: string | null, enforcedGrantControls?: (string |
+        null)[], enforcedSessionControls?: (string | null)[], id?: string |
+        null, result?: Record<string, never> | "success" | "failure" |
+        "unknownFutureValue" | "notApplied" | "notEnabled" | "unknown" |
+        "reportOnlySuccess" | "reportOnlyFailure" | "reportOnlyNotApplied" |
+        "reportOnlyInterrupted" | null }[], clientAppUsed?: string | null,
+        conditionalAccessStatus?: Record<string, never> | "success" | "failure"
+        | "unknownFutureValue" | "notApplied" | null, correlationId?: string |
+        null, createdDateTime?: string, deviceDetail?: Record<string, never> | {
+        @odata.type: string, browser?: string | null, deviceId?: string | null,
+        displayName?: string | null, isCompliant?: boolean | null, isManaged?:
+        boolean | null, operatingSystem?: string | null, trustType?: string |
+        null } | null, ipAddress?: string | null, isInteractive?: boolean |
+        null, location?: Record<string, never> | { @odata.type: string, city?:
+        string | null, countryOrRegion?: string | null, geoCoordinates?:
+        Record<string, never> | { @odata.type: string, altitude?: string |
+        number | null, latitude?: string | number | null, longitude?: string |
+        number | null } | null, state?: string | null } | null,
+        resourceDisplayName?: string | null, resourceId?: string | null,
+        riskDetail?: Record<string, never> | "unknownFutureValue" | "none" |
+        "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange"
+        | "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "hidden" | "adminConfirmedUserCompromised" |
+        "m365DAdminDismissedDetection" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+        "adminConfirmedAccountSafe" | null, riskEventTypes?: (Record<string,
+        never> | "unknownFutureValue" | "adminConfirmedUserCompromised" |
+        "unlikelyTravel" | "anonymizedIPAddress" | "maliciousIPAddress" |
+        "unfamiliarFeatures" | "malwareInfectedIPAddress" |
+        "suspiciousIPAddress" | "leakedCredentials" |
+        "investigationsThreatIntelligence" | "generic" | "mcasImpossibleTravel"
+        | "mcasSuspiciousInboxManipulationRules" |
+        "investigationsThreatIntelligenceSigninLinked" |
+        "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+        riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+        Record<string, never> | "unknownFutureValue" | "none" | "hidden" | "low"
+        | "medium" | "high" | null, riskLevelDuringSignIn?: Record<string,
+        never> | "unknownFutureValue" | "none" | "hidden" | "low" | "medium" |
+        "high" | null, riskState?: Record<string, never> | "unknownFutureValue"
+        | "none" | "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+        "confirmedCompromised" | null, status?: Record<string, never> | {
+        @odata.type: string, additionalDetails?: string | null, errorCode?:
+        number | null, failureReason?: string | null } | null, userDisplayName?:
+        string | null, userId?: string, userPrincipalName?: string | null } & {
+        @odata.type: "#microsoft.graph.signIn" }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, appDisplayName?: string | null, appId?: string | null,
+        appliedConditionalAccessPolicies?: { @odata.type: string, displayName?:
+        string | null, enforcedGrantControls?: (string | null)[],
+        enforcedSessionControls?: (string | null)[], id?: string | null,
+        result?: Record<string, never> | "success" | "failure" |
+        "unknownFutureValue" | "notApplied" | "notEnabled" | "unknown" |
+        "reportOnlySuccess" | "reportOnlyFailure" | "reportOnlyNotApplied" |
+        "reportOnlyInterrupted" | null }[], clientAppUsed?: string | null,
+        conditionalAccessStatus?: Record<string, never> | "success" | "failure"
+        | "unknownFutureValue" | "notApplied" | null, correlationId?: string |
+        null, createdDateTime?: string, deviceDetail?: Record<string, never> | {
+        @odata.type: string, browser?: string | null, deviceId?: string | null,
+        displayName?: string | null, isCompliant?: boolean | null, isManaged?:
+        boolean | null, operatingSystem?: string | null, trustType?: string |
+        null } | null, ipAddress?: string | null, isInteractive?: boolean |
+        null, location?: Record<string, never> | { @odata.type: string, city?:
+        string | null, countryOrRegion?: string | null, geoCoordinates?:
+        Record<string, never> | { @odata.type: string, altitude?: string |
+        number | null, latitude?: string | number | null, longitude?: string |
+        number | null } | null, state?: string | null } | null,
+        resourceDisplayName?: string | null, resourceId?: string | null,
+        riskDetail?: Record<string, never> | "unknownFutureValue" | "none" |
+        "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange"
+        | "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "hidden" | "adminConfirmedUserCompromised" |
+        "m365DAdminDismissedDetection" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+        "adminConfirmedAccountSafe" | null, riskEventTypes?: (Record<string,
+        never> | "unknownFutureValue" | "adminConfirmedUserCompromised" |
+        "unlikelyTravel" | "anonymizedIPAddress" | "maliciousIPAddress" |
+        "unfamiliarFeatures" | "malwareInfectedIPAddress" |
+        "suspiciousIPAddress" | "leakedCredentials" |
+        "investigationsThreatIntelligence" | "generic" | "mcasImpossibleTravel"
+        | "mcasSuspiciousInboxManipulationRules" |
+        "investigationsThreatIntelligenceSigninLinked" |
+        "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+        riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+        Record<string, never> | "unknownFutureValue" | "none" | "hidden" | "low"
+        | "medium" | "high" | null, riskLevelDuringSignIn?: Record<string,
+        never> | "unknownFutureValue" | "none" | "hidden" | "low" | "medium" |
+        "high" | null, riskState?: Record<string, never> | "unknownFutureValue"
+        | "none" | "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+        "confirmedCompromised" | null, status?: Record<string, never> | {
+        @odata.type: string, additionalDetails?: string | null, errorCode?:
+        number | null, failureReason?: string | null } | null, userDisplayName?:
+        string | null, userId?: string, userPrincipalName?: string | null } & {
+        @odata.type: "#microsoft.graph.signIn" }>
       parameters:
         - id: body
-          type: Operation&lt;"/auditLogs/signIns", "post"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            appDisplayName?: string | null, appId?: string | null,
+            appliedConditionalAccessPolicies?: { <xref uid="@odata.type" />:
+            string, displayName?: string | null, enforcedGrantControls?: (string
+            | null)[], enforcedSessionControls?: (string | null)[], id?: string
+            | null, result?: Record&lt;string, never&gt; | "success" | "failure"
+            | "unknownFutureValue" | "notApplied" | "notEnabled" | "unknown" |
+            "reportOnlySuccess" | "reportOnlyFailure" | "reportOnlyNotApplied" |
+            "reportOnlyInterrupted" | null }[], clientAppUsed?: string | null,
+            conditionalAccessStatus?: Record&lt;string, never&gt; | "success" |
+            "failure" | "unknownFutureValue" | "notApplied" | null,
+            correlationId?: string | null, createdDateTime?: string,
+            deviceDetail?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, browser?: string | null, deviceId?:
+            string | null, displayName?: string | null, isCompliant?: boolean |
+            null, isManaged?: boolean | null, operatingSystem?: string | null,
+            trustType?: string | null } | null, ipAddress?: string | null,
+            isInteractive?: boolean | null, location?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, city?: string |
+            null, countryOrRegion?: string | null, geoCoordinates?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            altitude?: string | number | null, latitude?: string | number |
+            null, longitude?: string | number | null } | null, state?: string |
+            null } | null, resourceDisplayName?: string | null, resourceId?:
+            string | null, riskDetail?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "none" | "adminGeneratedTemporaryPassword" |
+            "userPerformedSecuredPasswordChange" |
+            "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+            "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+            "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+            "hidden" | "adminConfirmedUserCompromised" |
+            "m365DAdminDismissedDetection" |
+            "adminConfirmedServicePrincipalCompromised" |
+            "adminDismissedAllRiskForServicePrincipal" |
+            "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+            "adminConfirmedAccountSafe" | null, riskEventTypes?:
+            (Record&lt;string, never&gt; | "unknownFutureValue" |
+            "adminConfirmedUserCompromised" | "unlikelyTravel" |
+            "anonymizedIPAddress" | "maliciousIPAddress" | "unfamiliarFeatures"
+            | "malwareInfectedIPAddress" | "suspiciousIPAddress" |
+            "leakedCredentials" | "investigationsThreatIntelligence" | "generic"
+            | "mcasImpossibleTravel" | "mcasSuspiciousInboxManipulationRules" |
+            "investigationsThreatIntelligenceSigninLinked" |
+            "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+            riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "none" |
+            "hidden" | "low" | "medium" | "high" | null, riskLevelDuringSignIn?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "none" |
+            "hidden" | "low" | "medium" | "high" | null, riskState?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "none" |
+            "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+            "confirmedCompromised" | null, status?: Record&lt;string, never&gt;
+            | { <xref uid="@odata.type" />: string, additionalDetails?: string |
+            null, errorCode?: number | null, failureReason?: string | null } |
+            null, userDisplayName?: string | null, userId?: string,
+            userPrincipalName?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.signIn" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /auditLogs/signIns"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, appDisplayName?: string | null, appId?: string | null,
+          appliedConditionalAccessPolicies?: { <xref uid="@odata.type" />:
+          string, displayName?: string | null, enforcedGrantControls?: (string |
+          null)[], enforcedSessionControls?: (string | null)[], id?: string |
+          null, result?: Record&lt;string, never&gt; | "success" | "failure" |
+          "unknownFutureValue" | "notApplied" | "notEnabled" | "unknown" |
+          "reportOnlySuccess" | "reportOnlyFailure" | "reportOnlyNotApplied" |
+          "reportOnlyInterrupted" | null }[], clientAppUsed?: string | null,
+          conditionalAccessStatus?: Record&lt;string, never&gt; | "success" |
+          "failure" | "unknownFutureValue" | "notApplied" | null,
+          correlationId?: string | null, createdDateTime?: string,
+          deviceDetail?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, browser?: string | null, deviceId?: string | null,
+          displayName?: string | null, isCompliant?: boolean | null, isManaged?:
+          boolean | null, operatingSystem?: string | null, trustType?: string |
+          null } | null, ipAddress?: string | null, isInteractive?: boolean |
+          null, location?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, city?: string | null, countryOrRegion?:
+          string | null, geoCoordinates?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, altitude?: string | number | null,
+          latitude?: string | number | null, longitude?: string | number | null
+          } | null, state?: string | null } | null, resourceDisplayName?: string
+          | null, resourceId?: string | null, riskDetail?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "none" |
+          "adminGeneratedTemporaryPassword" |
+          "userPerformedSecuredPasswordChange" |
+          "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+          "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+          "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+          "hidden" | "adminConfirmedUserCompromised" |
+          "m365DAdminDismissedDetection" |
+          "adminConfirmedServicePrincipalCompromised" |
+          "adminDismissedAllRiskForServicePrincipal" |
+          "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+          "adminConfirmedAccountSafe" | null, riskEventTypes?:
+          (Record&lt;string, never&gt; | "unknownFutureValue" |
+          "adminConfirmedUserCompromised" | "unlikelyTravel" |
+          "anonymizedIPAddress" | "maliciousIPAddress" | "unfamiliarFeatures" |
+          "malwareInfectedIPAddress" | "suspiciousIPAddress" |
+          "leakedCredentials" | "investigationsThreatIntelligence" | "generic" |
+          "mcasImpossibleTravel" | "mcasSuspiciousInboxManipulationRules" |
+          "investigationsThreatIntelligenceSigninLinked" |
+          "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+          riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "none" | "hidden"
+          | "low" | "medium" | "high" | null, riskLevelDuringSignIn?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "none" | "hidden"
+          | "low" | "medium" | "high" | null, riskState?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "none" | "confirmedSafe" |
+          "remediated" | "dismissed" | "atRisk" | "confirmedCompromised" | null,
+          status?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, additionalDetails?: string | null, errorCode?: number | null,
+          failureReason?: string | null } | null, userDisplayName?: string |
+          null, userId?: string, userPrincipalName?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.signIn" />" }&gt;
+  - name: 'del({ If-Match?: string, signIn-id: string })'
     uid: '@microsoft/teams.graph-endpoints.auditLogs.signIns.del'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`DELETE /auditLogs/signIns/{signIn-id}`'
@@ -92,18 +357,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /auditLogs/signIns/{signIn-id}"]["response"]>
+        function del(params?: { If-Match?: string, signIn-id: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, signIn-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /auditLogs/signIns/{signIn-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[], signIn-id: string })'
     uid: '@microsoft/teams.graph-endpoints.auditLogs.signIns.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -118,18 +381,128 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /auditLogs/signIns/{signIn-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        signIn-id: string }): EndpointRequest<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, appDisplayName?:
+        string | null, appId?: string | null, appliedConditionalAccessPolicies?:
+        { @odata.type: string, displayName?: string | null,
+        enforcedGrantControls?: (string | null)[], enforcedSessionControls?:
+        (string | null)[], id?: string | null, result?: Record<string, never> |
+        "success" | "failure" | "unknownFutureValue" | "notApplied" |
+        "notEnabled" | "unknown" | "reportOnlySuccess" | "reportOnlyFailure" |
+        "reportOnlyNotApplied" | "reportOnlyInterrupted" | null }[],
+        clientAppUsed?: string | null, conditionalAccessStatus?: Record<string,
+        never> | "success" | "failure" | "unknownFutureValue" | "notApplied" |
+        null, correlationId?: string | null, createdDateTime?: string,
+        deviceDetail?: Record<string, never> | { @odata.type: string, browser?:
+        string | null, deviceId?: string | null, displayName?: string | null,
+        isCompliant?: boolean | null, isManaged?: boolean | null,
+        operatingSystem?: string | null, trustType?: string | null } | null,
+        ipAddress?: string | null, isInteractive?: boolean | null, location?:
+        Record<string, never> | { @odata.type: string, city?: string | null,
+        countryOrRegion?: string | null, geoCoordinates?: Record<string, never>
+        | { @odata.type: string, altitude?: string | number | null, latitude?:
+        string | number | null, longitude?: string | number | null } | null,
+        state?: string | null } | null, resourceDisplayName?: string | null,
+        resourceId?: string | null, riskDetail?: Record<string, never> |
+        "unknownFutureValue" | "none" | "adminGeneratedTemporaryPassword" |
+        "userPerformedSecuredPasswordChange" |
+        "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "hidden" | "adminConfirmedUserCompromised" |
+        "m365DAdminDismissedDetection" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+        "adminConfirmedAccountSafe" | null, riskEventTypes?: (Record<string,
+        never> | "unknownFutureValue" | "adminConfirmedUserCompromised" |
+        "unlikelyTravel" | "anonymizedIPAddress" | "maliciousIPAddress" |
+        "unfamiliarFeatures" | "malwareInfectedIPAddress" |
+        "suspiciousIPAddress" | "leakedCredentials" |
+        "investigationsThreatIntelligence" | "generic" | "mcasImpossibleTravel"
+        | "mcasSuspiciousInboxManipulationRules" |
+        "investigationsThreatIntelligenceSigninLinked" |
+        "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+        riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+        Record<string, never> | "unknownFutureValue" | "none" | "hidden" | "low"
+        | "medium" | "high" | null, riskLevelDuringSignIn?: Record<string,
+        never> | "unknownFutureValue" | "none" | "hidden" | "low" | "medium" |
+        "high" | null, riskState?: Record<string, never> | "unknownFutureValue"
+        | "none" | "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+        "confirmedCompromised" | null, status?: Record<string, never> | {
+        @odata.type: string, additionalDetails?: string | null, errorCode?:
+        number | null, failureReason?: string | null } | null, userDisplayName?:
+        string | null, userId?: string, userPrincipalName?: string | null } & {
+        @odata.type: "#microsoft.graph.signIn" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[], signIn-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /auditLogs/signIns/{signIn-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, appDisplayName?: string | null, appId?: string | null,
+          appliedConditionalAccessPolicies?: { <xref uid="@odata.type" />:
+          string, displayName?: string | null, enforcedGrantControls?: (string |
+          null)[], enforcedSessionControls?: (string | null)[], id?: string |
+          null, result?: Record&lt;string, never&gt; | "success" | "failure" |
+          "unknownFutureValue" | "notApplied" | "notEnabled" | "unknown" |
+          "reportOnlySuccess" | "reportOnlyFailure" | "reportOnlyNotApplied" |
+          "reportOnlyInterrupted" | null }[], clientAppUsed?: string | null,
+          conditionalAccessStatus?: Record&lt;string, never&gt; | "success" |
+          "failure" | "unknownFutureValue" | "notApplied" | null,
+          correlationId?: string | null, createdDateTime?: string,
+          deviceDetail?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, browser?: string | null, deviceId?: string | null,
+          displayName?: string | null, isCompliant?: boolean | null, isManaged?:
+          boolean | null, operatingSystem?: string | null, trustType?: string |
+          null } | null, ipAddress?: string | null, isInteractive?: boolean |
+          null, location?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, city?: string | null, countryOrRegion?:
+          string | null, geoCoordinates?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, altitude?: string | number | null,
+          latitude?: string | number | null, longitude?: string | number | null
+          } | null, state?: string | null } | null, resourceDisplayName?: string
+          | null, resourceId?: string | null, riskDetail?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "none" |
+          "adminGeneratedTemporaryPassword" |
+          "userPerformedSecuredPasswordChange" |
+          "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+          "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+          "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+          "hidden" | "adminConfirmedUserCompromised" |
+          "m365DAdminDismissedDetection" |
+          "adminConfirmedServicePrincipalCompromised" |
+          "adminDismissedAllRiskForServicePrincipal" |
+          "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+          "adminConfirmedAccountSafe" | null, riskEventTypes?:
+          (Record&lt;string, never&gt; | "unknownFutureValue" |
+          "adminConfirmedUserCompromised" | "unlikelyTravel" |
+          "anonymizedIPAddress" | "maliciousIPAddress" | "unfamiliarFeatures" |
+          "malwareInfectedIPAddress" | "suspiciousIPAddress" |
+          "leakedCredentials" | "investigationsThreatIntelligence" | "generic" |
+          "mcasImpossibleTravel" | "mcasSuspiciousInboxManipulationRules" |
+          "investigationsThreatIntelligenceSigninLinked" |
+          "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+          riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "none" | "hidden"
+          | "low" | "medium" | "high" | null, riskLevelDuringSignIn?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "none" | "hidden"
+          | "low" | "medium" | "high" | null, riskState?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "none" | "confirmedSafe" |
+          "remediated" | "dismissed" | "atRisk" | "confirmedCompromised" | null,
+          status?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, additionalDetails?: string | null, errorCode?: number | null,
+          failureReason?: string | null } | null, userDisplayName?: string |
+          null, userId?: string, userPrincipalName?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.signIn" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: '@microsoft/teams.graph-endpoints.auditLogs.signIns.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -147,18 +520,173 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /auditLogs/signIns"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, appDisplayName?: string | null, appId?: string | null,
+        appliedConditionalAccessPolicies?: { @odata.type: string, displayName?:
+        function, enforcedGrantControls?: function, enforcedSessionControls?:
+        function, id?: function, result?: function }[], clientAppUsed?: string |
+        null, conditionalAccessStatus?: Record<string, never> | "success" |
+        "failure" | "unknownFutureValue" | "notApplied" | null, correlationId?:
+        string | null, createdDateTime?: string, deviceDetail?: Record<string,
+        never> | { @odata.type: string, browser?: string | null, deviceId?:
+        string | null, displayName?: string | null, isCompliant?: boolean |
+        null, isManaged?: boolean | null, operatingSystem?: string | null,
+        trustType?: string | null } | null, ipAddress?: string | null,
+        isInteractive?: boolean | null, location?: Record<string, never> | {
+        @odata.type: string, city?: string | null, countryOrRegion?: string |
+        null, geoCoordinates?: Record<..., ...> | { @odata.type: ..., altitude?:
+        ..., latitude?: ..., longitude?: ... } | null, state?: string | null } |
+        null, resourceDisplayName?: string | null, resourceId?: string | null,
+        riskDetail?: Record<string, never> | "unknownFutureValue" | "none" |
+        "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange"
+        | "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "hidden" | "adminConfirmedUserCompromised" |
+        "m365DAdminDismissedDetection" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+        "adminConfirmedAccountSafe" | null, riskEventTypes?: (Record<..., ...> |
+        "unknownFutureValue" | "adminConfirmedUserCompromised" |
+        "unlikelyTravel" | "anonymizedIPAddress" | "maliciousIPAddress" |
+        "unfamiliarFeatures" | "malwareInfectedIPAddress" |
+        "suspiciousIPAddress" | "leakedCredentials" |
+        "investigationsThreatIntelligence" | "generic" | "mcasImpossibleTravel"
+        | "mcasSuspiciousInboxManipulationRules" |
+        "investigationsThreatIntelligenceSigninLinked" |
+        "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+        riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+        Record<string, never> | "unknownFutureValue" | "none" | "hidden" | "low"
+        | "medium" | "high" | null, riskLevelDuringSignIn?: Record<string,
+        never> | "unknownFutureValue" | "none" | "hidden" | "low" | "medium" |
+        "high" | null, riskState?: Record<string, never> | "unknownFutureValue"
+        | "none" | "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+        "confirmedCompromised" | null, status?: Record<string, never> | {
+        @odata.type: string, additionalDetails?: string | null, errorCode?:
+        number | null, failureReason?: string | null } | null, userDisplayName?:
+        string | null, userId?: string, userPrincipalName?: string | null } & {
+        @odata.type: "#microsoft.graph.signIn" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /auditLogs/signIns"]["response"]&gt;
-  - name: update(Operation<"/auditLogs/signIns/{signIn-id}", "patch">, any)
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          appDisplayName?: string | null, appId?: string | null,
+          appliedConditionalAccessPolicies?: { <xref uid="@odata.type" />:
+          string, displayName?: function, enforcedGrantControls?: function,
+          enforcedSessionControls?: function, id?: function, result?: function
+          }[], clientAppUsed?: string | null, conditionalAccessStatus?:
+          Record&lt;string, never&gt; | "success" | "failure" |
+          "unknownFutureValue" | "notApplied" | null, correlationId?: string |
+          null, createdDateTime?: string, deviceDetail?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, browser?: string |
+          null, deviceId?: string | null, displayName?: string | null,
+          isCompliant?: boolean | null, isManaged?: boolean | null,
+          operatingSystem?: string | null, trustType?: string | null } | null,
+          ipAddress?: string | null, isInteractive?: boolean | null, location?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          city?: string | null, countryOrRegion?: string | null,
+          geoCoordinates?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., altitude?: ..., latitude?: ..., longitude?: ... } | null,
+          state?: string | null } | null, resourceDisplayName?: string | null,
+          resourceId?: string | null, riskDetail?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "none" | "adminGeneratedTemporaryPassword" |
+          "userPerformedSecuredPasswordChange" |
+          "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+          "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+          "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+          "hidden" | "adminConfirmedUserCompromised" |
+          "m365DAdminDismissedDetection" |
+          "adminConfirmedServicePrincipalCompromised" |
+          "adminDismissedAllRiskForServicePrincipal" |
+          "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+          "adminConfirmedAccountSafe" | null, riskEventTypes?: (Record&lt;...,
+          ...&gt; | "unknownFutureValue" | "adminConfirmedUserCompromised" |
+          "unlikelyTravel" | "anonymizedIPAddress" | "maliciousIPAddress" |
+          "unfamiliarFeatures" | "malwareInfectedIPAddress" |
+          "suspiciousIPAddress" | "leakedCredentials" |
+          "investigationsThreatIntelligence" | "generic" |
+          "mcasImpossibleTravel" | "mcasSuspiciousInboxManipulationRules" |
+          "investigationsThreatIntelligenceSigninLinked" |
+          "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+          riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "none" | "hidden"
+          | "low" | "medium" | "high" | null, riskLevelDuringSignIn?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "none" | "hidden"
+          | "low" | "medium" | "high" | null, riskState?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "none" | "confirmedSafe" |
+          "remediated" | "dismissed" | "atRisk" | "confirmedCompromised" | null,
+          status?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, additionalDetails?: string | null, errorCode?: number | null,
+          failureReason?: string | null } | null, userDisplayName?: string |
+          null, userId?: string, userPrincipalName?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.signIn" />" })[]
+          }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, appDisplayName?: string | null, appId?: string |
+      null, appliedConditionalAccessPolicies?: { @odata.type: string,
+      displayName?: string | null, enforcedGrantControls?: (string | null)[],
+      enforcedSessionControls?: (string | null)[], id?: string | null, result?:
+      Record<string, never> | "success" | "failure" | "unknownFutureValue" |
+      "notApplied" | "notEnabled" | "unknown" | "reportOnlySuccess" |
+      "reportOnlyFailure" | "reportOnlyNotApplied" | "reportOnlyInterrupted" |
+      null }[], clientAppUsed?: string | null, conditionalAccessStatus?:
+      Record<string, never> | "success" | "failure" | "unknownFutureValue" |
+      "notApplied" | null, correlationId?: string | null, createdDateTime?:
+      string, deviceDetail?: Record<string, never> | { @odata.type: string,
+      browser?: string | null, deviceId?: string | null, displayName?: string |
+      null, isCompliant?: boolean | null, isManaged?: boolean | null,
+      operatingSystem?: string | null, trustType?: string | null } | null,
+      ipAddress?: string | null, isInteractive?: boolean | null, location?:
+      Record<string, never> | { @odata.type: string, city?: string | null,
+      countryOrRegion?: string | null, geoCoordinates?: Record<string, never> |
+      { @odata.type: string, altitude?: string | number | null, latitude?:
+      string | number | null, longitude?: string | number | null } | null,
+      state?: string | null } | null, resourceDisplayName?: string | null,
+      resourceId?: string | null, riskDetail?: Record<string, never> |
+      "unknownFutureValue" | "none" | "adminGeneratedTemporaryPassword" |
+      "userPerformedSecuredPasswordChange" | "userPerformedSecuredPasswordReset"
+      | "adminConfirmedSigninSafe" | "aiConfirmedSigninSafe" |
+      "userPassedMFADrivenByRiskBasedPolicy" | "adminDismissedAllRiskForUser" |
+      "adminConfirmedSigninCompromised" | "hidden" |
+      "adminConfirmedUserCompromised" | "m365DAdminDismissedDetection" |
+      "adminConfirmedServicePrincipalCompromised" |
+      "adminDismissedAllRiskForServicePrincipal" |
+      "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+      "adminConfirmedAccountSafe" | null, riskEventTypes?: (Record<string,
+      never> | "unknownFutureValue" | "adminConfirmedUserCompromised" |
+      "unlikelyTravel" | "anonymizedIPAddress" | "maliciousIPAddress" |
+      "unfamiliarFeatures" | "malwareInfectedIPAddress" | "suspiciousIPAddress"
+      | "leakedCredentials" | "investigationsThreatIntelligence" | "generic" |
+      "mcasImpossibleTravel" | "mcasSuspiciousInboxManipulationRules" |
+      "investigationsThreatIntelligenceSigninLinked" |
+      "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+      riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+      Record<string, never> | "unknownFutureValue" | "none" | "hidden" | "low" |
+      "medium" | "high" | null, riskLevelDuringSignIn?: Record<string, never> |
+      "unknownFutureValue" | "none" | "hidden" | "low" | "medium" | "high" |
+      null, riskState?: Record<string, never> | "unknownFutureValue" | "none" |
+      "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+      "confirmedCompromised" | null, status?: Record<string, never> | {
+      @odata.type: string, additionalDetails?: string | null, errorCode?: number
+      | null, failureReason?: string | null } | null, userDisplayName?: string |
+      null, userId?: string, userPrincipalName?: string | null } & {
+      @odata.type: "#microsoft.graph.signIn" }, { signIn-id: string })
     uid: '@microsoft/teams.graph-endpoints.auditLogs.signIns.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`PATCH /auditLogs/signIns/{signIn-id}`'
@@ -166,18 +694,232 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/auditLogs/signIns/{signIn-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /auditLogs/signIns/{signIn-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, appDisplayName?: string | null,
+        appId?: string | null, appliedConditionalAccessPolicies?: { @odata.type:
+        string, displayName?: string | null, enforcedGrantControls?: (string |
+        null)[], enforcedSessionControls?: (string | null)[], id?: string |
+        null, result?: Record<string, never> | "success" | "failure" |
+        "unknownFutureValue" | "notApplied" | "notEnabled" | "unknown" |
+        "reportOnlySuccess" | "reportOnlyFailure" | "reportOnlyNotApplied" |
+        "reportOnlyInterrupted" | null }[], clientAppUsed?: string | null,
+        conditionalAccessStatus?: Record<string, never> | "success" | "failure"
+        | "unknownFutureValue" | "notApplied" | null, correlationId?: string |
+        null, createdDateTime?: string, deviceDetail?: Record<string, never> | {
+        @odata.type: string, browser?: string | null, deviceId?: string | null,
+        displayName?: string | null, isCompliant?: boolean | null, isManaged?:
+        boolean | null, operatingSystem?: string | null, trustType?: string |
+        null } | null, ipAddress?: string | null, isInteractive?: boolean |
+        null, location?: Record<string, never> | { @odata.type: string, city?:
+        string | null, countryOrRegion?: string | null, geoCoordinates?:
+        Record<string, never> | { @odata.type: string, altitude?: string |
+        number | null, latitude?: string | number | null, longitude?: string |
+        number | null } | null, state?: string | null } | null,
+        resourceDisplayName?: string | null, resourceId?: string | null,
+        riskDetail?: Record<string, never> | "unknownFutureValue" | "none" |
+        "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange"
+        | "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "hidden" | "adminConfirmedUserCompromised" |
+        "m365DAdminDismissedDetection" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+        "adminConfirmedAccountSafe" | null, riskEventTypes?: (Record<string,
+        never> | "unknownFutureValue" | "adminConfirmedUserCompromised" |
+        "unlikelyTravel" | "anonymizedIPAddress" | "maliciousIPAddress" |
+        "unfamiliarFeatures" | "malwareInfectedIPAddress" |
+        "suspiciousIPAddress" | "leakedCredentials" |
+        "investigationsThreatIntelligence" | "generic" | "mcasImpossibleTravel"
+        | "mcasSuspiciousInboxManipulationRules" |
+        "investigationsThreatIntelligenceSigninLinked" |
+        "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+        riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+        Record<string, never> | "unknownFutureValue" | "none" | "hidden" | "low"
+        | "medium" | "high" | null, riskLevelDuringSignIn?: Record<string,
+        never> | "unknownFutureValue" | "none" | "hidden" | "low" | "medium" |
+        "high" | null, riskState?: Record<string, never> | "unknownFutureValue"
+        | "none" | "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+        "confirmedCompromised" | null, status?: Record<string, never> | {
+        @odata.type: string, additionalDetails?: string | null, errorCode?:
+        number | null, failureReason?: string | null } | null, userDisplayName?:
+        string | null, userId?: string, userPrincipalName?: string | null } & {
+        @odata.type: "#microsoft.graph.signIn" }, params?: { signIn-id: string
+        }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, appDisplayName?: string | null,
+        appId?: string | null, appliedConditionalAccessPolicies?: { @odata.type:
+        string, displayName?: string | null, enforcedGrantControls?: (string |
+        null)[], enforcedSessionControls?: (string | null)[], id?: string |
+        null, result?: Record<string, never> | "success" | "failure" |
+        "unknownFutureValue" | "notApplied" | "notEnabled" | "unknown" |
+        "reportOnlySuccess" | "reportOnlyFailure" | "reportOnlyNotApplied" |
+        "reportOnlyInterrupted" | null }[], clientAppUsed?: string | null,
+        conditionalAccessStatus?: Record<string, never> | "success" | "failure"
+        | "unknownFutureValue" | "notApplied" | null, correlationId?: string |
+        null, createdDateTime?: string, deviceDetail?: Record<string, never> | {
+        @odata.type: string, browser?: string | null, deviceId?: string | null,
+        displayName?: string | null, isCompliant?: boolean | null, isManaged?:
+        boolean | null, operatingSystem?: string | null, trustType?: string |
+        null } | null, ipAddress?: string | null, isInteractive?: boolean |
+        null, location?: Record<string, never> | { @odata.type: string, city?:
+        string | null, countryOrRegion?: string | null, geoCoordinates?:
+        Record<string, never> | { @odata.type: string, altitude?: string |
+        number | null, latitude?: string | number | null, longitude?: string |
+        number | null } | null, state?: string | null } | null,
+        resourceDisplayName?: string | null, resourceId?: string | null,
+        riskDetail?: Record<string, never> | "unknownFutureValue" | "none" |
+        "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange"
+        | "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "hidden" | "adminConfirmedUserCompromised" |
+        "m365DAdminDismissedDetection" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+        "adminConfirmedAccountSafe" | null, riskEventTypes?: (Record<string,
+        never> | "unknownFutureValue" | "adminConfirmedUserCompromised" |
+        "unlikelyTravel" | "anonymizedIPAddress" | "maliciousIPAddress" |
+        "unfamiliarFeatures" | "malwareInfectedIPAddress" |
+        "suspiciousIPAddress" | "leakedCredentials" |
+        "investigationsThreatIntelligence" | "generic" | "mcasImpossibleTravel"
+        | "mcasSuspiciousInboxManipulationRules" |
+        "investigationsThreatIntelligenceSigninLinked" |
+        "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+        riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+        Record<string, never> | "unknownFutureValue" | "none" | "hidden" | "low"
+        | "medium" | "high" | null, riskLevelDuringSignIn?: Record<string,
+        never> | "unknownFutureValue" | "none" | "hidden" | "low" | "medium" |
+        "high" | null, riskState?: Record<string, never> | "unknownFutureValue"
+        | "none" | "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+        "confirmedCompromised" | null, status?: Record<string, never> | {
+        @odata.type: string, additionalDetails?: string | null, errorCode?:
+        number | null, failureReason?: string | null } | null, userDisplayName?:
+        string | null, userId?: string, userPrincipalName?: string | null } & {
+        @odata.type: "#microsoft.graph.signIn" }>
       parameters:
         - id: body
-          type: Operation&lt;"/auditLogs/signIns/{signIn-id}", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            appDisplayName?: string | null, appId?: string | null,
+            appliedConditionalAccessPolicies?: { <xref uid="@odata.type" />:
+            string, displayName?: string | null, enforcedGrantControls?: (string
+            | null)[], enforcedSessionControls?: (string | null)[], id?: string
+            | null, result?: Record&lt;string, never&gt; | "success" | "failure"
+            | "unknownFutureValue" | "notApplied" | "notEnabled" | "unknown" |
+            "reportOnlySuccess" | "reportOnlyFailure" | "reportOnlyNotApplied" |
+            "reportOnlyInterrupted" | null }[], clientAppUsed?: string | null,
+            conditionalAccessStatus?: Record&lt;string, never&gt; | "success" |
+            "failure" | "unknownFutureValue" | "notApplied" | null,
+            correlationId?: string | null, createdDateTime?: string,
+            deviceDetail?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, browser?: string | null, deviceId?:
+            string | null, displayName?: string | null, isCompliant?: boolean |
+            null, isManaged?: boolean | null, operatingSystem?: string | null,
+            trustType?: string | null } | null, ipAddress?: string | null,
+            isInteractive?: boolean | null, location?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, city?: string |
+            null, countryOrRegion?: string | null, geoCoordinates?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            altitude?: string | number | null, latitude?: string | number |
+            null, longitude?: string | number | null } | null, state?: string |
+            null } | null, resourceDisplayName?: string | null, resourceId?:
+            string | null, riskDetail?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "none" | "adminGeneratedTemporaryPassword" |
+            "userPerformedSecuredPasswordChange" |
+            "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+            "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+            "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+            "hidden" | "adminConfirmedUserCompromised" |
+            "m365DAdminDismissedDetection" |
+            "adminConfirmedServicePrincipalCompromised" |
+            "adminDismissedAllRiskForServicePrincipal" |
+            "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+            "adminConfirmedAccountSafe" | null, riskEventTypes?:
+            (Record&lt;string, never&gt; | "unknownFutureValue" |
+            "adminConfirmedUserCompromised" | "unlikelyTravel" |
+            "anonymizedIPAddress" | "maliciousIPAddress" | "unfamiliarFeatures"
+            | "malwareInfectedIPAddress" | "suspiciousIPAddress" |
+            "leakedCredentials" | "investigationsThreatIntelligence" | "generic"
+            | "mcasImpossibleTravel" | "mcasSuspiciousInboxManipulationRules" |
+            "investigationsThreatIntelligenceSigninLinked" |
+            "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+            riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "none" |
+            "hidden" | "low" | "medium" | "high" | null, riskLevelDuringSignIn?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "none" |
+            "hidden" | "low" | "medium" | "high" | null, riskState?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "none" |
+            "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+            "confirmedCompromised" | null, status?: Record&lt;string, never&gt;
+            | { <xref uid="@odata.type" />: string, additionalDetails?: string |
+            null, errorCode?: number | null, failureReason?: string | null } |
+            null, userDisplayName?: string | null, userId?: string,
+            userPrincipalName?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.signIn" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ signIn-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /auditLogs/signIns/{signIn-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, appDisplayName?: string | null, appId?: string | null,
+          appliedConditionalAccessPolicies?: { <xref uid="@odata.type" />:
+          string, displayName?: string | null, enforcedGrantControls?: (string |
+          null)[], enforcedSessionControls?: (string | null)[], id?: string |
+          null, result?: Record&lt;string, never&gt; | "success" | "failure" |
+          "unknownFutureValue" | "notApplied" | "notEnabled" | "unknown" |
+          "reportOnlySuccess" | "reportOnlyFailure" | "reportOnlyNotApplied" |
+          "reportOnlyInterrupted" | null }[], clientAppUsed?: string | null,
+          conditionalAccessStatus?: Record&lt;string, never&gt; | "success" |
+          "failure" | "unknownFutureValue" | "notApplied" | null,
+          correlationId?: string | null, createdDateTime?: string,
+          deviceDetail?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, browser?: string | null, deviceId?: string | null,
+          displayName?: string | null, isCompliant?: boolean | null, isManaged?:
+          boolean | null, operatingSystem?: string | null, trustType?: string |
+          null } | null, ipAddress?: string | null, isInteractive?: boolean |
+          null, location?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, city?: string | null, countryOrRegion?:
+          string | null, geoCoordinates?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, altitude?: string | number | null,
+          latitude?: string | number | null, longitude?: string | number | null
+          } | null, state?: string | null } | null, resourceDisplayName?: string
+          | null, resourceId?: string | null, riskDetail?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "none" |
+          "adminGeneratedTemporaryPassword" |
+          "userPerformedSecuredPasswordChange" |
+          "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+          "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+          "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+          "hidden" | "adminConfirmedUserCompromised" |
+          "m365DAdminDismissedDetection" |
+          "adminConfirmedServicePrincipalCompromised" |
+          "adminDismissedAllRiskForServicePrincipal" |
+          "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+          "adminConfirmedAccountSafe" | null, riskEventTypes?:
+          (Record&lt;string, never&gt; | "unknownFutureValue" |
+          "adminConfirmedUserCompromised" | "unlikelyTravel" |
+          "anonymizedIPAddress" | "maliciousIPAddress" | "unfamiliarFeatures" |
+          "malwareInfectedIPAddress" | "suspiciousIPAddress" |
+          "leakedCredentials" | "investigationsThreatIntelligence" | "generic" |
+          "mcasImpossibleTravel" | "mcasSuspiciousInboxManipulationRules" |
+          "investigationsThreatIntelligenceSigninLinked" |
+          "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+          riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "none" | "hidden"
+          | "low" | "medium" | "high" | null, riskLevelDuringSignIn?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "none" | "hidden"
+          | "low" | "medium" | "high" | null, riskState?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "none" | "confirmedSafe" |
+          "remediated" | "dismissed" | "atRisk" | "confirmedCompromised" | null,
+          status?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, additionalDetails?: string | null, errorCode?: number | null,
+          failureReason?: string | null } | null, userDisplayName?: string |
+          null, userId?: string, userPrincipalName?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.signIn" />" }&gt;

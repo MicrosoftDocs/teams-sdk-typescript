@@ -72,17 +72,24 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        calendarView: { get: (params?: IEndpoints["GET
-        /me/calendar/calendarView"]["parameters"]) =>
-        EndpointRequest<IEndpoints["GET /me/calendar/calendarView"]["response"]>
-        }
+        calendarView: { /** * `GET /me/calendar/calendarView` * * Get the
+        occurrences, exceptions and single instances of events in a calendar
+        view defined by a time range, from a user&#x27;s default calendar
+        (../me/calendarView) or some other calendar of the user&#x27;s. */ get:
+        (params?: IEndpoints["GET /me/calendar/calendarView"]["parameters"]) =>
+        EndpointRequest<IEndpoints["GET
+        /me/calendar/calendarView"]["response"]>; }
       return:
         description: ''
         type: >-
-          { get: (params?: IEndpoints["GET
+          { /** * `GET /me/calendar/calendarView` * * Get the occurrences,
+          exceptions and single instances of events in a calendar view defined
+          by a time range, from a user&#x27;s default calendar
+          (../me/calendarView) or some other calendar of the user&#x27;s. */
+          get: (params?: IEndpoints["GET
           /me/calendar/calendarView"]["parameters"]) =&gt;
           EndpointRequest&lt;IEndpoints["GET
-          /me/calendar/calendarView"]["response"]&gt; }
+          /me/calendar/calendarView"]["response"]&gt;; }
   - name: getSchedule
     uid: '@microsoft/teams.graph-endpoints.me.calendar.getSchedule'
     package: '@microsoft/teams.graph-endpoints'
@@ -116,7 +123,7 @@ variables:
           { create: () =&gt; EndpointRequest&lt;IEndpoints["POST
           /me/calendar/permanentDelete"]["response"]&gt; }
 functions:
-  - name: get(any)
+  - name: 'get({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints.me.calendar.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -132,16 +139,658 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /me/calendar"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, allowedOnlineMeetingProviders?:
+        (Record<string, never> | "unknown" | "skypeForBusiness" |
+        "skypeForConsumer" | "teamsForBusiness" | null)[], calendarPermissions?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, allowedRoles?: (Record<..., ...> | "none" |
+        "freeBusyRead" | "limitedRead" | "read" | "write" |
+        "delegateWithoutPrivateEventAccess" | "delegateWithPrivateEventAccess" |
+        "custom" | null)[], emailAddress?: Record<string, never> | {
+        @odata.type: string, address?: string | null, name?: string | null } |
+        null, isInsideOrganization?: boolean | null, isRemovable?: boolean |
+        null, role?: Record<string, never> | "none" | "freeBusyRead" |
+        "limitedRead" | "read" | "write" | "delegateWithoutPrivateEventAccess" |
+        "delegateWithPrivateEventAccess" | "custom" | null } & { @odata.type:
+        "#microsoft.graph.calendarPermission" })[], calendarView?: (Omit<Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, categories?: function, changeKey?: function,
+        createdDateTime?: function, lastModifiedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.outlookItem" },
+        "@odata.type"> & { @odata.type: string, allowNewTimeProposals?: boolean
+        | null, attachments?: (Omit<..., ...> & Omit<..., ...> & { @odata.type:
+        ... })[], attendees?: (Omit<..., ...> & { @odata.type: ...,
+        proposedNewTime?: ..., status?: ... })[], body?: Record<string, never> |
+        { @odata.type: string, content?: string | null, contentType?:
+        Record<..., ...> | "text" | "html" | null } | null, bodyPreview?: string
+        | null, calendar?: Record<string, never> | Omit<{ id?: string |
+        undefined; '@odata.type': string; }, "@odata.type"> & {
+        allowedOnlineMeetingProviders?: (Record<string, never> | "unknown" |
+        "skypeForBusiness" | "skypeForConsumer" | "teamsForBusiness" | null)[] |
+        undefined; ... 17 more ...; '@odata.type': string; } & { ...; } | null,
+        cancelledOccurrences?: string[], end?: Record<string, never> | {
+        @odata.type: string, dateTime?: string, timeZone?: string | null } |
+        null, exceptionOccurrences?: (Omit<Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & Omit<{ categories?: (string |
+        null)[] | undefined; changeKey?: string | null | undefined;
+        createdDateTime?: string | ... 1 more ... | undefined;
+        lastModifiedDateTime?: string | ... 1 more ... | undefined;
+        '@odata.type': string; }, "@oda..., extensions?: (Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... })[], hasAttachments?: boolean |
+        null, hideAttendees?: boolean | null, iCalUId?: string | null,
+        importance?: Record<string, never> | "low" | "high" | "normal" | null,
+        instances?: (Omit<Omit<{ id?: string | undefined; '@odata.type': string;
+        }, "@odata.type"> & Omit<{ categories?: (string | null)[] | undefined;
+        changeKey?: string | null | undefined; createdDateTime?: string | ... 1
+        more ... | undefined; lastModifiedDateTime?: string | ... 1 more ... |
+        undefined; '@odata.type': string; }, "@oda..., isAllDay?: boolean |
+        null, isCancelled?: boolean | null, isDraft?: boolean | null,
+        isOnlineMeeting?: boolean | null, isOrganizer?: boolean | null,
+        isReminderOn?: boolean | null, location?: Record<string, never> | {
+        @odata.type: string, address?: Record<..., ...> | { @odata.type: ...,
+        city?: ..., countryOrRegion?: ..., postalCode?: ..., state?: ...,
+        street?: ... } | null, coordinates?: Record<..., ...> | { @odata.type:
+        ..., accuracy?: ..., altitude?: ..., altitudeAccuracy?: ..., latitude?:
+        ..., longitude?: ... } | null, displayName?: string | null,
+        locationEmailAddress?: string | null, locationType?: Record<..., ...> |
+        "default" | "conferenceRoom" | "homeAddress" | "businessAddress" |
+        "geoCoordinates" | "streetAddress" | "hotel" | "restaurant" |
+        "localBusiness" | "postalAddress" | null, locationUri?: string | null,
+        uniqueId?: string | null, uniqueIdType?: Record<..., ...> | "unknown" |
+        "locationStore" | "directory" | "private" | "bing" | null } | null,
+        locations?: { @odata.type: string, address?: function, coordinates?:
+        function, displayName?: function, locationEmailAddress?: function,
+        locationType?: function, locationUri?: function, uniqueId?: function,
+        uniqueIdType?: function }[], multiValueExtendedProperties?: (Omit<...,
+        ...> & { @odata.type: ..., value?: ... } & { @odata.type: ... })[],
+        onlineMeeting?: Record<string, never> | { @odata.type: string,
+        conferenceId?: string | null, joinUrl?: string | null, phones?: ...[],
+        quickDial?: string | null, tollFreeNumbers?: ...[], tollNumber?: string
+        | null } | null, onlineMeetingProvider?: Record<string, never> |
+        "unknown" | "skypeForBusiness" | "skypeForConsumer" | "teamsForBusiness"
+        | null, onlineMeetingUrl?: string | null, organizer?: Record<string,
+        never> | { @odata.type: string, emailAddress?: Record<..., ...> | {
+        @odata.type: ..., address?: ..., name?: ... } | null } | null,
+        originalEndTimeZone?: string | null, originalStart?: string | null,
+        originalStartTimeZone?: string | null, recurrence?: Record<string,
+        never> | { @odata.type: string, pattern?: Record<..., ...> | {
+        @odata.type: ..., dayOfMonth?: ..., daysOfWeek?: ..., firstDayOfWeek?:
+        ..., index?: ..., interval?: ..., month?: ..., type?: ... } | null,
+        range?: Record<..., ...> | { @odata.type: ..., endDate?: ...,
+        numberOfOccurrences?: ..., recurrenceTimeZone?: ..., startDate?: ...,
+        type?: ... } | null } | null, reminderMinutesBeforeStart?: number |
+        null, responseRequested?: boolean | null, responseStatus?:
+        Record<string, never> | { @odata.type: string, response?: Record<...,
+        ...> | "none" | "accepted" | "declined" | "organizer" |
+        "tentativelyAccepted" | "notResponded" | null, time?: string | null } |
+        null, sensitivity?: Record<string, never> | "normal" | "private" |
+        "personal" | "confidential" | null, seriesMasterId?: string | null,
+        showAs?: Record<string, never> | "unknown" | "free" | "tentative" |
+        "busy" | "oof" | "workingElsewhere" | null,
+        singleValueExtendedProperties?: (Omit<..., ...> & { @odata.type: ...,
+        value?: ... } & { @odata.type: ... })[], start?: Record<string, never> |
+        { @odata.type: string, dateTime?: string, timeZone?: string | null } |
+        null, subject?: string | null, transactionId?: string | null, type?:
+        Record<string, never> | "singleInstance" | "occurrence" | "exception" |
+        "seriesMaster" | null, webLink?: string | null })[], canEdit?: boolean |
+        null, canShare?: boolean | null, canViewPrivateItems?: boolean | null,
+        changeKey?: string | null, color?: Record<string, never> | "auto" |
+        "lightBlue" | "lightGreen" | "lightOrange" | "lightGray" | "lightYellow"
+        | "lightTeal" | "lightPink" | "lightBrown" | "lightRed" | "maxColor" |
+        null, defaultOnlineMeetingProvider?: Record<string, never> | "unknown" |
+        "skypeForBusiness" | "skypeForConsumer" | "teamsForBusiness" | null,
+        events?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, categories?: function,
+        changeKey?: function, createdDateTime?: function, lastModifiedDateTime?:
+        function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.outlookItem" }, "@odata.type"> & { @odata.type:
+        string, allowNewTimeProposals?: boolean | null, attachments?: (Omit<...,
+        ...> & Omit<..., ...> & { @odata.type: ... })[], attendees?: (Omit<...,
+        ...> & { @odata.type: ..., proposedNewTime?: ..., status?: ... })[],
+        body?: Record<string, never> | { @odata.type: string, content?: string |
+        null, contentType?: Record<..., ...> | "text" | "html" | null } | null,
+        bodyPreview?: string | null, calendar?: Record<string, never> | Omit<{
+        id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        allowedOnlineMeetingProviders?: (Record<string, never> | "unknown" |
+        "skypeForBusiness" | "skypeForConsumer" | "teamsForBusiness" | null)[] |
+        undefined; ... 17 more ...; '@odata.type': string; } & { ...; } | null,
+        cancelledOccurrences?: string[], end?: Record<string, never> | {
+        @odata.type: string, dateTime?: string, timeZone?: string | null } |
+        null, exceptionOccurrences?: (Omit<Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & Omit<{ categories?: (string |
+        null)[] | undefined; changeKey?: string | null | undefined;
+        createdDateTime?: string | ... 1 more ... | undefined;
+        lastModifiedDateTime?: string | ... 1 more ... | undefined;
+        '@odata.type': string; }, "@oda..., extensions?: (Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... })[], hasAttachments?: boolean |
+        null, hideAttendees?: boolean | null, iCalUId?: string | null,
+        importance?: Record<string, never> | "low" | "high" | "normal" | null,
+        instances?: (Omit<Omit<{ id?: string | undefined; '@odata.type': string;
+        }, "@odata.type"> & Omit<{ categories?: (string | null)[] | undefined;
+        changeKey?: string | null | undefined; createdDateTime?: string | ... 1
+        more ... | undefined; lastModifiedDateTime?: string | ... 1 more ... |
+        undefined; '@odata.type': string; }, "@oda..., isAllDay?: boolean |
+        null, isCancelled?: boolean | null, isDraft?: boolean | null,
+        isOnlineMeeting?: boolean | null, isOrganizer?: boolean | null,
+        isReminderOn?: boolean | null, location?: Record<string, never> | {
+        @odata.type: string, address?: Record<..., ...> | { @odata.type: ...,
+        city?: ..., countryOrRegion?: ..., postalCode?: ..., state?: ...,
+        street?: ... } | null, coordinates?: Record<..., ...> | { @odata.type:
+        ..., accuracy?: ..., altitude?: ..., altitudeAccuracy?: ..., latitude?:
+        ..., longitude?: ... } | null, displayName?: string | null,
+        locationEmailAddress?: string | null, locationType?: Record<..., ...> |
+        "default" | "conferenceRoom" | "homeAddress" | "businessAddress" |
+        "geoCoordinates" | "streetAddress" | "hotel" | "restaurant" |
+        "localBusiness" | "postalAddress" | null, locationUri?: string | null,
+        uniqueId?: string | null, uniqueIdType?: Record<..., ...> | "unknown" |
+        "locationStore" | "directory" | "private" | "bing" | null } | null,
+        locations?: { @odata.type: string, address?: function, coordinates?:
+        function, displayName?: function, locationEmailAddress?: function,
+        locationType?: function, locationUri?: function, uniqueId?: function,
+        uniqueIdType?: function }[], multiValueExtendedProperties?: (Omit<...,
+        ...> & { @odata.type: ..., value?: ... } & { @odata.type: ... })[],
+        onlineMeeting?: Record<string, never> | { @odata.type: string,
+        conferenceId?: string | null, joinUrl?: string | null, phones?: ...[],
+        quickDial?: string | null, tollFreeNumbers?: ...[], tollNumber?: string
+        | null } | null, onlineMeetingProvider?: Record<string, never> |
+        "unknown" | "skypeForBusiness" | "skypeForConsumer" | "teamsForBusiness"
+        | null, onlineMeetingUrl?: string | null, organizer?: Record<string,
+        never> | { @odata.type: string, emailAddress?: Record<..., ...> | {
+        @odata.type: ..., address?: ..., name?: ... } | null } | null,
+        originalEndTimeZone?: string | null, originalStart?: string | null,
+        originalStartTimeZone?: string | null, recurrence?: Record<string,
+        never> | { @odata.type: string, pattern?: Record<..., ...> | {
+        @odata.type: ..., dayOfMonth?: ..., daysOfWeek?: ..., firstDayOfWeek?:
+        ..., index?: ..., interval?: ..., month?: ..., type?: ... } | null,
+        range?: Record<..., ...> | { @odata.type: ..., endDate?: ...,
+        numberOfOccurrences?: ..., recurrenceTimeZone?: ..., startDate?: ...,
+        type?: ... } | null } | null, reminderMinutesBeforeStart?: number |
+        null, responseRequested?: boolean | null, responseStatus?:
+        Record<string, never> | { @odata.type: string, response?: Record<...,
+        ...> | "none" | "accepted" | "declined" | "organizer" |
+        "tentativelyAccepted" | "notResponded" | null, time?: string | null } |
+        null, sensitivity?: Record<string, never> | "normal" | "private" |
+        "personal" | "confidential" | null, seriesMasterId?: string | null,
+        showAs?: Record<string, never> | "unknown" | "free" | "tentative" |
+        "busy" | "oof" | "workingElsewhere" | null,
+        singleValueExtendedProperties?: (Omit<..., ...> & { @odata.type: ...,
+        value?: ... } & { @odata.type: ... })[], start?: Record<string, never> |
+        { @odata.type: string, dateTime?: string, timeZone?: string | null } |
+        null, subject?: string | null, transactionId?: string | null, type?:
+        Record<string, never> | "singleInstance" | "occurrence" | "exception" |
+        "seriesMaster" | null, webLink?: string | null })[], hexColor?: string |
+        null, isDefaultCalendar?: boolean | null, isRemovable?: boolean | null,
+        isTallyingResponses?: boolean | null, multiValueExtendedProperties?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, value?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.multiValueLegacyExtendedProperty" })[], name?: string
+        | null, owner?: Record<string, never> | { @odata.type: string, address?:
+        string | null, name?: string | null } | null,
+        singleValueExtendedProperties?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, value?: string | null } & {
+        @odata.type: "#microsoft.graph.singleValueLegacyExtendedProperty" })[] }
+        & { @odata.type: "#microsoft.graph.calendar" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /me/calendar"]["response"]&gt;
-  - name: update(Operation<"/me/calendar", "patch">)
+        type: >-
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, allowedOnlineMeetingProviders?: (Record&lt;string,
+          never&gt; | "unknown" | "skypeForBusiness" | "skypeForConsumer" |
+          "teamsForBusiness" | null)[], calendarPermissions?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, allowedRoles?:
+          (Record&lt;..., ...&gt; | "none" | "freeBusyRead" | "limitedRead" |
+          "read" | "write" | "delegateWithoutPrivateEventAccess" |
+          "delegateWithPrivateEventAccess" | "custom" | null)[], emailAddress?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          address?: string | null, name?: string | null } | null,
+          isInsideOrganization?: boolean | null, isRemovable?: boolean | null,
+          role?: Record&lt;string, never&gt; | "none" | "freeBusyRead" |
+          "limitedRead" | "read" | "write" | "delegateWithoutPrivateEventAccess"
+          | "delegateWithPrivateEventAccess" | "custom" | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.calendarPermission"
+          />" })[], calendarView?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: function }, "<xref uid="@odata.type" />"&gt; &
+          Omit&lt;{ <xref uid="@odata.type" />: string, categories?: function,
+          changeKey?: function, createdDateTime?: function,
+          lastModifiedDateTime?: function }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.outlookItem" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string,
+          allowNewTimeProposals?: boolean | null, attachments?: (Omit&lt;...,
+          ...&gt; & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...
+          })[], attendees?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type"
+          />: ..., proposedNewTime?: ..., status?: ... })[], body?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          content?: string | null, contentType?: Record&lt;..., ...&gt; | "text"
+          | "html" | null } | null, bodyPreview?: string | null, calendar?:
+          Record&lt;string, never&gt; | Omit&lt;{ id?: string | undefined;
+          '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+          />"&gt; & { allowedOnlineMeetingProviders?: (Record&lt;string,
+          never&gt; | "unknown" | "skypeForBusiness" | "skypeForConsumer" |
+          "teamsForBusiness" | null)[] | undefined; ... 17 more ...; '<xref
+          uid="@odata.type" />': string; } & { ...; } | null,
+          cancelledOccurrences?: string[], end?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, dateTime?: string, timeZone?:
+          string | null } | null, exceptionOccurrences?: (Omit&lt;Omit&lt;{ id?:
+          string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ categories?: (string | null)[] |
+          undefined; changeKey?: string | null | undefined; createdDateTime?:
+          string | ... 1 more ... | undefined; lastModifiedDateTime?: string |
+          ... 1 more ... | undefined; '<xref uid="@odata.type" />': string; },
+          "<xref uid="@oda..." />, extensions?: (Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... })[],
+          hasAttachments?: boolean | null, hideAttendees?: boolean | null,
+          iCalUId?: string | null, importance?: Record&lt;string, never&gt; |
+          "low" | "high" | "normal" | null, instances?: (Omit&lt;Omit&lt;{ id?:
+          string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ categories?: (string | null)[] |
+          undefined; changeKey?: string | null | undefined; createdDateTime?:
+          string | ... 1 more ... | undefined; lastModifiedDateTime?: string |
+          ... 1 more ... | undefined; '<xref uid="@odata.type" />': string; },
+          "<xref uid="@oda..." />, isAllDay?: boolean | null, isCancelled?:
+          boolean | null, isDraft?: boolean | null, isOnlineMeeting?: boolean |
+          null, isOrganizer?: boolean | null, isReminderOn?: boolean | null,
+          location?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, address?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., city?: ..., countryOrRegion?: ..., postalCode?: ..., state?:
+          ..., street?: ... } | null, coordinates?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., accuracy?: ..., altitude?: ...,
+          altitudeAccuracy?: ..., latitude?: ..., longitude?: ... } | null,
+          displayName?: string | null, locationEmailAddress?: string | null,
+          locationType?: Record&lt;..., ...&gt; | "default" | "conferenceRoom" |
+          "homeAddress" | "businessAddress" | "geoCoordinates" | "streetAddress"
+          | "hotel" | "restaurant" | "localBusiness" | "postalAddress" | null,
+          locationUri?: string | null, uniqueId?: string | null, uniqueIdType?:
+          Record&lt;..., ...&gt; | "unknown" | "locationStore" | "directory" |
+          "private" | "bing" | null } | null, locations?: { <xref
+          uid="@odata.type" />: string, address?: function, coordinates?:
+          function, displayName?: function, locationEmailAddress?: function,
+          locationType?: function, locationUri?: function, uniqueId?: function,
+          uniqueIdType?: function }[], multiValueExtendedProperties?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ..., value?: ...
+          } & { <xref uid="@odata.type" />: ... })[], onlineMeeting?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          conferenceId?: string | null, joinUrl?: string | null, phones?: ...[],
+          quickDial?: string | null, tollFreeNumbers?: ...[], tollNumber?:
+          string | null } | null, onlineMeetingProvider?: Record&lt;string,
+          never&gt; | "unknown" | "skypeForBusiness" | "skypeForConsumer" |
+          "teamsForBusiness" | null, onlineMeetingUrl?: string | null,
+          organizer?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, emailAddress?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., address?: ..., name?: ... } | null } |
+          null, originalEndTimeZone?: string | null, originalStart?: string |
+          null, originalStartTimeZone?: string | null, recurrence?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          pattern?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          dayOfMonth?: ..., daysOfWeek?: ..., firstDayOfWeek?: ..., index?: ...,
+          interval?: ..., month?: ..., type?: ... } | null, range?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., endDate?:
+          ..., numberOfOccurrences?: ..., recurrenceTimeZone?: ..., startDate?:
+          ..., type?: ... } | null } | null, reminderMinutesBeforeStart?: number
+          | null, responseRequested?: boolean | null, responseStatus?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          response?: Record&lt;..., ...&gt; | "none" | "accepted" | "declined" |
+          "organizer" | "tentativelyAccepted" | "notResponded" | null, time?:
+          string | null } | null, sensitivity?: Record&lt;string, never&gt; |
+          "normal" | "private" | "personal" | "confidential" | null,
+          seriesMasterId?: string | null, showAs?: Record&lt;string, never&gt; |
+          "unknown" | "free" | "tentative" | "busy" | "oof" | "workingElsewhere"
+          | null, singleValueExtendedProperties?: (Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ..., value?: ... } & { <xref
+          uid="@odata.type" />: ... })[], start?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string, dateTime?: string, timeZone?:
+          string | null } | null, subject?: string | null, transactionId?:
+          string | null, type?: Record&lt;string, never&gt; | "singleInstance" |
+          "occurrence" | "exception" | "seriesMaster" | null, webLink?: string |
+          null })[], canEdit?: boolean | null, canShare?: boolean | null,
+          canViewPrivateItems?: boolean | null, changeKey?: string | null,
+          color?: Record&lt;string, never&gt; | "auto" | "lightBlue" |
+          "lightGreen" | "lightOrange" | "lightGray" | "lightYellow" |
+          "lightTeal" | "lightPink" | "lightBrown" | "lightRed" | "maxColor" |
+          null, defaultOnlineMeetingProvider?: Record&lt;string, never&gt; |
+          "unknown" | "skypeForBusiness" | "skypeForConsumer" |
+          "teamsForBusiness" | null, events?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, categories?: function, changeKey?: function, createdDateTime?:
+          function, lastModifiedDateTime?: function }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.outlookItem" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string,
+          allowNewTimeProposals?: boolean | null, attachments?: (Omit&lt;...,
+          ...&gt; & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...
+          })[], attendees?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type"
+          />: ..., proposedNewTime?: ..., status?: ... })[], body?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          content?: string | null, contentType?: Record&lt;..., ...&gt; | "text"
+          | "html" | null } | null, bodyPreview?: string | null, calendar?:
+          Record&lt;string, never&gt; | Omit&lt;{ id?: string | undefined;
+          '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+          />"&gt; & { allowedOnlineMeetingProviders?: (Record&lt;string,
+          never&gt; | "unknown" | "skypeForBusiness" | "skypeForConsumer" |
+          "teamsForBusiness" | null)[] | undefined; ... 17 more ...; '<xref
+          uid="@odata.type" />': string; } & { ...; } | null,
+          cancelledOccurrences?: string[], end?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, dateTime?: string, timeZone?:
+          string | null } | null, exceptionOccurrences?: (Omit&lt;Omit&lt;{ id?:
+          string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ categories?: (string | null)[] |
+          undefined; changeKey?: string | null | undefined; createdDateTime?:
+          string | ... 1 more ... | undefined; lastModifiedDateTime?: string |
+          ... 1 more ... | undefined; '<xref uid="@odata.type" />': string; },
+          "<xref uid="@oda..." />, extensions?: (Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... })[],
+          hasAttachments?: boolean | null, hideAttendees?: boolean | null,
+          iCalUId?: string | null, importance?: Record&lt;string, never&gt; |
+          "low" | "high" | "normal" | null, instances?: (Omit&lt;Omit&lt;{ id?:
+          string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ categories?: (string | null)[] |
+          undefined; changeKey?: string | null | undefined; createdDateTime?:
+          string | ... 1 more ... | undefined; lastModifiedDateTime?: string |
+          ... 1 more ... | undefined; '<xref uid="@odata.type" />': string; },
+          "<xref uid="@oda..." />, isAllDay?: boolean | null, isCancelled?:
+          boolean | null, isDraft?: boolean | null, isOnlineMeeting?: boolean |
+          null, isOrganizer?: boolean | null, isReminderOn?: boolean | null,
+          location?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, address?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., city?: ..., countryOrRegion?: ..., postalCode?: ..., state?:
+          ..., street?: ... } | null, coordinates?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., accuracy?: ..., altitude?: ...,
+          altitudeAccuracy?: ..., latitude?: ..., longitude?: ... } | null,
+          displayName?: string | null, locationEmailAddress?: string | null,
+          locationType?: Record&lt;..., ...&gt; | "default" | "conferenceRoom" |
+          "homeAddress" | "businessAddress" | "geoCoordinates" | "streetAddress"
+          | "hotel" | "restaurant" | "localBusiness" | "postalAddress" | null,
+          locationUri?: string | null, uniqueId?: string | null, uniqueIdType?:
+          Record&lt;..., ...&gt; | "unknown" | "locationStore" | "directory" |
+          "private" | "bing" | null } | null, locations?: { <xref
+          uid="@odata.type" />: string, address?: function, coordinates?:
+          function, displayName?: function, locationEmailAddress?: function,
+          locationType?: function, locationUri?: function, uniqueId?: function,
+          uniqueIdType?: function }[], multiValueExtendedProperties?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ..., value?: ...
+          } & { <xref uid="@odata.type" />: ... })[], onlineMeeting?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          conferenceId?: string | null, joinUrl?: string | null, phones?: ...[],
+          quickDial?: string | null, tollFreeNumbers?: ...[], tollNumber?:
+          string | null } | null, onlineMeetingProvider?: Record&lt;string,
+          never&gt; | "unknown" | "skypeForBusiness" | "skypeForConsumer" |
+          "teamsForBusiness" | null, onlineMeetingUrl?: string | null,
+          organizer?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, emailAddress?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., address?: ..., name?: ... } | null } |
+          null, originalEndTimeZone?: string | null, originalStart?: string |
+          null, originalStartTimeZone?: string | null, recurrence?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          pattern?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          dayOfMonth?: ..., daysOfWeek?: ..., firstDayOfWeek?: ..., index?: ...,
+          interval?: ..., month?: ..., type?: ... } | null, range?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., endDate?:
+          ..., numberOfOccurrences?: ..., recurrenceTimeZone?: ..., startDate?:
+          ..., type?: ... } | null } | null, reminderMinutesBeforeStart?: number
+          | null, responseRequested?: boolean | null, responseStatus?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          response?: Record&lt;..., ...&gt; | "none" | "accepted" | "declined" |
+          "organizer" | "tentativelyAccepted" | "notResponded" | null, time?:
+          string | null } | null, sensitivity?: Record&lt;string, never&gt; |
+          "normal" | "private" | "personal" | "confidential" | null,
+          seriesMasterId?: string | null, showAs?: Record&lt;string, never&gt; |
+          "unknown" | "free" | "tentative" | "busy" | "oof" | "workingElsewhere"
+          | null, singleValueExtendedProperties?: (Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ..., value?: ... } & { <xref
+          uid="@odata.type" />: ... })[], start?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string, dateTime?: string, timeZone?:
+          string | null } | null, subject?: string | null, transactionId?:
+          string | null, type?: Record&lt;string, never&gt; | "singleInstance" |
+          "occurrence" | "exception" | "seriesMaster" | null, webLink?: string |
+          null })[], hexColor?: string | null, isDefaultCalendar?: boolean |
+          null, isRemovable?: boolean | null, isTallyingResponses?: boolean |
+          null, multiValueExtendedProperties?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, value?: (string |
+          null)[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.multiValueLegacyExtendedProperty" />" })[],
+          name?: string | null, owner?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, address?: string | null, name?: string |
+          null } | null, singleValueExtendedProperties?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, value?: string | null
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.singleValueLegacyExtendedProperty" />" })[] } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.calendar" />"
+          }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, allowedOnlineMeetingProviders?: (Record<string,
+      never> | "unknown" | "skypeForBusiness" | "skypeForConsumer" |
+      "teamsForBusiness" | null)[], calendarPermissions?: (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string,
+      allowedRoles?: (Record<string, never> | "none" | "freeBusyRead" |
+      "limitedRead" | "read" | "write" | "delegateWithoutPrivateEventAccess" |
+      "delegateWithPrivateEventAccess" | "custom" | null)[], emailAddress?:
+      Record<string, never> | { @odata.type: string, address?: string | null,
+      name?: string | null } | null, isInsideOrganization?: boolean | null,
+      isRemovable?: boolean | null, role?: Record<string, never> | "none" |
+      "freeBusyRead" | "limitedRead" | "read" | "write" |
+      "delegateWithoutPrivateEventAccess" | "delegateWithPrivateEventAccess" |
+      "custom" | null } & { @odata.type: "#microsoft.graph.calendarPermission"
+      })[], calendarView?: (Omit<Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, categories?: ...[],
+      changeKey?: string | null, createdDateTime?: string | null,
+      lastModifiedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.outlookItem" }, "@odata.type"> & { @odata.type: string,
+      allowNewTimeProposals?: boolean | null, attachments?: (Omit<{ @odata.type:
+      ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ..., contentType?:
+      ..., isInline?: ..., lastModifiedDateTime?: ..., name?: ..., size?: ... },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.attachment" })[],
+      attendees?: (Omit<... & ... & ..., "@odata.type"> & { @odata.type: string,
+      proposedNewTime?: function, status?: function })[], body?: Record<string,
+      never> | { @odata.type: string, content?: string | null, contentType?:
+      Record<string, never> | "text" | "html" | null } | null, bodyPreview?:
+      string | null, calendar?: Record<string, never> | Omit<{ id?: string |
+      undefined; '@odata.type': string; }, "@odata.type"> & {
+      allowedOnlineMeetingProviders?: (Record<string, never> | "unknown" |
+      "skypeForBusiness" | "skypeForConsumer" | "teamsForBusiness" | null)[] |
+      undefined; ... 17 more ...; '@odata.type': string; } & { ...; } | null,
+      cancelledOccurrences?: string[], end?: Record<string, never> | {
+      @odata.type: string, dateTime?: string, timeZone?: string | null } | null,
+      exceptionOccurrences?: (Omit<Omit<{ id?: string | undefined;
+      '@odata.type': string; }, "@odata.type"> & Omit<{ categories?: (string |
+      null)[] | undefined; changeKey?: string | null | undefined;
+      createdDateTime?: string | ... 1 more ... | undefined;
+      lastModifiedDateTime?: string | ... 1 more ... | undefined; '@odata.type':
+      string; }, "@oda..., extensions?: (Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & Omit<{ @odata.type: ... }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.extension" })[], hasAttachments?: boolean |
+      null, hideAttendees?: boolean | null, iCalUId?: string | null,
+      importance?: Record<string, never> | "low" | "high" | "normal" | null,
+      instances?: (Omit<Omit<{ id?: string | undefined; '@odata.type': string;
+      }, "@odata.type"> & Omit<{ categories?: (string | null)[] | undefined;
+      changeKey?: string | null | undefined; createdDateTime?: string | ... 1
+      more ... | undefined; lastModifiedDateTime?: string | ... 1 more ... |
+      undefined; '@odata.type': string; }, "@oda..., isAllDay?: boolean | null,
+      isCancelled?: boolean | null, isDraft?: boolean | null, isOnlineMeeting?:
+      boolean | null, isOrganizer?: boolean | null, isReminderOn?: boolean |
+      null, location?: Record<string, never> | { @odata.type: string, address?:
+      Record<string, never> | { @odata.type: string, city?: function,
+      countryOrRegion?: function, postalCode?: function, state?: function,
+      street?: function } | null, coordinates?: Record<string, never> | {
+      @odata.type: string, accuracy?: function, altitude?: function,
+      altitudeAccuracy?: function, latitude?: function, longitude?: function } |
+      null, displayName?: string | null, locationEmailAddress?: string | null,
+      locationType?: Record<string, never> | "default" | "conferenceRoom" |
+      "homeAddress" | "businessAddress" | "geoCoordinates" | "streetAddress" |
+      "hotel" | "restaurant" | "localBusiness" | "postalAddress" | null,
+      locationUri?: string | null, uniqueId?: string | null, uniqueIdType?:
+      Record<string, never> | "unknown" | "locationStore" | "directory" |
+      "private" | "bing" | null } | null, locations?: { @odata.type: string,
+      address?: Record<..., ...> | { @odata.type: ..., city?: ...,
+      countryOrRegion?: ..., postalCode?: ..., state?: ..., street?: ... } |
+      null, coordinates?: Record<..., ...> | { @odata.type: ..., accuracy?: ...,
+      altitude?: ..., altitudeAccuracy?: ..., latitude?: ..., longitude?: ... }
+      | null, displayName?: string | null, locationEmailAddress?: string | null,
+      locationType?: Record<..., ...> | "default" | "conferenceRoom" |
+      "homeAddress" | "businessAddress" | "geoCoordinates" | "streetAddress" |
+      "hotel" | "restaurant" | "localBusiness" | "postalAddress" | null,
+      locationUri?: string | null, uniqueId?: string | null, uniqueIdType?:
+      Record<..., ...> | "unknown" | "locationStore" | "directory" | "private" |
+      "bing" | null }[], multiValueExtendedProperties?: (Omit<{ @odata.type:
+      ..., id?: ... }, "@odata.type"> & { @odata.type: string, value?: function
+      } & { @odata.type: "#microsoft.graph.multiValueLegacyExtendedProperty"
+      })[], onlineMeeting?: Record<string, never> | { @odata.type: string,
+      conferenceId?: string | null, joinUrl?: string | null, phones?: {
+      @odata.type: ..., language?: ..., number?: ..., region?: ..., type?: ...
+      }[], quickDial?: string | null, tollFreeNumbers?: function[], tollNumber?:
+      string | null } | null, onlineMeetingProvider?: Record<string, never> |
+      "unknown" | "skypeForBusiness" | "skypeForConsumer" | "teamsForBusiness" |
+      null, onlineMeetingUrl?: string | null, organizer?: Record<string, never>
+      | { @odata.type: string, emailAddress?: Record<string, never> | {
+      @odata.type: string, address?: function, name?: function } | null } |
+      null, originalEndTimeZone?: string | null, originalStart?: string | null,
+      originalStartTimeZone?: string | null, recurrence?: Record<string, never>
+      | { @odata.type: string, pattern?: Record<string, never> | { @odata.type:
+      string, dayOfMonth?: function, daysOfWeek?: function, firstDayOfWeek?:
+      function, index?: function, interval?: function, month?: function, type?:
+      function } | null, range?: Record<string, never> | { @odata.type: string,
+      endDate?: function, numberOfOccurrences?: function, recurrenceTimeZone?:
+      function, startDate?: function, type?: function } | null } | null,
+      reminderMinutesBeforeStart?: number | null, responseRequested?: boolean |
+      null, responseStatus?: Record<string, never> | { @odata.type: string,
+      response?: Record<string, never> | "none" | "accepted" | "declined" |
+      "organizer" | "tentativelyAccepted" | "notResponded" | null, time?: string
+      | null } | null, sensitivity?: Record<string, never> | "normal" |
+      "private" | "personal" | "confidential" | null, seriesMasterId?: string |
+      null, showAs?: Record<string, never> | "unknown" | "free" | "tentative" |
+      "busy" | "oof" | "workingElsewhere" | null,
+      singleValueExtendedProperties?: (Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & { @odata.type: string, value?: function } & {
+      @odata.type: "#microsoft.graph.singleValueLegacyExtendedProperty" })[],
+      start?: Record<string, never> | { @odata.type: string, dateTime?: string,
+      timeZone?: string | null } | null, subject?: string | null,
+      transactionId?: string | null, type?: Record<string, never> |
+      "singleInstance" | "occurrence" | "exception" | "seriesMaster" | null,
+      webLink?: string | null })[], canEdit?: boolean | null, canShare?: boolean
+      | null, canViewPrivateItems?: boolean | null, changeKey?: string | null,
+      color?: Record<string, never> | "auto" | "lightBlue" | "lightGreen" |
+      "lightOrange" | "lightGray" | "lightYellow" | "lightTeal" | "lightPink" |
+      "lightBrown" | "lightRed" | "maxColor" | null,
+      defaultOnlineMeetingProvider?: Record<string, never> | "unknown" |
+      "skypeForBusiness" | "skypeForConsumer" | "teamsForBusiness" | null,
+      events?: (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+      Omit<{ @odata.type: string, categories?: ...[], changeKey?: string | null,
+      createdDateTime?: string | null, lastModifiedDateTime?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.outlookItem" },
+      "@odata.type"> & { @odata.type: string, allowNewTimeProposals?: boolean |
+      null, attachments?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> &
+      Omit<{ @odata.type: ..., contentType?: ..., isInline?: ...,
+      lastModifiedDateTime?: ..., name?: ..., size?: ... }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.attachment" })[], attendees?: (Omit<... &
+      ... & ..., "@odata.type"> & { @odata.type: string, proposedNewTime?:
+      function, status?: function })[], body?: Record<string, never> | {
+      @odata.type: string, content?: string | null, contentType?: Record<string,
+      never> | "text" | "html" | null } | null, bodyPreview?: string | null,
+      calendar?: Record<string, never> | Omit<{ id?: string | undefined;
+      '@odata.type': string; }, "@odata.type"> & {
+      allowedOnlineMeetingProviders?: (Record<string, never> | "unknown" |
+      "skypeForBusiness" | "skypeForConsumer" | "teamsForBusiness" | null)[] |
+      undefined; ... 17 more ...; '@odata.type': string; } & { ...; } | null,
+      cancelledOccurrences?: string[], end?: Record<string, never> | {
+      @odata.type: string, dateTime?: string, timeZone?: string | null } | null,
+      exceptionOccurrences?: (Omit<Omit<{ id?: string | undefined;
+      '@odata.type': string; }, "@odata.type"> & Omit<{ categories?: (string |
+      null)[] | undefined; changeKey?: string | null | undefined;
+      createdDateTime?: string | ... 1 more ... | undefined;
+      lastModifiedDateTime?: string | ... 1 more ... | undefined; '@odata.type':
+      string; }, "@oda..., extensions?: (Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & Omit<{ @odata.type: ... }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.extension" })[], hasAttachments?: boolean |
+      null, hideAttendees?: boolean | null, iCalUId?: string | null,
+      importance?: Record<string, never> | "low" | "high" | "normal" | null,
+      instances?: (Omit<Omit<{ id?: string | undefined; '@odata.type': string;
+      }, "@odata.type"> & Omit<{ categories?: (string | null)[] | undefined;
+      changeKey?: string | null | undefined; createdDateTime?: string | ... 1
+      more ... | undefined; lastModifiedDateTime?: string | ... 1 more ... |
+      undefined; '@odata.type': string; }, "@oda..., isAllDay?: boolean | null,
+      isCancelled?: boolean | null, isDraft?: boolean | null, isOnlineMeeting?:
+      boolean | null, isOrganizer?: boolean | null, isReminderOn?: boolean |
+      null, location?: Record<string, never> | { @odata.type: string, address?:
+      Record<string, never> | { @odata.type: string, city?: function,
+      countryOrRegion?: function, postalCode?: function, state?: function,
+      street?: function } | null, coordinates?: Record<string, never> | {
+      @odata.type: string, accuracy?: function, altitude?: function,
+      altitudeAccuracy?: function, latitude?: function, longitude?: function } |
+      null, displayName?: string | null, locationEmailAddress?: string | null,
+      locationType?: Record<string, never> | "default" | "conferenceRoom" |
+      "homeAddress" | "businessAddress" | "geoCoordinates" | "streetAddress" |
+      "hotel" | "restaurant" | "localBusiness" | "postalAddress" | null,
+      locationUri?: string | null, uniqueId?: string | null, uniqueIdType?:
+      Record<string, never> | "unknown" | "locationStore" | "directory" |
+      "private" | "bing" | null } | null, locations?: { @odata.type: string,
+      address?: Record<..., ...> | { @odata.type: ..., city?: ...,
+      countryOrRegion?: ..., postalCode?: ..., state?: ..., street?: ... } |
+      null, coordinates?: Record<..., ...> | { @odata.type: ..., accuracy?: ...,
+      altitude?: ..., altitudeAccuracy?: ..., latitude?: ..., longitude?: ... }
+      | null, displayName?: string | null, locationEmailAddress?: string | null,
+      locationType?: Record<..., ...> | "default" | "conferenceRoom" |
+      "homeAddress" | "businessAddress" | "geoCoordinates" | "streetAddress" |
+      "hotel" | "restaurant" | "localBusiness" | "postalAddress" | null,
+      locationUri?: string | null, uniqueId?: string | null, uniqueIdType?:
+      Record<..., ...> | "unknown" | "locationStore" | "directory" | "private" |
+      "bing" | null }[], multiValueExtendedProperties?: (Omit<{ @odata.type:
+      ..., id?: ... }, "@odata.type"> & { @odata.type: string, value?: function
+      } & { @odata.type: "#microsoft.graph.multiValueLegacyExtendedProperty"
+      })[], onlineMeeting?: Record<string, never> | { @odata.type: string,
+      conferenceId?: string | null, joinUrl?: string | null, phones?: {
+      @odata.type: ..., language?: ..., number?: ..., region?: ..., type?: ...
+      }[], quickDial?: string | null, tollFreeNumbers?: function[], tollNumber?:
+      string | null } | null, onlineMeetingProvider?: Record<string, never> |
+      "unknown" | "skypeForBusiness" | "skypeForConsumer" | "teamsForBusiness" |
+      null, onlineMeetingUrl?: string | null, organizer?: Record<string, never>
+      | { @odata.type: string, emailAddress?: Record<string, never> | {
+      @odata.type: string, address?: function, name?: function } | null } |
+      null, originalEndTimeZone?: string | null, originalStart?: string | null,
+      originalStartTimeZone?: string | null, recurrence?: Record<string, never>
+      | { @odata.type: string, pattern?: Record<string, never> | { @odata.type:
+      string, dayOfMonth?: function, daysOfWeek?: function, firstDayOfWeek?:
+      function, index?: function, interval?: function, month?: function, type?:
+      function } | null, range?: Record<string, never> | { @odata.type: string,
+      endDate?: function, numberOfOccurrences?: function, recurrenceTimeZone?:
+      function, startDate?: function, type?: function } | null } | null,
+      reminderMinutesBeforeStart?: number | null, responseRequested?: boolean |
+      null, responseStatus?: Record<string, never> | { @odata.type: string,
+      response?: Record<string, never> | "none" | "accepted" | "declined" |
+      "organizer" | "tentativelyAccepted" | "notResponded" | null, time?: string
+      | null } | null, sensitivity?: Record<string, never> | "normal" |
+      "private" | "personal" | "confidential" | null, seriesMasterId?: string |
+      null, showAs?: Record<string, never> | "unknown" | "free" | "tentative" |
+      "busy" | "oof" | "workingElsewhere" | null,
+      singleValueExtendedProperties?: (Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & { @odata.type: string, value?: function } & {
+      @odata.type: "#microsoft.graph.singleValueLegacyExtendedProperty" })[],
+      start?: Record<string, never> | { @odata.type: string, dateTime?: string,
+      timeZone?: string | null } | null, subject?: string | null,
+      transactionId?: string | null, type?: Record<string, never> |
+      "singleInstance" | "occurrence" | "exception" | "seriesMaster" | null,
+      webLink?: string | null })[], hexColor?: string | null,
+      isDefaultCalendar?: boolean | null, isRemovable?: boolean | null,
+      isTallyingResponses?: boolean | null, multiValueExtendedProperties?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, value?: (string | null)[] } & { @odata.type:
+      "#microsoft.graph.multiValueLegacyExtendedProperty" })[], name?: string |
+      null, owner?: Record<string, never> | { @odata.type: string, address?:
+      string | null, name?: string | null } | null,
+      singleValueExtendedProperties?: (Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & { @odata.type: string, value?: string | null } & {
+      @odata.type: "#microsoft.graph.singleValueLegacyExtendedProperty" })[] } &
+      { @odata.type: "#microsoft.graph.calendar" })
     uid: '@microsoft/teams.graph-endpoints.me.calendar.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -156,12 +805,955 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/me/calendar", "patch">):
-        EndpointRequest<IEndpoints["PATCH /me/calendar"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, allowedOnlineMeetingProviders?:
+        (Record<string, never> | "unknown" | "skypeForBusiness" |
+        "skypeForConsumer" | "teamsForBusiness" | null)[], calendarPermissions?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, allowedRoles?: (Record<string, never> | "none" |
+        "freeBusyRead" | "limitedRead" | "read" | "write" |
+        "delegateWithoutPrivateEventAccess" | "delegateWithPrivateEventAccess" |
+        "custom" | null)[], emailAddress?: Record<string, never> | {
+        @odata.type: string, address?: string | null, name?: string | null } |
+        null, isInsideOrganization?: boolean | null, isRemovable?: boolean |
+        null, role?: Record<string, never> | "none" | "freeBusyRead" |
+        "limitedRead" | "read" | "write" | "delegateWithoutPrivateEventAccess" |
+        "delegateWithPrivateEventAccess" | "custom" | null } & { @odata.type:
+        "#microsoft.graph.calendarPermission" })[], calendarView?: (Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, categories?: ...[], changeKey?: string | null, createdDateTime?:
+        string | null, lastModifiedDateTime?: string | null }, "@odata.type"> &
+        { @odata.type: "#microsoft.graph.outlookItem" }, "@odata.type"> & {
+        @odata.type: string, allowNewTimeProposals?: boolean | null,
+        attachments?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> &
+        Omit<{ @odata.type: ..., contentType?: ..., isInline?: ...,
+        lastModifiedDateTime?: ..., name?: ..., size?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.attachment" })[], attendees?: (Omit<... &
+        ... & ..., "@odata.type"> & { @odata.type: string, proposedNewTime?:
+        function, status?: function })[], body?: Record<string, never> | {
+        @odata.type: string, content?: string | null, contentType?:
+        Record<string, never> | "text" | "html" | null } | null, bodyPreview?:
+        string | null, calendar?: Record<string, never> | Omit<{ id?: string |
+        undefined; '@odata.type': string; }, "@odata.type"> & {
+        allowedOnlineMeetingProviders?: (Record<string, never> | "unknown" |
+        "skypeForBusiness" | "skypeForConsumer" | "teamsForBusiness" | null)[] |
+        undefined; ... 17 more ...; '@odata.type': string; } & { ...; } | null,
+        cancelledOccurrences?: string[], end?: Record<string, never> | {
+        @odata.type: string, dateTime?: string, timeZone?: string | null } |
+        null, exceptionOccurrences?: (Omit<Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & Omit<{ categories?: (string |
+        null)[] | undefined; changeKey?: string | null | undefined;
+        createdDateTime?: string | ... 1 more ... | undefined;
+        lastModifiedDateTime?: string | ... 1 more ... | undefined;
+        '@odata.type': string; }, "@oda..., extensions?: (Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ... },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.extension" })[],
+        hasAttachments?: boolean | null, hideAttendees?: boolean | null,
+        iCalUId?: string | null, importance?: Record<string, never> | "low" |
+        "high" | "normal" | null, instances?: (Omit<Omit<{ id?: string |
+        undefined; '@odata.type': string; }, "@odata.type"> & Omit<{
+        categories?: (string | null)[] | undefined; changeKey?: string | null |
+        undefined; createdDateTime?: string | ... 1 more ... | undefined;
+        lastModifiedDateTime?: string | ... 1 more ... | undefined;
+        '@odata.type': string; }, "@oda..., isAllDay?: boolean | null,
+        isCancelled?: boolean | null, isDraft?: boolean | null,
+        isOnlineMeeting?: boolean | null, isOrganizer?: boolean | null,
+        isReminderOn?: boolean | null, location?: Record<string, never> | {
+        @odata.type: string, address?: Record<string, never> | { @odata.type:
+        string, city?: function, countryOrRegion?: function, postalCode?:
+        function, state?: function, street?: function } | null, coordinates?:
+        Record<string, never> | { @odata.type: string, accuracy?: function,
+        altitude?: function, altitudeAccuracy?: function, latitude?: function,
+        longitude?: function } | null, displayName?: string | null,
+        locationEmailAddress?: string | null, locationType?: Record<string,
+        never> | "default" | "conferenceRoom" | "homeAddress" |
+        "businessAddress" | "geoCoordinates" | "streetAddress" | "hotel" |
+        "restaurant" | "localBusiness" | "postalAddress" | null, locationUri?:
+        string | null, uniqueId?: string | null, uniqueIdType?: Record<string,
+        never> | "unknown" | "locationStore" | "directory" | "private" | "bing"
+        | null } | null, locations?: { @odata.type: string, address?:
+        Record<..., ...> | { @odata.type: ..., city?: ..., countryOrRegion?:
+        ..., postalCode?: ..., state?: ..., street?: ... } | null, coordinates?:
+        Record<..., ...> | { @odata.type: ..., accuracy?: ..., altitude?: ...,
+        altitudeAccuracy?: ..., latitude?: ..., longitude?: ... } | null,
+        displayName?: string | null, locationEmailAddress?: string | null,
+        locationType?: Record<..., ...> | "default" | "conferenceRoom" |
+        "homeAddress" | "businessAddress" | "geoCoordinates" | "streetAddress" |
+        "hotel" | "restaurant" | "localBusiness" | "postalAddress" | null,
+        locationUri?: string | null, uniqueId?: string | null, uniqueIdType?:
+        Record<..., ...> | "unknown" | "locationStore" | "directory" | "private"
+        | "bing" | null }[], multiValueExtendedProperties?: (Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & { @odata.type: string, value?:
+        function } & { @odata.type:
+        "#microsoft.graph.multiValueLegacyExtendedProperty" })[],
+        onlineMeeting?: Record<string, never> | { @odata.type: string,
+        conferenceId?: string | null, joinUrl?: string | null, phones?: {
+        @odata.type: ..., language?: ..., number?: ..., region?: ..., type?: ...
+        }[], quickDial?: string | null, tollFreeNumbers?: function[],
+        tollNumber?: string | null } | null, onlineMeetingProvider?:
+        Record<string, never> | "unknown" | "skypeForBusiness" |
+        "skypeForConsumer" | "teamsForBusiness" | null, onlineMeetingUrl?:
+        string | null, organizer?: Record<string, never> | { @odata.type:
+        string, emailAddress?: Record<string, never> | { @odata.type: string,
+        address?: function, name?: function } | null } | null,
+        originalEndTimeZone?: string | null, originalStart?: string | null,
+        originalStartTimeZone?: string | null, recurrence?: Record<string,
+        never> | { @odata.type: string, pattern?: Record<string, never> | {
+        @odata.type: string, dayOfMonth?: function, daysOfWeek?: function,
+        firstDayOfWeek?: function, index?: function, interval?: function,
+        month?: function, type?: function } | null, range?: Record<string,
+        never> | { @odata.type: string, endDate?: function,
+        numberOfOccurrences?: function, recurrenceTimeZone?: function,
+        startDate?: function, type?: function } | null } | null,
+        reminderMinutesBeforeStart?: number | null, responseRequested?: boolean
+        | null, responseStatus?: Record<string, never> | { @odata.type: string,
+        response?: Record<string, never> | "none" | "accepted" | "declined" |
+        "organizer" | "tentativelyAccepted" | "notResponded" | null, time?:
+        string | null } | null, sensitivity?: Record<string, never> | "normal" |
+        "private" | "personal" | "confidential" | null, seriesMasterId?: string
+        | null, showAs?: Record<string, never> | "unknown" | "free" |
+        "tentative" | "busy" | "oof" | "workingElsewhere" | null,
+        singleValueExtendedProperties?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, value?: function } & {
+        @odata.type: "#microsoft.graph.singleValueLegacyExtendedProperty" })[],
+        start?: Record<string, never> | { @odata.type: string, dateTime?:
+        string, timeZone?: string | null } | null, subject?: string | null,
+        transactionId?: string | null, type?: Record<string, never> |
+        "singleInstance" | "occurrence" | "exception" | "seriesMaster" | null,
+        webLink?: string | null })[], canEdit?: boolean | null, canShare?:
+        boolean | null, canViewPrivateItems?: boolean | null, changeKey?: string
+        | null, color?: Record<string, never> | "auto" | "lightBlue" |
+        "lightGreen" | "lightOrange" | "lightGray" | "lightYellow" | "lightTeal"
+        | "lightPink" | "lightBrown" | "lightRed" | "maxColor" | null,
+        defaultOnlineMeetingProvider?: Record<string, never> | "unknown" |
+        "skypeForBusiness" | "skypeForConsumer" | "teamsForBusiness" | null,
+        events?: (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type">
+        & Omit<{ @odata.type: string, categories?: ...[], changeKey?: string |
+        null, createdDateTime?: string | null, lastModifiedDateTime?: string |
+        null }, "@odata.type"> & { @odata.type: "#microsoft.graph.outlookItem"
+        }, "@odata.type"> & { @odata.type: string, allowNewTimeProposals?:
+        boolean | null, attachments?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., contentType?: ..., isInline?:
+        ..., lastModifiedDateTime?: ..., name?: ..., size?: ... },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.attachment" })[],
+        attendees?: (Omit<... & ... & ..., "@odata.type"> & { @odata.type:
+        string, proposedNewTime?: function, status?: function })[], body?:
+        Record<string, never> | { @odata.type: string, content?: string | null,
+        contentType?: Record<string, never> | "text" | "html" | null } | null,
+        bodyPreview?: string | null, calendar?: Record<string, never> | Omit<{
+        id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        allowedOnlineMeetingProviders?: (Record<string, never> | "unknown" |
+        "skypeForBusiness" | "skypeForConsumer" | "teamsForBusiness" | null)[] |
+        undefined; ... 17 more ...; '@odata.type': string; } & { ...; } | null,
+        cancelledOccurrences?: string[], end?: Record<string, never> | {
+        @odata.type: string, dateTime?: string, timeZone?: string | null } |
+        null, exceptionOccurrences?: (Omit<Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & Omit<{ categories?: (string |
+        null)[] | undefined; changeKey?: string | null | undefined;
+        createdDateTime?: string | ... 1 more ... | undefined;
+        lastModifiedDateTime?: string | ... 1 more ... | undefined;
+        '@odata.type': string; }, "@oda..., extensions?: (Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ... },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.extension" })[],
+        hasAttachments?: boolean | null, hideAttendees?: boolean | null,
+        iCalUId?: string | null, importance?: Record<string, never> | "low" |
+        "high" | "normal" | null, instances?: (Omit<Omit<{ id?: string |
+        undefined; '@odata.type': string; }, "@odata.type"> & Omit<{
+        categories?: (string | null)[] | undefined; changeKey?: string | null |
+        undefined; createdDateTime?: string | ... 1 more ... | undefined;
+        lastModifiedDateTime?: string | ... 1 more ... | undefined;
+        '@odata.type': string; }, "@oda..., isAllDay?: boolean | null,
+        isCancelled?: boolean | null, isDraft?: boolean | null,
+        isOnlineMeeting?: boolean | null, isOrganizer?: boolean | null,
+        isReminderOn?: boolean | null, location?: Record<string, never> | {
+        @odata.type: string, address?: Record<string, never> | { @odata.type:
+        string, city?: function, countryOrRegion?: function, postalCode?:
+        function, state?: function, street?: function } | null, coordinates?:
+        Record<string, never> | { @odata.type: string, accuracy?: function,
+        altitude?: function, altitudeAccuracy?: function, latitude?: function,
+        longitude?: function } | null, displayName?: string | null,
+        locationEmailAddress?: string | null, locationType?: Record<string,
+        never> | "default" | "conferenceRoom" | "homeAddress" |
+        "businessAddress" | "geoCoordinates" | "streetAddress" | "hotel" |
+        "restaurant" | "localBusiness" | "postalAddress" | null, locationUri?:
+        string | null, uniqueId?: string | null, uniqueIdType?: Record<string,
+        never> | "unknown" | "locationStore" | "directory" | "private" | "bing"
+        | null } | null, locations?: { @odata.type: string, address?:
+        Record<..., ...> | { @odata.type: ..., city?: ..., countryOrRegion?:
+        ..., postalCode?: ..., state?: ..., street?: ... } | null, coordinates?:
+        Record<..., ...> | { @odata.type: ..., accuracy?: ..., altitude?: ...,
+        altitudeAccuracy?: ..., latitude?: ..., longitude?: ... } | null,
+        displayName?: string | null, locationEmailAddress?: string | null,
+        locationType?: Record<..., ...> | "default" | "conferenceRoom" |
+        "homeAddress" | "businessAddress" | "geoCoordinates" | "streetAddress" |
+        "hotel" | "restaurant" | "localBusiness" | "postalAddress" | null,
+        locationUri?: string | null, uniqueId?: string | null, uniqueIdType?:
+        Record<..., ...> | "unknown" | "locationStore" | "directory" | "private"
+        | "bing" | null }[], multiValueExtendedProperties?: (Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & { @odata.type: string, value?:
+        function } & { @odata.type:
+        "#microsoft.graph.multiValueLegacyExtendedProperty" })[],
+        onlineMeeting?: Record<string, never> | { @odata.type: string,
+        conferenceId?: string | null, joinUrl?: string | null, phones?: {
+        @odata.type: ..., language?: ..., number?: ..., region?: ..., type?: ...
+        }[], quickDial?: string | null, tollFreeNumbers?: function[],
+        tollNumber?: string | null } | null, onlineMeetingProvider?:
+        Record<string, never> | "unknown" | "skypeForBusiness" |
+        "skypeForConsumer" | "teamsForBusiness" | null, onlineMeetingUrl?:
+        string | null, organizer?: Record<string, never> | { @odata.type:
+        string, emailAddress?: Record<string, never> | { @odata.type: string,
+        address?: function, name?: function } | null } | null,
+        originalEndTimeZone?: string | null, originalStart?: string | null,
+        originalStartTimeZone?: string | null, recurrence?: Record<string,
+        never> | { @odata.type: string, pattern?: Record<string, never> | {
+        @odata.type: string, dayOfMonth?: function, daysOfWeek?: function,
+        firstDayOfWeek?: function, index?: function, interval?: function,
+        month?: function, type?: function } | null, range?: Record<string,
+        never> | { @odata.type: string, endDate?: function,
+        numberOfOccurrences?: function, recurrenceTimeZone?: function,
+        startDate?: function, type?: function } | null } | null,
+        reminderMinutesBeforeStart?: number | null, responseRequested?: boolean
+        | null, responseStatus?: Record<string, never> | { @odata.type: string,
+        response?: Record<string, never> | "none" | "accepted" | "declined" |
+        "organizer" | "tentativelyAccepted" | "notResponded" | null, time?:
+        string | null } | null, sensitivity?: Record<string, never> | "normal" |
+        "private" | "personal" | "confidential" | null, seriesMasterId?: string
+        | null, showAs?: Record<string, never> | "unknown" | "free" |
+        "tentative" | "busy" | "oof" | "workingElsewhere" | null,
+        singleValueExtendedProperties?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, value?: function } & {
+        @odata.type: "#microsoft.graph.singleValueLegacyExtendedProperty" })[],
+        start?: Record<string, never> | { @odata.type: string, dateTime?:
+        string, timeZone?: string | null } | null, subject?: string | null,
+        transactionId?: string | null, type?: Record<string, never> |
+        "singleInstance" | "occurrence" | "exception" | "seriesMaster" | null,
+        webLink?: string | null })[], hexColor?: string | null,
+        isDefaultCalendar?: boolean | null, isRemovable?: boolean | null,
+        isTallyingResponses?: boolean | null, multiValueExtendedProperties?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, value?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.multiValueLegacyExtendedProperty" })[], name?: string
+        | null, owner?: Record<string, never> | { @odata.type: string, address?:
+        string | null, name?: string | null } | null,
+        singleValueExtendedProperties?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, value?: string | null } & {
+        @odata.type: "#microsoft.graph.singleValueLegacyExtendedProperty" })[] }
+        & { @odata.type: "#microsoft.graph.calendar" }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, allowedOnlineMeetingProviders?: (Record<string, never> |
+        "unknown" | "skypeForBusiness" | "skypeForConsumer" | "teamsForBusiness"
+        | null)[], calendarPermissions?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, allowedRoles?:
+        (Record<..., ...> | "none" | "freeBusyRead" | "limitedRead" | "read" |
+        "write" | "delegateWithoutPrivateEventAccess" |
+        "delegateWithPrivateEventAccess" | "custom" | null)[], emailAddress?:
+        Record<string, never> | { @odata.type: string, address?: string | null,
+        name?: string | null } | null, isInsideOrganization?: boolean | null,
+        isRemovable?: boolean | null, role?: Record<string, never> | "none" |
+        "freeBusyRead" | "limitedRead" | "read" | "write" |
+        "delegateWithoutPrivateEventAccess" | "delegateWithPrivateEventAccess" |
+        "custom" | null } & { @odata.type: "#microsoft.graph.calendarPermission"
+        })[], calendarView?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, categories?: function,
+        changeKey?: function, createdDateTime?: function, lastModifiedDateTime?:
+        function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.outlookItem" }, "@odata.type"> & { @odata.type:
+        string, allowNewTimeProposals?: boolean | null, attachments?: (Omit<...,
+        ...> & Omit<..., ...> & { @odata.type: ... })[], attendees?: (Omit<...,
+        ...> & { @odata.type: ..., proposedNewTime?: ..., status?: ... })[],
+        body?: Record<string, never> | { @odata.type: string, content?: string |
+        null, contentType?: Record<..., ...> | "text" | "html" | null } | null,
+        bodyPreview?: string | null, calendar?: Record<string, never> | Omit<{
+        id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        allowedOnlineMeetingProviders?: (Record<string, never> | "unknown" |
+        "skypeForBusiness" | "skypeForConsumer" | "teamsForBusiness" | null)[] |
+        undefined; ... 17 more ...; '@odata.type': string; } & { ...; } | null,
+        cancelledOccurrences?: string[], end?: Record<string, never> | {
+        @odata.type: string, dateTime?: string, timeZone?: string | null } |
+        null, exceptionOccurrences?: (Omit<Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & Omit<{ categories?: (string |
+        null)[] | undefined; changeKey?: string | null | undefined;
+        createdDateTime?: string | ... 1 more ... | undefined;
+        lastModifiedDateTime?: string | ... 1 more ... | undefined;
+        '@odata.type': string; }, "@oda..., extensions?: (Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... })[], hasAttachments?: boolean |
+        null, hideAttendees?: boolean | null, iCalUId?: string | null,
+        importance?: Record<string, never> | "low" | "high" | "normal" | null,
+        instances?: (Omit<Omit<{ id?: string | undefined; '@odata.type': string;
+        }, "@odata.type"> & Omit<{ categories?: (string | null)[] | undefined;
+        changeKey?: string | null | undefined; createdDateTime?: string | ... 1
+        more ... | undefined; lastModifiedDateTime?: string | ... 1 more ... |
+        undefined; '@odata.type': string; }, "@oda..., isAllDay?: boolean |
+        null, isCancelled?: boolean | null, isDraft?: boolean | null,
+        isOnlineMeeting?: boolean | null, isOrganizer?: boolean | null,
+        isReminderOn?: boolean | null, location?: Record<string, never> | {
+        @odata.type: string, address?: Record<..., ...> | { @odata.type: ...,
+        city?: ..., countryOrRegion?: ..., postalCode?: ..., state?: ...,
+        street?: ... } | null, coordinates?: Record<..., ...> | { @odata.type:
+        ..., accuracy?: ..., altitude?: ..., altitudeAccuracy?: ..., latitude?:
+        ..., longitude?: ... } | null, displayName?: string | null,
+        locationEmailAddress?: string | null, locationType?: Record<..., ...> |
+        "default" | "conferenceRoom" | "homeAddress" | "businessAddress" |
+        "geoCoordinates" | "streetAddress" | "hotel" | "restaurant" |
+        "localBusiness" | "postalAddress" | null, locationUri?: string | null,
+        uniqueId?: string | null, uniqueIdType?: Record<..., ...> | "unknown" |
+        "locationStore" | "directory" | "private" | "bing" | null } | null,
+        locations?: { @odata.type: string, address?: function, coordinates?:
+        function, displayName?: function, locationEmailAddress?: function,
+        locationType?: function, locationUri?: function, uniqueId?: function,
+        uniqueIdType?: function }[], multiValueExtendedProperties?: (Omit<...,
+        ...> & { @odata.type: ..., value?: ... } & { @odata.type: ... })[],
+        onlineMeeting?: Record<string, never> | { @odata.type: string,
+        conferenceId?: string | null, joinUrl?: string | null, phones?: ...[],
+        quickDial?: string | null, tollFreeNumbers?: ...[], tollNumber?: string
+        | null } | null, onlineMeetingProvider?: Record<string, never> |
+        "unknown" | "skypeForBusiness" | "skypeForConsumer" | "teamsForBusiness"
+        | null, onlineMeetingUrl?: string | null, organizer?: Record<string,
+        never> | { @odata.type: string, emailAddress?: Record<..., ...> | {
+        @odata.type: ..., address?: ..., name?: ... } | null } | null,
+        originalEndTimeZone?: string | null, originalStart?: string | null,
+        originalStartTimeZone?: string | null, recurrence?: Record<string,
+        never> | { @odata.type: string, pattern?: Record<..., ...> | {
+        @odata.type: ..., dayOfMonth?: ..., daysOfWeek?: ..., firstDayOfWeek?:
+        ..., index?: ..., interval?: ..., month?: ..., type?: ... } | null,
+        range?: Record<..., ...> | { @odata.type: ..., endDate?: ...,
+        numberOfOccurrences?: ..., recurrenceTimeZone?: ..., startDate?: ...,
+        type?: ... } | null } | null, reminderMinutesBeforeStart?: number |
+        null, responseRequested?: boolean | null, responseStatus?:
+        Record<string, never> | { @odata.type: string, response?: Record<...,
+        ...> | "none" | "accepted" | "declined" | "organizer" |
+        "tentativelyAccepted" | "notResponded" | null, time?: string | null } |
+        null, sensitivity?: Record<string, never> | "normal" | "private" |
+        "personal" | "confidential" | null, seriesMasterId?: string | null,
+        showAs?: Record<string, never> | "unknown" | "free" | "tentative" |
+        "busy" | "oof" | "workingElsewhere" | null,
+        singleValueExtendedProperties?: (Omit<..., ...> & { @odata.type: ...,
+        value?: ... } & { @odata.type: ... })[], start?: Record<string, never> |
+        { @odata.type: string, dateTime?: string, timeZone?: string | null } |
+        null, subject?: string | null, transactionId?: string | null, type?:
+        Record<string, never> | "singleInstance" | "occurrence" | "exception" |
+        "seriesMaster" | null, webLink?: string | null })[], canEdit?: boolean |
+        null, canShare?: boolean | null, canViewPrivateItems?: boolean | null,
+        changeKey?: string | null, color?: Record<string, never> | "auto" |
+        "lightBlue" | "lightGreen" | "lightOrange" | "lightGray" | "lightYellow"
+        | "lightTeal" | "lightPink" | "lightBrown" | "lightRed" | "maxColor" |
+        null, defaultOnlineMeetingProvider?: Record<string, never> | "unknown" |
+        "skypeForBusiness" | "skypeForConsumer" | "teamsForBusiness" | null,
+        events?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, categories?: function,
+        changeKey?: function, createdDateTime?: function, lastModifiedDateTime?:
+        function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.outlookItem" }, "@odata.type"> & { @odata.type:
+        string, allowNewTimeProposals?: boolean | null, attachments?: (Omit<...,
+        ...> & Omit<..., ...> & { @odata.type: ... })[], attendees?: (Omit<...,
+        ...> & { @odata.type: ..., proposedNewTime?: ..., status?: ... })[],
+        body?: Record<string, never> | { @odata.type: string, content?: string |
+        null, contentType?: Record<..., ...> | "text" | "html" | null } | null,
+        bodyPreview?: string | null, calendar?: Record<string, never> | Omit<{
+        id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        allowedOnlineMeetingProviders?: (Record<string, never> | "unknown" |
+        "skypeForBusiness" | "skypeForConsumer" | "teamsForBusiness" | null)[] |
+        undefined; ... 17 more ...; '@odata.type': string; } & { ...; } | null,
+        cancelledOccurrences?: string[], end?: Record<string, never> | {
+        @odata.type: string, dateTime?: string, timeZone?: string | null } |
+        null, exceptionOccurrences?: (Omit<Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & Omit<{ categories?: (string |
+        null)[] | undefined; changeKey?: string | null | undefined;
+        createdDateTime?: string | ... 1 more ... | undefined;
+        lastModifiedDateTime?: string | ... 1 more ... | undefined;
+        '@odata.type': string; }, "@oda..., extensions?: (Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... })[], hasAttachments?: boolean |
+        null, hideAttendees?: boolean | null, iCalUId?: string | null,
+        importance?: Record<string, never> | "low" | "high" | "normal" | null,
+        instances?: (Omit<Omit<{ id?: string | undefined; '@odata.type': string;
+        }, "@odata.type"> & Omit<{ categories?: (string | null)[] | undefined;
+        changeKey?: string | null | undefined; createdDateTime?: string | ... 1
+        more ... | undefined; lastModifiedDateTime?: string | ... 1 more ... |
+        undefined; '@odata.type': string; }, "@oda..., isAllDay?: boolean |
+        null, isCancelled?: boolean | null, isDraft?: boolean | null,
+        isOnlineMeeting?: boolean | null, isOrganizer?: boolean | null,
+        isReminderOn?: boolean | null, location?: Record<string, never> | {
+        @odata.type: string, address?: Record<..., ...> | { @odata.type: ...,
+        city?: ..., countryOrRegion?: ..., postalCode?: ..., state?: ...,
+        street?: ... } | null, coordinates?: Record<..., ...> | { @odata.type:
+        ..., accuracy?: ..., altitude?: ..., altitudeAccuracy?: ..., latitude?:
+        ..., longitude?: ... } | null, displayName?: string | null,
+        locationEmailAddress?: string | null, locationType?: Record<..., ...> |
+        "default" | "conferenceRoom" | "homeAddress" | "businessAddress" |
+        "geoCoordinates" | "streetAddress" | "hotel" | "restaurant" |
+        "localBusiness" | "postalAddress" | null, locationUri?: string | null,
+        uniqueId?: string | null, uniqueIdType?: Record<..., ...> | "unknown" |
+        "locationStore" | "directory" | "private" | "bing" | null } | null,
+        locations?: { @odata.type: string, address?: function, coordinates?:
+        function, displayName?: function, locationEmailAddress?: function,
+        locationType?: function, locationUri?: function, uniqueId?: function,
+        uniqueIdType?: function }[], multiValueExtendedProperties?: (Omit<...,
+        ...> & { @odata.type: ..., value?: ... } & { @odata.type: ... })[],
+        onlineMeeting?: Record<string, never> | { @odata.type: string,
+        conferenceId?: string | null, joinUrl?: string | null, phones?: ...[],
+        quickDial?: string | null, tollFreeNumbers?: ...[], tollNumber?: string
+        | null } | null, onlineMeetingProvider?: Record<string, never> |
+        "unknown" | "skypeForBusiness" | "skypeForConsumer" | "teamsForBusiness"
+        | null, onlineMeetingUrl?: string | null, organizer?: Record<string,
+        never> | { @odata.type: string, emailAddress?: Record<..., ...> | {
+        @odata.type: ..., address?: ..., name?: ... } | null } | null,
+        originalEndTimeZone?: string | null, originalStart?: string | null,
+        originalStartTimeZone?: string | null, recurrence?: Record<string,
+        never> | { @odata.type: string, pattern?: Record<..., ...> | {
+        @odata.type: ..., dayOfMonth?: ..., daysOfWeek?: ..., firstDayOfWeek?:
+        ..., index?: ..., interval?: ..., month?: ..., type?: ... } | null,
+        range?: Record<..., ...> | { @odata.type: ..., endDate?: ...,
+        numberOfOccurrences?: ..., recurrenceTimeZone?: ..., startDate?: ...,
+        type?: ... } | null } | null, reminderMinutesBeforeStart?: number |
+        null, responseRequested?: boolean | null, responseStatus?:
+        Record<string, never> | { @odata.type: string, response?: Record<...,
+        ...> | "none" | "accepted" | "declined" | "organizer" |
+        "tentativelyAccepted" | "notResponded" | null, time?: string | null } |
+        null, sensitivity?: Record<string, never> | "normal" | "private" |
+        "personal" | "confidential" | null, seriesMasterId?: string | null,
+        showAs?: Record<string, never> | "unknown" | "free" | "tentative" |
+        "busy" | "oof" | "workingElsewhere" | null,
+        singleValueExtendedProperties?: (Omit<..., ...> & { @odata.type: ...,
+        value?: ... } & { @odata.type: ... })[], start?: Record<string, never> |
+        { @odata.type: string, dateTime?: string, timeZone?: string | null } |
+        null, subject?: string | null, transactionId?: string | null, type?:
+        Record<string, never> | "singleInstance" | "occurrence" | "exception" |
+        "seriesMaster" | null, webLink?: string | null })[], hexColor?: string |
+        null, isDefaultCalendar?: boolean | null, isRemovable?: boolean | null,
+        isTallyingResponses?: boolean | null, multiValueExtendedProperties?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, value?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.multiValueLegacyExtendedProperty" })[], name?: string
+        | null, owner?: Record<string, never> | { @odata.type: string, address?:
+        string | null, name?: string | null } | null,
+        singleValueExtendedProperties?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, value?: string | null } & {
+        @odata.type: "#microsoft.graph.singleValueLegacyExtendedProperty" })[] }
+        & { @odata.type: "#microsoft.graph.calendar" }>
       parameters:
         - id: body
-          type: Operation&lt;"/me/calendar", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            allowedOnlineMeetingProviders?: (Record&lt;string, never&gt; |
+            "unknown" | "skypeForBusiness" | "skypeForConsumer" |
+            "teamsForBusiness" | null)[], calendarPermissions?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            allowedRoles?: (Record&lt;string, never&gt; | "none" |
+            "freeBusyRead" | "limitedRead" | "read" | "write" |
+            "delegateWithoutPrivateEventAccess" |
+            "delegateWithPrivateEventAccess" | "custom" | null)[],
+            emailAddress?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, address?: string | null, name?: string
+            | null } | null, isInsideOrganization?: boolean | null,
+            isRemovable?: boolean | null, role?: Record&lt;string, never&gt; |
+            "none" | "freeBusyRead" | "limitedRead" | "read" | "write" |
+            "delegateWithoutPrivateEventAccess" |
+            "delegateWithPrivateEventAccess" | "custom" | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.calendarPermission" />" })[], calendarView?:
+            (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+            }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, categories?: ...[], changeKey?: string
+            | null, createdDateTime?: string | null, lastModifiedDateTime?:
+            string | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.outlookItem" />"
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, allowNewTimeProposals?: boolean | null, attachments?:
+            (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            ..., contentType?: ..., isInline?: ..., lastModifiedDateTime?: ...,
+            name?: ..., size?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.attachment" />"
+            })[], attendees?: (Omit&lt;... & ... & ..., "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, proposedNewTime?:
+            function, status?: function })[], body?: Record&lt;string, never&gt;
+            | { <xref uid="@odata.type" />: string, content?: string | null,
+            contentType?: Record&lt;string, never&gt; | "text" | "html" | null }
+            | null, bodyPreview?: string | null, calendar?: Record&lt;string,
+            never&gt; | Omit&lt;{ id?: string | undefined; '<xref
+            uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; &
+            { allowedOnlineMeetingProviders?: (Record&lt;string, never&gt; |
+            "unknown" | "skypeForBusiness" | "skypeForConsumer" |
+            "teamsForBusiness" | null)[] | undefined; ... 17 more ...; '<xref
+            uid="@odata.type" />': string; } & { ...; } | null,
+            cancelledOccurrences?: string[], end?: Record&lt;string, never&gt; |
+            { <xref uid="@odata.type" />: string, dateTime?: string, timeZone?:
+            string | null } | null, exceptionOccurrences?: (Omit&lt;Omit&lt;{
+            id?: string | undefined; '<xref uid="@odata.type" />': string; },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ categories?: (string |
+            null)[] | undefined; changeKey?: string | null | undefined;
+            createdDateTime?: string | ... 1 more ... | undefined;
+            lastModifiedDateTime?: string | ... 1 more ... | undefined; '<xref
+            uid="@odata.type" />': string; }, "<xref uid="@oda..." />,
+            extensions?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+            />: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.extension" />"
+            })[], hasAttachments?: boolean | null, hideAttendees?: boolean |
+            null, iCalUId?: string | null, importance?: Record&lt;string,
+            never&gt; | "low" | "high" | "normal" | null, instances?:
+            (Omit&lt;Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type"
+            />': string; }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            categories?: (string | null)[] | undefined; changeKey?: string |
+            null | undefined; createdDateTime?: string | ... 1 more ... |
+            undefined; lastModifiedDateTime?: string | ... 1 more ... |
+            undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@oda..." />, isAllDay?: boolean | null, isCancelled?: boolean |
+            null, isDraft?: boolean | null, isOnlineMeeting?: boolean | null,
+            isOrganizer?: boolean | null, isReminderOn?: boolean | null,
+            location?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, address?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, city?: function, countryOrRegion?:
+            function, postalCode?: function, state?: function, street?: function
+            } | null, coordinates?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, accuracy?: function, altitude?:
+            function, altitudeAccuracy?: function, latitude?: function,
+            longitude?: function } | null, displayName?: string | null,
+            locationEmailAddress?: string | null, locationType?:
+            Record&lt;string, never&gt; | "default" | "conferenceRoom" |
+            "homeAddress" | "businessAddress" | "geoCoordinates" |
+            "streetAddress" | "hotel" | "restaurant" | "localBusiness" |
+            "postalAddress" | null, locationUri?: string | null, uniqueId?:
+            string | null, uniqueIdType?: Record&lt;string, never&gt; |
+            "unknown" | "locationStore" | "directory" | "private" | "bing" |
+            null } | null, locations?: { <xref uid="@odata.type" />: string,
+            address?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+            ..., city?: ..., countryOrRegion?: ..., postalCode?: ..., state?:
+            ..., street?: ... } | null, coordinates?: Record&lt;..., ...&gt; | {
+            <xref uid="@odata.type" />: ..., accuracy?: ..., altitude?: ...,
+            altitudeAccuracy?: ..., latitude?: ..., longitude?: ... } | null,
+            displayName?: string | null, locationEmailAddress?: string | null,
+            locationType?: Record&lt;..., ...&gt; | "default" | "conferenceRoom"
+            | "homeAddress" | "businessAddress" | "geoCoordinates" |
+            "streetAddress" | "hotel" | "restaurant" | "localBusiness" |
+            "postalAddress" | null, locationUri?: string | null, uniqueId?:
+            string | null, uniqueIdType?: Record&lt;..., ...&gt; | "unknown" |
+            "locationStore" | "directory" | "private" | "bing" | null }[],
+            multiValueExtendedProperties?: (Omit&lt;{ <xref uid="@odata.type"
+            />: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, value?: function } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.multiValueLegacyExtendedProperty" />" })[],
+            onlineMeeting?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, conferenceId?: string | null,
+            joinUrl?: string | null, phones?: { <xref uid="@odata.type" />: ...,
+            language?: ..., number?: ..., region?: ..., type?: ... }[],
+            quickDial?: string | null, tollFreeNumbers?: function[],
+            tollNumber?: string | null } | null, onlineMeetingProvider?:
+            Record&lt;string, never&gt; | "unknown" | "skypeForBusiness" |
+            "skypeForConsumer" | "teamsForBusiness" | null, onlineMeetingUrl?:
+            string | null, organizer?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, emailAddress?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, address?:
+            function, name?: function } | null } | null, originalEndTimeZone?:
+            string | null, originalStart?: string | null,
+            originalStartTimeZone?: string | null, recurrence?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            pattern?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, dayOfMonth?: function, daysOfWeek?: function,
+            firstDayOfWeek?: function, index?: function, interval?: function,
+            month?: function, type?: function } | null, range?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            endDate?: function, numberOfOccurrences?: function,
+            recurrenceTimeZone?: function, startDate?: function, type?: function
+            } | null } | null, reminderMinutesBeforeStart?: number | null,
+            responseRequested?: boolean | null, responseStatus?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            response?: Record&lt;string, never&gt; | "none" | "accepted" |
+            "declined" | "organizer" | "tentativelyAccepted" | "notResponded" |
+            null, time?: string | null } | null, sensitivity?: Record&lt;string,
+            never&gt; | "normal" | "private" | "personal" | "confidential" |
+            null, seriesMasterId?: string | null, showAs?: Record&lt;string,
+            never&gt; | "unknown" | "free" | "tentative" | "busy" | "oof" |
+            "workingElsewhere" | null, singleValueExtendedProperties?:
+            (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            value?: function } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.singleValueLegacyExtendedProperty" />" })[],
+            start?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+            string, dateTime?: string, timeZone?: string | null } | null,
+            subject?: string | null, transactionId?: string | null, type?:
+            Record&lt;string, never&gt; | "singleInstance" | "occurrence" |
+            "exception" | "seriesMaster" | null, webLink?: string | null })[],
+            canEdit?: boolean | null, canShare?: boolean | null,
+            canViewPrivateItems?: boolean | null, changeKey?: string | null,
+            color?: Record&lt;string, never&gt; | "auto" | "lightBlue" |
+            "lightGreen" | "lightOrange" | "lightGray" | "lightYellow" |
+            "lightTeal" | "lightPink" | "lightBrown" | "lightRed" | "maxColor" |
+            null, defaultOnlineMeetingProvider?: Record&lt;string, never&gt; |
+            "unknown" | "skypeForBusiness" | "skypeForConsumer" |
+            "teamsForBusiness" | null, events?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, categories?: ...[], changeKey?: string | null,
+            createdDateTime?: string | null, lastModifiedDateTime?: string |
+            null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.outlookItem" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            allowNewTimeProposals?: boolean | null, attachments?: (Omit&lt;{
+            <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            ..., contentType?: ..., isInline?: ..., lastModifiedDateTime?: ...,
+            name?: ..., size?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.attachment" />"
+            })[], attendees?: (Omit&lt;... & ... & ..., "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, proposedNewTime?:
+            function, status?: function })[], body?: Record&lt;string, never&gt;
+            | { <xref uid="@odata.type" />: string, content?: string | null,
+            contentType?: Record&lt;string, never&gt; | "text" | "html" | null }
+            | null, bodyPreview?: string | null, calendar?: Record&lt;string,
+            never&gt; | Omit&lt;{ id?: string | undefined; '<xref
+            uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; &
+            { allowedOnlineMeetingProviders?: (Record&lt;string, never&gt; |
+            "unknown" | "skypeForBusiness" | "skypeForConsumer" |
+            "teamsForBusiness" | null)[] | undefined; ... 17 more ...; '<xref
+            uid="@odata.type" />': string; } & { ...; } | null,
+            cancelledOccurrences?: string[], end?: Record&lt;string, never&gt; |
+            { <xref uid="@odata.type" />: string, dateTime?: string, timeZone?:
+            string | null } | null, exceptionOccurrences?: (Omit&lt;Omit&lt;{
+            id?: string | undefined; '<xref uid="@odata.type" />': string; },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ categories?: (string |
+            null)[] | undefined; changeKey?: string | null | undefined;
+            createdDateTime?: string | ... 1 more ... | undefined;
+            lastModifiedDateTime?: string | ... 1 more ... | undefined; '<xref
+            uid="@odata.type" />': string; }, "<xref uid="@oda..." />,
+            extensions?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+            />: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.extension" />"
+            })[], hasAttachments?: boolean | null, hideAttendees?: boolean |
+            null, iCalUId?: string | null, importance?: Record&lt;string,
+            never&gt; | "low" | "high" | "normal" | null, instances?:
+            (Omit&lt;Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type"
+            />': string; }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            categories?: (string | null)[] | undefined; changeKey?: string |
+            null | undefined; createdDateTime?: string | ... 1 more ... |
+            undefined; lastModifiedDateTime?: string | ... 1 more ... |
+            undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@oda..." />, isAllDay?: boolean | null, isCancelled?: boolean |
+            null, isDraft?: boolean | null, isOnlineMeeting?: boolean | null,
+            isOrganizer?: boolean | null, isReminderOn?: boolean | null,
+            location?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, address?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, city?: function, countryOrRegion?:
+            function, postalCode?: function, state?: function, street?: function
+            } | null, coordinates?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, accuracy?: function, altitude?:
+            function, altitudeAccuracy?: function, latitude?: function,
+            longitude?: function } | null, displayName?: string | null,
+            locationEmailAddress?: string | null, locationType?:
+            Record&lt;string, never&gt; | "default" | "conferenceRoom" |
+            "homeAddress" | "businessAddress" | "geoCoordinates" |
+            "streetAddress" | "hotel" | "restaurant" | "localBusiness" |
+            "postalAddress" | null, locationUri?: string | null, uniqueId?:
+            string | null, uniqueIdType?: Record&lt;string, never&gt; |
+            "unknown" | "locationStore" | "directory" | "private" | "bing" |
+            null } | null, locations?: { <xref uid="@odata.type" />: string,
+            address?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+            ..., city?: ..., countryOrRegion?: ..., postalCode?: ..., state?:
+            ..., street?: ... } | null, coordinates?: Record&lt;..., ...&gt; | {
+            <xref uid="@odata.type" />: ..., accuracy?: ..., altitude?: ...,
+            altitudeAccuracy?: ..., latitude?: ..., longitude?: ... } | null,
+            displayName?: string | null, locationEmailAddress?: string | null,
+            locationType?: Record&lt;..., ...&gt; | "default" | "conferenceRoom"
+            | "homeAddress" | "businessAddress" | "geoCoordinates" |
+            "streetAddress" | "hotel" | "restaurant" | "localBusiness" |
+            "postalAddress" | null, locationUri?: string | null, uniqueId?:
+            string | null, uniqueIdType?: Record&lt;..., ...&gt; | "unknown" |
+            "locationStore" | "directory" | "private" | "bing" | null }[],
+            multiValueExtendedProperties?: (Omit&lt;{ <xref uid="@odata.type"
+            />: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, value?: function } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.multiValueLegacyExtendedProperty" />" })[],
+            onlineMeeting?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, conferenceId?: string | null,
+            joinUrl?: string | null, phones?: { <xref uid="@odata.type" />: ...,
+            language?: ..., number?: ..., region?: ..., type?: ... }[],
+            quickDial?: string | null, tollFreeNumbers?: function[],
+            tollNumber?: string | null } | null, onlineMeetingProvider?:
+            Record&lt;string, never&gt; | "unknown" | "skypeForBusiness" |
+            "skypeForConsumer" | "teamsForBusiness" | null, onlineMeetingUrl?:
+            string | null, organizer?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, emailAddress?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, address?:
+            function, name?: function } | null } | null, originalEndTimeZone?:
+            string | null, originalStart?: string | null,
+            originalStartTimeZone?: string | null, recurrence?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            pattern?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, dayOfMonth?: function, daysOfWeek?: function,
+            firstDayOfWeek?: function, index?: function, interval?: function,
+            month?: function, type?: function } | null, range?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            endDate?: function, numberOfOccurrences?: function,
+            recurrenceTimeZone?: function, startDate?: function, type?: function
+            } | null } | null, reminderMinutesBeforeStart?: number | null,
+            responseRequested?: boolean | null, responseStatus?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            response?: Record&lt;string, never&gt; | "none" | "accepted" |
+            "declined" | "organizer" | "tentativelyAccepted" | "notResponded" |
+            null, time?: string | null } | null, sensitivity?: Record&lt;string,
+            never&gt; | "normal" | "private" | "personal" | "confidential" |
+            null, seriesMasterId?: string | null, showAs?: Record&lt;string,
+            never&gt; | "unknown" | "free" | "tentative" | "busy" | "oof" |
+            "workingElsewhere" | null, singleValueExtendedProperties?:
+            (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            value?: function } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.singleValueLegacyExtendedProperty" />" })[],
+            start?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+            string, dateTime?: string, timeZone?: string | null } | null,
+            subject?: string | null, transactionId?: string | null, type?:
+            Record&lt;string, never&gt; | "singleInstance" | "occurrence" |
+            "exception" | "seriesMaster" | null, webLink?: string | null })[],
+            hexColor?: string | null, isDefaultCalendar?: boolean | null,
+            isRemovable?: boolean | null, isTallyingResponses?: boolean | null,
+            multiValueExtendedProperties?: (Omit&lt;{ <xref uid="@odata.type"
+            />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, value?: (string | null)[] } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.multiValueLegacyExtendedProperty" />" })[],
+            name?: string | null, owner?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, address?: string | null, name?: string
+            | null } | null, singleValueExtendedProperties?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            value?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.singleValueLegacyExtendedProperty" />" })[] } &
+            { <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.calendar"
+            />" }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["PATCH /me/calendar"]["response"]&gt;
+        type: >-
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, allowedOnlineMeetingProviders?: (Record&lt;string,
+          never&gt; | "unknown" | "skypeForBusiness" | "skypeForConsumer" |
+          "teamsForBusiness" | null)[], calendarPermissions?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, allowedRoles?:
+          (Record&lt;..., ...&gt; | "none" | "freeBusyRead" | "limitedRead" |
+          "read" | "write" | "delegateWithoutPrivateEventAccess" |
+          "delegateWithPrivateEventAccess" | "custom" | null)[], emailAddress?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          address?: string | null, name?: string | null } | null,
+          isInsideOrganization?: boolean | null, isRemovable?: boolean | null,
+          role?: Record&lt;string, never&gt; | "none" | "freeBusyRead" |
+          "limitedRead" | "read" | "write" | "delegateWithoutPrivateEventAccess"
+          | "delegateWithPrivateEventAccess" | "custom" | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.calendarPermission"
+          />" })[], calendarView?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: function }, "<xref uid="@odata.type" />"&gt; &
+          Omit&lt;{ <xref uid="@odata.type" />: string, categories?: function,
+          changeKey?: function, createdDateTime?: function,
+          lastModifiedDateTime?: function }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.outlookItem" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string,
+          allowNewTimeProposals?: boolean | null, attachments?: (Omit&lt;...,
+          ...&gt; & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...
+          })[], attendees?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type"
+          />: ..., proposedNewTime?: ..., status?: ... })[], body?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          content?: string | null, contentType?: Record&lt;..., ...&gt; | "text"
+          | "html" | null } | null, bodyPreview?: string | null, calendar?:
+          Record&lt;string, never&gt; | Omit&lt;{ id?: string | undefined;
+          '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+          />"&gt; & { allowedOnlineMeetingProviders?: (Record&lt;string,
+          never&gt; | "unknown" | "skypeForBusiness" | "skypeForConsumer" |
+          "teamsForBusiness" | null)[] | undefined; ... 17 more ...; '<xref
+          uid="@odata.type" />': string; } & { ...; } | null,
+          cancelledOccurrences?: string[], end?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, dateTime?: string, timeZone?:
+          string | null } | null, exceptionOccurrences?: (Omit&lt;Omit&lt;{ id?:
+          string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ categories?: (string | null)[] |
+          undefined; changeKey?: string | null | undefined; createdDateTime?:
+          string | ... 1 more ... | undefined; lastModifiedDateTime?: string |
+          ... 1 more ... | undefined; '<xref uid="@odata.type" />': string; },
+          "<xref uid="@oda..." />, extensions?: (Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... })[],
+          hasAttachments?: boolean | null, hideAttendees?: boolean | null,
+          iCalUId?: string | null, importance?: Record&lt;string, never&gt; |
+          "low" | "high" | "normal" | null, instances?: (Omit&lt;Omit&lt;{ id?:
+          string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ categories?: (string | null)[] |
+          undefined; changeKey?: string | null | undefined; createdDateTime?:
+          string | ... 1 more ... | undefined; lastModifiedDateTime?: string |
+          ... 1 more ... | undefined; '<xref uid="@odata.type" />': string; },
+          "<xref uid="@oda..." />, isAllDay?: boolean | null, isCancelled?:
+          boolean | null, isDraft?: boolean | null, isOnlineMeeting?: boolean |
+          null, isOrganizer?: boolean | null, isReminderOn?: boolean | null,
+          location?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, address?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., city?: ..., countryOrRegion?: ..., postalCode?: ..., state?:
+          ..., street?: ... } | null, coordinates?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., accuracy?: ..., altitude?: ...,
+          altitudeAccuracy?: ..., latitude?: ..., longitude?: ... } | null,
+          displayName?: string | null, locationEmailAddress?: string | null,
+          locationType?: Record&lt;..., ...&gt; | "default" | "conferenceRoom" |
+          "homeAddress" | "businessAddress" | "geoCoordinates" | "streetAddress"
+          | "hotel" | "restaurant" | "localBusiness" | "postalAddress" | null,
+          locationUri?: string | null, uniqueId?: string | null, uniqueIdType?:
+          Record&lt;..., ...&gt; | "unknown" | "locationStore" | "directory" |
+          "private" | "bing" | null } | null, locations?: { <xref
+          uid="@odata.type" />: string, address?: function, coordinates?:
+          function, displayName?: function, locationEmailAddress?: function,
+          locationType?: function, locationUri?: function, uniqueId?: function,
+          uniqueIdType?: function }[], multiValueExtendedProperties?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ..., value?: ...
+          } & { <xref uid="@odata.type" />: ... })[], onlineMeeting?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          conferenceId?: string | null, joinUrl?: string | null, phones?: ...[],
+          quickDial?: string | null, tollFreeNumbers?: ...[], tollNumber?:
+          string | null } | null, onlineMeetingProvider?: Record&lt;string,
+          never&gt; | "unknown" | "skypeForBusiness" | "skypeForConsumer" |
+          "teamsForBusiness" | null, onlineMeetingUrl?: string | null,
+          organizer?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, emailAddress?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., address?: ..., name?: ... } | null } |
+          null, originalEndTimeZone?: string | null, originalStart?: string |
+          null, originalStartTimeZone?: string | null, recurrence?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          pattern?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          dayOfMonth?: ..., daysOfWeek?: ..., firstDayOfWeek?: ..., index?: ...,
+          interval?: ..., month?: ..., type?: ... } | null, range?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., endDate?:
+          ..., numberOfOccurrences?: ..., recurrenceTimeZone?: ..., startDate?:
+          ..., type?: ... } | null } | null, reminderMinutesBeforeStart?: number
+          | null, responseRequested?: boolean | null, responseStatus?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          response?: Record&lt;..., ...&gt; | "none" | "accepted" | "declined" |
+          "organizer" | "tentativelyAccepted" | "notResponded" | null, time?:
+          string | null } | null, sensitivity?: Record&lt;string, never&gt; |
+          "normal" | "private" | "personal" | "confidential" | null,
+          seriesMasterId?: string | null, showAs?: Record&lt;string, never&gt; |
+          "unknown" | "free" | "tentative" | "busy" | "oof" | "workingElsewhere"
+          | null, singleValueExtendedProperties?: (Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ..., value?: ... } & { <xref
+          uid="@odata.type" />: ... })[], start?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string, dateTime?: string, timeZone?:
+          string | null } | null, subject?: string | null, transactionId?:
+          string | null, type?: Record&lt;string, never&gt; | "singleInstance" |
+          "occurrence" | "exception" | "seriesMaster" | null, webLink?: string |
+          null })[], canEdit?: boolean | null, canShare?: boolean | null,
+          canViewPrivateItems?: boolean | null, changeKey?: string | null,
+          color?: Record&lt;string, never&gt; | "auto" | "lightBlue" |
+          "lightGreen" | "lightOrange" | "lightGray" | "lightYellow" |
+          "lightTeal" | "lightPink" | "lightBrown" | "lightRed" | "maxColor" |
+          null, defaultOnlineMeetingProvider?: Record&lt;string, never&gt; |
+          "unknown" | "skypeForBusiness" | "skypeForConsumer" |
+          "teamsForBusiness" | null, events?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, categories?: function, changeKey?: function, createdDateTime?:
+          function, lastModifiedDateTime?: function }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.outlookItem" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string,
+          allowNewTimeProposals?: boolean | null, attachments?: (Omit&lt;...,
+          ...&gt; & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...
+          })[], attendees?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type"
+          />: ..., proposedNewTime?: ..., status?: ... })[], body?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          content?: string | null, contentType?: Record&lt;..., ...&gt; | "text"
+          | "html" | null } | null, bodyPreview?: string | null, calendar?:
+          Record&lt;string, never&gt; | Omit&lt;{ id?: string | undefined;
+          '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+          />"&gt; & { allowedOnlineMeetingProviders?: (Record&lt;string,
+          never&gt; | "unknown" | "skypeForBusiness" | "skypeForConsumer" |
+          "teamsForBusiness" | null)[] | undefined; ... 17 more ...; '<xref
+          uid="@odata.type" />': string; } & { ...; } | null,
+          cancelledOccurrences?: string[], end?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, dateTime?: string, timeZone?:
+          string | null } | null, exceptionOccurrences?: (Omit&lt;Omit&lt;{ id?:
+          string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ categories?: (string | null)[] |
+          undefined; changeKey?: string | null | undefined; createdDateTime?:
+          string | ... 1 more ... | undefined; lastModifiedDateTime?: string |
+          ... 1 more ... | undefined; '<xref uid="@odata.type" />': string; },
+          "<xref uid="@oda..." />, extensions?: (Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... })[],
+          hasAttachments?: boolean | null, hideAttendees?: boolean | null,
+          iCalUId?: string | null, importance?: Record&lt;string, never&gt; |
+          "low" | "high" | "normal" | null, instances?: (Omit&lt;Omit&lt;{ id?:
+          string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ categories?: (string | null)[] |
+          undefined; changeKey?: string | null | undefined; createdDateTime?:
+          string | ... 1 more ... | undefined; lastModifiedDateTime?: string |
+          ... 1 more ... | undefined; '<xref uid="@odata.type" />': string; },
+          "<xref uid="@oda..." />, isAllDay?: boolean | null, isCancelled?:
+          boolean | null, isDraft?: boolean | null, isOnlineMeeting?: boolean |
+          null, isOrganizer?: boolean | null, isReminderOn?: boolean | null,
+          location?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, address?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., city?: ..., countryOrRegion?: ..., postalCode?: ..., state?:
+          ..., street?: ... } | null, coordinates?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., accuracy?: ..., altitude?: ...,
+          altitudeAccuracy?: ..., latitude?: ..., longitude?: ... } | null,
+          displayName?: string | null, locationEmailAddress?: string | null,
+          locationType?: Record&lt;..., ...&gt; | "default" | "conferenceRoom" |
+          "homeAddress" | "businessAddress" | "geoCoordinates" | "streetAddress"
+          | "hotel" | "restaurant" | "localBusiness" | "postalAddress" | null,
+          locationUri?: string | null, uniqueId?: string | null, uniqueIdType?:
+          Record&lt;..., ...&gt; | "unknown" | "locationStore" | "directory" |
+          "private" | "bing" | null } | null, locations?: { <xref
+          uid="@odata.type" />: string, address?: function, coordinates?:
+          function, displayName?: function, locationEmailAddress?: function,
+          locationType?: function, locationUri?: function, uniqueId?: function,
+          uniqueIdType?: function }[], multiValueExtendedProperties?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ..., value?: ...
+          } & { <xref uid="@odata.type" />: ... })[], onlineMeeting?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          conferenceId?: string | null, joinUrl?: string | null, phones?: ...[],
+          quickDial?: string | null, tollFreeNumbers?: ...[], tollNumber?:
+          string | null } | null, onlineMeetingProvider?: Record&lt;string,
+          never&gt; | "unknown" | "skypeForBusiness" | "skypeForConsumer" |
+          "teamsForBusiness" | null, onlineMeetingUrl?: string | null,
+          organizer?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, emailAddress?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., address?: ..., name?: ... } | null } |
+          null, originalEndTimeZone?: string | null, originalStart?: string |
+          null, originalStartTimeZone?: string | null, recurrence?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          pattern?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          dayOfMonth?: ..., daysOfWeek?: ..., firstDayOfWeek?: ..., index?: ...,
+          interval?: ..., month?: ..., type?: ... } | null, range?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., endDate?:
+          ..., numberOfOccurrences?: ..., recurrenceTimeZone?: ..., startDate?:
+          ..., type?: ... } | null } | null, reminderMinutesBeforeStart?: number
+          | null, responseRequested?: boolean | null, responseStatus?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          response?: Record&lt;..., ...&gt; | "none" | "accepted" | "declined" |
+          "organizer" | "tentativelyAccepted" | "notResponded" | null, time?:
+          string | null } | null, sensitivity?: Record&lt;string, never&gt; |
+          "normal" | "private" | "personal" | "confidential" | null,
+          seriesMasterId?: string | null, showAs?: Record&lt;string, never&gt; |
+          "unknown" | "free" | "tentative" | "busy" | "oof" | "workingElsewhere"
+          | null, singleValueExtendedProperties?: (Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ..., value?: ... } & { <xref
+          uid="@odata.type" />: ... })[], start?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string, dateTime?: string, timeZone?:
+          string | null } | null, subject?: string | null, transactionId?:
+          string | null, type?: Record&lt;string, never&gt; | "singleInstance" |
+          "occurrence" | "exception" | "seriesMaster" | null, webLink?: string |
+          null })[], hexColor?: string | null, isDefaultCalendar?: boolean |
+          null, isRemovable?: boolean | null, isTallyingResponses?: boolean |
+          null, multiValueExtendedProperties?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, value?: (string |
+          null)[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.multiValueLegacyExtendedProperty" />" })[],
+          name?: string | null, owner?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, address?: string | null, name?: string |
+          null } | null, singleValueExtendedProperties?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, value?: string | null
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.singleValueLegacyExtendedProperty" />" })[] } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.calendar" />"
+          }&gt;

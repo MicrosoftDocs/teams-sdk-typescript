@@ -7,7 +7,7 @@ interfaces:
   - '@microsoft/teams.graph-endpoints-beta.users.authentication.IEndpoints'
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: del(any)
+  - name: 'del({ If-Match?: string, user-id: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.users.authentication.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`DELETE /users/{user-id}/authentication`'
@@ -15,18 +15,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /users/{user-id}/authentication"]["response"]>
+        function del(params?: { If-Match?: string, user-id: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, user-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /users/{user-id}/authentication"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[], user-id: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.users.authentication.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -37,18 +35,798 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/authentication"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[], user-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, emailMethods?: (Omit<Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, createdDateTime?: function, lastUsedDateTime?:
+        function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authenticationMethod" }, "@odata.type"> & {
+        @odata.type: string, emailAddress?: string | null } & { @odata.type:
+        "#microsoft.graph.emailAuthenticationMethod" })[],
+        externalAuthenticationMethods?: (Omit<Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdDateTime?: function, lastUsedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.authenticationMethod"
+        }, "@odata.type"> & { @odata.type: string, configurationId?: string,
+        displayName?: string } & { @odata.type:
+        "#microsoft.graph.externalAuthenticationMethod" })[], fido2Methods?:
+        (Omit<Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string, createdDateTime?: function,
+        lastUsedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authenticationMethod" }, "@odata.type"> & {
+        @odata.type: string, aaGuid?: string | null, attestationCertificates?:
+        (string | null)[], attestationLevel?: "unknownFutureValue" |
+        Record<string, never> | "attested" | "notAttested" | null, displayName?:
+        string | null, model?: string | null, publicKeyCredential?:
+        Record<string, never> | { @odata.type: string, clientExtensionResults?:
+        Record<..., ...> | { @odata.type: ... } | null, id?: string | null,
+        response?: Record<..., ...> | { @odata.type: ..., attestationObject?:
+        ..., clientDataJSON?: ... } | null } | null } & { @odata.type:
+        "#microsoft.graph.fido2AuthenticationMethod" })[], hardwareOathMethods?:
+        (Omit<Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string, createdDateTime?: function,
+        lastUsedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authenticationMethod" }, "@odata.type"> & {
+        @odata.type: string, device?: Record<string, never> | (Omit<... & ... &
+        ..., "@odata.type"> & { @odata.type: string, assignedTo?: function,
+        assignTo?: function, hashFunction?: function, lastUsedDateTime?:
+        function, manufacturer?: function, model?: function, secretKey?:
+        function, serialNumber?: function, status?: function,
+        timeIntervalInSeconds?: function } & { @odata.type:
+        "#microsoft.graph.hardwareOathTokenAuthenticationMethodDevice" }) | null
+        } & { @odata.type: "#microsoft.graph.hardwareOathAuthenticationMethod"
+        })[], methods?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string |
+        null, lastUsedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authenticationMethod" })[],
+        microsoftAuthenticatorMethods?: (Omit<Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdDateTime?: function, lastUsedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.authenticationMethod"
+        }, "@odata.type"> & { @odata.type: string, clientAppName?:
+        "unknownFutureValue" | Record<string, never> | "microsoftAuthenticator"
+        | "outlookMobile" | null, device?: Record<string, never> | (Omit<... &
+        ... & ..., "@odata.type"> & { @odata.type: string, accountEnabled?:
+        function, alternativeNames?: function, alternativeSecurityIds?:
+        function, approximateLastSignInDateTime?: function, commands?: function,
+        complianceExpirationDateTime?: function, deviceCategory?: function,
+        deviceId?: function, deviceMetadata?: function, deviceOwnership?:
+        function, deviceTemplate?: function, deviceVersion?: function,
+        displayName?: function, domainName?: function, enrollmentProfileName?:
+        function, enrollmentType?: function, extensionAttributes?: function,
+        extensions?: function, hostnames?: function, isCompliant?: function,
+        isManaged?: function, isManagementRestricted?: function, isRooted?:
+        function, kind?: function, managementType?: function, manufacturer?:
+        function, mdmAppId?: function, memberOf?: function, model?: function,
+        name?: function, onPremisesLastSyncDateTime?: function,
+        onPremisesSecurityIdentifier?: function, onPremisesSyncEnabled?:
+        function, operatingSystem?: function, operatingSystemVersion?: function,
+        physicalIds?: function, platform?: function, profileType?: function,
+        registeredOwners?: function, registeredUsers?: function,
+        registrationDateTime?: function, status?: function, systemLabels?:
+        function, transitiveMemberOf?: function, trustType?: function,
+        usageRights?: function }) | null, deviceTag?: string | null,
+        displayName?: string | null, phoneAppVersion?: string | null } & {
+        @odata.type:
+        "#microsoft.graph.microsoftAuthenticatorAuthenticationMethod" })[],
+        operations?: (Omit<{ @odata.type: string, id?: string }, "@odata.type">
+        & Omit<{ @odata.type: string, createdDateTime?: string | null,
+        lastActionDateTime?: string | null, resourceLocation?: string | null,
+        status?: "unknownFutureValue" | Record<string, never> | "notStarted" |
+        "running" | "succeeded" | "failed" | null, statusDetail?: string | null
+        }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.longRunningOperation" })[],
+        passwordlessMicrosoftAuthenticatorMethods?: (Omit<Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdDateTime?: function, lastUsedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.authenticationMethod"
+        }, "@odata.type"> & { @odata.type: string, creationDateTime?: string |
+        null, device?: Record<string, never> | (Omit<... & ... & ...,
+        "@odata.type"> & { @odata.type: string, accountEnabled?: function,
+        alternativeNames?: function, alternativeSecurityIds?: function,
+        approximateLastSignInDateTime?: function, commands?: function,
+        complianceExpirationDateTime?: function, deviceCategory?: function,
+        deviceId?: function, deviceMetadata?: function, deviceOwnership?:
+        function, deviceTemplate?: function, deviceVersion?: function,
+        displayName?: function, domainName?: function, enrollmentProfileName?:
+        function, enrollmentType?: function, extensionAttributes?: function,
+        extensions?: function, hostnames?: function, isCompliant?: function,
+        isManaged?: function, isManagementRestricted?: function, isRooted?:
+        function, kind?: function, managementType?: function, manufacturer?:
+        function, mdmAppId?: function, memberOf?: function, model?: function,
+        name?: function, onPremisesLastSyncDateTime?: function,
+        onPremisesSecurityIdentifier?: function, onPremisesSyncEnabled?:
+        function, operatingSystem?: function, operatingSystemVersion?: function,
+        physicalIds?: function, platform?: function, profileType?: function,
+        registeredOwners?: function, registeredUsers?: function,
+        registrationDateTime?: function, status?: function, systemLabels?:
+        function, transitiveMemberOf?: function, trustType?: function,
+        usageRights?: function }) | null, displayName?: string | null } & {
+        @odata.type:
+        "#microsoft.graph.passwordlessMicrosoftAuthenticatorAuthenticationMethod"
+        })[], passwordMethods?: (Omit<Omit<{ @odata.type: string, id?: function
+        }, "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?:
+        function, lastUsedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authenticationMethod" }, "@odata.type"> & {
+        @odata.type: string, password?: string | null } & { @odata.type:
+        "#microsoft.graph.passwordAuthenticationMethod" })[], phoneMethods?:
+        (Omit<Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string, createdDateTime?: function,
+        lastUsedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authenticationMethod" }, "@odata.type"> & {
+        @odata.type: string, phoneNumber?: string | null, phoneType?:
+        "unknownFutureValue" | Record<string, never> | "mobile" |
+        "alternateMobile" | "office" | null, smsSignInState?:
+        "unknownFutureValue" | Record<string, never> | "notSupported" |
+        "notAllowedByPolicy" | "notEnabled" | "phoneNumberNotUnique" | "ready" |
+        "notConfigured" | null } & { @odata.type:
+        "#microsoft.graph.phoneAuthenticationMethod" })[],
+        platformCredentialMethods?: (Omit<Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdDateTime?: function, lastUsedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.authenticationMethod"
+        }, "@odata.type"> & { @odata.type: string, device?: Record<string,
+        never> | (Omit<... & ... & ..., "@odata.type"> & { @odata.type: string,
+        accountEnabled?: function, alternativeNames?: function,
+        alternativeSecurityIds?: function, approximateLastSignInDateTime?:
+        function, commands?: function, complianceExpirationDateTime?: function,
+        deviceCategory?: function, deviceId?: function, deviceMetadata?:
+        function, deviceOwnership?: function, deviceTemplate?: function,
+        deviceVersion?: function, displayName?: function, domainName?: function,
+        enrollmentProfileName?: function, enrollmentType?: function,
+        extensionAttributes?: function, extensions?: function, hostnames?:
+        function, isCompliant?: function, isManaged?: function,
+        isManagementRestricted?: function, isRooted?: function, kind?: function,
+        managementType?: function, manufacturer?: function, mdmAppId?: function,
+        memberOf?: function, model?: function, name?: function,
+        onPremisesLastSyncDateTime?: function, onPremisesSecurityIdentifier?:
+        function, onPremisesSyncEnabled?: function, operatingSystem?: function,
+        operatingSystemVersion?: function, physicalIds?: function, platform?:
+        function, profileType?: function, registeredOwners?: function,
+        registeredUsers?: function, registrationDateTime?: function, status?:
+        function, systemLabels?: function, transitiveMemberOf?: function,
+        trustType?: function, usageRights?: function }) | null, displayName?:
+        string | null, keyStrength?: Record<string, never> | "unknown" |
+        "normal" | "weak" | null, platform?: "unknownFutureValue" |
+        Record<string, never> | "unknown" | "windows" | "macOS" | "iOS" |
+        "android" | "linux" | null } & { @odata.type:
+        "#microsoft.graph.platformCredentialAuthenticationMethod" })[],
+        qrCodePinMethod?: Record<string, never> | (Omit<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdDateTime?: string | null, lastUsedDateTime?: string | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.authenticationMethod"
+        }, "@odata.type"> & { @odata.type: string, pin?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+        @odata.type: string, code?: string, createdDateTime?: string | null,
+        forceChangePinNextSignIn?: boolean | null, updatedDateTime?: string |
+        null } & { @odata.type: "#microsoft.graph.qrPin" }) | null,
+        standardQRCode?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: function }, "@odata.type"> & { @odata.type: string,
+        createdDateTime?: string | null, expireDateTime?: string | null, image?:
+        Record<..., ...> | { @odata.type: ..., binaryValue?: ...,
+        errorCorrectionLevel?: ..., rawContent?: ..., version?: ... } | null,
+        lastUsedDateTime?: string | null, startDateTime?: string | null } & {
+        @odata.type: "#microsoft.graph.qrCode" }) | null, temporaryQRCode?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, createdDateTime?: string | null,
+        expireDateTime?: string | null, image?: Record<..., ...> | {
+        @odata.type: ..., binaryValue?: ..., errorCorrectionLevel?: ...,
+        rawContent?: ..., version?: ... } | null, lastUsedDateTime?: string |
+        null, startDateTime?: string | null } & { @odata.type:
+        "#microsoft.graph.qrCode" }) | null } & { @odata.type:
+        "#microsoft.graph.qrCodePinAuthenticationMethod" }) | null,
+        requirements?: Record<string, never> | { @odata.type: string,
+        perUserMfaState?: "enabled" | "disabled" | "unknownFutureValue" |
+        Record<string, never> | "enforced" | null } | null, signInPreferences?:
+        Record<string, never> | { @odata.type: string,
+        isSystemPreferredAuthenticationMethodEnabled?: boolean | null,
+        userPreferredMethodForSecondaryAuthentication?: "unknownFutureValue" |
+        Record<string, never> | "push" | "oath" | "voiceMobile" |
+        "voiceAlternateMobile" | "voiceOffice" | "sms" | null } | null,
+        softwareOathMethods?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: function,
+        lastUsedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authenticationMethod" }, "@odata.type"> & {
+        @odata.type: string, secretKey?: string | null } & { @odata.type:
+        "#microsoft.graph.softwareOathAuthenticationMethod" })[],
+        temporaryAccessPassMethods?: (Omit<Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdDateTime?: function, lastUsedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.authenticationMethod"
+        }, "@odata.type"> & { @odata.type: string, isUsableOnce?: boolean |
+        null, lifetimeInMinutes?: number | null, startDateTime?: string | null,
+        temporaryAccessPass?: string | null } & { @odata.type:
+        "#microsoft.graph.temporaryAccessPassAuthenticationMethod" })[],
+        windowsHelloForBusinessMethods?: (Omit<Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdDateTime?: function, lastUsedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.authenticationMethod"
+        }, "@odata.type"> & { @odata.type: string, device?: Record<string,
+        never> | (Omit<... & ... & ..., "@odata.type"> & { @odata.type: string,
+        accountEnabled?: function, alternativeNames?: function,
+        alternativeSecurityIds?: function, approximateLastSignInDateTime?:
+        function, commands?: function, complianceExpirationDateTime?: function,
+        deviceCategory?: function, deviceId?: function, deviceMetadata?:
+        function, deviceOwnership?: function, deviceTemplate?: function,
+        deviceVersion?: function, displayName?: function, domainName?: function,
+        enrollmentProfileName?: function, enrollmentType?: function,
+        extensionAttributes?: function, extensions?: function, hostnames?:
+        function, isCompliant?: function, isManaged?: function,
+        isManagementRestricted?: function, isRooted?: function, kind?: function,
+        managementType?: function, manufacturer?: function, mdmAppId?: function,
+        memberOf?: function, model?: function, name?: function,
+        onPremisesLastSyncDateTime?: function, onPremisesSecurityIdentifier?:
+        function, onPremisesSyncEnabled?: function, operatingSystem?: function,
+        operatingSystemVersion?: function, physicalIds?: function, platform?:
+        function, profileType?: function, registeredOwners?: function,
+        registeredUsers?: function, registrationDateTime?: function, status?:
+        function, systemLabels?: function, transitiveMemberOf?: function,
+        trustType?: function, usageRights?: function }) | null, displayName?:
+        string | null, keyStrength?: Record<string, never> | "unknown" |
+        "normal" | "weak" | null } & { @odata.type:
+        "#microsoft.graph.windowsHelloForBusinessAuthenticationMethod" })[] } &
+        { @odata.type: "#microsoft.graph.authentication" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[], user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/authentication"]["response"]&gt;
-  - name: update(Operation<"/users/{user-id}/authentication", "patch">, any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, emailMethods?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: function }, "<xref uid="@odata.type" />"&gt; &
+          Omit&lt;{ <xref uid="@odata.type" />: string, createdDateTime?:
+          function, lastUsedDateTime?: function }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          emailAddress?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.emailAuthenticationMethod" />" })[],
+          externalAuthenticationMethods?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdDateTime?: function, lastUsedDateTime?: function },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          configurationId?: string, displayName?: string } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.externalAuthenticationMethod" />" })[],
+          fido2Methods?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdDateTime?: function,
+          lastUsedDateTime?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          aaGuid?: string | null, attestationCertificates?: (string | null)[],
+          attestationLevel?: "unknownFutureValue" | Record&lt;string, never&gt;
+          | "attested" | "notAttested" | null, displayName?: string | null,
+          model?: string | null, publicKeyCredential?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string,
+          clientExtensionResults?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ... } | null, id?: string | null, response?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          attestationObject?: ..., clientDataJSON?: ... } | null } | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.fido2AuthenticationMethod" />" })[],
+          hardwareOathMethods?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, createdDateTime?: function,
+          lastUsedDateTime?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          device?: Record&lt;string, never&gt; | (Omit&lt;... & ... & ...,
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, assignedTo?: function, assignTo?: function, hashFunction?:
+          function, lastUsedDateTime?: function, manufacturer?: function,
+          model?: function, secretKey?: function, serialNumber?: function,
+          status?: function, timeIntervalInSeconds?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.hardwareOathTokenAuthenticationMethodDevice" />"
+          }) | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.hardwareOathAuthenticationMethod" />" })[],
+          methods?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdDateTime?: string | null,
+          lastUsedDateTime?: string | null }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethod" />" })[],
+          microsoftAuthenticatorMethods?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdDateTime?: function, lastUsedDateTime?: function },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          clientAppName?: "unknownFutureValue" | Record&lt;string, never&gt; |
+          "microsoftAuthenticator" | "outlookMobile" | null, device?:
+          Record&lt;string, never&gt; | (Omit&lt;... & ... & ..., "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          accountEnabled?: function, alternativeNames?: function,
+          alternativeSecurityIds?: function, approximateLastSignInDateTime?:
+          function, commands?: function, complianceExpirationDateTime?:
+          function, deviceCategory?: function, deviceId?: function,
+          deviceMetadata?: function, deviceOwnership?: function,
+          deviceTemplate?: function, deviceVersion?: function, displayName?:
+          function, domainName?: function, enrollmentProfileName?: function,
+          enrollmentType?: function, extensionAttributes?: function,
+          extensions?: function, hostnames?: function, isCompliant?: function,
+          isManaged?: function, isManagementRestricted?: function, isRooted?:
+          function, kind?: function, managementType?: function, manufacturer?:
+          function, mdmAppId?: function, memberOf?: function, model?: function,
+          name?: function, onPremisesLastSyncDateTime?: function,
+          onPremisesSecurityIdentifier?: function, onPremisesSyncEnabled?:
+          function, operatingSystem?: function, operatingSystemVersion?:
+          function, physicalIds?: function, platform?: function, profileType?:
+          function, registeredOwners?: function, registeredUsers?: function,
+          registrationDateTime?: function, status?: function, systemLabels?:
+          function, transitiveMemberOf?: function, trustType?: function,
+          usageRights?: function }) | null, deviceTag?: string | null,
+          displayName?: string | null, phoneAppVersion?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.microsoftAuthenticatorAuthenticationMethod" />"
+          })[], operations?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdDateTime?: string | null,
+          lastActionDateTime?: string | null, resourceLocation?: string | null,
+          status?: "unknownFutureValue" | Record&lt;string, never&gt; |
+          "notStarted" | "running" | "succeeded" | "failed" | null,
+          statusDetail?: string | null }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.longRunningOperation" />" })[],
+          passwordlessMicrosoftAuthenticatorMethods?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdDateTime?: function, lastUsedDateTime?: function },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          creationDateTime?: string | null, device?: Record&lt;string, never&gt;
+          | (Omit&lt;... & ... & ..., "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, accountEnabled?: function,
+          alternativeNames?: function, alternativeSecurityIds?: function,
+          approximateLastSignInDateTime?: function, commands?: function,
+          complianceExpirationDateTime?: function, deviceCategory?: function,
+          deviceId?: function, deviceMetadata?: function, deviceOwnership?:
+          function, deviceTemplate?: function, deviceVersion?: function,
+          displayName?: function, domainName?: function, enrollmentProfileName?:
+          function, enrollmentType?: function, extensionAttributes?: function,
+          extensions?: function, hostnames?: function, isCompliant?: function,
+          isManaged?: function, isManagementRestricted?: function, isRooted?:
+          function, kind?: function, managementType?: function, manufacturer?:
+          function, mdmAppId?: function, memberOf?: function, model?: function,
+          name?: function, onPremisesLastSyncDateTime?: function,
+          onPremisesSecurityIdentifier?: function, onPremisesSyncEnabled?:
+          function, operatingSystem?: function, operatingSystemVersion?:
+          function, physicalIds?: function, platform?: function, profileType?:
+          function, registeredOwners?: function, registeredUsers?: function,
+          registrationDateTime?: function, status?: function, systemLabels?:
+          function, transitiveMemberOf?: function, trustType?: function,
+          usageRights?: function }) | null, displayName?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.passwordlessMicrosoftAuthenticatorAuthenticationMethod"
+          />" })[], passwordMethods?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: function }, "<xref uid="@odata.type" />"&gt; &
+          Omit&lt;{ <xref uid="@odata.type" />: string, createdDateTime?:
+          function, lastUsedDateTime?: function }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          password?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.passwordAuthenticationMethod" />" })[],
+          phoneMethods?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdDateTime?: function,
+          lastUsedDateTime?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          phoneNumber?: string | null, phoneType?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "mobile" | "alternateMobile" | "office"
+          | null, smsSignInState?: "unknownFutureValue" | Record&lt;string,
+          never&gt; | "notSupported" | "notAllowedByPolicy" | "notEnabled" |
+          "phoneNumberNotUnique" | "ready" | "notConfigured" | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.phoneAuthenticationMethod" />" })[],
+          platformCredentialMethods?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: function }, "<xref uid="@odata.type" />"&gt; &
+          Omit&lt;{ <xref uid="@odata.type" />: string, createdDateTime?:
+          function, lastUsedDateTime?: function }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          device?: Record&lt;string, never&gt; | (Omit&lt;... & ... & ...,
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, accountEnabled?: function, alternativeNames?: function,
+          alternativeSecurityIds?: function, approximateLastSignInDateTime?:
+          function, commands?: function, complianceExpirationDateTime?:
+          function, deviceCategory?: function, deviceId?: function,
+          deviceMetadata?: function, deviceOwnership?: function,
+          deviceTemplate?: function, deviceVersion?: function, displayName?:
+          function, domainName?: function, enrollmentProfileName?: function,
+          enrollmentType?: function, extensionAttributes?: function,
+          extensions?: function, hostnames?: function, isCompliant?: function,
+          isManaged?: function, isManagementRestricted?: function, isRooted?:
+          function, kind?: function, managementType?: function, manufacturer?:
+          function, mdmAppId?: function, memberOf?: function, model?: function,
+          name?: function, onPremisesLastSyncDateTime?: function,
+          onPremisesSecurityIdentifier?: function, onPremisesSyncEnabled?:
+          function, operatingSystem?: function, operatingSystemVersion?:
+          function, physicalIds?: function, platform?: function, profileType?:
+          function, registeredOwners?: function, registeredUsers?: function,
+          registrationDateTime?: function, status?: function, systemLabels?:
+          function, transitiveMemberOf?: function, trustType?: function,
+          usageRights?: function }) | null, displayName?: string | null,
+          keyStrength?: Record&lt;string, never&gt; | "unknown" | "normal" |
+          "weak" | null, platform?: "unknownFutureValue" | Record&lt;string,
+          never&gt; | "unknown" | "windows" | "macOS" | "iOS" | "android" |
+          "linux" | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.platformCredentialAuthenticationMethod" />" })[],
+          qrCodePinMethod?: Record&lt;string, never&gt; | (Omit&lt;Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdDateTime?: string | null, lastUsedDateTime?: string |
+          null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          pin?: Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, code?: string, createdDateTime?:
+          string | null, forceChangePinNextSignIn?: boolean | null,
+          updatedDateTime?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.qrPin" />" }) | null, standardQRCode?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, createdDateTime?: string | null,
+          expireDateTime?: string | null, image?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., binaryValue?: ...,
+          errorCorrectionLevel?: ..., rawContent?: ..., version?: ... } | null,
+          lastUsedDateTime?: string | null, startDateTime?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.qrCode" />"
+          }) | null, temporaryQRCode?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          createdDateTime?: string | null, expireDateTime?: string | null,
+          image?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          binaryValue?: ..., errorCorrectionLevel?: ..., rawContent?: ...,
+          version?: ... } | null, lastUsedDateTime?: string | null,
+          startDateTime?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.qrCode" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.qrCodePinAuthenticationMethod" />" }) | null,
+          requirements?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, perUserMfaState?: "enabled" | "disabled" |
+          "unknownFutureValue" | Record&lt;string, never&gt; | "enforced" | null
+          } | null, signInPreferences?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string,
+          isSystemPreferredAuthenticationMethodEnabled?: boolean | null,
+          userPreferredMethodForSecondaryAuthentication?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "push" | "oath" | "voiceMobile" |
+          "voiceAlternateMobile" | "voiceOffice" | "sms" | null } | null,
+          softwareOathMethods?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, createdDateTime?: function,
+          lastUsedDateTime?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          secretKey?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.softwareOathAuthenticationMethod" />" })[],
+          temporaryAccessPassMethods?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdDateTime?: function, lastUsedDateTime?: function },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          isUsableOnce?: boolean | null, lifetimeInMinutes?: number | null,
+          startDateTime?: string | null, temporaryAccessPass?: string | null } &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.temporaryAccessPassAuthenticationMethod" />"
+          })[], windowsHelloForBusinessMethods?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdDateTime?: function, lastUsedDateTime?: function },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          device?: Record&lt;string, never&gt; | (Omit&lt;... & ... & ...,
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, accountEnabled?: function, alternativeNames?: function,
+          alternativeSecurityIds?: function, approximateLastSignInDateTime?:
+          function, commands?: function, complianceExpirationDateTime?:
+          function, deviceCategory?: function, deviceId?: function,
+          deviceMetadata?: function, deviceOwnership?: function,
+          deviceTemplate?: function, deviceVersion?: function, displayName?:
+          function, domainName?: function, enrollmentProfileName?: function,
+          enrollmentType?: function, extensionAttributes?: function,
+          extensions?: function, hostnames?: function, isCompliant?: function,
+          isManaged?: function, isManagementRestricted?: function, isRooted?:
+          function, kind?: function, managementType?: function, manufacturer?:
+          function, mdmAppId?: function, memberOf?: function, model?: function,
+          name?: function, onPremisesLastSyncDateTime?: function,
+          onPremisesSecurityIdentifier?: function, onPremisesSyncEnabled?:
+          function, operatingSystem?: function, operatingSystemVersion?:
+          function, physicalIds?: function, platform?: function, profileType?:
+          function, registeredOwners?: function, registeredUsers?: function,
+          registrationDateTime?: function, status?: function, systemLabels?:
+          function, transitiveMemberOf?: function, trustType?: function,
+          usageRights?: function }) | null, displayName?: string | null,
+          keyStrength?: Record&lt;string, never&gt; | "unknown" | "normal" |
+          "weak" | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsHelloForBusinessAuthenticationMethod" />"
+          })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authentication" />" }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, emailMethods?: (Omit<Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?:
+      string | null, lastUsedDateTime?: string | null }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.authenticationMethod" }, "@odata.type"> & {
+      @odata.type: string, emailAddress?: string | null } & { @odata.type:
+      "#microsoft.graph.emailAuthenticationMethod" })[],
+      externalAuthenticationMethods?: (Omit<Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?:
+      string | null, lastUsedDateTime?: string | null }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.authenticationMethod" }, "@odata.type"> & {
+      @odata.type: string, configurationId?: string, displayName?: string } & {
+      @odata.type: "#microsoft.graph.externalAuthenticationMethod" })[],
+      fido2Methods?: (Omit<Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string |
+      null, lastUsedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.authenticationMethod" }, "@odata.type"> & { @odata.type:
+      string, aaGuid?: string | null, attestationCertificates?: (string |
+      null)[], attestationLevel?: "unknownFutureValue" | Record<string, never> |
+      "attested" | "notAttested" | null, displayName?: string | null, model?:
+      string | null, publicKeyCredential?: Record<string, never> | {
+      @odata.type: string, clientExtensionResults?: Record<string, never> | {
+      @odata.type: string } | null, id?: string | null, response?:
+      Record<string, never> | { @odata.type: string, attestationObject?:
+      function, clientDataJSON?: function } | null } | null } & { @odata.type:
+      "#microsoft.graph.fido2AuthenticationMethod" })[], hardwareOathMethods?:
+      (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, createdDateTime?: string | null, lastUsedDateTime?:
+      string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.authenticationMethod" }, "@odata.type"> & { @odata.type:
+      string, device?: Record<string, never> | (Omit<Omit<..., ...> & Omit<...,
+      ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+      assignedTo?: Record<..., ...> | { @odata.type: ..., displayName?: ...,
+      id?: ... } | null, assignTo?: Record<..., ...> | (... & ... & ...) | null,
+      hashFunction?: "unknownFutureValue" | Record<..., ...> | "hmacsha1" |
+      "hmacsha256" | null, lastUsedDateTime?: string | null, manufacturer?:
+      string, model?: string, secretKey?: string | null, serialNumber?: string,
+      status?: "unknownFutureValue" | Record<..., ...> | "available" |
+      "activated" | "assigned" | "failedActivation" | null,
+      timeIntervalInSeconds?: number } & { @odata.type:
+      "#microsoft.graph.hardwareOathTokenAuthenticationMethodDevice" }) | null }
+      & { @odata.type: "#microsoft.graph.hardwareOathAuthenticationMethod" })[],
+      methods?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+      Omit<{ @odata.type: string, createdDateTime?: string | null,
+      lastUsedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.authenticationMethod" })[],
+      microsoftAuthenticatorMethods?: (Omit<Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?:
+      string | null, lastUsedDateTime?: string | null }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.authenticationMethod" }, "@odata.type"> & {
+      @odata.type: string, clientAppName?: "unknownFutureValue" | Record<string,
+      never> | "microsoftAuthenticator" | "outlookMobile" | null, device?:
+      Record<string, never> | (Omit<Omit<..., ...> & Omit<..., ...> & {
+      @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+      accountEnabled?: boolean | null, alternativeNames?: ...[],
+      alternativeSecurityIds?: ...[], approximateLastSignInDateTime?: string |
+      null, commands?: ...[], complianceExpirationDateTime?: string | null,
+      deviceCategory?: string | null, deviceId?: string | null, deviceMetadata?:
+      string | null, deviceOwnership?: string | null, deviceTemplate?: ...[],
+      deviceVersion?: number | null, displayName?: string | null, domainName?:
+      string | null, enrollmentProfileName?: string | null, enrollmentType?:
+      string | null, extensionAttributes?: Record<..., ...> | { @odata.type:
+      ..., extensionAttribute1?: ..., extensionAttribute10?: ...,
+      extensionAttribute11?: ..., extensionAttribute12?: ...,
+      extensionAttribute13?: ..., extensionAttribute14?: ...,
+      extensionAttribute15?: ..., extensionAttribute2?: ...,
+      extensionAttribute3?: ..., extensionAttribute4?: ...,
+      extensionAttribute5?: ..., extensionAttribute6?: ...,
+      extensionAttribute7?: ..., extensionAttribute8?: ...,
+      extensionAttribute9?: ... } | null, extensions?: ...[], hostnames?: ...[],
+      isCompliant?: boolean | null, isManaged?: boolean | null,
+      isManagementRestricted?: boolean | null, isRooted?: boolean | null, kind?:
+      string | null, managementType?: string | null, manufacturer?: string |
+      null, mdmAppId?: string | null, memberOf?: ...[], model?: string | null,
+      name?: string | null, onPremisesLastSyncDateTime?: string | null,
+      onPremisesSecurityIdentifier?: string | null, onPremisesSyncEnabled?:
+      boolean | null, operatingSystem?: string | null, operatingSystemVersion?:
+      string | null, physicalIds?: ...[], platform?: string | null,
+      profileType?: string | null, registeredOwners?: ...[], registeredUsers?:
+      ...[], registrationDateTime?: string | null, status?: string | null,
+      systemLabels?: ...[], transitiveMemberOf?: ...[], trustType?: string |
+      null, usageRights?: ...[] }) | null, deviceTag?: string | null,
+      displayName?: string | null, phoneAppVersion?: string | null } & {
+      @odata.type: "#microsoft.graph.microsoftAuthenticatorAuthenticationMethod"
+      })[], operations?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string |
+      null, lastActionDateTime?: string | null, resourceLocation?: string |
+      null, status?: "unknownFutureValue" | Record<string, never> | "notStarted"
+      | "running" | "succeeded" | "failed" | null, statusDetail?: string | null
+      }, "@odata.type"> & { @odata.type: "#microsoft.graph.longRunningOperation"
+      })[], passwordlessMicrosoftAuthenticatorMethods?: (Omit<Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+      string, createdDateTime?: string | null, lastUsedDateTime?: string | null
+      }, "@odata.type"> & { @odata.type: "#microsoft.graph.authenticationMethod"
+      }, "@odata.type"> & { @odata.type: string, creationDateTime?: string |
+      null, device?: Record<string, never> | (Omit<Omit<..., ...> & Omit<...,
+      ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+      accountEnabled?: boolean | null, alternativeNames?: ...[],
+      alternativeSecurityIds?: ...[], approximateLastSignInDateTime?: string |
+      null, commands?: ...[], complianceExpirationDateTime?: string | null,
+      deviceCategory?: string | null, deviceId?: string | null, deviceMetadata?:
+      string | null, deviceOwnership?: string | null, deviceTemplate?: ...[],
+      deviceVersion?: number | null, displayName?: string | null, domainName?:
+      string | null, enrollmentProfileName?: string | null, enrollmentType?:
+      string | null, extensionAttributes?: Record<..., ...> | { @odata.type:
+      ..., extensionAttribute1?: ..., extensionAttribute10?: ...,
+      extensionAttribute11?: ..., extensionAttribute12?: ...,
+      extensionAttribute13?: ..., extensionAttribute14?: ...,
+      extensionAttribute15?: ..., extensionAttribute2?: ...,
+      extensionAttribute3?: ..., extensionAttribute4?: ...,
+      extensionAttribute5?: ..., extensionAttribute6?: ...,
+      extensionAttribute7?: ..., extensionAttribute8?: ...,
+      extensionAttribute9?: ... } | null, extensions?: ...[], hostnames?: ...[],
+      isCompliant?: boolean | null, isManaged?: boolean | null,
+      isManagementRestricted?: boolean | null, isRooted?: boolean | null, kind?:
+      string | null, managementType?: string | null, manufacturer?: string |
+      null, mdmAppId?: string | null, memberOf?: ...[], model?: string | null,
+      name?: string | null, onPremisesLastSyncDateTime?: string | null,
+      onPremisesSecurityIdentifier?: string | null, onPremisesSyncEnabled?:
+      boolean | null, operatingSystem?: string | null, operatingSystemVersion?:
+      string | null, physicalIds?: ...[], platform?: string | null,
+      profileType?: string | null, registeredOwners?: ...[], registeredUsers?:
+      ...[], registrationDateTime?: string | null, status?: string | null,
+      systemLabels?: ...[], transitiveMemberOf?: ...[], trustType?: string |
+      null, usageRights?: ...[] }) | null, displayName?: string | null } & {
+      @odata.type:
+      "#microsoft.graph.passwordlessMicrosoftAuthenticatorAuthenticationMethod"
+      })[], passwordMethods?: (Omit<Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string |
+      null, lastUsedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.authenticationMethod" }, "@odata.type"> & { @odata.type:
+      string, password?: string | null } & { @odata.type:
+      "#microsoft.graph.passwordAuthenticationMethod" })[], phoneMethods?:
+      (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, createdDateTime?: string | null, lastUsedDateTime?:
+      string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.authenticationMethod" }, "@odata.type"> & { @odata.type:
+      string, phoneNumber?: string | null, phoneType?: "unknownFutureValue" |
+      Record<string, never> | "mobile" | "alternateMobile" | "office" | null,
+      smsSignInState?: "unknownFutureValue" | Record<string, never> |
+      "notSupported" | "notAllowedByPolicy" | "notEnabled" |
+      "phoneNumberNotUnique" | "ready" | "notConfigured" | null } & {
+      @odata.type: "#microsoft.graph.phoneAuthenticationMethod" })[],
+      platformCredentialMethods?: (Omit<Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string |
+      null, lastUsedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.authenticationMethod" }, "@odata.type"> & { @odata.type:
+      string, device?: Record<string, never> | (Omit<Omit<..., ...> & Omit<...,
+      ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+      accountEnabled?: boolean | null, alternativeNames?: ...[],
+      alternativeSecurityIds?: ...[], approximateLastSignInDateTime?: string |
+      null, commands?: ...[], complianceExpirationDateTime?: string | null,
+      deviceCategory?: string | null, deviceId?: string | null, deviceMetadata?:
+      string | null, deviceOwnership?: string | null, deviceTemplate?: ...[],
+      deviceVersion?: number | null, displayName?: string | null, domainName?:
+      string | null, enrollmentProfileName?: string | null, enrollmentType?:
+      string | null, extensionAttributes?: Record<..., ...> | { @odata.type:
+      ..., extensionAttribute1?: ..., extensionAttribute10?: ...,
+      extensionAttribute11?: ..., extensionAttribute12?: ...,
+      extensionAttribute13?: ..., extensionAttribute14?: ...,
+      extensionAttribute15?: ..., extensionAttribute2?: ...,
+      extensionAttribute3?: ..., extensionAttribute4?: ...,
+      extensionAttribute5?: ..., extensionAttribute6?: ...,
+      extensionAttribute7?: ..., extensionAttribute8?: ...,
+      extensionAttribute9?: ... } | null, extensions?: ...[], hostnames?: ...[],
+      isCompliant?: boolean | null, isManaged?: boolean | null,
+      isManagementRestricted?: boolean | null, isRooted?: boolean | null, kind?:
+      string | null, managementType?: string | null, manufacturer?: string |
+      null, mdmAppId?: string | null, memberOf?: ...[], model?: string | null,
+      name?: string | null, onPremisesLastSyncDateTime?: string | null,
+      onPremisesSecurityIdentifier?: string | null, onPremisesSyncEnabled?:
+      boolean | null, operatingSystem?: string | null, operatingSystemVersion?:
+      string | null, physicalIds?: ...[], platform?: string | null,
+      profileType?: string | null, registeredOwners?: ...[], registeredUsers?:
+      ...[], registrationDateTime?: string | null, status?: string | null,
+      systemLabels?: ...[], transitiveMemberOf?: ...[], trustType?: string |
+      null, usageRights?: ...[] }) | null, displayName?: string | null,
+      keyStrength?: Record<string, never> | "unknown" | "normal" | "weak" |
+      null, platform?: "unknownFutureValue" | Record<string, never> | "unknown"
+      | "windows" | "macOS" | "iOS" | "android" | "linux" | null } & {
+      @odata.type: "#microsoft.graph.platformCredentialAuthenticationMethod"
+      })[], qrCodePinMethod?: Record<string, never> | (Omit<Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+      createdDateTime?: string | null, lastUsedDateTime?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.authenticationMethod" },
+      "@odata.type"> & { @odata.type: string, pin?: Record<string, never> |
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, code?: string, createdDateTime?: string | null,
+      forceChangePinNextSignIn?: boolean | null, updatedDateTime?: string | null
+      } & { @odata.type: "#microsoft.graph.qrPin" }) | null, standardQRCode?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, createdDateTime?: string | null,
+      expireDateTime?: string | null, image?: Record<string, never> | {
+      @odata.type: string, binaryValue?: function, errorCorrectionLevel?:
+      function, rawContent?: function, version?: function } | null,
+      lastUsedDateTime?: string | null, startDateTime?: string | null } & {
+      @odata.type: "#microsoft.graph.qrCode" }) | null, temporaryQRCode?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, createdDateTime?: string | null,
+      expireDateTime?: string | null, image?: Record<string, never> | {
+      @odata.type: string, binaryValue?: function, errorCorrectionLevel?:
+      function, rawContent?: function, version?: function } | null,
+      lastUsedDateTime?: string | null, startDateTime?: string | null } & {
+      @odata.type: "#microsoft.graph.qrCode" }) | null } & { @odata.type:
+      "#microsoft.graph.qrCodePinAuthenticationMethod" }) | null, requirements?:
+      Record<string, never> | { @odata.type: string, perUserMfaState?: "enabled"
+      | "disabled" | "unknownFutureValue" | Record<string, never> | "enforced" |
+      null } | null, signInPreferences?: Record<string, never> | { @odata.type:
+      string, isSystemPreferredAuthenticationMethodEnabled?: boolean | null,
+      userPreferredMethodForSecondaryAuthentication?: "unknownFutureValue" |
+      Record<string, never> | "push" | "oath" | "voiceMobile" |
+      "voiceAlternateMobile" | "voiceOffice" | "sms" | null } | null,
+      softwareOathMethods?: (Omit<Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string |
+      null, lastUsedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.authenticationMethod" }, "@odata.type"> & { @odata.type:
+      string, secretKey?: string | null } & { @odata.type:
+      "#microsoft.graph.softwareOathAuthenticationMethod" })[],
+      temporaryAccessPassMethods?: (Omit<Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string |
+      null, lastUsedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.authenticationMethod" }, "@odata.type"> & { @odata.type:
+      string, isUsableOnce?: boolean | null, lifetimeInMinutes?: number | null,
+      startDateTime?: string | null, temporaryAccessPass?: string | null } & {
+      @odata.type: "#microsoft.graph.temporaryAccessPassAuthenticationMethod"
+      })[], windowsHelloForBusinessMethods?: (Omit<Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+      createdDateTime?: string | null, lastUsedDateTime?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.authenticationMethod" },
+      "@odata.type"> & { @odata.type: string, device?: Record<string, never> |
+      (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+      "@odata.type"> & { @odata.type: string, accountEnabled?: boolean | null,
+      alternativeNames?: ...[], alternativeSecurityIds?: ...[],
+      approximateLastSignInDateTime?: string | null, commands?: ...[],
+      complianceExpirationDateTime?: string | null, deviceCategory?: string |
+      null, deviceId?: string | null, deviceMetadata?: string | null,
+      deviceOwnership?: string | null, deviceTemplate?: ...[], deviceVersion?:
+      number | null, displayName?: string | null, domainName?: string | null,
+      enrollmentProfileName?: string | null, enrollmentType?: string | null,
+      extensionAttributes?: Record<..., ...> | { @odata.type: ...,
+      extensionAttribute1?: ..., extensionAttribute10?: ...,
+      extensionAttribute11?: ..., extensionAttribute12?: ...,
+      extensionAttribute13?: ..., extensionAttribute14?: ...,
+      extensionAttribute15?: ..., extensionAttribute2?: ...,
+      extensionAttribute3?: ..., extensionAttribute4?: ...,
+      extensionAttribute5?: ..., extensionAttribute6?: ...,
+      extensionAttribute7?: ..., extensionAttribute8?: ...,
+      extensionAttribute9?: ... } | null, extensions?: ...[], hostnames?: ...[],
+      isCompliant?: boolean | null, isManaged?: boolean | null,
+      isManagementRestricted?: boolean | null, isRooted?: boolean | null, kind?:
+      string | null, managementType?: string | null, manufacturer?: string |
+      null, mdmAppId?: string | null, memberOf?: ...[], model?: string | null,
+      name?: string | null, onPremisesLastSyncDateTime?: string | null,
+      onPremisesSecurityIdentifier?: string | null, onPremisesSyncEnabled?:
+      boolean | null, operatingSystem?: string | null, operatingSystemVersion?:
+      string | null, physicalIds?: ...[], platform?: string | null,
+      profileType?: string | null, registeredOwners?: ...[], registeredUsers?:
+      ...[], registrationDateTime?: string | null, status?: string | null,
+      systemLabels?: ...[], transitiveMemberOf?: ...[], trustType?: string |
+      null, usageRights?: ...[] }) | null, displayName?: string | null,
+      keyStrength?: Record<string, never> | "unknown" | "normal" | "weak" | null
+      } & { @odata.type:
+      "#microsoft.graph.windowsHelloForBusinessAuthenticationMethod" })[] } & {
+      @odata.type: "#microsoft.graph.authentication" }, { user-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.users.authentication.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /users/{user-id}/authentication`'
@@ -56,21 +834,1154 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/users/{user-id}/authentication",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /users/{user-id}/authentication"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, emailMethods?: (Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, createdDateTime?: string | null, lastUsedDateTime?: string |
+        null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authenticationMethod" }, "@odata.type"> & {
+        @odata.type: string, emailAddress?: string | null } & { @odata.type:
+        "#microsoft.graph.emailAuthenticationMethod" })[],
+        externalAuthenticationMethods?: (Omit<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?:
+        string | null, lastUsedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authenticationMethod" }, "@odata.type"> &
+        { @odata.type: string, configurationId?: string, displayName?: string }
+        & { @odata.type: "#microsoft.graph.externalAuthenticationMethod" })[],
+        fido2Methods?: (Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string |
+        null, lastUsedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authenticationMethod" }, "@odata.type"> &
+        { @odata.type: string, aaGuid?: string | null, attestationCertificates?:
+        (string | null)[], attestationLevel?: "unknownFutureValue" |
+        Record<string, never> | "attested" | "notAttested" | null, displayName?:
+        string | null, model?: string | null, publicKeyCredential?:
+        Record<string, never> | { @odata.type: string, clientExtensionResults?:
+        Record<string, never> | { @odata.type: string } | null, id?: string |
+        null, response?: Record<string, never> | { @odata.type: string,
+        attestationObject?: function, clientDataJSON?: function } | null } |
+        null } & { @odata.type: "#microsoft.graph.fido2AuthenticationMethod"
+        })[], hardwareOathMethods?: (Omit<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?:
+        string | null, lastUsedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authenticationMethod" }, "@odata.type"> &
+        { @odata.type: string, device?: Record<string, never> | (Omit<Omit<...,
+        ...> & Omit<..., ...> & { @odata.type: ... }, "@odata.type"> & {
+        @odata.type: string, assignedTo?: Record<..., ...> | { @odata.type: ...,
+        displayName?: ..., id?: ... } | null, assignTo?: Record<..., ...> | (...
+        & ... & ...) | null, hashFunction?: "unknownFutureValue" | Record<...,
+        ...> | "hmacsha1" | "hmacsha256" | null, lastUsedDateTime?: string |
+        null, manufacturer?: string, model?: string, secretKey?: string | null,
+        serialNumber?: string, status?: "unknownFutureValue" | Record<..., ...>
+        | "available" | "activated" | "assigned" | "failedActivation" | null,
+        timeIntervalInSeconds?: number } & { @odata.type:
+        "#microsoft.graph.hardwareOathTokenAuthenticationMethodDevice" }) | null
+        } & { @odata.type: "#microsoft.graph.hardwareOathAuthenticationMethod"
+        })[], methods?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string |
+        null, lastUsedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authenticationMethod" })[],
+        microsoftAuthenticatorMethods?: (Omit<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?:
+        string | null, lastUsedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authenticationMethod" }, "@odata.type"> &
+        { @odata.type: string, clientAppName?: "unknownFutureValue" |
+        Record<string, never> | "microsoftAuthenticator" | "outlookMobile" |
+        null, device?: Record<string, never> | (Omit<Omit<..., ...> & Omit<...,
+        ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        accountEnabled?: boolean | null, alternativeNames?: ...[],
+        alternativeSecurityIds?: ...[], approximateLastSignInDateTime?: string |
+        null, commands?: ...[], complianceExpirationDateTime?: string | null,
+        deviceCategory?: string | null, deviceId?: string | null,
+        deviceMetadata?: string | null, deviceOwnership?: string | null,
+        deviceTemplate?: ...[], deviceVersion?: number | null, displayName?:
+        string | null, domainName?: string | null, enrollmentProfileName?:
+        string | null, enrollmentType?: string | null, extensionAttributes?:
+        Record<..., ...> | { @odata.type: ..., extensionAttribute1?: ...,
+        extensionAttribute10?: ..., extensionAttribute11?: ...,
+        extensionAttribute12?: ..., extensionAttribute13?: ...,
+        extensionAttribute14?: ..., extensionAttribute15?: ...,
+        extensionAttribute2?: ..., extensionAttribute3?: ...,
+        extensionAttribute4?: ..., extensionAttribute5?: ...,
+        extensionAttribute6?: ..., extensionAttribute7?: ...,
+        extensionAttribute8?: ..., extensionAttribute9?: ... } | null,
+        extensions?: ...[], hostnames?: ...[], isCompliant?: boolean | null,
+        isManaged?: boolean | null, isManagementRestricted?: boolean | null,
+        isRooted?: boolean | null, kind?: string | null, managementType?: string
+        | null, manufacturer?: string | null, mdmAppId?: string | null,
+        memberOf?: ...[], model?: string | null, name?: string | null,
+        onPremisesLastSyncDateTime?: string | null,
+        onPremisesSecurityIdentifier?: string | null, onPremisesSyncEnabled?:
+        boolean | null, operatingSystem?: string | null,
+        operatingSystemVersion?: string | null, physicalIds?: ...[], platform?:
+        string | null, profileType?: string | null, registeredOwners?: ...[],
+        registeredUsers?: ...[], registrationDateTime?: string | null, status?:
+        string | null, systemLabels?: ...[], transitiveMemberOf?: ...[],
+        trustType?: string | null, usageRights?: ...[] }) | null, deviceTag?:
+        string | null, displayName?: string | null, phoneAppVersion?: string |
+        null } & { @odata.type:
+        "#microsoft.graph.microsoftAuthenticatorAuthenticationMethod" })[],
+        operations?: (Omit<{ @odata.type: string, id?: string }, "@odata.type">
+        & Omit<{ @odata.type: string, createdDateTime?: string | null,
+        lastActionDateTime?: string | null, resourceLocation?: string | null,
+        status?: "unknownFutureValue" | Record<string, never> | "notStarted" |
+        "running" | "succeeded" | "failed" | null, statusDetail?: string | null
+        }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.longRunningOperation" })[],
+        passwordlessMicrosoftAuthenticatorMethods?: (Omit<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdDateTime?: string | null, lastUsedDateTime?: string | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.authenticationMethod"
+        }, "@odata.type"> & { @odata.type: string, creationDateTime?: string |
+        null, device?: Record<string, never> | (Omit<Omit<..., ...> & Omit<...,
+        ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        accountEnabled?: boolean | null, alternativeNames?: ...[],
+        alternativeSecurityIds?: ...[], approximateLastSignInDateTime?: string |
+        null, commands?: ...[], complianceExpirationDateTime?: string | null,
+        deviceCategory?: string | null, deviceId?: string | null,
+        deviceMetadata?: string | null, deviceOwnership?: string | null,
+        deviceTemplate?: ...[], deviceVersion?: number | null, displayName?:
+        string | null, domainName?: string | null, enrollmentProfileName?:
+        string | null, enrollmentType?: string | null, extensionAttributes?:
+        Record<..., ...> | { @odata.type: ..., extensionAttribute1?: ...,
+        extensionAttribute10?: ..., extensionAttribute11?: ...,
+        extensionAttribute12?: ..., extensionAttribute13?: ...,
+        extensionAttribute14?: ..., extensionAttribute15?: ...,
+        extensionAttribute2?: ..., extensionAttribute3?: ...,
+        extensionAttribute4?: ..., extensionAttribute5?: ...,
+        extensionAttribute6?: ..., extensionAttribute7?: ...,
+        extensionAttribute8?: ..., extensionAttribute9?: ... } | null,
+        extensions?: ...[], hostnames?: ...[], isCompliant?: boolean | null,
+        isManaged?: boolean | null, isManagementRestricted?: boolean | null,
+        isRooted?: boolean | null, kind?: string | null, managementType?: string
+        | null, manufacturer?: string | null, mdmAppId?: string | null,
+        memberOf?: ...[], model?: string | null, name?: string | null,
+        onPremisesLastSyncDateTime?: string | null,
+        onPremisesSecurityIdentifier?: string | null, onPremisesSyncEnabled?:
+        boolean | null, operatingSystem?: string | null,
+        operatingSystemVersion?: string | null, physicalIds?: ...[], platform?:
+        string | null, profileType?: string | null, registeredOwners?: ...[],
+        registeredUsers?: ...[], registrationDateTime?: string | null, status?:
+        string | null, systemLabels?: ...[], transitiveMemberOf?: ...[],
+        trustType?: string | null, usageRights?: ...[] }) | null, displayName?:
+        string | null } & { @odata.type:
+        "#microsoft.graph.passwordlessMicrosoftAuthenticatorAuthenticationMethod"
+        })[], passwordMethods?: (Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string |
+        null, lastUsedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authenticationMethod" }, "@odata.type"> &
+        { @odata.type: string, password?: string | null } & { @odata.type:
+        "#microsoft.graph.passwordAuthenticationMethod" })[], phoneMethods?:
+        (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, createdDateTime?: string | null, lastUsedDateTime?:
+        string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authenticationMethod" }, "@odata.type"> & {
+        @odata.type: string, phoneNumber?: string | null, phoneType?:
+        "unknownFutureValue" | Record<string, never> | "mobile" |
+        "alternateMobile" | "office" | null, smsSignInState?:
+        "unknownFutureValue" | Record<string, never> | "notSupported" |
+        "notAllowedByPolicy" | "notEnabled" | "phoneNumberNotUnique" | "ready" |
+        "notConfigured" | null } & { @odata.type:
+        "#microsoft.graph.phoneAuthenticationMethod" })[],
+        platformCredentialMethods?: (Omit<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?:
+        string | null, lastUsedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authenticationMethod" }, "@odata.type"> &
+        { @odata.type: string, device?: Record<string, never> | (Omit<Omit<...,
+        ...> & Omit<..., ...> & { @odata.type: ... }, "@odata.type"> & {
+        @odata.type: string, accountEnabled?: boolean | null, alternativeNames?:
+        ...[], alternativeSecurityIds?: ...[], approximateLastSignInDateTime?:
+        string | null, commands?: ...[], complianceExpirationDateTime?: string |
+        null, deviceCategory?: string | null, deviceId?: string | null,
+        deviceMetadata?: string | null, deviceOwnership?: string | null,
+        deviceTemplate?: ...[], deviceVersion?: number | null, displayName?:
+        string | null, domainName?: string | null, enrollmentProfileName?:
+        string | null, enrollmentType?: string | null, extensionAttributes?:
+        Record<..., ...> | { @odata.type: ..., extensionAttribute1?: ...,
+        extensionAttribute10?: ..., extensionAttribute11?: ...,
+        extensionAttribute12?: ..., extensionAttribute13?: ...,
+        extensionAttribute14?: ..., extensionAttribute15?: ...,
+        extensionAttribute2?: ..., extensionAttribute3?: ...,
+        extensionAttribute4?: ..., extensionAttribute5?: ...,
+        extensionAttribute6?: ..., extensionAttribute7?: ...,
+        extensionAttribute8?: ..., extensionAttribute9?: ... } | null,
+        extensions?: ...[], hostnames?: ...[], isCompliant?: boolean | null,
+        isManaged?: boolean | null, isManagementRestricted?: boolean | null,
+        isRooted?: boolean | null, kind?: string | null, managementType?: string
+        | null, manufacturer?: string | null, mdmAppId?: string | null,
+        memberOf?: ...[], model?: string | null, name?: string | null,
+        onPremisesLastSyncDateTime?: string | null,
+        onPremisesSecurityIdentifier?: string | null, onPremisesSyncEnabled?:
+        boolean | null, operatingSystem?: string | null,
+        operatingSystemVersion?: string | null, physicalIds?: ...[], platform?:
+        string | null, profileType?: string | null, registeredOwners?: ...[],
+        registeredUsers?: ...[], registrationDateTime?: string | null, status?:
+        string | null, systemLabels?: ...[], transitiveMemberOf?: ...[],
+        trustType?: string | null, usageRights?: ...[] }) | null, displayName?:
+        string | null, keyStrength?: Record<string, never> | "unknown" |
+        "normal" | "weak" | null, platform?: "unknownFutureValue" |
+        Record<string, never> | "unknown" | "windows" | "macOS" | "iOS" |
+        "android" | "linux" | null } & { @odata.type:
+        "#microsoft.graph.platformCredentialAuthenticationMethod" })[],
+        qrCodePinMethod?: Record<string, never> | (Omit<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdDateTime?: string | null, lastUsedDateTime?: string | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.authenticationMethod"
+        }, "@odata.type"> & { @odata.type: string, pin?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, code?: string, createdDateTime?: string | null,
+        forceChangePinNextSignIn?: boolean | null, updatedDateTime?: string |
+        null } & { @odata.type: "#microsoft.graph.qrPin" }) | null,
+        standardQRCode?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, createdDateTime?:
+        string | null, expireDateTime?: string | null, image?: Record<string,
+        never> | { @odata.type: string, binaryValue?: function,
+        errorCorrectionLevel?: function, rawContent?: function, version?:
+        function } | null, lastUsedDateTime?: string | null, startDateTime?:
+        string | null } & { @odata.type: "#microsoft.graph.qrCode" }) | null,
+        temporaryQRCode?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, createdDateTime?:
+        string | null, expireDateTime?: string | null, image?: Record<string,
+        never> | { @odata.type: string, binaryValue?: function,
+        errorCorrectionLevel?: function, rawContent?: function, version?:
+        function } | null, lastUsedDateTime?: string | null, startDateTime?:
+        string | null } & { @odata.type: "#microsoft.graph.qrCode" }) | null } &
+        { @odata.type: "#microsoft.graph.qrCodePinAuthenticationMethod" }) |
+        null, requirements?: Record<string, never> | { @odata.type: string,
+        perUserMfaState?: "enabled" | "disabled" | "unknownFutureValue" |
+        Record<string, never> | "enforced" | null } | null, signInPreferences?:
+        Record<string, never> | { @odata.type: string,
+        isSystemPreferredAuthenticationMethodEnabled?: boolean | null,
+        userPreferredMethodForSecondaryAuthentication?: "unknownFutureValue" |
+        Record<string, never> | "push" | "oath" | "voiceMobile" |
+        "voiceAlternateMobile" | "voiceOffice" | "sms" | null } | null,
+        softwareOathMethods?: (Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string |
+        null, lastUsedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authenticationMethod" }, "@odata.type"> &
+        { @odata.type: string, secretKey?: string | null } & { @odata.type:
+        "#microsoft.graph.softwareOathAuthenticationMethod" })[],
+        temporaryAccessPassMethods?: (Omit<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?:
+        string | null, lastUsedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authenticationMethod" }, "@odata.type"> &
+        { @odata.type: string, isUsableOnce?: boolean | null,
+        lifetimeInMinutes?: number | null, startDateTime?: string | null,
+        temporaryAccessPass?: string | null } & { @odata.type:
+        "#microsoft.graph.temporaryAccessPassAuthenticationMethod" })[],
+        windowsHelloForBusinessMethods?: (Omit<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?:
+        string | null, lastUsedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authenticationMethod" }, "@odata.type"> &
+        { @odata.type: string, device?: Record<string, never> | (Omit<Omit<...,
+        ...> & Omit<..., ...> & { @odata.type: ... }, "@odata.type"> & {
+        @odata.type: string, accountEnabled?: boolean | null, alternativeNames?:
+        ...[], alternativeSecurityIds?: ...[], approximateLastSignInDateTime?:
+        string | null, commands?: ...[], complianceExpirationDateTime?: string |
+        null, deviceCategory?: string | null, deviceId?: string | null,
+        deviceMetadata?: string | null, deviceOwnership?: string | null,
+        deviceTemplate?: ...[], deviceVersion?: number | null, displayName?:
+        string | null, domainName?: string | null, enrollmentProfileName?:
+        string | null, enrollmentType?: string | null, extensionAttributes?:
+        Record<..., ...> | { @odata.type: ..., extensionAttribute1?: ...,
+        extensionAttribute10?: ..., extensionAttribute11?: ...,
+        extensionAttribute12?: ..., extensionAttribute13?: ...,
+        extensionAttribute14?: ..., extensionAttribute15?: ...,
+        extensionAttribute2?: ..., extensionAttribute3?: ...,
+        extensionAttribute4?: ..., extensionAttribute5?: ...,
+        extensionAttribute6?: ..., extensionAttribute7?: ...,
+        extensionAttribute8?: ..., extensionAttribute9?: ... } | null,
+        extensions?: ...[], hostnames?: ...[], isCompliant?: boolean | null,
+        isManaged?: boolean | null, isManagementRestricted?: boolean | null,
+        isRooted?: boolean | null, kind?: string | null, managementType?: string
+        | null, manufacturer?: string | null, mdmAppId?: string | null,
+        memberOf?: ...[], model?: string | null, name?: string | null,
+        onPremisesLastSyncDateTime?: string | null,
+        onPremisesSecurityIdentifier?: string | null, onPremisesSyncEnabled?:
+        boolean | null, operatingSystem?: string | null,
+        operatingSystemVersion?: string | null, physicalIds?: ...[], platform?:
+        string | null, profileType?: string | null, registeredOwners?: ...[],
+        registeredUsers?: ...[], registrationDateTime?: string | null, status?:
+        string | null, systemLabels?: ...[], transitiveMemberOf?: ...[],
+        trustType?: string | null, usageRights?: ...[] }) | null, displayName?:
+        string | null, keyStrength?: Record<string, never> | "unknown" |
+        "normal" | "weak" | null } & { @odata.type:
+        "#microsoft.graph.windowsHelloForBusinessAuthenticationMethod" })[] } &
+        { @odata.type: "#microsoft.graph.authentication" }, params?: { user-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, emailMethods?: (Omit<Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, createdDateTime?: function, lastUsedDateTime?:
+        function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authenticationMethod" }, "@odata.type"> & {
+        @odata.type: string, emailAddress?: string | null } & { @odata.type:
+        "#microsoft.graph.emailAuthenticationMethod" })[],
+        externalAuthenticationMethods?: (Omit<Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdDateTime?: function, lastUsedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.authenticationMethod"
+        }, "@odata.type"> & { @odata.type: string, configurationId?: string,
+        displayName?: string } & { @odata.type:
+        "#microsoft.graph.externalAuthenticationMethod" })[], fido2Methods?:
+        (Omit<Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string, createdDateTime?: function,
+        lastUsedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authenticationMethod" }, "@odata.type"> & {
+        @odata.type: string, aaGuid?: string | null, attestationCertificates?:
+        (string | null)[], attestationLevel?: "unknownFutureValue" |
+        Record<string, never> | "attested" | "notAttested" | null, displayName?:
+        string | null, model?: string | null, publicKeyCredential?:
+        Record<string, never> | { @odata.type: string, clientExtensionResults?:
+        Record<..., ...> | { @odata.type: ... } | null, id?: string | null,
+        response?: Record<..., ...> | { @odata.type: ..., attestationObject?:
+        ..., clientDataJSON?: ... } | null } | null } & { @odata.type:
+        "#microsoft.graph.fido2AuthenticationMethod" })[], hardwareOathMethods?:
+        (Omit<Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string, createdDateTime?: function,
+        lastUsedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authenticationMethod" }, "@odata.type"> & {
+        @odata.type: string, device?: Record<string, never> | (Omit<... & ... &
+        ..., "@odata.type"> & { @odata.type: string, assignedTo?: function,
+        assignTo?: function, hashFunction?: function, lastUsedDateTime?:
+        function, manufacturer?: function, model?: function, secretKey?:
+        function, serialNumber?: function, status?: function,
+        timeIntervalInSeconds?: function } & { @odata.type:
+        "#microsoft.graph.hardwareOathTokenAuthenticationMethodDevice" }) | null
+        } & { @odata.type: "#microsoft.graph.hardwareOathAuthenticationMethod"
+        })[], methods?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: string |
+        null, lastUsedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authenticationMethod" })[],
+        microsoftAuthenticatorMethods?: (Omit<Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdDateTime?: function, lastUsedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.authenticationMethod"
+        }, "@odata.type"> & { @odata.type: string, clientAppName?:
+        "unknownFutureValue" | Record<string, never> | "microsoftAuthenticator"
+        | "outlookMobile" | null, device?: Record<string, never> | (Omit<... &
+        ... & ..., "@odata.type"> & { @odata.type: string, accountEnabled?:
+        function, alternativeNames?: function, alternativeSecurityIds?:
+        function, approximateLastSignInDateTime?: function, commands?: function,
+        complianceExpirationDateTime?: function, deviceCategory?: function,
+        deviceId?: function, deviceMetadata?: function, deviceOwnership?:
+        function, deviceTemplate?: function, deviceVersion?: function,
+        displayName?: function, domainName?: function, enrollmentProfileName?:
+        function, enrollmentType?: function, extensionAttributes?: function,
+        extensions?: function, hostnames?: function, isCompliant?: function,
+        isManaged?: function, isManagementRestricted?: function, isRooted?:
+        function, kind?: function, managementType?: function, manufacturer?:
+        function, mdmAppId?: function, memberOf?: function, model?: function,
+        name?: function, onPremisesLastSyncDateTime?: function,
+        onPremisesSecurityIdentifier?: function, onPremisesSyncEnabled?:
+        function, operatingSystem?: function, operatingSystemVersion?: function,
+        physicalIds?: function, platform?: function, profileType?: function,
+        registeredOwners?: function, registeredUsers?: function,
+        registrationDateTime?: function, status?: function, systemLabels?:
+        function, transitiveMemberOf?: function, trustType?: function,
+        usageRights?: function }) | null, deviceTag?: string | null,
+        displayName?: string | null, phoneAppVersion?: string | null } & {
+        @odata.type:
+        "#microsoft.graph.microsoftAuthenticatorAuthenticationMethod" })[],
+        operations?: (Omit<{ @odata.type: string, id?: string }, "@odata.type">
+        & Omit<{ @odata.type: string, createdDateTime?: string | null,
+        lastActionDateTime?: string | null, resourceLocation?: string | null,
+        status?: "unknownFutureValue" | Record<string, never> | "notStarted" |
+        "running" | "succeeded" | "failed" | null, statusDetail?: string | null
+        }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.longRunningOperation" })[],
+        passwordlessMicrosoftAuthenticatorMethods?: (Omit<Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdDateTime?: function, lastUsedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.authenticationMethod"
+        }, "@odata.type"> & { @odata.type: string, creationDateTime?: string |
+        null, device?: Record<string, never> | (Omit<... & ... & ...,
+        "@odata.type"> & { @odata.type: string, accountEnabled?: function,
+        alternativeNames?: function, alternativeSecurityIds?: function,
+        approximateLastSignInDateTime?: function, commands?: function,
+        complianceExpirationDateTime?: function, deviceCategory?: function,
+        deviceId?: function, deviceMetadata?: function, deviceOwnership?:
+        function, deviceTemplate?: function, deviceVersion?: function,
+        displayName?: function, domainName?: function, enrollmentProfileName?:
+        function, enrollmentType?: function, extensionAttributes?: function,
+        extensions?: function, hostnames?: function, isCompliant?: function,
+        isManaged?: function, isManagementRestricted?: function, isRooted?:
+        function, kind?: function, managementType?: function, manufacturer?:
+        function, mdmAppId?: function, memberOf?: function, model?: function,
+        name?: function, onPremisesLastSyncDateTime?: function,
+        onPremisesSecurityIdentifier?: function, onPremisesSyncEnabled?:
+        function, operatingSystem?: function, operatingSystemVersion?: function,
+        physicalIds?: function, platform?: function, profileType?: function,
+        registeredOwners?: function, registeredUsers?: function,
+        registrationDateTime?: function, status?: function, systemLabels?:
+        function, transitiveMemberOf?: function, trustType?: function,
+        usageRights?: function }) | null, displayName?: string | null } & {
+        @odata.type:
+        "#microsoft.graph.passwordlessMicrosoftAuthenticatorAuthenticationMethod"
+        })[], passwordMethods?: (Omit<Omit<{ @odata.type: string, id?: function
+        }, "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?:
+        function, lastUsedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authenticationMethod" }, "@odata.type"> & {
+        @odata.type: string, password?: string | null } & { @odata.type:
+        "#microsoft.graph.passwordAuthenticationMethod" })[], phoneMethods?:
+        (Omit<Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string, createdDateTime?: function,
+        lastUsedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authenticationMethod" }, "@odata.type"> & {
+        @odata.type: string, phoneNumber?: string | null, phoneType?:
+        "unknownFutureValue" | Record<string, never> | "mobile" |
+        "alternateMobile" | "office" | null, smsSignInState?:
+        "unknownFutureValue" | Record<string, never> | "notSupported" |
+        "notAllowedByPolicy" | "notEnabled" | "phoneNumberNotUnique" | "ready" |
+        "notConfigured" | null } & { @odata.type:
+        "#microsoft.graph.phoneAuthenticationMethod" })[],
+        platformCredentialMethods?: (Omit<Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdDateTime?: function, lastUsedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.authenticationMethod"
+        }, "@odata.type"> & { @odata.type: string, device?: Record<string,
+        never> | (Omit<... & ... & ..., "@odata.type"> & { @odata.type: string,
+        accountEnabled?: function, alternativeNames?: function,
+        alternativeSecurityIds?: function, approximateLastSignInDateTime?:
+        function, commands?: function, complianceExpirationDateTime?: function,
+        deviceCategory?: function, deviceId?: function, deviceMetadata?:
+        function, deviceOwnership?: function, deviceTemplate?: function,
+        deviceVersion?: function, displayName?: function, domainName?: function,
+        enrollmentProfileName?: function, enrollmentType?: function,
+        extensionAttributes?: function, extensions?: function, hostnames?:
+        function, isCompliant?: function, isManaged?: function,
+        isManagementRestricted?: function, isRooted?: function, kind?: function,
+        managementType?: function, manufacturer?: function, mdmAppId?: function,
+        memberOf?: function, model?: function, name?: function,
+        onPremisesLastSyncDateTime?: function, onPremisesSecurityIdentifier?:
+        function, onPremisesSyncEnabled?: function, operatingSystem?: function,
+        operatingSystemVersion?: function, physicalIds?: function, platform?:
+        function, profileType?: function, registeredOwners?: function,
+        registeredUsers?: function, registrationDateTime?: function, status?:
+        function, systemLabels?: function, transitiveMemberOf?: function,
+        trustType?: function, usageRights?: function }) | null, displayName?:
+        string | null, keyStrength?: Record<string, never> | "unknown" |
+        "normal" | "weak" | null, platform?: "unknownFutureValue" |
+        Record<string, never> | "unknown" | "windows" | "macOS" | "iOS" |
+        "android" | "linux" | null } & { @odata.type:
+        "#microsoft.graph.platformCredentialAuthenticationMethod" })[],
+        qrCodePinMethod?: Record<string, never> | (Omit<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdDateTime?: string | null, lastUsedDateTime?: string | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.authenticationMethod"
+        }, "@odata.type"> & { @odata.type: string, pin?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+        @odata.type: string, code?: string, createdDateTime?: string | null,
+        forceChangePinNextSignIn?: boolean | null, updatedDateTime?: string |
+        null } & { @odata.type: "#microsoft.graph.qrPin" }) | null,
+        standardQRCode?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: function }, "@odata.type"> & { @odata.type: string,
+        createdDateTime?: string | null, expireDateTime?: string | null, image?:
+        Record<..., ...> | { @odata.type: ..., binaryValue?: ...,
+        errorCorrectionLevel?: ..., rawContent?: ..., version?: ... } | null,
+        lastUsedDateTime?: string | null, startDateTime?: string | null } & {
+        @odata.type: "#microsoft.graph.qrCode" }) | null, temporaryQRCode?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, createdDateTime?: string | null,
+        expireDateTime?: string | null, image?: Record<..., ...> | {
+        @odata.type: ..., binaryValue?: ..., errorCorrectionLevel?: ...,
+        rawContent?: ..., version?: ... } | null, lastUsedDateTime?: string |
+        null, startDateTime?: string | null } & { @odata.type:
+        "#microsoft.graph.qrCode" }) | null } & { @odata.type:
+        "#microsoft.graph.qrCodePinAuthenticationMethod" }) | null,
+        requirements?: Record<string, never> | { @odata.type: string,
+        perUserMfaState?: "enabled" | "disabled" | "unknownFutureValue" |
+        Record<string, never> | "enforced" | null } | null, signInPreferences?:
+        Record<string, never> | { @odata.type: string,
+        isSystemPreferredAuthenticationMethodEnabled?: boolean | null,
+        userPreferredMethodForSecondaryAuthentication?: "unknownFutureValue" |
+        Record<string, never> | "push" | "oath" | "voiceMobile" |
+        "voiceAlternateMobile" | "voiceOffice" | "sms" | null } | null,
+        softwareOathMethods?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: function,
+        lastUsedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authenticationMethod" }, "@odata.type"> & {
+        @odata.type: string, secretKey?: string | null } & { @odata.type:
+        "#microsoft.graph.softwareOathAuthenticationMethod" })[],
+        temporaryAccessPassMethods?: (Omit<Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdDateTime?: function, lastUsedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.authenticationMethod"
+        }, "@odata.type"> & { @odata.type: string, isUsableOnce?: boolean |
+        null, lifetimeInMinutes?: number | null, startDateTime?: string | null,
+        temporaryAccessPass?: string | null } & { @odata.type:
+        "#microsoft.graph.temporaryAccessPassAuthenticationMethod" })[],
+        windowsHelloForBusinessMethods?: (Omit<Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdDateTime?: function, lastUsedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.authenticationMethod"
+        }, "@odata.type"> & { @odata.type: string, device?: Record<string,
+        never> | (Omit<... & ... & ..., "@odata.type"> & { @odata.type: string,
+        accountEnabled?: function, alternativeNames?: function,
+        alternativeSecurityIds?: function, approximateLastSignInDateTime?:
+        function, commands?: function, complianceExpirationDateTime?: function,
+        deviceCategory?: function, deviceId?: function, deviceMetadata?:
+        function, deviceOwnership?: function, deviceTemplate?: function,
+        deviceVersion?: function, displayName?: function, domainName?: function,
+        enrollmentProfileName?: function, enrollmentType?: function,
+        extensionAttributes?: function, extensions?: function, hostnames?:
+        function, isCompliant?: function, isManaged?: function,
+        isManagementRestricted?: function, isRooted?: function, kind?: function,
+        managementType?: function, manufacturer?: function, mdmAppId?: function,
+        memberOf?: function, model?: function, name?: function,
+        onPremisesLastSyncDateTime?: function, onPremisesSecurityIdentifier?:
+        function, onPremisesSyncEnabled?: function, operatingSystem?: function,
+        operatingSystemVersion?: function, physicalIds?: function, platform?:
+        function, profileType?: function, registeredOwners?: function,
+        registeredUsers?: function, registrationDateTime?: function, status?:
+        function, systemLabels?: function, transitiveMemberOf?: function,
+        trustType?: function, usageRights?: function }) | null, displayName?:
+        string | null, keyStrength?: Record<string, never> | "unknown" |
+        "normal" | "weak" | null } & { @odata.type:
+        "#microsoft.graph.windowsHelloForBusinessAuthenticationMethod" })[] } &
+        { @odata.type: "#microsoft.graph.authentication" }>
       parameters:
         - id: body
-          type: Operation&lt;"/users/{user-id}/authentication", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            emailMethods?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: string, createdDateTime?: string | null,
+            lastUsedDateTime?: string | null }, "<xref uid="@odata.type" />"&gt;
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.authenticationMethod" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            emailAddress?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.emailAuthenticationMethod" />" })[],
+            externalAuthenticationMethods?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, createdDateTime?: string | null, lastUsedDateTime?: string |
+            null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.authenticationMethod" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            configurationId?: string, displayName?: string } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.externalAuthenticationMethod" />" })[],
+            fido2Methods?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: string, createdDateTime?: string | null,
+            lastUsedDateTime?: string | null }, "<xref uid="@odata.type" />"&gt;
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.authenticationMethod" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            aaGuid?: string | null, attestationCertificates?: (string | null)[],
+            attestationLevel?: "unknownFutureValue" | Record&lt;string,
+            never&gt; | "attested" | "notAttested" | null, displayName?: string
+            | null, model?: string | null, publicKeyCredential?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            clientExtensionResults?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string } | null, id?: string | null,
+            response?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, attestationObject?: function, clientDataJSON?: function
+            } | null } | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.fido2AuthenticationMethod" />" })[],
+            hardwareOathMethods?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: string, createdDateTime?: string | null,
+            lastUsedDateTime?: string | null }, "<xref uid="@odata.type" />"&gt;
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.authenticationMethod" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            device?: Record&lt;string, never&gt; | (Omit&lt;Omit&lt;..., ...&gt;
+            & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            assignedTo?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+            ..., displayName?: ..., id?: ... } | null, assignTo?: Record&lt;...,
+            ...&gt; | (... & ... & ...) | null, hashFunction?:
+            "unknownFutureValue" | Record&lt;..., ...&gt; | "hmacsha1" |
+            "hmacsha256" | null, lastUsedDateTime?: string | null,
+            manufacturer?: string, model?: string, secretKey?: string | null,
+            serialNumber?: string, status?: "unknownFutureValue" |
+            Record&lt;..., ...&gt; | "available" | "activated" | "assigned" |
+            "failedActivation" | null, timeIntervalInSeconds?: number } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.hardwareOathTokenAuthenticationMethodDevice"
+            />" }) | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.hardwareOathAuthenticationMethod" />" })[],
+            methods?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+            }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, createdDateTime?: string | null,
+            lastUsedDateTime?: string | null }, "<xref uid="@odata.type" />"&gt;
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.authenticationMethod" />" })[],
+            microsoftAuthenticatorMethods?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, createdDateTime?: string | null, lastUsedDateTime?: string |
+            null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.authenticationMethod" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            clientAppName?: "unknownFutureValue" | Record&lt;string, never&gt; |
+            "microsoftAuthenticator" | "outlookMobile" | null, device?:
+            Record&lt;string, never&gt; | (Omit&lt;Omit&lt;..., ...&gt; &
+            Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            accountEnabled?: boolean | null, alternativeNames?: ...[],
+            alternativeSecurityIds?: ...[], approximateLastSignInDateTime?:
+            string | null, commands?: ...[], complianceExpirationDateTime?:
+            string | null, deviceCategory?: string | null, deviceId?: string |
+            null, deviceMetadata?: string | null, deviceOwnership?: string |
+            null, deviceTemplate?: ...[], deviceVersion?: number | null,
+            displayName?: string | null, domainName?: string | null,
+            enrollmentProfileName?: string | null, enrollmentType?: string |
+            null, extensionAttributes?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., extensionAttribute1?: ...,
+            extensionAttribute10?: ..., extensionAttribute11?: ...,
+            extensionAttribute12?: ..., extensionAttribute13?: ...,
+            extensionAttribute14?: ..., extensionAttribute15?: ...,
+            extensionAttribute2?: ..., extensionAttribute3?: ...,
+            extensionAttribute4?: ..., extensionAttribute5?: ...,
+            extensionAttribute6?: ..., extensionAttribute7?: ...,
+            extensionAttribute8?: ..., extensionAttribute9?: ... } | null,
+            extensions?: ...[], hostnames?: ...[], isCompliant?: boolean | null,
+            isManaged?: boolean | null, isManagementRestricted?: boolean | null,
+            isRooted?: boolean | null, kind?: string | null, managementType?:
+            string | null, manufacturer?: string | null, mdmAppId?: string |
+            null, memberOf?: ...[], model?: string | null, name?: string | null,
+            onPremisesLastSyncDateTime?: string | null,
+            onPremisesSecurityIdentifier?: string | null,
+            onPremisesSyncEnabled?: boolean | null, operatingSystem?: string |
+            null, operatingSystemVersion?: string | null, physicalIds?: ...[],
+            platform?: string | null, profileType?: string | null,
+            registeredOwners?: ...[], registeredUsers?: ...[],
+            registrationDateTime?: string | null, status?: string | null,
+            systemLabels?: ...[], transitiveMemberOf?: ...[], trustType?: string
+            | null, usageRights?: ...[] }) | null, deviceTag?: string | null,
+            displayName?: string | null, phoneAppVersion?: string | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.microsoftAuthenticatorAuthenticationMethod" />"
+            })[], operations?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, createdDateTime?: string | null,
+            lastActionDateTime?: string | null, resourceLocation?: string |
+            null, status?: "unknownFutureValue" | Record&lt;string, never&gt; |
+            "notStarted" | "running" | "succeeded" | "failed" | null,
+            statusDetail?: string | null }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.longRunningOperation" />" })[],
+            passwordlessMicrosoftAuthenticatorMethods?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, createdDateTime?: string | null, lastUsedDateTime?: string |
+            null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.authenticationMethod" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            creationDateTime?: string | null, device?: Record&lt;string,
+            never&gt; | (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & {
+            <xref uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt;
+            & { <xref uid="@odata.type" />: string, accountEnabled?: boolean |
+            null, alternativeNames?: ...[], alternativeSecurityIds?: ...[],
+            approximateLastSignInDateTime?: string | null, commands?: ...[],
+            complianceExpirationDateTime?: string | null, deviceCategory?:
+            string | null, deviceId?: string | null, deviceMetadata?: string |
+            null, deviceOwnership?: string | null, deviceTemplate?: ...[],
+            deviceVersion?: number | null, displayName?: string | null,
+            domainName?: string | null, enrollmentProfileName?: string | null,
+            enrollmentType?: string | null, extensionAttributes?: Record&lt;...,
+            ...&gt; | { <xref uid="@odata.type" />: ..., extensionAttribute1?:
+            ..., extensionAttribute10?: ..., extensionAttribute11?: ...,
+            extensionAttribute12?: ..., extensionAttribute13?: ...,
+            extensionAttribute14?: ..., extensionAttribute15?: ...,
+            extensionAttribute2?: ..., extensionAttribute3?: ...,
+            extensionAttribute4?: ..., extensionAttribute5?: ...,
+            extensionAttribute6?: ..., extensionAttribute7?: ...,
+            extensionAttribute8?: ..., extensionAttribute9?: ... } | null,
+            extensions?: ...[], hostnames?: ...[], isCompliant?: boolean | null,
+            isManaged?: boolean | null, isManagementRestricted?: boolean | null,
+            isRooted?: boolean | null, kind?: string | null, managementType?:
+            string | null, manufacturer?: string | null, mdmAppId?: string |
+            null, memberOf?: ...[], model?: string | null, name?: string | null,
+            onPremisesLastSyncDateTime?: string | null,
+            onPremisesSecurityIdentifier?: string | null,
+            onPremisesSyncEnabled?: boolean | null, operatingSystem?: string |
+            null, operatingSystemVersion?: string | null, physicalIds?: ...[],
+            platform?: string | null, profileType?: string | null,
+            registeredOwners?: ...[], registeredUsers?: ...[],
+            registrationDateTime?: string | null, status?: string | null,
+            systemLabels?: ...[], transitiveMemberOf?: ...[], trustType?: string
+            | null, usageRights?: ...[] }) | null, displayName?: string | null }
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.passwordlessMicrosoftAuthenticatorAuthenticationMethod"
+            />" })[], passwordMethods?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, createdDateTime?: string | null, lastUsedDateTime?: string |
+            null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.authenticationMethod" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            password?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.passwordAuthenticationMethod" />" })[],
+            phoneMethods?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: string, createdDateTime?: string | null,
+            lastUsedDateTime?: string | null }, "<xref uid="@odata.type" />"&gt;
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.authenticationMethod" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            phoneNumber?: string | null, phoneType?: "unknownFutureValue" |
+            Record&lt;string, never&gt; | "mobile" | "alternateMobile" |
+            "office" | null, smsSignInState?: "unknownFutureValue" |
+            Record&lt;string, never&gt; | "notSupported" | "notAllowedByPolicy"
+            | "notEnabled" | "phoneNumberNotUnique" | "ready" | "notConfigured"
+            | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.phoneAuthenticationMethod" />" })[],
+            platformCredentialMethods?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, createdDateTime?: string | null, lastUsedDateTime?: string |
+            null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.authenticationMethod" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            device?: Record&lt;string, never&gt; | (Omit&lt;Omit&lt;..., ...&gt;
+            & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            accountEnabled?: boolean | null, alternativeNames?: ...[],
+            alternativeSecurityIds?: ...[], approximateLastSignInDateTime?:
+            string | null, commands?: ...[], complianceExpirationDateTime?:
+            string | null, deviceCategory?: string | null, deviceId?: string |
+            null, deviceMetadata?: string | null, deviceOwnership?: string |
+            null, deviceTemplate?: ...[], deviceVersion?: number | null,
+            displayName?: string | null, domainName?: string | null,
+            enrollmentProfileName?: string | null, enrollmentType?: string |
+            null, extensionAttributes?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., extensionAttribute1?: ...,
+            extensionAttribute10?: ..., extensionAttribute11?: ...,
+            extensionAttribute12?: ..., extensionAttribute13?: ...,
+            extensionAttribute14?: ..., extensionAttribute15?: ...,
+            extensionAttribute2?: ..., extensionAttribute3?: ...,
+            extensionAttribute4?: ..., extensionAttribute5?: ...,
+            extensionAttribute6?: ..., extensionAttribute7?: ...,
+            extensionAttribute8?: ..., extensionAttribute9?: ... } | null,
+            extensions?: ...[], hostnames?: ...[], isCompliant?: boolean | null,
+            isManaged?: boolean | null, isManagementRestricted?: boolean | null,
+            isRooted?: boolean | null, kind?: string | null, managementType?:
+            string | null, manufacturer?: string | null, mdmAppId?: string |
+            null, memberOf?: ...[], model?: string | null, name?: string | null,
+            onPremisesLastSyncDateTime?: string | null,
+            onPremisesSecurityIdentifier?: string | null,
+            onPremisesSyncEnabled?: boolean | null, operatingSystem?: string |
+            null, operatingSystemVersion?: string | null, physicalIds?: ...[],
+            platform?: string | null, profileType?: string | null,
+            registeredOwners?: ...[], registeredUsers?: ...[],
+            registrationDateTime?: string | null, status?: string | null,
+            systemLabels?: ...[], transitiveMemberOf?: ...[], trustType?: string
+            | null, usageRights?: ...[] }) | null, displayName?: string | null,
+            keyStrength?: Record&lt;string, never&gt; | "unknown" | "normal" |
+            "weak" | null, platform?: "unknownFutureValue" | Record&lt;string,
+            never&gt; | "unknown" | "windows" | "macOS" | "iOS" | "android" |
+            "linux" | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.platformCredentialAuthenticationMethod" />"
+            })[], qrCodePinMethod?: Record&lt;string, never&gt; |
+            (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+            }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, createdDateTime?: string | null,
+            lastUsedDateTime?: string | null }, "<xref uid="@odata.type" />"&gt;
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.authenticationMethod" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            pin?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            code?: string, createdDateTime?: string | null,
+            forceChangePinNextSignIn?: boolean | null, updatedDateTime?: string
+            | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.qrPin" />" }) | null, standardQRCode?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, createdDateTime?: string | null,
+            expireDateTime?: string | null, image?: Record&lt;string, never&gt;
+            | { <xref uid="@odata.type" />: string, binaryValue?: function,
+            errorCorrectionLevel?: function, rawContent?: function, version?:
+            function } | null, lastUsedDateTime?: string | null, startDateTime?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.qrCode" />" }) | null, temporaryQRCode?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, createdDateTime?: string | null,
+            expireDateTime?: string | null, image?: Record&lt;string, never&gt;
+            | { <xref uid="@odata.type" />: string, binaryValue?: function,
+            errorCorrectionLevel?: function, rawContent?: function, version?:
+            function } | null, lastUsedDateTime?: string | null, startDateTime?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.qrCode" />" }) | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.qrCodePinAuthenticationMethod" />" }) | null,
+            requirements?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, perUserMfaState?: "enabled" |
+            "disabled" | "unknownFutureValue" | Record&lt;string, never&gt; |
+            "enforced" | null } | null, signInPreferences?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string,
+            isSystemPreferredAuthenticationMethodEnabled?: boolean | null,
+            userPreferredMethodForSecondaryAuthentication?: "unknownFutureValue"
+            | Record&lt;string, never&gt; | "push" | "oath" | "voiceMobile" |
+            "voiceAlternateMobile" | "voiceOffice" | "sms" | null } | null,
+            softwareOathMethods?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: string, createdDateTime?: string | null,
+            lastUsedDateTime?: string | null }, "<xref uid="@odata.type" />"&gt;
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.authenticationMethod" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            secretKey?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.softwareOathAuthenticationMethod" />" })[],
+            temporaryAccessPassMethods?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, createdDateTime?: string | null, lastUsedDateTime?: string |
+            null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.authenticationMethod" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            isUsableOnce?: boolean | null, lifetimeInMinutes?: number | null,
+            startDateTime?: string | null, temporaryAccessPass?: string | null }
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.temporaryAccessPassAuthenticationMethod" />"
+            })[], windowsHelloForBusinessMethods?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, createdDateTime?: string | null, lastUsedDateTime?: string |
+            null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.authenticationMethod" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            device?: Record&lt;string, never&gt; | (Omit&lt;Omit&lt;..., ...&gt;
+            & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            accountEnabled?: boolean | null, alternativeNames?: ...[],
+            alternativeSecurityIds?: ...[], approximateLastSignInDateTime?:
+            string | null, commands?: ...[], complianceExpirationDateTime?:
+            string | null, deviceCategory?: string | null, deviceId?: string |
+            null, deviceMetadata?: string | null, deviceOwnership?: string |
+            null, deviceTemplate?: ...[], deviceVersion?: number | null,
+            displayName?: string | null, domainName?: string | null,
+            enrollmentProfileName?: string | null, enrollmentType?: string |
+            null, extensionAttributes?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., extensionAttribute1?: ...,
+            extensionAttribute10?: ..., extensionAttribute11?: ...,
+            extensionAttribute12?: ..., extensionAttribute13?: ...,
+            extensionAttribute14?: ..., extensionAttribute15?: ...,
+            extensionAttribute2?: ..., extensionAttribute3?: ...,
+            extensionAttribute4?: ..., extensionAttribute5?: ...,
+            extensionAttribute6?: ..., extensionAttribute7?: ...,
+            extensionAttribute8?: ..., extensionAttribute9?: ... } | null,
+            extensions?: ...[], hostnames?: ...[], isCompliant?: boolean | null,
+            isManaged?: boolean | null, isManagementRestricted?: boolean | null,
+            isRooted?: boolean | null, kind?: string | null, managementType?:
+            string | null, manufacturer?: string | null, mdmAppId?: string |
+            null, memberOf?: ...[], model?: string | null, name?: string | null,
+            onPremisesLastSyncDateTime?: string | null,
+            onPremisesSecurityIdentifier?: string | null,
+            onPremisesSyncEnabled?: boolean | null, operatingSystem?: string |
+            null, operatingSystemVersion?: string | null, physicalIds?: ...[],
+            platform?: string | null, profileType?: string | null,
+            registeredOwners?: ...[], registeredUsers?: ...[],
+            registrationDateTime?: string | null, status?: string | null,
+            systemLabels?: ...[], transitiveMemberOf?: ...[], trustType?: string
+            | null, usageRights?: ...[] }) | null, displayName?: string | null,
+            keyStrength?: Record&lt;string, never&gt; | "unknown" | "normal" |
+            "weak" | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsHelloForBusinessAuthenticationMethod"
+            />" })[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.authentication" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /users/{user-id}/authentication"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, emailMethods?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: function }, "<xref uid="@odata.type" />"&gt; &
+          Omit&lt;{ <xref uid="@odata.type" />: string, createdDateTime?:
+          function, lastUsedDateTime?: function }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          emailAddress?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.emailAuthenticationMethod" />" })[],
+          externalAuthenticationMethods?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdDateTime?: function, lastUsedDateTime?: function },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          configurationId?: string, displayName?: string } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.externalAuthenticationMethod" />" })[],
+          fido2Methods?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdDateTime?: function,
+          lastUsedDateTime?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          aaGuid?: string | null, attestationCertificates?: (string | null)[],
+          attestationLevel?: "unknownFutureValue" | Record&lt;string, never&gt;
+          | "attested" | "notAttested" | null, displayName?: string | null,
+          model?: string | null, publicKeyCredential?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string,
+          clientExtensionResults?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ... } | null, id?: string | null, response?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          attestationObject?: ..., clientDataJSON?: ... } | null } | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.fido2AuthenticationMethod" />" })[],
+          hardwareOathMethods?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, createdDateTime?: function,
+          lastUsedDateTime?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          device?: Record&lt;string, never&gt; | (Omit&lt;... & ... & ...,
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, assignedTo?: function, assignTo?: function, hashFunction?:
+          function, lastUsedDateTime?: function, manufacturer?: function,
+          model?: function, secretKey?: function, serialNumber?: function,
+          status?: function, timeIntervalInSeconds?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.hardwareOathTokenAuthenticationMethodDevice" />"
+          }) | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.hardwareOathAuthenticationMethod" />" })[],
+          methods?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdDateTime?: string | null,
+          lastUsedDateTime?: string | null }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethod" />" })[],
+          microsoftAuthenticatorMethods?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdDateTime?: function, lastUsedDateTime?: function },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          clientAppName?: "unknownFutureValue" | Record&lt;string, never&gt; |
+          "microsoftAuthenticator" | "outlookMobile" | null, device?:
+          Record&lt;string, never&gt; | (Omit&lt;... & ... & ..., "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          accountEnabled?: function, alternativeNames?: function,
+          alternativeSecurityIds?: function, approximateLastSignInDateTime?:
+          function, commands?: function, complianceExpirationDateTime?:
+          function, deviceCategory?: function, deviceId?: function,
+          deviceMetadata?: function, deviceOwnership?: function,
+          deviceTemplate?: function, deviceVersion?: function, displayName?:
+          function, domainName?: function, enrollmentProfileName?: function,
+          enrollmentType?: function, extensionAttributes?: function,
+          extensions?: function, hostnames?: function, isCompliant?: function,
+          isManaged?: function, isManagementRestricted?: function, isRooted?:
+          function, kind?: function, managementType?: function, manufacturer?:
+          function, mdmAppId?: function, memberOf?: function, model?: function,
+          name?: function, onPremisesLastSyncDateTime?: function,
+          onPremisesSecurityIdentifier?: function, onPremisesSyncEnabled?:
+          function, operatingSystem?: function, operatingSystemVersion?:
+          function, physicalIds?: function, platform?: function, profileType?:
+          function, registeredOwners?: function, registeredUsers?: function,
+          registrationDateTime?: function, status?: function, systemLabels?:
+          function, transitiveMemberOf?: function, trustType?: function,
+          usageRights?: function }) | null, deviceTag?: string | null,
+          displayName?: string | null, phoneAppVersion?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.microsoftAuthenticatorAuthenticationMethod" />"
+          })[], operations?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdDateTime?: string | null,
+          lastActionDateTime?: string | null, resourceLocation?: string | null,
+          status?: "unknownFutureValue" | Record&lt;string, never&gt; |
+          "notStarted" | "running" | "succeeded" | "failed" | null,
+          statusDetail?: string | null }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.longRunningOperation" />" })[],
+          passwordlessMicrosoftAuthenticatorMethods?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdDateTime?: function, lastUsedDateTime?: function },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          creationDateTime?: string | null, device?: Record&lt;string, never&gt;
+          | (Omit&lt;... & ... & ..., "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, accountEnabled?: function,
+          alternativeNames?: function, alternativeSecurityIds?: function,
+          approximateLastSignInDateTime?: function, commands?: function,
+          complianceExpirationDateTime?: function, deviceCategory?: function,
+          deviceId?: function, deviceMetadata?: function, deviceOwnership?:
+          function, deviceTemplate?: function, deviceVersion?: function,
+          displayName?: function, domainName?: function, enrollmentProfileName?:
+          function, enrollmentType?: function, extensionAttributes?: function,
+          extensions?: function, hostnames?: function, isCompliant?: function,
+          isManaged?: function, isManagementRestricted?: function, isRooted?:
+          function, kind?: function, managementType?: function, manufacturer?:
+          function, mdmAppId?: function, memberOf?: function, model?: function,
+          name?: function, onPremisesLastSyncDateTime?: function,
+          onPremisesSecurityIdentifier?: function, onPremisesSyncEnabled?:
+          function, operatingSystem?: function, operatingSystemVersion?:
+          function, physicalIds?: function, platform?: function, profileType?:
+          function, registeredOwners?: function, registeredUsers?: function,
+          registrationDateTime?: function, status?: function, systemLabels?:
+          function, transitiveMemberOf?: function, trustType?: function,
+          usageRights?: function }) | null, displayName?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.passwordlessMicrosoftAuthenticatorAuthenticationMethod"
+          />" })[], passwordMethods?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: function }, "<xref uid="@odata.type" />"&gt; &
+          Omit&lt;{ <xref uid="@odata.type" />: string, createdDateTime?:
+          function, lastUsedDateTime?: function }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          password?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.passwordAuthenticationMethod" />" })[],
+          phoneMethods?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdDateTime?: function,
+          lastUsedDateTime?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          phoneNumber?: string | null, phoneType?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "mobile" | "alternateMobile" | "office"
+          | null, smsSignInState?: "unknownFutureValue" | Record&lt;string,
+          never&gt; | "notSupported" | "notAllowedByPolicy" | "notEnabled" |
+          "phoneNumberNotUnique" | "ready" | "notConfigured" | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.phoneAuthenticationMethod" />" })[],
+          platformCredentialMethods?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: function }, "<xref uid="@odata.type" />"&gt; &
+          Omit&lt;{ <xref uid="@odata.type" />: string, createdDateTime?:
+          function, lastUsedDateTime?: function }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          device?: Record&lt;string, never&gt; | (Omit&lt;... & ... & ...,
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, accountEnabled?: function, alternativeNames?: function,
+          alternativeSecurityIds?: function, approximateLastSignInDateTime?:
+          function, commands?: function, complianceExpirationDateTime?:
+          function, deviceCategory?: function, deviceId?: function,
+          deviceMetadata?: function, deviceOwnership?: function,
+          deviceTemplate?: function, deviceVersion?: function, displayName?:
+          function, domainName?: function, enrollmentProfileName?: function,
+          enrollmentType?: function, extensionAttributes?: function,
+          extensions?: function, hostnames?: function, isCompliant?: function,
+          isManaged?: function, isManagementRestricted?: function, isRooted?:
+          function, kind?: function, managementType?: function, manufacturer?:
+          function, mdmAppId?: function, memberOf?: function, model?: function,
+          name?: function, onPremisesLastSyncDateTime?: function,
+          onPremisesSecurityIdentifier?: function, onPremisesSyncEnabled?:
+          function, operatingSystem?: function, operatingSystemVersion?:
+          function, physicalIds?: function, platform?: function, profileType?:
+          function, registeredOwners?: function, registeredUsers?: function,
+          registrationDateTime?: function, status?: function, systemLabels?:
+          function, transitiveMemberOf?: function, trustType?: function,
+          usageRights?: function }) | null, displayName?: string | null,
+          keyStrength?: Record&lt;string, never&gt; | "unknown" | "normal" |
+          "weak" | null, platform?: "unknownFutureValue" | Record&lt;string,
+          never&gt; | "unknown" | "windows" | "macOS" | "iOS" | "android" |
+          "linux" | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.platformCredentialAuthenticationMethod" />" })[],
+          qrCodePinMethod?: Record&lt;string, never&gt; | (Omit&lt;Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdDateTime?: string | null, lastUsedDateTime?: string |
+          null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          pin?: Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, code?: string, createdDateTime?:
+          string | null, forceChangePinNextSignIn?: boolean | null,
+          updatedDateTime?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.qrPin" />" }) | null, standardQRCode?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, createdDateTime?: string | null,
+          expireDateTime?: string | null, image?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., binaryValue?: ...,
+          errorCorrectionLevel?: ..., rawContent?: ..., version?: ... } | null,
+          lastUsedDateTime?: string | null, startDateTime?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.qrCode" />"
+          }) | null, temporaryQRCode?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          createdDateTime?: string | null, expireDateTime?: string | null,
+          image?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          binaryValue?: ..., errorCorrectionLevel?: ..., rawContent?: ...,
+          version?: ... } | null, lastUsedDateTime?: string | null,
+          startDateTime?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.qrCode" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.qrCodePinAuthenticationMethod" />" }) | null,
+          requirements?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, perUserMfaState?: "enabled" | "disabled" |
+          "unknownFutureValue" | Record&lt;string, never&gt; | "enforced" | null
+          } | null, signInPreferences?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string,
+          isSystemPreferredAuthenticationMethodEnabled?: boolean | null,
+          userPreferredMethodForSecondaryAuthentication?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "push" | "oath" | "voiceMobile" |
+          "voiceAlternateMobile" | "voiceOffice" | "sms" | null } | null,
+          softwareOathMethods?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, createdDateTime?: function,
+          lastUsedDateTime?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          secretKey?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.softwareOathAuthenticationMethod" />" })[],
+          temporaryAccessPassMethods?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdDateTime?: function, lastUsedDateTime?: function },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          isUsableOnce?: boolean | null, lifetimeInMinutes?: number | null,
+          startDateTime?: string | null, temporaryAccessPass?: string | null } &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.temporaryAccessPassAuthenticationMethod" />"
+          })[], windowsHelloForBusinessMethods?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdDateTime?: function, lastUsedDateTime?: function },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.authenticationMethod" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          device?: Record&lt;string, never&gt; | (Omit&lt;... & ... & ...,
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, accountEnabled?: function, alternativeNames?: function,
+          alternativeSecurityIds?: function, approximateLastSignInDateTime?:
+          function, commands?: function, complianceExpirationDateTime?:
+          function, deviceCategory?: function, deviceId?: function,
+          deviceMetadata?: function, deviceOwnership?: function,
+          deviceTemplate?: function, deviceVersion?: function, displayName?:
+          function, domainName?: function, enrollmentProfileName?: function,
+          enrollmentType?: function, extensionAttributes?: function,
+          extensions?: function, hostnames?: function, isCompliant?: function,
+          isManaged?: function, isManagementRestricted?: function, isRooted?:
+          function, kind?: function, managementType?: function, manufacturer?:
+          function, mdmAppId?: function, memberOf?: function, model?: function,
+          name?: function, onPremisesLastSyncDateTime?: function,
+          onPremisesSecurityIdentifier?: function, onPremisesSyncEnabled?:
+          function, operatingSystem?: function, operatingSystemVersion?:
+          function, physicalIds?: function, platform?: function, profileType?:
+          function, registeredOwners?: function, registeredUsers?: function,
+          registrationDateTime?: function, status?: function, systemLabels?:
+          function, transitiveMemberOf?: function, trustType?: function,
+          usageRights?: function }) | null, displayName?: string | null,
+          keyStrength?: Record&lt;string, never&gt; | "unknown" | "normal" |
+          "weak" | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsHelloForBusinessAuthenticationMethod" />"
+          })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authentication" />" }&gt;
 variables:
   - name: emailMethods
     uid: '@microsoft/teams.graph-endpoints-beta.users.authentication.emailMethods'
@@ -80,58 +1991,88 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        emailMethods: { create: (body: IEndpoints["POST
-        /users/{user-id}/authentication/emailMethods"]["body"], params?:
-        IEndpoints["POST
-        /users/{user-id}/authentication/emailMethods"]["parameters"]) =>
-        EndpointRequest<IEndpoints["POST
-        /users/{user-id}/authentication/emailMethods"]["response"]>, del:
-        (params?: IEndpoints["DELETE
-        /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["parameters"])
-        => EndpointRequest<IEndpoints["DELETE
-        /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["response"]>,
-        get: (params?: IEndpoints["GET
-        /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["parameters"])
-        => EndpointRequest<IEndpoints["GET
-        /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["response"]>,
-        list: (params?: IEndpoints["GET
+        emailMethods: { /** * `GET /users/{user-id}/authentication/emailMethods`
+        * * Represents the email addresses registered to a user for
+        authentication. */ list: (params?: IEndpoints["GET
         /users/{user-id}/authentication/emailMethods"]["parameters"]) =>
         EndpointRequest<IEndpoints["GET
-        /users/{user-id}/authentication/emailMethods"]["response"]>, update:
-        (body: IEndpoints["PATCH
+        /users/{user-id}/authentication/emailMethods"]["response"]>; /** * `POST
+        /users/{user-id}/authentication/emailMethods` * * Set a user&#x27;s
+        emailAuthenticationMethod object. Email authentication is a self-service
+        password reset method. A user may only have one email authentication
+        method. Self-service operations aren&#x27;t supported. */ create: (body:
+        IEndpoints["POST /users/{user-id}/authentication/emailMethods"]["body"],
+        params?: IEndpoints["POST
+        /users/{user-id}/authentication/emailMethods"]["parameters"]) =>
+        EndpointRequest<IEndpoints["POST
+        /users/{user-id}/authentication/emailMethods"]["response"]>; /** * `GET
+        /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}`
+        * * Represents the email addresses registered to a user for
+        authentication. */ get: (params?: IEndpoints["GET
+        /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["parameters"])
+        => EndpointRequest<IEndpoints["GET
+        /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["response"]>;
+        /** * `PATCH
+        /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}`
+        * * Update a user&#x27;s email address associated with an email
+        Authentication Method object. Self-service operations aren&#x27;t
+        supported. */ update: (body: IEndpoints["PATCH
         /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["body"],
         params?: IEndpoints["PATCH
         /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["parameters"])
         => EndpointRequest<IEndpoints["PATCH
-        /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["response"]>
+        /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["response"]>;
+        /** * `DELETE
+        /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}`
+        * * Deletes a user&#x27;s email Authentication Method object. */ del:
+        (params?: IEndpoints["DELETE
+        /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["parameters"])
+        => EndpointRequest<IEndpoints["DELETE
+        /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["response"]>;
         }
       return:
         description: ''
         type: >-
-          { create: (body: IEndpoints["POST
+          { /** * `GET /users/{user-id}/authentication/emailMethods` * *
+          Represents the email addresses registered to a user for
+          authentication. */ list: (params?: IEndpoints["GET
+          /users/{user-id}/authentication/emailMethods"]["parameters"]) =&gt;
+          EndpointRequest&lt;IEndpoints["GET
+          /users/{user-id}/authentication/emailMethods"]["response"]&gt;; /** *
+          `POST /users/{user-id}/authentication/emailMethods` * * Set a
+          user&#x27;s emailAuthenticationMethod object. Email authentication is
+          a self-service password reset method. A user may only have one email
+          authentication method. Self-service operations aren&#x27;t supported.
+          */ create: (body: IEndpoints["POST
           /users/{user-id}/authentication/emailMethods"]["body"], params?:
           IEndpoints["POST
           /users/{user-id}/authentication/emailMethods"]["parameters"]) =&gt;
           EndpointRequest&lt;IEndpoints["POST
-          /users/{user-id}/authentication/emailMethods"]["response"]&gt;, del:
-          (params?: IEndpoints["DELETE
-          /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["parameters"])
-          =&gt; EndpointRequest&lt;IEndpoints["DELETE
-          /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["response"]&gt;,
-          get: (params?: IEndpoints["GET
+          /users/{user-id}/authentication/emailMethods"]["response"]&gt;; /** *
+          `GET
+          /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}`
+          * * Represents the email addresses registered to a user for
+          authentication. */ get: (params?: IEndpoints["GET
           /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["response"]&gt;,
-          list: (params?: IEndpoints["GET
-          /users/{user-id}/authentication/emailMethods"]["parameters"]) =&gt;
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/authentication/emailMethods"]["response"]&gt;,
-          update: (body: IEndpoints["PATCH
+          /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["response"]&gt;;
+          /** * `PATCH
+          /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}`
+          * * Update a user&#x27;s email address associated with an email
+          Authentication Method object. Self-service operations aren&#x27;t
+          supported. */ update: (body: IEndpoints["PATCH
           /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["body"],
           params?: IEndpoints["PATCH
           /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["PATCH
-          /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["response"]&gt;
+          /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["response"]&gt;;
+          /** * `DELETE
+          /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}`
+          * * Deletes a user&#x27;s email Authentication Method object. */ del:
+          (params?: IEndpoints["DELETE
+          /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["DELETE
+          /users/{user-id}/authentication/emailMethods/{emailAuthenticationMethod-id}"]["response"]&gt;;
           }
   - name: externalAuthenticationMethods
     uid: >-
@@ -142,58 +2083,88 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        externalAuthenticationMethods: { create: (body: IEndpoints["POST
+        externalAuthenticationMethods: { /** * `GET
+        /users/{user-id}/authentication/externalAuthenticationMethods` * *
+        Represents the external methods registered to a user for authentication.
+        */ list: (params?: IEndpoints["GET
+        /users/{user-id}/authentication/externalAuthenticationMethods"]["parameters"])
+        => EndpointRequest<IEndpoints["GET
+        /users/{user-id}/authentication/externalAuthenticationMethods"]["response"]>;
+        /** * `POST
+        /users/{user-id}/authentication/externalAuthenticationMethods` * *
+        Create a new externalAuthenticationMethod object. This API doesn&#x27;t
+        support self-service operations. */ create: (body: IEndpoints["POST
         /users/{user-id}/authentication/externalAuthenticationMethods"]["body"],
         params?: IEndpoints["POST
         /users/{user-id}/authentication/externalAuthenticationMethods"]["parameters"])
         => EndpointRequest<IEndpoints["POST
-        /users/{user-id}/authentication/externalAuthenticationMethods"]["response"]>,
-        del: (params?: IEndpoints["DELETE
-        /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["parameters"])
-        => EndpointRequest<IEndpoints["DELETE
-        /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["response"]>,
-        get: (params?: IEndpoints["GET
+        /users/{user-id}/authentication/externalAuthenticationMethods"]["response"]>;
+        /** * `GET
+        /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}`
+        * * Represents the external methods registered to a user for
+        authentication. */ get: (params?: IEndpoints["GET
         /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["parameters"])
         => EndpointRequest<IEndpoints["GET
-        /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["response"]>,
-        list: (params?: IEndpoints["GET
-        /users/{user-id}/authentication/externalAuthenticationMethods"]["parameters"])
-        => EndpointRequest<IEndpoints["GET
-        /users/{user-id}/authentication/externalAuthenticationMethods"]["response"]>,
-        update: (body: IEndpoints["PATCH
+        /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["response"]>;
+        /** * `PATCH
+        /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}`
+        * */ update: (body: IEndpoints["PATCH
         /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["body"],
         params?: IEndpoints["PATCH
         /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["parameters"])
         => EndpointRequest<IEndpoints["PATCH
-        /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["response"]>
+        /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["response"]>;
+        /** * `DELETE
+        /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}`
+        * * Delete an externalAuthenticationMethod object. This API doesn&#x27;t
+        support self-service operations. */ del: (params?: IEndpoints["DELETE
+        /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["parameters"])
+        => EndpointRequest<IEndpoints["DELETE
+        /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["response"]>;
         }
       return:
         description: ''
         type: >-
-          { create: (body: IEndpoints["POST
+          { /** * `GET
+          /users/{user-id}/authentication/externalAuthenticationMethods` * *
+          Represents the external methods registered to a user for
+          authentication. */ list: (params?: IEndpoints["GET
+          /users/{user-id}/authentication/externalAuthenticationMethods"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["GET
+          /users/{user-id}/authentication/externalAuthenticationMethods"]["response"]&gt;;
+          /** * `POST
+          /users/{user-id}/authentication/externalAuthenticationMethods` * *
+          Create a new externalAuthenticationMethod object. This API
+          doesn&#x27;t support self-service operations. */ create: (body:
+          IEndpoints["POST
           /users/{user-id}/authentication/externalAuthenticationMethods"]["body"],
           params?: IEndpoints["POST
           /users/{user-id}/authentication/externalAuthenticationMethods"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["POST
-          /users/{user-id}/authentication/externalAuthenticationMethods"]["response"]&gt;,
-          del: (params?: IEndpoints["DELETE
-          /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["parameters"])
-          =&gt; EndpointRequest&lt;IEndpoints["DELETE
-          /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["response"]&gt;,
-          get: (params?: IEndpoints["GET
+          /users/{user-id}/authentication/externalAuthenticationMethods"]["response"]&gt;;
+          /** * `GET
+          /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}`
+          * * Represents the external methods registered to a user for
+          authentication. */ get: (params?: IEndpoints["GET
           /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["response"]&gt;,
-          list: (params?: IEndpoints["GET
-          /users/{user-id}/authentication/externalAuthenticationMethods"]["parameters"])
-          =&gt; EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/authentication/externalAuthenticationMethods"]["response"]&gt;,
-          update: (body: IEndpoints["PATCH
+          /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["response"]&gt;;
+          /** * `PATCH
+          /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}`
+          * */ update: (body: IEndpoints["PATCH
           /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["body"],
           params?: IEndpoints["PATCH
           /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["PATCH
-          /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["response"]&gt;
+          /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["response"]&gt;;
+          /** * `DELETE
+          /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}`
+          * * Delete an externalAuthenticationMethod object. This API
+          doesn&#x27;t support self-service operations. */ del: (params?:
+          IEndpoints["DELETE
+          /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["DELETE
+          /users/{user-id}/authentication/externalAuthenticationMethods/{externalAuthenticationMethod-id}"]["response"]&gt;;
           }
   - name: fido2Methods
     uid: '@microsoft/teams.graph-endpoints-beta.users.authentication.fido2Methods'
@@ -203,33 +2174,50 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        fido2Methods: { del: (params?: IEndpoints["DELETE
-        /users/{user-id}/authentication/fido2Methods/{fido2AuthenticationMethod-id}"]["parameters"])
-        => EndpointRequest<IEndpoints["DELETE
-        /users/{user-id}/authentication/fido2Methods/{fido2AuthenticationMethod-id}"]["response"]>,
-        get: (params?: IEndpoints["GET
-        /users/{user-id}/authentication/fido2Methods/{fido2AuthenticationMethod-id}"]["parameters"])
-        => EndpointRequest<IEndpoints["GET
-        /users/{user-id}/authentication/fido2Methods/{fido2AuthenticationMethod-id}"]["response"]>,
-        list: (params?: IEndpoints["GET
+        fido2Methods: { /** * `GET /users/{user-id}/authentication/fido2Methods`
+        * * Represents the FIDO2 security keys registered to a user for
+        authentication. */ list: (params?: IEndpoints["GET
         /users/{user-id}/authentication/fido2Methods"]["parameters"]) =>
         EndpointRequest<IEndpoints["GET
-        /users/{user-id}/authentication/fido2Methods"]["response"]> }
+        /users/{user-id}/authentication/fido2Methods"]["response"]>; /** * `GET
+        /users/{user-id}/authentication/fido2Methods/{fido2AuthenticationMethod-id}`
+        * * Represents the FIDO2 security keys registered to a user for
+        authentication. */ get: (params?: IEndpoints["GET
+        /users/{user-id}/authentication/fido2Methods/{fido2AuthenticationMethod-id}"]["parameters"])
+        => EndpointRequest<IEndpoints["GET
+        /users/{user-id}/authentication/fido2Methods/{fido2AuthenticationMethod-id}"]["response"]>;
+        /** * `DELETE
+        /users/{user-id}/authentication/fido2Methods/{fido2AuthenticationMethod-id}`
+        * * Deletes a user&#x27;s FIDO2 security key authentication method
+        object. */ del: (params?: IEndpoints["DELETE
+        /users/{user-id}/authentication/fido2Methods/{fido2AuthenticationMethod-id}"]["parameters"])
+        => EndpointRequest<IEndpoints["DELETE
+        /users/{user-id}/authentication/fido2Methods/{fido2AuthenticationMethod-id}"]["response"]>;
+        }
       return:
         description: ''
         type: >-
-          { del: (params?: IEndpoints["DELETE
-          /users/{user-id}/authentication/fido2Methods/{fido2AuthenticationMethod-id}"]["parameters"])
-          =&gt; EndpointRequest&lt;IEndpoints["DELETE
-          /users/{user-id}/authentication/fido2Methods/{fido2AuthenticationMethod-id}"]["response"]&gt;,
-          get: (params?: IEndpoints["GET
-          /users/{user-id}/authentication/fido2Methods/{fido2AuthenticationMethod-id}"]["parameters"])
-          =&gt; EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/authentication/fido2Methods/{fido2AuthenticationMethod-id}"]["response"]&gt;,
-          list: (params?: IEndpoints["GET
+          { /** * `GET /users/{user-id}/authentication/fido2Methods` * *
+          Represents the FIDO2 security keys registered to a user for
+          authentication. */ list: (params?: IEndpoints["GET
           /users/{user-id}/authentication/fido2Methods"]["parameters"]) =&gt;
           EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/authentication/fido2Methods"]["response"]&gt; }
+          /users/{user-id}/authentication/fido2Methods"]["response"]&gt;; /** *
+          `GET
+          /users/{user-id}/authentication/fido2Methods/{fido2AuthenticationMethod-id}`
+          * * Represents the FIDO2 security keys registered to a user for
+          authentication. */ get: (params?: IEndpoints["GET
+          /users/{user-id}/authentication/fido2Methods/{fido2AuthenticationMethod-id}"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["GET
+          /users/{user-id}/authentication/fido2Methods/{fido2AuthenticationMethod-id}"]["response"]&gt;;
+          /** * `DELETE
+          /users/{user-id}/authentication/fido2Methods/{fido2AuthenticationMethod-id}`
+          * * Deletes a user&#x27;s FIDO2 security key authentication method
+          object. */ del: (params?: IEndpoints["DELETE
+          /users/{user-id}/authentication/fido2Methods/{fido2AuthenticationMethod-id}"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["DELETE
+          /users/{user-id}/authentication/fido2Methods/{fido2AuthenticationMethod-id}"]["response"]&gt;;
+          }
   - name: operations
     uid: '@microsoft/teams.graph-endpoints-beta.users.authentication.operations'
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -338,58 +2326,107 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        phoneMethods: { create: (body: IEndpoints["POST
-        /users/{user-id}/authentication/phoneMethods"]["body"], params?:
-        IEndpoints["POST
-        /users/{user-id}/authentication/phoneMethods"]["parameters"]) =>
-        EndpointRequest<IEndpoints["POST
-        /users/{user-id}/authentication/phoneMethods"]["response"]>, del:
-        (params?: IEndpoints["DELETE
-        /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["parameters"])
-        => EndpointRequest<IEndpoints["DELETE
-        /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["response"]>,
-        get: (params?: IEndpoints["GET
-        /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["parameters"])
-        => EndpointRequest<IEndpoints["GET
-        /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["response"]>,
+        phoneMethods: { /** * `GET /users/{user-id}/authentication/phoneMethods`
+        * * Represents the phone registered to a user for authentication. */
         list: (params?: IEndpoints["GET
         /users/{user-id}/authentication/phoneMethods"]["parameters"]) =>
         EndpointRequest<IEndpoints["GET
-        /users/{user-id}/authentication/phoneMethods"]["response"]>, update:
-        (body: IEndpoints["PATCH
+        /users/{user-id}/authentication/phoneMethods"]["response"]>; /** * `POST
+        /users/{user-id}/authentication/phoneMethods` * * Add a new phone
+        authentication method. A user may only have one phone of each type,
+        captured in the phoneType property. This means, for example, adding a
+        mobile phone to a user with a preexisting mobile phone will fail.
+        Additionally, a user must always have a mobile phone before adding an
+        alternateMobile phone. Adding a phone number makes it available for use
+        in both Azure multifactor authentication (MFA) and self-service password
+        reset (SSPR), if enabled. Additionally, if a user is enabled by policy
+        to use SMS sign-in and a mobile number is added, the system attempts to
+        register the number for use in that system. */ create: (body:
+        IEndpoints["POST /users/{user-id}/authentication/phoneMethods"]["body"],
+        params?: IEndpoints["POST
+        /users/{user-id}/authentication/phoneMethods"]["parameters"]) =>
+        EndpointRequest<IEndpoints["POST
+        /users/{user-id}/authentication/phoneMethods"]["response"]>; /** * `GET
+        /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}`
+        * * Represents the phone registered to a user for authentication. */
+        get: (params?: IEndpoints["GET
+        /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["parameters"])
+        => EndpointRequest<IEndpoints["GET
+        /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["response"]>;
+        /** * `PATCH
+        /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}`
+        * * Update the phone number associated with a phone authentication
+        method. You can&#x27;t change a phone&#x27;s type. To change a
+        phone&#x27;s type, add a new number of the desired type and then delete
+        the object with the original type. If a user is enabled by policy to use
+        SMS to sign in and the mobile number is changed, the system attempts to
+        register the number for use in that system. Self-service operations
+        aren&#x27;t supported. */ update: (body: IEndpoints["PATCH
         /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["body"],
         params?: IEndpoints["PATCH
         /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["parameters"])
         => EndpointRequest<IEndpoints["PATCH
-        /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["response"]>
+        /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["response"]>;
+        /** * `DELETE
+        /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}`
+        * */ del: (params?: IEndpoints["DELETE
+        /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["parameters"])
+        => EndpointRequest<IEndpoints["DELETE
+        /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["response"]>;
         }
       return:
         description: ''
         type: >-
-          { create: (body: IEndpoints["POST
+          { /** * `GET /users/{user-id}/authentication/phoneMethods` * *
+          Represents the phone registered to a user for authentication. */ list:
+          (params?: IEndpoints["GET
+          /users/{user-id}/authentication/phoneMethods"]["parameters"]) =&gt;
+          EndpointRequest&lt;IEndpoints["GET
+          /users/{user-id}/authentication/phoneMethods"]["response"]&gt;; /** *
+          `POST /users/{user-id}/authentication/phoneMethods` * * Add a new
+          phone authentication method. A user may only have one phone of each
+          type, captured in the phoneType property. This means, for example,
+          adding a mobile phone to a user with a preexisting mobile phone will
+          fail. Additionally, a user must always have a mobile phone before
+          adding an alternateMobile phone. Adding a phone number makes it
+          available for use in both Azure multifactor authentication (MFA) and
+          self-service password reset (SSPR), if enabled. Additionally, if a
+          user is enabled by policy to use SMS sign-in and a mobile number is
+          added, the system attempts to register the number for use in that
+          system. */ create: (body: IEndpoints["POST
           /users/{user-id}/authentication/phoneMethods"]["body"], params?:
           IEndpoints["POST
           /users/{user-id}/authentication/phoneMethods"]["parameters"]) =&gt;
           EndpointRequest&lt;IEndpoints["POST
-          /users/{user-id}/authentication/phoneMethods"]["response"]&gt;, del:
-          (params?: IEndpoints["DELETE
-          /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["parameters"])
-          =&gt; EndpointRequest&lt;IEndpoints["DELETE
-          /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["response"]&gt;,
+          /users/{user-id}/authentication/phoneMethods"]["response"]&gt;; /** *
+          `GET
+          /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}`
+          * * Represents the phone registered to a user for authentication. */
           get: (params?: IEndpoints["GET
           /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["response"]&gt;,
-          list: (params?: IEndpoints["GET
-          /users/{user-id}/authentication/phoneMethods"]["parameters"]) =&gt;
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/authentication/phoneMethods"]["response"]&gt;,
-          update: (body: IEndpoints["PATCH
+          /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["response"]&gt;;
+          /** * `PATCH
+          /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}`
+          * * Update the phone number associated with a phone authentication
+          method. You can&#x27;t change a phone&#x27;s type. To change a
+          phone&#x27;s type, add a new number of the desired type and then
+          delete the object with the original type. If a user is enabled by
+          policy to use SMS to sign in and the mobile number is changed, the
+          system attempts to register the number for use in that system.
+          Self-service operations aren&#x27;t supported. */ update: (body:
+          IEndpoints["PATCH
           /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["body"],
           params?: IEndpoints["PATCH
           /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["PATCH
-          /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["response"]&gt;
+          /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["response"]&gt;;
+          /** * `DELETE
+          /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}`
+          * */ del: (params?: IEndpoints["DELETE
+          /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["DELETE
+          /users/{user-id}/authentication/phoneMethods/{phoneAuthenticationMethod-id}"]["response"]&gt;;
           }
   - name: requirements
     uid: '@microsoft/teams.graph-endpoints-beta.users.authentication.requirements'
@@ -399,29 +2436,39 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        requirements: { list: (params?: IEndpoints["GET
+        requirements: { /** * `GET /users/{user-id}/authentication/requirements`
+        * * Read the properties of a user&#x27;s authentication states. Use this
+        API to retrieve the following information: */ list: (params?:
+        IEndpoints["GET
         /users/{user-id}/authentication/requirements"]["parameters"]) =>
         EndpointRequest<IEndpoints["GET
-        /users/{user-id}/authentication/requirements"]["response"]>, update:
-        (body: IEndpoints["PATCH
+        /users/{user-id}/authentication/requirements"]["response"]>; /** *
+        `PATCH /users/{user-id}/authentication/requirements` * * Update the
+        properties of a user&#x27;s authentication method states. Use this API
+        to update the following information: */ update: (body: IEndpoints["PATCH
         /users/{user-id}/authentication/requirements"]["body"], params?:
         IEndpoints["PATCH
         /users/{user-id}/authentication/requirements"]["parameters"]) =>
         EndpointRequest<IEndpoints["PATCH
-        /users/{user-id}/authentication/requirements"]["response"]> }
+        /users/{user-id}/authentication/requirements"]["response"]>; }
       return:
         description: ''
         type: >-
-          { list: (params?: IEndpoints["GET
+          { /** * `GET /users/{user-id}/authentication/requirements` * * Read
+          the properties of a user&#x27;s authentication states. Use this API to
+          retrieve the following information: */ list: (params?: IEndpoints["GET
           /users/{user-id}/authentication/requirements"]["parameters"]) =&gt;
           EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/authentication/requirements"]["response"]&gt;,
-          update: (body: IEndpoints["PATCH
+          /users/{user-id}/authentication/requirements"]["response"]&gt;; /** *
+          `PATCH /users/{user-id}/authentication/requirements` * * Update the
+          properties of a user&#x27;s authentication method states. Use this API
+          to update the following information: */ update: (body:
+          IEndpoints["PATCH
           /users/{user-id}/authentication/requirements"]["body"], params?:
           IEndpoints["PATCH
           /users/{user-id}/authentication/requirements"]["parameters"]) =&gt;
           EndpointRequest&lt;IEndpoints["PATCH
-          /users/{user-id}/authentication/requirements"]["response"]&gt; }
+          /users/{user-id}/authentication/requirements"]["response"]&gt;; }
   - name: signInPreferences
     uid: >-
       @microsoft/teams.graph-endpoints-beta.users.authentication.signInPreferences
@@ -431,29 +2478,40 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        signInPreferences: { list: (params?: IEndpoints["GET
+        signInPreferences: { /** * `GET
+        /users/{user-id}/authentication/signInPreferences` * * Read the
+        properties of a user&#x27;s authentication states. Use this API to
+        retrieve the following information: */ list: (params?: IEndpoints["GET
         /users/{user-id}/authentication/signInPreferences"]["parameters"]) =>
         EndpointRequest<IEndpoints["GET
-        /users/{user-id}/authentication/signInPreferences"]["response"]>,
-        update: (body: IEndpoints["PATCH
+        /users/{user-id}/authentication/signInPreferences"]["response"]>; /** *
+        `PATCH /users/{user-id}/authentication/signInPreferences` * * Update the
+        properties of a user&#x27;s authentication method states. Use this API
+        to update the following information: */ update: (body: IEndpoints["PATCH
         /users/{user-id}/authentication/signInPreferences"]["body"], params?:
         IEndpoints["PATCH
         /users/{user-id}/authentication/signInPreferences"]["parameters"]) =>
         EndpointRequest<IEndpoints["PATCH
-        /users/{user-id}/authentication/signInPreferences"]["response"]> }
+        /users/{user-id}/authentication/signInPreferences"]["response"]>; }
       return:
         description: ''
         type: >-
-          { list: (params?: IEndpoints["GET
+          { /** * `GET /users/{user-id}/authentication/signInPreferences` * *
+          Read the properties of a user&#x27;s authentication states. Use this
+          API to retrieve the following information: */ list: (params?:
+          IEndpoints["GET
           /users/{user-id}/authentication/signInPreferences"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/authentication/signInPreferences"]["response"]&gt;,
-          update: (body: IEndpoints["PATCH
+          /users/{user-id}/authentication/signInPreferences"]["response"]&gt;;
+          /** * `PATCH /users/{user-id}/authentication/signInPreferences` * *
+          Update the properties of a user&#x27;s authentication method states.
+          Use this API to update the following information: */ update: (body:
+          IEndpoints["PATCH
           /users/{user-id}/authentication/signInPreferences"]["body"], params?:
           IEndpoints["PATCH
           /users/{user-id}/authentication/signInPreferences"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["PATCH
-          /users/{user-id}/authentication/signInPreferences"]["response"]&gt; }
+          /users/{user-id}/authentication/signInPreferences"]["response"]&gt;; }
   - name: softwareOathMethods
     uid: >-
       @microsoft/teams.graph-endpoints-beta.users.authentication.softwareOathMethods
@@ -463,33 +2521,54 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        softwareOathMethods: { del: (params?: IEndpoints["DELETE
-        /users/{user-id}/authentication/softwareOathMethods/{softwareOathAuthenticationMethod-id}"]["parameters"])
-        => EndpointRequest<IEndpoints["DELETE
-        /users/{user-id}/authentication/softwareOathMethods/{softwareOathAuthenticationMethod-id}"]["response"]>,
-        get: (params?: IEndpoints["GET
-        /users/{user-id}/authentication/softwareOathMethods/{softwareOathAuthenticationMethod-id}"]["parameters"])
-        => EndpointRequest<IEndpoints["GET
-        /users/{user-id}/authentication/softwareOathMethods/{softwareOathAuthenticationMethod-id}"]["response"]>,
-        list: (params?: IEndpoints["GET
+        softwareOathMethods: { /** * `GET
+        /users/{user-id}/authentication/softwareOathMethods` * * The software
+        OATH time-based one-time password (TOTP) applications registered to a
+        user for authentication. */ list: (params?: IEndpoints["GET
         /users/{user-id}/authentication/softwareOathMethods"]["parameters"]) =>
         EndpointRequest<IEndpoints["GET
-        /users/{user-id}/authentication/softwareOathMethods"]["response"]> }
+        /users/{user-id}/authentication/softwareOathMethods"]["response"]>; /**
+        * `GET
+        /users/{user-id}/authentication/softwareOathMethods/{softwareOathAuthenticationMethod-id}`
+        * * The software OATH time-based one-time password (TOTP) applications
+        registered to a user for authentication. */ get: (params?:
+        IEndpoints["GET
+        /users/{user-id}/authentication/softwareOathMethods/{softwareOathAuthenticationMethod-id}"]["parameters"])
+        => EndpointRequest<IEndpoints["GET
+        /users/{user-id}/authentication/softwareOathMethods/{softwareOathAuthenticationMethod-id}"]["response"]>;
+        /** * `DELETE
+        /users/{user-id}/authentication/softwareOathMethods/{softwareOathAuthenticationMethod-id}`
+        * * Delete a user&#x27;s Software OATH token authentication method
+        object. */ del: (params?: IEndpoints["DELETE
+        /users/{user-id}/authentication/softwareOathMethods/{softwareOathAuthenticationMethod-id}"]["parameters"])
+        => EndpointRequest<IEndpoints["DELETE
+        /users/{user-id}/authentication/softwareOathMethods/{softwareOathAuthenticationMethod-id}"]["response"]>;
+        }
       return:
         description: ''
         type: >-
-          { del: (params?: IEndpoints["DELETE
-          /users/{user-id}/authentication/softwareOathMethods/{softwareOathAuthenticationMethod-id}"]["parameters"])
-          =&gt; EndpointRequest&lt;IEndpoints["DELETE
-          /users/{user-id}/authentication/softwareOathMethods/{softwareOathAuthenticationMethod-id}"]["response"]&gt;,
-          get: (params?: IEndpoints["GET
-          /users/{user-id}/authentication/softwareOathMethods/{softwareOathAuthenticationMethod-id}"]["parameters"])
-          =&gt; EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/authentication/softwareOathMethods/{softwareOathAuthenticationMethod-id}"]["response"]&gt;,
-          list: (params?: IEndpoints["GET
+          { /** * `GET /users/{user-id}/authentication/softwareOathMethods` * *
+          The software OATH time-based one-time password (TOTP) applications
+          registered to a user for authentication. */ list: (params?:
+          IEndpoints["GET
           /users/{user-id}/authentication/softwareOathMethods"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/authentication/softwareOathMethods"]["response"]&gt;
+          /users/{user-id}/authentication/softwareOathMethods"]["response"]&gt;;
+          /** * `GET
+          /users/{user-id}/authentication/softwareOathMethods/{softwareOathAuthenticationMethod-id}`
+          * * The software OATH time-based one-time password (TOTP) applications
+          registered to a user for authentication. */ get: (params?:
+          IEndpoints["GET
+          /users/{user-id}/authentication/softwareOathMethods/{softwareOathAuthenticationMethod-id}"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["GET
+          /users/{user-id}/authentication/softwareOathMethods/{softwareOathAuthenticationMethod-id}"]["response"]&gt;;
+          /** * `DELETE
+          /users/{user-id}/authentication/softwareOathMethods/{softwareOathAuthenticationMethod-id}`
+          * * Delete a user&#x27;s Software OATH token authentication method
+          object. */ del: (params?: IEndpoints["DELETE
+          /users/{user-id}/authentication/softwareOathMethods/{softwareOathAuthenticationMethod-id}"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["DELETE
+          /users/{user-id}/authentication/softwareOathMethods/{softwareOathAuthenticationMethod-id}"]["response"]&gt;;
           }
   - name: temporaryAccessPassMethods
     uid: >-
@@ -500,44 +2579,84 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        temporaryAccessPassMethods: { create: (body: IEndpoints["POST
+        temporaryAccessPassMethods: { /** * `GET
+        /users/{user-id}/authentication/temporaryAccessPassMethods` * * Retrieve
+        a list of a user&#x27;s temporaryAccessPassAuthenticationMethod objects
+        and their properties. This API will only return a single object in the
+        collection as a user can have only one Temporary Access Pass (TAP)
+        method. */ list: (params?: IEndpoints["GET
+        /users/{user-id}/authentication/temporaryAccessPassMethods"]["parameters"])
+        => EndpointRequest<IEndpoints["GET
+        /users/{user-id}/authentication/temporaryAccessPassMethods"]["response"]>;
+        /** * `POST /users/{user-id}/authentication/temporaryAccessPassMethods`
+        * * Create a new temporaryAccessPassAuthenticationMethod object on a
+        user. A user can only have one Temporary Access Pass that&#x27;s usable
+        within its specified lifetime. If the user requires a new Temporary
+        Access Pass while the current Temporary Access Pass is valid, the admin
+        can create a new Temporary Access Pass for the user, the previous
+        Temporary Access Pass will be deleted, and a new Temporary Access Pass
+        will be created. */ create: (body: IEndpoints["POST
         /users/{user-id}/authentication/temporaryAccessPassMethods"]["body"],
         params?: IEndpoints["POST
         /users/{user-id}/authentication/temporaryAccessPassMethods"]["parameters"])
         => EndpointRequest<IEndpoints["POST
-        /users/{user-id}/authentication/temporaryAccessPassMethods"]["response"]>,
-        del: (params?: IEndpoints["DELETE
+        /users/{user-id}/authentication/temporaryAccessPassMethods"]["response"]>;
+        /** * `GET
+        /users/{user-id}/authentication/temporaryAccessPassMethods/{temporaryAccessPassAuthenticationMethod-id}`
+        * * Retrieve a user&#x27;s single
+        temporaryAccessPassAuthenticationMethod object. */ get: (params?:
+        IEndpoints["GET
+        /users/{user-id}/authentication/temporaryAccessPassMethods/{temporaryAccessPassAuthenticationMethod-id}"]["parameters"])
+        => EndpointRequest<IEndpoints["GET
+        /users/{user-id}/authentication/temporaryAccessPassMethods/{temporaryAccessPassAuthenticationMethod-id}"]["response"]>;
+        /** * `DELETE
+        /users/{user-id}/authentication/temporaryAccessPassMethods/{temporaryAccessPassAuthenticationMethod-id}`
+        * * Delete a users&#x27;s temporaryAccessPassAuthenticationMethod
+        object. */ del: (params?: IEndpoints["DELETE
         /users/{user-id}/authentication/temporaryAccessPassMethods/{temporaryAccessPassAuthenticationMethod-id}"]["parameters"])
         => EndpointRequest<IEndpoints["DELETE
-        /users/{user-id}/authentication/temporaryAccessPassMethods/{temporaryAccessPassAuthenticationMethod-id}"]["response"]>,
-        get: (params?: IEndpoints["GET
-        /users/{user-id}/authentication/temporaryAccessPassMethods/{temporaryAccessPassAuthenticationMethod-id}"]["parameters"])
-        => EndpointRequest<IEndpoints["GET
-        /users/{user-id}/authentication/temporaryAccessPassMethods/{temporaryAccessPassAuthenticationMethod-id}"]["response"]>,
-        list: (params?: IEndpoints["GET
-        /users/{user-id}/authentication/temporaryAccessPassMethods"]["parameters"])
-        => EndpointRequest<IEndpoints["GET
-        /users/{user-id}/authentication/temporaryAccessPassMethods"]["response"]>
+        /users/{user-id}/authentication/temporaryAccessPassMethods/{temporaryAccessPassAuthenticationMethod-id}"]["response"]>;
         }
       return:
         description: ''
         type: >-
-          { create: (body: IEndpoints["POST
+          { /** * `GET
+          /users/{user-id}/authentication/temporaryAccessPassMethods` * *
+          Retrieve a list of a user&#x27;s
+          temporaryAccessPassAuthenticationMethod objects and their properties.
+          This API will only return a single object in the collection as a user
+          can have only one Temporary Access Pass (TAP) method. */ list:
+          (params?: IEndpoints["GET
+          /users/{user-id}/authentication/temporaryAccessPassMethods"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["GET
+          /users/{user-id}/authentication/temporaryAccessPassMethods"]["response"]&gt;;
+          /** * `POST
+          /users/{user-id}/authentication/temporaryAccessPassMethods` * * Create
+          a new temporaryAccessPassAuthenticationMethod object on a user. A user
+          can only have one Temporary Access Pass that&#x27;s usable within its
+          specified lifetime. If the user requires a new Temporary Access Pass
+          while the current Temporary Access Pass is valid, the admin can create
+          a new Temporary Access Pass for the user, the previous Temporary
+          Access Pass will be deleted, and a new Temporary Access Pass will be
+          created. */ create: (body: IEndpoints["POST
           /users/{user-id}/authentication/temporaryAccessPassMethods"]["body"],
           params?: IEndpoints["POST
           /users/{user-id}/authentication/temporaryAccessPassMethods"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["POST
-          /users/{user-id}/authentication/temporaryAccessPassMethods"]["response"]&gt;,
-          del: (params?: IEndpoints["DELETE
+          /users/{user-id}/authentication/temporaryAccessPassMethods"]["response"]&gt;;
+          /** * `GET
+          /users/{user-id}/authentication/temporaryAccessPassMethods/{temporaryAccessPassAuthenticationMethod-id}`
+          * * Retrieve a user&#x27;s single
+          temporaryAccessPassAuthenticationMethod object. */ get: (params?:
+          IEndpoints["GET
+          /users/{user-id}/authentication/temporaryAccessPassMethods/{temporaryAccessPassAuthenticationMethod-id}"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["GET
+          /users/{user-id}/authentication/temporaryAccessPassMethods/{temporaryAccessPassAuthenticationMethod-id}"]["response"]&gt;;
+          /** * `DELETE
+          /users/{user-id}/authentication/temporaryAccessPassMethods/{temporaryAccessPassAuthenticationMethod-id}`
+          * * Delete a users&#x27;s temporaryAccessPassAuthenticationMethod
+          object. */ del: (params?: IEndpoints["DELETE
           /users/{user-id}/authentication/temporaryAccessPassMethods/{temporaryAccessPassAuthenticationMethod-id}"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["DELETE
-          /users/{user-id}/authentication/temporaryAccessPassMethods/{temporaryAccessPassAuthenticationMethod-id}"]["response"]&gt;,
-          get: (params?: IEndpoints["GET
-          /users/{user-id}/authentication/temporaryAccessPassMethods/{temporaryAccessPassAuthenticationMethod-id}"]["parameters"])
-          =&gt; EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/authentication/temporaryAccessPassMethods/{temporaryAccessPassAuthenticationMethod-id}"]["response"]&gt;,
-          list: (params?: IEndpoints["GET
-          /users/{user-id}/authentication/temporaryAccessPassMethods"]["parameters"])
-          =&gt; EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/authentication/temporaryAccessPassMethods"]["response"]&gt;
+          /users/{user-id}/authentication/temporaryAccessPassMethods/{temporaryAccessPassAuthenticationMethod-id}"]["response"]&gt;;
           }

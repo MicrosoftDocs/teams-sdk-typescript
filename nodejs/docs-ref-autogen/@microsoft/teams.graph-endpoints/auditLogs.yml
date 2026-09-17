@@ -114,7 +114,7 @@ variables:
           /auditLogs/provisioning/{provisioningObjectSummary-id}"]["response"]&gt;
           }
 functions:
-  - name: list(any)
+  - name: 'list({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints.auditLogs.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`GET /auditLogs`'
@@ -122,16 +122,356 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /auditLogs"]["response"]>
+        function list(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, directoryAudits?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, activityDateTime?: string, activityDisplayName?: string,
+        additionalDetails?: { @odata.type: string, key?: function, value?:
+        function }[], category?: string, correlationId?: string | null,
+        initiatedBy?: { @odata.type: string, app?: { @odata.type: ..., appId?:
+        ..., displayName?: ..., servicePrincipalId?: ..., servicePrincipalName?:
+        ... } | Record<..., ...> | null, user?: Record<..., ...> | (... & ... &
+        ...) | null }, loggedByService?: string | null, operationType?: string |
+        null, result?: Record<string, never> | "success" | "failure" | "timeout"
+        | "unknownFutureValue" | null, resultReason?: string | null,
+        targetResources?: { @odata.type: string, displayName?: function,
+        groupType?: function, id?: function, modifiedProperties?: function,
+        type?: function, userPrincipalName?: function }[] } & { @odata.type:
+        "#microsoft.graph.directoryAudit" })[], provisioning?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, activityDateTime?: string, changeId?: string | null, cycleId?:
+        string | null, durationInMilliseconds?: number | null, initiatedBy?:
+        Record<string, never> | (Omit<{ @odata.type: ..., displayName?: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string, initiatorType?:
+        function } & { @odata.type: "#microsoft.graph.initiator" }) | null,
+        jobId?: string | null, modifiedProperties?: { @odata.type: string,
+        displayName?: function, newValue?: function, oldValue?: function }[],
+        provisioningAction?: Record<string, never> | "unknownFutureValue" |
+        "other" | "create" | "delete" | "disable" | "update" | "stagedDelete" |
+        null, provisioningStatusInfo?: Record<string, never> | { @odata.type:
+        string, errorInformation?: Record<..., ...> | { @odata.type: ...,
+        additionalDetails?: ..., errorCategory?: ..., errorCode?: ..., reason?:
+        ..., recommendedAction?: ... } | null, status?: Record<..., ...> |
+        "success" | "failure" | "unknownFutureValue" | "skipped" | "warning" |
+        null } | null, provisioningSteps?: { @odata.type: string, description?:
+        function, details?: function, name?: function, provisioningStepType?:
+        function, status?: function }[], servicePrincipal?: Record<string,
+        never> | (Omit<{ @odata.type: ..., displayName?: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.provisioningServicePrincipal" }) | null,
+        sourceIdentity?: Record<string, never> | (Omit<{ @odata.type: ...,
+        displayName?: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        details?: function, identityType?: function } & { @odata.type:
+        "#microsoft.graph.provisionedIdentity" }) | null, sourceSystem?:
+        Record<string, never> | (Omit<{ @odata.type: ..., displayName?: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string, details?: function }
+        & { @odata.type: "#microsoft.graph.provisioningSystem" }) | null,
+        targetIdentity?: Record<string, never> | (Omit<{ @odata.type: ...,
+        displayName?: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        details?: function, identityType?: function } & { @odata.type:
+        "#microsoft.graph.provisionedIdentity" }) | null, targetSystem?:
+        Record<string, never> | (Omit<{ @odata.type: ..., displayName?: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string, details?: function }
+        & { @odata.type: "#microsoft.graph.provisioningSystem" }) | null,
+        tenantId?: string | null } & { @odata.type:
+        "#microsoft.graph.provisioningObjectSummary" })[], signIns?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, appDisplayName?: string | null, appId?: string | null,
+        appliedConditionalAccessPolicies?: { @odata.type: string, displayName?:
+        function, enforcedGrantControls?: function, enforcedSessionControls?:
+        function, id?: function, result?: function }[], clientAppUsed?: string |
+        null, conditionalAccessStatus?: Record<string, never> | "success" |
+        "failure" | "unknownFutureValue" | "notApplied" | null, correlationId?:
+        string | null, createdDateTime?: string, deviceDetail?: Record<string,
+        never> | { @odata.type: string, browser?: string | null, deviceId?:
+        string | null, displayName?: string | null, isCompliant?: boolean |
+        null, isManaged?: boolean | null, operatingSystem?: string | null,
+        trustType?: string | null } | null, ipAddress?: string | null,
+        isInteractive?: boolean | null, location?: Record<string, never> | {
+        @odata.type: string, city?: string | null, countryOrRegion?: string |
+        null, geoCoordinates?: Record<..., ...> | { @odata.type: ..., altitude?:
+        ..., latitude?: ..., longitude?: ... } | null, state?: string | null } |
+        null, resourceDisplayName?: string | null, resourceId?: string | null,
+        riskDetail?: Record<string, never> | "unknownFutureValue" | "none" |
+        "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange"
+        | "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "hidden" | "adminConfirmedUserCompromised" |
+        "m365DAdminDismissedDetection" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+        "adminConfirmedAccountSafe" | null, riskEventTypes?: (Record<..., ...> |
+        "unknownFutureValue" | "adminConfirmedUserCompromised" |
+        "unlikelyTravel" | "anonymizedIPAddress" | "maliciousIPAddress" |
+        "unfamiliarFeatures" | "malwareInfectedIPAddress" |
+        "suspiciousIPAddress" | "leakedCredentials" |
+        "investigationsThreatIntelligence" | "generic" | "mcasImpossibleTravel"
+        | "mcasSuspiciousInboxManipulationRules" |
+        "investigationsThreatIntelligenceSigninLinked" |
+        "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+        riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+        Record<string, never> | "unknownFutureValue" | "none" | "hidden" | "low"
+        | "medium" | "high" | null, riskLevelDuringSignIn?: Record<string,
+        never> | "unknownFutureValue" | "none" | "hidden" | "low" | "medium" |
+        "high" | null, riskState?: Record<string, never> | "unknownFutureValue"
+        | "none" | "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+        "confirmedCompromised" | null, status?: Record<string, never> | {
+        @odata.type: string, additionalDetails?: string | null, errorCode?:
+        number | null, failureReason?: string | null } | null, userDisplayName?:
+        string | null, userId?: string, userPrincipalName?: string | null } & {
+        @odata.type: "#microsoft.graph.signIn" })[] } & { @odata.type:
+        "#microsoft.graph.auditLogRoot" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /auditLogs"]["response"]&gt;
-  - name: update(Operation<"/auditLogs", "patch">)
+        type: >-
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, directoryAudits?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, activityDateTime?: string,
+          activityDisplayName?: string, additionalDetails?: { <xref
+          uid="@odata.type" />: string, key?: function, value?: function }[],
+          category?: string, correlationId?: string | null, initiatedBy?: {
+          <xref uid="@odata.type" />: string, app?: { <xref uid="@odata.type"
+          />: ..., appId?: ..., displayName?: ..., servicePrincipalId?: ...,
+          servicePrincipalName?: ... } | Record&lt;..., ...&gt; | null, user?:
+          Record&lt;..., ...&gt; | (... & ... & ...) | null }, loggedByService?:
+          string | null, operationType?: string | null, result?:
+          Record&lt;string, never&gt; | "success" | "failure" | "timeout" |
+          "unknownFutureValue" | null, resultReason?: string | null,
+          targetResources?: { <xref uid="@odata.type" />: string, displayName?:
+          function, groupType?: function, id?: function, modifiedProperties?:
+          function, type?: function, userPrincipalName?: function }[] } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryAudit" />" })[], provisioning?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          activityDateTime?: string, changeId?: string | null, cycleId?: string
+          | null, durationInMilliseconds?: number | null, initiatedBy?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., displayName?: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: string, initiatorType?: function } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.initiator"
+          />" }) | null, jobId?: string | null, modifiedProperties?: { <xref
+          uid="@odata.type" />: string, displayName?: function, newValue?:
+          function, oldValue?: function }[], provisioningAction?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "other" |
+          "create" | "delete" | "disable" | "update" | "stagedDelete" | null,
+          provisioningStatusInfo?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, errorInformation?: Record&lt;...,
+          ...&gt; | { <xref uid="@odata.type" />: ..., additionalDetails?: ...,
+          errorCategory?: ..., errorCode?: ..., reason?: ...,
+          recommendedAction?: ... } | null, status?: Record&lt;..., ...&gt; |
+          "success" | "failure" | "unknownFutureValue" | "skipped" | "warning" |
+          null } | null, provisioningSteps?: { <xref uid="@odata.type" />:
+          string, description?: function, details?: function, name?: function,
+          provisioningStepType?: function, status?: function }[],
+          servicePrincipal?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.provisioningServicePrincipal" />" }) | null,
+          sourceIdentity?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          details?: function, identityType?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.provisionedIdentity" />" }) | null,
+          sourceSystem?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          details?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.provisioningSystem" />" }) | null,
+          targetIdentity?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          details?: function, identityType?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.provisionedIdentity" />" }) | null,
+          targetSystem?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          details?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.provisioningSystem" />" }) | null, tenantId?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.provisioningObjectSummary" />" })[], signIns?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          appDisplayName?: string | null, appId?: string | null,
+          appliedConditionalAccessPolicies?: { <xref uid="@odata.type" />:
+          string, displayName?: function, enforcedGrantControls?: function,
+          enforcedSessionControls?: function, id?: function, result?: function
+          }[], clientAppUsed?: string | null, conditionalAccessStatus?:
+          Record&lt;string, never&gt; | "success" | "failure" |
+          "unknownFutureValue" | "notApplied" | null, correlationId?: string |
+          null, createdDateTime?: string, deviceDetail?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, browser?: string |
+          null, deviceId?: string | null, displayName?: string | null,
+          isCompliant?: boolean | null, isManaged?: boolean | null,
+          operatingSystem?: string | null, trustType?: string | null } | null,
+          ipAddress?: string | null, isInteractive?: boolean | null, location?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          city?: string | null, countryOrRegion?: string | null,
+          geoCoordinates?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., altitude?: ..., latitude?: ..., longitude?: ... } | null,
+          state?: string | null } | null, resourceDisplayName?: string | null,
+          resourceId?: string | null, riskDetail?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "none" | "adminGeneratedTemporaryPassword" |
+          "userPerformedSecuredPasswordChange" |
+          "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+          "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+          "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+          "hidden" | "adminConfirmedUserCompromised" |
+          "m365DAdminDismissedDetection" |
+          "adminConfirmedServicePrincipalCompromised" |
+          "adminDismissedAllRiskForServicePrincipal" |
+          "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+          "adminConfirmedAccountSafe" | null, riskEventTypes?: (Record&lt;...,
+          ...&gt; | "unknownFutureValue" | "adminConfirmedUserCompromised" |
+          "unlikelyTravel" | "anonymizedIPAddress" | "maliciousIPAddress" |
+          "unfamiliarFeatures" | "malwareInfectedIPAddress" |
+          "suspiciousIPAddress" | "leakedCredentials" |
+          "investigationsThreatIntelligence" | "generic" |
+          "mcasImpossibleTravel" | "mcasSuspiciousInboxManipulationRules" |
+          "investigationsThreatIntelligenceSigninLinked" |
+          "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+          riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "none" | "hidden"
+          | "low" | "medium" | "high" | null, riskLevelDuringSignIn?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "none" | "hidden"
+          | "low" | "medium" | "high" | null, riskState?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "none" | "confirmedSafe" |
+          "remediated" | "dismissed" | "atRisk" | "confirmedCompromised" | null,
+          status?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, additionalDetails?: string | null, errorCode?: number | null,
+          failureReason?: string | null } | null, userDisplayName?: string |
+          null, userId?: string, userPrincipalName?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.signIn" />" })[] }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.auditLogRoot" />" }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, directoryAudits?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, activityDateTime?:
+      string, activityDisplayName?: string, additionalDetails?: { @odata.type:
+      string, key?: string | null, value?: string | null }[], category?: string,
+      correlationId?: string | null, initiatedBy?: { @odata.type: string, app?:
+      { @odata.type: string, appId?: function, displayName?: function,
+      servicePrincipalId?: function, servicePrincipalName?: function } |
+      Record<string, never> | null, user?: Record<string, never> | (Omit<...,
+      ...> & { @odata.type: ..., ipAddress?: ..., userPrincipalName?: ... } & {
+      @odata.type: ... }) | null }, loggedByService?: string | null,
+      operationType?: string | null, result?: Record<string, never> | "success"
+      | "failure" | "timeout" | "unknownFutureValue" | null, resultReason?:
+      string | null, targetResources?: { @odata.type: string, displayName?:
+      string | null, groupType?: Record<..., ...> | "unknownFutureValue" |
+      "unifiedGroups" | "azureAD" | null, id?: string | null,
+      modifiedProperties?: ...[], type?: string | null, userPrincipalName?:
+      string | null }[] } & { @odata.type: "#microsoft.graph.directoryAudit"
+      })[], provisioning?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, activityDateTime?: string,
+      changeId?: string | null, cycleId?: string | null,
+      durationInMilliseconds?: number | null, initiatedBy?: Record<string,
+      never> | (Omit<{ @odata.type: string, displayName?: function, id?:
+      function }, "@odata.type"> & { @odata.type: string, initiatorType?:
+      Record<..., ...> | "unknownFutureValue" | "user" | "application" |
+      "system" | null } & { @odata.type: "#microsoft.graph.initiator" }) | null,
+      jobId?: string | null, modifiedProperties?: { @odata.type: string,
+      displayName?: string | null, newValue?: string | null, oldValue?: string |
+      null }[], provisioningAction?: Record<string, never> |
+      "unknownFutureValue" | "other" | "create" | "delete" | "disable" |
+      "update" | "stagedDelete" | null, provisioningStatusInfo?: Record<string,
+      never> | { @odata.type: string, errorInformation?: Record<string, never> |
+      { @odata.type: string, additionalDetails?: function, errorCategory?:
+      function, errorCode?: function, reason?: function, recommendedAction?:
+      function } | null, status?: Record<string, never> | "success" | "failure"
+      | "unknownFutureValue" | "skipped" | "warning" | null } | null,
+      provisioningSteps?: { @odata.type: string, description?: string | null,
+      details?: Record<..., ...> | { @odata.type: ... } | null, name?: string |
+      null, provisioningStepType?: Record<..., ...> | "unknownFutureValue" |
+      "import" | "scoping" | "matching" | "processing" | "referenceResolution" |
+      "export" | null, status?: Record<..., ...> | "success" | "failure" |
+      "unknownFutureValue" | "skipped" | "warning" | null }[],
+      servicePrincipal?: Record<string, never> | (Omit<{ @odata.type: string,
+      displayName?: function, id?: function }, "@odata.type"> & { @odata.type:
+      string } & { @odata.type: "#microsoft.graph.provisioningServicePrincipal"
+      }) | null, sourceIdentity?: Record<string, never> | (Omit<{ @odata.type:
+      string, displayName?: function, id?: function }, "@odata.type"> & {
+      @odata.type: string, details?: Record<..., ...> | { @odata.type: ... } |
+      null, identityType?: string | null } & { @odata.type:
+      "#microsoft.graph.provisionedIdentity" }) | null, sourceSystem?:
+      Record<string, never> | (Omit<{ @odata.type: string, displayName?:
+      function, id?: function }, "@odata.type"> & { @odata.type: string,
+      details?: Record<..., ...> | { @odata.type: ... } | null } & {
+      @odata.type: "#microsoft.graph.provisioningSystem" }) | null,
+      targetIdentity?: Record<string, never> | (Omit<{ @odata.type: string,
+      displayName?: function, id?: function }, "@odata.type"> & { @odata.type:
+      string, details?: Record<..., ...> | { @odata.type: ... } | null,
+      identityType?: string | null } & { @odata.type:
+      "#microsoft.graph.provisionedIdentity" }) | null, targetSystem?:
+      Record<string, never> | (Omit<{ @odata.type: string, displayName?:
+      function, id?: function }, "@odata.type"> & { @odata.type: string,
+      details?: Record<..., ...> | { @odata.type: ... } | null } & {
+      @odata.type: "#microsoft.graph.provisioningSystem" }) | null, tenantId?:
+      string | null } & { @odata.type:
+      "#microsoft.graph.provisioningObjectSummary" })[], signIns?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, appDisplayName?: string | null, appId?: string | null,
+      appliedConditionalAccessPolicies?: { @odata.type: string, displayName?:
+      string | null, enforcedGrantControls?: ...[], enforcedSessionControls?:
+      ...[], id?: string | null, result?: Record<..., ...> | "success" |
+      "failure" | "unknownFutureValue" | "notApplied" | "notEnabled" | "unknown"
+      | "reportOnlySuccess" | "reportOnlyFailure" | "reportOnlyNotApplied" |
+      "reportOnlyInterrupted" | null }[], clientAppUsed?: string | null,
+      conditionalAccessStatus?: Record<string, never> | "success" | "failure" |
+      "unknownFutureValue" | "notApplied" | null, correlationId?: string | null,
+      createdDateTime?: string, deviceDetail?: Record<string, never> | {
+      @odata.type: string, browser?: string | null, deviceId?: string | null,
+      displayName?: string | null, isCompliant?: boolean | null, isManaged?:
+      boolean | null, operatingSystem?: string | null, trustType?: string | null
+      } | null, ipAddress?: string | null, isInteractive?: boolean | null,
+      location?: Record<string, never> | { @odata.type: string, city?: string |
+      null, countryOrRegion?: string | null, geoCoordinates?: Record<string,
+      never> | { @odata.type: string, altitude?: function, latitude?: function,
+      longitude?: function } | null, state?: string | null } | null,
+      resourceDisplayName?: string | null, resourceId?: string | null,
+      riskDetail?: Record<string, never> | "unknownFutureValue" | "none" |
+      "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange" |
+      "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+      "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+      "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+      "hidden" | "adminConfirmedUserCompromised" |
+      "m365DAdminDismissedDetection" |
+      "adminConfirmedServicePrincipalCompromised" |
+      "adminDismissedAllRiskForServicePrincipal" |
+      "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+      "adminConfirmedAccountSafe" | null, riskEventTypes?: (Record<string,
+      never> | "unknownFutureValue" | "adminConfirmedUserCompromised" |
+      "unlikelyTravel" | "anonymizedIPAddress" | "maliciousIPAddress" |
+      "unfamiliarFeatures" | "malwareInfectedIPAddress" | "suspiciousIPAddress"
+      | "leakedCredentials" | "investigationsThreatIntelligence" | "generic" |
+      "mcasImpossibleTravel" | "mcasSuspiciousInboxManipulationRules" |
+      "investigationsThreatIntelligenceSigninLinked" |
+      "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+      riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+      Record<string, never> | "unknownFutureValue" | "none" | "hidden" | "low" |
+      "medium" | "high" | null, riskLevelDuringSignIn?: Record<string, never> |
+      "unknownFutureValue" | "none" | "hidden" | "low" | "medium" | "high" |
+      null, riskState?: Record<string, never> | "unknownFutureValue" | "none" |
+      "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+      "confirmedCompromised" | null, status?: Record<string, never> | {
+      @odata.type: string, additionalDetails?: string | null, errorCode?: number
+      | null, failureReason?: string | null } | null, userDisplayName?: string |
+      null, userId?: string, userPrincipalName?: string | null } & {
+      @odata.type: "#microsoft.graph.signIn" })[] } & { @odata.type:
+      "#microsoft.graph.auditLogRoot" })
     uid: '@microsoft/teams.graph-endpoints.auditLogs.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`PATCH /auditLogs`'
@@ -139,12 +479,502 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/auditLogs", "patch">):
-        EndpointRequest<IEndpoints["PATCH /auditLogs"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, directoryAudits?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, activityDateTime?: string, activityDisplayName?: string,
+        additionalDetails?: { @odata.type: string, key?: string | null, value?:
+        string | null }[], category?: string, correlationId?: string | null,
+        initiatedBy?: { @odata.type: string, app?: { @odata.type: string,
+        appId?: function, displayName?: function, servicePrincipalId?: function,
+        servicePrincipalName?: function } | Record<string, never> | null, user?:
+        Record<string, never> | (Omit<..., ...> & { @odata.type: ...,
+        ipAddress?: ..., userPrincipalName?: ... } & { @odata.type: ... }) |
+        null }, loggedByService?: string | null, operationType?: string | null,
+        result?: Record<string, never> | "success" | "failure" | "timeout" |
+        "unknownFutureValue" | null, resultReason?: string | null,
+        targetResources?: { @odata.type: string, displayName?: string | null,
+        groupType?: Record<..., ...> | "unknownFutureValue" | "unifiedGroups" |
+        "azureAD" | null, id?: string | null, modifiedProperties?: ...[], type?:
+        string | null, userPrincipalName?: string | null }[] } & { @odata.type:
+        "#microsoft.graph.directoryAudit" })[], provisioning?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, activityDateTime?: string, changeId?: string | null, cycleId?:
+        string | null, durationInMilliseconds?: number | null, initiatedBy?:
+        Record<string, never> | (Omit<{ @odata.type: string, displayName?:
+        function, id?: function }, "@odata.type"> & { @odata.type: string,
+        initiatorType?: Record<..., ...> | "unknownFutureValue" | "user" |
+        "application" | "system" | null } & { @odata.type:
+        "#microsoft.graph.initiator" }) | null, jobId?: string | null,
+        modifiedProperties?: { @odata.type: string, displayName?: string | null,
+        newValue?: string | null, oldValue?: string | null }[],
+        provisioningAction?: Record<string, never> | "unknownFutureValue" |
+        "other" | "create" | "delete" | "disable" | "update" | "stagedDelete" |
+        null, provisioningStatusInfo?: Record<string, never> | { @odata.type:
+        string, errorInformation?: Record<string, never> | { @odata.type:
+        string, additionalDetails?: function, errorCategory?: function,
+        errorCode?: function, reason?: function, recommendedAction?: function }
+        | null, status?: Record<string, never> | "success" | "failure" |
+        "unknownFutureValue" | "skipped" | "warning" | null } | null,
+        provisioningSteps?: { @odata.type: string, description?: string | null,
+        details?: Record<..., ...> | { @odata.type: ... } | null, name?: string
+        | null, provisioningStepType?: Record<..., ...> | "unknownFutureValue" |
+        "import" | "scoping" | "matching" | "processing" | "referenceResolution"
+        | "export" | null, status?: Record<..., ...> | "success" | "failure" |
+        "unknownFutureValue" | "skipped" | "warning" | null }[],
+        servicePrincipal?: Record<string, never> | (Omit<{ @odata.type: string,
+        displayName?: function, id?: function }, "@odata.type"> & { @odata.type:
+        string } & { @odata.type:
+        "#microsoft.graph.provisioningServicePrincipal" }) | null,
+        sourceIdentity?: Record<string, never> | (Omit<{ @odata.type: string,
+        displayName?: function, id?: function }, "@odata.type"> & { @odata.type:
+        string, details?: Record<..., ...> | { @odata.type: ... } | null,
+        identityType?: string | null } & { @odata.type:
+        "#microsoft.graph.provisionedIdentity" }) | null, sourceSystem?:
+        Record<string, never> | (Omit<{ @odata.type: string, displayName?:
+        function, id?: function }, "@odata.type"> & { @odata.type: string,
+        details?: Record<..., ...> | { @odata.type: ... } | null } & {
+        @odata.type: "#microsoft.graph.provisioningSystem" }) | null,
+        targetIdentity?: Record<string, never> | (Omit<{ @odata.type: string,
+        displayName?: function, id?: function }, "@odata.type"> & { @odata.type:
+        string, details?: Record<..., ...> | { @odata.type: ... } | null,
+        identityType?: string | null } & { @odata.type:
+        "#microsoft.graph.provisionedIdentity" }) | null, targetSystem?:
+        Record<string, never> | (Omit<{ @odata.type: string, displayName?:
+        function, id?: function }, "@odata.type"> & { @odata.type: string,
+        details?: Record<..., ...> | { @odata.type: ... } | null } & {
+        @odata.type: "#microsoft.graph.provisioningSystem" }) | null, tenantId?:
+        string | null } & { @odata.type:
+        "#microsoft.graph.provisioningObjectSummary" })[], signIns?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, appDisplayName?: string | null, appId?: string | null,
+        appliedConditionalAccessPolicies?: { @odata.type: string, displayName?:
+        string | null, enforcedGrantControls?: ...[], enforcedSessionControls?:
+        ...[], id?: string | null, result?: Record<..., ...> | "success" |
+        "failure" | "unknownFutureValue" | "notApplied" | "notEnabled" |
+        "unknown" | "reportOnlySuccess" | "reportOnlyFailure" |
+        "reportOnlyNotApplied" | "reportOnlyInterrupted" | null }[],
+        clientAppUsed?: string | null, conditionalAccessStatus?: Record<string,
+        never> | "success" | "failure" | "unknownFutureValue" | "notApplied" |
+        null, correlationId?: string | null, createdDateTime?: string,
+        deviceDetail?: Record<string, never> | { @odata.type: string, browser?:
+        string | null, deviceId?: string | null, displayName?: string | null,
+        isCompliant?: boolean | null, isManaged?: boolean | null,
+        operatingSystem?: string | null, trustType?: string | null } | null,
+        ipAddress?: string | null, isInteractive?: boolean | null, location?:
+        Record<string, never> | { @odata.type: string, city?: string | null,
+        countryOrRegion?: string | null, geoCoordinates?: Record<string, never>
+        | { @odata.type: string, altitude?: function, latitude?: function,
+        longitude?: function } | null, state?: string | null } | null,
+        resourceDisplayName?: string | null, resourceId?: string | null,
+        riskDetail?: Record<string, never> | "unknownFutureValue" | "none" |
+        "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange"
+        | "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "hidden" | "adminConfirmedUserCompromised" |
+        "m365DAdminDismissedDetection" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+        "adminConfirmedAccountSafe" | null, riskEventTypes?: (Record<string,
+        never> | "unknownFutureValue" | "adminConfirmedUserCompromised" |
+        "unlikelyTravel" | "anonymizedIPAddress" | "maliciousIPAddress" |
+        "unfamiliarFeatures" | "malwareInfectedIPAddress" |
+        "suspiciousIPAddress" | "leakedCredentials" |
+        "investigationsThreatIntelligence" | "generic" | "mcasImpossibleTravel"
+        | "mcasSuspiciousInboxManipulationRules" |
+        "investigationsThreatIntelligenceSigninLinked" |
+        "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+        riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+        Record<string, never> | "unknownFutureValue" | "none" | "hidden" | "low"
+        | "medium" | "high" | null, riskLevelDuringSignIn?: Record<string,
+        never> | "unknownFutureValue" | "none" | "hidden" | "low" | "medium" |
+        "high" | null, riskState?: Record<string, never> | "unknownFutureValue"
+        | "none" | "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+        "confirmedCompromised" | null, status?: Record<string, never> | {
+        @odata.type: string, additionalDetails?: string | null, errorCode?:
+        number | null, failureReason?: string | null } | null, userDisplayName?:
+        string | null, userId?: string, userPrincipalName?: string | null } & {
+        @odata.type: "#microsoft.graph.signIn" })[] } & { @odata.type:
+        "#microsoft.graph.auditLogRoot" }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        directoryAudits?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, activityDateTime?: string,
+        activityDisplayName?: string, additionalDetails?: { @odata.type: string,
+        key?: function, value?: function }[], category?: string, correlationId?:
+        string | null, initiatedBy?: { @odata.type: string, app?: { @odata.type:
+        ..., appId?: ..., displayName?: ..., servicePrincipalId?: ...,
+        servicePrincipalName?: ... } | Record<..., ...> | null, user?:
+        Record<..., ...> | (... & ... & ...) | null }, loggedByService?: string
+        | null, operationType?: string | null, result?: Record<string, never> |
+        "success" | "failure" | "timeout" | "unknownFutureValue" | null,
+        resultReason?: string | null, targetResources?: { @odata.type: string,
+        displayName?: function, groupType?: function, id?: function,
+        modifiedProperties?: function, type?: function, userPrincipalName?:
+        function }[] } & { @odata.type: "#microsoft.graph.directoryAudit" })[],
+        provisioning?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, activityDateTime?: string,
+        changeId?: string | null, cycleId?: string | null,
+        durationInMilliseconds?: number | null, initiatedBy?: Record<string,
+        never> | (Omit<{ @odata.type: ..., displayName?: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, initiatorType?: function } & {
+        @odata.type: "#microsoft.graph.initiator" }) | null, jobId?: string |
+        null, modifiedProperties?: { @odata.type: string, displayName?:
+        function, newValue?: function, oldValue?: function }[],
+        provisioningAction?: Record<string, never> | "unknownFutureValue" |
+        "other" | "create" | "delete" | "disable" | "update" | "stagedDelete" |
+        null, provisioningStatusInfo?: Record<string, never> | { @odata.type:
+        string, errorInformation?: Record<..., ...> | { @odata.type: ...,
+        additionalDetails?: ..., errorCategory?: ..., errorCode?: ..., reason?:
+        ..., recommendedAction?: ... } | null, status?: Record<..., ...> |
+        "success" | "failure" | "unknownFutureValue" | "skipped" | "warning" |
+        null } | null, provisioningSteps?: { @odata.type: string, description?:
+        function, details?: function, name?: function, provisioningStepType?:
+        function, status?: function }[], servicePrincipal?: Record<string,
+        never> | (Omit<{ @odata.type: ..., displayName?: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.provisioningServicePrincipal" }) | null,
+        sourceIdentity?: Record<string, never> | (Omit<{ @odata.type: ...,
+        displayName?: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        details?: function, identityType?: function } & { @odata.type:
+        "#microsoft.graph.provisionedIdentity" }) | null, sourceSystem?:
+        Record<string, never> | (Omit<{ @odata.type: ..., displayName?: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string, details?: function }
+        & { @odata.type: "#microsoft.graph.provisioningSystem" }) | null,
+        targetIdentity?: Record<string, never> | (Omit<{ @odata.type: ...,
+        displayName?: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        details?: function, identityType?: function } & { @odata.type:
+        "#microsoft.graph.provisionedIdentity" }) | null, targetSystem?:
+        Record<string, never> | (Omit<{ @odata.type: ..., displayName?: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string, details?: function }
+        & { @odata.type: "#microsoft.graph.provisioningSystem" }) | null,
+        tenantId?: string | null } & { @odata.type:
+        "#microsoft.graph.provisioningObjectSummary" })[], signIns?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, appDisplayName?: string | null, appId?: string | null,
+        appliedConditionalAccessPolicies?: { @odata.type: string, displayName?:
+        function, enforcedGrantControls?: function, enforcedSessionControls?:
+        function, id?: function, result?: function }[], clientAppUsed?: string |
+        null, conditionalAccessStatus?: Record<string, never> | "success" |
+        "failure" | "unknownFutureValue" | "notApplied" | null, correlationId?:
+        string | null, createdDateTime?: string, deviceDetail?: Record<string,
+        never> | { @odata.type: string, browser?: string | null, deviceId?:
+        string | null, displayName?: string | null, isCompliant?: boolean |
+        null, isManaged?: boolean | null, operatingSystem?: string | null,
+        trustType?: string | null } | null, ipAddress?: string | null,
+        isInteractive?: boolean | null, location?: Record<string, never> | {
+        @odata.type: string, city?: string | null, countryOrRegion?: string |
+        null, geoCoordinates?: Record<..., ...> | { @odata.type: ..., altitude?:
+        ..., latitude?: ..., longitude?: ... } | null, state?: string | null } |
+        null, resourceDisplayName?: string | null, resourceId?: string | null,
+        riskDetail?: Record<string, never> | "unknownFutureValue" | "none" |
+        "adminGeneratedTemporaryPassword" | "userPerformedSecuredPasswordChange"
+        | "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+        "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+        "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+        "hidden" | "adminConfirmedUserCompromised" |
+        "m365DAdminDismissedDetection" |
+        "adminConfirmedServicePrincipalCompromised" |
+        "adminDismissedAllRiskForServicePrincipal" |
+        "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+        "adminConfirmedAccountSafe" | null, riskEventTypes?: (Record<..., ...> |
+        "unknownFutureValue" | "adminConfirmedUserCompromised" |
+        "unlikelyTravel" | "anonymizedIPAddress" | "maliciousIPAddress" |
+        "unfamiliarFeatures" | "malwareInfectedIPAddress" |
+        "suspiciousIPAddress" | "leakedCredentials" |
+        "investigationsThreatIntelligence" | "generic" | "mcasImpossibleTravel"
+        | "mcasSuspiciousInboxManipulationRules" |
+        "investigationsThreatIntelligenceSigninLinked" |
+        "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+        riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+        Record<string, never> | "unknownFutureValue" | "none" | "hidden" | "low"
+        | "medium" | "high" | null, riskLevelDuringSignIn?: Record<string,
+        never> | "unknownFutureValue" | "none" | "hidden" | "low" | "medium" |
+        "high" | null, riskState?: Record<string, never> | "unknownFutureValue"
+        | "none" | "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+        "confirmedCompromised" | null, status?: Record<string, never> | {
+        @odata.type: string, additionalDetails?: string | null, errorCode?:
+        number | null, failureReason?: string | null } | null, userDisplayName?:
+        string | null, userId?: string, userPrincipalName?: string | null } & {
+        @odata.type: "#microsoft.graph.signIn" })[] } & { @odata.type:
+        "#microsoft.graph.auditLogRoot" }>
       parameters:
         - id: body
-          type: Operation&lt;"/auditLogs", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            directoryAudits?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, activityDateTime?: string,
+            activityDisplayName?: string, additionalDetails?: { <xref
+            uid="@odata.type" />: string, key?: string | null, value?: string |
+            null }[], category?: string, correlationId?: string | null,
+            initiatedBy?: { <xref uid="@odata.type" />: string, app?: { <xref
+            uid="@odata.type" />: string, appId?: function, displayName?:
+            function, servicePrincipalId?: function, servicePrincipalName?:
+            function } | Record&lt;string, never&gt; | null, user?:
+            Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ..., ipAddress?: ..., userPrincipalName?: ...
+            } & { <xref uid="@odata.type" />: ... }) | null }, loggedByService?:
+            string | null, operationType?: string | null, result?:
+            Record&lt;string, never&gt; | "success" | "failure" | "timeout" |
+            "unknownFutureValue" | null, resultReason?: string | null,
+            targetResources?: { <xref uid="@odata.type" />: string,
+            displayName?: string | null, groupType?: Record&lt;..., ...&gt; |
+            "unknownFutureValue" | "unifiedGroups" | "azureAD" | null, id?:
+            string | null, modifiedProperties?: ...[], type?: string | null,
+            userPrincipalName?: string | null }[] } & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.directoryAudit" />" })[],
+            provisioning?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, activityDateTime?: string, changeId?:
+            string | null, cycleId?: string | null, durationInMilliseconds?:
+            number | null, initiatedBy?: Record&lt;string, never&gt; |
+            (Omit&lt;{ <xref uid="@odata.type" />: string, displayName?:
+            function, id?: function }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, initiatorType?: Record&lt;...,
+            ...&gt; | "unknownFutureValue" | "user" | "application" | "system" |
+            null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.initiator" />" }) | null, jobId?: string |
+            null, modifiedProperties?: { <xref uid="@odata.type" />: string,
+            displayName?: string | null, newValue?: string | null, oldValue?:
+            string | null }[], provisioningAction?: Record&lt;string, never&gt;
+            | "unknownFutureValue" | "other" | "create" | "delete" | "disable" |
+            "update" | "stagedDelete" | null, provisioningStatusInfo?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            errorInformation?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, additionalDetails?: function,
+            errorCategory?: function, errorCode?: function, reason?: function,
+            recommendedAction?: function } | null, status?: Record&lt;string,
+            never&gt; | "success" | "failure" | "unknownFutureValue" | "skipped"
+            | "warning" | null } | null, provisioningSteps?: { <xref
+            uid="@odata.type" />: string, description?: string | null, details?:
+            Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ... } | null,
+            name?: string | null, provisioningStepType?: Record&lt;..., ...&gt;
+            | "unknownFutureValue" | "import" | "scoping" | "matching" |
+            "processing" | "referenceResolution" | "export" | null, status?:
+            Record&lt;..., ...&gt; | "success" | "failure" |
+            "unknownFutureValue" | "skipped" | "warning" | null }[],
+            servicePrincipal?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.provisioningServicePrincipal" />" }) | null,
+            sourceIdentity?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, details?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ... } | null, identityType?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.provisionedIdentity" />" }) | null,
+            sourceSystem?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, details?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ... } | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.provisioningSystem" />" }) | null,
+            targetIdentity?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, details?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ... } | null, identityType?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.provisionedIdentity" />" }) | null,
+            targetSystem?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, details?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ... } | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.provisioningSystem" />" }) | null, tenantId?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.provisioningObjectSummary" />" })[], signIns?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            appDisplayName?: string | null, appId?: string | null,
+            appliedConditionalAccessPolicies?: { <xref uid="@odata.type" />:
+            string, displayName?: string | null, enforcedGrantControls?: ...[],
+            enforcedSessionControls?: ...[], id?: string | null, result?:
+            Record&lt;..., ...&gt; | "success" | "failure" |
+            "unknownFutureValue" | "notApplied" | "notEnabled" | "unknown" |
+            "reportOnlySuccess" | "reportOnlyFailure" | "reportOnlyNotApplied" |
+            "reportOnlyInterrupted" | null }[], clientAppUsed?: string | null,
+            conditionalAccessStatus?: Record&lt;string, never&gt; | "success" |
+            "failure" | "unknownFutureValue" | "notApplied" | null,
+            correlationId?: string | null, createdDateTime?: string,
+            deviceDetail?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, browser?: string | null, deviceId?:
+            string | null, displayName?: string | null, isCompliant?: boolean |
+            null, isManaged?: boolean | null, operatingSystem?: string | null,
+            trustType?: string | null } | null, ipAddress?: string | null,
+            isInteractive?: boolean | null, location?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, city?: string |
+            null, countryOrRegion?: string | null, geoCoordinates?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            altitude?: function, latitude?: function, longitude?: function } |
+            null, state?: string | null } | null, resourceDisplayName?: string |
+            null, resourceId?: string | null, riskDetail?: Record&lt;string,
+            never&gt; | "unknownFutureValue" | "none" |
+            "adminGeneratedTemporaryPassword" |
+            "userPerformedSecuredPasswordChange" |
+            "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+            "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+            "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+            "hidden" | "adminConfirmedUserCompromised" |
+            "m365DAdminDismissedDetection" |
+            "adminConfirmedServicePrincipalCompromised" |
+            "adminDismissedAllRiskForServicePrincipal" |
+            "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+            "adminConfirmedAccountSafe" | null, riskEventTypes?:
+            (Record&lt;string, never&gt; | "unknownFutureValue" |
+            "adminConfirmedUserCompromised" | "unlikelyTravel" |
+            "anonymizedIPAddress" | "maliciousIPAddress" | "unfamiliarFeatures"
+            | "malwareInfectedIPAddress" | "suspiciousIPAddress" |
+            "leakedCredentials" | "investigationsThreatIntelligence" | "generic"
+            | "mcasImpossibleTravel" | "mcasSuspiciousInboxManipulationRules" |
+            "investigationsThreatIntelligenceSigninLinked" |
+            "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+            riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "none" |
+            "hidden" | "low" | "medium" | "high" | null, riskLevelDuringSignIn?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "none" |
+            "hidden" | "low" | "medium" | "high" | null, riskState?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "none" |
+            "confirmedSafe" | "remediated" | "dismissed" | "atRisk" |
+            "confirmedCompromised" | null, status?: Record&lt;string, never&gt;
+            | { <xref uid="@odata.type" />: string, additionalDetails?: string |
+            null, errorCode?: number | null, failureReason?: string | null } |
+            null, userDisplayName?: string | null, userId?: string,
+            userPrincipalName?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.signIn" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.auditLogRoot" />"
+            }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["PATCH /auditLogs"]["response"]&gt;
+        type: >-
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, directoryAudits?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, activityDateTime?: string,
+          activityDisplayName?: string, additionalDetails?: { <xref
+          uid="@odata.type" />: string, key?: function, value?: function }[],
+          category?: string, correlationId?: string | null, initiatedBy?: {
+          <xref uid="@odata.type" />: string, app?: { <xref uid="@odata.type"
+          />: ..., appId?: ..., displayName?: ..., servicePrincipalId?: ...,
+          servicePrincipalName?: ... } | Record&lt;..., ...&gt; | null, user?:
+          Record&lt;..., ...&gt; | (... & ... & ...) | null }, loggedByService?:
+          string | null, operationType?: string | null, result?:
+          Record&lt;string, never&gt; | "success" | "failure" | "timeout" |
+          "unknownFutureValue" | null, resultReason?: string | null,
+          targetResources?: { <xref uid="@odata.type" />: string, displayName?:
+          function, groupType?: function, id?: function, modifiedProperties?:
+          function, type?: function, userPrincipalName?: function }[] } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryAudit" />" })[], provisioning?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          activityDateTime?: string, changeId?: string | null, cycleId?: string
+          | null, durationInMilliseconds?: number | null, initiatedBy?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., displayName?: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: string, initiatorType?: function } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.initiator"
+          />" }) | null, jobId?: string | null, modifiedProperties?: { <xref
+          uid="@odata.type" />: string, displayName?: function, newValue?:
+          function, oldValue?: function }[], provisioningAction?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "other" |
+          "create" | "delete" | "disable" | "update" | "stagedDelete" | null,
+          provisioningStatusInfo?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, errorInformation?: Record&lt;...,
+          ...&gt; | { <xref uid="@odata.type" />: ..., additionalDetails?: ...,
+          errorCategory?: ..., errorCode?: ..., reason?: ...,
+          recommendedAction?: ... } | null, status?: Record&lt;..., ...&gt; |
+          "success" | "failure" | "unknownFutureValue" | "skipped" | "warning" |
+          null } | null, provisioningSteps?: { <xref uid="@odata.type" />:
+          string, description?: function, details?: function, name?: function,
+          provisioningStepType?: function, status?: function }[],
+          servicePrincipal?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.provisioningServicePrincipal" />" }) | null,
+          sourceIdentity?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          details?: function, identityType?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.provisionedIdentity" />" }) | null,
+          sourceSystem?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          details?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.provisioningSystem" />" }) | null,
+          targetIdentity?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          details?: function, identityType?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.provisionedIdentity" />" }) | null,
+          targetSystem?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          details?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.provisioningSystem" />" }) | null, tenantId?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.provisioningObjectSummary" />" })[], signIns?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          appDisplayName?: string | null, appId?: string | null,
+          appliedConditionalAccessPolicies?: { <xref uid="@odata.type" />:
+          string, displayName?: function, enforcedGrantControls?: function,
+          enforcedSessionControls?: function, id?: function, result?: function
+          }[], clientAppUsed?: string | null, conditionalAccessStatus?:
+          Record&lt;string, never&gt; | "success" | "failure" |
+          "unknownFutureValue" | "notApplied" | null, correlationId?: string |
+          null, createdDateTime?: string, deviceDetail?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, browser?: string |
+          null, deviceId?: string | null, displayName?: string | null,
+          isCompliant?: boolean | null, isManaged?: boolean | null,
+          operatingSystem?: string | null, trustType?: string | null } | null,
+          ipAddress?: string | null, isInteractive?: boolean | null, location?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          city?: string | null, countryOrRegion?: string | null,
+          geoCoordinates?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., altitude?: ..., latitude?: ..., longitude?: ... } | null,
+          state?: string | null } | null, resourceDisplayName?: string | null,
+          resourceId?: string | null, riskDetail?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "none" | "adminGeneratedTemporaryPassword" |
+          "userPerformedSecuredPasswordChange" |
+          "userPerformedSecuredPasswordReset" | "adminConfirmedSigninSafe" |
+          "aiConfirmedSigninSafe" | "userPassedMFADrivenByRiskBasedPolicy" |
+          "adminDismissedAllRiskForUser" | "adminConfirmedSigninCompromised" |
+          "hidden" | "adminConfirmedUserCompromised" |
+          "m365DAdminDismissedDetection" |
+          "adminConfirmedServicePrincipalCompromised" |
+          "adminDismissedAllRiskForServicePrincipal" |
+          "userChangedPasswordOnPremises" | "adminDismissedRiskForSignIn" |
+          "adminConfirmedAccountSafe" | null, riskEventTypes?: (Record&lt;...,
+          ...&gt; | "unknownFutureValue" | "adminConfirmedUserCompromised" |
+          "unlikelyTravel" | "anonymizedIPAddress" | "maliciousIPAddress" |
+          "unfamiliarFeatures" | "malwareInfectedIPAddress" |
+          "suspiciousIPAddress" | "leakedCredentials" |
+          "investigationsThreatIntelligence" | "generic" |
+          "mcasImpossibleTravel" | "mcasSuspiciousInboxManipulationRules" |
+          "investigationsThreatIntelligenceSigninLinked" |
+          "maliciousIPAddressValidCredentialsBlockedIP" | null)[],
+          riskEventTypes_v2?: (string | null)[], riskLevelAggregated?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "none" | "hidden"
+          | "low" | "medium" | "high" | null, riskLevelDuringSignIn?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "none" | "hidden"
+          | "low" | "medium" | "high" | null, riskState?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "none" | "confirmedSafe" |
+          "remediated" | "dismissed" | "atRisk" | "confirmedCompromised" | null,
+          status?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, additionalDetails?: string | null, errorCode?: number | null,
+          failureReason?: string | null } | null, userDisplayName?: string |
+          null, userId?: string, userPrincipalName?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.signIn" />" })[] }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.auditLogRoot" />" }&gt;

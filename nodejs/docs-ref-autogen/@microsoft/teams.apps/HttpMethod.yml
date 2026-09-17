@@ -2,11 +2,26 @@
 name: HttpMethod
 uid: '@microsoft/teams.apps.HttpMethod'
 package: '@microsoft/teams.apps'
-summary: |-
-  Adapter interface for different HTTP frameworks
+summary: >-
+  Adapter interface for different inbound transports.
 
-  Adapters handle framework-specific HTTP concerns while HttpServer
-  handles Teams protocol logic (JWT validation, activity processing, etc.)
+
+  This is the transport seam:
+  [IHttpServer](xref:@microsoft/teams.apps.IHttpServer) owns the Teams protocol
+  logic
+
+  (token validation, activity processing, invoke responses) and delegates all
+
+  wire concerns to an adapter. `ExpressAdapter` implements it for HTTP; other
+
+  transports (e.g. Socket Mode) implement it too and live *inside* a single
+
+  `HttpServer`. A non-HTTP transport may treat browser-oriented calls as no-ops
+
+  — `serveStatic` and non-messaging `registerRoute` paths — and deliver
+
+  pre-authenticated requests via
+  [IHttpServerRequest.token](xref:@microsoft/teams.apps.IHttpServerRequest.token).
 fullName: HttpMethod
 remarks: ''
 isDeprecated: false

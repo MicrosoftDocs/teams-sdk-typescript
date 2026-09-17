@@ -8,8 +8,43 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints'
 functions:
   - name: >-
-      create(Operation<"/users/{user-id}/chats/{chat-id}/installedApps",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, consentedPermissionSet?: Record<string, never> | {
+      @odata.type: string, resourceSpecificPermissions?: { @odata.type: string,
+      permissionType?: Record<string, never> | "unknownFutureValue" |
+      "delegated" | "application" | null, permissionValue?: string | null }[] }
+      | null, teamsApp?: Record<string, never> | (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string, appDefinitions?:
+      (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
+      string, authorization?: function, bot?: function, createdBy?: function,
+      description?: function, displayName?: function, lastModifiedDateTime?:
+      function, publishingState?: function, shortDescription?: function,
+      teamsAppId?: function, version?: function } & { @odata.type:
+      "#microsoft.graph.teamsAppDefinition" })[], displayName?: string | null,
+      distributionMethod?: Record<string, never> | "unknownFutureValue" |
+      "store" | "organization" | "sideloaded" | null, externalId?: string | null
+      } & { @odata.type: "#microsoft.graph.teamsApp" }) | null,
+      teamsAppDefinition?: Record<string, never> | (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string, authorization?:
+      Record<string, never> | { @odata.type: string, clientAppId?: string |
+      null, requiredPermissionSet?: Record<string, never> | { @odata.type:
+      string, resourceSpecificPermissions?: function } | null } | null, bot?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+      "@odata.type"> & { @odata.type: string } & { @odata.type:
+      "#microsoft.graph.teamworkBot" }) | null, createdBy?: Record<string,
+      never> | { @odata.type: string, application?: Record<string, never> | {
+      @odata.type: string, displayName?: function, id?: function } | null,
+      device?: Record<string, never> | { @odata.type: string, displayName?:
+      function, id?: function } | null, user?: Record<string, never> | {
+      @odata.type: string, displayName?: function, id?: function } | null } |
+      null, description?: string | null, displayName?: string | null,
+      lastModifiedDateTime?: string | null, publishingState?: Record<string,
+      never> | "unknownFutureValue" | "submitted" | "rejected" | "published" |
+      null, shortDescription?: string | null, teamsAppId?: string | null,
+      version?: string | null } & { @odata.type:
+      "#microsoft.graph.teamsAppDefinition" }) | null }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.teamsAppInstallation" }, { chat-id: string,
+      user-id: string })
     uid: '@microsoft/teams.graph-endpoints.users.chats.installedApps.create'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`POST /users/{user-id}/chats/{chat-id}/installedApps`'
@@ -17,25 +52,185 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/users/{user-id}/chats/{chat-id}/installedApps", "post">,
-        params?: any): EndpointRequest<IEndpoints["POST
-        /users/{user-id}/chats/{chat-id}/installedApps"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, consentedPermissionSet?:
+        Record<string, never> | { @odata.type: string,
+        resourceSpecificPermissions?: { @odata.type: string, permissionType?:
+        Record<string, never> | "unknownFutureValue" | "delegated" |
+        "application" | null, permissionValue?: string | null }[] } | null,
+        teamsApp?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, appDefinitions?:
+        (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
+        string, authorization?: function, bot?: function, createdBy?: function,
+        description?: function, displayName?: function, lastModifiedDateTime?:
+        function, publishingState?: function, shortDescription?: function,
+        teamsAppId?: function, version?: function } & { @odata.type:
+        "#microsoft.graph.teamsAppDefinition" })[], displayName?: string | null,
+        distributionMethod?: Record<string, never> | "unknownFutureValue" |
+        "store" | "organization" | "sideloaded" | null, externalId?: string |
+        null } & { @odata.type: "#microsoft.graph.teamsApp" }) | null,
+        teamsAppDefinition?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        authorization?: Record<string, never> | { @odata.type: string,
+        clientAppId?: string | null, requiredPermissionSet?: Record<string,
+        never> | { @odata.type: string, resourceSpecificPermissions?: function }
+        | null } | null, bot?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & { @odata.type: string } & {
+        @odata.type: "#microsoft.graph.teamworkBot" }) | null, createdBy?:
+        Record<string, never> | { @odata.type: string, application?:
+        Record<string, never> | { @odata.type: string, displayName?: function,
+        id?: function } | null, device?: Record<string, never> | { @odata.type:
+        string, displayName?: function, id?: function } | null, user?:
+        Record<string, never> | { @odata.type: string, displayName?: function,
+        id?: function } | null } | null, description?: string | null,
+        displayName?: string | null, lastModifiedDateTime?: string | null,
+        publishingState?: Record<string, never> | "unknownFutureValue" |
+        "submitted" | "rejected" | "published" | null, shortDescription?: string
+        | null, teamsAppId?: string | null, version?: string | null } & {
+        @odata.type: "#microsoft.graph.teamsAppDefinition" }) | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.teamsAppInstallation"
+        }, params?: { chat-id: string, user-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, consentedPermissionSet?:
+        Record<string, never> | { @odata.type: string,
+        resourceSpecificPermissions?: { @odata.type: string, permissionType?:
+        Record<..., ...> | "unknownFutureValue" | "delegated" | "application" |
+        null, permissionValue?: string | null }[] } | null, teamsApp?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, appDefinitions?: (Omit<..., ...>
+        & { @odata.type: ..., authorization?: ..., bot?: ..., createdBy?: ...,
+        description?: ..., displayName?: ..., lastModifiedDateTime?: ...,
+        publishingState?: ..., shortDescription?: ..., teamsAppId?: ...,
+        version?: ... } & { @odata.type: ... })[], displayName?: string | null,
+        distributionMethod?: Record<string, never> | "unknownFutureValue" |
+        "store" | "organization" | "sideloaded" | null, externalId?: string |
+        null } & { @odata.type: "#microsoft.graph.teamsApp" }) | null,
+        teamsAppDefinition?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        authorization?: Record<string, never> | { @odata.type: string,
+        clientAppId?: string | null, requiredPermissionSet?: Record<..., ...> |
+        { @odata.type: ..., resourceSpecificPermissions?: ... } | null } | null,
+        bot?: Record<string, never> | (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.teamworkBot" }) | null, createdBy?: Record<string,
+        never> | { @odata.type: string, application?: Record<..., ...> | {
+        @odata.type: ..., displayName?: ..., id?: ... } | null, device?:
+        Record<..., ...> | { @odata.type: ..., displayName?: ..., id?: ... } |
+        null, user?: Record<..., ...> | { @odata.type: ..., displayName?: ...,
+        id?: ... } | null } | null, description?: string | null, displayName?:
+        string | null, lastModifiedDateTime?: string | null, publishingState?:
+        Record<string, never> | "unknownFutureValue" | "submitted" | "rejected"
+        | "published" | null, shortDescription?: string | null, teamsAppId?:
+        string | null, version?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsAppDefinition" }) | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.teamsAppInstallation" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/users/{user-id}/chats/{chat-id}/installedApps",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, consentedPermissionSet?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, resourceSpecificPermissions?: {
+            <xref uid="@odata.type" />: string, permissionType?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "delegated" |
+            "application" | null, permissionValue?: string | null }[] } | null,
+            teamsApp?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            appDefinitions?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?:
+            ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: string, authorization?: function, bot?: function, createdBy?:
+            function, description?: function, displayName?: function,
+            lastModifiedDateTime?: function, publishingState?: function,
+            shortDescription?: function, teamsAppId?: function, version?:
+            function } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAppDefinition" />" })[], displayName?:
+            string | null, distributionMethod?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "store" | "organization" | "sideloaded" |
+            null, externalId?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.teamsApp" />" }) | null,
+            teamsAppDefinition?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            authorization?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, clientAppId?: string | null,
+            requiredPermissionSet?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, resourceSpecificPermissions?: function
+            } | null } | null, bot?: Record&lt;string, never&gt; | (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamworkBot" />" }) | null, createdBy?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            application?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            } | null, device?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            } | null, user?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            } | null } | null, description?: string | null, displayName?: string
+            | null, lastModifiedDateTime?: string | null, publishingState?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "submitted" |
+            "rejected" | "published" | null, shortDescription?: string | null,
+            teamsAppId?: string | null, version?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAppDefinition" />" }) | null }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAppInstallation" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ chat-id: string, user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /users/{user-id}/chats/{chat-id}/installedApps"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, consentedPermissionSet?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          resourceSpecificPermissions?: { <xref uid="@odata.type" />: string,
+          permissionType?: Record&lt;..., ...&gt; | "unknownFutureValue" |
+          "delegated" | "application" | null, permissionValue?: string | null
+          }[] } | null, teamsApp?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          appDefinitions?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+          ..., authorization?: ..., bot?: ..., createdBy?: ..., description?:
+          ..., displayName?: ..., lastModifiedDateTime?: ..., publishingState?:
+          ..., shortDescription?: ..., teamsAppId?: ..., version?: ... } & {
+          <xref uid="@odata.type" />: ... })[], displayName?: string | null,
+          distributionMethod?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "store" | "organization" | "sideloaded" | null,
+          externalId?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsApp" />" }) | null, teamsAppDefinition?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, authorization?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, clientAppId?: string
+          | null, requiredPermissionSet?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., resourceSpecificPermissions?: ... } | null
+          } | null, bot?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamworkBot" />" })
+          | null, createdBy?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, application?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } | null,
+          device?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          displayName?: ..., id?: ... } | null, user?: Record&lt;..., ...&gt; |
+          { <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          null } | null, description?: string | null, displayName?: string |
+          null, lastModifiedDateTime?: string | null, publishingState?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "submitted" |
+          "rejected" | "published" | null, shortDescription?: string | null,
+          teamsAppId?: string | null, version?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamsAppDefinition"
+          />" }) | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppInstallation" />" }&gt;
+  - name: >-
+      del({ chat-id: string, If-Match?: string, teamsAppInstallation-id: string,
+      user-id: string })
     uid: '@microsoft/teams.graph-endpoints.users.chats.installedApps.del'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -45,18 +240,21 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /users/{user-id}/chats/{chat-id}/installedApps/{teamsAppInstallation-id}"]["response"]>
+        function del(params?: { chat-id: string, If-Match?: string,
+        teamsAppInstallation-id: string, user-id: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { chat-id: string, If-Match?: string, teamsAppInstallation-id:
+            string, user-id: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /users/{user-id}/chats/{chat-id}/installedApps/{teamsAppInstallation-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], chat-id: string,
+      teamsAppInstallation-id: string, user-id: string })
     uid: '@microsoft/teams.graph-endpoints.users.chats.installedApps.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -69,18 +267,99 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/chats/{chat-id}/installedApps/{teamsAppInstallation-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[], chat-id:
+        string, teamsAppInstallation-id: string, user-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, consentedPermissionSet?:
+        Record<string, never> | { @odata.type: string,
+        resourceSpecificPermissions?: { @odata.type: string, permissionType?:
+        Record<..., ...> | "unknownFutureValue" | "delegated" | "application" |
+        null, permissionValue?: string | null }[] } | null, teamsApp?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, appDefinitions?: (Omit<..., ...>
+        & { @odata.type: ..., authorization?: ..., bot?: ..., createdBy?: ...,
+        description?: ..., displayName?: ..., lastModifiedDateTime?: ...,
+        publishingState?: ..., shortDescription?: ..., teamsAppId?: ...,
+        version?: ... } & { @odata.type: ... })[], displayName?: string | null,
+        distributionMethod?: Record<string, never> | "unknownFutureValue" |
+        "store" | "organization" | "sideloaded" | null, externalId?: string |
+        null } & { @odata.type: "#microsoft.graph.teamsApp" }) | null,
+        teamsAppDefinition?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        authorization?: Record<string, never> | { @odata.type: string,
+        clientAppId?: string | null, requiredPermissionSet?: Record<..., ...> |
+        { @odata.type: ..., resourceSpecificPermissions?: ... } | null } | null,
+        bot?: Record<string, never> | (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.teamworkBot" }) | null, createdBy?: Record<string,
+        never> | { @odata.type: string, application?: Record<..., ...> | {
+        @odata.type: ..., displayName?: ..., id?: ... } | null, device?:
+        Record<..., ...> | { @odata.type: ..., displayName?: ..., id?: ... } |
+        null, user?: Record<..., ...> | { @odata.type: ..., displayName?: ...,
+        id?: ... } | null } | null, description?: string | null, displayName?:
+        string | null, lastModifiedDateTime?: string | null, publishingState?:
+        Record<string, never> | "unknownFutureValue" | "submitted" | "rejected"
+        | "published" | null, shortDescription?: string | null, teamsAppId?:
+        string | null, version?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsAppDefinition" }) | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.teamsAppInstallation" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], chat-id: string,
+            teamsAppInstallation-id: string, user-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/chats/{chat-id}/installedApps/{teamsAppInstallation-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, consentedPermissionSet?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          resourceSpecificPermissions?: { <xref uid="@odata.type" />: string,
+          permissionType?: Record&lt;..., ...&gt; | "unknownFutureValue" |
+          "delegated" | "application" | null, permissionValue?: string | null
+          }[] } | null, teamsApp?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          appDefinitions?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+          ..., authorization?: ..., bot?: ..., createdBy?: ..., description?:
+          ..., displayName?: ..., lastModifiedDateTime?: ..., publishingState?:
+          ..., shortDescription?: ..., teamsAppId?: ..., version?: ... } & {
+          <xref uid="@odata.type" />: ... })[], displayName?: string | null,
+          distributionMethod?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "store" | "organization" | "sideloaded" | null,
+          externalId?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsApp" />" }) | null, teamsAppDefinition?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, authorization?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, clientAppId?: string
+          | null, requiredPermissionSet?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., resourceSpecificPermissions?: ... } | null
+          } | null, bot?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamworkBot" />" })
+          | null, createdBy?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, application?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } | null,
+          device?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          displayName?: ..., id?: ... } | null, user?: Record&lt;..., ...&gt; |
+          { <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          null } | null, description?: string | null, displayName?: string |
+          null, lastModifiedDateTime?: string | null, publishingState?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "submitted" |
+          "rejected" | "published" | null, shortDescription?: string | null,
+          teamsAppId?: string | null, version?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamsAppDefinition"
+          />" }) | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppInstallation" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, chat-id: string, user-id: string })
     uid: '@microsoft/teams.graph-endpoints.users.chats.installedApps.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -91,20 +370,88 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/chats/{chat-id}/installedApps"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, chat-id: string, user-id: string }):
+        EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?: string
+        | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, consentedPermissionSet?:
+        Record<string, never> | { @odata.type: string,
+        resourceSpecificPermissions?: function } | null, teamsApp?:
+        Record<string, never> | (Omit<..., ...> & { @odata.type: ...,
+        appDefinitions?: ..., displayName?: ..., distributionMethod?: ...,
+        externalId?: ... } & { @odata.type: ... }) | null, teamsAppDefinition?:
+        Record<string, never> | (Omit<..., ...> & { @odata.type: ...,
+        authorization?: ..., bot?: ..., createdBy?: ..., description?: ...,
+        displayName?: ..., lastModifiedDateTime?: ..., publishingState?: ...,
+        shortDescription?: ..., teamsAppId?: ..., version?: ... } & {
+        @odata.type: ... }) | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.teamsAppInstallation" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, chat-id: string, user-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/chats/{chat-id}/installedApps"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, consentedPermissionSet?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, resourceSpecificPermissions?: function }
+          | null, teamsApp?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt;
+          & { <xref uid="@odata.type" />: ..., appDefinitions?: ...,
+          displayName?: ..., distributionMethod?: ..., externalId?: ... } & {
+          <xref uid="@odata.type" />: ... }) | null, teamsAppDefinition?:
+          Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., authorization?: ..., bot?: ..., createdBy?:
+          ..., description?: ..., displayName?: ..., lastModifiedDateTime?: ...,
+          publishingState?: ..., shortDescription?: ..., teamsAppId?: ...,
+          version?: ... } & { <xref uid="@odata.type" />: ... }) | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.teamsAppInstallation" />" })[] }&gt;
   - name: >-
-      update(Operation<"/users/{user-id}/chats/{chat-id}/installedApps/{teamsAppInstallation-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, consentedPermissionSet?: Record<string, never> | {
+      @odata.type: string, resourceSpecificPermissions?: { @odata.type: string,
+      permissionType?: Record<string, never> | "unknownFutureValue" |
+      "delegated" | "application" | null, permissionValue?: string | null }[] }
+      | null, teamsApp?: Record<string, never> | (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string, appDefinitions?:
+      (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
+      string, authorization?: function, bot?: function, createdBy?: function,
+      description?: function, displayName?: function, lastModifiedDateTime?:
+      function, publishingState?: function, shortDescription?: function,
+      teamsAppId?: function, version?: function } & { @odata.type:
+      "#microsoft.graph.teamsAppDefinition" })[], displayName?: string | null,
+      distributionMethod?: Record<string, never> | "unknownFutureValue" |
+      "store" | "organization" | "sideloaded" | null, externalId?: string | null
+      } & { @odata.type: "#microsoft.graph.teamsApp" }) | null,
+      teamsAppDefinition?: Record<string, never> | (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string, authorization?:
+      Record<string, never> | { @odata.type: string, clientAppId?: string |
+      null, requiredPermissionSet?: Record<string, never> | { @odata.type:
+      string, resourceSpecificPermissions?: function } | null } | null, bot?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+      "@odata.type"> & { @odata.type: string } & { @odata.type:
+      "#microsoft.graph.teamworkBot" }) | null, createdBy?: Record<string,
+      never> | { @odata.type: string, application?: Record<string, never> | {
+      @odata.type: string, displayName?: function, id?: function } | null,
+      device?: Record<string, never> | { @odata.type: string, displayName?:
+      function, id?: function } | null, user?: Record<string, never> | {
+      @odata.type: string, displayName?: function, id?: function } | null } |
+      null, description?: string | null, displayName?: string | null,
+      lastModifiedDateTime?: string | null, publishingState?: Record<string,
+      never> | "unknownFutureValue" | "submitted" | "rejected" | "published" |
+      null, shortDescription?: string | null, teamsAppId?: string | null,
+      version?: string | null } & { @odata.type:
+      "#microsoft.graph.teamsAppDefinition" }) | null }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.teamsAppInstallation" }, { chat-id: string,
+      teamsAppInstallation-id: string, user-id: string })
     uid: '@microsoft/teams.graph-endpoints.users.chats.installedApps.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -114,24 +461,184 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/users/{user-id}/chats/{chat-id}/installedApps/{teamsAppInstallation-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /users/{user-id}/chats/{chat-id}/installedApps/{teamsAppInstallation-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, consentedPermissionSet?:
+        Record<string, never> | { @odata.type: string,
+        resourceSpecificPermissions?: { @odata.type: string, permissionType?:
+        Record<string, never> | "unknownFutureValue" | "delegated" |
+        "application" | null, permissionValue?: string | null }[] } | null,
+        teamsApp?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, appDefinitions?:
+        (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
+        string, authorization?: function, bot?: function, createdBy?: function,
+        description?: function, displayName?: function, lastModifiedDateTime?:
+        function, publishingState?: function, shortDescription?: function,
+        teamsAppId?: function, version?: function } & { @odata.type:
+        "#microsoft.graph.teamsAppDefinition" })[], displayName?: string | null,
+        distributionMethod?: Record<string, never> | "unknownFutureValue" |
+        "store" | "organization" | "sideloaded" | null, externalId?: string |
+        null } & { @odata.type: "#microsoft.graph.teamsApp" }) | null,
+        teamsAppDefinition?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        authorization?: Record<string, never> | { @odata.type: string,
+        clientAppId?: string | null, requiredPermissionSet?: Record<string,
+        never> | { @odata.type: string, resourceSpecificPermissions?: function }
+        | null } | null, bot?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & { @odata.type: string } & {
+        @odata.type: "#microsoft.graph.teamworkBot" }) | null, createdBy?:
+        Record<string, never> | { @odata.type: string, application?:
+        Record<string, never> | { @odata.type: string, displayName?: function,
+        id?: function } | null, device?: Record<string, never> | { @odata.type:
+        string, displayName?: function, id?: function } | null, user?:
+        Record<string, never> | { @odata.type: string, displayName?: function,
+        id?: function } | null } | null, description?: string | null,
+        displayName?: string | null, lastModifiedDateTime?: string | null,
+        publishingState?: Record<string, never> | "unknownFutureValue" |
+        "submitted" | "rejected" | "published" | null, shortDescription?: string
+        | null, teamsAppId?: string | null, version?: string | null } & {
+        @odata.type: "#microsoft.graph.teamsAppDefinition" }) | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.teamsAppInstallation"
+        }, params?: { chat-id: string, teamsAppInstallation-id: string, user-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, consentedPermissionSet?:
+        Record<string, never> | { @odata.type: string,
+        resourceSpecificPermissions?: { @odata.type: string, permissionType?:
+        Record<..., ...> | "unknownFutureValue" | "delegated" | "application" |
+        null, permissionValue?: string | null }[] } | null, teamsApp?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, appDefinitions?: (Omit<..., ...>
+        & { @odata.type: ..., authorization?: ..., bot?: ..., createdBy?: ...,
+        description?: ..., displayName?: ..., lastModifiedDateTime?: ...,
+        publishingState?: ..., shortDescription?: ..., teamsAppId?: ...,
+        version?: ... } & { @odata.type: ... })[], displayName?: string | null,
+        distributionMethod?: Record<string, never> | "unknownFutureValue" |
+        "store" | "organization" | "sideloaded" | null, externalId?: string |
+        null } & { @odata.type: "#microsoft.graph.teamsApp" }) | null,
+        teamsAppDefinition?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        authorization?: Record<string, never> | { @odata.type: string,
+        clientAppId?: string | null, requiredPermissionSet?: Record<..., ...> |
+        { @odata.type: ..., resourceSpecificPermissions?: ... } | null } | null,
+        bot?: Record<string, never> | (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.teamworkBot" }) | null, createdBy?: Record<string,
+        never> | { @odata.type: string, application?: Record<..., ...> | {
+        @odata.type: ..., displayName?: ..., id?: ... } | null, device?:
+        Record<..., ...> | { @odata.type: ..., displayName?: ..., id?: ... } |
+        null, user?: Record<..., ...> | { @odata.type: ..., displayName?: ...,
+        id?: ... } | null } | null, description?: string | null, displayName?:
+        string | null, lastModifiedDateTime?: string | null, publishingState?:
+        Record<string, never> | "unknownFutureValue" | "submitted" | "rejected"
+        | "published" | null, shortDescription?: string | null, teamsAppId?:
+        string | null, version?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsAppDefinition" }) | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.teamsAppInstallation" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/users/{user-id}/chats/{chat-id}/installedApps/{teamsAppInstallation-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, consentedPermissionSet?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, resourceSpecificPermissions?: {
+            <xref uid="@odata.type" />: string, permissionType?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "delegated" |
+            "application" | null, permissionValue?: string | null }[] } | null,
+            teamsApp?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            appDefinitions?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?:
+            ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: string, authorization?: function, bot?: function, createdBy?:
+            function, description?: function, displayName?: function,
+            lastModifiedDateTime?: function, publishingState?: function,
+            shortDescription?: function, teamsAppId?: function, version?:
+            function } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAppDefinition" />" })[], displayName?:
+            string | null, distributionMethod?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "store" | "organization" | "sideloaded" |
+            null, externalId?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.teamsApp" />" }) | null,
+            teamsAppDefinition?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            authorization?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, clientAppId?: string | null,
+            requiredPermissionSet?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, resourceSpecificPermissions?: function
+            } | null } | null, bot?: Record&lt;string, never&gt; | (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamworkBot" />" }) | null, createdBy?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            application?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            } | null, device?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            } | null, user?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            } | null } | null, description?: string | null, displayName?: string
+            | null, lastModifiedDateTime?: string | null, publishingState?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "submitted" |
+            "rejected" | "published" | null, shortDescription?: string | null,
+            teamsAppId?: string | null, version?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAppDefinition" />" }) | null }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAppInstallation" />" }
           description: ''
         - id: params
-          type: any
+          type: >-
+            { chat-id: string, teamsAppInstallation-id: string, user-id: string
+            }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /users/{user-id}/chats/{chat-id}/installedApps/{teamsAppInstallation-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, consentedPermissionSet?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          resourceSpecificPermissions?: { <xref uid="@odata.type" />: string,
+          permissionType?: Record&lt;..., ...&gt; | "unknownFutureValue" |
+          "delegated" | "application" | null, permissionValue?: string | null
+          }[] } | null, teamsApp?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          appDefinitions?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+          ..., authorization?: ..., bot?: ..., createdBy?: ..., description?:
+          ..., displayName?: ..., lastModifiedDateTime?: ..., publishingState?:
+          ..., shortDescription?: ..., teamsAppId?: ..., version?: ... } & {
+          <xref uid="@odata.type" />: ... })[], displayName?: string | null,
+          distributionMethod?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "store" | "organization" | "sideloaded" | null,
+          externalId?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsApp" />" }) | null, teamsAppDefinition?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, authorization?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, clientAppId?: string
+          | null, requiredPermissionSet?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., resourceSpecificPermissions?: ... } | null
+          } | null, bot?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamworkBot" />" })
+          | null, createdBy?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, application?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } | null,
+          device?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          displayName?: ..., id?: ... } | null, user?: Record&lt;..., ...&gt; |
+          { <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          null } | null, description?: string | null, displayName?: string |
+          null, lastModifiedDateTime?: string | null, publishingState?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "submitted" |
+          "rejected" | "published" | null, shortDescription?: string | null,
+          teamsAppId?: string | null, version?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamsAppDefinition"
+          />" }) | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppInstallation" />" }&gt;
 variables:
   - name: teamsApp
     uid: '@microsoft/teams.graph-endpoints.users.chats.installedApps.teamsApp'

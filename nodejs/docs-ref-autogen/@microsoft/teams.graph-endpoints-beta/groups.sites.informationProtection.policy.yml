@@ -9,7 +9,7 @@ interfaces:
     @microsoft/teams.graph-endpoints-beta.groups.sites.informationProtection.policy.IEndpoints
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: del(any)
+  - name: 'del({ group-id: string, If-Match?: string, site-id: string })'
     uid: >-
       @microsoft/teams.graph-endpoints-beta.groups.sites.informationProtection.policy.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -19,18 +19,18 @@ functions:
     customDeprecatedMessage: ''
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /groups/{group-id}/sites/{site-id}/informationProtection/policy"]["response"]>
+        function del(params?: { group-id: string, If-Match?: string, site-id:
+        string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ group-id: string, If-Match?: string, site-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /groups/{group-id}/sites/{site-id}/informationProtection/policy"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], group-id: string, site-id:
+      string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.groups.sites.informationProtection.policy.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -40,20 +40,69 @@ functions:
     customDeprecatedMessage: ''
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /groups/{group-id}/sites/{site-id}/informationProtection/policy"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        group-id: string, site-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, labels?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, color?: string | null,
+        description?: string | null, isActive?: boolean, name?: string | null,
+        parent?: Record<string, never> | { @odata.type: string, color?: string |
+        null, description?: string | null, id?: string | null, isActive?:
+        boolean, name?: string | null, parent?: Record<string, never> | {
+        color?: string | null | undefined; description?: string | null |
+        undefined; id?: string | null | undefined; isActive?: boolean |
+        undefined; name?: string | ... 1 more ... | undefined; parent?:
+        Record<...> | ... 2 more ... | undefined; sensitivity?: number |
+        undefined; tooltip?: string | ......, sensitivity?: number, tooltip?:
+        string | null } | null, sensitivity?: number, tooltip?: string | null }
+        & { @odata.type: "#microsoft.graph.informationProtectionLabel" })[] } &
+        { @odata.type: "#microsoft.graph.informationProtectionPolicy" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], group-id: string, site-id:
+            string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /groups/{group-id}/sites/{site-id}/informationProtection/policy"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, labels?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, color?: string | null, description?:
+          string | null, isActive?: boolean, name?: string | null, parent?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          color?: string | null, description?: string | null, id?: string |
+          null, isActive?: boolean, name?: string | null, parent?:
+          Record&lt;string, never&gt; | { color?: string | null | undefined;
+          description?: string | null | undefined; id?: string | null |
+          undefined; isActive?: boolean | undefined; name?: string | ... 1 more
+          ... | undefined; parent?: Record&lt;...&gt; | ... 2 more ... |
+          undefined; sensitivity?: number | undefined; tooltip?: string |
+          ......, sensitivity?: number, tooltip?: string | null } | null,
+          sensitivity?: number, tooltip?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.informationProtectionLabel" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.informationProtectionPolicy" />" }&gt;
   - name: >-
-      update(Operation<"/groups/{group-id}/sites/{site-id}/informationProtection/policy",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, labels?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, color?: string | null,
+      description?: string | null, isActive?: boolean, name?: string | null,
+      parent?: Record<string, never> | { @odata.type: string, color?: string |
+      null, description?: string | null, id?: string | null, isActive?: boolean,
+      name?: string | null, parent?: Record<string, never> | { color?: string |
+      null | undefined; description?: string | null | undefined; id?: string |
+      null | undefined; isActive?: boolean | undefined; name?: string | ... 1
+      more ... | undefined; parent?: Record<...> | ... 2 more ... | undefined;
+      sensitivity?: number | undefined; tooltip?: string | ......, sensitivity?:
+      number, tooltip?: string | null } | null, sensitivity?: number, tooltip?:
+      string | null } & { @odata.type:
+      "#microsoft.graph.informationProtectionLabel" })[] } & { @odata.type:
+      "#microsoft.graph.informationProtectionPolicy" }, { group-id: string,
+      site-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.groups.sites.informationProtection.policy.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -63,21 +112,83 @@ functions:
     customDeprecatedMessage: ''
     syntax:
       content: >-
-        function update(body:
-        Operation<"/groups/{group-id}/sites/{site-id}/informationProtection/policy",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /groups/{group-id}/sites/{site-id}/informationProtection/policy"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, labels?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string, color?:
+        string | null, description?: string | null, isActive?: boolean, name?:
+        string | null, parent?: Record<string, never> | { @odata.type: string,
+        color?: string | null, description?: string | null, id?: string | null,
+        isActive?: boolean, name?: string | null, parent?: Record<string, never>
+        | { color?: string | null | undefined; description?: string | null |
+        undefined; id?: string | null | undefined; isActive?: boolean |
+        undefined; name?: string | ... 1 more ... | undefined; parent?:
+        Record<...> | ... 2 more ... | undefined; sensitivity?: number |
+        undefined; tooltip?: string | ......, sensitivity?: number, tooltip?:
+        string | null } | null, sensitivity?: number, tooltip?: string | null }
+        & { @odata.type: "#microsoft.graph.informationProtectionLabel" })[] } &
+        { @odata.type: "#microsoft.graph.informationProtectionPolicy" },
+        params?: { group-id: string, site-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, labels?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, color?: string | null,
+        description?: string | null, isActive?: boolean, name?: string | null,
+        parent?: Record<string, never> | { @odata.type: string, color?: string |
+        null, description?: string | null, id?: string | null, isActive?:
+        boolean, name?: string | null, parent?: Record<string, never> | {
+        color?: string | null | undefined; description?: string | null |
+        undefined; id?: string | null | undefined; isActive?: boolean |
+        undefined; name?: string | ... 1 more ... | undefined; parent?:
+        Record<...> | ... 2 more ... | undefined; sensitivity?: number |
+        undefined; tooltip?: string | ......, sensitivity?: number, tooltip?:
+        string | null } | null, sensitivity?: number, tooltip?: string | null }
+        & { @odata.type: "#microsoft.graph.informationProtectionLabel" })[] } &
+        { @odata.type: "#microsoft.graph.informationProtectionPolicy" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/groups/{group-id}/sites/{site-id}/informationProtection/policy",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            labels?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, color?: string | null, description?: string | null,
+            isActive?: boolean, name?: string | null, parent?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, color?: string |
+            null, description?: string | null, id?: string | null, isActive?:
+            boolean, name?: string | null, parent?: Record&lt;string, never&gt;
+            | { color?: string | null | undefined; description?: string | null |
+            undefined; id?: string | null | undefined; isActive?: boolean |
+            undefined; name?: string | ... 1 more ... | undefined; parent?:
+            Record&lt;...&gt; | ... 2 more ... | undefined; sensitivity?: number
+            | undefined; tooltip?: string | ......, sensitivity?: number,
+            tooltip?: string | null } | null, sensitivity?: number, tooltip?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.informationProtectionLabel" />" })[] } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.informationProtectionPolicy" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ group-id: string, site-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /groups/{group-id}/sites/{site-id}/informationProtection/policy"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, labels?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, color?: string | null, description?:
+          string | null, isActive?: boolean, name?: string | null, parent?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          color?: string | null, description?: string | null, id?: string |
+          null, isActive?: boolean, name?: string | null, parent?:
+          Record&lt;string, never&gt; | { color?: string | null | undefined;
+          description?: string | null | undefined; id?: string | null |
+          undefined; isActive?: boolean | undefined; name?: string | ... 1 more
+          ... | undefined; parent?: Record&lt;...&gt; | ... 2 more ... |
+          undefined; sensitivity?: number | undefined; tooltip?: string |
+          ......, sensitivity?: number, tooltip?: string | null } | null,
+          sensitivity?: number, tooltip?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.informationProtectionLabel" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.informationProtectionPolicy" />" }&gt;

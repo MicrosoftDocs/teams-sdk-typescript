@@ -7,26 +7,22 @@ interfaces:
   - '@microsoft/teams.graph-endpoints-beta.security.securityCopilot.IEndpoints'
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: del(any)
+  - name: 'del({ If-Match?: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.security.securityCopilot.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`DELETE /security/securityCopilot`'
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /security/securityCopilot"]["response"]>
+      content: 'function del(params?: { If-Match?: string }): EndpointRequest<never>'
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /security/securityCopilot"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints-beta.security.securityCopilot.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -37,18 +33,63 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /security/securityCopilot"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, workspaces?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, displayName?: string | null, plugins?: { @odata.type: string,
+        authorization?: function, catalogScope?: function, category?: function,
+        description?: function, displayName?: function, isEnabled?: function,
+        name?: function, previewState?: function, settings?: function,
+        supportedAuthTypes?: function }[], sessions?: (Omit<..., ...> & {
+        @odata.type: ..., createdDateTime?: ..., displayName?: ...,
+        lastModifiedDateTime?: ..., prompts?: ... } & { @odata.type: ... })[] }
+        & { @odata.type: "#microsoft.graph.security.securityCopilot.workspace"
+        })[] } & { @odata.type: "#microsoft.graph.securityCopilot" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /security/securityCopilot"]["response"]&gt;
-  - name: update(Operation<"/security/securityCopilot", "patch">)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, workspaces?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, displayName?: string | null, plugins?: {
+          <xref uid="@odata.type" />: string, authorization?: function,
+          catalogScope?: function, category?: function, description?: function,
+          displayName?: function, isEnabled?: function, name?: function,
+          previewState?: function, settings?: function, supportedAuthTypes?:
+          function }[], sessions?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., createdDateTime?: ..., displayName?: ...,
+          lastModifiedDateTime?: ..., prompts?: ... } & { <xref
+          uid="@odata.type" />: ... })[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.security.securityCopilot.workspace" />"
+          })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.securityCopilot" />" }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, workspaces?: (Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & { @odata.type: string, displayName?: string | null,
+      plugins?: { @odata.type: string, authorization?: Record<..., ...> | {
+      @odata.type: ..., authType?: ... } | null, catalogScope?:
+      "unknownFutureValue" | "none" | "global" | "tenant" | "user" | "workspace"
+      | "geoGlobal" | "userWorkspace", category?: "unknownFutureValue" | "other"
+      | "microsoft" | "hidden" | "microsoftConnectors" | "web" | "testing" |
+      "plugin", description?: string | null, displayName?: string | null,
+      isEnabled?: boolean, name?: string, previewState?: "unknownFutureValue" |
+      "private" | "public" | "ga", settings?: ...[], supportedAuthTypes?:
+      "unknownFutureValue" | "none" | "basic" | "aPIKey" |
+      "oAuthAuthorizationCodeFlow" | "oAuthClientCredentialsFlow" | "aad" |
+      "serviceHttp" | "aadDelegated" | "oAuthPasswordGrantFlow" }[], sessions?:
+      (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
+      string, createdDateTime?: function, displayName?: function,
+      lastModifiedDateTime?: function, prompts?: function } & { @odata.type:
+      "#microsoft.graph.security.securityCopilot.session" })[] } & {
+      @odata.type: "#microsoft.graph.security.securityCopilot.workspace" })[] }
+      & { @odata.type: "#microsoft.graph.securityCopilot" })
     uid: '@microsoft/teams.graph-endpoints-beta.security.securityCopilot.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /security/securityCopilot`'
@@ -56,15 +97,86 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/security/securityCopilot", "patch">):
-        EndpointRequest<IEndpoints["PATCH
-        /security/securityCopilot"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, workspaces?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, displayName?: string | null, plugins?: { @odata.type: string,
+        authorization?: Record<..., ...> | { @odata.type: ..., authType?: ... }
+        | null, catalogScope?: "unknownFutureValue" | "none" | "global" |
+        "tenant" | "user" | "workspace" | "geoGlobal" | "userWorkspace",
+        category?: "unknownFutureValue" | "other" | "microsoft" | "hidden" |
+        "microsoftConnectors" | "web" | "testing" | "plugin", description?:
+        string | null, displayName?: string | null, isEnabled?: boolean, name?:
+        string, previewState?: "unknownFutureValue" | "private" | "public" |
+        "ga", settings?: ...[], supportedAuthTypes?: "unknownFutureValue" |
+        "none" | "basic" | "aPIKey" | "oAuthAuthorizationCodeFlow" |
+        "oAuthClientCredentialsFlow" | "aad" | "serviceHttp" | "aadDelegated" |
+        "oAuthPasswordGrantFlow" }[], sessions?: (Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & { @odata.type: string, createdDateTime?:
+        function, displayName?: function, lastModifiedDateTime?: function,
+        prompts?: function } & { @odata.type:
+        "#microsoft.graph.security.securityCopilot.session" })[] } & {
+        @odata.type: "#microsoft.graph.security.securityCopilot.workspace" })[]
+        } & { @odata.type: "#microsoft.graph.securityCopilot" }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, workspaces?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, displayName?: string | null, plugins?: { @odata.type: string,
+        authorization?: function, catalogScope?: function, category?: function,
+        description?: function, displayName?: function, isEnabled?: function,
+        name?: function, previewState?: function, settings?: function,
+        supportedAuthTypes?: function }[], sessions?: (Omit<..., ...> & {
+        @odata.type: ..., createdDateTime?: ..., displayName?: ...,
+        lastModifiedDateTime?: ..., prompts?: ... } & { @odata.type: ... })[] }
+        & { @odata.type: "#microsoft.graph.security.securityCopilot.workspace"
+        })[] } & { @odata.type: "#microsoft.graph.securityCopilot" }>
       parameters:
         - id: body
-          type: Operation&lt;"/security/securityCopilot", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            workspaces?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, displayName?: string | null, plugins?:
+            { <xref uid="@odata.type" />: string, authorization?: Record&lt;...,
+            ...&gt; | { <xref uid="@odata.type" />: ..., authType?: ... } |
+            null, catalogScope?: "unknownFutureValue" | "none" | "global" |
+            "tenant" | "user" | "workspace" | "geoGlobal" | "userWorkspace",
+            category?: "unknownFutureValue" | "other" | "microsoft" | "hidden" |
+            "microsoftConnectors" | "web" | "testing" | "plugin", description?:
+            string | null, displayName?: string | null, isEnabled?: boolean,
+            name?: string, previewState?: "unknownFutureValue" | "private" |
+            "public" | "ga", settings?: ...[], supportedAuthTypes?:
+            "unknownFutureValue" | "none" | "basic" | "aPIKey" |
+            "oAuthAuthorizationCodeFlow" | "oAuthClientCredentialsFlow" | "aad"
+            | "serviceHttp" | "aadDelegated" | "oAuthPasswordGrantFlow" }[],
+            sessions?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, createdDateTime?: function, displayName?: function,
+            lastModifiedDateTime?: function, prompts?: function } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.security.securityCopilot.session" />" })[] } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.security.securityCopilot.workspace" />" })[] }
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.securityCopilot" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /security/securityCopilot"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, workspaces?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, displayName?: string | null, plugins?: {
+          <xref uid="@odata.type" />: string, authorization?: function,
+          catalogScope?: function, category?: function, description?: function,
+          displayName?: function, isEnabled?: function, name?: function,
+          previewState?: function, settings?: function, supportedAuthTypes?:
+          function }[], sessions?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., createdDateTime?: ..., displayName?: ...,
+          lastModifiedDateTime?: ..., prompts?: ... } & { <xref
+          uid="@odata.type" />: ... })[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.security.securityCopilot.workspace" />"
+          })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.securityCopilot" />" }&gt;

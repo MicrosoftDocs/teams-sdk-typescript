@@ -10,8 +10,14 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
   - name: >-
-      create(Operation<"/deviceManagement/depOnboardingSettings/{depOnboardingSetting-id}/enrollmentProfiles",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, configurationEndpointUrl?: string | null,
+      description?: string | null, displayName?: string | null,
+      enableAuthenticationViaCompanyPortal?: boolean,
+      requireCompanyPortalOnSetupAssistantEnrolledDevices?: boolean,
+      requiresUserAuthentication?: boolean }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.enrollmentProfile" }, { depOnboardingSetting-id: string
+      })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.depOnboardingSettings.enrollmentProfiles.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -22,25 +28,51 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/deviceManagement/depOnboardingSettings/{depOnboardingSetting-id}/enrollmentProfiles",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /deviceManagement/depOnboardingSettings/{depOnboardingSetting-id}/enrollmentProfiles"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, configurationEndpointUrl?:
+        string | null, description?: string | null, displayName?: string | null,
+        enableAuthenticationViaCompanyPortal?: boolean,
+        requireCompanyPortalOnSetupAssistantEnrolledDevices?: boolean,
+        requiresUserAuthentication?: boolean }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.enrollmentProfile" }, params?: {
+        depOnboardingSetting-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        configurationEndpointUrl?: string | null, description?: string | null,
+        displayName?: string | null, enableAuthenticationViaCompanyPortal?:
+        boolean, requireCompanyPortalOnSetupAssistantEnrolledDevices?: boolean,
+        requiresUserAuthentication?: boolean }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.enrollmentProfile" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/depOnboardingSettings/{depOnboardingSetting-id}/enrollmentProfiles",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, configurationEndpointUrl?: string | null, description?:
+            string | null, displayName?: string | null,
+            enableAuthenticationViaCompanyPortal?: boolean,
+            requireCompanyPortalOnSetupAssistantEnrolledDevices?: boolean,
+            requiresUserAuthentication?: boolean }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.enrollmentProfile" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ depOnboardingSetting-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /deviceManagement/depOnboardingSettings/{depOnboardingSetting-id}/enrollmentProfiles"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, configurationEndpointUrl?: string |
+          null, description?: string | null, displayName?: string | null,
+          enableAuthenticationViaCompanyPortal?: boolean,
+          requireCompanyPortalOnSetupAssistantEnrolledDevices?: boolean,
+          requiresUserAuthentication?: boolean }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.enrollmentProfile" />" }&gt;
+  - name: >-
+      del({ depOnboardingSetting-id: string, enrollmentProfile-id: string,
+      If-Match?: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.depOnboardingSettings.enrollmentProfiles.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -51,18 +83,21 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /deviceManagement/depOnboardingSettings/{depOnboardingSetting-id}/enrollmentProfiles/{enrollmentProfile-id}"]["response"]>
+        function del(params?: { depOnboardingSetting-id: string,
+        enrollmentProfile-id: string, If-Match?: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { depOnboardingSetting-id: string, enrollmentProfile-id: string,
+            If-Match?: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /deviceManagement/depOnboardingSettings/{depOnboardingSetting-id}/enrollmentProfiles/{enrollmentProfile-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], depOnboardingSetting-id:
+      string, enrollmentProfile-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.depOnboardingSettings.enrollmentProfiles.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -76,18 +111,37 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/depOnboardingSettings/{depOnboardingSetting-id}/enrollmentProfiles/{enrollmentProfile-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        depOnboardingSetting-id: string, enrollmentProfile-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, configurationEndpointUrl?:
+        string | null, description?: string | null, displayName?: string | null,
+        enableAuthenticationViaCompanyPortal?: boolean,
+        requireCompanyPortalOnSetupAssistantEnrolledDevices?: boolean,
+        requiresUserAuthentication?: boolean }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.enrollmentProfile" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], depOnboardingSetting-id:
+            string, enrollmentProfile-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/depOnboardingSettings/{depOnboardingSetting-id}/enrollmentProfiles/{enrollmentProfile-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, configurationEndpointUrl?: string |
+          null, description?: string | null, displayName?: string | null,
+          enableAuthenticationViaCompanyPortal?: boolean,
+          requireCompanyPortalOnSetupAssistantEnrolledDevices?: boolean,
+          requiresUserAuthentication?: boolean }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.enrollmentProfile" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, depOnboardingSetting-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.depOnboardingSettings.enrollmentProfiles.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -101,20 +155,47 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/depOnboardingSettings/{depOnboardingSetting-id}/enrollmentProfiles"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, depOnboardingSetting-id: string }):
+        EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?: string
+        | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, configurationEndpointUrl?:
+        string | null, description?: string | null, displayName?: string | null,
+        enableAuthenticationViaCompanyPortal?: boolean,
+        requireCompanyPortalOnSetupAssistantEnrolledDevices?: boolean,
+        requiresUserAuthentication?: boolean }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.enrollmentProfile" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, depOnboardingSetting-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/depOnboardingSettings/{depOnboardingSetting-id}/enrollmentProfiles"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, configurationEndpointUrl?: string | null, description?: string
+          | null, displayName?: string | null,
+          enableAuthenticationViaCompanyPortal?: boolean,
+          requireCompanyPortalOnSetupAssistantEnrolledDevices?: boolean,
+          requiresUserAuthentication?: boolean }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.enrollmentProfile" />" })[] }&gt;
   - name: >-
-      update(Operation<"/deviceManagement/depOnboardingSettings/{depOnboardingSetting-id}/enrollmentProfiles/{enrollmentProfile-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, configurationEndpointUrl?: string | null,
+      description?: string | null, displayName?: string | null,
+      enableAuthenticationViaCompanyPortal?: boolean,
+      requireCompanyPortalOnSetupAssistantEnrolledDevices?: boolean,
+      requiresUserAuthentication?: boolean }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.enrollmentProfile" }, { depOnboardingSetting-id: string,
+      enrollmentProfile-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.depOnboardingSettings.enrollmentProfiles.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -125,24 +206,49 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/deviceManagement/depOnboardingSettings/{depOnboardingSetting-id}/enrollmentProfiles/{enrollmentProfile-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /deviceManagement/depOnboardingSettings/{depOnboardingSetting-id}/enrollmentProfiles/{enrollmentProfile-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, configurationEndpointUrl?:
+        string | null, description?: string | null, displayName?: string | null,
+        enableAuthenticationViaCompanyPortal?: boolean,
+        requireCompanyPortalOnSetupAssistantEnrolledDevices?: boolean,
+        requiresUserAuthentication?: boolean }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.enrollmentProfile" }, params?: {
+        depOnboardingSetting-id: string, enrollmentProfile-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, configurationEndpointUrl?:
+        string | null, description?: string | null, displayName?: string | null,
+        enableAuthenticationViaCompanyPortal?: boolean,
+        requireCompanyPortalOnSetupAssistantEnrolledDevices?: boolean,
+        requiresUserAuthentication?: boolean }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.enrollmentProfile" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/depOnboardingSettings/{depOnboardingSetting-id}/enrollmentProfiles/{enrollmentProfile-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, configurationEndpointUrl?: string | null, description?:
+            string | null, displayName?: string | null,
+            enableAuthenticationViaCompanyPortal?: boolean,
+            requireCompanyPortalOnSetupAssistantEnrolledDevices?: boolean,
+            requiresUserAuthentication?: boolean }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.enrollmentProfile" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ depOnboardingSetting-id: string, enrollmentProfile-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /deviceManagement/depOnboardingSettings/{depOnboardingSetting-id}/enrollmentProfiles/{enrollmentProfile-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, configurationEndpointUrl?: string |
+          null, description?: string | null, displayName?: string | null,
+          enableAuthenticationViaCompanyPortal?: boolean,
+          requireCompanyPortalOnSetupAssistantEnrolledDevices?: boolean,
+          requiresUserAuthentication?: boolean }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.enrollmentProfile" />" }&gt;
 variables:
   - name: setDefaultProfile
     uid: >-

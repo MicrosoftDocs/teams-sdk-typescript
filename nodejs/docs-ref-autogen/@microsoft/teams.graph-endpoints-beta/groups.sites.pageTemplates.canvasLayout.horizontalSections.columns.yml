@@ -10,8 +10,13 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
   - name: >-
-      create(Operation<"/groups/{group-id}/sites/{site-id}/pageTemplates/{pageTemplate-id}/canvasLayout/horizontalSections/{horizontalSection-id}/columns",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, webparts?: (Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & Omit<{ @odata.type: string }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.webPart" })[], width?: number | null } & {
+      @odata.type: "#microsoft.graph.horizontalSectionColumn" }, { group-id:
+      string, horizontalSection-id: string, pageTemplate-id: string, site-id:
+      string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.groups.sites.pageTemplates.canvasLayout.horizontalSections.columns.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -22,25 +27,51 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/groups/{group-id}/sites/{site-id}/pageTemplates/{pageTemplate-id}/canvasLayout/horizontalSections/{horizontalSection-id}/columns",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /groups/{group-id}/sites/{site-id}/pageTemplates/{pageTemplate-id}/canvasLayout/horizontalSections/{horizontalSection-id}/columns"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, webparts?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.webPart" })[], width?:
+        number | null } & { @odata.type:
+        "#microsoft.graph.horizontalSectionColumn" }, params?: { group-id:
+        string, horizontalSection-id: string, pageTemplate-id: string, site-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, webparts?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.webPart" })[], width?:
+        number | null } & { @odata.type:
+        "#microsoft.graph.horizontalSectionColumn" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/groups/{group-id}/sites/{site-id}/pageTemplates/{pageTemplate-id}/canvasLayout/horizontalSections/{horizontalSection-id}/columns",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            webparts?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.webPart"
+            />" })[], width?: number | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.horizontalSectionColumn" />" }
           description: ''
         - id: params
-          type: any
+          type: >-
+            { group-id: string, horizontalSection-id: string, pageTemplate-id:
+            string, site-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /groups/{group-id}/sites/{site-id}/pageTemplates/{pageTemplate-id}/canvasLayout/horizontalSections/{horizontalSection-id}/columns"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, webparts?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.webPart" />"
+          })[], width?: number | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.horizontalSectionColumn" />" }&gt;
+  - name: >-
+      del({ group-id: string, horizontalSection-id: string,
+      horizontalSectionColumn-id: string, If-Match?: string, pageTemplate-id:
+      string, site-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.groups.sites.pageTemplates.canvasLayout.horizontalSections.columns.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -51,18 +82,23 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /groups/{group-id}/sites/{site-id}/pageTemplates/{pageTemplate-id}/canvasLayout/horizontalSections/{horizontalSection-id}/columns/{horizontalSectionColumn-id}"]["response"]>
+        function del(params?: { group-id: string, horizontalSection-id: string,
+        horizontalSectionColumn-id: string, If-Match?: string, pageTemplate-id:
+        string, site-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { group-id: string, horizontalSection-id: string,
+            horizontalSectionColumn-id: string, If-Match?: string,
+            pageTemplate-id: string, site-id: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /groups/{group-id}/sites/{site-id}/pageTemplates/{pageTemplate-id}/canvasLayout/horizontalSections/{horizontalSection-id}/columns/{horizontalSectionColumn-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], group-id: string,
+      horizontalSection-id: string, horizontalSectionColumn-id: string,
+      pageTemplate-id: string, site-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.groups.sites.pageTemplates.canvasLayout.horizontalSections.columns.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -76,18 +112,38 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /groups/{group-id}/sites/{site-id}/pageTemplates/{pageTemplate-id}/canvasLayout/horizontalSections/{horizontalSection-id}/columns/{horizontalSectionColumn-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        group-id: string, horizontalSection-id: string,
+        horizontalSectionColumn-id: string, pageTemplate-id: string, site-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, webparts?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.webPart" })[], width?:
+        number | null } & { @odata.type:
+        "#microsoft.graph.horizontalSectionColumn" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], group-id: string,
+            horizontalSection-id: string, horizontalSectionColumn-id: string,
+            pageTemplate-id: string, site-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /groups/{group-id}/sites/{site-id}/pageTemplates/{pageTemplate-id}/canvasLayout/horizontalSections/{horizontalSection-id}/columns/{horizontalSectionColumn-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, webparts?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.webPart" />"
+          })[], width?: number | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.horizontalSectionColumn" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, group-id: string, horizontalSection-id: string, pageTemplate-id:
+      string, site-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.groups.sites.pageTemplates.canvasLayout.horizontalSections.columns.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -101,20 +157,42 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /groups/{group-id}/sites/{site-id}/pageTemplates/{pageTemplate-id}/canvasLayout/horizontalSections/{horizontalSection-id}/columns"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, group-id: string, horizontalSection-id:
+        string, pageTemplate-id: string, site-id: string }): EndpointRequest<{
+        @odata.count?: number | null, @odata.nextLink?: string | null } & {
+        value?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, webparts?: (Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... })[], width?: number | null } & { @odata.type:
+        "#microsoft.graph.horizontalSectionColumn" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, group-id: string, horizontalSection-id: string,
+            pageTemplate-id: string, site-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /groups/{group-id}/sites/{site-id}/pageTemplates/{pageTemplate-id}/canvasLayout/horizontalSections/{horizontalSection-id}/columns"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          webparts?: (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... })[], width?: number | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.horizontalSectionColumn" />" })[] }&gt;
   - name: >-
-      update(Operation<"/groups/{group-id}/sites/{site-id}/pageTemplates/{pageTemplate-id}/canvasLayout/horizontalSections/{horizontalSection-id}/columns/{horizontalSectionColumn-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, webparts?: (Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & Omit<{ @odata.type: string }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.webPart" })[], width?: number | null } & {
+      @odata.type: "#microsoft.graph.horizontalSectionColumn" }, { group-id:
+      string, horizontalSection-id: string, horizontalSectionColumn-id: string,
+      pageTemplate-id: string, site-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.groups.sites.pageTemplates.canvasLayout.horizontalSections.columns.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -125,21 +203,46 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/groups/{group-id}/sites/{site-id}/pageTemplates/{pageTemplate-id}/canvasLayout/horizontalSections/{horizontalSection-id}/columns/{horizontalSectionColumn-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /groups/{group-id}/sites/{site-id}/pageTemplates/{pageTemplate-id}/canvasLayout/horizontalSections/{horizontalSection-id}/columns/{horizontalSectionColumn-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, webparts?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.webPart" })[], width?:
+        number | null } & { @odata.type:
+        "#microsoft.graph.horizontalSectionColumn" }, params?: { group-id:
+        string, horizontalSection-id: string, horizontalSectionColumn-id:
+        string, pageTemplate-id: string, site-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, webparts?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.webPart" })[], width?:
+        number | null } & { @odata.type:
+        "#microsoft.graph.horizontalSectionColumn" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/groups/{group-id}/sites/{site-id}/pageTemplates/{pageTemplate-id}/canvasLayout/horizontalSections/{horizontalSection-id}/columns/{horizontalSectionColumn-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            webparts?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.webPart"
+            />" })[], width?: number | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.horizontalSectionColumn" />" }
           description: ''
         - id: params
-          type: any
+          type: >-
+            { group-id: string, horizontalSection-id: string,
+            horizontalSectionColumn-id: string, pageTemplate-id: string,
+            site-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /groups/{group-id}/sites/{site-id}/pageTemplates/{pageTemplate-id}/canvasLayout/horizontalSections/{horizontalSection-id}/columns/{horizontalSectionColumn-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, webparts?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.webPart" />"
+          })[], width?: number | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.horizontalSectionColumn" />" }&gt;

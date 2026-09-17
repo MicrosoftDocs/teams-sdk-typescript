@@ -95,8 +95,14 @@ variables:
           }
 functions:
   - name: >-
-      create(Operation<"/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent",
-      "post">, any)
+      create({ @odata.type: string, catalogEntry?: Record<string, never> |
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, deployableUntilDateTime?: string | null,
+      displayName?: string | null, releaseDateTime?: string }, "@odata.type"> &
+      { @odata.type: "#microsoft.graph.windowsUpdates.catalogEntry" }) | null,
+      catalogEntryId?: string, matchedDevices?: { @odata.type: string,
+      deviceId?: string, recommendedBy?: string[] }[] }, {
+      deploymentAudience-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.admin.windows.updates.deploymentAudiences.applicableContent.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -107,25 +113,55 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent"]["response"]>
+        function create(body: { @odata.type: string, catalogEntry?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, deployableUntilDateTime?:
+        string | null, displayName?: string | null, releaseDateTime?: string },
+        "@odata.type"> & { @odata.type:
+        "#microsoft.graph.windowsUpdates.catalogEntry" }) | null,
+        catalogEntryId?: string, matchedDevices?: { @odata.type: string,
+        deviceId?: string, recommendedBy?: string[] }[] }, params?: {
+        deploymentAudience-id: string }): EndpointRequest<{ @odata.type: string,
+        catalogEntry?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string,
+        deployableUntilDateTime?: string | null, displayName?: string | null,
+        releaseDateTime?: string }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.windowsUpdates.catalogEntry" }) | null,
+        catalogEntryId?: string, matchedDevices?: { @odata.type: string,
+        deviceId?: string, recommendedBy?: string[] }[] }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent",
-            "post"&gt;
+            { <xref uid="@odata.type" />: string, catalogEntry?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: string, deployableUntilDateTime?: string
+            | null, displayName?: string | null, releaseDateTime?: string },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.windowsUpdates.catalogEntry" />" }) |
+            null, catalogEntryId?: string, matchedDevices?: { <xref
+            uid="@odata.type" />: string, deviceId?: string, recommendedBy?:
+            string[] }[] }
           description: ''
         - id: params
-          type: any
+          type: '{ deploymentAudience-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string,
+          catalogEntry?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string,
+          deployableUntilDateTime?: string | null, displayName?: string | null,
+          releaseDateTime?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.catalogEntry" />" }) | null,
+          catalogEntryId?: string, matchedDevices?: { <xref uid="@odata.type"
+          />: string, deviceId?: string, recommendedBy?: string[] }[] }&gt;
+  - name: >-
+      del({ applicableContent-catalogEntryId: string, deploymentAudience-id:
+      string, If-Match?: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.admin.windows.updates.deploymentAudiences.applicableContent.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -136,18 +172,21 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent/{applicableContent-catalogEntryId}"]["response"]>
+        function del(params?: { applicableContent-catalogEntryId: string,
+        deploymentAudience-id: string, If-Match?: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { applicableContent-catalogEntryId: string, deploymentAudience-id:
+            string, If-Match?: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent/{applicableContent-catalogEntryId}"]["response"]&gt;
-  - name: get$1(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get$1({ $expand?: string[], $select?: string[],
+      applicableContent-catalogEntryId: string, deploymentAudience-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.admin.windows.updates.deploymentAudiences.applicableContent.get$1
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -162,18 +201,39 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get$1(params?: any): EndpointRequest<IEndpoints["GET
-        /admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent/{applicableContent-catalogEntryId}"]["response"]>
+        function get$1(params?: { $expand?: string[], $select?: string[],
+        applicableContent-catalogEntryId: string, deploymentAudience-id: string
+        }): EndpointRequest<{ @odata.type: string, catalogEntry?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+        Omit<{ @odata.type: string, deployableUntilDateTime?: string | null,
+        displayName?: string | null, releaseDateTime?: string }, "@odata.type">
+        & { @odata.type: "#microsoft.graph.windowsUpdates.catalogEntry" }) |
+        null, catalogEntryId?: string, matchedDevices?: { @odata.type: string,
+        deviceId?: string, recommendedBy?: string[] }[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[],
+            applicableContent-catalogEntryId: string, deploymentAudience-id:
+            string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent/{applicableContent-catalogEntryId}"]["response"]&gt;
-  - name: get(any)
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string,
+          catalogEntry?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string,
+          deployableUntilDateTime?: string | null, displayName?: string | null,
+          releaseDateTime?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.catalogEntry" />" }) | null,
+          catalogEntryId?: string, matchedDevices?: { <xref uid="@odata.type"
+          />: string, deviceId?: string, recommendedBy?: string[] }[] }&gt;
+  - name: >-
+      get({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, deploymentAudience-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.admin.windows.updates.deploymentAudiences.applicableContent.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -188,20 +248,48 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent"]["response"]>
+        function get(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, deploymentAudience-id: string }):
+        EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?: string
+        | null } & { value?: { @odata.type: string, catalogEntry?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, deployableUntilDateTime?:
+        function, displayName?: function, releaseDateTime?: function },
+        "@odata.type"> & { @odata.type:
+        "#microsoft.graph.windowsUpdates.catalogEntry" }) | null,
+        catalogEntryId?: string, matchedDevices?: { @odata.type: string,
+        deviceId?: string, recommendedBy?: ...[] }[] }[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, deploymentAudience-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?: { <xref
+          uid="@odata.type" />: string, catalogEntry?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, deployableUntilDateTime?: function,
+          displayName?: function, releaseDateTime?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.catalogEntry" />" }) | null,
+          catalogEntryId?: string, matchedDevices?: { <xref uid="@odata.type"
+          />: string, deviceId?: string, recommendedBy?: ...[] }[] }[] }&gt;
   - name: >-
-      update(Operation<"/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent/{applicableContent-catalogEntryId}",
-      "patch">, any)
+      update({ @odata.type: string, catalogEntry?: Record<string, never> |
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, deployableUntilDateTime?: string | null,
+      displayName?: string | null, releaseDateTime?: string }, "@odata.type"> &
+      { @odata.type: "#microsoft.graph.windowsUpdates.catalogEntry" }) | null,
+      catalogEntryId?: string, matchedDevices?: { @odata.type: string,
+      deviceId?: string, recommendedBy?: string[] }[] }, {
+      applicableContent-catalogEntryId: string, deploymentAudience-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.admin.windows.updates.deploymentAudiences.applicableContent.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -212,21 +300,51 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent/{applicableContent-catalogEntryId}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent/{applicableContent-catalogEntryId}"]["response"]>
+        function update(body: { @odata.type: string, catalogEntry?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, deployableUntilDateTime?:
+        string | null, displayName?: string | null, releaseDateTime?: string },
+        "@odata.type"> & { @odata.type:
+        "#microsoft.graph.windowsUpdates.catalogEntry" }) | null,
+        catalogEntryId?: string, matchedDevices?: { @odata.type: string,
+        deviceId?: string, recommendedBy?: string[] }[] }, params?: {
+        applicableContent-catalogEntryId: string, deploymentAudience-id: string
+        }): EndpointRequest<{ @odata.type: string, catalogEntry?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+        Omit<{ @odata.type: string, deployableUntilDateTime?: string | null,
+        displayName?: string | null, releaseDateTime?: string }, "@odata.type">
+        & { @odata.type: "#microsoft.graph.windowsUpdates.catalogEntry" }) |
+        null, catalogEntryId?: string, matchedDevices?: { @odata.type: string,
+        deviceId?: string, recommendedBy?: string[] }[] }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent/{applicableContent-catalogEntryId}",
-            "patch"&gt;
+            { <xref uid="@odata.type" />: string, catalogEntry?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: string, deployableUntilDateTime?: string
+            | null, displayName?: string | null, releaseDateTime?: string },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.windowsUpdates.catalogEntry" />" }) |
+            null, catalogEntryId?: string, matchedDevices?: { <xref
+            uid="@odata.type" />: string, deviceId?: string, recommendedBy?:
+            string[] }[] }
           description: ''
         - id: params
-          type: any
+          type: >-
+            { applicableContent-catalogEntryId: string, deploymentAudience-id:
+            string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent/{applicableContent-catalogEntryId}"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string,
+          catalogEntry?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string,
+          deployableUntilDateTime?: string | null, displayName?: string | null,
+          releaseDateTime?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.catalogEntry" />" }) | null,
+          catalogEntryId?: string, matchedDevices?: { <xref uid="@odata.type"
+          />: string, deviceId?: string, recommendedBy?: string[] }[] }&gt;

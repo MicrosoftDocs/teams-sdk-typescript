@@ -7,7 +7,7 @@ interfaces:
   - '@microsoft/teams.graph-endpoints-beta.users.teamwork.IEndpoints'
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: del(any)
+  - name: 'del({ If-Match?: string, user-id: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.users.teamwork.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`DELETE /users/{user-id}/teamwork`'
@@ -15,18 +15,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /users/{user-id}/teamwork"]["response"]>
+        function del(params?: { If-Match?: string, user-id: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, user-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /users/{user-id}/teamwork"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[], user-id: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.users.teamwork.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: >-
@@ -39,18 +37,102 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/teamwork"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[], user-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, associatedTeams?: (Omit<Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, displayName?: function, team?: function, tenantId?:
+        function }, "@odata.type"> & { @odata.type: "#microsoft.graph.teamInfo"
+        }, "@odata.type"> & { @odata.type: string })[], installedApps?:
+        (Omit<Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string, consentedPermissionSet?: function,
+        scopeInfo?: function, teamsApp?: function, teamsAppDefinition?: function
+        }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.teamsAppInstallation" }, "@odata.type"> & {
+        @odata.type: string, chat?: Record<string, never> | (Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & { @odata.type: string, chatType?:
+        function, createdBy?: function, createdDateTime?: function,
+        installedApps?: function, isHiddenForAllMembers?: function,
+        lastMessagePreview?: function, lastUpdatedDateTime?: function, members?:
+        function, messages?: function, onlineMeetingInfo?: function,
+        operations?: function, permissionGrants?: function, pinnedMessages?:
+        function, tabs?: function, tenantId?: function, topic?: function,
+        viewpoint?: function, webUrl?: function } & { @odata.type:
+        "#microsoft.graph.chat" }) | null } & { @odata.type:
+        "#microsoft.graph.userScopeTeamsAppInstallation" })[], locale?: string |
+        null, region?: string | null } & { @odata.type:
+        "#microsoft.graph.userTeamwork" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[], user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/teamwork"]["response"]&gt;
-  - name: update(Operation<"/users/{user-id}/teamwork", "patch">, any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, associatedTeams?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, displayName?: function, team?: function, tenantId?: function
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.teamInfo" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string })[], installedApps?:
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: function
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, consentedPermissionSet?: function,
+          scopeInfo?: function, teamsApp?: function, teamsAppDefinition?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppInstallation" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          chat?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, chatType?: function,
+          createdBy?: function, createdDateTime?: function, installedApps?:
+          function, isHiddenForAllMembers?: function, lastMessagePreview?:
+          function, lastUpdatedDateTime?: function, members?: function,
+          messages?: function, onlineMeetingInfo?: function, operations?:
+          function, permissionGrants?: function, pinnedMessages?: function,
+          tabs?: function, tenantId?: function, topic?: function, viewpoint?:
+          function, webUrl?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.chat" />" }) | null } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.userScopeTeamsAppInstallation" />"
+          })[], locale?: string | null, region?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.userTeamwork" />"
+          }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, associatedTeams?: (Omit<Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & Omit<{ @odata.type: string, displayName?:
+      string | null, team?: Record<..., ...> | (... & ... & ...) | null,
+      tenantId?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.teamInfo" }, "@odata.type"> & { @odata.type: string
+      })[], installedApps?: (Omit<Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, consentedPermissionSet?:
+      Record<..., ...> | { @odata.type: ..., resourceSpecificPermissions?: ... }
+      | null, scopeInfo?: Record<..., ...> | { @odata.type: ..., scope?: ... } |
+      null, teamsApp?: Record<..., ...> | (... & ... & ...) | null,
+      teamsAppDefinition?: Record<..., ...> | (... & ... & ...) | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.teamsAppInstallation" },
+      "@odata.type"> & { @odata.type: string, chat?: Record<string, never> |
+      (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+      @odata.type: string, chatType?: "unknownFutureValue" | "group" |
+      "oneOnOne" | "meeting", createdBy?: Record<..., ...> | { @odata.type: ...,
+      application?: ..., device?: ..., user?: ... } | null, createdDateTime?:
+      string | null, installedApps?: ...[], isHiddenForAllMembers?: boolean |
+      null, lastMessagePreview?: Record<..., ...> | (... & ... & ...) | null,
+      lastUpdatedDateTime?: string | null, members?: ...[], messages?: ...[],
+      onlineMeetingInfo?: Record<..., ...> | { @odata.type: ...,
+      calendarEventId?: ..., joinWebUrl?: ..., organizer?: ... } | null,
+      operations?: ...[], permissionGrants?: ...[], pinnedMessages?: ...[],
+      tabs?: ...[], tenantId?: string | null, topic?: string | null, viewpoint?:
+      Record<..., ...> | { @odata.type: ..., isHidden?: ...,
+      lastMessageReadDateTime?: ... } | null, webUrl?: string | null } & {
+      @odata.type: "#microsoft.graph.chat" }) | null } & { @odata.type:
+      "#microsoft.graph.userScopeTeamsAppInstallation" })[], locale?: string |
+      null, region?: string | null } & { @odata.type:
+      "#microsoft.graph.userTeamwork" }, { user-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.users.teamwork.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /users/{user-id}/teamwork`'
@@ -58,21 +140,148 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/users/{user-id}/teamwork", "patch">,
-        params?: any): EndpointRequest<IEndpoints["PATCH
-        /users/{user-id}/teamwork"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, associatedTeams?: (Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, displayName?: string | null, team?: Record<..., ...> | (... &
+        ... & ...) | null, tenantId?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.teamInfo" }, "@odata.type"> & {
+        @odata.type: string })[], installedApps?: (Omit<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        consentedPermissionSet?: Record<..., ...> | { @odata.type: ...,
+        resourceSpecificPermissions?: ... } | null, scopeInfo?: Record<..., ...>
+        | { @odata.type: ..., scope?: ... } | null, teamsApp?: Record<..., ...>
+        | (... & ... & ...) | null, teamsAppDefinition?: Record<..., ...> | (...
+        & ... & ...) | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.teamsAppInstallation" }, "@odata.type"> & {
+        @odata.type: string, chat?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & { @odata.type: string,
+        chatType?: "unknownFutureValue" | "group" | "oneOnOne" | "meeting",
+        createdBy?: Record<..., ...> | { @odata.type: ..., application?: ...,
+        device?: ..., user?: ... } | null, createdDateTime?: string | null,
+        installedApps?: ...[], isHiddenForAllMembers?: boolean | null,
+        lastMessagePreview?: Record<..., ...> | (... & ... & ...) | null,
+        lastUpdatedDateTime?: string | null, members?: ...[], messages?: ...[],
+        onlineMeetingInfo?: Record<..., ...> | { @odata.type: ...,
+        calendarEventId?: ..., joinWebUrl?: ..., organizer?: ... } | null,
+        operations?: ...[], permissionGrants?: ...[], pinnedMessages?: ...[],
+        tabs?: ...[], tenantId?: string | null, topic?: string | null,
+        viewpoint?: Record<..., ...> | { @odata.type: ..., isHidden?: ...,
+        lastMessageReadDateTime?: ... } | null, webUrl?: string | null } & {
+        @odata.type: "#microsoft.graph.chat" }) | null } & { @odata.type:
+        "#microsoft.graph.userScopeTeamsAppInstallation" })[], locale?: string |
+        null, region?: string | null } & { @odata.type:
+        "#microsoft.graph.userTeamwork" }, params?: { user-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, associatedTeams?: (Omit<Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, displayName?: function, team?: function, tenantId?:
+        function }, "@odata.type"> & { @odata.type: "#microsoft.graph.teamInfo"
+        }, "@odata.type"> & { @odata.type: string })[], installedApps?:
+        (Omit<Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string, consentedPermissionSet?: function,
+        scopeInfo?: function, teamsApp?: function, teamsAppDefinition?: function
+        }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.teamsAppInstallation" }, "@odata.type"> & {
+        @odata.type: string, chat?: Record<string, never> | (Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & { @odata.type: string, chatType?:
+        function, createdBy?: function, createdDateTime?: function,
+        installedApps?: function, isHiddenForAllMembers?: function,
+        lastMessagePreview?: function, lastUpdatedDateTime?: function, members?:
+        function, messages?: function, onlineMeetingInfo?: function,
+        operations?: function, permissionGrants?: function, pinnedMessages?:
+        function, tabs?: function, tenantId?: function, topic?: function,
+        viewpoint?: function, webUrl?: function } & { @odata.type:
+        "#microsoft.graph.chat" }) | null } & { @odata.type:
+        "#microsoft.graph.userScopeTeamsAppInstallation" })[], locale?: string |
+        null, region?: string | null } & { @odata.type:
+        "#microsoft.graph.userTeamwork" }>
       parameters:
         - id: body
-          type: Operation&lt;"/users/{user-id}/teamwork", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            associatedTeams?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            team?: Record&lt;..., ...&gt; | (... & ... & ...) | null, tenantId?:
+            string | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.teamInfo" />" },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string })[], installedApps?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, consentedPermissionSet?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., resourceSpecificPermissions?: ... } |
+            null, scopeInfo?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ..., scope?: ... } | null, teamsApp?: Record&lt;..., ...&gt; |
+            (... & ... & ...) | null, teamsAppDefinition?: Record&lt;...,
+            ...&gt; | (... & ... & ...) | null }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAppInstallation" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            chat?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            chatType?: "unknownFutureValue" | "group" | "oneOnOne" | "meeting",
+            createdBy?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+            ..., application?: ..., device?: ..., user?: ... } | null,
+            createdDateTime?: string | null, installedApps?: ...[],
+            isHiddenForAllMembers?: boolean | null, lastMessagePreview?:
+            Record&lt;..., ...&gt; | (... & ... & ...) | null,
+            lastUpdatedDateTime?: string | null, members?: ...[], messages?:
+            ...[], onlineMeetingInfo?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., calendarEventId?: ..., joinWebUrl?: ...,
+            organizer?: ... } | null, operations?: ...[], permissionGrants?:
+            ...[], pinnedMessages?: ...[], tabs?: ...[], tenantId?: string |
+            null, topic?: string | null, viewpoint?: Record&lt;..., ...&gt; | {
+            <xref uid="@odata.type" />: ..., isHidden?: ...,
+            lastMessageReadDateTime?: ... } | null, webUrl?: string | null } & {
+            <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.chat" />"
+            }) | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.userScopeTeamsAppInstallation" />" })[],
+            locale?: string | null, region?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.userTeamwork" />"
+            }
           description: ''
         - id: params
-          type: any
+          type: '{ user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /users/{user-id}/teamwork"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, associatedTeams?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, displayName?: function, team?: function, tenantId?: function
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.teamInfo" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string })[], installedApps?:
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: function
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, consentedPermissionSet?: function,
+          scopeInfo?: function, teamsApp?: function, teamsAppDefinition?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppInstallation" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          chat?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, chatType?: function,
+          createdBy?: function, createdDateTime?: function, installedApps?:
+          function, isHiddenForAllMembers?: function, lastMessagePreview?:
+          function, lastUpdatedDateTime?: function, members?: function,
+          messages?: function, onlineMeetingInfo?: function, operations?:
+          function, permissionGrants?: function, pinnedMessages?: function,
+          tabs?: function, tenantId?: function, topic?: function, viewpoint?:
+          function, webUrl?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.chat" />" }) | null } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.userScopeTeamsAppInstallation" />"
+          })[], locale?: string | null, region?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.userTeamwork" />"
+          }&gt;
 variables:
   - name: sendActivityNotification
     uid: >-

@@ -182,26 +182,22 @@ variables:
           /deviceManagement/virtualEndpoint/galleryImages/{cloudPcGalleryImage-id}"]["response"]&gt;
           }
 functions:
-  - name: del(any)
+  - name: 'del({ If-Match?: string })'
     uid: '@microsoft/teams.graph-endpoints.deviceManagement.virtualEndpoint.del'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`DELETE /deviceManagement/virtualEndpoint`'
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /deviceManagement/virtualEndpoint"]["response"]>
+      content: 'function del(params?: { If-Match?: string }): EndpointRequest<never>'
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /deviceManagement/virtualEndpoint"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints.deviceManagement.virtualEndpoint.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`GET /deviceManagement/virtualEndpoint`'
@@ -209,18 +205,331 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/virtualEndpoint"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, auditEvents?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, activity?: string | null, activityDateTime?: string,
+        activityOperationType?: "delete" | "patch" | "unknownFutureValue" |
+        "create", activityResult?: "unknownFutureValue" | "success" |
+        "clientError" | "failure" | "timeout", activityType?: string, actor?: {
+        @odata.type: string, applicationDisplayName?: string | null,
+        applicationId?: string | null, ipAddress?: string | null,
+        remoteTenantId?: string | null, remoteUserId?: string | null,
+        servicePrincipalName?: string | null, userId?: string | null,
+        userPermissions?: ...[], userPrincipalName?: string | null,
+        userRoleScopeTags?: ...[] }, category?: "unknownFutureValue" |
+        "cloudPC", componentName?: string, correlationId?: string, displayName?:
+        string, resources?: { @odata.type: string, displayName?: function,
+        modifiedProperties?: function, resourceId?: function }[] } & {
+        @odata.type: "#microsoft.graph.cloudPcAuditEvent" })[], cloudPCs?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, aadDeviceId?: string | null, displayName?: string |
+        null, gracePeriodEndDateTime?: string | null, imageDisplayName?: string
+        | null, lastModifiedDateTime?: string, managedDeviceId?: string | null,
+        managedDeviceName?: string | null, onPremisesConnectionName?: string |
+        null, provisioningPolicyId?: string | null, provisioningPolicyName?:
+        string | null, provisioningType?: Record<string, never> |
+        "unknownFutureValue" | "dedicated" | "shared" | null, servicePlanId?:
+        string | null, servicePlanName?: string | null, userPrincipalName?:
+        string | null } & { @odata.type: "#microsoft.graph.cloudPC" })[],
+        deviceImages?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, displayName?: string | null,
+        errorCode?: Record<string, never> | "unknownFutureValue" |
+        "internalServerError" | "sourceImageNotFound" | "osVersionNotSupported"
+        | "sourceImageInvalid" | "sourceImageNotGeneralized" |
+        "vmAlreadyAzureAdjoined" | "paidSourceImageNotSupport" |
+        "sourceImageNotSupportCustomizeVMName" |
+        "sourceImageSizeExceedsLimitation" | null, expirationDate?: string |
+        null, lastModifiedDateTime?: string | null, operatingSystem?: string |
+        null, osBuildNumber?: string | null, osStatus?: Record<string, never> |
+        "unknown" | "unknownFutureValue" | "supported" | "supportedWithWarning"
+        | null, sourceImageResourceId?: string | null, status?: Record<string,
+        never> | "failed" | "pending" | "unknownFutureValue" | "ready" | null,
+        version?: string | null } & { @odata.type:
+        "#microsoft.graph.cloudPcDeviceImage" })[], galleryImages?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, displayName?: string | null, endDate?: string | null,
+        expirationDate?: string | null, offerName?: string | null,
+        publisherName?: string | null, sizeInGB?: number | null, skuName?:
+        string | null, startDate?: string | null, status?: Record<string, never>
+        | "unknownFutureValue" | "notSupported" | "supported" |
+        "supportedWithWarning" | null } & { @odata.type:
+        "#microsoft.graph.cloudPcGalleryImage" })[], onPremisesConnections?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, adDomainName?: string | null, adDomainPassword?:
+        string | null, adDomainUsername?: string | null, alternateResourceUrl?:
+        string | null, connectionType?: Record<string, never> |
+        "unknownFutureValue" | "hybridAzureADJoin" | "azureADJoin" | null,
+        displayName?: string, healthCheckStatus?: "failed" | "pending" |
+        "warning" | "running" | "unknownFutureValue" | "informational" |
+        "passed", healthCheckStatusDetail?: Record<string, never> | {
+        @odata.type: string, endDateTime?: string, healthChecks?: ...[],
+        startDateTime?: string } | null, inUse?: boolean | null,
+        organizationalUnit?: string | null, resourceGroupId?: string, subnetId?:
+        string, subscriptionId?: string, subscriptionName?: string | null,
+        virtualNetworkId?: string, virtualNetworkLocation?: string | null } & {
+        @odata.type: "#microsoft.graph.cloudPcOnPremisesConnection" })[],
+        provisioningPolicies?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, alternateResourceUrl?: string |
+        null, assignments?: (Omit<..., ...> & { @odata.type: ...,
+        assignedUsers?: ..., target?: ... } & { @odata.type: ... })[],
+        autopatch?: Record<string, never> | { @odata.type: string,
+        autopatchGroupId?: string | null } | null, cloudPcGroupDisplayName?:
+        string | null, cloudPcNamingTemplate?: string | null, description?:
+        string | null, displayName?: string, domainJoinConfigurations?: {
+        @odata.type: string, domainJoinType?: function, onPremisesConnectionId?:
+        function, regionGroup?: function, regionName?: function }[],
+        enableSingleSignOn?: boolean | null, gracePeriodInHours?: number | null,
+        imageDisplayName?: string, imageId?: string, imageType?:
+        "unknownFutureValue" | "gallery" | "custom", localAdminEnabled?: boolean
+        | null, microsoftManagedDesktop?: Record<string, never> | { @odata.type:
+        string, managedType?: Record<..., ...> | "unknownFutureValue" |
+        "notManaged" | "premiumManaged" | "standardManaged" | "starterManaged" |
+        null, profile?: string | null } | null, provisioningType?:
+        Record<string, never> | "unknownFutureValue" | "dedicated" | "shared" |
+        null, windowsSetting?: Record<string, never> | { @odata.type: string,
+        locale?: string | null } | null } & { @odata.type:
+        "#microsoft.graph.cloudPcProvisioningPolicy" })[], userSettings?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, assignments?: (Omit<..., ...> & { @odata.type: ...,
+        createdDateTime?: ..., target?: ... } & { @odata.type: ... })[],
+        createdDateTime?: string | null, displayName?: string | null,
+        lastModifiedDateTime?: string | null, localAdminEnabled?: boolean |
+        null, resetEnabled?: boolean | null, restorePointSetting?:
+        Record<string, never> | { @odata.type: string, frequencyType?:
+        Record<..., ...> | "unknownFutureValue" | "default" | "fourHours" |
+        "sixHours" | "twelveHours" | "sixteenHours" | "twentyFourHours" | null,
+        userRestoreEnabled?: boolean | null } | null } & { @odata.type:
+        "#microsoft.graph.cloudPcUserSetting" })[] } & { @odata.type:
+        "#microsoft.graph.virtualEndpoint" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/virtualEndpoint"]["response"]&gt;
-  - name: update(Operation<"/deviceManagement/virtualEndpoint", "patch">)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, auditEvents?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, activity?: string | null,
+          activityDateTime?: string, activityOperationType?: "delete" | "patch"
+          | "unknownFutureValue" | "create", activityResult?:
+          "unknownFutureValue" | "success" | "clientError" | "failure" |
+          "timeout", activityType?: string, actor?: { <xref uid="@odata.type"
+          />: string, applicationDisplayName?: string | null, applicationId?:
+          string | null, ipAddress?: string | null, remoteTenantId?: string |
+          null, remoteUserId?: string | null, servicePrincipalName?: string |
+          null, userId?: string | null, userPermissions?: ...[],
+          userPrincipalName?: string | null, userRoleScopeTags?: ...[] },
+          category?: "unknownFutureValue" | "cloudPC", componentName?: string,
+          correlationId?: string, displayName?: string, resources?: { <xref
+          uid="@odata.type" />: string, displayName?: function,
+          modifiedProperties?: function, resourceId?: function }[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.cloudPcAuditEvent"
+          />" })[], cloudPCs?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, aadDeviceId?: string | null,
+          displayName?: string | null, gracePeriodEndDateTime?: string | null,
+          imageDisplayName?: string | null, lastModifiedDateTime?: string,
+          managedDeviceId?: string | null, managedDeviceName?: string | null,
+          onPremisesConnectionName?: string | null, provisioningPolicyId?:
+          string | null, provisioningPolicyName?: string | null,
+          provisioningType?: Record&lt;string, never&gt; | "unknownFutureValue"
+          | "dedicated" | "shared" | null, servicePlanId?: string | null,
+          servicePlanName?: string | null, userPrincipalName?: string | null } &
+          { <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.cloudPC"
+          />" })[], deviceImages?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, displayName?: string | null, errorCode?:
+          Record&lt;string, never&gt; | "unknownFutureValue" |
+          "internalServerError" | "sourceImageNotFound" |
+          "osVersionNotSupported" | "sourceImageInvalid" |
+          "sourceImageNotGeneralized" | "vmAlreadyAzureAdjoined" |
+          "paidSourceImageNotSupport" | "sourceImageNotSupportCustomizeVMName" |
+          "sourceImageSizeExceedsLimitation" | null, expirationDate?: string |
+          null, lastModifiedDateTime?: string | null, operatingSystem?: string |
+          null, osBuildNumber?: string | null, osStatus?: Record&lt;string,
+          never&gt; | "unknown" | "unknownFutureValue" | "supported" |
+          "supportedWithWarning" | null, sourceImageResourceId?: string | null,
+          status?: Record&lt;string, never&gt; | "failed" | "pending" |
+          "unknownFutureValue" | "ready" | null, version?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.cloudPcDeviceImage" />" })[], galleryImages?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          displayName?: string | null, endDate?: string | null, expirationDate?:
+          string | null, offerName?: string | null, publisherName?: string |
+          null, sizeInGB?: number | null, skuName?: string | null, startDate?:
+          string | null, status?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "notSupported" | "supported" |
+          "supportedWithWarning" | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.cloudPcGalleryImage" />" })[],
+          onPremisesConnections?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, adDomainName?: string | null,
+          adDomainPassword?: string | null, adDomainUsername?: string | null,
+          alternateResourceUrl?: string | null, connectionType?:
+          Record&lt;string, never&gt; | "unknownFutureValue" |
+          "hybridAzureADJoin" | "azureADJoin" | null, displayName?: string,
+          healthCheckStatus?: "failed" | "pending" | "warning" | "running" |
+          "unknownFutureValue" | "informational" | "passed",
+          healthCheckStatusDetail?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, endDateTime?: string, healthChecks?:
+          ...[], startDateTime?: string } | null, inUse?: boolean | null,
+          organizationalUnit?: string | null, resourceGroupId?: string,
+          subnetId?: string, subscriptionId?: string, subscriptionName?: string
+          | null, virtualNetworkId?: string, virtualNetworkLocation?: string |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.cloudPcOnPremisesConnection" />" })[],
+          provisioningPolicies?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, alternateResourceUrl?: string | null,
+          assignments?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+          ..., assignedUsers?: ..., target?: ... } & { <xref uid="@odata.type"
+          />: ... })[], autopatch?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, autopatchGroupId?: string | null } |
+          null, cloudPcGroupDisplayName?: string | null, cloudPcNamingTemplate?:
+          string | null, description?: string | null, displayName?: string,
+          domainJoinConfigurations?: { <xref uid="@odata.type" />: string,
+          domainJoinType?: function, onPremisesConnectionId?: function,
+          regionGroup?: function, regionName?: function }[],
+          enableSingleSignOn?: boolean | null, gracePeriodInHours?: number |
+          null, imageDisplayName?: string, imageId?: string, imageType?:
+          "unknownFutureValue" | "gallery" | "custom", localAdminEnabled?:
+          boolean | null, microsoftManagedDesktop?: Record&lt;string, never&gt;
+          | { <xref uid="@odata.type" />: string, managedType?: Record&lt;...,
+          ...&gt; | "unknownFutureValue" | "notManaged" | "premiumManaged" |
+          "standardManaged" | "starterManaged" | null, profile?: string | null }
+          | null, provisioningType?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "dedicated" | "shared" | null, windowsSetting?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          locale?: string | null } | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.cloudPcProvisioningPolicy" />" })[],
+          userSettings?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, assignments?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., createdDateTime?: ..., target?: ... } & {
+          <xref uid="@odata.type" />: ... })[], createdDateTime?: string | null,
+          displayName?: string | null, lastModifiedDateTime?: string | null,
+          localAdminEnabled?: boolean | null, resetEnabled?: boolean | null,
+          restorePointSetting?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, frequencyType?: Record&lt;..., ...&gt; |
+          "unknownFutureValue" | "default" | "fourHours" | "sixHours" |
+          "twelveHours" | "sixteenHours" | "twentyFourHours" | null,
+          userRestoreEnabled?: boolean | null } | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.cloudPcUserSetting"
+          />" })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.virtualEndpoint" />" }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, auditEvents?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, activity?: string |
+      null, activityDateTime?: string, activityOperationType?: "delete" |
+      "patch" | "unknownFutureValue" | "create", activityResult?:
+      "unknownFutureValue" | "success" | "clientError" | "failure" | "timeout",
+      activityType?: string, actor?: { @odata.type: string,
+      applicationDisplayName?: string | null, applicationId?: string | null,
+      ipAddress?: string | null, remoteTenantId?: string | null, remoteUserId?:
+      string | null, servicePrincipalName?: string | null, userId?: string |
+      null, userPermissions?: string[], userPrincipalName?: string | null,
+      userRoleScopeTags?: { @odata.type: ..., displayName?: ...,
+      roleScopeTagId?: ... }[] }, category?: "unknownFutureValue" | "cloudPC",
+      componentName?: string, correlationId?: string, displayName?: string,
+      resources?: { @odata.type: string, displayName?: string | null,
+      modifiedProperties?: ...[], resourceId?: string }[] } & { @odata.type:
+      "#microsoft.graph.cloudPcAuditEvent" })[], cloudPCs?: (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string,
+      aadDeviceId?: string | null, displayName?: string | null,
+      gracePeriodEndDateTime?: string | null, imageDisplayName?: string | null,
+      lastModifiedDateTime?: string, managedDeviceId?: string | null,
+      managedDeviceName?: string | null, onPremisesConnectionName?: string |
+      null, provisioningPolicyId?: string | null, provisioningPolicyName?:
+      string | null, provisioningType?: Record<string, never> |
+      "unknownFutureValue" | "dedicated" | "shared" | null, servicePlanId?:
+      string | null, servicePlanName?: string | null, userPrincipalName?: string
+      | null } & { @odata.type: "#microsoft.graph.cloudPC" })[], deviceImages?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, displayName?: string | null, errorCode?:
+      Record<string, never> | "unknownFutureValue" | "internalServerError" |
+      "sourceImageNotFound" | "osVersionNotSupported" | "sourceImageInvalid" |
+      "sourceImageNotGeneralized" | "vmAlreadyAzureAdjoined" |
+      "paidSourceImageNotSupport" | "sourceImageNotSupportCustomizeVMName" |
+      "sourceImageSizeExceedsLimitation" | null, expirationDate?: string | null,
+      lastModifiedDateTime?: string | null, operatingSystem?: string | null,
+      osBuildNumber?: string | null, osStatus?: Record<string, never> |
+      "unknown" | "unknownFutureValue" | "supported" | "supportedWithWarning" |
+      null, sourceImageResourceId?: string | null, status?: Record<string,
+      never> | "failed" | "pending" | "unknownFutureValue" | "ready" | null,
+      version?: string | null } & { @odata.type:
+      "#microsoft.graph.cloudPcDeviceImage" })[], galleryImages?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, displayName?: string | null, endDate?: string | null,
+      expirationDate?: string | null, offerName?: string | null, publisherName?:
+      string | null, sizeInGB?: number | null, skuName?: string | null,
+      startDate?: string | null, status?: Record<string, never> |
+      "unknownFutureValue" | "notSupported" | "supported" |
+      "supportedWithWarning" | null } & { @odata.type:
+      "#microsoft.graph.cloudPcGalleryImage" })[], onPremisesConnections?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, adDomainName?: string | null, adDomainPassword?:
+      string | null, adDomainUsername?: string | null, alternateResourceUrl?:
+      string | null, connectionType?: Record<string, never> |
+      "unknownFutureValue" | "hybridAzureADJoin" | "azureADJoin" | null,
+      displayName?: string, healthCheckStatus?: "failed" | "pending" | "warning"
+      | "running" | "unknownFutureValue" | "informational" | "passed",
+      healthCheckStatusDetail?: Record<string, never> | { @odata.type: string,
+      endDateTime?: string, healthChecks?: { @odata.type: ...,
+      additionalDetail?: ..., correlationId?: ..., displayName?: ...,
+      endDateTime?: ..., errorType?: ..., recommendedAction?: ...,
+      startDateTime?: ..., status?: ... }[], startDateTime?: string } | null,
+      inUse?: boolean | null, organizationalUnit?: string | null,
+      resourceGroupId?: string, subnetId?: string, subscriptionId?: string,
+      subscriptionName?: string | null, virtualNetworkId?: string,
+      virtualNetworkLocation?: string | null } & { @odata.type:
+      "#microsoft.graph.cloudPcOnPremisesConnection" })[],
+      provisioningPolicies?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, alternateResourceUrl?: string |
+      null, assignments?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> &
+      { @odata.type: string, assignedUsers?: function, target?: function } & {
+      @odata.type: "#microsoft.graph.cloudPcProvisioningPolicyAssignment" })[],
+      autopatch?: Record<string, never> | { @odata.type: string,
+      autopatchGroupId?: string | null } | null, cloudPcGroupDisplayName?:
+      string | null, cloudPcNamingTemplate?: string | null, description?: string
+      | null, displayName?: string, domainJoinConfigurations?: { @odata.type:
+      string, domainJoinType?: Record<..., ...> | "unknownFutureValue" |
+      "hybridAzureADJoin" | "azureADJoin" | null, onPremisesConnectionId?:
+      string | null, regionGroup?: Record<..., ...> | "unknownFutureValue" |
+      "default" | "australia" | "canada" | "usCentral" | "usEast" | "usWest" |
+      "france" | "germany" | "europeUnion" | "unitedKingdom" | "japan" | "asia"
+      | "india" | "southAmerica" | "euap" | "usGovernment" | "usGovernmentDOD" |
+      "norway" | "switzerland" | "southKorea" | null, regionName?: string | null
+      }[], enableSingleSignOn?: boolean | null, gracePeriodInHours?: number |
+      null, imageDisplayName?: string, imageId?: string, imageType?:
+      "unknownFutureValue" | "gallery" | "custom", localAdminEnabled?: boolean |
+      null, microsoftManagedDesktop?: Record<string, never> | { @odata.type:
+      string, managedType?: Record<string, never> | "unknownFutureValue" |
+      "notManaged" | "premiumManaged" | "standardManaged" | "starterManaged" |
+      null, profile?: string | null } | null, provisioningType?: Record<string,
+      never> | "unknownFutureValue" | "dedicated" | "shared" | null,
+      windowsSetting?: Record<string, never> | { @odata.type: string, locale?:
+      string | null } | null } & { @odata.type:
+      "#microsoft.graph.cloudPcProvisioningPolicy" })[], userSettings?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, assignments?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type">
+      & { @odata.type: string, createdDateTime?: function, target?: function } &
+      { @odata.type: "#microsoft.graph.cloudPcUserSettingAssignment" })[],
+      createdDateTime?: string | null, displayName?: string | null,
+      lastModifiedDateTime?: string | null, localAdminEnabled?: boolean | null,
+      resetEnabled?: boolean | null, restorePointSetting?: Record<string, never>
+      | { @odata.type: string, frequencyType?: Record<string, never> |
+      "unknownFutureValue" | "default" | "fourHours" | "sixHours" |
+      "twelveHours" | "sixteenHours" | "twentyFourHours" | null,
+      userRestoreEnabled?: boolean | null } | null } & { @odata.type:
+      "#microsoft.graph.cloudPcUserSetting" })[] } & { @odata.type:
+      "#microsoft.graph.virtualEndpoint" })
     uid: '@microsoft/teams.graph-endpoints.deviceManagement.virtualEndpoint.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`PATCH /deviceManagement/virtualEndpoint`'
@@ -228,15 +537,461 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/deviceManagement/virtualEndpoint",
-        "patch">): EndpointRequest<IEndpoints["PATCH
-        /deviceManagement/virtualEndpoint"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, auditEvents?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, activity?: string | null, activityDateTime?: string,
+        activityOperationType?: "delete" | "patch" | "unknownFutureValue" |
+        "create", activityResult?: "unknownFutureValue" | "success" |
+        "clientError" | "failure" | "timeout", activityType?: string, actor?: {
+        @odata.type: string, applicationDisplayName?: string | null,
+        applicationId?: string | null, ipAddress?: string | null,
+        remoteTenantId?: string | null, remoteUserId?: string | null,
+        servicePrincipalName?: string | null, userId?: string | null,
+        userPermissions?: string[], userPrincipalName?: string | null,
+        userRoleScopeTags?: { @odata.type: ..., displayName?: ...,
+        roleScopeTagId?: ... }[] }, category?: "unknownFutureValue" | "cloudPC",
+        componentName?: string, correlationId?: string, displayName?: string,
+        resources?: { @odata.type: string, displayName?: string | null,
+        modifiedProperties?: ...[], resourceId?: string }[] } & { @odata.type:
+        "#microsoft.graph.cloudPcAuditEvent" })[], cloudPCs?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, aadDeviceId?: string | null, displayName?: string | null,
+        gracePeriodEndDateTime?: string | null, imageDisplayName?: string |
+        null, lastModifiedDateTime?: string, managedDeviceId?: string | null,
+        managedDeviceName?: string | null, onPremisesConnectionName?: string |
+        null, provisioningPolicyId?: string | null, provisioningPolicyName?:
+        string | null, provisioningType?: Record<string, never> |
+        "unknownFutureValue" | "dedicated" | "shared" | null, servicePlanId?:
+        string | null, servicePlanName?: string | null, userPrincipalName?:
+        string | null } & { @odata.type: "#microsoft.graph.cloudPC" })[],
+        deviceImages?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, displayName?: string | null,
+        errorCode?: Record<string, never> | "unknownFutureValue" |
+        "internalServerError" | "sourceImageNotFound" | "osVersionNotSupported"
+        | "sourceImageInvalid" | "sourceImageNotGeneralized" |
+        "vmAlreadyAzureAdjoined" | "paidSourceImageNotSupport" |
+        "sourceImageNotSupportCustomizeVMName" |
+        "sourceImageSizeExceedsLimitation" | null, expirationDate?: string |
+        null, lastModifiedDateTime?: string | null, operatingSystem?: string |
+        null, osBuildNumber?: string | null, osStatus?: Record<string, never> |
+        "unknown" | "unknownFutureValue" | "supported" | "supportedWithWarning"
+        | null, sourceImageResourceId?: string | null, status?: Record<string,
+        never> | "failed" | "pending" | "unknownFutureValue" | "ready" | null,
+        version?: string | null } & { @odata.type:
+        "#microsoft.graph.cloudPcDeviceImage" })[], galleryImages?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, displayName?: string | null, endDate?: string | null,
+        expirationDate?: string | null, offerName?: string | null,
+        publisherName?: string | null, sizeInGB?: number | null, skuName?:
+        string | null, startDate?: string | null, status?: Record<string, never>
+        | "unknownFutureValue" | "notSupported" | "supported" |
+        "supportedWithWarning" | null } & { @odata.type:
+        "#microsoft.graph.cloudPcGalleryImage" })[], onPremisesConnections?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, adDomainName?: string | null, adDomainPassword?:
+        string | null, adDomainUsername?: string | null, alternateResourceUrl?:
+        string | null, connectionType?: Record<string, never> |
+        "unknownFutureValue" | "hybridAzureADJoin" | "azureADJoin" | null,
+        displayName?: string, healthCheckStatus?: "failed" | "pending" |
+        "warning" | "running" | "unknownFutureValue" | "informational" |
+        "passed", healthCheckStatusDetail?: Record<string, never> | {
+        @odata.type: string, endDateTime?: string, healthChecks?: { @odata.type:
+        ..., additionalDetail?: ..., correlationId?: ..., displayName?: ...,
+        endDateTime?: ..., errorType?: ..., recommendedAction?: ...,
+        startDateTime?: ..., status?: ... }[], startDateTime?: string } | null,
+        inUse?: boolean | null, organizationalUnit?: string | null,
+        resourceGroupId?: string, subnetId?: string, subscriptionId?: string,
+        subscriptionName?: string | null, virtualNetworkId?: string,
+        virtualNetworkLocation?: string | null } & { @odata.type:
+        "#microsoft.graph.cloudPcOnPremisesConnection" })[],
+        provisioningPolicies?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, alternateResourceUrl?: string |
+        null, assignments?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type">
+        & { @odata.type: string, assignedUsers?: function, target?: function } &
+        { @odata.type: "#microsoft.graph.cloudPcProvisioningPolicyAssignment"
+        })[], autopatch?: Record<string, never> | { @odata.type: string,
+        autopatchGroupId?: string | null } | null, cloudPcGroupDisplayName?:
+        string | null, cloudPcNamingTemplate?: string | null, description?:
+        string | null, displayName?: string, domainJoinConfigurations?: {
+        @odata.type: string, domainJoinType?: Record<..., ...> |
+        "unknownFutureValue" | "hybridAzureADJoin" | "azureADJoin" | null,
+        onPremisesConnectionId?: string | null, regionGroup?: Record<..., ...> |
+        "unknownFutureValue" | "default" | "australia" | "canada" | "usCentral"
+        | "usEast" | "usWest" | "france" | "germany" | "europeUnion" |
+        "unitedKingdom" | "japan" | "asia" | "india" | "southAmerica" | "euap" |
+        "usGovernment" | "usGovernmentDOD" | "norway" | "switzerland" |
+        "southKorea" | null, regionName?: string | null }[],
+        enableSingleSignOn?: boolean | null, gracePeriodInHours?: number | null,
+        imageDisplayName?: string, imageId?: string, imageType?:
+        "unknownFutureValue" | "gallery" | "custom", localAdminEnabled?: boolean
+        | null, microsoftManagedDesktop?: Record<string, never> | { @odata.type:
+        string, managedType?: Record<string, never> | "unknownFutureValue" |
+        "notManaged" | "premiumManaged" | "standardManaged" | "starterManaged" |
+        null, profile?: string | null } | null, provisioningType?:
+        Record<string, never> | "unknownFutureValue" | "dedicated" | "shared" |
+        null, windowsSetting?: Record<string, never> | { @odata.type: string,
+        locale?: string | null } | null } & { @odata.type:
+        "#microsoft.graph.cloudPcProvisioningPolicy" })[], userSettings?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, assignments?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, createdDateTime?: function,
+        target?: function } & { @odata.type:
+        "#microsoft.graph.cloudPcUserSettingAssignment" })[], createdDateTime?:
+        string | null, displayName?: string | null, lastModifiedDateTime?:
+        string | null, localAdminEnabled?: boolean | null, resetEnabled?:
+        boolean | null, restorePointSetting?: Record<string, never> | {
+        @odata.type: string, frequencyType?: Record<string, never> |
+        "unknownFutureValue" | "default" | "fourHours" | "sixHours" |
+        "twelveHours" | "sixteenHours" | "twentyFourHours" | null,
+        userRestoreEnabled?: boolean | null } | null } & { @odata.type:
+        "#microsoft.graph.cloudPcUserSetting" })[] } & { @odata.type:
+        "#microsoft.graph.virtualEndpoint" }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, auditEvents?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, activity?: string | null,
+        activityDateTime?: string, activityOperationType?: "delete" | "patch" |
+        "unknownFutureValue" | "create", activityResult?: "unknownFutureValue" |
+        "success" | "clientError" | "failure" | "timeout", activityType?:
+        string, actor?: { @odata.type: string, applicationDisplayName?: string |
+        null, applicationId?: string | null, ipAddress?: string | null,
+        remoteTenantId?: string | null, remoteUserId?: string | null,
+        servicePrincipalName?: string | null, userId?: string | null,
+        userPermissions?: ...[], userPrincipalName?: string | null,
+        userRoleScopeTags?: ...[] }, category?: "unknownFutureValue" |
+        "cloudPC", componentName?: string, correlationId?: string, displayName?:
+        string, resources?: { @odata.type: string, displayName?: function,
+        modifiedProperties?: function, resourceId?: function }[] } & {
+        @odata.type: "#microsoft.graph.cloudPcAuditEvent" })[], cloudPCs?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, aadDeviceId?: string | null, displayName?: string |
+        null, gracePeriodEndDateTime?: string | null, imageDisplayName?: string
+        | null, lastModifiedDateTime?: string, managedDeviceId?: string | null,
+        managedDeviceName?: string | null, onPremisesConnectionName?: string |
+        null, provisioningPolicyId?: string | null, provisioningPolicyName?:
+        string | null, provisioningType?: Record<string, never> |
+        "unknownFutureValue" | "dedicated" | "shared" | null, servicePlanId?:
+        string | null, servicePlanName?: string | null, userPrincipalName?:
+        string | null } & { @odata.type: "#microsoft.graph.cloudPC" })[],
+        deviceImages?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, displayName?: string | null,
+        errorCode?: Record<string, never> | "unknownFutureValue" |
+        "internalServerError" | "sourceImageNotFound" | "osVersionNotSupported"
+        | "sourceImageInvalid" | "sourceImageNotGeneralized" |
+        "vmAlreadyAzureAdjoined" | "paidSourceImageNotSupport" |
+        "sourceImageNotSupportCustomizeVMName" |
+        "sourceImageSizeExceedsLimitation" | null, expirationDate?: string |
+        null, lastModifiedDateTime?: string | null, operatingSystem?: string |
+        null, osBuildNumber?: string | null, osStatus?: Record<string, never> |
+        "unknown" | "unknownFutureValue" | "supported" | "supportedWithWarning"
+        | null, sourceImageResourceId?: string | null, status?: Record<string,
+        never> | "failed" | "pending" | "unknownFutureValue" | "ready" | null,
+        version?: string | null } & { @odata.type:
+        "#microsoft.graph.cloudPcDeviceImage" })[], galleryImages?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, displayName?: string | null, endDate?: string | null,
+        expirationDate?: string | null, offerName?: string | null,
+        publisherName?: string | null, sizeInGB?: number | null, skuName?:
+        string | null, startDate?: string | null, status?: Record<string, never>
+        | "unknownFutureValue" | "notSupported" | "supported" |
+        "supportedWithWarning" | null } & { @odata.type:
+        "#microsoft.graph.cloudPcGalleryImage" })[], onPremisesConnections?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, adDomainName?: string | null, adDomainPassword?:
+        string | null, adDomainUsername?: string | null, alternateResourceUrl?:
+        string | null, connectionType?: Record<string, never> |
+        "unknownFutureValue" | "hybridAzureADJoin" | "azureADJoin" | null,
+        displayName?: string, healthCheckStatus?: "failed" | "pending" |
+        "warning" | "running" | "unknownFutureValue" | "informational" |
+        "passed", healthCheckStatusDetail?: Record<string, never> | {
+        @odata.type: string, endDateTime?: string, healthChecks?: ...[],
+        startDateTime?: string } | null, inUse?: boolean | null,
+        organizationalUnit?: string | null, resourceGroupId?: string, subnetId?:
+        string, subscriptionId?: string, subscriptionName?: string | null,
+        virtualNetworkId?: string, virtualNetworkLocation?: string | null } & {
+        @odata.type: "#microsoft.graph.cloudPcOnPremisesConnection" })[],
+        provisioningPolicies?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, alternateResourceUrl?: string |
+        null, assignments?: (Omit<..., ...> & { @odata.type: ...,
+        assignedUsers?: ..., target?: ... } & { @odata.type: ... })[],
+        autopatch?: Record<string, never> | { @odata.type: string,
+        autopatchGroupId?: string | null } | null, cloudPcGroupDisplayName?:
+        string | null, cloudPcNamingTemplate?: string | null, description?:
+        string | null, displayName?: string, domainJoinConfigurations?: {
+        @odata.type: string, domainJoinType?: function, onPremisesConnectionId?:
+        function, regionGroup?: function, regionName?: function }[],
+        enableSingleSignOn?: boolean | null, gracePeriodInHours?: number | null,
+        imageDisplayName?: string, imageId?: string, imageType?:
+        "unknownFutureValue" | "gallery" | "custom", localAdminEnabled?: boolean
+        | null, microsoftManagedDesktop?: Record<string, never> | { @odata.type:
+        string, managedType?: Record<..., ...> | "unknownFutureValue" |
+        "notManaged" | "premiumManaged" | "standardManaged" | "starterManaged" |
+        null, profile?: string | null } | null, provisioningType?:
+        Record<string, never> | "unknownFutureValue" | "dedicated" | "shared" |
+        null, windowsSetting?: Record<string, never> | { @odata.type: string,
+        locale?: string | null } | null } & { @odata.type:
+        "#microsoft.graph.cloudPcProvisioningPolicy" })[], userSettings?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, assignments?: (Omit<..., ...> & { @odata.type: ...,
+        createdDateTime?: ..., target?: ... } & { @odata.type: ... })[],
+        createdDateTime?: string | null, displayName?: string | null,
+        lastModifiedDateTime?: string | null, localAdminEnabled?: boolean |
+        null, resetEnabled?: boolean | null, restorePointSetting?:
+        Record<string, never> | { @odata.type: string, frequencyType?:
+        Record<..., ...> | "unknownFutureValue" | "default" | "fourHours" |
+        "sixHours" | "twelveHours" | "sixteenHours" | "twentyFourHours" | null,
+        userRestoreEnabled?: boolean | null } | null } & { @odata.type:
+        "#microsoft.graph.cloudPcUserSetting" })[] } & { @odata.type:
+        "#microsoft.graph.virtualEndpoint" }>
       parameters:
         - id: body
-          type: Operation&lt;"/deviceManagement/virtualEndpoint", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            auditEvents?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, activity?: string | null,
+            activityDateTime?: string, activityOperationType?: "delete" |
+            "patch" | "unknownFutureValue" | "create", activityResult?:
+            "unknownFutureValue" | "success" | "clientError" | "failure" |
+            "timeout", activityType?: string, actor?: { <xref uid="@odata.type"
+            />: string, applicationDisplayName?: string | null, applicationId?:
+            string | null, ipAddress?: string | null, remoteTenantId?: string |
+            null, remoteUserId?: string | null, servicePrincipalName?: string |
+            null, userId?: string | null, userPermissions?: string[],
+            userPrincipalName?: string | null, userRoleScopeTags?: { <xref
+            uid="@odata.type" />: ..., displayName?: ..., roleScopeTagId?: ...
+            }[] }, category?: "unknownFutureValue" | "cloudPC", componentName?:
+            string, correlationId?: string, displayName?: string, resources?: {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            modifiedProperties?: ...[], resourceId?: string }[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.cloudPcAuditEvent" />" })[], cloudPCs?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            aadDeviceId?: string | null, displayName?: string | null,
+            gracePeriodEndDateTime?: string | null, imageDisplayName?: string |
+            null, lastModifiedDateTime?: string, managedDeviceId?: string |
+            null, managedDeviceName?: string | null, onPremisesConnectionName?:
+            string | null, provisioningPolicyId?: string | null,
+            provisioningPolicyName?: string | null, provisioningType?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "dedicated" |
+            "shared" | null, servicePlanId?: string | null, servicePlanName?:
+            string | null, userPrincipalName?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.cloudPC" />"
+            })[], deviceImages?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, displayName?: string | null,
+            errorCode?: Record&lt;string, never&gt; | "unknownFutureValue" |
+            "internalServerError" | "sourceImageNotFound" |
+            "osVersionNotSupported" | "sourceImageInvalid" |
+            "sourceImageNotGeneralized" | "vmAlreadyAzureAdjoined" |
+            "paidSourceImageNotSupport" | "sourceImageNotSupportCustomizeVMName"
+            | "sourceImageSizeExceedsLimitation" | null, expirationDate?: string
+            | null, lastModifiedDateTime?: string | null, operatingSystem?:
+            string | null, osBuildNumber?: string | null, osStatus?:
+            Record&lt;string, never&gt; | "unknown" | "unknownFutureValue" |
+            "supported" | "supportedWithWarning" | null, sourceImageResourceId?:
+            string | null, status?: Record&lt;string, never&gt; | "failed" |
+            "pending" | "unknownFutureValue" | "ready" | null, version?: string
+            | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.cloudPcDeviceImage" />" })[], galleryImages?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            displayName?: string | null, endDate?: string | null,
+            expirationDate?: string | null, offerName?: string | null,
+            publisherName?: string | null, sizeInGB?: number | null, skuName?:
+            string | null, startDate?: string | null, status?: Record&lt;string,
+            never&gt; | "unknownFutureValue" | "notSupported" | "supported" |
+            "supportedWithWarning" | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.cloudPcGalleryImage" />" })[],
+            onPremisesConnections?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, adDomainName?: string | null,
+            adDomainPassword?: string | null, adDomainUsername?: string | null,
+            alternateResourceUrl?: string | null, connectionType?:
+            Record&lt;string, never&gt; | "unknownFutureValue" |
+            "hybridAzureADJoin" | "azureADJoin" | null, displayName?: string,
+            healthCheckStatus?: "failed" | "pending" | "warning" | "running" |
+            "unknownFutureValue" | "informational" | "passed",
+            healthCheckStatusDetail?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, endDateTime?: string, healthChecks?: {
+            <xref uid="@odata.type" />: ..., additionalDetail?: ...,
+            correlationId?: ..., displayName?: ..., endDateTime?: ...,
+            errorType?: ..., recommendedAction?: ..., startDateTime?: ...,
+            status?: ... }[], startDateTime?: string } | null, inUse?: boolean |
+            null, organizationalUnit?: string | null, resourceGroupId?: string,
+            subnetId?: string, subscriptionId?: string, subscriptionName?:
+            string | null, virtualNetworkId?: string, virtualNetworkLocation?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.cloudPcOnPremisesConnection" />" })[],
+            provisioningPolicies?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, alternateResourceUrl?: string | null,
+            assignments?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, assignedUsers?: function, target?: function } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.cloudPcProvisioningPolicyAssignment" />" })[],
+            autopatch?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, autopatchGroupId?: string | null } | null,
+            cloudPcGroupDisplayName?: string | null, cloudPcNamingTemplate?:
+            string | null, description?: string | null, displayName?: string,
+            domainJoinConfigurations?: { <xref uid="@odata.type" />: string,
+            domainJoinType?: Record&lt;..., ...&gt; | "unknownFutureValue" |
+            "hybridAzureADJoin" | "azureADJoin" | null, onPremisesConnectionId?:
+            string | null, regionGroup?: Record&lt;..., ...&gt; |
+            "unknownFutureValue" | "default" | "australia" | "canada" |
+            "usCentral" | "usEast" | "usWest" | "france" | "germany" |
+            "europeUnion" | "unitedKingdom" | "japan" | "asia" | "india" |
+            "southAmerica" | "euap" | "usGovernment" | "usGovernmentDOD" |
+            "norway" | "switzerland" | "southKorea" | null, regionName?: string
+            | null }[], enableSingleSignOn?: boolean | null,
+            gracePeriodInHours?: number | null, imageDisplayName?: string,
+            imageId?: string, imageType?: "unknownFutureValue" | "gallery" |
+            "custom", localAdminEnabled?: boolean | null,
+            microsoftManagedDesktop?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, managedType?: Record&lt;string,
+            never&gt; | "unknownFutureValue" | "notManaged" | "premiumManaged" |
+            "standardManaged" | "starterManaged" | null, profile?: string | null
+            } | null, provisioningType?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "dedicated" | "shared" | null,
+            windowsSetting?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, locale?: string | null } | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.cloudPcProvisioningPolicy" />" })[],
+            userSettings?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, assignments?: (Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, createdDateTime?:
+            function, target?: function } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.cloudPcUserSettingAssignment" />" })[],
+            createdDateTime?: string | null, displayName?: string | null,
+            lastModifiedDateTime?: string | null, localAdminEnabled?: boolean |
+            null, resetEnabled?: boolean | null, restorePointSetting?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            frequencyType?: Record&lt;string, never&gt; | "unknownFutureValue" |
+            "default" | "fourHours" | "sixHours" | "twelveHours" |
+            "sixteenHours" | "twentyFourHours" | null, userRestoreEnabled?:
+            boolean | null } | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.cloudPcUserSetting" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.virtualEndpoint"
+            />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /deviceManagement/virtualEndpoint"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, auditEvents?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, activity?: string | null,
+          activityDateTime?: string, activityOperationType?: "delete" | "patch"
+          | "unknownFutureValue" | "create", activityResult?:
+          "unknownFutureValue" | "success" | "clientError" | "failure" |
+          "timeout", activityType?: string, actor?: { <xref uid="@odata.type"
+          />: string, applicationDisplayName?: string | null, applicationId?:
+          string | null, ipAddress?: string | null, remoteTenantId?: string |
+          null, remoteUserId?: string | null, servicePrincipalName?: string |
+          null, userId?: string | null, userPermissions?: ...[],
+          userPrincipalName?: string | null, userRoleScopeTags?: ...[] },
+          category?: "unknownFutureValue" | "cloudPC", componentName?: string,
+          correlationId?: string, displayName?: string, resources?: { <xref
+          uid="@odata.type" />: string, displayName?: function,
+          modifiedProperties?: function, resourceId?: function }[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.cloudPcAuditEvent"
+          />" })[], cloudPCs?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, aadDeviceId?: string | null,
+          displayName?: string | null, gracePeriodEndDateTime?: string | null,
+          imageDisplayName?: string | null, lastModifiedDateTime?: string,
+          managedDeviceId?: string | null, managedDeviceName?: string | null,
+          onPremisesConnectionName?: string | null, provisioningPolicyId?:
+          string | null, provisioningPolicyName?: string | null,
+          provisioningType?: Record&lt;string, never&gt; | "unknownFutureValue"
+          | "dedicated" | "shared" | null, servicePlanId?: string | null,
+          servicePlanName?: string | null, userPrincipalName?: string | null } &
+          { <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.cloudPC"
+          />" })[], deviceImages?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, displayName?: string | null, errorCode?:
+          Record&lt;string, never&gt; | "unknownFutureValue" |
+          "internalServerError" | "sourceImageNotFound" |
+          "osVersionNotSupported" | "sourceImageInvalid" |
+          "sourceImageNotGeneralized" | "vmAlreadyAzureAdjoined" |
+          "paidSourceImageNotSupport" | "sourceImageNotSupportCustomizeVMName" |
+          "sourceImageSizeExceedsLimitation" | null, expirationDate?: string |
+          null, lastModifiedDateTime?: string | null, operatingSystem?: string |
+          null, osBuildNumber?: string | null, osStatus?: Record&lt;string,
+          never&gt; | "unknown" | "unknownFutureValue" | "supported" |
+          "supportedWithWarning" | null, sourceImageResourceId?: string | null,
+          status?: Record&lt;string, never&gt; | "failed" | "pending" |
+          "unknownFutureValue" | "ready" | null, version?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.cloudPcDeviceImage" />" })[], galleryImages?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          displayName?: string | null, endDate?: string | null, expirationDate?:
+          string | null, offerName?: string | null, publisherName?: string |
+          null, sizeInGB?: number | null, skuName?: string | null, startDate?:
+          string | null, status?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "notSupported" | "supported" |
+          "supportedWithWarning" | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.cloudPcGalleryImage" />" })[],
+          onPremisesConnections?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, adDomainName?: string | null,
+          adDomainPassword?: string | null, adDomainUsername?: string | null,
+          alternateResourceUrl?: string | null, connectionType?:
+          Record&lt;string, never&gt; | "unknownFutureValue" |
+          "hybridAzureADJoin" | "azureADJoin" | null, displayName?: string,
+          healthCheckStatus?: "failed" | "pending" | "warning" | "running" |
+          "unknownFutureValue" | "informational" | "passed",
+          healthCheckStatusDetail?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, endDateTime?: string, healthChecks?:
+          ...[], startDateTime?: string } | null, inUse?: boolean | null,
+          organizationalUnit?: string | null, resourceGroupId?: string,
+          subnetId?: string, subscriptionId?: string, subscriptionName?: string
+          | null, virtualNetworkId?: string, virtualNetworkLocation?: string |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.cloudPcOnPremisesConnection" />" })[],
+          provisioningPolicies?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, alternateResourceUrl?: string | null,
+          assignments?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+          ..., assignedUsers?: ..., target?: ... } & { <xref uid="@odata.type"
+          />: ... })[], autopatch?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, autopatchGroupId?: string | null } |
+          null, cloudPcGroupDisplayName?: string | null, cloudPcNamingTemplate?:
+          string | null, description?: string | null, displayName?: string,
+          domainJoinConfigurations?: { <xref uid="@odata.type" />: string,
+          domainJoinType?: function, onPremisesConnectionId?: function,
+          regionGroup?: function, regionName?: function }[],
+          enableSingleSignOn?: boolean | null, gracePeriodInHours?: number |
+          null, imageDisplayName?: string, imageId?: string, imageType?:
+          "unknownFutureValue" | "gallery" | "custom", localAdminEnabled?:
+          boolean | null, microsoftManagedDesktop?: Record&lt;string, never&gt;
+          | { <xref uid="@odata.type" />: string, managedType?: Record&lt;...,
+          ...&gt; | "unknownFutureValue" | "notManaged" | "premiumManaged" |
+          "standardManaged" | "starterManaged" | null, profile?: string | null }
+          | null, provisioningType?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "dedicated" | "shared" | null, windowsSetting?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          locale?: string | null } | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.cloudPcProvisioningPolicy" />" })[],
+          userSettings?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, assignments?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., createdDateTime?: ..., target?: ... } & {
+          <xref uid="@odata.type" />: ... })[], createdDateTime?: string | null,
+          displayName?: string | null, lastModifiedDateTime?: string | null,
+          localAdminEnabled?: boolean | null, resetEnabled?: boolean | null,
+          restorePointSetting?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, frequencyType?: Record&lt;..., ...&gt; |
+          "unknownFutureValue" | "default" | "fourHours" | "sixHours" |
+          "twelveHours" | "sixteenHours" | "twentyFourHours" | null,
+          userRestoreEnabled?: boolean | null } | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.cloudPcUserSetting"
+          />" })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.virtualEndpoint" />" }&gt;

@@ -73,19 +73,75 @@ inheritedProperties:
         description: ''
         type: string
     inheritanceDescription: <b>Inherited From</b> IActivityContext.appId
+  - name: client
+    uid: '@microsoft/teams.apps.IActivityErrorContext.client'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      the app's shared HTTP client, used for outbound calls that are not part of
+      the Teams API surface
+
+      (e.g. downloading an inbound file's bytes)
+
+      They inherit the app's User-Agent, middleware, and configuration.
+    fullName: client
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'client?: Client'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.common.Client" />
+    inheritanceDescription: <b>Inherited From</b> IActivityContext.client
   - name: connectionName
     uid: '@microsoft/teams.apps.IActivityErrorContext.connectionName'
     package: '@microsoft/teams.apps'
     summary: the default connection name to use for the app
     fullName: connectionName
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: Register and retain the required `OAuthFlow` explicitly.
     syntax:
       content: 'connectionName: string'
       return:
         description: ''
         type: string
     inheritanceDescription: <b>Inherited From</b> IActivityContext.connectionName
+  - name: files
+    uid: '@microsoft/teams.apps.IActivityErrorContext.files'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      the uploaded files on the current inbound activity, i.e. `contentType:
+      file.download.info` subset of `activity.attachments`, mapped to
+      `IncomingFile`. See
+      [IFilesAccessor](xref:@microsoft/teams.apps.IFilesAccessor).
+    fullName: files
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'files: IFilesAccessor'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.IFilesAccessor" />
+    inheritanceDescription: <b>Inherited From</b> IActivityContext.files
+  - name: getConnectionStatus
+    uid: '@microsoft/teams.apps.IActivityErrorContext.getConnectionStatus'
+    package: '@microsoft/teams.apps'
+    summary: |-
+      Gets token status for every registered OAuth connection.
+
+      Connections reported as disconnected after silent SSO are verified with a
+      direct token lookup. A connected flow omitted by the status endpoint is
+      returned with an empty `serviceProviderDisplayName` because that value is
+      unavailable from the token response.
+    fullName: getConnectionStatus
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'getConnectionStatus: () => Promise<TokenStatus[]>'
+      return:
+        description: ''
+        type: () =&gt; Promise&lt;TokenStatus[]&gt;
+    inheritanceDescription: <b>Inherited From</b> IActivityContext.getConnectionStatus
   - name: isSignedIn
     uid: '@microsoft/teams.apps.IActivityErrorContext.isSignedIn'
     package: '@microsoft/teams.apps'
@@ -95,7 +151,8 @@ inheritedProperties:
       via `api.user.*`
     fullName: isSignedIn
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: Use `app.getOAuthFlow(connectionName).isSignedIn(ctx)`.
     syntax:
       content: 'isSignedIn?: boolean'
       return:
@@ -125,15 +182,14 @@ inheritedProperties:
     syntax:
       content: >-
         next: (context?: IBaseActivityContext<Activity, Record<string, any>> &
-        Record<string, any>) => void | InvokeResponse<any> | Promise<void |
-        InvokeResponse<any>>
+        Record<string, any>) => void | InvokeResponse | Promise<void |
+        InvokeResponse>
       return:
         description: ''
         type: >-
           (context?: IBaseActivityContext&lt;Activity, Record&lt;string,
-          any&gt;&gt; & Record&lt;string, any&gt;) =&gt; void |
-          InvokeResponse&lt;any&gt; | Promise&lt;void |
-          InvokeResponse&lt;any&gt;&gt;
+          any&gt;&gt; & Record&lt;string, any&gt;) =&gt; void | InvokeResponse |
+          Promise&lt;void | InvokeResponse&gt;
     inheritanceDescription: <b>Inherited From</b> IActivityContext.next
   - name: ref
     uid: '@microsoft/teams.apps.IActivityErrorContext.ref'
@@ -154,16 +210,15 @@ inheritedProperties:
     summary: trigger user signin flow for the activity sender
     fullName: signin
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: |-
+      Register a connection with `app.addOAuthFlow(...)` and call
+      `flow.signIn(ctx, options)` instead.
     syntax:
-      content: >-
-        signin: (options?: Partial<SignInOptions>) => Promise<undefined |
-        string>
+      content: 'signin: (options?: OAuthSignInOptions) => Promise<string | undefined>'
       return:
         description: ''
-        type: >-
-          (options?: Partial&lt;SignInOptions&gt;) =&gt; Promise&lt;undefined |
-          string&gt;
+        type: '(options?: OAuthSignInOptions) =&gt; Promise&lt;string | undefined&gt;'
     inheritanceDescription: <b>Inherited From</b> IActivityContext.signin
   - name: signout
     uid: '@microsoft/teams.apps.IActivityErrorContext.signout'
@@ -171,25 +226,54 @@ inheritedProperties:
     summary: sign the activity sender out
     fullName: signout
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: |-
+      Register a connection with `app.addOAuthFlow(...)` and call
+      `flow.signOut(ctx)` instead.
     syntax:
       content: 'signout: (name?: string) => Promise<void>'
       return:
         description: ''
         type: '(name?: string) =&gt; Promise&lt;void&gt;'
     inheritanceDescription: <b>Inherited From</b> IActivityContext.signout
+  - name: state
+    uid: '@microsoft/teams.apps.IActivityErrorContext.state'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Conversation and user state loaded for this activity turn.
+
+
+      This is undefined when state is disabled or the activity has no
+      conversation ID.
+
+      Do not retain the container after the handler completes; its scopes are
+      sealed.
+    fullName: state
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'state?: TurnStateContainer'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.TurnStateContainer" />
+    inheritanceDescription: <b>Inherited From</b> IActivityContext.state
   - name: storage
     uid: '@microsoft/teams.apps.IActivityErrorContext.storage'
     package: '@microsoft/teams.apps'
     summary: app storage instance
     fullName: storage
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: >-
+      Use `state` for conversation or user state. Applications that
+
+      need general persistence should own and use their storage provider
+      directly.
     syntax:
-      content: 'storage: IStorage<any, any>'
+      content: 'storage: IStorage'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.common.IStorage" />&lt;any, any&gt;
+        type: <xref uid="@microsoft/teams.common.IStorage" />
     inheritanceDescription: <b>Inherited From</b> IActivityContext.storage
   - name: stream
     uid: '@microsoft/teams.apps.IActivityErrorContext.stream'
@@ -210,7 +294,12 @@ inheritedProperties:
     summary: the user graph client
     fullName: userGraph
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: >-
+      Use a registered OAuth flow to acquire the token needed by the
+
+      Microsoft Graph operation. This property remains available for
+      compatibility.
     syntax:
       content: 'userGraph: Client'
       return:
@@ -223,7 +312,8 @@ inheritedProperties:
     summary: the user token for the activity context
     fullName: userToken
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: Use `app.getOAuthFlow(connectionName).getToken(ctx)`.
     syntax:
       content: 'userToken?: string'
       return:

@@ -9,7 +9,9 @@ interfaces:
     @microsoft/teams.graph-endpoints.identityGovernance.lifecycleWorkflows.workflows.taskReports.IEndpoints
 package: '@microsoft/teams.graph-endpoints'
 functions:
-  - name: get(any)
+  - name: >-
+      get({ $expand?: string[], $select?: string[], taskReport-id: string,
+      workflow-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.identityGovernance.lifecycleWorkflows.workflows.taskReports.get
     package: '@microsoft/teams.graph-endpoints'
@@ -24,18 +26,244 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /identityGovernance/lifecycleWorkflows/workflows/{workflow-id}/taskReports/{taskReport-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        taskReport-id: string, workflow-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, completedDateTime?: string | null, failedUsersCount?: number,
+        lastUpdatedDateTime?: string, processingStatus?: "unknownFutureValue" |
+        "canceled" | "queued" | "inProgress" | "completed" |
+        "completedWithErrors" | "failed", runId?: string | null,
+        startedDateTime?: string | null, successfulUsersCount?: number, task?:
+        Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, arguments?: { @odata.type: string, name?: string,
+        value?: string | null }[], category?: "unknownFutureValue" | "joiner" |
+        "leaver" | "mover", continueOnError?: boolean, description?: string |
+        null, displayName?: string, executionSequence?: number, isEnabled?:
+        boolean, taskDefinitionId?: string, taskProcessingResults?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        completedDateTime?: function, createdDateTime?: function,
+        failureReason?: function, processingStatus?: function, startedDateTime?:
+        function, subject?: function, task?: (Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { arguments?: { name?: string
+        | undefined; value?: string | null | undefined; '@odata.type': string;
+        }[] | undefined; ... 8 more ...; '@odata.type': string; } & { ...; }) |
+        undefined } & { @odata.type:
+        "#microsoft.graph.identityGovernance.taskProcessingResult" })[] } & {
+        @odata.type: "#microsoft.graph.identityGovernance.task" },
+        taskDefinition?: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, category?: "unknownFutureValue"
+        | "joiner" | "leaver" | "mover", continueOnError?: boolean,
+        description?: string | null, displayName?: string, parameters?: {
+        @odata.type: string, name?: string, values?: ...[], valueType?: "string"
+        | "unknownFutureValue" | "enum" | "int" | "bool" }[], version?: number }
+        & { @odata.type: "#microsoft.graph.identityGovernance.taskDefinition" },
+        taskProcessingResults?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, completedDateTime?: string |
+        null, createdDateTime?: string, failureReason?: string | null,
+        processingStatus?: "unknownFutureValue" | "canceled" | "queued" |
+        "inProgress" | "completed" | "completedWithErrors" | "failed",
+        startedDateTime?: string | null, subject?: Omit<... & ... & ...,
+        "@odata.type"> & { @odata.type: string, aboutMe?: function,
+        accountEnabled?: function, activities?: function, ageGroup?: function,
+        agreementAcceptances?: function, appRoleAssignments?: function,
+        assignedLicenses?: function, assignedPlans?: function, authentication?:
+        function, authorizationInfo?: function, birthday?: function,
+        businessPhones?: function, calendar?: function, calendarGroups?:
+        function, calendars?: function, calendarView?: function, chats?:
+        function, city?: function, cloudClipboard?: function, cloudPCs?:
+        function, companyName?: function, consentProvidedForMinor?: function,
+        contactFolders?: function, contacts?: function, country?: function,
+        createdDateTime?: function, createdObjects?: function, creationType?:
+        function, customSecurityAttributes?: function,
+        dataSecurityAndGovernance?: function, department?: function,
+        deviceEnrollmentLimit?: function,
+        deviceManagementTroubleshootingEvents?: function, directReports?:
+        function, displayName?: function, drive?: function, drives?: function,
+        employeeExperience?: function, employeeHireDate?: function, employeeId?:
+        function, employeeLeaveDateTime?: function, employeeOrgData?: function,
+        employeeType?: function, events?: function, extensions?: function,
+        externalUserState?: function, externalUserStateChangeDateTime?:
+        function, faxNumber?: function, followedSites?: function, givenName?:
+        function, hireDate?: function, identities?: function, imAddresses?:
+        function, inferenceClassification?: function, insights?: function,
+        interests?: function, isManagementRestricted?: function,
+        isResourceAccount?: function, jobTitle?: function, joinedTeams?:
+        function, lastPasswordChangeDateTime?: function,
+        legalAgeGroupClassification?: function, licenseAssignmentStates?:
+        function, licenseDetails?: function, mail?: function, mailboxSettings?:
+        function, mailFolders?: function, mailNickname?: function,
+        managedAppRegistrations?: function, managedDevices?: function, manager?:
+        function, memberOf?: function, messages?: function, mobilePhone?:
+        function, mySite?: function, oauth2PermissionGrants?: function,
+        officeLocation?: function, onenote?: function, onlineMeetings?:
+        function, onPremisesDistinguishedName?: function, onPremisesDomainName?:
+        function, onPremisesExtensionAttributes?: function,
+        onPremisesImmutableId?: function, onPremisesLastSyncDateTime?: function,
+        onPremisesProvisioningErrors?: function, onPremisesSamAccountName?:
+        function, onPremisesSecurityIdentifier?: function,
+        onPremisesSyncEnabled?: function, onPremisesUserPrincipalName?:
+        function, otherMails?: function, outlook?: function, ownedDevices?:
+        function, ownedObjects?: function, passwordPolicies?: function,
+        passwordProfile?: function, pastProjects?: function, people?: function,
+        permissionGrants?: function, photo?: function, photos?: function,
+        planner?: function, postalCode?: function, preferredDataLocation?:
+        function, preferredLanguage?: function, preferredName?: function,
+        presence?: function, print?: function, provisionedPlans?: function,
+        proxyAddresses?: function, registeredDevices?: function,
+        responsibilities?: function, schools?: function, scopedRoleMemberOf?:
+        function, securityIdentifier?: function, serviceProvisioningErrors?:
+        function, settings?: function, showInAddressList?: function,
+        signInActivity?: function, signInSessionsValidFromDateTime?: function,
+        skills?: function, solutions?: function, sponsors?: function, state?:
+        function, streetAddress?: function, surname?: function, teamwork?:
+        function, todo?: function, transitiveMemberOf?: function,
+        usageLocation?: function, userPrincipalName?: function, userType?:
+        function } & { @odata.type: "#microsoft.graph.user" }, task?: Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        arguments?: function, category?: function, continueOnError?: function,
+        description?: function, displayName?: function, executionSequence?:
+        function, isEnabled?: function, taskDefinitionId?: function,
+        taskProcessingResults?: (Omit<{ id?: string | undefined; '@odata.type':
+        string; }, "@odata.type"> & { completedDateTime?: string | null |
+        undefined; createdDateTime?: string | undefined; failureReason?: string
+        | ... 1 more ... | undefined; ... 4 more ...; '@odata.type': string; } &
+        { ...; })[] | undefined } & { @odata.type:
+        "#microsoft.graph.identityGovernance.task" } } & { @odata.type:
+        "#microsoft.graph.identityGovernance.taskProcessingResult" })[],
+        totalUsersCount?: number, unprocessedUsersCount?: number } & {
+        @odata.type: "#microsoft.graph.identityGovernance.taskReport" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], taskReport-id: string,
+            workflow-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /identityGovernance/lifecycleWorkflows/workflows/{workflow-id}/taskReports/{taskReport-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, completedDateTime?: string | null, failedUsersCount?:
+          number, lastUpdatedDateTime?: string, processingStatus?:
+          "unknownFutureValue" | "canceled" | "queued" | "inProgress" |
+          "completed" | "completedWithErrors" | "failed", runId?: string | null,
+          startedDateTime?: string | null, successfulUsersCount?: number, task?:
+          Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          arguments?: { <xref uid="@odata.type" />: string, name?: string,
+          value?: string | null }[], category?: "unknownFutureValue" | "joiner"
+          | "leaver" | "mover", continueOnError?: boolean, description?: string
+          | null, displayName?: string, executionSequence?: number, isEnabled?:
+          boolean, taskDefinitionId?: string, taskProcessingResults?: (Omit&lt;{
+          <xref uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, completedDateTime?:
+          function, createdDateTime?: function, failureReason?: function,
+          processingStatus?: function, startedDateTime?: function, subject?:
+          function, task?: (Omit&lt;{ id?: string | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; & {
+          arguments?: { name?: string | undefined; value?: string | null |
+          undefined; '<xref uid="@odata.type" />': string; }[] | undefined; ...
+          8 more ...; '<xref uid="@odata.type" />': string; } & { ...; }) |
+          undefined } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityGovernance.taskProcessingResult" />" })[]
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityGovernance.task" />" }, taskDefinition?:
+          Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          category?: "unknownFutureValue" | "joiner" | "leaver" | "mover",
+          continueOnError?: boolean, description?: string | null, displayName?:
+          string, parameters?: { <xref uid="@odata.type" />: string, name?:
+          string, values?: ...[], valueType?: "string" | "unknownFutureValue" |
+          "enum" | "int" | "bool" }[], version?: number } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityGovernance.taskDefinition" />" },
+          taskProcessingResults?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, completedDateTime?: string | null,
+          createdDateTime?: string, failureReason?: string | null,
+          processingStatus?: "unknownFutureValue" | "canceled" | "queued" |
+          "inProgress" | "completed" | "completedWithErrors" | "failed",
+          startedDateTime?: string | null, subject?: Omit&lt;... & ... & ...,
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, aboutMe?: function, accountEnabled?: function, activities?:
+          function, ageGroup?: function, agreementAcceptances?: function,
+          appRoleAssignments?: function, assignedLicenses?: function,
+          assignedPlans?: function, authentication?: function,
+          authorizationInfo?: function, birthday?: function, businessPhones?:
+          function, calendar?: function, calendarGroups?: function, calendars?:
+          function, calendarView?: function, chats?: function, city?: function,
+          cloudClipboard?: function, cloudPCs?: function, companyName?:
+          function, consentProvidedForMinor?: function, contactFolders?:
+          function, contacts?: function, country?: function, createdDateTime?:
+          function, createdObjects?: function, creationType?: function,
+          customSecurityAttributes?: function, dataSecurityAndGovernance?:
+          function, department?: function, deviceEnrollmentLimit?: function,
+          deviceManagementTroubleshootingEvents?: function, directReports?:
+          function, displayName?: function, drive?: function, drives?: function,
+          employeeExperience?: function, employeeHireDate?: function,
+          employeeId?: function, employeeLeaveDateTime?: function,
+          employeeOrgData?: function, employeeType?: function, events?:
+          function, extensions?: function, externalUserState?: function,
+          externalUserStateChangeDateTime?: function, faxNumber?: function,
+          followedSites?: function, givenName?: function, hireDate?: function,
+          identities?: function, imAddresses?: function,
+          inferenceClassification?: function, insights?: function, interests?:
+          function, isManagementRestricted?: function, isResourceAccount?:
+          function, jobTitle?: function, joinedTeams?: function,
+          lastPasswordChangeDateTime?: function, legalAgeGroupClassification?:
+          function, licenseAssignmentStates?: function, licenseDetails?:
+          function, mail?: function, mailboxSettings?: function, mailFolders?:
+          function, mailNickname?: function, managedAppRegistrations?: function,
+          managedDevices?: function, manager?: function, memberOf?: function,
+          messages?: function, mobilePhone?: function, mySite?: function,
+          oauth2PermissionGrants?: function, officeLocation?: function,
+          onenote?: function, onlineMeetings?: function,
+          onPremisesDistinguishedName?: function, onPremisesDomainName?:
+          function, onPremisesExtensionAttributes?: function,
+          onPremisesImmutableId?: function, onPremisesLastSyncDateTime?:
+          function, onPremisesProvisioningErrors?: function,
+          onPremisesSamAccountName?: function, onPremisesSecurityIdentifier?:
+          function, onPremisesSyncEnabled?: function,
+          onPremisesUserPrincipalName?: function, otherMails?: function,
+          outlook?: function, ownedDevices?: function, ownedObjects?: function,
+          passwordPolicies?: function, passwordProfile?: function,
+          pastProjects?: function, people?: function, permissionGrants?:
+          function, photo?: function, photos?: function, planner?: function,
+          postalCode?: function, preferredDataLocation?: function,
+          preferredLanguage?: function, preferredName?: function, presence?:
+          function, print?: function, provisionedPlans?: function,
+          proxyAddresses?: function, registeredDevices?: function,
+          responsibilities?: function, schools?: function, scopedRoleMemberOf?:
+          function, securityIdentifier?: function, serviceProvisioningErrors?:
+          function, settings?: function, showInAddressList?: function,
+          signInActivity?: function, signInSessionsValidFromDateTime?: function,
+          skills?: function, solutions?: function, sponsors?: function, state?:
+          function, streetAddress?: function, surname?: function, teamwork?:
+          function, todo?: function, transitiveMemberOf?: function,
+          usageLocation?: function, userPrincipalName?: function, userType?:
+          function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.user" />" }, task?: Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, arguments?: function,
+          category?: function, continueOnError?: function, description?:
+          function, displayName?: function, executionSequence?: function,
+          isEnabled?: function, taskDefinitionId?: function,
+          taskProcessingResults?: (Omit&lt;{ id?: string | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; & {
+          completedDateTime?: string | null | undefined; createdDateTime?:
+          string | undefined; failureReason?: string | ... 1 more ... |
+          undefined; ... 4 more ...; '<xref uid="@odata.type" />': string; } & {
+          ...; })[] | undefined } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityGovernance.task" />" } } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityGovernance.taskProcessingResult" />"
+          })[], totalUsersCount?: number, unprocessedUsersCount?: number } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityGovernance.taskReport" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, workflow-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.identityGovernance.lifecycleWorkflows.workflows.taskReports.list
     package: '@microsoft/teams.graph-endpoints'
@@ -49,17 +277,72 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /identityGovernance/lifecycleWorkflows/workflows/{workflow-id}/taskReports"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, workflow-id: string }): EndpointRequest<{
+        @odata.count?: number | null, @odata.nextLink?: string | null } & {
+        value?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, completedDateTime?: string | null,
+        failedUsersCount?: number, lastUpdatedDateTime?: string,
+        processingStatus?: "unknownFutureValue" | "canceled" | "queued" |
+        "inProgress" | "completed" | "completedWithErrors" | "failed", runId?:
+        string | null, startedDateTime?: string | null, successfulUsersCount?:
+        number, task?: Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+        @odata.type: string, arguments?: function, category?: function,
+        continueOnError?: function, description?: function, displayName?:
+        function, executionSequence?: function, isEnabled?: function,
+        taskDefinitionId?: function, taskProcessingResults?: function } & {
+        @odata.type: "#microsoft.graph.identityGovernance.task" },
+        taskDefinition?: Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+        @odata.type: string, category?: function, continueOnError?: function,
+        description?: function, displayName?: function, parameters?: function,
+        version?: function } & { @odata.type:
+        "#microsoft.graph.identityGovernance.taskDefinition" },
+        taskProcessingResults?: (Omit<..., ...> & { @odata.type: ...,
+        completedDateTime?: ..., createdDateTime?: ..., failureReason?: ...,
+        processingStatus?: ..., startedDateTime?: ..., subject?: ..., task?: ...
+        } & { @odata.type: ... })[], totalUsersCount?: number,
+        unprocessedUsersCount?: number } & { @odata.type:
+        "#microsoft.graph.identityGovernance.taskReport" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, workflow-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /identityGovernance/lifecycleWorkflows/workflows/{workflow-id}/taskReports"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          completedDateTime?: string | null, failedUsersCount?: number,
+          lastUpdatedDateTime?: string, processingStatus?: "unknownFutureValue"
+          | "canceled" | "queued" | "inProgress" | "completed" |
+          "completedWithErrors" | "failed", runId?: string | null,
+          startedDateTime?: string | null, successfulUsersCount?: number, task?:
+          Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          arguments?: function, category?: function, continueOnError?: function,
+          description?: function, displayName?: function, executionSequence?:
+          function, isEnabled?: function, taskDefinitionId?: function,
+          taskProcessingResults?: function } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.identityGovernance.task" />" },
+          taskDefinition?: Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, category?: function, continueOnError?: function, description?:
+          function, displayName?: function, parameters?: function, version?:
+          function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityGovernance.taskDefinition" />" },
+          taskProcessingResults?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., completedDateTime?: ..., createdDateTime?:
+          ..., failureReason?: ..., processingStatus?: ..., startedDateTime?:
+          ..., subject?: ..., task?: ... } & { <xref uid="@odata.type" />: ...
+          })[], totalUsersCount?: number, unprocessedUsersCount?: number } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityGovernance.taskReport" />" })[] }&gt;
 variables:
   - name: task
     uid: >-

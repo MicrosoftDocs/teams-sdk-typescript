@@ -1,0 +1,247 @@
+### YamlMime:TSType
+name: IIncomingFile
+uid: '@microsoft/teams.apps.IIncomingFile'
+package: '@microsoft/teams.apps'
+summary: >-
+  A lazy handle to a file attached to the current inbound activity.
+
+
+  Nothing is downloaded until a byte method is called. The handle stays live and
+  holds no memoized bytes, so each of
+  `stream()`/`download()`/`text()`/`arrayBuffer()`/`saveAs()` fetches afresh.
+  For a personal file that re-fetch is bounded by the short-lived download URL
+  lifetime and may hit its expiry; to read the same file several ways, call
+  [download](xref:@microsoft/teams.apps.IIncomingFile.download) once and reuse
+  the returned [IDownloadedFile](xref:@microsoft/teams.apps.IDownloadedFile).
+fullName: IIncomingFile
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: contentType
+    uid: '@microsoft/teams.apps.IIncomingFile.contentType'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      The file's MIME type when the source provides one. Always unset for
+      `botActivity` files: a `file.download.info` attachment carries no MIME
+      type, only the `fileType` extension surfaced as
+      [extension](xref:@microsoft/teams.apps.IIncomingFile.extension). Populated
+      for sources that do carry one, such as a `graph` drive item. To learn the
+      type of the bytes you actually received, read
+      [IDownloadedFile.contentType](xref:@microsoft/teams.apps.IDownloadedFile.contentType),
+      which is resolved from the download response.
+    fullName: contentType
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'contentType?: string'
+      return:
+        description: ''
+        type: string
+  - name: contentUrl
+    uid: '@microsoft/teams.apps.IIncomingFile.contentUrl'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Browsable URL to the file in OneDrive/SharePoint, as sent on the
+      attachment's `contentUrl`.
+
+
+      Not fetchable for bytes despite the name; those come from
+      [IIncomingFile.download](xref:@microsoft/teams.apps.IIncomingFile.download)
+      or
+      [IIncomingFile.stream](xref:@microsoft/teams.apps.IIncomingFile.stream).
+    fullName: contentUrl
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'contentUrl?: string'
+      return:
+        description: ''
+        type: string
+  - name: extension
+    uid: '@microsoft/teams.apps.IIncomingFile.extension'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      File extension without the dot (e.g. `pdf`), taken from the
+      platform-supplied `fileType`. Absent when the wire omits it.
+    fullName: extension
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'extension?: string'
+      return:
+        description: ''
+        type: string
+  - name: name
+    uid: '@microsoft/teams.apps.IIncomingFile.name'
+    package: '@microsoft/teams.apps'
+    summary: Display name including extension when known.
+    fullName: name
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'name: string'
+      return:
+        description: ''
+        type: string
+  - name: raw
+    uid: '@microsoft/teams.apps.IIncomingFile.raw'
+    package: '@microsoft/teams.apps'
+    summary: The raw underlying attachment/graph object for escape-hatch access.
+    fullName: raw
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'raw?: unknown'
+      return:
+        description: ''
+        type: unknown
+  - name: scope
+    uid: '@microsoft/teams.apps.IIncomingFile.scope'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Conversation scope the file arrived in (the SDK's
+      <xref:ConversationType>).
+    fullName: scope
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'scope: ConversationType'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.api.ConversationType" />
+  - name: source
+    uid: '@microsoft/teams.apps.IIncomingFile.source'
+    package: '@microsoft/teams.apps'
+    summary: Where the SDK found the file. Only `botActivity` is produced today.
+    fullName: source
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'source: FileSource'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.FileSource" />
+  - name: uniqueId
+    uid: '@microsoft/teams.apps.IIncomingFile.uniqueId'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      The ODSP/OneDrive identifier for the file when the platform reports it
+      (`content.uniqueId`). Useful for correlation, dedup and logging, but not
+      for retrieval: the Graph fetch resolves bytes from `contentUrl` through
+      `/shares`, and this value arrives as a GUID, which is a SharePoint
+      `listItemUniqueId` shape rather than a Graph `driveItem.id`. Present only
+      when the wire provided it.
+    fullName: uniqueId
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'uniqueId?: string'
+      return:
+        description: ''
+        type: string
+methods:
+  - name: arrayBuffer(IFileReadOptions)
+    uid: '@microsoft/teams.apps.IIncomingFile.arrayBuffer'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Convenience: run `download()` then return the bytes as an `ArrayBuffer`.
+      Re-fetches on each call.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function arrayBuffer(options?: IFileReadOptions): Promise<ArrayBuffer>'
+      parameters:
+        - id: options
+          type: <xref uid="@microsoft/teams.apps.IFileReadOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;ArrayBuffer&gt;
+  - name: download(IFileReadOptions)
+    uid: '@microsoft/teams.apps.IIncomingFile.download'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Fetch the whole file and buffer it into a
+      [IDownloadedFile](xref:@microsoft/teams.apps.IDownloadedFile) snapshot you
+      own. Lazy and not memoized: calling again re-fetches. If you already hold
+      a `DownloadedFile`, call its `saveAs()` rather than this handle's, which
+      would re-fetch.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function download(options?: IFileReadOptions): Promise<IDownloadedFile>'
+      parameters:
+        - id: options
+          type: <xref uid="@microsoft/teams.apps.IFileReadOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.apps.IDownloadedFile" />&gt;
+  - name: saveAs(string, IFileReadOptions)
+    uid: '@microsoft/teams.apps.IIncomingFile.saveAs'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Stream the bytes straight to a local file path, so saving a large file
+      never materializes it in memory. Requires Node: it writes to the local
+      filesystem, which is unavailable in the browser.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function saveAs(path: string, options?: IFileReadOptions): Promise<void>'
+      parameters:
+        - id: path
+          type: string
+          description: ''
+        - id: options
+          type: <xref uid="@microsoft/teams.apps.IFileReadOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: stream(IFileReadOptions)
+    uid: '@microsoft/teams.apps.IIncomingFile.stream'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Stream the bytes. Low-level primitive: returns the native stream directly
+      from the fetch, single-consumption, not buffered or retained. Use for
+      large files and pipelines (parse-as-you-go, pipe to disk). `download()` is
+      built on this. Uncapped: the consumer bounds it by how much it reads.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function stream(options?: IFileReadOptions):
+        Promise<ReadableStream<Uint8Array>>
+      parameters:
+        - id: options
+          type: <xref uid="@microsoft/teams.apps.IFileReadOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;ReadableStream&lt;Uint8Array&gt;&gt;
+  - name: text(string, IFileReadOptions)
+    uid: '@microsoft/teams.apps.IIncomingFile.text'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Convenience: run `download()` then decode the bytes as UTF-8 (or a
+      provided encoding). Re-fetches on each call (no memoized bytes); to read
+      bytes several ways hold one `DownloadedFile` instead. No content-type
+      check; decoding is lossy (invalid bytes become U+FFFD and never throw).
+      For strict or binary-safe reads, use `download().bytes`/`arrayBuffer()`.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function text(encoding?: string, options?: IFileReadOptions):
+        Promise<string>
+      parameters:
+        - id: encoding
+          type: string
+          description: ''
+        - id: options
+          type: <xref uid="@microsoft/teams.apps.IFileReadOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;string&gt;

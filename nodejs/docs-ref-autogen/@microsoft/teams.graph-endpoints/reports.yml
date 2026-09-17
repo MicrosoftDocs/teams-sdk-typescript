@@ -72,53 +72,66 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        dailyPrintUsageByUser: { create: (body: IEndpoints["POST
-        /reports/dailyPrintUsageByUser"]["body"]) =>
-        EndpointRequest<IEndpoints["POST
-        /reports/dailyPrintUsageByUser"]["response"]>, del: (params?:
-        IEndpoints["DELETE
-        /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["parameters"]) =>
-        EndpointRequest<IEndpoints["DELETE
-        /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["response"]>,
-        get: (params?: IEndpoints["GET
+        dailyPrintUsageByUser: { /** * `GET /reports/dailyPrintUsageByUser` * *
+        Retrieve a list of daily print usage summaries, grouped by user. */ get:
+        (params?: IEndpoints["GET
         /reports/dailyPrintUsageByUser"]["parameters"]) =>
         EndpointRequest<IEndpoints["GET
-        /reports/dailyPrintUsageByUser"]["response"]>, get$1: (params?:
+        /reports/dailyPrintUsageByUser"]["response"]>; /** * `POST
+        /reports/dailyPrintUsageByUser` * */ create: (body: IEndpoints["POST
+        /reports/dailyPrintUsageByUser"]["body"]) =>
+        EndpointRequest<IEndpoints["POST
+        /reports/dailyPrintUsageByUser"]["response"]>; /** * `GET
+        /reports/dailyPrintUsageByUser/{printUsageByUser-id}` * * Retrieve a
+        user&#x27;s usage summary for a particular time period. For descriptions
+        of each endpoint, see printUsageByUser. */ get$1: (params?:
         IEndpoints["GET
         /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["parameters"]) =>
         EndpointRequest<IEndpoints["GET
-        /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["response"]>,
+        /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["response"]>; /**
+        * `PATCH /reports/dailyPrintUsageByUser/{printUsageByUser-id}` * */
         update: (body: IEndpoints["PATCH
         /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["body"], params?:
         IEndpoints["PATCH
         /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["parameters"]) =>
         EndpointRequest<IEndpoints["PATCH
-        /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["response"]> }
+        /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["response"]>; /**
+        * `DELETE /reports/dailyPrintUsageByUser/{printUsageByUser-id}` * */
+        del: (params?: IEndpoints["DELETE
+        /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["parameters"]) =>
+        EndpointRequest<IEndpoints["DELETE
+        /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["response"]>; }
       return:
         description: ''
         type: >-
-          { create: (body: IEndpoints["POST
+          { /** * `GET /reports/dailyPrintUsageByUser` * * Retrieve a list of
+          daily print usage summaries, grouped by user. */ get: (params?:
+          IEndpoints["GET /reports/dailyPrintUsageByUser"]["parameters"]) =&gt;
+          EndpointRequest&lt;IEndpoints["GET
+          /reports/dailyPrintUsageByUser"]["response"]&gt;; /** * `POST
+          /reports/dailyPrintUsageByUser` * */ create: (body: IEndpoints["POST
           /reports/dailyPrintUsageByUser"]["body"]) =&gt;
           EndpointRequest&lt;IEndpoints["POST
-          /reports/dailyPrintUsageByUser"]["response"]&gt;, del: (params?:
-          IEndpoints["DELETE
-          /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["parameters"])
-          =&gt; EndpointRequest&lt;IEndpoints["DELETE
-          /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["response"]&gt;,
-          get: (params?: IEndpoints["GET
-          /reports/dailyPrintUsageByUser"]["parameters"]) =&gt;
-          EndpointRequest&lt;IEndpoints["GET
-          /reports/dailyPrintUsageByUser"]["response"]&gt;, get$1: (params?:
-          IEndpoints["GET
+          /reports/dailyPrintUsageByUser"]["response"]&gt;; /** * `GET
+          /reports/dailyPrintUsageByUser/{printUsageByUser-id}` * * Retrieve a
+          user&#x27;s usage summary for a particular time period. For
+          descriptions of each endpoint, see printUsageByUser. */ get$1:
+          (params?: IEndpoints["GET
           /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["GET
-          /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["response"]&gt;,
-          update: (body: IEndpoints["PATCH
+          /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["response"]&gt;;
+          /** * `PATCH /reports/dailyPrintUsageByUser/{printUsageByUser-id}` *
+          */ update: (body: IEndpoints["PATCH
           /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["body"],
           params?: IEndpoints["PATCH
           /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["parameters"])
           =&gt; EndpointRequest&lt;IEndpoints["PATCH
-          /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["response"]&gt;
+          /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["response"]&gt;;
+          /** * `DELETE /reports/dailyPrintUsageByUser/{printUsageByUser-id}` *
+          */ del: (params?: IEndpoints["DELETE
+          /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["DELETE
+          /reports/dailyPrintUsageByUser/{printUsageByUser-id}"]["response"]&gt;;
           }
   - name: monthlyPrintUsageByPrinter
     uid: '@microsoft/teams.graph-endpoints.reports.monthlyPrintUsageByPrinter'
@@ -261,7 +274,7 @@ variables:
           EndpointRequest&lt;IEndpoints["PATCH
           /reports/security"]["response"]&gt; }
 functions:
-  - name: list(any)
+  - name: 'list({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints.reports.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`GET /reports`'
@@ -269,16 +282,256 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /reports"]["response"]>
+        function list(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<{ @odata.type: string, authenticationMethods?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, userRegistrationDetails?: (Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & { @odata.type: string, isAdmin?: boolean |
+        null, isMfaCapable?: boolean, isMfaRegistered?: boolean,
+        isPasswordlessCapable?: boolean, isSsprCapable?: boolean,
+        isSsprEnabled?: boolean, isSsprRegistered?: boolean,
+        isSystemPreferredAuthenticationMethodEnabled?: boolean | null,
+        lastUpdatedDateTime?: string, methodsRegistered?: ...[],
+        systemPreferredAuthenticationMethods?: ...[], userDisplayName?: string,
+        userPreferredMethodForSecondaryAuthentication?: Record<..., ...> |
+        "push" | "oath" | "voiceMobile" | "voiceAlternateMobile" | "voiceOffice"
+        | "sms" | "none" | "unknownFutureValue" | null, userPrincipalName?:
+        string, userType?: Record<..., ...> | "unknownFutureValue" | "member" |
+        "guest" | null } & { @odata.type:
+        "#microsoft.graph.userRegistrationDetails" })[] } & { @odata.type:
+        "#microsoft.graph.authenticationMethodsRoot" }) | Record<string, never>
+        | null, dailyPrintUsageByPrinter?: (Omit<Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        blackAndWhitePageCount?: number | null, colorPageCount?: number | null,
+        completedBlackAndWhiteJobCount?: number, completedColorJobCount?:
+        number, completedJobCount?: number | null, doubleSidedSheetCount?:
+        number | null, incompleteJobCount?: number, mediaSheetCount?: number |
+        null, pageCount?: number | null, singleSidedSheetCount?: number | null,
+        usageDate?: string }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.printUsage" }, "@odata.type"> & { @odata.type: string,
+        printerId?: string, printerName?: string | null } & { @odata.type:
+        "#microsoft.graph.printUsageByPrinter" })[], dailyPrintUsageByUser?:
+        (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, blackAndWhitePageCount?: number | null,
+        colorPageCount?: number | null, completedBlackAndWhiteJobCount?: number,
+        completedColorJobCount?: number, completedJobCount?: number | null,
+        doubleSidedSheetCount?: number | null, incompleteJobCount?: number,
+        mediaSheetCount?: number | null, pageCount?: number | null,
+        singleSidedSheetCount?: number | null, usageDate?: string },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.printUsage" },
+        "@odata.type"> & { @odata.type: string, userPrincipalName?: string } & {
+        @odata.type: "#microsoft.graph.printUsageByUser" })[],
+        monthlyPrintUsageByPrinter?: (Omit<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string,
+        blackAndWhitePageCount?: number | null, colorPageCount?: number | null,
+        completedBlackAndWhiteJobCount?: number, completedColorJobCount?:
+        number, completedJobCount?: number | null, doubleSidedSheetCount?:
+        number | null, incompleteJobCount?: number, mediaSheetCount?: number |
+        null, pageCount?: number | null, singleSidedSheetCount?: number | null,
+        usageDate?: string }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.printUsage" }, "@odata.type"> & { @odata.type: string,
+        printerId?: string, printerName?: string | null } & { @odata.type:
+        "#microsoft.graph.printUsageByPrinter" })[], monthlyPrintUsageByUser?:
+        (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, blackAndWhitePageCount?: number | null,
+        colorPageCount?: number | null, completedBlackAndWhiteJobCount?: number,
+        completedColorJobCount?: number, completedJobCount?: number | null,
+        doubleSidedSheetCount?: number | null, incompleteJobCount?: number,
+        mediaSheetCount?: number | null, pageCount?: number | null,
+        singleSidedSheetCount?: number | null, usageDate?: string },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.printUsage" },
+        "@odata.type"> & { @odata.type: string, userPrincipalName?: string } & {
+        @odata.type: "#microsoft.graph.printUsageByUser" })[], partners?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, billing?: Record<string, never>
+        | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, manifests?: (... & ... & ...)[], operations?: (...
+        & ... & ...)[], reconciliation?: Omit<..., ...> & { @odata.type: ...,
+        billed?: ..., unbilled?: ... } & { @odata.type: ... }, usage?: Omit<...,
+        ...> & { @odata.type: ..., billed?: ..., unbilled?: ... } & {
+        @odata.type: ... } } & { @odata.type:
+        "#microsoft.graph.partners.billing.billing" }) | null } & { @odata.type:
+        "#microsoft.graph.partners" }) | null, security?: Record<string, never>
+        | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string } & { @odata.type:
+        "#microsoft.graph.securityReportsRoot" }) | null }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /reports"]["response"]&gt;
-  - name: update(Operation<"/reports", "patch">)
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string,
+          authenticationMethods?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, userRegistrationDetails?: (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          isAdmin?: boolean | null, isMfaCapable?: boolean, isMfaRegistered?:
+          boolean, isPasswordlessCapable?: boolean, isSsprCapable?: boolean,
+          isSsprEnabled?: boolean, isSsprRegistered?: boolean,
+          isSystemPreferredAuthenticationMethodEnabled?: boolean | null,
+          lastUpdatedDateTime?: string, methodsRegistered?: ...[],
+          systemPreferredAuthenticationMethods?: ...[], userDisplayName?:
+          string, userPreferredMethodForSecondaryAuthentication?: Record&lt;...,
+          ...&gt; | "push" | "oath" | "voiceMobile" | "voiceAlternateMobile" |
+          "voiceOffice" | "sms" | "none" | "unknownFutureValue" | null,
+          userPrincipalName?: string, userType?: Record&lt;..., ...&gt; |
+          "unknownFutureValue" | "member" | "guest" | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userRegistrationDetails" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethodsRoot" />" }) |
+          Record&lt;string, never&gt; | null, dailyPrintUsageByPrinter?:
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string },
+          "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+          />: string, blackAndWhitePageCount?: number | null, colorPageCount?:
+          number | null, completedBlackAndWhiteJobCount?: number,
+          completedColorJobCount?: number, completedJobCount?: number | null,
+          doubleSidedSheetCount?: number | null, incompleteJobCount?: number,
+          mediaSheetCount?: number | null, pageCount?: number | null,
+          singleSidedSheetCount?: number | null, usageDate?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printUsage" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, printerId?: string,
+          printerName?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printUsageByPrinter" />" })[],
+          dailyPrintUsageByUser?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, blackAndWhitePageCount?: number |
+          null, colorPageCount?: number | null, completedBlackAndWhiteJobCount?:
+          number, completedColorJobCount?: number, completedJobCount?: number |
+          null, doubleSidedSheetCount?: number | null, incompleteJobCount?:
+          number, mediaSheetCount?: number | null, pageCount?: number | null,
+          singleSidedSheetCount?: number | null, usageDate?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printUsage" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, userPrincipalName?:
+          string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printUsageByUser" />" })[],
+          monthlyPrintUsageByPrinter?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string,
+          blackAndWhitePageCount?: number | null, colorPageCount?: number |
+          null, completedBlackAndWhiteJobCount?: number,
+          completedColorJobCount?: number, completedJobCount?: number | null,
+          doubleSidedSheetCount?: number | null, incompleteJobCount?: number,
+          mediaSheetCount?: number | null, pageCount?: number | null,
+          singleSidedSheetCount?: number | null, usageDate?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printUsage" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, printerId?: string,
+          printerName?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printUsageByPrinter" />" })[],
+          monthlyPrintUsageByUser?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: string }, "<xref uid="@odata.type" />"&gt; &
+          Omit&lt;{ <xref uid="@odata.type" />: string, blackAndWhitePageCount?:
+          number | null, colorPageCount?: number | null,
+          completedBlackAndWhiteJobCount?: number, completedColorJobCount?:
+          number, completedJobCount?: number | null, doubleSidedSheetCount?:
+          number | null, incompleteJobCount?: number, mediaSheetCount?: number |
+          null, pageCount?: number | null, singleSidedSheetCount?: number |
+          null, usageDate?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.printUsage" />" },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, userPrincipalName?: string } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.printUsageByUser" />" })[], partners?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, billing?: Record&lt;string, never&gt; |
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          manifests?: (... & ... & ...)[], operations?: (... & ... & ...)[],
+          reconciliation?: Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+          ..., billed?: ..., unbilled?: ... } & { <xref uid="@odata.type" />:
+          ... }, usage?: Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+          ..., billed?: ..., unbilled?: ... } & { <xref uid="@odata.type" />:
+          ... } } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.partners.billing.billing" />" }) | null } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.partners" />"
+          }) | null, security?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.securityReportsRoot" />" }) | null }&gt;
+  - name: >-
+      update({ @odata.type: string, authenticationMethods?: (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string,
+      userRegistrationDetails?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, isAdmin?: boolean | null,
+      isMfaCapable?: boolean, isMfaRegistered?: boolean, isPasswordlessCapable?:
+      boolean, isSsprCapable?: boolean, isSsprEnabled?: boolean,
+      isSsprRegistered?: boolean, isSystemPreferredAuthenticationMethodEnabled?:
+      boolean | null, lastUpdatedDateTime?: string, methodsRegistered?:
+      function[], systemPreferredAuthenticationMethods?: function[],
+      userDisplayName?: string, userPreferredMethodForSecondaryAuthentication?:
+      Record<string, never> | "push" | "oath" | "voiceMobile" |
+      "voiceAlternateMobile" | "voiceOffice" | "sms" | "none" |
+      "unknownFutureValue" | null, userPrincipalName?: string, userType?:
+      Record<string, never> | "unknownFutureValue" | "member" | "guest" | null }
+      & { @odata.type: "#microsoft.graph.userRegistrationDetails" })[] } & {
+      @odata.type: "#microsoft.graph.authenticationMethodsRoot" }) |
+      Record<string, never> | null, dailyPrintUsageByPrinter?: (Omit<Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+      string, blackAndWhitePageCount?: number | null, colorPageCount?: number |
+      null, completedBlackAndWhiteJobCount?: number, completedColorJobCount?:
+      number, completedJobCount?: number | null, doubleSidedSheetCount?: number
+      | null, incompleteJobCount?: number, mediaSheetCount?: number | null,
+      pageCount?: number | null, singleSidedSheetCount?: number | null,
+      usageDate?: string }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.printUsage" }, "@odata.type"> & { @odata.type: string,
+      printerId?: string, printerName?: string | null } & { @odata.type:
+      "#microsoft.graph.printUsageByPrinter" })[], dailyPrintUsageByUser?:
+      (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, blackAndWhitePageCount?: number | null,
+      colorPageCount?: number | null, completedBlackAndWhiteJobCount?: number,
+      completedColorJobCount?: number, completedJobCount?: number | null,
+      doubleSidedSheetCount?: number | null, incompleteJobCount?: number,
+      mediaSheetCount?: number | null, pageCount?: number | null,
+      singleSidedSheetCount?: number | null, usageDate?: string },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.printUsage" },
+      "@odata.type"> & { @odata.type: string, userPrincipalName?: string } & {
+      @odata.type: "#microsoft.graph.printUsageByUser" })[],
+      monthlyPrintUsageByPrinter?: (Omit<Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & Omit<{ @odata.type: string, blackAndWhitePageCount?:
+      number | null, colorPageCount?: number | null,
+      completedBlackAndWhiteJobCount?: number, completedColorJobCount?: number,
+      completedJobCount?: number | null, doubleSidedSheetCount?: number | null,
+      incompleteJobCount?: number, mediaSheetCount?: number | null, pageCount?:
+      number | null, singleSidedSheetCount?: number | null, usageDate?: string
+      }, "@odata.type"> & { @odata.type: "#microsoft.graph.printUsage" },
+      "@odata.type"> & { @odata.type: string, printerId?: string, printerName?:
+      string | null } & { @odata.type: "#microsoft.graph.printUsageByPrinter"
+      })[], monthlyPrintUsageByUser?: (Omit<Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & Omit<{ @odata.type: string,
+      blackAndWhitePageCount?: number | null, colorPageCount?: number | null,
+      completedBlackAndWhiteJobCount?: number, completedColorJobCount?: number,
+      completedJobCount?: number | null, doubleSidedSheetCount?: number | null,
+      incompleteJobCount?: number, mediaSheetCount?: number | null, pageCount?:
+      number | null, singleSidedSheetCount?: number | null, usageDate?: string
+      }, "@odata.type"> & { @odata.type: "#microsoft.graph.printUsage" },
+      "@odata.type"> & { @odata.type: string, userPrincipalName?: string } & {
+      @odata.type: "#microsoft.graph.printUsageByUser" })[], partners?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, billing?: Record<string, never> |
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, manifests?: (Omit<..., ...> & { @odata.type: ...,
+      blobCount?: ..., blobs?: ..., createdDateTime?: ..., dataFormat?: ...,
+      eTag?: ..., partitionType?: ..., partnerTenantId?: ..., rootDirectory?:
+      ..., sasToken?: ..., schemaVersion?: ... } & { @odata.type: ... })[],
+      operations?: (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... })[],
+      reconciliation?: Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+      @odata.type: string, billed?: function, unbilled?: function } & {
+      @odata.type: "#microsoft.graph.partners.billing.billingReconciliation" },
+      usage?: Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+      @odata.type: string, billed?: function, unbilled?: function } & {
+      @odata.type: "#microsoft.graph.partners.billing.azureUsage" } } & {
+      @odata.type: "#microsoft.graph.partners.billing.billing" }) | null } & {
+      @odata.type: "#microsoft.graph.partners" }) | null, security?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string } & { @odata.type:
+      "#microsoft.graph.securityReportsRoot" }) | null })
     uid: '@microsoft/teams.graph-endpoints.reports.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`PATCH /reports`'
@@ -286,12 +539,360 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/reports", "patch">):
-        EndpointRequest<IEndpoints["PATCH /reports"]["response"]>
+        function update(body: { @odata.type: string, authenticationMethods?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, userRegistrationDetails?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string, isAdmin?:
+        boolean | null, isMfaCapable?: boolean, isMfaRegistered?: boolean,
+        isPasswordlessCapable?: boolean, isSsprCapable?: boolean,
+        isSsprEnabled?: boolean, isSsprRegistered?: boolean,
+        isSystemPreferredAuthenticationMethodEnabled?: boolean | null,
+        lastUpdatedDateTime?: string, methodsRegistered?: function[],
+        systemPreferredAuthenticationMethods?: function[], userDisplayName?:
+        string, userPreferredMethodForSecondaryAuthentication?: Record<string,
+        never> | "push" | "oath" | "voiceMobile" | "voiceAlternateMobile" |
+        "voiceOffice" | "sms" | "none" | "unknownFutureValue" | null,
+        userPrincipalName?: string, userType?: Record<string, never> |
+        "unknownFutureValue" | "member" | "guest" | null } & { @odata.type:
+        "#microsoft.graph.userRegistrationDetails" })[] } & { @odata.type:
+        "#microsoft.graph.authenticationMethodsRoot" }) | Record<string, never>
+        | null, dailyPrintUsageByPrinter?: (Omit<Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        blackAndWhitePageCount?: number | null, colorPageCount?: number | null,
+        completedBlackAndWhiteJobCount?: number, completedColorJobCount?:
+        number, completedJobCount?: number | null, doubleSidedSheetCount?:
+        number | null, incompleteJobCount?: number, mediaSheetCount?: number |
+        null, pageCount?: number | null, singleSidedSheetCount?: number | null,
+        usageDate?: string }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.printUsage" }, "@odata.type"> & { @odata.type: string,
+        printerId?: string, printerName?: string | null } & { @odata.type:
+        "#microsoft.graph.printUsageByPrinter" })[], dailyPrintUsageByUser?:
+        (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, blackAndWhitePageCount?: number | null,
+        colorPageCount?: number | null, completedBlackAndWhiteJobCount?: number,
+        completedColorJobCount?: number, completedJobCount?: number | null,
+        doubleSidedSheetCount?: number | null, incompleteJobCount?: number,
+        mediaSheetCount?: number | null, pageCount?: number | null,
+        singleSidedSheetCount?: number | null, usageDate?: string },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.printUsage" },
+        "@odata.type"> & { @odata.type: string, userPrincipalName?: string } & {
+        @odata.type: "#microsoft.graph.printUsageByUser" })[],
+        monthlyPrintUsageByPrinter?: (Omit<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string,
+        blackAndWhitePageCount?: number | null, colorPageCount?: number | null,
+        completedBlackAndWhiteJobCount?: number, completedColorJobCount?:
+        number, completedJobCount?: number | null, doubleSidedSheetCount?:
+        number | null, incompleteJobCount?: number, mediaSheetCount?: number |
+        null, pageCount?: number | null, singleSidedSheetCount?: number | null,
+        usageDate?: string }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.printUsage" }, "@odata.type"> & { @odata.type: string,
+        printerId?: string, printerName?: string | null } & { @odata.type:
+        "#microsoft.graph.printUsageByPrinter" })[], monthlyPrintUsageByUser?:
+        (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, blackAndWhitePageCount?: number | null,
+        colorPageCount?: number | null, completedBlackAndWhiteJobCount?: number,
+        completedColorJobCount?: number, completedJobCount?: number | null,
+        doubleSidedSheetCount?: number | null, incompleteJobCount?: number,
+        mediaSheetCount?: number | null, pageCount?: number | null,
+        singleSidedSheetCount?: number | null, usageDate?: string },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.printUsage" },
+        "@odata.type"> & { @odata.type: string, userPrincipalName?: string } & {
+        @odata.type: "#microsoft.graph.printUsageByUser" })[], partners?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, billing?: Record<string, never>
+        | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, manifests?: (Omit<..., ...> & { @odata.type: ...,
+        blobCount?: ..., blobs?: ..., createdDateTime?: ..., dataFormat?: ...,
+        eTag?: ..., partitionType?: ..., partnerTenantId?: ..., rootDirectory?:
+        ..., sasToken?: ..., schemaVersion?: ... } & { @odata.type: ... })[],
+        operations?: (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... })[],
+        reconciliation?: Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+        @odata.type: string, billed?: function, unbilled?: function } & {
+        @odata.type: "#microsoft.graph.partners.billing.billingReconciliation"
+        }, usage?: Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+        @odata.type: string, billed?: function, unbilled?: function } & {
+        @odata.type: "#microsoft.graph.partners.billing.azureUsage" } } & {
+        @odata.type: "#microsoft.graph.partners.billing.billing" }) | null } & {
+        @odata.type: "#microsoft.graph.partners" }) | null, security?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.securityReportsRoot" }) | null }): EndpointRequest<{
+        @odata.type: string, authenticationMethods?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        userRegistrationDetails?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, isAdmin?: boolean | null,
+        isMfaCapable?: boolean, isMfaRegistered?: boolean,
+        isPasswordlessCapable?: boolean, isSsprCapable?: boolean,
+        isSsprEnabled?: boolean, isSsprRegistered?: boolean,
+        isSystemPreferredAuthenticationMethodEnabled?: boolean | null,
+        lastUpdatedDateTime?: string, methodsRegistered?: ...[],
+        systemPreferredAuthenticationMethods?: ...[], userDisplayName?: string,
+        userPreferredMethodForSecondaryAuthentication?: Record<..., ...> |
+        "push" | "oath" | "voiceMobile" | "voiceAlternateMobile" | "voiceOffice"
+        | "sms" | "none" | "unknownFutureValue" | null, userPrincipalName?:
+        string, userType?: Record<..., ...> | "unknownFutureValue" | "member" |
+        "guest" | null } & { @odata.type:
+        "#microsoft.graph.userRegistrationDetails" })[] } & { @odata.type:
+        "#microsoft.graph.authenticationMethodsRoot" }) | Record<string, never>
+        | null, dailyPrintUsageByPrinter?: (Omit<Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        blackAndWhitePageCount?: number | null, colorPageCount?: number | null,
+        completedBlackAndWhiteJobCount?: number, completedColorJobCount?:
+        number, completedJobCount?: number | null, doubleSidedSheetCount?:
+        number | null, incompleteJobCount?: number, mediaSheetCount?: number |
+        null, pageCount?: number | null, singleSidedSheetCount?: number | null,
+        usageDate?: string }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.printUsage" }, "@odata.type"> & { @odata.type: string,
+        printerId?: string, printerName?: string | null } & { @odata.type:
+        "#microsoft.graph.printUsageByPrinter" })[], dailyPrintUsageByUser?:
+        (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, blackAndWhitePageCount?: number | null,
+        colorPageCount?: number | null, completedBlackAndWhiteJobCount?: number,
+        completedColorJobCount?: number, completedJobCount?: number | null,
+        doubleSidedSheetCount?: number | null, incompleteJobCount?: number,
+        mediaSheetCount?: number | null, pageCount?: number | null,
+        singleSidedSheetCount?: number | null, usageDate?: string },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.printUsage" },
+        "@odata.type"> & { @odata.type: string, userPrincipalName?: string } & {
+        @odata.type: "#microsoft.graph.printUsageByUser" })[],
+        monthlyPrintUsageByPrinter?: (Omit<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string,
+        blackAndWhitePageCount?: number | null, colorPageCount?: number | null,
+        completedBlackAndWhiteJobCount?: number, completedColorJobCount?:
+        number, completedJobCount?: number | null, doubleSidedSheetCount?:
+        number | null, incompleteJobCount?: number, mediaSheetCount?: number |
+        null, pageCount?: number | null, singleSidedSheetCount?: number | null,
+        usageDate?: string }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.printUsage" }, "@odata.type"> & { @odata.type: string,
+        printerId?: string, printerName?: string | null } & { @odata.type:
+        "#microsoft.graph.printUsageByPrinter" })[], monthlyPrintUsageByUser?:
+        (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, blackAndWhitePageCount?: number | null,
+        colorPageCount?: number | null, completedBlackAndWhiteJobCount?: number,
+        completedColorJobCount?: number, completedJobCount?: number | null,
+        doubleSidedSheetCount?: number | null, incompleteJobCount?: number,
+        mediaSheetCount?: number | null, pageCount?: number | null,
+        singleSidedSheetCount?: number | null, usageDate?: string },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.printUsage" },
+        "@odata.type"> & { @odata.type: string, userPrincipalName?: string } & {
+        @odata.type: "#microsoft.graph.printUsageByUser" })[], partners?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, billing?: Record<string, never>
+        | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, manifests?: (... & ... & ...)[], operations?: (...
+        & ... & ...)[], reconciliation?: Omit<..., ...> & { @odata.type: ...,
+        billed?: ..., unbilled?: ... } & { @odata.type: ... }, usage?: Omit<...,
+        ...> & { @odata.type: ..., billed?: ..., unbilled?: ... } & {
+        @odata.type: ... } } & { @odata.type:
+        "#microsoft.graph.partners.billing.billing" }) | null } & { @odata.type:
+        "#microsoft.graph.partners" }) | null, security?: Record<string, never>
+        | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string } & { @odata.type:
+        "#microsoft.graph.securityReportsRoot" }) | null }>
       parameters:
         - id: body
-          type: Operation&lt;"/reports", "patch"&gt;
+          type: >-
+            { <xref uid="@odata.type" />: string, authenticationMethods?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            userRegistrationDetails?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, isAdmin?: boolean | null,
+            isMfaCapable?: boolean, isMfaRegistered?: boolean,
+            isPasswordlessCapable?: boolean, isSsprCapable?: boolean,
+            isSsprEnabled?: boolean, isSsprRegistered?: boolean,
+            isSystemPreferredAuthenticationMethodEnabled?: boolean | null,
+            lastUpdatedDateTime?: string, methodsRegistered?: function[],
+            systemPreferredAuthenticationMethods?: function[], userDisplayName?:
+            string, userPreferredMethodForSecondaryAuthentication?:
+            Record&lt;string, never&gt; | "push" | "oath" | "voiceMobile" |
+            "voiceAlternateMobile" | "voiceOffice" | "sms" | "none" |
+            "unknownFutureValue" | null, userPrincipalName?: string, userType?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "member" |
+            "guest" | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.userRegistrationDetails" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.authenticationMethodsRoot" />" }) |
+            Record&lt;string, never&gt; | null, dailyPrintUsageByPrinter?:
+            (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+            }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, blackAndWhitePageCount?: number |
+            null, colorPageCount?: number | null,
+            completedBlackAndWhiteJobCount?: number, completedColorJobCount?:
+            number, completedJobCount?: number | null, doubleSidedSheetCount?:
+            number | null, incompleteJobCount?: number, mediaSheetCount?: number
+            | null, pageCount?: number | null, singleSidedSheetCount?: number |
+            null, usageDate?: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.printUsage"
+            />" }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: string, printerId?: string, printerName?: string | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.printUsageByPrinter" />" })[],
+            dailyPrintUsageByUser?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type"
+            />: string, id?: string }, "<xref uid="@odata.type" />"&gt; &
+            Omit&lt;{ <xref uid="@odata.type" />: string,
+            blackAndWhitePageCount?: number | null, colorPageCount?: number |
+            null, completedBlackAndWhiteJobCount?: number,
+            completedColorJobCount?: number, completedJobCount?: number | null,
+            doubleSidedSheetCount?: number | null, incompleteJobCount?: number,
+            mediaSheetCount?: number | null, pageCount?: number | null,
+            singleSidedSheetCount?: number | null, usageDate?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.printUsage" />" }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, userPrincipalName?:
+            string } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.printUsageByUser" />" })[],
+            monthlyPrintUsageByPrinter?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, blackAndWhitePageCount?: number | null, colorPageCount?:
+            number | null, completedBlackAndWhiteJobCount?: number,
+            completedColorJobCount?: number, completedJobCount?: number | null,
+            doubleSidedSheetCount?: number | null, incompleteJobCount?: number,
+            mediaSheetCount?: number | null, pageCount?: number | null,
+            singleSidedSheetCount?: number | null, usageDate?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.printUsage" />" }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, printerId?: string,
+            printerName?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.printUsageByPrinter" />" })[],
+            monthlyPrintUsageByUser?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type"
+            />: string, id?: string }, "<xref uid="@odata.type" />"&gt; &
+            Omit&lt;{ <xref uid="@odata.type" />: string,
+            blackAndWhitePageCount?: number | null, colorPageCount?: number |
+            null, completedBlackAndWhiteJobCount?: number,
+            completedColorJobCount?: number, completedJobCount?: number | null,
+            doubleSidedSheetCount?: number | null, incompleteJobCount?: number,
+            mediaSheetCount?: number | null, pageCount?: number | null,
+            singleSidedSheetCount?: number | null, usageDate?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.printUsage" />" }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, userPrincipalName?:
+            string } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.printUsageByUser" />" })[], partners?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, billing?: Record&lt;string, never&gt;
+            | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, manifests?: (Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ..., blobCount?: ..., blobs?: ...,
+            createdDateTime?: ..., dataFormat?: ..., eTag?: ..., partitionType?:
+            ..., partnerTenantId?: ..., rootDirectory?: ..., sasToken?: ...,
+            schemaVersion?: ... } & { <xref uid="@odata.type" />: ... })[],
+            operations?: (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ... })[], reconciliation?: Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, billed?: function,
+            unbilled?: function } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.partners.billing.billingReconciliation" />" },
+            usage?: Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, billed?: function, unbilled?: function } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.partners.billing.azureUsage" />" } } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.partners.billing.billing" />" }) | null } & {
+            <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.partners"
+            />" }) | null, security?: Record&lt;string, never&gt; | (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.securityReportsRoot" />" }) | null }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["PATCH /reports"]["response"]&gt;
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string,
+          authenticationMethods?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, userRegistrationDetails?: (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          isAdmin?: boolean | null, isMfaCapable?: boolean, isMfaRegistered?:
+          boolean, isPasswordlessCapable?: boolean, isSsprCapable?: boolean,
+          isSsprEnabled?: boolean, isSsprRegistered?: boolean,
+          isSystemPreferredAuthenticationMethodEnabled?: boolean | null,
+          lastUpdatedDateTime?: string, methodsRegistered?: ...[],
+          systemPreferredAuthenticationMethods?: ...[], userDisplayName?:
+          string, userPreferredMethodForSecondaryAuthentication?: Record&lt;...,
+          ...&gt; | "push" | "oath" | "voiceMobile" | "voiceAlternateMobile" |
+          "voiceOffice" | "sms" | "none" | "unknownFutureValue" | null,
+          userPrincipalName?: string, userType?: Record&lt;..., ...&gt; |
+          "unknownFutureValue" | "member" | "guest" | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userRegistrationDetails" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationMethodsRoot" />" }) |
+          Record&lt;string, never&gt; | null, dailyPrintUsageByPrinter?:
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string },
+          "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+          />: string, blackAndWhitePageCount?: number | null, colorPageCount?:
+          number | null, completedBlackAndWhiteJobCount?: number,
+          completedColorJobCount?: number, completedJobCount?: number | null,
+          doubleSidedSheetCount?: number | null, incompleteJobCount?: number,
+          mediaSheetCount?: number | null, pageCount?: number | null,
+          singleSidedSheetCount?: number | null, usageDate?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printUsage" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, printerId?: string,
+          printerName?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printUsageByPrinter" />" })[],
+          dailyPrintUsageByUser?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, blackAndWhitePageCount?: number |
+          null, colorPageCount?: number | null, completedBlackAndWhiteJobCount?:
+          number, completedColorJobCount?: number, completedJobCount?: number |
+          null, doubleSidedSheetCount?: number | null, incompleteJobCount?:
+          number, mediaSheetCount?: number | null, pageCount?: number | null,
+          singleSidedSheetCount?: number | null, usageDate?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printUsage" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, userPrincipalName?:
+          string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printUsageByUser" />" })[],
+          monthlyPrintUsageByPrinter?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string,
+          blackAndWhitePageCount?: number | null, colorPageCount?: number |
+          null, completedBlackAndWhiteJobCount?: number,
+          completedColorJobCount?: number, completedJobCount?: number | null,
+          doubleSidedSheetCount?: number | null, incompleteJobCount?: number,
+          mediaSheetCount?: number | null, pageCount?: number | null,
+          singleSidedSheetCount?: number | null, usageDate?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printUsage" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, printerId?: string,
+          printerName?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.printUsageByPrinter" />" })[],
+          monthlyPrintUsageByUser?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: string }, "<xref uid="@odata.type" />"&gt; &
+          Omit&lt;{ <xref uid="@odata.type" />: string, blackAndWhitePageCount?:
+          number | null, colorPageCount?: number | null,
+          completedBlackAndWhiteJobCount?: number, completedColorJobCount?:
+          number, completedJobCount?: number | null, doubleSidedSheetCount?:
+          number | null, incompleteJobCount?: number, mediaSheetCount?: number |
+          null, pageCount?: number | null, singleSidedSheetCount?: number |
+          null, usageDate?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.printUsage" />" },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, userPrincipalName?: string } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.printUsageByUser" />" })[], partners?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, billing?: Record&lt;string, never&gt; |
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          manifests?: (... & ... & ...)[], operations?: (... & ... & ...)[],
+          reconciliation?: Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+          ..., billed?: ..., unbilled?: ... } & { <xref uid="@odata.type" />:
+          ... }, usage?: Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+          ..., billed?: ..., unbilled?: ... } & { <xref uid="@odata.type" />:
+          ... } } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.partners.billing.billing" />" }) | null } & {
+          <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.partners" />"
+          }) | null, security?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.securityReportsRoot" />" }) | null }&gt;

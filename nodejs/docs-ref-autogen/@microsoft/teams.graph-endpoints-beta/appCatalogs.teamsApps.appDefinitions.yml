@@ -114,8 +114,54 @@ variables:
           }
 functions:
   - name: >-
-      create(Operation<"/appCatalogs/teamsApps/{teamsApp-id}/appDefinitions",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, allowedInstallationScopes?: "unknownFutureValue" |
+      Record<string, never> | "team" | "groupChat" | "personal" | null,
+      authorization?: Record<string, never> | { @odata.type: string,
+      clientAppId?: string | null, requiredPermissionSet?: Record<string, never>
+      | { @odata.type: string, resourceSpecificPermissions?: { @odata.type:
+      string, permissionType?: "unknownFutureValue" | Record<..., ...> |
+      "delegated" | "application" | null, permissionValue?: string | null }[] }
+      | null } | null, azureADAppId?: string | null, bot?: Record<string, never>
+      | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string } & { @odata.type: "#microsoft.graph.teamworkBot" }) |
+      null, colorIcon?: Record<string, never> | (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string, hostedContent?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, contentBytes?: string | null,
+      contentType?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.teamworkHostedContent" }) | null, webUrl?: string | null
+      } & { @odata.type: "#microsoft.graph.teamsAppIcon" }) | null, createdBy?:
+      Record<string, never> | { @odata.type: string, application?:
+      Record<string, never> | { @odata.type: string, displayName?: string |
+      null, id?: string | null } | null, device?: Record<string, never> | {
+      @odata.type: string, displayName?: string | null, id?: string | null } |
+      null, user?: Record<string, never> | { @odata.type: string, displayName?:
+      string | null, id?: string | null } | null } | null, dashboardCards?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, contentSource?: Record<string, never> | {
+      @odata.type: string, botConfiguration?: Record<string, never> | {
+      @odata.type: string, botId?: function } | null, sourceType?:
+      "unknownFutureValue" | Record<string, never> | "bot" | null } | null,
+      defaultSize?: "unknownFutureValue" | Record<string, never> | "medium" |
+      "large" | null, description?: string | null, displayName?: string | null,
+      icon?: Record<string, never> | { @odata.type: string, iconUrl?: string |
+      null, officeUIFabricIconName?: string | null } | null, pickerGroupId?:
+      string | null } & { @odata.type:
+      "#microsoft.graph.teamsAppDashboardCardDefinition" })[], description?:
+      string | null, displayName?: string | null, lastModifiedDateTime?: string
+      | null, outlineIcon?: Record<string, never> | (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string, hostedContent?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, contentBytes?: string | null,
+      contentType?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.teamworkHostedContent" }) | null, webUrl?: string | null
+      } & { @odata.type: "#microsoft.graph.teamsAppIcon" }) | null,
+      publishingState?: "unknownFutureValue" | Record<string, never> |
+      "submitted" | "rejected" | "published" | null, shortdescription?: string |
+      null, teamsAppId?: string | null, version?: string | null } & {
+      @odata.type: "#microsoft.graph.teamsAppDefinition" }, { teamsApp-id:
+      string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.appCatalogs.teamsApps.appDefinitions.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -131,25 +177,245 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/appCatalogs/teamsApps/{teamsApp-id}/appDefinitions",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /appCatalogs/teamsApps/{teamsApp-id}/appDefinitions"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, allowedInstallationScopes?:
+        "unknownFutureValue" | Record<string, never> | "team" | "groupChat" |
+        "personal" | null, authorization?: Record<string, never> | {
+        @odata.type: string, clientAppId?: string | null,
+        requiredPermissionSet?: Record<string, never> | { @odata.type: string,
+        resourceSpecificPermissions?: { @odata.type: string, permissionType?:
+        "unknownFutureValue" | Record<..., ...> | "delegated" | "application" |
+        null, permissionValue?: string | null }[] } | null } | null,
+        azureADAppId?: string | null, bot?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string } & { @odata.type: "#microsoft.graph.teamworkBot" }) | null,
+        colorIcon?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, hostedContent?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, contentBytes?: string |
+        null, contentType?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.teamworkHostedContent" }) | null, webUrl?: string |
+        null } & { @odata.type: "#microsoft.graph.teamsAppIcon" }) | null,
+        createdBy?: Record<string, never> | { @odata.type: string, application?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, device?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, user?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null } | null,
+        dashboardCards?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, contentSource?: Record<string,
+        never> | { @odata.type: string, botConfiguration?: Record<string, never>
+        | { @odata.type: string, botId?: function } | null, sourceType?:
+        "unknownFutureValue" | Record<string, never> | "bot" | null } | null,
+        defaultSize?: "unknownFutureValue" | Record<string, never> | "medium" |
+        "large" | null, description?: string | null, displayName?: string |
+        null, icon?: Record<string, never> | { @odata.type: string, iconUrl?:
+        string | null, officeUIFabricIconName?: string | null } | null,
+        pickerGroupId?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsAppDashboardCardDefinition" })[], description?:
+        string | null, displayName?: string | null, lastModifiedDateTime?:
+        string | null, outlineIcon?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, hostedContent?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        contentBytes?: string | null, contentType?: string | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.teamworkHostedContent"
+        }) | null, webUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsAppIcon" }) | null, publishingState?:
+        "unknownFutureValue" | Record<string, never> | "submitted" | "rejected"
+        | "published" | null, shortdescription?: string | null, teamsAppId?:
+        string | null, version?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsAppDefinition" }, params?: { teamsApp-id: string
+        }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, allowedInstallationScopes?:
+        "unknownFutureValue" | Record<string, never> | "team" | "groupChat" |
+        "personal" | null, authorization?: Record<string, never> | {
+        @odata.type: string, clientAppId?: string | null,
+        requiredPermissionSet?: Record<string, never> | { @odata.type: string,
+        resourceSpecificPermissions?: { @odata.type: string, permissionType?:
+        function, permissionValue?: function }[] } | null } | null,
+        azureADAppId?: string | null, bot?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string } & { @odata.type: "#microsoft.graph.teamworkBot" }) | null,
+        colorIcon?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, hostedContent?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, contentBytes?: function,
+        contentType?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.teamworkHostedContent" }) | null, webUrl?: string |
+        null } & { @odata.type: "#microsoft.graph.teamsAppIcon" }) | null,
+        createdBy?: Record<string, never> | { @odata.type: string, application?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, device?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, user?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null } | null,
+        dashboardCards?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, contentSource?: Record<string,
+        never> | { @odata.type: string, botConfiguration?: Record<..., ...> | {
+        @odata.type: ..., botId?: ... } | null, sourceType?:
+        "unknownFutureValue" | Record<..., ...> | "bot" | null } | null,
+        defaultSize?: "unknownFutureValue" | Record<string, never> | "medium" |
+        "large" | null, description?: string | null, displayName?: string |
+        null, icon?: Record<string, never> | { @odata.type: string, iconUrl?:
+        string | null, officeUIFabricIconName?: string | null } | null,
+        pickerGroupId?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsAppDashboardCardDefinition" })[], description?:
+        string | null, displayName?: string | null, lastModifiedDateTime?:
+        string | null, outlineIcon?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, hostedContent?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & Omit<{ @odata.type: string,
+        contentBytes?: function, contentType?: function }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.teamworkHostedContent" }) | null,
+        webUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsAppIcon" }) | null, publishingState?:
+        "unknownFutureValue" | Record<string, never> | "submitted" | "rejected"
+        | "published" | null, shortdescription?: string | null, teamsAppId?:
+        string | null, version?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsAppDefinition" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/appCatalogs/teamsApps/{teamsApp-id}/appDefinitions",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            allowedInstallationScopes?: "unknownFutureValue" | Record&lt;string,
+            never&gt; | "team" | "groupChat" | "personal" | null,
+            authorization?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, clientAppId?: string | null,
+            requiredPermissionSet?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, resourceSpecificPermissions?: { <xref
+            uid="@odata.type" />: string, permissionType?: "unknownFutureValue"
+            | Record&lt;..., ...&gt; | "delegated" | "application" | null,
+            permissionValue?: string | null }[] } | null } | null,
+            azureADAppId?: string | null, bot?: Record&lt;string, never&gt; |
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamworkBot" />" }) | null, colorIcon?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, hostedContent?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, contentBytes?: string | null,
+            contentType?: string | null }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamworkHostedContent" />" }) | null, webUrl?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAppIcon" />" }) | null, createdBy?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            application?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, displayName?: string | null, id?:
+            string | null } | null, device?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | null, user?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | null } | null, dashboardCards?: (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            contentSource?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, botConfiguration?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, botId?: function }
+            | null, sourceType?: "unknownFutureValue" | Record&lt;string,
+            never&gt; | "bot" | null } | null, defaultSize?:
+            "unknownFutureValue" | Record&lt;string, never&gt; | "medium" |
+            "large" | null, description?: string | null, displayName?: string |
+            null, icon?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, iconUrl?: string | null, officeUIFabricIconName?: string
+            | null } | null, pickerGroupId?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAppDashboardCardDefinition" />" })[],
+            description?: string | null, displayName?: string | null,
+            lastModifiedDateTime?: string | null, outlineIcon?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, hostedContent?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, contentBytes?: string | null,
+            contentType?: string | null }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamworkHostedContent" />" }) | null, webUrl?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAppIcon" />" }) | null, publishingState?:
+            "unknownFutureValue" | Record&lt;string, never&gt; | "submitted" |
+            "rejected" | "published" | null, shortdescription?: string | null,
+            teamsAppId?: string | null, version?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAppDefinition" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ teamsApp-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /appCatalogs/teamsApps/{teamsApp-id}/appDefinitions"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, allowedInstallationScopes?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "team" | "groupChat" | "personal" |
+          null, authorization?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, clientAppId?: string | null,
+          requiredPermissionSet?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, resourceSpecificPermissions?: { <xref
+          uid="@odata.type" />: string, permissionType?: function,
+          permissionValue?: function }[] } | null } | null, azureADAppId?:
+          string | null, bot?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamworkBot" />" })
+          | null, colorIcon?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, hostedContent?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, contentBytes?: function,
+          contentType?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamworkHostedContent" />" }) | null, webUrl?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppIcon" />" }) | null, createdBy?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          application?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } | null,
+          device?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null,
+          user?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null } |
+          null, dashboardCards?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, contentSource?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, botConfiguration?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., botId?:
+          ... } | null, sourceType?: "unknownFutureValue" | Record&lt;...,
+          ...&gt; | "bot" | null } | null, defaultSize?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "medium" | "large" | null, description?:
+          string | null, displayName?: string | null, icon?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, iconUrl?: string |
+          null, officeUIFabricIconName?: string | null } | null, pickerGroupId?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppDashboardCardDefinition" />" })[],
+          description?: string | null, displayName?: string | null,
+          lastModifiedDateTime?: string | null, outlineIcon?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, hostedContent?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, contentBytes?: function, contentType?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamworkHostedContent" />" }) | null, webUrl?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppIcon" />" }) | null, publishingState?:
+          "unknownFutureValue" | Record&lt;string, never&gt; | "submitted" |
+          "rejected" | "published" | null, shortdescription?: string | null,
+          teamsAppId?: string | null, version?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamsAppDefinition"
+          />" }&gt;
+  - name: >-
+      del({ If-Match?: string, teamsApp-id: string, teamsAppDefinition-id:
+      string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.appCatalogs.teamsApps.appDefinitions.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -160,18 +426,20 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /appCatalogs/teamsApps/{teamsApp-id}/appDefinitions/{teamsAppDefinition-id}"]["response"]>
+        function del(params?: { If-Match?: string, teamsApp-id: string,
+        teamsAppDefinition-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { If-Match?: string, teamsApp-id: string, teamsAppDefinition-id:
+            string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /appCatalogs/teamsApps/{teamsApp-id}/appDefinitions/{teamsAppDefinition-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], teamsApp-id: string,
+      teamsAppDefinition-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.appCatalogs.teamsApps.appDefinitions.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -185,18 +453,131 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /appCatalogs/teamsApps/{teamsApp-id}/appDefinitions/{teamsAppDefinition-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        teamsApp-id: string, teamsAppDefinition-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, allowedInstallationScopes?:
+        "unknownFutureValue" | Record<string, never> | "team" | "groupChat" |
+        "personal" | null, authorization?: Record<string, never> | {
+        @odata.type: string, clientAppId?: string | null,
+        requiredPermissionSet?: Record<string, never> | { @odata.type: string,
+        resourceSpecificPermissions?: { @odata.type: string, permissionType?:
+        function, permissionValue?: function }[] } | null } | null,
+        azureADAppId?: string | null, bot?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string } & { @odata.type: "#microsoft.graph.teamworkBot" }) | null,
+        colorIcon?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, hostedContent?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, contentBytes?: function,
+        contentType?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.teamworkHostedContent" }) | null, webUrl?: string |
+        null } & { @odata.type: "#microsoft.graph.teamsAppIcon" }) | null,
+        createdBy?: Record<string, never> | { @odata.type: string, application?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, device?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, user?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null } | null,
+        dashboardCards?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, contentSource?: Record<string,
+        never> | { @odata.type: string, botConfiguration?: Record<..., ...> | {
+        @odata.type: ..., botId?: ... } | null, sourceType?:
+        "unknownFutureValue" | Record<..., ...> | "bot" | null } | null,
+        defaultSize?: "unknownFutureValue" | Record<string, never> | "medium" |
+        "large" | null, description?: string | null, displayName?: string |
+        null, icon?: Record<string, never> | { @odata.type: string, iconUrl?:
+        string | null, officeUIFabricIconName?: string | null } | null,
+        pickerGroupId?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsAppDashboardCardDefinition" })[], description?:
+        string | null, displayName?: string | null, lastModifiedDateTime?:
+        string | null, outlineIcon?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, hostedContent?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & Omit<{ @odata.type: string,
+        contentBytes?: function, contentType?: function }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.teamworkHostedContent" }) | null,
+        webUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsAppIcon" }) | null, publishingState?:
+        "unknownFutureValue" | Record<string, never> | "submitted" | "rejected"
+        | "published" | null, shortdescription?: string | null, teamsAppId?:
+        string | null, version?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsAppDefinition" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], teamsApp-id: string,
+            teamsAppDefinition-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /appCatalogs/teamsApps/{teamsApp-id}/appDefinitions/{teamsAppDefinition-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, allowedInstallationScopes?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "team" | "groupChat" | "personal" |
+          null, authorization?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, clientAppId?: string | null,
+          requiredPermissionSet?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, resourceSpecificPermissions?: { <xref
+          uid="@odata.type" />: string, permissionType?: function,
+          permissionValue?: function }[] } | null } | null, azureADAppId?:
+          string | null, bot?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamworkBot" />" })
+          | null, colorIcon?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, hostedContent?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, contentBytes?: function,
+          contentType?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamworkHostedContent" />" }) | null, webUrl?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppIcon" />" }) | null, createdBy?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          application?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } | null,
+          device?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null,
+          user?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null } |
+          null, dashboardCards?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, contentSource?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, botConfiguration?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., botId?:
+          ... } | null, sourceType?: "unknownFutureValue" | Record&lt;...,
+          ...&gt; | "bot" | null } | null, defaultSize?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "medium" | "large" | null, description?:
+          string | null, displayName?: string | null, icon?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, iconUrl?: string |
+          null, officeUIFabricIconName?: string | null } | null, pickerGroupId?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppDashboardCardDefinition" />" })[],
+          description?: string | null, displayName?: string | null,
+          lastModifiedDateTime?: string | null, outlineIcon?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, hostedContent?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, contentBytes?: function, contentType?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamworkHostedContent" />" }) | null, webUrl?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppIcon" />" }) | null, publishingState?:
+          "unknownFutureValue" | Record&lt;string, never&gt; | "submitted" |
+          "rejected" | "published" | null, shortdescription?: string | null,
+          teamsAppId?: string | null, version?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamsAppDefinition"
+          />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, teamsApp-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.appCatalogs.teamsApps.appDefinitions.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -208,20 +589,138 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /appCatalogs/teamsApps/{teamsApp-id}/appDefinitions"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, teamsApp-id: string }): EndpointRequest<{
+        @odata.count?: number | null, @odata.nextLink?: string | null } & {
+        value?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, allowedInstallationScopes?: "unknownFutureValue" |
+        Record<string, never> | "team" | "groupChat" | "personal" | null,
+        authorization?: Record<string, never> | { @odata.type: string,
+        clientAppId?: string | null, requiredPermissionSet?: Record<..., ...> |
+        { @odata.type: ..., resourceSpecificPermissions?: ... } | null } | null,
+        azureADAppId?: string | null, bot?: Record<string, never> | (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string } &
+        { @odata.type: "#microsoft.graph.teamworkBot" }) | null, colorIcon?:
+        Record<string, never> | (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, hostedContent?: function,
+        webUrl?: function } & { @odata.type: "#microsoft.graph.teamsAppIcon" })
+        | null, createdBy?: Record<string, never> | { @odata.type: string,
+        application?: Record<..., ...> | { @odata.type: ..., displayName?: ...,
+        id?: ... } | null, device?: Record<..., ...> | { @odata.type: ...,
+        displayName?: ..., id?: ... } | null, user?: Record<..., ...> | {
+        @odata.type: ..., displayName?: ..., id?: ... } | null } | null,
+        dashboardCards?: (Omit<..., ...> & { @odata.type: ..., contentSource?:
+        ..., defaultSize?: ..., description?: ..., displayName?: ..., icon?:
+        ..., pickerGroupId?: ... } & { @odata.type: ... })[], description?:
+        string | null, displayName?: string | null, lastModifiedDateTime?:
+        string | null, outlineIcon?: Record<string, never> | (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        hostedContent?: function, webUrl?: function } & { @odata.type:
+        "#microsoft.graph.teamsAppIcon" }) | null, publishingState?:
+        "unknownFutureValue" | Record<string, never> | "submitted" | "rejected"
+        | "published" | null, shortdescription?: string | null, teamsAppId?:
+        string | null, version?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsAppDefinition" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, teamsApp-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /appCatalogs/teamsApps/{teamsApp-id}/appDefinitions"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          allowedInstallationScopes?: "unknownFutureValue" | Record&lt;string,
+          never&gt; | "team" | "groupChat" | "personal" | null, authorization?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          clientAppId?: string | null, requiredPermissionSet?: Record&lt;...,
+          ...&gt; | { <xref uid="@odata.type" />: ...,
+          resourceSpecificPermissions?: ... } | null } | null, azureADAppId?:
+          string | null, bot?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamworkBot" />" })
+          | null, colorIcon?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, hostedContent?:
+          function, webUrl?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppIcon" />" }) | null, createdBy?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          application?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., displayName?: ..., id?: ... } | null, device?: Record&lt;...,
+          ...&gt; | { <xref uid="@odata.type" />: ..., displayName?: ..., id?:
+          ... } | null, user?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... } | null } |
+          null, dashboardCards?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., contentSource?: ..., defaultSize?: ...,
+          description?: ..., displayName?: ..., icon?: ..., pickerGroupId?: ...
+          } & { <xref uid="@odata.type" />: ... })[], description?: string |
+          null, displayName?: string | null, lastModifiedDateTime?: string |
+          null, outlineIcon?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, hostedContent?:
+          function, webUrl?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppIcon" />" }) | null, publishingState?:
+          "unknownFutureValue" | Record&lt;string, never&gt; | "submitted" |
+          "rejected" | "published" | null, shortdescription?: string | null,
+          teamsAppId?: string | null, version?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamsAppDefinition"
+          />" })[] }&gt;
   - name: >-
-      update(Operation<"/appCatalogs/teamsApps/{teamsApp-id}/appDefinitions/{teamsAppDefinition-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, allowedInstallationScopes?: "unknownFutureValue" |
+      Record<string, never> | "team" | "groupChat" | "personal" | null,
+      authorization?: Record<string, never> | { @odata.type: string,
+      clientAppId?: string | null, requiredPermissionSet?: Record<string, never>
+      | { @odata.type: string, resourceSpecificPermissions?: { @odata.type:
+      string, permissionType?: "unknownFutureValue" | Record<..., ...> |
+      "delegated" | "application" | null, permissionValue?: string | null }[] }
+      | null } | null, azureADAppId?: string | null, bot?: Record<string, never>
+      | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string } & { @odata.type: "#microsoft.graph.teamworkBot" }) |
+      null, colorIcon?: Record<string, never> | (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string, hostedContent?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, contentBytes?: string | null,
+      contentType?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.teamworkHostedContent" }) | null, webUrl?: string | null
+      } & { @odata.type: "#microsoft.graph.teamsAppIcon" }) | null, createdBy?:
+      Record<string, never> | { @odata.type: string, application?:
+      Record<string, never> | { @odata.type: string, displayName?: string |
+      null, id?: string | null } | null, device?: Record<string, never> | {
+      @odata.type: string, displayName?: string | null, id?: string | null } |
+      null, user?: Record<string, never> | { @odata.type: string, displayName?:
+      string | null, id?: string | null } | null } | null, dashboardCards?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, contentSource?: Record<string, never> | {
+      @odata.type: string, botConfiguration?: Record<string, never> | {
+      @odata.type: string, botId?: function } | null, sourceType?:
+      "unknownFutureValue" | Record<string, never> | "bot" | null } | null,
+      defaultSize?: "unknownFutureValue" | Record<string, never> | "medium" |
+      "large" | null, description?: string | null, displayName?: string | null,
+      icon?: Record<string, never> | { @odata.type: string, iconUrl?: string |
+      null, officeUIFabricIconName?: string | null } | null, pickerGroupId?:
+      string | null } & { @odata.type:
+      "#microsoft.graph.teamsAppDashboardCardDefinition" })[], description?:
+      string | null, displayName?: string | null, lastModifiedDateTime?: string
+      | null, outlineIcon?: Record<string, never> | (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string, hostedContent?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, contentBytes?: string | null,
+      contentType?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.teamworkHostedContent" }) | null, webUrl?: string | null
+      } & { @odata.type: "#microsoft.graph.teamsAppIcon" }) | null,
+      publishingState?: "unknownFutureValue" | Record<string, never> |
+      "submitted" | "rejected" | "published" | null, shortdescription?: string |
+      null, teamsAppId?: string | null, version?: string | null } & {
+      @odata.type: "#microsoft.graph.teamsAppDefinition" }, { teamsApp-id:
+      string, teamsAppDefinition-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.appCatalogs.teamsApps.appDefinitions.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -243,21 +742,239 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/appCatalogs/teamsApps/{teamsApp-id}/appDefinitions/{teamsAppDefinition-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /appCatalogs/teamsApps/{teamsApp-id}/appDefinitions/{teamsAppDefinition-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, allowedInstallationScopes?:
+        "unknownFutureValue" | Record<string, never> | "team" | "groupChat" |
+        "personal" | null, authorization?: Record<string, never> | {
+        @odata.type: string, clientAppId?: string | null,
+        requiredPermissionSet?: Record<string, never> | { @odata.type: string,
+        resourceSpecificPermissions?: { @odata.type: string, permissionType?:
+        "unknownFutureValue" | Record<..., ...> | "delegated" | "application" |
+        null, permissionValue?: string | null }[] } | null } | null,
+        azureADAppId?: string | null, bot?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string } & { @odata.type: "#microsoft.graph.teamworkBot" }) | null,
+        colorIcon?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, hostedContent?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, contentBytes?: string |
+        null, contentType?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.teamworkHostedContent" }) | null, webUrl?: string |
+        null } & { @odata.type: "#microsoft.graph.teamsAppIcon" }) | null,
+        createdBy?: Record<string, never> | { @odata.type: string, application?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, device?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, user?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null } | null,
+        dashboardCards?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, contentSource?: Record<string,
+        never> | { @odata.type: string, botConfiguration?: Record<string, never>
+        | { @odata.type: string, botId?: function } | null, sourceType?:
+        "unknownFutureValue" | Record<string, never> | "bot" | null } | null,
+        defaultSize?: "unknownFutureValue" | Record<string, never> | "medium" |
+        "large" | null, description?: string | null, displayName?: string |
+        null, icon?: Record<string, never> | { @odata.type: string, iconUrl?:
+        string | null, officeUIFabricIconName?: string | null } | null,
+        pickerGroupId?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsAppDashboardCardDefinition" })[], description?:
+        string | null, displayName?: string | null, lastModifiedDateTime?:
+        string | null, outlineIcon?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, hostedContent?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        contentBytes?: string | null, contentType?: string | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.teamworkHostedContent"
+        }) | null, webUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsAppIcon" }) | null, publishingState?:
+        "unknownFutureValue" | Record<string, never> | "submitted" | "rejected"
+        | "published" | null, shortdescription?: string | null, teamsAppId?:
+        string | null, version?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsAppDefinition" }, params?: { teamsApp-id: string,
+        teamsAppDefinition-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        allowedInstallationScopes?: "unknownFutureValue" | Record<string, never>
+        | "team" | "groupChat" | "personal" | null, authorization?:
+        Record<string, never> | { @odata.type: string, clientAppId?: string |
+        null, requiredPermissionSet?: Record<string, never> | { @odata.type:
+        string, resourceSpecificPermissions?: { @odata.type: string,
+        permissionType?: function, permissionValue?: function }[] } | null } |
+        null, azureADAppId?: string | null, bot?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string } & { @odata.type: "#microsoft.graph.teamworkBot" })
+        | null, colorIcon?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, hostedContent?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, contentBytes?: function,
+        contentType?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.teamworkHostedContent" }) | null, webUrl?: string |
+        null } & { @odata.type: "#microsoft.graph.teamsAppIcon" }) | null,
+        createdBy?: Record<string, never> | { @odata.type: string, application?:
+        Record<string, never> | { @odata.type: string, displayName?: string |
+        null, id?: string | null } | null, device?: Record<string, never> | {
+        @odata.type: string, displayName?: string | null, id?: string | null } |
+        null, user?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null } | null,
+        dashboardCards?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, contentSource?: Record<string,
+        never> | { @odata.type: string, botConfiguration?: Record<..., ...> | {
+        @odata.type: ..., botId?: ... } | null, sourceType?:
+        "unknownFutureValue" | Record<..., ...> | "bot" | null } | null,
+        defaultSize?: "unknownFutureValue" | Record<string, never> | "medium" |
+        "large" | null, description?: string | null, displayName?: string |
+        null, icon?: Record<string, never> | { @odata.type: string, iconUrl?:
+        string | null, officeUIFabricIconName?: string | null } | null,
+        pickerGroupId?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsAppDashboardCardDefinition" })[], description?:
+        string | null, displayName?: string | null, lastModifiedDateTime?:
+        string | null, outlineIcon?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, hostedContent?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & Omit<{ @odata.type: string,
+        contentBytes?: function, contentType?: function }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.teamworkHostedContent" }) | null,
+        webUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsAppIcon" }) | null, publishingState?:
+        "unknownFutureValue" | Record<string, never> | "submitted" | "rejected"
+        | "published" | null, shortdescription?: string | null, teamsAppId?:
+        string | null, version?: string | null } & { @odata.type:
+        "#microsoft.graph.teamsAppDefinition" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/appCatalogs/teamsApps/{teamsApp-id}/appDefinitions/{teamsAppDefinition-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            allowedInstallationScopes?: "unknownFutureValue" | Record&lt;string,
+            never&gt; | "team" | "groupChat" | "personal" | null,
+            authorization?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, clientAppId?: string | null,
+            requiredPermissionSet?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, resourceSpecificPermissions?: { <xref
+            uid="@odata.type" />: string, permissionType?: "unknownFutureValue"
+            | Record&lt;..., ...&gt; | "delegated" | "application" | null,
+            permissionValue?: string | null }[] } | null } | null,
+            azureADAppId?: string | null, bot?: Record&lt;string, never&gt; |
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamworkBot" />" }) | null, colorIcon?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, hostedContent?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, contentBytes?: string | null,
+            contentType?: string | null }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamworkHostedContent" />" }) | null, webUrl?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAppIcon" />" }) | null, createdBy?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            application?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, displayName?: string | null, id?:
+            string | null } | null, device?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | null, user?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | null } | null, dashboardCards?: (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            contentSource?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, botConfiguration?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, botId?: function }
+            | null, sourceType?: "unknownFutureValue" | Record&lt;string,
+            never&gt; | "bot" | null } | null, defaultSize?:
+            "unknownFutureValue" | Record&lt;string, never&gt; | "medium" |
+            "large" | null, description?: string | null, displayName?: string |
+            null, icon?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, iconUrl?: string | null, officeUIFabricIconName?: string
+            | null } | null, pickerGroupId?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAppDashboardCardDefinition" />" })[],
+            description?: string | null, displayName?: string | null,
+            lastModifiedDateTime?: string | null, outlineIcon?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, hostedContent?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, contentBytes?: string | null,
+            contentType?: string | null }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamworkHostedContent" />" }) | null, webUrl?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAppIcon" />" }) | null, publishingState?:
+            "unknownFutureValue" | Record&lt;string, never&gt; | "submitted" |
+            "rejected" | "published" | null, shortdescription?: string | null,
+            teamsAppId?: string | null, version?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.teamsAppDefinition" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ teamsApp-id: string, teamsAppDefinition-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /appCatalogs/teamsApps/{teamsApp-id}/appDefinitions/{teamsAppDefinition-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, allowedInstallationScopes?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "team" | "groupChat" | "personal" |
+          null, authorization?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, clientAppId?: string | null,
+          requiredPermissionSet?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, resourceSpecificPermissions?: { <xref
+          uid="@odata.type" />: string, permissionType?: function,
+          permissionValue?: function }[] } | null } | null, azureADAppId?:
+          string | null, bot?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamworkBot" />" })
+          | null, colorIcon?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, hostedContent?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, contentBytes?: function,
+          contentType?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamworkHostedContent" />" }) | null, webUrl?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppIcon" />" }) | null, createdBy?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          application?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } | null,
+          device?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null,
+          user?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, displayName?: string | null, id?: string | null } | null } |
+          null, dashboardCards?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, contentSource?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, botConfiguration?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., botId?:
+          ... } | null, sourceType?: "unknownFutureValue" | Record&lt;...,
+          ...&gt; | "bot" | null } | null, defaultSize?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "medium" | "large" | null, description?:
+          string | null, displayName?: string | null, icon?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, iconUrl?: string |
+          null, officeUIFabricIconName?: string | null } | null, pickerGroupId?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppDashboardCardDefinition" />" })[],
+          description?: string | null, displayName?: string | null,
+          lastModifiedDateTime?: string | null, outlineIcon?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, hostedContent?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, contentBytes?: function, contentType?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamworkHostedContent" />" }) | null, webUrl?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.teamsAppIcon" />" }) | null, publishingState?:
+          "unknownFutureValue" | Record&lt;string, never&gt; | "submitted" |
+          "rejected" | "published" | null, shortdescription?: string | null,
+          teamsAppId?: string | null, version?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.teamsAppDefinition"
+          />" }&gt;

@@ -9,7 +9,9 @@ interfaces:
     @microsoft/teams.graph-endpoints.servicePrincipals.synchronization.templates.schema.IEndpoints
 package: '@microsoft/teams.graph-endpoints'
 functions:
-  - name: del(any)
+  - name: >-
+      del({ If-Match?: string, servicePrincipal-id: string,
+      synchronizationTemplate-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.servicePrincipals.synchronization.templates.schema.del
     package: '@microsoft/teams.graph-endpoints'
@@ -20,18 +22,20 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /servicePrincipals/{servicePrincipal-id}/synchronization/templates/{synchronizationTemplate-id}/schema"]["response"]>
+        function del(params?: { If-Match?: string, servicePrincipal-id: string,
+        synchronizationTemplate-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { If-Match?: string, servicePrincipal-id: string,
+            synchronizationTemplate-id: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /servicePrincipals/{servicePrincipal-id}/synchronization/templates/{synchronizationTemplate-id}/schema"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], servicePrincipal-id: string,
+      synchronizationTemplate-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.servicePrincipals.synchronization.templates.schema.get
     package: '@microsoft/teams.graph-endpoints'
@@ -45,20 +49,98 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /servicePrincipals/{servicePrincipal-id}/synchronization/templates/{synchronizationTemplate-id}/schema"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        servicePrincipal-id: string, synchronizationTemplate-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, directories?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, discoverabilities?: "None" | "AttributeNames" |
+        "AttributeDataTypes" | "AttributeReadOnly" | "ReferenceAttributes" |
+        "UnknownFutureValue", discoveryDateTime?: string | null, name?: string |
+        null, objects?: { @odata.type: string, attributes?: function, metadata?:
+        function, name?: function, supportedApis?: function }[], readOnly?:
+        boolean, version?: string | null } & { @odata.type:
+        "#microsoft.graph.directoryDefinition" })[], synchronizationRules?: {
+        @odata.type: string, containerFilter?: Record<string, never> | {
+        @odata.type: string, includedContainers?: function[] } | null,
+        editable?: boolean, groupFilter?: Record<string, never> | { @odata.type:
+        string, includedGroups?: function[] } | null, id?: string | null,
+        metadata?: { @odata.type: string, key?: string | null, value?: string |
+        null }[], name?: string | null, objectMappings?: { @odata.type: string,
+        attributeMappings?: ...[], enabled?: boolean, flowTypes?: "None" | "Add"
+        | "Update" | "Delete", metadata?: ...[], name?: string | null, scope?:
+        Record<..., ...> | { @odata.type: ..., categoryFilterGroups?: ...,
+        groups?: ..., inputFilterGroups?: ... } | null, sourceObjectName?:
+        string | null, targetObjectName?: string | null }[], priority?: number,
+        sourceDirectoryName?: string | null, targetDirectoryName?: string | null
+        }[], version?: string | null } & { @odata.type:
+        "#microsoft.graph.synchronizationSchema" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], servicePrincipal-id:
+            string, synchronizationTemplate-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /servicePrincipals/{servicePrincipal-id}/synchronization/templates/{synchronizationTemplate-id}/schema"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, directories?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, discoverabilities?: "None" |
+          "AttributeNames" | "AttributeDataTypes" | "AttributeReadOnly" |
+          "ReferenceAttributes" | "UnknownFutureValue", discoveryDateTime?:
+          string | null, name?: string | null, objects?: { <xref
+          uid="@odata.type" />: string, attributes?: function, metadata?:
+          function, name?: function, supportedApis?: function }[], readOnly?:
+          boolean, version?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.directoryDefinition" />" })[],
+          synchronizationRules?: { <xref uid="@odata.type" />: string,
+          containerFilter?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, includedContainers?: function[] } |
+          null, editable?: boolean, groupFilter?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string, includedGroups?: function[] } |
+          null, id?: string | null, metadata?: { <xref uid="@odata.type" />:
+          string, key?: string | null, value?: string | null }[], name?: string
+          | null, objectMappings?: { <xref uid="@odata.type" />: string,
+          attributeMappings?: ...[], enabled?: boolean, flowTypes?: "None" |
+          "Add" | "Update" | "Delete", metadata?: ...[], name?: string | null,
+          scope?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          categoryFilterGroups?: ..., groups?: ..., inputFilterGroups?: ... } |
+          null, sourceObjectName?: string | null, targetObjectName?: string |
+          null }[], priority?: number, sourceDirectoryName?: string | null,
+          targetDirectoryName?: string | null }[], version?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.synchronizationSchema" />" }&gt;
   - name: >-
-      update(Operation<"/servicePrincipals/{servicePrincipal-id}/synchronization/templates/{synchronizationTemplate-id}/schema",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, directories?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, discoverabilities?:
+      "None" | "AttributeNames" | "AttributeDataTypes" | "AttributeReadOnly" |
+      "ReferenceAttributes" | "UnknownFutureValue", discoveryDateTime?: string |
+      null, name?: string | null, objects?: { @odata.type: string, attributes?:
+      ...[], metadata?: ...[], name?: string | null, supportedApis?: ...[] }[],
+      readOnly?: boolean, version?: string | null } & { @odata.type:
+      "#microsoft.graph.directoryDefinition" })[], synchronizationRules?: {
+      @odata.type: string, containerFilter?: Record<string, never> | {
+      @odata.type: string, includedContainers?: (string | null)[] } | null,
+      editable?: boolean, groupFilter?: Record<string, never> | { @odata.type:
+      string, includedGroups?: (string | null)[] } | null, id?: string | null,
+      metadata?: { @odata.type: string, key?: string | null, value?: string |
+      null }[], name?: string | null, objectMappings?: { @odata.type: string,
+      attributeMappings?: { @odata.type: ..., defaultValue?: ...,
+      exportMissingReferences?: ..., flowBehavior?: ..., flowType?: ...,
+      matchingPriority?: ..., source?: ..., targetAttributeName?: ... }[],
+      enabled?: boolean, flowTypes?: "None" | "Add" | "Update" | "Delete",
+      metadata?: { @odata.type: ..., key?: ..., value?: ... }[], name?: string |
+      null, scope?: Record<string, never> | { @odata.type: string,
+      categoryFilterGroups?: function, groups?: function, inputFilterGroups?:
+      function } | null, sourceObjectName?: string | null, targetObjectName?:
+      string | null }[], priority?: number, sourceDirectoryName?: string | null,
+      targetDirectoryName?: string | null }[], version?: string | null } & {
+      @odata.type: "#microsoft.graph.synchronizationSchema" }, {
+      servicePrincipal-id: string, synchronizationTemplate-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.servicePrincipals.synchronization.templates.schema.update
     package: '@microsoft/teams.graph-endpoints'
@@ -69,24 +151,131 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/servicePrincipals/{servicePrincipal-id}/synchronization/templates/{synchronizationTemplate-id}/schema",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /servicePrincipals/{servicePrincipal-id}/synchronization/templates/{synchronizationTemplate-id}/schema"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, directories?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, discoverabilities?: "None" | "AttributeNames" |
+        "AttributeDataTypes" | "AttributeReadOnly" | "ReferenceAttributes" |
+        "UnknownFutureValue", discoveryDateTime?: string | null, name?: string |
+        null, objects?: { @odata.type: string, attributes?: ...[], metadata?:
+        ...[], name?: string | null, supportedApis?: ...[] }[], readOnly?:
+        boolean, version?: string | null } & { @odata.type:
+        "#microsoft.graph.directoryDefinition" })[], synchronizationRules?: {
+        @odata.type: string, containerFilter?: Record<string, never> | {
+        @odata.type: string, includedContainers?: (string | null)[] } | null,
+        editable?: boolean, groupFilter?: Record<string, never> | { @odata.type:
+        string, includedGroups?: (string | null)[] } | null, id?: string | null,
+        metadata?: { @odata.type: string, key?: string | null, value?: string |
+        null }[], name?: string | null, objectMappings?: { @odata.type: string,
+        attributeMappings?: { @odata.type: ..., defaultValue?: ...,
+        exportMissingReferences?: ..., flowBehavior?: ..., flowType?: ...,
+        matchingPriority?: ..., source?: ..., targetAttributeName?: ... }[],
+        enabled?: boolean, flowTypes?: "None" | "Add" | "Update" | "Delete",
+        metadata?: { @odata.type: ..., key?: ..., value?: ... }[], name?: string
+        | null, scope?: Record<string, never> | { @odata.type: string,
+        categoryFilterGroups?: function, groups?: function, inputFilterGroups?:
+        function } | null, sourceObjectName?: string | null, targetObjectName?:
+        string | null }[], priority?: number, sourceDirectoryName?: string |
+        null, targetDirectoryName?: string | null }[], version?: string | null }
+        & { @odata.type: "#microsoft.graph.synchronizationSchema" }, params?: {
+        servicePrincipal-id: string, synchronizationTemplate-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, directories?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, discoverabilities?: "None" | "AttributeNames" |
+        "AttributeDataTypes" | "AttributeReadOnly" | "ReferenceAttributes" |
+        "UnknownFutureValue", discoveryDateTime?: string | null, name?: string |
+        null, objects?: { @odata.type: string, attributes?: function, metadata?:
+        function, name?: function, supportedApis?: function }[], readOnly?:
+        boolean, version?: string | null } & { @odata.type:
+        "#microsoft.graph.directoryDefinition" })[], synchronizationRules?: {
+        @odata.type: string, containerFilter?: Record<string, never> | {
+        @odata.type: string, includedContainers?: function[] } | null,
+        editable?: boolean, groupFilter?: Record<string, never> | { @odata.type:
+        string, includedGroups?: function[] } | null, id?: string | null,
+        metadata?: { @odata.type: string, key?: string | null, value?: string |
+        null }[], name?: string | null, objectMappings?: { @odata.type: string,
+        attributeMappings?: ...[], enabled?: boolean, flowTypes?: "None" | "Add"
+        | "Update" | "Delete", metadata?: ...[], name?: string | null, scope?:
+        Record<..., ...> | { @odata.type: ..., categoryFilterGroups?: ...,
+        groups?: ..., inputFilterGroups?: ... } | null, sourceObjectName?:
+        string | null, targetObjectName?: string | null }[], priority?: number,
+        sourceDirectoryName?: string | null, targetDirectoryName?: string | null
+        }[], version?: string | null } & { @odata.type:
+        "#microsoft.graph.synchronizationSchema" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/servicePrincipals/{servicePrincipal-id}/synchronization/templates/{synchronizationTemplate-id}/schema",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            directories?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, discoverabilities?: "None" |
+            "AttributeNames" | "AttributeDataTypes" | "AttributeReadOnly" |
+            "ReferenceAttributes" | "UnknownFutureValue", discoveryDateTime?:
+            string | null, name?: string | null, objects?: { <xref
+            uid="@odata.type" />: string, attributes?: ...[], metadata?: ...[],
+            name?: string | null, supportedApis?: ...[] }[], readOnly?: boolean,
+            version?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.directoryDefinition" />" })[],
+            synchronizationRules?: { <xref uid="@odata.type" />: string,
+            containerFilter?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, includedContainers?: (string | null)[]
+            } | null, editable?: boolean, groupFilter?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, includedGroups?:
+            (string | null)[] } | null, id?: string | null, metadata?: { <xref
+            uid="@odata.type" />: string, key?: string | null, value?: string |
+            null }[], name?: string | null, objectMappings?: { <xref
+            uid="@odata.type" />: string, attributeMappings?: { <xref
+            uid="@odata.type" />: ..., defaultValue?: ...,
+            exportMissingReferences?: ..., flowBehavior?: ..., flowType?: ...,
+            matchingPriority?: ..., source?: ..., targetAttributeName?: ... }[],
+            enabled?: boolean, flowTypes?: "None" | "Add" | "Update" | "Delete",
+            metadata?: { <xref uid="@odata.type" />: ..., key?: ..., value?: ...
+            }[], name?: string | null, scope?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, categoryFilterGroups?: function,
+            groups?: function, inputFilterGroups?: function } | null,
+            sourceObjectName?: string | null, targetObjectName?: string | null
+            }[], priority?: number, sourceDirectoryName?: string | null,
+            targetDirectoryName?: string | null }[], version?: string | null } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.synchronizationSchema" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ servicePrincipal-id: string, synchronizationTemplate-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /servicePrincipals/{servicePrincipal-id}/synchronization/templates/{synchronizationTemplate-id}/schema"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, directories?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, discoverabilities?: "None" |
+          "AttributeNames" | "AttributeDataTypes" | "AttributeReadOnly" |
+          "ReferenceAttributes" | "UnknownFutureValue", discoveryDateTime?:
+          string | null, name?: string | null, objects?: { <xref
+          uid="@odata.type" />: string, attributes?: function, metadata?:
+          function, name?: function, supportedApis?: function }[], readOnly?:
+          boolean, version?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.directoryDefinition" />" })[],
+          synchronizationRules?: { <xref uid="@odata.type" />: string,
+          containerFilter?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, includedContainers?: function[] } |
+          null, editable?: boolean, groupFilter?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string, includedGroups?: function[] } |
+          null, id?: string | null, metadata?: { <xref uid="@odata.type" />:
+          string, key?: string | null, value?: string | null }[], name?: string
+          | null, objectMappings?: { <xref uid="@odata.type" />: string,
+          attributeMappings?: ...[], enabled?: boolean, flowTypes?: "None" |
+          "Add" | "Update" | "Delete", metadata?: ...[], name?: string | null,
+          scope?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          categoryFilterGroups?: ..., groups?: ..., inputFilterGroups?: ... } |
+          null, sourceObjectName?: string | null, targetObjectName?: string |
+          null }[], priority?: number, sourceDirectoryName?: string | null,
+          targetDirectoryName?: string | null }[], version?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.synchronizationSchema" />" }&gt;
 variables:
   - name: parseExpression
     uid: >-

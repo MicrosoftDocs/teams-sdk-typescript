@@ -7,24 +7,22 @@ interfaces:
   - '@microsoft/teams.graph-endpoints.me.insights.IEndpoints'
 package: '@microsoft/teams.graph-endpoints'
 functions:
-  - name: del(any)
+  - name: 'del({ If-Match?: string })'
     uid: '@microsoft/teams.graph-endpoints.me.insights.del'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`DELETE /me/insights`'
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /me/insights"]["response"]>
+      content: 'function del(params?: { If-Match?: string }): EndpointRequest<never>'
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["DELETE /me/insights"]["response"]&gt;
-  - name: list(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'list({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints.me.insights.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -38,16 +36,88 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /me/insights"]["response"]>
+        function list(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, shared?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        lastShared?: function, lastSharedMethod?: function, resource?: function,
+        resourceReference?: function, resourceVisualization?: function,
+        sharingHistory?: function } & { @odata.type:
+        "#microsoft.graph.sharedInsight" })[], trending?: (Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        lastModifiedDateTime?: function, resource?: function,
+        resourceReference?: function, resourceVisualization?: function, weight?:
+        function } & { @odata.type: "#microsoft.graph.trending" })[], used?:
+        (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
+        string, lastUsed?: function, resource?: function, resourceReference?:
+        function, resourceVisualization?: function } & { @odata.type:
+        "#microsoft.graph.usedInsight" })[] }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.officeGraphInsights" }, "@odata.type"> & {
+        @odata.type: string }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /me/insights"]["response"]&gt;
-  - name: update(Operation<"/me/insights", "patch">)
+        type: >-
+          EndpointRequest&lt;Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, shared?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, lastShared?: function,
+          lastSharedMethod?: function, resource?: function, resourceReference?:
+          function, resourceVisualization?: function, sharingHistory?: function
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.sharedInsight" />" })[], trending?: (Omit&lt;{
+          <xref uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, lastModifiedDateTime?:
+          function, resource?: function, resourceReference?: function,
+          resourceVisualization?: function, weight?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.trending" />" })[],
+          used?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          lastUsed?: function, resource?: function, resourceReference?:
+          function, resourceVisualization?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.usedInsight" />"
+          })[] }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.officeGraphInsights" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string }&gt;
+  - name: >-
+      update(Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+      Omit<{ @odata.type: string, shared?: (Omit<{ @odata.type: string, id?:
+      function }, "@odata.type"> & { @odata.type: string, lastShared?:
+      Record<..., ...> | { @odata.type: ..., sharedBy?: ..., sharedDateTime?:
+      ..., sharingReference?: ..., sharingSubject?: ..., sharingType?: ... } |
+      null, lastSharedMethod?: { @odata.type: ..., id?: ... } | Record<..., ...>
+      | null, resource?: { @odata.type: ..., id?: ... } | Record<..., ...> |
+      null, resourceReference?: Record<..., ...> | { @odata.type: ..., id?: ...,
+      type?: ..., webUrl?: ... } | null, resourceVisualization?: Record<...,
+      ...> | { @odata.type: ..., containerDisplayName?: ..., containerType?:
+      ..., containerWebUrl?: ..., mediaType?: ..., previewImageUrl?: ...,
+      previewText?: ..., title?: ..., type?: ... } | null, sharingHistory?:
+      ...[] } & { @odata.type: "#microsoft.graph.sharedInsight" })[], trending?:
+      (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+      @odata.type: string, lastModifiedDateTime?: string | null, resource?: {
+      @odata.type: ..., id?: ... } | Record<..., ...> | null,
+      resourceReference?: Record<..., ...> | { @odata.type: ..., id?: ...,
+      type?: ..., webUrl?: ... } | null, resourceVisualization?: Record<...,
+      ...> | { @odata.type: ..., containerDisplayName?: ..., containerType?:
+      ..., containerWebUrl?: ..., mediaType?: ..., previewImageUrl?: ...,
+      previewText?: ..., title?: ..., type?: ... } | null, weight?: string |
+      number | null } & { @odata.type: "#microsoft.graph.trending" })[], used?:
+      (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+      @odata.type: string, lastUsed?: Record<..., ...> | { @odata.type: ...,
+      lastAccessedDateTime?: ..., lastModifiedDateTime?: ... } | null,
+      resource?: { @odata.type: ..., id?: ... } | Record<..., ...> | null,
+      resourceReference?: Record<..., ...> | { @odata.type: ..., id?: ...,
+      type?: ..., webUrl?: ... } | null, resourceVisualization?: Record<...,
+      ...> | { @odata.type: ..., containerDisplayName?: ..., containerType?:
+      ..., containerWebUrl?: ..., mediaType?: ..., previewImageUrl?: ...,
+      previewText?: ..., title?: ..., type?: ... } | null } & { @odata.type:
+      "#microsoft.graph.usedInsight" })[] }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.officeGraphInsights" }, "@odata.type"> & { @odata.type:
+      string })
     uid: '@microsoft/teams.graph-endpoints.me.insights.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`PATCH /me/insights`'
@@ -55,12 +125,130 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/me/insights", "patch">):
-        EndpointRequest<IEndpoints["PATCH /me/insights"]["response"]>
+        function update(body: Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, shared?: (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, lastShared?: Record<..., ...> | { @odata.type: ..., sharedBy?:
+        ..., sharedDateTime?: ..., sharingReference?: ..., sharingSubject?: ...,
+        sharingType?: ... } | null, lastSharedMethod?: { @odata.type: ..., id?:
+        ... } | Record<..., ...> | null, resource?: { @odata.type: ..., id?: ...
+        } | Record<..., ...> | null, resourceReference?: Record<..., ...> | {
+        @odata.type: ..., id?: ..., type?: ..., webUrl?: ... } | null,
+        resourceVisualization?: Record<..., ...> | { @odata.type: ...,
+        containerDisplayName?: ..., containerType?: ..., containerWebUrl?: ...,
+        mediaType?: ..., previewImageUrl?: ..., previewText?: ..., title?: ...,
+        type?: ... } | null, sharingHistory?: ...[] } & { @odata.type:
+        "#microsoft.graph.sharedInsight" })[], trending?: (Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & { @odata.type: string,
+        lastModifiedDateTime?: string | null, resource?: { @odata.type: ...,
+        id?: ... } | Record<..., ...> | null, resourceReference?: Record<...,
+        ...> | { @odata.type: ..., id?: ..., type?: ..., webUrl?: ... } | null,
+        resourceVisualization?: Record<..., ...> | { @odata.type: ...,
+        containerDisplayName?: ..., containerType?: ..., containerWebUrl?: ...,
+        mediaType?: ..., previewImageUrl?: ..., previewText?: ..., title?: ...,
+        type?: ... } | null, weight?: string | number | null } & { @odata.type:
+        "#microsoft.graph.trending" })[], used?: (Omit<{ @odata.type: string,
+        id?: function }, "@odata.type"> & { @odata.type: string, lastUsed?:
+        Record<..., ...> | { @odata.type: ..., lastAccessedDateTime?: ...,
+        lastModifiedDateTime?: ... } | null, resource?: { @odata.type: ..., id?:
+        ... } | Record<..., ...> | null, resourceReference?: Record<..., ...> |
+        { @odata.type: ..., id?: ..., type?: ..., webUrl?: ... } | null,
+        resourceVisualization?: Record<..., ...> | { @odata.type: ...,
+        containerDisplayName?: ..., containerType?: ..., containerWebUrl?: ...,
+        mediaType?: ..., previewImageUrl?: ..., previewText?: ..., title?: ...,
+        type?: ... } | null } & { @odata.type: "#microsoft.graph.usedInsight"
+        })[] }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.officeGraphInsights" }, "@odata.type"> & {
+        @odata.type: string }): EndpointRequest<Omit<Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & Omit<{ @odata.type: string, shared?:
+        (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
+        string, lastShared?: function, lastSharedMethod?: function, resource?:
+        function, resourceReference?: function, resourceVisualization?:
+        function, sharingHistory?: function } & { @odata.type:
+        "#microsoft.graph.sharedInsight" })[], trending?: (Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        lastModifiedDateTime?: function, resource?: function,
+        resourceReference?: function, resourceVisualization?: function, weight?:
+        function } & { @odata.type: "#microsoft.graph.trending" })[], used?:
+        (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
+        string, lastUsed?: function, resource?: function, resourceReference?:
+        function, resourceVisualization?: function } & { @odata.type:
+        "#microsoft.graph.usedInsight" })[] }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.officeGraphInsights" }, "@odata.type"> & {
+        @odata.type: string }>
       parameters:
         - id: body
-          type: Operation&lt;"/me/insights", "patch"&gt;
+          type: >-
+            Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+            />: string, shared?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, lastShared?: Record&lt;..., ...&gt; |
+            { <xref uid="@odata.type" />: ..., sharedBy?: ..., sharedDateTime?:
+            ..., sharingReference?: ..., sharingSubject?: ..., sharingType?: ...
+            } | null, lastSharedMethod?: { <xref uid="@odata.type" />: ..., id?:
+            ... } | Record&lt;..., ...&gt; | null, resource?: { <xref
+            uid="@odata.type" />: ..., id?: ... } | Record&lt;..., ...&gt; |
+            null, resourceReference?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., id?: ..., type?: ..., webUrl?: ... } |
+            null, resourceVisualization?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., containerDisplayName?: ...,
+            containerType?: ..., containerWebUrl?: ..., mediaType?: ...,
+            previewImageUrl?: ..., previewText?: ..., title?: ..., type?: ... }
+            | null, sharingHistory?: ...[] } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.sharedInsight" />" })[], trending?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, lastModifiedDateTime?: string | null, resource?: { <xref
+            uid="@odata.type" />: ..., id?: ... } | Record&lt;..., ...&gt; |
+            null, resourceReference?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., id?: ..., type?: ..., webUrl?: ... } |
+            null, resourceVisualization?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., containerDisplayName?: ...,
+            containerType?: ..., containerWebUrl?: ..., mediaType?: ...,
+            previewImageUrl?: ..., previewText?: ..., title?: ..., type?: ... }
+            | null, weight?: string | number | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.trending" />"
+            })[], used?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, lastUsed?: Record&lt;..., ...&gt; | {
+            <xref uid="@odata.type" />: ..., lastAccessedDateTime?: ...,
+            lastModifiedDateTime?: ... } | null, resource?: { <xref
+            uid="@odata.type" />: ..., id?: ... } | Record&lt;..., ...&gt; |
+            null, resourceReference?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., id?: ..., type?: ..., webUrl?: ... } |
+            null, resourceVisualization?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., containerDisplayName?: ...,
+            containerType?: ..., containerWebUrl?: ..., mediaType?: ...,
+            previewImageUrl?: ..., previewText?: ..., title?: ..., type?: ... }
+            | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.usedInsight" />" })[] }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.officeGraphInsights" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["PATCH /me/insights"]["response"]&gt;
+        type: >-
+          EndpointRequest&lt;Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, shared?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, lastShared?: function,
+          lastSharedMethod?: function, resource?: function, resourceReference?:
+          function, resourceVisualization?: function, sharingHistory?: function
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.sharedInsight" />" })[], trending?: (Omit&lt;{
+          <xref uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, lastModifiedDateTime?:
+          function, resource?: function, resourceReference?: function,
+          resourceVisualization?: function, weight?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.trending" />" })[],
+          used?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          lastUsed?: function, resource?: function, resourceReference?:
+          function, resourceVisualization?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.usedInsight" />"
+          })[] }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.officeGraphInsights" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string }&gt;

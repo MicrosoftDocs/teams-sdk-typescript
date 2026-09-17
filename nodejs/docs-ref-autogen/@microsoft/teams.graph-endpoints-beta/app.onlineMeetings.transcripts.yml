@@ -94,8 +94,18 @@ variables:
           }
 functions:
   - name: >-
-      create(Operation<"/app/onlineMeetings/{onlineMeeting-id}/transcripts",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, callId?: string | null, content?: string | null,
+      contentCorrelationId?: string | null, createdDateTime?: string | null,
+      endDateTime?: string | null, meetingId?: string | null, meetingOrganizer?:
+      Record<string, never> | { @odata.type: string, application?: {
+      @odata.type: string, displayName?: string | null, id?: string | null } |
+      Record<string, never> | null, device?: { @odata.type: string,
+      displayName?: string | null, id?: string | null } | Record<string, never>
+      | null, user?: { @odata.type: string, displayName?: string | null, id?:
+      string | null } | Record<string, never> | null } | null, metadataContent?:
+      string | null, transcriptContentUrl?: string | null } & { @odata.type:
+      "#microsoft.graph.callTranscript" }, { onlineMeeting-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.app.onlineMeetings.transcripts.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -104,25 +114,77 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/app/onlineMeetings/{onlineMeeting-id}/transcripts", "post">,
-        params?: any): EndpointRequest<IEndpoints["POST
-        /app/onlineMeetings/{onlineMeeting-id}/transcripts"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, callId?: string | null,
+        content?: string | null, contentCorrelationId?: string | null,
+        createdDateTime?: string | null, endDateTime?: string | null,
+        meetingId?: string | null, meetingOrganizer?: Record<string, never> | {
+        @odata.type: string, application?: { @odata.type: string, displayName?:
+        string | null, id?: string | null } | Record<string, never> | null,
+        device?: { @odata.type: string, displayName?: string | null, id?: string
+        | null } | Record<string, never> | null, user?: { @odata.type: string,
+        displayName?: string | null, id?: string | null } | Record<string,
+        never> | null } | null, metadataContent?: string | null,
+        transcriptContentUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.callTranscript" }, params?: { onlineMeeting-id: string
+        }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, callId?: string | null,
+        content?: string | null, contentCorrelationId?: string | null,
+        createdDateTime?: string | null, endDateTime?: string | null,
+        meetingId?: string | null, meetingOrganizer?: Record<string, never> | {
+        @odata.type: string, application?: { @odata.type: string, displayName?:
+        string | null, id?: string | null } | Record<string, never> | null,
+        device?: { @odata.type: string, displayName?: string | null, id?: string
+        | null } | Record<string, never> | null, user?: { @odata.type: string,
+        displayName?: string | null, id?: string | null } | Record<string,
+        never> | null } | null, metadataContent?: string | null,
+        transcriptContentUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.callTranscript" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/app/onlineMeetings/{onlineMeeting-id}/transcripts",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            callId?: string | null, content?: string | null,
+            contentCorrelationId?: string | null, createdDateTime?: string |
+            null, endDateTime?: string | null, meetingId?: string | null,
+            meetingOrganizer?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, application?: { <xref
+            uid="@odata.type" />: string, displayName?: string | null, id?:
+            string | null } | Record&lt;string, never&gt; | null, device?: {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | Record&lt;string, never&gt; | null, user?: {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | Record&lt;string, never&gt; | null } | null,
+            metadataContent?: string | null, transcriptContentUrl?: string |
+            null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.callTranscript" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ onlineMeeting-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /app/onlineMeetings/{onlineMeeting-id}/transcripts"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, callId?: string | null, content?: string | null,
+          contentCorrelationId?: string | null, createdDateTime?: string | null,
+          endDateTime?: string | null, meetingId?: string | null,
+          meetingOrganizer?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, application?: { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } |
+          Record&lt;string, never&gt; | null, device?: { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } |
+          Record&lt;string, never&gt; | null, user?: { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } |
+          Record&lt;string, never&gt; | null } | null, metadataContent?: string
+          | null, transcriptContentUrl?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.callTranscript" />"
+          }&gt;
+  - name: >-
+      del({ callTranscript-id: string, If-Match?: string, onlineMeeting-id:
+      string })
     uid: '@microsoft/teams.graph-endpoints-beta.app.onlineMeetings.transcripts.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: >-
@@ -132,18 +194,20 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /app/onlineMeetings/{onlineMeeting-id}/transcripts/{callTranscript-id}"]["response"]>
+        function del(params?: { callTranscript-id: string, If-Match?: string,
+        onlineMeeting-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { callTranscript-id: string, If-Match?: string, onlineMeeting-id:
+            string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /app/onlineMeetings/{onlineMeeting-id}/transcripts/{callTranscript-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], callTranscript-id: string,
+      onlineMeeting-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.app.onlineMeetings.transcripts.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: >-
@@ -156,18 +220,50 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /app/onlineMeetings/{onlineMeeting-id}/transcripts/{callTranscript-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        callTranscript-id: string, onlineMeeting-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, callId?: string | null,
+        content?: string | null, contentCorrelationId?: string | null,
+        createdDateTime?: string | null, endDateTime?: string | null,
+        meetingId?: string | null, meetingOrganizer?: Record<string, never> | {
+        @odata.type: string, application?: { @odata.type: string, displayName?:
+        string | null, id?: string | null } | Record<string, never> | null,
+        device?: { @odata.type: string, displayName?: string | null, id?: string
+        | null } | Record<string, never> | null, user?: { @odata.type: string,
+        displayName?: string | null, id?: string | null } | Record<string,
+        never> | null } | null, metadataContent?: string | null,
+        transcriptContentUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.callTranscript" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], callTranscript-id: string,
+            onlineMeeting-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /app/onlineMeetings/{onlineMeeting-id}/transcripts/{callTranscript-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, callId?: string | null, content?: string | null,
+          contentCorrelationId?: string | null, createdDateTime?: string | null,
+          endDateTime?: string | null, meetingId?: string | null,
+          meetingOrganizer?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, application?: { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } |
+          Record&lt;string, never&gt; | null, device?: { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } |
+          Record&lt;string, never&gt; | null, user?: { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } |
+          Record&lt;string, never&gt; | null } | null, metadataContent?: string
+          | null, transcriptContentUrl?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.callTranscript" />"
+          }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, onlineMeeting-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.app.onlineMeetings.transcripts.list'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -178,20 +274,63 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /app/onlineMeetings/{onlineMeeting-id}/transcripts"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, onlineMeeting-id: string }):
+        EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?: string
+        | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, callId?: string | null,
+        content?: string | null, contentCorrelationId?: string | null,
+        createdDateTime?: string | null, endDateTime?: string | null,
+        meetingId?: string | null, meetingOrganizer?: Record<string, never> | {
+        @odata.type: string, application?: { @odata.type: ..., displayName?:
+        ..., id?: ... } | Record<..., ...> | null, device?: { @odata.type: ...,
+        displayName?: ..., id?: ... } | Record<..., ...> | null, user?: {
+        @odata.type: ..., displayName?: ..., id?: ... } | Record<..., ...> |
+        null } | null, metadataContent?: string | null, transcriptContentUrl?:
+        string | null } & { @odata.type: "#microsoft.graph.callTranscript" })[]
+        }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, onlineMeeting-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /app/onlineMeetings/{onlineMeeting-id}/transcripts"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          callId?: string | null, content?: string | null,
+          contentCorrelationId?: string | null, createdDateTime?: string | null,
+          endDateTime?: string | null, meetingId?: string | null,
+          meetingOrganizer?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, application?: { <xref uid="@odata.type"
+          />: ..., displayName?: ..., id?: ... } | Record&lt;..., ...&gt; |
+          null, device?: { <xref uid="@odata.type" />: ..., displayName?: ...,
+          id?: ... } | Record&lt;..., ...&gt; | null, user?: { <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          Record&lt;..., ...&gt; | null } | null, metadataContent?: string |
+          null, transcriptContentUrl?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.callTranscript" />"
+          })[] }&gt;
   - name: >-
-      update(Operation<"/app/onlineMeetings/{onlineMeeting-id}/transcripts/{callTranscript-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, callId?: string | null, content?: string | null,
+      contentCorrelationId?: string | null, createdDateTime?: string | null,
+      endDateTime?: string | null, meetingId?: string | null, meetingOrganizer?:
+      Record<string, never> | { @odata.type: string, application?: {
+      @odata.type: string, displayName?: string | null, id?: string | null } |
+      Record<string, never> | null, device?: { @odata.type: string,
+      displayName?: string | null, id?: string | null } | Record<string, never>
+      | null, user?: { @odata.type: string, displayName?: string | null, id?:
+      string | null } | Record<string, never> | null } | null, metadataContent?:
+      string | null, transcriptContentUrl?: string | null } & { @odata.type:
+      "#microsoft.graph.callTranscript" }, { callTranscript-id: string,
+      onlineMeeting-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.app.onlineMeetings.transcripts.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -202,21 +341,71 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/app/onlineMeetings/{onlineMeeting-id}/transcripts/{callTranscript-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /app/onlineMeetings/{onlineMeeting-id}/transcripts/{callTranscript-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, callId?: string | null,
+        content?: string | null, contentCorrelationId?: string | null,
+        createdDateTime?: string | null, endDateTime?: string | null,
+        meetingId?: string | null, meetingOrganizer?: Record<string, never> | {
+        @odata.type: string, application?: { @odata.type: string, displayName?:
+        string | null, id?: string | null } | Record<string, never> | null,
+        device?: { @odata.type: string, displayName?: string | null, id?: string
+        | null } | Record<string, never> | null, user?: { @odata.type: string,
+        displayName?: string | null, id?: string | null } | Record<string,
+        never> | null } | null, metadataContent?: string | null,
+        transcriptContentUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.callTranscript" }, params?: { callTranscript-id:
+        string, onlineMeeting-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string, callId?:
+        string | null, content?: string | null, contentCorrelationId?: string |
+        null, createdDateTime?: string | null, endDateTime?: string | null,
+        meetingId?: string | null, meetingOrganizer?: Record<string, never> | {
+        @odata.type: string, application?: { @odata.type: string, displayName?:
+        string | null, id?: string | null } | Record<string, never> | null,
+        device?: { @odata.type: string, displayName?: string | null, id?: string
+        | null } | Record<string, never> | null, user?: { @odata.type: string,
+        displayName?: string | null, id?: string | null } | Record<string,
+        never> | null } | null, metadataContent?: string | null,
+        transcriptContentUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.callTranscript" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/app/onlineMeetings/{onlineMeeting-id}/transcripts/{callTranscript-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            callId?: string | null, content?: string | null,
+            contentCorrelationId?: string | null, createdDateTime?: string |
+            null, endDateTime?: string | null, meetingId?: string | null,
+            meetingOrganizer?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, application?: { <xref
+            uid="@odata.type" />: string, displayName?: string | null, id?:
+            string | null } | Record&lt;string, never&gt; | null, device?: {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | Record&lt;string, never&gt; | null, user?: {
+            <xref uid="@odata.type" />: string, displayName?: string | null,
+            id?: string | null } | Record&lt;string, never&gt; | null } | null,
+            metadataContent?: string | null, transcriptContentUrl?: string |
+            null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.callTranscript" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ callTranscript-id: string, onlineMeeting-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /app/onlineMeetings/{onlineMeeting-id}/transcripts/{callTranscript-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, callId?: string | null, content?: string | null,
+          contentCorrelationId?: string | null, createdDateTime?: string | null,
+          endDateTime?: string | null, meetingId?: string | null,
+          meetingOrganizer?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, application?: { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } |
+          Record&lt;string, never&gt; | null, device?: { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } |
+          Record&lt;string, never&gt; | null, user?: { <xref uid="@odata.type"
+          />: string, displayName?: string | null, id?: string | null } |
+          Record&lt;string, never&gt; | null } | null, metadataContent?: string
+          | null, transcriptContentUrl?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.callTranscript" />"
+          }&gt;

@@ -124,17 +124,24 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        getUserOwnedObjects: { create: (body: IEndpoints["POST
+        getUserOwnedObjects: { /** * `POST /contracts/getUserOwnedObjects` * *
+        Retrieve a list of recently deleted application and group objects owned
+        by the specified user. This API returns up to 1,000 deleted objects
+        owned by the user, sorted by ID, and doesn&#x27;t support pagination. */
+        create: (body: IEndpoints["POST
         /contracts/getUserOwnedObjects"]["body"]) =>
         EndpointRequest<IEndpoints["POST
-        /contracts/getUserOwnedObjects"]["response"]> }
+        /contracts/getUserOwnedObjects"]["response"]>; }
       return:
         description: ''
         type: >-
-          { create: (body: IEndpoints["POST
-          /contracts/getUserOwnedObjects"]["body"]) =&gt;
+          { /** * `POST /contracts/getUserOwnedObjects` * * Retrieve a list of
+          recently deleted application and group objects owned by the specified
+          user. This API returns up to 1,000 deleted objects owned by the user,
+          sorted by ID, and doesn&#x27;t support pagination. */ create: (body:
+          IEndpoints["POST /contracts/getUserOwnedObjects"]["body"]) =&gt;
           EndpointRequest&lt;IEndpoints["POST
-          /contracts/getUserOwnedObjects"]["response"]&gt; }
+          /contracts/getUserOwnedObjects"]["response"]&gt;; }
   - name: restore
     uid: '@microsoft/teams.graph-endpoints-beta.contracts.restore'
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -143,17 +150,40 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        restore: { create: (params?: IEndpoints["POST
-        /contracts/{contract-id}/restore"]["parameters"]) =>
+        restore: { /** * `POST /contracts/{contract-id}/restore` * * Restore a
+        recently deleted directory object from deleted items. The following
+        types are supported: - administrativeUnit - application -
+        certificateBasedAuthPki - certificateAuthorityDetail -
+        externalUserProfile - group - pendingExternalUserProfile -
+        servicePrincipal - user If an item was accidentally deleted, you can
+        fully restore the item. This isn&#x27;t applicable to security groups,
+        which are deleted permanently. Also, restoring an application
+        doesn&#x27;t restore the associated service principal automatically. You
+        must call this API to explicitly restore the deleted service principal.
+        A recently deleted item remains available for up to 30 days. After 30
+        days, the item is permanently deleted. */ create: (params?:
+        IEndpoints["POST /contracts/{contract-id}/restore"]["parameters"]) =>
         EndpointRequest<IEndpoints["POST
-        /contracts/{contract-id}/restore"]["response"]> }
+        /contracts/{contract-id}/restore"]["response"]>; }
       return:
         description: ''
         type: >-
-          { create: (params?: IEndpoints["POST
+          { /** * `POST /contracts/{contract-id}/restore` * * Restore a recently
+          deleted directory object from deleted items. The following types are
+          supported: - administrativeUnit - application -
+          certificateBasedAuthPki - certificateAuthorityDetail -
+          externalUserProfile - group - pendingExternalUserProfile -
+          servicePrincipal - user If an item was accidentally deleted, you can
+          fully restore the item. This isn&#x27;t applicable to security groups,
+          which are deleted permanently. Also, restoring an application
+          doesn&#x27;t restore the associated service principal automatically.
+          You must call this API to explicitly restore the deleted service
+          principal. A recently deleted item remains available for up to 30
+          days. After 30 days, the item is permanently deleted. */ create:
+          (params?: IEndpoints["POST
           /contracts/{contract-id}/restore"]["parameters"]) =&gt;
           EndpointRequest&lt;IEndpoints["POST
-          /contracts/{contract-id}/restore"]["response"]&gt; }
+          /contracts/{contract-id}/restore"]["response"]&gt;; }
   - name: validateProperties
     uid: '@microsoft/teams.graph-endpoints-beta.contracts.validateProperties'
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -162,19 +192,53 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        validateProperties: { create: (body: IEndpoints["POST
+        validateProperties: { /** * `POST /contracts/validateProperties` * *
+        Validate that a Microsoft 365 group&#x27;s display name or mail nickname
+        complies with naming policies. Clients can use this API to determine
+        whether a display name or mail nickname is valid before trying to create
+        a Microsoft 365 group. For validating properties of an existing group,
+        use the validateProperties function for groups. The following
+        validations are performed for the display name and mail nickname
+        properties: 1. Validate the prefix and suffix naming policy 2. Validate
+        the custom banned words policy 3. Validate the mail nickname is unique
+        This API returns with the first failure encountered. If one or more
+        properties fail multiple validations, only the property with the first
+        validation failure is returned. However, you can validate both the mail
+        nickname and the display name and receive a collection of validation
+        errors if you&#x27;re only validating the prefix and suffix naming
+        policy. */ create: (body: IEndpoints["POST
         /contracts/validateProperties"]["body"]) =>
         EndpointRequest<IEndpoints["POST
-        /contracts/validateProperties"]["response"]> }
+        /contracts/validateProperties"]["response"]>; }
       return:
         description: ''
         type: >-
-          { create: (body: IEndpoints["POST
+          { /** * `POST /contracts/validateProperties` * * Validate that a
+          Microsoft 365 group&#x27;s display name or mail nickname complies with
+          naming policies. Clients can use this API to determine whether a
+          display name or mail nickname is valid before trying to create a
+          Microsoft 365 group. For validating properties of an existing group,
+          use the validateProperties function for groups. The following
+          validations are performed for the display name and mail nickname
+          properties: 1. Validate the prefix and suffix naming policy 2.
+          Validate the custom banned words policy 3. Validate the mail nickname
+          is unique This API returns with the first failure encountered. If one
+          or more properties fail multiple validations, only the property with
+          the first validation failure is returned. However, you can validate
+          both the mail nickname and the display name and receive a collection
+          of validation errors if you&#x27;re only validating the prefix and
+          suffix naming policy. */ create: (body: IEndpoints["POST
           /contracts/validateProperties"]["body"]) =&gt;
           EndpointRequest&lt;IEndpoints["POST
-          /contracts/validateProperties"]["response"]&gt; }
+          /contracts/validateProperties"]["response"]&gt;; }
 functions:
-  - name: create(Operation<"/contracts", "post">)
+  - name: >-
+      create(Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+      Omit<{ @odata.type: string, deletedDateTime?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.directoryObject" },
+      "@odata.type"> & { @odata.type: string, contractType?: string | null,
+      customerId?: string | null, defaultDomainName?: string | null,
+      displayName?: string | null })
     uid: '@microsoft/teams.graph-endpoints-beta.contracts.create'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`POST /contracts`'
@@ -182,16 +246,42 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body: Operation<"/contracts", "post">):
-        EndpointRequest<IEndpoints["POST /contracts"]["response"]>
+        function create(body: Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, deletedDateTime?: string |
+        null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" }, "@odata.type"> & { @odata.type:
+        string, contractType?: string | null, customerId?: string | null,
+        defaultDomainName?: string | null, displayName?: string | null }):
+        EndpointRequest<Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, deletedDateTime?: string |
+        null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" }, "@odata.type"> & { @odata.type:
+        string, contractType?: string | null, customerId?: string | null,
+        defaultDomainName?: string | null, displayName?: string | null }>
       parameters:
         - id: body
-          type: Operation&lt;"/contracts", "post"&gt;
+          type: >-
+            Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+            />: string, deletedDateTime?: string | null }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.directoryObject" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            contractType?: string | null, customerId?: string | null,
+            defaultDomainName?: string | null, displayName?: string | null }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["POST /contracts"]["response"]&gt;
-  - name: del(any)
+        type: >-
+          EndpointRequest&lt;Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, deletedDateTime?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.directoryObject" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          contractType?: string | null, customerId?: string | null,
+          defaultDomainName?: string | null, displayName?: string | null }&gt;
+  - name: 'del({ contract-id: string, If-Match?: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.contracts.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`DELETE /contracts/{contract-id}`'
@@ -199,18 +289,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /contracts/{contract-id}"]["response"]>
+        function del(params?: { contract-id: string, If-Match?: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ contract-id: string, If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /contracts/{contract-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[], contract-id: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.contracts.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -221,18 +309,32 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /contracts/{contract-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        contract-id: string }): EndpointRequest<Omit<Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        deletedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" }, "@odata.type"> & { @odata.type:
+        string, contractType?: string | null, customerId?: string | null,
+        defaultDomainName?: string | null, displayName?: string | null }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[], contract-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /contracts/{contract-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, deletedDateTime?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.directoryObject" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          contractType?: string | null, customerId?: string | null,
+          defaultDomainName?: string | null, displayName?: string | null }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: '@microsoft/teams.graph-endpoints-beta.contracts.list'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -243,16 +345,43 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /contracts"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?:
+        (Omit<Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string, deletedDateTime?: function }, "@odata.type">
+        & { @odata.type: "#microsoft.graph.directoryObject" }, "@odata.type"> &
+        { @odata.type: string, contractType?: string | null, customerId?: string
+        | null, defaultDomainName?: string | null, displayName?: string | null
+        })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /contracts"]["response"]&gt;
-  - name: update(Operation<"/contracts/{contract-id}", "patch">, any)
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: function
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, deletedDateTime?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryObject" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, contractType?: string
+          | null, customerId?: string | null, defaultDomainName?: string | null,
+          displayName?: string | null })[] }&gt;
+  - name: >-
+      update(Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+      Omit<{ @odata.type: string, deletedDateTime?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.directoryObject" },
+      "@odata.type"> & { @odata.type: string, contractType?: string | null,
+      customerId?: string | null, defaultDomainName?: string | null,
+      displayName?: string | null }, { contract-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.contracts.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /contracts/{contract-id}`'
@@ -260,18 +389,41 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/contracts/{contract-id}", "patch">,
-        params?: any): EndpointRequest<IEndpoints["PATCH
-        /contracts/{contract-id}"]["response"]>
+        function update(body: Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, deletedDateTime?: string |
+        null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" }, "@odata.type"> & { @odata.type:
+        string, contractType?: string | null, customerId?: string | null,
+        defaultDomainName?: string | null, displayName?: string | null },
+        params?: { contract-id: string }): EndpointRequest<Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, deletedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.directoryObject" }, "@odata.type"> & {
+        @odata.type: string, contractType?: string | null, customerId?: string |
+        null, defaultDomainName?: string | null, displayName?: string | null }>
       parameters:
         - id: body
-          type: Operation&lt;"/contracts/{contract-id}", "patch"&gt;
+          type: >-
+            Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+            />: string, deletedDateTime?: string | null }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.directoryObject" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            contractType?: string | null, customerId?: string | null,
+            defaultDomainName?: string | null, displayName?: string | null }
           description: ''
         - id: params
-          type: any
+          type: '{ contract-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /contracts/{contract-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, deletedDateTime?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.directoryObject" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          contractType?: string | null, customerId?: string | null,
+          defaultDomainName?: string | null, displayName?: string | null }&gt;

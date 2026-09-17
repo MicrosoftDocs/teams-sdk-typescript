@@ -1,0 +1,181 @@
+### YamlMime:TSType
+name: TurnState
+uid: '@microsoft/teams.apps.TurnState'
+package: '@microsoft/teams.apps'
+summary: >-
+  Mutable key/value state scoped to one activity turn.
+
+
+  Values are persisted as JSON at the end of the turn when the state is dirty.
+
+  Instances are not thread-safe and must not be retained after the handler
+  completes.
+fullName: TurnState
+remarks: ''
+isDeprecated: false
+type: class
+constructors:
+  - name: TurnState(Readonly<Record<string, unknown>>)
+    uid: '@microsoft/teams.apps.TurnState.constructor'
+    package: '@microsoft/teams.apps'
+    summary: Creates turn state from an optional persisted snapshot.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'new TurnState(data?: Readonly<Record<string, unknown>>)'
+      parameters:
+        - id: data
+          type: Readonly&lt;Record&lt;string, unknown&gt;&gt;
+          description: Initial values. Loading values does not mark the state dirty.
+properties:
+  - name: isDirty
+    uid: '@microsoft/teams.apps.TurnState.isDirty'
+    package: '@microsoft/teams.apps'
+    summary: Whether this scope changed during the current turn.
+    fullName: isDirty
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: boolean isDirty
+      return:
+        description: ''
+        type: boolean
+  - name: isEmpty
+    uid: '@microsoft/teams.apps.TurnState.isEmpty'
+    package: '@microsoft/teams.apps'
+    summary: Whether this scope contains no values.
+    fullName: isEmpty
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: boolean isEmpty
+      return:
+        description: ''
+        type: boolean
+  - name: isSealed
+    uid: '@microsoft/teams.apps.TurnState.isSealed'
+    package: '@microsoft/teams.apps'
+    summary: Whether this scope has been sealed after turn processing.
+    fullName: isSealed
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: boolean isSealed
+      return:
+        description: ''
+        type: boolean
+  - name: size
+    uid: '@microsoft/teams.apps.TurnState.size'
+    package: '@microsoft/teams.apps'
+    summary: Number of values in this scope.
+    fullName: size
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: number size
+      return:
+        description: ''
+        type: number
+methods:
+  - name: clear()
+    uid: '@microsoft/teams.apps.TurnState.clear'
+    package: '@microsoft/teams.apps'
+    summary: Removes every value. An already-empty scope remains clean.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: function clear()
+  - name: delete(string)
+    uid: '@microsoft/teams.apps.TurnState.delete'
+    package: '@microsoft/teams.apps'
+    summary: Removes a value. The scope is marked dirty only when the key existed.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function delete(key: string): boolean'
+      parameters:
+        - id: key
+          type: string
+          description: Key to remove.
+      return:
+        description: ''
+        type: boolean
+  - name: get<T>(string)
+    uid: '@microsoft/teams.apps.TurnState.get'
+    package: '@microsoft/teams.apps'
+    summary: |-
+      Reads a value from this scope.
+
+      Reads never mark state dirty. Call `set` after changing mutable values so
+      the scope is persisted at the end of the turn.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function get<T>(key: string): T | undefined'
+      parameters:
+        - id: key
+          type: string
+          description: Stable key used to persist the value.
+      return:
+        description: ''
+        type: T | undefined
+  - name: has(string)
+    uid: '@microsoft/teams.apps.TurnState.has'
+    package: '@microsoft/teams.apps'
+    summary: Tests whether a key exists in this scope.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function has(key: string): boolean'
+      parameters:
+        - id: key
+          type: string
+          description: Key to test.
+      return:
+        description: ''
+        type: boolean
+  - name: seal()
+    uid: '@microsoft/teams.apps.TurnState.seal'
+    package: '@microsoft/teams.apps'
+    summary: Seals this scope so handlers cannot access it after the turn completes.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: function seal()
+  - name: set<T>(string, T)
+    uid: '@microsoft/teams.apps.TurnState.set'
+    package: '@microsoft/teams.apps'
+    summary: |-
+      Writes a value and marks this scope dirty.
+
+      Values must be JSON-serializable when the turn is saved.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function set<T>(key: string, value: T): this'
+      parameters:
+        - id: key
+          type: string
+          description: Stable key used to persist the value.
+        - id: value
+          type: T
+          description: Value to store.
+      return:
+        description: ''
+        type: this
+  - name: toRecord()
+    uid: '@microsoft/teams.apps.TurnState.toRecord'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Returns a shallow record snapshot for persistence.
+
+
+      This remains available after sealing so storage adapters can finish a
+      save.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function toRecord(): Record<string, unknown>'
+      return:
+        description: ''
+        type: Record&lt;string, unknown&gt;

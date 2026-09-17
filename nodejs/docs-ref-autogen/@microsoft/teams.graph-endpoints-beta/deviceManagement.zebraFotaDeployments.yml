@@ -31,7 +31,49 @@ variables:
           /deviceManagement/zebraFotaDeployments/{zebraFotaDeployment-id}/cancel"]["response"]&gt;
           }
 functions:
-  - name: create(Operation<"/deviceManagement/zebraFotaDeployments", "post">)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, deploymentAssignments?: { @odata.type: string,
+      assignmentTarget?: Record<string, never> | { @odata.type: string,
+      deviceAndAppManagementAssignmentFilterId?: string | null,
+      deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+      "exclude" } | null, displayName?: string, id?: string | null, target?:
+      Record<string, never> | (Omit<{ @odata.type: string,
+      deviceAndAppManagementAssignmentFilterId?: string | null,
+      deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+      "exclude" }, "@odata.type"> & { @odata.type: string, groupId?: string } &
+      { @odata.type: "#microsoft.graph.androidFotaDeploymentAssignmentTarget" })
+      | null }[], deploymentSettings?: { @odata.type: string,
+      batteryRuleMinimumBatteryLevelPercentage?: number | null,
+      batteryRuleRequireCharger?: boolean | null, deviceModel?: string,
+      downloadRuleNetworkType?: "unknownFutureValue" | "wifi" | "any" |
+      "cellular" | "wifiAndCellular", downloadRuleStartDateTime?: string | null,
+      firmwareTargetArtifactDescription?: string | null,
+      firmwareTargetBoardSupportPackageVersion?: string | null,
+      firmwareTargetOsVersion?: string | null, firmwareTargetPatch?: string |
+      null, installRuleStartDateTime?: string | null, installRuleWindowEndTime?:
+      string | null, installRuleWindowStartTime?: string | null,
+      scheduleDurationInDays?: number | null, scheduleMode?:
+      "unknownFutureValue" | "installNow" | "scheduled",
+      timeZoneOffsetInMinutes?: number | null, updateType?: "unknownFutureValue"
+      | "custom" | "latest" | "auto" }, deploymentStatus?: Record<string, never>
+      | { @odata.type: string, cancelRequested?: boolean,
+      completeOrCanceledDateTime?: string | null, errorCode?:
+      "unknownFutureValue" | "success" | "noDevicesFoundInSelectedAadGroups" |
+      "noIntuneDevicesFoundInSelectedAadGroups" |
+      "noZebraFotaEnrolledDevicesFoundForCurrentTenant" |
+      "noZebraFotaEnrolledDevicesFoundInSelectedAadGroups" |
+      "noZebraFotaDevicesFoundForSelectedDeviceModel" |
+      "zebraFotaCreateDeploymentRequestFailure", lastUpdatedDateTime?: string |
+      null, state?: "unknownFutureValue" | "completed" | "inProgress" |
+      "canceled" | "pendingCreation" | "createFailed" | "created" |
+      "pendingCancel", totalAwaitingInstall?: number, totalCanceled?: number,
+      totalCreated?: number, totalDevices?: number, totalDownloading?: number,
+      totalFailedDownload?: number, totalFailedInstall?: number,
+      totalScheduled?: number, totalSucceededInstall?: number, totalUnknown?:
+      number } | null, description?: string | null, displayName?: string,
+      roleScopeTagIds?: (string | null)[] } & { @odata.type:
+      "#microsoft.graph.zebraFotaDeployment" })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.zebraFotaDeployments.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -40,20 +82,198 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/deviceManagement/zebraFotaDeployments", "post">):
-        EndpointRequest<IEndpoints["POST
-        /deviceManagement/zebraFotaDeployments"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, deploymentAssignments?: {
+        @odata.type: string, assignmentTarget?: Record<string, never> | {
+        @odata.type: string, deviceAndAppManagementAssignmentFilterId?: string |
+        null, deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+        "exclude" } | null, displayName?: string, id?: string | null, target?:
+        Record<string, never> | (Omit<{ @odata.type: string,
+        deviceAndAppManagementAssignmentFilterId?: string | null,
+        deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+        "exclude" }, "@odata.type"> & { @odata.type: string, groupId?: string }
+        & { @odata.type:
+        "#microsoft.graph.androidFotaDeploymentAssignmentTarget" }) | null }[],
+        deploymentSettings?: { @odata.type: string,
+        batteryRuleMinimumBatteryLevelPercentage?: number | null,
+        batteryRuleRequireCharger?: boolean | null, deviceModel?: string,
+        downloadRuleNetworkType?: "unknownFutureValue" | "wifi" | "any" |
+        "cellular" | "wifiAndCellular", downloadRuleStartDateTime?: string |
+        null, firmwareTargetArtifactDescription?: string | null,
+        firmwareTargetBoardSupportPackageVersion?: string | null,
+        firmwareTargetOsVersion?: string | null, firmwareTargetPatch?: string |
+        null, installRuleStartDateTime?: string | null,
+        installRuleWindowEndTime?: string | null, installRuleWindowStartTime?:
+        string | null, scheduleDurationInDays?: number | null, scheduleMode?:
+        "unknownFutureValue" | "installNow" | "scheduled",
+        timeZoneOffsetInMinutes?: number | null, updateType?:
+        "unknownFutureValue" | "custom" | "latest" | "auto" },
+        deploymentStatus?: Record<string, never> | { @odata.type: string,
+        cancelRequested?: boolean, completeOrCanceledDateTime?: string | null,
+        errorCode?: "unknownFutureValue" | "success" |
+        "noDevicesFoundInSelectedAadGroups" |
+        "noIntuneDevicesFoundInSelectedAadGroups" |
+        "noZebraFotaEnrolledDevicesFoundForCurrentTenant" |
+        "noZebraFotaEnrolledDevicesFoundInSelectedAadGroups" |
+        "noZebraFotaDevicesFoundForSelectedDeviceModel" |
+        "zebraFotaCreateDeploymentRequestFailure", lastUpdatedDateTime?: string
+        | null, state?: "unknownFutureValue" | "completed" | "inProgress" |
+        "canceled" | "pendingCreation" | "createFailed" | "created" |
+        "pendingCancel", totalAwaitingInstall?: number, totalCanceled?: number,
+        totalCreated?: number, totalDevices?: number, totalDownloading?: number,
+        totalFailedDownload?: number, totalFailedInstall?: number,
+        totalScheduled?: number, totalSucceededInstall?: number, totalUnknown?:
+        number } | null, description?: string | null, displayName?: string,
+        roleScopeTagIds?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.zebraFotaDeployment" }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, deploymentAssignments?: { @odata.type: string,
+        assignmentTarget?: Record<string, never> | { @odata.type: string,
+        deviceAndAppManagementAssignmentFilterId?: string | null,
+        deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+        "exclude" } | null, displayName?: string, id?: string | null, target?:
+        Record<string, never> | (Omit<{ @odata.type: string,
+        deviceAndAppManagementAssignmentFilterId?: function,
+        deviceAndAppManagementAssignmentFilterType?: function }, "@odata.type">
+        & { @odata.type: string, groupId?: string } & { @odata.type:
+        "#microsoft.graph.androidFotaDeploymentAssignmentTarget" }) | null }[],
+        deploymentSettings?: { @odata.type: string,
+        batteryRuleMinimumBatteryLevelPercentage?: number | null,
+        batteryRuleRequireCharger?: boolean | null, deviceModel?: string,
+        downloadRuleNetworkType?: "unknownFutureValue" | "wifi" | "any" |
+        "cellular" | "wifiAndCellular", downloadRuleStartDateTime?: string |
+        null, firmwareTargetArtifactDescription?: string | null,
+        firmwareTargetBoardSupportPackageVersion?: string | null,
+        firmwareTargetOsVersion?: string | null, firmwareTargetPatch?: string |
+        null, installRuleStartDateTime?: string | null,
+        installRuleWindowEndTime?: string | null, installRuleWindowStartTime?:
+        string | null, scheduleDurationInDays?: number | null, scheduleMode?:
+        "unknownFutureValue" | "installNow" | "scheduled",
+        timeZoneOffsetInMinutes?: number | null, updateType?:
+        "unknownFutureValue" | "custom" | "latest" | "auto" },
+        deploymentStatus?: Record<string, never> | { @odata.type: string,
+        cancelRequested?: boolean, completeOrCanceledDateTime?: string | null,
+        errorCode?: "unknownFutureValue" | "success" |
+        "noDevicesFoundInSelectedAadGroups" |
+        "noIntuneDevicesFoundInSelectedAadGroups" |
+        "noZebraFotaEnrolledDevicesFoundForCurrentTenant" |
+        "noZebraFotaEnrolledDevicesFoundInSelectedAadGroups" |
+        "noZebraFotaDevicesFoundForSelectedDeviceModel" |
+        "zebraFotaCreateDeploymentRequestFailure", lastUpdatedDateTime?: string
+        | null, state?: "unknownFutureValue" | "completed" | "inProgress" |
+        "canceled" | "pendingCreation" | "createFailed" | "created" |
+        "pendingCancel", totalAwaitingInstall?: number, totalCanceled?: number,
+        totalCreated?: number, totalDevices?: number, totalDownloading?: number,
+        totalFailedDownload?: number, totalFailedInstall?: number,
+        totalScheduled?: number, totalSucceededInstall?: number, totalUnknown?:
+        number } | null, description?: string | null, displayName?: string,
+        roleScopeTagIds?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.zebraFotaDeployment" }>
       parameters:
         - id: body
-          type: Operation&lt;"/deviceManagement/zebraFotaDeployments", "post"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            deploymentAssignments?: { <xref uid="@odata.type" />: string,
+            assignmentTarget?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string,
+            deviceAndAppManagementAssignmentFilterId?: string | null,
+            deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+            "exclude" } | null, displayName?: string, id?: string | null,
+            target?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string,
+            deviceAndAppManagementAssignmentFilterId?: string | null,
+            deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+            "exclude" }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, groupId?: string } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.androidFotaDeploymentAssignmentTarget" />" }) |
+            null }[], deploymentSettings?: { <xref uid="@odata.type" />: string,
+            batteryRuleMinimumBatteryLevelPercentage?: number | null,
+            batteryRuleRequireCharger?: boolean | null, deviceModel?: string,
+            downloadRuleNetworkType?: "unknownFutureValue" | "wifi" | "any" |
+            "cellular" | "wifiAndCellular", downloadRuleStartDateTime?: string |
+            null, firmwareTargetArtifactDescription?: string | null,
+            firmwareTargetBoardSupportPackageVersion?: string | null,
+            firmwareTargetOsVersion?: string | null, firmwareTargetPatch?:
+            string | null, installRuleStartDateTime?: string | null,
+            installRuleWindowEndTime?: string | null,
+            installRuleWindowStartTime?: string | null, scheduleDurationInDays?:
+            number | null, scheduleMode?: "unknownFutureValue" | "installNow" |
+            "scheduled", timeZoneOffsetInMinutes?: number | null, updateType?:
+            "unknownFutureValue" | "custom" | "latest" | "auto" },
+            deploymentStatus?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, cancelRequested?: boolean,
+            completeOrCanceledDateTime?: string | null, errorCode?:
+            "unknownFutureValue" | "success" |
+            "noDevicesFoundInSelectedAadGroups" |
+            "noIntuneDevicesFoundInSelectedAadGroups" |
+            "noZebraFotaEnrolledDevicesFoundForCurrentTenant" |
+            "noZebraFotaEnrolledDevicesFoundInSelectedAadGroups" |
+            "noZebraFotaDevicesFoundForSelectedDeviceModel" |
+            "zebraFotaCreateDeploymentRequestFailure", lastUpdatedDateTime?:
+            string | null, state?: "unknownFutureValue" | "completed" |
+            "inProgress" | "canceled" | "pendingCreation" | "createFailed" |
+            "created" | "pendingCancel", totalAwaitingInstall?: number,
+            totalCanceled?: number, totalCreated?: number, totalDevices?:
+            number, totalDownloading?: number, totalFailedDownload?: number,
+            totalFailedInstall?: number, totalScheduled?: number,
+            totalSucceededInstall?: number, totalUnknown?: number } | null,
+            description?: string | null, displayName?: string, roleScopeTagIds?:
+            (string | null)[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.zebraFotaDeployment" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /deviceManagement/zebraFotaDeployments"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, deploymentAssignments?: { <xref uid="@odata.type" />:
+          string, assignmentTarget?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string,
+          deviceAndAppManagementAssignmentFilterId?: string | null,
+          deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+          "exclude" } | null, displayName?: string, id?: string | null, target?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, deviceAndAppManagementAssignmentFilterId?: function,
+          deviceAndAppManagementAssignmentFilterType?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          groupId?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.androidFotaDeploymentAssignmentTarget" />" }) |
+          null }[], deploymentSettings?: { <xref uid="@odata.type" />: string,
+          batteryRuleMinimumBatteryLevelPercentage?: number | null,
+          batteryRuleRequireCharger?: boolean | null, deviceModel?: string,
+          downloadRuleNetworkType?: "unknownFutureValue" | "wifi" | "any" |
+          "cellular" | "wifiAndCellular", downloadRuleStartDateTime?: string |
+          null, firmwareTargetArtifactDescription?: string | null,
+          firmwareTargetBoardSupportPackageVersion?: string | null,
+          firmwareTargetOsVersion?: string | null, firmwareTargetPatch?: string
+          | null, installRuleStartDateTime?: string | null,
+          installRuleWindowEndTime?: string | null, installRuleWindowStartTime?:
+          string | null, scheduleDurationInDays?: number | null, scheduleMode?:
+          "unknownFutureValue" | "installNow" | "scheduled",
+          timeZoneOffsetInMinutes?: number | null, updateType?:
+          "unknownFutureValue" | "custom" | "latest" | "auto" },
+          deploymentStatus?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, cancelRequested?: boolean,
+          completeOrCanceledDateTime?: string | null, errorCode?:
+          "unknownFutureValue" | "success" | "noDevicesFoundInSelectedAadGroups"
+          | "noIntuneDevicesFoundInSelectedAadGroups" |
+          "noZebraFotaEnrolledDevicesFoundForCurrentTenant" |
+          "noZebraFotaEnrolledDevicesFoundInSelectedAadGroups" |
+          "noZebraFotaDevicesFoundForSelectedDeviceModel" |
+          "zebraFotaCreateDeploymentRequestFailure", lastUpdatedDateTime?:
+          string | null, state?: "unknownFutureValue" | "completed" |
+          "inProgress" | "canceled" | "pendingCreation" | "createFailed" |
+          "created" | "pendingCancel", totalAwaitingInstall?: number,
+          totalCanceled?: number, totalCreated?: number, totalDevices?: number,
+          totalDownloading?: number, totalFailedDownload?: number,
+          totalFailedInstall?: number, totalScheduled?: number,
+          totalSucceededInstall?: number, totalUnknown?: number } | null,
+          description?: string | null, displayName?: string, roleScopeTagIds?:
+          (string | null)[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.zebraFotaDeployment" />" }&gt;
+  - name: 'del({ If-Match?: string, zebraFotaDeployment-id: string })'
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.zebraFotaDeployments.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -62,18 +282,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /deviceManagement/zebraFotaDeployments/{zebraFotaDeployment-id}"]["response"]>
+        function del(params?: { If-Match?: string, zebraFotaDeployment-id:
+        string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, zebraFotaDeployment-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /deviceManagement/zebraFotaDeployments/{zebraFotaDeployment-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], zebraFotaDeployment-id:
+      string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.zebraFotaDeployments.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -85,18 +305,111 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/zebraFotaDeployments/{zebraFotaDeployment-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        zebraFotaDeployment-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        deploymentAssignments?: { @odata.type: string, assignmentTarget?:
+        Record<string, never> | { @odata.type: string,
+        deviceAndAppManagementAssignmentFilterId?: string | null,
+        deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+        "exclude" } | null, displayName?: string, id?: string | null, target?:
+        Record<string, never> | (Omit<{ @odata.type: string,
+        deviceAndAppManagementAssignmentFilterId?: function,
+        deviceAndAppManagementAssignmentFilterType?: function }, "@odata.type">
+        & { @odata.type: string, groupId?: string } & { @odata.type:
+        "#microsoft.graph.androidFotaDeploymentAssignmentTarget" }) | null }[],
+        deploymentSettings?: { @odata.type: string,
+        batteryRuleMinimumBatteryLevelPercentage?: number | null,
+        batteryRuleRequireCharger?: boolean | null, deviceModel?: string,
+        downloadRuleNetworkType?: "unknownFutureValue" | "wifi" | "any" |
+        "cellular" | "wifiAndCellular", downloadRuleStartDateTime?: string |
+        null, firmwareTargetArtifactDescription?: string | null,
+        firmwareTargetBoardSupportPackageVersion?: string | null,
+        firmwareTargetOsVersion?: string | null, firmwareTargetPatch?: string |
+        null, installRuleStartDateTime?: string | null,
+        installRuleWindowEndTime?: string | null, installRuleWindowStartTime?:
+        string | null, scheduleDurationInDays?: number | null, scheduleMode?:
+        "unknownFutureValue" | "installNow" | "scheduled",
+        timeZoneOffsetInMinutes?: number | null, updateType?:
+        "unknownFutureValue" | "custom" | "latest" | "auto" },
+        deploymentStatus?: Record<string, never> | { @odata.type: string,
+        cancelRequested?: boolean, completeOrCanceledDateTime?: string | null,
+        errorCode?: "unknownFutureValue" | "success" |
+        "noDevicesFoundInSelectedAadGroups" |
+        "noIntuneDevicesFoundInSelectedAadGroups" |
+        "noZebraFotaEnrolledDevicesFoundForCurrentTenant" |
+        "noZebraFotaEnrolledDevicesFoundInSelectedAadGroups" |
+        "noZebraFotaDevicesFoundForSelectedDeviceModel" |
+        "zebraFotaCreateDeploymentRequestFailure", lastUpdatedDateTime?: string
+        | null, state?: "unknownFutureValue" | "completed" | "inProgress" |
+        "canceled" | "pendingCreation" | "createFailed" | "created" |
+        "pendingCancel", totalAwaitingInstall?: number, totalCanceled?: number,
+        totalCreated?: number, totalDevices?: number, totalDownloading?: number,
+        totalFailedDownload?: number, totalFailedInstall?: number,
+        totalScheduled?: number, totalSucceededInstall?: number, totalUnknown?:
+        number } | null, description?: string | null, displayName?: string,
+        roleScopeTagIds?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.zebraFotaDeployment" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], zebraFotaDeployment-id:
+            string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/zebraFotaDeployments/{zebraFotaDeployment-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, deploymentAssignments?: { <xref uid="@odata.type" />:
+          string, assignmentTarget?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string,
+          deviceAndAppManagementAssignmentFilterId?: string | null,
+          deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+          "exclude" } | null, displayName?: string, id?: string | null, target?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, deviceAndAppManagementAssignmentFilterId?: function,
+          deviceAndAppManagementAssignmentFilterType?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          groupId?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.androidFotaDeploymentAssignmentTarget" />" }) |
+          null }[], deploymentSettings?: { <xref uid="@odata.type" />: string,
+          batteryRuleMinimumBatteryLevelPercentage?: number | null,
+          batteryRuleRequireCharger?: boolean | null, deviceModel?: string,
+          downloadRuleNetworkType?: "unknownFutureValue" | "wifi" | "any" |
+          "cellular" | "wifiAndCellular", downloadRuleStartDateTime?: string |
+          null, firmwareTargetArtifactDescription?: string | null,
+          firmwareTargetBoardSupportPackageVersion?: string | null,
+          firmwareTargetOsVersion?: string | null, firmwareTargetPatch?: string
+          | null, installRuleStartDateTime?: string | null,
+          installRuleWindowEndTime?: string | null, installRuleWindowStartTime?:
+          string | null, scheduleDurationInDays?: number | null, scheduleMode?:
+          "unknownFutureValue" | "installNow" | "scheduled",
+          timeZoneOffsetInMinutes?: number | null, updateType?:
+          "unknownFutureValue" | "custom" | "latest" | "auto" },
+          deploymentStatus?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, cancelRequested?: boolean,
+          completeOrCanceledDateTime?: string | null, errorCode?:
+          "unknownFutureValue" | "success" | "noDevicesFoundInSelectedAadGroups"
+          | "noIntuneDevicesFoundInSelectedAadGroups" |
+          "noZebraFotaEnrolledDevicesFoundForCurrentTenant" |
+          "noZebraFotaEnrolledDevicesFoundInSelectedAadGroups" |
+          "noZebraFotaDevicesFoundForSelectedDeviceModel" |
+          "zebraFotaCreateDeploymentRequestFailure", lastUpdatedDateTime?:
+          string | null, state?: "unknownFutureValue" | "completed" |
+          "inProgress" | "canceled" | "pendingCreation" | "createFailed" |
+          "created" | "pendingCancel", totalAwaitingInstall?: number,
+          totalCanceled?: number, totalCreated?: number, totalDevices?: number,
+          totalDownloading?: number, totalFailedDownload?: number,
+          totalFailedInstall?: number, totalScheduled?: number,
+          totalSucceededInstall?: number, totalUnknown?: number } | null,
+          description?: string | null, displayName?: string, roleScopeTagIds?:
+          (string | null)[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.zebraFotaDeployment" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.zebraFotaDeployments.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -108,20 +421,138 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/zebraFotaDeployments"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, deploymentAssignments?: { @odata.type: string,
+        assignmentTarget?: function, displayName?: function, id?: function,
+        target?: function }[], deploymentSettings?: { @odata.type: string,
+        batteryRuleMinimumBatteryLevelPercentage?: number | null,
+        batteryRuleRequireCharger?: boolean | null, deviceModel?: string,
+        downloadRuleNetworkType?: "unknownFutureValue" | "wifi" | "any" |
+        "cellular" | "wifiAndCellular", downloadRuleStartDateTime?: string |
+        null, firmwareTargetArtifactDescription?: string | null,
+        firmwareTargetBoardSupportPackageVersion?: string | null,
+        firmwareTargetOsVersion?: string | null, firmwareTargetPatch?: string |
+        null, installRuleStartDateTime?: string | null,
+        installRuleWindowEndTime?: string | null, installRuleWindowStartTime?:
+        string | null, scheduleDurationInDays?: number | null, scheduleMode?:
+        "unknownFutureValue" | "installNow" | "scheduled",
+        timeZoneOffsetInMinutes?: number | null, updateType?:
+        "unknownFutureValue" | "custom" | "latest" | "auto" },
+        deploymentStatus?: Record<string, never> | { @odata.type: string,
+        cancelRequested?: boolean, completeOrCanceledDateTime?: string | null,
+        errorCode?: "unknownFutureValue" | "success" |
+        "noDevicesFoundInSelectedAadGroups" |
+        "noIntuneDevicesFoundInSelectedAadGroups" |
+        "noZebraFotaEnrolledDevicesFoundForCurrentTenant" |
+        "noZebraFotaEnrolledDevicesFoundInSelectedAadGroups" |
+        "noZebraFotaDevicesFoundForSelectedDeviceModel" |
+        "zebraFotaCreateDeploymentRequestFailure", lastUpdatedDateTime?: string
+        | null, state?: "unknownFutureValue" | "completed" | "inProgress" |
+        "canceled" | "pendingCreation" | "createFailed" | "created" |
+        "pendingCancel", totalAwaitingInstall?: number, totalCanceled?: number,
+        totalCreated?: number, totalDevices?: number, totalDownloading?: number,
+        totalFailedDownload?: number, totalFailedInstall?: number,
+        totalScheduled?: number, totalSucceededInstall?: number, totalUnknown?:
+        number } | null, description?: string | null, displayName?: string,
+        roleScopeTagIds?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.zebraFotaDeployment" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/zebraFotaDeployments"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          deploymentAssignments?: { <xref uid="@odata.type" />: string,
+          assignmentTarget?: function, displayName?: function, id?: function,
+          target?: function }[], deploymentSettings?: { <xref uid="@odata.type"
+          />: string, batteryRuleMinimumBatteryLevelPercentage?: number | null,
+          batteryRuleRequireCharger?: boolean | null, deviceModel?: string,
+          downloadRuleNetworkType?: "unknownFutureValue" | "wifi" | "any" |
+          "cellular" | "wifiAndCellular", downloadRuleStartDateTime?: string |
+          null, firmwareTargetArtifactDescription?: string | null,
+          firmwareTargetBoardSupportPackageVersion?: string | null,
+          firmwareTargetOsVersion?: string | null, firmwareTargetPatch?: string
+          | null, installRuleStartDateTime?: string | null,
+          installRuleWindowEndTime?: string | null, installRuleWindowStartTime?:
+          string | null, scheduleDurationInDays?: number | null, scheduleMode?:
+          "unknownFutureValue" | "installNow" | "scheduled",
+          timeZoneOffsetInMinutes?: number | null, updateType?:
+          "unknownFutureValue" | "custom" | "latest" | "auto" },
+          deploymentStatus?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, cancelRequested?: boolean,
+          completeOrCanceledDateTime?: string | null, errorCode?:
+          "unknownFutureValue" | "success" | "noDevicesFoundInSelectedAadGroups"
+          | "noIntuneDevicesFoundInSelectedAadGroups" |
+          "noZebraFotaEnrolledDevicesFoundForCurrentTenant" |
+          "noZebraFotaEnrolledDevicesFoundInSelectedAadGroups" |
+          "noZebraFotaDevicesFoundForSelectedDeviceModel" |
+          "zebraFotaCreateDeploymentRequestFailure", lastUpdatedDateTime?:
+          string | null, state?: "unknownFutureValue" | "completed" |
+          "inProgress" | "canceled" | "pendingCreation" | "createFailed" |
+          "created" | "pendingCancel", totalAwaitingInstall?: number,
+          totalCanceled?: number, totalCreated?: number, totalDevices?: number,
+          totalDownloading?: number, totalFailedDownload?: number,
+          totalFailedInstall?: number, totalScheduled?: number,
+          totalSucceededInstall?: number, totalUnknown?: number } | null,
+          description?: string | null, displayName?: string, roleScopeTagIds?:
+          (string | null)[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.zebraFotaDeployment" />" })[] }&gt;
   - name: >-
-      update(Operation<"/deviceManagement/zebraFotaDeployments/{zebraFotaDeployment-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, deploymentAssignments?: { @odata.type: string,
+      assignmentTarget?: Record<string, never> | { @odata.type: string,
+      deviceAndAppManagementAssignmentFilterId?: string | null,
+      deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+      "exclude" } | null, displayName?: string, id?: string | null, target?:
+      Record<string, never> | (Omit<{ @odata.type: string,
+      deviceAndAppManagementAssignmentFilterId?: string | null,
+      deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+      "exclude" }, "@odata.type"> & { @odata.type: string, groupId?: string } &
+      { @odata.type: "#microsoft.graph.androidFotaDeploymentAssignmentTarget" })
+      | null }[], deploymentSettings?: { @odata.type: string,
+      batteryRuleMinimumBatteryLevelPercentage?: number | null,
+      batteryRuleRequireCharger?: boolean | null, deviceModel?: string,
+      downloadRuleNetworkType?: "unknownFutureValue" | "wifi" | "any" |
+      "cellular" | "wifiAndCellular", downloadRuleStartDateTime?: string | null,
+      firmwareTargetArtifactDescription?: string | null,
+      firmwareTargetBoardSupportPackageVersion?: string | null,
+      firmwareTargetOsVersion?: string | null, firmwareTargetPatch?: string |
+      null, installRuleStartDateTime?: string | null, installRuleWindowEndTime?:
+      string | null, installRuleWindowStartTime?: string | null,
+      scheduleDurationInDays?: number | null, scheduleMode?:
+      "unknownFutureValue" | "installNow" | "scheduled",
+      timeZoneOffsetInMinutes?: number | null, updateType?: "unknownFutureValue"
+      | "custom" | "latest" | "auto" }, deploymentStatus?: Record<string, never>
+      | { @odata.type: string, cancelRequested?: boolean,
+      completeOrCanceledDateTime?: string | null, errorCode?:
+      "unknownFutureValue" | "success" | "noDevicesFoundInSelectedAadGroups" |
+      "noIntuneDevicesFoundInSelectedAadGroups" |
+      "noZebraFotaEnrolledDevicesFoundForCurrentTenant" |
+      "noZebraFotaEnrolledDevicesFoundInSelectedAadGroups" |
+      "noZebraFotaDevicesFoundForSelectedDeviceModel" |
+      "zebraFotaCreateDeploymentRequestFailure", lastUpdatedDateTime?: string |
+      null, state?: "unknownFutureValue" | "completed" | "inProgress" |
+      "canceled" | "pendingCreation" | "createFailed" | "created" |
+      "pendingCancel", totalAwaitingInstall?: number, totalCanceled?: number,
+      totalCreated?: number, totalDevices?: number, totalDownloading?: number,
+      totalFailedDownload?: number, totalFailedInstall?: number,
+      totalScheduled?: number, totalSucceededInstall?: number, totalUnknown?:
+      number } | null, description?: string | null, displayName?: string,
+      roleScopeTagIds?: (string | null)[] } & { @odata.type:
+      "#microsoft.graph.zebraFotaDeployment" }, { zebraFotaDeployment-id: string
+      })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.zebraFotaDeployments.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -130,21 +561,198 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/deviceManagement/zebraFotaDeployments/{zebraFotaDeployment-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /deviceManagement/zebraFotaDeployments/{zebraFotaDeployment-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, deploymentAssignments?: {
+        @odata.type: string, assignmentTarget?: Record<string, never> | {
+        @odata.type: string, deviceAndAppManagementAssignmentFilterId?: string |
+        null, deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+        "exclude" } | null, displayName?: string, id?: string | null, target?:
+        Record<string, never> | (Omit<{ @odata.type: string,
+        deviceAndAppManagementAssignmentFilterId?: string | null,
+        deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+        "exclude" }, "@odata.type"> & { @odata.type: string, groupId?: string }
+        & { @odata.type:
+        "#microsoft.graph.androidFotaDeploymentAssignmentTarget" }) | null }[],
+        deploymentSettings?: { @odata.type: string,
+        batteryRuleMinimumBatteryLevelPercentage?: number | null,
+        batteryRuleRequireCharger?: boolean | null, deviceModel?: string,
+        downloadRuleNetworkType?: "unknownFutureValue" | "wifi" | "any" |
+        "cellular" | "wifiAndCellular", downloadRuleStartDateTime?: string |
+        null, firmwareTargetArtifactDescription?: string | null,
+        firmwareTargetBoardSupportPackageVersion?: string | null,
+        firmwareTargetOsVersion?: string | null, firmwareTargetPatch?: string |
+        null, installRuleStartDateTime?: string | null,
+        installRuleWindowEndTime?: string | null, installRuleWindowStartTime?:
+        string | null, scheduleDurationInDays?: number | null, scheduleMode?:
+        "unknownFutureValue" | "installNow" | "scheduled",
+        timeZoneOffsetInMinutes?: number | null, updateType?:
+        "unknownFutureValue" | "custom" | "latest" | "auto" },
+        deploymentStatus?: Record<string, never> | { @odata.type: string,
+        cancelRequested?: boolean, completeOrCanceledDateTime?: string | null,
+        errorCode?: "unknownFutureValue" | "success" |
+        "noDevicesFoundInSelectedAadGroups" |
+        "noIntuneDevicesFoundInSelectedAadGroups" |
+        "noZebraFotaEnrolledDevicesFoundForCurrentTenant" |
+        "noZebraFotaEnrolledDevicesFoundInSelectedAadGroups" |
+        "noZebraFotaDevicesFoundForSelectedDeviceModel" |
+        "zebraFotaCreateDeploymentRequestFailure", lastUpdatedDateTime?: string
+        | null, state?: "unknownFutureValue" | "completed" | "inProgress" |
+        "canceled" | "pendingCreation" | "createFailed" | "created" |
+        "pendingCancel", totalAwaitingInstall?: number, totalCanceled?: number,
+        totalCreated?: number, totalDevices?: number, totalDownloading?: number,
+        totalFailedDownload?: number, totalFailedInstall?: number,
+        totalScheduled?: number, totalSucceededInstall?: number, totalUnknown?:
+        number } | null, description?: string | null, displayName?: string,
+        roleScopeTagIds?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.zebraFotaDeployment" }, params?: {
+        zebraFotaDeployment-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        deploymentAssignments?: { @odata.type: string, assignmentTarget?:
+        Record<string, never> | { @odata.type: string,
+        deviceAndAppManagementAssignmentFilterId?: string | null,
+        deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+        "exclude" } | null, displayName?: string, id?: string | null, target?:
+        Record<string, never> | (Omit<{ @odata.type: string,
+        deviceAndAppManagementAssignmentFilterId?: function,
+        deviceAndAppManagementAssignmentFilterType?: function }, "@odata.type">
+        & { @odata.type: string, groupId?: string } & { @odata.type:
+        "#microsoft.graph.androidFotaDeploymentAssignmentTarget" }) | null }[],
+        deploymentSettings?: { @odata.type: string,
+        batteryRuleMinimumBatteryLevelPercentage?: number | null,
+        batteryRuleRequireCharger?: boolean | null, deviceModel?: string,
+        downloadRuleNetworkType?: "unknownFutureValue" | "wifi" | "any" |
+        "cellular" | "wifiAndCellular", downloadRuleStartDateTime?: string |
+        null, firmwareTargetArtifactDescription?: string | null,
+        firmwareTargetBoardSupportPackageVersion?: string | null,
+        firmwareTargetOsVersion?: string | null, firmwareTargetPatch?: string |
+        null, installRuleStartDateTime?: string | null,
+        installRuleWindowEndTime?: string | null, installRuleWindowStartTime?:
+        string | null, scheduleDurationInDays?: number | null, scheduleMode?:
+        "unknownFutureValue" | "installNow" | "scheduled",
+        timeZoneOffsetInMinutes?: number | null, updateType?:
+        "unknownFutureValue" | "custom" | "latest" | "auto" },
+        deploymentStatus?: Record<string, never> | { @odata.type: string,
+        cancelRequested?: boolean, completeOrCanceledDateTime?: string | null,
+        errorCode?: "unknownFutureValue" | "success" |
+        "noDevicesFoundInSelectedAadGroups" |
+        "noIntuneDevicesFoundInSelectedAadGroups" |
+        "noZebraFotaEnrolledDevicesFoundForCurrentTenant" |
+        "noZebraFotaEnrolledDevicesFoundInSelectedAadGroups" |
+        "noZebraFotaDevicesFoundForSelectedDeviceModel" |
+        "zebraFotaCreateDeploymentRequestFailure", lastUpdatedDateTime?: string
+        | null, state?: "unknownFutureValue" | "completed" | "inProgress" |
+        "canceled" | "pendingCreation" | "createFailed" | "created" |
+        "pendingCancel", totalAwaitingInstall?: number, totalCanceled?: number,
+        totalCreated?: number, totalDevices?: number, totalDownloading?: number,
+        totalFailedDownload?: number, totalFailedInstall?: number,
+        totalScheduled?: number, totalSucceededInstall?: number, totalUnknown?:
+        number } | null, description?: string | null, displayName?: string,
+        roleScopeTagIds?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.zebraFotaDeployment" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/zebraFotaDeployments/{zebraFotaDeployment-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            deploymentAssignments?: { <xref uid="@odata.type" />: string,
+            assignmentTarget?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string,
+            deviceAndAppManagementAssignmentFilterId?: string | null,
+            deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+            "exclude" } | null, displayName?: string, id?: string | null,
+            target?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string,
+            deviceAndAppManagementAssignmentFilterId?: string | null,
+            deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+            "exclude" }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, groupId?: string } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.androidFotaDeploymentAssignmentTarget" />" }) |
+            null }[], deploymentSettings?: { <xref uid="@odata.type" />: string,
+            batteryRuleMinimumBatteryLevelPercentage?: number | null,
+            batteryRuleRequireCharger?: boolean | null, deviceModel?: string,
+            downloadRuleNetworkType?: "unknownFutureValue" | "wifi" | "any" |
+            "cellular" | "wifiAndCellular", downloadRuleStartDateTime?: string |
+            null, firmwareTargetArtifactDescription?: string | null,
+            firmwareTargetBoardSupportPackageVersion?: string | null,
+            firmwareTargetOsVersion?: string | null, firmwareTargetPatch?:
+            string | null, installRuleStartDateTime?: string | null,
+            installRuleWindowEndTime?: string | null,
+            installRuleWindowStartTime?: string | null, scheduleDurationInDays?:
+            number | null, scheduleMode?: "unknownFutureValue" | "installNow" |
+            "scheduled", timeZoneOffsetInMinutes?: number | null, updateType?:
+            "unknownFutureValue" | "custom" | "latest" | "auto" },
+            deploymentStatus?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, cancelRequested?: boolean,
+            completeOrCanceledDateTime?: string | null, errorCode?:
+            "unknownFutureValue" | "success" |
+            "noDevicesFoundInSelectedAadGroups" |
+            "noIntuneDevicesFoundInSelectedAadGroups" |
+            "noZebraFotaEnrolledDevicesFoundForCurrentTenant" |
+            "noZebraFotaEnrolledDevicesFoundInSelectedAadGroups" |
+            "noZebraFotaDevicesFoundForSelectedDeviceModel" |
+            "zebraFotaCreateDeploymentRequestFailure", lastUpdatedDateTime?:
+            string | null, state?: "unknownFutureValue" | "completed" |
+            "inProgress" | "canceled" | "pendingCreation" | "createFailed" |
+            "created" | "pendingCancel", totalAwaitingInstall?: number,
+            totalCanceled?: number, totalCreated?: number, totalDevices?:
+            number, totalDownloading?: number, totalFailedDownload?: number,
+            totalFailedInstall?: number, totalScheduled?: number,
+            totalSucceededInstall?: number, totalUnknown?: number } | null,
+            description?: string | null, displayName?: string, roleScopeTagIds?:
+            (string | null)[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.zebraFotaDeployment" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ zebraFotaDeployment-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /deviceManagement/zebraFotaDeployments/{zebraFotaDeployment-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, deploymentAssignments?: { <xref uid="@odata.type" />:
+          string, assignmentTarget?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string,
+          deviceAndAppManagementAssignmentFilterId?: string | null,
+          deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+          "exclude" } | null, displayName?: string, id?: string | null, target?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, deviceAndAppManagementAssignmentFilterId?: function,
+          deviceAndAppManagementAssignmentFilterType?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          groupId?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.androidFotaDeploymentAssignmentTarget" />" }) |
+          null }[], deploymentSettings?: { <xref uid="@odata.type" />: string,
+          batteryRuleMinimumBatteryLevelPercentage?: number | null,
+          batteryRuleRequireCharger?: boolean | null, deviceModel?: string,
+          downloadRuleNetworkType?: "unknownFutureValue" | "wifi" | "any" |
+          "cellular" | "wifiAndCellular", downloadRuleStartDateTime?: string |
+          null, firmwareTargetArtifactDescription?: string | null,
+          firmwareTargetBoardSupportPackageVersion?: string | null,
+          firmwareTargetOsVersion?: string | null, firmwareTargetPatch?: string
+          | null, installRuleStartDateTime?: string | null,
+          installRuleWindowEndTime?: string | null, installRuleWindowStartTime?:
+          string | null, scheduleDurationInDays?: number | null, scheduleMode?:
+          "unknownFutureValue" | "installNow" | "scheduled",
+          timeZoneOffsetInMinutes?: number | null, updateType?:
+          "unknownFutureValue" | "custom" | "latest" | "auto" },
+          deploymentStatus?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, cancelRequested?: boolean,
+          completeOrCanceledDateTime?: string | null, errorCode?:
+          "unknownFutureValue" | "success" | "noDevicesFoundInSelectedAadGroups"
+          | "noIntuneDevicesFoundInSelectedAadGroups" |
+          "noZebraFotaEnrolledDevicesFoundForCurrentTenant" |
+          "noZebraFotaEnrolledDevicesFoundInSelectedAadGroups" |
+          "noZebraFotaDevicesFoundForSelectedDeviceModel" |
+          "zebraFotaCreateDeploymentRequestFailure", lastUpdatedDateTime?:
+          string | null, state?: "unknownFutureValue" | "completed" |
+          "inProgress" | "canceled" | "pendingCreation" | "createFailed" |
+          "created" | "pendingCancel", totalAwaitingInstall?: number,
+          totalCanceled?: number, totalCreated?: number, totalDevices?: number,
+          totalDownloading?: number, totalFailedDownload?: number,
+          totalFailedInstall?: number, totalScheduled?: number,
+          totalSucceededInstall?: number, totalUnknown?: number } | null,
+          description?: string | null, displayName?: string, roleScopeTagIds?:
+          (string | null)[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.zebraFotaDeployment" />" }&gt;

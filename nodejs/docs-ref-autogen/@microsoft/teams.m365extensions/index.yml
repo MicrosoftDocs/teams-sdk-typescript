@@ -1,0 +1,141 @@
+### YamlMime:TSPackage
+uid: '@microsoft/teams.m365extensions'
+name: '@microsoft/teams.m365extensions'
+summary: ''
+type: package
+classes:
+  - '@microsoft/teams.m365extensions.TeamsMiddleware'
+  - '@microsoft/teams.m365extensions.TeamsToken'
+typeAliases:
+  - '@microsoft/teams.m365extensions.AgentSdkConnections'
+  - '@microsoft/teams.m365extensions.ShouldBypassTeams'
+  - '@microsoft/teams.m365extensions.TeamsSdkTokenProvider'
+  - '@microsoft/teams.m365extensions.UseTeamsSdkOptions'
+functions:
+  - name: agentSdkContext()
+    uid: '@microsoft/teams.m365extensions.agentSdkContext'
+    package: '@microsoft/teams.m365extensions'
+    summary: >-
+      Access the Agents SDK <xref:TurnContext> for the turn teams.ts is
+      currently
+
+      handling.
+
+
+      The bridge stashes the host `TurnContext` in async-local storage for the
+
+      duration of `App.process`, letting teams.ts route handlers reach host-only
+
+      facilities (e.g. Agents SDK auth/state) that the teams.ts context does not
+      model.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function agentSdkContext(): TurnContext'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/agents-hosting.TurnContext" />
+  - name: createAgentSdkTokenProvider(AgentSdkConnections)
+    uid: '@microsoft/teams.m365extensions.createAgentSdkTokenProvider'
+    package: '@microsoft/teams.m365extensions'
+    summary: >-
+      Build a teams.ts token provider that delegates to the host Agents SDK
+
+      connection manager.
+
+
+      For each requested scope it selects the connection appropriate to the
+      active
+
+      turn (per-request identity when a turn is in flight, otherwise the default
+
+      connection) and returns that provider's access token — so the bridge never
+
+      holds its own credential. Also supports agentic user tokens when the
+
+      underlying MSAL provider exposes them.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createAgentSdkTokenProvider(connectionManager:
+        AgentSdkConnections): TeamsSdkTokenProvider
+      parameters:
+        - id: connectionManager
+          type: <xref uid="@microsoft/teams.m365extensions.AgentSdkConnections" />
+          description: the host app's connection manager
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.m365extensions.TeamsSdkTokenProvider" />
+  - name: 'isTeamsChannel({ channelId?: string | { channel?: string } | null })'
+    uid: '@microsoft/teams.m365extensions.isTeamsChannel'
+    package: '@microsoft/teams.m365extensions'
+    summary: |-
+      Whether an activity arrived on the Microsoft Teams channel.
+
+      Accepts either a plain channel id (e.g. `"msteams"`, or a sub-channel like
+      `"msteams:..."`) or the object form and compares only the base channel.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function isTeamsChannel(activity: { channelId?: string | { channel?:
+        string } | null }): boolean
+      parameters:
+        - id: activity
+          type: '{ channelId?: string | { channel?: string } | null }'
+          description: ''
+      return:
+        description: ''
+        type: boolean
+  - name: >-
+      useTeamsSdk<TState, TPlugin>(AgentApplication<TState>,
+      AgentSdkConnections, UseTeamsSdkOptions<TPlugin>, ShouldBypassTeams)
+    uid: '@microsoft/teams.m365extensions.useTeamsSdk'
+    package: '@microsoft/teams.m365extensions'
+    summary: >-
+      Wire teams.ts routing into an existing Microsoft 365 Agents SDK app.
+
+
+      Creates a teams.ts app that borrows the host app's identity (via
+
+      `connectionManager`) and installs a
+      [TeamsMiddleware](xref:@microsoft/teams.m365extensions.TeamsMiddleware) on
+      the Agents SDK
+
+      adapter so matching Teams activities are handled by teams.ts while
+      everything
+
+      else flows through the host app unchanged. Returns the teams.ts app so the
+
+      caller can register routes (`app.message(...)`, `app.on(...)`, etc.).
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function useTeamsSdk<TState, TPlugin>(app: AgentApplication<TState>,
+        connectionManager: AgentSdkConnections, teamsAppOptions?:
+        UseTeamsSdkOptions<TPlugin>, shouldBypassTeams?: ShouldBypassTeams):
+        App<TPlugin>
+      parameters:
+        - id: app
+          type: >-
+            <xref uid="@microsoft/agents-hosting.AgentApplication"
+            />&lt;TState&gt;
+          description: the host Agents SDK application to attach the middleware to
+        - id: connectionManager
+          type: <xref uid="@microsoft/teams.m365extensions.AgentSdkConnections" />
+          description: resolves the host app's credentials/token provider
+        - id: teamsAppOptions
+          type: >-
+            <xref uid="@microsoft/teams.m365extensions.UseTeamsSdkOptions"
+            />&lt;TPlugin&gt;
+          description: |-
+            extra teams.ts `AppOptions`; the identity keys
+              (`clientId`, `tenantId`, `token`) are owned by the bridge and must be omitted
+        - id: shouldBypassTeams
+          type: <xref uid="@microsoft/teams.m365extensions.ShouldBypassTeams" />
+          description: optional predicate to keep specific turns on the host app
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.App" />&lt;TPlugin&gt;

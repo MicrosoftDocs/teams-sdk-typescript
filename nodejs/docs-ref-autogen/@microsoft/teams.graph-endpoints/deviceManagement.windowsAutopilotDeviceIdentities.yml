@@ -85,8 +85,17 @@ variables:
           }
 functions:
   - name: >-
-      create(Operation<"/deviceManagement/windowsAutopilotDeviceIdentities",
-      "post">)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, addressableUserName?: string | null,
+      azureActiveDirectoryDeviceId?: string | null, displayName?: string | null,
+      enrollmentState?: "unknown" | "failed" | "enrolled" | "pendingReset" |
+      "notContacted", groupTag?: string | null, lastContactedDateTime?: string,
+      managedDeviceId?: string | null, manufacturer?: string | null, model?:
+      string | null, productKey?: string | null, purchaseOrderIdentifier?:
+      string | null, resourceName?: string | null, serialNumber?: string | null,
+      skuNumber?: string | null, systemFamily?: string | null,
+      userPrincipalName?: string | null } & { @odata.type:
+      "#microsoft.graph.windowsAutopilotDeviceIdentity" })
     uid: >-
       @microsoft/teams.graph-endpoints.deviceManagement.windowsAutopilotDeviceIdentities.create
     package: '@microsoft/teams.graph-endpoints'
@@ -95,22 +104,62 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/deviceManagement/windowsAutopilotDeviceIdentities",
-        "post">): EndpointRequest<IEndpoints["POST
-        /deviceManagement/windowsAutopilotDeviceIdentities"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, addressableUserName?: string |
+        null, azureActiveDirectoryDeviceId?: string | null, displayName?: string
+        | null, enrollmentState?: "unknown" | "failed" | "enrolled" |
+        "pendingReset" | "notContacted", groupTag?: string | null,
+        lastContactedDateTime?: string, managedDeviceId?: string | null,
+        manufacturer?: string | null, model?: string | null, productKey?: string
+        | null, purchaseOrderIdentifier?: string | null, resourceName?: string |
+        null, serialNumber?: string | null, skuNumber?: string | null,
+        systemFamily?: string | null, userPrincipalName?: string | null } & {
+        @odata.type: "#microsoft.graph.windowsAutopilotDeviceIdentity" }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, addressableUserName?: string |
+        null, azureActiveDirectoryDeviceId?: string | null, displayName?: string
+        | null, enrollmentState?: "unknown" | "failed" | "enrolled" |
+        "pendingReset" | "notContacted", groupTag?: string | null,
+        lastContactedDateTime?: string, managedDeviceId?: string | null,
+        manufacturer?: string | null, model?: string | null, productKey?: string
+        | null, purchaseOrderIdentifier?: string | null, resourceName?: string |
+        null, serialNumber?: string | null, skuNumber?: string | null,
+        systemFamily?: string | null, userPrincipalName?: string | null } & {
+        @odata.type: "#microsoft.graph.windowsAutopilotDeviceIdentity" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/windowsAutopilotDeviceIdentities",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            addressableUserName?: string | null, azureActiveDirectoryDeviceId?:
+            string | null, displayName?: string | null, enrollmentState?:
+            "unknown" | "failed" | "enrolled" | "pendingReset" | "notContacted",
+            groupTag?: string | null, lastContactedDateTime?: string,
+            managedDeviceId?: string | null, manufacturer?: string | null,
+            model?: string | null, productKey?: string | null,
+            purchaseOrderIdentifier?: string | null, resourceName?: string |
+            null, serialNumber?: string | null, skuNumber?: string | null,
+            systemFamily?: string | null, userPrincipalName?: string | null } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsAutopilotDeviceIdentity" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /deviceManagement/windowsAutopilotDeviceIdentities"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, addressableUserName?: string | null,
+          azureActiveDirectoryDeviceId?: string | null, displayName?: string |
+          null, enrollmentState?: "unknown" | "failed" | "enrolled" |
+          "pendingReset" | "notContacted", groupTag?: string | null,
+          lastContactedDateTime?: string, managedDeviceId?: string | null,
+          manufacturer?: string | null, model?: string | null, productKey?:
+          string | null, purchaseOrderIdentifier?: string | null, resourceName?:
+          string | null, serialNumber?: string | null, skuNumber?: string |
+          null, systemFamily?: string | null, userPrincipalName?: string | null
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsAutopilotDeviceIdentity" />" }&gt;
+  - name: 'del({ If-Match?: string, windowsAutopilotDeviceIdentity-id: string })'
     uid: >-
       @microsoft/teams.graph-endpoints.deviceManagement.windowsAutopilotDeviceIdentities.del
     package: '@microsoft/teams.graph-endpoints'
@@ -121,18 +170,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /deviceManagement/windowsAutopilotDeviceIdentities/{windowsAutopilotDeviceIdentity-id}"]["response"]>
+        function del(params?: { If-Match?: string,
+        windowsAutopilotDeviceIdentity-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, windowsAutopilotDeviceIdentity-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /deviceManagement/windowsAutopilotDeviceIdentities/{windowsAutopilotDeviceIdentity-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[],
+      windowsAutopilotDeviceIdentity-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.deviceManagement.windowsAutopilotDeviceIdentities.get
     package: '@microsoft/teams.graph-endpoints'
@@ -146,18 +195,45 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/windowsAutopilotDeviceIdentities/{windowsAutopilotDeviceIdentity-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        windowsAutopilotDeviceIdentity-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, addressableUserName?: string | null,
+        azureActiveDirectoryDeviceId?: string | null, displayName?: string |
+        null, enrollmentState?: "unknown" | "failed" | "enrolled" |
+        "pendingReset" | "notContacted", groupTag?: string | null,
+        lastContactedDateTime?: string, managedDeviceId?: string | null,
+        manufacturer?: string | null, model?: string | null, productKey?: string
+        | null, purchaseOrderIdentifier?: string | null, resourceName?: string |
+        null, serialNumber?: string | null, skuNumber?: string | null,
+        systemFamily?: string | null, userPrincipalName?: string | null } & {
+        @odata.type: "#microsoft.graph.windowsAutopilotDeviceIdentity" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[],
+            windowsAutopilotDeviceIdentity-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/windowsAutopilotDeviceIdentities/{windowsAutopilotDeviceIdentity-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, addressableUserName?: string | null,
+          azureActiveDirectoryDeviceId?: string | null, displayName?: string |
+          null, enrollmentState?: "unknown" | "failed" | "enrolled" |
+          "pendingReset" | "notContacted", groupTag?: string | null,
+          lastContactedDateTime?: string, managedDeviceId?: string | null,
+          manufacturer?: string | null, model?: string | null, productKey?:
+          string | null, purchaseOrderIdentifier?: string | null, resourceName?:
+          string | null, serialNumber?: string | null, skuNumber?: string |
+          null, systemFamily?: string | null, userPrincipalName?: string | null
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsAutopilotDeviceIdentity" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: >-
       @microsoft/teams.graph-endpoints.deviceManagement.windowsAutopilotDeviceIdentities.list
     package: '@microsoft/teams.graph-endpoints'
@@ -169,20 +245,59 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/windowsAutopilotDeviceIdentities"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, addressableUserName?: string | null,
+        azureActiveDirectoryDeviceId?: string | null, displayName?: string |
+        null, enrollmentState?: "unknown" | "failed" | "enrolled" |
+        "pendingReset" | "notContacted", groupTag?: string | null,
+        lastContactedDateTime?: string, managedDeviceId?: string | null,
+        manufacturer?: string | null, model?: string | null, productKey?: string
+        | null, purchaseOrderIdentifier?: string | null, resourceName?: string |
+        null, serialNumber?: string | null, skuNumber?: string | null,
+        systemFamily?: string | null, userPrincipalName?: string | null } & {
+        @odata.type: "#microsoft.graph.windowsAutopilotDeviceIdentity" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/windowsAutopilotDeviceIdentities"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          addressableUserName?: string | null, azureActiveDirectoryDeviceId?:
+          string | null, displayName?: string | null, enrollmentState?:
+          "unknown" | "failed" | "enrolled" | "pendingReset" | "notContacted",
+          groupTag?: string | null, lastContactedDateTime?: string,
+          managedDeviceId?: string | null, manufacturer?: string | null, model?:
+          string | null, productKey?: string | null, purchaseOrderIdentifier?:
+          string | null, resourceName?: string | null, serialNumber?: string |
+          null, skuNumber?: string | null, systemFamily?: string | null,
+          userPrincipalName?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.windowsAutopilotDeviceIdentity" />" })[]
+          }&gt;
   - name: >-
-      update(Operation<"/deviceManagement/windowsAutopilotDeviceIdentities/{windowsAutopilotDeviceIdentity-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, addressableUserName?: string | null,
+      azureActiveDirectoryDeviceId?: string | null, displayName?: string | null,
+      enrollmentState?: "unknown" | "failed" | "enrolled" | "pendingReset" |
+      "notContacted", groupTag?: string | null, lastContactedDateTime?: string,
+      managedDeviceId?: string | null, manufacturer?: string | null, model?:
+      string | null, productKey?: string | null, purchaseOrderIdentifier?:
+      string | null, resourceName?: string | null, serialNumber?: string | null,
+      skuNumber?: string | null, systemFamily?: string | null,
+      userPrincipalName?: string | null } & { @odata.type:
+      "#microsoft.graph.windowsAutopilotDeviceIdentity" }, {
+      windowsAutopilotDeviceIdentity-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.deviceManagement.windowsAutopilotDeviceIdentities.update
     package: '@microsoft/teams.graph-endpoints'
@@ -193,21 +308,62 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/deviceManagement/windowsAutopilotDeviceIdentities/{windowsAutopilotDeviceIdentity-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /deviceManagement/windowsAutopilotDeviceIdentities/{windowsAutopilotDeviceIdentity-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, addressableUserName?: string |
+        null, azureActiveDirectoryDeviceId?: string | null, displayName?: string
+        | null, enrollmentState?: "unknown" | "failed" | "enrolled" |
+        "pendingReset" | "notContacted", groupTag?: string | null,
+        lastContactedDateTime?: string, managedDeviceId?: string | null,
+        manufacturer?: string | null, model?: string | null, productKey?: string
+        | null, purchaseOrderIdentifier?: string | null, resourceName?: string |
+        null, serialNumber?: string | null, skuNumber?: string | null,
+        systemFamily?: string | null, userPrincipalName?: string | null } & {
+        @odata.type: "#microsoft.graph.windowsAutopilotDeviceIdentity" },
+        params?: { windowsAutopilotDeviceIdentity-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, addressableUserName?: string |
+        null, azureActiveDirectoryDeviceId?: string | null, displayName?: string
+        | null, enrollmentState?: "unknown" | "failed" | "enrolled" |
+        "pendingReset" | "notContacted", groupTag?: string | null,
+        lastContactedDateTime?: string, managedDeviceId?: string | null,
+        manufacturer?: string | null, model?: string | null, productKey?: string
+        | null, purchaseOrderIdentifier?: string | null, resourceName?: string |
+        null, serialNumber?: string | null, skuNumber?: string | null,
+        systemFamily?: string | null, userPrincipalName?: string | null } & {
+        @odata.type: "#microsoft.graph.windowsAutopilotDeviceIdentity" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/windowsAutopilotDeviceIdentities/{windowsAutopilotDeviceIdentity-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            addressableUserName?: string | null, azureActiveDirectoryDeviceId?:
+            string | null, displayName?: string | null, enrollmentState?:
+            "unknown" | "failed" | "enrolled" | "pendingReset" | "notContacted",
+            groupTag?: string | null, lastContactedDateTime?: string,
+            managedDeviceId?: string | null, manufacturer?: string | null,
+            model?: string | null, productKey?: string | null,
+            purchaseOrderIdentifier?: string | null, resourceName?: string |
+            null, serialNumber?: string | null, skuNumber?: string | null,
+            systemFamily?: string | null, userPrincipalName?: string | null } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsAutopilotDeviceIdentity" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ windowsAutopilotDeviceIdentity-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /deviceManagement/windowsAutopilotDeviceIdentities/{windowsAutopilotDeviceIdentity-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, addressableUserName?: string | null,
+          azureActiveDirectoryDeviceId?: string | null, displayName?: string |
+          null, enrollmentState?: "unknown" | "failed" | "enrolled" |
+          "pendingReset" | "notContacted", groupTag?: string | null,
+          lastContactedDateTime?: string, managedDeviceId?: string | null,
+          manufacturer?: string | null, model?: string | null, productKey?:
+          string | null, purchaseOrderIdentifier?: string | null, resourceName?:
+          string | null, serialNumber?: string | null, skuNumber?: string |
+          null, systemFamily?: string | null, userPrincipalName?: string | null
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsAutopilotDeviceIdentity" />" }&gt;

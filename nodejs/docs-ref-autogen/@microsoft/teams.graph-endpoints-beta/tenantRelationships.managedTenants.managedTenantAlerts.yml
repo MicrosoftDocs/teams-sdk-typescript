@@ -123,8 +123,80 @@ variables:
           }
 functions:
   - name: >-
-      create(Operation<"/tenantRelationships/managedTenants/managedTenantAlerts",
-      "post">)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, alertData?: Record<string, never> | { @odata.type:
+      string, displayName?: string | null } | null, alertDataReferenceStrings?:
+      { @odata.type: string, displayName?: string | null }[], alertLogs?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, alert?: Record<string, never> | Omit<{ id?: string |
+      undefined; '@odata.type': string; }, "@odata.type"> & { alertData?:
+      Record<string, never> | { displayName?: string | null | undefined;
+      '@odata.type': string; } | null | undefined; ... 18 more ...;
+      '@odata.type': string; } & { ...; } | null, content?: Record<string,
+      never> | { @odata.type: string, displayName?: string | null } | null,
+      createdByUserId?: string | null, createdDateTime?: string | null,
+      lastActionByUserId?: string | null, lastActionDateTime?: string | null } &
+      { @odata.type: "#microsoft.graph.managedTenants.managedTenantAlertLog"
+      })[], alertRule?: Record<string, never> | (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string, alertDisplayName?:
+      string | null, alerts?: Omit<{ id?: string | undefined; '@odata.type':
+      string; }, "@odata.type"> & { alertData?: Record<string, never> | {
+      displayName?: string | null | undefined; '@odata.type': string; } | null |
+      undefined; ... 18 more ...; '@odata.type': string; } & { ...; }[],
+      alertTTL?: number | null, createdByUserId?: string | null,
+      createdDateTime?: string | null, description?: string | null,
+      displayName?: string | null, lastActionByUserId?: string | null,
+      lastActionDateTime?: string | null, lastRunDateTime?: string | null,
+      notificationFinalDestinations?: "unknownFutureValue" | Record<string,
+      never> | "none" | "api" | "email" | "sms" | null, ruleDefinition?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, alertRules?: Omit<{ id?: string |
+      undefined; '@odata.type': string; }, "@odata.type"> & { alertDisplayName?:
+      string | null | undefined; alertTTL?: number | null | undefined;
+      createdByUserId?: string | ... 1 more ... | undefined; ... 12 more ...;
+      '@odata.type': string; } & { ...; }[], createdByUserId?: string | null,
+      createdDateTime?: string | null, definitionTemplate?: Record<string,
+      never> | { @odata.type: string, defaultSeverity?: function } | null,
+      displayName?: string | null, lastActionByUserId?: string | null,
+      lastActionDateTime?: string | null } & { @odata.type:
+      "#microsoft.graph.managedTenants.managedTenantAlertRuleDefinition" }) |
+      null, severity?: "unknownFutureValue" | Record<string, never> | "unknown"
+      | "informational" | "low" | "medium" | "high" | null, targets?: {
+      @odata.type: string, displayName?: string | null }[], tenantIds?: {
+      @odata.type: string, tenantId?: string | null }[] } & { @odata.type:
+      "#microsoft.graph.managedTenants.managedTenantAlertRule" }) | null,
+      alertRuleDisplayName?: string | null, apiNotifications?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, alert?: Record<string, never> | Omit<{ id?: string | undefined;
+      '@odata.type': string; }, "@odata.type"> & { alertData?: Record<string,
+      never> | { displayName?: string | null | undefined; '@odata.type': string;
+      } | null | undefined; ... 18 more ...; '@odata.type': string; } & { ...; }
+      | null, createdByUserId?: string | null, createdDateTime?: string | null,
+      isAcknowledged?: boolean | null, lastActionByUserId?: string | null,
+      lastActionDateTime?: string | null, message?: string | null, title?:
+      string | null, userId?: string | null } & { @odata.type:
+      "#microsoft.graph.managedTenants.managedTenantApiNotification" })[],
+      assignedToUserId?: string | null, correlationCount?: number | null,
+      correlationId?: string | null, createdByUserId?: string | null,
+      createdDateTime?: string | null, emailNotifications?: (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string, alert?:
+      Record<string, never> | Omit<{ id?: string | undefined; '@odata.type':
+      string; }, "@odata.type"> & { alertData?: Record<string, never> | {
+      displayName?: string | null | undefined; '@odata.type': string; } | null |
+      undefined; ... 18 more ...; '@odata.type': string; } & { ...; } | null,
+      createdByUserId?: string | null, createdDateTime?: string | null,
+      emailAddresses?: { @odata.type: string, emailAddress?: string | null }[],
+      emailBody?: string | null, lastActionByUserId?: string | null,
+      lastActionDateTime?: string | null, subject?: string | null } & {
+      @odata.type:
+      "#microsoft.graph.managedTenants.managedTenantEmailNotification" })[],
+      lastActionByUserId?: string | null, lastActionDateTime?: string | null,
+      message?: string | null, severity?: "unknownFutureValue" | Record<string,
+      never> | "unknown" | "informational" | "low" | "medium" | "high" | null,
+      status?: "unknownFutureValue" | Record<string, never> | "unknown" |
+      "newAlert" | "inProgress" | "resolved" | "dismissed" | null, tenantId?:
+      string | null, title?: string | null } & { @odata.type:
+      "#microsoft.graph.managedTenants.managedTenantAlert" })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.tenantRelationships.managedTenants.managedTenantAlerts.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -133,22 +205,349 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/tenantRelationships/managedTenants/managedTenantAlerts",
-        "post">): EndpointRequest<IEndpoints["POST
-        /tenantRelationships/managedTenants/managedTenantAlerts"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, alertData?: Record<string,
+        never> | { @odata.type: string, displayName?: string | null } | null,
+        alertDataReferenceStrings?: { @odata.type: string, displayName?: string
+        | null }[], alertLogs?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, alert?: Record<string, never> |
+        Omit<{ id?: string | undefined; '@odata.type': string; }, "@odata.type">
+        & { alertData?: Record<string, never> | { displayName?: string | null |
+        undefined; '@odata.type': string; } | null | undefined; ... 18 more ...;
+        '@odata.type': string; } & { ...; } | null, content?: Record<string,
+        never> | { @odata.type: string, displayName?: string | null } | null,
+        createdByUserId?: string | null, createdDateTime?: string | null,
+        lastActionByUserId?: string | null, lastActionDateTime?: string | null }
+        & { @odata.type: "#microsoft.graph.managedTenants.managedTenantAlertLog"
+        })[], alertRule?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string,
+        alertDisplayName?: string | null, alerts?: Omit<{ id?: string |
+        undefined; '@odata.type': string; }, "@odata.type"> & { alertData?:
+        Record<string, never> | { displayName?: string | null | undefined;
+        '@odata.type': string; } | null | undefined; ... 18 more ...;
+        '@odata.type': string; } & { ...; }[], alertTTL?: number | null,
+        createdByUserId?: string | null, createdDateTime?: string | null,
+        description?: string | null, displayName?: string | null,
+        lastActionByUserId?: string | null, lastActionDateTime?: string | null,
+        lastRunDateTime?: string | null, notificationFinalDestinations?:
+        "unknownFutureValue" | Record<string, never> | "none" | "api" | "email"
+        | "sms" | null, ruleDefinition?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, alertRules?: Omit<{ id?: string | undefined; '@odata.type':
+        string; }, "@odata.type"> & { alertDisplayName?: string | null |
+        undefined; alertTTL?: number | null | undefined; createdByUserId?:
+        string | ... 1 more ... | undefined; ... 12 more ...; '@odata.type':
+        string; } & { ...; }[], createdByUserId?: string | null,
+        createdDateTime?: string | null, definitionTemplate?: Record<string,
+        never> | { @odata.type: string, defaultSeverity?: function } | null,
+        displayName?: string | null, lastActionByUserId?: string | null,
+        lastActionDateTime?: string | null } & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantAlertRuleDefinition" }) |
+        null, severity?: "unknownFutureValue" | Record<string, never> |
+        "unknown" | "informational" | "low" | "medium" | "high" | null,
+        targets?: { @odata.type: string, displayName?: string | null }[],
+        tenantIds?: { @odata.type: string, tenantId?: string | null }[] } & {
+        @odata.type: "#microsoft.graph.managedTenants.managedTenantAlertRule" })
+        | null, alertRuleDisplayName?: string | null, apiNotifications?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, alert?: Record<string, never> | Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { alertData?: Record<string,
+        never> | { displayName?: string | null | undefined; '@odata.type':
+        string; } | null | undefined; ... 18 more ...; '@odata.type': string; }
+        & { ...; } | null, createdByUserId?: string | null, createdDateTime?:
+        string | null, isAcknowledged?: boolean | null, lastActionByUserId?:
+        string | null, lastActionDateTime?: string | null, message?: string |
+        null, title?: string | null, userId?: string | null } & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantApiNotification" })[],
+        assignedToUserId?: string | null, correlationCount?: number | null,
+        correlationId?: string | null, createdByUserId?: string | null,
+        createdDateTime?: string | null, emailNotifications?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, alert?: Record<string, never> | Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { alertData?: Record<string,
+        never> | { displayName?: string | null | undefined; '@odata.type':
+        string; } | null | undefined; ... 18 more ...; '@odata.type': string; }
+        & { ...; } | null, createdByUserId?: string | null, createdDateTime?:
+        string | null, emailAddresses?: { @odata.type: string, emailAddress?:
+        string | null }[], emailBody?: string | null, lastActionByUserId?:
+        string | null, lastActionDateTime?: string | null, subject?: string |
+        null } & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantEmailNotification" })[],
+        lastActionByUserId?: string | null, lastActionDateTime?: string | null,
+        message?: string | null, severity?: "unknownFutureValue" |
+        Record<string, never> | "unknown" | "informational" | "low" | "medium" |
+        "high" | null, status?: "unknownFutureValue" | Record<string, never> |
+        "unknown" | "newAlert" | "inProgress" | "resolved" | "dismissed" | null,
+        tenantId?: string | null, title?: string | null } & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantAlert" }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, alertData?: Record<string,
+        never> | { @odata.type: string, displayName?: string | null } | null,
+        alertDataReferenceStrings?: { @odata.type: string, displayName?: string
+        | null }[], alertLogs?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, alert?: Record<string, never> |
+        Omit<{ id?: string | undefined; '@odata.type': string; }, "@odata.type">
+        & { alertData?: Record<string, never> | { displayName?: string | null |
+        undefined; '@odata.type': string; } | null | undefined; ... 18 more ...;
+        '@odata.type': string; } & { ...; } | null, content?: Record<string,
+        never> | { @odata.type: string, displayName?: string | null } | null,
+        createdByUserId?: string | null, createdDateTime?: string | null,
+        lastActionByUserId?: string | null, lastActionDateTime?: string | null }
+        & { @odata.type: "#microsoft.graph.managedTenants.managedTenantAlertLog"
+        })[], alertRule?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string,
+        alertDisplayName?: string | null, alerts?: Omit<{ id?: string |
+        undefined; '@odata.type': string; }, "@odata.type"> & { alertData?:
+        Record<string, never> | { displayName?: string | null | undefined;
+        '@odata.type': string; } | null | undefined; ... 18 more ...;
+        '@odata.type': string; } & { ...; }[], alertTTL?: number | null,
+        createdByUserId?: string | null, createdDateTime?: string | null,
+        description?: string | null, displayName?: string | null,
+        lastActionByUserId?: string | null, lastActionDateTime?: string | null,
+        lastRunDateTime?: string | null, notificationFinalDestinations?:
+        "unknownFutureValue" | Record<string, never> | "none" | "api" | "email"
+        | "sms" | null, ruleDefinition?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, alertRules?: ...[], createdByUserId?: string | null,
+        createdDateTime?: string | null, definitionTemplate?: Record<..., ...> |
+        { @odata.type: ..., defaultSeverity?: ... } | null, displayName?: string
+        | null, lastActionByUserId?: string | null, lastActionDateTime?: string
+        | null } & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantAlertRuleDefinition" }) |
+        null, severity?: "unknownFutureValue" | Record<string, never> |
+        "unknown" | "informational" | "low" | "medium" | "high" | null,
+        targets?: { @odata.type: string, displayName?: string | null }[],
+        tenantIds?: { @odata.type: string, tenantId?: string | null }[] } & {
+        @odata.type: "#microsoft.graph.managedTenants.managedTenantAlertRule" })
+        | null, alertRuleDisplayName?: string | null, apiNotifications?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, alert?: Record<string, never> | Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { alertData?: Record<string,
+        never> | { displayName?: string | null | undefined; '@odata.type':
+        string; } | null | undefined; ... 18 more ...; '@odata.type': string; }
+        & { ...; } | null, createdByUserId?: string | null, createdDateTime?:
+        string | null, isAcknowledged?: boolean | null, lastActionByUserId?:
+        string | null, lastActionDateTime?: string | null, message?: string |
+        null, title?: string | null, userId?: string | null } & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantApiNotification" })[],
+        assignedToUserId?: string | null, correlationCount?: number | null,
+        correlationId?: string | null, createdByUserId?: string | null,
+        createdDateTime?: string | null, emailNotifications?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, alert?: Record<string, never> | Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { alertData?: Record<string,
+        never> | { displayName?: string | null | undefined; '@odata.type':
+        string; } | null | undefined; ... 18 more ...; '@odata.type': string; }
+        & { ...; } | null, createdByUserId?: string | null, createdDateTime?:
+        string | null, emailAddresses?: { @odata.type: string, emailAddress?:
+        function }[], emailBody?: string | null, lastActionByUserId?: string |
+        null, lastActionDateTime?: string | null, subject?: string | null } & {
+        @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantEmailNotification" })[],
+        lastActionByUserId?: string | null, lastActionDateTime?: string | null,
+        message?: string | null, severity?: "unknownFutureValue" |
+        Record<string, never> | "unknown" | "informational" | "low" | "medium" |
+        "high" | null, status?: "unknownFutureValue" | Record<string, never> |
+        "unknown" | "newAlert" | "inProgress" | "resolved" | "dismissed" | null,
+        tenantId?: string | null, title?: string | null } & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantAlert" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/tenantRelationships/managedTenants/managedTenantAlerts",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            alertData?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, displayName?: string | null } | null,
+            alertDataReferenceStrings?: { <xref uid="@odata.type" />: string,
+            displayName?: string | null }[], alertLogs?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            alert?: Record&lt;string, never&gt; | Omit&lt;{ id?: string |
+            undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { alertData?: Record&lt;string,
+            never&gt; | { displayName?: string | null | undefined; '<xref
+            uid="@odata.type" />': string; } | null | undefined; ... 18 more
+            ...; '<xref uid="@odata.type" />': string; } & { ...; } | null,
+            content?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, displayName?: string | null } | null, createdByUserId?:
+            string | null, createdDateTime?: string | null, lastActionByUserId?:
+            string | null, lastActionDateTime?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedTenants.managedTenantAlertLog" />" })[],
+            alertRule?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            alertDisplayName?: string | null, alerts?: Omit&lt;{ id?: string |
+            undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { alertData?: Record&lt;string,
+            never&gt; | { displayName?: string | null | undefined; '<xref
+            uid="@odata.type" />': string; } | null | undefined; ... 18 more
+            ...; '<xref uid="@odata.type" />': string; } & { ...; }[],
+            alertTTL?: number | null, createdByUserId?: string | null,
+            createdDateTime?: string | null, description?: string | null,
+            displayName?: string | null, lastActionByUserId?: string | null,
+            lastActionDateTime?: string | null, lastRunDateTime?: string | null,
+            notificationFinalDestinations?: "unknownFutureValue" |
+            Record&lt;string, never&gt; | "none" | "api" | "email" | "sms" |
+            null, ruleDefinition?: Record&lt;string, never&gt; | (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            alertRules?: Omit&lt;{ id?: string | undefined; '<xref
+            uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; &
+            { alertDisplayName?: string | null | undefined; alertTTL?: number |
+            null | undefined; createdByUserId?: string | ... 1 more ... |
+            undefined; ... 12 more ...; '<xref uid="@odata.type" />': string; }
+            & { ...; }[], createdByUserId?: string | null, createdDateTime?:
+            string | null, definitionTemplate?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, defaultSeverity?: function } |
+            null, displayName?: string | null, lastActionByUserId?: string |
+            null, lastActionDateTime?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedTenants.managedTenantAlertRuleDefinition"
+            />" }) | null, severity?: "unknownFutureValue" | Record&lt;string,
+            never&gt; | "unknown" | "informational" | "low" | "medium" | "high"
+            | null, targets?: { <xref uid="@odata.type" />: string,
+            displayName?: string | null }[], tenantIds?: { <xref
+            uid="@odata.type" />: string, tenantId?: string | null }[] } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedTenants.managedTenantAlertRule" />" }) |
+            null, alertRuleDisplayName?: string | null, apiNotifications?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            alert?: Record&lt;string, never&gt; | Omit&lt;{ id?: string |
+            undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { alertData?: Record&lt;string,
+            never&gt; | { displayName?: string | null | undefined; '<xref
+            uid="@odata.type" />': string; } | null | undefined; ... 18 more
+            ...; '<xref uid="@odata.type" />': string; } & { ...; } | null,
+            createdByUserId?: string | null, createdDateTime?: string | null,
+            isAcknowledged?: boolean | null, lastActionByUserId?: string | null,
+            lastActionDateTime?: string | null, message?: string | null, title?:
+            string | null, userId?: string | null } & { <xref uid="@odata.type"
+            />: "#<xref
+            uid="microsoft.graph.managedTenants.managedTenantApiNotification"
+            />" })[], assignedToUserId?: string | null, correlationCount?:
+            number | null, correlationId?: string | null, createdByUserId?:
+            string | null, createdDateTime?: string | null, emailNotifications?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            alert?: Record&lt;string, never&gt; | Omit&lt;{ id?: string |
+            undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { alertData?: Record&lt;string,
+            never&gt; | { displayName?: string | null | undefined; '<xref
+            uid="@odata.type" />': string; } | null | undefined; ... 18 more
+            ...; '<xref uid="@odata.type" />': string; } & { ...; } | null,
+            createdByUserId?: string | null, createdDateTime?: string | null,
+            emailAddresses?: { <xref uid="@odata.type" />: string,
+            emailAddress?: string | null }[], emailBody?: string | null,
+            lastActionByUserId?: string | null, lastActionDateTime?: string |
+            null, subject?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref
+            uid="microsoft.graph.managedTenants.managedTenantEmailNotification"
+            />" })[], lastActionByUserId?: string | null, lastActionDateTime?:
+            string | null, message?: string | null, severity?:
+            "unknownFutureValue" | Record&lt;string, never&gt; | "unknown" |
+            "informational" | "low" | "medium" | "high" | null, status?:
+            "unknownFutureValue" | Record&lt;string, never&gt; | "unknown" |
+            "newAlert" | "inProgress" | "resolved" | "dismissed" | null,
+            tenantId?: string | null, title?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedTenants.managedTenantAlert" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /tenantRelationships/managedTenants/managedTenantAlerts"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, alertData?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null } | null,
+          alertDataReferenceStrings?: { <xref uid="@odata.type" />: string,
+          displayName?: string | null }[], alertLogs?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, alert?:
+          Record&lt;string, never&gt; | Omit&lt;{ id?: string | undefined;
+          '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+          />"&gt; & { alertData?: Record&lt;string, never&gt; | { displayName?:
+          string | null | undefined; '<xref uid="@odata.type" />': string; } |
+          null | undefined; ... 18 more ...; '<xref uid="@odata.type" />':
+          string; } & { ...; } | null, content?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, displayName?: string | null } |
+          null, createdByUserId?: string | null, createdDateTime?: string |
+          null, lastActionByUserId?: string | null, lastActionDateTime?: string
+          | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managedTenantAlertLog" />" })[],
+          alertRule?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, alertDisplayName?:
+          string | null, alerts?: Omit&lt;{ id?: string | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; & {
+          alertData?: Record&lt;string, never&gt; | { displayName?: string |
+          null | undefined; '<xref uid="@odata.type" />': string; } | null |
+          undefined; ... 18 more ...; '<xref uid="@odata.type" />': string; } &
+          { ...; }[], alertTTL?: number | null, createdByUserId?: string | null,
+          createdDateTime?: string | null, description?: string | null,
+          displayName?: string | null, lastActionByUserId?: string | null,
+          lastActionDateTime?: string | null, lastRunDateTime?: string | null,
+          notificationFinalDestinations?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "none" | "api" | "email" | "sms" | null,
+          ruleDefinition?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          alertRules?: ...[], createdByUserId?: string | null, createdDateTime?:
+          string | null, definitionTemplate?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., defaultSeverity?: ... } | null,
+          displayName?: string | null, lastActionByUserId?: string | null,
+          lastActionDateTime?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref
+          uid="microsoft.graph.managedTenants.managedTenantAlertRuleDefinition"
+          />" }) | null, severity?: "unknownFutureValue" | Record&lt;string,
+          never&gt; | "unknown" | "informational" | "low" | "medium" | "high" |
+          null, targets?: { <xref uid="@odata.type" />: string, displayName?:
+          string | null }[], tenantIds?: { <xref uid="@odata.type" />: string,
+          tenantId?: string | null }[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managedTenantAlertRule" />" }) |
+          null, alertRuleDisplayName?: string | null, apiNotifications?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          alert?: Record&lt;string, never&gt; | Omit&lt;{ id?: string |
+          undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & { alertData?: Record&lt;string, never&gt;
+          | { displayName?: string | null | undefined; '<xref uid="@odata.type"
+          />': string; } | null | undefined; ... 18 more ...; '<xref
+          uid="@odata.type" />': string; } & { ...; } | null, createdByUserId?:
+          string | null, createdDateTime?: string | null, isAcknowledged?:
+          boolean | null, lastActionByUserId?: string | null,
+          lastActionDateTime?: string | null, message?: string | null, title?:
+          string | null, userId?: string | null } & { <xref uid="@odata.type"
+          />: "#<xref
+          uid="microsoft.graph.managedTenants.managedTenantApiNotification" />"
+          })[], assignedToUserId?: string | null, correlationCount?: number |
+          null, correlationId?: string | null, createdByUserId?: string | null,
+          createdDateTime?: string | null, emailNotifications?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, alert?:
+          Record&lt;string, never&gt; | Omit&lt;{ id?: string | undefined;
+          '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+          />"&gt; & { alertData?: Record&lt;string, never&gt; | { displayName?:
+          string | null | undefined; '<xref uid="@odata.type" />': string; } |
+          null | undefined; ... 18 more ...; '<xref uid="@odata.type" />':
+          string; } & { ...; } | null, createdByUserId?: string | null,
+          createdDateTime?: string | null, emailAddresses?: { <xref
+          uid="@odata.type" />: string, emailAddress?: function }[], emailBody?:
+          string | null, lastActionByUserId?: string | null,
+          lastActionDateTime?: string | null, subject?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managedTenantEmailNotification"
+          />" })[], lastActionByUserId?: string | null, lastActionDateTime?:
+          string | null, message?: string | null, severity?:
+          "unknownFutureValue" | Record&lt;string, never&gt; | "unknown" |
+          "informational" | "low" | "medium" | "high" | null, status?:
+          "unknownFutureValue" | Record&lt;string, never&gt; | "unknown" |
+          "newAlert" | "inProgress" | "resolved" | "dismissed" | null,
+          tenantId?: string | null, title?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managedTenantAlert" />" }&gt;
+  - name: 'del({ If-Match?: string, managedTenantAlert-id: string })'
     uid: >-
       @microsoft/teams.graph-endpoints-beta.tenantRelationships.managedTenants.managedTenantAlerts.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -159,18 +558,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /tenantRelationships/managedTenants/managedTenantAlerts/{managedTenantAlert-id}"]["response"]>
+        function del(params?: { If-Match?: string, managedTenantAlert-id: string
+        }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, managedTenantAlert-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /tenantRelationships/managedTenants/managedTenantAlerts/{managedTenantAlert-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], managedTenantAlert-id:
+      string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.tenantRelationships.managedTenants.managedTenantAlerts.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -181,18 +580,182 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /tenantRelationships/managedTenants/managedTenantAlerts/{managedTenantAlert-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        managedTenantAlert-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        alertData?: Record<string, never> | { @odata.type: string, displayName?:
+        string | null } | null, alertDataReferenceStrings?: { @odata.type:
+        string, displayName?: string | null }[], alertLogs?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, alert?: Record<string, never> | Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { alertData?: Record<string,
+        never> | { displayName?: string | null | undefined; '@odata.type':
+        string; } | null | undefined; ... 18 more ...; '@odata.type': string; }
+        & { ...; } | null, content?: Record<string, never> | { @odata.type:
+        string, displayName?: string | null } | null, createdByUserId?: string |
+        null, createdDateTime?: string | null, lastActionByUserId?: string |
+        null, lastActionDateTime?: string | null } & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantAlertLog" })[],
+        alertRule?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, alertDisplayName?:
+        string | null, alerts?: Omit<{ id?: string | undefined; '@odata.type':
+        string; }, "@odata.type"> & { alertData?: Record<string, never> | {
+        displayName?: string | null | undefined; '@odata.type': string; } | null
+        | undefined; ... 18 more ...; '@odata.type': string; } & { ...; }[],
+        alertTTL?: number | null, createdByUserId?: string | null,
+        createdDateTime?: string | null, description?: string | null,
+        displayName?: string | null, lastActionByUserId?: string | null,
+        lastActionDateTime?: string | null, lastRunDateTime?: string | null,
+        notificationFinalDestinations?: "unknownFutureValue" | Record<string,
+        never> | "none" | "api" | "email" | "sms" | null, ruleDefinition?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, alertRules?: ...[],
+        createdByUserId?: string | null, createdDateTime?: string | null,
+        definitionTemplate?: Record<..., ...> | { @odata.type: ...,
+        defaultSeverity?: ... } | null, displayName?: string | null,
+        lastActionByUserId?: string | null, lastActionDateTime?: string | null }
+        & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantAlertRuleDefinition" }) |
+        null, severity?: "unknownFutureValue" | Record<string, never> |
+        "unknown" | "informational" | "low" | "medium" | "high" | null,
+        targets?: { @odata.type: string, displayName?: string | null }[],
+        tenantIds?: { @odata.type: string, tenantId?: string | null }[] } & {
+        @odata.type: "#microsoft.graph.managedTenants.managedTenantAlertRule" })
+        | null, alertRuleDisplayName?: string | null, apiNotifications?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, alert?: Record<string, never> | Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { alertData?: Record<string,
+        never> | { displayName?: string | null | undefined; '@odata.type':
+        string; } | null | undefined; ... 18 more ...; '@odata.type': string; }
+        & { ...; } | null, createdByUserId?: string | null, createdDateTime?:
+        string | null, isAcknowledged?: boolean | null, lastActionByUserId?:
+        string | null, lastActionDateTime?: string | null, message?: string |
+        null, title?: string | null, userId?: string | null } & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantApiNotification" })[],
+        assignedToUserId?: string | null, correlationCount?: number | null,
+        correlationId?: string | null, createdByUserId?: string | null,
+        createdDateTime?: string | null, emailNotifications?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, alert?: Record<string, never> | Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { alertData?: Record<string,
+        never> | { displayName?: string | null | undefined; '@odata.type':
+        string; } | null | undefined; ... 18 more ...; '@odata.type': string; }
+        & { ...; } | null, createdByUserId?: string | null, createdDateTime?:
+        string | null, emailAddresses?: { @odata.type: string, emailAddress?:
+        function }[], emailBody?: string | null, lastActionByUserId?: string |
+        null, lastActionDateTime?: string | null, subject?: string | null } & {
+        @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantEmailNotification" })[],
+        lastActionByUserId?: string | null, lastActionDateTime?: string | null,
+        message?: string | null, severity?: "unknownFutureValue" |
+        Record<string, never> | "unknown" | "informational" | "low" | "medium" |
+        "high" | null, status?: "unknownFutureValue" | Record<string, never> |
+        "unknown" | "newAlert" | "inProgress" | "resolved" | "dismissed" | null,
+        tenantId?: string | null, title?: string | null } & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantAlert" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], managedTenantAlert-id:
+            string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /tenantRelationships/managedTenants/managedTenantAlerts/{managedTenantAlert-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, alertData?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null } | null,
+          alertDataReferenceStrings?: { <xref uid="@odata.type" />: string,
+          displayName?: string | null }[], alertLogs?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, alert?:
+          Record&lt;string, never&gt; | Omit&lt;{ id?: string | undefined;
+          '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+          />"&gt; & { alertData?: Record&lt;string, never&gt; | { displayName?:
+          string | null | undefined; '<xref uid="@odata.type" />': string; } |
+          null | undefined; ... 18 more ...; '<xref uid="@odata.type" />':
+          string; } & { ...; } | null, content?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, displayName?: string | null } |
+          null, createdByUserId?: string | null, createdDateTime?: string |
+          null, lastActionByUserId?: string | null, lastActionDateTime?: string
+          | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managedTenantAlertLog" />" })[],
+          alertRule?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, alertDisplayName?:
+          string | null, alerts?: Omit&lt;{ id?: string | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; & {
+          alertData?: Record&lt;string, never&gt; | { displayName?: string |
+          null | undefined; '<xref uid="@odata.type" />': string; } | null |
+          undefined; ... 18 more ...; '<xref uid="@odata.type" />': string; } &
+          { ...; }[], alertTTL?: number | null, createdByUserId?: string | null,
+          createdDateTime?: string | null, description?: string | null,
+          displayName?: string | null, lastActionByUserId?: string | null,
+          lastActionDateTime?: string | null, lastRunDateTime?: string | null,
+          notificationFinalDestinations?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "none" | "api" | "email" | "sms" | null,
+          ruleDefinition?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          alertRules?: ...[], createdByUserId?: string | null, createdDateTime?:
+          string | null, definitionTemplate?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., defaultSeverity?: ... } | null,
+          displayName?: string | null, lastActionByUserId?: string | null,
+          lastActionDateTime?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref
+          uid="microsoft.graph.managedTenants.managedTenantAlertRuleDefinition"
+          />" }) | null, severity?: "unknownFutureValue" | Record&lt;string,
+          never&gt; | "unknown" | "informational" | "low" | "medium" | "high" |
+          null, targets?: { <xref uid="@odata.type" />: string, displayName?:
+          string | null }[], tenantIds?: { <xref uid="@odata.type" />: string,
+          tenantId?: string | null }[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managedTenantAlertRule" />" }) |
+          null, alertRuleDisplayName?: string | null, apiNotifications?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          alert?: Record&lt;string, never&gt; | Omit&lt;{ id?: string |
+          undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & { alertData?: Record&lt;string, never&gt;
+          | { displayName?: string | null | undefined; '<xref uid="@odata.type"
+          />': string; } | null | undefined; ... 18 more ...; '<xref
+          uid="@odata.type" />': string; } & { ...; } | null, createdByUserId?:
+          string | null, createdDateTime?: string | null, isAcknowledged?:
+          boolean | null, lastActionByUserId?: string | null,
+          lastActionDateTime?: string | null, message?: string | null, title?:
+          string | null, userId?: string | null } & { <xref uid="@odata.type"
+          />: "#<xref
+          uid="microsoft.graph.managedTenants.managedTenantApiNotification" />"
+          })[], assignedToUserId?: string | null, correlationCount?: number |
+          null, correlationId?: string | null, createdByUserId?: string | null,
+          createdDateTime?: string | null, emailNotifications?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, alert?:
+          Record&lt;string, never&gt; | Omit&lt;{ id?: string | undefined;
+          '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+          />"&gt; & { alertData?: Record&lt;string, never&gt; | { displayName?:
+          string | null | undefined; '<xref uid="@odata.type" />': string; } |
+          null | undefined; ... 18 more ...; '<xref uid="@odata.type" />':
+          string; } & { ...; } | null, createdByUserId?: string | null,
+          createdDateTime?: string | null, emailAddresses?: { <xref
+          uid="@odata.type" />: string, emailAddress?: function }[], emailBody?:
+          string | null, lastActionByUserId?: string | null,
+          lastActionDateTime?: string | null, subject?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managedTenantEmailNotification"
+          />" })[], lastActionByUserId?: string | null, lastActionDateTime?:
+          string | null, message?: string | null, severity?:
+          "unknownFutureValue" | Record&lt;string, never&gt; | "unknown" |
+          "informational" | "low" | "medium" | "high" | null, status?:
+          "unknownFutureValue" | Record&lt;string, never&gt; | "unknown" |
+          "newAlert" | "inProgress" | "resolved" | "dismissed" | null,
+          tenantId?: string | null, title?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managedTenantAlert" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.tenantRelationships.managedTenants.managedTenantAlerts.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -201,20 +764,181 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /tenantRelationships/managedTenants/managedTenantAlerts"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, alertData?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null } | null, alertDataReferenceStrings?: {
+        @odata.type: string, displayName?: function }[], alertLogs?: (Omit<...,
+        ...> & { @odata.type: ..., alert?: ..., content?: ..., createdByUserId?:
+        ..., createdDateTime?: ..., lastActionByUserId?: ...,
+        lastActionDateTime?: ... } & { @odata.type: ... })[], alertRule?:
+        Record<string, never> | (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, alertDisplayName?: function,
+        alerts?: (Omit<{ id?: string | undefined; '@odata.type': string; },
+        "@odata.type"> & { alertData?: Record<string, never> | { displayName?:
+        string | null | undefined; '@odata.type': string; } | null | undefined;
+        ... 18 more ...; '@odata.type': string; } & { ...; })[] | undefined,
+        alertTTL?: function, createdByUserId?: function, createdDateTime?:
+        function, description?: function, displayName?: function,
+        lastActionByUserId?: function, lastActionDateTime?: function,
+        lastRunDateTime?: function, notificationFinalDestinations?: function,
+        ruleDefinition?: function, severity?: function, targets?: function,
+        tenantIds?: function } & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantAlertRule" }) | null,
+        alertRuleDisplayName?: string | null, apiNotifications?: (Omit<..., ...>
+        & { @odata.type: ..., alert?: ..., createdByUserId?: ...,
+        createdDateTime?: ..., isAcknowledged?: ..., lastActionByUserId?: ...,
+        lastActionDateTime?: ..., message?: ..., title?: ..., userId?: ... } & {
+        @odata.type: ... })[], assignedToUserId?: string | null,
+        correlationCount?: number | null, correlationId?: string | null,
+        createdByUserId?: string | null, createdDateTime?: string | null,
+        emailNotifications?: (Omit<..., ...> & { @odata.type: ..., alert?: ...,
+        createdByUserId?: ..., createdDateTime?: ..., emailAddresses?: ...,
+        emailBody?: ..., lastActionByUserId?: ..., lastActionDateTime?: ...,
+        subject?: ... } & { @odata.type: ... })[], lastActionByUserId?: string |
+        null, lastActionDateTime?: string | null, message?: string | null,
+        severity?: "unknownFutureValue" | Record<string, never> | "unknown" |
+        "informational" | "low" | "medium" | "high" | null, status?:
+        "unknownFutureValue" | Record<string, never> | "unknown" | "newAlert" |
+        "inProgress" | "resolved" | "dismissed" | null, tenantId?: string |
+        null, title?: string | null } & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantAlert" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /tenantRelationships/managedTenants/managedTenantAlerts"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          alertData?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, displayName?: string | null } | null,
+          alertDataReferenceStrings?: { <xref uid="@odata.type" />: string,
+          displayName?: function }[], alertLogs?: (Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ..., alert?: ..., content?: ...,
+          createdByUserId?: ..., createdDateTime?: ..., lastActionByUserId?:
+          ..., lastActionDateTime?: ... } & { <xref uid="@odata.type" />: ...
+          })[], alertRule?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, alertDisplayName?:
+          function, alerts?: (Omit&lt;{ id?: string | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; & {
+          alertData?: Record&lt;string, never&gt; | { displayName?: string |
+          null | undefined; '<xref uid="@odata.type" />': string; } | null |
+          undefined; ... 18 more ...; '<xref uid="@odata.type" />': string; } &
+          { ...; })[] | undefined, alertTTL?: function, createdByUserId?:
+          function, createdDateTime?: function, description?: function,
+          displayName?: function, lastActionByUserId?: function,
+          lastActionDateTime?: function, lastRunDateTime?: function,
+          notificationFinalDestinations?: function, ruleDefinition?: function,
+          severity?: function, targets?: function, tenantIds?: function } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managedTenantAlertRule" />" }) |
+          null, alertRuleDisplayName?: string | null, apiNotifications?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ..., alert?:
+          ..., createdByUserId?: ..., createdDateTime?: ..., isAcknowledged?:
+          ..., lastActionByUserId?: ..., lastActionDateTime?: ..., message?:
+          ..., title?: ..., userId?: ... } & { <xref uid="@odata.type" />: ...
+          })[], assignedToUserId?: string | null, correlationCount?: number |
+          null, correlationId?: string | null, createdByUserId?: string | null,
+          createdDateTime?: string | null, emailNotifications?: (Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ..., alert?: ...,
+          createdByUserId?: ..., createdDateTime?: ..., emailAddresses?: ...,
+          emailBody?: ..., lastActionByUserId?: ..., lastActionDateTime?: ...,
+          subject?: ... } & { <xref uid="@odata.type" />: ... })[],
+          lastActionByUserId?: string | null, lastActionDateTime?: string |
+          null, message?: string | null, severity?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "unknown" | "informational" | "low" |
+          "medium" | "high" | null, status?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "unknown" | "newAlert" | "inProgress" |
+          "resolved" | "dismissed" | null, tenantId?: string | null, title?:
+          string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managedTenantAlert" />" })[] }&gt;
   - name: >-
-      update(Operation<"/tenantRelationships/managedTenants/managedTenantAlerts/{managedTenantAlert-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, alertData?: Record<string, never> | { @odata.type:
+      string, displayName?: string | null } | null, alertDataReferenceStrings?:
+      { @odata.type: string, displayName?: string | null }[], alertLogs?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, alert?: Record<string, never> | Omit<{ id?: string |
+      undefined; '@odata.type': string; }, "@odata.type"> & { alertData?:
+      Record<string, never> | { displayName?: string | null | undefined;
+      '@odata.type': string; } | null | undefined; ... 18 more ...;
+      '@odata.type': string; } & { ...; } | null, content?: Record<string,
+      never> | { @odata.type: string, displayName?: string | null } | null,
+      createdByUserId?: string | null, createdDateTime?: string | null,
+      lastActionByUserId?: string | null, lastActionDateTime?: string | null } &
+      { @odata.type: "#microsoft.graph.managedTenants.managedTenantAlertLog"
+      })[], alertRule?: Record<string, never> | (Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & { @odata.type: string, alertDisplayName?:
+      string | null, alerts?: Omit<{ id?: string | undefined; '@odata.type':
+      string; }, "@odata.type"> & { alertData?: Record<string, never> | {
+      displayName?: string | null | undefined; '@odata.type': string; } | null |
+      undefined; ... 18 more ...; '@odata.type': string; } & { ...; }[],
+      alertTTL?: number | null, createdByUserId?: string | null,
+      createdDateTime?: string | null, description?: string | null,
+      displayName?: string | null, lastActionByUserId?: string | null,
+      lastActionDateTime?: string | null, lastRunDateTime?: string | null,
+      notificationFinalDestinations?: "unknownFutureValue" | Record<string,
+      never> | "none" | "api" | "email" | "sms" | null, ruleDefinition?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, alertRules?: Omit<{ id?: string |
+      undefined; '@odata.type': string; }, "@odata.type"> & { alertDisplayName?:
+      string | null | undefined; alertTTL?: number | null | undefined;
+      createdByUserId?: string | ... 1 more ... | undefined; ... 12 more ...;
+      '@odata.type': string; } & { ...; }[], createdByUserId?: string | null,
+      createdDateTime?: string | null, definitionTemplate?: Record<string,
+      never> | { @odata.type: string, defaultSeverity?: function } | null,
+      displayName?: string | null, lastActionByUserId?: string | null,
+      lastActionDateTime?: string | null } & { @odata.type:
+      "#microsoft.graph.managedTenants.managedTenantAlertRuleDefinition" }) |
+      null, severity?: "unknownFutureValue" | Record<string, never> | "unknown"
+      | "informational" | "low" | "medium" | "high" | null, targets?: {
+      @odata.type: string, displayName?: string | null }[], tenantIds?: {
+      @odata.type: string, tenantId?: string | null }[] } & { @odata.type:
+      "#microsoft.graph.managedTenants.managedTenantAlertRule" }) | null,
+      alertRuleDisplayName?: string | null, apiNotifications?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, alert?: Record<string, never> | Omit<{ id?: string | undefined;
+      '@odata.type': string; }, "@odata.type"> & { alertData?: Record<string,
+      never> | { displayName?: string | null | undefined; '@odata.type': string;
+      } | null | undefined; ... 18 more ...; '@odata.type': string; } & { ...; }
+      | null, createdByUserId?: string | null, createdDateTime?: string | null,
+      isAcknowledged?: boolean | null, lastActionByUserId?: string | null,
+      lastActionDateTime?: string | null, message?: string | null, title?:
+      string | null, userId?: string | null } & { @odata.type:
+      "#microsoft.graph.managedTenants.managedTenantApiNotification" })[],
+      assignedToUserId?: string | null, correlationCount?: number | null,
+      correlationId?: string | null, createdByUserId?: string | null,
+      createdDateTime?: string | null, emailNotifications?: (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string, alert?:
+      Record<string, never> | Omit<{ id?: string | undefined; '@odata.type':
+      string; }, "@odata.type"> & { alertData?: Record<string, never> | {
+      displayName?: string | null | undefined; '@odata.type': string; } | null |
+      undefined; ... 18 more ...; '@odata.type': string; } & { ...; } | null,
+      createdByUserId?: string | null, createdDateTime?: string | null,
+      emailAddresses?: { @odata.type: string, emailAddress?: string | null }[],
+      emailBody?: string | null, lastActionByUserId?: string | null,
+      lastActionDateTime?: string | null, subject?: string | null } & {
+      @odata.type:
+      "#microsoft.graph.managedTenants.managedTenantEmailNotification" })[],
+      lastActionByUserId?: string | null, lastActionDateTime?: string | null,
+      message?: string | null, severity?: "unknownFutureValue" | Record<string,
+      never> | "unknown" | "informational" | "low" | "medium" | "high" | null,
+      status?: "unknownFutureValue" | Record<string, never> | "unknown" |
+      "newAlert" | "inProgress" | "resolved" | "dismissed" | null, tenantId?:
+      string | null, title?: string | null } & { @odata.type:
+      "#microsoft.graph.managedTenants.managedTenantAlert" }, {
+      managedTenantAlert-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.tenantRelationships.managedTenants.managedTenantAlerts.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -225,21 +949,349 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/tenantRelationships/managedTenants/managedTenantAlerts/{managedTenantAlert-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /tenantRelationships/managedTenants/managedTenantAlerts/{managedTenantAlert-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, alertData?: Record<string,
+        never> | { @odata.type: string, displayName?: string | null } | null,
+        alertDataReferenceStrings?: { @odata.type: string, displayName?: string
+        | null }[], alertLogs?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, alert?: Record<string, never> |
+        Omit<{ id?: string | undefined; '@odata.type': string; }, "@odata.type">
+        & { alertData?: Record<string, never> | { displayName?: string | null |
+        undefined; '@odata.type': string; } | null | undefined; ... 18 more ...;
+        '@odata.type': string; } & { ...; } | null, content?: Record<string,
+        never> | { @odata.type: string, displayName?: string | null } | null,
+        createdByUserId?: string | null, createdDateTime?: string | null,
+        lastActionByUserId?: string | null, lastActionDateTime?: string | null }
+        & { @odata.type: "#microsoft.graph.managedTenants.managedTenantAlertLog"
+        })[], alertRule?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string,
+        alertDisplayName?: string | null, alerts?: Omit<{ id?: string |
+        undefined; '@odata.type': string; }, "@odata.type"> & { alertData?:
+        Record<string, never> | { displayName?: string | null | undefined;
+        '@odata.type': string; } | null | undefined; ... 18 more ...;
+        '@odata.type': string; } & { ...; }[], alertTTL?: number | null,
+        createdByUserId?: string | null, createdDateTime?: string | null,
+        description?: string | null, displayName?: string | null,
+        lastActionByUserId?: string | null, lastActionDateTime?: string | null,
+        lastRunDateTime?: string | null, notificationFinalDestinations?:
+        "unknownFutureValue" | Record<string, never> | "none" | "api" | "email"
+        | "sms" | null, ruleDefinition?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, alertRules?: Omit<{ id?: string | undefined; '@odata.type':
+        string; }, "@odata.type"> & { alertDisplayName?: string | null |
+        undefined; alertTTL?: number | null | undefined; createdByUserId?:
+        string | ... 1 more ... | undefined; ... 12 more ...; '@odata.type':
+        string; } & { ...; }[], createdByUserId?: string | null,
+        createdDateTime?: string | null, definitionTemplate?: Record<string,
+        never> | { @odata.type: string, defaultSeverity?: function } | null,
+        displayName?: string | null, lastActionByUserId?: string | null,
+        lastActionDateTime?: string | null } & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantAlertRuleDefinition" }) |
+        null, severity?: "unknownFutureValue" | Record<string, never> |
+        "unknown" | "informational" | "low" | "medium" | "high" | null,
+        targets?: { @odata.type: string, displayName?: string | null }[],
+        tenantIds?: { @odata.type: string, tenantId?: string | null }[] } & {
+        @odata.type: "#microsoft.graph.managedTenants.managedTenantAlertRule" })
+        | null, alertRuleDisplayName?: string | null, apiNotifications?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, alert?: Record<string, never> | Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { alertData?: Record<string,
+        never> | { displayName?: string | null | undefined; '@odata.type':
+        string; } | null | undefined; ... 18 more ...; '@odata.type': string; }
+        & { ...; } | null, createdByUserId?: string | null, createdDateTime?:
+        string | null, isAcknowledged?: boolean | null, lastActionByUserId?:
+        string | null, lastActionDateTime?: string | null, message?: string |
+        null, title?: string | null, userId?: string | null } & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantApiNotification" })[],
+        assignedToUserId?: string | null, correlationCount?: number | null,
+        correlationId?: string | null, createdByUserId?: string | null,
+        createdDateTime?: string | null, emailNotifications?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, alert?: Record<string, never> | Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { alertData?: Record<string,
+        never> | { displayName?: string | null | undefined; '@odata.type':
+        string; } | null | undefined; ... 18 more ...; '@odata.type': string; }
+        & { ...; } | null, createdByUserId?: string | null, createdDateTime?:
+        string | null, emailAddresses?: { @odata.type: string, emailAddress?:
+        string | null }[], emailBody?: string | null, lastActionByUserId?:
+        string | null, lastActionDateTime?: string | null, subject?: string |
+        null } & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantEmailNotification" })[],
+        lastActionByUserId?: string | null, lastActionDateTime?: string | null,
+        message?: string | null, severity?: "unknownFutureValue" |
+        Record<string, never> | "unknown" | "informational" | "low" | "medium" |
+        "high" | null, status?: "unknownFutureValue" | Record<string, never> |
+        "unknown" | "newAlert" | "inProgress" | "resolved" | "dismissed" | null,
+        tenantId?: string | null, title?: string | null } & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantAlert" }, params?: {
+        managedTenantAlert-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        alertData?: Record<string, never> | { @odata.type: string, displayName?:
+        string | null } | null, alertDataReferenceStrings?: { @odata.type:
+        string, displayName?: string | null }[], alertLogs?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, alert?: Record<string, never> | Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { alertData?: Record<string,
+        never> | { displayName?: string | null | undefined; '@odata.type':
+        string; } | null | undefined; ... 18 more ...; '@odata.type': string; }
+        & { ...; } | null, content?: Record<string, never> | { @odata.type:
+        string, displayName?: string | null } | null, createdByUserId?: string |
+        null, createdDateTime?: string | null, lastActionByUserId?: string |
+        null, lastActionDateTime?: string | null } & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantAlertLog" })[],
+        alertRule?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, alertDisplayName?:
+        string | null, alerts?: Omit<{ id?: string | undefined; '@odata.type':
+        string; }, "@odata.type"> & { alertData?: Record<string, never> | {
+        displayName?: string | null | undefined; '@odata.type': string; } | null
+        | undefined; ... 18 more ...; '@odata.type': string; } & { ...; }[],
+        alertTTL?: number | null, createdByUserId?: string | null,
+        createdDateTime?: string | null, description?: string | null,
+        displayName?: string | null, lastActionByUserId?: string | null,
+        lastActionDateTime?: string | null, lastRunDateTime?: string | null,
+        notificationFinalDestinations?: "unknownFutureValue" | Record<string,
+        never> | "none" | "api" | "email" | "sms" | null, ruleDefinition?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, alertRules?: ...[],
+        createdByUserId?: string | null, createdDateTime?: string | null,
+        definitionTemplate?: Record<..., ...> | { @odata.type: ...,
+        defaultSeverity?: ... } | null, displayName?: string | null,
+        lastActionByUserId?: string | null, lastActionDateTime?: string | null }
+        & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantAlertRuleDefinition" }) |
+        null, severity?: "unknownFutureValue" | Record<string, never> |
+        "unknown" | "informational" | "low" | "medium" | "high" | null,
+        targets?: { @odata.type: string, displayName?: string | null }[],
+        tenantIds?: { @odata.type: string, tenantId?: string | null }[] } & {
+        @odata.type: "#microsoft.graph.managedTenants.managedTenantAlertRule" })
+        | null, alertRuleDisplayName?: string | null, apiNotifications?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, alert?: Record<string, never> | Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { alertData?: Record<string,
+        never> | { displayName?: string | null | undefined; '@odata.type':
+        string; } | null | undefined; ... 18 more ...; '@odata.type': string; }
+        & { ...; } | null, createdByUserId?: string | null, createdDateTime?:
+        string | null, isAcknowledged?: boolean | null, lastActionByUserId?:
+        string | null, lastActionDateTime?: string | null, message?: string |
+        null, title?: string | null, userId?: string | null } & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantApiNotification" })[],
+        assignedToUserId?: string | null, correlationCount?: number | null,
+        correlationId?: string | null, createdByUserId?: string | null,
+        createdDateTime?: string | null, emailNotifications?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, alert?: Record<string, never> | Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { alertData?: Record<string,
+        never> | { displayName?: string | null | undefined; '@odata.type':
+        string; } | null | undefined; ... 18 more ...; '@odata.type': string; }
+        & { ...; } | null, createdByUserId?: string | null, createdDateTime?:
+        string | null, emailAddresses?: { @odata.type: string, emailAddress?:
+        function }[], emailBody?: string | null, lastActionByUserId?: string |
+        null, lastActionDateTime?: string | null, subject?: string | null } & {
+        @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantEmailNotification" })[],
+        lastActionByUserId?: string | null, lastActionDateTime?: string | null,
+        message?: string | null, severity?: "unknownFutureValue" |
+        Record<string, never> | "unknown" | "informational" | "low" | "medium" |
+        "high" | null, status?: "unknownFutureValue" | Record<string, never> |
+        "unknown" | "newAlert" | "inProgress" | "resolved" | "dismissed" | null,
+        tenantId?: string | null, title?: string | null } & { @odata.type:
+        "#microsoft.graph.managedTenants.managedTenantAlert" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/tenantRelationships/managedTenants/managedTenantAlerts/{managedTenantAlert-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            alertData?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, displayName?: string | null } | null,
+            alertDataReferenceStrings?: { <xref uid="@odata.type" />: string,
+            displayName?: string | null }[], alertLogs?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            alert?: Record&lt;string, never&gt; | Omit&lt;{ id?: string |
+            undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { alertData?: Record&lt;string,
+            never&gt; | { displayName?: string | null | undefined; '<xref
+            uid="@odata.type" />': string; } | null | undefined; ... 18 more
+            ...; '<xref uid="@odata.type" />': string; } & { ...; } | null,
+            content?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, displayName?: string | null } | null, createdByUserId?:
+            string | null, createdDateTime?: string | null, lastActionByUserId?:
+            string | null, lastActionDateTime?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedTenants.managedTenantAlertLog" />" })[],
+            alertRule?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            alertDisplayName?: string | null, alerts?: Omit&lt;{ id?: string |
+            undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { alertData?: Record&lt;string,
+            never&gt; | { displayName?: string | null | undefined; '<xref
+            uid="@odata.type" />': string; } | null | undefined; ... 18 more
+            ...; '<xref uid="@odata.type" />': string; } & { ...; }[],
+            alertTTL?: number | null, createdByUserId?: string | null,
+            createdDateTime?: string | null, description?: string | null,
+            displayName?: string | null, lastActionByUserId?: string | null,
+            lastActionDateTime?: string | null, lastRunDateTime?: string | null,
+            notificationFinalDestinations?: "unknownFutureValue" |
+            Record&lt;string, never&gt; | "none" | "api" | "email" | "sms" |
+            null, ruleDefinition?: Record&lt;string, never&gt; | (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            alertRules?: Omit&lt;{ id?: string | undefined; '<xref
+            uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; &
+            { alertDisplayName?: string | null | undefined; alertTTL?: number |
+            null | undefined; createdByUserId?: string | ... 1 more ... |
+            undefined; ... 12 more ...; '<xref uid="@odata.type" />': string; }
+            & { ...; }[], createdByUserId?: string | null, createdDateTime?:
+            string | null, definitionTemplate?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, defaultSeverity?: function } |
+            null, displayName?: string | null, lastActionByUserId?: string |
+            null, lastActionDateTime?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedTenants.managedTenantAlertRuleDefinition"
+            />" }) | null, severity?: "unknownFutureValue" | Record&lt;string,
+            never&gt; | "unknown" | "informational" | "low" | "medium" | "high"
+            | null, targets?: { <xref uid="@odata.type" />: string,
+            displayName?: string | null }[], tenantIds?: { <xref
+            uid="@odata.type" />: string, tenantId?: string | null }[] } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedTenants.managedTenantAlertRule" />" }) |
+            null, alertRuleDisplayName?: string | null, apiNotifications?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            alert?: Record&lt;string, never&gt; | Omit&lt;{ id?: string |
+            undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { alertData?: Record&lt;string,
+            never&gt; | { displayName?: string | null | undefined; '<xref
+            uid="@odata.type" />': string; } | null | undefined; ... 18 more
+            ...; '<xref uid="@odata.type" />': string; } & { ...; } | null,
+            createdByUserId?: string | null, createdDateTime?: string | null,
+            isAcknowledged?: boolean | null, lastActionByUserId?: string | null,
+            lastActionDateTime?: string | null, message?: string | null, title?:
+            string | null, userId?: string | null } & { <xref uid="@odata.type"
+            />: "#<xref
+            uid="microsoft.graph.managedTenants.managedTenantApiNotification"
+            />" })[], assignedToUserId?: string | null, correlationCount?:
+            number | null, correlationId?: string | null, createdByUserId?:
+            string | null, createdDateTime?: string | null, emailNotifications?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            alert?: Record&lt;string, never&gt; | Omit&lt;{ id?: string |
+            undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { alertData?: Record&lt;string,
+            never&gt; | { displayName?: string | null | undefined; '<xref
+            uid="@odata.type" />': string; } | null | undefined; ... 18 more
+            ...; '<xref uid="@odata.type" />': string; } & { ...; } | null,
+            createdByUserId?: string | null, createdDateTime?: string | null,
+            emailAddresses?: { <xref uid="@odata.type" />: string,
+            emailAddress?: string | null }[], emailBody?: string | null,
+            lastActionByUserId?: string | null, lastActionDateTime?: string |
+            null, subject?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref
+            uid="microsoft.graph.managedTenants.managedTenantEmailNotification"
+            />" })[], lastActionByUserId?: string | null, lastActionDateTime?:
+            string | null, message?: string | null, severity?:
+            "unknownFutureValue" | Record&lt;string, never&gt; | "unknown" |
+            "informational" | "low" | "medium" | "high" | null, status?:
+            "unknownFutureValue" | Record&lt;string, never&gt; | "unknown" |
+            "newAlert" | "inProgress" | "resolved" | "dismissed" | null,
+            tenantId?: string | null, title?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedTenants.managedTenantAlert" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ managedTenantAlert-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /tenantRelationships/managedTenants/managedTenantAlerts/{managedTenantAlert-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, alertData?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, displayName?: string | null } | null,
+          alertDataReferenceStrings?: { <xref uid="@odata.type" />: string,
+          displayName?: string | null }[], alertLogs?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, alert?:
+          Record&lt;string, never&gt; | Omit&lt;{ id?: string | undefined;
+          '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+          />"&gt; & { alertData?: Record&lt;string, never&gt; | { displayName?:
+          string | null | undefined; '<xref uid="@odata.type" />': string; } |
+          null | undefined; ... 18 more ...; '<xref uid="@odata.type" />':
+          string; } & { ...; } | null, content?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, displayName?: string | null } |
+          null, createdByUserId?: string | null, createdDateTime?: string |
+          null, lastActionByUserId?: string | null, lastActionDateTime?: string
+          | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managedTenantAlertLog" />" })[],
+          alertRule?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, alertDisplayName?:
+          string | null, alerts?: Omit&lt;{ id?: string | undefined; '<xref
+          uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; & {
+          alertData?: Record&lt;string, never&gt; | { displayName?: string |
+          null | undefined; '<xref uid="@odata.type" />': string; } | null |
+          undefined; ... 18 more ...; '<xref uid="@odata.type" />': string; } &
+          { ...; }[], alertTTL?: number | null, createdByUserId?: string | null,
+          createdDateTime?: string | null, description?: string | null,
+          displayName?: string | null, lastActionByUserId?: string | null,
+          lastActionDateTime?: string | null, lastRunDateTime?: string | null,
+          notificationFinalDestinations?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "none" | "api" | "email" | "sms" | null,
+          ruleDefinition?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          alertRules?: ...[], createdByUserId?: string | null, createdDateTime?:
+          string | null, definitionTemplate?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., defaultSeverity?: ... } | null,
+          displayName?: string | null, lastActionByUserId?: string | null,
+          lastActionDateTime?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref
+          uid="microsoft.graph.managedTenants.managedTenantAlertRuleDefinition"
+          />" }) | null, severity?: "unknownFutureValue" | Record&lt;string,
+          never&gt; | "unknown" | "informational" | "low" | "medium" | "high" |
+          null, targets?: { <xref uid="@odata.type" />: string, displayName?:
+          string | null }[], tenantIds?: { <xref uid="@odata.type" />: string,
+          tenantId?: string | null }[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managedTenantAlertRule" />" }) |
+          null, alertRuleDisplayName?: string | null, apiNotifications?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          alert?: Record&lt;string, never&gt; | Omit&lt;{ id?: string |
+          undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & { alertData?: Record&lt;string, never&gt;
+          | { displayName?: string | null | undefined; '<xref uid="@odata.type"
+          />': string; } | null | undefined; ... 18 more ...; '<xref
+          uid="@odata.type" />': string; } & { ...; } | null, createdByUserId?:
+          string | null, createdDateTime?: string | null, isAcknowledged?:
+          boolean | null, lastActionByUserId?: string | null,
+          lastActionDateTime?: string | null, message?: string | null, title?:
+          string | null, userId?: string | null } & { <xref uid="@odata.type"
+          />: "#<xref
+          uid="microsoft.graph.managedTenants.managedTenantApiNotification" />"
+          })[], assignedToUserId?: string | null, correlationCount?: number |
+          null, correlationId?: string | null, createdByUserId?: string | null,
+          createdDateTime?: string | null, emailNotifications?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, alert?:
+          Record&lt;string, never&gt; | Omit&lt;{ id?: string | undefined;
+          '<xref uid="@odata.type" />': string; }, "<xref uid="@odata.type"
+          />"&gt; & { alertData?: Record&lt;string, never&gt; | { displayName?:
+          string | null | undefined; '<xref uid="@odata.type" />': string; } |
+          null | undefined; ... 18 more ...; '<xref uid="@odata.type" />':
+          string; } & { ...; } | null, createdByUserId?: string | null,
+          createdDateTime?: string | null, emailAddresses?: { <xref
+          uid="@odata.type" />: string, emailAddress?: function }[], emailBody?:
+          string | null, lastActionByUserId?: string | null,
+          lastActionDateTime?: string | null, subject?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managedTenantEmailNotification"
+          />" })[], lastActionByUserId?: string | null, lastActionDateTime?:
+          string | null, message?: string | null, severity?:
+          "unknownFutureValue" | Record&lt;string, never&gt; | "unknown" |
+          "informational" | "low" | "medium" | "high" | null, status?:
+          "unknownFutureValue" | Record&lt;string, never&gt; | "unknown" |
+          "newAlert" | "inProgress" | "resolved" | "dismissed" | null,
+          tenantId?: string | null, title?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managedTenantAlert" />" }&gt;

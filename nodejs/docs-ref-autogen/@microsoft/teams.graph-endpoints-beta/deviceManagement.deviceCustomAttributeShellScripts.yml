@@ -183,8 +183,91 @@ variables:
           }
 functions:
   - name: >-
-      create(Operation<"/deviceManagement/deviceCustomAttributeShellScripts",
-      "post">)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, assignments?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, target?: Record<string,
+      never> | { @odata.type: string, deviceAndAppManagementAssignmentFilterId?:
+      string | null, deviceAndAppManagementAssignmentFilterType?: "none" |
+      "include" | "exclude" } | null } & { @odata.type:
+      "#microsoft.graph.deviceManagementScriptAssignment" })[],
+      createdDateTime?: string, customAttributeName?: string | null,
+      customAttributeType?: "string" | "integer" | "dateTime", description?:
+      string | null, deviceRunStates?: (Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & { @odata.type: string, errorCode?: number,
+      errorDescription?: string | null, lastStateUpdateDateTime?: string,
+      managedDevice?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+      function }, "@odata.type"> & Omit<{ @odata.type: string, aadRegistered?:
+      function, activationLockBypassCode?: function, androidSecurityPatchLevel?:
+      function, assignmentFilterEvaluationStatusDetails?: function,
+      autopilotEnrolled?: function, azureActiveDirectoryDeviceId?: function,
+      azureADDeviceId?: function, azureADRegistered?: function,
+      bootstrapTokenEscrowed?: function, chassisType?: function,
+      chromeOSDeviceInfo?: function, cloudPcRemoteActionResults?: function,
+      complianceGracePeriodExpirationDateTime?: function, complianceState?:
+      function, configurationManagerClientEnabledFeatures?: function,
+      configurationManagerClientHealthState?: function,
+      configurationManagerClientInformation?: function, detectedApps?: function,
+      deviceActionResults?: function, deviceCategory?: function,
+      deviceCategoryDisplayName?: function, deviceCompliancePolicyStates?:
+      function, deviceConfigurationStates?: function, deviceEnrollmentType?:
+      function, deviceFirmwareConfigurationInterfaceManaged?: function,
+      deviceHealthAttestationState?: function, deviceHealthScriptStates?:
+      function, deviceName?: function, deviceRegistrationState?: function,
+      deviceType?: function, easActivated?: function, easActivationDateTime?:
+      function, easDeviceId?: function, emailAddress?: function,
+      enrolledByUserPrincipalName?: function, enrolledDateTime?: function,
+      enrollmentProfileName?: function, ethernetMacAddress?: function,
+      exchangeAccessState?: function, exchangeAccessStateReason?: function,
+      exchangeLastSuccessfulSyncDateTime?: function, freeStorageSpaceInBytes?:
+      function, hardwareInformation?: function, iccid?: function, imei?:
+      function, isEncrypted?: function, isSupervised?: function, jailBroken?:
+      function, joinType?: function, lastSyncDateTime?: function,
+      logCollectionRequests?: function, lostModeState?: function,
+      managedDeviceMobileAppConfigurationStates?: function, managedDeviceName?:
+      function, managedDeviceOwnerType?: function, managementAgent?: function,
+      managementCertificateExpirationDate?: function, managementFeatures?:
+      function, managementState?: function, manufacturer?: function, meid?:
+      function, model?: function, notes?: function, operatingSystem?: function,
+      osVersion?: function, ownerType?: function, partnerReportedThreatState?:
+      function, phoneNumber?: function, physicalMemoryInBytes?: function,
+      preferMdmOverGroupPolicyAppliedDateTime?: function,
+      processorArchitecture?: function, remoteAssistanceSessionErrorDetails?:
+      function, remoteAssistanceSessionUrl?: function,
+      requireUserEnrollmentApproval?: function, retireAfterDateTime?: function,
+      roleScopeTagIds?: function, securityBaselineStates?: function,
+      securityPatchLevel?: function, serialNumber?: function, skuFamily?:
+      function, skuNumber?: function, specificationVersion?: function,
+      subscriberCarrier?: function, totalStorageSpaceInBytes?: function, udid?:
+      function, userDisplayName?: function, userId?: function,
+      userPrincipalName?: function, users?: function, usersLoggedOn?: function,
+      wiFiMacAddress?: function, windowsActiveMalwareCount?: function,
+      windowsProtectionState?: function, windowsRemediatedMalwareCount?:
+      function }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.managedDevice" }) | null, resultMessage?: string | null,
+      runState?: "unknown" | "pending" | "notApplicable" | "success" | "fail" |
+      "scriptError" } & { @odata.type:
+      "#microsoft.graph.deviceManagementScriptDeviceState" })[], displayName?:
+      string | null, fileName?: string | null, groupAssignments?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, targetGroupId?: string | null } & { @odata.type:
+      "#microsoft.graph.deviceManagementScriptGroupAssignment" })[],
+      lastModifiedDateTime?: string, roleScopeTagIds?: (string | null)[],
+      runAsAccount?: "user" | "system", runSummary?: Record<string, never> |
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, errorDeviceCount?: number, errorUserCount?: number,
+      successDeviceCount?: number, successUserCount?: number } & { @odata.type:
+      "#microsoft.graph.deviceManagementScriptRunSummary" }) | null,
+      scriptContent?: string | null, userRunStates?: (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string,
+      deviceRunStates?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+      @odata.type: string, errorCode?: function, errorDescription?: function,
+      lastStateUpdateDateTime?: function, managedDevice?: function,
+      resultMessage?: function, runState?: function } & { @odata.type:
+      "#microsoft.graph.deviceManagementScriptDeviceState" })[],
+      errorDeviceCount?: number, successDeviceCount?: number,
+      userPrincipalName?: string | null } & { @odata.type:
+      "#microsoft.graph.deviceManagementScriptUserState" })[] } & { @odata.type:
+      "#microsoft.graph.deviceCustomAttributeShellScript" })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.deviceCustomAttributeShellScripts.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -193,22 +276,378 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/deviceManagement/deviceCustomAttributeShellScripts",
-        "post">): EndpointRequest<IEndpoints["POST
-        /deviceManagement/deviceCustomAttributeShellScripts"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, assignments?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, target?: Record<string, never> | { @odata.type: string,
+        deviceAndAppManagementAssignmentFilterId?: string | null,
+        deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+        "exclude" } | null } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptAssignment" })[],
+        createdDateTime?: string, customAttributeName?: string | null,
+        customAttributeType?: "string" | "integer" | "dateTime", description?:
+        string | null, deviceRunStates?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, errorCode?: number,
+        errorDescription?: string | null, lastStateUpdateDateTime?: string,
+        managedDevice?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: function }, "@odata.type"> & Omit<{ @odata.type: string,
+        aadRegistered?: function, activationLockBypassCode?: function,
+        androidSecurityPatchLevel?: function,
+        assignmentFilterEvaluationStatusDetails?: function, autopilotEnrolled?:
+        function, azureActiveDirectoryDeviceId?: function, azureADDeviceId?:
+        function, azureADRegistered?: function, bootstrapTokenEscrowed?:
+        function, chassisType?: function, chromeOSDeviceInfo?: function,
+        cloudPcRemoteActionResults?: function,
+        complianceGracePeriodExpirationDateTime?: function, complianceState?:
+        function, configurationManagerClientEnabledFeatures?: function,
+        configurationManagerClientHealthState?: function,
+        configurationManagerClientInformation?: function, detectedApps?:
+        function, deviceActionResults?: function, deviceCategory?: function,
+        deviceCategoryDisplayName?: function, deviceCompliancePolicyStates?:
+        function, deviceConfigurationStates?: function, deviceEnrollmentType?:
+        function, deviceFirmwareConfigurationInterfaceManaged?: function,
+        deviceHealthAttestationState?: function, deviceHealthScriptStates?:
+        function, deviceName?: function, deviceRegistrationState?: function,
+        deviceType?: function, easActivated?: function, easActivationDateTime?:
+        function, easDeviceId?: function, emailAddress?: function,
+        enrolledByUserPrincipalName?: function, enrolledDateTime?: function,
+        enrollmentProfileName?: function, ethernetMacAddress?: function,
+        exchangeAccessState?: function, exchangeAccessStateReason?: function,
+        exchangeLastSuccessfulSyncDateTime?: function, freeStorageSpaceInBytes?:
+        function, hardwareInformation?: function, iccid?: function, imei?:
+        function, isEncrypted?: function, isSupervised?: function, jailBroken?:
+        function, joinType?: function, lastSyncDateTime?: function,
+        logCollectionRequests?: function, lostModeState?: function,
+        managedDeviceMobileAppConfigurationStates?: function,
+        managedDeviceName?: function, managedDeviceOwnerType?: function,
+        managementAgent?: function, managementCertificateExpirationDate?:
+        function, managementFeatures?: function, managementState?: function,
+        manufacturer?: function, meid?: function, model?: function, notes?:
+        function, operatingSystem?: function, osVersion?: function, ownerType?:
+        function, partnerReportedThreatState?: function, phoneNumber?: function,
+        physicalMemoryInBytes?: function,
+        preferMdmOverGroupPolicyAppliedDateTime?: function,
+        processorArchitecture?: function, remoteAssistanceSessionErrorDetails?:
+        function, remoteAssistanceSessionUrl?: function,
+        requireUserEnrollmentApproval?: function, retireAfterDateTime?:
+        function, roleScopeTagIds?: function, securityBaselineStates?: function,
+        securityPatchLevel?: function, serialNumber?: function, skuFamily?:
+        function, skuNumber?: function, specificationVersion?: function,
+        subscriberCarrier?: function, totalStorageSpaceInBytes?: function,
+        udid?: function, userDisplayName?: function, userId?: function,
+        userPrincipalName?: function, users?: function, usersLoggedOn?:
+        function, wiFiMacAddress?: function, windowsActiveMalwareCount?:
+        function, windowsProtectionState?: function,
+        windowsRemediatedMalwareCount?: function }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.managedDevice" }) | null, resultMessage?:
+        string | null, runState?: "unknown" | "pending" | "notApplicable" |
+        "success" | "fail" | "scriptError" } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptDeviceState" })[], displayName?:
+        string | null, fileName?: string | null, groupAssignments?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, targetGroupId?: string | null } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptGroupAssignment" })[],
+        lastModifiedDateTime?: string, roleScopeTagIds?: (string | null)[],
+        runAsAccount?: "user" | "system", runSummary?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, errorDeviceCount?: number, errorUserCount?: number,
+        successDeviceCount?: number, successUserCount?: number } & {
+        @odata.type: "#microsoft.graph.deviceManagementScriptRunSummary" }) |
+        null, scriptContent?: string | null, userRunStates?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, deviceRunStates?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, errorCode?: function,
+        errorDescription?: function, lastStateUpdateDateTime?: function,
+        managedDevice?: function, resultMessage?: function, runState?: function
+        } & { @odata.type: "#microsoft.graph.deviceManagementScriptDeviceState"
+        })[], errorDeviceCount?: number, successDeviceCount?: number,
+        userPrincipalName?: string | null } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptUserState" })[] } & {
+        @odata.type: "#microsoft.graph.deviceCustomAttributeShellScript" }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, assignments?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, target?: Record<string, never> | { @odata.type: string,
+        deviceAndAppManagementAssignmentFilterId?: string | null,
+        deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+        "exclude" } | null } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptAssignment" })[],
+        createdDateTime?: string, customAttributeName?: string | null,
+        customAttributeType?: "string" | "integer" | "dateTime", description?:
+        string | null, deviceRunStates?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, errorCode?: number,
+        errorDescription?: string | null, lastStateUpdateDateTime?: string,
+        managedDevice?: Record<string, never> | (Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & Omit<{ @odata.type: ..., aadRegistered?: ...,
+        activationLockBypassCode?: ..., androidSecurityPatchLevel?: ...,
+        assignmentFilterEvaluationStatusDetails?: ..., autopilotEnrolled?: ...,
+        azureActiveDirectoryDeviceId?: ..., azureADDeviceId?: ...,
+        azureADRegistered?: ..., bootstrapTokenEscrowed?: ..., chassisType?:
+        ..., chromeOSDeviceInfo?: ..., cloudPcRemoteActionResults?: ...,
+        complianceGracePeriodExpirationDateTime?: ..., complianceState?: ...,
+        configurationManagerClientEnabledFeatures?: ...,
+        configurationManagerClientHealthState?: ...,
+        configurationManagerClientInformation?: ..., detectedApps?: ...,
+        deviceActionResults?: ..., deviceCategory?: ...,
+        deviceCategoryDisplayName?: ..., deviceCompliancePolicyStates?: ...,
+        deviceConfigurationStates?: ..., deviceEnrollmentType?: ...,
+        deviceFirmwareConfigurationInterfaceManaged?: ...,
+        deviceHealthAttestationState?: ..., deviceHealthScriptStates?: ...,
+        deviceName?: ..., deviceRegistrationState?: ..., deviceType?: ...,
+        easActivated?: ..., easActivationDateTime?: ..., easDeviceId?: ...,
+        emailAddress?: ..., enrolledByUserPrincipalName?: ...,
+        enrolledDateTime?: ..., enrollmentProfileName?: ...,
+        ethernetMacAddress?: ..., exchangeAccessState?: ...,
+        exchangeAccessStateReason?: ..., exchangeLastSuccessfulSyncDateTime?:
+        ..., freeStorageSpaceInBytes?: ..., hardwareInformation?: ..., iccid?:
+        ..., imei?: ..., isEncrypted?: ..., isSupervised?: ..., jailBroken?:
+        ..., joinType?: ..., lastSyncDateTime?: ..., logCollectionRequests?:
+        ..., lostModeState?: ..., managedDeviceMobileAppConfigurationStates?:
+        ..., managedDeviceName?: ..., managedDeviceOwnerType?: ...,
+        managementAgent?: ..., managementCertificateExpirationDate?: ...,
+        managementFeatures?: ..., managementState?: ..., manufacturer?: ...,
+        meid?: ..., model?: ..., notes?: ..., operatingSystem?: ..., osVersion?:
+        ..., ownerType?: ..., partnerReportedThreatState?: ..., phoneNumber?:
+        ..., physicalMemoryInBytes?: ...,
+        preferMdmOverGroupPolicyAppliedDateTime?: ..., processorArchitecture?:
+        ..., remoteAssistanceSessionErrorDetails?: ...,
+        remoteAssistanceSessionUrl?: ..., requireUserEnrollmentApproval?: ...,
+        retireAfterDateTime?: ..., roleScopeTagIds?: ...,
+        securityBaselineStates?: ..., securityPatchLevel?: ..., serialNumber?:
+        ..., skuFamily?: ..., skuNumber?: ..., specificationVersion?: ...,
+        subscriberCarrier?: ..., totalStorageSpaceInBytes?: ..., udid?: ...,
+        userDisplayName?: ..., userId?: ..., userPrincipalName?: ..., users?:
+        ..., usersLoggedOn?: ..., wiFiMacAddress?: ...,
+        windowsActiveMalwareCount?: ..., windowsProtectionState?: ...,
+        windowsRemediatedMalwareCount?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.managedDevice" }) | null, resultMessage?: string |
+        null, runState?: "unknown" | "pending" | "notApplicable" | "success" |
+        "fail" | "scriptError" } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptDeviceState" })[], displayName?:
+        string | null, fileName?: string | null, groupAssignments?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, targetGroupId?: string | null } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptGroupAssignment" })[],
+        lastModifiedDateTime?: string, roleScopeTagIds?: (string | null)[],
+        runAsAccount?: "user" | "system", runSummary?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, errorDeviceCount?: number, errorUserCount?: number,
+        successDeviceCount?: number, successUserCount?: number } & {
+        @odata.type: "#microsoft.graph.deviceManagementScriptRunSummary" }) |
+        null, scriptContent?: string | null, userRunStates?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, deviceRunStates?: (Omit<..., ...> & { @odata.type: ...,
+        errorCode?: ..., errorDescription?: ..., lastStateUpdateDateTime?: ...,
+        managedDevice?: ..., resultMessage?: ..., runState?: ... } & {
+        @odata.type: ... })[], errorDeviceCount?: number, successDeviceCount?:
+        number, userPrincipalName?: string | null } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptUserState" })[] } & {
+        @odata.type: "#microsoft.graph.deviceCustomAttributeShellScript" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/deviceCustomAttributeShellScripts",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            assignments?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, target?: Record&lt;string, never&gt; |
+            { <xref uid="@odata.type" />: string,
+            deviceAndAppManagementAssignmentFilterId?: string | null,
+            deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+            "exclude" } | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deviceManagementScriptAssignment" />" })[],
+            createdDateTime?: string, customAttributeName?: string | null,
+            customAttributeType?: "string" | "integer" | "dateTime",
+            description?: string | null, deviceRunStates?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            errorCode?: number, errorDescription?: string | null,
+            lastStateUpdateDateTime?: string, managedDevice?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, aadRegistered?: function,
+            activationLockBypassCode?: function, androidSecurityPatchLevel?:
+            function, assignmentFilterEvaluationStatusDetails?: function,
+            autopilotEnrolled?: function, azureActiveDirectoryDeviceId?:
+            function, azureADDeviceId?: function, azureADRegistered?: function,
+            bootstrapTokenEscrowed?: function, chassisType?: function,
+            chromeOSDeviceInfo?: function, cloudPcRemoteActionResults?:
+            function, complianceGracePeriodExpirationDateTime?: function,
+            complianceState?: function,
+            configurationManagerClientEnabledFeatures?: function,
+            configurationManagerClientHealthState?: function,
+            configurationManagerClientInformation?: function, detectedApps?:
+            function, deviceActionResults?: function, deviceCategory?: function,
+            deviceCategoryDisplayName?: function, deviceCompliancePolicyStates?:
+            function, deviceConfigurationStates?: function,
+            deviceEnrollmentType?: function,
+            deviceFirmwareConfigurationInterfaceManaged?: function,
+            deviceHealthAttestationState?: function, deviceHealthScriptStates?:
+            function, deviceName?: function, deviceRegistrationState?: function,
+            deviceType?: function, easActivated?: function,
+            easActivationDateTime?: function, easDeviceId?: function,
+            emailAddress?: function, enrolledByUserPrincipalName?: function,
+            enrolledDateTime?: function, enrollmentProfileName?: function,
+            ethernetMacAddress?: function, exchangeAccessState?: function,
+            exchangeAccessStateReason?: function,
+            exchangeLastSuccessfulSyncDateTime?: function,
+            freeStorageSpaceInBytes?: function, hardwareInformation?: function,
+            iccid?: function, imei?: function, isEncrypted?: function,
+            isSupervised?: function, jailBroken?: function, joinType?: function,
+            lastSyncDateTime?: function, logCollectionRequests?: function,
+            lostModeState?: function,
+            managedDeviceMobileAppConfigurationStates?: function,
+            managedDeviceName?: function, managedDeviceOwnerType?: function,
+            managementAgent?: function, managementCertificateExpirationDate?:
+            function, managementFeatures?: function, managementState?: function,
+            manufacturer?: function, meid?: function, model?: function, notes?:
+            function, operatingSystem?: function, osVersion?: function,
+            ownerType?: function, partnerReportedThreatState?: function,
+            phoneNumber?: function, physicalMemoryInBytes?: function,
+            preferMdmOverGroupPolicyAppliedDateTime?: function,
+            processorArchitecture?: function,
+            remoteAssistanceSessionErrorDetails?: function,
+            remoteAssistanceSessionUrl?: function,
+            requireUserEnrollmentApproval?: function, retireAfterDateTime?:
+            function, roleScopeTagIds?: function, securityBaselineStates?:
+            function, securityPatchLevel?: function, serialNumber?: function,
+            skuFamily?: function, skuNumber?: function, specificationVersion?:
+            function, subscriberCarrier?: function, totalStorageSpaceInBytes?:
+            function, udid?: function, userDisplayName?: function, userId?:
+            function, userPrincipalName?: function, users?: function,
+            usersLoggedOn?: function, wiFiMacAddress?: function,
+            windowsActiveMalwareCount?: function, windowsProtectionState?:
+            function, windowsRemediatedMalwareCount?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedDevice" />" }) | null, resultMessage?:
+            string | null, runState?: "unknown" | "pending" | "notApplicable" |
+            "success" | "fail" | "scriptError" } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.deviceManagementScriptDeviceState" />"
+            })[], displayName?: string | null, fileName?: string | null,
+            groupAssignments?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, targetGroupId?: string | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deviceManagementScriptGroupAssignment" />"
+            })[], lastModifiedDateTime?: string, roleScopeTagIds?: (string |
+            null)[], runAsAccount?: "user" | "system", runSummary?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, errorDeviceCount?: number,
+            errorUserCount?: number, successDeviceCount?: number,
+            successUserCount?: number } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deviceManagementScriptRunSummary" />" }) |
+            null, scriptContent?: string | null, userRunStates?: (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            deviceRunStates?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?:
+            ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: string, errorCode?: function, errorDescription?: function,
+            lastStateUpdateDateTime?: function, managedDevice?: function,
+            resultMessage?: function, runState?: function } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deviceManagementScriptDeviceState" />" })[],
+            errorDeviceCount?: number, successDeviceCount?: number,
+            userPrincipalName?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.deviceManagementScriptUserState" />"
+            })[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deviceCustomAttributeShellScript" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /deviceManagement/deviceCustomAttributeShellScripts"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, assignments?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, target?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string,
+          deviceAndAppManagementAssignmentFilterId?: string | null,
+          deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+          "exclude" } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementScriptAssignment" />" })[],
+          createdDateTime?: string, customAttributeName?: string | null,
+          customAttributeType?: "string" | "integer" | "dateTime", description?:
+          string | null, deviceRunStates?: (Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, errorCode?: number, errorDescription?:
+          string | null, lastStateUpdateDateTime?: string, managedDevice?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ..., aadRegistered?: ...,
+          activationLockBypassCode?: ..., androidSecurityPatchLevel?: ...,
+          assignmentFilterEvaluationStatusDetails?: ..., autopilotEnrolled?:
+          ..., azureActiveDirectoryDeviceId?: ..., azureADDeviceId?: ...,
+          azureADRegistered?: ..., bootstrapTokenEscrowed?: ..., chassisType?:
+          ..., chromeOSDeviceInfo?: ..., cloudPcRemoteActionResults?: ...,
+          complianceGracePeriodExpirationDateTime?: ..., complianceState?: ...,
+          configurationManagerClientEnabledFeatures?: ...,
+          configurationManagerClientHealthState?: ...,
+          configurationManagerClientInformation?: ..., detectedApps?: ...,
+          deviceActionResults?: ..., deviceCategory?: ...,
+          deviceCategoryDisplayName?: ..., deviceCompliancePolicyStates?: ...,
+          deviceConfigurationStates?: ..., deviceEnrollmentType?: ...,
+          deviceFirmwareConfigurationInterfaceManaged?: ...,
+          deviceHealthAttestationState?: ..., deviceHealthScriptStates?: ...,
+          deviceName?: ..., deviceRegistrationState?: ..., deviceType?: ...,
+          easActivated?: ..., easActivationDateTime?: ..., easDeviceId?: ...,
+          emailAddress?: ..., enrolledByUserPrincipalName?: ...,
+          enrolledDateTime?: ..., enrollmentProfileName?: ...,
+          ethernetMacAddress?: ..., exchangeAccessState?: ...,
+          exchangeAccessStateReason?: ..., exchangeLastSuccessfulSyncDateTime?:
+          ..., freeStorageSpaceInBytes?: ..., hardwareInformation?: ..., iccid?:
+          ..., imei?: ..., isEncrypted?: ..., isSupervised?: ..., jailBroken?:
+          ..., joinType?: ..., lastSyncDateTime?: ..., logCollectionRequests?:
+          ..., lostModeState?: ..., managedDeviceMobileAppConfigurationStates?:
+          ..., managedDeviceName?: ..., managedDeviceOwnerType?: ...,
+          managementAgent?: ..., managementCertificateExpirationDate?: ...,
+          managementFeatures?: ..., managementState?: ..., manufacturer?: ...,
+          meid?: ..., model?: ..., notes?: ..., operatingSystem?: ...,
+          osVersion?: ..., ownerType?: ..., partnerReportedThreatState?: ...,
+          phoneNumber?: ..., physicalMemoryInBytes?: ...,
+          preferMdmOverGroupPolicyAppliedDateTime?: ..., processorArchitecture?:
+          ..., remoteAssistanceSessionErrorDetails?: ...,
+          remoteAssistanceSessionUrl?: ..., requireUserEnrollmentApproval?: ...,
+          retireAfterDateTime?: ..., roleScopeTagIds?: ...,
+          securityBaselineStates?: ..., securityPatchLevel?: ..., serialNumber?:
+          ..., skuFamily?: ..., skuNumber?: ..., specificationVersion?: ...,
+          subscriberCarrier?: ..., totalStorageSpaceInBytes?: ..., udid?: ...,
+          userDisplayName?: ..., userId?: ..., userPrincipalName?: ..., users?:
+          ..., usersLoggedOn?: ..., wiFiMacAddress?: ...,
+          windowsActiveMalwareCount?: ..., windowsProtectionState?: ...,
+          windowsRemediatedMalwareCount?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedDevice" />" }) | null, resultMessage?:
+          string | null, runState?: "unknown" | "pending" | "notApplicable" |
+          "success" | "fail" | "scriptError" } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.deviceManagementScriptDeviceState" />"
+          })[], displayName?: string | null, fileName?: string | null,
+          groupAssignments?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, targetGroupId?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementScriptGroupAssignment" />" })[],
+          lastModifiedDateTime?: string, roleScopeTagIds?: (string | null)[],
+          runAsAccount?: "user" | "system", runSummary?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, errorDeviceCount?: number, errorUserCount?: number,
+          successDeviceCount?: number, successUserCount?: number } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementScriptRunSummary" />" }) | null,
+          scriptContent?: string | null, userRunStates?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, deviceRunStates?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ..., errorCode?:
+          ..., errorDescription?: ..., lastStateUpdateDateTime?: ...,
+          managedDevice?: ..., resultMessage?: ..., runState?: ... } & { <xref
+          uid="@odata.type" />: ... })[], errorDeviceCount?: number,
+          successDeviceCount?: number, userPrincipalName?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementScriptUserState" />" })[] } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceCustomAttributeShellScript" />" }&gt;
+  - name: 'del({ deviceCustomAttributeShellScript-id: string, If-Match?: string })'
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.deviceCustomAttributeShellScripts.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -219,18 +658,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /deviceManagement/deviceCustomAttributeShellScripts/{deviceCustomAttributeShellScript-id}"]["response"]>
+        function del(params?: { deviceCustomAttributeShellScript-id: string,
+        If-Match?: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ deviceCustomAttributeShellScript-id: string, If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /deviceManagement/deviceCustomAttributeShellScripts/{deviceCustomAttributeShellScript-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[],
+      deviceCustomAttributeShellScript-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.deviceCustomAttributeShellScripts.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -245,18 +684,190 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/deviceCustomAttributeShellScripts/{deviceCustomAttributeShellScript-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        deviceCustomAttributeShellScript-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, assignments?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, target?: Record<string, never> |
+        { @odata.type: string, deviceAndAppManagementAssignmentFilterId?: string
+        | null, deviceAndAppManagementAssignmentFilterType?: "none" | "include"
+        | "exclude" } | null } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptAssignment" })[],
+        createdDateTime?: string, customAttributeName?: string | null,
+        customAttributeType?: "string" | "integer" | "dateTime", description?:
+        string | null, deviceRunStates?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, errorCode?: number,
+        errorDescription?: string | null, lastStateUpdateDateTime?: string,
+        managedDevice?: Record<string, never> | (Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & Omit<{ @odata.type: ..., aadRegistered?: ...,
+        activationLockBypassCode?: ..., androidSecurityPatchLevel?: ...,
+        assignmentFilterEvaluationStatusDetails?: ..., autopilotEnrolled?: ...,
+        azureActiveDirectoryDeviceId?: ..., azureADDeviceId?: ...,
+        azureADRegistered?: ..., bootstrapTokenEscrowed?: ..., chassisType?:
+        ..., chromeOSDeviceInfo?: ..., cloudPcRemoteActionResults?: ...,
+        complianceGracePeriodExpirationDateTime?: ..., complianceState?: ...,
+        configurationManagerClientEnabledFeatures?: ...,
+        configurationManagerClientHealthState?: ...,
+        configurationManagerClientInformation?: ..., detectedApps?: ...,
+        deviceActionResults?: ..., deviceCategory?: ...,
+        deviceCategoryDisplayName?: ..., deviceCompliancePolicyStates?: ...,
+        deviceConfigurationStates?: ..., deviceEnrollmentType?: ...,
+        deviceFirmwareConfigurationInterfaceManaged?: ...,
+        deviceHealthAttestationState?: ..., deviceHealthScriptStates?: ...,
+        deviceName?: ..., deviceRegistrationState?: ..., deviceType?: ...,
+        easActivated?: ..., easActivationDateTime?: ..., easDeviceId?: ...,
+        emailAddress?: ..., enrolledByUserPrincipalName?: ...,
+        enrolledDateTime?: ..., enrollmentProfileName?: ...,
+        ethernetMacAddress?: ..., exchangeAccessState?: ...,
+        exchangeAccessStateReason?: ..., exchangeLastSuccessfulSyncDateTime?:
+        ..., freeStorageSpaceInBytes?: ..., hardwareInformation?: ..., iccid?:
+        ..., imei?: ..., isEncrypted?: ..., isSupervised?: ..., jailBroken?:
+        ..., joinType?: ..., lastSyncDateTime?: ..., logCollectionRequests?:
+        ..., lostModeState?: ..., managedDeviceMobileAppConfigurationStates?:
+        ..., managedDeviceName?: ..., managedDeviceOwnerType?: ...,
+        managementAgent?: ..., managementCertificateExpirationDate?: ...,
+        managementFeatures?: ..., managementState?: ..., manufacturer?: ...,
+        meid?: ..., model?: ..., notes?: ..., operatingSystem?: ..., osVersion?:
+        ..., ownerType?: ..., partnerReportedThreatState?: ..., phoneNumber?:
+        ..., physicalMemoryInBytes?: ...,
+        preferMdmOverGroupPolicyAppliedDateTime?: ..., processorArchitecture?:
+        ..., remoteAssistanceSessionErrorDetails?: ...,
+        remoteAssistanceSessionUrl?: ..., requireUserEnrollmentApproval?: ...,
+        retireAfterDateTime?: ..., roleScopeTagIds?: ...,
+        securityBaselineStates?: ..., securityPatchLevel?: ..., serialNumber?:
+        ..., skuFamily?: ..., skuNumber?: ..., specificationVersion?: ...,
+        subscriberCarrier?: ..., totalStorageSpaceInBytes?: ..., udid?: ...,
+        userDisplayName?: ..., userId?: ..., userPrincipalName?: ..., users?:
+        ..., usersLoggedOn?: ..., wiFiMacAddress?: ...,
+        windowsActiveMalwareCount?: ..., windowsProtectionState?: ...,
+        windowsRemediatedMalwareCount?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.managedDevice" }) | null, resultMessage?: string |
+        null, runState?: "unknown" | "pending" | "notApplicable" | "success" |
+        "fail" | "scriptError" } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptDeviceState" })[], displayName?:
+        string | null, fileName?: string | null, groupAssignments?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, targetGroupId?: string | null } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptGroupAssignment" })[],
+        lastModifiedDateTime?: string, roleScopeTagIds?: (string | null)[],
+        runAsAccount?: "user" | "system", runSummary?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, errorDeviceCount?: number, errorUserCount?: number,
+        successDeviceCount?: number, successUserCount?: number } & {
+        @odata.type: "#microsoft.graph.deviceManagementScriptRunSummary" }) |
+        null, scriptContent?: string | null, userRunStates?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, deviceRunStates?: (Omit<..., ...> & { @odata.type: ...,
+        errorCode?: ..., errorDescription?: ..., lastStateUpdateDateTime?: ...,
+        managedDevice?: ..., resultMessage?: ..., runState?: ... } & {
+        @odata.type: ... })[], errorDeviceCount?: number, successDeviceCount?:
+        number, userPrincipalName?: string | null } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptUserState" })[] } & {
+        @odata.type: "#microsoft.graph.deviceCustomAttributeShellScript" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[],
+            deviceCustomAttributeShellScript-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/deviceCustomAttributeShellScripts/{deviceCustomAttributeShellScript-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, assignments?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, target?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string,
+          deviceAndAppManagementAssignmentFilterId?: string | null,
+          deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+          "exclude" } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementScriptAssignment" />" })[],
+          createdDateTime?: string, customAttributeName?: string | null,
+          customAttributeType?: "string" | "integer" | "dateTime", description?:
+          string | null, deviceRunStates?: (Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, errorCode?: number, errorDescription?:
+          string | null, lastStateUpdateDateTime?: string, managedDevice?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ..., aadRegistered?: ...,
+          activationLockBypassCode?: ..., androidSecurityPatchLevel?: ...,
+          assignmentFilterEvaluationStatusDetails?: ..., autopilotEnrolled?:
+          ..., azureActiveDirectoryDeviceId?: ..., azureADDeviceId?: ...,
+          azureADRegistered?: ..., bootstrapTokenEscrowed?: ..., chassisType?:
+          ..., chromeOSDeviceInfo?: ..., cloudPcRemoteActionResults?: ...,
+          complianceGracePeriodExpirationDateTime?: ..., complianceState?: ...,
+          configurationManagerClientEnabledFeatures?: ...,
+          configurationManagerClientHealthState?: ...,
+          configurationManagerClientInformation?: ..., detectedApps?: ...,
+          deviceActionResults?: ..., deviceCategory?: ...,
+          deviceCategoryDisplayName?: ..., deviceCompliancePolicyStates?: ...,
+          deviceConfigurationStates?: ..., deviceEnrollmentType?: ...,
+          deviceFirmwareConfigurationInterfaceManaged?: ...,
+          deviceHealthAttestationState?: ..., deviceHealthScriptStates?: ...,
+          deviceName?: ..., deviceRegistrationState?: ..., deviceType?: ...,
+          easActivated?: ..., easActivationDateTime?: ..., easDeviceId?: ...,
+          emailAddress?: ..., enrolledByUserPrincipalName?: ...,
+          enrolledDateTime?: ..., enrollmentProfileName?: ...,
+          ethernetMacAddress?: ..., exchangeAccessState?: ...,
+          exchangeAccessStateReason?: ..., exchangeLastSuccessfulSyncDateTime?:
+          ..., freeStorageSpaceInBytes?: ..., hardwareInformation?: ..., iccid?:
+          ..., imei?: ..., isEncrypted?: ..., isSupervised?: ..., jailBroken?:
+          ..., joinType?: ..., lastSyncDateTime?: ..., logCollectionRequests?:
+          ..., lostModeState?: ..., managedDeviceMobileAppConfigurationStates?:
+          ..., managedDeviceName?: ..., managedDeviceOwnerType?: ...,
+          managementAgent?: ..., managementCertificateExpirationDate?: ...,
+          managementFeatures?: ..., managementState?: ..., manufacturer?: ...,
+          meid?: ..., model?: ..., notes?: ..., operatingSystem?: ...,
+          osVersion?: ..., ownerType?: ..., partnerReportedThreatState?: ...,
+          phoneNumber?: ..., physicalMemoryInBytes?: ...,
+          preferMdmOverGroupPolicyAppliedDateTime?: ..., processorArchitecture?:
+          ..., remoteAssistanceSessionErrorDetails?: ...,
+          remoteAssistanceSessionUrl?: ..., requireUserEnrollmentApproval?: ...,
+          retireAfterDateTime?: ..., roleScopeTagIds?: ...,
+          securityBaselineStates?: ..., securityPatchLevel?: ..., serialNumber?:
+          ..., skuFamily?: ..., skuNumber?: ..., specificationVersion?: ...,
+          subscriberCarrier?: ..., totalStorageSpaceInBytes?: ..., udid?: ...,
+          userDisplayName?: ..., userId?: ..., userPrincipalName?: ..., users?:
+          ..., usersLoggedOn?: ..., wiFiMacAddress?: ...,
+          windowsActiveMalwareCount?: ..., windowsProtectionState?: ...,
+          windowsRemediatedMalwareCount?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedDevice" />" }) | null, resultMessage?:
+          string | null, runState?: "unknown" | "pending" | "notApplicable" |
+          "success" | "fail" | "scriptError" } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.deviceManagementScriptDeviceState" />"
+          })[], displayName?: string | null, fileName?: string | null,
+          groupAssignments?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, targetGroupId?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementScriptGroupAssignment" />" })[],
+          lastModifiedDateTime?: string, roleScopeTagIds?: (string | null)[],
+          runAsAccount?: "user" | "system", runSummary?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, errorDeviceCount?: number, errorUserCount?: number,
+          successDeviceCount?: number, successUserCount?: number } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementScriptRunSummary" />" }) | null,
+          scriptContent?: string | null, userRunStates?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, deviceRunStates?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ..., errorCode?:
+          ..., errorDescription?: ..., lastStateUpdateDateTime?: ...,
+          managedDevice?: ..., resultMessage?: ..., runState?: ... } & { <xref
+          uid="@odata.type" />: ... })[], errorDeviceCount?: number,
+          successDeviceCount?: number, userPrincipalName?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementScriptUserState" />" })[] } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceCustomAttributeShellScript" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.deviceCustomAttributeShellScripts.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -270,20 +881,158 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/deviceCustomAttributeShellScripts"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, assignments?: (Omit<..., ...> & { @odata.type: ..., target?: ...
+        } & { @odata.type: ... })[], createdDateTime?: string,
+        customAttributeName?: string | null, customAttributeType?: "string" |
+        "integer" | "dateTime", description?: string | null, deviceRunStates?:
+        (Omit<..., ...> & { @odata.type: ..., errorCode?: ...,
+        errorDescription?: ..., lastStateUpdateDateTime?: ..., managedDevice?:
+        ..., resultMessage?: ..., runState?: ... } & { @odata.type: ... })[],
+        displayName?: string | null, fileName?: string | null,
+        groupAssignments?: (Omit<..., ...> & { @odata.type: ..., targetGroupId?:
+        ... } & { @odata.type: ... })[], lastModifiedDateTime?: string,
+        roleScopeTagIds?: (string | null)[], runAsAccount?: "user" | "system",
+        runSummary?: Record<string, never> | (Omit<{ @odata.type: ..., id?: ...
+        }, "@odata.type"> & { @odata.type: string, errorDeviceCount?: function,
+        errorUserCount?: function, successDeviceCount?: function,
+        successUserCount?: function } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptRunSummary" }) | null,
+        scriptContent?: string | null, userRunStates?: (Omit<..., ...> & {
+        @odata.type: ..., deviceRunStates?: ..., errorDeviceCount?: ...,
+        successDeviceCount?: ..., userPrincipalName?: ... } & { @odata.type: ...
+        })[] } & { @odata.type:
+        "#microsoft.graph.deviceCustomAttributeShellScript" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/deviceCustomAttributeShellScripts"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          assignments?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+          ..., target?: ... } & { <xref uid="@odata.type" />: ... })[],
+          createdDateTime?: string, customAttributeName?: string | null,
+          customAttributeType?: "string" | "integer" | "dateTime", description?:
+          string | null, deviceRunStates?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., errorCode?: ..., errorDescription?: ...,
+          lastStateUpdateDateTime?: ..., managedDevice?: ..., resultMessage?:
+          ..., runState?: ... } & { <xref uid="@odata.type" />: ... })[],
+          displayName?: string | null, fileName?: string | null,
+          groupAssignments?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type"
+          />: ..., targetGroupId?: ... } & { <xref uid="@odata.type" />: ...
+          })[], lastModifiedDateTime?: string, roleScopeTagIds?: (string |
+          null)[], runAsAccount?: "user" | "system", runSummary?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, errorDeviceCount?: function,
+          errorUserCount?: function, successDeviceCount?: function,
+          successUserCount?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementScriptRunSummary" />" }) | null,
+          scriptContent?: string | null, userRunStates?: (Omit&lt;..., ...&gt; &
+          { <xref uid="@odata.type" />: ..., deviceRunStates?: ...,
+          errorDeviceCount?: ..., successDeviceCount?: ..., userPrincipalName?:
+          ... } & { <xref uid="@odata.type" />: ... })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceCustomAttributeShellScript" />" })[] }&gt;
   - name: >-
-      update(Operation<"/deviceManagement/deviceCustomAttributeShellScripts/{deviceCustomAttributeShellScript-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, assignments?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, target?: Record<string,
+      never> | { @odata.type: string, deviceAndAppManagementAssignmentFilterId?:
+      string | null, deviceAndAppManagementAssignmentFilterType?: "none" |
+      "include" | "exclude" } | null } & { @odata.type:
+      "#microsoft.graph.deviceManagementScriptAssignment" })[],
+      createdDateTime?: string, customAttributeName?: string | null,
+      customAttributeType?: "string" | "integer" | "dateTime", description?:
+      string | null, deviceRunStates?: (Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & { @odata.type: string, errorCode?: number,
+      errorDescription?: string | null, lastStateUpdateDateTime?: string,
+      managedDevice?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+      function }, "@odata.type"> & Omit<{ @odata.type: string, aadRegistered?:
+      function, activationLockBypassCode?: function, androidSecurityPatchLevel?:
+      function, assignmentFilterEvaluationStatusDetails?: function,
+      autopilotEnrolled?: function, azureActiveDirectoryDeviceId?: function,
+      azureADDeviceId?: function, azureADRegistered?: function,
+      bootstrapTokenEscrowed?: function, chassisType?: function,
+      chromeOSDeviceInfo?: function, cloudPcRemoteActionResults?: function,
+      complianceGracePeriodExpirationDateTime?: function, complianceState?:
+      function, configurationManagerClientEnabledFeatures?: function,
+      configurationManagerClientHealthState?: function,
+      configurationManagerClientInformation?: function, detectedApps?: function,
+      deviceActionResults?: function, deviceCategory?: function,
+      deviceCategoryDisplayName?: function, deviceCompliancePolicyStates?:
+      function, deviceConfigurationStates?: function, deviceEnrollmentType?:
+      function, deviceFirmwareConfigurationInterfaceManaged?: function,
+      deviceHealthAttestationState?: function, deviceHealthScriptStates?:
+      function, deviceName?: function, deviceRegistrationState?: function,
+      deviceType?: function, easActivated?: function, easActivationDateTime?:
+      function, easDeviceId?: function, emailAddress?: function,
+      enrolledByUserPrincipalName?: function, enrolledDateTime?: function,
+      enrollmentProfileName?: function, ethernetMacAddress?: function,
+      exchangeAccessState?: function, exchangeAccessStateReason?: function,
+      exchangeLastSuccessfulSyncDateTime?: function, freeStorageSpaceInBytes?:
+      function, hardwareInformation?: function, iccid?: function, imei?:
+      function, isEncrypted?: function, isSupervised?: function, jailBroken?:
+      function, joinType?: function, lastSyncDateTime?: function,
+      logCollectionRequests?: function, lostModeState?: function,
+      managedDeviceMobileAppConfigurationStates?: function, managedDeviceName?:
+      function, managedDeviceOwnerType?: function, managementAgent?: function,
+      managementCertificateExpirationDate?: function, managementFeatures?:
+      function, managementState?: function, manufacturer?: function, meid?:
+      function, model?: function, notes?: function, operatingSystem?: function,
+      osVersion?: function, ownerType?: function, partnerReportedThreatState?:
+      function, phoneNumber?: function, physicalMemoryInBytes?: function,
+      preferMdmOverGroupPolicyAppliedDateTime?: function,
+      processorArchitecture?: function, remoteAssistanceSessionErrorDetails?:
+      function, remoteAssistanceSessionUrl?: function,
+      requireUserEnrollmentApproval?: function, retireAfterDateTime?: function,
+      roleScopeTagIds?: function, securityBaselineStates?: function,
+      securityPatchLevel?: function, serialNumber?: function, skuFamily?:
+      function, skuNumber?: function, specificationVersion?: function,
+      subscriberCarrier?: function, totalStorageSpaceInBytes?: function, udid?:
+      function, userDisplayName?: function, userId?: function,
+      userPrincipalName?: function, users?: function, usersLoggedOn?: function,
+      wiFiMacAddress?: function, windowsActiveMalwareCount?: function,
+      windowsProtectionState?: function, windowsRemediatedMalwareCount?:
+      function }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.managedDevice" }) | null, resultMessage?: string | null,
+      runState?: "unknown" | "pending" | "notApplicable" | "success" | "fail" |
+      "scriptError" } & { @odata.type:
+      "#microsoft.graph.deviceManagementScriptDeviceState" })[], displayName?:
+      string | null, fileName?: string | null, groupAssignments?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, targetGroupId?: string | null } & { @odata.type:
+      "#microsoft.graph.deviceManagementScriptGroupAssignment" })[],
+      lastModifiedDateTime?: string, roleScopeTagIds?: (string | null)[],
+      runAsAccount?: "user" | "system", runSummary?: Record<string, never> |
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, errorDeviceCount?: number, errorUserCount?: number,
+      successDeviceCount?: number, successUserCount?: number } & { @odata.type:
+      "#microsoft.graph.deviceManagementScriptRunSummary" }) | null,
+      scriptContent?: string | null, userRunStates?: (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string,
+      deviceRunStates?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+      @odata.type: string, errorCode?: function, errorDescription?: function,
+      lastStateUpdateDateTime?: function, managedDevice?: function,
+      resultMessage?: function, runState?: function } & { @odata.type:
+      "#microsoft.graph.deviceManagementScriptDeviceState" })[],
+      errorDeviceCount?: number, successDeviceCount?: number,
+      userPrincipalName?: string | null } & { @odata.type:
+      "#microsoft.graph.deviceManagementScriptUserState" })[] } & { @odata.type:
+      "#microsoft.graph.deviceCustomAttributeShellScript" }, {
+      deviceCustomAttributeShellScript-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.deviceManagement.deviceCustomAttributeShellScripts.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -294,21 +1043,378 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/deviceManagement/deviceCustomAttributeShellScripts/{deviceCustomAttributeShellScript-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /deviceManagement/deviceCustomAttributeShellScripts/{deviceCustomAttributeShellScript-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, assignments?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, target?: Record<string, never> | { @odata.type: string,
+        deviceAndAppManagementAssignmentFilterId?: string | null,
+        deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+        "exclude" } | null } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptAssignment" })[],
+        createdDateTime?: string, customAttributeName?: string | null,
+        customAttributeType?: "string" | "integer" | "dateTime", description?:
+        string | null, deviceRunStates?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, errorCode?: number,
+        errorDescription?: string | null, lastStateUpdateDateTime?: string,
+        managedDevice?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: function }, "@odata.type"> & Omit<{ @odata.type: string,
+        aadRegistered?: function, activationLockBypassCode?: function,
+        androidSecurityPatchLevel?: function,
+        assignmentFilterEvaluationStatusDetails?: function, autopilotEnrolled?:
+        function, azureActiveDirectoryDeviceId?: function, azureADDeviceId?:
+        function, azureADRegistered?: function, bootstrapTokenEscrowed?:
+        function, chassisType?: function, chromeOSDeviceInfo?: function,
+        cloudPcRemoteActionResults?: function,
+        complianceGracePeriodExpirationDateTime?: function, complianceState?:
+        function, configurationManagerClientEnabledFeatures?: function,
+        configurationManagerClientHealthState?: function,
+        configurationManagerClientInformation?: function, detectedApps?:
+        function, deviceActionResults?: function, deviceCategory?: function,
+        deviceCategoryDisplayName?: function, deviceCompliancePolicyStates?:
+        function, deviceConfigurationStates?: function, deviceEnrollmentType?:
+        function, deviceFirmwareConfigurationInterfaceManaged?: function,
+        deviceHealthAttestationState?: function, deviceHealthScriptStates?:
+        function, deviceName?: function, deviceRegistrationState?: function,
+        deviceType?: function, easActivated?: function, easActivationDateTime?:
+        function, easDeviceId?: function, emailAddress?: function,
+        enrolledByUserPrincipalName?: function, enrolledDateTime?: function,
+        enrollmentProfileName?: function, ethernetMacAddress?: function,
+        exchangeAccessState?: function, exchangeAccessStateReason?: function,
+        exchangeLastSuccessfulSyncDateTime?: function, freeStorageSpaceInBytes?:
+        function, hardwareInformation?: function, iccid?: function, imei?:
+        function, isEncrypted?: function, isSupervised?: function, jailBroken?:
+        function, joinType?: function, lastSyncDateTime?: function,
+        logCollectionRequests?: function, lostModeState?: function,
+        managedDeviceMobileAppConfigurationStates?: function,
+        managedDeviceName?: function, managedDeviceOwnerType?: function,
+        managementAgent?: function, managementCertificateExpirationDate?:
+        function, managementFeatures?: function, managementState?: function,
+        manufacturer?: function, meid?: function, model?: function, notes?:
+        function, operatingSystem?: function, osVersion?: function, ownerType?:
+        function, partnerReportedThreatState?: function, phoneNumber?: function,
+        physicalMemoryInBytes?: function,
+        preferMdmOverGroupPolicyAppliedDateTime?: function,
+        processorArchitecture?: function, remoteAssistanceSessionErrorDetails?:
+        function, remoteAssistanceSessionUrl?: function,
+        requireUserEnrollmentApproval?: function, retireAfterDateTime?:
+        function, roleScopeTagIds?: function, securityBaselineStates?: function,
+        securityPatchLevel?: function, serialNumber?: function, skuFamily?:
+        function, skuNumber?: function, specificationVersion?: function,
+        subscriberCarrier?: function, totalStorageSpaceInBytes?: function,
+        udid?: function, userDisplayName?: function, userId?: function,
+        userPrincipalName?: function, users?: function, usersLoggedOn?:
+        function, wiFiMacAddress?: function, windowsActiveMalwareCount?:
+        function, windowsProtectionState?: function,
+        windowsRemediatedMalwareCount?: function }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.managedDevice" }) | null, resultMessage?:
+        string | null, runState?: "unknown" | "pending" | "notApplicable" |
+        "success" | "fail" | "scriptError" } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptDeviceState" })[], displayName?:
+        string | null, fileName?: string | null, groupAssignments?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, targetGroupId?: string | null } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptGroupAssignment" })[],
+        lastModifiedDateTime?: string, roleScopeTagIds?: (string | null)[],
+        runAsAccount?: "user" | "system", runSummary?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, errorDeviceCount?: number, errorUserCount?: number,
+        successDeviceCount?: number, successUserCount?: number } & {
+        @odata.type: "#microsoft.graph.deviceManagementScriptRunSummary" }) |
+        null, scriptContent?: string | null, userRunStates?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, deviceRunStates?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, errorCode?: function,
+        errorDescription?: function, lastStateUpdateDateTime?: function,
+        managedDevice?: function, resultMessage?: function, runState?: function
+        } & { @odata.type: "#microsoft.graph.deviceManagementScriptDeviceState"
+        })[], errorDeviceCount?: number, successDeviceCount?: number,
+        userPrincipalName?: string | null } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptUserState" })[] } & {
+        @odata.type: "#microsoft.graph.deviceCustomAttributeShellScript" },
+        params?: { deviceCustomAttributeShellScript-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, assignments?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, target?: Record<string, never> | { @odata.type: string,
+        deviceAndAppManagementAssignmentFilterId?: string | null,
+        deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+        "exclude" } | null } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptAssignment" })[],
+        createdDateTime?: string, customAttributeName?: string | null,
+        customAttributeType?: "string" | "integer" | "dateTime", description?:
+        string | null, deviceRunStates?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, errorCode?: number,
+        errorDescription?: string | null, lastStateUpdateDateTime?: string,
+        managedDevice?: Record<string, never> | (Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & Omit<{ @odata.type: ..., aadRegistered?: ...,
+        activationLockBypassCode?: ..., androidSecurityPatchLevel?: ...,
+        assignmentFilterEvaluationStatusDetails?: ..., autopilotEnrolled?: ...,
+        azureActiveDirectoryDeviceId?: ..., azureADDeviceId?: ...,
+        azureADRegistered?: ..., bootstrapTokenEscrowed?: ..., chassisType?:
+        ..., chromeOSDeviceInfo?: ..., cloudPcRemoteActionResults?: ...,
+        complianceGracePeriodExpirationDateTime?: ..., complianceState?: ...,
+        configurationManagerClientEnabledFeatures?: ...,
+        configurationManagerClientHealthState?: ...,
+        configurationManagerClientInformation?: ..., detectedApps?: ...,
+        deviceActionResults?: ..., deviceCategory?: ...,
+        deviceCategoryDisplayName?: ..., deviceCompliancePolicyStates?: ...,
+        deviceConfigurationStates?: ..., deviceEnrollmentType?: ...,
+        deviceFirmwareConfigurationInterfaceManaged?: ...,
+        deviceHealthAttestationState?: ..., deviceHealthScriptStates?: ...,
+        deviceName?: ..., deviceRegistrationState?: ..., deviceType?: ...,
+        easActivated?: ..., easActivationDateTime?: ..., easDeviceId?: ...,
+        emailAddress?: ..., enrolledByUserPrincipalName?: ...,
+        enrolledDateTime?: ..., enrollmentProfileName?: ...,
+        ethernetMacAddress?: ..., exchangeAccessState?: ...,
+        exchangeAccessStateReason?: ..., exchangeLastSuccessfulSyncDateTime?:
+        ..., freeStorageSpaceInBytes?: ..., hardwareInformation?: ..., iccid?:
+        ..., imei?: ..., isEncrypted?: ..., isSupervised?: ..., jailBroken?:
+        ..., joinType?: ..., lastSyncDateTime?: ..., logCollectionRequests?:
+        ..., lostModeState?: ..., managedDeviceMobileAppConfigurationStates?:
+        ..., managedDeviceName?: ..., managedDeviceOwnerType?: ...,
+        managementAgent?: ..., managementCertificateExpirationDate?: ...,
+        managementFeatures?: ..., managementState?: ..., manufacturer?: ...,
+        meid?: ..., model?: ..., notes?: ..., operatingSystem?: ..., osVersion?:
+        ..., ownerType?: ..., partnerReportedThreatState?: ..., phoneNumber?:
+        ..., physicalMemoryInBytes?: ...,
+        preferMdmOverGroupPolicyAppliedDateTime?: ..., processorArchitecture?:
+        ..., remoteAssistanceSessionErrorDetails?: ...,
+        remoteAssistanceSessionUrl?: ..., requireUserEnrollmentApproval?: ...,
+        retireAfterDateTime?: ..., roleScopeTagIds?: ...,
+        securityBaselineStates?: ..., securityPatchLevel?: ..., serialNumber?:
+        ..., skuFamily?: ..., skuNumber?: ..., specificationVersion?: ...,
+        subscriberCarrier?: ..., totalStorageSpaceInBytes?: ..., udid?: ...,
+        userDisplayName?: ..., userId?: ..., userPrincipalName?: ..., users?:
+        ..., usersLoggedOn?: ..., wiFiMacAddress?: ...,
+        windowsActiveMalwareCount?: ..., windowsProtectionState?: ...,
+        windowsRemediatedMalwareCount?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.managedDevice" }) | null, resultMessage?: string |
+        null, runState?: "unknown" | "pending" | "notApplicable" | "success" |
+        "fail" | "scriptError" } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptDeviceState" })[], displayName?:
+        string | null, fileName?: string | null, groupAssignments?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, targetGroupId?: string | null } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptGroupAssignment" })[],
+        lastModifiedDateTime?: string, roleScopeTagIds?: (string | null)[],
+        runAsAccount?: "user" | "system", runSummary?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, errorDeviceCount?: number, errorUserCount?: number,
+        successDeviceCount?: number, successUserCount?: number } & {
+        @odata.type: "#microsoft.graph.deviceManagementScriptRunSummary" }) |
+        null, scriptContent?: string | null, userRunStates?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, deviceRunStates?: (Omit<..., ...> & { @odata.type: ...,
+        errorCode?: ..., errorDescription?: ..., lastStateUpdateDateTime?: ...,
+        managedDevice?: ..., resultMessage?: ..., runState?: ... } & {
+        @odata.type: ... })[], errorDeviceCount?: number, successDeviceCount?:
+        number, userPrincipalName?: string | null } & { @odata.type:
+        "#microsoft.graph.deviceManagementScriptUserState" })[] } & {
+        @odata.type: "#microsoft.graph.deviceCustomAttributeShellScript" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/deviceCustomAttributeShellScripts/{deviceCustomAttributeShellScript-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            assignments?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, target?: Record&lt;string, never&gt; |
+            { <xref uid="@odata.type" />: string,
+            deviceAndAppManagementAssignmentFilterId?: string | null,
+            deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+            "exclude" } | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deviceManagementScriptAssignment" />" })[],
+            createdDateTime?: string, customAttributeName?: string | null,
+            customAttributeType?: "string" | "integer" | "dateTime",
+            description?: string | null, deviceRunStates?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            errorCode?: number, errorDescription?: string | null,
+            lastStateUpdateDateTime?: string, managedDevice?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, aadRegistered?: function,
+            activationLockBypassCode?: function, androidSecurityPatchLevel?:
+            function, assignmentFilterEvaluationStatusDetails?: function,
+            autopilotEnrolled?: function, azureActiveDirectoryDeviceId?:
+            function, azureADDeviceId?: function, azureADRegistered?: function,
+            bootstrapTokenEscrowed?: function, chassisType?: function,
+            chromeOSDeviceInfo?: function, cloudPcRemoteActionResults?:
+            function, complianceGracePeriodExpirationDateTime?: function,
+            complianceState?: function,
+            configurationManagerClientEnabledFeatures?: function,
+            configurationManagerClientHealthState?: function,
+            configurationManagerClientInformation?: function, detectedApps?:
+            function, deviceActionResults?: function, deviceCategory?: function,
+            deviceCategoryDisplayName?: function, deviceCompliancePolicyStates?:
+            function, deviceConfigurationStates?: function,
+            deviceEnrollmentType?: function,
+            deviceFirmwareConfigurationInterfaceManaged?: function,
+            deviceHealthAttestationState?: function, deviceHealthScriptStates?:
+            function, deviceName?: function, deviceRegistrationState?: function,
+            deviceType?: function, easActivated?: function,
+            easActivationDateTime?: function, easDeviceId?: function,
+            emailAddress?: function, enrolledByUserPrincipalName?: function,
+            enrolledDateTime?: function, enrollmentProfileName?: function,
+            ethernetMacAddress?: function, exchangeAccessState?: function,
+            exchangeAccessStateReason?: function,
+            exchangeLastSuccessfulSyncDateTime?: function,
+            freeStorageSpaceInBytes?: function, hardwareInformation?: function,
+            iccid?: function, imei?: function, isEncrypted?: function,
+            isSupervised?: function, jailBroken?: function, joinType?: function,
+            lastSyncDateTime?: function, logCollectionRequests?: function,
+            lostModeState?: function,
+            managedDeviceMobileAppConfigurationStates?: function,
+            managedDeviceName?: function, managedDeviceOwnerType?: function,
+            managementAgent?: function, managementCertificateExpirationDate?:
+            function, managementFeatures?: function, managementState?: function,
+            manufacturer?: function, meid?: function, model?: function, notes?:
+            function, operatingSystem?: function, osVersion?: function,
+            ownerType?: function, partnerReportedThreatState?: function,
+            phoneNumber?: function, physicalMemoryInBytes?: function,
+            preferMdmOverGroupPolicyAppliedDateTime?: function,
+            processorArchitecture?: function,
+            remoteAssistanceSessionErrorDetails?: function,
+            remoteAssistanceSessionUrl?: function,
+            requireUserEnrollmentApproval?: function, retireAfterDateTime?:
+            function, roleScopeTagIds?: function, securityBaselineStates?:
+            function, securityPatchLevel?: function, serialNumber?: function,
+            skuFamily?: function, skuNumber?: function, specificationVersion?:
+            function, subscriberCarrier?: function, totalStorageSpaceInBytes?:
+            function, udid?: function, userDisplayName?: function, userId?:
+            function, userPrincipalName?: function, users?: function,
+            usersLoggedOn?: function, wiFiMacAddress?: function,
+            windowsActiveMalwareCount?: function, windowsProtectionState?:
+            function, windowsRemediatedMalwareCount?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedDevice" />" }) | null, resultMessage?:
+            string | null, runState?: "unknown" | "pending" | "notApplicable" |
+            "success" | "fail" | "scriptError" } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.deviceManagementScriptDeviceState" />"
+            })[], displayName?: string | null, fileName?: string | null,
+            groupAssignments?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, targetGroupId?: string | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deviceManagementScriptGroupAssignment" />"
+            })[], lastModifiedDateTime?: string, roleScopeTagIds?: (string |
+            null)[], runAsAccount?: "user" | "system", runSummary?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, errorDeviceCount?: number,
+            errorUserCount?: number, successDeviceCount?: number,
+            successUserCount?: number } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deviceManagementScriptRunSummary" />" }) |
+            null, scriptContent?: string | null, userRunStates?: (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            deviceRunStates?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?:
+            ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: string, errorCode?: function, errorDescription?: function,
+            lastStateUpdateDateTime?: function, managedDevice?: function,
+            resultMessage?: function, runState?: function } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deviceManagementScriptDeviceState" />" })[],
+            errorDeviceCount?: number, successDeviceCount?: number,
+            userPrincipalName?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.deviceManagementScriptUserState" />"
+            })[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deviceCustomAttributeShellScript" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ deviceCustomAttributeShellScript-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /deviceManagement/deviceCustomAttributeShellScripts/{deviceCustomAttributeShellScript-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, assignments?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, target?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string,
+          deviceAndAppManagementAssignmentFilterId?: string | null,
+          deviceAndAppManagementAssignmentFilterType?: "none" | "include" |
+          "exclude" } | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementScriptAssignment" />" })[],
+          createdDateTime?: string, customAttributeName?: string | null,
+          customAttributeType?: "string" | "integer" | "dateTime", description?:
+          string | null, deviceRunStates?: (Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, errorCode?: number, errorDescription?:
+          string | null, lastStateUpdateDateTime?: string, managedDevice?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ..., aadRegistered?: ...,
+          activationLockBypassCode?: ..., androidSecurityPatchLevel?: ...,
+          assignmentFilterEvaluationStatusDetails?: ..., autopilotEnrolled?:
+          ..., azureActiveDirectoryDeviceId?: ..., azureADDeviceId?: ...,
+          azureADRegistered?: ..., bootstrapTokenEscrowed?: ..., chassisType?:
+          ..., chromeOSDeviceInfo?: ..., cloudPcRemoteActionResults?: ...,
+          complianceGracePeriodExpirationDateTime?: ..., complianceState?: ...,
+          configurationManagerClientEnabledFeatures?: ...,
+          configurationManagerClientHealthState?: ...,
+          configurationManagerClientInformation?: ..., detectedApps?: ...,
+          deviceActionResults?: ..., deviceCategory?: ...,
+          deviceCategoryDisplayName?: ..., deviceCompliancePolicyStates?: ...,
+          deviceConfigurationStates?: ..., deviceEnrollmentType?: ...,
+          deviceFirmwareConfigurationInterfaceManaged?: ...,
+          deviceHealthAttestationState?: ..., deviceHealthScriptStates?: ...,
+          deviceName?: ..., deviceRegistrationState?: ..., deviceType?: ...,
+          easActivated?: ..., easActivationDateTime?: ..., easDeviceId?: ...,
+          emailAddress?: ..., enrolledByUserPrincipalName?: ...,
+          enrolledDateTime?: ..., enrollmentProfileName?: ...,
+          ethernetMacAddress?: ..., exchangeAccessState?: ...,
+          exchangeAccessStateReason?: ..., exchangeLastSuccessfulSyncDateTime?:
+          ..., freeStorageSpaceInBytes?: ..., hardwareInformation?: ..., iccid?:
+          ..., imei?: ..., isEncrypted?: ..., isSupervised?: ..., jailBroken?:
+          ..., joinType?: ..., lastSyncDateTime?: ..., logCollectionRequests?:
+          ..., lostModeState?: ..., managedDeviceMobileAppConfigurationStates?:
+          ..., managedDeviceName?: ..., managedDeviceOwnerType?: ...,
+          managementAgent?: ..., managementCertificateExpirationDate?: ...,
+          managementFeatures?: ..., managementState?: ..., manufacturer?: ...,
+          meid?: ..., model?: ..., notes?: ..., operatingSystem?: ...,
+          osVersion?: ..., ownerType?: ..., partnerReportedThreatState?: ...,
+          phoneNumber?: ..., physicalMemoryInBytes?: ...,
+          preferMdmOverGroupPolicyAppliedDateTime?: ..., processorArchitecture?:
+          ..., remoteAssistanceSessionErrorDetails?: ...,
+          remoteAssistanceSessionUrl?: ..., requireUserEnrollmentApproval?: ...,
+          retireAfterDateTime?: ..., roleScopeTagIds?: ...,
+          securityBaselineStates?: ..., securityPatchLevel?: ..., serialNumber?:
+          ..., skuFamily?: ..., skuNumber?: ..., specificationVersion?: ...,
+          subscriberCarrier?: ..., totalStorageSpaceInBytes?: ..., udid?: ...,
+          userDisplayName?: ..., userId?: ..., userPrincipalName?: ..., users?:
+          ..., usersLoggedOn?: ..., wiFiMacAddress?: ...,
+          windowsActiveMalwareCount?: ..., windowsProtectionState?: ...,
+          windowsRemediatedMalwareCount?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedDevice" />" }) | null, resultMessage?:
+          string | null, runState?: "unknown" | "pending" | "notApplicable" |
+          "success" | "fail" | "scriptError" } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.deviceManagementScriptDeviceState" />"
+          })[], displayName?: string | null, fileName?: string | null,
+          groupAssignments?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, targetGroupId?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementScriptGroupAssignment" />" })[],
+          lastModifiedDateTime?: string, roleScopeTagIds?: (string | null)[],
+          runAsAccount?: "user" | "system", runSummary?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, errorDeviceCount?: number, errorUserCount?: number,
+          successDeviceCount?: number, successUserCount?: number } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementScriptRunSummary" />" }) | null,
+          scriptContent?: string | null, userRunStates?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, deviceRunStates?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ..., errorCode?:
+          ..., errorDescription?: ..., lastStateUpdateDateTime?: ...,
+          managedDevice?: ..., resultMessage?: ..., runState?: ... } & { <xref
+          uid="@odata.type" />: ... })[], errorDeviceCount?: number,
+          successDeviceCount?: number, userPrincipalName?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementScriptUserState" />" })[] } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceCustomAttributeShellScript" />" }&gt;
