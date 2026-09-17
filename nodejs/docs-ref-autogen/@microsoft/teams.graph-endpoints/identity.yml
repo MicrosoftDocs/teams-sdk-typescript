@@ -178,7 +178,7 @@ variables:
           /identity/userFlowAttributes/{identityUserFlowAttribute-id}"]["response"]&gt;
           }
 functions:
-  - name: get(any)
+  - name: 'get({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints.identity.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`GET /identity`'
@@ -186,16 +186,344 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /identity"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, apiConnectors?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, authenticationConfiguration?: { @odata.type: string } |
+        Record<string, never> | null, displayName?: string | null, targetUrl?:
+        string | null } & { @odata.type: "#microsoft.graph.identityApiConnector"
+        })[], authenticationEventListeners?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string,
+        authenticationEventsFlowId?: string | null, conditions?: Record<string,
+        never> | { @odata.type: string, applications?: function } | null },
+        "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authenticationEventListener" })[],
+        authenticationEventsFlows?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, conditions?: Record<string,
+        never> | { @odata.type: string, applications?: function } | null,
+        description?: string | null, displayName?: string }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authenticationEventsFlow" })[],
+        b2xUserFlows?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, userFlowType?: function,
+        userFlowTypeVersion?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.identityUserFlow" }, "@odata.type"> & { @odata.type:
+        string, apiConnectorConfiguration?: Record<string, never> | {
+        @odata.type: string, postAttributeCollection?: (... & ... & ...) |
+        Record<..., ...> | null, postFederationSignup?: (... & ... & ...) |
+        Record<..., ...> | null } | null, identityProviders?: (Omit<..., ...> &
+        { @odata.type: ..., clientId?: ..., clientSecret?: ..., name?: ...,
+        type?: ... } & { @odata.type: ... })[], languages?: (Omit<..., ...> & {
+        @odata.type: ..., defaultPages?: ..., displayName?: ..., isEnabled?:
+        ..., overridesPages?: ... } & { @odata.type: ... })[],
+        userAttributeAssignments?: (Omit<..., ...> & { @odata.type: ...,
+        displayName?: ..., isOptional?: ..., requiresVerification?: ...,
+        userAttribute?: ..., userAttributeValues?: ..., userInputType?: ... } &
+        { @odata.type: ... })[], userFlowIdentityProviders?: (Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... })[] })[], conditionalAccess?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string,
+        authenticationContextClassReferences?: (Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & { @odata.type: string, description?: function,
+        displayName?: function, isAvailable?: function } & { @odata.type:
+        "#microsoft.graph.authenticationContextClassReference" })[],
+        authenticationStrength?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & { @odata.type: string,
+        authenticationMethodModes?: ...[], combinations?: ...[], policies?:
+        ...[] } & { @odata.type: "#microsoft.graph.authenticationStrengthRoot"
+        }) | null, namedLocations?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., createdDateTime?: ...,
+        displayName?: ..., modifiedDateTime?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.namedLocation" })[], policies?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        conditions?: ..., createdDateTime?: ..., description?: ...,
+        displayName?: ..., grantControls?: ..., modifiedDateTime?: ...,
+        sessionControls?: ..., state?: ..., templateId?: ... }, "@odata.type"> &
+        { @odata.type: "#microsoft.graph.conditionalAccessPolicy" })[],
+        templates?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+        @odata.type: string, description?: function, details?: function, name?:
+        function, scenarios?: function } & { @odata.type:
+        "#microsoft.graph.conditionalAccessTemplate" })[] } & { @odata.type:
+        "#microsoft.graph.conditionalAccessRoot" }) | null,
+        customAuthenticationExtensions?: (Omit<Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string,
+        authenticationConfiguration?: function, clientConfiguration?: function,
+        description?: function, displayName?: function, endpointConfiguration?:
+        function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.customCalloutExtension" }, "@odata.type"> & Omit<{
+        @odata.type: string, behaviorOnError?: Record<string, never> | {
+        @odata.type: string } | null }, "@odata.type">)[], identityProviders?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, displayName?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.identityProviderBase" })[],
+        riskPrevention?: Record<string, never> | { @odata.type: string,
+        webApplicationFirewallProviders?: (Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string, displayName?:
+        function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.webApplicationFirewallProvider" })[],
+        webApplicationFirewallVerifications?: (Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & { @odata.type: string, provider?:
+        Record<..., ...> | (... & ... & ...) | null, providerType?:
+        "unknownFutureValue" | "akamai" | "cloudflare", verificationResult?:
+        Record<..., ...> | { @odata.type: ..., errors?: ..., status?: ...,
+        verifiedOnDateTime?: ..., warnings?: ... } | null, verifiedDetails?:
+        Record<..., ...> | { @odata.type: ..., dnsConfiguration?: ... } | null,
+        verifiedHost?: string | null } & { @odata.type:
+        "#microsoft.graph.webApplicationFirewallVerificationModel" })[] } |
+        null, userFlowAttributes?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, dataType?: "string" |
+        "boolean" | "unknownFutureValue" | "int64" | "stringCollection" |
+        "dateTime", description?: string | null, displayName?: string | null,
+        userFlowAttributeType?: "unknownFutureValue" | "builtIn" | "custom" |
+        "required" }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.identityUserFlowAttribute" })[] } & { @odata.type:
+        "#microsoft.graph.identityContainer" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /identity"]["response"]&gt;
-  - name: update(Operation<"/identity", "patch">)
+        type: >-
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, apiConnectors?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, authenticationConfiguration?: { <xref
+          uid="@odata.type" />: string } | Record&lt;string, never&gt; | null,
+          displayName?: string | null, targetUrl?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityApiConnector" />" })[],
+          authenticationEventListeners?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, authenticationEventsFlowId?:
+          string | null, conditions?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, applications?: function } | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.authenticationEventListener" />" })[],
+          authenticationEventsFlows?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, conditions?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, applications?:
+          function } | null, description?: string | null, displayName?: string
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.authenticationEventsFlow" />" })[],
+          b2xUserFlows?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, userFlowType?: function,
+          userFlowTypeVersion?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityUserFlow" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string,
+          apiConnectorConfiguration?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, postAttributeCollection?: (... & ... &
+          ...) | Record&lt;..., ...&gt; | null, postFederationSignup?: (... &
+          ... & ...) | Record&lt;..., ...&gt; | null } | null,
+          identityProviders?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type"
+          />: ..., clientId?: ..., clientSecret?: ..., name?: ..., type?: ... }
+          & { <xref uid="@odata.type" />: ... })[], languages?: (Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ..., defaultPages?: ...,
+          displayName?: ..., isEnabled?: ..., overridesPages?: ... } & { <xref
+          uid="@odata.type" />: ... })[], userAttributeAssignments?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          displayName?: ..., isOptional?: ..., requiresVerification?: ...,
+          userAttribute?: ..., userAttributeValues?: ..., userInputType?: ... }
+          & { <xref uid="@odata.type" />: ... })[], userFlowIdentityProviders?:
+          (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... })[] })[], conditionalAccess?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, authenticationContextClassReferences?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          description?: function, displayName?: function, isAvailable?: function
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationContextClassReference" />" })[],
+          authenticationStrength?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          authenticationMethodModes?: ...[], combinations?: ...[], policies?:
+          ...[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationStrengthRoot" />" }) | null,
+          namedLocations?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ..., createdDateTime?: ..., displayName?: ...,
+          modifiedDateTime?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.namedLocation" />"
+          })[], policies?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ..., conditions?: ..., createdDateTime?: ...,
+          description?: ..., displayName?: ..., grantControls?: ...,
+          modifiedDateTime?: ..., sessionControls?: ..., state?: ...,
+          templateId?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.conditionalAccessPolicy" />" })[], templates?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          description?: function, details?: function, name?: function,
+          scenarios?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.conditionalAccessTemplate" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.conditionalAccessRoot" />" }) | null,
+          customAuthenticationExtensions?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, authenticationConfiguration?: function, clientConfiguration?:
+          function, description?: function, displayName?: function,
+          endpointConfiguration?: function }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.customCalloutExtension" />" }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, behaviorOnError?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string } | null }, "<xref uid="@odata.type"
+          />"&gt;)[], identityProviders?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, displayName?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.identityProviderBase" />" })[],
+          riskPrevention?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, webApplicationFirewallProviders?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, displayName?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.webApplicationFirewallProvider" />" })[],
+          webApplicationFirewallVerifications?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          provider?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+          providerType?: "unknownFutureValue" | "akamai" | "cloudflare",
+          verificationResult?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., errors?: ..., status?: ...,
+          verifiedOnDateTime?: ..., warnings?: ... } | null, verifiedDetails?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          dnsConfiguration?: ... } | null, verifiedHost?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.webApplicationFirewallVerificationModel" />" })[]
+          } | null, userFlowAttributes?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, dataType?: "string" | "boolean" |
+          "unknownFutureValue" | "int64" | "stringCollection" | "dateTime",
+          description?: string | null, displayName?: string | null,
+          userFlowAttributeType?: "unknownFutureValue" | "builtIn" | "custom" |
+          "required" }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityUserFlowAttribute" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.identityContainer"
+          />" }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, apiConnectors?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string,
+      authenticationConfiguration?: { @odata.type: string } | Record<string,
+      never> | null, displayName?: string | null, targetUrl?: string | null } &
+      { @odata.type: "#microsoft.graph.identityApiConnector" })[],
+      authenticationEventListeners?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, authenticationEventsFlowId?:
+      string | null, conditions?: Record<string, never> | { @odata.type: string,
+      applications?: Record<..., ...> | { @odata.type: ...,
+      includeApplications?: ... } | null } | null }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.authenticationEventListener" })[],
+      authenticationEventsFlows?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, conditions?: Record<string,
+      never> | { @odata.type: string, applications?: Record<..., ...> | {
+      @odata.type: ..., includeApplications?: ... } | null } | null,
+      description?: string | null, displayName?: string }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.authenticationEventsFlow" })[],
+      b2xUserFlows?: (Omit<Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, userFlowType?: "signUp" |
+      "signIn" | "signUpOrSignIn" | "passwordReset" | "profileUpdate" |
+      "resourceOwner" | "unknownFutureValue", userFlowTypeVersion?: string |
+      number | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.identityUserFlow" }, "@odata.type"> & { @odata.type:
+      string, apiConnectorConfiguration?: Record<string, never> | { @odata.type:
+      string, postAttributeCollection?: (Omit<..., ...> & { @odata.type: ...,
+      authenticationConfiguration?: ..., displayName?: ..., targetUrl?: ... } &
+      { @odata.type: ... }) | Record<string, never> | null,
+      postFederationSignup?: (Omit<..., ...> & { @odata.type: ...,
+      authenticationConfiguration?: ..., displayName?: ..., targetUrl?: ... } &
+      { @odata.type: ... }) | Record<string, never> | null } | null,
+      identityProviders?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> &
+      { @odata.type: string, clientId?: function, clientSecret?: function,
+      name?: function, type?: function } & { @odata.type:
+      "#microsoft.graph.identityProvider" })[], languages?: (Omit<{ @odata.type:
+      ..., id?: ... }, "@odata.type"> & { @odata.type: string, defaultPages?:
+      function, displayName?: function, isEnabled?: function, overridesPages?:
+      function } & { @odata.type:
+      "#microsoft.graph.userFlowLanguageConfiguration" })[],
+      userAttributeAssignments?: (Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & { @odata.type: string, displayName?: function,
+      isOptional?: function, requiresVerification?: function, userAttribute?:
+      function, userAttributeValues?: function, userInputType?: function } & {
+      @odata.type: "#microsoft.graph.identityUserFlowAttributeAssignment" })[],
+      userFlowIdentityProviders?: (Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & Omit<{ @odata.type: ..., displayName?: ... },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.identityProviderBase"
+      })[] })[], conditionalAccess?: Record<string, never> | (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, authenticationContextClassReferences?: (Omit<{ @odata.type:
+      string, id?: function }, "@odata.type"> & { @odata.type: string,
+      description?: string | null, displayName?: string | null, isAvailable?:
+      boolean | null } & { @odata.type:
+      "#microsoft.graph.authenticationContextClassReference" })[],
+      authenticationStrength?: Record<string, never> | (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string,
+      authenticationMethodModes?: (... & ... & ...)[], combinations?:
+      function[], policies?: (... & ... & ...)[] } & { @odata.type:
+      "#microsoft.graph.authenticationStrengthRoot" }) | null, namedLocations?:
+      (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+      @odata.type: string, createdDateTime?: function, displayName?: function,
+      modifiedDateTime?: function }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.namedLocation" })[], policies?: (Omit<{ @odata.type:
+      string, id?: function }, "@odata.type"> & Omit<{ @odata.type: string,
+      conditions?: function, createdDateTime?: function, description?: function,
+      displayName?: function, grantControls?: function, modifiedDateTime?:
+      function, sessionControls?: function, state?: function, templateId?:
+      function }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.conditionalAccessPolicy" })[], templates?: (Omit<{
+      @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+      string, description?: string, details?: { @odata.type: ..., conditions?:
+      ..., grantControls?: ..., sessionControls?: ... }, name?: string,
+      scenarios?: "unknownFutureValue" | "new" | "secureFoundation" |
+      "zeroTrust" | "remoteWork" | "protectAdmins" | "emergingThreats" } & {
+      @odata.type: "#microsoft.graph.conditionalAccessTemplate" })[] } & {
+      @odata.type: "#microsoft.graph.conditionalAccessRoot" }) | null,
+      customAuthenticationExtensions?: (Omit<Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & Omit<{ @odata.type: string,
+      authenticationConfiguration?: Record<..., ...> | { @odata.type: ... } |
+      null, clientConfiguration?: Record<..., ...> | { @odata.type: ...,
+      maximumRetries?: ..., timeoutInMilliseconds?: ... } | null, description?:
+      string | null, displayName?: string | null, endpointConfiguration?:
+      Record<..., ...> | { @odata.type: ... } | null }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.customCalloutExtension" }, "@odata.type"> &
+      Omit<{ @odata.type: string, behaviorOnError?: Record<string, never> | {
+      @odata.type: string } | null }, "@odata.type">)[], identityProviders?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, displayName?: string | null }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.identityProviderBase" })[],
+      riskPrevention?: Record<string, never> | { @odata.type: string,
+      webApplicationFirewallProviders?: (Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & Omit<{ @odata.type: string, displayName?: string },
+      "@odata.type"> & { @odata.type:
+      "#microsoft.graph.webApplicationFirewallProvider" })[],
+      webApplicationFirewallVerifications?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, provider?:
+      Record<string, never> | (Omit<..., ...> & Omit<..., ...> & { @odata.type:
+      ... }) | null, providerType?: "unknownFutureValue" | "akamai" |
+      "cloudflare", verificationResult?: Record<string, never> | { @odata.type:
+      string, errors?: function, status?: function, verifiedOnDateTime?:
+      function, warnings?: function } | null, verifiedDetails?: Record<string,
+      never> | { @odata.type: string, dnsConfiguration?: function } | null,
+      verifiedHost?: string | null } & { @odata.type:
+      "#microsoft.graph.webApplicationFirewallVerificationModel" })[] } | null,
+      userFlowAttributes?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, dataType?: "string" |
+      "boolean" | "unknownFutureValue" | "int64" | "stringCollection" |
+      "dateTime", description?: string | null, displayName?: string | null,
+      userFlowAttributeType?: "unknownFutureValue" | "builtIn" | "custom" |
+      "required" }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.identityUserFlowAttribute" })[] } & { @odata.type:
+      "#microsoft.graph.identityContainer" })
     uid: '@microsoft/teams.graph-endpoints.identity.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`PATCH /identity`'
@@ -203,12 +531,501 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/identity", "patch">):
-        EndpointRequest<IEndpoints["PATCH /identity"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, apiConnectors?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, authenticationConfiguration?: { @odata.type: string } |
+        Record<string, never> | null, displayName?: string | null, targetUrl?:
+        string | null } & { @odata.type: "#microsoft.graph.identityApiConnector"
+        })[], authenticationEventListeners?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string,
+        authenticationEventsFlowId?: string | null, conditions?: Record<string,
+        never> | { @odata.type: string, applications?: Record<..., ...> | {
+        @odata.type: ..., includeApplications?: ... } | null } | null },
+        "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authenticationEventListener" })[],
+        authenticationEventsFlows?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, conditions?: Record<string,
+        never> | { @odata.type: string, applications?: Record<..., ...> | {
+        @odata.type: ..., includeApplications?: ... } | null } | null,
+        description?: string | null, displayName?: string }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authenticationEventsFlow" })[],
+        b2xUserFlows?: (Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, userFlowType?: "signUp" |
+        "signIn" | "signUpOrSignIn" | "passwordReset" | "profileUpdate" |
+        "resourceOwner" | "unknownFutureValue", userFlowTypeVersion?: string |
+        number | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.identityUserFlow" }, "@odata.type"> & { @odata.type:
+        string, apiConnectorConfiguration?: Record<string, never> | {
+        @odata.type: string, postAttributeCollection?: (Omit<..., ...> & {
+        @odata.type: ..., authenticationConfiguration?: ..., displayName?: ...,
+        targetUrl?: ... } & { @odata.type: ... }) | Record<string, never> |
+        null, postFederationSignup?: (Omit<..., ...> & { @odata.type: ...,
+        authenticationConfiguration?: ..., displayName?: ..., targetUrl?: ... }
+        & { @odata.type: ... }) | Record<string, never> | null } | null,
+        identityProviders?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type">
+        & { @odata.type: string, clientId?: function, clientSecret?: function,
+        name?: function, type?: function } & { @odata.type:
+        "#microsoft.graph.identityProvider" })[], languages?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        defaultPages?: function, displayName?: function, isEnabled?: function,
+        overridesPages?: function } & { @odata.type:
+        "#microsoft.graph.userFlowLanguageConfiguration" })[],
+        userAttributeAssignments?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, displayName?: function,
+        isOptional?: function, requiresVerification?: function, userAttribute?:
+        function, userAttributeValues?: function, userInputType?: function } & {
+        @odata.type: "#microsoft.graph.identityUserFlowAttributeAssignment"
+        })[], userFlowIdentityProviders?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., displayName?: ... },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.identityProviderBase"
+        })[] })[], conditionalAccess?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, authenticationContextClassReferences?: (Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & { @odata.type: string,
+        description?: string | null, displayName?: string | null, isAvailable?:
+        boolean | null } & { @odata.type:
+        "#microsoft.graph.authenticationContextClassReference" })[],
+        authenticationStrength?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        authenticationMethodModes?: (... & ... & ...)[], combinations?:
+        function[], policies?: (... & ... & ...)[] } & { @odata.type:
+        "#microsoft.graph.authenticationStrengthRoot" }) | null,
+        namedLocations?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?: function,
+        displayName?: function, modifiedDateTime?: function }, "@odata.type"> &
+        { @odata.type: "#microsoft.graph.namedLocation" })[], policies?: (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, conditions?: function, createdDateTime?: function,
+        description?: function, displayName?: function, grantControls?:
+        function, modifiedDateTime?: function, sessionControls?: function,
+        state?: function, templateId?: function }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.conditionalAccessPolicy" })[],
+        templates?: (Omit<{ @odata.type: string, id?: function }, "@odata.type">
+        & { @odata.type: string, description?: string, details?: { @odata.type:
+        ..., conditions?: ..., grantControls?: ..., sessionControls?: ... },
+        name?: string, scenarios?: "unknownFutureValue" | "new" |
+        "secureFoundation" | "zeroTrust" | "remoteWork" | "protectAdmins" |
+        "emergingThreats" } & { @odata.type:
+        "#microsoft.graph.conditionalAccessTemplate" })[] } & { @odata.type:
+        "#microsoft.graph.conditionalAccessRoot" }) | null,
+        customAuthenticationExtensions?: (Omit<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string,
+        authenticationConfiguration?: Record<..., ...> | { @odata.type: ... } |
+        null, clientConfiguration?: Record<..., ...> | { @odata.type: ...,
+        maximumRetries?: ..., timeoutInMilliseconds?: ... } | null,
+        description?: string | null, displayName?: string | null,
+        endpointConfiguration?: Record<..., ...> | { @odata.type: ... } | null
+        }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.customCalloutExtension" }, "@odata.type"> & Omit<{
+        @odata.type: string, behaviorOnError?: Record<string, never> | {
+        @odata.type: string } | null }, "@odata.type">)[], identityProviders?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, displayName?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.identityProviderBase" })[],
+        riskPrevention?: Record<string, never> | { @odata.type: string,
+        webApplicationFirewallProviders?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, displayName?:
+        string }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.webApplicationFirewallProvider" })[],
+        webApplicationFirewallVerifications?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, provider?:
+        Record<string, never> | (Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }) | null, providerType?: "unknownFutureValue" |
+        "akamai" | "cloudflare", verificationResult?: Record<string, never> | {
+        @odata.type: string, errors?: function, status?: function,
+        verifiedOnDateTime?: function, warnings?: function } | null,
+        verifiedDetails?: Record<string, never> | { @odata.type: string,
+        dnsConfiguration?: function } | null, verifiedHost?: string | null } & {
+        @odata.type: "#microsoft.graph.webApplicationFirewallVerificationModel"
+        })[] } | null, userFlowAttributes?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, dataType?:
+        "string" | "boolean" | "unknownFutureValue" | "int64" |
+        "stringCollection" | "dateTime", description?: string | null,
+        displayName?: string | null, userFlowAttributeType?:
+        "unknownFutureValue" | "builtIn" | "custom" | "required" },
+        "@odata.type"> & { @odata.type:
+        "#microsoft.graph.identityUserFlowAttribute" })[] } & { @odata.type:
+        "#microsoft.graph.identityContainer" }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, apiConnectors?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, authenticationConfiguration?: {
+        @odata.type: string } | Record<string, never> | null, displayName?:
+        string | null, targetUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.identityApiConnector" })[],
+        authenticationEventListeners?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & Omit<{ @odata.type: string,
+        authenticationEventsFlowId?: string | null, conditions?: Record<string,
+        never> | { @odata.type: string, applications?: function } | null },
+        "@odata.type"> & { @odata.type:
+        "#microsoft.graph.authenticationEventListener" })[],
+        authenticationEventsFlows?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, conditions?: Record<string,
+        never> | { @odata.type: string, applications?: function } | null,
+        description?: string | null, displayName?: string }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.authenticationEventsFlow" })[],
+        b2xUserFlows?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, userFlowType?: function,
+        userFlowTypeVersion?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.identityUserFlow" }, "@odata.type"> & { @odata.type:
+        string, apiConnectorConfiguration?: Record<string, never> | {
+        @odata.type: string, postAttributeCollection?: (... & ... & ...) |
+        Record<..., ...> | null, postFederationSignup?: (... & ... & ...) |
+        Record<..., ...> | null } | null, identityProviders?: (Omit<..., ...> &
+        { @odata.type: ..., clientId?: ..., clientSecret?: ..., name?: ...,
+        type?: ... } & { @odata.type: ... })[], languages?: (Omit<..., ...> & {
+        @odata.type: ..., defaultPages?: ..., displayName?: ..., isEnabled?:
+        ..., overridesPages?: ... } & { @odata.type: ... })[],
+        userAttributeAssignments?: (Omit<..., ...> & { @odata.type: ...,
+        displayName?: ..., isOptional?: ..., requiresVerification?: ...,
+        userAttribute?: ..., userAttributeValues?: ..., userInputType?: ... } &
+        { @odata.type: ... })[], userFlowIdentityProviders?: (Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... })[] })[], conditionalAccess?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string,
+        authenticationContextClassReferences?: (Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & { @odata.type: string, description?: function,
+        displayName?: function, isAvailable?: function } & { @odata.type:
+        "#microsoft.graph.authenticationContextClassReference" })[],
+        authenticationStrength?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & { @odata.type: string,
+        authenticationMethodModes?: ...[], combinations?: ...[], policies?:
+        ...[] } & { @odata.type: "#microsoft.graph.authenticationStrengthRoot"
+        }) | null, namedLocations?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., createdDateTime?: ...,
+        displayName?: ..., modifiedDateTime?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.namedLocation" })[], policies?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        conditions?: ..., createdDateTime?: ..., description?: ...,
+        displayName?: ..., grantControls?: ..., modifiedDateTime?: ...,
+        sessionControls?: ..., state?: ..., templateId?: ... }, "@odata.type"> &
+        { @odata.type: "#microsoft.graph.conditionalAccessPolicy" })[],
+        templates?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+        @odata.type: string, description?: function, details?: function, name?:
+        function, scenarios?: function } & { @odata.type:
+        "#microsoft.graph.conditionalAccessTemplate" })[] } & { @odata.type:
+        "#microsoft.graph.conditionalAccessRoot" }) | null,
+        customAuthenticationExtensions?: (Omit<Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string,
+        authenticationConfiguration?: function, clientConfiguration?: function,
+        description?: function, displayName?: function, endpointConfiguration?:
+        function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.customCalloutExtension" }, "@odata.type"> & Omit<{
+        @odata.type: string, behaviorOnError?: Record<string, never> | {
+        @odata.type: string } | null }, "@odata.type">)[], identityProviders?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, displayName?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.identityProviderBase" })[],
+        riskPrevention?: Record<string, never> | { @odata.type: string,
+        webApplicationFirewallProviders?: (Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string, displayName?:
+        function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.webApplicationFirewallProvider" })[],
+        webApplicationFirewallVerifications?: (Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & { @odata.type: string, provider?:
+        Record<..., ...> | (... & ... & ...) | null, providerType?:
+        "unknownFutureValue" | "akamai" | "cloudflare", verificationResult?:
+        Record<..., ...> | { @odata.type: ..., errors?: ..., status?: ...,
+        verifiedOnDateTime?: ..., warnings?: ... } | null, verifiedDetails?:
+        Record<..., ...> | { @odata.type: ..., dnsConfiguration?: ... } | null,
+        verifiedHost?: string | null } & { @odata.type:
+        "#microsoft.graph.webApplicationFirewallVerificationModel" })[] } |
+        null, userFlowAttributes?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, dataType?: "string" |
+        "boolean" | "unknownFutureValue" | "int64" | "stringCollection" |
+        "dateTime", description?: string | null, displayName?: string | null,
+        userFlowAttributeType?: "unknownFutureValue" | "builtIn" | "custom" |
+        "required" }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.identityUserFlowAttribute" })[] } & { @odata.type:
+        "#microsoft.graph.identityContainer" }>
       parameters:
         - id: body
-          type: Operation&lt;"/identity", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            apiConnectors?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, authenticationConfiguration?: { <xref
+            uid="@odata.type" />: string } | Record&lt;string, never&gt; | null,
+            displayName?: string | null, targetUrl?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.identityApiConnector" />" })[],
+            authenticationEventListeners?: (Omit&lt;{ <xref uid="@odata.type"
+            />: string, id?: string }, "<xref uid="@odata.type" />"&gt; &
+            Omit&lt;{ <xref uid="@odata.type" />: string,
+            authenticationEventsFlowId?: string | null, conditions?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            applications?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ..., includeApplications?: ... } | null } | null }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.authenticationEventListener" />" })[],
+            authenticationEventsFlows?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: string, conditions?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, applications?:
+            Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            includeApplications?: ... } | null } | null, description?: string |
+            null, displayName?: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.authenticationEventsFlow" />" })[],
+            b2xUserFlows?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: string, userFlowType?: "signUp" |
+            "signIn" | "signUpOrSignIn" | "passwordReset" | "profileUpdate" |
+            "resourceOwner" | "unknownFutureValue", userFlowTypeVersion?: string
+            | number | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.identityUserFlow"
+            />" }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: string, apiConnectorConfiguration?: Record&lt;string, never&gt;
+            | { <xref uid="@odata.type" />: string, postAttributeCollection?:
+            (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+            authenticationConfiguration?: ..., displayName?: ..., targetUrl?:
+            ... } & { <xref uid="@odata.type" />: ... }) | Record&lt;string,
+            never&gt; | null, postFederationSignup?: (Omit&lt;..., ...&gt; & {
+            <xref uid="@odata.type" />: ..., authenticationConfiguration?: ...,
+            displayName?: ..., targetUrl?: ... } & { <xref uid="@odata.type" />:
+            ... }) | Record&lt;string, never&gt; | null } | null,
+            identityProviders?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?:
+            ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: string, clientId?: function, clientSecret?: function, name?:
+            function, type?: function } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.identityProvider" />" })[], languages?:
+            (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            defaultPages?: function, displayName?: function, isEnabled?:
+            function, overridesPages?: function } & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.userFlowLanguageConfiguration" />"
+            })[], userAttributeAssignments?: (Omit&lt;{ <xref uid="@odata.type"
+            />: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, displayName?: function, isOptional?:
+            function, requiresVerification?: function, userAttribute?: function,
+            userAttributeValues?: function, userInputType?: function } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.identityUserFlowAttributeAssignment" />" })[],
+            userFlowIdentityProviders?: (Omit&lt;{ <xref uid="@odata.type" />:
+            ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: ..., displayName?: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.identityProviderBase" />" })[] })[],
+            conditionalAccess?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            authenticationContextClassReferences?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            description?: string | null, displayName?: string | null,
+            isAvailable?: boolean | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.authenticationContextClassReference"
+            />" })[], authenticationStrength?: Record&lt;string, never&gt; |
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            authenticationMethodModes?: (... & ... & ...)[], combinations?:
+            function[], policies?: (... & ... & ...)[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.authenticationStrengthRoot" />" }) | null,
+            namedLocations?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, createdDateTime?: function,
+            displayName?: function, modifiedDateTime?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.namedLocation" />" })[], policies?: (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: function }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, conditions?: function, createdDateTime?: function,
+            description?: function, displayName?: function, grantControls?:
+            function, modifiedDateTime?: function, sessionControls?: function,
+            state?: function, templateId?: function }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.conditionalAccessPolicy" />" })[], templates?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, description?: string, details?: { <xref uid="@odata.type"
+            />: ..., conditions?: ..., grantControls?: ..., sessionControls?:
+            ... }, name?: string, scenarios?: "unknownFutureValue" | "new" |
+            "secureFoundation" | "zeroTrust" | "remoteWork" | "protectAdmins" |
+            "emergingThreats" } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.conditionalAccessTemplate" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.conditionalAccessRoot" />" }) | null,
+            customAuthenticationExtensions?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, authenticationConfiguration?: Record&lt;..., ...&gt; | {
+            <xref uid="@odata.type" />: ... } | null, clientConfiguration?:
+            Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            maximumRetries?: ..., timeoutInMilliseconds?: ... } | null,
+            description?: string | null, displayName?: string | null,
+            endpointConfiguration?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ... } | null }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.customCalloutExtension" />" }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, behaviorOnError?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string } | null }, "<xref uid="@odata.type"
+            />"&gt;)[], identityProviders?: (Omit&lt;{ <xref uid="@odata.type"
+            />: string, id?: string }, "<xref uid="@odata.type" />"&gt; &
+            Omit&lt;{ <xref uid="@odata.type" />: string, displayName?: string |
+            null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.identityProviderBase" />" })[],
+            riskPrevention?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, webApplicationFirewallProviders?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, displayName?: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.webApplicationFirewallProvider" />" })[],
+            webApplicationFirewallVerifications?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            provider?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; &
+            Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }) | null,
+            providerType?: "unknownFutureValue" | "akamai" | "cloudflare",
+            verificationResult?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, errors?: function, status?: function,
+            verifiedOnDateTime?: function, warnings?: function } | null,
+            verifiedDetails?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, dnsConfiguration?: function } | null,
+            verifiedHost?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref
+            uid="microsoft.graph.webApplicationFirewallVerificationModel" />"
+            })[] } | null, userFlowAttributes?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, dataType?: "string" | "boolean" | "unknownFutureValue" |
+            "int64" | "stringCollection" | "dateTime", description?: string |
+            null, displayName?: string | null, userFlowAttributeType?:
+            "unknownFutureValue" | "builtIn" | "custom" | "required" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.identityUserFlowAttribute" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.identityContainer" />" }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["PATCH /identity"]["response"]&gt;
+        type: >-
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, apiConnectors?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, authenticationConfiguration?: { <xref
+          uid="@odata.type" />: string } | Record&lt;string, never&gt; | null,
+          displayName?: string | null, targetUrl?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityApiConnector" />" })[],
+          authenticationEventListeners?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, authenticationEventsFlowId?:
+          string | null, conditions?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, applications?: function } | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.authenticationEventListener" />" })[],
+          authenticationEventsFlows?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, conditions?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, applications?:
+          function } | null, description?: string | null, displayName?: string
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.authenticationEventsFlow" />" })[],
+          b2xUserFlows?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, userFlowType?: function,
+          userFlowTypeVersion?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityUserFlow" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string,
+          apiConnectorConfiguration?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, postAttributeCollection?: (... & ... &
+          ...) | Record&lt;..., ...&gt; | null, postFederationSignup?: (... &
+          ... & ...) | Record&lt;..., ...&gt; | null } | null,
+          identityProviders?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type"
+          />: ..., clientId?: ..., clientSecret?: ..., name?: ..., type?: ... }
+          & { <xref uid="@odata.type" />: ... })[], languages?: (Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ..., defaultPages?: ...,
+          displayName?: ..., isEnabled?: ..., overridesPages?: ... } & { <xref
+          uid="@odata.type" />: ... })[], userAttributeAssignments?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          displayName?: ..., isOptional?: ..., requiresVerification?: ...,
+          userAttribute?: ..., userAttributeValues?: ..., userInputType?: ... }
+          & { <xref uid="@odata.type" />: ... })[], userFlowIdentityProviders?:
+          (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... })[] })[], conditionalAccess?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, authenticationContextClassReferences?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          description?: function, displayName?: function, isAvailable?: function
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationContextClassReference" />" })[],
+          authenticationStrength?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          authenticationMethodModes?: ...[], combinations?: ...[], policies?:
+          ...[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.authenticationStrengthRoot" />" }) | null,
+          namedLocations?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ..., createdDateTime?: ..., displayName?: ...,
+          modifiedDateTime?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.namedLocation" />"
+          })[], policies?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ..., conditions?: ..., createdDateTime?: ...,
+          description?: ..., displayName?: ..., grantControls?: ...,
+          modifiedDateTime?: ..., sessionControls?: ..., state?: ...,
+          templateId?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.conditionalAccessPolicy" />" })[], templates?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          description?: function, details?: function, name?: function,
+          scenarios?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.conditionalAccessTemplate" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.conditionalAccessRoot" />" }) | null,
+          customAuthenticationExtensions?: (Omit&lt;Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, authenticationConfiguration?: function, clientConfiguration?:
+          function, description?: function, displayName?: function,
+          endpointConfiguration?: function }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.customCalloutExtension" />" }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, behaviorOnError?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string } | null }, "<xref uid="@odata.type"
+          />"&gt;)[], identityProviders?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, displayName?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.identityProviderBase" />" })[],
+          riskPrevention?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, webApplicationFirewallProviders?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, displayName?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.webApplicationFirewallProvider" />" })[],
+          webApplicationFirewallVerifications?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          provider?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+          providerType?: "unknownFutureValue" | "akamai" | "cloudflare",
+          verificationResult?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., errors?: ..., status?: ...,
+          verifiedOnDateTime?: ..., warnings?: ... } | null, verifiedDetails?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          dnsConfiguration?: ... } | null, verifiedHost?: string | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.webApplicationFirewallVerificationModel" />" })[]
+          } | null, userFlowAttributes?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, dataType?: "string" | "boolean" |
+          "unknownFutureValue" | "int64" | "stringCollection" | "dateTime",
+          description?: string | null, displayName?: string | null,
+          userFlowAttributeType?: "unknownFutureValue" | "builtIn" | "custom" |
+          "required" }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityUserFlowAttribute" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.identityContainer"
+          />" }&gt;

@@ -10,8 +10,79 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
   - name: >-
-      create(Operation<"/tenantRelationships/managedTenants/managementTemplateStepVersions/{managementTemplateStepVersion-id}/deployments",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, createdByUserId?: string | null, createdDateTime?:
+      string | null, error?: Record<string, never> | { @odata.type: string,
+      code?: string | null, message?: string | null } | null,
+      lastActionByUserId?: string | null, lastActionDateTime?: string | null,
+      status?: "unknownFutureValue" | "unknown" | "failed" | "inProgress" |
+      "completed" | "ineligible", templateStepVersion?: Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string,
+      acceptedFor?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, acceptedVersion?:
+      Record<string, never> | Omit<{ id?: string | undefined; '@odata.type':
+      string; }, "@odata.type"> & { contentMarkdown?: string | null | undefined;
+      createdByUserId?: string | null | undefined; createdDateTime?: string |
+      ... 1 more ... | undefined; ... 8 more ...; '@odata.type': string; } & {
+      ...; } | null, category?: "unknownFutureValue" | Record<string, never> |
+      "custom" | "devices" | "identity" | "data" | null, createdByUserId?:
+      string | null, createdDateTime?: string | null, description?: string |
+      null, displayName?: string | null, informationLinks?: { @odata.type: ...,
+      displayName?: ..., url?: ... }[], lastActionByUserId?: string | null,
+      lastActionDateTime?: string | null, managementTemplate?: Record<string,
+      never> | (Omit<..., ...> & { @odata.type: ..., category?: ...,
+      createdByUserId?: ..., createdDateTime?: ..., description?: ...,
+      displayName?: ..., informationLinks?: ..., lastActionByUserId?: ...,
+      lastActionDateTime?: ..., managementTemplateCollections?: ...,
+      managementTemplateSteps?: ..., parameters?: ..., priority?: ...,
+      provider?: ..., userImpact?: ..., version?: ..., workloadActions?: ... } &
+      { @odata.type: ... }) | null, portalLink?: Record<string, never> | {
+      @odata.type: string, displayName?: function, url?: function } | null,
+      priority?: number | null, userImpact?: string | null, versions?: Omit<{
+      id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+      contentMarkdown?: string | null | undefined; createdByUserId?: string |
+      null | undefined; createdDateTime?: string | ... 1 more ... | undefined;
+      ... 8 more ...; '@odata.type': string; } & { ...; }[] } & { @odata.type:
+      "#microsoft.graph.managedTenants.managementTemplateStep" }) | null,
+      contentMarkdown?: string | null, createdByUserId?: string | null,
+      createdDateTime?: string | null, deployments?: Omit<{ id?: string |
+      undefined; '@odata.type': string; }, "@odata.type"> & { createdByUserId?:
+      string | null | undefined; createdDateTime?: string | null | undefined;
+      error?: Record<...> | ... 2 more ... | undefined; ... 5 more ...;
+      '@odata.type': string; } & { ...; }[], lastActionByUserId?: string | null,
+      lastActionDateTime?: string | null, name?: string | null, templateStep?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, acceptedVersion?: Record<string,
+      never> | Omit<{ id?: string | undefined; '@odata.type': string; },
+      "@odata.type"> & { contentMarkdown?: string | null | undefined;
+      createdByUserId?: string | null | undefined; createdDateTime?: string |
+      ... 1 more ... | undefined; ... 8 more ...; '@odata.type': string; } & {
+      ...; } | null, category?: "unknownFutureValue" | Record<string, never> |
+      "custom" | "devices" | "identity" | "data" | null, createdByUserId?:
+      string | null, createdDateTime?: string | null, description?: string |
+      null, displayName?: string | null, informationLinks?: { @odata.type: ...,
+      displayName?: ..., url?: ... }[], lastActionByUserId?: string | null,
+      lastActionDateTime?: string | null, managementTemplate?: Record<string,
+      never> | (Omit<..., ...> & { @odata.type: ..., category?: ...,
+      createdByUserId?: ..., createdDateTime?: ..., description?: ...,
+      displayName?: ..., informationLinks?: ..., lastActionByUserId?: ...,
+      lastActionDateTime?: ..., managementTemplateCollections?: ...,
+      managementTemplateSteps?: ..., parameters?: ..., priority?: ...,
+      provider?: ..., userImpact?: ..., version?: ..., workloadActions?: ... } &
+      { @odata.type: ... }) | null, portalLink?: Record<string, never> | {
+      @odata.type: string, displayName?: function, url?: function } | null,
+      priority?: number | null, userImpact?: string | null, versions?: Omit<{
+      id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+      contentMarkdown?: string | null | undefined; createdByUserId?: string |
+      null | undefined; createdDateTime?: string | ... 1 more ... | undefined;
+      ... 8 more ...; '@odata.type': string; } & { ...; }[] } & { @odata.type:
+      "#microsoft.graph.managedTenants.managementTemplateStep" }) | null,
+      version?: number | null, versionInformation?: string | null } & {
+      @odata.type:
+      "#microsoft.graph.managedTenants.managementTemplateStepVersion" },
+      tenantId?: string } & { @odata.type:
+      "#microsoft.graph.managedTenants.managementTemplateStepDeployment" }, {
+      managementTemplateStepVersion-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.tenantRelationships.managedTenants.managementTemplateStepVersions.deployments.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -22,25 +93,303 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/tenantRelationships/managedTenants/managementTemplateStepVersions/{managementTemplateStepVersion-id}/deployments",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /tenantRelationships/managedTenants/managementTemplateStepVersions/{managementTemplateStepVersion-id}/deployments"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, createdByUserId?: string | null,
+        createdDateTime?: string | null, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null } |
+        null, lastActionByUserId?: string | null, lastActionDateTime?: string |
+        null, status?: "unknownFutureValue" | "unknown" | "failed" |
+        "inProgress" | "completed" | "ineligible", templateStepVersion?: Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, acceptedFor?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        acceptedVersion?: Record<string, never> | Omit<{ id?: string |
+        undefined; '@odata.type': string; }, "@odata.type"> & {
+        contentMarkdown?: string | null | undefined; createdByUserId?: string |
+        null | undefined; createdDateTime?: string | ... 1 more ... | undefined;
+        ... 8 more ...; '@odata.type': string; } & { ...; } | null, category?:
+        "unknownFutureValue" | Record<string, never> | "custom" | "devices" |
+        "identity" | "data" | null, createdByUserId?: string | null,
+        createdDateTime?: string | null, description?: string | null,
+        displayName?: string | null, informationLinks?: { @odata.type: ...,
+        displayName?: ..., url?: ... }[], lastActionByUserId?: string | null,
+        lastActionDateTime?: string | null, managementTemplate?: Record<string,
+        never> | (Omit<..., ...> & { @odata.type: ..., category?: ...,
+        createdByUserId?: ..., createdDateTime?: ..., description?: ...,
+        displayName?: ..., informationLinks?: ..., lastActionByUserId?: ...,
+        lastActionDateTime?: ..., managementTemplateCollections?: ...,
+        managementTemplateSteps?: ..., parameters?: ..., priority?: ...,
+        provider?: ..., userImpact?: ..., version?: ..., workloadActions?: ... }
+        & { @odata.type: ... }) | null, portalLink?: Record<string, never> | {
+        @odata.type: string, displayName?: function, url?: function } | null,
+        priority?: number | null, userImpact?: string | null, versions?: Omit<{
+        id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        contentMarkdown?: string | null | undefined; createdByUserId?: string |
+        null | undefined; createdDateTime?: string | ... 1 more ... | undefined;
+        ... 8 more ...; '@odata.type': string; } & { ...; }[] } & { @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStep" }) | null,
+        contentMarkdown?: string | null, createdByUserId?: string | null,
+        createdDateTime?: string | null, deployments?: Omit<{ id?: string |
+        undefined; '@odata.type': string; }, "@odata.type"> & {
+        createdByUserId?: string | null | undefined; createdDateTime?: string |
+        null | undefined; error?: Record<...> | ... 2 more ... | undefined; ...
+        5 more ...; '@odata.type': string; } & { ...; }[], lastActionByUserId?:
+        string | null, lastActionDateTime?: string | null, name?: string | null,
+        templateStep?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, acceptedVersion?:
+        Record<string, never> | Omit<{ id?: string | undefined; '@odata.type':
+        string; }, "@odata.type"> & { contentMarkdown?: string | null |
+        undefined; createdByUserId?: string | null | undefined;
+        createdDateTime?: string | ... 1 more ... | undefined; ... 8 more ...;
+        '@odata.type': string; } & { ...; } | null, category?:
+        "unknownFutureValue" | Record<string, never> | "custom" | "devices" |
+        "identity" | "data" | null, createdByUserId?: string | null,
+        createdDateTime?: string | null, description?: string | null,
+        displayName?: string | null, informationLinks?: { @odata.type: ...,
+        displayName?: ..., url?: ... }[], lastActionByUserId?: string | null,
+        lastActionDateTime?: string | null, managementTemplate?: Record<string,
+        never> | (Omit<..., ...> & { @odata.type: ..., category?: ...,
+        createdByUserId?: ..., createdDateTime?: ..., description?: ...,
+        displayName?: ..., informationLinks?: ..., lastActionByUserId?: ...,
+        lastActionDateTime?: ..., managementTemplateCollections?: ...,
+        managementTemplateSteps?: ..., parameters?: ..., priority?: ...,
+        provider?: ..., userImpact?: ..., version?: ..., workloadActions?: ... }
+        & { @odata.type: ... }) | null, portalLink?: Record<string, never> | {
+        @odata.type: string, displayName?: function, url?: function } | null,
+        priority?: number | null, userImpact?: string | null, versions?: Omit<{
+        id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        contentMarkdown?: string | null | undefined; createdByUserId?: string |
+        null | undefined; createdDateTime?: string | ... 1 more ... | undefined;
+        ... 8 more ...; '@odata.type': string; } & { ...; }[] } & { @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStep" }) | null,
+        version?: number | null, versionInformation?: string | null } & {
+        @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStepVersion" },
+        tenantId?: string } & { @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStepDeployment" },
+        params?: { managementTemplateStepVersion-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, createdByUserId?: string | null,
+        createdDateTime?: string | null, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null } |
+        null, lastActionByUserId?: string | null, lastActionDateTime?: string |
+        null, status?: "unknownFutureValue" | "unknown" | "failed" |
+        "inProgress" | "completed" | "ineligible", templateStepVersion?: Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, acceptedFor?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & { @odata.type: string,
+        acceptedVersion?: Record<..., ...> | Omit<{ id?: string | undefined;
+        '@odata.type': string; }, "@odata.type"> & { contentMarkdown?: string |
+        null | undefined; createdByUserId?: string | null | undefined;
+        createdDateTime?: string | ... 1 more ... | undefined; ... 8 more ...;
+        '@odata.type': string; } & { ...; } | null, category?:
+        "unknownFutureValue" | Record<..., ...> | "custom" | "devices" |
+        "identity" | "data" | null, createdByUserId?: string | null,
+        createdDateTime?: string | null, description?: string | null,
+        displayName?: string | null, informationLinks?: ...[],
+        lastActionByUserId?: string | null, lastActionDateTime?: string | null,
+        managementTemplate?: Record<..., ...> | (... & ... & ...) | null,
+        portalLink?: Record<..., ...> | { @odata.type: ..., displayName?: ...,
+        url?: ... } | null, priority?: number | null, userImpact?: string |
+        null, versions?: ...[] } & { @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStep" }) | null,
+        contentMarkdown?: string | null, createdByUserId?: string | null,
+        createdDateTime?: string | null, deployments?: Omit<{ id?: string |
+        undefined; '@odata.type': string; }, "@odata.type"> & {
+        createdByUserId?: string | null | undefined; createdDateTime?: string |
+        null | undefined; error?: Record<...> | ... 2 more ... | undefined; ...
+        5 more ...; '@odata.type': string; } & { ...; }[], lastActionByUserId?:
+        string | null, lastActionDateTime?: string | null, name?: string | null,
+        templateStep?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & { @odata.type: string, acceptedVersion?:
+        Record<..., ...> | Omit<{ id?: string | undefined; '@odata.type':
+        string; }, "@odata.type"> & { contentMarkdown?: string | null |
+        undefined; createdByUserId?: string | null | undefined;
+        createdDateTime?: string | ... 1 more ... | undefined; ... 8 more ...;
+        '@odata.type': string; } & { ...; } | null, category?:
+        "unknownFutureValue" | Record<..., ...> | "custom" | "devices" |
+        "identity" | "data" | null, createdByUserId?: string | null,
+        createdDateTime?: string | null, description?: string | null,
+        displayName?: string | null, informationLinks?: ...[],
+        lastActionByUserId?: string | null, lastActionDateTime?: string | null,
+        managementTemplate?: Record<..., ...> | (... & ... & ...) | null,
+        portalLink?: Record<..., ...> | { @odata.type: ..., displayName?: ...,
+        url?: ... } | null, priority?: number | null, userImpact?: string |
+        null, versions?: ...[] } & { @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStep" }) | null,
+        version?: number | null, versionInformation?: string | null } & {
+        @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStepVersion" },
+        tenantId?: string } & { @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStepDeployment" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/tenantRelationships/managedTenants/managementTemplateStepVersions/{managementTemplateStepVersion-id}/deployments",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            createdByUserId?: string | null, createdDateTime?: string | null,
+            error?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+            string, code?: string | null, message?: string | null } | null,
+            lastActionByUserId?: string | null, lastActionDateTime?: string |
+            null, status?: "unknownFutureValue" | "unknown" | "failed" |
+            "inProgress" | "completed" | "ineligible", templateStepVersion?:
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            acceptedFor?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            acceptedVersion?: Record&lt;string, never&gt; | Omit&lt;{ id?:
+            string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { contentMarkdown?: string | null |
+            undefined; createdByUserId?: string | null | undefined;
+            createdDateTime?: string | ... 1 more ... | undefined; ... 8 more
+            ...; '<xref uid="@odata.type" />': string; } & { ...; } | null,
+            category?: "unknownFutureValue" | Record&lt;string, never&gt; |
+            "custom" | "devices" | "identity" | "data" | null, createdByUserId?:
+            string | null, createdDateTime?: string | null, description?: string
+            | null, displayName?: string | null, informationLinks?: { <xref
+            uid="@odata.type" />: ..., displayName?: ..., url?: ... }[],
+            lastActionByUserId?: string | null, lastActionDateTime?: string |
+            null, managementTemplate?: Record&lt;string, never&gt; |
+            (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+            category?: ..., createdByUserId?: ..., createdDateTime?: ...,
+            description?: ..., displayName?: ..., informationLinks?: ...,
+            lastActionByUserId?: ..., lastActionDateTime?: ...,
+            managementTemplateCollections?: ..., managementTemplateSteps?: ...,
+            parameters?: ..., priority?: ..., provider?: ..., userImpact?: ...,
+            version?: ..., workloadActions?: ... } & { <xref uid="@odata.type"
+            />: ... }) | null, portalLink?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: function, url?:
+            function } | null, priority?: number | null, userImpact?: string |
+            null, versions?: Omit&lt;{ id?: string | undefined; '<xref
+            uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; &
+            { contentMarkdown?: string | null | undefined; createdByUserId?:
+            string | null | undefined; createdDateTime?: string | ... 1 more ...
+            | undefined; ... 8 more ...; '<xref uid="@odata.type" />': string; }
+            & { ...; }[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedTenants.managementTemplateStep" />" }) |
+            null, contentMarkdown?: string | null, createdByUserId?: string |
+            null, createdDateTime?: string | null, deployments?: Omit&lt;{ id?:
+            string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { createdByUserId?: string | null |
+            undefined; createdDateTime?: string | null | undefined; error?:
+            Record&lt;...&gt; | ... 2 more ... | undefined; ... 5 more ...;
+            '<xref uid="@odata.type" />': string; } & { ...; }[],
+            lastActionByUserId?: string | null, lastActionDateTime?: string |
+            null, name?: string | null, templateStep?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, acceptedVersion?: Record&lt;string,
+            never&gt; | Omit&lt;{ id?: string | undefined; '<xref
+            uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; &
+            { contentMarkdown?: string | null | undefined; createdByUserId?:
+            string | null | undefined; createdDateTime?: string | ... 1 more ...
+            | undefined; ... 8 more ...; '<xref uid="@odata.type" />': string; }
+            & { ...; } | null, category?: "unknownFutureValue" |
+            Record&lt;string, never&gt; | "custom" | "devices" | "identity" |
+            "data" | null, createdByUserId?: string | null, createdDateTime?:
+            string | null, description?: string | null, displayName?: string |
+            null, informationLinks?: { <xref uid="@odata.type" />: ...,
+            displayName?: ..., url?: ... }[], lastActionByUserId?: string |
+            null, lastActionDateTime?: string | null, managementTemplate?:
+            Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ..., category?: ..., createdByUserId?: ...,
+            createdDateTime?: ..., description?: ..., displayName?: ...,
+            informationLinks?: ..., lastActionByUserId?: ...,
+            lastActionDateTime?: ..., managementTemplateCollections?: ...,
+            managementTemplateSteps?: ..., parameters?: ..., priority?: ...,
+            provider?: ..., userImpact?: ..., version?: ..., workloadActions?:
+            ... } & { <xref uid="@odata.type" />: ... }) | null, portalLink?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: function, url?: function } | null, priority?: number |
+            null, userImpact?: string | null, versions?: Omit&lt;{ id?: string |
+            undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { contentMarkdown?: string | null |
+            undefined; createdByUserId?: string | null | undefined;
+            createdDateTime?: string | ... 1 more ... | undefined; ... 8 more
+            ...; '<xref uid="@odata.type" />': string; } & { ...; }[] } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedTenants.managementTemplateStep" />" }) |
+            null, version?: number | null, versionInformation?: string | null }
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedTenants.managementTemplateStepVersion"
+            />" }, tenantId?: string } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedTenants.managementTemplateStepDeployment"
+            />" }
           description: ''
         - id: params
-          type: any
+          type: '{ managementTemplateStepVersion-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /tenantRelationships/managedTenants/managementTemplateStepVersions/{managementTemplateStepVersion-id}/deployments"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, createdByUserId?: string | null, createdDateTime?: string
+          | null, error?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, code?: string | null, message?: string |
+          null } | null, lastActionByUserId?: string | null,
+          lastActionDateTime?: string | null, status?: "unknownFutureValue" |
+          "unknown" | "failed" | "inProgress" | "completed" | "ineligible",
+          templateStepVersion?: Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, acceptedFor?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, acceptedVersion?: Record&lt;..., ...&gt;
+          | Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type" />':
+          string; }, "<xref uid="@odata.type" />"&gt; & { contentMarkdown?:
+          string | null | undefined; createdByUserId?: string | null |
+          undefined; createdDateTime?: string | ... 1 more ... | undefined; ...
+          8 more ...; '<xref uid="@odata.type" />': string; } & { ...; } | null,
+          category?: "unknownFutureValue" | Record&lt;..., ...&gt; | "custom" |
+          "devices" | "identity" | "data" | null, createdByUserId?: string |
+          null, createdDateTime?: string | null, description?: string | null,
+          displayName?: string | null, informationLinks?: ...[],
+          lastActionByUserId?: string | null, lastActionDateTime?: string |
+          null, managementTemplate?: Record&lt;..., ...&gt; | (... & ... & ...)
+          | null, portalLink?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., displayName?: ..., url?: ... } | null,
+          priority?: number | null, userImpact?: string | null, versions?: ...[]
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managementTemplateStep" />" }) |
+          null, contentMarkdown?: string | null, createdByUserId?: string |
+          null, createdDateTime?: string | null, deployments?: Omit&lt;{ id?:
+          string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & { createdByUserId?: string | null |
+          undefined; createdDateTime?: string | null | undefined; error?:
+          Record&lt;...&gt; | ... 2 more ... | undefined; ... 5 more ...; '<xref
+          uid="@odata.type" />': string; } & { ...; }[], lastActionByUserId?:
+          string | null, lastActionDateTime?: string | null, name?: string |
+          null, templateStep?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          acceptedVersion?: Record&lt;..., ...&gt; | Omit&lt;{ id?: string |
+          undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & { contentMarkdown?: string | null |
+          undefined; createdByUserId?: string | null | undefined;
+          createdDateTime?: string | ... 1 more ... | undefined; ... 8 more ...;
+          '<xref uid="@odata.type" />': string; } & { ...; } | null, category?:
+          "unknownFutureValue" | Record&lt;..., ...&gt; | "custom" | "devices" |
+          "identity" | "data" | null, createdByUserId?: string | null,
+          createdDateTime?: string | null, description?: string | null,
+          displayName?: string | null, informationLinks?: ...[],
+          lastActionByUserId?: string | null, lastActionDateTime?: string |
+          null, managementTemplate?: Record&lt;..., ...&gt; | (... & ... & ...)
+          | null, portalLink?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., displayName?: ..., url?: ... } | null,
+          priority?: number | null, userImpact?: string | null, versions?: ...[]
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managementTemplateStep" />" }) |
+          null, version?: number | null, versionInformation?: string | null } &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managementTemplateStepVersion" />"
+          }, tenantId?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managementTemplateStepDeployment"
+          />" }&gt;
+  - name: >-
+      del({ If-Match?: string, managementTemplateStepDeployment-id: string,
+      managementTemplateStepVersion-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.tenantRelationships.managedTenants.managementTemplateStepVersions.deployments.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -51,18 +400,22 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /tenantRelationships/managedTenants/managementTemplateStepVersions/{managementTemplateStepVersion-id}/deployments/{managementTemplateStepDeployment-id}"]["response"]>
+        function del(params?: { If-Match?: string,
+        managementTemplateStepDeployment-id: string,
+        managementTemplateStepVersion-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { If-Match?: string, managementTemplateStepDeployment-id: string,
+            managementTemplateStepVersion-id: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /tenantRelationships/managedTenants/managementTemplateStepVersions/{managementTemplateStepVersion-id}/deployments/{managementTemplateStepDeployment-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[],
+      managementTemplateStepDeployment-id: string,
+      managementTemplateStepVersion-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.tenantRelationships.managedTenants.managementTemplateStepVersions.deployments.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -73,18 +426,140 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /tenantRelationships/managedTenants/managementTemplateStepVersions/{managementTemplateStepVersion-id}/deployments/{managementTemplateStepDeployment-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        managementTemplateStepDeployment-id: string,
+        managementTemplateStepVersion-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, createdByUserId?: string | null, createdDateTime?: string |
+        null, error?: Record<string, never> | { @odata.type: string, code?:
+        string | null, message?: string | null } | null, lastActionByUserId?:
+        string | null, lastActionDateTime?: string | null, status?:
+        "unknownFutureValue" | "unknown" | "failed" | "inProgress" | "completed"
+        | "ineligible", templateStepVersion?: Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, acceptedFor?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, acceptedVersion?: Record<...,
+        ...> | Omit<{ id?: string | undefined; '@odata.type': string; },
+        "@odata.type"> & { contentMarkdown?: string | null | undefined;
+        createdByUserId?: string | null | undefined; createdDateTime?: string |
+        ... 1 more ... | undefined; ... 8 more ...; '@odata.type': string; } & {
+        ...; } | null, category?: "unknownFutureValue" | Record<..., ...> |
+        "custom" | "devices" | "identity" | "data" | null, createdByUserId?:
+        string | null, createdDateTime?: string | null, description?: string |
+        null, displayName?: string | null, informationLinks?: ...[],
+        lastActionByUserId?: string | null, lastActionDateTime?: string | null,
+        managementTemplate?: Record<..., ...> | (... & ... & ...) | null,
+        portalLink?: Record<..., ...> | { @odata.type: ..., displayName?: ...,
+        url?: ... } | null, priority?: number | null, userImpact?: string |
+        null, versions?: ...[] } & { @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStep" }) | null,
+        contentMarkdown?: string | null, createdByUserId?: string | null,
+        createdDateTime?: string | null, deployments?: Omit<{ id?: string |
+        undefined; '@odata.type': string; }, "@odata.type"> & {
+        createdByUserId?: string | null | undefined; createdDateTime?: string |
+        null | undefined; error?: Record<...> | ... 2 more ... | undefined; ...
+        5 more ...; '@odata.type': string; } & { ...; }[], lastActionByUserId?:
+        string | null, lastActionDateTime?: string | null, name?: string | null,
+        templateStep?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & { @odata.type: string, acceptedVersion?:
+        Record<..., ...> | Omit<{ id?: string | undefined; '@odata.type':
+        string; }, "@odata.type"> & { contentMarkdown?: string | null |
+        undefined; createdByUserId?: string | null | undefined;
+        createdDateTime?: string | ... 1 more ... | undefined; ... 8 more ...;
+        '@odata.type': string; } & { ...; } | null, category?:
+        "unknownFutureValue" | Record<..., ...> | "custom" | "devices" |
+        "identity" | "data" | null, createdByUserId?: string | null,
+        createdDateTime?: string | null, description?: string | null,
+        displayName?: string | null, informationLinks?: ...[],
+        lastActionByUserId?: string | null, lastActionDateTime?: string | null,
+        managementTemplate?: Record<..., ...> | (... & ... & ...) | null,
+        portalLink?: Record<..., ...> | { @odata.type: ..., displayName?: ...,
+        url?: ... } | null, priority?: number | null, userImpact?: string |
+        null, versions?: ...[] } & { @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStep" }) | null,
+        version?: number | null, versionInformation?: string | null } & {
+        @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStepVersion" },
+        tenantId?: string } & { @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStepDeployment" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[],
+            managementTemplateStepDeployment-id: string,
+            managementTemplateStepVersion-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /tenantRelationships/managedTenants/managementTemplateStepVersions/{managementTemplateStepVersion-id}/deployments/{managementTemplateStepDeployment-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, createdByUserId?: string | null, createdDateTime?: string
+          | null, error?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, code?: string | null, message?: string |
+          null } | null, lastActionByUserId?: string | null,
+          lastActionDateTime?: string | null, status?: "unknownFutureValue" |
+          "unknown" | "failed" | "inProgress" | "completed" | "ineligible",
+          templateStepVersion?: Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, acceptedFor?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, acceptedVersion?: Record&lt;..., ...&gt;
+          | Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type" />':
+          string; }, "<xref uid="@odata.type" />"&gt; & { contentMarkdown?:
+          string | null | undefined; createdByUserId?: string | null |
+          undefined; createdDateTime?: string | ... 1 more ... | undefined; ...
+          8 more ...; '<xref uid="@odata.type" />': string; } & { ...; } | null,
+          category?: "unknownFutureValue" | Record&lt;..., ...&gt; | "custom" |
+          "devices" | "identity" | "data" | null, createdByUserId?: string |
+          null, createdDateTime?: string | null, description?: string | null,
+          displayName?: string | null, informationLinks?: ...[],
+          lastActionByUserId?: string | null, lastActionDateTime?: string |
+          null, managementTemplate?: Record&lt;..., ...&gt; | (... & ... & ...)
+          | null, portalLink?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., displayName?: ..., url?: ... } | null,
+          priority?: number | null, userImpact?: string | null, versions?: ...[]
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managementTemplateStep" />" }) |
+          null, contentMarkdown?: string | null, createdByUserId?: string |
+          null, createdDateTime?: string | null, deployments?: Omit&lt;{ id?:
+          string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & { createdByUserId?: string | null |
+          undefined; createdDateTime?: string | null | undefined; error?:
+          Record&lt;...&gt; | ... 2 more ... | undefined; ... 5 more ...; '<xref
+          uid="@odata.type" />': string; } & { ...; }[], lastActionByUserId?:
+          string | null, lastActionDateTime?: string | null, name?: string |
+          null, templateStep?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          acceptedVersion?: Record&lt;..., ...&gt; | Omit&lt;{ id?: string |
+          undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & { contentMarkdown?: string | null |
+          undefined; createdByUserId?: string | null | undefined;
+          createdDateTime?: string | ... 1 more ... | undefined; ... 8 more ...;
+          '<xref uid="@odata.type" />': string; } & { ...; } | null, category?:
+          "unknownFutureValue" | Record&lt;..., ...&gt; | "custom" | "devices" |
+          "identity" | "data" | null, createdByUserId?: string | null,
+          createdDateTime?: string | null, description?: string | null,
+          displayName?: string | null, informationLinks?: ...[],
+          lastActionByUserId?: string | null, lastActionDateTime?: string |
+          null, managementTemplate?: Record&lt;..., ...&gt; | (... & ... & ...)
+          | null, portalLink?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., displayName?: ..., url?: ... } | null,
+          priority?: number | null, userImpact?: string | null, versions?: ...[]
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managementTemplateStep" />" }) |
+          null, version?: number | null, versionInformation?: string | null } &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managementTemplateStepVersion" />"
+          }, tenantId?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managementTemplateStepDeployment"
+          />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, managementTemplateStepVersion-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.tenantRelationships.managedTenants.managementTemplateStepVersions.deployments.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -95,20 +570,143 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /tenantRelationships/managedTenants/managementTemplateStepVersions/{managementTemplateStepVersion-id}/deployments"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, managementTemplateStepVersion-id: string
+        }): EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?:
+        string | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, createdByUserId?: string | null,
+        createdDateTime?: string | null, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null } |
+        null, lastActionByUserId?: string | null, lastActionDateTime?: string |
+        null, status?: "unknownFutureValue" | "unknown" | "failed" |
+        "inProgress" | "completed" | "ineligible", templateStepVersion?: Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        acceptedFor?: function, contentMarkdown?: function, createdByUserId?:
+        function, createdDateTime?: function, deployments?: (Omit<{ id?: string
+        | undefined; '@odata.type': string; }, "@odata.type"> & {
+        createdByUserId?: string | null | undefined; createdDateTime?: string |
+        null | undefined; error?: Record<...> | ... 2 more ... | undefined; ...
+        5 more ...; '@odata.type': string; } & { ...; })[] | undefined,
+        lastActionByUserId?: function, lastActionDateTime?: function, name?:
+        function, templateStep?: function, version?: function,
+        versionInformation?: function } & { @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStepVersion" },
+        tenantId?: string } & { @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStepDeployment" })[]
+        }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, managementTemplateStepVersion-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /tenantRelationships/managedTenants/managementTemplateStepVersions/{managementTemplateStepVersion-id}/deployments"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          createdByUserId?: string | null, createdDateTime?: string | null,
+          error?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, code?: string | null, message?: string | null } | null,
+          lastActionByUserId?: string | null, lastActionDateTime?: string |
+          null, status?: "unknownFutureValue" | "unknown" | "failed" |
+          "inProgress" | "completed" | "ineligible", templateStepVersion?:
+          Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          acceptedFor?: function, contentMarkdown?: function, createdByUserId?:
+          function, createdDateTime?: function, deployments?: (Omit&lt;{ id?:
+          string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & { createdByUserId?: string | null |
+          undefined; createdDateTime?: string | null | undefined; error?:
+          Record&lt;...&gt; | ... 2 more ... | undefined; ... 5 more ...; '<xref
+          uid="@odata.type" />': string; } & { ...; })[] | undefined,
+          lastActionByUserId?: function, lastActionDateTime?: function, name?:
+          function, templateStep?: function, version?: function,
+          versionInformation?: function } & { <xref uid="@odata.type" />:
+          "#<xref
+          uid="microsoft.graph.managedTenants.managementTemplateStepVersion" />"
+          }, tenantId?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managementTemplateStepDeployment"
+          />" })[] }&gt;
   - name: >-
-      update(Operation<"/tenantRelationships/managedTenants/managementTemplateStepVersions/{managementTemplateStepVersion-id}/deployments/{managementTemplateStepDeployment-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, createdByUserId?: string | null, createdDateTime?:
+      string | null, error?: Record<string, never> | { @odata.type: string,
+      code?: string | null, message?: string | null } | null,
+      lastActionByUserId?: string | null, lastActionDateTime?: string | null,
+      status?: "unknownFutureValue" | "unknown" | "failed" | "inProgress" |
+      "completed" | "ineligible", templateStepVersion?: Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string,
+      acceptedFor?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, acceptedVersion?:
+      Record<string, never> | Omit<{ id?: string | undefined; '@odata.type':
+      string; }, "@odata.type"> & { contentMarkdown?: string | null | undefined;
+      createdByUserId?: string | null | undefined; createdDateTime?: string |
+      ... 1 more ... | undefined; ... 8 more ...; '@odata.type': string; } & {
+      ...; } | null, category?: "unknownFutureValue" | Record<string, never> |
+      "custom" | "devices" | "identity" | "data" | null, createdByUserId?:
+      string | null, createdDateTime?: string | null, description?: string |
+      null, displayName?: string | null, informationLinks?: { @odata.type: ...,
+      displayName?: ..., url?: ... }[], lastActionByUserId?: string | null,
+      lastActionDateTime?: string | null, managementTemplate?: Record<string,
+      never> | (Omit<..., ...> & { @odata.type: ..., category?: ...,
+      createdByUserId?: ..., createdDateTime?: ..., description?: ...,
+      displayName?: ..., informationLinks?: ..., lastActionByUserId?: ...,
+      lastActionDateTime?: ..., managementTemplateCollections?: ...,
+      managementTemplateSteps?: ..., parameters?: ..., priority?: ...,
+      provider?: ..., userImpact?: ..., version?: ..., workloadActions?: ... } &
+      { @odata.type: ... }) | null, portalLink?: Record<string, never> | {
+      @odata.type: string, displayName?: function, url?: function } | null,
+      priority?: number | null, userImpact?: string | null, versions?: Omit<{
+      id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+      contentMarkdown?: string | null | undefined; createdByUserId?: string |
+      null | undefined; createdDateTime?: string | ... 1 more ... | undefined;
+      ... 8 more ...; '@odata.type': string; } & { ...; }[] } & { @odata.type:
+      "#microsoft.graph.managedTenants.managementTemplateStep" }) | null,
+      contentMarkdown?: string | null, createdByUserId?: string | null,
+      createdDateTime?: string | null, deployments?: Omit<{ id?: string |
+      undefined; '@odata.type': string; }, "@odata.type"> & { createdByUserId?:
+      string | null | undefined; createdDateTime?: string | null | undefined;
+      error?: Record<...> | ... 2 more ... | undefined; ... 5 more ...;
+      '@odata.type': string; } & { ...; }[], lastActionByUserId?: string | null,
+      lastActionDateTime?: string | null, name?: string | null, templateStep?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, acceptedVersion?: Record<string,
+      never> | Omit<{ id?: string | undefined; '@odata.type': string; },
+      "@odata.type"> & { contentMarkdown?: string | null | undefined;
+      createdByUserId?: string | null | undefined; createdDateTime?: string |
+      ... 1 more ... | undefined; ... 8 more ...; '@odata.type': string; } & {
+      ...; } | null, category?: "unknownFutureValue" | Record<string, never> |
+      "custom" | "devices" | "identity" | "data" | null, createdByUserId?:
+      string | null, createdDateTime?: string | null, description?: string |
+      null, displayName?: string | null, informationLinks?: { @odata.type: ...,
+      displayName?: ..., url?: ... }[], lastActionByUserId?: string | null,
+      lastActionDateTime?: string | null, managementTemplate?: Record<string,
+      never> | (Omit<..., ...> & { @odata.type: ..., category?: ...,
+      createdByUserId?: ..., createdDateTime?: ..., description?: ...,
+      displayName?: ..., informationLinks?: ..., lastActionByUserId?: ...,
+      lastActionDateTime?: ..., managementTemplateCollections?: ...,
+      managementTemplateSteps?: ..., parameters?: ..., priority?: ...,
+      provider?: ..., userImpact?: ..., version?: ..., workloadActions?: ... } &
+      { @odata.type: ... }) | null, portalLink?: Record<string, never> | {
+      @odata.type: string, displayName?: function, url?: function } | null,
+      priority?: number | null, userImpact?: string | null, versions?: Omit<{
+      id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+      contentMarkdown?: string | null | undefined; createdByUserId?: string |
+      null | undefined; createdDateTime?: string | ... 1 more ... | undefined;
+      ... 8 more ...; '@odata.type': string; } & { ...; }[] } & { @odata.type:
+      "#microsoft.graph.managedTenants.managementTemplateStep" }) | null,
+      version?: number | null, versionInformation?: string | null } & {
+      @odata.type:
+      "#microsoft.graph.managedTenants.managementTemplateStepVersion" },
+      tenantId?: string } & { @odata.type:
+      "#microsoft.graph.managedTenants.managementTemplateStepDeployment" }, {
+      managementTemplateStepDeployment-id: string,
+      managementTemplateStepVersion-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.tenantRelationships.managedTenants.managementTemplateStepVersions.deployments.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -119,24 +717,302 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/tenantRelationships/managedTenants/managementTemplateStepVersions/{managementTemplateStepVersion-id}/deployments/{managementTemplateStepDeployment-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /tenantRelationships/managedTenants/managementTemplateStepVersions/{managementTemplateStepVersion-id}/deployments/{managementTemplateStepDeployment-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, createdByUserId?: string | null,
+        createdDateTime?: string | null, error?: Record<string, never> | {
+        @odata.type: string, code?: string | null, message?: string | null } |
+        null, lastActionByUserId?: string | null, lastActionDateTime?: string |
+        null, status?: "unknownFutureValue" | "unknown" | "failed" |
+        "inProgress" | "completed" | "ineligible", templateStepVersion?: Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, acceptedFor?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        acceptedVersion?: Record<string, never> | Omit<{ id?: string |
+        undefined; '@odata.type': string; }, "@odata.type"> & {
+        contentMarkdown?: string | null | undefined; createdByUserId?: string |
+        null | undefined; createdDateTime?: string | ... 1 more ... | undefined;
+        ... 8 more ...; '@odata.type': string; } & { ...; } | null, category?:
+        "unknownFutureValue" | Record<string, never> | "custom" | "devices" |
+        "identity" | "data" | null, createdByUserId?: string | null,
+        createdDateTime?: string | null, description?: string | null,
+        displayName?: string | null, informationLinks?: { @odata.type: ...,
+        displayName?: ..., url?: ... }[], lastActionByUserId?: string | null,
+        lastActionDateTime?: string | null, managementTemplate?: Record<string,
+        never> | (Omit<..., ...> & { @odata.type: ..., category?: ...,
+        createdByUserId?: ..., createdDateTime?: ..., description?: ...,
+        displayName?: ..., informationLinks?: ..., lastActionByUserId?: ...,
+        lastActionDateTime?: ..., managementTemplateCollections?: ...,
+        managementTemplateSteps?: ..., parameters?: ..., priority?: ...,
+        provider?: ..., userImpact?: ..., version?: ..., workloadActions?: ... }
+        & { @odata.type: ... }) | null, portalLink?: Record<string, never> | {
+        @odata.type: string, displayName?: function, url?: function } | null,
+        priority?: number | null, userImpact?: string | null, versions?: Omit<{
+        id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        contentMarkdown?: string | null | undefined; createdByUserId?: string |
+        null | undefined; createdDateTime?: string | ... 1 more ... | undefined;
+        ... 8 more ...; '@odata.type': string; } & { ...; }[] } & { @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStep" }) | null,
+        contentMarkdown?: string | null, createdByUserId?: string | null,
+        createdDateTime?: string | null, deployments?: Omit<{ id?: string |
+        undefined; '@odata.type': string; }, "@odata.type"> & {
+        createdByUserId?: string | null | undefined; createdDateTime?: string |
+        null | undefined; error?: Record<...> | ... 2 more ... | undefined; ...
+        5 more ...; '@odata.type': string; } & { ...; }[], lastActionByUserId?:
+        string | null, lastActionDateTime?: string | null, name?: string | null,
+        templateStep?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, acceptedVersion?:
+        Record<string, never> | Omit<{ id?: string | undefined; '@odata.type':
+        string; }, "@odata.type"> & { contentMarkdown?: string | null |
+        undefined; createdByUserId?: string | null | undefined;
+        createdDateTime?: string | ... 1 more ... | undefined; ... 8 more ...;
+        '@odata.type': string; } & { ...; } | null, category?:
+        "unknownFutureValue" | Record<string, never> | "custom" | "devices" |
+        "identity" | "data" | null, createdByUserId?: string | null,
+        createdDateTime?: string | null, description?: string | null,
+        displayName?: string | null, informationLinks?: { @odata.type: ...,
+        displayName?: ..., url?: ... }[], lastActionByUserId?: string | null,
+        lastActionDateTime?: string | null, managementTemplate?: Record<string,
+        never> | (Omit<..., ...> & { @odata.type: ..., category?: ...,
+        createdByUserId?: ..., createdDateTime?: ..., description?: ...,
+        displayName?: ..., informationLinks?: ..., lastActionByUserId?: ...,
+        lastActionDateTime?: ..., managementTemplateCollections?: ...,
+        managementTemplateSteps?: ..., parameters?: ..., priority?: ...,
+        provider?: ..., userImpact?: ..., version?: ..., workloadActions?: ... }
+        & { @odata.type: ... }) | null, portalLink?: Record<string, never> | {
+        @odata.type: string, displayName?: function, url?: function } | null,
+        priority?: number | null, userImpact?: string | null, versions?: Omit<{
+        id?: string | undefined; '@odata.type': string; }, "@odata.type"> & {
+        contentMarkdown?: string | null | undefined; createdByUserId?: string |
+        null | undefined; createdDateTime?: string | ... 1 more ... | undefined;
+        ... 8 more ...; '@odata.type': string; } & { ...; }[] } & { @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStep" }) | null,
+        version?: number | null, versionInformation?: string | null } & {
+        @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStepVersion" },
+        tenantId?: string } & { @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStepDeployment" },
+        params?: { managementTemplateStepDeployment-id: string,
+        managementTemplateStepVersion-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, createdByUserId?: string | null, createdDateTime?: string |
+        null, error?: Record<string, never> | { @odata.type: string, code?:
+        string | null, message?: string | null } | null, lastActionByUserId?:
+        string | null, lastActionDateTime?: string | null, status?:
+        "unknownFutureValue" | "unknown" | "failed" | "inProgress" | "completed"
+        | "ineligible", templateStepVersion?: Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, acceptedFor?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, acceptedVersion?: Record<...,
+        ...> | Omit<{ id?: string | undefined; '@odata.type': string; },
+        "@odata.type"> & { contentMarkdown?: string | null | undefined;
+        createdByUserId?: string | null | undefined; createdDateTime?: string |
+        ... 1 more ... | undefined; ... 8 more ...; '@odata.type': string; } & {
+        ...; } | null, category?: "unknownFutureValue" | Record<..., ...> |
+        "custom" | "devices" | "identity" | "data" | null, createdByUserId?:
+        string | null, createdDateTime?: string | null, description?: string |
+        null, displayName?: string | null, informationLinks?: ...[],
+        lastActionByUserId?: string | null, lastActionDateTime?: string | null,
+        managementTemplate?: Record<..., ...> | (... & ... & ...) | null,
+        portalLink?: Record<..., ...> | { @odata.type: ..., displayName?: ...,
+        url?: ... } | null, priority?: number | null, userImpact?: string |
+        null, versions?: ...[] } & { @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStep" }) | null,
+        contentMarkdown?: string | null, createdByUserId?: string | null,
+        createdDateTime?: string | null, deployments?: Omit<{ id?: string |
+        undefined; '@odata.type': string; }, "@odata.type"> & {
+        createdByUserId?: string | null | undefined; createdDateTime?: string |
+        null | undefined; error?: Record<...> | ... 2 more ... | undefined; ...
+        5 more ...; '@odata.type': string; } & { ...; }[], lastActionByUserId?:
+        string | null, lastActionDateTime?: string | null, name?: string | null,
+        templateStep?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & { @odata.type: string, acceptedVersion?:
+        Record<..., ...> | Omit<{ id?: string | undefined; '@odata.type':
+        string; }, "@odata.type"> & { contentMarkdown?: string | null |
+        undefined; createdByUserId?: string | null | undefined;
+        createdDateTime?: string | ... 1 more ... | undefined; ... 8 more ...;
+        '@odata.type': string; } & { ...; } | null, category?:
+        "unknownFutureValue" | Record<..., ...> | "custom" | "devices" |
+        "identity" | "data" | null, createdByUserId?: string | null,
+        createdDateTime?: string | null, description?: string | null,
+        displayName?: string | null, informationLinks?: ...[],
+        lastActionByUserId?: string | null, lastActionDateTime?: string | null,
+        managementTemplate?: Record<..., ...> | (... & ... & ...) | null,
+        portalLink?: Record<..., ...> | { @odata.type: ..., displayName?: ...,
+        url?: ... } | null, priority?: number | null, userImpact?: string |
+        null, versions?: ...[] } & { @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStep" }) | null,
+        version?: number | null, versionInformation?: string | null } & {
+        @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStepVersion" },
+        tenantId?: string } & { @odata.type:
+        "#microsoft.graph.managedTenants.managementTemplateStepDeployment" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/tenantRelationships/managedTenants/managementTemplateStepVersions/{managementTemplateStepVersion-id}/deployments/{managementTemplateStepDeployment-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            createdByUserId?: string | null, createdDateTime?: string | null,
+            error?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+            string, code?: string | null, message?: string | null } | null,
+            lastActionByUserId?: string | null, lastActionDateTime?: string |
+            null, status?: "unknownFutureValue" | "unknown" | "failed" |
+            "inProgress" | "completed" | "ineligible", templateStepVersion?:
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            acceptedFor?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            acceptedVersion?: Record&lt;string, never&gt; | Omit&lt;{ id?:
+            string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { contentMarkdown?: string | null |
+            undefined; createdByUserId?: string | null | undefined;
+            createdDateTime?: string | ... 1 more ... | undefined; ... 8 more
+            ...; '<xref uid="@odata.type" />': string; } & { ...; } | null,
+            category?: "unknownFutureValue" | Record&lt;string, never&gt; |
+            "custom" | "devices" | "identity" | "data" | null, createdByUserId?:
+            string | null, createdDateTime?: string | null, description?: string
+            | null, displayName?: string | null, informationLinks?: { <xref
+            uid="@odata.type" />: ..., displayName?: ..., url?: ... }[],
+            lastActionByUserId?: string | null, lastActionDateTime?: string |
+            null, managementTemplate?: Record&lt;string, never&gt; |
+            (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+            category?: ..., createdByUserId?: ..., createdDateTime?: ...,
+            description?: ..., displayName?: ..., informationLinks?: ...,
+            lastActionByUserId?: ..., lastActionDateTime?: ...,
+            managementTemplateCollections?: ..., managementTemplateSteps?: ...,
+            parameters?: ..., priority?: ..., provider?: ..., userImpact?: ...,
+            version?: ..., workloadActions?: ... } & { <xref uid="@odata.type"
+            />: ... }) | null, portalLink?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: function, url?:
+            function } | null, priority?: number | null, userImpact?: string |
+            null, versions?: Omit&lt;{ id?: string | undefined; '<xref
+            uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; &
+            { contentMarkdown?: string | null | undefined; createdByUserId?:
+            string | null | undefined; createdDateTime?: string | ... 1 more ...
+            | undefined; ... 8 more ...; '<xref uid="@odata.type" />': string; }
+            & { ...; }[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedTenants.managementTemplateStep" />" }) |
+            null, contentMarkdown?: string | null, createdByUserId?: string |
+            null, createdDateTime?: string | null, deployments?: Omit&lt;{ id?:
+            string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { createdByUserId?: string | null |
+            undefined; createdDateTime?: string | null | undefined; error?:
+            Record&lt;...&gt; | ... 2 more ... | undefined; ... 5 more ...;
+            '<xref uid="@odata.type" />': string; } & { ...; }[],
+            lastActionByUserId?: string | null, lastActionDateTime?: string |
+            null, name?: string | null, templateStep?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, acceptedVersion?: Record&lt;string,
+            never&gt; | Omit&lt;{ id?: string | undefined; '<xref
+            uid="@odata.type" />': string; }, "<xref uid="@odata.type" />"&gt; &
+            { contentMarkdown?: string | null | undefined; createdByUserId?:
+            string | null | undefined; createdDateTime?: string | ... 1 more ...
+            | undefined; ... 8 more ...; '<xref uid="@odata.type" />': string; }
+            & { ...; } | null, category?: "unknownFutureValue" |
+            Record&lt;string, never&gt; | "custom" | "devices" | "identity" |
+            "data" | null, createdByUserId?: string | null, createdDateTime?:
+            string | null, description?: string | null, displayName?: string |
+            null, informationLinks?: { <xref uid="@odata.type" />: ...,
+            displayName?: ..., url?: ... }[], lastActionByUserId?: string |
+            null, lastActionDateTime?: string | null, managementTemplate?:
+            Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ..., category?: ..., createdByUserId?: ...,
+            createdDateTime?: ..., description?: ..., displayName?: ...,
+            informationLinks?: ..., lastActionByUserId?: ...,
+            lastActionDateTime?: ..., managementTemplateCollections?: ...,
+            managementTemplateSteps?: ..., parameters?: ..., priority?: ...,
+            provider?: ..., userImpact?: ..., version?: ..., workloadActions?:
+            ... } & { <xref uid="@odata.type" />: ... }) | null, portalLink?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: function, url?: function } | null, priority?: number |
+            null, userImpact?: string | null, versions?: Omit&lt;{ id?: string |
+            undefined; '<xref uid="@odata.type" />': string; }, "<xref
+            uid="@odata.type" />"&gt; & { contentMarkdown?: string | null |
+            undefined; createdByUserId?: string | null | undefined;
+            createdDateTime?: string | ... 1 more ... | undefined; ... 8 more
+            ...; '<xref uid="@odata.type" />': string; } & { ...; }[] } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedTenants.managementTemplateStep" />" }) |
+            null, version?: number | null, versionInformation?: string | null }
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedTenants.managementTemplateStepVersion"
+            />" }, tenantId?: string } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.managedTenants.managementTemplateStepDeployment"
+            />" }
           description: ''
         - id: params
-          type: any
+          type: >-
+            { managementTemplateStepDeployment-id: string,
+            managementTemplateStepVersion-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /tenantRelationships/managedTenants/managementTemplateStepVersions/{managementTemplateStepVersion-id}/deployments/{managementTemplateStepDeployment-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, createdByUserId?: string | null, createdDateTime?: string
+          | null, error?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, code?: string | null, message?: string |
+          null } | null, lastActionByUserId?: string | null,
+          lastActionDateTime?: string | null, status?: "unknownFutureValue" |
+          "unknown" | "failed" | "inProgress" | "completed" | "ineligible",
+          templateStepVersion?: Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, acceptedFor?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, acceptedVersion?: Record&lt;..., ...&gt;
+          | Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type" />':
+          string; }, "<xref uid="@odata.type" />"&gt; & { contentMarkdown?:
+          string | null | undefined; createdByUserId?: string | null |
+          undefined; createdDateTime?: string | ... 1 more ... | undefined; ...
+          8 more ...; '<xref uid="@odata.type" />': string; } & { ...; } | null,
+          category?: "unknownFutureValue" | Record&lt;..., ...&gt; | "custom" |
+          "devices" | "identity" | "data" | null, createdByUserId?: string |
+          null, createdDateTime?: string | null, description?: string | null,
+          displayName?: string | null, informationLinks?: ...[],
+          lastActionByUserId?: string | null, lastActionDateTime?: string |
+          null, managementTemplate?: Record&lt;..., ...&gt; | (... & ... & ...)
+          | null, portalLink?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., displayName?: ..., url?: ... } | null,
+          priority?: number | null, userImpact?: string | null, versions?: ...[]
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managementTemplateStep" />" }) |
+          null, contentMarkdown?: string | null, createdByUserId?: string |
+          null, createdDateTime?: string | null, deployments?: Omit&lt;{ id?:
+          string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & { createdByUserId?: string | null |
+          undefined; createdDateTime?: string | null | undefined; error?:
+          Record&lt;...&gt; | ... 2 more ... | undefined; ... 5 more ...; '<xref
+          uid="@odata.type" />': string; } & { ...; }[], lastActionByUserId?:
+          string | null, lastActionDateTime?: string | null, name?: string |
+          null, templateStep?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          acceptedVersion?: Record&lt;..., ...&gt; | Omit&lt;{ id?: string |
+          undefined; '<xref uid="@odata.type" />': string; }, "<xref
+          uid="@odata.type" />"&gt; & { contentMarkdown?: string | null |
+          undefined; createdByUserId?: string | null | undefined;
+          createdDateTime?: string | ... 1 more ... | undefined; ... 8 more ...;
+          '<xref uid="@odata.type" />': string; } & { ...; } | null, category?:
+          "unknownFutureValue" | Record&lt;..., ...&gt; | "custom" | "devices" |
+          "identity" | "data" | null, createdByUserId?: string | null,
+          createdDateTime?: string | null, description?: string | null,
+          displayName?: string | null, informationLinks?: ...[],
+          lastActionByUserId?: string | null, lastActionDateTime?: string |
+          null, managementTemplate?: Record&lt;..., ...&gt; | (... & ... & ...)
+          | null, portalLink?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., displayName?: ..., url?: ... } | null,
+          priority?: number | null, userImpact?: string | null, versions?: ...[]
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managementTemplateStep" />" }) |
+          null, version?: number | null, versionInformation?: string | null } &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managementTemplateStepVersion" />"
+          }, tenantId?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.managedTenants.managementTemplateStepDeployment"
+          />" }&gt;
 variables:
   - name: templateStepVersion
     uid: >-

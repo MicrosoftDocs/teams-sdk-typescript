@@ -7,7 +7,7 @@ interfaces:
   - '@microsoft/teams.graph-endpoints-beta.storage.IEndpoints'
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: get(any)
+  - name: 'get({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints-beta.storage.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`GET /storage`'
@@ -15,16 +15,286 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /storage"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<{ @odata.type: string, fileStorage?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, containers?: (Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & { @odata.type: string, archivalDetails?:
+        Record<..., ...> | { @odata.type: ..., archivedBy?: ...,
+        archivedDateTime?: ..., archiveStatus?: ... } | null,
+        assignedSensitivityLabel?: Record<..., ...> | { @odata.type: ...,
+        displayName?: ..., labelId?: ... } | null, columns?: ...[],
+        containerTypeId?: string, createdDateTime?: string, customProperties?:
+        Record<..., ...> | (... & ... & ...) | null, description?: string |
+        null, displayName?: string, drive?: Record<..., ...> | (... & ... & ...)
+        | null, externalGroupId?: string | null, isItemVersioningEnabled?:
+        boolean | null, itemMajorVersionLimit?: number | null, lockState?:
+        Record<..., ...> | "unknownFutureValue" | "unlocked" | "lockedReadOnly"
+        | "lockedNoAccess" | "lockedNoAdditions" | null, migrationJobs?: ...[],
+        owners?: ...[], ownershipType?: Record<..., ...> | "unknownFutureValue"
+        | "tenantOwned" | "userOwned" | null, permissions?: ...[], recycleBin?:
+        Record<..., ...> | (... & ... & ...) | null, settings?: { @odata.type:
+        ..., isItemVersioningEnabled?: ..., isOcrEnabled?: ...,
+        itemDefaultSensitivityLabelId?: ..., itemMajorVersionLimit?: ... },
+        sharePointGroups?: ...[], status?: Record<..., ...> |
+        "unknownFutureValue" | "inactive" | "active" | null,
+        storageUsedInBytes?: number | null, viewpoint?: Record<..., ...> | {
+        @odata.type: ..., effectiveRole?: ... } | null } & { @odata.type:
+        "#microsoft.graph.fileStorageContainer" })[],
+        containerTypeRegistrations?: (Omit<{ @odata.type: string, id?: function
+        }, "@odata.type"> & { @odata.type: string, applicationPermissionGrants?:
+        ...[], billingClassification?: "unknownFutureValue" | "standard" |
+        "trial" | "directToCustomer", billingStatus?: "unknownFutureValue" |
+        "invalid" | "valid", etag?: string, expirationDateTime?: string, name?:
+        string, owningAppId?: string, registeredDateTime?: string, settings?: {
+        @odata.type: ..., agent?: ..., isDiscoverabilityEnabled?: ...,
+        isItemVersioningEnabled?: ..., isSearchEnabled?: ...,
+        isSharingRestricted?: ..., itemMajorVersionLimit?: ...,
+        maxStoragePerContainerInBytes?: ..., sharingCapability?: ...,
+        urlTemplate?: ... } } & { @odata.type:
+        "#microsoft.graph.fileStorageContainerTypeRegistration" })[],
+        containerTypes?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, billingClassification?:
+        "unknownFutureValue" | "standard" | "trial" | "directToCustomer",
+        billingStatus?: "unknownFutureValue" | "invalid" | "valid",
+        createdDateTime?: string, etag?: string, expirationDateTime?: string,
+        name?: string, owningAppId?: string, settings?: { @odata.type: ...,
+        agent?: ..., consumingTenantOverridables?: ...,
+        isDiscoverabilityEnabled?: ..., isItemVersioningEnabled?: ...,
+        isSearchEnabled?: ..., isSharingRestricted?: ...,
+        itemMajorVersionLimit?: ..., maxStoragePerContainerInBytes?: ...,
+        sharingCapability?: ..., urlTemplate?: ... } } & { @odata.type:
+        "#microsoft.graph.fileStorageContainerType" })[], deletedContainers?:
+        (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+        @odata.type: string, archivalDetails?: Record<..., ...> | { @odata.type:
+        ..., archivedBy?: ..., archivedDateTime?: ..., archiveStatus?: ... } |
+        null, assignedSensitivityLabel?: Record<..., ...> | { @odata.type: ...,
+        displayName?: ..., labelId?: ... } | null, columns?: ...[],
+        containerTypeId?: string, createdDateTime?: string, customProperties?:
+        Record<..., ...> | (... & ... & ...) | null, description?: string |
+        null, displayName?: string, drive?: Record<..., ...> | (... & ... & ...)
+        | null, externalGroupId?: string | null, isItemVersioningEnabled?:
+        boolean | null, itemMajorVersionLimit?: number | null, lockState?:
+        Record<..., ...> | "unknownFutureValue" | "unlocked" | "lockedReadOnly"
+        | "lockedNoAccess" | "lockedNoAdditions" | null, migrationJobs?: ...[],
+        owners?: ...[], ownershipType?: Record<..., ...> | "unknownFutureValue"
+        | "tenantOwned" | "userOwned" | null, permissions?: ...[], recycleBin?:
+        Record<..., ...> | (... & ... & ...) | null, settings?: { @odata.type:
+        ..., isItemVersioningEnabled?: ..., isOcrEnabled?: ...,
+        itemDefaultSensitivityLabelId?: ..., itemMajorVersionLimit?: ... },
+        sharePointGroups?: ...[], status?: Record<..., ...> |
+        "unknownFutureValue" | "inactive" | "active" | null,
+        storageUsedInBytes?: number | null, viewpoint?: Record<..., ...> | {
+        @odata.type: ..., effectiveRole?: ... } | null } & { @odata.type:
+        "#microsoft.graph.fileStorageContainer" })[] } & { @odata.type:
+        "#microsoft.graph.fileStorage" }) | null, settings?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, quota?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, deleted?: number | null, manageWebUrl?: string | null,
+        remaining?: number | null, services?: (... & ...)[], state?: string |
+        null, total?: number | null, used?: number | null } & { @odata.type:
+        "#microsoft.graph.unifiedStorageQuota" }) | null } & { @odata.type:
+        "#microsoft.graph.storageSettings" }) | null }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /storage"]["response"]&gt;
-  - name: update(Operation<"/storage", "patch">)
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string, fileStorage?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, containers?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          archivalDetails?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., archivedBy?: ..., archivedDateTime?: ..., archiveStatus?: ...
+          } | null, assignedSensitivityLabel?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., displayName?: ..., labelId?: ... } | null,
+          columns?: ...[], containerTypeId?: string, createdDateTime?: string,
+          customProperties?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+          description?: string | null, displayName?: string, drive?:
+          Record&lt;..., ...&gt; | (... & ... & ...) | null, externalGroupId?:
+          string | null, isItemVersioningEnabled?: boolean | null,
+          itemMajorVersionLimit?: number | null, lockState?: Record&lt;...,
+          ...&gt; | "unknownFutureValue" | "unlocked" | "lockedReadOnly" |
+          "lockedNoAccess" | "lockedNoAdditions" | null, migrationJobs?: ...[],
+          owners?: ...[], ownershipType?: Record&lt;..., ...&gt; |
+          "unknownFutureValue" | "tenantOwned" | "userOwned" | null,
+          permissions?: ...[], recycleBin?: Record&lt;..., ...&gt; | (... & ...
+          & ...) | null, settings?: { <xref uid="@odata.type" />: ...,
+          isItemVersioningEnabled?: ..., isOcrEnabled?: ...,
+          itemDefaultSensitivityLabelId?: ..., itemMajorVersionLimit?: ... },
+          sharePointGroups?: ...[], status?: Record&lt;..., ...&gt; |
+          "unknownFutureValue" | "inactive" | "active" | null,
+          storageUsedInBytes?: number | null, viewpoint?: Record&lt;..., ...&gt;
+          | { <xref uid="@odata.type" />: ..., effectiveRole?: ... } | null } &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.fileStorageContainer" />" })[],
+          containerTypeRegistrations?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, applicationPermissionGrants?: ...[],
+          billingClassification?: "unknownFutureValue" | "standard" | "trial" |
+          "directToCustomer", billingStatus?: "unknownFutureValue" | "invalid" |
+          "valid", etag?: string, expirationDateTime?: string, name?: string,
+          owningAppId?: string, registeredDateTime?: string, settings?: { <xref
+          uid="@odata.type" />: ..., agent?: ..., isDiscoverabilityEnabled?:
+          ..., isItemVersioningEnabled?: ..., isSearchEnabled?: ...,
+          isSharingRestricted?: ..., itemMajorVersionLimit?: ...,
+          maxStoragePerContainerInBytes?: ..., sharingCapability?: ...,
+          urlTemplate?: ... } } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.fileStorageContainerTypeRegistration" />" })[],
+          containerTypes?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, billingClassification?:
+          "unknownFutureValue" | "standard" | "trial" | "directToCustomer",
+          billingStatus?: "unknownFutureValue" | "invalid" | "valid",
+          createdDateTime?: string, etag?: string, expirationDateTime?: string,
+          name?: string, owningAppId?: string, settings?: { <xref
+          uid="@odata.type" />: ..., agent?: ..., consumingTenantOverridables?:
+          ..., isDiscoverabilityEnabled?: ..., isItemVersioningEnabled?: ...,
+          isSearchEnabled?: ..., isSharingRestricted?: ...,
+          itemMajorVersionLimit?: ..., maxStoragePerContainerInBytes?: ...,
+          sharingCapability?: ..., urlTemplate?: ... } } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.fileStorageContainerType" />" })[],
+          deletedContainers?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, archivalDetails?: Record&lt;..., ...&gt;
+          | { <xref uid="@odata.type" />: ..., archivedBy?: ...,
+          archivedDateTime?: ..., archiveStatus?: ... } | null,
+          assignedSensitivityLabel?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., displayName?: ..., labelId?: ... } | null,
+          columns?: ...[], containerTypeId?: string, createdDateTime?: string,
+          customProperties?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+          description?: string | null, displayName?: string, drive?:
+          Record&lt;..., ...&gt; | (... & ... & ...) | null, externalGroupId?:
+          string | null, isItemVersioningEnabled?: boolean | null,
+          itemMajorVersionLimit?: number | null, lockState?: Record&lt;...,
+          ...&gt; | "unknownFutureValue" | "unlocked" | "lockedReadOnly" |
+          "lockedNoAccess" | "lockedNoAdditions" | null, migrationJobs?: ...[],
+          owners?: ...[], ownershipType?: Record&lt;..., ...&gt; |
+          "unknownFutureValue" | "tenantOwned" | "userOwned" | null,
+          permissions?: ...[], recycleBin?: Record&lt;..., ...&gt; | (... & ...
+          & ...) | null, settings?: { <xref uid="@odata.type" />: ...,
+          isItemVersioningEnabled?: ..., isOcrEnabled?: ...,
+          itemDefaultSensitivityLabelId?: ..., itemMajorVersionLimit?: ... },
+          sharePointGroups?: ...[], status?: Record&lt;..., ...&gt; |
+          "unknownFutureValue" | "inactive" | "active" | null,
+          storageUsedInBytes?: number | null, viewpoint?: Record&lt;..., ...&gt;
+          | { <xref uid="@odata.type" />: ..., effectiveRole?: ... } | null } &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.fileStorageContainer" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.fileStorage" />" })
+          | null, settings?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, quota?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, deleted?: number | null, manageWebUrl?:
+          string | null, remaining?: number | null, services?: (... & ...)[],
+          state?: string | null, total?: number | null, used?: number | null } &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.unifiedStorageQuota" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.storageSettings"
+          />" }) | null }&gt;
+  - name: >-
+      update({ @odata.type: string, fileStorage?: Record<string, never> |
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, containers?: (Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & { @odata.type: string, archivalDetails?:
+      Record<string, never> | { @odata.type: string, archivedBy?: function,
+      archivedDateTime?: function, archiveStatus?: function } | null,
+      assignedSensitivityLabel?: Record<string, never> | { @odata.type: string,
+      displayName?: function, labelId?: function } | null, columns?: (... & ...
+      & ...)[], containerTypeId?: string, createdDateTime?: string,
+      customProperties?: Record<string, never> | (Omit<..., ...> & {
+      @odata.type: ... } & { @odata.type: ... }) | null, description?: string |
+      null, displayName?: string, drive?: Record<string, never> | (Omit<...,
+      ...> & { @odata.type: ..., activities?: ..., bundles?: ..., driveType?:
+      ..., following?: ..., items?: ..., list?: ..., owner?: ..., quota?: ...,
+      root?: ..., sharePointIds?: ..., special?: ..., system?: ... } & {
+      @odata.type: ... }) | null, externalGroupId?: string | null,
+      isItemVersioningEnabled?: boolean | null, itemMajorVersionLimit?: number |
+      null, lockState?: Record<string, never> | "unknownFutureValue" |
+      "unlocked" | "lockedReadOnly" | "lockedNoAccess" | "lockedNoAdditions" |
+      null, migrationJobs?: (... & ... & ...)[], owners?: (... & ... & ...)[],
+      ownershipType?: Record<string, never> | "unknownFutureValue" |
+      "tenantOwned" | "userOwned" | null, permissions?: (... & ... & ...)[],
+      recycleBin?: Record<string, never> | (Omit<..., ...> & { @odata.type: ...,
+      items?: ..., settings?: ... } & { @odata.type: ... }) | null, settings?: {
+      @odata.type: string, isItemVersioningEnabled?: function, isOcrEnabled?:
+      function, itemDefaultSensitivityLabelId?: function,
+      itemMajorVersionLimit?: function }, sharePointGroups?: (... & ... &
+      ...)[], status?: Record<string, never> | "unknownFutureValue" | "inactive"
+      | "active" | null, storageUsedInBytes?: number | null, viewpoint?:
+      Record<string, never> | { @odata.type: string, effectiveRole?: function }
+      | null } & { @odata.type: "#microsoft.graph.fileStorageContainer" })[],
+      containerTypeRegistrations?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, applicationPermissionGrants?: {
+      @odata.type: ..., appId?: ..., applicationPermissions?: ...,
+      delegatedPermissions?: ... }[], billingClassification?:
+      "unknownFutureValue" | "standard" | "trial" | "directToCustomer",
+      billingStatus?: "unknownFutureValue" | "invalid" | "valid", etag?: string,
+      expirationDateTime?: string, name?: string, owningAppId?: string,
+      registeredDateTime?: string, settings?: { @odata.type: string, agent?:
+      function, isDiscoverabilityEnabled?: function, isItemVersioningEnabled?:
+      function, isSearchEnabled?: function, isSharingRestricted?: function,
+      itemMajorVersionLimit?: function, maxStoragePerContainerInBytes?:
+      function, sharingCapability?: function, urlTemplate?: function } } & {
+      @odata.type: "#microsoft.graph.fileStorageContainerTypeRegistration" })[],
+      containerTypes?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, billingClassification?:
+      "unknownFutureValue" | "standard" | "trial" | "directToCustomer",
+      billingStatus?: "unknownFutureValue" | "invalid" | "valid",
+      createdDateTime?: string, etag?: string, expirationDateTime?: string,
+      name?: string, owningAppId?: string, settings?: { @odata.type: string,
+      agent?: function, consumingTenantOverridables?: function,
+      isDiscoverabilityEnabled?: function, isItemVersioningEnabled?: function,
+      isSearchEnabled?: function, isSharingRestricted?: function,
+      itemMajorVersionLimit?: function, maxStoragePerContainerInBytes?:
+      function, sharingCapability?: function, urlTemplate?: function } } & {
+      @odata.type: "#microsoft.graph.fileStorageContainerType" })[],
+      deletedContainers?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, archivalDetails?: Record<string,
+      never> | { @odata.type: string, archivedBy?: function, archivedDateTime?:
+      function, archiveStatus?: function } | null, assignedSensitivityLabel?:
+      Record<string, never> | { @odata.type: string, displayName?: function,
+      labelId?: function } | null, columns?: (... & ... & ...)[],
+      containerTypeId?: string, createdDateTime?: string, customProperties?:
+      Record<string, never> | (Omit<..., ...> & { @odata.type: ... } & {
+      @odata.type: ... }) | null, description?: string | null, displayName?:
+      string, drive?: Record<string, never> | (Omit<..., ...> & { @odata.type:
+      ..., activities?: ..., bundles?: ..., driveType?: ..., following?: ...,
+      items?: ..., list?: ..., owner?: ..., quota?: ..., root?: ...,
+      sharePointIds?: ..., special?: ..., system?: ... } & { @odata.type: ... })
+      | null, externalGroupId?: string | null, isItemVersioningEnabled?: boolean
+      | null, itemMajorVersionLimit?: number | null, lockState?: Record<string,
+      never> | "unknownFutureValue" | "unlocked" | "lockedReadOnly" |
+      "lockedNoAccess" | "lockedNoAdditions" | null, migrationJobs?: (... & ...
+      & ...)[], owners?: (... & ... & ...)[], ownershipType?: Record<string,
+      never> | "unknownFutureValue" | "tenantOwned" | "userOwned" | null,
+      permissions?: (... & ... & ...)[], recycleBin?: Record<string, never> |
+      (Omit<..., ...> & { @odata.type: ..., items?: ..., settings?: ... } & {
+      @odata.type: ... }) | null, settings?: { @odata.type: string,
+      isItemVersioningEnabled?: function, isOcrEnabled?: function,
+      itemDefaultSensitivityLabelId?: function, itemMajorVersionLimit?: function
+      }, sharePointGroups?: (... & ... & ...)[], status?: Record<string, never>
+      | "unknownFutureValue" | "inactive" | "active" | null,
+      storageUsedInBytes?: number | null, viewpoint?: Record<string, never> | {
+      @odata.type: string, effectiveRole?: function } | null } & { @odata.type:
+      "#microsoft.graph.fileStorageContainer" })[] } & { @odata.type:
+      "#microsoft.graph.fileStorage" }) | null, settings?: Record<string, never>
+      | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, quota?: Record<string, never> | (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string, deleted?:
+      number | null, manageWebUrl?: string | null, remaining?: number | null,
+      services?: (Omit<..., ...> & { @odata.type: ... })[], state?: string |
+      null, total?: number | null, used?: number | null } & { @odata.type:
+      "#microsoft.graph.unifiedStorageQuota" }) | null } & { @odata.type:
+      "#microsoft.graph.storageSettings" }) | null })
     uid: '@microsoft/teams.graph-endpoints-beta.storage.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /storage`'
@@ -32,12 +302,407 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/storage", "patch">):
-        EndpointRequest<IEndpoints["PATCH /storage"]["response"]>
+        function update(body: { @odata.type: string, fileStorage?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, containers?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, archivalDetails?: Record<string, never> | { @odata.type: string,
+        archivedBy?: function, archivedDateTime?: function, archiveStatus?:
+        function } | null, assignedSensitivityLabel?: Record<string, never> | {
+        @odata.type: string, displayName?: function, labelId?: function } |
+        null, columns?: (... & ... & ...)[], containerTypeId?: string,
+        createdDateTime?: string, customProperties?: Record<string, never> |
+        (Omit<..., ...> & { @odata.type: ... } & { @odata.type: ... }) | null,
+        description?: string | null, displayName?: string, drive?:
+        Record<string, never> | (Omit<..., ...> & { @odata.type: ...,
+        activities?: ..., bundles?: ..., driveType?: ..., following?: ...,
+        items?: ..., list?: ..., owner?: ..., quota?: ..., root?: ...,
+        sharePointIds?: ..., special?: ..., system?: ... } & { @odata.type: ...
+        }) | null, externalGroupId?: string | null, isItemVersioningEnabled?:
+        boolean | null, itemMajorVersionLimit?: number | null, lockState?:
+        Record<string, never> | "unknownFutureValue" | "unlocked" |
+        "lockedReadOnly" | "lockedNoAccess" | "lockedNoAdditions" | null,
+        migrationJobs?: (... & ... & ...)[], owners?: (... & ... & ...)[],
+        ownershipType?: Record<string, never> | "unknownFutureValue" |
+        "tenantOwned" | "userOwned" | null, permissions?: (... & ... & ...)[],
+        recycleBin?: Record<string, never> | (Omit<..., ...> & { @odata.type:
+        ..., items?: ..., settings?: ... } & { @odata.type: ... }) | null,
+        settings?: { @odata.type: string, isItemVersioningEnabled?: function,
+        isOcrEnabled?: function, itemDefaultSensitivityLabelId?: function,
+        itemMajorVersionLimit?: function }, sharePointGroups?: (... & ... &
+        ...)[], status?: Record<string, never> | "unknownFutureValue" |
+        "inactive" | "active" | null, storageUsedInBytes?: number | null,
+        viewpoint?: Record<string, never> | { @odata.type: string,
+        effectiveRole?: function } | null } & { @odata.type:
+        "#microsoft.graph.fileStorageContainer" })[],
+        containerTypeRegistrations?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, applicationPermissionGrants?: {
+        @odata.type: ..., appId?: ..., applicationPermissions?: ...,
+        delegatedPermissions?: ... }[], billingClassification?:
+        "unknownFutureValue" | "standard" | "trial" | "directToCustomer",
+        billingStatus?: "unknownFutureValue" | "invalid" | "valid", etag?:
+        string, expirationDateTime?: string, name?: string, owningAppId?:
+        string, registeredDateTime?: string, settings?: { @odata.type: string,
+        agent?: function, isDiscoverabilityEnabled?: function,
+        isItemVersioningEnabled?: function, isSearchEnabled?: function,
+        isSharingRestricted?: function, itemMajorVersionLimit?: function,
+        maxStoragePerContainerInBytes?: function, sharingCapability?: function,
+        urlTemplate?: function } } & { @odata.type:
+        "#microsoft.graph.fileStorageContainerTypeRegistration" })[],
+        containerTypes?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, billingClassification?:
+        "unknownFutureValue" | "standard" | "trial" | "directToCustomer",
+        billingStatus?: "unknownFutureValue" | "invalid" | "valid",
+        createdDateTime?: string, etag?: string, expirationDateTime?: string,
+        name?: string, owningAppId?: string, settings?: { @odata.type: string,
+        agent?: function, consumingTenantOverridables?: function,
+        isDiscoverabilityEnabled?: function, isItemVersioningEnabled?: function,
+        isSearchEnabled?: function, isSharingRestricted?: function,
+        itemMajorVersionLimit?: function, maxStoragePerContainerInBytes?:
+        function, sharingCapability?: function, urlTemplate?: function } } & {
+        @odata.type: "#microsoft.graph.fileStorageContainerType" })[],
+        deletedContainers?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, archivalDetails?: Record<string,
+        never> | { @odata.type: string, archivedBy?: function,
+        archivedDateTime?: function, archiveStatus?: function } | null,
+        assignedSensitivityLabel?: Record<string, never> | { @odata.type:
+        string, displayName?: function, labelId?: function } | null, columns?:
+        (... & ... & ...)[], containerTypeId?: string, createdDateTime?: string,
+        customProperties?: Record<string, never> | (Omit<..., ...> & {
+        @odata.type: ... } & { @odata.type: ... }) | null, description?: string
+        | null, displayName?: string, drive?: Record<string, never> | (Omit<...,
+        ...> & { @odata.type: ..., activities?: ..., bundles?: ..., driveType?:
+        ..., following?: ..., items?: ..., list?: ..., owner?: ..., quota?: ...,
+        root?: ..., sharePointIds?: ..., special?: ..., system?: ... } & {
+        @odata.type: ... }) | null, externalGroupId?: string | null,
+        isItemVersioningEnabled?: boolean | null, itemMajorVersionLimit?: number
+        | null, lockState?: Record<string, never> | "unknownFutureValue" |
+        "unlocked" | "lockedReadOnly" | "lockedNoAccess" | "lockedNoAdditions" |
+        null, migrationJobs?: (... & ... & ...)[], owners?: (... & ... & ...)[],
+        ownershipType?: Record<string, never> | "unknownFutureValue" |
+        "tenantOwned" | "userOwned" | null, permissions?: (... & ... & ...)[],
+        recycleBin?: Record<string, never> | (Omit<..., ...> & { @odata.type:
+        ..., items?: ..., settings?: ... } & { @odata.type: ... }) | null,
+        settings?: { @odata.type: string, isItemVersioningEnabled?: function,
+        isOcrEnabled?: function, itemDefaultSensitivityLabelId?: function,
+        itemMajorVersionLimit?: function }, sharePointGroups?: (... & ... &
+        ...)[], status?: Record<string, never> | "unknownFutureValue" |
+        "inactive" | "active" | null, storageUsedInBytes?: number | null,
+        viewpoint?: Record<string, never> | { @odata.type: string,
+        effectiveRole?: function } | null } & { @odata.type:
+        "#microsoft.graph.fileStorageContainer" })[] } & { @odata.type:
+        "#microsoft.graph.fileStorage" }) | null, settings?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, quota?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, deleted?: number | null, manageWebUrl?: string | null,
+        remaining?: number | null, services?: (Omit<..., ...> & { @odata.type:
+        ... })[], state?: string | null, total?: number | null, used?: number |
+        null } & { @odata.type: "#microsoft.graph.unifiedStorageQuota" }) | null
+        } & { @odata.type: "#microsoft.graph.storageSettings" }) | null }):
+        EndpointRequest<{ @odata.type: string, fileStorage?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, containers?: (Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & { @odata.type: string, archivalDetails?:
+        Record<..., ...> | { @odata.type: ..., archivedBy?: ...,
+        archivedDateTime?: ..., archiveStatus?: ... } | null,
+        assignedSensitivityLabel?: Record<..., ...> | { @odata.type: ...,
+        displayName?: ..., labelId?: ... } | null, columns?: ...[],
+        containerTypeId?: string, createdDateTime?: string, customProperties?:
+        Record<..., ...> | (... & ... & ...) | null, description?: string |
+        null, displayName?: string, drive?: Record<..., ...> | (... & ... & ...)
+        | null, externalGroupId?: string | null, isItemVersioningEnabled?:
+        boolean | null, itemMajorVersionLimit?: number | null, lockState?:
+        Record<..., ...> | "unknownFutureValue" | "unlocked" | "lockedReadOnly"
+        | "lockedNoAccess" | "lockedNoAdditions" | null, migrationJobs?: ...[],
+        owners?: ...[], ownershipType?: Record<..., ...> | "unknownFutureValue"
+        | "tenantOwned" | "userOwned" | null, permissions?: ...[], recycleBin?:
+        Record<..., ...> | (... & ... & ...) | null, settings?: { @odata.type:
+        ..., isItemVersioningEnabled?: ..., isOcrEnabled?: ...,
+        itemDefaultSensitivityLabelId?: ..., itemMajorVersionLimit?: ... },
+        sharePointGroups?: ...[], status?: Record<..., ...> |
+        "unknownFutureValue" | "inactive" | "active" | null,
+        storageUsedInBytes?: number | null, viewpoint?: Record<..., ...> | {
+        @odata.type: ..., effectiveRole?: ... } | null } & { @odata.type:
+        "#microsoft.graph.fileStorageContainer" })[],
+        containerTypeRegistrations?: (Omit<{ @odata.type: string, id?: function
+        }, "@odata.type"> & { @odata.type: string, applicationPermissionGrants?:
+        ...[], billingClassification?: "unknownFutureValue" | "standard" |
+        "trial" | "directToCustomer", billingStatus?: "unknownFutureValue" |
+        "invalid" | "valid", etag?: string, expirationDateTime?: string, name?:
+        string, owningAppId?: string, registeredDateTime?: string, settings?: {
+        @odata.type: ..., agent?: ..., isDiscoverabilityEnabled?: ...,
+        isItemVersioningEnabled?: ..., isSearchEnabled?: ...,
+        isSharingRestricted?: ..., itemMajorVersionLimit?: ...,
+        maxStoragePerContainerInBytes?: ..., sharingCapability?: ...,
+        urlTemplate?: ... } } & { @odata.type:
+        "#microsoft.graph.fileStorageContainerTypeRegistration" })[],
+        containerTypes?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, billingClassification?:
+        "unknownFutureValue" | "standard" | "trial" | "directToCustomer",
+        billingStatus?: "unknownFutureValue" | "invalid" | "valid",
+        createdDateTime?: string, etag?: string, expirationDateTime?: string,
+        name?: string, owningAppId?: string, settings?: { @odata.type: ...,
+        agent?: ..., consumingTenantOverridables?: ...,
+        isDiscoverabilityEnabled?: ..., isItemVersioningEnabled?: ...,
+        isSearchEnabled?: ..., isSharingRestricted?: ...,
+        itemMajorVersionLimit?: ..., maxStoragePerContainerInBytes?: ...,
+        sharingCapability?: ..., urlTemplate?: ... } } & { @odata.type:
+        "#microsoft.graph.fileStorageContainerType" })[], deletedContainers?:
+        (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+        @odata.type: string, archivalDetails?: Record<..., ...> | { @odata.type:
+        ..., archivedBy?: ..., archivedDateTime?: ..., archiveStatus?: ... } |
+        null, assignedSensitivityLabel?: Record<..., ...> | { @odata.type: ...,
+        displayName?: ..., labelId?: ... } | null, columns?: ...[],
+        containerTypeId?: string, createdDateTime?: string, customProperties?:
+        Record<..., ...> | (... & ... & ...) | null, description?: string |
+        null, displayName?: string, drive?: Record<..., ...> | (... & ... & ...)
+        | null, externalGroupId?: string | null, isItemVersioningEnabled?:
+        boolean | null, itemMajorVersionLimit?: number | null, lockState?:
+        Record<..., ...> | "unknownFutureValue" | "unlocked" | "lockedReadOnly"
+        | "lockedNoAccess" | "lockedNoAdditions" | null, migrationJobs?: ...[],
+        owners?: ...[], ownershipType?: Record<..., ...> | "unknownFutureValue"
+        | "tenantOwned" | "userOwned" | null, permissions?: ...[], recycleBin?:
+        Record<..., ...> | (... & ... & ...) | null, settings?: { @odata.type:
+        ..., isItemVersioningEnabled?: ..., isOcrEnabled?: ...,
+        itemDefaultSensitivityLabelId?: ..., itemMajorVersionLimit?: ... },
+        sharePointGroups?: ...[], status?: Record<..., ...> |
+        "unknownFutureValue" | "inactive" | "active" | null,
+        storageUsedInBytes?: number | null, viewpoint?: Record<..., ...> | {
+        @odata.type: ..., effectiveRole?: ... } | null } & { @odata.type:
+        "#microsoft.graph.fileStorageContainer" })[] } & { @odata.type:
+        "#microsoft.graph.fileStorage" }) | null, settings?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, quota?: Record<string, never> | (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, deleted?: number | null, manageWebUrl?: string | null,
+        remaining?: number | null, services?: (... & ...)[], state?: string |
+        null, total?: number | null, used?: number | null } & { @odata.type:
+        "#microsoft.graph.unifiedStorageQuota" }) | null } & { @odata.type:
+        "#microsoft.graph.storageSettings" }) | null }>
       parameters:
         - id: body
-          type: Operation&lt;"/storage", "patch"&gt;
+          type: >-
+            { <xref uid="@odata.type" />: string, fileStorage?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, containers?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            archivalDetails?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, archivedBy?: function,
+            archivedDateTime?: function, archiveStatus?: function } | null,
+            assignedSensitivityLabel?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, displayName?: function, labelId?:
+            function } | null, columns?: (... & ... & ...)[], containerTypeId?:
+            string, createdDateTime?: string, customProperties?:
+            Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ... } & { <xref uid="@odata.type" />: ... }) |
+            null, description?: string | null, displayName?: string, drive?:
+            Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ..., activities?: ..., bundles?: ...,
+            driveType?: ..., following?: ..., items?: ..., list?: ..., owner?:
+            ..., quota?: ..., root?: ..., sharePointIds?: ..., special?: ...,
+            system?: ... } & { <xref uid="@odata.type" />: ... }) | null,
+            externalGroupId?: string | null, isItemVersioningEnabled?: boolean |
+            null, itemMajorVersionLimit?: number | null, lockState?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "unlocked" |
+            "lockedReadOnly" | "lockedNoAccess" | "lockedNoAdditions" | null,
+            migrationJobs?: (... & ... & ...)[], owners?: (... & ... & ...)[],
+            ownershipType?: Record&lt;string, never&gt; | "unknownFutureValue" |
+            "tenantOwned" | "userOwned" | null, permissions?: (... & ... &
+            ...)[], recycleBin?: Record&lt;string, never&gt; | (Omit&lt;...,
+            ...&gt; & { <xref uid="@odata.type" />: ..., items?: ..., settings?:
+            ... } & { <xref uid="@odata.type" />: ... }) | null, settings?: {
+            <xref uid="@odata.type" />: string, isItemVersioningEnabled?:
+            function, isOcrEnabled?: function, itemDefaultSensitivityLabelId?:
+            function, itemMajorVersionLimit?: function }, sharePointGroups?:
+            (... & ... & ...)[], status?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "inactive" | "active" | null,
+            storageUsedInBytes?: number | null, viewpoint?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, effectiveRole?:
+            function } | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.fileStorageContainer" />" })[],
+            containerTypeRegistrations?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, applicationPermissionGrants?: { <xref
+            uid="@odata.type" />: ..., appId?: ..., applicationPermissions?:
+            ..., delegatedPermissions?: ... }[], billingClassification?:
+            "unknownFutureValue" | "standard" | "trial" | "directToCustomer",
+            billingStatus?: "unknownFutureValue" | "invalid" | "valid", etag?:
+            string, expirationDateTime?: string, name?: string, owningAppId?:
+            string, registeredDateTime?: string, settings?: { <xref
+            uid="@odata.type" />: string, agent?: function,
+            isDiscoverabilityEnabled?: function, isItemVersioningEnabled?:
+            function, isSearchEnabled?: function, isSharingRestricted?:
+            function, itemMajorVersionLimit?: function,
+            maxStoragePerContainerInBytes?: function, sharingCapability?:
+            function, urlTemplate?: function } } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.fileStorageContainerTypeRegistration"
+            />" })[], containerTypes?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, billingClassification?:
+            "unknownFutureValue" | "standard" | "trial" | "directToCustomer",
+            billingStatus?: "unknownFutureValue" | "invalid" | "valid",
+            createdDateTime?: string, etag?: string, expirationDateTime?:
+            string, name?: string, owningAppId?: string, settings?: { <xref
+            uid="@odata.type" />: string, agent?: function,
+            consumingTenantOverridables?: function, isDiscoverabilityEnabled?:
+            function, isItemVersioningEnabled?: function, isSearchEnabled?:
+            function, isSharingRestricted?: function, itemMajorVersionLimit?:
+            function, maxStoragePerContainerInBytes?: function,
+            sharingCapability?: function, urlTemplate?: function } } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.fileStorageContainerType" />" })[],
+            deletedContainers?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, archivalDetails?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, archivedBy?:
+            function, archivedDateTime?: function, archiveStatus?: function } |
+            null, assignedSensitivityLabel?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, displayName?: function,
+            labelId?: function } | null, columns?: (... & ... & ...)[],
+            containerTypeId?: string, createdDateTime?: string,
+            customProperties?: Record&lt;string, never&gt; | (Omit&lt;...,
+            ...&gt; & { <xref uid="@odata.type" />: ... } & { <xref
+            uid="@odata.type" />: ... }) | null, description?: string | null,
+            displayName?: string, drive?: Record&lt;string, never&gt; |
+            (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+            activities?: ..., bundles?: ..., driveType?: ..., following?: ...,
+            items?: ..., list?: ..., owner?: ..., quota?: ..., root?: ...,
+            sharePointIds?: ..., special?: ..., system?: ... } & { <xref
+            uid="@odata.type" />: ... }) | null, externalGroupId?: string |
+            null, isItemVersioningEnabled?: boolean | null,
+            itemMajorVersionLimit?: number | null, lockState?: Record&lt;string,
+            never&gt; | "unknownFutureValue" | "unlocked" | "lockedReadOnly" |
+            "lockedNoAccess" | "lockedNoAdditions" | null, migrationJobs?: (...
+            & ... & ...)[], owners?: (... & ... & ...)[], ownershipType?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "tenantOwned" |
+            "userOwned" | null, permissions?: (... & ... & ...)[], recycleBin?:
+            Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ..., items?: ..., settings?: ... } & { <xref
+            uid="@odata.type" />: ... }) | null, settings?: { <xref
+            uid="@odata.type" />: string, isItemVersioningEnabled?: function,
+            isOcrEnabled?: function, itemDefaultSensitivityLabelId?: function,
+            itemMajorVersionLimit?: function }, sharePointGroups?: (... & ... &
+            ...)[], status?: Record&lt;string, never&gt; | "unknownFutureValue"
+            | "inactive" | "active" | null, storageUsedInBytes?: number | null,
+            viewpoint?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, effectiveRole?: function } | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.fileStorageContainer" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.fileStorage" />"
+            }) | null, settings?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            quota?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            deleted?: number | null, manageWebUrl?: string | null, remaining?:
+            number | null, services?: (Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ... })[], state?: string | null, total?:
+            number | null, used?: number | null } & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.unifiedStorageQuota" />" }) | null
+            } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.storageSettings" />" }) | null }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["PATCH /storage"]["response"]&gt;
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string, fileStorage?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, containers?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          archivalDetails?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., archivedBy?: ..., archivedDateTime?: ..., archiveStatus?: ...
+          } | null, assignedSensitivityLabel?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., displayName?: ..., labelId?: ... } | null,
+          columns?: ...[], containerTypeId?: string, createdDateTime?: string,
+          customProperties?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+          description?: string | null, displayName?: string, drive?:
+          Record&lt;..., ...&gt; | (... & ... & ...) | null, externalGroupId?:
+          string | null, isItemVersioningEnabled?: boolean | null,
+          itemMajorVersionLimit?: number | null, lockState?: Record&lt;...,
+          ...&gt; | "unknownFutureValue" | "unlocked" | "lockedReadOnly" |
+          "lockedNoAccess" | "lockedNoAdditions" | null, migrationJobs?: ...[],
+          owners?: ...[], ownershipType?: Record&lt;..., ...&gt; |
+          "unknownFutureValue" | "tenantOwned" | "userOwned" | null,
+          permissions?: ...[], recycleBin?: Record&lt;..., ...&gt; | (... & ...
+          & ...) | null, settings?: { <xref uid="@odata.type" />: ...,
+          isItemVersioningEnabled?: ..., isOcrEnabled?: ...,
+          itemDefaultSensitivityLabelId?: ..., itemMajorVersionLimit?: ... },
+          sharePointGroups?: ...[], status?: Record&lt;..., ...&gt; |
+          "unknownFutureValue" | "inactive" | "active" | null,
+          storageUsedInBytes?: number | null, viewpoint?: Record&lt;..., ...&gt;
+          | { <xref uid="@odata.type" />: ..., effectiveRole?: ... } | null } &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.fileStorageContainer" />" })[],
+          containerTypeRegistrations?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, applicationPermissionGrants?: ...[],
+          billingClassification?: "unknownFutureValue" | "standard" | "trial" |
+          "directToCustomer", billingStatus?: "unknownFutureValue" | "invalid" |
+          "valid", etag?: string, expirationDateTime?: string, name?: string,
+          owningAppId?: string, registeredDateTime?: string, settings?: { <xref
+          uid="@odata.type" />: ..., agent?: ..., isDiscoverabilityEnabled?:
+          ..., isItemVersioningEnabled?: ..., isSearchEnabled?: ...,
+          isSharingRestricted?: ..., itemMajorVersionLimit?: ...,
+          maxStoragePerContainerInBytes?: ..., sharingCapability?: ...,
+          urlTemplate?: ... } } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.fileStorageContainerTypeRegistration" />" })[],
+          containerTypes?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, billingClassification?:
+          "unknownFutureValue" | "standard" | "trial" | "directToCustomer",
+          billingStatus?: "unknownFutureValue" | "invalid" | "valid",
+          createdDateTime?: string, etag?: string, expirationDateTime?: string,
+          name?: string, owningAppId?: string, settings?: { <xref
+          uid="@odata.type" />: ..., agent?: ..., consumingTenantOverridables?:
+          ..., isDiscoverabilityEnabled?: ..., isItemVersioningEnabled?: ...,
+          isSearchEnabled?: ..., isSharingRestricted?: ...,
+          itemMajorVersionLimit?: ..., maxStoragePerContainerInBytes?: ...,
+          sharingCapability?: ..., urlTemplate?: ... } } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.fileStorageContainerType" />" })[],
+          deletedContainers?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, archivalDetails?: Record&lt;..., ...&gt;
+          | { <xref uid="@odata.type" />: ..., archivedBy?: ...,
+          archivedDateTime?: ..., archiveStatus?: ... } | null,
+          assignedSensitivityLabel?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., displayName?: ..., labelId?: ... } | null,
+          columns?: ...[], containerTypeId?: string, createdDateTime?: string,
+          customProperties?: Record&lt;..., ...&gt; | (... & ... & ...) | null,
+          description?: string | null, displayName?: string, drive?:
+          Record&lt;..., ...&gt; | (... & ... & ...) | null, externalGroupId?:
+          string | null, isItemVersioningEnabled?: boolean | null,
+          itemMajorVersionLimit?: number | null, lockState?: Record&lt;...,
+          ...&gt; | "unknownFutureValue" | "unlocked" | "lockedReadOnly" |
+          "lockedNoAccess" | "lockedNoAdditions" | null, migrationJobs?: ...[],
+          owners?: ...[], ownershipType?: Record&lt;..., ...&gt; |
+          "unknownFutureValue" | "tenantOwned" | "userOwned" | null,
+          permissions?: ...[], recycleBin?: Record&lt;..., ...&gt; | (... & ...
+          & ...) | null, settings?: { <xref uid="@odata.type" />: ...,
+          isItemVersioningEnabled?: ..., isOcrEnabled?: ...,
+          itemDefaultSensitivityLabelId?: ..., itemMajorVersionLimit?: ... },
+          sharePointGroups?: ...[], status?: Record&lt;..., ...&gt; |
+          "unknownFutureValue" | "inactive" | "active" | null,
+          storageUsedInBytes?: number | null, viewpoint?: Record&lt;..., ...&gt;
+          | { <xref uid="@odata.type" />: ..., effectiveRole?: ... } | null } &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.fileStorageContainer" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.fileStorage" />" })
+          | null, settings?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, quota?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, deleted?: number | null, manageWebUrl?:
+          string | null, remaining?: number | null, services?: (... & ...)[],
+          state?: string | null, total?: number | null, used?: number | null } &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.unifiedStorageQuota" />" }) | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.storageSettings"
+          />" }) | null }&gt;

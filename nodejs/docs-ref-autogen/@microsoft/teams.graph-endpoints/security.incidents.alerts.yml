@@ -33,7 +33,9 @@ variables:
           /security/incidents/{incident-id}/alerts/{alert-id}/comments"]["response"]&gt;
           }
 functions:
-  - name: get(any)
+  - name: >-
+      get({ $expand?: string[], $select?: string[], alert-id: string,
+      incident-id: string })
     uid: '@microsoft/teams.graph-endpoints.security.incidents.alerts.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -44,18 +46,164 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /security/incidents/{incident-id}/alerts/{alert-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        alert-id: string, incident-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, actorDisplayName?: string | null, additionalData?:
+        Record<string, never> | { @odata.type: string } | null, alertPolicyId?:
+        string | null, alertWebUrl?: string | null, assignedTo?: string | null,
+        category?: string | null, classification?: Record<string, never> |
+        "unknownFutureValue" | "unknown" | "truePositive" | "falsePositive" |
+        "informationalExpectedActivity" | null, comments?: { @odata.type:
+        string, comment?: string | null, createdByDisplayName?: string | null,
+        createdDateTime?: string }[], createdDateTime?: string | null,
+        customDetails?: Record<string, never> | { @odata.type: string } | null,
+        description?: string | null, detectionSource?: Record<string, never> |
+        "unknownFutureValue" | "unknown" | "microsoftDefenderForEndpoint" |
+        "antivirus" | "smartScreen" | "customTi" |
+        "microsoftDefenderForOffice365" | "automatedInvestigation" |
+        "microsoftThreatExperts" | "customDetection" |
+        "microsoftDefenderForIdentity" | "cloudAppSecurity" |
+        "microsoft365Defender" | "azureAdIdentityProtection" | "manual" |
+        "microsoftDataLossPrevention" | "appGovernancePolicy" |
+        "appGovernanceDetection" | "microsoftDefenderForCloud" |
+        "microsoftDefenderForIoT" | "microsoftDefenderForServers" |
+        "microsoftDefenderForStorage" | "microsoftDefenderForDNS" |
+        "microsoftDefenderForDatabases" | "microsoftDefenderForContainers" |
+        "microsoftDefenderForNetwork" | "microsoftDefenderForAppService" |
+        "microsoftDefenderForKeyVault" | "microsoftDefenderForResourceManager" |
+        "microsoftDefenderForApiManagement" | "nrtAlerts" | "scheduledAlerts" |
+        "microsoftDefenderThreatIntelligenceAnalytics" | "builtInMl" |
+        "microsoftInsiderRiskManagement" | "microsoftThreatIntelligence" |
+        "microsoftDefenderForAIServices" | "securityCopilot" |
+        "microsoftSentinel" | null, detectorId?: string | null, determination?:
+        Record<string, never> | "unknownFutureValue" | "unknown" | "apt" |
+        "malware" | "securityPersonnel" | "securityTesting" | "unwantedSoftware"
+        | "other" | "multiStagedAttack" | "compromisedAccount" | "phishing" |
+        "maliciousUserActivity" | "notMalicious" | "notEnoughDataToValidate" |
+        "confirmedActivity" | "lineOfBusinessApplication" | null, evidence?: {
+        @odata.type: string, createdDateTime?: string, detailedRoles?: (string |
+        null)[], remediationStatus?: "none" | "unknownFutureValue" | "running" |
+        "blocked" | "remediated" | "prevented" | "notFound" | "active" |
+        "pendingApproval" | "declined" | "unremediated" | "partiallyRemediated",
+        remediationStatusDetails?: string | null, roles?: ("unknownFutureValue"
+        | "unknown" | "attacked" | "contextual" | "scanned" | "source" |
+        "destination" | "created" | "added" | "compromised" | "edited" |
+        "attacker" | "commandAndControl" | "loaded" | "suspicious" |
+        "policyViolator")[], tags?: (string | null)[], verdict?:
+        "unknownFutureValue" | "unknown" | "suspicious" | "malicious" |
+        "noThreatsFound" }[], firstActivityDateTime?: string | null,
+        incidentId?: string | null, incidentWebUrl?: string | null,
+        investigationState?: Record<string, never> | "unknownFutureValue" |
+        "running" | "failed" | "unknown" | "pendingApproval" |
+        "partiallyRemediated" | "terminated" | "successfullyRemediated" |
+        "benign" | "pendingResource" | "queued" | "innerFailure" |
+        "preexistingAlert" | "unsupportedOs" | "unsupportedAlertType" |
+        "suppressedAlert" | "partiallyInvestigated" | "terminatedByUser" |
+        "terminatedBySystem" | null, lastActivityDateTime?: string | null,
+        lastUpdateDateTime?: string | null, mitreTechniques?: (string | null)[],
+        productName?: string | null, providerAlertId?: string | null,
+        recommendedActions?: string | null, resolvedDateTime?: string | null,
+        serviceSource?: "unknownFutureValue" | "unknown" |
+        "microsoftDefenderForEndpoint" | "microsoftDefenderForOffice365" |
+        "microsoftDefenderForIdentity" | "microsoft365Defender" |
+        "azureAdIdentityProtection" | "microsoftDefenderForCloud" |
+        "microsoftInsiderRiskManagement" | "microsoftThreatIntelligence" |
+        "microsoftSentinel" | "microsoftDefenderForCloudApps" |
+        "microsoftAppGovernance" | "dataLossPrevention", severity?:
+        "unknownFutureValue" | "unknown" | "low" | "medium" | "high" |
+        "informational", status?: "unknownFutureValue" | "unknown" |
+        "inProgress" | "resolved" | "new", systemTags?: (string | null)[],
+        tenantId?: string | null, threatDisplayName?: string | null,
+        threatFamilyName?: string | null, title?: string | null } & {
+        @odata.type: "#microsoft.graph.security.alert" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], alert-id: string,
+            incident-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /security/incidents/{incident-id}/alerts/{alert-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, actorDisplayName?: string | null, additionalData?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string } |
+          null, alertPolicyId?: string | null, alertWebUrl?: string | null,
+          assignedTo?: string | null, category?: string | null, classification?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "unknown" |
+          "truePositive" | "falsePositive" | "informationalExpectedActivity" |
+          null, comments?: { <xref uid="@odata.type" />: string, comment?:
+          string | null, createdByDisplayName?: string | null, createdDateTime?:
+          string }[], createdDateTime?: string | null, customDetails?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string } |
+          null, description?: string | null, detectionSource?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "unknown" |
+          "microsoftDefenderForEndpoint" | "antivirus" | "smartScreen" |
+          "customTi" | "microsoftDefenderForOffice365" |
+          "automatedInvestigation" | "microsoftThreatExperts" |
+          "customDetection" | "microsoftDefenderForIdentity" |
+          "cloudAppSecurity" | "microsoft365Defender" |
+          "azureAdIdentityProtection" | "manual" | "microsoftDataLossPrevention"
+          | "appGovernancePolicy" | "appGovernanceDetection" |
+          "microsoftDefenderForCloud" | "microsoftDefenderForIoT" |
+          "microsoftDefenderForServers" | "microsoftDefenderForStorage" |
+          "microsoftDefenderForDNS" | "microsoftDefenderForDatabases" |
+          "microsoftDefenderForContainers" | "microsoftDefenderForNetwork" |
+          "microsoftDefenderForAppService" | "microsoftDefenderForKeyVault" |
+          "microsoftDefenderForResourceManager" |
+          "microsoftDefenderForApiManagement" | "nrtAlerts" | "scheduledAlerts"
+          | "microsoftDefenderThreatIntelligenceAnalytics" | "builtInMl" |
+          "microsoftInsiderRiskManagement" | "microsoftThreatIntelligence" |
+          "microsoftDefenderForAIServices" | "securityCopilot" |
+          "microsoftSentinel" | null, detectorId?: string | null,
+          determination?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "unknown" | "apt" | "malware" | "securityPersonnel" |
+          "securityTesting" | "unwantedSoftware" | "other" | "multiStagedAttack"
+          | "compromisedAccount" | "phishing" | "maliciousUserActivity" |
+          "notMalicious" | "notEnoughDataToValidate" | "confirmedActivity" |
+          "lineOfBusinessApplication" | null, evidence?: { <xref
+          uid="@odata.type" />: string, createdDateTime?: string,
+          detailedRoles?: (string | null)[], remediationStatus?: "none" |
+          "unknownFutureValue" | "running" | "blocked" | "remediated" |
+          "prevented" | "notFound" | "active" | "pendingApproval" | "declined" |
+          "unremediated" | "partiallyRemediated", remediationStatusDetails?:
+          string | null, roles?: ("unknownFutureValue" | "unknown" | "attacked"
+          | "contextual" | "scanned" | "source" | "destination" | "created" |
+          "added" | "compromised" | "edited" | "attacker" | "commandAndControl"
+          | "loaded" | "suspicious" | "policyViolator")[], tags?: (string |
+          null)[], verdict?: "unknownFutureValue" | "unknown" | "suspicious" |
+          "malicious" | "noThreatsFound" }[], firstActivityDateTime?: string |
+          null, incidentId?: string | null, incidentWebUrl?: string | null,
+          investigationState?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "running" | "failed" | "unknown" |
+          "pendingApproval" | "partiallyRemediated" | "terminated" |
+          "successfullyRemediated" | "benign" | "pendingResource" | "queued" |
+          "innerFailure" | "preexistingAlert" | "unsupportedOs" |
+          "unsupportedAlertType" | "suppressedAlert" | "partiallyInvestigated" |
+          "terminatedByUser" | "terminatedBySystem" | null,
+          lastActivityDateTime?: string | null, lastUpdateDateTime?: string |
+          null, mitreTechniques?: (string | null)[], productName?: string |
+          null, providerAlertId?: string | null, recommendedActions?: string |
+          null, resolvedDateTime?: string | null, serviceSource?:
+          "unknownFutureValue" | "unknown" | "microsoftDefenderForEndpoint" |
+          "microsoftDefenderForOffice365" | "microsoftDefenderForIdentity" |
+          "microsoft365Defender" | "azureAdIdentityProtection" |
+          "microsoftDefenderForCloud" | "microsoftInsiderRiskManagement" |
+          "microsoftThreatIntelligence" | "microsoftSentinel" |
+          "microsoftDefenderForCloudApps" | "microsoftAppGovernance" |
+          "dataLossPrevention", severity?: "unknownFutureValue" | "unknown" |
+          "low" | "medium" | "high" | "informational", status?:
+          "unknownFutureValue" | "unknown" | "inProgress" | "resolved" | "new",
+          systemTags?: (string | null)[], tenantId?: string | null,
+          threatDisplayName?: string | null, threatFamilyName?: string | null,
+          title?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.alert" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, incident-id: string })
     uid: '@microsoft/teams.graph-endpoints.security.incidents.alerts.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -66,14 +214,147 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /security/incidents/{incident-id}/alerts"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, incident-id: string }): EndpointRequest<{
+        @odata.count?: number | null, @odata.nextLink?: string | null } & {
+        value?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, actorDisplayName?: string | null, additionalData?:
+        Record<string, never> | { @odata.type: string } | null, alertPolicyId?:
+        string | null, alertWebUrl?: string | null, assignedTo?: string | null,
+        category?: string | null, classification?: Record<string, never> |
+        "unknownFutureValue" | "unknown" | "truePositive" | "falsePositive" |
+        "informationalExpectedActivity" | null, comments?: { @odata.type:
+        string, comment?: function, createdByDisplayName?: function,
+        createdDateTime?: function }[], createdDateTime?: string | null,
+        customDetails?: Record<string, never> | { @odata.type: string } | null,
+        description?: string | null, detectionSource?: Record<string, never> |
+        "unknownFutureValue" | "unknown" | "microsoftDefenderForEndpoint" |
+        "antivirus" | "smartScreen" | "customTi" |
+        "microsoftDefenderForOffice365" | "automatedInvestigation" |
+        "microsoftThreatExperts" | "customDetection" |
+        "microsoftDefenderForIdentity" | "cloudAppSecurity" |
+        "microsoft365Defender" | "azureAdIdentityProtection" | "manual" |
+        "microsoftDataLossPrevention" | "appGovernancePolicy" |
+        "appGovernanceDetection" | "microsoftDefenderForCloud" |
+        "microsoftDefenderForIoT" | "microsoftDefenderForServers" |
+        "microsoftDefenderForStorage" | "microsoftDefenderForDNS" |
+        "microsoftDefenderForDatabases" | "microsoftDefenderForContainers" |
+        "microsoftDefenderForNetwork" | "microsoftDefenderForAppService" |
+        "microsoftDefenderForKeyVault" | "microsoftDefenderForResourceManager" |
+        "microsoftDefenderForApiManagement" | "nrtAlerts" | "scheduledAlerts" |
+        "microsoftDefenderThreatIntelligenceAnalytics" | "builtInMl" |
+        "microsoftInsiderRiskManagement" | "microsoftThreatIntelligence" |
+        "microsoftDefenderForAIServices" | "securityCopilot" |
+        "microsoftSentinel" | null, detectorId?: string | null, determination?:
+        Record<string, never> | "unknownFutureValue" | "unknown" | "apt" |
+        "malware" | "securityPersonnel" | "securityTesting" | "unwantedSoftware"
+        | "other" | "multiStagedAttack" | "compromisedAccount" | "phishing" |
+        "maliciousUserActivity" | "notMalicious" | "notEnoughDataToValidate" |
+        "confirmedActivity" | "lineOfBusinessApplication" | null, evidence?: {
+        @odata.type: string, createdDateTime?: function, detailedRoles?:
+        function, remediationStatus?: function, remediationStatusDetails?:
+        function, roles?: function, tags?: function, verdict?: function }[],
+        firstActivityDateTime?: string | null, incidentId?: string | null,
+        incidentWebUrl?: string | null, investigationState?: Record<string,
+        never> | "unknownFutureValue" | "running" | "failed" | "unknown" |
+        "pendingApproval" | "partiallyRemediated" | "terminated" |
+        "successfullyRemediated" | "benign" | "pendingResource" | "queued" |
+        "innerFailure" | "preexistingAlert" | "unsupportedOs" |
+        "unsupportedAlertType" | "suppressedAlert" | "partiallyInvestigated" |
+        "terminatedByUser" | "terminatedBySystem" | null, lastActivityDateTime?:
+        string | null, lastUpdateDateTime?: string | null, mitreTechniques?:
+        (string | null)[], productName?: string | null, providerAlertId?: string
+        | null, recommendedActions?: string | null, resolvedDateTime?: string |
+        null, serviceSource?: "unknownFutureValue" | "unknown" |
+        "microsoftDefenderForEndpoint" | "microsoftDefenderForOffice365" |
+        "microsoftDefenderForIdentity" | "microsoft365Defender" |
+        "azureAdIdentityProtection" | "microsoftDefenderForCloud" |
+        "microsoftInsiderRiskManagement" | "microsoftThreatIntelligence" |
+        "microsoftSentinel" | "microsoftDefenderForCloudApps" |
+        "microsoftAppGovernance" | "dataLossPrevention", severity?:
+        "unknownFutureValue" | "unknown" | "low" | "medium" | "high" |
+        "informational", status?: "unknownFutureValue" | "unknown" |
+        "inProgress" | "resolved" | "new", systemTags?: (string | null)[],
+        tenantId?: string | null, threatDisplayName?: string | null,
+        threatFamilyName?: string | null, title?: string | null } & {
+        @odata.type: "#microsoft.graph.security.alert" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, incident-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /security/incidents/{incident-id}/alerts"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          actorDisplayName?: string | null, additionalData?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string } | null,
+          alertPolicyId?: string | null, alertWebUrl?: string | null,
+          assignedTo?: string | null, category?: string | null, classification?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "unknown" |
+          "truePositive" | "falsePositive" | "informationalExpectedActivity" |
+          null, comments?: { <xref uid="@odata.type" />: string, comment?:
+          function, createdByDisplayName?: function, createdDateTime?: function
+          }[], createdDateTime?: string | null, customDetails?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string } |
+          null, description?: string | null, detectionSource?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "unknown" |
+          "microsoftDefenderForEndpoint" | "antivirus" | "smartScreen" |
+          "customTi" | "microsoftDefenderForOffice365" |
+          "automatedInvestigation" | "microsoftThreatExperts" |
+          "customDetection" | "microsoftDefenderForIdentity" |
+          "cloudAppSecurity" | "microsoft365Defender" |
+          "azureAdIdentityProtection" | "manual" | "microsoftDataLossPrevention"
+          | "appGovernancePolicy" | "appGovernanceDetection" |
+          "microsoftDefenderForCloud" | "microsoftDefenderForIoT" |
+          "microsoftDefenderForServers" | "microsoftDefenderForStorage" |
+          "microsoftDefenderForDNS" | "microsoftDefenderForDatabases" |
+          "microsoftDefenderForContainers" | "microsoftDefenderForNetwork" |
+          "microsoftDefenderForAppService" | "microsoftDefenderForKeyVault" |
+          "microsoftDefenderForResourceManager" |
+          "microsoftDefenderForApiManagement" | "nrtAlerts" | "scheduledAlerts"
+          | "microsoftDefenderThreatIntelligenceAnalytics" | "builtInMl" |
+          "microsoftInsiderRiskManagement" | "microsoftThreatIntelligence" |
+          "microsoftDefenderForAIServices" | "securityCopilot" |
+          "microsoftSentinel" | null, detectorId?: string | null,
+          determination?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "unknown" | "apt" | "malware" | "securityPersonnel" |
+          "securityTesting" | "unwantedSoftware" | "other" | "multiStagedAttack"
+          | "compromisedAccount" | "phishing" | "maliciousUserActivity" |
+          "notMalicious" | "notEnoughDataToValidate" | "confirmedActivity" |
+          "lineOfBusinessApplication" | null, evidence?: { <xref
+          uid="@odata.type" />: string, createdDateTime?: function,
+          detailedRoles?: function, remediationStatus?: function,
+          remediationStatusDetails?: function, roles?: function, tags?:
+          function, verdict?: function }[], firstActivityDateTime?: string |
+          null, incidentId?: string | null, incidentWebUrl?: string | null,
+          investigationState?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "running" | "failed" | "unknown" |
+          "pendingApproval" | "partiallyRemediated" | "terminated" |
+          "successfullyRemediated" | "benign" | "pendingResource" | "queued" |
+          "innerFailure" | "preexistingAlert" | "unsupportedOs" |
+          "unsupportedAlertType" | "suppressedAlert" | "partiallyInvestigated" |
+          "terminatedByUser" | "terminatedBySystem" | null,
+          lastActivityDateTime?: string | null, lastUpdateDateTime?: string |
+          null, mitreTechniques?: (string | null)[], productName?: string |
+          null, providerAlertId?: string | null, recommendedActions?: string |
+          null, resolvedDateTime?: string | null, serviceSource?:
+          "unknownFutureValue" | "unknown" | "microsoftDefenderForEndpoint" |
+          "microsoftDefenderForOffice365" | "microsoftDefenderForIdentity" |
+          "microsoft365Defender" | "azureAdIdentityProtection" |
+          "microsoftDefenderForCloud" | "microsoftInsiderRiskManagement" |
+          "microsoftThreatIntelligence" | "microsoftSentinel" |
+          "microsoftDefenderForCloudApps" | "microsoftAppGovernance" |
+          "dataLossPrevention", severity?: "unknownFutureValue" | "unknown" |
+          "low" | "medium" | "high" | "informational", status?:
+          "unknownFutureValue" | "unknown" | "inProgress" | "resolved" | "new",
+          systemTags?: (string | null)[], tenantId?: string | null,
+          threatDisplayName?: string | null, threatFamilyName?: string | null,
+          title?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.alert" />" })[] }&gt;

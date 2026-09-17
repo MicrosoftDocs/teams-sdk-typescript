@@ -643,7 +643,7 @@ variables:
           /me/joinedTeams/{team-id}/schedule/timesOff/{timeOff-id}"]["response"]&gt;
           }
 functions:
-  - name: del(any)
+  - name: 'del({ If-Match?: string, team-id: string })'
     uid: '@microsoft/teams.graph-endpoints.me.joinedTeams.schedule.del'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`DELETE /me/joinedTeams/{team-id}/schedule`'
@@ -651,18 +651,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /me/joinedTeams/{team-id}/schedule"]["response"]>
+        function del(params?: { If-Match?: string, team-id: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, team-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /me/joinedTeams/{team-id}/schedule"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[], team-id: string })'
     uid: '@microsoft/teams.graph-endpoints.me.joinedTeams.schedule.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -673,18 +671,551 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /me/joinedTeams/{team-id}/schedule"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[], team-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, dayNotes?: (Omit<Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, createdBy?: function, createdDateTime?: function,
+        lastModifiedBy?: function, lastModifiedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.changeTrackedEntity"
+        }, "@odata.type"> & { @odata.type: string, dayNoteDate?: string | null,
+        draftDayNote?: Record<string, never> | { @odata.type: string, content?:
+        string | null, contentType?: Record<..., ...> | "text" | "html" | null }
+        | null, sharedDayNote?: Record<string, never> | { @odata.type: string,
+        content?: string | null, contentType?: Record<..., ...> | "text" |
+        "html" | null } | null } & { @odata.type: "#microsoft.graph.dayNote"
+        })[], enabled?: boolean | null,
+        isActivitiesIncludedWhenCopyingShiftsEnabled?: boolean | null,
+        offerShiftRequests?: (Omit<Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & Omit<{ @odata.type: string,
+        assignedTo?: function, managerActionDateTime?: function,
+        managerActionMessage?: function, managerUserId?: function,
+        senderDateTime?: function, senderMessage?: function, senderUserId?:
+        function, state?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.scheduleChangeRequest" }, "@odata.type"> & Omit<{
+        @odata.type: string, recipientActionDateTime?: string | null,
+        recipientActionMessage?: string | null, recipientUserId?: string | null,
+        senderShiftId?: string | null }, "@odata.type">)[],
+        offerShiftRequestsEnabled?: boolean | null, openShiftChangeRequests?:
+        (Omit<Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & Omit<{ @odata.type: string, assignedTo?: function,
+        managerActionDateTime?: function, managerActionMessage?: function,
+        managerUserId?: function, senderDateTime?: function, senderMessage?:
+        function, senderUserId?: function, state?: function }, "@odata.type"> &
+        { @odata.type: "#microsoft.graph.scheduleChangeRequest" },
+        "@odata.type"> & { @odata.type: string, openShiftId?: string | null
+        })[], openShifts?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, createdBy?: function,
+        createdDateTime?: function, lastModifiedBy?: function,
+        lastModifiedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & {
+        @odata.type: string, draftOpenShift?: Record<string, never> | (Omit<...
+        & ... & ..., "@odata.type"> & { @odata.type: string, openSlotCount?:
+        function }) | null, isStagedForDeletion?: boolean | null,
+        schedulingGroupId?: string | null, sharedOpenShift?: Record<string,
+        never> | (Omit<... & ... & ..., "@odata.type"> & { @odata.type: string,
+        openSlotCount?: function }) | null } & { @odata.type:
+        "#microsoft.graph.openShift" })[], openShiftsEnabled?: boolean | null,
+        provisionStatus?: Record<string, never> | "NotStarted" | "Running" |
+        "Completed" | "Failed" | null, provisionStatusCode?: string | null,
+        schedulingGroups?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, createdBy?: function,
+        createdDateTime?: function, lastModifiedBy?: function,
+        lastModifiedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & {
+        @odata.type: string, code?: string | null, displayName?: string | null,
+        isActive?: boolean | null, userIds?: (string | null)[] } & {
+        @odata.type: "#microsoft.graph.schedulingGroup" })[], shifts?:
+        (Omit<Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string, createdBy?: function, createdDateTime?:
+        function, lastModifiedBy?: function, lastModifiedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.changeTrackedEntity"
+        }, "@odata.type"> & { @odata.type: string, draftShift?: Record<string,
+        never> | (Omit<{ @odata.type: ..., endDateTime?: ..., startDateTime?:
+        ..., theme?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        activities?: ..., displayName?: ..., notes?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.shiftItem" }) | null,
+        isStagedForDeletion?: boolean | null, schedulingGroupId?: string | null,
+        sharedShift?: Record<string, never> | (Omit<{ @odata.type: ...,
+        endDateTime?: ..., startDateTime?: ..., theme?: ... }, "@odata.type"> &
+        Omit<{ @odata.type: ..., activities?: ..., displayName?: ..., notes?:
+        ... }, "@odata.type"> & { @odata.type: "#microsoft.graph.shiftItem" }) |
+        null, userId?: string | null } & { @odata.type: "#microsoft.graph.shift"
+        })[], startDayOfWeek?: Record<string, never> | "sunday" | "monday" |
+        "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | null,
+        swapShiftsChangeRequests?: (Omit<Omit<Omit<..., ...> & Omit<..., ...> &
+        { @odata.type: ... }, "@odata.type"> & Omit<{ @odata.type: string,
+        assignedTo?: function, managerActionDateTime?: function,
+        managerActionMessage?: function, managerUserId?: function,
+        senderDateTime?: function, senderMessage?: function, senderUserId?:
+        function, state?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.scheduleChangeRequest" }, "@odata.type"> & Omit<{
+        @odata.type: string, recipientActionDateTime?: string | null,
+        recipientActionMessage?: string | null, recipientUserId?: string | null,
+        senderShiftId?: string | null }, "@odata.type"> & { @odata.type: string,
+        recipientShiftId?: string | null })[], swapShiftsRequestsEnabled?:
+        boolean | null, timeCards?: (Omit<Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string, createdBy?:
+        function, createdDateTime?: function, lastModifiedBy?: function,
+        lastModifiedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & {
+        @odata.type: string, breaks?: { @odata.type: string, breakId?: function,
+        end?: function, notes?: function, start?: function }[], clockInEvent?:
+        Record<string, never> | { @odata.type: string, dateTime?: string,
+        isAtApprovedLocation?: boolean | null, notes?: Record<..., ...> | {
+        @odata.type: ..., content?: ..., contentType?: ... } | null } | null,
+        clockOutEvent?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, isAtApprovedLocation?: boolean | null, notes?:
+        Record<..., ...> | { @odata.type: ..., content?: ..., contentType?: ...
+        } | null } | null, confirmedBy?: "user" | "unknownFutureValue" |
+        Record<string, never> | "none" | "manager" | null, notes?:
+        Record<string, never> | { @odata.type: string, content?: string | null,
+        contentType?: Record<..., ...> | "text" | "html" | null } | null,
+        originalEntry?: Record<string, never> | { @odata.type: string, breaks?:
+        ...[], clockInEvent?: Record<..., ...> | { @odata.type: ..., dateTime?:
+        ..., isAtApprovedLocation?: ..., notes?: ... } | null, clockOutEvent?:
+        Record<..., ...> | { @odata.type: ..., dateTime?: ...,
+        isAtApprovedLocation?: ..., notes?: ... } | null } | null, state?:
+        "unknownFutureValue" | Record<string, never> | "clockedIn" | "onBreak" |
+        "clockedOut" | null, userId?: string | null } & { @odata.type:
+        "#microsoft.graph.timeCard" })[], timeClockEnabled?: boolean | null,
+        timeClockSettings?: Record<string, never> | { @odata.type: string,
+        approvedLocation?: Record<string, never> | { @odata.type: string,
+        altitude?: string | number | null, latitude?: string | number | null,
+        longitude?: string | number | null } | null } | null, timeOffReasons?:
+        (Omit<Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string, createdBy?: function, createdDateTime?:
+        function, lastModifiedBy?: function, lastModifiedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.changeTrackedEntity"
+        }, "@odata.type"> & { @odata.type: string, code?: string | null,
+        displayName?: string | null, iconType?: "unknownFutureValue" |
+        Record<string, never> | "none" | "running" | "pin" | "car" | "calendar"
+        | "plane" | "firstAid" | "doctor" | "notWorking" | "clock" | "juryDuty"
+        | "globe" | "cup" | "phone" | "weather" | "umbrella" | "piggyBank" |
+        "dog" | "cake" | "trafficCone" | "sunny" | null, isActive?: boolean |
+        null } & { @odata.type: "#microsoft.graph.timeOffReason" })[],
+        timeOffRequests?: (Omit<Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & Omit<{ @odata.type: string,
+        assignedTo?: function, managerActionDateTime?: function,
+        managerActionMessage?: function, managerUserId?: function,
+        senderDateTime?: function, senderMessage?: function, senderUserId?:
+        function, state?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.scheduleChangeRequest" }, "@odata.type"> & {
+        @odata.type: string, endDateTime?: string | null, startDateTime?: string
+        | null, timeOffReasonId?: string | null } & { @odata.type:
+        "#microsoft.graph.timeOffRequest" })[], timeOffRequestsEnabled?: boolean
+        | null, timesOff?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, createdBy?: function,
+        createdDateTime?: function, lastModifiedBy?: function,
+        lastModifiedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & {
+        @odata.type: string, draftTimeOff?: Record<string, never> | (Omit<{
+        @odata.type: ..., endDateTime?: ..., startDateTime?: ..., theme?: ... },
+        "@odata.type"> & { @odata.type: string, timeOffReasonId?: function } & {
+        @odata.type: "#microsoft.graph.timeOffItem" }) | null,
+        isStagedForDeletion?: boolean | null, sharedTimeOff?: Record<string,
+        never> | (Omit<{ @odata.type: ..., endDateTime?: ..., startDateTime?:
+        ..., theme?: ... }, "@odata.type"> & { @odata.type: string,
+        timeOffReasonId?: function } & { @odata.type:
+        "#microsoft.graph.timeOffItem" }) | null, userId?: string | null } & {
+        @odata.type: "#microsoft.graph.timeOff" })[], timeZone?: string | null,
+        workforceIntegrationIds?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.schedule" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[], team-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /me/joinedTeams/{team-id}/schedule"]["response"]&gt;
-  - name: set(Operation<"/me/joinedTeams/{team-id}/schedule", "put">, any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, dayNotes?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, createdBy?: function,
+          createdDateTime?: function, lastModifiedBy?: function,
+          lastModifiedDateTime?: function }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          dayNoteDate?: string | null, draftDayNote?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, content?: string |
+          null, contentType?: Record&lt;..., ...&gt; | "text" | "html" | null }
+          | null, sharedDayNote?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, content?: string | null, contentType?:
+          Record&lt;..., ...&gt; | "text" | "html" | null } | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.dayNote" />" })[],
+          enabled?: boolean | null,
+          isActivitiesIncludedWhenCopyingShiftsEnabled?: boolean | null,
+          offerShiftRequests?: (Omit&lt;Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, assignedTo?: function, managerActionDateTime?: function,
+          managerActionMessage?: function, managerUserId?: function,
+          senderDateTime?: function, senderMessage?: function, senderUserId?:
+          function, state?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.scheduleChangeRequest" />" }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, recipientActionDateTime?: string | null,
+          recipientActionMessage?: string | null, recipientUserId?: string |
+          null, senderShiftId?: string | null }, "<xref uid="@odata.type"
+          />"&gt;)[], offerShiftRequestsEnabled?: boolean | null,
+          openShiftChangeRequests?: (Omit&lt;Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, assignedTo?: function, managerActionDateTime?: function,
+          managerActionMessage?: function, managerUserId?: function,
+          senderDateTime?: function, senderMessage?: function, senderUserId?:
+          function, state?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.scheduleChangeRequest" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          openShiftId?: string | null })[], openShifts?: (Omit&lt;Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdBy?: function, createdDateTime?: function,
+          lastModifiedBy?: function, lastModifiedDateTime?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          draftOpenShift?: Record&lt;string, never&gt; | (Omit&lt;... & ... &
+          ..., "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, openSlotCount?: function }) | null, isStagedForDeletion?:
+          boolean | null, schedulingGroupId?: string | null, sharedOpenShift?:
+          Record&lt;string, never&gt; | (Omit&lt;... & ... & ..., "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          openSlotCount?: function }) | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.openShift" />" })[], openShiftsEnabled?:
+          boolean | null, provisionStatus?: Record&lt;string, never&gt; |
+          "NotStarted" | "Running" | "Completed" | "Failed" | null,
+          provisionStatusCode?: string | null, schedulingGroups?:
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: function
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdBy?: function, createdDateTime?:
+          function, lastModifiedBy?: function, lastModifiedDateTime?: function
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          code?: string | null, displayName?: string | null, isActive?: boolean
+          | null, userIds?: (string | null)[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.schedulingGroup" />" })[], shifts?:
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: function
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdBy?: function, createdDateTime?:
+          function, lastModifiedBy?: function, lastModifiedDateTime?: function
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          draftShift?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., endDateTime?: ..., startDateTime?: ...,
+          theme?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ..., activities?: ..., displayName?: ...,
+          notes?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.shiftItem" />" }) |
+          null, isStagedForDeletion?: boolean | null, schedulingGroupId?: string
+          | null, sharedShift?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., endDateTime?: ..., startDateTime?: ...,
+          theme?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ..., activities?: ..., displayName?: ...,
+          notes?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.shiftItem" />" }) |
+          null, userId?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.shift" />" })[], startDayOfWeek?:
+          Record&lt;string, never&gt; | "sunday" | "monday" | "tuesday" |
+          "wednesday" | "thursday" | "friday" | "saturday" | null,
+          swapShiftsChangeRequests?: (Omit&lt;Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, assignedTo?: function, managerActionDateTime?: function,
+          managerActionMessage?: function, managerUserId?: function,
+          senderDateTime?: function, senderMessage?: function, senderUserId?:
+          function, state?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.scheduleChangeRequest" />" }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, recipientActionDateTime?: string | null,
+          recipientActionMessage?: string | null, recipientUserId?: string |
+          null, senderShiftId?: string | null }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, recipientShiftId?:
+          string | null })[], swapShiftsRequestsEnabled?: boolean | null,
+          timeCards?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdBy?: function, createdDateTime?:
+          function, lastModifiedBy?: function, lastModifiedDateTime?: function
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          breaks?: { <xref uid="@odata.type" />: string, breakId?: function,
+          end?: function, notes?: function, start?: function }[], clockInEvent?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          dateTime?: string, isAtApprovedLocation?: boolean | null, notes?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., content?:
+          ..., contentType?: ... } | null } | null, clockOutEvent?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          dateTime?: string, isAtApprovedLocation?: boolean | null, notes?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., content?:
+          ..., contentType?: ... } | null } | null, confirmedBy?: "user" |
+          "unknownFutureValue" | Record&lt;string, never&gt; | "none" |
+          "manager" | null, notes?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, content?: string | null, contentType?:
+          Record&lt;..., ...&gt; | "text" | "html" | null } | null,
+          originalEntry?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, breaks?: ...[], clockInEvent?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., dateTime?:
+          ..., isAtApprovedLocation?: ..., notes?: ... } | null, clockOutEvent?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., dateTime?:
+          ..., isAtApprovedLocation?: ..., notes?: ... } | null } | null,
+          state?: "unknownFutureValue" | Record&lt;string, never&gt; |
+          "clockedIn" | "onBreak" | "clockedOut" | null, userId?: string | null
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.timeCard" />" })[], timeClockEnabled?: boolean |
+          null, timeClockSettings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, approvedLocation?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, altitude?: string |
+          number | null, latitude?: string | number | null, longitude?: string |
+          number | null } | null } | null, timeOffReasons?: (Omit&lt;Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdBy?: function, createdDateTime?: function,
+          lastModifiedBy?: function, lastModifiedDateTime?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          code?: string | null, displayName?: string | null, iconType?:
+          "unknownFutureValue" | Record&lt;string, never&gt; | "none" |
+          "running" | "pin" | "car" | "calendar" | "plane" | "firstAid" |
+          "doctor" | "notWorking" | "clock" | "juryDuty" | "globe" | "cup" |
+          "phone" | "weather" | "umbrella" | "piggyBank" | "dog" | "cake" |
+          "trafficCone" | "sunny" | null, isActive?: boolean | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.timeOffReason" />"
+          })[], timeOffRequests?: (Omit&lt;Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, assignedTo?: function, managerActionDateTime?: function,
+          managerActionMessage?: function, managerUserId?: function,
+          senderDateTime?: function, senderMessage?: function, senderUserId?:
+          function, state?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.scheduleChangeRequest" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          endDateTime?: string | null, startDateTime?: string | null,
+          timeOffReasonId?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.timeOffRequest" />" })[],
+          timeOffRequestsEnabled?: boolean | null, timesOff?: (Omit&lt;Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdBy?: function, createdDateTime?: function,
+          lastModifiedBy?: function, lastModifiedDateTime?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          draftTimeOff?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., endDateTime?: ..., startDateTime?: ...,
+          theme?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, timeOffReasonId?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.timeOffItem" />" })
+          | null, isStagedForDeletion?: boolean | null, sharedTimeOff?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., endDateTime?: ..., startDateTime?: ..., theme?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          timeOffReasonId?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.timeOffItem" />" }) | null, userId?: string |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.timeOff" />" })[], timeZone?: string | null,
+          workforceIntegrationIds?: (string | null)[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.schedule" />" }&gt;
+  - name: >-
+      set(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, dayNotes?: (Omit<Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & Omit<{ @odata.type: string, createdBy?:
+      Record<..., ...> | { @odata.type: ..., application?: ..., device?: ...,
+      user?: ... } | null, createdDateTime?: string | null, lastModifiedBy?:
+      Record<..., ...> | { @odata.type: ..., application?: ..., device?: ...,
+      user?: ... } | null, lastModifiedDateTime?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.changeTrackedEntity" },
+      "@odata.type"> & { @odata.type: string, dayNoteDate?: string | null,
+      draftDayNote?: Record<string, never> | { @odata.type: string, content?:
+      string | null, contentType?: Record<string, never> | "text" | "html" |
+      null } | null, sharedDayNote?: Record<string, never> | { @odata.type:
+      string, content?: string | null, contentType?: Record<string, never> |
+      "text" | "html" | null } | null } & { @odata.type:
+      "#microsoft.graph.dayNote" })[], enabled?: boolean | null,
+      isActivitiesIncludedWhenCopyingShiftsEnabled?: boolean | null,
+      offerShiftRequests?: (Omit<Omit<Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & Omit<{ @odata.type: ..., createdBy?: ...,
+      createdDateTime?: ..., lastModifiedBy?: ..., lastModifiedDateTime?: ... },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.changeTrackedEntity" },
+      "@odata.type"> & Omit<{ @odata.type: string, assignedTo?:
+      "unknownFutureValue" | Record<..., ...> | "sender" | "system" | "manager"
+      | "recipient" | null, managerActionDateTime?: string | null,
+      managerActionMessage?: string | null, managerUserId?: string | null,
+      senderDateTime?: string | null, senderMessage?: string | null,
+      senderUserId?: string | null, state?: "unknownFutureValue" | Record<...,
+      ...> | "pending" | "declined" | "approved" | null }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.scheduleChangeRequest" }, "@odata.type"> &
+      Omit<{ @odata.type: string, recipientActionDateTime?: string | null,
+      recipientActionMessage?: string | null, recipientUserId?: string | null,
+      senderShiftId?: string | null }, "@odata.type">)[],
+      offerShiftRequestsEnabled?: boolean | null, openShiftChangeRequests?:
+      (Omit<Omit<Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+      @odata.type: ..., createdBy?: ..., createdDateTime?: ..., lastModifiedBy?:
+      ..., lastModifiedDateTime?: ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & Omit<{
+      @odata.type: string, assignedTo?: "unknownFutureValue" | Record<..., ...>
+      | "sender" | "system" | "manager" | "recipient" | null,
+      managerActionDateTime?: string | null, managerActionMessage?: string |
+      null, managerUserId?: string | null, senderDateTime?: string | null,
+      senderMessage?: string | null, senderUserId?: string | null, state?:
+      "unknownFutureValue" | Record<..., ...> | "pending" | "declined" |
+      "approved" | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.scheduleChangeRequest" }, "@odata.type"> & {
+      @odata.type: string, openShiftId?: string | null })[], openShifts?:
+      (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, createdBy?: Record<..., ...> | { @odata.type: ...,
+      application?: ..., device?: ..., user?: ... } | null, createdDateTime?:
+      string | null, lastModifiedBy?: Record<..., ...> | { @odata.type: ...,
+      application?: ..., device?: ..., user?: ... } | null,
+      lastModifiedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & { @odata.type:
+      string, draftOpenShift?: Record<string, never> | (Omit<Omit<..., ...> &
+      Omit<..., ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type:
+      string, openSlotCount?: number }) | null, isStagedForDeletion?: boolean |
+      null, schedulingGroupId?: string | null, sharedOpenShift?: Record<string,
+      never> | (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+      "@odata.type"> & { @odata.type: string, openSlotCount?: number }) | null }
+      & { @odata.type: "#microsoft.graph.openShift" })[], openShiftsEnabled?:
+      boolean | null, provisionStatus?: Record<string, never> | "NotStarted" |
+      "Running" | "Completed" | "Failed" | null, provisionStatusCode?: string |
+      null, schedulingGroups?: (Omit<Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, createdBy?: Record<..., ...>
+      | { @odata.type: ..., application?: ..., device?: ..., user?: ... } |
+      null, createdDateTime?: string | null, lastModifiedBy?: Record<..., ...> |
+      { @odata.type: ..., application?: ..., device?: ..., user?: ... } | null,
+      lastModifiedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & { @odata.type:
+      string, code?: string | null, displayName?: string | null, isActive?:
+      boolean | null, userIds?: (string | null)[] } & { @odata.type:
+      "#microsoft.graph.schedulingGroup" })[], shifts?: (Omit<Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+      string, createdBy?: Record<..., ...> | { @odata.type: ..., application?:
+      ..., device?: ..., user?: ... } | null, createdDateTime?: string | null,
+      lastModifiedBy?: Record<..., ...> | { @odata.type: ..., application?: ...,
+      device?: ..., user?: ... } | null, lastModifiedDateTime?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.changeTrackedEntity" },
+      "@odata.type"> & { @odata.type: string, draftShift?: Record<string, never>
+      | (Omit<{ @odata.type: string, endDateTime?: function, startDateTime?:
+      function, theme?: function }, "@odata.type"> & Omit<{ @odata.type: string,
+      activities?: function, displayName?: function, notes?: function },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.shiftItem" }) | null,
+      isStagedForDeletion?: boolean | null, schedulingGroupId?: string | null,
+      sharedShift?: Record<string, never> | (Omit<{ @odata.type: string,
+      endDateTime?: function, startDateTime?: function, theme?: function },
+      "@odata.type"> & Omit<{ @odata.type: string, activities?: function,
+      displayName?: function, notes?: function }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.shiftItem" }) | null, userId?: string |
+      null } & { @odata.type: "#microsoft.graph.shift" })[], startDayOfWeek?:
+      Record<string, never> | "sunday" | "monday" | "tuesday" | "wednesday" |
+      "thursday" | "friday" | "saturday" | null, swapShiftsChangeRequests?:
+      (Omit<Omit<Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+      @odata.type: ..., createdBy?: ..., createdDateTime?: ..., lastModifiedBy?:
+      ..., lastModifiedDateTime?: ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & Omit<{
+      @odata.type: string, assignedTo?: "unknownFutureValue" | Record<..., ...>
+      | "sender" | "system" | "manager" | "recipient" | null,
+      managerActionDateTime?: string | null, managerActionMessage?: string |
+      null, managerUserId?: string | null, senderDateTime?: string | null,
+      senderMessage?: string | null, senderUserId?: string | null, state?:
+      "unknownFutureValue" | Record<..., ...> | "pending" | "declined" |
+      "approved" | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.scheduleChangeRequest" }, "@odata.type"> & Omit<{
+      @odata.type: string, recipientActionDateTime?: string | null,
+      recipientActionMessage?: string | null, recipientUserId?: string | null,
+      senderShiftId?: string | null }, "@odata.type"> & { @odata.type: string,
+      recipientShiftId?: string | null })[], swapShiftsRequestsEnabled?: boolean
+      | null, timeCards?: (Omit<Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, createdBy?: Record<..., ...>
+      | { @odata.type: ..., application?: ..., device?: ..., user?: ... } |
+      null, createdDateTime?: string | null, lastModifiedBy?: Record<..., ...> |
+      { @odata.type: ..., application?: ..., device?: ..., user?: ... } | null,
+      lastModifiedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & { @odata.type:
+      string, breaks?: { @odata.type: string, breakId?: string | null, end?:
+      Record<..., ...> | { @odata.type: ..., dateTime?: ...,
+      isAtApprovedLocation?: ..., notes?: ... } | null, notes?: Record<..., ...>
+      | { @odata.type: ..., content?: ..., contentType?: ... } | null, start?: {
+      @odata.type: ..., dateTime?: ..., isAtApprovedLocation?: ..., notes?: ...
+      } }[], clockInEvent?: Record<string, never> | { @odata.type: string,
+      dateTime?: string, isAtApprovedLocation?: boolean | null, notes?:
+      Record<string, never> | { @odata.type: string, content?: function,
+      contentType?: function } | null } | null, clockOutEvent?: Record<string,
+      never> | { @odata.type: string, dateTime?: string, isAtApprovedLocation?:
+      boolean | null, notes?: Record<string, never> | { @odata.type: string,
+      content?: function, contentType?: function } | null } | null,
+      confirmedBy?: "user" | "unknownFutureValue" | Record<string, never> |
+      "none" | "manager" | null, notes?: Record<string, never> | { @odata.type:
+      string, content?: string | null, contentType?: Record<string, never> |
+      "text" | "html" | null } | null, originalEntry?: Record<string, never> | {
+      @odata.type: string, breaks?: { @odata.type: ..., breakId?: ..., end?:
+      ..., notes?: ..., start?: ... }[], clockInEvent?: Record<string, never> |
+      { @odata.type: string, dateTime?: function, isAtApprovedLocation?:
+      function, notes?: function } | null, clockOutEvent?: Record<string, never>
+      | { @odata.type: string, dateTime?: function, isAtApprovedLocation?:
+      function, notes?: function } | null } | null, state?: "unknownFutureValue"
+      | Record<string, never> | "clockedIn" | "onBreak" | "clockedOut" | null,
+      userId?: string | null } & { @odata.type: "#microsoft.graph.timeCard"
+      })[], timeClockEnabled?: boolean | null, timeClockSettings?:
+      Record<string, never> | { @odata.type: string, approvedLocation?:
+      Record<string, never> | { @odata.type: string, altitude?: string | number
+      | null, latitude?: string | number | null, longitude?: string | number |
+      null } | null } | null, timeOffReasons?: (Omit<Omit<{ @odata.type: string,
+      id?: string }, "@odata.type"> & Omit<{ @odata.type: string, createdBy?:
+      Record<..., ...> | { @odata.type: ..., application?: ..., device?: ...,
+      user?: ... } | null, createdDateTime?: string | null, lastModifiedBy?:
+      Record<..., ...> | { @odata.type: ..., application?: ..., device?: ...,
+      user?: ... } | null, lastModifiedDateTime?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.changeTrackedEntity" },
+      "@odata.type"> & { @odata.type: string, code?: string | null,
+      displayName?: string | null, iconType?: "unknownFutureValue" |
+      Record<string, never> | "none" | "running" | "pin" | "car" | "calendar" |
+      "plane" | "firstAid" | "doctor" | "notWorking" | "clock" | "juryDuty" |
+      "globe" | "cup" | "phone" | "weather" | "umbrella" | "piggyBank" | "dog" |
+      "cake" | "trafficCone" | "sunny" | null, isActive?: boolean | null } & {
+      @odata.type: "#microsoft.graph.timeOffReason" })[], timeOffRequests?:
+      (Omit<Omit<Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+      @odata.type: ..., createdBy?: ..., createdDateTime?: ..., lastModifiedBy?:
+      ..., lastModifiedDateTime?: ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & Omit<{
+      @odata.type: string, assignedTo?: "unknownFutureValue" | Record<..., ...>
+      | "sender" | "system" | "manager" | "recipient" | null,
+      managerActionDateTime?: string | null, managerActionMessage?: string |
+      null, managerUserId?: string | null, senderDateTime?: string | null,
+      senderMessage?: string | null, senderUserId?: string | null, state?:
+      "unknownFutureValue" | Record<..., ...> | "pending" | "declined" |
+      "approved" | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.scheduleChangeRequest" }, "@odata.type"> & {
+      @odata.type: string, endDateTime?: string | null, startDateTime?: string |
+      null, timeOffReasonId?: string | null } & { @odata.type:
+      "#microsoft.graph.timeOffRequest" })[], timeOffRequestsEnabled?: boolean |
+      null, timesOff?: (Omit<Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, createdBy?: Record<..., ...>
+      | { @odata.type: ..., application?: ..., device?: ..., user?: ... } |
+      null, createdDateTime?: string | null, lastModifiedBy?: Record<..., ...> |
+      { @odata.type: ..., application?: ..., device?: ..., user?: ... } | null,
+      lastModifiedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & { @odata.type:
+      string, draftTimeOff?: Record<string, never> | (Omit<{ @odata.type:
+      string, endDateTime?: function, startDateTime?: function, theme?: function
+      }, "@odata.type"> & { @odata.type: string, timeOffReasonId?: string | null
+      } & { @odata.type: "#microsoft.graph.timeOffItem" }) | null,
+      isStagedForDeletion?: boolean | null, sharedTimeOff?: Record<string,
+      never> | (Omit<{ @odata.type: string, endDateTime?: function,
+      startDateTime?: function, theme?: function }, "@odata.type"> & {
+      @odata.type: string, timeOffReasonId?: string | null } & { @odata.type:
+      "#microsoft.graph.timeOffItem" }) | null, userId?: string | null } & {
+      @odata.type: "#microsoft.graph.timeOff" })[], timeZone?: string | null,
+      workforceIntegrationIds?: (string | null)[] } & { @odata.type:
+      "#microsoft.graph.schedule" }, { team-id: string })
     uid: '@microsoft/teams.graph-endpoints.me.joinedTeams.schedule.set'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`PUT /me/joinedTeams/{team-id}/schedule`'
@@ -692,18 +1223,825 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function set(body: Operation<"/me/joinedTeams/{team-id}/schedule",
-        "put">, params?: any): EndpointRequest<IEndpoints["PUT
-        /me/joinedTeams/{team-id}/schedule"]["response"]>
+        function set(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, dayNotes?: (Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, createdBy?: Record<..., ...> | { @odata.type: ..., application?:
+        ..., device?: ..., user?: ... } | null, createdDateTime?: string | null,
+        lastModifiedBy?: Record<..., ...> | { @odata.type: ..., application?:
+        ..., device?: ..., user?: ... } | null, lastModifiedDateTime?: string |
+        null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & {
+        @odata.type: string, dayNoteDate?: string | null, draftDayNote?:
+        Record<string, never> | { @odata.type: string, content?: string | null,
+        contentType?: Record<string, never> | "text" | "html" | null } | null,
+        sharedDayNote?: Record<string, never> | { @odata.type: string, content?:
+        string | null, contentType?: Record<string, never> | "text" | "html" |
+        null } | null } & { @odata.type: "#microsoft.graph.dayNote" })[],
+        enabled?: boolean | null, isActivitiesIncludedWhenCopyingShiftsEnabled?:
+        boolean | null, offerShiftRequests?: (Omit<Omit<Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & Omit<{ @odata.type: ..., createdBy?: ...,
+        createdDateTime?: ..., lastModifiedBy?: ..., lastModifiedDateTime?: ...
+        }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & Omit<{
+        @odata.type: string, assignedTo?: "unknownFutureValue" | Record<...,
+        ...> | "sender" | "system" | "manager" | "recipient" | null,
+        managerActionDateTime?: string | null, managerActionMessage?: string |
+        null, managerUserId?: string | null, senderDateTime?: string | null,
+        senderMessage?: string | null, senderUserId?: string | null, state?:
+        "unknownFutureValue" | Record<..., ...> | "pending" | "declined" |
+        "approved" | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.scheduleChangeRequest" }, "@odata.type"> & Omit<{
+        @odata.type: string, recipientActionDateTime?: string | null,
+        recipientActionMessage?: string | null, recipientUserId?: string | null,
+        senderShiftId?: string | null }, "@odata.type">)[],
+        offerShiftRequestsEnabled?: boolean | null, openShiftChangeRequests?:
+        (Omit<Omit<Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+        @odata.type: ..., createdBy?: ..., createdDateTime?: ...,
+        lastModifiedBy?: ..., lastModifiedDateTime?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> &
+        Omit<{ @odata.type: string, assignedTo?: "unknownFutureValue" |
+        Record<..., ...> | "sender" | "system" | "manager" | "recipient" | null,
+        managerActionDateTime?: string | null, managerActionMessage?: string |
+        null, managerUserId?: string | null, senderDateTime?: string | null,
+        senderMessage?: string | null, senderUserId?: string | null, state?:
+        "unknownFutureValue" | Record<..., ...> | "pending" | "declined" |
+        "approved" | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.scheduleChangeRequest" }, "@odata.type"> & {
+        @odata.type: string, openShiftId?: string | null })[], openShifts?:
+        (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, createdBy?: Record<..., ...> | { @odata.type: ...,
+        application?: ..., device?: ..., user?: ... } | null, createdDateTime?:
+        string | null, lastModifiedBy?: Record<..., ...> | { @odata.type: ...,
+        application?: ..., device?: ..., user?: ... } | null,
+        lastModifiedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & {
+        @odata.type: string, draftOpenShift?: Record<string, never> |
+        (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, openSlotCount?: number }) |
+        null, isStagedForDeletion?: boolean | null, schedulingGroupId?: string |
+        null, sharedOpenShift?: Record<string, never> | (Omit<Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type:
+        string, openSlotCount?: number }) | null } & { @odata.type:
+        "#microsoft.graph.openShift" })[], openShiftsEnabled?: boolean | null,
+        provisionStatus?: Record<string, never> | "NotStarted" | "Running" |
+        "Completed" | "Failed" | null, provisionStatusCode?: string | null,
+        schedulingGroups?: (Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdBy?: Record<...,
+        ...> | { @odata.type: ..., application?: ..., device?: ..., user?: ... }
+        | null, createdDateTime?: string | null, lastModifiedBy?: Record<...,
+        ...> | { @odata.type: ..., application?: ..., device?: ..., user?: ... }
+        | null, lastModifiedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> &
+        { @odata.type: string, code?: string | null, displayName?: string |
+        null, isActive?: boolean | null, userIds?: (string | null)[] } & {
+        @odata.type: "#microsoft.graph.schedulingGroup" })[], shifts?:
+        (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, createdBy?: Record<..., ...> | { @odata.type: ...,
+        application?: ..., device?: ..., user?: ... } | null, createdDateTime?:
+        string | null, lastModifiedBy?: Record<..., ...> | { @odata.type: ...,
+        application?: ..., device?: ..., user?: ... } | null,
+        lastModifiedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & {
+        @odata.type: string, draftShift?: Record<string, never> | (Omit<{
+        @odata.type: string, endDateTime?: function, startDateTime?: function,
+        theme?: function }, "@odata.type"> & Omit<{ @odata.type: string,
+        activities?: function, displayName?: function, notes?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.shiftItem" }) | null,
+        isStagedForDeletion?: boolean | null, schedulingGroupId?: string | null,
+        sharedShift?: Record<string, never> | (Omit<{ @odata.type: string,
+        endDateTime?: function, startDateTime?: function, theme?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, activities?: function,
+        displayName?: function, notes?: function }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.shiftItem" }) | null, userId?: string |
+        null } & { @odata.type: "#microsoft.graph.shift" })[], startDayOfWeek?:
+        Record<string, never> | "sunday" | "monday" | "tuesday" | "wednesday" |
+        "thursday" | "friday" | "saturday" | null, swapShiftsChangeRequests?:
+        (Omit<Omit<Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+        @odata.type: ..., createdBy?: ..., createdDateTime?: ...,
+        lastModifiedBy?: ..., lastModifiedDateTime?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> &
+        Omit<{ @odata.type: string, assignedTo?: "unknownFutureValue" |
+        Record<..., ...> | "sender" | "system" | "manager" | "recipient" | null,
+        managerActionDateTime?: string | null, managerActionMessage?: string |
+        null, managerUserId?: string | null, senderDateTime?: string | null,
+        senderMessage?: string | null, senderUserId?: string | null, state?:
+        "unknownFutureValue" | Record<..., ...> | "pending" | "declined" |
+        "approved" | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.scheduleChangeRequest" }, "@odata.type"> & Omit<{
+        @odata.type: string, recipientActionDateTime?: string | null,
+        recipientActionMessage?: string | null, recipientUserId?: string | null,
+        senderShiftId?: string | null }, "@odata.type"> & { @odata.type: string,
+        recipientShiftId?: string | null })[], swapShiftsRequestsEnabled?:
+        boolean | null, timeCards?: (Omit<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, createdBy?:
+        Record<..., ...> | { @odata.type: ..., application?: ..., device?: ...,
+        user?: ... } | null, createdDateTime?: string | null, lastModifiedBy?:
+        Record<..., ...> | { @odata.type: ..., application?: ..., device?: ...,
+        user?: ... } | null, lastModifiedDateTime?: string | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.changeTrackedEntity"
+        }, "@odata.type"> & { @odata.type: string, breaks?: { @odata.type:
+        string, breakId?: string | null, end?: Record<..., ...> | { @odata.type:
+        ..., dateTime?: ..., isAtApprovedLocation?: ..., notes?: ... } | null,
+        notes?: Record<..., ...> | { @odata.type: ..., content?: ...,
+        contentType?: ... } | null, start?: { @odata.type: ..., dateTime?: ...,
+        isAtApprovedLocation?: ..., notes?: ... } }[], clockInEvent?:
+        Record<string, never> | { @odata.type: string, dateTime?: string,
+        isAtApprovedLocation?: boolean | null, notes?: Record<string, never> | {
+        @odata.type: string, content?: function, contentType?: function } | null
+        } | null, clockOutEvent?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, isAtApprovedLocation?: boolean | null, notes?:
+        Record<string, never> | { @odata.type: string, content?: function,
+        contentType?: function } | null } | null, confirmedBy?: "user" |
+        "unknownFutureValue" | Record<string, never> | "none" | "manager" |
+        null, notes?: Record<string, never> | { @odata.type: string, content?:
+        string | null, contentType?: Record<string, never> | "text" | "html" |
+        null } | null, originalEntry?: Record<string, never> | { @odata.type:
+        string, breaks?: { @odata.type: ..., breakId?: ..., end?: ..., notes?:
+        ..., start?: ... }[], clockInEvent?: Record<string, never> | {
+        @odata.type: string, dateTime?: function, isAtApprovedLocation?:
+        function, notes?: function } | null, clockOutEvent?: Record<string,
+        never> | { @odata.type: string, dateTime?: function,
+        isAtApprovedLocation?: function, notes?: function } | null } | null,
+        state?: "unknownFutureValue" | Record<string, never> | "clockedIn" |
+        "onBreak" | "clockedOut" | null, userId?: string | null } & {
+        @odata.type: "#microsoft.graph.timeCard" })[], timeClockEnabled?:
+        boolean | null, timeClockSettings?: Record<string, never> | {
+        @odata.type: string, approvedLocation?: Record<string, never> | {
+        @odata.type: string, altitude?: string | number | null, latitude?:
+        string | number | null, longitude?: string | number | null } | null } |
+        null, timeOffReasons?: (Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdBy?: Record<...,
+        ...> | { @odata.type: ..., application?: ..., device?: ..., user?: ... }
+        | null, createdDateTime?: string | null, lastModifiedBy?: Record<...,
+        ...> | { @odata.type: ..., application?: ..., device?: ..., user?: ... }
+        | null, lastModifiedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> &
+        { @odata.type: string, code?: string | null, displayName?: string |
+        null, iconType?: "unknownFutureValue" | Record<string, never> | "none" |
+        "running" | "pin" | "car" | "calendar" | "plane" | "firstAid" | "doctor"
+        | "notWorking" | "clock" | "juryDuty" | "globe" | "cup" | "phone" |
+        "weather" | "umbrella" | "piggyBank" | "dog" | "cake" | "trafficCone" |
+        "sunny" | null, isActive?: boolean | null } & { @odata.type:
+        "#microsoft.graph.timeOffReason" })[], timeOffRequests?:
+        (Omit<Omit<Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+        @odata.type: ..., createdBy?: ..., createdDateTime?: ...,
+        lastModifiedBy?: ..., lastModifiedDateTime?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> &
+        Omit<{ @odata.type: string, assignedTo?: "unknownFutureValue" |
+        Record<..., ...> | "sender" | "system" | "manager" | "recipient" | null,
+        managerActionDateTime?: string | null, managerActionMessage?: string |
+        null, managerUserId?: string | null, senderDateTime?: string | null,
+        senderMessage?: string | null, senderUserId?: string | null, state?:
+        "unknownFutureValue" | Record<..., ...> | "pending" | "declined" |
+        "approved" | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.scheduleChangeRequest" }, "@odata.type"> & {
+        @odata.type: string, endDateTime?: string | null, startDateTime?: string
+        | null, timeOffReasonId?: string | null } & { @odata.type:
+        "#microsoft.graph.timeOffRequest" })[], timeOffRequestsEnabled?: boolean
+        | null, timesOff?: (Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdBy?: Record<...,
+        ...> | { @odata.type: ..., application?: ..., device?: ..., user?: ... }
+        | null, createdDateTime?: string | null, lastModifiedBy?: Record<...,
+        ...> | { @odata.type: ..., application?: ..., device?: ..., user?: ... }
+        | null, lastModifiedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> &
+        { @odata.type: string, draftTimeOff?: Record<string, never> | (Omit<{
+        @odata.type: string, endDateTime?: function, startDateTime?: function,
+        theme?: function }, "@odata.type"> & { @odata.type: string,
+        timeOffReasonId?: string | null } & { @odata.type:
+        "#microsoft.graph.timeOffItem" }) | null, isStagedForDeletion?: boolean
+        | null, sharedTimeOff?: Record<string, never> | (Omit<{ @odata.type:
+        string, endDateTime?: function, startDateTime?: function, theme?:
+        function }, "@odata.type"> & { @odata.type: string, timeOffReasonId?:
+        string | null } & { @odata.type: "#microsoft.graph.timeOffItem" }) |
+        null, userId?: string | null } & { @odata.type:
+        "#microsoft.graph.timeOff" })[], timeZone?: string | null,
+        workforceIntegrationIds?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.schedule" }, params?: { team-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, dayNotes?: (Omit<Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, createdBy?: function, createdDateTime?: function,
+        lastModifiedBy?: function, lastModifiedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.changeTrackedEntity"
+        }, "@odata.type"> & { @odata.type: string, dayNoteDate?: string | null,
+        draftDayNote?: Record<string, never> | { @odata.type: string, content?:
+        string | null, contentType?: Record<..., ...> | "text" | "html" | null }
+        | null, sharedDayNote?: Record<string, never> | { @odata.type: string,
+        content?: string | null, contentType?: Record<..., ...> | "text" |
+        "html" | null } | null } & { @odata.type: "#microsoft.graph.dayNote"
+        })[], enabled?: boolean | null,
+        isActivitiesIncludedWhenCopyingShiftsEnabled?: boolean | null,
+        offerShiftRequests?: (Omit<Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & Omit<{ @odata.type: string,
+        assignedTo?: function, managerActionDateTime?: function,
+        managerActionMessage?: function, managerUserId?: function,
+        senderDateTime?: function, senderMessage?: function, senderUserId?:
+        function, state?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.scheduleChangeRequest" }, "@odata.type"> & Omit<{
+        @odata.type: string, recipientActionDateTime?: string | null,
+        recipientActionMessage?: string | null, recipientUserId?: string | null,
+        senderShiftId?: string | null }, "@odata.type">)[],
+        offerShiftRequestsEnabled?: boolean | null, openShiftChangeRequests?:
+        (Omit<Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & Omit<{ @odata.type: string, assignedTo?: function,
+        managerActionDateTime?: function, managerActionMessage?: function,
+        managerUserId?: function, senderDateTime?: function, senderMessage?:
+        function, senderUserId?: function, state?: function }, "@odata.type"> &
+        { @odata.type: "#microsoft.graph.scheduleChangeRequest" },
+        "@odata.type"> & { @odata.type: string, openShiftId?: string | null
+        })[], openShifts?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, createdBy?: function,
+        createdDateTime?: function, lastModifiedBy?: function,
+        lastModifiedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & {
+        @odata.type: string, draftOpenShift?: Record<string, never> | (Omit<...
+        & ... & ..., "@odata.type"> & { @odata.type: string, openSlotCount?:
+        function }) | null, isStagedForDeletion?: boolean | null,
+        schedulingGroupId?: string | null, sharedOpenShift?: Record<string,
+        never> | (Omit<... & ... & ..., "@odata.type"> & { @odata.type: string,
+        openSlotCount?: function }) | null } & { @odata.type:
+        "#microsoft.graph.openShift" })[], openShiftsEnabled?: boolean | null,
+        provisionStatus?: Record<string, never> | "NotStarted" | "Running" |
+        "Completed" | "Failed" | null, provisionStatusCode?: string | null,
+        schedulingGroups?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, createdBy?: function,
+        createdDateTime?: function, lastModifiedBy?: function,
+        lastModifiedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & {
+        @odata.type: string, code?: string | null, displayName?: string | null,
+        isActive?: boolean | null, userIds?: (string | null)[] } & {
+        @odata.type: "#microsoft.graph.schedulingGroup" })[], shifts?:
+        (Omit<Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string, createdBy?: function, createdDateTime?:
+        function, lastModifiedBy?: function, lastModifiedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.changeTrackedEntity"
+        }, "@odata.type"> & { @odata.type: string, draftShift?: Record<string,
+        never> | (Omit<{ @odata.type: ..., endDateTime?: ..., startDateTime?:
+        ..., theme?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        activities?: ..., displayName?: ..., notes?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.shiftItem" }) | null,
+        isStagedForDeletion?: boolean | null, schedulingGroupId?: string | null,
+        sharedShift?: Record<string, never> | (Omit<{ @odata.type: ...,
+        endDateTime?: ..., startDateTime?: ..., theme?: ... }, "@odata.type"> &
+        Omit<{ @odata.type: ..., activities?: ..., displayName?: ..., notes?:
+        ... }, "@odata.type"> & { @odata.type: "#microsoft.graph.shiftItem" }) |
+        null, userId?: string | null } & { @odata.type: "#microsoft.graph.shift"
+        })[], startDayOfWeek?: Record<string, never> | "sunday" | "monday" |
+        "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | null,
+        swapShiftsChangeRequests?: (Omit<Omit<Omit<..., ...> & Omit<..., ...> &
+        { @odata.type: ... }, "@odata.type"> & Omit<{ @odata.type: string,
+        assignedTo?: function, managerActionDateTime?: function,
+        managerActionMessage?: function, managerUserId?: function,
+        senderDateTime?: function, senderMessage?: function, senderUserId?:
+        function, state?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.scheduleChangeRequest" }, "@odata.type"> & Omit<{
+        @odata.type: string, recipientActionDateTime?: string | null,
+        recipientActionMessage?: string | null, recipientUserId?: string | null,
+        senderShiftId?: string | null }, "@odata.type"> & { @odata.type: string,
+        recipientShiftId?: string | null })[], swapShiftsRequestsEnabled?:
+        boolean | null, timeCards?: (Omit<Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & Omit<{ @odata.type: string, createdBy?:
+        function, createdDateTime?: function, lastModifiedBy?: function,
+        lastModifiedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & {
+        @odata.type: string, breaks?: { @odata.type: string, breakId?: function,
+        end?: function, notes?: function, start?: function }[], clockInEvent?:
+        Record<string, never> | { @odata.type: string, dateTime?: string,
+        isAtApprovedLocation?: boolean | null, notes?: Record<..., ...> | {
+        @odata.type: ..., content?: ..., contentType?: ... } | null } | null,
+        clockOutEvent?: Record<string, never> | { @odata.type: string,
+        dateTime?: string, isAtApprovedLocation?: boolean | null, notes?:
+        Record<..., ...> | { @odata.type: ..., content?: ..., contentType?: ...
+        } | null } | null, confirmedBy?: "user" | "unknownFutureValue" |
+        Record<string, never> | "none" | "manager" | null, notes?:
+        Record<string, never> | { @odata.type: string, content?: string | null,
+        contentType?: Record<..., ...> | "text" | "html" | null } | null,
+        originalEntry?: Record<string, never> | { @odata.type: string, breaks?:
+        ...[], clockInEvent?: Record<..., ...> | { @odata.type: ..., dateTime?:
+        ..., isAtApprovedLocation?: ..., notes?: ... } | null, clockOutEvent?:
+        Record<..., ...> | { @odata.type: ..., dateTime?: ...,
+        isAtApprovedLocation?: ..., notes?: ... } | null } | null, state?:
+        "unknownFutureValue" | Record<string, never> | "clockedIn" | "onBreak" |
+        "clockedOut" | null, userId?: string | null } & { @odata.type:
+        "#microsoft.graph.timeCard" })[], timeClockEnabled?: boolean | null,
+        timeClockSettings?: Record<string, never> | { @odata.type: string,
+        approvedLocation?: Record<string, never> | { @odata.type: string,
+        altitude?: string | number | null, latitude?: string | number | null,
+        longitude?: string | number | null } | null } | null, timeOffReasons?:
+        (Omit<Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string, createdBy?: function, createdDateTime?:
+        function, lastModifiedBy?: function, lastModifiedDateTime?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.changeTrackedEntity"
+        }, "@odata.type"> & { @odata.type: string, code?: string | null,
+        displayName?: string | null, iconType?: "unknownFutureValue" |
+        Record<string, never> | "none" | "running" | "pin" | "car" | "calendar"
+        | "plane" | "firstAid" | "doctor" | "notWorking" | "clock" | "juryDuty"
+        | "globe" | "cup" | "phone" | "weather" | "umbrella" | "piggyBank" |
+        "dog" | "cake" | "trafficCone" | "sunny" | null, isActive?: boolean |
+        null } & { @odata.type: "#microsoft.graph.timeOffReason" })[],
+        timeOffRequests?: (Omit<Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & Omit<{ @odata.type: string,
+        assignedTo?: function, managerActionDateTime?: function,
+        managerActionMessage?: function, managerUserId?: function,
+        senderDateTime?: function, senderMessage?: function, senderUserId?:
+        function, state?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.scheduleChangeRequest" }, "@odata.type"> & {
+        @odata.type: string, endDateTime?: string | null, startDateTime?: string
+        | null, timeOffReasonId?: string | null } & { @odata.type:
+        "#microsoft.graph.timeOffRequest" })[], timeOffRequestsEnabled?: boolean
+        | null, timesOff?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, createdBy?: function,
+        createdDateTime?: function, lastModifiedBy?: function,
+        lastModifiedDateTime?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.changeTrackedEntity" }, "@odata.type"> & {
+        @odata.type: string, draftTimeOff?: Record<string, never> | (Omit<{
+        @odata.type: ..., endDateTime?: ..., startDateTime?: ..., theme?: ... },
+        "@odata.type"> & { @odata.type: string, timeOffReasonId?: function } & {
+        @odata.type: "#microsoft.graph.timeOffItem" }) | null,
+        isStagedForDeletion?: boolean | null, sharedTimeOff?: Record<string,
+        never> | (Omit<{ @odata.type: ..., endDateTime?: ..., startDateTime?:
+        ..., theme?: ... }, "@odata.type"> & { @odata.type: string,
+        timeOffReasonId?: function } & { @odata.type:
+        "#microsoft.graph.timeOffItem" }) | null, userId?: string | null } & {
+        @odata.type: "#microsoft.graph.timeOff" })[], timeZone?: string | null,
+        workforceIntegrationIds?: (string | null)[] } & { @odata.type:
+        "#microsoft.graph.schedule" }>
       parameters:
         - id: body
-          type: Operation&lt;"/me/joinedTeams/{team-id}/schedule", "put"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            dayNotes?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, createdBy?: Record&lt;..., ...&gt; | {
+            <xref uid="@odata.type" />: ..., application?: ..., device?: ...,
+            user?: ... } | null, createdDateTime?: string | null,
+            lastModifiedBy?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ..., application?: ..., device?: ..., user?: ... } | null,
+            lastModifiedDateTime?: string | null }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            dayNoteDate?: string | null, draftDayNote?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, content?: string |
+            null, contentType?: Record&lt;string, never&gt; | "text" | "html" |
+            null } | null, sharedDayNote?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, content?: string | null, contentType?:
+            Record&lt;string, never&gt; | "text" | "html" | null } | null } & {
+            <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.dayNote"
+            />" })[], enabled?: boolean | null,
+            isActivitiesIncludedWhenCopyingShiftsEnabled?: boolean | null,
+            offerShiftRequests?: (Omit&lt;Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., createdBy?:
+            ..., createdDateTime?: ..., lastModifiedBy?: ...,
+            lastModifiedDateTime?: ... }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, assignedTo?: "unknownFutureValue" | Record&lt;..., ...&gt; |
+            "sender" | "system" | "manager" | "recipient" | null,
+            managerActionDateTime?: string | null, managerActionMessage?: string
+            | null, managerUserId?: string | null, senderDateTime?: string |
+            null, senderMessage?: string | null, senderUserId?: string | null,
+            state?: "unknownFutureValue" | Record&lt;..., ...&gt; | "pending" |
+            "declined" | "approved" | null }, "<xref uid="@odata.type" />"&gt; &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.scheduleChangeRequest" />" }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, recipientActionDateTime?: string | null,
+            recipientActionMessage?: string | null, recipientUserId?: string |
+            null, senderShiftId?: string | null }, "<xref uid="@odata.type"
+            />"&gt;)[], offerShiftRequestsEnabled?: boolean | null,
+            openShiftChangeRequests?: (Omit&lt;Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., createdBy?:
+            ..., createdDateTime?: ..., lastModifiedBy?: ...,
+            lastModifiedDateTime?: ... }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, assignedTo?: "unknownFutureValue" | Record&lt;..., ...&gt; |
+            "sender" | "system" | "manager" | "recipient" | null,
+            managerActionDateTime?: string | null, managerActionMessage?: string
+            | null, managerUserId?: string | null, senderDateTime?: string |
+            null, senderMessage?: string | null, senderUserId?: string | null,
+            state?: "unknownFutureValue" | Record&lt;..., ...&gt; | "pending" |
+            "declined" | "approved" | null }, "<xref uid="@odata.type" />"&gt; &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.scheduleChangeRequest" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            openShiftId?: string | null })[], openShifts?: (Omit&lt;Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, createdBy?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., application?: ..., device?: ..., user?:
+            ... } | null, createdDateTime?: string | null, lastModifiedBy?:
+            Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            application?: ..., device?: ..., user?: ... } | null,
+            lastModifiedDateTime?: string | null }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            draftOpenShift?: Record&lt;string, never&gt; | (Omit&lt;Omit&lt;...,
+            ...&gt; & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, openSlotCount?: number }) | null, isStagedForDeletion?:
+            boolean | null, schedulingGroupId?: string | null, sharedOpenShift?:
+            Record&lt;string, never&gt; | (Omit&lt;Omit&lt;..., ...&gt; &
+            Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            openSlotCount?: number }) | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.openShift" />" })[],
+            openShiftsEnabled?: boolean | null, provisionStatus?:
+            Record&lt;string, never&gt; | "NotStarted" | "Running" | "Completed"
+            | "Failed" | null, provisionStatusCode?: string | null,
+            schedulingGroups?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: string, createdBy?: Record&lt;...,
+            ...&gt; | { <xref uid="@odata.type" />: ..., application?: ...,
+            device?: ..., user?: ... } | null, createdDateTime?: string | null,
+            lastModifiedBy?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ..., application?: ..., device?: ..., user?: ... } | null,
+            lastModifiedDateTime?: string | null }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            code?: string | null, displayName?: string | null, isActive?:
+            boolean | null, userIds?: (string | null)[] } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.schedulingGroup"
+            />" })[], shifts?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: string, createdBy?: Record&lt;...,
+            ...&gt; | { <xref uid="@odata.type" />: ..., application?: ...,
+            device?: ..., user?: ... } | null, createdDateTime?: string | null,
+            lastModifiedBy?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ..., application?: ..., device?: ..., user?: ... } | null,
+            lastModifiedDateTime?: string | null }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            draftShift?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, endDateTime?: function,
+            startDateTime?: function, theme?: function }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, activities?: function, displayName?: function, notes?:
+            function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.shiftItem" />" })
+            | null, isStagedForDeletion?: boolean | null, schedulingGroupId?:
+            string | null, sharedShift?: Record&lt;string, never&gt; |
+            (Omit&lt;{ <xref uid="@odata.type" />: string, endDateTime?:
+            function, startDateTime?: function, theme?: function }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, activities?: function, displayName?: function, notes?:
+            function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.shiftItem" />" })
+            | null, userId?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.shift" />" })[], startDayOfWeek?:
+            Record&lt;string, never&gt; | "sunday" | "monday" | "tuesday" |
+            "wednesday" | "thursday" | "friday" | "saturday" | null,
+            swapShiftsChangeRequests?: (Omit&lt;Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., createdBy?:
+            ..., createdDateTime?: ..., lastModifiedBy?: ...,
+            lastModifiedDateTime?: ... }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, assignedTo?: "unknownFutureValue" | Record&lt;..., ...&gt; |
+            "sender" | "system" | "manager" | "recipient" | null,
+            managerActionDateTime?: string | null, managerActionMessage?: string
+            | null, managerUserId?: string | null, senderDateTime?: string |
+            null, senderMessage?: string | null, senderUserId?: string | null,
+            state?: "unknownFutureValue" | Record&lt;..., ...&gt; | "pending" |
+            "declined" | "approved" | null }, "<xref uid="@odata.type" />"&gt; &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.scheduleChangeRequest" />" }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, recipientActionDateTime?: string | null,
+            recipientActionMessage?: string | null, recipientUserId?: string |
+            null, senderShiftId?: string | null }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, recipientShiftId?:
+            string | null })[], swapShiftsRequestsEnabled?: boolean | null,
+            timeCards?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, createdBy?: Record&lt;..., ...&gt; | {
+            <xref uid="@odata.type" />: ..., application?: ..., device?: ...,
+            user?: ... } | null, createdDateTime?: string | null,
+            lastModifiedBy?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ..., application?: ..., device?: ..., user?: ... } | null,
+            lastModifiedDateTime?: string | null }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            breaks?: { <xref uid="@odata.type" />: string, breakId?: string |
+            null, end?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+            ..., dateTime?: ..., isAtApprovedLocation?: ..., notes?: ... } |
+            null, notes?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+            ..., content?: ..., contentType?: ... } | null, start?: { <xref
+            uid="@odata.type" />: ..., dateTime?: ..., isAtApprovedLocation?:
+            ..., notes?: ... } }[], clockInEvent?: Record&lt;string, never&gt; |
+            { <xref uid="@odata.type" />: string, dateTime?: string,
+            isAtApprovedLocation?: boolean | null, notes?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, content?:
+            function, contentType?: function } | null } | null, clockOutEvent?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            dateTime?: string, isAtApprovedLocation?: boolean | null, notes?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            content?: function, contentType?: function } | null } | null,
+            confirmedBy?: "user" | "unknownFutureValue" | Record&lt;string,
+            never&gt; | "none" | "manager" | null, notes?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, content?: string |
+            null, contentType?: Record&lt;string, never&gt; | "text" | "html" |
+            null } | null, originalEntry?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, breaks?: { <xref uid="@odata.type" />:
+            ..., breakId?: ..., end?: ..., notes?: ..., start?: ... }[],
+            clockInEvent?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, dateTime?: function,
+            isAtApprovedLocation?: function, notes?: function } | null,
+            clockOutEvent?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, dateTime?: function,
+            isAtApprovedLocation?: function, notes?: function } | null } | null,
+            state?: "unknownFutureValue" | Record&lt;string, never&gt; |
+            "clockedIn" | "onBreak" | "clockedOut" | null, userId?: string |
+            null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.timeCard" />" })[], timeClockEnabled?: boolean
+            | null, timeClockSettings?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, approvedLocation?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, altitude?: string
+            | number | null, latitude?: string | number | null, longitude?:
+            string | number | null } | null } | null, timeOffReasons?:
+            (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+            }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, createdBy?: Record&lt;..., ...&gt; | {
+            <xref uid="@odata.type" />: ..., application?: ..., device?: ...,
+            user?: ... } | null, createdDateTime?: string | null,
+            lastModifiedBy?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ..., application?: ..., device?: ..., user?: ... } | null,
+            lastModifiedDateTime?: string | null }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            code?: string | null, displayName?: string | null, iconType?:
+            "unknownFutureValue" | Record&lt;string, never&gt; | "none" |
+            "running" | "pin" | "car" | "calendar" | "plane" | "firstAid" |
+            "doctor" | "notWorking" | "clock" | "juryDuty" | "globe" | "cup" |
+            "phone" | "weather" | "umbrella" | "piggyBank" | "dog" | "cake" |
+            "trafficCone" | "sunny" | null, isActive?: boolean | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.timeOffReason" />" })[], timeOffRequests?:
+            (Omit&lt;Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+            }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: ..., createdBy?: ..., createdDateTime?: ...,
+            lastModifiedBy?: ..., lastModifiedDateTime?: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, assignedTo?: "unknownFutureValue" | Record&lt;..., ...&gt; |
+            "sender" | "system" | "manager" | "recipient" | null,
+            managerActionDateTime?: string | null, managerActionMessage?: string
+            | null, managerUserId?: string | null, senderDateTime?: string |
+            null, senderMessage?: string | null, senderUserId?: string | null,
+            state?: "unknownFutureValue" | Record&lt;..., ...&gt; | "pending" |
+            "declined" | "approved" | null }, "<xref uid="@odata.type" />"&gt; &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.scheduleChangeRequest" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            endDateTime?: string | null, startDateTime?: string | null,
+            timeOffReasonId?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.timeOffRequest" />" })[],
+            timeOffRequestsEnabled?: boolean | null, timesOff?:
+            (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+            }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, createdBy?: Record&lt;..., ...&gt; | {
+            <xref uid="@odata.type" />: ..., application?: ..., device?: ...,
+            user?: ... } | null, createdDateTime?: string | null,
+            lastModifiedBy?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ..., application?: ..., device?: ..., user?: ... } | null,
+            lastModifiedDateTime?: string | null }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            draftTimeOff?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, endDateTime?: function,
+            startDateTime?: function, theme?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            timeOffReasonId?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.timeOffItem" />" }) | null,
+            isStagedForDeletion?: boolean | null, sharedTimeOff?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, endDateTime?: function, startDateTime?: function, theme?:
+            function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, timeOffReasonId?: string | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.timeOffItem" />" }) | null, userId?: string |
+            null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.timeOff" />" })[], timeZone?: string | null,
+            workforceIntegrationIds?: (string | null)[] } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.schedule" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ team-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PUT
-          /me/joinedTeams/{team-id}/schedule"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, dayNotes?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, createdBy?: function,
+          createdDateTime?: function, lastModifiedBy?: function,
+          lastModifiedDateTime?: function }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          dayNoteDate?: string | null, draftDayNote?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, content?: string |
+          null, contentType?: Record&lt;..., ...&gt; | "text" | "html" | null }
+          | null, sharedDayNote?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, content?: string | null, contentType?:
+          Record&lt;..., ...&gt; | "text" | "html" | null } | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.dayNote" />" })[],
+          enabled?: boolean | null,
+          isActivitiesIncludedWhenCopyingShiftsEnabled?: boolean | null,
+          offerShiftRequests?: (Omit&lt;Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, assignedTo?: function, managerActionDateTime?: function,
+          managerActionMessage?: function, managerUserId?: function,
+          senderDateTime?: function, senderMessage?: function, senderUserId?:
+          function, state?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.scheduleChangeRequest" />" }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, recipientActionDateTime?: string | null,
+          recipientActionMessage?: string | null, recipientUserId?: string |
+          null, senderShiftId?: string | null }, "<xref uid="@odata.type"
+          />"&gt;)[], offerShiftRequestsEnabled?: boolean | null,
+          openShiftChangeRequests?: (Omit&lt;Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, assignedTo?: function, managerActionDateTime?: function,
+          managerActionMessage?: function, managerUserId?: function,
+          senderDateTime?: function, senderMessage?: function, senderUserId?:
+          function, state?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.scheduleChangeRequest" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          openShiftId?: string | null })[], openShifts?: (Omit&lt;Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdBy?: function, createdDateTime?: function,
+          lastModifiedBy?: function, lastModifiedDateTime?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          draftOpenShift?: Record&lt;string, never&gt; | (Omit&lt;... & ... &
+          ..., "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, openSlotCount?: function }) | null, isStagedForDeletion?:
+          boolean | null, schedulingGroupId?: string | null, sharedOpenShift?:
+          Record&lt;string, never&gt; | (Omit&lt;... & ... & ..., "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          openSlotCount?: function }) | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.openShift" />" })[], openShiftsEnabled?:
+          boolean | null, provisionStatus?: Record&lt;string, never&gt; |
+          "NotStarted" | "Running" | "Completed" | "Failed" | null,
+          provisionStatusCode?: string | null, schedulingGroups?:
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: function
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdBy?: function, createdDateTime?:
+          function, lastModifiedBy?: function, lastModifiedDateTime?: function
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          code?: string | null, displayName?: string | null, isActive?: boolean
+          | null, userIds?: (string | null)[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.schedulingGroup" />" })[], shifts?:
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: function
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdBy?: function, createdDateTime?:
+          function, lastModifiedBy?: function, lastModifiedDateTime?: function
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          draftShift?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., endDateTime?: ..., startDateTime?: ...,
+          theme?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ..., activities?: ..., displayName?: ...,
+          notes?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.shiftItem" />" }) |
+          null, isStagedForDeletion?: boolean | null, schedulingGroupId?: string
+          | null, sharedShift?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., endDateTime?: ..., startDateTime?: ...,
+          theme?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ..., activities?: ..., displayName?: ...,
+          notes?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.shiftItem" />" }) |
+          null, userId?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.shift" />" })[], startDayOfWeek?:
+          Record&lt;string, never&gt; | "sunday" | "monday" | "tuesday" |
+          "wednesday" | "thursday" | "friday" | "saturday" | null,
+          swapShiftsChangeRequests?: (Omit&lt;Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, assignedTo?: function, managerActionDateTime?: function,
+          managerActionMessage?: function, managerUserId?: function,
+          senderDateTime?: function, senderMessage?: function, senderUserId?:
+          function, state?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.scheduleChangeRequest" />" }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, recipientActionDateTime?: string | null,
+          recipientActionMessage?: string | null, recipientUserId?: string |
+          null, senderShiftId?: string | null }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, recipientShiftId?:
+          string | null })[], swapShiftsRequestsEnabled?: boolean | null,
+          timeCards?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdBy?: function, createdDateTime?:
+          function, lastModifiedBy?: function, lastModifiedDateTime?: function
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          breaks?: { <xref uid="@odata.type" />: string, breakId?: function,
+          end?: function, notes?: function, start?: function }[], clockInEvent?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          dateTime?: string, isAtApprovedLocation?: boolean | null, notes?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., content?:
+          ..., contentType?: ... } | null } | null, clockOutEvent?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          dateTime?: string, isAtApprovedLocation?: boolean | null, notes?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., content?:
+          ..., contentType?: ... } | null } | null, confirmedBy?: "user" |
+          "unknownFutureValue" | Record&lt;string, never&gt; | "none" |
+          "manager" | null, notes?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, content?: string | null, contentType?:
+          Record&lt;..., ...&gt; | "text" | "html" | null } | null,
+          originalEntry?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, breaks?: ...[], clockInEvent?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., dateTime?:
+          ..., isAtApprovedLocation?: ..., notes?: ... } | null, clockOutEvent?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ..., dateTime?:
+          ..., isAtApprovedLocation?: ..., notes?: ... } | null } | null,
+          state?: "unknownFutureValue" | Record&lt;string, never&gt; |
+          "clockedIn" | "onBreak" | "clockedOut" | null, userId?: string | null
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.timeCard" />" })[], timeClockEnabled?: boolean |
+          null, timeClockSettings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, approvedLocation?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, altitude?: string |
+          number | null, latitude?: string | number | null, longitude?: string |
+          number | null } | null } | null, timeOffReasons?: (Omit&lt;Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdBy?: function, createdDateTime?: function,
+          lastModifiedBy?: function, lastModifiedDateTime?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          code?: string | null, displayName?: string | null, iconType?:
+          "unknownFutureValue" | Record&lt;string, never&gt; | "none" |
+          "running" | "pin" | "car" | "calendar" | "plane" | "firstAid" |
+          "doctor" | "notWorking" | "clock" | "juryDuty" | "globe" | "cup" |
+          "phone" | "weather" | "umbrella" | "piggyBank" | "dog" | "cake" |
+          "trafficCone" | "sunny" | null, isActive?: boolean | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.timeOffReason" />"
+          })[], timeOffRequests?: (Omit&lt;Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, assignedTo?: function, managerActionDateTime?: function,
+          managerActionMessage?: function, managerUserId?: function,
+          senderDateTime?: function, senderMessage?: function, senderUserId?:
+          function, state?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.scheduleChangeRequest" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          endDateTime?: string | null, startDateTime?: string | null,
+          timeOffReasonId?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.timeOffRequest" />" })[],
+          timeOffRequestsEnabled?: boolean | null, timesOff?: (Omit&lt;Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdBy?: function, createdDateTime?: function,
+          lastModifiedBy?: function, lastModifiedDateTime?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.changeTrackedEntity" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          draftTimeOff?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., endDateTime?: ..., startDateTime?: ...,
+          theme?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, timeOffReasonId?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.timeOffItem" />" })
+          | null, isStagedForDeletion?: boolean | null, sharedTimeOff?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., endDateTime?: ..., startDateTime?: ..., theme?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          timeOffReasonId?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.timeOffItem" />" }) | null, userId?: string |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.timeOff" />" })[], timeZone?: string | null,
+          workforceIntegrationIds?: (string | null)[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.schedule" />" }&gt;

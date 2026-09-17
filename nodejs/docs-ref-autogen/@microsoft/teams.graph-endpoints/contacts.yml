@@ -61,25 +61,37 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        directReports: { get: (params?: IEndpoints["GET
-        /contacts/{orgContact-id}/directReports/{directoryObject-id}"]["parameters"])
-        => EndpointRequest<IEndpoints["GET
-        /contacts/{orgContact-id}/directReports/{directoryObject-id}"]["response"]>,
-        list: (params?: IEndpoints["GET
+        directReports: { /** * `GET /contacts/{orgContact-id}/directReports` * *
+        Get the direct reports for this organizational contact. */ list:
+        (params?: IEndpoints["GET
         /contacts/{orgContact-id}/directReports"]["parameters"]) =>
         EndpointRequest<IEndpoints["GET
-        /contacts/{orgContact-id}/directReports"]["response"]> }
+        /contacts/{orgContact-id}/directReports"]["response"]>; /** * `GET
+        /contacts/{orgContact-id}/directReports/{directoryObject-id}` * * The
+        contact&#x27;s direct reports. (The users and contacts that have their
+        manager property set to this contact.) Read-only. Nullable. Supports
+        $expand. */ get: (params?: IEndpoints["GET
+        /contacts/{orgContact-id}/directReports/{directoryObject-id}"]["parameters"])
+        => EndpointRequest<IEndpoints["GET
+        /contacts/{orgContact-id}/directReports/{directoryObject-id}"]["response"]>;
+        }
       return:
         description: ''
         type: >-
-          { get: (params?: IEndpoints["GET
-          /contacts/{orgContact-id}/directReports/{directoryObject-id}"]["parameters"])
-          =&gt; EndpointRequest&lt;IEndpoints["GET
-          /contacts/{orgContact-id}/directReports/{directoryObject-id}"]["response"]&gt;,
-          list: (params?: IEndpoints["GET
+          { /** * `GET /contacts/{orgContact-id}/directReports` * * Get the
+          direct reports for this organizational contact. */ list: (params?:
+          IEndpoints["GET
           /contacts/{orgContact-id}/directReports"]["parameters"]) =&gt;
           EndpointRequest&lt;IEndpoints["GET
-          /contacts/{orgContact-id}/directReports"]["response"]&gt; }
+          /contacts/{orgContact-id}/directReports"]["response"]&gt;; /** * `GET
+          /contacts/{orgContact-id}/directReports/{directoryObject-id}` * * The
+          contact&#x27;s direct reports. (The users and contacts that have their
+          manager property set to this contact.) Read-only. Nullable. Supports
+          $expand. */ get: (params?: IEndpoints["GET
+          /contacts/{orgContact-id}/directReports/{directoryObject-id}"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["GET
+          /contacts/{orgContact-id}/directReports/{directoryObject-id}"]["response"]&gt;;
+          }
   - name: getAvailableExtensionProperties
     uid: '@microsoft/teams.graph-endpoints.contacts.getAvailableExtensionProperties'
     package: '@microsoft/teams.graph-endpoints'
@@ -170,17 +182,19 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        manager: { get: (params?: IEndpoints["GET
+        manager: { /** * `GET /contacts/{orgContact-id}/manager` * * Get this
+        organizational contact&#x27;s manager. */ get: (params?: IEndpoints["GET
         /contacts/{orgContact-id}/manager"]["parameters"]) =>
         EndpointRequest<IEndpoints["GET
-        /contacts/{orgContact-id}/manager"]["response"]> }
+        /contacts/{orgContact-id}/manager"]["response"]>; }
       return:
         description: ''
         type: >-
-          { get: (params?: IEndpoints["GET
-          /contacts/{orgContact-id}/manager"]["parameters"]) =&gt;
-          EndpointRequest&lt;IEndpoints["GET
-          /contacts/{orgContact-id}/manager"]["response"]&gt; }
+          { /** * `GET /contacts/{orgContact-id}/manager` * * Get this
+          organizational contact&#x27;s manager. */ get: (params?:
+          IEndpoints["GET /contacts/{orgContact-id}/manager"]["parameters"])
+          =&gt; EndpointRequest&lt;IEndpoints["GET
+          /contacts/{orgContact-id}/manager"]["response"]&gt;; }
   - name: memberOf
     uid: '@microsoft/teams.graph-endpoints.contacts.memberOf'
     package: '@microsoft/teams.graph-endpoints'
@@ -343,19 +357,49 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        validateProperties: { create: (body: IEndpoints["POST
+        validateProperties: { /** * `POST /contacts/validateProperties` * *
+        Validate that a Microsoft 365 group&#x27;s display name or mail nickname
+        complies with naming policies. Clients can use this API to determine
+        whether a display name or mail nickname is valid before trying to create
+        a Microsoft 365 group. To validate the properties of an existing group,
+        use the group: validateProperties function. The following policy
+        validations are performed for the display name and mail nickname
+        properties: 1. Validate the prefix and suffix naming policy 2. Validate
+        the custom banned words policy 3. Validate that the mail nickname is
+        unique This API only returns the first validation failure that is
+        encountered. If the properties fail multiple validations, only the first
+        validation failure is returned. However, you can validate both the mail
+        nickname and the display name and receive a collection of validation
+        errors if you&#x27;re only validating the prefix and suffix naming
+        policy. To learn more about configuring naming policies, see Configure
+        naming policy. */ create: (body: IEndpoints["POST
         /contacts/validateProperties"]["body"]) =>
         EndpointRequest<IEndpoints["POST
-        /contacts/validateProperties"]["response"]> }
+        /contacts/validateProperties"]["response"]>; }
       return:
         description: ''
         type: >-
-          { create: (body: IEndpoints["POST
+          { /** * `POST /contacts/validateProperties` * * Validate that a
+          Microsoft 365 group&#x27;s display name or mail nickname complies with
+          naming policies. Clients can use this API to determine whether a
+          display name or mail nickname is valid before trying to create a
+          Microsoft 365 group. To validate the properties of an existing group,
+          use the group: validateProperties function. The following policy
+          validations are performed for the display name and mail nickname
+          properties: 1. Validate the prefix and suffix naming policy 2.
+          Validate the custom banned words policy 3. Validate that the mail
+          nickname is unique This API only returns the first validation failure
+          that is encountered. If the properties fail multiple validations, only
+          the first validation failure is returned. However, you can validate
+          both the mail nickname and the display name and receive a collection
+          of validation errors if you&#x27;re only validating the prefix and
+          suffix naming policy. To learn more about configuring naming policies,
+          see Configure naming policy. */ create: (body: IEndpoints["POST
           /contacts/validateProperties"]["body"]) =&gt;
           EndpointRequest&lt;IEndpoints["POST
-          /contacts/validateProperties"]["response"]&gt; }
+          /contacts/validateProperties"]["response"]&gt;; }
 functions:
-  - name: del(any)
+  - name: 'del({ If-Match?: string, orgContact-id: string })'
     uid: '@microsoft/teams.graph-endpoints.contacts.del'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`DELETE /contacts/{orgContact-id}`'
@@ -363,18 +407,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /contacts/{orgContact-id}"]["response"]>
+        function del(params?: { If-Match?: string, orgContact-id: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, orgContact-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /contacts/{orgContact-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[], orgContact-id: string })'
     uid: '@microsoft/teams.graph-endpoints.contacts.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -385,18 +427,109 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /contacts/{orgContact-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        orgContact-id: string }): EndpointRequest<Omit<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        deletedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" }, "@odata.type"> & { @odata.type:
+        string, addresses?: { @odata.type: string, city?: string | null,
+        countryOrRegion?: string | null, officeLocation?: string | null,
+        postalCode?: string | null, state?: string | null, street?: string |
+        null }[], companyName?: string | null, department?: string | null,
+        directReports?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, deletedDateTime?: string |
+        null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" })[], displayName?: string | null,
+        givenName?: string | null, jobTitle?: string | null, mail?: string |
+        null, mailNickname?: string | null, manager?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        deletedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" }) | Record<string, never> | null,
+        memberOf?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+        Omit<{ @odata.type: string, deletedDateTime?: string | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.directoryObject" })[],
+        onPremisesLastSyncDateTime?: string | null,
+        onPremisesProvisioningErrors?: { @odata.type: string, category?: string
+        | null, occurredDateTime?: string | null, propertyCausingError?: string
+        | null, value?: string | null }[], onPremisesSyncBehavior?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, isCloudManaged?: boolean } & {
+        @odata.type: "#microsoft.graph.onPremisesSyncBehavior" }) | null,
+        onPremisesSyncEnabled?: boolean | null, phones?: { @odata.type: string,
+        language?: string | null, number?: string | null, region?: string |
+        null, type?: "home" | "business" | "mobile" | "other" | "assistant" |
+        "homeFax" | "businessFax" | "otherFax" | "pager" | "radio" |
+        Record<string, never> | null }[], proxyAddresses?: string[],
+        serviceProvisioningErrors?: { @odata.type: string, createdDateTime?:
+        string | null, isResolved?: boolean | null, serviceInstance?: string |
+        null }[], surname?: string | null, transitiveMemberOf?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, deletedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.directoryObject" })[] } & { @odata.type:
+        "#microsoft.graph.orgContact" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[], orgContact-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /contacts/{orgContact-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, deletedDateTime?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.directoryObject" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          addresses?: { <xref uid="@odata.type" />: string, city?: string |
+          null, countryOrRegion?: string | null, officeLocation?: string | null,
+          postalCode?: string | null, state?: string | null, street?: string |
+          null }[], companyName?: string | null, department?: string | null,
+          directReports?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, deletedDateTime?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.directoryObject" />" })[], displayName?:
+          string | null, givenName?: string | null, jobTitle?: string | null,
+          mail?: string | null, mailNickname?: string | null, manager?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, deletedDateTime?: string | null }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryObject" />" }) | Record&lt;string,
+          never&gt; | null, memberOf?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, deletedDateTime?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.directoryObject" />" })[],
+          onPremisesLastSyncDateTime?: string | null,
+          onPremisesProvisioningErrors?: { <xref uid="@odata.type" />: string,
+          category?: string | null, occurredDateTime?: string | null,
+          propertyCausingError?: string | null, value?: string | null }[],
+          onPremisesSyncBehavior?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          isCloudManaged?: boolean } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.onPremisesSyncBehavior" />" }) | null,
+          onPremisesSyncEnabled?: boolean | null, phones?: { <xref
+          uid="@odata.type" />: string, language?: string | null, number?:
+          string | null, region?: string | null, type?: "home" | "business" |
+          "mobile" | "other" | "assistant" | "homeFax" | "businessFax" |
+          "otherFax" | "pager" | "radio" | Record&lt;string, never&gt; | null
+          }[], proxyAddresses?: string[], serviceProvisioningErrors?: { <xref
+          uid="@odata.type" />: string, createdDateTime?: string | null,
+          isResolved?: boolean | null, serviceInstance?: string | null }[],
+          surname?: string | null, transitiveMemberOf?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string,
+          deletedDateTime?: string | null }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryObject" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.orgContact" />"
+          }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, ConsistencyLevel?: string })
     uid: '@microsoft/teams.graph-endpoints.contacts.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -407,16 +540,127 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /contacts"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, ConsistencyLevel?: string }):
+        EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?: string
+        | null } & { value?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, deletedDateTime?: function
+        }, "@odata.type"> & { @odata.type: "#microsoft.graph.directoryObject" },
+        "@odata.type"> & { @odata.type: string, addresses?: { @odata.type:
+        string, city?: function, countryOrRegion?: function, officeLocation?:
+        function, postalCode?: function, state?: function, street?: function
+        }[], companyName?: string | null, department?: string | null,
+        directReports?: (Omit<..., ...> & Omit<..., ...> & { @odata.type: ...
+        })[], displayName?: string | null, givenName?: string | null, jobTitle?:
+        string | null, mail?: string | null, mailNickname?: string | null,
+        manager?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+        @odata.type: ..., deletedDateTime?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.directoryObject" }) | Record<string,
+        never> | null, memberOf?: (Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... })[], onPremisesLastSyncDateTime?: string | null,
+        onPremisesProvisioningErrors?: { @odata.type: string, category?:
+        function, occurredDateTime?: function, propertyCausingError?: function,
+        value?: function }[], onPremisesSyncBehavior?: Record<string, never> |
+        (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
+        string, isCloudManaged?: function } & { @odata.type:
+        "#microsoft.graph.onPremisesSyncBehavior" }) | null,
+        onPremisesSyncEnabled?: boolean | null, phones?: { @odata.type: string,
+        language?: function, number?: function, region?: function, type?:
+        function }[], proxyAddresses?: string[], serviceProvisioningErrors?: {
+        @odata.type: string, createdDateTime?: function, isResolved?: function,
+        serviceInstance?: function }[], surname?: string | null,
+        transitiveMemberOf?: (Omit<..., ...> & Omit<..., ...> & { @odata.type:
+        ... })[] } & { @odata.type: "#microsoft.graph.orgContact" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, ConsistencyLevel?: string }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /contacts"]["response"]&gt;
-  - name: update(Operation<"/contacts/{orgContact-id}", "patch">, any)
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: function
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, deletedDateTime?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryObject" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, addresses?: { <xref
+          uid="@odata.type" />: string, city?: function, countryOrRegion?:
+          function, officeLocation?: function, postalCode?: function, state?:
+          function, street?: function }[], companyName?: string | null,
+          department?: string | null, directReports?: (Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... })[],
+          displayName?: string | null, givenName?: string | null, jobTitle?:
+          string | null, mail?: string | null, mailNickname?: string | null,
+          manager?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+          "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+          />: ..., deletedDateTime?: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryObject" />" }) | Record&lt;string,
+          never&gt; | null, memberOf?: (Omit&lt;..., ...&gt; & Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ... })[],
+          onPremisesLastSyncDateTime?: string | null,
+          onPremisesProvisioningErrors?: { <xref uid="@odata.type" />: string,
+          category?: function, occurredDateTime?: function,
+          propertyCausingError?: function, value?: function }[],
+          onPremisesSyncBehavior?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, isCloudManaged?:
+          function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.onPremisesSyncBehavior" />" }) | null,
+          onPremisesSyncEnabled?: boolean | null, phones?: { <xref
+          uid="@odata.type" />: string, language?: function, number?: function,
+          region?: function, type?: function }[], proxyAddresses?: string[],
+          serviceProvisioningErrors?: { <xref uid="@odata.type" />: string,
+          createdDateTime?: function, isResolved?: function, serviceInstance?:
+          function }[], surname?: string | null, transitiveMemberOf?:
+          (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... })[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.orgContact" />" })[] }&gt;
+  - name: >-
+      update(Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+      Omit<{ @odata.type: string, deletedDateTime?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.directoryObject" },
+      "@odata.type"> & { @odata.type: string, addresses?: { @odata.type: string,
+      city?: string | null, countryOrRegion?: string | null, officeLocation?:
+      string | null, postalCode?: string | null, state?: string | null, street?:
+      string | null }[], companyName?: string | null, department?: string |
+      null, directReports?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, deletedDateTime?: string |
+      null }, "@odata.type"> & { @odata.type: "#microsoft.graph.directoryObject"
+      })[], displayName?: string | null, givenName?: string | null, jobTitle?:
+      string | null, mail?: string | null, mailNickname?: string | null,
+      manager?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+      Omit<{ @odata.type: string, deletedDateTime?: string | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.directoryObject" }) |
+      Record<string, never> | null, memberOf?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & Omit<{ @odata.type: string, deletedDateTime?:
+      string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.directoryObject" })[], onPremisesLastSyncDateTime?:
+      string | null, onPremisesProvisioningErrors?: { @odata.type: string,
+      category?: string | null, occurredDateTime?: string | null,
+      propertyCausingError?: string | null, value?: string | null }[],
+      onPremisesSyncBehavior?: Record<string, never> | (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string,
+      isCloudManaged?: boolean } & { @odata.type:
+      "#microsoft.graph.onPremisesSyncBehavior" }) | null,
+      onPremisesSyncEnabled?: boolean | null, phones?: { @odata.type: string,
+      language?: string | null, number?: string | null, region?: string | null,
+      type?: "home" | "business" | "mobile" | "other" | "assistant" | "homeFax"
+      | "businessFax" | "otherFax" | "pager" | "radio" | Record<string, never> |
+      null }[], proxyAddresses?: string[], serviceProvisioningErrors?: {
+      @odata.type: string, createdDateTime?: string | null, isResolved?: boolean
+      | null, serviceInstance?: string | null }[], surname?: string | null,
+      transitiveMemberOf?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, deletedDateTime?: string |
+      null }, "@odata.type"> & { @odata.type: "#microsoft.graph.directoryObject"
+      })[] } & { @odata.type: "#microsoft.graph.orgContact" }, { orgContact-id:
+      string })
     uid: '@microsoft/teams.graph-endpoints.contacts.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`PATCH /contacts/{orgContact-id}`'
@@ -424,18 +668,195 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/contacts/{orgContact-id}", "patch">,
-        params?: any): EndpointRequest<IEndpoints["PATCH
-        /contacts/{orgContact-id}"]["response"]>
+        function update(body: Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, deletedDateTime?: string |
+        null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" }, "@odata.type"> & { @odata.type:
+        string, addresses?: { @odata.type: string, city?: string | null,
+        countryOrRegion?: string | null, officeLocation?: string | null,
+        postalCode?: string | null, state?: string | null, street?: string |
+        null }[], companyName?: string | null, department?: string | null,
+        directReports?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, deletedDateTime?: string |
+        null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" })[], displayName?: string | null,
+        givenName?: string | null, jobTitle?: string | null, mail?: string |
+        null, mailNickname?: string | null, manager?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        deletedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" }) | Record<string, never> | null,
+        memberOf?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+        Omit<{ @odata.type: string, deletedDateTime?: string | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.directoryObject" })[],
+        onPremisesLastSyncDateTime?: string | null,
+        onPremisesProvisioningErrors?: { @odata.type: string, category?: string
+        | null, occurredDateTime?: string | null, propertyCausingError?: string
+        | null, value?: string | null }[], onPremisesSyncBehavior?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, isCloudManaged?: boolean } & {
+        @odata.type: "#microsoft.graph.onPremisesSyncBehavior" }) | null,
+        onPremisesSyncEnabled?: boolean | null, phones?: { @odata.type: string,
+        language?: string | null, number?: string | null, region?: string |
+        null, type?: "home" | "business" | "mobile" | "other" | "assistant" |
+        "homeFax" | "businessFax" | "otherFax" | "pager" | "radio" |
+        Record<string, never> | null }[], proxyAddresses?: string[],
+        serviceProvisioningErrors?: { @odata.type: string, createdDateTime?:
+        string | null, isResolved?: boolean | null, serviceInstance?: string |
+        null }[], surname?: string | null, transitiveMemberOf?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, deletedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.directoryObject" })[] } & { @odata.type:
+        "#microsoft.graph.orgContact" }, params?: { orgContact-id: string }):
+        EndpointRequest<Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, deletedDateTime?: string |
+        null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" }, "@odata.type"> & { @odata.type:
+        string, addresses?: { @odata.type: string, city?: string | null,
+        countryOrRegion?: string | null, officeLocation?: string | null,
+        postalCode?: string | null, state?: string | null, street?: string |
+        null }[], companyName?: string | null, department?: string | null,
+        directReports?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, deletedDateTime?: string |
+        null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" })[], displayName?: string | null,
+        givenName?: string | null, jobTitle?: string | null, mail?: string |
+        null, mailNickname?: string | null, manager?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        deletedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" }) | Record<string, never> | null,
+        memberOf?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+        Omit<{ @odata.type: string, deletedDateTime?: string | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.directoryObject" })[],
+        onPremisesLastSyncDateTime?: string | null,
+        onPremisesProvisioningErrors?: { @odata.type: string, category?: string
+        | null, occurredDateTime?: string | null, propertyCausingError?: string
+        | null, value?: string | null }[], onPremisesSyncBehavior?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, isCloudManaged?: boolean } & {
+        @odata.type: "#microsoft.graph.onPremisesSyncBehavior" }) | null,
+        onPremisesSyncEnabled?: boolean | null, phones?: { @odata.type: string,
+        language?: string | null, number?: string | null, region?: string |
+        null, type?: "home" | "business" | "mobile" | "other" | "assistant" |
+        "homeFax" | "businessFax" | "otherFax" | "pager" | "radio" |
+        Record<string, never> | null }[], proxyAddresses?: string[],
+        serviceProvisioningErrors?: { @odata.type: string, createdDateTime?:
+        string | null, isResolved?: boolean | null, serviceInstance?: string |
+        null }[], surname?: string | null, transitiveMemberOf?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, deletedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.directoryObject" })[] } & { @odata.type:
+        "#microsoft.graph.orgContact" }>
       parameters:
         - id: body
-          type: Operation&lt;"/contacts/{orgContact-id}", "patch"&gt;
+          type: >-
+            Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+            />: string, deletedDateTime?: string | null }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.directoryObject" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            addresses?: { <xref uid="@odata.type" />: string, city?: string |
+            null, countryOrRegion?: string | null, officeLocation?: string |
+            null, postalCode?: string | null, state?: string | null, street?:
+            string | null }[], companyName?: string | null, department?: string
+            | null, directReports?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: string, deletedDateTime?: string | null
+            }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.directoryObject" />" })[],
+            displayName?: string | null, givenName?: string | null, jobTitle?:
+            string | null, mail?: string | null, mailNickname?: string | null,
+            manager?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+            }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, deletedDateTime?: string | null },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.directoryObject" />" }) |
+            Record&lt;string, never&gt; | null, memberOf?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, deletedDateTime?: string | null }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.directoryObject" />" })[],
+            onPremisesLastSyncDateTime?: string | null,
+            onPremisesProvisioningErrors?: { <xref uid="@odata.type" />: string,
+            category?: string | null, occurredDateTime?: string | null,
+            propertyCausingError?: string | null, value?: string | null }[],
+            onPremisesSyncBehavior?: Record&lt;string, never&gt; | (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            isCloudManaged?: boolean } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.onPremisesSyncBehavior" />" }) | null,
+            onPremisesSyncEnabled?: boolean | null, phones?: { <xref
+            uid="@odata.type" />: string, language?: string | null, number?:
+            string | null, region?: string | null, type?: "home" | "business" |
+            "mobile" | "other" | "assistant" | "homeFax" | "businessFax" |
+            "otherFax" | "pager" | "radio" | Record&lt;string, never&gt; | null
+            }[], proxyAddresses?: string[], serviceProvisioningErrors?: { <xref
+            uid="@odata.type" />: string, createdDateTime?: string | null,
+            isResolved?: boolean | null, serviceInstance?: string | null }[],
+            surname?: string | null, transitiveMemberOf?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, deletedDateTime?: string | null }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.directoryObject" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.orgContact" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ orgContact-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /contacts/{orgContact-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, deletedDateTime?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.directoryObject" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          addresses?: { <xref uid="@odata.type" />: string, city?: string |
+          null, countryOrRegion?: string | null, officeLocation?: string | null,
+          postalCode?: string | null, state?: string | null, street?: string |
+          null }[], companyName?: string | null, department?: string | null,
+          directReports?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, deletedDateTime?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.directoryObject" />" })[], displayName?:
+          string | null, givenName?: string | null, jobTitle?: string | null,
+          mail?: string | null, mailNickname?: string | null, manager?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, deletedDateTime?: string | null }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryObject" />" }) | Record&lt;string,
+          never&gt; | null, memberOf?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, deletedDateTime?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.directoryObject" />" })[],
+          onPremisesLastSyncDateTime?: string | null,
+          onPremisesProvisioningErrors?: { <xref uid="@odata.type" />: string,
+          category?: string | null, occurredDateTime?: string | null,
+          propertyCausingError?: string | null, value?: string | null }[],
+          onPremisesSyncBehavior?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          isCloudManaged?: boolean } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.onPremisesSyncBehavior" />" }) | null,
+          onPremisesSyncEnabled?: boolean | null, phones?: { <xref
+          uid="@odata.type" />: string, language?: string | null, number?:
+          string | null, region?: string | null, type?: "home" | "business" |
+          "mobile" | "other" | "assistant" | "homeFax" | "businessFax" |
+          "otherFax" | "pager" | "radio" | Record&lt;string, never&gt; | null
+          }[], proxyAddresses?: string[], serviceProvisioningErrors?: { <xref
+          uid="@odata.type" />: string, createdDateTime?: string | null,
+          isResolved?: boolean | null, serviceInstance?: string | null }[],
+          surname?: string | null, transitiveMemberOf?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string,
+          deletedDateTime?: string | null }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryObject" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.orgContact" />"
+          }&gt;

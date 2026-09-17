@@ -1,0 +1,139 @@
+### YamlMime:TSType
+name: TurnStateLoader
+uid: '@microsoft/teams.apps.TurnStateLoader'
+package: '@microsoft/teams.apps'
+summary: |-
+  Loads and saves per-turn state scopes using app storage.
+
+  Each save replaces one complete scope. Concurrent turns therefore use
+  last-writer-wins semantics.
+fullName: TurnStateLoader
+remarks: ''
+isDeprecated: false
+type: class
+constructors:
+  - name: TurnStateLoader(IStorage<string, string>, StateOptions, ILogger)
+    uid: '@microsoft/teams.apps.TurnStateLoader.constructor'
+    package: '@microsoft/teams.apps'
+    summary: Creates a state loader.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        new TurnStateLoader(storage: IStorage<string, string>, options?:
+        StateOptions, logger?: ILogger)
+      parameters:
+        - id: storage
+          type: >-
+            <xref uid="@microsoft/teams.common.IStorage" />&lt;string,
+            string&gt;
+          description: Storage for serialized state JSON.
+        - id: options
+          type: <xref uid="@microsoft/teams.apps.StateOptions" />
+          description: State storage and key options.
+        - id: logger
+          type: <xref uid="@microsoft/teams.common.ILogger" />
+          description: Optional logger for malformed persisted values.
+methods:
+  - name: conversationKey(string)
+    uid: '@microsoft/teams.apps.TurnStateLoader.conversationKey'
+    package: '@microsoft/teams.apps'
+    summary: |-
+      Returns the persisted conversation-scope key.
+
+      The conversation ID is percent-encoded as one key segment.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function conversationKey(conversationId: string): string'
+      parameters:
+        - id: conversationId
+          type: string
+          description: Conversation ID.
+      return:
+        description: ''
+        type: string
+  - name: delete(string, string)
+    uid: '@microsoft/teams.apps.TurnStateLoader.delete'
+    package: '@microsoft/teams.apps'
+    summary: Deletes persisted conversation and user scopes without loading them.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function delete(conversationId: string, userId?: string): Promise<void>'
+      parameters:
+        - id: conversationId
+          type: string
+          description: Conversation ID to delete.
+        - id: userId
+          type: string
+          description: Optional user ID to delete within the conversation.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: load(string, string)
+    uid: '@microsoft/teams.apps.TurnStateLoader.load'
+    package: '@microsoft/teams.apps'
+    summary: Loads conversation state and, when a user ID is present, user state.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function load(conversationId: string, userId?: string):
+        Promise<TurnStateContainer>
+      parameters:
+        - id: conversationId
+          type: string
+          description: Conversation ID for the activity.
+        - id: userId
+          type: string
+          description: Optional sender ID.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.apps.TurnStateContainer" />&gt;
+  - name: save(TurnStateContainer)
+    uid: '@microsoft/teams.apps.TurnStateLoader.save'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Persists dirty scopes to the same storage keys from which they were
+      loaded.
+
+
+      Manually constructed containers are not bound to storage and cannot be
+
+      saved. Dirty empty scopes delete their backing keys; clean scopes perform
+
+      no I/O. Each successfully persisted scope is marked clean independently.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function save(container: TurnStateContainer): Promise<void>'
+      parameters:
+        - id: container
+          type: <xref uid="@microsoft/teams.apps.TurnStateContainer" />
+          description: Loaded state container to persist.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: userKey(string, string)
+    uid: '@microsoft/teams.apps.TurnStateLoader.userKey'
+    package: '@microsoft/teams.apps'
+    summary: |-
+      Returns the persisted user-within-conversation key.
+
+      The conversation and user IDs are independently percent-encoded so
+      delimiter characters cannot make distinct ID pairs share a key.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function userKey(conversationId: string, userId: string): string'
+      parameters:
+        - id: conversationId
+          type: string
+          description: Conversation ID.
+        - id: userId
+          type: string
+          description: User ID.
+      return:
+        description: ''
+        type: string

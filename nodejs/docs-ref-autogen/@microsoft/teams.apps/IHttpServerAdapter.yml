@@ -8,6 +8,36 @@ remarks: ''
 isDeprecated: false
 type: interface
 methods:
+  - name: initialize(IHttpServerInitializeDeps)
+    uid: '@microsoft/teams.apps.IHttpServerAdapter.initialize'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Initialize the adapter with app-level dependencies, before
+      [start](xref:@microsoft/teams.apps.IHttpServerAdapter.start).
+
+      Called by `HttpServer.initialize()`, which forwards the same deps it
+
+      receives from `App.initialize()`.
+
+
+      Optional: HTTP adapters that need nothing at init (e.g. `ExpressAdapter`)
+
+      omit it. Transports that authenticate the connection (e.g. Socket Mode)
+
+      implement it to receive `credentials`/`cloud` through the seam rather than
+
+      out of band.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function initialize(deps: IHttpServerInitializeDeps): Promise<void>'
+      parameters:
+        - id: deps
+          type: IHttpServerInitializeDeps
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
   - name: registerRoute("POST", string, HttpRouteHandler)
     uid: '@microsoft/teams.apps.IHttpServerAdapter.registerRoute'
     package: '@microsoft/teams.apps'
@@ -27,7 +57,15 @@ methods:
           description: URL path (e.g., '/api/messages')
         - id: handler
           type: <xref uid="@microsoft/teams.apps.HttpRouteHandler" />
-          description: 'Pure function: ({ body, headers }) → { status, body }'
+          description: >-
+            Pure function: ({ body, headers }) → { status, body }
+
+
+            Non-HTTP transports register only the messaging endpoint and may
+            no-op other
+
+            paths (e.g. `/api/functions/*`), which then require an HTTP
+            transport to serve.
   - name: serveStatic(string, string)
     uid: '@microsoft/teams.apps.IHttpServerAdapter.serveStatic'
     package: '@microsoft/teams.apps'
@@ -46,7 +84,12 @@ methods:
           description: URL path prefix (e.g., '/static')
         - id: directory
           type: string
-          description: File system directory to serve from
+          description: >-
+            File system directory to serve from
+
+
+            Optional: non-HTTP transports may omit or no-op this (tabs require
+            an HTTP transport).
   - name: start(string | number)
     uid: '@microsoft/teams.apps.IHttpServerAdapter.start'
     package: '@microsoft/teams.apps'

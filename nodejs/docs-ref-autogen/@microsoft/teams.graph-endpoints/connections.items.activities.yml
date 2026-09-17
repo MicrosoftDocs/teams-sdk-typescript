@@ -8,8 +8,16 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints'
 functions:
   - name: >-
-      create(Operation<"/connections/{externalConnection-id}/items/{externalItem-id}/activities",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, performedBy?: Record<string, never> | (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, type?: Record<string, never> | "unknownFutureValue" | "user" |
+      "group" | "externalGroup" | null } & { @odata.type:
+      "#microsoft.graph.externalConnectors.identity" }) | null, startDateTime?:
+      string, type?: "unknownFutureValue" | "viewed" | "modified" | "created" |
+      "commented" }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.externalConnectors.externalActivity" }, {
+      externalConnection-id: string, externalItem-id: string })
     uid: '@microsoft/teams.graph-endpoints.connections.items.activities.create'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -19,25 +27,63 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/connections/{externalConnection-id}/items/{externalItem-id}/activities",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /connections/{externalConnection-id}/items/{externalItem-id}/activities"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, performedBy?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, type?: Record<string, never> |
+        "unknownFutureValue" | "user" | "group" | "externalGroup" | null } & {
+        @odata.type: "#microsoft.graph.externalConnectors.identity" }) | null,
+        startDateTime?: string, type?: "unknownFutureValue" | "viewed" |
+        "modified" | "created" | "commented" }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.externalConnectors.externalActivity" }, params?: {
+        externalConnection-id: string, externalItem-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, performedBy?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, type?: Record<string, never> |
+        "unknownFutureValue" | "user" | "group" | "externalGroup" | null } & {
+        @odata.type: "#microsoft.graph.externalConnectors.identity" }) | null,
+        startDateTime?: string, type?: "unknownFutureValue" | "viewed" |
+        "modified" | "created" | "commented" }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.externalConnectors.externalActivity" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/connections/{externalConnection-id}/items/{externalItem-id}/activities",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, performedBy?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            type?: Record&lt;string, never&gt; | "unknownFutureValue" | "user" |
+            "group" | "externalGroup" | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.externalConnectors.identity" />" }) |
+            null, startDateTime?: string, type?: "unknownFutureValue" | "viewed"
+            | "modified" | "created" | "commented" }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.externalConnectors.externalActivity" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ externalConnection-id: string, externalItem-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /connections/{externalConnection-id}/items/{externalItem-id}/activities"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, performedBy?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, type?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "user" | "group" | "externalGroup" | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.externalConnectors.identity" />" }) | null,
+          startDateTime?: string, type?: "unknownFutureValue" | "viewed" |
+          "modified" | "created" | "commented" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.externalConnectors.externalActivity" />" }&gt;
+  - name: >-
+      del({ externalActivity-id: string, externalConnection-id: string,
+      externalItem-id: string, If-Match?: string })
     uid: '@microsoft/teams.graph-endpoints.connections.items.activities.del'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -47,18 +93,21 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /connections/{externalConnection-id}/items/{externalItem-id}/activities/{externalActivity-id}"]["response"]>
+        function del(params?: { externalActivity-id: string,
+        externalConnection-id: string, externalItem-id: string, If-Match?:
+        string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { externalActivity-id: string, externalConnection-id: string,
+            externalItem-id: string, If-Match?: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /connections/{externalConnection-id}/items/{externalItem-id}/activities/{externalActivity-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], externalActivity-id: string,
+      externalConnection-id: string, externalItem-id: string })
     uid: '@microsoft/teams.graph-endpoints.connections.items.activities.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -71,18 +120,43 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /connections/{externalConnection-id}/items/{externalItem-id}/activities/{externalActivity-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        externalActivity-id: string, externalConnection-id: string,
+        externalItem-id: string }): EndpointRequest<Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        performedBy?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, type?: Record<string,
+        never> | "unknownFutureValue" | "user" | "group" | "externalGroup" |
+        null } & { @odata.type: "#microsoft.graph.externalConnectors.identity"
+        }) | null, startDateTime?: string, type?: "unknownFutureValue" |
+        "viewed" | "modified" | "created" | "commented" }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.externalConnectors.externalActivity" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], externalActivity-id:
+            string, externalConnection-id: string, externalItem-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /connections/{externalConnection-id}/items/{externalItem-id}/activities/{externalActivity-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, performedBy?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, type?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "user" | "group" | "externalGroup" | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.externalConnectors.identity" />" }) | null,
+          startDateTime?: string, type?: "unknownFutureValue" | "viewed" |
+          "modified" | "created" | "commented" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.externalConnectors.externalActivity" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, externalConnection-id: string, externalItem-id: string })
     uid: '@microsoft/teams.graph-endpoints.connections.items.activities.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -95,20 +169,51 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /connections/{externalConnection-id}/items/{externalItem-id}/activities"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, externalConnection-id: string,
+        externalItem-id: string }): EndpointRequest<{ @odata.count?: number |
+        null, @odata.nextLink?: string | null } & { value?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        performedBy?: Record<string, never> | (Omit<..., ...> & { @odata.type:
+        ..., type?: ... } & { @odata.type: ... }) | null, startDateTime?:
+        string, type?: "unknownFutureValue" | "viewed" | "modified" | "created"
+        | "commented" }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.externalConnectors.externalActivity" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, externalConnection-id: string, externalItem-id:
+            string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /connections/{externalConnection-id}/items/{externalItem-id}/activities"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, performedBy?: Record&lt;string, never&gt; | (Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ..., type?: ... } & { <xref
+          uid="@odata.type" />: ... }) | null, startDateTime?: string, type?:
+          "unknownFutureValue" | "viewed" | "modified" | "created" | "commented"
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.externalConnectors.externalActivity" />"
+          })[] }&gt;
   - name: >-
-      update(Operation<"/connections/{externalConnection-id}/items/{externalItem-id}/activities/{externalActivity-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, performedBy?: Record<string, never> | (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, type?: Record<string, never> | "unknownFutureValue" | "user" |
+      "group" | "externalGroup" | null } & { @odata.type:
+      "#microsoft.graph.externalConnectors.identity" }) | null, startDateTime?:
+      string, type?: "unknownFutureValue" | "viewed" | "modified" | "created" |
+      "commented" }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.externalConnectors.externalActivity" }, {
+      externalActivity-id: string, externalConnection-id: string,
+      externalItem-id: string })
     uid: '@microsoft/teams.graph-endpoints.connections.items.activities.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -118,24 +223,62 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/connections/{externalConnection-id}/items/{externalItem-id}/activities/{externalActivity-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /connections/{externalConnection-id}/items/{externalItem-id}/activities/{externalActivity-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, performedBy?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, type?: Record<string, never> |
+        "unknownFutureValue" | "user" | "group" | "externalGroup" | null } & {
+        @odata.type: "#microsoft.graph.externalConnectors.identity" }) | null,
+        startDateTime?: string, type?: "unknownFutureValue" | "viewed" |
+        "modified" | "created" | "commented" }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.externalConnectors.externalActivity" }, params?: {
+        externalActivity-id: string, externalConnection-id: string,
+        externalItem-id: string }): EndpointRequest<Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        performedBy?: Record<string, never> | (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, type?: Record<string,
+        never> | "unknownFutureValue" | "user" | "group" | "externalGroup" |
+        null } & { @odata.type: "#microsoft.graph.externalConnectors.identity"
+        }) | null, startDateTime?: string, type?: "unknownFutureValue" |
+        "viewed" | "modified" | "created" | "commented" }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.externalConnectors.externalActivity" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/connections/{externalConnection-id}/items/{externalItem-id}/activities/{externalActivity-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, performedBy?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            type?: Record&lt;string, never&gt; | "unknownFutureValue" | "user" |
+            "group" | "externalGroup" | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.externalConnectors.identity" />" }) |
+            null, startDateTime?: string, type?: "unknownFutureValue" | "viewed"
+            | "modified" | "created" | "commented" }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.externalConnectors.externalActivity" />" }
           description: ''
         - id: params
-          type: any
+          type: >-
+            { externalActivity-id: string, externalConnection-id: string,
+            externalItem-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /connections/{externalConnection-id}/items/{externalItem-id}/activities/{externalActivity-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, performedBy?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, type?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "user" | "group" | "externalGroup" | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.externalConnectors.identity" />" }) | null,
+          startDateTime?: string, type?: "unknownFutureValue" | "viewed" |
+          "modified" | "created" | "commented" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.externalConnectors.externalActivity" />" }&gt;
 variables:
   - name: performedBy
     uid: '@microsoft/teams.graph-endpoints.connections.items.activities.performedBy'

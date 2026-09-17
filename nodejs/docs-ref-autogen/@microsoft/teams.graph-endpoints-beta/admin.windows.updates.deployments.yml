@@ -8,7 +8,47 @@ interfaces:
     @microsoft/teams.graph-endpoints-beta.admin.windows.updates.deployments.IEndpoints
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: create(Operation<"/admin/windows/updates/deployments", "post">)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, audience?: Record<string, never> | (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, applicableContent?: { @odata.type: string, catalogEntry?:
+      Record<string, never> | (Omit<..., ...> & Omit<..., ...> & { @odata.type:
+      ... }) | null, catalogEntryId?: string, matchedDevices?: { @odata.type:
+      ..., deviceId?: ..., recommendedBy?: ... }[] }[], exclusions?: (Omit<{
+      @odata.type: string, id?: function }, "@odata.type"> & Omit<{ @odata.type:
+      string }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.windowsUpdates.updatableAsset" })[], members?: (Omit<{
+      @odata.type: string, id?: function }, "@odata.type"> & Omit<{ @odata.type:
+      string }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.windowsUpdates.updatableAsset" })[] } & { @odata.type:
+      "#microsoft.graph.windowsUpdates.deploymentAudience" }) | null, content?:
+      Record<string, never> | { @odata.type: string } | null, createdDateTime?:
+      string, lastModifiedDateTime?: string, settings?: Record<string, never> |
+      { @odata.type: string, contentApplicability?: Record<string, never> | {
+      @odata.type: string, offerWhileRecommendedBy?: (string | null)[],
+      safeguard?: Record<string, never> | { @odata.type: string,
+      disabledSafeguardProfiles?: { @odata.type: ..., category?: ... }[] } |
+      null } | null, expedite?: Record<string, never> | { @odata.type: string,
+      isExpedited?: boolean | null, isReadinessTest?: boolean | null } | null,
+      monitoring?: Record<string, never> | { @odata.type: string,
+      monitoringRules?: { @odata.type: string, action?: Record<..., ...> |
+      "unknownFutureValue" | "alertError" | "offerFallback" | "pauseDeployment"
+      | null, signal?: Record<..., ...> | "unknownFutureValue" | "rollback" |
+      "ineligible" | null, threshold?: number | null }[] } | null, schedule?:
+      Record<string, never> | { @odata.type: string, gradualRollout?:
+      Record<string, never> | { @odata.type: string, durationBetweenOffers?:
+      string | null } | null, startDateTime?: string | null } | null,
+      userExperience?: Record<string, never> | { @odata.type: string,
+      daysUntilForcedReboot?: number | null, isHotpatchEnabled?: boolean | null,
+      offerAsOptional?: boolean | null } | null } | null, state?: Record<string,
+      never> | { @odata.type: string, effectiveValue?: "unknownFutureValue" |
+      "scheduled" | "offering" | "paused" | "faulted" | "archived", reasons?: {
+      @odata.type: string, value?: "unknownFutureValue" |
+      "scheduledByOfferWindow" | "offeringByRequest" | "pausedByRequest" |
+      "pausedByMonitoring" | "faultedByContentOutdated" }[], requestedValue?:
+      "unknownFutureValue" | "none" | "paused" | "archived" } | null } & {
+      @odata.type: "#microsoft.graph.windowsUpdates.deployment" })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.admin.windows.updates.deployments.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -20,19 +60,196 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body: Operation<"/admin/windows/updates/deployments",
-        "post">): EndpointRequest<IEndpoints["POST
-        /admin/windows/updates/deployments"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, audience?: Record<string, never>
+        | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, applicableContent?: { @odata.type: string,
+        catalogEntry?: Record<string, never> | (Omit<..., ...> & Omit<..., ...>
+        & { @odata.type: ... }) | null, catalogEntryId?: string,
+        matchedDevices?: { @odata.type: ..., deviceId?: ..., recommendedBy?: ...
+        }[] }[], exclusions?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.windowsUpdates.updatableAsset" })[],
+        members?: (Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.windowsUpdates.updatableAsset" })[] } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.deploymentAudience" }) | null,
+        content?: Record<string, never> | { @odata.type: string } | null,
+        createdDateTime?: string, lastModifiedDateTime?: string, settings?:
+        Record<string, never> | { @odata.type: string, contentApplicability?:
+        Record<string, never> | { @odata.type: string, offerWhileRecommendedBy?:
+        (string | null)[], safeguard?: Record<string, never> | { @odata.type:
+        string, disabledSafeguardProfiles?: { @odata.type: ..., category?: ...
+        }[] } | null } | null, expedite?: Record<string, never> | { @odata.type:
+        string, isExpedited?: boolean | null, isReadinessTest?: boolean | null }
+        | null, monitoring?: Record<string, never> | { @odata.type: string,
+        monitoringRules?: { @odata.type: string, action?: Record<..., ...> |
+        "unknownFutureValue" | "alertError" | "offerFallback" |
+        "pauseDeployment" | null, signal?: Record<..., ...> |
+        "unknownFutureValue" | "rollback" | "ineligible" | null, threshold?:
+        number | null }[] } | null, schedule?: Record<string, never> | {
+        @odata.type: string, gradualRollout?: Record<string, never> | {
+        @odata.type: string, durationBetweenOffers?: string | null } | null,
+        startDateTime?: string | null } | null, userExperience?: Record<string,
+        never> | { @odata.type: string, daysUntilForcedReboot?: number | null,
+        isHotpatchEnabled?: boolean | null, offerAsOptional?: boolean | null } |
+        null } | null, state?: Record<string, never> | { @odata.type: string,
+        effectiveValue?: "unknownFutureValue" | "scheduled" | "offering" |
+        "paused" | "faulted" | "archived", reasons?: { @odata.type: string,
+        value?: "unknownFutureValue" | "scheduledByOfferWindow" |
+        "offeringByRequest" | "pausedByRequest" | "pausedByMonitoring" |
+        "faultedByContentOutdated" }[], requestedValue?: "unknownFutureValue" |
+        "none" | "paused" | "archived" } | null } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.deployment" }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, audience?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string,
+        applicableContent?: { @odata.type: string, catalogEntry?: Record<...,
+        ...> | (... & ... & ...) | null, catalogEntryId?: string,
+        matchedDevices?: ...[] }[], exclusions?: (Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & Omit<{ @odata.type: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.windowsUpdates.updatableAsset" })[],
+        members?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+        @odata.type: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.windowsUpdates.updatableAsset" })[] } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.deploymentAudience" }) | null,
+        content?: Record<string, never> | { @odata.type: string } | null,
+        createdDateTime?: string, lastModifiedDateTime?: string, settings?:
+        Record<string, never> | { @odata.type: string, contentApplicability?:
+        Record<string, never> | { @odata.type: string, offerWhileRecommendedBy?:
+        (string | null)[], safeguard?: Record<string, never> | { @odata.type:
+        string, disabledSafeguardProfiles?: ...[] } | null } | null, expedite?:
+        Record<string, never> | { @odata.type: string, isExpedited?: boolean |
+        null, isReadinessTest?: boolean | null } | null, monitoring?:
+        Record<string, never> | { @odata.type: string, monitoringRules?: {
+        @odata.type: string, action?: function, signal?: function, threshold?:
+        function }[] } | null, schedule?: Record<string, never> | { @odata.type:
+        string, gradualRollout?: Record<string, never> | { @odata.type: string,
+        durationBetweenOffers?: string | null } | null, startDateTime?: string |
+        null } | null, userExperience?: Record<string, never> | { @odata.type:
+        string, daysUntilForcedReboot?: number | null, isHotpatchEnabled?:
+        boolean | null, offerAsOptional?: boolean | null } | null } | null,
+        state?: Record<string, never> | { @odata.type: string, effectiveValue?:
+        "unknownFutureValue" | "scheduled" | "offering" | "paused" | "faulted" |
+        "archived", reasons?: { @odata.type: string, value?:
+        "unknownFutureValue" | "scheduledByOfferWindow" | "offeringByRequest" |
+        "pausedByRequest" | "pausedByMonitoring" | "faultedByContentOutdated"
+        }[], requestedValue?: "unknownFutureValue" | "none" | "paused" |
+        "archived" } | null } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.deployment" }>
       parameters:
         - id: body
-          type: Operation&lt;"/admin/windows/updates/deployments", "post"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            audience?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            applicableContent?: { <xref uid="@odata.type" />: string,
+            catalogEntry?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; &
+            Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }) | null,
+            catalogEntryId?: string, matchedDevices?: { <xref uid="@odata.type"
+            />: ..., deviceId?: ..., recommendedBy?: ... }[] }[], exclusions?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+            />: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsUpdates.updatableAsset" />" })[],
+            members?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsUpdates.updatableAsset" />" })[] } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsUpdates.deploymentAudience" />" }) |
+            null, content?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string } | null, createdDateTime?: string,
+            lastModifiedDateTime?: string, settings?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string,
+            contentApplicability?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, offerWhileRecommendedBy?: (string |
+            null)[], safeguard?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, disabledSafeguardProfiles?: { <xref
+            uid="@odata.type" />: ..., category?: ... }[] } | null } | null,
+            expedite?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, isExpedited?: boolean | null, isReadinessTest?: boolean
+            | null } | null, monitoring?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, monitoringRules?: { <xref
+            uid="@odata.type" />: string, action?: Record&lt;..., ...&gt; |
+            "unknownFutureValue" | "alertError" | "offerFallback" |
+            "pauseDeployment" | null, signal?: Record&lt;..., ...&gt; |
+            "unknownFutureValue" | "rollback" | "ineligible" | null, threshold?:
+            number | null }[] } | null, schedule?: Record&lt;string, never&gt; |
+            { <xref uid="@odata.type" />: string, gradualRollout?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            durationBetweenOffers?: string | null } | null, startDateTime?:
+            string | null } | null, userExperience?: Record&lt;string, never&gt;
+            | { <xref uid="@odata.type" />: string, daysUntilForcedReboot?:
+            number | null, isHotpatchEnabled?: boolean | null, offerAsOptional?:
+            boolean | null } | null } | null, state?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, effectiveValue?:
+            "unknownFutureValue" | "scheduled" | "offering" | "paused" |
+            "faulted" | "archived", reasons?: { <xref uid="@odata.type" />:
+            string, value?: "unknownFutureValue" | "scheduledByOfferWindow" |
+            "offeringByRequest" | "pausedByRequest" | "pausedByMonitoring" |
+            "faultedByContentOutdated" }[], requestedValue?:
+            "unknownFutureValue" | "none" | "paused" | "archived" } | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsUpdates.deployment" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /admin/windows/updates/deployments"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, audience?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, applicableContent?: {
+          <xref uid="@odata.type" />: string, catalogEntry?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null, catalogEntryId?: string,
+          matchedDevices?: ...[] }[], exclusions?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.updatableAsset" />" })[],
+          members?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+          "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+          />: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.updatableAsset" />" })[] } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.deploymentAudience" />" }) | null,
+          content?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string } | null, createdDateTime?: string, lastModifiedDateTime?:
+          string, settings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, contentApplicability?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string,
+          offerWhileRecommendedBy?: (string | null)[], safeguard?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          disabledSafeguardProfiles?: ...[] } | null } | null, expedite?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          isExpedited?: boolean | null, isReadinessTest?: boolean | null } |
+          null, monitoring?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, monitoringRules?: { <xref
+          uid="@odata.type" />: string, action?: function, signal?: function,
+          threshold?: function }[] } | null, schedule?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, gradualRollout?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          durationBetweenOffers?: string | null } | null, startDateTime?: string
+          | null } | null, userExperience?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, daysUntilForcedReboot?: number |
+          null, isHotpatchEnabled?: boolean | null, offerAsOptional?: boolean |
+          null } | null } | null, state?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, effectiveValue?: "unknownFutureValue" |
+          "scheduled" | "offering" | "paused" | "faulted" | "archived",
+          reasons?: { <xref uid="@odata.type" />: string, value?:
+          "unknownFutureValue" | "scheduledByOfferWindow" | "offeringByRequest"
+          | "pausedByRequest" | "pausedByMonitoring" |
+          "faultedByContentOutdated" }[], requestedValue?: "unknownFutureValue"
+          | "none" | "paused" | "archived" } | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.deployment" />" }&gt;
+  - name: 'del({ deployment-id: string, If-Match?: string })'
     uid: >-
       @microsoft/teams.graph-endpoints-beta.admin.windows.updates.deployments.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -44,18 +261,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /admin/windows/updates/deployments/{deployment-id}"]["response"]>
+        function del(params?: { deployment-id: string, If-Match?: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ deployment-id: string, If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /admin/windows/updates/deployments/{deployment-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[], deployment-id: string })'
     uid: >-
       @microsoft/teams.graph-endpoints-beta.admin.windows.updates.deployments.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -67,18 +282,104 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /admin/windows/updates/deployments/{deployment-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        deployment-id: string }): EndpointRequest<Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, audience?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, applicableContent?: {
+        @odata.type: string, catalogEntry?: Record<..., ...> | (... & ... & ...)
+        | null, catalogEntryId?: string, matchedDevices?: ...[] }[],
+        exclusions?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> &
+        Omit<{ @odata.type: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.windowsUpdates.updatableAsset" })[], members?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...
+        }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.windowsUpdates.updatableAsset" })[] } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.deploymentAudience" }) | null,
+        content?: Record<string, never> | { @odata.type: string } | null,
+        createdDateTime?: string, lastModifiedDateTime?: string, settings?:
+        Record<string, never> | { @odata.type: string, contentApplicability?:
+        Record<string, never> | { @odata.type: string, offerWhileRecommendedBy?:
+        (string | null)[], safeguard?: Record<string, never> | { @odata.type:
+        string, disabledSafeguardProfiles?: ...[] } | null } | null, expedite?:
+        Record<string, never> | { @odata.type: string, isExpedited?: boolean |
+        null, isReadinessTest?: boolean | null } | null, monitoring?:
+        Record<string, never> | { @odata.type: string, monitoringRules?: {
+        @odata.type: string, action?: function, signal?: function, threshold?:
+        function }[] } | null, schedule?: Record<string, never> | { @odata.type:
+        string, gradualRollout?: Record<string, never> | { @odata.type: string,
+        durationBetweenOffers?: string | null } | null, startDateTime?: string |
+        null } | null, userExperience?: Record<string, never> | { @odata.type:
+        string, daysUntilForcedReboot?: number | null, isHotpatchEnabled?:
+        boolean | null, offerAsOptional?: boolean | null } | null } | null,
+        state?: Record<string, never> | { @odata.type: string, effectiveValue?:
+        "unknownFutureValue" | "scheduled" | "offering" | "paused" | "faulted" |
+        "archived", reasons?: { @odata.type: string, value?:
+        "unknownFutureValue" | "scheduledByOfferWindow" | "offeringByRequest" |
+        "pausedByRequest" | "pausedByMonitoring" | "faultedByContentOutdated"
+        }[], requestedValue?: "unknownFutureValue" | "none" | "paused" |
+        "archived" } | null } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.deployment" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[], deployment-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /admin/windows/updates/deployments/{deployment-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, audience?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, applicableContent?: {
+          <xref uid="@odata.type" />: string, catalogEntry?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null, catalogEntryId?: string,
+          matchedDevices?: ...[] }[], exclusions?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.updatableAsset" />" })[],
+          members?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+          "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+          />: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.updatableAsset" />" })[] } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.deploymentAudience" />" }) | null,
+          content?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string } | null, createdDateTime?: string, lastModifiedDateTime?:
+          string, settings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, contentApplicability?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string,
+          offerWhileRecommendedBy?: (string | null)[], safeguard?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          disabledSafeguardProfiles?: ...[] } | null } | null, expedite?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          isExpedited?: boolean | null, isReadinessTest?: boolean | null } |
+          null, monitoring?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, monitoringRules?: { <xref
+          uid="@odata.type" />: string, action?: function, signal?: function,
+          threshold?: function }[] } | null, schedule?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, gradualRollout?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          durationBetweenOffers?: string | null } | null, startDateTime?: string
+          | null } | null, userExperience?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, daysUntilForcedReboot?: number |
+          null, isHotpatchEnabled?: boolean | null, offerAsOptional?: boolean |
+          null } | null } | null, state?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, effectiveValue?: "unknownFutureValue" |
+          "scheduled" | "offering" | "paused" | "faulted" | "archived",
+          reasons?: { <xref uid="@odata.type" />: string, value?:
+          "unknownFutureValue" | "scheduledByOfferWindow" | "offeringByRequest"
+          | "pausedByRequest" | "pausedByMonitoring" |
+          "faultedByContentOutdated" }[], requestedValue?: "unknownFutureValue"
+          | "none" | "paused" | "archived" } | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.deployment" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.admin.windows.updates.deployments.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -90,20 +391,113 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /admin/windows/updates/deployments"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, audience?: Record<string, never> | (Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string, applicableContent?:
+        function, exclusions?: function, members?: function } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.deploymentAudience" }) | null,
+        content?: Record<string, never> | { @odata.type: string } | null,
+        createdDateTime?: string, lastModifiedDateTime?: string, settings?:
+        Record<string, never> | { @odata.type: string, contentApplicability?:
+        Record<..., ...> | { @odata.type: ..., offerWhileRecommendedBy?: ...,
+        safeguard?: ... } | null, expedite?: Record<..., ...> | { @odata.type:
+        ..., isExpedited?: ..., isReadinessTest?: ... } | null, monitoring?:
+        Record<..., ...> | { @odata.type: ..., monitoringRules?: ... } | null,
+        schedule?: Record<..., ...> | { @odata.type: ..., gradualRollout?: ...,
+        startDateTime?: ... } | null, userExperience?: Record<..., ...> | {
+        @odata.type: ..., daysUntilForcedReboot?: ..., isHotpatchEnabled?: ...,
+        offerAsOptional?: ... } | null } | null, state?: Record<string, never> |
+        { @odata.type: string, effectiveValue?: "unknownFutureValue" |
+        "scheduled" | "offering" | "paused" | "faulted" | "archived", reasons?:
+        ...[], requestedValue?: "unknownFutureValue" | "none" | "paused" |
+        "archived" } | null } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.deployment" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /admin/windows/updates/deployments"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          audience?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, applicableContent?:
+          function, exclusions?: function, members?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.deploymentAudience" />" }) | null,
+          content?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string } | null, createdDateTime?: string, lastModifiedDateTime?:
+          string, settings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, contentApplicability?: Record&lt;...,
+          ...&gt; | { <xref uid="@odata.type" />: ..., offerWhileRecommendedBy?:
+          ..., safeguard?: ... } | null, expedite?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., isExpedited?: ..., isReadinessTest?:
+          ... } | null, monitoring?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., monitoringRules?: ... } | null, schedule?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          gradualRollout?: ..., startDateTime?: ... } | null, userExperience?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          daysUntilForcedReboot?: ..., isHotpatchEnabled?: ...,
+          offerAsOptional?: ... } | null } | null, state?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, effectiveValue?:
+          "unknownFutureValue" | "scheduled" | "offering" | "paused" | "faulted"
+          | "archived", reasons?: ...[], requestedValue?: "unknownFutureValue" |
+          "none" | "paused" | "archived" } | null } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.windowsUpdates.deployment" />" })[]
+          }&gt;
   - name: >-
-      update(Operation<"/admin/windows/updates/deployments/{deployment-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, audience?: Record<string, never> | (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, applicableContent?: { @odata.type: string, catalogEntry?:
+      Record<string, never> | (Omit<..., ...> & Omit<..., ...> & { @odata.type:
+      ... }) | null, catalogEntryId?: string, matchedDevices?: { @odata.type:
+      ..., deviceId?: ..., recommendedBy?: ... }[] }[], exclusions?: (Omit<{
+      @odata.type: string, id?: function }, "@odata.type"> & Omit<{ @odata.type:
+      string }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.windowsUpdates.updatableAsset" })[], members?: (Omit<{
+      @odata.type: string, id?: function }, "@odata.type"> & Omit<{ @odata.type:
+      string }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.windowsUpdates.updatableAsset" })[] } & { @odata.type:
+      "#microsoft.graph.windowsUpdates.deploymentAudience" }) | null, content?:
+      Record<string, never> | { @odata.type: string } | null, createdDateTime?:
+      string, lastModifiedDateTime?: string, settings?: Record<string, never> |
+      { @odata.type: string, contentApplicability?: Record<string, never> | {
+      @odata.type: string, offerWhileRecommendedBy?: (string | null)[],
+      safeguard?: Record<string, never> | { @odata.type: string,
+      disabledSafeguardProfiles?: { @odata.type: ..., category?: ... }[] } |
+      null } | null, expedite?: Record<string, never> | { @odata.type: string,
+      isExpedited?: boolean | null, isReadinessTest?: boolean | null } | null,
+      monitoring?: Record<string, never> | { @odata.type: string,
+      monitoringRules?: { @odata.type: string, action?: Record<..., ...> |
+      "unknownFutureValue" | "alertError" | "offerFallback" | "pauseDeployment"
+      | null, signal?: Record<..., ...> | "unknownFutureValue" | "rollback" |
+      "ineligible" | null, threshold?: number | null }[] } | null, schedule?:
+      Record<string, never> | { @odata.type: string, gradualRollout?:
+      Record<string, never> | { @odata.type: string, durationBetweenOffers?:
+      string | null } | null, startDateTime?: string | null } | null,
+      userExperience?: Record<string, never> | { @odata.type: string,
+      daysUntilForcedReboot?: number | null, isHotpatchEnabled?: boolean | null,
+      offerAsOptional?: boolean | null } | null } | null, state?: Record<string,
+      never> | { @odata.type: string, effectiveValue?: "unknownFutureValue" |
+      "scheduled" | "offering" | "paused" | "faulted" | "archived", reasons?: {
+      @odata.type: string, value?: "unknownFutureValue" |
+      "scheduledByOfferWindow" | "offeringByRequest" | "pausedByRequest" |
+      "pausedByMonitoring" | "faultedByContentOutdated" }[], requestedValue?:
+      "unknownFutureValue" | "none" | "paused" | "archived" } | null } & {
+      @odata.type: "#microsoft.graph.windowsUpdates.deployment" }, {
+      deployment-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.admin.windows.updates.deployments.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -115,21 +509,196 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/admin/windows/updates/deployments/{deployment-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /admin/windows/updates/deployments/{deployment-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, audience?: Record<string, never>
+        | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, applicableContent?: { @odata.type: string,
+        catalogEntry?: Record<string, never> | (Omit<..., ...> & Omit<..., ...>
+        & { @odata.type: ... }) | null, catalogEntryId?: string,
+        matchedDevices?: { @odata.type: ..., deviceId?: ..., recommendedBy?: ...
+        }[] }[], exclusions?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.windowsUpdates.updatableAsset" })[],
+        members?: (Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.windowsUpdates.updatableAsset" })[] } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.deploymentAudience" }) | null,
+        content?: Record<string, never> | { @odata.type: string } | null,
+        createdDateTime?: string, lastModifiedDateTime?: string, settings?:
+        Record<string, never> | { @odata.type: string, contentApplicability?:
+        Record<string, never> | { @odata.type: string, offerWhileRecommendedBy?:
+        (string | null)[], safeguard?: Record<string, never> | { @odata.type:
+        string, disabledSafeguardProfiles?: { @odata.type: ..., category?: ...
+        }[] } | null } | null, expedite?: Record<string, never> | { @odata.type:
+        string, isExpedited?: boolean | null, isReadinessTest?: boolean | null }
+        | null, monitoring?: Record<string, never> | { @odata.type: string,
+        monitoringRules?: { @odata.type: string, action?: Record<..., ...> |
+        "unknownFutureValue" | "alertError" | "offerFallback" |
+        "pauseDeployment" | null, signal?: Record<..., ...> |
+        "unknownFutureValue" | "rollback" | "ineligible" | null, threshold?:
+        number | null }[] } | null, schedule?: Record<string, never> | {
+        @odata.type: string, gradualRollout?: Record<string, never> | {
+        @odata.type: string, durationBetweenOffers?: string | null } | null,
+        startDateTime?: string | null } | null, userExperience?: Record<string,
+        never> | { @odata.type: string, daysUntilForcedReboot?: number | null,
+        isHotpatchEnabled?: boolean | null, offerAsOptional?: boolean | null } |
+        null } | null, state?: Record<string, never> | { @odata.type: string,
+        effectiveValue?: "unknownFutureValue" | "scheduled" | "offering" |
+        "paused" | "faulted" | "archived", reasons?: { @odata.type: string,
+        value?: "unknownFutureValue" | "scheduledByOfferWindow" |
+        "offeringByRequest" | "pausedByRequest" | "pausedByMonitoring" |
+        "faultedByContentOutdated" }[], requestedValue?: "unknownFutureValue" |
+        "none" | "paused" | "archived" } | null } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.deployment" }, params?: {
+        deployment-id: string }): EndpointRequest<Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, audience?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, applicableContent?: {
+        @odata.type: string, catalogEntry?: Record<..., ...> | (... & ... & ...)
+        | null, catalogEntryId?: string, matchedDevices?: ...[] }[],
+        exclusions?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> &
+        Omit<{ @odata.type: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.windowsUpdates.updatableAsset" })[], members?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...
+        }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.windowsUpdates.updatableAsset" })[] } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.deploymentAudience" }) | null,
+        content?: Record<string, never> | { @odata.type: string } | null,
+        createdDateTime?: string, lastModifiedDateTime?: string, settings?:
+        Record<string, never> | { @odata.type: string, contentApplicability?:
+        Record<string, never> | { @odata.type: string, offerWhileRecommendedBy?:
+        (string | null)[], safeguard?: Record<string, never> | { @odata.type:
+        string, disabledSafeguardProfiles?: ...[] } | null } | null, expedite?:
+        Record<string, never> | { @odata.type: string, isExpedited?: boolean |
+        null, isReadinessTest?: boolean | null } | null, monitoring?:
+        Record<string, never> | { @odata.type: string, monitoringRules?: {
+        @odata.type: string, action?: function, signal?: function, threshold?:
+        function }[] } | null, schedule?: Record<string, never> | { @odata.type:
+        string, gradualRollout?: Record<string, never> | { @odata.type: string,
+        durationBetweenOffers?: string | null } | null, startDateTime?: string |
+        null } | null, userExperience?: Record<string, never> | { @odata.type:
+        string, daysUntilForcedReboot?: number | null, isHotpatchEnabled?:
+        boolean | null, offerAsOptional?: boolean | null } | null } | null,
+        state?: Record<string, never> | { @odata.type: string, effectiveValue?:
+        "unknownFutureValue" | "scheduled" | "offering" | "paused" | "faulted" |
+        "archived", reasons?: { @odata.type: string, value?:
+        "unknownFutureValue" | "scheduledByOfferWindow" | "offeringByRequest" |
+        "pausedByRequest" | "pausedByMonitoring" | "faultedByContentOutdated"
+        }[], requestedValue?: "unknownFutureValue" | "none" | "paused" |
+        "archived" } | null } & { @odata.type:
+        "#microsoft.graph.windowsUpdates.deployment" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/admin/windows/updates/deployments/{deployment-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            audience?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            applicableContent?: { <xref uid="@odata.type" />: string,
+            catalogEntry?: Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; &
+            Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }) | null,
+            catalogEntryId?: string, matchedDevices?: { <xref uid="@odata.type"
+            />: ..., deviceId?: ..., recommendedBy?: ... }[] }[], exclusions?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+            />: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsUpdates.updatableAsset" />" })[],
+            members?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsUpdates.updatableAsset" />" })[] } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsUpdates.deploymentAudience" />" }) |
+            null, content?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string } | null, createdDateTime?: string,
+            lastModifiedDateTime?: string, settings?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string,
+            contentApplicability?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, offerWhileRecommendedBy?: (string |
+            null)[], safeguard?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, disabledSafeguardProfiles?: { <xref
+            uid="@odata.type" />: ..., category?: ... }[] } | null } | null,
+            expedite?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, isExpedited?: boolean | null, isReadinessTest?: boolean
+            | null } | null, monitoring?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, monitoringRules?: { <xref
+            uid="@odata.type" />: string, action?: Record&lt;..., ...&gt; |
+            "unknownFutureValue" | "alertError" | "offerFallback" |
+            "pauseDeployment" | null, signal?: Record&lt;..., ...&gt; |
+            "unknownFutureValue" | "rollback" | "ineligible" | null, threshold?:
+            number | null }[] } | null, schedule?: Record&lt;string, never&gt; |
+            { <xref uid="@odata.type" />: string, gradualRollout?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            durationBetweenOffers?: string | null } | null, startDateTime?:
+            string | null } | null, userExperience?: Record&lt;string, never&gt;
+            | { <xref uid="@odata.type" />: string, daysUntilForcedReboot?:
+            number | null, isHotpatchEnabled?: boolean | null, offerAsOptional?:
+            boolean | null } | null } | null, state?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, effectiveValue?:
+            "unknownFutureValue" | "scheduled" | "offering" | "paused" |
+            "faulted" | "archived", reasons?: { <xref uid="@odata.type" />:
+            string, value?: "unknownFutureValue" | "scheduledByOfferWindow" |
+            "offeringByRequest" | "pausedByRequest" | "pausedByMonitoring" |
+            "faultedByContentOutdated" }[], requestedValue?:
+            "unknownFutureValue" | "none" | "paused" | "archived" } | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsUpdates.deployment" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ deployment-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /admin/windows/updates/deployments/{deployment-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, audience?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, applicableContent?: {
+          <xref uid="@odata.type" />: string, catalogEntry?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null, catalogEntryId?: string,
+          matchedDevices?: ...[] }[], exclusions?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.updatableAsset" />" })[],
+          members?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+          "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+          />: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.updatableAsset" />" })[] } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.deploymentAudience" />" }) | null,
+          content?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string } | null, createdDateTime?: string, lastModifiedDateTime?:
+          string, settings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, contentApplicability?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string,
+          offerWhileRecommendedBy?: (string | null)[], safeguard?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          disabledSafeguardProfiles?: ...[] } | null } | null, expedite?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          isExpedited?: boolean | null, isReadinessTest?: boolean | null } |
+          null, monitoring?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, monitoringRules?: { <xref
+          uid="@odata.type" />: string, action?: function, signal?: function,
+          threshold?: function }[] } | null, schedule?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, gradualRollout?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          durationBetweenOffers?: string | null } | null, startDateTime?: string
+          | null } | null, userExperience?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, daysUntilForcedReboot?: number |
+          null, isHotpatchEnabled?: boolean | null, offerAsOptional?: boolean |
+          null } | null } | null, state?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, effectiveValue?: "unknownFutureValue" |
+          "scheduled" | "offering" | "paused" | "faulted" | "archived",
+          reasons?: { <xref uid="@odata.type" />: string, value?:
+          "unknownFutureValue" | "scheduledByOfferWindow" | "offeringByRequest"
+          | "pausedByRequest" | "pausedByMonitoring" |
+          "faultedByContentOutdated" }[], requestedValue?: "unknownFutureValue"
+          | "none" | "paused" | "archived" } | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsUpdates.deployment" />" }&gt;

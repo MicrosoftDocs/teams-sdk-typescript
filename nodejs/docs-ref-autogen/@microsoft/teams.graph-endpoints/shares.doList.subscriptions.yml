@@ -8,8 +8,16 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints'
 functions:
   - name: >-
-      create(Operation<"/shares/{sharedDriveItem-id}/list/subscriptions",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, applicationId?: string | null, changeType?: string,
+      clientState?: string | null, creatorId?: string | null,
+      encryptionCertificate?: string | null, encryptionCertificateId?: string |
+      null, expirationDateTime?: string, includeResourceData?: boolean | null,
+      latestSupportedTlsVersion?: string | null, lifecycleNotificationUrl?:
+      string | null, notificationQueryOptions?: string | null, notificationUrl?:
+      string, notificationUrlAppId?: string | null, resource?: string } & {
+      @odata.type: "#microsoft.graph.subscription" }, { sharedDriveItem-id:
+      string })
     uid: '@microsoft/teams.graph-endpoints.shares.doList.subscriptions.create'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`POST /shares/{sharedDriveItem-id}/list/subscriptions`'
@@ -17,25 +25,61 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/shares/{sharedDriveItem-id}/list/subscriptions", "post">,
-        params?: any): EndpointRequest<IEndpoints["POST
-        /shares/{sharedDriveItem-id}/list/subscriptions"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, applicationId?: string | null,
+        changeType?: string, clientState?: string | null, creatorId?: string |
+        null, encryptionCertificate?: string | null, encryptionCertificateId?:
+        string | null, expirationDateTime?: string, includeResourceData?:
+        boolean | null, latestSupportedTlsVersion?: string | null,
+        lifecycleNotificationUrl?: string | null, notificationQueryOptions?:
+        string | null, notificationUrl?: string, notificationUrlAppId?: string |
+        null, resource?: string } & { @odata.type:
+        "#microsoft.graph.subscription" }, params?: { sharedDriveItem-id: string
+        }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, applicationId?: string | null,
+        changeType?: string, clientState?: string | null, creatorId?: string |
+        null, encryptionCertificate?: string | null, encryptionCertificateId?:
+        string | null, expirationDateTime?: string, includeResourceData?:
+        boolean | null, latestSupportedTlsVersion?: string | null,
+        lifecycleNotificationUrl?: string | null, notificationQueryOptions?:
+        string | null, notificationUrl?: string, notificationUrlAppId?: string |
+        null, resource?: string } & { @odata.type:
+        "#microsoft.graph.subscription" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/shares/{sharedDriveItem-id}/list/subscriptions",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            applicationId?: string | null, changeType?: string, clientState?:
+            string | null, creatorId?: string | null, encryptionCertificate?:
+            string | null, encryptionCertificateId?: string | null,
+            expirationDateTime?: string, includeResourceData?: boolean | null,
+            latestSupportedTlsVersion?: string | null,
+            lifecycleNotificationUrl?: string | null, notificationQueryOptions?:
+            string | null, notificationUrl?: string, notificationUrlAppId?:
+            string | null, resource?: string } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.subscription" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ sharedDriveItem-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /shares/{sharedDriveItem-id}/list/subscriptions"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, applicationId?: string | null, changeType?: string,
+          clientState?: string | null, creatorId?: string | null,
+          encryptionCertificate?: string | null, encryptionCertificateId?:
+          string | null, expirationDateTime?: string, includeResourceData?:
+          boolean | null, latestSupportedTlsVersion?: string | null,
+          lifecycleNotificationUrl?: string | null, notificationQueryOptions?:
+          string | null, notificationUrl?: string, notificationUrlAppId?: string
+          | null, resource?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.subscription" />" }&gt;
+  - name: >-
+      del({ If-Match?: string, sharedDriveItem-id: string, subscription-id:
+      string })
     uid: '@microsoft/teams.graph-endpoints.shares.doList.subscriptions.del'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`DELETE /shares/{sharedDriveItem-id}/list/subscriptions/{subscription-id}`'
@@ -43,18 +87,20 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /shares/{sharedDriveItem-id}/list/subscriptions/{subscription-id}"]["response"]>
+        function del(params?: { If-Match?: string, sharedDriveItem-id: string,
+        subscription-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { If-Match?: string, sharedDriveItem-id: string, subscription-id:
+            string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /shares/{sharedDriveItem-id}/list/subscriptions/{subscription-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], sharedDriveItem-id: string,
+      subscription-id: string })
     uid: '@microsoft/teams.graph-endpoints.shares.doList.subscriptions.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -65,18 +111,42 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /shares/{sharedDriveItem-id}/list/subscriptions/{subscription-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        sharedDriveItem-id: string, subscription-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, applicationId?: string | null,
+        changeType?: string, clientState?: string | null, creatorId?: string |
+        null, encryptionCertificate?: string | null, encryptionCertificateId?:
+        string | null, expirationDateTime?: string, includeResourceData?:
+        boolean | null, latestSupportedTlsVersion?: string | null,
+        lifecycleNotificationUrl?: string | null, notificationQueryOptions?:
+        string | null, notificationUrl?: string, notificationUrlAppId?: string |
+        null, resource?: string } & { @odata.type:
+        "#microsoft.graph.subscription" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], sharedDriveItem-id:
+            string, subscription-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /shares/{sharedDriveItem-id}/list/subscriptions/{subscription-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, applicationId?: string | null, changeType?: string,
+          clientState?: string | null, creatorId?: string | null,
+          encryptionCertificate?: string | null, encryptionCertificateId?:
+          string | null, expirationDateTime?: string, includeResourceData?:
+          boolean | null, latestSupportedTlsVersion?: string | null,
+          lifecycleNotificationUrl?: string | null, notificationQueryOptions?:
+          string | null, notificationUrl?: string, notificationUrlAppId?: string
+          | null, resource?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.subscription" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, sharedDriveItem-id: string })
     uid: '@microsoft/teams.graph-endpoints.shares.doList.subscriptions.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -87,20 +157,54 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /shares/{sharedDriveItem-id}/list/subscriptions"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, sharedDriveItem-id: string }):
+        EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?: string
+        | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, applicationId?: string | null,
+        changeType?: string, clientState?: string | null, creatorId?: string |
+        null, encryptionCertificate?: string | null, encryptionCertificateId?:
+        string | null, expirationDateTime?: string, includeResourceData?:
+        boolean | null, latestSupportedTlsVersion?: string | null,
+        lifecycleNotificationUrl?: string | null, notificationQueryOptions?:
+        string | null, notificationUrl?: string, notificationUrlAppId?: string |
+        null, resource?: string } & { @odata.type:
+        "#microsoft.graph.subscription" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, sharedDriveItem-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /shares/{sharedDriveItem-id}/list/subscriptions"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          applicationId?: string | null, changeType?: string, clientState?:
+          string | null, creatorId?: string | null, encryptionCertificate?:
+          string | null, encryptionCertificateId?: string | null,
+          expirationDateTime?: string, includeResourceData?: boolean | null,
+          latestSupportedTlsVersion?: string | null, lifecycleNotificationUrl?:
+          string | null, notificationQueryOptions?: string | null,
+          notificationUrl?: string, notificationUrlAppId?: string | null,
+          resource?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.subscription" />" })[] }&gt;
   - name: >-
-      update(Operation<"/shares/{sharedDriveItem-id}/list/subscriptions/{subscription-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, applicationId?: string | null, changeType?: string,
+      clientState?: string | null, creatorId?: string | null,
+      encryptionCertificate?: string | null, encryptionCertificateId?: string |
+      null, expirationDateTime?: string, includeResourceData?: boolean | null,
+      latestSupportedTlsVersion?: string | null, lifecycleNotificationUrl?:
+      string | null, notificationQueryOptions?: string | null, notificationUrl?:
+      string, notificationUrlAppId?: string | null, resource?: string } & {
+      @odata.type: "#microsoft.graph.subscription" }, { sharedDriveItem-id:
+      string, subscription-id: string })
     uid: '@microsoft/teams.graph-endpoints.shares.doList.subscriptions.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`PATCH /shares/{sharedDriveItem-id}/list/subscriptions/{subscription-id}`'
@@ -108,24 +212,58 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/shares/{sharedDriveItem-id}/list/subscriptions/{subscription-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /shares/{sharedDriveItem-id}/list/subscriptions/{subscription-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, applicationId?: string | null,
+        changeType?: string, clientState?: string | null, creatorId?: string |
+        null, encryptionCertificate?: string | null, encryptionCertificateId?:
+        string | null, expirationDateTime?: string, includeResourceData?:
+        boolean | null, latestSupportedTlsVersion?: string | null,
+        lifecycleNotificationUrl?: string | null, notificationQueryOptions?:
+        string | null, notificationUrl?: string, notificationUrlAppId?: string |
+        null, resource?: string } & { @odata.type:
+        "#microsoft.graph.subscription" }, params?: { sharedDriveItem-id:
+        string, subscription-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        applicationId?: string | null, changeType?: string, clientState?: string
+        | null, creatorId?: string | null, encryptionCertificate?: string |
+        null, encryptionCertificateId?: string | null, expirationDateTime?:
+        string, includeResourceData?: boolean | null,
+        latestSupportedTlsVersion?: string | null, lifecycleNotificationUrl?:
+        string | null, notificationQueryOptions?: string | null,
+        notificationUrl?: string, notificationUrlAppId?: string | null,
+        resource?: string } & { @odata.type: "#microsoft.graph.subscription" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/shares/{sharedDriveItem-id}/list/subscriptions/{subscription-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            applicationId?: string | null, changeType?: string, clientState?:
+            string | null, creatorId?: string | null, encryptionCertificate?:
+            string | null, encryptionCertificateId?: string | null,
+            expirationDateTime?: string, includeResourceData?: boolean | null,
+            latestSupportedTlsVersion?: string | null,
+            lifecycleNotificationUrl?: string | null, notificationQueryOptions?:
+            string | null, notificationUrl?: string, notificationUrlAppId?:
+            string | null, resource?: string } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.subscription" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ sharedDriveItem-id: string, subscription-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /shares/{sharedDriveItem-id}/list/subscriptions/{subscription-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, applicationId?: string | null, changeType?: string,
+          clientState?: string | null, creatorId?: string | null,
+          encryptionCertificate?: string | null, encryptionCertificateId?:
+          string | null, expirationDateTime?: string, includeResourceData?:
+          boolean | null, latestSupportedTlsVersion?: string | null,
+          lifecycleNotificationUrl?: string | null, notificationQueryOptions?:
+          string | null, notificationUrl?: string, notificationUrlAppId?: string
+          | null, resource?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.subscription" />" }&gt;
 variables:
   - name: reauthorize
     uid: '@microsoft/teams.graph-endpoints.shares.doList.subscriptions.reauthorize'

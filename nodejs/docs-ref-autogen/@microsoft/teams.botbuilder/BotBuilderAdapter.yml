@@ -24,7 +24,7 @@ methods:
   - name: registerRoute("POST", string, HttpRouteHandler)
     uid: '@microsoft/teams.botbuilder.BotBuilderAdapter.registerRoute'
     package: '@microsoft/teams.botbuilder'
-    summary: ''
+    summary: Register a route handler for a given HTTP method and path
     remarks: ''
     isDeprecated: false
     syntax:
@@ -34,17 +34,29 @@ methods:
       parameters:
         - id: method
           type: '"POST"'
-          description: ''
+          description: HTTP method
         - id: path
           type: string
-          description: ''
+          description: URL path (e.g., '/api/messages')
         - id: handler
           type: <xref uid="@microsoft/teams.apps.HttpRouteHandler" />
-          description: ''
+          description: >-
+            Pure function: ({ body, headers }) → { status, body }
+
+
+            Non-HTTP transports register only the messaging endpoint and may
+            no-op other
+
+            paths (e.g. `/api/functions/*`), which then require an HTTP
+            transport to serve.
   - name: serveStatic(string, string)
     uid: '@microsoft/teams.botbuilder.BotBuilderAdapter.serveStatic'
     package: '@microsoft/teams.botbuilder'
-    summary: ''
+    summary: >-
+      Serve static files from a directory
+
+      Primarily used for serving static files like for tabs, or static pages via
+      MessageExtensions and Dialogs
     remarks: ''
     isDeprecated: false
     syntax:
@@ -52,14 +64,21 @@ methods:
       parameters:
         - id: path
           type: string
-          description: ''
+          description: URL path prefix (e.g., '/static')
         - id: directory
           type: string
-          description: ''
+          description: >-
+            File system directory to serve from
+
+
+            Optional: non-HTTP transports may omit or no-op this (tabs require
+            an HTTP transport).
   - name: start(string | number)
     uid: '@microsoft/teams.botbuilder.BotBuilderAdapter.start'
     package: '@microsoft/teams.botbuilder'
-    summary: ''
+    summary: |-
+      Start the server listening to incoming requests
+      Not needed if app.start() is not called
     remarks: ''
     isDeprecated: false
     syntax:
@@ -67,14 +86,16 @@ methods:
       parameters:
         - id: port
           type: string | number
-          description: ''
+          description: Port number to listen on
       return:
         description: ''
         type: Promise&lt;void&gt;
   - name: stop()
     uid: '@microsoft/teams.botbuilder.BotBuilderAdapter.stop'
     package: '@microsoft/teams.botbuilder'
-    summary: ''
+    summary: >-
+      Stop the server from listening and perform any cleanup that needs to be
+      done
     remarks: ''
     isDeprecated: false
     syntax:

@@ -62,7 +62,7 @@ variables:
           =&gt; EndpointRequest&lt;IEndpoints["PATCH
           /solutions/bookingCurrencies/{bookingCurrency-id}"]["response"]&gt; }
 functions:
-  - name: list(any)
+  - name: 'list({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints.solutions.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`GET /solutions`'
@@ -70,16 +70,822 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /solutions"]["response"]>
+        function list(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<{ @odata.type: string, backupRestore?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, driveInclusionRules?: (Omit<Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type:
+        string, driveExpression?: string | null })[], driveProtectionUnits?:
+        (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, directoryObjectId?: string |
+        null, displayName?: string | null, email?: string | null })[],
+        driveProtectionUnitsBulkAdditionJobs?: (Omit<Omit<..., ...> & Omit<...,
+        ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        directoryObjectIds?: ...[], drives?: ...[] })[],
+        exchangeProtectionPolicies?: (Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        mailboxInclusionRules?: ...[], mailboxProtectionUnits?: ...[],
+        mailboxProtectionUnitsBulkAdditionJobs?: ...[] })[],
+        exchangeRestoreSessions?: (Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        granularMailboxRestoreArtifacts?: ...[], mailboxRestoreArtifacts?:
+        ...[], mailboxRestoreArtifactsBulkAdditionRequests?: ...[] })[],
+        mailboxInclusionRules?: (Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        mailboxExpression?: string | null })[], mailboxProtectionUnits?:
+        (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, directoryObjectId?: string |
+        null, displayName?: string | null, email?: string | null })[],
+        mailboxProtectionUnitsBulkAdditionJobs?: (Omit<Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type:
+        string, directoryObjectIds?: ...[], mailboxes?: ...[] })[],
+        oneDriveForBusinessProtectionPolicies?: (Omit<Omit<..., ...> & Omit<...,
+        ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        driveInclusionRules?: ...[], driveProtectionUnits?: ...[],
+        driveProtectionUnitsBulkAdditionJobs?: ...[] })[],
+        oneDriveForBusinessRestoreSessions?: (Omit<Omit<..., ...> & Omit<...,
+        ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        driveRestoreArtifacts?: ...[],
+        driveRestoreArtifactsBulkAdditionRequests?: ...[] })[],
+        protectionPolicies?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, createdBy?: function,
+        createdDateTime?: function, displayName?: function, lastModifiedBy?:
+        function, lastModifiedDateTime?: function, retentionSettings?: function,
+        status?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.protectionPolicyBase" })[], protectionUnits?: (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, createdBy?: function, createdDateTime?: function,
+        error?: function, lastModifiedBy?: function, lastModifiedDateTime?:
+        function, offboardRequestedDateTime?: function, policyId?: function,
+        protectionSources?: function, status?: function }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.protectionUnitBase" })[], restorePoints?:
+        (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+        @odata.type: string, expirationDateTime?: string | null,
+        protectionDateTime?: string | null, protectionUnit?: Record<..., ...> |
+        (... & ... & ...) | null, tags?: Record<..., ...> | "unknownFutureValue"
+        | "none" | "fastRestore" | null } & { @odata.type:
+        "#microsoft.graph.restorePoint" })[], restoreSessions?: (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, completedDateTime?: function, createdBy?: function,
+        createdDateTime?: function, error?: function, lastModifiedBy?: function,
+        lastModifiedDateTime?: function, restoreJobType?: function,
+        restoreSessionArtifactCount?: function, status?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.restoreSessionBase"
+        })[], serviceApps?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, application?: Record<..., ...> |
+        { @odata.type: ..., displayName?: ..., id?: ... } | null,
+        effectiveDateTime?: string | null, lastModifiedBy?: { @odata.type: ...,
+        application?: ..., device?: ..., user?: ... } | Record<..., ...> | null,
+        lastModifiedDateTime?: string | null, registrationDateTime?: string |
+        null, status?: Record<..., ...> | "unknownFutureValue" | "inactive" |
+        "active" | "pendingActive" | "pendingInactive" | null } & { @odata.type:
+        "#microsoft.graph.serviceApp" })[], serviceStatus?: Record<string,
+        never> | { @odata.type: string, backupServiceConsumer?: Record<string,
+        never> | "unknownFutureValue" | "unknown" | "firstparty" | "thirdparty"
+        | null, disableReason?: Record<string, never> | "unknownFutureValue" |
+        "none" | "invalidBillingProfile" | "userRequested" | null,
+        gracePeriodDateTime?: string | null, lastModifiedBy?: { @odata.type:
+        string, application?: Record<..., ...> | { @odata.type: ...,
+        displayName?: ..., id?: ... } | null, device?: Record<..., ...> | {
+        @odata.type: ..., displayName?: ..., id?: ... } | null, user?:
+        Record<..., ...> | { @odata.type: ..., displayName?: ..., id?: ... } |
+        null } | Record<string, never> | null, lastModifiedDateTime?: string |
+        null, restoreAllowedTillDateTime?: string | null, status?:
+        Record<string, never> | "unknownFutureValue" | "disabled" | "enabled" |
+        "protectionChangeLocked" | "restoreLocked" | null } | null,
+        sharePointProtectionPolicies?: (Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        siteInclusionRules?: ...[], siteProtectionUnits?: ...[],
+        siteProtectionUnitsBulkAdditionJobs?: ...[] } & { @odata.type:
+        "#microsoft.graph.sharePointProtectionPolicy" })[],
+        sharePointRestoreSessions?: (Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        siteRestoreArtifacts?: ...[], siteRestoreArtifactsBulkAdditionRequests?:
+        ...[] } & { @odata.type: "#microsoft.graph.sharePointRestoreSession"
+        })[], siteInclusionRules?: (Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        siteExpression?: string | null } & { @odata.type:
+        "#microsoft.graph.siteProtectionRule" })[], siteProtectionUnits?:
+        (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, siteId?: string | null,
+        siteName?: string | null, siteWebUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.siteProtectionUnit" })[],
+        siteProtectionUnitsBulkAdditionJobs?: (Omit<Omit<..., ...> & Omit<...,
+        ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        siteIds?: ...[], siteWebUrls?: ...[] } & { @odata.type:
+        "#microsoft.graph.siteProtectionUnitsBulkAdditionJob" })[] } & {
+        @odata.type: "#microsoft.graph.backupRestoreRoot" }) | null,
+        bookingBusinesses?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, address?: Record<string, never>
+        | { @odata.type: string, city?: string | null, countryOrRegion?: string
+        | null, postalCode?: string | null, state?: string | null, street?:
+        string | null } | null, appointments?: (Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & { @odata.type: string, additionalInformation?:
+        function, anonymousJoinWebUrl?: function, appointmentLabel?: function,
+        createdDateTime?: function, customerEmailAddress?: function,
+        customerName?: function, customerNotes?: function, customerPhone?:
+        function, customers?: function, customerTimeZone?: function, duration?:
+        function, endDateTime?: function, filledAttendeesCount?: function,
+        isCustomerAllowedToManageBooking?: function, isLocationOnline?:
+        function, joinWebUrl?: function, lastUpdatedDateTime?: function,
+        maximumAttendeesCount?: function, optOutOfCustomerEmail?: function,
+        postBuffer?: function, preBuffer?: function, price?: function,
+        priceType?: function, reminders?: function, selfServiceAppointmentId?:
+        function, serviceId?: function, serviceLocation?: function,
+        serviceName?: function, serviceNotes?: function,
+        smsNotificationsEnabled?: function, staffMemberIds?: function,
+        startDateTime?: function } & { @odata.type:
+        "#microsoft.graph.bookingAppointment" })[], bookingPageSettings?:
+        Record<string, never> | { @odata.type: string, accessControl?:
+        "unknownFutureValue" | "unrestricted" | "restrictedToOrganization",
+        bookingPageColorCode?: string, businessTimeZone?: string,
+        customerConsentMessage?: string, enforceOneTimePassword?: boolean,
+        isBusinessLogoDisplayEnabled?: boolean, isCustomerConsentEnabled?:
+        boolean, isSearchEngineIndexabilityDisabled?: boolean,
+        isTimeSlotTimeZoneSetToBusinessTimeZone?: boolean, privacyPolicyWebUrl?:
+        string, termsAndConditionsWebUrl?: string } | null, businessHours?: {
+        @odata.type: string, day?: "sunday" | "monday" | "tuesday" | "wednesday"
+        | "thursday" | "friday" | "saturday", timeSlots?: ...[] }[],
+        businessType?: string | null, calendarView?: (Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string,
+        additionalInformation?: function, anonymousJoinWebUrl?: function,
+        appointmentLabel?: function, createdDateTime?: function,
+        customerEmailAddress?: function, customerName?: function,
+        customerNotes?: function, customerPhone?: function, customers?:
+        function, customerTimeZone?: function, duration?: function,
+        endDateTime?: function, filledAttendeesCount?: function,
+        isCustomerAllowedToManageBooking?: function, isLocationOnline?:
+        function, joinWebUrl?: function, lastUpdatedDateTime?: function,
+        maximumAttendeesCount?: function, optOutOfCustomerEmail?: function,
+        postBuffer?: function, preBuffer?: function, price?: function,
+        priceType?: function, reminders?: function, selfServiceAppointmentId?:
+        function, serviceId?: function, serviceLocation?: function,
+        serviceName?: function, serviceNotes?: function,
+        smsNotificationsEnabled?: function, staffMemberIds?: function,
+        startDateTime?: function } & { @odata.type:
+        "#microsoft.graph.bookingAppointment" })[], createdDateTime?: string |
+        null, customers?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> &
+        Omit<{ @odata.type: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.bookingCustomerBase" })[], customQuestions?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        answerInputType?: function, answerOptions?: function, createdDateTime?:
+        function, displayName?: function, lastUpdatedDateTime?: function } & {
+        @odata.type: "#microsoft.graph.bookingCustomQuestion" })[],
+        defaultCurrencyIso?: string | null, displayName?: string, email?: string
+        | null, isPublished?: boolean | null, languageTag?: string | null,
+        lastUpdatedDateTime?: string | null, phone?: string | null, publicUrl?:
+        string | null, schedulingPolicy?: Record<string, never> | { @odata.type:
+        string, allowStaffSelection?: boolean, customAvailabilities?: (... & ...
+        & ...)[], generalAvailability?: Record<string, never> | { @odata.type:
+        string, availabilityType?: function, businessHours?: function } | null,
+        isMeetingInviteToCustomersEnabled?: boolean | null, maximumAdvance?:
+        string, minimumLeadTime?: string, sendConfirmationsToOwner?: boolean,
+        timeSlotInterval?: string } | null, services?: (Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string,
+        additionalInformation?: function, createdDateTime?: function,
+        customQuestions?: function, defaultDuration?: function,
+        defaultLocation?: function, defaultPrice?: function, defaultPriceType?:
+        function, defaultReminders?: function, description?: function,
+        displayName?: function, isAnonymousJoinEnabled?: function,
+        isCustomerAllowedToManageBooking?: function, isHiddenFromCustomers?:
+        function, isLocationOnline?: function, languageTag?: function,
+        lastUpdatedDateTime?: function, maximumAttendeesCount?: function,
+        notes?: function, postBuffer?: function, preBuffer?: function,
+        schedulingPolicy?: function, smsNotificationsEnabled?: function,
+        staffMemberIds?: function, webUrl?: function } & { @odata.type:
+        "#microsoft.graph.bookingService" })[], staffMembers?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...
+        }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.bookingStaffMemberBase" })[], webSiteUrl?: string |
+        null } & { @odata.type: "#microsoft.graph.bookingBusiness" })[],
+        bookingCurrencies?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, symbol?: string } & {
+        @odata.type: "#microsoft.graph.bookingCurrency" })[], virtualEvents?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, events?: (Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdBy?: function, description?: function, displayName?: function,
+        endDateTime?: function, externalEventInformation?: function,
+        presenters?: function, sessions?: function, settings?: function,
+        startDateTime?: function, status?: function }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.virtualEvent" })[], townhalls?:
+        (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, audience?: Record<..., ...> |
+        "unknownFutureValue" | "everyone" | "organization" | null,
+        coOrganizers?: ...[], invitedAttendees?: ...[], isInviteOnly?: boolean |
+        null } & { @odata.type: "#microsoft.graph.virtualEventTownhall" })[],
+        webinars?: (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, audience?: Record<..., ...> |
+        "unknownFutureValue" | "everyone" | "organization" | null,
+        coOrganizers?: ...[], registrationConfiguration?: Record<..., ...> |
+        (... & ... & ...) | null, registrations?: ...[] } & { @odata.type:
+        "#microsoft.graph.virtualEventWebinar" })[] } & { @odata.type:
+        "#microsoft.graph.virtualEventsRoot" }) | null }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /solutions"]["response"]&gt;
-  - name: update(Operation<"/solutions", "patch">)
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string,
+          backupRestore?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, driveInclusionRules?:
+          (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, driveExpression?: string | null
+          })[], driveProtectionUnits?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          directoryObjectId?: string | null, displayName?: string | null,
+          email?: string | null })[], driveProtectionUnitsBulkAdditionJobs?:
+          (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, directoryObjectIds?: ...[],
+          drives?: ...[] })[], exchangeProtectionPolicies?:
+          (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, mailboxInclusionRules?: ...[],
+          mailboxProtectionUnits?: ...[],
+          mailboxProtectionUnitsBulkAdditionJobs?: ...[] })[],
+          exchangeRestoreSessions?: (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          granularMailboxRestoreArtifacts?: ...[], mailboxRestoreArtifacts?:
+          ...[], mailboxRestoreArtifactsBulkAdditionRequests?: ...[] })[],
+          mailboxInclusionRules?: (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          mailboxExpression?: string | null })[], mailboxProtectionUnits?:
+          (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, directoryObjectId?: string | null,
+          displayName?: string | null, email?: string | null })[],
+          mailboxProtectionUnitsBulkAdditionJobs?: (Omit&lt;Omit&lt;..., ...&gt;
+          & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          directoryObjectIds?: ...[], mailboxes?: ...[] })[],
+          oneDriveForBusinessProtectionPolicies?: (Omit&lt;Omit&lt;..., ...&gt;
+          & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          driveInclusionRules?: ...[], driveProtectionUnits?: ...[],
+          driveProtectionUnitsBulkAdditionJobs?: ...[] })[],
+          oneDriveForBusinessRestoreSessions?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          driveRestoreArtifacts?: ...[],
+          driveRestoreArtifactsBulkAdditionRequests?: ...[] })[],
+          protectionPolicies?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdBy?: function, createdDateTime?:
+          function, displayName?: function, lastModifiedBy?: function,
+          lastModifiedDateTime?: function, retentionSettings?: function,
+          status?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.protectionPolicyBase" />" })[], protectionUnits?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdBy?: function, createdDateTime?: function, error?:
+          function, lastModifiedBy?: function, lastModifiedDateTime?: function,
+          offboardRequestedDateTime?: function, policyId?: function,
+          protectionSources?: function, status?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.protectionUnitBase" />" })[], restorePoints?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          expirationDateTime?: string | null, protectionDateTime?: string |
+          null, protectionUnit?: Record&lt;..., ...&gt; | (... & ... & ...) |
+          null, tags?: Record&lt;..., ...&gt; | "unknownFutureValue" | "none" |
+          "fastRestore" | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.restorePoint" />" })[], restoreSessions?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, completedDateTime?: function, createdBy?: function,
+          createdDateTime?: function, error?: function, lastModifiedBy?:
+          function, lastModifiedDateTime?: function, restoreJobType?: function,
+          restoreSessionArtifactCount?: function, status?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.restoreSessionBase" />" })[], serviceApps?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          application?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., displayName?: ..., id?: ... } | null, effectiveDateTime?: string
+          | null, lastModifiedBy?: { <xref uid="@odata.type" />: ...,
+          application?: ..., device?: ..., user?: ... } | Record&lt;..., ...&gt;
+          | null, lastModifiedDateTime?: string | null, registrationDateTime?:
+          string | null, status?: Record&lt;..., ...&gt; | "unknownFutureValue"
+          | "inactive" | "active" | "pendingActive" | "pendingInactive" | null }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.serviceApp" />" })[], serviceStatus?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          backupServiceConsumer?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "unknown" | "firstparty" | "thirdparty" | null,
+          disableReason?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "none" | "invalidBillingProfile" | "userRequested" | null,
+          gracePeriodDateTime?: string | null, lastModifiedBy?: { <xref
+          uid="@odata.type" />: string, application?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } | null,
+          device?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          displayName?: ..., id?: ... } | null, user?: Record&lt;..., ...&gt; |
+          { <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          null } | Record&lt;string, never&gt; | null, lastModifiedDateTime?:
+          string | null, restoreAllowedTillDateTime?: string | null, status?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "disabled" |
+          "enabled" | "protectionChangeLocked" | "restoreLocked" | null } |
+          null, sharePointProtectionPolicies?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          siteInclusionRules?: ...[], siteProtectionUnits?: ...[],
+          siteProtectionUnitsBulkAdditionJobs?: ...[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.sharePointProtectionPolicy" />" })[],
+          sharePointRestoreSessions?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          siteRestoreArtifacts?: ...[],
+          siteRestoreArtifactsBulkAdditionRequests?: ...[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.sharePointRestoreSession" />" })[],
+          siteInclusionRules?: (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          siteExpression?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.siteProtectionRule" />" })[],
+          siteProtectionUnits?: (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          siteId?: string | null, siteName?: string | null, siteWebUrl?: string
+          | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.siteProtectionUnit" />" })[],
+          siteProtectionUnitsBulkAdditionJobs?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          siteIds?: ...[], siteWebUrls?: ...[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.siteProtectionUnitsBulkAdditionJob" />"
+          })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.backupRestoreRoot" />" }) | null,
+          bookingBusinesses?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, address?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string, city?: string | null,
+          countryOrRegion?: string | null, postalCode?: string | null, state?:
+          string | null, street?: string | null } | null, appointments?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          additionalInformation?: function, anonymousJoinWebUrl?: function,
+          appointmentLabel?: function, createdDateTime?: function,
+          customerEmailAddress?: function, customerName?: function,
+          customerNotes?: function, customerPhone?: function, customers?:
+          function, customerTimeZone?: function, duration?: function,
+          endDateTime?: function, filledAttendeesCount?: function,
+          isCustomerAllowedToManageBooking?: function, isLocationOnline?:
+          function, joinWebUrl?: function, lastUpdatedDateTime?: function,
+          maximumAttendeesCount?: function, optOutOfCustomerEmail?: function,
+          postBuffer?: function, preBuffer?: function, price?: function,
+          priceType?: function, reminders?: function, selfServiceAppointmentId?:
+          function, serviceId?: function, serviceLocation?: function,
+          serviceName?: function, serviceNotes?: function,
+          smsNotificationsEnabled?: function, staffMemberIds?: function,
+          startDateTime?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.bookingAppointment" />" })[],
+          bookingPageSettings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, accessControl?: "unknownFutureValue" |
+          "unrestricted" | "restrictedToOrganization", bookingPageColorCode?:
+          string, businessTimeZone?: string, customerConsentMessage?: string,
+          enforceOneTimePassword?: boolean, isBusinessLogoDisplayEnabled?:
+          boolean, isCustomerConsentEnabled?: boolean,
+          isSearchEngineIndexabilityDisabled?: boolean,
+          isTimeSlotTimeZoneSetToBusinessTimeZone?: boolean,
+          privacyPolicyWebUrl?: string, termsAndConditionsWebUrl?: string } |
+          null, businessHours?: { <xref uid="@odata.type" />: string, day?:
+          "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday"
+          | "saturday", timeSlots?: ...[] }[], businessType?: string | null,
+          calendarView?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, additionalInformation?: function, anonymousJoinWebUrl?:
+          function, appointmentLabel?: function, createdDateTime?: function,
+          customerEmailAddress?: function, customerName?: function,
+          customerNotes?: function, customerPhone?: function, customers?:
+          function, customerTimeZone?: function, duration?: function,
+          endDateTime?: function, filledAttendeesCount?: function,
+          isCustomerAllowedToManageBooking?: function, isLocationOnline?:
+          function, joinWebUrl?: function, lastUpdatedDateTime?: function,
+          maximumAttendeesCount?: function, optOutOfCustomerEmail?: function,
+          postBuffer?: function, preBuffer?: function, price?: function,
+          priceType?: function, reminders?: function, selfServiceAppointmentId?:
+          function, serviceId?: function, serviceLocation?: function,
+          serviceName?: function, serviceNotes?: function,
+          smsNotificationsEnabled?: function, staffMemberIds?: function,
+          startDateTime?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.bookingAppointment" />" })[], createdDateTime?:
+          string | null, customers?: (Omit&lt;{ <xref uid="@odata.type" />: ...,
+          id?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.bookingCustomerBase" />" })[], customQuestions?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          answerInputType?: function, answerOptions?: function,
+          createdDateTime?: function, displayName?: function,
+          lastUpdatedDateTime?: function } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.bookingCustomQuestion" />" })[],
+          defaultCurrencyIso?: string | null, displayName?: string, email?:
+          string | null, isPublished?: boolean | null, languageTag?: string |
+          null, lastUpdatedDateTime?: string | null, phone?: string | null,
+          publicUrl?: string | null, schedulingPolicy?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string,
+          allowStaffSelection?: boolean, customAvailabilities?: (... & ... &
+          ...)[], generalAvailability?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, availabilityType?: function,
+          businessHours?: function } | null, isMeetingInviteToCustomersEnabled?:
+          boolean | null, maximumAdvance?: string, minimumLeadTime?: string,
+          sendConfirmationsToOwner?: boolean, timeSlotInterval?: string } |
+          null, services?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, additionalInformation?: function, createdDateTime?: function,
+          customQuestions?: function, defaultDuration?: function,
+          defaultLocation?: function, defaultPrice?: function,
+          defaultPriceType?: function, defaultReminders?: function,
+          description?: function, displayName?: function,
+          isAnonymousJoinEnabled?: function, isCustomerAllowedToManageBooking?:
+          function, isHiddenFromCustomers?: function, isLocationOnline?:
+          function, languageTag?: function, lastUpdatedDateTime?: function,
+          maximumAttendeesCount?: function, notes?: function, postBuffer?:
+          function, preBuffer?: function, schedulingPolicy?: function,
+          smsNotificationsEnabled?: function, staffMemberIds?: function,
+          webUrl?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.bookingService" />" })[], staffMembers?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.bookingStaffMemberBase" />" })[],
+          webSiteUrl?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.bookingBusiness" />" })[], bookingCurrencies?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          symbol?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.bookingCurrency" />" })[], virtualEvents?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, events?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdBy?: function, description?: function, displayName?:
+          function, endDateTime?: function, externalEventInformation?: function,
+          presenters?: function, sessions?: function, settings?: function,
+          startDateTime?: function, status?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.virtualEvent" />" })[], townhalls?:
+          (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, audience?: Record&lt;..., ...&gt;
+          | "unknownFutureValue" | "everyone" | "organization" | null,
+          coOrganizers?: ...[], invitedAttendees?: ...[], isInviteOnly?: boolean
+          | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.virtualEventTownhall" />" })[], webinars?:
+          (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, audience?: Record&lt;..., ...&gt;
+          | "unknownFutureValue" | "everyone" | "organization" | null,
+          coOrganizers?: ...[], registrationConfiguration?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null, registrations?: ...[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.virtualEventWebinar" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.virtualEventsRoot"
+          />" }) | null }&gt;
+  - name: >-
+      update({ @odata.type: string, backupRestore?: Record<string, never> |
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, driveInclusionRules?: (Omit<Omit<{ @odata.type: ...,
+      id?: ... }, "@odata.type"> & Omit<{ @odata.type: ..., createdBy?: ...,
+      createdDateTime?: ..., error?: ..., isAutoApplyEnabled?: ...,
+      lastModifiedBy?: ..., lastModifiedDateTime?: ..., status?: ... },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.protectionRuleBase" },
+      "@odata.type"> & { @odata.type: string, driveExpression?: string | null
+      })[], driveProtectionUnits?: (Omit<Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & Omit<{ @odata.type: ..., createdBy?: ...,
+      createdDateTime?: ..., error?: ..., lastModifiedBy?: ...,
+      lastModifiedDateTime?: ..., offboardRequestedDateTime?: ..., policyId?:
+      ..., protectionSources?: ..., status?: ... }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.protectionUnitBase" }, "@odata.type"> & {
+      @odata.type: string, directoryObjectId?: string | null, displayName?:
+      string | null, email?: string | null })[],
+      driveProtectionUnitsBulkAdditionJobs?: (Omit<Omit<{ @odata.type: ..., id?:
+      ... }, "@odata.type"> & Omit<{ @odata.type: ..., createdBy?: ...,
+      createdDateTime?: ..., displayName?: ..., error?: ..., lastModifiedBy?:
+      ..., lastModifiedDateTime?: ..., status?: ... }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.protectionUnitsBulkJobBase" },
+      "@odata.type"> & { @odata.type: string, directoryObjectIds?: function[],
+      drives?: function[] })[], exchangeProtectionPolicies?: (Omit<Omit<{
+      @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+      createdBy?: ..., createdDateTime?: ..., displayName?: ...,
+      lastModifiedBy?: ..., lastModifiedDateTime?: ..., retentionSettings?: ...,
+      status?: ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.protectionPolicyBase" }, "@odata.type"> & { @odata.type:
+      string, mailboxInclusionRules?: (... & ...)[], mailboxProtectionUnits?:
+      (... & ...)[], mailboxProtectionUnitsBulkAdditionJobs?: (... & ...)[]
+      })[], exchangeRestoreSessions?: (Omit<Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & Omit<{ @odata.type: ..., completedDateTime?: ...,
+      createdBy?: ..., createdDateTime?: ..., error?: ..., lastModifiedBy?: ...,
+      lastModifiedDateTime?: ..., restoreJobType?: ...,
+      restoreSessionArtifactCount?: ..., status?: ... }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.restoreSessionBase" }, "@odata.type"> & {
+      @odata.type: string, granularMailboxRestoreArtifacts?: (... & ... &
+      ...)[], mailboxRestoreArtifacts?: (... & ...)[],
+      mailboxRestoreArtifactsBulkAdditionRequests?: (... & ...)[] })[],
+      mailboxInclusionRules?: (Omit<Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & Omit<{ @odata.type: ..., createdBy?: ...,
+      createdDateTime?: ..., error?: ..., isAutoApplyEnabled?: ...,
+      lastModifiedBy?: ..., lastModifiedDateTime?: ..., status?: ... },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.protectionRuleBase" },
+      "@odata.type"> & { @odata.type: string, mailboxExpression?: string | null
+      })[], mailboxProtectionUnits?: (Omit<Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & Omit<{ @odata.type: ..., createdBy?: ...,
+      createdDateTime?: ..., error?: ..., lastModifiedBy?: ...,
+      lastModifiedDateTime?: ..., offboardRequestedDateTime?: ..., policyId?:
+      ..., protectionSources?: ..., status?: ... }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.protectionUnitBase" }, "@odata.type"> & {
+      @odata.type: string, directoryObjectId?: string | null, displayName?:
+      string | null, email?: string | null })[],
+      mailboxProtectionUnitsBulkAdditionJobs?: (Omit<Omit<{ @odata.type: ...,
+      id?: ... }, "@odata.type"> & Omit<{ @odata.type: ..., createdBy?: ...,
+      createdDateTime?: ..., displayName?: ..., error?: ..., lastModifiedBy?:
+      ..., lastModifiedDateTime?: ..., status?: ... }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.protectionUnitsBulkJobBase" },
+      "@odata.type"> & { @odata.type: string, directoryObjectIds?: function[],
+      mailboxes?: function[] })[], oneDriveForBusinessProtectionPolicies?:
+      (Omit<Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+      @odata.type: ..., createdBy?: ..., createdDateTime?: ..., displayName?:
+      ..., lastModifiedBy?: ..., lastModifiedDateTime?: ..., retentionSettings?:
+      ..., status?: ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.protectionPolicyBase" }, "@odata.type"> & { @odata.type:
+      string, driveInclusionRules?: (... & ...)[], driveProtectionUnits?: (... &
+      ...)[], driveProtectionUnitsBulkAdditionJobs?: (... & ...)[] })[],
+      oneDriveForBusinessRestoreSessions?: (Omit<Omit<{ @odata.type: ..., id?:
+      ... }, "@odata.type"> & Omit<{ @odata.type: ..., completedDateTime?: ...,
+      createdBy?: ..., createdDateTime?: ..., error?: ..., lastModifiedBy?: ...,
+      lastModifiedDateTime?: ..., restoreJobType?: ...,
+      restoreSessionArtifactCount?: ..., status?: ... }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.restoreSessionBase" }, "@odata.type"> & {
+      @odata.type: string, driveRestoreArtifacts?: (... & ...)[],
+      driveRestoreArtifactsBulkAdditionRequests?: (... & ...)[] })[],
+      protectionPolicies?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, createdBy?: { @odata.type:
+      ..., application?: ..., device?: ..., user?: ... } | Record<..., ...> |
+      null, createdDateTime?: string | null, displayName?: string | null,
+      lastModifiedBy?: { @odata.type: ..., application?: ..., device?: ...,
+      user?: ... } | Record<..., ...> | null, lastModifiedDateTime?: string |
+      null, retentionSettings?: ...[], status?: Record<..., ...> |
+      "unknownFutureValue" | "inactive" | "activeWithErrors" | "updating" |
+      "active" | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.protectionPolicyBase" })[], protectionUnits?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+      string, createdBy?: { @odata.type: ..., application?: ..., device?: ...,
+      user?: ... } | Record<..., ...> | null, createdDateTime?: string | null,
+      error?: Record<..., ...> | { @odata.type: ..., code?: ..., details?: ...,
+      innerError?: ..., message?: ..., target?: ... } | null, lastModifiedBy?: {
+      @odata.type: ..., application?: ..., device?: ..., user?: ... } |
+      Record<..., ...> | null, lastModifiedDateTime?: string | null,
+      offboardRequestedDateTime?: string | null, policyId?: string | null,
+      protectionSources?: "unknownFutureValue" | "none" | "manual" |
+      "dynamicRule", status?: Record<..., ...> | "unknownFutureValue" |
+      "protectRequested" | "protected" | "unprotectRequested" | "unprotected" |
+      "removeRequested" | "offboardRequested" | "offboarded" |
+      "cancelOffboardRequested" | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.protectionUnitBase" })[], restorePoints?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+      string, expirationDateTime?: string | null, protectionDateTime?: string |
+      null, protectionUnit?: Record<string, never> | (Omit<..., ...> & Omit<...,
+      ...> & { @odata.type: ... }) | null, tags?: Record<string, never> |
+      "unknownFutureValue" | "none" | "fastRestore" | null } & { @odata.type:
+      "#microsoft.graph.restorePoint" })[], restoreSessions?: (Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+      string, completedDateTime?: string | null, createdBy?: { @odata.type: ...,
+      application?: ..., device?: ..., user?: ... } | Record<..., ...> | null,
+      createdDateTime?: string | null, error?: Record<..., ...> | { @odata.type:
+      ..., code?: ..., details?: ..., innerError?: ..., message?: ..., target?:
+      ... } | null, lastModifiedBy?: { @odata.type: ..., application?: ...,
+      device?: ..., user?: ... } | Record<..., ...> | null,
+      lastModifiedDateTime?: string | null, restoreJobType?: Record<..., ...> |
+      "unknownFutureValue" | "standard" | "bulk" | null,
+      restoreSessionArtifactCount?: Record<..., ...> | { @odata.type: ...,
+      completed?: ..., failed?: ..., inProgress?: ..., total?: ... } | null,
+      status?: Record<..., ...> | "failed" | "unknownFutureValue" | "active" |
+      "draft" | "activating" | "completedWithError" | "completed" | null },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.restoreSessionBase"
+      })[], serviceApps?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, application?: Record<string,
+      never> | { @odata.type: string, displayName?: function, id?: function } |
+      null, effectiveDateTime?: string | null, lastModifiedBy?: { @odata.type:
+      string, application?: function, device?: function, user?: function } |
+      Record<string, never> | null, lastModifiedDateTime?: string | null,
+      registrationDateTime?: string | null, status?: Record<string, never> |
+      "unknownFutureValue" | "inactive" | "active" | "pendingActive" |
+      "pendingInactive" | null } & { @odata.type: "#microsoft.graph.serviceApp"
+      })[], serviceStatus?: Record<string, never> | { @odata.type: string,
+      backupServiceConsumer?: Record<string, never> | "unknownFutureValue" |
+      "unknown" | "firstparty" | "thirdparty" | null, disableReason?:
+      Record<string, never> | "unknownFutureValue" | "none" |
+      "invalidBillingProfile" | "userRequested" | null, gracePeriodDateTime?:
+      string | null, lastModifiedBy?: { @odata.type: string, application?:
+      Record<string, never> | { @odata.type: string, displayName?: function,
+      id?: function } | null, device?: Record<string, never> | { @odata.type:
+      string, displayName?: function, id?: function } | null, user?:
+      Record<string, never> | { @odata.type: string, displayName?: function,
+      id?: function } | null } | Record<string, never> | null,
+      lastModifiedDateTime?: string | null, restoreAllowedTillDateTime?: string
+      | null, status?: Record<string, never> | "unknownFutureValue" | "disabled"
+      | "enabled" | "protectionChangeLocked" | "restoreLocked" | null } | null,
+      sharePointProtectionPolicies?: (Omit<Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & Omit<{ @odata.type: ..., createdBy?: ...,
+      createdDateTime?: ..., displayName?: ..., lastModifiedBy?: ...,
+      lastModifiedDateTime?: ..., retentionSettings?: ..., status?: ... },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.protectionPolicyBase" },
+      "@odata.type"> & { @odata.type: string, siteInclusionRules?: (... & ... &
+      ...)[], siteProtectionUnits?: (... & ... & ...)[],
+      siteProtectionUnitsBulkAdditionJobs?: (... & ... & ...)[] } & {
+      @odata.type: "#microsoft.graph.sharePointProtectionPolicy" })[],
+      sharePointRestoreSessions?: (Omit<Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & Omit<{ @odata.type: ..., completedDateTime?: ...,
+      createdBy?: ..., createdDateTime?: ..., error?: ..., lastModifiedBy?: ...,
+      lastModifiedDateTime?: ..., restoreJobType?: ...,
+      restoreSessionArtifactCount?: ..., status?: ... }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.restoreSessionBase" }, "@odata.type"> & {
+      @odata.type: string, siteRestoreArtifacts?: (... & ... & ...)[],
+      siteRestoreArtifactsBulkAdditionRequests?: (... & ... & ...)[] } & {
+      @odata.type: "#microsoft.graph.sharePointRestoreSession" })[],
+      siteInclusionRules?: (Omit<Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & Omit<{ @odata.type: ..., createdBy?: ...,
+      createdDateTime?: ..., error?: ..., isAutoApplyEnabled?: ...,
+      lastModifiedBy?: ..., lastModifiedDateTime?: ..., status?: ... },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.protectionRuleBase" },
+      "@odata.type"> & { @odata.type: string, siteExpression?: string | null } &
+      { @odata.type: "#microsoft.graph.siteProtectionRule" })[],
+      siteProtectionUnits?: (Omit<Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & Omit<{ @odata.type: ..., createdBy?: ...,
+      createdDateTime?: ..., error?: ..., lastModifiedBy?: ...,
+      lastModifiedDateTime?: ..., offboardRequestedDateTime?: ..., policyId?:
+      ..., protectionSources?: ..., status?: ... }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.protectionUnitBase" }, "@odata.type"> & {
+      @odata.type: string, siteId?: string | null, siteName?: string | null,
+      siteWebUrl?: string | null } & { @odata.type:
+      "#microsoft.graph.siteProtectionUnit" })[],
+      siteProtectionUnitsBulkAdditionJobs?: (Omit<Omit<{ @odata.type: ..., id?:
+      ... }, "@odata.type"> & Omit<{ @odata.type: ..., createdBy?: ...,
+      createdDateTime?: ..., displayName?: ..., error?: ..., lastModifiedBy?:
+      ..., lastModifiedDateTime?: ..., status?: ... }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.protectionUnitsBulkJobBase" },
+      "@odata.type"> & { @odata.type: string, siteIds?: function[],
+      siteWebUrls?: function[] } & { @odata.type:
+      "#microsoft.graph.siteProtectionUnitsBulkAdditionJob" })[] } & {
+      @odata.type: "#microsoft.graph.backupRestoreRoot" }) | null,
+      bookingBusinesses?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, address?: Record<string, never> |
+      { @odata.type: string, city?: string | null, countryOrRegion?: string |
+      null, postalCode?: string | null, state?: string | null, street?: string |
+      null } | null, appointments?: (Omit<{ @odata.type: string, id?: function
+      }, "@odata.type"> & { @odata.type: string, additionalInformation?: string
+      | null, anonymousJoinWebUrl?: string | null, appointmentLabel?: string |
+      null, createdDateTime?: string | null, customerEmailAddress?: string |
+      null, customerName?: string | null, customerNotes?: string | null,
+      customerPhone?: string | null, customers?: ...[], customerTimeZone?:
+      string | null, duration?: string, endDateTime?: { @odata.type: ...,
+      dateTime?: ..., timeZone?: ... }, filledAttendeesCount?: number,
+      isCustomerAllowedToManageBooking?: boolean | null, isLocationOnline?:
+      boolean, joinWebUrl?: string | null, lastUpdatedDateTime?: string | null,
+      maximumAttendeesCount?: number, optOutOfCustomerEmail?: boolean,
+      postBuffer?: string, preBuffer?: string, price?: string | number | null,
+      priceType?: "undefined" | "unknownFutureValue" | "fixedPrice" |
+      "startingAt" | "hourly" | "free" | "priceVaries" | "callUs" | "notSet",
+      reminders?: ...[], selfServiceAppointmentId?: string | null, serviceId?:
+      string | null, serviceLocation?: Record<..., ...> | { @odata.type: ...,
+      address?: ..., coordinates?: ..., displayName?: ...,
+      locationEmailAddress?: ..., locationType?: ..., locationUri?: ...,
+      uniqueId?: ..., uniqueIdType?: ... } | null, serviceName?: string,
+      serviceNotes?: string | null, smsNotificationsEnabled?: boolean,
+      staffMemberIds?: ...[], startDateTime?: { @odata.type: ..., dateTime?:
+      ..., timeZone?: ... } } & { @odata.type:
+      "#microsoft.graph.bookingAppointment" })[], bookingPageSettings?:
+      Record<string, never> | { @odata.type: string, accessControl?:
+      "unknownFutureValue" | "unrestricted" | "restrictedToOrganization",
+      bookingPageColorCode?: string, businessTimeZone?: string,
+      customerConsentMessage?: string, enforceOneTimePassword?: boolean,
+      isBusinessLogoDisplayEnabled?: boolean, isCustomerConsentEnabled?:
+      boolean, isSearchEngineIndexabilityDisabled?: boolean,
+      isTimeSlotTimeZoneSetToBusinessTimeZone?: boolean, privacyPolicyWebUrl?:
+      string, termsAndConditionsWebUrl?: string } | null, businessHours?: {
+      @odata.type: string, day?: "sunday" | "monday" | "tuesday" | "wednesday" |
+      "thursday" | "friday" | "saturday", timeSlots?: { @odata.type: ...,
+      endTime?: ..., startTime?: ... }[] }[], businessType?: string | null,
+      calendarView?: (Omit<{ @odata.type: string, id?: function },
+      "@odata.type"> & { @odata.type: string, additionalInformation?: string |
+      null, anonymousJoinWebUrl?: string | null, appointmentLabel?: string |
+      null, createdDateTime?: string | null, customerEmailAddress?: string |
+      null, customerName?: string | null, customerNotes?: string | null,
+      customerPhone?: string | null, customers?: ...[], customerTimeZone?:
+      string | null, duration?: string, endDateTime?: { @odata.type: ...,
+      dateTime?: ..., timeZone?: ... }, filledAttendeesCount?: number,
+      isCustomerAllowedToManageBooking?: boolean | null, isLocationOnline?:
+      boolean, joinWebUrl?: string | null, lastUpdatedDateTime?: string | null,
+      maximumAttendeesCount?: number, optOutOfCustomerEmail?: boolean,
+      postBuffer?: string, preBuffer?: string, price?: string | number | null,
+      priceType?: "undefined" | "unknownFutureValue" | "fixedPrice" |
+      "startingAt" | "hourly" | "free" | "priceVaries" | "callUs" | "notSet",
+      reminders?: ...[], selfServiceAppointmentId?: string | null, serviceId?:
+      string | null, serviceLocation?: Record<..., ...> | { @odata.type: ...,
+      address?: ..., coordinates?: ..., displayName?: ...,
+      locationEmailAddress?: ..., locationType?: ..., locationUri?: ...,
+      uniqueId?: ..., uniqueIdType?: ... } | null, serviceName?: string,
+      serviceNotes?: string | null, smsNotificationsEnabled?: boolean,
+      staffMemberIds?: ...[], startDateTime?: { @odata.type: ..., dateTime?:
+      ..., timeZone?: ... } } & { @odata.type:
+      "#microsoft.graph.bookingAppointment" })[], createdDateTime?: string |
+      null, customers?: (Omit<{ @odata.type: string, id?: function },
+      "@odata.type"> & Omit<{ @odata.type: string }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.bookingCustomerBase" })[],
+      customQuestions?: (Omit<{ @odata.type: string, id?: function },
+      "@odata.type"> & { @odata.type: string, answerInputType?: Record<..., ...>
+      | "unknownFutureValue" | "text" | "radioButton" | null, answerOptions?:
+      ...[], createdDateTime?: string | null, displayName?: string,
+      lastUpdatedDateTime?: string | null } & { @odata.type:
+      "#microsoft.graph.bookingCustomQuestion" })[], defaultCurrencyIso?: string
+      | null, displayName?: string, email?: string | null, isPublished?: boolean
+      | null, languageTag?: string | null, lastUpdatedDateTime?: string | null,
+      phone?: string | null, publicUrl?: string | null, schedulingPolicy?:
+      Record<string, never> | { @odata.type: string, allowStaffSelection?:
+      boolean, customAvailabilities?: (Omit<..., ...> & { @odata.type: ...,
+      endDate?: ..., startDate?: ... } & { @odata.type: ... })[],
+      generalAvailability?: Record<string, never> | { @odata.type: string,
+      availabilityType?: "unknownFutureValue" | "bookWhenStaffAreFree" |
+      "notBookable" | "customWeeklyHours", businessHours?: ...[] } | null,
+      isMeetingInviteToCustomersEnabled?: boolean | null, maximumAdvance?:
+      string, minimumLeadTime?: string, sendConfirmationsToOwner?: boolean,
+      timeSlotInterval?: string } | null, services?: (Omit<{ @odata.type:
+      string, id?: function }, "@odata.type"> & { @odata.type: string,
+      additionalInformation?: string | null, createdDateTime?: string | null,
+      customQuestions?: ...[], defaultDuration?: string, defaultLocation?:
+      Record<..., ...> | { @odata.type: ..., address?: ..., coordinates?: ...,
+      displayName?: ..., locationEmailAddress?: ..., locationType?: ...,
+      locationUri?: ..., uniqueId?: ..., uniqueIdType?: ... } | null,
+      defaultPrice?: string | number | null, defaultPriceType?: "undefined" |
+      "unknownFutureValue" | "fixedPrice" | "startingAt" | "hourly" | "free" |
+      "priceVaries" | "callUs" | "notSet", defaultReminders?: ...[],
+      description?: string | null, displayName?: string,
+      isAnonymousJoinEnabled?: boolean, isCustomerAllowedToManageBooking?:
+      boolean | null, isHiddenFromCustomers?: boolean, isLocationOnline?:
+      boolean, languageTag?: string, lastUpdatedDateTime?: string | null,
+      maximumAttendeesCount?: number, notes?: string | null, postBuffer?:
+      string, preBuffer?: string, schedulingPolicy?: Record<..., ...> | {
+      @odata.type: ..., allowStaffSelection?: ..., customAvailabilities?: ...,
+      generalAvailability?: ..., isMeetingInviteToCustomersEnabled?: ...,
+      maximumAdvance?: ..., minimumLeadTime?: ..., sendConfirmationsToOwner?:
+      ..., timeSlotInterval?: ... } | null, smsNotificationsEnabled?: boolean,
+      staffMemberIds?: ...[], webUrl?: string | null } & { @odata.type:
+      "#microsoft.graph.bookingService" })[], staffMembers?: (Omit<{
+      @odata.type: string, id?: function }, "@odata.type"> & Omit<{ @odata.type:
+      string }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.bookingStaffMemberBase" })[], webSiteUrl?: string | null
+      } & { @odata.type: "#microsoft.graph.bookingBusiness" })[],
+      bookingCurrencies?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, symbol?: string } & { @odata.type:
+      "#microsoft.graph.bookingCurrency" })[], virtualEvents?: Record<string,
+      never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, events?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, createdBy?: Record<..., ...>
+      | (... & ... & ...) | null, description?: Record<..., ...> | {
+      @odata.type: ..., content?: ..., contentType?: ... } | null, displayName?:
+      string | null, endDateTime?: Record<..., ...> | { @odata.type: ...,
+      dateTime?: ..., timeZone?: ... } | null, externalEventInformation?: ...[],
+      presenters?: ...[], sessions?: ...[], settings?: Record<..., ...> | {
+      @odata.type: ..., isAttendeeEmailNotificationEnabled?: ... } | null,
+      startDateTime?: Record<..., ...> | { @odata.type: ..., dateTime?: ...,
+      timeZone?: ... } | null, status?: Record<..., ...> | "unknownFutureValue"
+      | "draft" | "published" | "canceled" | null }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.virtualEvent" })[], townhalls?:
+      (Omit<Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+      @odata.type: ..., createdBy?: ..., description?: ..., displayName?: ...,
+      endDateTime?: ..., externalEventInformation?: ..., presenters?: ...,
+      sessions?: ..., settings?: ..., startDateTime?: ..., status?: ... },
+      "@odata.type"> & { @odata.type: "#microsoft.graph.virtualEvent" },
+      "@odata.type"> & { @odata.type: string, audience?: Record<string, never> |
+      "unknownFutureValue" | "everyone" | "organization" | null, coOrganizers?:
+      (... & ... & ...)[], invitedAttendees?: { @odata.type: ..., displayName?:
+      ..., id?: ... }[], isInviteOnly?: boolean | null } & { @odata.type:
+      "#microsoft.graph.virtualEventTownhall" })[], webinars?: (Omit<Omit<{
+      @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+      createdBy?: ..., description?: ..., displayName?: ..., endDateTime?: ...,
+      externalEventInformation?: ..., presenters?: ..., sessions?: ...,
+      settings?: ..., startDateTime?: ..., status?: ... }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.virtualEvent" }, "@odata.type"> & {
+      @odata.type: string, audience?: Record<string, never> |
+      "unknownFutureValue" | "everyone" | "organization" | null, coOrganizers?:
+      (... & ... & ...)[], registrationConfiguration?: Record<string, never> |
+      (Omit<..., ...> & { @odata.type: ..., isManualApprovalEnabled?: ...,
+      isWaitlistEnabled?: ... } & { @odata.type: ... }) | null, registrations?:
+      (... & ... & ...)[] } & { @odata.type:
+      "#microsoft.graph.virtualEventWebinar" })[] } & { @odata.type:
+      "#microsoft.graph.virtualEventsRoot" }) | null })
     uid: '@microsoft/teams.graph-endpoints.solutions.update'
     package: '@microsoft/teams.graph-endpoints'
     summary: '`PATCH /solutions`'
@@ -87,12 +893,1263 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/solutions", "patch">):
-        EndpointRequest<IEndpoints["PATCH /solutions"]["response"]>
+        function update(body: { @odata.type: string, backupRestore?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, driveInclusionRules?:
+        (Omit<Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+        @odata.type: ..., createdBy?: ..., createdDateTime?: ..., error?: ...,
+        isAutoApplyEnabled?: ..., lastModifiedBy?: ..., lastModifiedDateTime?:
+        ..., status?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.protectionRuleBase" }, "@odata.type"> & { @odata.type:
+        string, driveExpression?: string | null })[], driveProtectionUnits?:
+        (Omit<Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+        @odata.type: ..., createdBy?: ..., createdDateTime?: ..., error?: ...,
+        lastModifiedBy?: ..., lastModifiedDateTime?: ...,
+        offboardRequestedDateTime?: ..., policyId?: ..., protectionSources?:
+        ..., status?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.protectionUnitBase" }, "@odata.type"> & { @odata.type:
+        string, directoryObjectId?: string | null, displayName?: string | null,
+        email?: string | null })[], driveProtectionUnitsBulkAdditionJobs?:
+        (Omit<Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+        @odata.type: ..., createdBy?: ..., createdDateTime?: ..., displayName?:
+        ..., error?: ..., lastModifiedBy?: ..., lastModifiedDateTime?: ...,
+        status?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.protectionUnitsBulkJobBase" }, "@odata.type"> & {
+        @odata.type: string, directoryObjectIds?: function[], drives?:
+        function[] })[], exchangeProtectionPolicies?: (Omit<Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ..., createdBy?:
+        ..., createdDateTime?: ..., displayName?: ..., lastModifiedBy?: ...,
+        lastModifiedDateTime?: ..., retentionSettings?: ..., status?: ... },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.protectionPolicyBase"
+        }, "@odata.type"> & { @odata.type: string, mailboxInclusionRules?: (...
+        & ...)[], mailboxProtectionUnits?: (... & ...)[],
+        mailboxProtectionUnitsBulkAdditionJobs?: (... & ...)[] })[],
+        exchangeRestoreSessions?: (Omit<Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., completedDateTime?: ...,
+        createdBy?: ..., createdDateTime?: ..., error?: ..., lastModifiedBy?:
+        ..., lastModifiedDateTime?: ..., restoreJobType?: ...,
+        restoreSessionArtifactCount?: ..., status?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.restoreSessionBase" }, "@odata.type"> & {
+        @odata.type: string, granularMailboxRestoreArtifacts?: (... & ... &
+        ...)[], mailboxRestoreArtifacts?: (... & ...)[],
+        mailboxRestoreArtifactsBulkAdditionRequests?: (... & ...)[] })[],
+        mailboxInclusionRules?: (Omit<Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., createdBy?: ...,
+        createdDateTime?: ..., error?: ..., isAutoApplyEnabled?: ...,
+        lastModifiedBy?: ..., lastModifiedDateTime?: ..., status?: ... },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.protectionRuleBase" },
+        "@odata.type"> & { @odata.type: string, mailboxExpression?: string |
+        null })[], mailboxProtectionUnits?: (Omit<Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & Omit<{ @odata.type: ..., createdBy?: ...,
+        createdDateTime?: ..., error?: ..., lastModifiedBy?: ...,
+        lastModifiedDateTime?: ..., offboardRequestedDateTime?: ..., policyId?:
+        ..., protectionSources?: ..., status?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.protectionUnitBase" }, "@odata.type"> & {
+        @odata.type: string, directoryObjectId?: string | null, displayName?:
+        string | null, email?: string | null })[],
+        mailboxProtectionUnitsBulkAdditionJobs?: (Omit<Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & Omit<{ @odata.type: ..., createdBy?: ...,
+        createdDateTime?: ..., displayName?: ..., error?: ..., lastModifiedBy?:
+        ..., lastModifiedDateTime?: ..., status?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.protectionUnitsBulkJobBase" },
+        "@odata.type"> & { @odata.type: string, directoryObjectIds?: function[],
+        mailboxes?: function[] })[], oneDriveForBusinessProtectionPolicies?:
+        (Omit<Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+        @odata.type: ..., createdBy?: ..., createdDateTime?: ..., displayName?:
+        ..., lastModifiedBy?: ..., lastModifiedDateTime?: ...,
+        retentionSettings?: ..., status?: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.protectionPolicyBase" }, "@odata.type"> & {
+        @odata.type: string, driveInclusionRules?: (... & ...)[],
+        driveProtectionUnits?: (... & ...)[],
+        driveProtectionUnitsBulkAdditionJobs?: (... & ...)[] })[],
+        oneDriveForBusinessRestoreSessions?: (Omit<Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & Omit<{ @odata.type: ..., completedDateTime?:
+        ..., createdBy?: ..., createdDateTime?: ..., error?: ...,
+        lastModifiedBy?: ..., lastModifiedDateTime?: ..., restoreJobType?: ...,
+        restoreSessionArtifactCount?: ..., status?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.restoreSessionBase" }, "@odata.type"> & {
+        @odata.type: string, driveRestoreArtifacts?: (... & ...)[],
+        driveRestoreArtifactsBulkAdditionRequests?: (... & ...)[] })[],
+        protectionPolicies?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, createdBy?: { @odata.type:
+        ..., application?: ..., device?: ..., user?: ... } | Record<..., ...> |
+        null, createdDateTime?: string | null, displayName?: string | null,
+        lastModifiedBy?: { @odata.type: ..., application?: ..., device?: ...,
+        user?: ... } | Record<..., ...> | null, lastModifiedDateTime?: string |
+        null, retentionSettings?: ...[], status?: Record<..., ...> |
+        "unknownFutureValue" | "inactive" | "activeWithErrors" | "updating" |
+        "active" | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.protectionPolicyBase" })[], protectionUnits?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, createdBy?: { @odata.type: ..., application?: ..., device?: ...,
+        user?: ... } | Record<..., ...> | null, createdDateTime?: string | null,
+        error?: Record<..., ...> | { @odata.type: ..., code?: ..., details?:
+        ..., innerError?: ..., message?: ..., target?: ... } | null,
+        lastModifiedBy?: { @odata.type: ..., application?: ..., device?: ...,
+        user?: ... } | Record<..., ...> | null, lastModifiedDateTime?: string |
+        null, offboardRequestedDateTime?: string | null, policyId?: string |
+        null, protectionSources?: "unknownFutureValue" | "none" | "manual" |
+        "dynamicRule", status?: Record<..., ...> | "unknownFutureValue" |
+        "protectRequested" | "protected" | "unprotectRequested" | "unprotected"
+        | "removeRequested" | "offboardRequested" | "offboarded" |
+        "cancelOffboardRequested" | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.protectionUnitBase" })[], restorePoints?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, expirationDateTime?: string | null, protectionDateTime?: string
+        | null, protectionUnit?: Record<string, never> | (Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... }) | null, tags?: Record<string,
+        never> | "unknownFutureValue" | "none" | "fastRestore" | null } & {
+        @odata.type: "#microsoft.graph.restorePoint" })[], restoreSessions?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, completedDateTime?: string | null, createdBy?: {
+        @odata.type: ..., application?: ..., device?: ..., user?: ... } |
+        Record<..., ...> | null, createdDateTime?: string | null, error?:
+        Record<..., ...> | { @odata.type: ..., code?: ..., details?: ...,
+        innerError?: ..., message?: ..., target?: ... } | null, lastModifiedBy?:
+        { @odata.type: ..., application?: ..., device?: ..., user?: ... } |
+        Record<..., ...> | null, lastModifiedDateTime?: string | null,
+        restoreJobType?: Record<..., ...> | "unknownFutureValue" | "standard" |
+        "bulk" | null, restoreSessionArtifactCount?: Record<..., ...> | {
+        @odata.type: ..., completed?: ..., failed?: ..., inProgress?: ...,
+        total?: ... } | null, status?: Record<..., ...> | "failed" |
+        "unknownFutureValue" | "active" | "draft" | "activating" |
+        "completedWithError" | "completed" | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.restoreSessionBase" })[], serviceApps?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, application?: Record<string, never> | {
+        @odata.type: string, displayName?: function, id?: function } | null,
+        effectiveDateTime?: string | null, lastModifiedBy?: { @odata.type:
+        string, application?: function, device?: function, user?: function } |
+        Record<string, never> | null, lastModifiedDateTime?: string | null,
+        registrationDateTime?: string | null, status?: Record<string, never> |
+        "unknownFutureValue" | "inactive" | "active" | "pendingActive" |
+        "pendingInactive" | null } & { @odata.type:
+        "#microsoft.graph.serviceApp" })[], serviceStatus?: Record<string,
+        never> | { @odata.type: string, backupServiceConsumer?: Record<string,
+        never> | "unknownFutureValue" | "unknown" | "firstparty" | "thirdparty"
+        | null, disableReason?: Record<string, never> | "unknownFutureValue" |
+        "none" | "invalidBillingProfile" | "userRequested" | null,
+        gracePeriodDateTime?: string | null, lastModifiedBy?: { @odata.type:
+        string, application?: Record<string, never> | { @odata.type: string,
+        displayName?: function, id?: function } | null, device?: Record<string,
+        never> | { @odata.type: string, displayName?: function, id?: function }
+        | null, user?: Record<string, never> | { @odata.type: string,
+        displayName?: function, id?: function } | null } | Record<string, never>
+        | null, lastModifiedDateTime?: string | null,
+        restoreAllowedTillDateTime?: string | null, status?: Record<string,
+        never> | "unknownFutureValue" | "disabled" | "enabled" |
+        "protectionChangeLocked" | "restoreLocked" | null } | null,
+        sharePointProtectionPolicies?: (Omit<Omit<{ @odata.type: ..., id?: ...
+        }, "@odata.type"> & Omit<{ @odata.type: ..., createdBy?: ...,
+        createdDateTime?: ..., displayName?: ..., lastModifiedBy?: ...,
+        lastModifiedDateTime?: ..., retentionSettings?: ..., status?: ... },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.protectionPolicyBase"
+        }, "@odata.type"> & { @odata.type: string, siteInclusionRules?: (... &
+        ... & ...)[], siteProtectionUnits?: (... & ... & ...)[],
+        siteProtectionUnitsBulkAdditionJobs?: (... & ... & ...)[] } & {
+        @odata.type: "#microsoft.graph.sharePointProtectionPolicy" })[],
+        sharePointRestoreSessions?: (Omit<Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., completedDateTime?: ...,
+        createdBy?: ..., createdDateTime?: ..., error?: ..., lastModifiedBy?:
+        ..., lastModifiedDateTime?: ..., restoreJobType?: ...,
+        restoreSessionArtifactCount?: ..., status?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.restoreSessionBase" }, "@odata.type"> & {
+        @odata.type: string, siteRestoreArtifacts?: (... & ... & ...)[],
+        siteRestoreArtifactsBulkAdditionRequests?: (... & ... & ...)[] } & {
+        @odata.type: "#microsoft.graph.sharePointRestoreSession" })[],
+        siteInclusionRules?: (Omit<Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., createdBy?: ...,
+        createdDateTime?: ..., error?: ..., isAutoApplyEnabled?: ...,
+        lastModifiedBy?: ..., lastModifiedDateTime?: ..., status?: ... },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.protectionRuleBase" },
+        "@odata.type"> & { @odata.type: string, siteExpression?: string | null }
+        & { @odata.type: "#microsoft.graph.siteProtectionRule" })[],
+        siteProtectionUnits?: (Omit<Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., createdBy?: ...,
+        createdDateTime?: ..., error?: ..., lastModifiedBy?: ...,
+        lastModifiedDateTime?: ..., offboardRequestedDateTime?: ..., policyId?:
+        ..., protectionSources?: ..., status?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.protectionUnitBase" }, "@odata.type"> & {
+        @odata.type: string, siteId?: string | null, siteName?: string | null,
+        siteWebUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.siteProtectionUnit" })[],
+        siteProtectionUnitsBulkAdditionJobs?: (Omit<Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & Omit<{ @odata.type: ..., createdBy?: ...,
+        createdDateTime?: ..., displayName?: ..., error?: ..., lastModifiedBy?:
+        ..., lastModifiedDateTime?: ..., status?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.protectionUnitsBulkJobBase" },
+        "@odata.type"> & { @odata.type: string, siteIds?: function[],
+        siteWebUrls?: function[] } & { @odata.type:
+        "#microsoft.graph.siteProtectionUnitsBulkAdditionJob" })[] } & {
+        @odata.type: "#microsoft.graph.backupRestoreRoot" }) | null,
+        bookingBusinesses?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, address?: Record<string, never>
+        | { @odata.type: string, city?: string | null, countryOrRegion?: string
+        | null, postalCode?: string | null, state?: string | null, street?:
+        string | null } | null, appointments?: (Omit<{ @odata.type: string, id?:
+        function }, "@odata.type"> & { @odata.type: string,
+        additionalInformation?: string | null, anonymousJoinWebUrl?: string |
+        null, appointmentLabel?: string | null, createdDateTime?: string | null,
+        customerEmailAddress?: string | null, customerName?: string | null,
+        customerNotes?: string | null, customerPhone?: string | null,
+        customers?: ...[], customerTimeZone?: string | null, duration?: string,
+        endDateTime?: { @odata.type: ..., dateTime?: ..., timeZone?: ... },
+        filledAttendeesCount?: number, isCustomerAllowedToManageBooking?:
+        boolean | null, isLocationOnline?: boolean, joinWebUrl?: string | null,
+        lastUpdatedDateTime?: string | null, maximumAttendeesCount?: number,
+        optOutOfCustomerEmail?: boolean, postBuffer?: string, preBuffer?:
+        string, price?: string | number | null, priceType?: "undefined" |
+        "unknownFutureValue" | "fixedPrice" | "startingAt" | "hourly" | "free" |
+        "priceVaries" | "callUs" | "notSet", reminders?: ...[],
+        selfServiceAppointmentId?: string | null, serviceId?: string | null,
+        serviceLocation?: Record<..., ...> | { @odata.type: ..., address?: ...,
+        coordinates?: ..., displayName?: ..., locationEmailAddress?: ...,
+        locationType?: ..., locationUri?: ..., uniqueId?: ..., uniqueIdType?:
+        ... } | null, serviceName?: string, serviceNotes?: string | null,
+        smsNotificationsEnabled?: boolean, staffMemberIds?: ...[],
+        startDateTime?: { @odata.type: ..., dateTime?: ..., timeZone?: ... } } &
+        { @odata.type: "#microsoft.graph.bookingAppointment" })[],
+        bookingPageSettings?: Record<string, never> | { @odata.type: string,
+        accessControl?: "unknownFutureValue" | "unrestricted" |
+        "restrictedToOrganization", bookingPageColorCode?: string,
+        businessTimeZone?: string, customerConsentMessage?: string,
+        enforceOneTimePassword?: boolean, isBusinessLogoDisplayEnabled?:
+        boolean, isCustomerConsentEnabled?: boolean,
+        isSearchEngineIndexabilityDisabled?: boolean,
+        isTimeSlotTimeZoneSetToBusinessTimeZone?: boolean, privacyPolicyWebUrl?:
+        string, termsAndConditionsWebUrl?: string } | null, businessHours?: {
+        @odata.type: string, day?: "sunday" | "monday" | "tuesday" | "wednesday"
+        | "thursday" | "friday" | "saturday", timeSlots?: { @odata.type: ...,
+        endTime?: ..., startTime?: ... }[] }[], businessType?: string | null,
+        calendarView?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, additionalInformation?: string |
+        null, anonymousJoinWebUrl?: string | null, appointmentLabel?: string |
+        null, createdDateTime?: string | null, customerEmailAddress?: string |
+        null, customerName?: string | null, customerNotes?: string | null,
+        customerPhone?: string | null, customers?: ...[], customerTimeZone?:
+        string | null, duration?: string, endDateTime?: { @odata.type: ...,
+        dateTime?: ..., timeZone?: ... }, filledAttendeesCount?: number,
+        isCustomerAllowedToManageBooking?: boolean | null, isLocationOnline?:
+        boolean, joinWebUrl?: string | null, lastUpdatedDateTime?: string |
+        null, maximumAttendeesCount?: number, optOutOfCustomerEmail?: boolean,
+        postBuffer?: string, preBuffer?: string, price?: string | number | null,
+        priceType?: "undefined" | "unknownFutureValue" | "fixedPrice" |
+        "startingAt" | "hourly" | "free" | "priceVaries" | "callUs" | "notSet",
+        reminders?: ...[], selfServiceAppointmentId?: string | null, serviceId?:
+        string | null, serviceLocation?: Record<..., ...> | { @odata.type: ...,
+        address?: ..., coordinates?: ..., displayName?: ...,
+        locationEmailAddress?: ..., locationType?: ..., locationUri?: ...,
+        uniqueId?: ..., uniqueIdType?: ... } | null, serviceName?: string,
+        serviceNotes?: string | null, smsNotificationsEnabled?: boolean,
+        staffMemberIds?: ...[], startDateTime?: { @odata.type: ..., dateTime?:
+        ..., timeZone?: ... } } & { @odata.type:
+        "#microsoft.graph.bookingAppointment" })[], createdDateTime?: string |
+        null, customers?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.bookingCustomerBase" })[],
+        customQuestions?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, answerInputType?: Record<...,
+        ...> | "unknownFutureValue" | "text" | "radioButton" | null,
+        answerOptions?: ...[], createdDateTime?: string | null, displayName?:
+        string, lastUpdatedDateTime?: string | null } & { @odata.type:
+        "#microsoft.graph.bookingCustomQuestion" })[], defaultCurrencyIso?:
+        string | null, displayName?: string, email?: string | null,
+        isPublished?: boolean | null, languageTag?: string | null,
+        lastUpdatedDateTime?: string | null, phone?: string | null, publicUrl?:
+        string | null, schedulingPolicy?: Record<string, never> | { @odata.type:
+        string, allowStaffSelection?: boolean, customAvailabilities?: (Omit<...,
+        ...> & { @odata.type: ..., endDate?: ..., startDate?: ... } & {
+        @odata.type: ... })[], generalAvailability?: Record<string, never> | {
+        @odata.type: string, availabilityType?: "unknownFutureValue" |
+        "bookWhenStaffAreFree" | "notBookable" | "customWeeklyHours",
+        businessHours?: ...[] } | null, isMeetingInviteToCustomersEnabled?:
+        boolean | null, maximumAdvance?: string, minimumLeadTime?: string,
+        sendConfirmationsToOwner?: boolean, timeSlotInterval?: string } | null,
+        services?: (Omit<{ @odata.type: string, id?: function }, "@odata.type">
+        & { @odata.type: string, additionalInformation?: string | null,
+        createdDateTime?: string | null, customQuestions?: ...[],
+        defaultDuration?: string, defaultLocation?: Record<..., ...> | {
+        @odata.type: ..., address?: ..., coordinates?: ..., displayName?: ...,
+        locationEmailAddress?: ..., locationType?: ..., locationUri?: ...,
+        uniqueId?: ..., uniqueIdType?: ... } | null, defaultPrice?: string |
+        number | null, defaultPriceType?: "undefined" | "unknownFutureValue" |
+        "fixedPrice" | "startingAt" | "hourly" | "free" | "priceVaries" |
+        "callUs" | "notSet", defaultReminders?: ...[], description?: string |
+        null, displayName?: string, isAnonymousJoinEnabled?: boolean,
+        isCustomerAllowedToManageBooking?: boolean | null,
+        isHiddenFromCustomers?: boolean, isLocationOnline?: boolean,
+        languageTag?: string, lastUpdatedDateTime?: string | null,
+        maximumAttendeesCount?: number, notes?: string | null, postBuffer?:
+        string, preBuffer?: string, schedulingPolicy?: Record<..., ...> | {
+        @odata.type: ..., allowStaffSelection?: ..., customAvailabilities?: ...,
+        generalAvailability?: ..., isMeetingInviteToCustomersEnabled?: ...,
+        maximumAdvance?: ..., minimumLeadTime?: ..., sendConfirmationsToOwner?:
+        ..., timeSlotInterval?: ... } | null, smsNotificationsEnabled?: boolean,
+        staffMemberIds?: ...[], webUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.bookingService" })[], staffMembers?: (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.bookingStaffMemberBase" })[], webSiteUrl?: string |
+        null } & { @odata.type: "#microsoft.graph.bookingBusiness" })[],
+        bookingCurrencies?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, symbol?: string } & {
+        @odata.type: "#microsoft.graph.bookingCurrency" })[], virtualEvents?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, events?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdBy?: Record<..., ...> | (... & ... & ...) | null, description?:
+        Record<..., ...> | { @odata.type: ..., content?: ..., contentType?: ...
+        } | null, displayName?: string | null, endDateTime?: Record<..., ...> |
+        { @odata.type: ..., dateTime?: ..., timeZone?: ... } | null,
+        externalEventInformation?: ...[], presenters?: ...[], sessions?: ...[],
+        settings?: Record<..., ...> | { @odata.type: ...,
+        isAttendeeEmailNotificationEnabled?: ... } | null, startDateTime?:
+        Record<..., ...> | { @odata.type: ..., dateTime?: ..., timeZone?: ... }
+        | null, status?: Record<..., ...> | "unknownFutureValue" | "draft" |
+        "published" | "canceled" | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.virtualEvent" })[], townhalls?: (Omit<Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        createdBy?: ..., description?: ..., displayName?: ..., endDateTime?:
+        ..., externalEventInformation?: ..., presenters?: ..., sessions?: ...,
+        settings?: ..., startDateTime?: ..., status?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.virtualEvent" }, "@odata.type"> & {
+        @odata.type: string, audience?: Record<string, never> |
+        "unknownFutureValue" | "everyone" | "organization" | null,
+        coOrganizers?: (... & ... & ...)[], invitedAttendees?: { @odata.type:
+        ..., displayName?: ..., id?: ... }[], isInviteOnly?: boolean | null } &
+        { @odata.type: "#microsoft.graph.virtualEventTownhall" })[], webinars?:
+        (Omit<Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+        @odata.type: ..., createdBy?: ..., description?: ..., displayName?: ...,
+        endDateTime?: ..., externalEventInformation?: ..., presenters?: ...,
+        sessions?: ..., settings?: ..., startDateTime?: ..., status?: ... },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.virtualEvent" },
+        "@odata.type"> & { @odata.type: string, audience?: Record<string, never>
+        | "unknownFutureValue" | "everyone" | "organization" | null,
+        coOrganizers?: (... & ... & ...)[], registrationConfiguration?:
+        Record<string, never> | (Omit<..., ...> & { @odata.type: ...,
+        isManualApprovalEnabled?: ..., isWaitlistEnabled?: ... } & {
+        @odata.type: ... }) | null, registrations?: (... & ... & ...)[] } & {
+        @odata.type: "#microsoft.graph.virtualEventWebinar" })[] } & {
+        @odata.type: "#microsoft.graph.virtualEventsRoot" }) | null }):
+        EndpointRequest<{ @odata.type: string, backupRestore?: Record<string,
+        never> | (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, driveInclusionRules?: (Omit<Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type:
+        string, driveExpression?: string | null })[], driveProtectionUnits?:
+        (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, directoryObjectId?: string |
+        null, displayName?: string | null, email?: string | null })[],
+        driveProtectionUnitsBulkAdditionJobs?: (Omit<Omit<..., ...> & Omit<...,
+        ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        directoryObjectIds?: ...[], drives?: ...[] })[],
+        exchangeProtectionPolicies?: (Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        mailboxInclusionRules?: ...[], mailboxProtectionUnits?: ...[],
+        mailboxProtectionUnitsBulkAdditionJobs?: ...[] })[],
+        exchangeRestoreSessions?: (Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        granularMailboxRestoreArtifacts?: ...[], mailboxRestoreArtifacts?:
+        ...[], mailboxRestoreArtifactsBulkAdditionRequests?: ...[] })[],
+        mailboxInclusionRules?: (Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        mailboxExpression?: string | null })[], mailboxProtectionUnits?:
+        (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, directoryObjectId?: string |
+        null, displayName?: string | null, email?: string | null })[],
+        mailboxProtectionUnitsBulkAdditionJobs?: (Omit<Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type:
+        string, directoryObjectIds?: ...[], mailboxes?: ...[] })[],
+        oneDriveForBusinessProtectionPolicies?: (Omit<Omit<..., ...> & Omit<...,
+        ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        driveInclusionRules?: ...[], driveProtectionUnits?: ...[],
+        driveProtectionUnitsBulkAdditionJobs?: ...[] })[],
+        oneDriveForBusinessRestoreSessions?: (Omit<Omit<..., ...> & Omit<...,
+        ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        driveRestoreArtifacts?: ...[],
+        driveRestoreArtifactsBulkAdditionRequests?: ...[] })[],
+        protectionPolicies?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, createdBy?: function,
+        createdDateTime?: function, displayName?: function, lastModifiedBy?:
+        function, lastModifiedDateTime?: function, retentionSettings?: function,
+        status?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.protectionPolicyBase" })[], protectionUnits?: (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, createdBy?: function, createdDateTime?: function,
+        error?: function, lastModifiedBy?: function, lastModifiedDateTime?:
+        function, offboardRequestedDateTime?: function, policyId?: function,
+        protectionSources?: function, status?: function }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.protectionUnitBase" })[], restorePoints?:
+        (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+        @odata.type: string, expirationDateTime?: string | null,
+        protectionDateTime?: string | null, protectionUnit?: Record<..., ...> |
+        (... & ... & ...) | null, tags?: Record<..., ...> | "unknownFutureValue"
+        | "none" | "fastRestore" | null } & { @odata.type:
+        "#microsoft.graph.restorePoint" })[], restoreSessions?: (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, completedDateTime?: function, createdBy?: function,
+        createdDateTime?: function, error?: function, lastModifiedBy?: function,
+        lastModifiedDateTime?: function, restoreJobType?: function,
+        restoreSessionArtifactCount?: function, status?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.restoreSessionBase"
+        })[], serviceApps?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, application?: Record<..., ...> |
+        { @odata.type: ..., displayName?: ..., id?: ... } | null,
+        effectiveDateTime?: string | null, lastModifiedBy?: { @odata.type: ...,
+        application?: ..., device?: ..., user?: ... } | Record<..., ...> | null,
+        lastModifiedDateTime?: string | null, registrationDateTime?: string |
+        null, status?: Record<..., ...> | "unknownFutureValue" | "inactive" |
+        "active" | "pendingActive" | "pendingInactive" | null } & { @odata.type:
+        "#microsoft.graph.serviceApp" })[], serviceStatus?: Record<string,
+        never> | { @odata.type: string, backupServiceConsumer?: Record<string,
+        never> | "unknownFutureValue" | "unknown" | "firstparty" | "thirdparty"
+        | null, disableReason?: Record<string, never> | "unknownFutureValue" |
+        "none" | "invalidBillingProfile" | "userRequested" | null,
+        gracePeriodDateTime?: string | null, lastModifiedBy?: { @odata.type:
+        string, application?: Record<..., ...> | { @odata.type: ...,
+        displayName?: ..., id?: ... } | null, device?: Record<..., ...> | {
+        @odata.type: ..., displayName?: ..., id?: ... } | null, user?:
+        Record<..., ...> | { @odata.type: ..., displayName?: ..., id?: ... } |
+        null } | Record<string, never> | null, lastModifiedDateTime?: string |
+        null, restoreAllowedTillDateTime?: string | null, status?:
+        Record<string, never> | "unknownFutureValue" | "disabled" | "enabled" |
+        "protectionChangeLocked" | "restoreLocked" | null } | null,
+        sharePointProtectionPolicies?: (Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        siteInclusionRules?: ...[], siteProtectionUnits?: ...[],
+        siteProtectionUnitsBulkAdditionJobs?: ...[] } & { @odata.type:
+        "#microsoft.graph.sharePointProtectionPolicy" })[],
+        sharePointRestoreSessions?: (Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        siteRestoreArtifacts?: ...[], siteRestoreArtifactsBulkAdditionRequests?:
+        ...[] } & { @odata.type: "#microsoft.graph.sharePointRestoreSession"
+        })[], siteInclusionRules?: (Omit<Omit<..., ...> & Omit<..., ...> & {
+        @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        siteExpression?: string | null } & { @odata.type:
+        "#microsoft.graph.siteProtectionRule" })[], siteProtectionUnits?:
+        (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, siteId?: string | null,
+        siteName?: string | null, siteWebUrl?: string | null } & { @odata.type:
+        "#microsoft.graph.siteProtectionUnit" })[],
+        siteProtectionUnitsBulkAdditionJobs?: (Omit<Omit<..., ...> & Omit<...,
+        ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type: string,
+        siteIds?: ...[], siteWebUrls?: ...[] } & { @odata.type:
+        "#microsoft.graph.siteProtectionUnitsBulkAdditionJob" })[] } & {
+        @odata.type: "#microsoft.graph.backupRestoreRoot" }) | null,
+        bookingBusinesses?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, address?: Record<string, never>
+        | { @odata.type: string, city?: string | null, countryOrRegion?: string
+        | null, postalCode?: string | null, state?: string | null, street?:
+        string | null } | null, appointments?: (Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & { @odata.type: string, additionalInformation?:
+        function, anonymousJoinWebUrl?: function, appointmentLabel?: function,
+        createdDateTime?: function, customerEmailAddress?: function,
+        customerName?: function, customerNotes?: function, customerPhone?:
+        function, customers?: function, customerTimeZone?: function, duration?:
+        function, endDateTime?: function, filledAttendeesCount?: function,
+        isCustomerAllowedToManageBooking?: function, isLocationOnline?:
+        function, joinWebUrl?: function, lastUpdatedDateTime?: function,
+        maximumAttendeesCount?: function, optOutOfCustomerEmail?: function,
+        postBuffer?: function, preBuffer?: function, price?: function,
+        priceType?: function, reminders?: function, selfServiceAppointmentId?:
+        function, serviceId?: function, serviceLocation?: function,
+        serviceName?: function, serviceNotes?: function,
+        smsNotificationsEnabled?: function, staffMemberIds?: function,
+        startDateTime?: function } & { @odata.type:
+        "#microsoft.graph.bookingAppointment" })[], bookingPageSettings?:
+        Record<string, never> | { @odata.type: string, accessControl?:
+        "unknownFutureValue" | "unrestricted" | "restrictedToOrganization",
+        bookingPageColorCode?: string, businessTimeZone?: string,
+        customerConsentMessage?: string, enforceOneTimePassword?: boolean,
+        isBusinessLogoDisplayEnabled?: boolean, isCustomerConsentEnabled?:
+        boolean, isSearchEngineIndexabilityDisabled?: boolean,
+        isTimeSlotTimeZoneSetToBusinessTimeZone?: boolean, privacyPolicyWebUrl?:
+        string, termsAndConditionsWebUrl?: string } | null, businessHours?: {
+        @odata.type: string, day?: "sunday" | "monday" | "tuesday" | "wednesday"
+        | "thursday" | "friday" | "saturday", timeSlots?: ...[] }[],
+        businessType?: string | null, calendarView?: (Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string,
+        additionalInformation?: function, anonymousJoinWebUrl?: function,
+        appointmentLabel?: function, createdDateTime?: function,
+        customerEmailAddress?: function, customerName?: function,
+        customerNotes?: function, customerPhone?: function, customers?:
+        function, customerTimeZone?: function, duration?: function,
+        endDateTime?: function, filledAttendeesCount?: function,
+        isCustomerAllowedToManageBooking?: function, isLocationOnline?:
+        function, joinWebUrl?: function, lastUpdatedDateTime?: function,
+        maximumAttendeesCount?: function, optOutOfCustomerEmail?: function,
+        postBuffer?: function, preBuffer?: function, price?: function,
+        priceType?: function, reminders?: function, selfServiceAppointmentId?:
+        function, serviceId?: function, serviceLocation?: function,
+        serviceName?: function, serviceNotes?: function,
+        smsNotificationsEnabled?: function, staffMemberIds?: function,
+        startDateTime?: function } & { @odata.type:
+        "#microsoft.graph.bookingAppointment" })[], createdDateTime?: string |
+        null, customers?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> &
+        Omit<{ @odata.type: ... }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.bookingCustomerBase" })[], customQuestions?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        answerInputType?: function, answerOptions?: function, createdDateTime?:
+        function, displayName?: function, lastUpdatedDateTime?: function } & {
+        @odata.type: "#microsoft.graph.bookingCustomQuestion" })[],
+        defaultCurrencyIso?: string | null, displayName?: string, email?: string
+        | null, isPublished?: boolean | null, languageTag?: string | null,
+        lastUpdatedDateTime?: string | null, phone?: string | null, publicUrl?:
+        string | null, schedulingPolicy?: Record<string, never> | { @odata.type:
+        string, allowStaffSelection?: boolean, customAvailabilities?: (... & ...
+        & ...)[], generalAvailability?: Record<string, never> | { @odata.type:
+        string, availabilityType?: function, businessHours?: function } | null,
+        isMeetingInviteToCustomersEnabled?: boolean | null, maximumAdvance?:
+        string, minimumLeadTime?: string, sendConfirmationsToOwner?: boolean,
+        timeSlotInterval?: string } | null, services?: (Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string,
+        additionalInformation?: function, createdDateTime?: function,
+        customQuestions?: function, defaultDuration?: function,
+        defaultLocation?: function, defaultPrice?: function, defaultPriceType?:
+        function, defaultReminders?: function, description?: function,
+        displayName?: function, isAnonymousJoinEnabled?: function,
+        isCustomerAllowedToManageBooking?: function, isHiddenFromCustomers?:
+        function, isLocationOnline?: function, languageTag?: function,
+        lastUpdatedDateTime?: function, maximumAttendeesCount?: function,
+        notes?: function, postBuffer?: function, preBuffer?: function,
+        schedulingPolicy?: function, smsNotificationsEnabled?: function,
+        staffMemberIds?: function, webUrl?: function } & { @odata.type:
+        "#microsoft.graph.bookingService" })[], staffMembers?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...
+        }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.bookingStaffMemberBase" })[], webSiteUrl?: string |
+        null } & { @odata.type: "#microsoft.graph.bookingBusiness" })[],
+        bookingCurrencies?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, symbol?: string } & {
+        @odata.type: "#microsoft.graph.bookingCurrency" })[], virtualEvents?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, events?: (Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdBy?: function, description?: function, displayName?: function,
+        endDateTime?: function, externalEventInformation?: function,
+        presenters?: function, sessions?: function, settings?: function,
+        startDateTime?: function, status?: function }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.virtualEvent" })[], townhalls?:
+        (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, audience?: Record<..., ...> |
+        "unknownFutureValue" | "everyone" | "organization" | null,
+        coOrganizers?: ...[], invitedAttendees?: ...[], isInviteOnly?: boolean |
+        null } & { @odata.type: "#microsoft.graph.virtualEventTownhall" })[],
+        webinars?: (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, audience?: Record<..., ...> |
+        "unknownFutureValue" | "everyone" | "organization" | null,
+        coOrganizers?: ...[], registrationConfiguration?: Record<..., ...> |
+        (... & ... & ...) | null, registrations?: ...[] } & { @odata.type:
+        "#microsoft.graph.virtualEventWebinar" })[] } & { @odata.type:
+        "#microsoft.graph.virtualEventsRoot" }) | null }>
       parameters:
         - id: body
-          type: Operation&lt;"/solutions", "patch"&gt;
+          type: >-
+            { <xref uid="@odata.type" />: string, backupRestore?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, driveInclusionRules?:
+            (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+            />: ..., createdBy?: ..., createdDateTime?: ..., error?: ...,
+            isAutoApplyEnabled?: ..., lastModifiedBy?: ...,
+            lastModifiedDateTime?: ..., status?: ... }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.protectionRuleBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            driveExpression?: string | null })[], driveProtectionUnits?:
+            (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+            />: ..., createdBy?: ..., createdDateTime?: ..., error?: ...,
+            lastModifiedBy?: ..., lastModifiedDateTime?: ...,
+            offboardRequestedDateTime?: ..., policyId?: ..., protectionSources?:
+            ..., status?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.protectionUnitBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            directoryObjectId?: string | null, displayName?: string | null,
+            email?: string | null })[], driveProtectionUnitsBulkAdditionJobs?:
+            (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+            />: ..., createdBy?: ..., createdDateTime?: ..., displayName?: ...,
+            error?: ..., lastModifiedBy?: ..., lastModifiedDateTime?: ...,
+            status?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.protectionUnitsBulkJobBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            directoryObjectIds?: function[], drives?: function[] })[],
+            exchangeProtectionPolicies?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., createdBy?:
+            ..., createdDateTime?: ..., displayName?: ..., lastModifiedBy?: ...,
+            lastModifiedDateTime?: ..., retentionSettings?: ..., status?: ... },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.protectionPolicyBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            mailboxInclusionRules?: (... & ...)[], mailboxProtectionUnits?: (...
+            & ...)[], mailboxProtectionUnitsBulkAdditionJobs?: (... & ...)[]
+            })[], exchangeRestoreSessions?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ...,
+            completedDateTime?: ..., createdBy?: ..., createdDateTime?: ...,
+            error?: ..., lastModifiedBy?: ..., lastModifiedDateTime?: ...,
+            restoreJobType?: ..., restoreSessionArtifactCount?: ..., status?:
+            ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.restoreSessionBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            granularMailboxRestoreArtifacts?: (... & ... & ...)[],
+            mailboxRestoreArtifacts?: (... & ...)[],
+            mailboxRestoreArtifactsBulkAdditionRequests?: (... & ...)[] })[],
+            mailboxInclusionRules?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type"
+            />: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+            <xref uid="@odata.type" />: ..., createdBy?: ..., createdDateTime?:
+            ..., error?: ..., isAutoApplyEnabled?: ..., lastModifiedBy?: ...,
+            lastModifiedDateTime?: ..., status?: ... }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.protectionRuleBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            mailboxExpression?: string | null })[], mailboxProtectionUnits?:
+            (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+            />: ..., createdBy?: ..., createdDateTime?: ..., error?: ...,
+            lastModifiedBy?: ..., lastModifiedDateTime?: ...,
+            offboardRequestedDateTime?: ..., policyId?: ..., protectionSources?:
+            ..., status?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.protectionUnitBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            directoryObjectId?: string | null, displayName?: string | null,
+            email?: string | null })[], mailboxProtectionUnitsBulkAdditionJobs?:
+            (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+            />: ..., createdBy?: ..., createdDateTime?: ..., displayName?: ...,
+            error?: ..., lastModifiedBy?: ..., lastModifiedDateTime?: ...,
+            status?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.protectionUnitsBulkJobBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            directoryObjectIds?: function[], mailboxes?: function[] })[],
+            oneDriveForBusinessProtectionPolicies?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., createdBy?:
+            ..., createdDateTime?: ..., displayName?: ..., lastModifiedBy?: ...,
+            lastModifiedDateTime?: ..., retentionSettings?: ..., status?: ... },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.protectionPolicyBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            driveInclusionRules?: (... & ...)[], driveProtectionUnits?: (... &
+            ...)[], driveProtectionUnitsBulkAdditionJobs?: (... & ...)[] })[],
+            oneDriveForBusinessRestoreSessions?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ...,
+            completedDateTime?: ..., createdBy?: ..., createdDateTime?: ...,
+            error?: ..., lastModifiedBy?: ..., lastModifiedDateTime?: ...,
+            restoreJobType?: ..., restoreSessionArtifactCount?: ..., status?:
+            ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.restoreSessionBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            driveRestoreArtifacts?: (... & ...)[],
+            driveRestoreArtifactsBulkAdditionRequests?: (... & ...)[] })[],
+            protectionPolicies?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, createdBy?: { <xref uid="@odata.type"
+            />: ..., application?: ..., device?: ..., user?: ... } |
+            Record&lt;..., ...&gt; | null, createdDateTime?: string | null,
+            displayName?: string | null, lastModifiedBy?: { <xref
+            uid="@odata.type" />: ..., application?: ..., device?: ..., user?:
+            ... } | Record&lt;..., ...&gt; | null, lastModifiedDateTime?: string
+            | null, retentionSettings?: ...[], status?: Record&lt;..., ...&gt; |
+            "unknownFutureValue" | "inactive" | "activeWithErrors" | "updating"
+            | "active" | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.protectionPolicyBase" />" })[],
+            protectionUnits?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, createdBy?: { <xref uid="@odata.type"
+            />: ..., application?: ..., device?: ..., user?: ... } |
+            Record&lt;..., ...&gt; | null, createdDateTime?: string | null,
+            error?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            code?: ..., details?: ..., innerError?: ..., message?: ..., target?:
+            ... } | null, lastModifiedBy?: { <xref uid="@odata.type" />: ...,
+            application?: ..., device?: ..., user?: ... } | Record&lt;...,
+            ...&gt; | null, lastModifiedDateTime?: string | null,
+            offboardRequestedDateTime?: string | null, policyId?: string | null,
+            protectionSources?: "unknownFutureValue" | "none" | "manual" |
+            "dynamicRule", status?: Record&lt;..., ...&gt; |
+            "unknownFutureValue" | "protectRequested" | "protected" |
+            "unprotectRequested" | "unprotected" | "removeRequested" |
+            "offboardRequested" | "offboarded" | "cancelOffboardRequested" |
+            null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.protectionUnitBase" />" })[],
+            restorePoints?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, expirationDateTime?: string | null,
+            protectionDateTime?: string | null, protectionUnit?:
+            Record&lt;string, never&gt; | (Omit&lt;..., ...&gt; & Omit&lt;...,
+            ...&gt; & { <xref uid="@odata.type" />: ... }) | null, tags?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "none" |
+            "fastRestore" | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.restorePoint" />" })[], restoreSessions?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, completedDateTime?: string | null, createdBy?: { <xref
+            uid="@odata.type" />: ..., application?: ..., device?: ..., user?:
+            ... } | Record&lt;..., ...&gt; | null, createdDateTime?: string |
+            null, error?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+            ..., code?: ..., details?: ..., innerError?: ..., message?: ...,
+            target?: ... } | null, lastModifiedBy?: { <xref uid="@odata.type"
+            />: ..., application?: ..., device?: ..., user?: ... } |
+            Record&lt;..., ...&gt; | null, lastModifiedDateTime?: string | null,
+            restoreJobType?: Record&lt;..., ...&gt; | "unknownFutureValue" |
+            "standard" | "bulk" | null, restoreSessionArtifactCount?:
+            Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            completed?: ..., failed?: ..., inProgress?: ..., total?: ... } |
+            null, status?: Record&lt;..., ...&gt; | "failed" |
+            "unknownFutureValue" | "active" | "draft" | "activating" |
+            "completedWithError" | "completed" | null }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.restoreSessionBase" />" })[], serviceApps?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            application?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            } | null, effectiveDateTime?: string | null, lastModifiedBy?: {
+            <xref uid="@odata.type" />: string, application?: function, device?:
+            function, user?: function } | Record&lt;string, never&gt; | null,
+            lastModifiedDateTime?: string | null, registrationDateTime?: string
+            | null, status?: Record&lt;string, never&gt; | "unknownFutureValue"
+            | "inactive" | "active" | "pendingActive" | "pendingInactive" | null
+            } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.serviceApp" />" })[], serviceStatus?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            backupServiceConsumer?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "unknown" | "firstparty" | "thirdparty" |
+            null, disableReason?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "none" | "invalidBillingProfile" |
+            "userRequested" | null, gracePeriodDateTime?: string | null,
+            lastModifiedBy?: { <xref uid="@odata.type" />: string, application?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: function, id?: function } | null, device?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: function, id?: function } | null, user?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            displayName?: function, id?: function } | null } | Record&lt;string,
+            never&gt; | null, lastModifiedDateTime?: string | null,
+            restoreAllowedTillDateTime?: string | null, status?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "disabled" |
+            "enabled" | "protectionChangeLocked" | "restoreLocked" | null } |
+            null, sharePointProtectionPolicies?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., createdBy?:
+            ..., createdDateTime?: ..., displayName?: ..., lastModifiedBy?: ...,
+            lastModifiedDateTime?: ..., retentionSettings?: ..., status?: ... },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.protectionPolicyBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            siteInclusionRules?: (... & ... & ...)[], siteProtectionUnits?: (...
+            & ... & ...)[], siteProtectionUnitsBulkAdditionJobs?: (... & ... &
+            ...)[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.sharePointProtectionPolicy" />" })[],
+            sharePointRestoreSessions?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ...,
+            completedDateTime?: ..., createdBy?: ..., createdDateTime?: ...,
+            error?: ..., lastModifiedBy?: ..., lastModifiedDateTime?: ...,
+            restoreJobType?: ..., restoreSessionArtifactCount?: ..., status?:
+            ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.restoreSessionBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            siteRestoreArtifacts?: (... & ... & ...)[],
+            siteRestoreArtifactsBulkAdditionRequests?: (... & ... & ...)[] } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.sharePointRestoreSession" />" })[],
+            siteInclusionRules?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+            ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: ..., createdBy?: ..., createdDateTime?: ...,
+            error?: ..., isAutoApplyEnabled?: ..., lastModifiedBy?: ...,
+            lastModifiedDateTime?: ..., status?: ... }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.protectionRuleBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            siteExpression?: string | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.siteProtectionRule" />" })[],
+            siteProtectionUnits?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+            ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: ..., createdBy?: ..., createdDateTime?: ...,
+            error?: ..., lastModifiedBy?: ..., lastModifiedDateTime?: ...,
+            offboardRequestedDateTime?: ..., policyId?: ..., protectionSources?:
+            ..., status?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.protectionUnitBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            siteId?: string | null, siteName?: string | null, siteWebUrl?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.siteProtectionUnit" />" })[],
+            siteProtectionUnitsBulkAdditionJobs?: (Omit&lt;Omit&lt;{ <xref
+            uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+            />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., createdBy?:
+            ..., createdDateTime?: ..., displayName?: ..., error?: ...,
+            lastModifiedBy?: ..., lastModifiedDateTime?: ..., status?: ... },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.protectionUnitsBulkJobBase" />" },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, siteIds?: function[], siteWebUrls?: function[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.siteProtectionUnitsBulkAdditionJob" />" })[] }
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.backupRestoreRoot" />" }) | null,
+            bookingBusinesses?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, address?: Record&lt;string, never&gt;
+            | { <xref uid="@odata.type" />: string, city?: string | null,
+            countryOrRegion?: string | null, postalCode?: string | null, state?:
+            string | null, street?: string | null } | null, appointments?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, additionalInformation?: string | null, anonymousJoinWebUrl?:
+            string | null, appointmentLabel?: string | null, createdDateTime?:
+            string | null, customerEmailAddress?: string | null, customerName?:
+            string | null, customerNotes?: string | null, customerPhone?: string
+            | null, customers?: ...[], customerTimeZone?: string | null,
+            duration?: string, endDateTime?: { <xref uid="@odata.type" />: ...,
+            dateTime?: ..., timeZone?: ... }, filledAttendeesCount?: number,
+            isCustomerAllowedToManageBooking?: boolean | null,
+            isLocationOnline?: boolean, joinWebUrl?: string | null,
+            lastUpdatedDateTime?: string | null, maximumAttendeesCount?: number,
+            optOutOfCustomerEmail?: boolean, postBuffer?: string, preBuffer?:
+            string, price?: string | number | null, priceType?: "undefined" |
+            "unknownFutureValue" | "fixedPrice" | "startingAt" | "hourly" |
+            "free" | "priceVaries" | "callUs" | "notSet", reminders?: ...[],
+            selfServiceAppointmentId?: string | null, serviceId?: string | null,
+            serviceLocation?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ..., address?: ..., coordinates?: ..., displayName?: ...,
+            locationEmailAddress?: ..., locationType?: ..., locationUri?: ...,
+            uniqueId?: ..., uniqueIdType?: ... } | null, serviceName?: string,
+            serviceNotes?: string | null, smsNotificationsEnabled?: boolean,
+            staffMemberIds?: ...[], startDateTime?: { <xref uid="@odata.type"
+            />: ..., dateTime?: ..., timeZone?: ... } } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.bookingAppointment" />" })[],
+            bookingPageSettings?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, accessControl?: "unknownFutureValue" |
+            "unrestricted" | "restrictedToOrganization", bookingPageColorCode?:
+            string, businessTimeZone?: string, customerConsentMessage?: string,
+            enforceOneTimePassword?: boolean, isBusinessLogoDisplayEnabled?:
+            boolean, isCustomerConsentEnabled?: boolean,
+            isSearchEngineIndexabilityDisabled?: boolean,
+            isTimeSlotTimeZoneSetToBusinessTimeZone?: boolean,
+            privacyPolicyWebUrl?: string, termsAndConditionsWebUrl?: string } |
+            null, businessHours?: { <xref uid="@odata.type" />: string, day?:
+            "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" |
+            "friday" | "saturday", timeSlots?: { <xref uid="@odata.type" />:
+            ..., endTime?: ..., startTime?: ... }[] }[], businessType?: string |
+            null, calendarView?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, additionalInformation?: string | null,
+            anonymousJoinWebUrl?: string | null, appointmentLabel?: string |
+            null, createdDateTime?: string | null, customerEmailAddress?: string
+            | null, customerName?: string | null, customerNotes?: string | null,
+            customerPhone?: string | null, customers?: ...[], customerTimeZone?:
+            string | null, duration?: string, endDateTime?: { <xref
+            uid="@odata.type" />: ..., dateTime?: ..., timeZone?: ... },
+            filledAttendeesCount?: number, isCustomerAllowedToManageBooking?:
+            boolean | null, isLocationOnline?: boolean, joinWebUrl?: string |
+            null, lastUpdatedDateTime?: string | null, maximumAttendeesCount?:
+            number, optOutOfCustomerEmail?: boolean, postBuffer?: string,
+            preBuffer?: string, price?: string | number | null, priceType?:
+            "undefined" | "unknownFutureValue" | "fixedPrice" | "startingAt" |
+            "hourly" | "free" | "priceVaries" | "callUs" | "notSet", reminders?:
+            ...[], selfServiceAppointmentId?: string | null, serviceId?: string
+            | null, serviceLocation?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., address?: ..., coordinates?: ...,
+            displayName?: ..., locationEmailAddress?: ..., locationType?: ...,
+            locationUri?: ..., uniqueId?: ..., uniqueIdType?: ... } | null,
+            serviceName?: string, serviceNotes?: string | null,
+            smsNotificationsEnabled?: boolean, staffMemberIds?: ...[],
+            startDateTime?: { <xref uid="@odata.type" />: ..., dateTime?: ...,
+            timeZone?: ... } } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.bookingAppointment" />" })[], createdDateTime?:
+            string | null, customers?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: function }, "<xref uid="@odata.type" />"&gt; &
+            Omit&lt;{ <xref uid="@odata.type" />: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.bookingCustomerBase" />" })[],
+            customQuestions?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, answerInputType?: Record&lt;...,
+            ...&gt; | "unknownFutureValue" | "text" | "radioButton" | null,
+            answerOptions?: ...[], createdDateTime?: string | null,
+            displayName?: string, lastUpdatedDateTime?: string | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.bookingCustomQuestion" />" })[],
+            defaultCurrencyIso?: string | null, displayName?: string, email?:
+            string | null, isPublished?: boolean | null, languageTag?: string |
+            null, lastUpdatedDateTime?: string | null, phone?: string | null,
+            publicUrl?: string | null, schedulingPolicy?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string,
+            allowStaffSelection?: boolean, customAvailabilities?: (Omit&lt;...,
+            ...&gt; & { <xref uid="@odata.type" />: ..., endDate?: ...,
+            startDate?: ... } & { <xref uid="@odata.type" />: ... })[],
+            generalAvailability?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, availabilityType?:
+            "unknownFutureValue" | "bookWhenStaffAreFree" | "notBookable" |
+            "customWeeklyHours", businessHours?: ...[] } | null,
+            isMeetingInviteToCustomersEnabled?: boolean | null, maximumAdvance?:
+            string, minimumLeadTime?: string, sendConfirmationsToOwner?:
+            boolean, timeSlotInterval?: string } | null, services?: (Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            additionalInformation?: string | null, createdDateTime?: string |
+            null, customQuestions?: ...[], defaultDuration?: string,
+            defaultLocation?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ..., address?: ..., coordinates?: ..., displayName?: ...,
+            locationEmailAddress?: ..., locationType?: ..., locationUri?: ...,
+            uniqueId?: ..., uniqueIdType?: ... } | null, defaultPrice?: string |
+            number | null, defaultPriceType?: "undefined" | "unknownFutureValue"
+            | "fixedPrice" | "startingAt" | "hourly" | "free" | "priceVaries" |
+            "callUs" | "notSet", defaultReminders?: ...[], description?: string
+            | null, displayName?: string, isAnonymousJoinEnabled?: boolean,
+            isCustomerAllowedToManageBooking?: boolean | null,
+            isHiddenFromCustomers?: boolean, isLocationOnline?: boolean,
+            languageTag?: string, lastUpdatedDateTime?: string | null,
+            maximumAttendeesCount?: number, notes?: string | null, postBuffer?:
+            string, preBuffer?: string, schedulingPolicy?: Record&lt;...,
+            ...&gt; | { <xref uid="@odata.type" />: ..., allowStaffSelection?:
+            ..., customAvailabilities?: ..., generalAvailability?: ...,
+            isMeetingInviteToCustomersEnabled?: ..., maximumAdvance?: ...,
+            minimumLeadTime?: ..., sendConfirmationsToOwner?: ...,
+            timeSlotInterval?: ... } | null, smsNotificationsEnabled?: boolean,
+            staffMemberIds?: ...[], webUrl?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.bookingService"
+            />" })[], staffMembers?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: function }, "<xref uid="@odata.type" />"&gt; &
+            Omit&lt;{ <xref uid="@odata.type" />: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.bookingStaffMemberBase" />" })[], webSiteUrl?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.bookingBusiness" />" })[], bookingCurrencies?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            symbol?: string } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.bookingCurrency" />" })[], virtualEvents?:
+            Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, events?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, createdBy?: Record&lt;..., ...&gt; | (... & ... & ...) |
+            null, description?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., content?: ..., contentType?: ... } |
+            null, displayName?: string | null, endDateTime?: Record&lt;...,
+            ...&gt; | { <xref uid="@odata.type" />: ..., dateTime?: ...,
+            timeZone?: ... } | null, externalEventInformation?: ...[],
+            presenters?: ...[], sessions?: ...[], settings?: Record&lt;...,
+            ...&gt; | { <xref uid="@odata.type" />: ...,
+            isAttendeeEmailNotificationEnabled?: ... } | null, startDateTime?:
+            Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            dateTime?: ..., timeZone?: ... } | null, status?: Record&lt;...,
+            ...&gt; | "unknownFutureValue" | "draft" | "published" | "canceled"
+            | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.virtualEvent" />"
+            })[], townhalls?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+            ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: ..., createdBy?: ..., description?: ...,
+            displayName?: ..., endDateTime?: ..., externalEventInformation?:
+            ..., presenters?: ..., sessions?: ..., settings?: ...,
+            startDateTime?: ..., status?: ... }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.virtualEvent" />" }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, audience?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "everyone" |
+            "organization" | null, coOrganizers?: (... & ... & ...)[],
+            invitedAttendees?: { <xref uid="@odata.type" />: ..., displayName?:
+            ..., id?: ... }[], isInviteOnly?: boolean | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.virtualEventTownhall" />" })[], webinars?:
+            (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+            />: ..., createdBy?: ..., description?: ..., displayName?: ...,
+            endDateTime?: ..., externalEventInformation?: ..., presenters?: ...,
+            sessions?: ..., settings?: ..., startDateTime?: ..., status?: ... },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.virtualEvent" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            audience?: Record&lt;string, never&gt; | "unknownFutureValue" |
+            "everyone" | "organization" | null, coOrganizers?: (... & ... &
+            ...)[], registrationConfiguration?: Record&lt;string, never&gt; |
+            (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+            isManualApprovalEnabled?: ..., isWaitlistEnabled?: ... } & { <xref
+            uid="@odata.type" />: ... }) | null, registrations?: (... & ... &
+            ...)[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.virtualEventWebinar" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.virtualEventsRoot" />" }) | null }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["PATCH /solutions"]["response"]&gt;
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string,
+          backupRestore?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, driveInclusionRules?:
+          (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, driveExpression?: string | null
+          })[], driveProtectionUnits?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          directoryObjectId?: string | null, displayName?: string | null,
+          email?: string | null })[], driveProtectionUnitsBulkAdditionJobs?:
+          (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, directoryObjectIds?: ...[],
+          drives?: ...[] })[], exchangeProtectionPolicies?:
+          (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, mailboxInclusionRules?: ...[],
+          mailboxProtectionUnits?: ...[],
+          mailboxProtectionUnitsBulkAdditionJobs?: ...[] })[],
+          exchangeRestoreSessions?: (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          granularMailboxRestoreArtifacts?: ...[], mailboxRestoreArtifacts?:
+          ...[], mailboxRestoreArtifactsBulkAdditionRequests?: ...[] })[],
+          mailboxInclusionRules?: (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          mailboxExpression?: string | null })[], mailboxProtectionUnits?:
+          (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, directoryObjectId?: string | null,
+          displayName?: string | null, email?: string | null })[],
+          mailboxProtectionUnitsBulkAdditionJobs?: (Omit&lt;Omit&lt;..., ...&gt;
+          & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          directoryObjectIds?: ...[], mailboxes?: ...[] })[],
+          oneDriveForBusinessProtectionPolicies?: (Omit&lt;Omit&lt;..., ...&gt;
+          & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          driveInclusionRules?: ...[], driveProtectionUnits?: ...[],
+          driveProtectionUnitsBulkAdditionJobs?: ...[] })[],
+          oneDriveForBusinessRestoreSessions?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          driveRestoreArtifacts?: ...[],
+          driveRestoreArtifactsBulkAdditionRequests?: ...[] })[],
+          protectionPolicies?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, createdBy?: function, createdDateTime?:
+          function, displayName?: function, lastModifiedBy?: function,
+          lastModifiedDateTime?: function, retentionSettings?: function,
+          status?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.protectionPolicyBase" />" })[], protectionUnits?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdBy?: function, createdDateTime?: function, error?:
+          function, lastModifiedBy?: function, lastModifiedDateTime?: function,
+          offboardRequestedDateTime?: function, policyId?: function,
+          protectionSources?: function, status?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.protectionUnitBase" />" })[], restorePoints?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          expirationDateTime?: string | null, protectionDateTime?: string |
+          null, protectionUnit?: Record&lt;..., ...&gt; | (... & ... & ...) |
+          null, tags?: Record&lt;..., ...&gt; | "unknownFutureValue" | "none" |
+          "fastRestore" | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.restorePoint" />" })[], restoreSessions?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, completedDateTime?: function, createdBy?: function,
+          createdDateTime?: function, error?: function, lastModifiedBy?:
+          function, lastModifiedDateTime?: function, restoreJobType?: function,
+          restoreSessionArtifactCount?: function, status?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.restoreSessionBase" />" })[], serviceApps?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          application?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+          ..., displayName?: ..., id?: ... } | null, effectiveDateTime?: string
+          | null, lastModifiedBy?: { <xref uid="@odata.type" />: ...,
+          application?: ..., device?: ..., user?: ... } | Record&lt;..., ...&gt;
+          | null, lastModifiedDateTime?: string | null, registrationDateTime?:
+          string | null, status?: Record&lt;..., ...&gt; | "unknownFutureValue"
+          | "inactive" | "active" | "pendingActive" | "pendingInactive" | null }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.serviceApp" />" })[], serviceStatus?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          backupServiceConsumer?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "unknown" | "firstparty" | "thirdparty" | null,
+          disableReason?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "none" | "invalidBillingProfile" | "userRequested" | null,
+          gracePeriodDateTime?: string | null, lastModifiedBy?: { <xref
+          uid="@odata.type" />: string, application?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } | null,
+          device?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          displayName?: ..., id?: ... } | null, user?: Record&lt;..., ...&gt; |
+          { <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          null } | Record&lt;string, never&gt; | null, lastModifiedDateTime?:
+          string | null, restoreAllowedTillDateTime?: string | null, status?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "disabled" |
+          "enabled" | "protectionChangeLocked" | "restoreLocked" | null } |
+          null, sharePointProtectionPolicies?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          siteInclusionRules?: ...[], siteProtectionUnits?: ...[],
+          siteProtectionUnitsBulkAdditionJobs?: ...[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.sharePointProtectionPolicy" />" })[],
+          sharePointRestoreSessions?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          siteRestoreArtifacts?: ...[],
+          siteRestoreArtifactsBulkAdditionRequests?: ...[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.sharePointRestoreSession" />" })[],
+          siteInclusionRules?: (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          siteExpression?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.siteProtectionRule" />" })[],
+          siteProtectionUnits?: (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          siteId?: string | null, siteName?: string | null, siteWebUrl?: string
+          | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.siteProtectionUnit" />" })[],
+          siteProtectionUnitsBulkAdditionJobs?: (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          siteIds?: ...[], siteWebUrls?: ...[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.siteProtectionUnitsBulkAdditionJob" />"
+          })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.backupRestoreRoot" />" }) | null,
+          bookingBusinesses?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, address?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string, city?: string | null,
+          countryOrRegion?: string | null, postalCode?: string | null, state?:
+          string | null, street?: string | null } | null, appointments?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          additionalInformation?: function, anonymousJoinWebUrl?: function,
+          appointmentLabel?: function, createdDateTime?: function,
+          customerEmailAddress?: function, customerName?: function,
+          customerNotes?: function, customerPhone?: function, customers?:
+          function, customerTimeZone?: function, duration?: function,
+          endDateTime?: function, filledAttendeesCount?: function,
+          isCustomerAllowedToManageBooking?: function, isLocationOnline?:
+          function, joinWebUrl?: function, lastUpdatedDateTime?: function,
+          maximumAttendeesCount?: function, optOutOfCustomerEmail?: function,
+          postBuffer?: function, preBuffer?: function, price?: function,
+          priceType?: function, reminders?: function, selfServiceAppointmentId?:
+          function, serviceId?: function, serviceLocation?: function,
+          serviceName?: function, serviceNotes?: function,
+          smsNotificationsEnabled?: function, staffMemberIds?: function,
+          startDateTime?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.bookingAppointment" />" })[],
+          bookingPageSettings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, accessControl?: "unknownFutureValue" |
+          "unrestricted" | "restrictedToOrganization", bookingPageColorCode?:
+          string, businessTimeZone?: string, customerConsentMessage?: string,
+          enforceOneTimePassword?: boolean, isBusinessLogoDisplayEnabled?:
+          boolean, isCustomerConsentEnabled?: boolean,
+          isSearchEngineIndexabilityDisabled?: boolean,
+          isTimeSlotTimeZoneSetToBusinessTimeZone?: boolean,
+          privacyPolicyWebUrl?: string, termsAndConditionsWebUrl?: string } |
+          null, businessHours?: { <xref uid="@odata.type" />: string, day?:
+          "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday"
+          | "saturday", timeSlots?: ...[] }[], businessType?: string | null,
+          calendarView?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, additionalInformation?: function, anonymousJoinWebUrl?:
+          function, appointmentLabel?: function, createdDateTime?: function,
+          customerEmailAddress?: function, customerName?: function,
+          customerNotes?: function, customerPhone?: function, customers?:
+          function, customerTimeZone?: function, duration?: function,
+          endDateTime?: function, filledAttendeesCount?: function,
+          isCustomerAllowedToManageBooking?: function, isLocationOnline?:
+          function, joinWebUrl?: function, lastUpdatedDateTime?: function,
+          maximumAttendeesCount?: function, optOutOfCustomerEmail?: function,
+          postBuffer?: function, preBuffer?: function, price?: function,
+          priceType?: function, reminders?: function, selfServiceAppointmentId?:
+          function, serviceId?: function, serviceLocation?: function,
+          serviceName?: function, serviceNotes?: function,
+          smsNotificationsEnabled?: function, staffMemberIds?: function,
+          startDateTime?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.bookingAppointment" />" })[], createdDateTime?:
+          string | null, customers?: (Omit&lt;{ <xref uid="@odata.type" />: ...,
+          id?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.bookingCustomerBase" />" })[], customQuestions?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          answerInputType?: function, answerOptions?: function,
+          createdDateTime?: function, displayName?: function,
+          lastUpdatedDateTime?: function } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.bookingCustomQuestion" />" })[],
+          defaultCurrencyIso?: string | null, displayName?: string, email?:
+          string | null, isPublished?: boolean | null, languageTag?: string |
+          null, lastUpdatedDateTime?: string | null, phone?: string | null,
+          publicUrl?: string | null, schedulingPolicy?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string,
+          allowStaffSelection?: boolean, customAvailabilities?: (... & ... &
+          ...)[], generalAvailability?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, availabilityType?: function,
+          businessHours?: function } | null, isMeetingInviteToCustomersEnabled?:
+          boolean | null, maximumAdvance?: string, minimumLeadTime?: string,
+          sendConfirmationsToOwner?: boolean, timeSlotInterval?: string } |
+          null, services?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, additionalInformation?: function, createdDateTime?: function,
+          customQuestions?: function, defaultDuration?: function,
+          defaultLocation?: function, defaultPrice?: function,
+          defaultPriceType?: function, defaultReminders?: function,
+          description?: function, displayName?: function,
+          isAnonymousJoinEnabled?: function, isCustomerAllowedToManageBooking?:
+          function, isHiddenFromCustomers?: function, isLocationOnline?:
+          function, languageTag?: function, lastUpdatedDateTime?: function,
+          maximumAttendeesCount?: function, notes?: function, postBuffer?:
+          function, preBuffer?: function, schedulingPolicy?: function,
+          smsNotificationsEnabled?: function, staffMemberIds?: function,
+          webUrl?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.bookingService" />" })[], staffMembers?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.bookingStaffMemberBase" />" })[],
+          webSiteUrl?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.bookingBusiness" />" })[], bookingCurrencies?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          symbol?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.bookingCurrency" />" })[], virtualEvents?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, events?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: function }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdBy?: function, description?: function, displayName?:
+          function, endDateTime?: function, externalEventInformation?: function,
+          presenters?: function, sessions?: function, settings?: function,
+          startDateTime?: function, status?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.virtualEvent" />" })[], townhalls?:
+          (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, audience?: Record&lt;..., ...&gt;
+          | "unknownFutureValue" | "everyone" | "organization" | null,
+          coOrganizers?: ...[], invitedAttendees?: ...[], isInviteOnly?: boolean
+          | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.virtualEventTownhall" />" })[], webinars?:
+          (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string, audience?: Record&lt;..., ...&gt;
+          | "unknownFutureValue" | "everyone" | "organization" | null,
+          coOrganizers?: ...[], registrationConfiguration?: Record&lt;...,
+          ...&gt; | (... & ... & ...) | null, registrations?: ...[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.virtualEventWebinar" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.virtualEventsRoot"
+          />" }) | null }&gt;

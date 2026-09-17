@@ -120,7 +120,7 @@ variables:
           /security/labels/retentionLabels/{retentionLabel-id}/descriptors/filePlanReferenceTemplate"]["response"]&gt;
           }
 functions:
-  - name: del(any)
+  - name: 'del({ If-Match?: string, retentionLabel-id: string })'
     uid: >-
       @microsoft/teams.graph-endpoints-beta.security.labels.retentionLabels.descriptors.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -129,18 +129,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /security/labels/retentionLabels/{retentionLabel-id}/descriptors"]["response"]>
+        function del(params?: { If-Match?: string, retentionLabel-id: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, retentionLabel-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /security/labels/retentionLabels/{retentionLabel-id}/descriptors"]["response"]&gt;
-  - name: list(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      list({ $expand?: string[], $select?: string[], retentionLabel-id: string
+      })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.security.labels.retentionLabels.descriptors.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -154,20 +154,229 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /security/labels/retentionLabels/{retentionLabel-id}/descriptors"]["response"]>
+        function list(params?: { $expand?: string[], $select?: string[],
+        retentionLabel-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        authority?: Record<string, never> | (Omit<{ @odata.type: string,
+        displayName?: string | null }, "@odata.type"> & { @odata.type: string }
+        & { @odata.type: "#microsoft.graph.security.filePlanAuthority" }) |
+        null, authorityTemplate?: Record<string, never> | (Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, createdBy?: Record<..., ...> | { @odata.type: ..., application?:
+        ..., device?: ..., user?: ... } | null, createdDateTime?: string | null,
+        displayName?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.security.filePlanDescriptorTemplate" }, "@odata.type">
+        & { @odata.type: string }) | null, category?: Record<string, never> |
+        (Omit<{ @odata.type: string, displayName?: string | null },
+        "@odata.type"> & { @odata.type: string, subcategory?: Record<string,
+        never> | (Omit<{ @odata.type: string, displayName?: function },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.security.filePlanSubcategory" }) | null } & {
+        @odata.type: "#microsoft.graph.security.filePlanAppliedCategory" }) |
+        null, categoryTemplate?: Record<string, never> | (Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, createdBy?: Record<..., ...> | { @odata.type: ..., application?:
+        ..., device?: ..., user?: ... } | null, createdDateTime?: string | null,
+        displayName?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.security.filePlanDescriptorTemplate" }, "@odata.type">
+        & { @odata.type: string, subcategories?: (Omit<... & ... & ...,
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.security.subcategoryTemplate" })[] }) | null,
+        citation?: Record<string, never> | (Omit<{ @odata.type: string,
+        displayName?: string | null }, "@odata.type"> & { @odata.type: string,
+        citationJurisdiction?: string | null, citationUrl?: string | null } & {
+        @odata.type: "#microsoft.graph.security.filePlanCitation" }) | null,
+        citationTemplate?: Record<string, never> | (Omit<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdBy?: Record<..., ...> | { @odata.type: ..., application?: ...,
+        device?: ..., user?: ... } | null, createdDateTime?: string | null,
+        displayName?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.security.filePlanDescriptorTemplate" }, "@odata.type">
+        & { @odata.type: string, citationJurisdiction?: string | null,
+        citationUrl?: string | null }) | null, department?: Record<string,
+        never> | (Omit<{ @odata.type: string, displayName?: string | null },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.security.filePlanDepartment" }) | null,
+        departmentTemplate?: Record<string, never> | (Omit<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdBy?: Record<..., ...> | { @odata.type: ..., application?: ...,
+        device?: ..., user?: ... } | null, createdDateTime?: string | null,
+        displayName?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.security.filePlanDescriptorTemplate" }, "@odata.type">
+        & { @odata.type: string }) | null, filePlanReference?: Record<string,
+        never> | (Omit<{ @odata.type: string, displayName?: string | null },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.security.filePlanReference" }) | null,
+        filePlanReferenceTemplate?: Record<string, never> | (Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, createdBy?: Record<..., ...> | { @odata.type: ..., application?:
+        ..., device?: ..., user?: ... } | null, createdDateTime?: string | null,
+        displayName?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.security.filePlanDescriptorTemplate" }, "@odata.type">
+        & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.security.filePlanReferenceTemplate" }) | null } & {
+        @odata.type: "#microsoft.graph.security.filePlanDescriptor" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], retentionLabel-id: string
+            }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /security/labels/retentionLabels/{retentionLabel-id}/descriptors"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, authority?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, displayName?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanAuthority" />" }) | null,
+          authorityTemplate?: Record&lt;string, never&gt; | (Omit&lt;Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdBy?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., application?: ..., device?: ..., user?: ... } | null,
+          createdDateTime?: string | null, displayName?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanDescriptorTemplate" />" },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string }) | null, category?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, displayName?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, subcategory?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, displayName?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanSubcategory" />" }) | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanAppliedCategory" />" }) | null,
+          categoryTemplate?: Record&lt;string, never&gt; | (Omit&lt;Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdBy?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., application?: ..., device?: ..., user?: ... } | null,
+          createdDateTime?: string | null, displayName?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanDescriptorTemplate" />" },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, subcategories?: (Omit&lt;... & ... & ..., "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.subcategoryTemplate" />" })[] }) | null,
+          citation?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, displayName?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          citationJurisdiction?: string | null, citationUrl?: string | null } &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanCitation" />" }) | null,
+          citationTemplate?: Record&lt;string, never&gt; | (Omit&lt;Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdBy?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., application?: ..., device?: ..., user?: ... } | null,
+          createdDateTime?: string | null, displayName?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanDescriptorTemplate" />" },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, citationJurisdiction?: string | null, citationUrl?: string |
+          null }) | null, department?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, displayName?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanDepartment" />" }) | null,
+          departmentTemplate?: Record&lt;string, never&gt; | (Omit&lt;Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdBy?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., application?: ..., device?: ..., user?: ... } | null,
+          createdDateTime?: string | null, displayName?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanDescriptorTemplate" />" },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string }) | null, filePlanReference?: Record&lt;string, never&gt; |
+          (Omit&lt;{ <xref uid="@odata.type" />: string, displayName?: string |
+          null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanReference" />" }) | null,
+          filePlanReferenceTemplate?: Record&lt;string, never&gt; |
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string },
+          "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+          />: string, createdBy?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., application?: ..., device?: ..., user?: ...
+          } | null, createdDateTime?: string | null, displayName?: string | null
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.security.filePlanDescriptorTemplate" />"
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanReferenceTemplate" />" }) | null
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanDescriptor" />" }&gt;
   - name: >-
-      update(Operation<"/security/labels/retentionLabels/{retentionLabel-id}/descriptors",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, authority?: Record<string, never> | (Omit<{
+      @odata.type: string, displayName?: string | null }, "@odata.type"> & {
+      @odata.type: string } & { @odata.type:
+      "#microsoft.graph.security.filePlanAuthority" }) | null,
+      authorityTemplate?: Record<string, never> | (Omit<Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+      createdBy?: Record<string, never> | { @odata.type: string, application?:
+      function, device?: function, user?: function } | null, createdDateTime?:
+      string | null, displayName?: string | null }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.security.filePlanDescriptorTemplate" },
+      "@odata.type"> & { @odata.type: string }) | null, category?:
+      Record<string, never> | (Omit<{ @odata.type: string, displayName?: string
+      | null }, "@odata.type"> & { @odata.type: string, subcategory?:
+      Record<string, never> | (Omit<{ @odata.type: string, displayName?: string
+      | null }, "@odata.type"> & { @odata.type: string } & { @odata.type:
+      "#microsoft.graph.security.filePlanSubcategory" }) | null } & {
+      @odata.type: "#microsoft.graph.security.filePlanAppliedCategory" }) |
+      null, categoryTemplate?: Record<string, never> | (Omit<Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+      createdBy?: Record<string, never> | { @odata.type: string, application?:
+      function, device?: function, user?: function } | null, createdDateTime?:
+      string | null, displayName?: string | null }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.security.filePlanDescriptorTemplate" },
+      "@odata.type"> & { @odata.type: string, subcategories?: (Omit<Omit<...,
+      ...> & Omit<..., ...> & { @odata.type: ... }, "@odata.type"> & {
+      @odata.type: string } & { @odata.type:
+      "#microsoft.graph.security.subcategoryTemplate" })[] }) | null, citation?:
+      Record<string, never> | (Omit<{ @odata.type: string, displayName?: string
+      | null }, "@odata.type"> & { @odata.type: string, citationJurisdiction?:
+      string | null, citationUrl?: string | null } & { @odata.type:
+      "#microsoft.graph.security.filePlanCitation" }) | null, citationTemplate?:
+      Record<string, never> | (Omit<Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, createdBy?: Record<string,
+      never> | { @odata.type: string, application?: function, device?: function,
+      user?: function } | null, createdDateTime?: string | null, displayName?:
+      string | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.security.filePlanDescriptorTemplate" }, "@odata.type"> &
+      { @odata.type: string, citationJurisdiction?: string | null, citationUrl?:
+      string | null }) | null, department?: Record<string, never> | (Omit<{
+      @odata.type: string, displayName?: string | null }, "@odata.type"> & {
+      @odata.type: string } & { @odata.type:
+      "#microsoft.graph.security.filePlanDepartment" }) | null,
+      departmentTemplate?: Record<string, never> | (Omit<Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+      createdBy?: Record<string, never> | { @odata.type: string, application?:
+      function, device?: function, user?: function } | null, createdDateTime?:
+      string | null, displayName?: string | null }, "@odata.type"> & {
+      @odata.type: "#microsoft.graph.security.filePlanDescriptorTemplate" },
+      "@odata.type"> & { @odata.type: string }) | null, filePlanReference?:
+      Record<string, never> | (Omit<{ @odata.type: string, displayName?: string
+      | null }, "@odata.type"> & { @odata.type: string } & { @odata.type:
+      "#microsoft.graph.security.filePlanReference" }) | null,
+      filePlanReferenceTemplate?: Record<string, never> | (Omit<Omit<{
+      @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+      string, createdBy?: Record<string, never> | { @odata.type: string,
+      application?: function, device?: function, user?: function } | null,
+      createdDateTime?: string | null, displayName?: string | null },
+      "@odata.type"> & { @odata.type:
+      "#microsoft.graph.security.filePlanDescriptorTemplate" }, "@odata.type"> &
+      { @odata.type: string } & { @odata.type:
+      "#microsoft.graph.security.filePlanReferenceTemplate" }) | null } & {
+      @odata.type: "#microsoft.graph.security.filePlanDescriptor" }, {
+      retentionLabel-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.security.labels.retentionLabels.descriptors.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -176,21 +385,318 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/security/labels/retentionLabels/{retentionLabel-id}/descriptors",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /security/labels/retentionLabels/{retentionLabel-id}/descriptors"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, authority?: Record<string,
+        never> | (Omit<{ @odata.type: string, displayName?: string | null },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.security.filePlanAuthority" }) | null,
+        authorityTemplate?: Record<string, never> | (Omit<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdBy?: Record<string, never> | { @odata.type: string, application?:
+        function, device?: function, user?: function } | null, createdDateTime?:
+        string | null, displayName?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.security.filePlanDescriptorTemplate" },
+        "@odata.type"> & { @odata.type: string }) | null, category?:
+        Record<string, never> | (Omit<{ @odata.type: string, displayName?:
+        string | null }, "@odata.type"> & { @odata.type: string, subcategory?:
+        Record<string, never> | (Omit<{ @odata.type: string, displayName?:
+        string | null }, "@odata.type"> & { @odata.type: string } & {
+        @odata.type: "#microsoft.graph.security.filePlanSubcategory" }) | null }
+        & { @odata.type: "#microsoft.graph.security.filePlanAppliedCategory" })
+        | null, categoryTemplate?: Record<string, never> | (Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, createdBy?: Record<string, never> | { @odata.type: string,
+        application?: function, device?: function, user?: function } | null,
+        createdDateTime?: string | null, displayName?: string | null },
+        "@odata.type"> & { @odata.type:
+        "#microsoft.graph.security.filePlanDescriptorTemplate" }, "@odata.type">
+        & { @odata.type: string, subcategories?: (Omit<Omit<..., ...> &
+        Omit<..., ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type:
+        string } & { @odata.type:
+        "#microsoft.graph.security.subcategoryTemplate" })[] }) | null,
+        citation?: Record<string, never> | (Omit<{ @odata.type: string,
+        displayName?: string | null }, "@odata.type"> & { @odata.type: string,
+        citationJurisdiction?: string | null, citationUrl?: string | null } & {
+        @odata.type: "#microsoft.graph.security.filePlanCitation" }) | null,
+        citationTemplate?: Record<string, never> | (Omit<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdBy?: Record<string, never> | { @odata.type: string, application?:
+        function, device?: function, user?: function } | null, createdDateTime?:
+        string | null, displayName?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.security.filePlanDescriptorTemplate" },
+        "@odata.type"> & { @odata.type: string, citationJurisdiction?: string |
+        null, citationUrl?: string | null }) | null, department?: Record<string,
+        never> | (Omit<{ @odata.type: string, displayName?: string | null },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.security.filePlanDepartment" }) | null,
+        departmentTemplate?: Record<string, never> | (Omit<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdBy?: Record<string, never> | { @odata.type: string, application?:
+        function, device?: function, user?: function } | null, createdDateTime?:
+        string | null, displayName?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.security.filePlanDescriptorTemplate" },
+        "@odata.type"> & { @odata.type: string }) | null, filePlanReference?:
+        Record<string, never> | (Omit<{ @odata.type: string, displayName?:
+        string | null }, "@odata.type"> & { @odata.type: string } & {
+        @odata.type: "#microsoft.graph.security.filePlanReference" }) | null,
+        filePlanReferenceTemplate?: Record<string, never> | (Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, createdBy?: Record<string, never> | { @odata.type: string,
+        application?: function, device?: function, user?: function } | null,
+        createdDateTime?: string | null, displayName?: string | null },
+        "@odata.type"> & { @odata.type:
+        "#microsoft.graph.security.filePlanDescriptorTemplate" }, "@odata.type">
+        & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.security.filePlanReferenceTemplate" }) | null } & {
+        @odata.type: "#microsoft.graph.security.filePlanDescriptor" }, params?:
+        { retentionLabel-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        authority?: Record<string, never> | (Omit<{ @odata.type: string,
+        displayName?: string | null }, "@odata.type"> & { @odata.type: string }
+        & { @odata.type: "#microsoft.graph.security.filePlanAuthority" }) |
+        null, authorityTemplate?: Record<string, never> | (Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, createdBy?: Record<..., ...> | { @odata.type: ..., application?:
+        ..., device?: ..., user?: ... } | null, createdDateTime?: string | null,
+        displayName?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.security.filePlanDescriptorTemplate" }, "@odata.type">
+        & { @odata.type: string }) | null, category?: Record<string, never> |
+        (Omit<{ @odata.type: string, displayName?: string | null },
+        "@odata.type"> & { @odata.type: string, subcategory?: Record<string,
+        never> | (Omit<{ @odata.type: string, displayName?: function },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.security.filePlanSubcategory" }) | null } & {
+        @odata.type: "#microsoft.graph.security.filePlanAppliedCategory" }) |
+        null, categoryTemplate?: Record<string, never> | (Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, createdBy?: Record<..., ...> | { @odata.type: ..., application?:
+        ..., device?: ..., user?: ... } | null, createdDateTime?: string | null,
+        displayName?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.security.filePlanDescriptorTemplate" }, "@odata.type">
+        & { @odata.type: string, subcategories?: (Omit<... & ... & ...,
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.security.subcategoryTemplate" })[] }) | null,
+        citation?: Record<string, never> | (Omit<{ @odata.type: string,
+        displayName?: string | null }, "@odata.type"> & { @odata.type: string,
+        citationJurisdiction?: string | null, citationUrl?: string | null } & {
+        @odata.type: "#microsoft.graph.security.filePlanCitation" }) | null,
+        citationTemplate?: Record<string, never> | (Omit<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdBy?: Record<..., ...> | { @odata.type: ..., application?: ...,
+        device?: ..., user?: ... } | null, createdDateTime?: string | null,
+        displayName?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.security.filePlanDescriptorTemplate" }, "@odata.type">
+        & { @odata.type: string, citationJurisdiction?: string | null,
+        citationUrl?: string | null }) | null, department?: Record<string,
+        never> | (Omit<{ @odata.type: string, displayName?: string | null },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.security.filePlanDepartment" }) | null,
+        departmentTemplate?: Record<string, never> | (Omit<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        createdBy?: Record<..., ...> | { @odata.type: ..., application?: ...,
+        device?: ..., user?: ... } | null, createdDateTime?: string | null,
+        displayName?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.security.filePlanDescriptorTemplate" }, "@odata.type">
+        & { @odata.type: string }) | null, filePlanReference?: Record<string,
+        never> | (Omit<{ @odata.type: string, displayName?: string | null },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.security.filePlanReference" }) | null,
+        filePlanReferenceTemplate?: Record<string, never> | (Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, createdBy?: Record<..., ...> | { @odata.type: ..., application?:
+        ..., device?: ..., user?: ... } | null, createdDateTime?: string | null,
+        displayName?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.security.filePlanDescriptorTemplate" }, "@odata.type">
+        & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.security.filePlanReferenceTemplate" }) | null } & {
+        @odata.type: "#microsoft.graph.security.filePlanDescriptor" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/security/labels/retentionLabels/{retentionLabel-id}/descriptors",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            authority?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, displayName?: string | null }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.security.filePlanAuthority" />" }) | null,
+            authorityTemplate?: Record&lt;string, never&gt; | (Omit&lt;Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, createdBy?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, application?: function, device?:
+            function, user?: function } | null, createdDateTime?: string | null,
+            displayName?: string | null }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.security.filePlanDescriptorTemplate" />" },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string }) | null, category?: Record&lt;string, never&gt; |
+            (Omit&lt;{ <xref uid="@odata.type" />: string, displayName?: string
+            | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, subcategory?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string,
+            displayName?: string | null }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.security.filePlanSubcategory" />" }) |
+            null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.security.filePlanAppliedCategory" />" }) |
+            null, categoryTemplate?: Record&lt;string, never&gt; |
+            (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+            }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, createdBy?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, application?:
+            function, device?: function, user?: function } | null,
+            createdDateTime?: string | null, displayName?: string | null },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.security.filePlanDescriptorTemplate"
+            />" }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: string, subcategories?: (Omit&lt;Omit&lt;..., ...&gt; &
+            Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.security.subcategoryTemplate" />" })[] }) |
+            null, citation?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+            uid="@odata.type" />: string, displayName?: string | null }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            citationJurisdiction?: string | null, citationUrl?: string | null }
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.security.filePlanCitation" />" }) | null,
+            citationTemplate?: Record&lt;string, never&gt; | (Omit&lt;Omit&lt;{
+            <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, createdBy?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, application?: function, device?:
+            function, user?: function } | null, createdDateTime?: string | null,
+            displayName?: string | null }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.security.filePlanDescriptorTemplate" />" },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, citationJurisdiction?: string | null, citationUrl?: string |
+            null }) | null, department?: Record&lt;string, never&gt; |
+            (Omit&lt;{ <xref uid="@odata.type" />: string, displayName?: string
+            | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.security.filePlanDepartment" />" }) |
+            null, departmentTemplate?: Record&lt;string, never&gt; |
+            (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+            }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, createdBy?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, application?:
+            function, device?: function, user?: function } | null,
+            createdDateTime?: string | null, displayName?: string | null },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.security.filePlanDescriptorTemplate"
+            />" }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: string }) | null, filePlanReference?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string,
+            displayName?: string | null }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.security.filePlanReference" />" }) |
+            null, filePlanReferenceTemplate?: Record&lt;string, never&gt; |
+            (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+            }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, createdBy?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, application?:
+            function, device?: function, user?: function } | null,
+            createdDateTime?: string | null, displayName?: string | null },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.security.filePlanDescriptorTemplate"
+            />" }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+            />: string } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.security.filePlanReferenceTemplate" />" }) |
+            null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.security.filePlanDescriptor" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ retentionLabel-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /security/labels/retentionLabels/{retentionLabel-id}/descriptors"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, authority?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, displayName?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanAuthority" />" }) | null,
+          authorityTemplate?: Record&lt;string, never&gt; | (Omit&lt;Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdBy?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., application?: ..., device?: ..., user?: ... } | null,
+          createdDateTime?: string | null, displayName?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanDescriptorTemplate" />" },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string }) | null, category?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, displayName?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, subcategory?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, displayName?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanSubcategory" />" }) | null } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanAppliedCategory" />" }) | null,
+          categoryTemplate?: Record&lt;string, never&gt; | (Omit&lt;Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdBy?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., application?: ..., device?: ..., user?: ... } | null,
+          createdDateTime?: string | null, displayName?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanDescriptorTemplate" />" },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, subcategories?: (Omit&lt;... & ... & ..., "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.subcategoryTemplate" />" })[] }) | null,
+          citation?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, displayName?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          citationJurisdiction?: string | null, citationUrl?: string | null } &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanCitation" />" }) | null,
+          citationTemplate?: Record&lt;string, never&gt; | (Omit&lt;Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdBy?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., application?: ..., device?: ..., user?: ... } | null,
+          createdDateTime?: string | null, displayName?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanDescriptorTemplate" />" },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, citationJurisdiction?: string | null, citationUrl?: string |
+          null }) | null, department?: Record&lt;string, never&gt; | (Omit&lt;{
+          <xref uid="@odata.type" />: string, displayName?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanDepartment" />" }) | null,
+          departmentTemplate?: Record&lt;string, never&gt; | (Omit&lt;Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, createdBy?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., application?: ..., device?: ..., user?: ... } | null,
+          createdDateTime?: string | null, displayName?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanDescriptorTemplate" />" },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string }) | null, filePlanReference?: Record&lt;string, never&gt; |
+          (Omit&lt;{ <xref uid="@odata.type" />: string, displayName?: string |
+          null }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanReference" />" }) | null,
+          filePlanReferenceTemplate?: Record&lt;string, never&gt; |
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string },
+          "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+          />: string, createdBy?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., application?: ..., device?: ..., user?: ...
+          } | null, createdDateTime?: string | null, displayName?: string | null
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.security.filePlanDescriptorTemplate" />"
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanReferenceTemplate" />" }) | null
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.security.filePlanDescriptor" />" }&gt;

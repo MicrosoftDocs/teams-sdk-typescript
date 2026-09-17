@@ -7,7 +7,7 @@ interfaces:
   - '@microsoft/teams.graph-endpoints-beta.users.virtualEvents.IEndpoints'
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: del(any)
+  - name: 'del({ If-Match?: string, user-id: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.users.virtualEvents.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`DELETE /users/{user-id}/virtualEvents`'
@@ -15,18 +15,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /users/{user-id}/virtualEvents"]["response"]>
+        function del(params?: { If-Match?: string, user-id: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, user-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /users/{user-id}/virtualEvents"]["response"]&gt;
-  - name: list(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'list({ $expand?: string[], $select?: string[], user-id: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.users.virtualEvents.list'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`GET /users/{user-id}/virtualEvents`'
@@ -34,18 +32,104 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/virtualEvents"]["response"]>
+        function list(params?: { $expand?: string[], $select?: string[],
+        user-id: string }): EndpointRequest<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, webinars?:
+        (Omit<Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string, createdBy?: function, description?:
+        function, displayName?: function, endDateTime?: function,
+        externalEventInformation?: function, presenters?: function, sessions?:
+        function, settings?: function, startDateTime?: function, status?:
+        function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.virtualEvent" }, "@odata.type"> & { @odata.type:
+        string, audience?: "unknownFutureValue" | Record<string, never> |
+        "organization" | "everyone" | null, coOrganizers?: (Omit<..., ...> & {
+        @odata.type: ..., tenantId?: ... } & { @odata.type: ... })[],
+        registrationConfiguration?: Record<string, never> | (Omit<... & ... &
+        ..., "@odata.type"> & { @odata.type: string, isManualApprovalEnabled?:
+        function, isWaitlistEnabled?: function } & { @odata.type:
+        "#microsoft.graph.virtualEventWebinarRegistrationConfiguration" }) |
+        null, registrations?: (Omit<..., ...> & { @odata.type: ...,
+        cancelationDateTime?: ..., email?: ...,
+        externalRegistrationInformation?: ..., firstName?: ..., lastName?: ...,
+        preferredLanguage?: ..., preferredTimezone?: ...,
+        registrantVideoOnDemandWebUrl?: ..., registrationDateTime?: ...,
+        registrationQuestionAnswers?: ..., sessions?: ..., status?: ...,
+        userId?: ... } & { @odata.type: ... })[] } & { @odata.type:
+        "#microsoft.graph.virtualEventWebinar" })[] } & { @odata.type:
+        "#microsoft.graph.userVirtualEventsRoot" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[], user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/virtualEvents"]["response"]&gt;
-  - name: update(Operation<"/users/{user-id}/virtualEvents", "patch">, any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, webinars?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, createdBy?: function,
+          description?: function, displayName?: function, endDateTime?:
+          function, externalEventInformation?: function, presenters?: function,
+          sessions?: function, settings?: function, startDateTime?: function,
+          status?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.virtualEvent" />"
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, audience?: "unknownFutureValue" | Record&lt;string, never&gt;
+          | "organization" | "everyone" | null, coOrganizers?: (Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ..., tenantId?: ... } & {
+          <xref uid="@odata.type" />: ... })[], registrationConfiguration?:
+          Record&lt;string, never&gt; | (Omit&lt;... & ... & ..., "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          isManualApprovalEnabled?: function, isWaitlistEnabled?: function } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.virtualEventWebinarRegistrationConfiguration" />"
+          }) | null, registrations?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., cancelationDateTime?: ..., email?: ...,
+          externalRegistrationInformation?: ..., firstName?: ..., lastName?:
+          ..., preferredLanguage?: ..., preferredTimezone?: ...,
+          registrantVideoOnDemandWebUrl?: ..., registrationDateTime?: ...,
+          registrationQuestionAnswers?: ..., sessions?: ..., status?: ...,
+          userId?: ... } & { <xref uid="@odata.type" />: ... })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.virtualEventWebinar" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userVirtualEventsRoot" />" }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, webinars?: (Omit<Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & Omit<{ @odata.type: string, createdBy?:
+      Record<..., ...> | (... & ... & ...) | null, description?: Record<...,
+      ...> | { @odata.type: ..., content?: ..., contentType?: ... } | null,
+      displayName?: string | null, endDateTime?: Record<..., ...> | {
+      @odata.type: ..., dateTime?: ..., timeZone?: ... } | null,
+      externalEventInformation?: ...[], presenters?: ...[], sessions?: ...[],
+      settings?: Record<..., ...> | { @odata.type: ...,
+      isAttendeeEmailNotificationEnabled?: ... } | null, startDateTime?:
+      Record<..., ...> | { @odata.type: ..., dateTime?: ..., timeZone?: ... } |
+      null, status?: "unknownFutureValue" | Record<..., ...> | "canceled" |
+      "published" | "draft" | null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.virtualEvent" }, "@odata.type"> & { @odata.type: string,
+      audience?: "unknownFutureValue" | Record<string, never> | "organization" |
+      "everyone" | null, coOrganizers?: (Omit<{ @odata.type: ..., displayName?:
+      ..., id?: ... }, "@odata.type"> & { @odata.type: string, tenantId?:
+      function } & { @odata.type: "#microsoft.graph.communicationsUserIdentity"
+      })[], registrationConfiguration?: Record<string, never> | (Omit<Omit<...,
+      ...> & Omit<..., ...> & { @odata.type: ... }, "@odata.type"> & {
+      @odata.type: string, isManualApprovalEnabled?: boolean | null,
+      isWaitlistEnabled?: boolean | null } & { @odata.type:
+      "#microsoft.graph.virtualEventWebinarRegistrationConfiguration" }) | null,
+      registrations?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+      @odata.type: string, cancelationDateTime?: function, email?: function,
+      externalRegistrationInformation?: function, firstName?: function,
+      lastName?: function, preferredLanguage?: function, preferredTimezone?:
+      function, registrantVideoOnDemandWebUrl?: function, registrationDateTime?:
+      function, registrationQuestionAnswers?: function, sessions?: function,
+      status?: function, userId?: function } & { @odata.type:
+      "#microsoft.graph.virtualEventRegistration" })[] } & { @odata.type:
+      "#microsoft.graph.virtualEventWebinar" })[] } & { @odata.type:
+      "#microsoft.graph.userVirtualEventsRoot" }, { user-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.users.virtualEvents.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /users/{user-id}/virtualEvents`'
@@ -53,21 +137,154 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/users/{user-id}/virtualEvents",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /users/{user-id}/virtualEvents"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, webinars?: (Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, createdBy?: Record<..., ...> | (... & ... & ...) | null,
+        description?: Record<..., ...> | { @odata.type: ..., content?: ...,
+        contentType?: ... } | null, displayName?: string | null, endDateTime?:
+        Record<..., ...> | { @odata.type: ..., dateTime?: ..., timeZone?: ... }
+        | null, externalEventInformation?: ...[], presenters?: ...[], sessions?:
+        ...[], settings?: Record<..., ...> | { @odata.type: ...,
+        isAttendeeEmailNotificationEnabled?: ... } | null, startDateTime?:
+        Record<..., ...> | { @odata.type: ..., dateTime?: ..., timeZone?: ... }
+        | null, status?: "unknownFutureValue" | Record<..., ...> | "canceled" |
+        "published" | "draft" | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.virtualEvent" }, "@odata.type"> & { @odata.type:
+        string, audience?: "unknownFutureValue" | Record<string, never> |
+        "organization" | "everyone" | null, coOrganizers?: (Omit<{ @odata.type:
+        ..., displayName?: ..., id?: ... }, "@odata.type"> & { @odata.type:
+        string, tenantId?: function } & { @odata.type:
+        "#microsoft.graph.communicationsUserIdentity" })[],
+        registrationConfiguration?: Record<string, never> | (Omit<Omit<..., ...>
+        & Omit<..., ...> & { @odata.type: ... }, "@odata.type"> & { @odata.type:
+        string, isManualApprovalEnabled?: boolean | null, isWaitlistEnabled?:
+        boolean | null } & { @odata.type:
+        "#microsoft.graph.virtualEventWebinarRegistrationConfiguration" }) |
+        null, registrations?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, cancelationDateTime?: function,
+        email?: function, externalRegistrationInformation?: function,
+        firstName?: function, lastName?: function, preferredLanguage?: function,
+        preferredTimezone?: function, registrantVideoOnDemandWebUrl?: function,
+        registrationDateTime?: function, registrationQuestionAnswers?: function,
+        sessions?: function, status?: function, userId?: function } & {
+        @odata.type: "#microsoft.graph.virtualEventRegistration" })[] } & {
+        @odata.type: "#microsoft.graph.virtualEventWebinar" })[] } & {
+        @odata.type: "#microsoft.graph.userVirtualEventsRoot" }, params?: {
+        user-id: string }): EndpointRequest<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, webinars?:
+        (Omit<Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string, createdBy?: function, description?:
+        function, displayName?: function, endDateTime?: function,
+        externalEventInformation?: function, presenters?: function, sessions?:
+        function, settings?: function, startDateTime?: function, status?:
+        function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.virtualEvent" }, "@odata.type"> & { @odata.type:
+        string, audience?: "unknownFutureValue" | Record<string, never> |
+        "organization" | "everyone" | null, coOrganizers?: (Omit<..., ...> & {
+        @odata.type: ..., tenantId?: ... } & { @odata.type: ... })[],
+        registrationConfiguration?: Record<string, never> | (Omit<... & ... &
+        ..., "@odata.type"> & { @odata.type: string, isManualApprovalEnabled?:
+        function, isWaitlistEnabled?: function } & { @odata.type:
+        "#microsoft.graph.virtualEventWebinarRegistrationConfiguration" }) |
+        null, registrations?: (Omit<..., ...> & { @odata.type: ...,
+        cancelationDateTime?: ..., email?: ...,
+        externalRegistrationInformation?: ..., firstName?: ..., lastName?: ...,
+        preferredLanguage?: ..., preferredTimezone?: ...,
+        registrantVideoOnDemandWebUrl?: ..., registrationDateTime?: ...,
+        registrationQuestionAnswers?: ..., sessions?: ..., status?: ...,
+        userId?: ... } & { @odata.type: ... })[] } & { @odata.type:
+        "#microsoft.graph.virtualEventWebinar" })[] } & { @odata.type:
+        "#microsoft.graph.userVirtualEventsRoot" }>
       parameters:
         - id: body
-          type: Operation&lt;"/users/{user-id}/virtualEvents", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            webinars?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, createdBy?: Record&lt;..., ...&gt; |
+            (... & ... & ...) | null, description?: Record&lt;..., ...&gt; | {
+            <xref uid="@odata.type" />: ..., content?: ..., contentType?: ... }
+            | null, displayName?: string | null, endDateTime?: Record&lt;...,
+            ...&gt; | { <xref uid="@odata.type" />: ..., dateTime?: ...,
+            timeZone?: ... } | null, externalEventInformation?: ...[],
+            presenters?: ...[], sessions?: ...[], settings?: Record&lt;...,
+            ...&gt; | { <xref uid="@odata.type" />: ...,
+            isAttendeeEmailNotificationEnabled?: ... } | null, startDateTime?:
+            Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            dateTime?: ..., timeZone?: ... } | null, status?:
+            "unknownFutureValue" | Record&lt;..., ...&gt; | "canceled" |
+            "published" | "draft" | null }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.virtualEvent" />" }, "<xref uid="@odata.type"
+            />"&gt; & { <xref uid="@odata.type" />: string, audience?:
+            "unknownFutureValue" | Record&lt;string, never&gt; | "organization"
+            | "everyone" | null, coOrganizers?: (Omit&lt;{ <xref
+            uid="@odata.type" />: ..., displayName?: ..., id?: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            tenantId?: function } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.communicationsUserIdentity" />" })[],
+            registrationConfiguration?: Record&lt;string, never&gt; |
+            (Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+            uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, isManualApprovalEnabled?:
+            boolean | null, isWaitlistEnabled?: boolean | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.virtualEventWebinarRegistrationConfiguration"
+            />" }) | null, registrations?: (Omit&lt;{ <xref uid="@odata.type"
+            />: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, cancelationDateTime?: function,
+            email?: function, externalRegistrationInformation?: function,
+            firstName?: function, lastName?: function, preferredLanguage?:
+            function, preferredTimezone?: function,
+            registrantVideoOnDemandWebUrl?: function, registrationDateTime?:
+            function, registrationQuestionAnswers?: function, sessions?:
+            function, status?: function, userId?: function } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.virtualEventRegistration" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.virtualEventWebinar" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.userVirtualEventsRoot" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /users/{user-id}/virtualEvents"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, webinars?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, createdBy?: function,
+          description?: function, displayName?: function, endDateTime?:
+          function, externalEventInformation?: function, presenters?: function,
+          sessions?: function, settings?: function, startDateTime?: function,
+          status?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.virtualEvent" />"
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, audience?: "unknownFutureValue" | Record&lt;string, never&gt;
+          | "organization" | "everyone" | null, coOrganizers?: (Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ..., tenantId?: ... } & {
+          <xref uid="@odata.type" />: ... })[], registrationConfiguration?:
+          Record&lt;string, never&gt; | (Omit&lt;... & ... & ..., "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          isManualApprovalEnabled?: function, isWaitlistEnabled?: function } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.virtualEventWebinarRegistrationConfiguration" />"
+          }) | null, registrations?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., cancelationDateTime?: ..., email?: ...,
+          externalRegistrationInformation?: ..., firstName?: ..., lastName?:
+          ..., preferredLanguage?: ..., preferredTimezone?: ...,
+          registrantVideoOnDemandWebUrl?: ..., registrationDateTime?: ...,
+          registrationQuestionAnswers?: ..., sessions?: ..., status?: ...,
+          userId?: ... } & { <xref uid="@odata.type" />: ... })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.virtualEventWebinar" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.userVirtualEventsRoot" />" }&gt;
 variables:
   - name: webinars
     uid: '@microsoft/teams.graph-endpoints-beta.users.virtualEvents.webinars'

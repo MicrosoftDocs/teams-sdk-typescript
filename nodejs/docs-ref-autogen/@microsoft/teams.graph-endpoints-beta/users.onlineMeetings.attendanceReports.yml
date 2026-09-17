@@ -72,8 +72,23 @@ variables:
           }
 functions:
   - name: >-
-      create(Operation<"/users/{user-id}/onlineMeetings/{onlineMeeting-id}/attendanceReports",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, attendanceRecords?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, attendanceIntervals?: {
+      @odata.type: string, durationInSeconds?: number | null, joinDateTime?:
+      string | null, leaveDateTime?: string | null }[], emailAddress?: string |
+      null, externalRegistrationInformation?: Record<string, never> | {
+      @odata.type: string, referrer?: string | null, registrationId?: string |
+      null } | null, identity?: Record<string, never> | { @odata.type: string,
+      displayName?: string | null, id?: string | null } | null, registrantId?:
+      string | null, registrationId?: string | null, role?: string | null,
+      totalAttendanceInSeconds?: number | null } & { @odata.type:
+      "#microsoft.graph.attendanceRecord" })[], externalEventInformation?: {
+      @odata.type: string, applicationId?: string | null, externalEventId?:
+      string | null }[], meetingEndDateTime?: string | null,
+      meetingStartDateTime?: string | null, totalParticipantCount?: number |
+      null } & { @odata.type: "#microsoft.graph.meetingAttendanceReport" }, {
+      onlineMeeting-id: string, user-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.users.onlineMeetings.attendanceReports.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -84,25 +99,97 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/users/{user-id}/onlineMeetings/{onlineMeeting-id}/attendanceReports",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /users/{user-id}/onlineMeetings/{onlineMeeting-id}/attendanceReports"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, attendanceRecords?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, attendanceIntervals?: { @odata.type: string, durationInSeconds?:
+        number | null, joinDateTime?: string | null, leaveDateTime?: string |
+        null }[], emailAddress?: string | null,
+        externalRegistrationInformation?: Record<string, never> | { @odata.type:
+        string, referrer?: string | null, registrationId?: string | null } |
+        null, identity?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, registrantId?:
+        string | null, registrationId?: string | null, role?: string | null,
+        totalAttendanceInSeconds?: number | null } & { @odata.type:
+        "#microsoft.graph.attendanceRecord" })[], externalEventInformation?: {
+        @odata.type: string, applicationId?: string | null, externalEventId?:
+        string | null }[], meetingEndDateTime?: string | null,
+        meetingStartDateTime?: string | null, totalParticipantCount?: number |
+        null } & { @odata.type: "#microsoft.graph.meetingAttendanceReport" },
+        params?: { onlineMeeting-id: string, user-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, attendanceRecords?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, attendanceIntervals?: { @odata.type: string, durationInSeconds?:
+        function, joinDateTime?: function, leaveDateTime?: function }[],
+        emailAddress?: string | null, externalRegistrationInformation?:
+        Record<string, never> | { @odata.type: string, referrer?: string | null,
+        registrationId?: string | null } | null, identity?: Record<string,
+        never> | { @odata.type: string, displayName?: string | null, id?: string
+        | null } | null, registrantId?: string | null, registrationId?: string |
+        null, role?: string | null, totalAttendanceInSeconds?: number | null } &
+        { @odata.type: "#microsoft.graph.attendanceRecord" })[],
+        externalEventInformation?: { @odata.type: string, applicationId?: string
+        | null, externalEventId?: string | null }[], meetingEndDateTime?: string
+        | null, meetingStartDateTime?: string | null, totalParticipantCount?:
+        number | null } & { @odata.type:
+        "#microsoft.graph.meetingAttendanceReport" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/users/{user-id}/onlineMeetings/{onlineMeeting-id}/attendanceReports",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            attendanceRecords?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, attendanceIntervals?: { <xref
+            uid="@odata.type" />: string, durationInSeconds?: number | null,
+            joinDateTime?: string | null, leaveDateTime?: string | null }[],
+            emailAddress?: string | null, externalRegistrationInformation?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            referrer?: string | null, registrationId?: string | null } | null,
+            identity?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, displayName?: string | null, id?: string | null } |
+            null, registrantId?: string | null, registrationId?: string | null,
+            role?: string | null, totalAttendanceInSeconds?: number | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.attendanceRecord" />" })[],
+            externalEventInformation?: { <xref uid="@odata.type" />: string,
+            applicationId?: string | null, externalEventId?: string | null }[],
+            meetingEndDateTime?: string | null, meetingStartDateTime?: string |
+            null, totalParticipantCount?: number | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.meetingAttendanceReport" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ onlineMeeting-id: string, user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /users/{user-id}/onlineMeetings/{onlineMeeting-id}/attendanceReports"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, attendanceRecords?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, attendanceIntervals?: { <xref
+          uid="@odata.type" />: string, durationInSeconds?: function,
+          joinDateTime?: function, leaveDateTime?: function }[], emailAddress?:
+          string | null, externalRegistrationInformation?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, referrer?: string |
+          null, registrationId?: string | null } | null, identity?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          displayName?: string | null, id?: string | null } | null,
+          registrantId?: string | null, registrationId?: string | null, role?:
+          string | null, totalAttendanceInSeconds?: number | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.attendanceRecord"
+          />" })[], externalEventInformation?: { <xref uid="@odata.type" />:
+          string, applicationId?: string | null, externalEventId?: string | null
+          }[], meetingEndDateTime?: string | null, meetingStartDateTime?: string
+          | null, totalParticipantCount?: number | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.meetingAttendanceReport" />" }&gt;
+  - name: >-
+      del({ If-Match?: string, meetingAttendanceReport-id: string,
+      onlineMeeting-id: string, user-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.users.onlineMeetings.attendanceReports.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -113,18 +200,21 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /users/{user-id}/onlineMeetings/{onlineMeeting-id}/attendanceReports/{meetingAttendanceReport-id}"]["response"]>
+        function del(params?: { If-Match?: string, meetingAttendanceReport-id:
+        string, onlineMeeting-id: string, user-id: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { If-Match?: string, meetingAttendanceReport-id: string,
+            onlineMeeting-id: string, user-id: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /users/{user-id}/onlineMeetings/{onlineMeeting-id}/attendanceReports/{meetingAttendanceReport-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], meetingAttendanceReport-id:
+      string, onlineMeeting-id: string, user-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.users.onlineMeetings.attendanceReports.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -138,18 +228,60 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/onlineMeetings/{onlineMeeting-id}/attendanceReports/{meetingAttendanceReport-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        meetingAttendanceReport-id: string, onlineMeeting-id: string, user-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, attendanceRecords?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, attendanceIntervals?: { @odata.type: string, durationInSeconds?:
+        function, joinDateTime?: function, leaveDateTime?: function }[],
+        emailAddress?: string | null, externalRegistrationInformation?:
+        Record<string, never> | { @odata.type: string, referrer?: string | null,
+        registrationId?: string | null } | null, identity?: Record<string,
+        never> | { @odata.type: string, displayName?: string | null, id?: string
+        | null } | null, registrantId?: string | null, registrationId?: string |
+        null, role?: string | null, totalAttendanceInSeconds?: number | null } &
+        { @odata.type: "#microsoft.graph.attendanceRecord" })[],
+        externalEventInformation?: { @odata.type: string, applicationId?: string
+        | null, externalEventId?: string | null }[], meetingEndDateTime?: string
+        | null, meetingStartDateTime?: string | null, totalParticipantCount?:
+        number | null } & { @odata.type:
+        "#microsoft.graph.meetingAttendanceReport" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[],
+            meetingAttendanceReport-id: string, onlineMeeting-id: string,
+            user-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/onlineMeetings/{onlineMeeting-id}/attendanceReports/{meetingAttendanceReport-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, attendanceRecords?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, attendanceIntervals?: { <xref
+          uid="@odata.type" />: string, durationInSeconds?: function,
+          joinDateTime?: function, leaveDateTime?: function }[], emailAddress?:
+          string | null, externalRegistrationInformation?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, referrer?: string |
+          null, registrationId?: string | null } | null, identity?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          displayName?: string | null, id?: string | null } | null,
+          registrantId?: string | null, registrationId?: string | null, role?:
+          string | null, totalAttendanceInSeconds?: number | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.attendanceRecord"
+          />" })[], externalEventInformation?: { <xref uid="@odata.type" />:
+          string, applicationId?: string | null, externalEventId?: string | null
+          }[], meetingEndDateTime?: string | null, meetingStartDateTime?: string
+          | null, totalParticipantCount?: number | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.meetingAttendanceReport" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, onlineMeeting-id: string, user-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.users.onlineMeetings.attendanceReports.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -161,20 +293,64 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/onlineMeetings/{onlineMeeting-id}/attendanceReports"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, onlineMeeting-id: string, user-id: string
+        }): EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?:
+        string | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, attendanceRecords?: (Omit<...,
+        ...> & { @odata.type: ..., attendanceIntervals?: ..., emailAddress?:
+        ..., externalRegistrationInformation?: ..., identity?: ...,
+        registrantId?: ..., registrationId?: ..., role?: ...,
+        totalAttendanceInSeconds?: ... } & { @odata.type: ... })[],
+        externalEventInformation?: { @odata.type: string, applicationId?:
+        function, externalEventId?: function }[], meetingEndDateTime?: string |
+        null, meetingStartDateTime?: string | null, totalParticipantCount?:
+        number | null } & { @odata.type:
+        "#microsoft.graph.meetingAttendanceReport" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, onlineMeeting-id: string, user-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/onlineMeetings/{onlineMeeting-id}/attendanceReports"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          attendanceRecords?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type"
+          />: ..., attendanceIntervals?: ..., emailAddress?: ...,
+          externalRegistrationInformation?: ..., identity?: ..., registrantId?:
+          ..., registrationId?: ..., role?: ..., totalAttendanceInSeconds?: ...
+          } & { <xref uid="@odata.type" />: ... })[], externalEventInformation?:
+          { <xref uid="@odata.type" />: string, applicationId?: function,
+          externalEventId?: function }[], meetingEndDateTime?: string | null,
+          meetingStartDateTime?: string | null, totalParticipantCount?: number |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.meetingAttendanceReport" />" })[] }&gt;
   - name: >-
-      update(Operation<"/users/{user-id}/onlineMeetings/{onlineMeeting-id}/attendanceReports/{meetingAttendanceReport-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, attendanceRecords?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, attendanceIntervals?: {
+      @odata.type: string, durationInSeconds?: number | null, joinDateTime?:
+      string | null, leaveDateTime?: string | null }[], emailAddress?: string |
+      null, externalRegistrationInformation?: Record<string, never> | {
+      @odata.type: string, referrer?: string | null, registrationId?: string |
+      null } | null, identity?: Record<string, never> | { @odata.type: string,
+      displayName?: string | null, id?: string | null } | null, registrantId?:
+      string | null, registrationId?: string | null, role?: string | null,
+      totalAttendanceInSeconds?: number | null } & { @odata.type:
+      "#microsoft.graph.attendanceRecord" })[], externalEventInformation?: {
+      @odata.type: string, applicationId?: string | null, externalEventId?:
+      string | null }[], meetingEndDateTime?: string | null,
+      meetingStartDateTime?: string | null, totalParticipantCount?: number |
+      null } & { @odata.type: "#microsoft.graph.meetingAttendanceReport" }, {
+      meetingAttendanceReport-id: string, onlineMeeting-id: string, user-id:
+      string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.users.onlineMeetings.attendanceReports.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -185,21 +361,93 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/users/{user-id}/onlineMeetings/{onlineMeeting-id}/attendanceReports/{meetingAttendanceReport-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /users/{user-id}/onlineMeetings/{onlineMeeting-id}/attendanceReports/{meetingAttendanceReport-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, attendanceRecords?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, attendanceIntervals?: { @odata.type: string, durationInSeconds?:
+        number | null, joinDateTime?: string | null, leaveDateTime?: string |
+        null }[], emailAddress?: string | null,
+        externalRegistrationInformation?: Record<string, never> | { @odata.type:
+        string, referrer?: string | null, registrationId?: string | null } |
+        null, identity?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, registrantId?:
+        string | null, registrationId?: string | null, role?: string | null,
+        totalAttendanceInSeconds?: number | null } & { @odata.type:
+        "#microsoft.graph.attendanceRecord" })[], externalEventInformation?: {
+        @odata.type: string, applicationId?: string | null, externalEventId?:
+        string | null }[], meetingEndDateTime?: string | null,
+        meetingStartDateTime?: string | null, totalParticipantCount?: number |
+        null } & { @odata.type: "#microsoft.graph.meetingAttendanceReport" },
+        params?: { meetingAttendanceReport-id: string, onlineMeeting-id: string,
+        user-id: string }): EndpointRequest<Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, attendanceRecords?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, attendanceIntervals?: { @odata.type: string,
+        durationInSeconds?: function, joinDateTime?: function, leaveDateTime?:
+        function }[], emailAddress?: string | null,
+        externalRegistrationInformation?: Record<string, never> | { @odata.type:
+        string, referrer?: string | null, registrationId?: string | null } |
+        null, identity?: Record<string, never> | { @odata.type: string,
+        displayName?: string | null, id?: string | null } | null, registrantId?:
+        string | null, registrationId?: string | null, role?: string | null,
+        totalAttendanceInSeconds?: number | null } & { @odata.type:
+        "#microsoft.graph.attendanceRecord" })[], externalEventInformation?: {
+        @odata.type: string, applicationId?: string | null, externalEventId?:
+        string | null }[], meetingEndDateTime?: string | null,
+        meetingStartDateTime?: string | null, totalParticipantCount?: number |
+        null } & { @odata.type: "#microsoft.graph.meetingAttendanceReport" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/users/{user-id}/onlineMeetings/{onlineMeeting-id}/attendanceReports/{meetingAttendanceReport-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            attendanceRecords?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, attendanceIntervals?: { <xref
+            uid="@odata.type" />: string, durationInSeconds?: number | null,
+            joinDateTime?: string | null, leaveDateTime?: string | null }[],
+            emailAddress?: string | null, externalRegistrationInformation?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            referrer?: string | null, registrationId?: string | null } | null,
+            identity?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, displayName?: string | null, id?: string | null } |
+            null, registrantId?: string | null, registrationId?: string | null,
+            role?: string | null, totalAttendanceInSeconds?: number | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.attendanceRecord" />" })[],
+            externalEventInformation?: { <xref uid="@odata.type" />: string,
+            applicationId?: string | null, externalEventId?: string | null }[],
+            meetingEndDateTime?: string | null, meetingStartDateTime?: string |
+            null, totalParticipantCount?: number | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.meetingAttendanceReport" />" }
           description: ''
         - id: params
-          type: any
+          type: >-
+            { meetingAttendanceReport-id: string, onlineMeeting-id: string,
+            user-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /users/{user-id}/onlineMeetings/{onlineMeeting-id}/attendanceReports/{meetingAttendanceReport-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, attendanceRecords?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, attendanceIntervals?: { <xref
+          uid="@odata.type" />: string, durationInSeconds?: function,
+          joinDateTime?: function, leaveDateTime?: function }[], emailAddress?:
+          string | null, externalRegistrationInformation?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, referrer?: string |
+          null, registrationId?: string | null } | null, identity?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          displayName?: string | null, id?: string | null } | null,
+          registrantId?: string | null, registrationId?: string | null, role?:
+          string | null, totalAttendanceInSeconds?: number | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.attendanceRecord"
+          />" })[], externalEventInformation?: { <xref uid="@odata.type" />:
+          string, applicationId?: string | null, externalEventId?: string | null
+          }[], meetingEndDateTime?: string | null, meetingStartDateTime?: string
+          | null, totalParticipantCount?: number | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.meetingAttendanceReport" />" }&gt;

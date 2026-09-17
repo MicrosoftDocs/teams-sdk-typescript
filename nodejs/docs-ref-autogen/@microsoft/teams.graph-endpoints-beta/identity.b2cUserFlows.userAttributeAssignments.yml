@@ -10,8 +10,22 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
   - name: >-
-      create(Operation<"/identity/b2cUserFlows/{b2cIdentityUserFlow-id}/userAttributeAssignments",
-      "post">, any)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, displayName?: string | null, isOptional?: boolean,
+      requiresVerification?: boolean, userAttribute?: Record<string, never> |
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, dataType?: "string" | "boolean" |
+      "unknownFutureValue" | "int64" | "stringCollection" | "dateTime",
+      description?: string | null, displayName?: string | null,
+      userFlowAttributeType?: "unknownFutureValue" | "builtIn" | "custom" |
+      "required" }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.identityUserFlowAttribute" }) | null,
+      userAttributeValues?: { @odata.type: string, isDefault?: boolean, name?:
+      string | null, value?: string | null }[], userInputType?: "textBox" |
+      "dateTimeDropdown" | "radioSingleSelect" | "dropdownSingleSelect" |
+      "emailBox" | "checkboxMultiSelect" } & { @odata.type:
+      "#microsoft.graph.identityUserFlowAttributeAssignment" }, {
+      b2cIdentityUserFlow-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.identity.b2cUserFlows.userAttributeAssignments.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -26,25 +40,88 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/identity/b2cUserFlows/{b2cIdentityUserFlow-id}/userAttributeAssignments",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /identity/b2cUserFlows/{b2cIdentityUserFlow-id}/userAttributeAssignments"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, displayName?: string | null,
+        isOptional?: boolean, requiresVerification?: boolean, userAttribute?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, dataType?: "string" |
+        "boolean" | "unknownFutureValue" | "int64" | "stringCollection" |
+        "dateTime", description?: string | null, displayName?: string | null,
+        userFlowAttributeType?: "unknownFutureValue" | "builtIn" | "custom" |
+        "required" }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.identityUserFlowAttribute" }) | null,
+        userAttributeValues?: { @odata.type: string, isDefault?: boolean, name?:
+        string | null, value?: string | null }[], userInputType?: "textBox" |
+        "dateTimeDropdown" | "radioSingleSelect" | "dropdownSingleSelect" |
+        "emailBox" | "checkboxMultiSelect" } & { @odata.type:
+        "#microsoft.graph.identityUserFlowAttributeAssignment" }, params?: {
+        b2cIdentityUserFlow-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        displayName?: string | null, isOptional?: boolean,
+        requiresVerification?: boolean, userAttribute?: Record<string, never> |
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, dataType?: "string" | "boolean" |
+        "unknownFutureValue" | "int64" | "stringCollection" | "dateTime",
+        description?: string | null, displayName?: string | null,
+        userFlowAttributeType?: "unknownFutureValue" | "builtIn" | "custom" |
+        "required" }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.identityUserFlowAttribute" }) | null,
+        userAttributeValues?: { @odata.type: string, isDefault?: boolean, name?:
+        string | null, value?: string | null }[], userInputType?: "textBox" |
+        "dateTimeDropdown" | "radioSingleSelect" | "dropdownSingleSelect" |
+        "emailBox" | "checkboxMultiSelect" } & { @odata.type:
+        "#microsoft.graph.identityUserFlowAttributeAssignment" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/identity/b2cUserFlows/{b2cIdentityUserFlow-id}/userAttributeAssignments",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            displayName?: string | null, isOptional?: boolean,
+            requiresVerification?: boolean, userAttribute?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, dataType?: "string" | "boolean" |
+            "unknownFutureValue" | "int64" | "stringCollection" | "dateTime",
+            description?: string | null, displayName?: string | null,
+            userFlowAttributeType?: "unknownFutureValue" | "builtIn" | "custom"
+            | "required" }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.identityUserFlowAttribute" />" }) | null,
+            userAttributeValues?: { <xref uid="@odata.type" />: string,
+            isDefault?: boolean, name?: string | null, value?: string | null
+            }[], userInputType?: "textBox" | "dateTimeDropdown" |
+            "radioSingleSelect" | "dropdownSingleSelect" | "emailBox" |
+            "checkboxMultiSelect" } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.identityUserFlowAttributeAssignment" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ b2cIdentityUserFlow-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /identity/b2cUserFlows/{b2cIdentityUserFlow-id}/userAttributeAssignments"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, displayName?: string | null, isOptional?: boolean,
+          requiresVerification?: boolean, userAttribute?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, dataType?: "string" | "boolean" |
+          "unknownFutureValue" | "int64" | "stringCollection" | "dateTime",
+          description?: string | null, displayName?: string | null,
+          userFlowAttributeType?: "unknownFutureValue" | "builtIn" | "custom" |
+          "required" }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityUserFlowAttribute" />" }) | null,
+          userAttributeValues?: { <xref uid="@odata.type" />: string,
+          isDefault?: boolean, name?: string | null, value?: string | null }[],
+          userInputType?: "textBox" | "dateTimeDropdown" | "radioSingleSelect" |
+          "dropdownSingleSelect" | "emailBox" | "checkboxMultiSelect" } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityUserFlowAttributeAssignment" />" }&gt;
+  - name: >-
+      del({ b2cIdentityUserFlow-id: string,
+      identityUserFlowAttributeAssignment-id: string, If-Match?: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.identity.b2cUserFlows.userAttributeAssignments.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -58,18 +135,21 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /identity/b2cUserFlows/{b2cIdentityUserFlow-id}/userAttributeAssignments/{identityUserFlowAttributeAssignment-id}"]["response"]>
+        function del(params?: { b2cIdentityUserFlow-id: string,
+        identityUserFlowAttributeAssignment-id: string, If-Match?: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { b2cIdentityUserFlow-id: string,
+            identityUserFlowAttributeAssignment-id: string, If-Match?: string }
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /identity/b2cUserFlows/{b2cIdentityUserFlow-id}/userAttributeAssignments/{identityUserFlowAttributeAssignment-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], b2cIdentityUserFlow-id:
+      string, identityUserFlowAttributeAssignment-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.identity.b2cUserFlows.userAttributeAssignments.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -84,18 +164,55 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /identity/b2cUserFlows/{b2cIdentityUserFlow-id}/userAttributeAssignments/{identityUserFlowAttributeAssignment-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        b2cIdentityUserFlow-id: string, identityUserFlowAttributeAssignment-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, displayName?: string | null,
+        isOptional?: boolean, requiresVerification?: boolean, userAttribute?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, dataType?: "string" |
+        "boolean" | "unknownFutureValue" | "int64" | "stringCollection" |
+        "dateTime", description?: string | null, displayName?: string | null,
+        userFlowAttributeType?: "unknownFutureValue" | "builtIn" | "custom" |
+        "required" }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.identityUserFlowAttribute" }) | null,
+        userAttributeValues?: { @odata.type: string, isDefault?: boolean, name?:
+        string | null, value?: string | null }[], userInputType?: "textBox" |
+        "dateTimeDropdown" | "radioSingleSelect" | "dropdownSingleSelect" |
+        "emailBox" | "checkboxMultiSelect" } & { @odata.type:
+        "#microsoft.graph.identityUserFlowAttributeAssignment" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], b2cIdentityUserFlow-id:
+            string, identityUserFlowAttributeAssignment-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /identity/b2cUserFlows/{b2cIdentityUserFlow-id}/userAttributeAssignments/{identityUserFlowAttributeAssignment-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, displayName?: string | null, isOptional?: boolean,
+          requiresVerification?: boolean, userAttribute?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, dataType?: "string" | "boolean" |
+          "unknownFutureValue" | "int64" | "stringCollection" | "dateTime",
+          description?: string | null, displayName?: string | null,
+          userFlowAttributeType?: "unknownFutureValue" | "builtIn" | "custom" |
+          "required" }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityUserFlowAttribute" />" }) | null,
+          userAttributeValues?: { <xref uid="@odata.type" />: string,
+          isDefault?: boolean, name?: string | null, value?: string | null }[],
+          userInputType?: "textBox" | "dateTimeDropdown" | "radioSingleSelect" |
+          "dropdownSingleSelect" | "emailBox" | "checkboxMultiSelect" } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityUserFlowAttributeAssignment" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, b2cIdentityUserFlow-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.identity.b2cUserFlows.userAttributeAssignments.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -110,20 +227,69 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /identity/b2cUserFlows/{b2cIdentityUserFlow-id}/userAttributeAssignments"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, b2cIdentityUserFlow-id: string }):
+        EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?: string
+        | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, displayName?: string | null,
+        isOptional?: boolean, requiresVerification?: boolean, userAttribute?:
+        Record<string, never> | (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & Omit<{ @odata.type: ..., dataType?: ..., description?:
+        ..., displayName?: ..., userFlowAttributeType?: ... }, "@odata.type"> &
+        { @odata.type: "#microsoft.graph.identityUserFlowAttribute" }) | null,
+        userAttributeValues?: { @odata.type: string, isDefault?: function,
+        name?: function, value?: function }[], userInputType?: "textBox" |
+        "dateTimeDropdown" | "radioSingleSelect" | "dropdownSingleSelect" |
+        "emailBox" | "checkboxMultiSelect" } & { @odata.type:
+        "#microsoft.graph.identityUserFlowAttributeAssignment" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, b2cIdentityUserFlow-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /identity/b2cUserFlows/{b2cIdentityUserFlow-id}/userAttributeAssignments"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          displayName?: string | null, isOptional?: boolean,
+          requiresVerification?: boolean, userAttribute?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+          "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+          />: ..., dataType?: ..., description?: ..., displayName?: ...,
+          userFlowAttributeType?: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityUserFlowAttribute" />" }) | null,
+          userAttributeValues?: { <xref uid="@odata.type" />: string,
+          isDefault?: function, name?: function, value?: function }[],
+          userInputType?: "textBox" | "dateTimeDropdown" | "radioSingleSelect" |
+          "dropdownSingleSelect" | "emailBox" | "checkboxMultiSelect" } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityUserFlowAttributeAssignment" />" })[]
+          }&gt;
   - name: >-
-      update(Operation<"/identity/b2cUserFlows/{b2cIdentityUserFlow-id}/userAttributeAssignments/{identityUserFlowAttributeAssignment-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, displayName?: string | null, isOptional?: boolean,
+      requiresVerification?: boolean, userAttribute?: Record<string, never> |
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+      @odata.type: string, dataType?: "string" | "boolean" |
+      "unknownFutureValue" | "int64" | "stringCollection" | "dateTime",
+      description?: string | null, displayName?: string | null,
+      userFlowAttributeType?: "unknownFutureValue" | "builtIn" | "custom" |
+      "required" }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.identityUserFlowAttribute" }) | null,
+      userAttributeValues?: { @odata.type: string, isDefault?: boolean, name?:
+      string | null, value?: string | null }[], userInputType?: "textBox" |
+      "dateTimeDropdown" | "radioSingleSelect" | "dropdownSingleSelect" |
+      "emailBox" | "checkboxMultiSelect" } & { @odata.type:
+      "#microsoft.graph.identityUserFlowAttributeAssignment" }, {
+      b2cIdentityUserFlow-id: string, identityUserFlowAttributeAssignment-id:
+      string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.identity.b2cUserFlows.userAttributeAssignments.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -137,24 +303,87 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/identity/b2cUserFlows/{b2cIdentityUserFlow-id}/userAttributeAssignments/{identityUserFlowAttributeAssignment-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /identity/b2cUserFlows/{b2cIdentityUserFlow-id}/userAttributeAssignments/{identityUserFlowAttributeAssignment-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, displayName?: string | null,
+        isOptional?: boolean, requiresVerification?: boolean, userAttribute?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, dataType?: "string" |
+        "boolean" | "unknownFutureValue" | "int64" | "stringCollection" |
+        "dateTime", description?: string | null, displayName?: string | null,
+        userFlowAttributeType?: "unknownFutureValue" | "builtIn" | "custom" |
+        "required" }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.identityUserFlowAttribute" }) | null,
+        userAttributeValues?: { @odata.type: string, isDefault?: boolean, name?:
+        string | null, value?: string | null }[], userInputType?: "textBox" |
+        "dateTimeDropdown" | "radioSingleSelect" | "dropdownSingleSelect" |
+        "emailBox" | "checkboxMultiSelect" } & { @odata.type:
+        "#microsoft.graph.identityUserFlowAttributeAssignment" }, params?: {
+        b2cIdentityUserFlow-id: string, identityUserFlowAttributeAssignment-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, displayName?: string | null,
+        isOptional?: boolean, requiresVerification?: boolean, userAttribute?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, dataType?: "string" |
+        "boolean" | "unknownFutureValue" | "int64" | "stringCollection" |
+        "dateTime", description?: string | null, displayName?: string | null,
+        userFlowAttributeType?: "unknownFutureValue" | "builtIn" | "custom" |
+        "required" }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.identityUserFlowAttribute" }) | null,
+        userAttributeValues?: { @odata.type: string, isDefault?: boolean, name?:
+        string | null, value?: string | null }[], userInputType?: "textBox" |
+        "dateTimeDropdown" | "radioSingleSelect" | "dropdownSingleSelect" |
+        "emailBox" | "checkboxMultiSelect" } & { @odata.type:
+        "#microsoft.graph.identityUserFlowAttributeAssignment" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/identity/b2cUserFlows/{b2cIdentityUserFlow-id}/userAttributeAssignments/{identityUserFlowAttributeAssignment-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            displayName?: string | null, isOptional?: boolean,
+            requiresVerification?: boolean, userAttribute?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+            uid="@odata.type" />: string, dataType?: "string" | "boolean" |
+            "unknownFutureValue" | "int64" | "stringCollection" | "dateTime",
+            description?: string | null, displayName?: string | null,
+            userFlowAttributeType?: "unknownFutureValue" | "builtIn" | "custom"
+            | "required" }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.identityUserFlowAttribute" />" }) | null,
+            userAttributeValues?: { <xref uid="@odata.type" />: string,
+            isDefault?: boolean, name?: string | null, value?: string | null
+            }[], userInputType?: "textBox" | "dateTimeDropdown" |
+            "radioSingleSelect" | "dropdownSingleSelect" | "emailBox" |
+            "checkboxMultiSelect" } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.identityUserFlowAttributeAssignment" />" }
           description: ''
         - id: params
-          type: any
+          type: >-
+            { b2cIdentityUserFlow-id: string,
+            identityUserFlowAttributeAssignment-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /identity/b2cUserFlows/{b2cIdentityUserFlow-id}/userAttributeAssignments/{identityUserFlowAttributeAssignment-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, displayName?: string | null, isOptional?: boolean,
+          requiresVerification?: boolean, userAttribute?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, dataType?: "string" | "boolean" |
+          "unknownFutureValue" | "int64" | "stringCollection" | "dateTime",
+          description?: string | null, displayName?: string | null,
+          userFlowAttributeType?: "unknownFutureValue" | "builtIn" | "custom" |
+          "required" }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityUserFlowAttribute" />" }) | null,
+          userAttributeValues?: { <xref uid="@odata.type" />: string,
+          isDefault?: boolean, name?: string | null, value?: string | null }[],
+          userInputType?: "textBox" | "dateTimeDropdown" | "radioSingleSelect" |
+          "dropdownSingleSelect" | "emailBox" | "checkboxMultiSelect" } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.identityUserFlowAttributeAssignment" />" }&gt;
 variables:
   - name: setOrder
     uid: >-

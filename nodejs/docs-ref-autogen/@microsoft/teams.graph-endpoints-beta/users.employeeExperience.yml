@@ -7,7 +7,7 @@ interfaces:
   - '@microsoft/teams.graph-endpoints-beta.users.employeeExperience.IEndpoints'
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: del(any)
+  - name: 'del({ If-Match?: string, user-id: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.users.employeeExperience.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`DELETE /users/{user-id}/employeeExperience`'
@@ -15,18 +15,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /users/{user-id}/employeeExperience"]["response"]>
+        function del(params?: { If-Match?: string, user-id: string }):
+        EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, user-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /users/{user-id}/employeeExperience"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[], user-id: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.users.employeeExperience.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`GET /users/{user-id}/employeeExperience`'
@@ -34,18 +32,67 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/employeeExperience"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[], user-id:
+        string }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, assignedRoles?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, displayName?: string, members?: (Omit<..., ...> & { @odata.type:
+        ..., createdDateTime?: ..., user?: ..., userId?: ... } & { @odata.type:
+        ... })[] } & { @odata.type: "#microsoft.graph.engagementRole" })[],
+        learningCourseActivities?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, completedDateTime?: string
+        | null, completionPercentage?: number | null, externalcourseActivityId?:
+        string | null, learnerUserId?: string, learningContentId?: string,
+        learningProviderId?: string | null, status?: "unknownFutureValue" |
+        Record<string, never> | "notStarted" | "inProgress" | "completed" | null
+        }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.learningCourseActivity" })[] } & { @odata.type:
+        "#microsoft.graph.employeeExperienceUser" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[], user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/employeeExperience"]["response"]&gt;
-  - name: update(Operation<"/users/{user-id}/employeeExperience", "patch">, any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, assignedRoles?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, displayName?: string, members?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          createdDateTime?: ..., user?: ..., userId?: ... } & { <xref
+          uid="@odata.type" />: ... })[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.engagementRole" />" })[],
+          learningCourseActivities?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, completedDateTime?: string | null,
+          completionPercentage?: number | null, externalcourseActivityId?:
+          string | null, learnerUserId?: string, learningContentId?: string,
+          learningProviderId?: string | null, status?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "notStarted" | "inProgress" |
+          "completed" | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.learningCourseActivity" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.employeeExperienceUser" />" }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, assignedRoles?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, displayName?: string,
+      members?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+      @odata.type: string, createdDateTime?: function, user?: function, userId?:
+      function } & { @odata.type: "#microsoft.graph.engagementRoleMember" })[] }
+      & { @odata.type: "#microsoft.graph.engagementRole" })[],
+      learningCourseActivities?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, completedDateTime?: string |
+      null, completionPercentage?: number | null, externalcourseActivityId?:
+      string | null, learnerUserId?: string, learningContentId?: string,
+      learningProviderId?: string | null, status?: "unknownFutureValue" |
+      Record<string, never> | "notStarted" | "inProgress" | "completed" | null
+      }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.learningCourseActivity" })[] } & { @odata.type:
+      "#microsoft.graph.employeeExperienceUser" }, { user-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.users.employeeExperience.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /users/{user-id}/employeeExperience`'
@@ -53,21 +100,93 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/users/{user-id}/employeeExperience",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /users/{user-id}/employeeExperience"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, assignedRoles?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, displayName?: string, members?: (Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & { @odata.type: string, createdDateTime?:
+        function, user?: function, userId?: function } & { @odata.type:
+        "#microsoft.graph.engagementRoleMember" })[] } & { @odata.type:
+        "#microsoft.graph.engagementRole" })[], learningCourseActivities?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, completedDateTime?: string | null,
+        completionPercentage?: number | null, externalcourseActivityId?: string
+        | null, learnerUserId?: string, learningContentId?: string,
+        learningProviderId?: string | null, status?: "unknownFutureValue" |
+        Record<string, never> | "notStarted" | "inProgress" | "completed" | null
+        }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.learningCourseActivity" })[] } & { @odata.type:
+        "#microsoft.graph.employeeExperienceUser" }, params?: { user-id: string
+        }): EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, assignedRoles?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, displayName?: string, members?: (Omit<..., ...> & { @odata.type:
+        ..., createdDateTime?: ..., user?: ..., userId?: ... } & { @odata.type:
+        ... })[] } & { @odata.type: "#microsoft.graph.engagementRole" })[],
+        learningCourseActivities?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string, completedDateTime?: string
+        | null, completionPercentage?: number | null, externalcourseActivityId?:
+        string | null, learnerUserId?: string, learningContentId?: string,
+        learningProviderId?: string | null, status?: "unknownFutureValue" |
+        Record<string, never> | "notStarted" | "inProgress" | "completed" | null
+        }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.learningCourseActivity" })[] } & { @odata.type:
+        "#microsoft.graph.employeeExperienceUser" }>
       parameters:
         - id: body
-          type: Operation&lt;"/users/{user-id}/employeeExperience", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            assignedRoles?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, displayName?: string, members?:
+            (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            createdDateTime?: function, user?: function, userId?: function } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.engagementRoleMember" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.engagementRole"
+            />" })[], learningCourseActivities?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+            string, completedDateTime?: string | null, completionPercentage?:
+            number | null, externalcourseActivityId?: string | null,
+            learnerUserId?: string, learningContentId?: string,
+            learningProviderId?: string | null, status?: "unknownFutureValue" |
+            Record&lt;string, never&gt; | "notStarted" | "inProgress" |
+            "completed" | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.learningCourseActivity" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.employeeExperienceUser" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /users/{user-id}/employeeExperience"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, assignedRoles?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, displayName?: string, members?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          createdDateTime?: ..., user?: ..., userId?: ... } & { <xref
+          uid="@odata.type" />: ... })[] } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.engagementRole" />" })[],
+          learningCourseActivities?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, completedDateTime?: string | null,
+          completionPercentage?: number | null, externalcourseActivityId?:
+          string | null, learnerUserId?: string, learningContentId?: string,
+          learningProviderId?: string | null, status?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "notStarted" | "inProgress" |
+          "completed" | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.learningCourseActivity" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.employeeExperienceUser" />" }&gt;
 variables:
   - name: learningCourseActivities
     uid: >-

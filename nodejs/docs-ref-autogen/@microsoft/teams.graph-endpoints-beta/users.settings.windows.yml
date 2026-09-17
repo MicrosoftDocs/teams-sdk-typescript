@@ -7,7 +7,16 @@ interfaces:
   - '@microsoft/teams.graph-endpoints-beta.users.settings.windows.IEndpoints'
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: create(Operation<"/users/{user-id}/settings/windows", "post">, any)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, instances?: (Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & { @odata.type: string, createdDateTime?: string,
+      expirationDateTime?: string, lastModifiedDateTime?: string | null,
+      payload?: string } & { @odata.type:
+      "#microsoft.graph.windowsSettingInstance" })[], payloadType?: string |
+      null, settingType?: "unknownFutureValue" | "roaming" | "backup",
+      windowsDeviceId?: string | null } & { @odata.type:
+      "#microsoft.graph.windowsSetting" }, { user-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.users.settings.windows.create'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`POST /users/{user-id}/settings/windows`'
@@ -15,22 +24,59 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body: Operation<"/users/{user-id}/settings/windows",
-        "post">, params?: any): EndpointRequest<IEndpoints["POST
-        /users/{user-id}/settings/windows"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, instances?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        createdDateTime?: string, expirationDateTime?: string,
+        lastModifiedDateTime?: string | null, payload?: string } & {
+        @odata.type: "#microsoft.graph.windowsSettingInstance" })[],
+        payloadType?: string | null, settingType?: "unknownFutureValue" |
+        "roaming" | "backup", windowsDeviceId?: string | null } & { @odata.type:
+        "#microsoft.graph.windowsSetting" }, params?: { user-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, instances?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        createdDateTime?: string, expirationDateTime?: string,
+        lastModifiedDateTime?: string | null, payload?: string } & {
+        @odata.type: "#microsoft.graph.windowsSettingInstance" })[],
+        payloadType?: string | null, settingType?: "unknownFutureValue" |
+        "roaming" | "backup", windowsDeviceId?: string | null } & { @odata.type:
+        "#microsoft.graph.windowsSetting" }>
       parameters:
         - id: body
-          type: Operation&lt;"/users/{user-id}/settings/windows", "post"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            instances?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, createdDateTime?: string,
+            expirationDateTime?: string, lastModifiedDateTime?: string | null,
+            payload?: string } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsSettingInstance" />" })[], payloadType?:
+            string | null, settingType?: "unknownFutureValue" | "roaming" |
+            "backup", windowsDeviceId?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.windowsSetting"
+            />" }
           description: ''
         - id: params
-          type: any
+          type: '{ user-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /users/{user-id}/settings/windows"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, instances?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, createdDateTime?: string,
+          expirationDateTime?: string, lastModifiedDateTime?: string | null,
+          payload?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsSettingInstance" />" })[], payloadType?:
+          string | null, settingType?: "unknownFutureValue" | "roaming" |
+          "backup", windowsDeviceId?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.windowsSetting" />"
+          }&gt;
+  - name: 'del({ If-Match?: string, user-id: string, windowsSetting-id: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.users.settings.windows.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -41,18 +87,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /users/{user-id}/settings/windows/{windowsSetting-id}"]["response"]>
+        function del(params?: { If-Match?: string, user-id: string,
+        windowsSetting-id: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string, user-id: string, windowsSetting-id: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /users/{user-id}/settings/windows/{windowsSetting-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], user-id: string,
+      windowsSetting-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.users.settings.windows.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -63,18 +109,42 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/settings/windows/{windowsSetting-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[], user-id:
+        string, windowsSetting-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, instances?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, createdDateTime?: string,
+        expirationDateTime?: string, lastModifiedDateTime?: string | null,
+        payload?: string } & { @odata.type:
+        "#microsoft.graph.windowsSettingInstance" })[], payloadType?: string |
+        null, settingType?: "unknownFutureValue" | "roaming" | "backup",
+        windowsDeviceId?: string | null } & { @odata.type:
+        "#microsoft.graph.windowsSetting" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], user-id: string,
+            windowsSetting-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/settings/windows/{windowsSetting-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, instances?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, createdDateTime?: string,
+          expirationDateTime?: string, lastModifiedDateTime?: string | null,
+          payload?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsSettingInstance" />" })[], payloadType?:
+          string | null, settingType?: "unknownFutureValue" | "roaming" |
+          "backup", windowsDeviceId?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.windowsSetting" />"
+          }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, user-id: string })
     uid: '@microsoft/teams.graph-endpoints-beta.users.settings.windows.list'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: |-
@@ -85,20 +155,49 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /users/{user-id}/settings/windows"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, user-id: string }): EndpointRequest<{
+        @odata.count?: number | null, @odata.nextLink?: string | null } & {
+        value?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, instances?: (Omit<..., ...> & { @odata.type: ...,
+        createdDateTime?: ..., expirationDateTime?: ..., lastModifiedDateTime?:
+        ..., payload?: ... } & { @odata.type: ... })[], payloadType?: string |
+        null, settingType?: "unknownFutureValue" | "roaming" | "backup",
+        windowsDeviceId?: string | null } & { @odata.type:
+        "#microsoft.graph.windowsSetting" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, user-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /users/{user-id}/settings/windows"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          instances?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
+          createdDateTime?: ..., expirationDateTime?: ...,
+          lastModifiedDateTime?: ..., payload?: ... } & { <xref
+          uid="@odata.type" />: ... })[], payloadType?: string | null,
+          settingType?: "unknownFutureValue" | "roaming" | "backup",
+          windowsDeviceId?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.windowsSetting" />" })[] }&gt;
   - name: >-
-      update(Operation<"/users/{user-id}/settings/windows/{windowsSetting-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, instances?: (Omit<{ @odata.type: string, id?: string
+      }, "@odata.type"> & { @odata.type: string, createdDateTime?: string,
+      expirationDateTime?: string, lastModifiedDateTime?: string | null,
+      payload?: string } & { @odata.type:
+      "#microsoft.graph.windowsSettingInstance" })[], payloadType?: string |
+      null, settingType?: "unknownFutureValue" | "roaming" | "backup",
+      windowsDeviceId?: string | null } & { @odata.type:
+      "#microsoft.graph.windowsSetting" }, { user-id: string, windowsSetting-id:
+      string })
     uid: '@microsoft/teams.graph-endpoints-beta.users.settings.windows.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /users/{user-id}/settings/windows/{windowsSetting-id}`'
@@ -106,24 +205,58 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/users/{user-id}/settings/windows/{windowsSetting-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /users/{user-id}/settings/windows/{windowsSetting-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, instances?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        createdDateTime?: string, expirationDateTime?: string,
+        lastModifiedDateTime?: string | null, payload?: string } & {
+        @odata.type: "#microsoft.graph.windowsSettingInstance" })[],
+        payloadType?: string | null, settingType?: "unknownFutureValue" |
+        "roaming" | "backup", windowsDeviceId?: string | null } & { @odata.type:
+        "#microsoft.graph.windowsSetting" }, params?: { user-id: string,
+        windowsSetting-id: string }): EndpointRequest<Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        instances?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+        { @odata.type: string, createdDateTime?: string, expirationDateTime?:
+        string, lastModifiedDateTime?: string | null, payload?: string } & {
+        @odata.type: "#microsoft.graph.windowsSettingInstance" })[],
+        payloadType?: string | null, settingType?: "unknownFutureValue" |
+        "roaming" | "backup", windowsDeviceId?: string | null } & { @odata.type:
+        "#microsoft.graph.windowsSetting" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/users/{user-id}/settings/windows/{windowsSetting-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            instances?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, createdDateTime?: string,
+            expirationDateTime?: string, lastModifiedDateTime?: string | null,
+            payload?: string } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.windowsSettingInstance" />" })[], payloadType?:
+            string | null, settingType?: "unknownFutureValue" | "roaming" |
+            "backup", windowsDeviceId?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.windowsSetting"
+            />" }
           description: ''
         - id: params
-          type: any
+          type: '{ user-id: string, windowsSetting-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /users/{user-id}/settings/windows/{windowsSetting-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, instances?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, createdDateTime?: string,
+          expirationDateTime?: string, lastModifiedDateTime?: string | null,
+          payload?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.windowsSettingInstance" />" })[], payloadType?:
+          string | null, settingType?: "unknownFutureValue" | "roaming" |
+          "backup", windowsDeviceId?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.windowsSetting" />"
+          }&gt;
 variables:
   - name: instances
     uid: '@microsoft/teams.graph-endpoints-beta.users.settings.windows.instances'

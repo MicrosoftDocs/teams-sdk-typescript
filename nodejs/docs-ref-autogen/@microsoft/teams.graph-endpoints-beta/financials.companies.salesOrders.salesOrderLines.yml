@@ -32,7 +32,9 @@ variables:
           /financials/companies/{company-id}/salesOrders/{salesOrder-id}/salesOrderLines/{salesOrderLine-id}/account"]["response"]&gt;
           }
 functions:
-  - name: get(any)
+  - name: >-
+      get({ $expand?: string[], $select?: string[], company-id: string,
+      salesOrder-id: string, salesOrderLine-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.financials.companies.salesOrders.salesOrderLines.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -43,18 +45,86 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /financials/companies/{company-id}/salesOrders/{salesOrder-id}/salesOrderLines/{salesOrderLine-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        company-id: string, salesOrder-id: string, salesOrderLine-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, account?: Record<string, never>
+        | { @odata.type: string, blocked?: boolean | null, category?: string |
+        null, displayName?: string | null, id?: string, lastModifiedDateTime?:
+        string | null, number?: string | null, subCategory?: string | null } |
+        null, accountId?: string | null, amountExcludingTax?: number | null,
+        amountIncludingTax?: number | null, description?: string | null,
+        discountAmount?: number | null, discountAppliedBeforeTax?: boolean |
+        null, discountPercent?: number | null, documentId?: string | null,
+        invoiceDiscountAllocation?: number | null, invoicedQuantity?: number |
+        null, invoiceQuantity?: number | null, item?: Record<string, never> | {
+        @odata.type: string, baseUnitOfMeasureId?: string | null, blocked?:
+        boolean | null, displayName?: string | null, gtin?: string | null, id?:
+        string, inventory?: number | null, itemCategory?: Record<string, never>
+        | { @odata.type: string, code?: string | null, displayName?: string |
+        null, id?: string, lastModifiedDateTime?: string | null } | null,
+        itemCategoryCode?: string | null, itemCategoryId?: string | null,
+        lastModifiedDateTime?: string | null, number?: string | null, picture?:
+        { @odata.type: string, content?: string | null, contentType?: string |
+        null, height?: number | null, id?: string, width?: number | null }[],
+        priceIncludesTax?: boolean | null, taxGroupCode?: string | null,
+        taxGroupId?: string | null, type?: string | null, unitCost?: number |
+        null, unitPrice?: number | null } | null, itemId?: string | null,
+        lineType?: string | null, netAmount?: number | null,
+        netAmountIncludingTax?: number | null, netTaxAmount?: number | null,
+        quantity?: number | null, sequence?: number | null, shipmentDate?:
+        string | null, shippedQuantity?: number | null, shipQuantity?: number |
+        null, taxCode?: string | null, taxPercent?: number | null,
+        totalTaxAmount?: number | null, unitOfMeasureId?: string | null,
+        unitPrice?: number | null } & { @odata.type:
+        "#microsoft.graph.salesOrderLine" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], company-id: string,
+            salesOrder-id: string, salesOrderLine-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /financials/companies/{company-id}/salesOrders/{salesOrder-id}/salesOrderLines/{salesOrderLine-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, account?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, blocked?: boolean | null, category?:
+          string | null, displayName?: string | null, id?: string,
+          lastModifiedDateTime?: string | null, number?: string | null,
+          subCategory?: string | null } | null, accountId?: string | null,
+          amountExcludingTax?: number | null, amountIncludingTax?: number |
+          null, description?: string | null, discountAmount?: number | null,
+          discountAppliedBeforeTax?: boolean | null, discountPercent?: number |
+          null, documentId?: string | null, invoiceDiscountAllocation?: number |
+          null, invoicedQuantity?: number | null, invoiceQuantity?: number |
+          null, item?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, baseUnitOfMeasureId?: string | null, blocked?: boolean |
+          null, displayName?: string | null, gtin?: string | null, id?: string,
+          inventory?: number | null, itemCategory?: Record&lt;string, never&gt;
+          | { <xref uid="@odata.type" />: string, code?: string | null,
+          displayName?: string | null, id?: string, lastModifiedDateTime?:
+          string | null } | null, itemCategoryCode?: string | null,
+          itemCategoryId?: string | null, lastModifiedDateTime?: string | null,
+          number?: string | null, picture?: { <xref uid="@odata.type" />:
+          string, content?: string | null, contentType?: string | null, height?:
+          number | null, id?: string, width?: number | null }[],
+          priceIncludesTax?: boolean | null, taxGroupCode?: string | null,
+          taxGroupId?: string | null, type?: string | null, unitCost?: number |
+          null, unitPrice?: number | null } | null, itemId?: string | null,
+          lineType?: string | null, netAmount?: number | null,
+          netAmountIncludingTax?: number | null, netTaxAmount?: number | null,
+          quantity?: number | null, sequence?: number | null, shipmentDate?:
+          string | null, shippedQuantity?: number | null, shipQuantity?: number
+          | null, taxCode?: string | null, taxPercent?: number | null,
+          totalTaxAmount?: number | null, unitOfMeasureId?: string | null,
+          unitPrice?: number | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.salesOrderLine" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, company-id: string, salesOrder-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.financials.companies.salesOrders.salesOrderLines.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -65,20 +135,113 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /financials/companies/{company-id}/salesOrders/{salesOrder-id}/salesOrderLines"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, company-id: string, salesOrder-id: string
+        }): EndpointRequest<{ @odata.count?: number | null, @odata.nextLink?:
+        string | null } & { value?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, account?: Record<string, never>
+        | { @odata.type: string, blocked?: boolean | null, category?: string |
+        null, displayName?: string | null, id?: string, lastModifiedDateTime?:
+        string | null, number?: string | null, subCategory?: string | null } |
+        null, accountId?: string | null, amountExcludingTax?: number | null,
+        amountIncludingTax?: number | null, description?: string | null,
+        discountAmount?: number | null, discountAppliedBeforeTax?: boolean |
+        null, discountPercent?: number | null, documentId?: string | null,
+        invoiceDiscountAllocation?: number | null, invoicedQuantity?: number |
+        null, invoiceQuantity?: number | null, item?: Record<string, never> | {
+        @odata.type: string, baseUnitOfMeasureId?: string | null, blocked?:
+        boolean | null, displayName?: string | null, gtin?: string | null, id?:
+        string, inventory?: number | null, itemCategory?: Record<..., ...> | {
+        @odata.type: ..., code?: ..., displayName?: ..., id?: ...,
+        lastModifiedDateTime?: ... } | null, itemCategoryCode?: string | null,
+        itemCategoryId?: string | null, lastModifiedDateTime?: string | null,
+        number?: string | null, picture?: ...[], priceIncludesTax?: boolean |
+        null, taxGroupCode?: string | null, taxGroupId?: string | null, type?:
+        string | null, unitCost?: number | null, unitPrice?: number | null } |
+        null, itemId?: string | null, lineType?: string | null, netAmount?:
+        number | null, netAmountIncludingTax?: number | null, netTaxAmount?:
+        number | null, quantity?: number | null, sequence?: number | null,
+        shipmentDate?: string | null, shippedQuantity?: number | null,
+        shipQuantity?: number | null, taxCode?: string | null, taxPercent?:
+        number | null, totalTaxAmount?: number | null, unitOfMeasureId?: string
+        | null, unitPrice?: number | null } & { @odata.type:
+        "#microsoft.graph.salesOrderLine" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, company-id: string, salesOrder-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /financials/companies/{company-id}/salesOrders/{salesOrder-id}/salesOrderLines"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          account?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, blocked?: boolean | null, category?: string | null,
+          displayName?: string | null, id?: string, lastModifiedDateTime?:
+          string | null, number?: string | null, subCategory?: string | null } |
+          null, accountId?: string | null, amountExcludingTax?: number | null,
+          amountIncludingTax?: number | null, description?: string | null,
+          discountAmount?: number | null, discountAppliedBeforeTax?: boolean |
+          null, discountPercent?: number | null, documentId?: string | null,
+          invoiceDiscountAllocation?: number | null, invoicedQuantity?: number |
+          null, invoiceQuantity?: number | null, item?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string,
+          baseUnitOfMeasureId?: string | null, blocked?: boolean | null,
+          displayName?: string | null, gtin?: string | null, id?: string,
+          inventory?: number | null, itemCategory?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., code?: ..., displayName?: ..., id?:
+          ..., lastModifiedDateTime?: ... } | null, itemCategoryCode?: string |
+          null, itemCategoryId?: string | null, lastModifiedDateTime?: string |
+          null, number?: string | null, picture?: ...[], priceIncludesTax?:
+          boolean | null, taxGroupCode?: string | null, taxGroupId?: string |
+          null, type?: string | null, unitCost?: number | null, unitPrice?:
+          number | null } | null, itemId?: string | null, lineType?: string |
+          null, netAmount?: number | null, netAmountIncludingTax?: number |
+          null, netTaxAmount?: number | null, quantity?: number | null,
+          sequence?: number | null, shipmentDate?: string | null,
+          shippedQuantity?: number | null, shipQuantity?: number | null,
+          taxCode?: string | null, taxPercent?: number | null, totalTaxAmount?:
+          number | null, unitOfMeasureId?: string | null, unitPrice?: number |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.salesOrderLine" />" })[] }&gt;
   - name: >-
-      update(Operation<"/financials/companies/{company-id}/salesOrders/{salesOrder-id}/salesOrderLines/{salesOrderLine-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, account?: Record<string, never> | { @odata.type:
+      string, blocked?: boolean | null, category?: string | null, displayName?:
+      string | null, id?: string, lastModifiedDateTime?: string | null, number?:
+      string | null, subCategory?: string | null } | null, accountId?: string |
+      null, amountExcludingTax?: number | null, amountIncludingTax?: number |
+      null, description?: string | null, discountAmount?: number | null,
+      discountAppliedBeforeTax?: boolean | null, discountPercent?: number |
+      null, documentId?: string | null, invoiceDiscountAllocation?: number |
+      null, invoicedQuantity?: number | null, invoiceQuantity?: number | null,
+      item?: Record<string, never> | { @odata.type: string,
+      baseUnitOfMeasureId?: string | null, blocked?: boolean | null,
+      displayName?: string | null, gtin?: string | null, id?: string,
+      inventory?: number | null, itemCategory?: Record<string, never> | {
+      @odata.type: string, code?: string | null, displayName?: string | null,
+      id?: string, lastModifiedDateTime?: string | null } | null,
+      itemCategoryCode?: string | null, itemCategoryId?: string | null,
+      lastModifiedDateTime?: string | null, number?: string | null, picture?: {
+      @odata.type: string, content?: string | null, contentType?: string | null,
+      height?: number | null, id?: string, width?: number | null }[],
+      priceIncludesTax?: boolean | null, taxGroupCode?: string | null,
+      taxGroupId?: string | null, type?: string | null, unitCost?: number |
+      null, unitPrice?: number | null } | null, itemId?: string | null,
+      lineType?: string | null, netAmount?: number | null,
+      netAmountIncludingTax?: number | null, netTaxAmount?: number | null,
+      quantity?: number | null, sequence?: number | null, shipmentDate?: string
+      | null, shippedQuantity?: number | null, shipQuantity?: number | null,
+      taxCode?: string | null, taxPercent?: number | null, totalTaxAmount?:
+      number | null, unitOfMeasureId?: string | null, unitPrice?: number | null
+      } & { @odata.type: "#microsoft.graph.salesOrderLine" }, { company-id:
+      string, salesOrder-id: string, salesOrderLine-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.financials.companies.salesOrders.salesOrderLines.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -89,21 +252,147 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/financials/companies/{company-id}/salesOrders/{salesOrder-id}/salesOrderLines/{salesOrderLine-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /financials/companies/{company-id}/salesOrders/{salesOrder-id}/salesOrderLines/{salesOrderLine-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, account?: Record<string, never>
+        | { @odata.type: string, blocked?: boolean | null, category?: string |
+        null, displayName?: string | null, id?: string, lastModifiedDateTime?:
+        string | null, number?: string | null, subCategory?: string | null } |
+        null, accountId?: string | null, amountExcludingTax?: number | null,
+        amountIncludingTax?: number | null, description?: string | null,
+        discountAmount?: number | null, discountAppliedBeforeTax?: boolean |
+        null, discountPercent?: number | null, documentId?: string | null,
+        invoiceDiscountAllocation?: number | null, invoicedQuantity?: number |
+        null, invoiceQuantity?: number | null, item?: Record<string, never> | {
+        @odata.type: string, baseUnitOfMeasureId?: string | null, blocked?:
+        boolean | null, displayName?: string | null, gtin?: string | null, id?:
+        string, inventory?: number | null, itemCategory?: Record<string, never>
+        | { @odata.type: string, code?: string | null, displayName?: string |
+        null, id?: string, lastModifiedDateTime?: string | null } | null,
+        itemCategoryCode?: string | null, itemCategoryId?: string | null,
+        lastModifiedDateTime?: string | null, number?: string | null, picture?:
+        { @odata.type: string, content?: string | null, contentType?: string |
+        null, height?: number | null, id?: string, width?: number | null }[],
+        priceIncludesTax?: boolean | null, taxGroupCode?: string | null,
+        taxGroupId?: string | null, type?: string | null, unitCost?: number |
+        null, unitPrice?: number | null } | null, itemId?: string | null,
+        lineType?: string | null, netAmount?: number | null,
+        netAmountIncludingTax?: number | null, netTaxAmount?: number | null,
+        quantity?: number | null, sequence?: number | null, shipmentDate?:
+        string | null, shippedQuantity?: number | null, shipQuantity?: number |
+        null, taxCode?: string | null, taxPercent?: number | null,
+        totalTaxAmount?: number | null, unitOfMeasureId?: string | null,
+        unitPrice?: number | null } & { @odata.type:
+        "#microsoft.graph.salesOrderLine" }, params?: { company-id: string,
+        salesOrder-id: string, salesOrderLine-id: string }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, account?: Record<string, never>
+        | { @odata.type: string, blocked?: boolean | null, category?: string |
+        null, displayName?: string | null, id?: string, lastModifiedDateTime?:
+        string | null, number?: string | null, subCategory?: string | null } |
+        null, accountId?: string | null, amountExcludingTax?: number | null,
+        amountIncludingTax?: number | null, description?: string | null,
+        discountAmount?: number | null, discountAppliedBeforeTax?: boolean |
+        null, discountPercent?: number | null, documentId?: string | null,
+        invoiceDiscountAllocation?: number | null, invoicedQuantity?: number |
+        null, invoiceQuantity?: number | null, item?: Record<string, never> | {
+        @odata.type: string, baseUnitOfMeasureId?: string | null, blocked?:
+        boolean | null, displayName?: string | null, gtin?: string | null, id?:
+        string, inventory?: number | null, itemCategory?: Record<string, never>
+        | { @odata.type: string, code?: string | null, displayName?: string |
+        null, id?: string, lastModifiedDateTime?: string | null } | null,
+        itemCategoryCode?: string | null, itemCategoryId?: string | null,
+        lastModifiedDateTime?: string | null, number?: string | null, picture?:
+        { @odata.type: string, content?: string | null, contentType?: string |
+        null, height?: number | null, id?: string, width?: number | null }[],
+        priceIncludesTax?: boolean | null, taxGroupCode?: string | null,
+        taxGroupId?: string | null, type?: string | null, unitCost?: number |
+        null, unitPrice?: number | null } | null, itemId?: string | null,
+        lineType?: string | null, netAmount?: number | null,
+        netAmountIncludingTax?: number | null, netTaxAmount?: number | null,
+        quantity?: number | null, sequence?: number | null, shipmentDate?:
+        string | null, shippedQuantity?: number | null, shipQuantity?: number |
+        null, taxCode?: string | null, taxPercent?: number | null,
+        totalTaxAmount?: number | null, unitOfMeasureId?: string | null,
+        unitPrice?: number | null } & { @odata.type:
+        "#microsoft.graph.salesOrderLine" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/financials/companies/{company-id}/salesOrders/{salesOrder-id}/salesOrderLines/{salesOrderLine-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            account?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, blocked?: boolean | null, category?: string | null,
+            displayName?: string | null, id?: string, lastModifiedDateTime?:
+            string | null, number?: string | null, subCategory?: string | null }
+            | null, accountId?: string | null, amountExcludingTax?: number |
+            null, amountIncludingTax?: number | null, description?: string |
+            null, discountAmount?: number | null, discountAppliedBeforeTax?:
+            boolean | null, discountPercent?: number | null, documentId?: string
+            | null, invoiceDiscountAllocation?: number | null,
+            invoicedQuantity?: number | null, invoiceQuantity?: number | null,
+            item?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+            string, baseUnitOfMeasureId?: string | null, blocked?: boolean |
+            null, displayName?: string | null, gtin?: string | null, id?:
+            string, inventory?: number | null, itemCategory?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, code?: string |
+            null, displayName?: string | null, id?: string,
+            lastModifiedDateTime?: string | null } | null, itemCategoryCode?:
+            string | null, itemCategoryId?: string | null,
+            lastModifiedDateTime?: string | null, number?: string | null,
+            picture?: { <xref uid="@odata.type" />: string, content?: string |
+            null, contentType?: string | null, height?: number | null, id?:
+            string, width?: number | null }[], priceIncludesTax?: boolean |
+            null, taxGroupCode?: string | null, taxGroupId?: string | null,
+            type?: string | null, unitCost?: number | null, unitPrice?: number |
+            null } | null, itemId?: string | null, lineType?: string | null,
+            netAmount?: number | null, netAmountIncludingTax?: number | null,
+            netTaxAmount?: number | null, quantity?: number | null, sequence?:
+            number | null, shipmentDate?: string | null, shippedQuantity?:
+            number | null, shipQuantity?: number | null, taxCode?: string |
+            null, taxPercent?: number | null, totalTaxAmount?: number | null,
+            unitOfMeasureId?: string | null, unitPrice?: number | null } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.salesOrderLine" />" }
           description: ''
         - id: params
-          type: any
+          type: >-
+            { company-id: string, salesOrder-id: string, salesOrderLine-id:
+            string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /financials/companies/{company-id}/salesOrders/{salesOrder-id}/salesOrderLines/{salesOrderLine-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, account?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, blocked?: boolean | null, category?:
+          string | null, displayName?: string | null, id?: string,
+          lastModifiedDateTime?: string | null, number?: string | null,
+          subCategory?: string | null } | null, accountId?: string | null,
+          amountExcludingTax?: number | null, amountIncludingTax?: number |
+          null, description?: string | null, discountAmount?: number | null,
+          discountAppliedBeforeTax?: boolean | null, discountPercent?: number |
+          null, documentId?: string | null, invoiceDiscountAllocation?: number |
+          null, invoicedQuantity?: number | null, invoiceQuantity?: number |
+          null, item?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, baseUnitOfMeasureId?: string | null, blocked?: boolean |
+          null, displayName?: string | null, gtin?: string | null, id?: string,
+          inventory?: number | null, itemCategory?: Record&lt;string, never&gt;
+          | { <xref uid="@odata.type" />: string, code?: string | null,
+          displayName?: string | null, id?: string, lastModifiedDateTime?:
+          string | null } | null, itemCategoryCode?: string | null,
+          itemCategoryId?: string | null, lastModifiedDateTime?: string | null,
+          number?: string | null, picture?: { <xref uid="@odata.type" />:
+          string, content?: string | null, contentType?: string | null, height?:
+          number | null, id?: string, width?: number | null }[],
+          priceIncludesTax?: boolean | null, taxGroupCode?: string | null,
+          taxGroupId?: string | null, type?: string | null, unitCost?: number |
+          null, unitPrice?: number | null } | null, itemId?: string | null,
+          lineType?: string | null, netAmount?: number | null,
+          netAmountIncludingTax?: number | null, netTaxAmount?: number | null,
+          quantity?: number | null, sequence?: number | null, shipmentDate?:
+          string | null, shippedQuantity?: number | null, shipQuantity?: number
+          | null, taxCode?: string | null, taxPercent?: number | null,
+          totalTaxAmount?: number | null, unitOfMeasureId?: string | null,
+          unitPrice?: number | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.salesOrderLine" />" }&gt;

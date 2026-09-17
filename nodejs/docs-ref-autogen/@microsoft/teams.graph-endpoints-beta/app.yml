@@ -7,7 +7,7 @@ interfaces:
   - '@microsoft/teams.graph-endpoints-beta.app.IEndpoints'
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: get(any)
+  - name: 'get({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints-beta.app.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`GET /app`'
@@ -15,16 +15,613 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /app"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<{ @odata.type: string, calls?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        activeModalities?: (Record<string, never> | "unknownFutureValue" |
+        "unknown" | "audio" | "video" | "videoBasedScreenSharing" | "data" |
+        null)[], answeredBy?: Record<string, never> | { @odata.type: string,
+        countryCode?: string | null, endpointType?: Record<string, never> |
+        "unknownFutureValue" | "default" | "voicemail" | "skypeForBusiness" |
+        "skypeForBusinessVoipPhone" | null, identity?: { @odata.type: string,
+        application?: function, device?: function, user?: function },
+        languageId?: string | null, nonAnonymizedIdentity?: Record<string,
+        never> | { @odata.type: string, application?: function, device?:
+        function, user?: function } | null, participantId?: string | null,
+        platformId?: string | null, region?: string | null } | null,
+        audioRoutingGroups?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, receivers?: function,
+        routingMode?: function, sources?: function } & { @odata.type:
+        "#microsoft.graph.audioRoutingGroup" })[], callbackUri?: string,
+        callChainId?: string | null, callOptions?: Record<string, never> | {
+        @odata.type: string, hideBotAfterEscalation?: boolean | null,
+        isContentSharingNotificationEnabled?: boolean | null,
+        isDeltaRosterEnabled?: boolean | null, isInteractiveRosterEnabled?:
+        boolean | null } | null, callRoutes?: { @odata.type: string, final?: {
+        @odata.type: ..., application?: ..., device?: ..., user?: ... },
+        original?: { @odata.type: ..., application?: ..., device?: ..., user?:
+        ... }, routingType?: "unknownFutureValue" | "forwarded" | "lookup" |
+        "selfFork" }[], chatInfo?: Record<string, never> | { @odata.type:
+        string, messageId?: string | null, replyChainMessageId?: string | null,
+        threadId?: string | null } | null, contentSharingSessions?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        pngOfCurrentSlide?: function, presenterParticipantId?: function } & {
+        @odata.type: "#microsoft.graph.contentSharingSession" })[], direction?:
+        Record<string, never> | "incoming" | "outgoing" | null,
+        incomingContext?: Record<string, never> | { @odata.type: string,
+        observedParticipantId?: string | null, onBehalfOf?: Record<string,
+        never> | { @odata.type: string, application?: function, device?:
+        function, user?: function } | null, sourceParticipantId?: string | null,
+        transferor?: Record<string, never> | { @odata.type: string,
+        application?: function, device?: function, user?: function } | null } |
+        null, mediaConfig?: Record<string, never> | { @odata.type: string,
+        removeFromDefaultAudioGroup?: boolean | null } | null, mediaState?:
+        Record<string, never> | { @odata.type: string, audio?: Record<string,
+        never> | "active" | "unknownFutureValue" | "inactive" | null } | null,
+        meetingCapability?: Record<string, never> | { @odata.type: string,
+        allowAnonymousUsersToDialOut?: boolean,
+        allowAnonymousUsersToStartMeeting?: boolean, autoAdmittedUsers?:
+        "everyone" | "everyoneInCompany" } | null, meetingInfo?: Record<string,
+        never> | { @odata.type: string, allowConversationWithoutHost?: boolean |
+        null } | null, myParticipantId?: string | null, operations?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        clientContext?: ..., resultInfo?: ..., status?: ... }, "@odata.type"> &
+        { @odata.type: "#microsoft.graph.commsOperation" })[], participants?:
+        (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
+        string, info?: function, isIdentityAnonymized?: function, isInLobby?:
+        function, isMuted?: function, mediaStreams?: function, metadata?:
+        function, preferredDisplayName?: function, recordingInfo?: function,
+        removedState?: function, restrictedExperience?: function,
+        rosterSequenceNumber?: function } & { @odata.type:
+        "#microsoft.graph.participant" })[], requestedModalities?:
+        (Record<string, never> | "unknownFutureValue" | "unknown" | "audio" |
+        "video" | "videoBasedScreenSharing" | "data" | null)[], resultInfo?:
+        Record<string, never> | { @odata.type: string, code?: number, message?:
+        string | null, subcode?: number } | null, ringingTimeoutInSeconds?:
+        number | null, routingPolicies?: (Record<string, never> |
+        "unknownFutureValue" | "none" | "noMissedCall" |
+        "disableForwardingExceptPhone" | "disableForwarding" |
+        "preferSkypeForBusiness" | null)[], source?: Record<string, never> | {
+        @odata.type: string, countryCode?: string | null, endpointType?:
+        Record<string, never> | "unknownFutureValue" | "default" | "voicemail" |
+        "skypeForBusiness" | "skypeForBusinessVoipPhone" | null, identity?: {
+        @odata.type: string, application?: function, device?: function, user?:
+        function }, languageId?: string | null, nonAnonymizedIdentity?:
+        Record<string, never> | { @odata.type: string, application?: function,
+        device?: function, user?: function } | null, participantId?: string |
+        null, platformId?: string | null, region?: string | null } | null,
+        state?: Record<string, never> | "unknownFutureValue" | "incoming" |
+        "establishing" | "ringing" | "established" | "hold" | "transferring" |
+        "transferAccepted" | "redirecting" | "terminating" | "terminated" |
+        null, subject?: string | null, targets?: { @odata.type: string,
+        endpointType?: Record<..., ...> | "unknownFutureValue" | "default" |
+        "voicemail" | "skypeForBusiness" | "skypeForBusinessVoipPhone" | null,
+        hidden?: boolean | null, identity?: { @odata.type: ..., application?:
+        ..., device?: ..., user?: ... }, participantId?: string | null,
+        removeFromDefaultAudioRoutingGroup?: boolean | null, replacesCallId?:
+        string | null }[], tenantId?: string | null, terminationReason?: string
+        | null, toneInfo?: Record<string, never> | { @odata.type: string,
+        sequenceId?: number, tone?: "tone0" | "tone1" | "tone2" | "tone3" |
+        "tone4" | "tone5" | "tone6" | "tone7" | "tone8" | "tone9" | "star" |
+        "pound" | "a" | "b" | "c" | "d" | "flash" } | null, transcription?:
+        Record<string, never> | { @odata.type: string, lastModifiedDateTime?:
+        string | null, state?: "active" | "unknownFutureValue" | "inactive" |
+        "notStarted" } | null } & { @odata.type: "#microsoft.graph.call" })[],
+        onlineMeetings?: (Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string,
+        allowAttendeeToEnableCamera?: boolean | null, allowAttendeeToEnableMic?:
+        boolean | null, allowBreakoutRooms?: boolean | null,
+        allowCopyingAndSharingMeetingContent?: boolean | null,
+        allowedLobbyAdmitters?: Record<..., ...> | "unknownFutureValue" |
+        "organizerAndCoOrganizersAndPresenters" | "organizerAndCoOrganizers" |
+        null, allowedPresenters?: Record<..., ...> | "unknownFutureValue" |
+        "organization" | "everyone" | "roleIsPresenter" | "organizer" | null,
+        allowLiveShare?: Record<..., ...> | "unknownFutureValue" | "disabled" |
+        "enabled" | null, allowMeetingChat?: Record<..., ...> |
+        "unknownFutureValue" | "disabled" | "enabled" | "limited" | null,
+        allowParticipantsToChangeName?: boolean | null, allowPowerPointSharing?:
+        boolean | null, allowRecording?: boolean | null,
+        allowTeamworkReactions?: boolean | null, allowTranscription?: boolean |
+        null, allowWhiteboard?: boolean | null, anonymizeIdentityForRoles?:
+        ...[], attendanceReports?: ...[], audioConferencing?: Record<..., ...> |
+        { @odata.type: ..., conferenceId?: ..., dialinUrl?: ...,
+        tollFreeNumber?: ..., tollFreeNumbers?: ..., tollNumber?: ...,
+        tollNumbers?: ... } | null, chatInfo?: Record<..., ...> | { @odata.type:
+        ..., messageId?: ..., replyChainMessageId?: ..., threadId?: ... } |
+        null, chatRestrictions?: Record<..., ...> | { @odata.type: ...,
+        allowTextOnly?: ... } | null, isEndToEndEncryptionEnabled?: boolean |
+        null, isEntryExitAnnounced?: boolean | null, joinInformation?:
+        Record<..., ...> | { @odata.type: ..., content?: ..., contentType?: ...
+        } | null, joinMeetingIdSettings?: Record<..., ...> | { @odata.type: ...,
+        isPasscodeRequired?: ..., joinMeetingId?: ..., passcode?: ... } | null,
+        joinWebUrl?: string | null, lobbyBypassSettings?: Record<..., ...> | {
+        @odata.type: ..., isDialInBypassEnabled?: ..., scope?: ... } | null,
+        recordAutomatically?: boolean | null, shareMeetingChatHistoryDefault?:
+        Record<..., ...> | "unknownFutureValue" | "none" | "all" | null,
+        subject?: string | null, videoTeleconferenceId?: string | null,
+        watermarkProtection?: Record<..., ...> | { @odata.type: ...,
+        isEnabledForContentSharing?: ..., isEnabledForVideo?: ... } | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.onlineMeetingBase" },
+        "@odata.type"> & { @odata.type: string, aiInsights?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        actionItems?: function, callId?: function, contentCorrelationId?:
+        function, createdDateTime?: function, endDateTime?: function,
+        meetingNotes?: function, viewpoint?: function } & { @odata.type:
+        "#microsoft.graph.callAiInsight" })[], alternativeRecording?: string |
+        null, attendeeReport?: string | null, broadcastRecording?: string |
+        null, broadcastSettings?: Record<string, never> | { @odata.type: string,
+        allowedAudience?: Record<string, never> | "unknownFutureValue" |
+        "organization" | "everyone" | "roleIsAttendee" | null, captions?:
+        Record<string, never> | { @odata.type: string, isCaptionEnabled?:
+        function, spokenLanguage?: function, translationLanguages?: function } |
+        null, isAttendeeReportEnabled?: boolean | null,
+        isQuestionAndAnswerEnabled?: boolean | null, isRecordingEnabled?:
+        boolean | null, isVideoOnDemandEnabled?: boolean | null } | null,
+        capabilities?: (Record<string, never> | "unknownFutureValue" |
+        "questionAndAnswer" | null)[], creationDateTime?: string | null,
+        endDateTime?: string | null, externalId?: string | null, isBroadcast?:
+        boolean | null, joinUrl?: string | null, meetingAttendanceReport?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, attendanceRecords?: ...[],
+        externalEventInformation?: ...[], meetingEndDateTime?: string | null,
+        meetingStartDateTime?: string | null, totalParticipantCount?: number |
+        null } & { @odata.type: "#microsoft.graph.meetingAttendanceReport" }) |
+        null, meetingTemplateId?: string | null, participants?: Record<string,
+        never> | { @odata.type: string, attendees?: { @odata.type: ...,
+        identity?: ..., role?: ..., upn?: ... }[], contributors?: { @odata.type:
+        ..., identity?: ..., role?: ..., upn?: ... }[], organizer?:
+        Record<string, never> | { @odata.type: string, identity?: function,
+        role?: function, upn?: function } | null, producers?: { @odata.type:
+        ..., identity?: ..., role?: ..., upn?: ... }[] } | null, recording?:
+        string | null, recordings?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, callId?: function, content?:
+        function, contentCorrelationId?: function, createdDateTime?: function,
+        endDateTime?: function, meetingId?: function, meetingOrganizer?:
+        function, recordingContentUrl?: function } & { @odata.type:
+        "#microsoft.graph.callRecording" })[], registration?: Record<string,
+        never> | (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, customQuestions?: ...[],
+        description?: string | null, endDateTime?: string | null,
+        registrationPageViewCount?: number | null, registrationPageWebUrl?:
+        string | null, speakers?: ...[], startDateTime?: string | null,
+        subject?: string | null }) | null, startDateTime?: string | null,
+        transcripts?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+        @odata.type: string, callId?: function, content?: function,
+        contentCorrelationId?: function, createdDateTime?: function,
+        endDateTime?: function, meetingId?: function, meetingOrganizer?:
+        function, metadataContent?: function, transcriptContentUrl?: function }
+        & { @odata.type: "#microsoft.graph.callTranscript" })[] })[] }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["GET /app"]["response"]&gt;
-  - name: update(Operation<"/app", "patch">)
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string, calls?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          activeModalities?: (Record&lt;string, never&gt; | "unknownFutureValue"
+          | "unknown" | "audio" | "video" | "videoBasedScreenSharing" | "data" |
+          null)[], answeredBy?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, countryCode?: string | null,
+          endpointType?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "default" | "voicemail" | "skypeForBusiness" |
+          "skypeForBusinessVoipPhone" | null, identity?: { <xref
+          uid="@odata.type" />: string, application?: function, device?:
+          function, user?: function }, languageId?: string | null,
+          nonAnonymizedIdentity?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, application?: function, device?:
+          function, user?: function } | null, participantId?: string | null,
+          platformId?: string | null, region?: string | null } | null,
+          audioRoutingGroups?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?:
+          ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, receivers?: function, routingMode?: function, sources?:
+          function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.audioRoutingGroup" />" })[], callbackUri?:
+          string, callChainId?: string | null, callOptions?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string,
+          hideBotAfterEscalation?: boolean | null,
+          isContentSharingNotificationEnabled?: boolean | null,
+          isDeltaRosterEnabled?: boolean | null, isInteractiveRosterEnabled?:
+          boolean | null } | null, callRoutes?: { <xref uid="@odata.type" />:
+          string, final?: { <xref uid="@odata.type" />: ..., application?: ...,
+          device?: ..., user?: ... }, original?: { <xref uid="@odata.type" />:
+          ..., application?: ..., device?: ..., user?: ... }, routingType?:
+          "unknownFutureValue" | "forwarded" | "lookup" | "selfFork" }[],
+          chatInfo?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, messageId?: string | null, replyChainMessageId?: string |
+          null, threadId?: string | null } | null, contentSharingSessions?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          pngOfCurrentSlide?: function, presenterParticipantId?: function } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.contentSharingSession" />" })[], direction?:
+          Record&lt;string, never&gt; | "incoming" | "outgoing" | null,
+          incomingContext?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, observedParticipantId?: string | null,
+          onBehalfOf?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, application?: function, device?: function, user?: function
+          } | null, sourceParticipantId?: string | null, transferor?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          application?: function, device?: function, user?: function } | null }
+          | null, mediaConfig?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, removeFromDefaultAudioGroup?: boolean |
+          null } | null, mediaState?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, audio?: Record&lt;string, never&gt; |
+          "active" | "unknownFutureValue" | "inactive" | null } | null,
+          meetingCapability?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, allowAnonymousUsersToDialOut?: boolean,
+          allowAnonymousUsersToStartMeeting?: boolean, autoAdmittedUsers?:
+          "everyone" | "everyoneInCompany" } | null, meetingInfo?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          allowConversationWithoutHost?: boolean | null } | null,
+          myParticipantId?: string | null, operations?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., clientContext?:
+          ..., resultInfo?: ..., status?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.commsOperation" />" })[], participants?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          info?: function, isIdentityAnonymized?: function, isInLobby?:
+          function, isMuted?: function, mediaStreams?: function, metadata?:
+          function, preferredDisplayName?: function, recordingInfo?: function,
+          removedState?: function, restrictedExperience?: function,
+          rosterSequenceNumber?: function } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.participant" />" })[],
+          requestedModalities?: (Record&lt;string, never&gt; |
+          "unknownFutureValue" | "unknown" | "audio" | "video" |
+          "videoBasedScreenSharing" | "data" | null)[], resultInfo?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          code?: number, message?: string | null, subcode?: number } | null,
+          ringingTimeoutInSeconds?: number | null, routingPolicies?:
+          (Record&lt;string, never&gt; | "unknownFutureValue" | "none" |
+          "noMissedCall" | "disableForwardingExceptPhone" | "disableForwarding"
+          | "preferSkypeForBusiness" | null)[], source?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, countryCode?: string
+          | null, endpointType?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "default" | "voicemail" | "skypeForBusiness" |
+          "skypeForBusinessVoipPhone" | null, identity?: { <xref
+          uid="@odata.type" />: string, application?: function, device?:
+          function, user?: function }, languageId?: string | null,
+          nonAnonymizedIdentity?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, application?: function, device?:
+          function, user?: function } | null, participantId?: string | null,
+          platformId?: string | null, region?: string | null } | null, state?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "incoming" |
+          "establishing" | "ringing" | "established" | "hold" | "transferring" |
+          "transferAccepted" | "redirecting" | "terminating" | "terminated" |
+          null, subject?: string | null, targets?: { <xref uid="@odata.type" />:
+          string, endpointType?: Record&lt;..., ...&gt; | "unknownFutureValue" |
+          "default" | "voicemail" | "skypeForBusiness" |
+          "skypeForBusinessVoipPhone" | null, hidden?: boolean | null,
+          identity?: { <xref uid="@odata.type" />: ..., application?: ...,
+          device?: ..., user?: ... }, participantId?: string | null,
+          removeFromDefaultAudioRoutingGroup?: boolean | null, replacesCallId?:
+          string | null }[], tenantId?: string | null, terminationReason?:
+          string | null, toneInfo?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, sequenceId?: number, tone?: "tone0" |
+          "tone1" | "tone2" | "tone3" | "tone4" | "tone5" | "tone6" | "tone7" |
+          "tone8" | "tone9" | "star" | "pound" | "a" | "b" | "c" | "d" | "flash"
+          } | null, transcription?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, lastModifiedDateTime?: string | null,
+          state?: "active" | "unknownFutureValue" | "inactive" | "notStarted" }
+          | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.call" />" })[], onlineMeetings?:
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string },
+          "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+          />: string, allowAttendeeToEnableCamera?: boolean | null,
+          allowAttendeeToEnableMic?: boolean | null, allowBreakoutRooms?:
+          boolean | null, allowCopyingAndSharingMeetingContent?: boolean | null,
+          allowedLobbyAdmitters?: Record&lt;..., ...&gt; | "unknownFutureValue"
+          | "organizerAndCoOrganizersAndPresenters" | "organizerAndCoOrganizers"
+          | null, allowedPresenters?: Record&lt;..., ...&gt; |
+          "unknownFutureValue" | "organization" | "everyone" | "roleIsPresenter"
+          | "organizer" | null, allowLiveShare?: Record&lt;..., ...&gt; |
+          "unknownFutureValue" | "disabled" | "enabled" | null,
+          allowMeetingChat?: Record&lt;..., ...&gt; | "unknownFutureValue" |
+          "disabled" | "enabled" | "limited" | null,
+          allowParticipantsToChangeName?: boolean | null,
+          allowPowerPointSharing?: boolean | null, allowRecording?: boolean |
+          null, allowTeamworkReactions?: boolean | null, allowTranscription?:
+          boolean | null, allowWhiteboard?: boolean | null,
+          anonymizeIdentityForRoles?: ...[], attendanceReports?: ...[],
+          audioConferencing?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., conferenceId?: ..., dialinUrl?: ..., tollFreeNumber?: ...,
+          tollFreeNumbers?: ..., tollNumber?: ..., tollNumbers?: ... } | null,
+          chatInfo?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          messageId?: ..., replyChainMessageId?: ..., threadId?: ... } | null,
+          chatRestrictions?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., allowTextOnly?: ... } | null, isEndToEndEncryptionEnabled?:
+          boolean | null, isEntryExitAnnounced?: boolean | null,
+          joinInformation?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., content?: ..., contentType?: ... } | null,
+          joinMeetingIdSettings?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., isPasscodeRequired?: ..., joinMeetingId?:
+          ..., passcode?: ... } | null, joinWebUrl?: string | null,
+          lobbyBypassSettings?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., isDialInBypassEnabled?: ..., scope?: ... }
+          | null, recordAutomatically?: boolean | null,
+          shareMeetingChatHistoryDefault?: Record&lt;..., ...&gt; |
+          "unknownFutureValue" | "none" | "all" | null, subject?: string | null,
+          videoTeleconferenceId?: string | null, watermarkProtection?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          isEnabledForContentSharing?: ..., isEnabledForVideo?: ... } | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.onlineMeetingBase" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          aiInsights?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, actionItems?: function, callId?: function,
+          contentCorrelationId?: function, createdDateTime?: function,
+          endDateTime?: function, meetingNotes?: function, viewpoint?: function
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.callAiInsight" />" })[], alternativeRecording?:
+          string | null, attendeeReport?: string | null, broadcastRecording?:
+          string | null, broadcastSettings?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, allowedAudience?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "organization" |
+          "everyone" | "roleIsAttendee" | null, captions?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, isCaptionEnabled?:
+          function, spokenLanguage?: function, translationLanguages?: function }
+          | null, isAttendeeReportEnabled?: boolean | null,
+          isQuestionAndAnswerEnabled?: boolean | null, isRecordingEnabled?:
+          boolean | null, isVideoOnDemandEnabled?: boolean | null } | null,
+          capabilities?: (Record&lt;string, never&gt; | "unknownFutureValue" |
+          "questionAndAnswer" | null)[], creationDateTime?: string | null,
+          endDateTime?: string | null, externalId?: string | null, isBroadcast?:
+          boolean | null, joinUrl?: string | null, meetingAttendanceReport?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, attendanceRecords?: ...[],
+          externalEventInformation?: ...[], meetingEndDateTime?: string | null,
+          meetingStartDateTime?: string | null, totalParticipantCount?: number |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.meetingAttendanceReport" />" }) | null,
+          meetingTemplateId?: string | null, participants?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, attendees?: { <xref
+          uid="@odata.type" />: ..., identity?: ..., role?: ..., upn?: ... }[],
+          contributors?: { <xref uid="@odata.type" />: ..., identity?: ...,
+          role?: ..., upn?: ... }[], organizer?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, identity?: function, role?:
+          function, upn?: function } | null, producers?: { <xref
+          uid="@odata.type" />: ..., identity?: ..., role?: ..., upn?: ... }[] }
+          | null, recording?: string | null, recordings?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, callId?: function,
+          content?: function, contentCorrelationId?: function, createdDateTime?:
+          function, endDateTime?: function, meetingId?: function,
+          meetingOrganizer?: function, recordingContentUrl?: function } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.callRecording" />" })[], registration?:
+          Record&lt;string, never&gt; | (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          customQuestions?: ...[], description?: string | null, endDateTime?:
+          string | null, registrationPageViewCount?: number | null,
+          registrationPageWebUrl?: string | null, speakers?: ...[],
+          startDateTime?: string | null, subject?: string | null }) | null,
+          startDateTime?: string | null, transcripts?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, callId?: function,
+          content?: function, contentCorrelationId?: function, createdDateTime?:
+          function, endDateTime?: function, meetingId?: function,
+          meetingOrganizer?: function, metadataContent?: function,
+          transcriptContentUrl?: function } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.callTranscript" />" })[] })[] }&gt;
+  - name: >-
+      update({ @odata.type: string, calls?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, activeModalities?:
+      (Record<string, never> | "unknownFutureValue" | "unknown" | "audio" |
+      "video" | "videoBasedScreenSharing" | "data" | null)[], answeredBy?:
+      Record<string, never> | { @odata.type: string, countryCode?: string |
+      null, endpointType?: Record<string, never> | "unknownFutureValue" |
+      "default" | "voicemail" | "skypeForBusiness" | "skypeForBusinessVoipPhone"
+      | null, identity?: { @odata.type: string, application?: { @odata.type:
+      ..., displayName?: ..., id?: ... } | Record<..., ...> | null, device?: {
+      @odata.type: ..., displayName?: ..., id?: ... } | Record<..., ...> | null,
+      user?: { @odata.type: ..., displayName?: ..., id?: ... } | Record<...,
+      ...> | null }, languageId?: string | null, nonAnonymizedIdentity?:
+      Record<string, never> | { @odata.type: string, application?: {
+      @odata.type: ..., displayName?: ..., id?: ... } | Record<..., ...> | null,
+      device?: { @odata.type: ..., displayName?: ..., id?: ... } | Record<...,
+      ...> | null, user?: { @odata.type: ..., displayName?: ..., id?: ... } |
+      Record<..., ...> | null } | null, participantId?: string | null,
+      platformId?: string | null, region?: string | null } | null,
+      audioRoutingGroups?: (Omit<{ @odata.type: string, id?: function },
+      "@odata.type"> & { @odata.type: string, receivers?: ...[], routingMode?:
+      "oneToOne" | "multicast", sources?: ...[] } & { @odata.type:
+      "#microsoft.graph.audioRoutingGroup" })[], callbackUri?: string,
+      callChainId?: string | null, callOptions?: Record<string, never> | {
+      @odata.type: string, hideBotAfterEscalation?: boolean | null,
+      isContentSharingNotificationEnabled?: boolean | null,
+      isDeltaRosterEnabled?: boolean | null, isInteractiveRosterEnabled?:
+      boolean | null } | null, callRoutes?: { @odata.type: string, final?: {
+      @odata.type: string, application?: function, device?: function, user?:
+      function }, original?: { @odata.type: string, application?: function,
+      device?: function, user?: function }, routingType?: "unknownFutureValue" |
+      "forwarded" | "lookup" | "selfFork" }[], chatInfo?: Record<string, never>
+      | { @odata.type: string, messageId?: string | null, replyChainMessageId?:
+      string | null, threadId?: string | null } | null, contentSharingSessions?:
+      (Omit<{ @odata.type: string, id?: function }, "@odata.type"> & {
+      @odata.type: string, pngOfCurrentSlide?: string | null,
+      presenterParticipantId?: string | null } & { @odata.type:
+      "#microsoft.graph.contentSharingSession" })[], direction?: Record<string,
+      never> | "incoming" | "outgoing" | null, incomingContext?: Record<string,
+      never> | { @odata.type: string, observedParticipantId?: string | null,
+      onBehalfOf?: Record<string, never> | { @odata.type: string, application?:
+      { @odata.type: ..., displayName?: ..., id?: ... } | Record<..., ...> |
+      null, device?: { @odata.type: ..., displayName?: ..., id?: ... } |
+      Record<..., ...> | null, user?: { @odata.type: ..., displayName?: ...,
+      id?: ... } | Record<..., ...> | null } | null, sourceParticipantId?:
+      string | null, transferor?: Record<string, never> | { @odata.type: string,
+      application?: { @odata.type: ..., displayName?: ..., id?: ... } |
+      Record<..., ...> | null, device?: { @odata.type: ..., displayName?: ...,
+      id?: ... } | Record<..., ...> | null, user?: { @odata.type: ...,
+      displayName?: ..., id?: ... } | Record<..., ...> | null } | null } | null,
+      mediaConfig?: Record<string, never> | { @odata.type: string,
+      removeFromDefaultAudioGroup?: boolean | null } | null, mediaState?:
+      Record<string, never> | { @odata.type: string, audio?: Record<string,
+      never> | "active" | "unknownFutureValue" | "inactive" | null } | null,
+      meetingCapability?: Record<string, never> | { @odata.type: string,
+      allowAnonymousUsersToDialOut?: boolean,
+      allowAnonymousUsersToStartMeeting?: boolean, autoAdmittedUsers?:
+      "everyone" | "everyoneInCompany" } | null, meetingInfo?: Record<string,
+      never> | { @odata.type: string, allowConversationWithoutHost?: boolean |
+      null } | null, myParticipantId?: string | null, operations?: (Omit<{
+      @odata.type: string, id?: function }, "@odata.type"> & Omit<{ @odata.type:
+      string, clientContext?: function, resultInfo?: function, status?: function
+      }, "@odata.type"> & { @odata.type: "#microsoft.graph.commsOperation" })[],
+      participants?: (Omit<{ @odata.type: string, id?: function },
+      "@odata.type"> & { @odata.type: string, info?: { @odata.type: ...,
+      countryCode?: ..., endpointType?: ..., identity?: ..., languageId?: ...,
+      nonAnonymizedIdentity?: ..., participantId?: ..., platformId?: ...,
+      region?: ... }, isIdentityAnonymized?: boolean | null, isInLobby?:
+      boolean, isMuted?: boolean, mediaStreams?: ...[], metadata?: string |
+      null, preferredDisplayName?: string | null, recordingInfo?: Record<...,
+      ...> | { @odata.type: ..., initiatedBy?: ..., initiator?: ...,
+      recordingStatus?: ... } | null, removedState?: Record<..., ...> | {
+      @odata.type: ..., reason?: ... } | null, restrictedExperience?:
+      Record<..., ...> | { @odata.type: ..., contentSharingDisabled?: ...,
+      videoDisabled?: ... } | null, rosterSequenceNumber?: number | null } & {
+      @odata.type: "#microsoft.graph.participant" })[], requestedModalities?:
+      (Record<string, never> | "unknownFutureValue" | "unknown" | "audio" |
+      "video" | "videoBasedScreenSharing" | "data" | null)[], resultInfo?:
+      Record<string, never> | { @odata.type: string, code?: number, message?:
+      string | null, subcode?: number } | null, ringingTimeoutInSeconds?: number
+      | null, routingPolicies?: (Record<string, never> | "unknownFutureValue" |
+      "none" | "noMissedCall" | "disableForwardingExceptPhone" |
+      "disableForwarding" | "preferSkypeForBusiness" | null)[], source?:
+      Record<string, never> | { @odata.type: string, countryCode?: string |
+      null, endpointType?: Record<string, never> | "unknownFutureValue" |
+      "default" | "voicemail" | "skypeForBusiness" | "skypeForBusinessVoipPhone"
+      | null, identity?: { @odata.type: string, application?: { @odata.type:
+      ..., displayName?: ..., id?: ... } | Record<..., ...> | null, device?: {
+      @odata.type: ..., displayName?: ..., id?: ... } | Record<..., ...> | null,
+      user?: { @odata.type: ..., displayName?: ..., id?: ... } | Record<...,
+      ...> | null }, languageId?: string | null, nonAnonymizedIdentity?:
+      Record<string, never> | { @odata.type: string, application?: {
+      @odata.type: ..., displayName?: ..., id?: ... } | Record<..., ...> | null,
+      device?: { @odata.type: ..., displayName?: ..., id?: ... } | Record<...,
+      ...> | null, user?: { @odata.type: ..., displayName?: ..., id?: ... } |
+      Record<..., ...> | null } | null, participantId?: string | null,
+      platformId?: string | null, region?: string | null } | null, state?:
+      Record<string, never> | "unknownFutureValue" | "incoming" | "establishing"
+      | "ringing" | "established" | "hold" | "transferring" | "transferAccepted"
+      | "redirecting" | "terminating" | "terminated" | null, subject?: string |
+      null, targets?: { @odata.type: string, endpointType?: Record<string,
+      never> | "unknownFutureValue" | "default" | "voicemail" |
+      "skypeForBusiness" | "skypeForBusinessVoipPhone" | null, hidden?: boolean
+      | null, identity?: { @odata.type: string, application?: function, device?:
+      function, user?: function }, participantId?: string | null,
+      removeFromDefaultAudioRoutingGroup?: boolean | null, replacesCallId?:
+      string | null }[], tenantId?: string | null, terminationReason?: string |
+      null, toneInfo?: Record<string, never> | { @odata.type: string,
+      sequenceId?: number, tone?: "tone0" | "tone1" | "tone2" | "tone3" |
+      "tone4" | "tone5" | "tone6" | "tone7" | "tone8" | "tone9" | "star" |
+      "pound" | "a" | "b" | "c" | "d" | "flash" } | null, transcription?:
+      Record<string, never> | { @odata.type: string, lastModifiedDateTime?:
+      string | null, state?: "active" | "unknownFutureValue" | "inactive" |
+      "notStarted" } | null } & { @odata.type: "#microsoft.graph.call" })[],
+      onlineMeetings?: (Omit<Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & Omit<{ @odata.type: string, allowAttendeeToEnableCamera?:
+      boolean | null, allowAttendeeToEnableMic?: boolean | null,
+      allowBreakoutRooms?: boolean | null,
+      allowCopyingAndSharingMeetingContent?: boolean | null,
+      allowedLobbyAdmitters?: Record<string, never> | "unknownFutureValue" |
+      "organizerAndCoOrganizersAndPresenters" | "organizerAndCoOrganizers" |
+      null, allowedPresenters?: Record<string, never> | "unknownFutureValue" |
+      "organization" | "everyone" | "roleIsPresenter" | "organizer" | null,
+      allowLiveShare?: Record<string, never> | "unknownFutureValue" | "disabled"
+      | "enabled" | null, allowMeetingChat?: Record<string, never> |
+      "unknownFutureValue" | "disabled" | "enabled" | "limited" | null,
+      allowParticipantsToChangeName?: boolean | null, allowPowerPointSharing?:
+      boolean | null, allowRecording?: boolean | null, allowTeamworkReactions?:
+      boolean | null, allowTranscription?: boolean | null, allowWhiteboard?:
+      boolean | null, anonymizeIdentityForRoles?: function[],
+      attendanceReports?: (... & ... & ...)[], audioConferencing?:
+      Record<string, never> | { @odata.type: string, conferenceId?: function,
+      dialinUrl?: function, tollFreeNumber?: function, tollFreeNumbers?:
+      function, tollNumber?: function, tollNumbers?: function } | null,
+      chatInfo?: Record<string, never> | { @odata.type: string, messageId?:
+      function, replyChainMessageId?: function, threadId?: function } | null,
+      chatRestrictions?: Record<string, never> | { @odata.type: string,
+      allowTextOnly?: function } | null, isEndToEndEncryptionEnabled?: boolean |
+      null, isEntryExitAnnounced?: boolean | null, joinInformation?:
+      Record<string, never> | { @odata.type: string, content?: function,
+      contentType?: function } | null, joinMeetingIdSettings?: Record<string,
+      never> | { @odata.type: string, isPasscodeRequired?: function,
+      joinMeetingId?: function, passcode?: function } | null, joinWebUrl?:
+      string | null, lobbyBypassSettings?: Record<string, never> | {
+      @odata.type: string, isDialInBypassEnabled?: function, scope?: function }
+      | null, recordAutomatically?: boolean | null,
+      shareMeetingChatHistoryDefault?: Record<string, never> |
+      "unknownFutureValue" | "none" | "all" | null, subject?: string | null,
+      videoTeleconferenceId?: string | null, watermarkProtection?:
+      Record<string, never> | { @odata.type: string,
+      isEnabledForContentSharing?: function, isEnabledForVideo?: function } |
+      null }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.onlineMeetingBase" }, "@odata.type"> & { @odata.type:
+      string, aiInsights?: (Omit<{ @odata.type: string, id?: function },
+      "@odata.type"> & { @odata.type: string, actionItems?: ...[], callId?:
+      string | null, contentCorrelationId?: string | null, createdDateTime?:
+      string | null, endDateTime?: string | null, meetingNotes?: ...[],
+      viewpoint?: Record<..., ...> | { @odata.type: ..., mentionEvents?: ... } |
+      null } & { @odata.type: "#microsoft.graph.callAiInsight" })[],
+      alternativeRecording?: string | null, attendeeReport?: string | null,
+      broadcastRecording?: string | null, broadcastSettings?: Record<string,
+      never> | { @odata.type: string, allowedAudience?: Record<string, never> |
+      "unknownFutureValue" | "organization" | "everyone" | "roleIsAttendee" |
+      null, captions?: Record<string, never> | { @odata.type: string,
+      isCaptionEnabled?: boolean | null, spokenLanguage?: string | null,
+      translationLanguages?: ...[] } | null, isAttendeeReportEnabled?: boolean |
+      null, isQuestionAndAnswerEnabled?: boolean | null, isRecordingEnabled?:
+      boolean | null, isVideoOnDemandEnabled?: boolean | null } | null,
+      capabilities?: (Record<string, never> | "unknownFutureValue" |
+      "questionAndAnswer" | null)[], creationDateTime?: string | null,
+      endDateTime?: string | null, externalId?: string | null, isBroadcast?:
+      boolean | null, joinUrl?: string | null, meetingAttendanceReport?:
+      Record<string, never> | (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, attendanceRecords?: (... & ... &
+      ...)[], externalEventInformation?: { @odata.type: ..., applicationId?:
+      ..., externalEventId?: ... }[], meetingEndDateTime?: string | null,
+      meetingStartDateTime?: string | null, totalParticipantCount?: number |
+      null } & { @odata.type: "#microsoft.graph.meetingAttendanceReport" }) |
+      null, meetingTemplateId?: string | null, participants?: Record<string,
+      never> | { @odata.type: string, attendees?: { @odata.type: string,
+      identity?: function, role?: function, upn?: function }[], contributors?: {
+      @odata.type: string, identity?: function, role?: function, upn?: function
+      }[], organizer?: Record<string, never> | { @odata.type: string, identity?:
+      Record<..., ...> | { @odata.type: ..., application?: ..., device?: ...,
+      user?: ... } | null, role?: Record<..., ...> | "unknownFutureValue" |
+      "attendee" | "presenter" | "producer" | "coorganizer" | null, upn?: string
+      | null } | null, producers?: { @odata.type: string, identity?: function,
+      role?: function, upn?: function }[] } | null, recording?: string | null,
+      recordings?: (Omit<{ @odata.type: string, id?: function }, "@odata.type">
+      & { @odata.type: string, callId?: string | null, content?: string | null,
+      contentCorrelationId?: string | null, createdDateTime?: string | null,
+      endDateTime?: string | null, meetingId?: string | null, meetingOrganizer?:
+      Record<..., ...> | { @odata.type: ..., application?: ..., device?: ...,
+      user?: ... } | null, recordingContentUrl?: string | null } & {
+      @odata.type: "#microsoft.graph.callRecording" })[], registration?:
+      Record<string, never> | (Omit<Omit<{ @odata.type: ..., id?: ... },
+      "@odata.type"> & Omit<{ @odata.type: ..., allowedRegistrant?: ...,
+      registrants?: ... }, "@odata.type"> & { @odata.type:
+      "#microsoft.graph.meetingRegistrationBase" }, "@odata.type"> & {
+      @odata.type: string, customQuestions?: (... & ... & ...)[], description?:
+      string | null, endDateTime?: string | null, registrationPageViewCount?:
+      number | null, registrationPageWebUrl?: string | null, speakers?: {
+      @odata.type: ..., bio?: ..., displayName?: ... }[], startDateTime?: string
+      | null, subject?: string | null }) | null, startDateTime?: string | null,
+      transcripts?: (Omit<{ @odata.type: string, id?: function }, "@odata.type">
+      & { @odata.type: string, callId?: string | null, content?: string | null,
+      contentCorrelationId?: string | null, createdDateTime?: string | null,
+      endDateTime?: string | null, meetingId?: string | null, meetingOrganizer?:
+      Record<..., ...> | { @odata.type: ..., application?: ..., device?: ...,
+      user?: ... } | null, metadataContent?: string | null,
+      transcriptContentUrl?: string | null } & { @odata.type:
+      "#microsoft.graph.callTranscript" })[] })[] })
     uid: '@microsoft/teams.graph-endpoints-beta.app.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /app`'
@@ -32,12 +629,882 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/app", "patch">):
-        EndpointRequest<IEndpoints["PATCH /app"]["response"]>
+        function update(body: { @odata.type: string, calls?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, activeModalities?: (Record<string, never> | "unknownFutureValue"
+        | "unknown" | "audio" | "video" | "videoBasedScreenSharing" | "data" |
+        null)[], answeredBy?: Record<string, never> | { @odata.type: string,
+        countryCode?: string | null, endpointType?: Record<string, never> |
+        "unknownFutureValue" | "default" | "voicemail" | "skypeForBusiness" |
+        "skypeForBusinessVoipPhone" | null, identity?: { @odata.type: string,
+        application?: { @odata.type: ..., displayName?: ..., id?: ... } |
+        Record<..., ...> | null, device?: { @odata.type: ..., displayName?: ...,
+        id?: ... } | Record<..., ...> | null, user?: { @odata.type: ...,
+        displayName?: ..., id?: ... } | Record<..., ...> | null }, languageId?:
+        string | null, nonAnonymizedIdentity?: Record<string, never> | {
+        @odata.type: string, application?: { @odata.type: ..., displayName?:
+        ..., id?: ... } | Record<..., ...> | null, device?: { @odata.type: ...,
+        displayName?: ..., id?: ... } | Record<..., ...> | null, user?: {
+        @odata.type: ..., displayName?: ..., id?: ... } | Record<..., ...> |
+        null } | null, participantId?: string | null, platformId?: string |
+        null, region?: string | null } | null, audioRoutingGroups?: (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, receivers?: ...[], routingMode?: "oneToOne" | "multicast",
+        sources?: ...[] } & { @odata.type: "#microsoft.graph.audioRoutingGroup"
+        })[], callbackUri?: string, callChainId?: string | null, callOptions?:
+        Record<string, never> | { @odata.type: string, hideBotAfterEscalation?:
+        boolean | null, isContentSharingNotificationEnabled?: boolean | null,
+        isDeltaRosterEnabled?: boolean | null, isInteractiveRosterEnabled?:
+        boolean | null } | null, callRoutes?: { @odata.type: string, final?: {
+        @odata.type: string, application?: function, device?: function, user?:
+        function }, original?: { @odata.type: string, application?: function,
+        device?: function, user?: function }, routingType?: "unknownFutureValue"
+        | "forwarded" | "lookup" | "selfFork" }[], chatInfo?: Record<string,
+        never> | { @odata.type: string, messageId?: string | null,
+        replyChainMessageId?: string | null, threadId?: string | null } | null,
+        contentSharingSessions?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, pngOfCurrentSlide?: string |
+        null, presenterParticipantId?: string | null } & { @odata.type:
+        "#microsoft.graph.contentSharingSession" })[], direction?:
+        Record<string, never> | "incoming" | "outgoing" | null,
+        incomingContext?: Record<string, never> | { @odata.type: string,
+        observedParticipantId?: string | null, onBehalfOf?: Record<string,
+        never> | { @odata.type: string, application?: { @odata.type: ...,
+        displayName?: ..., id?: ... } | Record<..., ...> | null, device?: {
+        @odata.type: ..., displayName?: ..., id?: ... } | Record<..., ...> |
+        null, user?: { @odata.type: ..., displayName?: ..., id?: ... } |
+        Record<..., ...> | null } | null, sourceParticipantId?: string | null,
+        transferor?: Record<string, never> | { @odata.type: string,
+        application?: { @odata.type: ..., displayName?: ..., id?: ... } |
+        Record<..., ...> | null, device?: { @odata.type: ..., displayName?: ...,
+        id?: ... } | Record<..., ...> | null, user?: { @odata.type: ...,
+        displayName?: ..., id?: ... } | Record<..., ...> | null } | null } |
+        null, mediaConfig?: Record<string, never> | { @odata.type: string,
+        removeFromDefaultAudioGroup?: boolean | null } | null, mediaState?:
+        Record<string, never> | { @odata.type: string, audio?: Record<string,
+        never> | "active" | "unknownFutureValue" | "inactive" | null } | null,
+        meetingCapability?: Record<string, never> | { @odata.type: string,
+        allowAnonymousUsersToDialOut?: boolean,
+        allowAnonymousUsersToStartMeeting?: boolean, autoAdmittedUsers?:
+        "everyone" | "everyoneInCompany" } | null, meetingInfo?: Record<string,
+        never> | { @odata.type: string, allowConversationWithoutHost?: boolean |
+        null } | null, myParticipantId?: string | null, operations?: (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & Omit<{
+        @odata.type: string, clientContext?: function, resultInfo?: function,
+        status?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.commsOperation" })[], participants?: (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, info?: { @odata.type: ..., countryCode?: ..., endpointType?:
+        ..., identity?: ..., languageId?: ..., nonAnonymizedIdentity?: ...,
+        participantId?: ..., platformId?: ..., region?: ... },
+        isIdentityAnonymized?: boolean | null, isInLobby?: boolean, isMuted?:
+        boolean, mediaStreams?: ...[], metadata?: string | null,
+        preferredDisplayName?: string | null, recordingInfo?: Record<..., ...> |
+        { @odata.type: ..., initiatedBy?: ..., initiator?: ...,
+        recordingStatus?: ... } | null, removedState?: Record<..., ...> | {
+        @odata.type: ..., reason?: ... } | null, restrictedExperience?:
+        Record<..., ...> | { @odata.type: ..., contentSharingDisabled?: ...,
+        videoDisabled?: ... } | null, rosterSequenceNumber?: number | null } & {
+        @odata.type: "#microsoft.graph.participant" })[], requestedModalities?:
+        (Record<string, never> | "unknownFutureValue" | "unknown" | "audio" |
+        "video" | "videoBasedScreenSharing" | "data" | null)[], resultInfo?:
+        Record<string, never> | { @odata.type: string, code?: number, message?:
+        string | null, subcode?: number } | null, ringingTimeoutInSeconds?:
+        number | null, routingPolicies?: (Record<string, never> |
+        "unknownFutureValue" | "none" | "noMissedCall" |
+        "disableForwardingExceptPhone" | "disableForwarding" |
+        "preferSkypeForBusiness" | null)[], source?: Record<string, never> | {
+        @odata.type: string, countryCode?: string | null, endpointType?:
+        Record<string, never> | "unknownFutureValue" | "default" | "voicemail" |
+        "skypeForBusiness" | "skypeForBusinessVoipPhone" | null, identity?: {
+        @odata.type: string, application?: { @odata.type: ..., displayName?:
+        ..., id?: ... } | Record<..., ...> | null, device?: { @odata.type: ...,
+        displayName?: ..., id?: ... } | Record<..., ...> | null, user?: {
+        @odata.type: ..., displayName?: ..., id?: ... } | Record<..., ...> |
+        null }, languageId?: string | null, nonAnonymizedIdentity?:
+        Record<string, never> | { @odata.type: string, application?: {
+        @odata.type: ..., displayName?: ..., id?: ... } | Record<..., ...> |
+        null, device?: { @odata.type: ..., displayName?: ..., id?: ... } |
+        Record<..., ...> | null, user?: { @odata.type: ..., displayName?: ...,
+        id?: ... } | Record<..., ...> | null } | null, participantId?: string |
+        null, platformId?: string | null, region?: string | null } | null,
+        state?: Record<string, never> | "unknownFutureValue" | "incoming" |
+        "establishing" | "ringing" | "established" | "hold" | "transferring" |
+        "transferAccepted" | "redirecting" | "terminating" | "terminated" |
+        null, subject?: string | null, targets?: { @odata.type: string,
+        endpointType?: Record<string, never> | "unknownFutureValue" | "default"
+        | "voicemail" | "skypeForBusiness" | "skypeForBusinessVoipPhone" | null,
+        hidden?: boolean | null, identity?: { @odata.type: string, application?:
+        function, device?: function, user?: function }, participantId?: string |
+        null, removeFromDefaultAudioRoutingGroup?: boolean | null,
+        replacesCallId?: string | null }[], tenantId?: string | null,
+        terminationReason?: string | null, toneInfo?: Record<string, never> | {
+        @odata.type: string, sequenceId?: number, tone?: "tone0" | "tone1" |
+        "tone2" | "tone3" | "tone4" | "tone5" | "tone6" | "tone7" | "tone8" |
+        "tone9" | "star" | "pound" | "a" | "b" | "c" | "d" | "flash" } | null,
+        transcription?: Record<string, never> | { @odata.type: string,
+        lastModifiedDateTime?: string | null, state?: "active" |
+        "unknownFutureValue" | "inactive" | "notStarted" } | null } & {
+        @odata.type: "#microsoft.graph.call" })[], onlineMeetings?: (Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, allowAttendeeToEnableCamera?: boolean | null,
+        allowAttendeeToEnableMic?: boolean | null, allowBreakoutRooms?: boolean
+        | null, allowCopyingAndSharingMeetingContent?: boolean | null,
+        allowedLobbyAdmitters?: Record<string, never> | "unknownFutureValue" |
+        "organizerAndCoOrganizersAndPresenters" | "organizerAndCoOrganizers" |
+        null, allowedPresenters?: Record<string, never> | "unknownFutureValue" |
+        "organization" | "everyone" | "roleIsPresenter" | "organizer" | null,
+        allowLiveShare?: Record<string, never> | "unknownFutureValue" |
+        "disabled" | "enabled" | null, allowMeetingChat?: Record<string, never>
+        | "unknownFutureValue" | "disabled" | "enabled" | "limited" | null,
+        allowParticipantsToChangeName?: boolean | null, allowPowerPointSharing?:
+        boolean | null, allowRecording?: boolean | null,
+        allowTeamworkReactions?: boolean | null, allowTranscription?: boolean |
+        null, allowWhiteboard?: boolean | null, anonymizeIdentityForRoles?:
+        function[], attendanceReports?: (... & ... & ...)[], audioConferencing?:
+        Record<string, never> | { @odata.type: string, conferenceId?: function,
+        dialinUrl?: function, tollFreeNumber?: function, tollFreeNumbers?:
+        function, tollNumber?: function, tollNumbers?: function } | null,
+        chatInfo?: Record<string, never> | { @odata.type: string, messageId?:
+        function, replyChainMessageId?: function, threadId?: function } | null,
+        chatRestrictions?: Record<string, never> | { @odata.type: string,
+        allowTextOnly?: function } | null, isEndToEndEncryptionEnabled?: boolean
+        | null, isEntryExitAnnounced?: boolean | null, joinInformation?:
+        Record<string, never> | { @odata.type: string, content?: function,
+        contentType?: function } | null, joinMeetingIdSettings?: Record<string,
+        never> | { @odata.type: string, isPasscodeRequired?: function,
+        joinMeetingId?: function, passcode?: function } | null, joinWebUrl?:
+        string | null, lobbyBypassSettings?: Record<string, never> | {
+        @odata.type: string, isDialInBypassEnabled?: function, scope?: function
+        } | null, recordAutomatically?: boolean | null,
+        shareMeetingChatHistoryDefault?: Record<string, never> |
+        "unknownFutureValue" | "none" | "all" | null, subject?: string | null,
+        videoTeleconferenceId?: string | null, watermarkProtection?:
+        Record<string, never> | { @odata.type: string,
+        isEnabledForContentSharing?: function, isEnabledForVideo?: function } |
+        null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.onlineMeetingBase" }, "@odata.type"> & { @odata.type:
+        string, aiInsights?: (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, actionItems?: ...[], callId?:
+        string | null, contentCorrelationId?: string | null, createdDateTime?:
+        string | null, endDateTime?: string | null, meetingNotes?: ...[],
+        viewpoint?: Record<..., ...> | { @odata.type: ..., mentionEvents?: ... }
+        | null } & { @odata.type: "#microsoft.graph.callAiInsight" })[],
+        alternativeRecording?: string | null, attendeeReport?: string | null,
+        broadcastRecording?: string | null, broadcastSettings?: Record<string,
+        never> | { @odata.type: string, allowedAudience?: Record<string, never>
+        | "unknownFutureValue" | "organization" | "everyone" | "roleIsAttendee"
+        | null, captions?: Record<string, never> | { @odata.type: string,
+        isCaptionEnabled?: boolean | null, spokenLanguage?: string | null,
+        translationLanguages?: ...[] } | null, isAttendeeReportEnabled?: boolean
+        | null, isQuestionAndAnswerEnabled?: boolean | null,
+        isRecordingEnabled?: boolean | null, isVideoOnDemandEnabled?: boolean |
+        null } | null, capabilities?: (Record<string, never> |
+        "unknownFutureValue" | "questionAndAnswer" | null)[], creationDateTime?:
+        string | null, endDateTime?: string | null, externalId?: string | null,
+        isBroadcast?: boolean | null, joinUrl?: string | null,
+        meetingAttendanceReport?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        attendanceRecords?: (... & ... & ...)[], externalEventInformation?: {
+        @odata.type: ..., applicationId?: ..., externalEventId?: ... }[],
+        meetingEndDateTime?: string | null, meetingStartDateTime?: string |
+        null, totalParticipantCount?: number | null } & { @odata.type:
+        "#microsoft.graph.meetingAttendanceReport" }) | null,
+        meetingTemplateId?: string | null, participants?: Record<string, never>
+        | { @odata.type: string, attendees?: { @odata.type: string, identity?:
+        function, role?: function, upn?: function }[], contributors?: {
+        @odata.type: string, identity?: function, role?: function, upn?:
+        function }[], organizer?: Record<string, never> | { @odata.type: string,
+        identity?: Record<..., ...> | { @odata.type: ..., application?: ...,
+        device?: ..., user?: ... } | null, role?: Record<..., ...> |
+        "unknownFutureValue" | "attendee" | "presenter" | "producer" |
+        "coorganizer" | null, upn?: string | null } | null, producers?: {
+        @odata.type: string, identity?: function, role?: function, upn?:
+        function }[] } | null, recording?: string | null, recordings?: (Omit<{
+        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
+        string, callId?: string | null, content?: string | null,
+        contentCorrelationId?: string | null, createdDateTime?: string | null,
+        endDateTime?: string | null, meetingId?: string | null,
+        meetingOrganizer?: Record<..., ...> | { @odata.type: ..., application?:
+        ..., device?: ..., user?: ... } | null, recordingContentUrl?: string |
+        null } & { @odata.type: "#microsoft.graph.callRecording" })[],
+        registration?: Record<string, never> | (Omit<Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        allowedRegistrant?: ..., registrants?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.meetingRegistrationBase" },
+        "@odata.type"> & { @odata.type: string, customQuestions?: (... & ... &
+        ...)[], description?: string | null, endDateTime?: string | null,
+        registrationPageViewCount?: number | null, registrationPageWebUrl?:
+        string | null, speakers?: { @odata.type: ..., bio?: ..., displayName?:
+        ... }[], startDateTime?: string | null, subject?: string | null }) |
+        null, startDateTime?: string | null, transcripts?: (Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & { @odata.type: string,
+        callId?: string | null, content?: string | null, contentCorrelationId?:
+        string | null, createdDateTime?: string | null, endDateTime?: string |
+        null, meetingId?: string | null, meetingOrganizer?: Record<..., ...> | {
+        @odata.type: ..., application?: ..., device?: ..., user?: ... } | null,
+        metadataContent?: string | null, transcriptContentUrl?: string | null }
+        & { @odata.type: "#microsoft.graph.callTranscript" })[] })[] }):
+        EndpointRequest<{ @odata.type: string, calls?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        activeModalities?: (Record<string, never> | "unknownFutureValue" |
+        "unknown" | "audio" | "video" | "videoBasedScreenSharing" | "data" |
+        null)[], answeredBy?: Record<string, never> | { @odata.type: string,
+        countryCode?: string | null, endpointType?: Record<string, never> |
+        "unknownFutureValue" | "default" | "voicemail" | "skypeForBusiness" |
+        "skypeForBusinessVoipPhone" | null, identity?: { @odata.type: string,
+        application?: function, device?: function, user?: function },
+        languageId?: string | null, nonAnonymizedIdentity?: Record<string,
+        never> | { @odata.type: string, application?: function, device?:
+        function, user?: function } | null, participantId?: string | null,
+        platformId?: string | null, region?: string | null } | null,
+        audioRoutingGroups?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, receivers?: function,
+        routingMode?: function, sources?: function } & { @odata.type:
+        "#microsoft.graph.audioRoutingGroup" })[], callbackUri?: string,
+        callChainId?: string | null, callOptions?: Record<string, never> | {
+        @odata.type: string, hideBotAfterEscalation?: boolean | null,
+        isContentSharingNotificationEnabled?: boolean | null,
+        isDeltaRosterEnabled?: boolean | null, isInteractiveRosterEnabled?:
+        boolean | null } | null, callRoutes?: { @odata.type: string, final?: {
+        @odata.type: ..., application?: ..., device?: ..., user?: ... },
+        original?: { @odata.type: ..., application?: ..., device?: ..., user?:
+        ... }, routingType?: "unknownFutureValue" | "forwarded" | "lookup" |
+        "selfFork" }[], chatInfo?: Record<string, never> | { @odata.type:
+        string, messageId?: string | null, replyChainMessageId?: string | null,
+        threadId?: string | null } | null, contentSharingSessions?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        pngOfCurrentSlide?: function, presenterParticipantId?: function } & {
+        @odata.type: "#microsoft.graph.contentSharingSession" })[], direction?:
+        Record<string, never> | "incoming" | "outgoing" | null,
+        incomingContext?: Record<string, never> | { @odata.type: string,
+        observedParticipantId?: string | null, onBehalfOf?: Record<string,
+        never> | { @odata.type: string, application?: function, device?:
+        function, user?: function } | null, sourceParticipantId?: string | null,
+        transferor?: Record<string, never> | { @odata.type: string,
+        application?: function, device?: function, user?: function } | null } |
+        null, mediaConfig?: Record<string, never> | { @odata.type: string,
+        removeFromDefaultAudioGroup?: boolean | null } | null, mediaState?:
+        Record<string, never> | { @odata.type: string, audio?: Record<string,
+        never> | "active" | "unknownFutureValue" | "inactive" | null } | null,
+        meetingCapability?: Record<string, never> | { @odata.type: string,
+        allowAnonymousUsersToDialOut?: boolean,
+        allowAnonymousUsersToStartMeeting?: boolean, autoAdmittedUsers?:
+        "everyone" | "everyoneInCompany" } | null, meetingInfo?: Record<string,
+        never> | { @odata.type: string, allowConversationWithoutHost?: boolean |
+        null } | null, myParticipantId?: string | null, operations?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{ @odata.type: ...,
+        clientContext?: ..., resultInfo?: ..., status?: ... }, "@odata.type"> &
+        { @odata.type: "#microsoft.graph.commsOperation" })[], participants?:
+        (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
+        string, info?: function, isIdentityAnonymized?: function, isInLobby?:
+        function, isMuted?: function, mediaStreams?: function, metadata?:
+        function, preferredDisplayName?: function, recordingInfo?: function,
+        removedState?: function, restrictedExperience?: function,
+        rosterSequenceNumber?: function } & { @odata.type:
+        "#microsoft.graph.participant" })[], requestedModalities?:
+        (Record<string, never> | "unknownFutureValue" | "unknown" | "audio" |
+        "video" | "videoBasedScreenSharing" | "data" | null)[], resultInfo?:
+        Record<string, never> | { @odata.type: string, code?: number, message?:
+        string | null, subcode?: number } | null, ringingTimeoutInSeconds?:
+        number | null, routingPolicies?: (Record<string, never> |
+        "unknownFutureValue" | "none" | "noMissedCall" |
+        "disableForwardingExceptPhone" | "disableForwarding" |
+        "preferSkypeForBusiness" | null)[], source?: Record<string, never> | {
+        @odata.type: string, countryCode?: string | null, endpointType?:
+        Record<string, never> | "unknownFutureValue" | "default" | "voicemail" |
+        "skypeForBusiness" | "skypeForBusinessVoipPhone" | null, identity?: {
+        @odata.type: string, application?: function, device?: function, user?:
+        function }, languageId?: string | null, nonAnonymizedIdentity?:
+        Record<string, never> | { @odata.type: string, application?: function,
+        device?: function, user?: function } | null, participantId?: string |
+        null, platformId?: string | null, region?: string | null } | null,
+        state?: Record<string, never> | "unknownFutureValue" | "incoming" |
+        "establishing" | "ringing" | "established" | "hold" | "transferring" |
+        "transferAccepted" | "redirecting" | "terminating" | "terminated" |
+        null, subject?: string | null, targets?: { @odata.type: string,
+        endpointType?: Record<..., ...> | "unknownFutureValue" | "default" |
+        "voicemail" | "skypeForBusiness" | "skypeForBusinessVoipPhone" | null,
+        hidden?: boolean | null, identity?: { @odata.type: ..., application?:
+        ..., device?: ..., user?: ... }, participantId?: string | null,
+        removeFromDefaultAudioRoutingGroup?: boolean | null, replacesCallId?:
+        string | null }[], tenantId?: string | null, terminationReason?: string
+        | null, toneInfo?: Record<string, never> | { @odata.type: string,
+        sequenceId?: number, tone?: "tone0" | "tone1" | "tone2" | "tone3" |
+        "tone4" | "tone5" | "tone6" | "tone7" | "tone8" | "tone9" | "star" |
+        "pound" | "a" | "b" | "c" | "d" | "flash" } | null, transcription?:
+        Record<string, never> | { @odata.type: string, lastModifiedDateTime?:
+        string | null, state?: "active" | "unknownFutureValue" | "inactive" |
+        "notStarted" } | null } & { @odata.type: "#microsoft.graph.call" })[],
+        onlineMeetings?: (Omit<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & Omit<{ @odata.type: string,
+        allowAttendeeToEnableCamera?: boolean | null, allowAttendeeToEnableMic?:
+        boolean | null, allowBreakoutRooms?: boolean | null,
+        allowCopyingAndSharingMeetingContent?: boolean | null,
+        allowedLobbyAdmitters?: Record<..., ...> | "unknownFutureValue" |
+        "organizerAndCoOrganizersAndPresenters" | "organizerAndCoOrganizers" |
+        null, allowedPresenters?: Record<..., ...> | "unknownFutureValue" |
+        "organization" | "everyone" | "roleIsPresenter" | "organizer" | null,
+        allowLiveShare?: Record<..., ...> | "unknownFutureValue" | "disabled" |
+        "enabled" | null, allowMeetingChat?: Record<..., ...> |
+        "unknownFutureValue" | "disabled" | "enabled" | "limited" | null,
+        allowParticipantsToChangeName?: boolean | null, allowPowerPointSharing?:
+        boolean | null, allowRecording?: boolean | null,
+        allowTeamworkReactions?: boolean | null, allowTranscription?: boolean |
+        null, allowWhiteboard?: boolean | null, anonymizeIdentityForRoles?:
+        ...[], attendanceReports?: ...[], audioConferencing?: Record<..., ...> |
+        { @odata.type: ..., conferenceId?: ..., dialinUrl?: ...,
+        tollFreeNumber?: ..., tollFreeNumbers?: ..., tollNumber?: ...,
+        tollNumbers?: ... } | null, chatInfo?: Record<..., ...> | { @odata.type:
+        ..., messageId?: ..., replyChainMessageId?: ..., threadId?: ... } |
+        null, chatRestrictions?: Record<..., ...> | { @odata.type: ...,
+        allowTextOnly?: ... } | null, isEndToEndEncryptionEnabled?: boolean |
+        null, isEntryExitAnnounced?: boolean | null, joinInformation?:
+        Record<..., ...> | { @odata.type: ..., content?: ..., contentType?: ...
+        } | null, joinMeetingIdSettings?: Record<..., ...> | { @odata.type: ...,
+        isPasscodeRequired?: ..., joinMeetingId?: ..., passcode?: ... } | null,
+        joinWebUrl?: string | null, lobbyBypassSettings?: Record<..., ...> | {
+        @odata.type: ..., isDialInBypassEnabled?: ..., scope?: ... } | null,
+        recordAutomatically?: boolean | null, shareMeetingChatHistoryDefault?:
+        Record<..., ...> | "unknownFutureValue" | "none" | "all" | null,
+        subject?: string | null, videoTeleconferenceId?: string | null,
+        watermarkProtection?: Record<..., ...> | { @odata.type: ...,
+        isEnabledForContentSharing?: ..., isEnabledForVideo?: ... } | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.onlineMeetingBase" },
+        "@odata.type"> & { @odata.type: string, aiInsights?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        actionItems?: function, callId?: function, contentCorrelationId?:
+        function, createdDateTime?: function, endDateTime?: function,
+        meetingNotes?: function, viewpoint?: function } & { @odata.type:
+        "#microsoft.graph.callAiInsight" })[], alternativeRecording?: string |
+        null, attendeeReport?: string | null, broadcastRecording?: string |
+        null, broadcastSettings?: Record<string, never> | { @odata.type: string,
+        allowedAudience?: Record<string, never> | "unknownFutureValue" |
+        "organization" | "everyone" | "roleIsAttendee" | null, captions?:
+        Record<string, never> | { @odata.type: string, isCaptionEnabled?:
+        function, spokenLanguage?: function, translationLanguages?: function } |
+        null, isAttendeeReportEnabled?: boolean | null,
+        isQuestionAndAnswerEnabled?: boolean | null, isRecordingEnabled?:
+        boolean | null, isVideoOnDemandEnabled?: boolean | null } | null,
+        capabilities?: (Record<string, never> | "unknownFutureValue" |
+        "questionAndAnswer" | null)[], creationDateTime?: string | null,
+        endDateTime?: string | null, externalId?: string | null, isBroadcast?:
+        boolean | null, joinUrl?: string | null, meetingAttendanceReport?:
+        Record<string, never> | (Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & { @odata.type: string, attendanceRecords?: ...[],
+        externalEventInformation?: ...[], meetingEndDateTime?: string | null,
+        meetingStartDateTime?: string | null, totalParticipantCount?: number |
+        null } & { @odata.type: "#microsoft.graph.meetingAttendanceReport" }) |
+        null, meetingTemplateId?: string | null, participants?: Record<string,
+        never> | { @odata.type: string, attendees?: { @odata.type: ...,
+        identity?: ..., role?: ..., upn?: ... }[], contributors?: { @odata.type:
+        ..., identity?: ..., role?: ..., upn?: ... }[], organizer?:
+        Record<string, never> | { @odata.type: string, identity?: function,
+        role?: function, upn?: function } | null, producers?: { @odata.type:
+        ..., identity?: ..., role?: ..., upn?: ... }[] } | null, recording?:
+        string | null, recordings?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, callId?: function, content?:
+        function, contentCorrelationId?: function, createdDateTime?: function,
+        endDateTime?: function, meetingId?: function, meetingOrganizer?:
+        function, recordingContentUrl?: function } & { @odata.type:
+        "#microsoft.graph.callRecording" })[], registration?: Record<string,
+        never> | (Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & { @odata.type: string, customQuestions?: ...[],
+        description?: string | null, endDateTime?: string | null,
+        registrationPageViewCount?: number | null, registrationPageWebUrl?:
+        string | null, speakers?: ...[], startDateTime?: string | null,
+        subject?: string | null }) | null, startDateTime?: string | null,
+        transcripts?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+        @odata.type: string, callId?: function, content?: function,
+        contentCorrelationId?: function, createdDateTime?: function,
+        endDateTime?: function, meetingId?: function, meetingOrganizer?:
+        function, metadataContent?: function, transcriptContentUrl?: function }
+        & { @odata.type: "#microsoft.graph.callTranscript" })[] })[] }>
       parameters:
         - id: body
-          type: Operation&lt;"/app", "patch"&gt;
+          type: >-
+            { <xref uid="@odata.type" />: string, calls?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            activeModalities?: (Record&lt;string, never&gt; |
+            "unknownFutureValue" | "unknown" | "audio" | "video" |
+            "videoBasedScreenSharing" | "data" | null)[], answeredBy?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            countryCode?: string | null, endpointType?: Record&lt;string,
+            never&gt; | "unknownFutureValue" | "default" | "voicemail" |
+            "skypeForBusiness" | "skypeForBusinessVoipPhone" | null, identity?:
+            { <xref uid="@odata.type" />: string, application?: { <xref
+            uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+            Record&lt;..., ...&gt; | null, device?: { <xref uid="@odata.type"
+            />: ..., displayName?: ..., id?: ... } | Record&lt;..., ...&gt; |
+            null, user?: { <xref uid="@odata.type" />: ..., displayName?: ...,
+            id?: ... } | Record&lt;..., ...&gt; | null }, languageId?: string |
+            null, nonAnonymizedIdentity?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, application?: { <xref
+            uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+            Record&lt;..., ...&gt; | null, device?: { <xref uid="@odata.type"
+            />: ..., displayName?: ..., id?: ... } | Record&lt;..., ...&gt; |
+            null, user?: { <xref uid="@odata.type" />: ..., displayName?: ...,
+            id?: ... } | Record&lt;..., ...&gt; | null } | null, participantId?:
+            string | null, platformId?: string | null, region?: string | null }
+            | null, audioRoutingGroups?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, receivers?: ...[], routingMode?:
+            "oneToOne" | "multicast", sources?: ...[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.audioRoutingGroup" />" })[], callbackUri?:
+            string, callChainId?: string | null, callOptions?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string,
+            hideBotAfterEscalation?: boolean | null,
+            isContentSharingNotificationEnabled?: boolean | null,
+            isDeltaRosterEnabled?: boolean | null, isInteractiveRosterEnabled?:
+            boolean | null } | null, callRoutes?: { <xref uid="@odata.type" />:
+            string, final?: { <xref uid="@odata.type" />: string, application?:
+            function, device?: function, user?: function }, original?: { <xref
+            uid="@odata.type" />: string, application?: function, device?:
+            function, user?: function }, routingType?: "unknownFutureValue" |
+            "forwarded" | "lookup" | "selfFork" }[], chatInfo?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            messageId?: string | null, replyChainMessageId?: string | null,
+            threadId?: string | null } | null, contentSharingSessions?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, pngOfCurrentSlide?: string | null, presenterParticipantId?:
+            string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.contentSharingSession" />" })[], direction?:
+            Record&lt;string, never&gt; | "incoming" | "outgoing" | null,
+            incomingContext?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, observedParticipantId?: string | null,
+            onBehalfOf?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, application?: { <xref uid="@odata.type" />: ...,
+            displayName?: ..., id?: ... } | Record&lt;..., ...&gt; | null,
+            device?: { <xref uid="@odata.type" />: ..., displayName?: ..., id?:
+            ... } | Record&lt;..., ...&gt; | null, user?: { <xref
+            uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+            Record&lt;..., ...&gt; | null } | null, sourceParticipantId?: string
+            | null, transferor?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, application?: { <xref
+            uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+            Record&lt;..., ...&gt; | null, device?: { <xref uid="@odata.type"
+            />: ..., displayName?: ..., id?: ... } | Record&lt;..., ...&gt; |
+            null, user?: { <xref uid="@odata.type" />: ..., displayName?: ...,
+            id?: ... } | Record&lt;..., ...&gt; | null } | null } | null,
+            mediaConfig?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, removeFromDefaultAudioGroup?: boolean
+            | null } | null, mediaState?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, audio?: Record&lt;string, never&gt; |
+            "active" | "unknownFutureValue" | "inactive" | null } | null,
+            meetingCapability?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, allowAnonymousUsersToDialOut?:
+            boolean, allowAnonymousUsersToStartMeeting?: boolean,
+            autoAdmittedUsers?: "everyone" | "everyoneInCompany" } | null,
+            meetingInfo?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, allowConversationWithoutHost?: boolean
+            | null } | null, myParticipantId?: string | null, operations?:
+            (Omit&lt;{ <xref uid="@odata.type" />: string, id?: function },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+            />: string, clientContext?: function, resultInfo?: function,
+            status?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.commsOperation"
+            />" })[], participants?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, info?: { <xref uid="@odata.type" />:
+            ..., countryCode?: ..., endpointType?: ..., identity?: ...,
+            languageId?: ..., nonAnonymizedIdentity?: ..., participantId?: ...,
+            platformId?: ..., region?: ... }, isIdentityAnonymized?: boolean |
+            null, isInLobby?: boolean, isMuted?: boolean, mediaStreams?: ...[],
+            metadata?: string | null, preferredDisplayName?: string | null,
+            recordingInfo?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+            />: ..., initiatedBy?: ..., initiator?: ..., recordingStatus?: ... }
+            | null, removedState?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., reason?: ... } | null,
+            restrictedExperience?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., contentSharingDisabled?: ...,
+            videoDisabled?: ... } | null, rosterSequenceNumber?: number | null }
+            & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.participant" />" })[], requestedModalities?:
+            (Record&lt;string, never&gt; | "unknownFutureValue" | "unknown" |
+            "audio" | "video" | "videoBasedScreenSharing" | "data" | null)[],
+            resultInfo?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, code?: number, message?: string | null, subcode?: number
+            } | null, ringingTimeoutInSeconds?: number | null, routingPolicies?:
+            (Record&lt;string, never&gt; | "unknownFutureValue" | "none" |
+            "noMissedCall" | "disableForwardingExceptPhone" |
+            "disableForwarding" | "preferSkypeForBusiness" | null)[], source?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            countryCode?: string | null, endpointType?: Record&lt;string,
+            never&gt; | "unknownFutureValue" | "default" | "voicemail" |
+            "skypeForBusiness" | "skypeForBusinessVoipPhone" | null, identity?:
+            { <xref uid="@odata.type" />: string, application?: { <xref
+            uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+            Record&lt;..., ...&gt; | null, device?: { <xref uid="@odata.type"
+            />: ..., displayName?: ..., id?: ... } | Record&lt;..., ...&gt; |
+            null, user?: { <xref uid="@odata.type" />: ..., displayName?: ...,
+            id?: ... } | Record&lt;..., ...&gt; | null }, languageId?: string |
+            null, nonAnonymizedIdentity?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, application?: { <xref
+            uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+            Record&lt;..., ...&gt; | null, device?: { <xref uid="@odata.type"
+            />: ..., displayName?: ..., id?: ... } | Record&lt;..., ...&gt; |
+            null, user?: { <xref uid="@odata.type" />: ..., displayName?: ...,
+            id?: ... } | Record&lt;..., ...&gt; | null } | null, participantId?:
+            string | null, platformId?: string | null, region?: string | null }
+            | null, state?: Record&lt;string, never&gt; | "unknownFutureValue" |
+            "incoming" | "establishing" | "ringing" | "established" | "hold" |
+            "transferring" | "transferAccepted" | "redirecting" | "terminating"
+            | "terminated" | null, subject?: string | null, targets?: { <xref
+            uid="@odata.type" />: string, endpointType?: Record&lt;string,
+            never&gt; | "unknownFutureValue" | "default" | "voicemail" |
+            "skypeForBusiness" | "skypeForBusinessVoipPhone" | null, hidden?:
+            boolean | null, identity?: { <xref uid="@odata.type" />: string,
+            application?: function, device?: function, user?: function },
+            participantId?: string | null, removeFromDefaultAudioRoutingGroup?:
+            boolean | null, replacesCallId?: string | null }[], tenantId?:
+            string | null, terminationReason?: string | null, toneInfo?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            sequenceId?: number, tone?: "tone0" | "tone1" | "tone2" | "tone3" |
+            "tone4" | "tone5" | "tone6" | "tone7" | "tone8" | "tone9" | "star" |
+            "pound" | "a" | "b" | "c" | "d" | "flash" } | null, transcription?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            lastModifiedDateTime?: string | null, state?: "active" |
+            "unknownFutureValue" | "inactive" | "notStarted" } | null } & {
+            <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.call" />"
+            })[], onlineMeetings?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type"
+            />: string, id?: string }, "<xref uid="@odata.type" />"&gt; &
+            Omit&lt;{ <xref uid="@odata.type" />: string,
+            allowAttendeeToEnableCamera?: boolean | null,
+            allowAttendeeToEnableMic?: boolean | null, allowBreakoutRooms?:
+            boolean | null, allowCopyingAndSharingMeetingContent?: boolean |
+            null, allowedLobbyAdmitters?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "organizerAndCoOrganizersAndPresenters" |
+            "organizerAndCoOrganizers" | null, allowedPresenters?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "organization"
+            | "everyone" | "roleIsPresenter" | "organizer" | null,
+            allowLiveShare?: Record&lt;string, never&gt; | "unknownFutureValue"
+            | "disabled" | "enabled" | null, allowMeetingChat?:
+            Record&lt;string, never&gt; | "unknownFutureValue" | "disabled" |
+            "enabled" | "limited" | null, allowParticipantsToChangeName?:
+            boolean | null, allowPowerPointSharing?: boolean | null,
+            allowRecording?: boolean | null, allowTeamworkReactions?: boolean |
+            null, allowTranscription?: boolean | null, allowWhiteboard?: boolean
+            | null, anonymizeIdentityForRoles?: function[], attendanceReports?:
+            (... & ... & ...)[], audioConferencing?: Record&lt;string, never&gt;
+            | { <xref uid="@odata.type" />: string, conferenceId?: function,
+            dialinUrl?: function, tollFreeNumber?: function, tollFreeNumbers?:
+            function, tollNumber?: function, tollNumbers?: function } | null,
+            chatInfo?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+            />: string, messageId?: function, replyChainMessageId?: function,
+            threadId?: function } | null, chatRestrictions?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, allowTextOnly?:
+            function } | null, isEndToEndEncryptionEnabled?: boolean | null,
+            isEntryExitAnnounced?: boolean | null, joinInformation?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            content?: function, contentType?: function } | null,
+            joinMeetingIdSettings?: Record&lt;string, never&gt; | { <xref
+            uid="@odata.type" />: string, isPasscodeRequired?: function,
+            joinMeetingId?: function, passcode?: function } | null, joinWebUrl?:
+            string | null, lobbyBypassSettings?: Record&lt;string, never&gt; | {
+            <xref uid="@odata.type" />: string, isDialInBypassEnabled?:
+            function, scope?: function } | null, recordAutomatically?: boolean |
+            null, shareMeetingChatHistoryDefault?: Record&lt;string, never&gt; |
+            "unknownFutureValue" | "none" | "all" | null, subject?: string |
+            null, videoTeleconferenceId?: string | null, watermarkProtection?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            isEnabledForContentSharing?: function, isEnabledForVideo?: function
+            } | null }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.onlineMeetingBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            aiInsights?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+            function }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, actionItems?: ...[], callId?: string |
+            null, contentCorrelationId?: string | null, createdDateTime?: string
+            | null, endDateTime?: string | null, meetingNotes?: ...[],
+            viewpoint?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />:
+            ..., mentionEvents?: ... } | null } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.callAiInsight" />" })[],
+            alternativeRecording?: string | null, attendeeReport?: string |
+            null, broadcastRecording?: string | null, broadcastSettings?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            allowedAudience?: Record&lt;string, never&gt; | "unknownFutureValue"
+            | "organization" | "everyone" | "roleIsAttendee" | null, captions?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            isCaptionEnabled?: boolean | null, spokenLanguage?: string | null,
+            translationLanguages?: ...[] } | null, isAttendeeReportEnabled?:
+            boolean | null, isQuestionAndAnswerEnabled?: boolean | null,
+            isRecordingEnabled?: boolean | null, isVideoOnDemandEnabled?:
+            boolean | null } | null, capabilities?: (Record&lt;string, never&gt;
+            | "unknownFutureValue" | "questionAndAnswer" | null)[],
+            creationDateTime?: string | null, endDateTime?: string | null,
+            externalId?: string | null, isBroadcast?: boolean | null, joinUrl?:
+            string | null, meetingAttendanceReport?: Record&lt;string, never&gt;
+            | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string },
+            "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+            string, attendanceRecords?: (... & ... & ...)[],
+            externalEventInformation?: { <xref uid="@odata.type" />: ...,
+            applicationId?: ..., externalEventId?: ... }[], meetingEndDateTime?:
+            string | null, meetingStartDateTime?: string | null,
+            totalParticipantCount?: number | null } & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.meetingAttendanceReport" />" }) |
+            null, meetingTemplateId?: string | null, participants?:
+            Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+            attendees?: { <xref uid="@odata.type" />: string, identity?:
+            function, role?: function, upn?: function }[], contributors?: {
+            <xref uid="@odata.type" />: string, identity?: function, role?:
+            function, upn?: function }[], organizer?: Record&lt;string,
+            never&gt; | { <xref uid="@odata.type" />: string, identity?:
+            Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+            application?: ..., device?: ..., user?: ... } | null, role?:
+            Record&lt;..., ...&gt; | "unknownFutureValue" | "attendee" |
+            "presenter" | "producer" | "coorganizer" | null, upn?: string | null
+            } | null, producers?: { <xref uid="@odata.type" />: string,
+            identity?: function, role?: function, upn?: function }[] } | null,
+            recording?: string | null, recordings?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            callId?: string | null, content?: string | null,
+            contentCorrelationId?: string | null, createdDateTime?: string |
+            null, endDateTime?: string | null, meetingId?: string | null,
+            meetingOrganizer?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., application?: ..., device?: ..., user?:
+            ... } | null, recordingContentUrl?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref uid="microsoft.graph.callRecording"
+            />" })[], registration?: Record&lt;string, never&gt; |
+            (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+            "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+            />: ..., allowedRegistrant?: ..., registrants?: ... }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.meetingRegistrationBase" />" }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            customQuestions?: (... & ... & ...)[], description?: string | null,
+            endDateTime?: string | null, registrationPageViewCount?: number |
+            null, registrationPageWebUrl?: string | null, speakers?: { <xref
+            uid="@odata.type" />: ..., bio?: ..., displayName?: ... }[],
+            startDateTime?: string | null, subject?: string | null }) | null,
+            startDateTime?: string | null, transcripts?: (Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            callId?: string | null, content?: string | null,
+            contentCorrelationId?: string | null, createdDateTime?: string |
+            null, endDateTime?: string | null, meetingId?: string | null,
+            meetingOrganizer?: Record&lt;..., ...&gt; | { <xref
+            uid="@odata.type" />: ..., application?: ..., device?: ..., user?:
+            ... } | null, metadataContent?: string | null,
+            transcriptContentUrl?: string | null } & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.callTranscript" />" })[] })[] }
           description: ''
       return:
         description: ''
-        type: EndpointRequest&lt;IEndpoints["PATCH /app"]["response"]&gt;
+        type: >-
+          EndpointRequest&lt;{ <xref uid="@odata.type" />: string, calls?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          activeModalities?: (Record&lt;string, never&gt; | "unknownFutureValue"
+          | "unknown" | "audio" | "video" | "videoBasedScreenSharing" | "data" |
+          null)[], answeredBy?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, countryCode?: string | null,
+          endpointType?: Record&lt;string, never&gt; | "unknownFutureValue" |
+          "default" | "voicemail" | "skypeForBusiness" |
+          "skypeForBusinessVoipPhone" | null, identity?: { <xref
+          uid="@odata.type" />: string, application?: function, device?:
+          function, user?: function }, languageId?: string | null,
+          nonAnonymizedIdentity?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, application?: function, device?:
+          function, user?: function } | null, participantId?: string | null,
+          platformId?: string | null, region?: string | null } | null,
+          audioRoutingGroups?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?:
+          ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, receivers?: function, routingMode?: function, sources?:
+          function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.audioRoutingGroup" />" })[], callbackUri?:
+          string, callChainId?: string | null, callOptions?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string,
+          hideBotAfterEscalation?: boolean | null,
+          isContentSharingNotificationEnabled?: boolean | null,
+          isDeltaRosterEnabled?: boolean | null, isInteractiveRosterEnabled?:
+          boolean | null } | null, callRoutes?: { <xref uid="@odata.type" />:
+          string, final?: { <xref uid="@odata.type" />: ..., application?: ...,
+          device?: ..., user?: ... }, original?: { <xref uid="@odata.type" />:
+          ..., application?: ..., device?: ..., user?: ... }, routingType?:
+          "unknownFutureValue" | "forwarded" | "lookup" | "selfFork" }[],
+          chatInfo?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, messageId?: string | null, replyChainMessageId?: string |
+          null, threadId?: string | null } | null, contentSharingSessions?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          pngOfCurrentSlide?: function, presenterParticipantId?: function } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.contentSharingSession" />" })[], direction?:
+          Record&lt;string, never&gt; | "incoming" | "outgoing" | null,
+          incomingContext?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, observedParticipantId?: string | null,
+          onBehalfOf?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, application?: function, device?: function, user?: function
+          } | null, sourceParticipantId?: string | null, transferor?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          application?: function, device?: function, user?: function } | null }
+          | null, mediaConfig?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, removeFromDefaultAudioGroup?: boolean |
+          null } | null, mediaState?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, audio?: Record&lt;string, never&gt; |
+          "active" | "unknownFutureValue" | "inactive" | null } | null,
+          meetingCapability?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, allowAnonymousUsersToDialOut?: boolean,
+          allowAnonymousUsersToStartMeeting?: boolean, autoAdmittedUsers?:
+          "everyone" | "everyoneInCompany" } | null, meetingInfo?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          allowConversationWithoutHost?: boolean | null } | null,
+          myParticipantId?: string | null, operations?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: ..., clientContext?:
+          ..., resultInfo?: ..., status?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.commsOperation" />" })[], participants?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          info?: function, isIdentityAnonymized?: function, isInLobby?:
+          function, isMuted?: function, mediaStreams?: function, metadata?:
+          function, preferredDisplayName?: function, recordingInfo?: function,
+          removedState?: function, restrictedExperience?: function,
+          rosterSequenceNumber?: function } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.participant" />" })[],
+          requestedModalities?: (Record&lt;string, never&gt; |
+          "unknownFutureValue" | "unknown" | "audio" | "video" |
+          "videoBasedScreenSharing" | "data" | null)[], resultInfo?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          code?: number, message?: string | null, subcode?: number } | null,
+          ringingTimeoutInSeconds?: number | null, routingPolicies?:
+          (Record&lt;string, never&gt; | "unknownFutureValue" | "none" |
+          "noMissedCall" | "disableForwardingExceptPhone" | "disableForwarding"
+          | "preferSkypeForBusiness" | null)[], source?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, countryCode?: string
+          | null, endpointType?: Record&lt;string, never&gt; |
+          "unknownFutureValue" | "default" | "voicemail" | "skypeForBusiness" |
+          "skypeForBusinessVoipPhone" | null, identity?: { <xref
+          uid="@odata.type" />: string, application?: function, device?:
+          function, user?: function }, languageId?: string | null,
+          nonAnonymizedIdentity?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, application?: function, device?:
+          function, user?: function } | null, participantId?: string | null,
+          platformId?: string | null, region?: string | null } | null, state?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "incoming" |
+          "establishing" | "ringing" | "established" | "hold" | "transferring" |
+          "transferAccepted" | "redirecting" | "terminating" | "terminated" |
+          null, subject?: string | null, targets?: { <xref uid="@odata.type" />:
+          string, endpointType?: Record&lt;..., ...&gt; | "unknownFutureValue" |
+          "default" | "voicemail" | "skypeForBusiness" |
+          "skypeForBusinessVoipPhone" | null, hidden?: boolean | null,
+          identity?: { <xref uid="@odata.type" />: ..., application?: ...,
+          device?: ..., user?: ... }, participantId?: string | null,
+          removeFromDefaultAudioRoutingGroup?: boolean | null, replacesCallId?:
+          string | null }[], tenantId?: string | null, terminationReason?:
+          string | null, toneInfo?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, sequenceId?: number, tone?: "tone0" |
+          "tone1" | "tone2" | "tone3" | "tone4" | "tone5" | "tone6" | "tone7" |
+          "tone8" | "tone9" | "star" | "pound" | "a" | "b" | "c" | "d" | "flash"
+          } | null, transcription?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, lastModifiedDateTime?: string | null,
+          state?: "active" | "unknownFutureValue" | "inactive" | "notStarted" }
+          | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.call" />" })[], onlineMeetings?:
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string },
+          "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+          />: string, allowAttendeeToEnableCamera?: boolean | null,
+          allowAttendeeToEnableMic?: boolean | null, allowBreakoutRooms?:
+          boolean | null, allowCopyingAndSharingMeetingContent?: boolean | null,
+          allowedLobbyAdmitters?: Record&lt;..., ...&gt; | "unknownFutureValue"
+          | "organizerAndCoOrganizersAndPresenters" | "organizerAndCoOrganizers"
+          | null, allowedPresenters?: Record&lt;..., ...&gt; |
+          "unknownFutureValue" | "organization" | "everyone" | "roleIsPresenter"
+          | "organizer" | null, allowLiveShare?: Record&lt;..., ...&gt; |
+          "unknownFutureValue" | "disabled" | "enabled" | null,
+          allowMeetingChat?: Record&lt;..., ...&gt; | "unknownFutureValue" |
+          "disabled" | "enabled" | "limited" | null,
+          allowParticipantsToChangeName?: boolean | null,
+          allowPowerPointSharing?: boolean | null, allowRecording?: boolean |
+          null, allowTeamworkReactions?: boolean | null, allowTranscription?:
+          boolean | null, allowWhiteboard?: boolean | null,
+          anonymizeIdentityForRoles?: ...[], attendanceReports?: ...[],
+          audioConferencing?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., conferenceId?: ..., dialinUrl?: ..., tollFreeNumber?: ...,
+          tollFreeNumbers?: ..., tollNumber?: ..., tollNumbers?: ... } | null,
+          chatInfo?: Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          messageId?: ..., replyChainMessageId?: ..., threadId?: ... } | null,
+          chatRestrictions?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., allowTextOnly?: ... } | null, isEndToEndEncryptionEnabled?:
+          boolean | null, isEntryExitAnnounced?: boolean | null,
+          joinInformation?: Record&lt;..., ...&gt; | { <xref uid="@odata.type"
+          />: ..., content?: ..., contentType?: ... } | null,
+          joinMeetingIdSettings?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., isPasscodeRequired?: ..., joinMeetingId?:
+          ..., passcode?: ... } | null, joinWebUrl?: string | null,
+          lobbyBypassSettings?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., isDialInBypassEnabled?: ..., scope?: ... }
+          | null, recordAutomatically?: boolean | null,
+          shareMeetingChatHistoryDefault?: Record&lt;..., ...&gt; |
+          "unknownFutureValue" | "none" | "all" | null, subject?: string | null,
+          videoTeleconferenceId?: string | null, watermarkProtection?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ...,
+          isEnabledForContentSharing?: ..., isEnabledForVideo?: ... } | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.onlineMeetingBase" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          aiInsights?: (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, actionItems?: function, callId?: function,
+          contentCorrelationId?: function, createdDateTime?: function,
+          endDateTime?: function, meetingNotes?: function, viewpoint?: function
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.callAiInsight" />" })[], alternativeRecording?:
+          string | null, attendeeReport?: string | null, broadcastRecording?:
+          string | null, broadcastSettings?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, allowedAudience?:
+          Record&lt;string, never&gt; | "unknownFutureValue" | "organization" |
+          "everyone" | "roleIsAttendee" | null, captions?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, isCaptionEnabled?:
+          function, spokenLanguage?: function, translationLanguages?: function }
+          | null, isAttendeeReportEnabled?: boolean | null,
+          isQuestionAndAnswerEnabled?: boolean | null, isRecordingEnabled?:
+          boolean | null, isVideoOnDemandEnabled?: boolean | null } | null,
+          capabilities?: (Record&lt;string, never&gt; | "unknownFutureValue" |
+          "questionAndAnswer" | null)[], creationDateTime?: string | null,
+          endDateTime?: string | null, externalId?: string | null, isBroadcast?:
+          boolean | null, joinUrl?: string | null, meetingAttendanceReport?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, attendanceRecords?: ...[],
+          externalEventInformation?: ...[], meetingEndDateTime?: string | null,
+          meetingStartDateTime?: string | null, totalParticipantCount?: number |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.meetingAttendanceReport" />" }) | null,
+          meetingTemplateId?: string | null, participants?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, attendees?: { <xref
+          uid="@odata.type" />: ..., identity?: ..., role?: ..., upn?: ... }[],
+          contributors?: { <xref uid="@odata.type" />: ..., identity?: ...,
+          role?: ..., upn?: ... }[], organizer?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, identity?: function, role?:
+          function, upn?: function } | null, producers?: { <xref
+          uid="@odata.type" />: ..., identity?: ..., role?: ..., upn?: ... }[] }
+          | null, recording?: string | null, recordings?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, callId?: function,
+          content?: function, contentCorrelationId?: function, createdDateTime?:
+          function, endDateTime?: function, meetingId?: function,
+          meetingOrganizer?: function, recordingContentUrl?: function } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.callRecording" />" })[], registration?:
+          Record&lt;string, never&gt; | (Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          customQuestions?: ...[], description?: string | null, endDateTime?:
+          string | null, registrationPageViewCount?: number | null,
+          registrationPageWebUrl?: string | null, speakers?: ...[],
+          startDateTime?: string | null, subject?: string | null }) | null,
+          startDateTime?: string | null, transcripts?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, callId?: function,
+          content?: function, contentCorrelationId?: function, createdDateTime?:
+          function, endDateTime?: function, meetingId?: function,
+          meetingOrganizer?: function, metadataContent?: function,
+          transcriptContentUrl?: function } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.callTranscript" />" })[] })[] }&gt;

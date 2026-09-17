@@ -10,8 +10,9 @@ interfaces:
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
   - name: >-
-      create(Operation<"/me/informationProtection/dataLossPreventionPolicies",
-      "post">)
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, name?: string | null } & { @odata.type:
+      "#microsoft.graph.dataLossPreventionPolicy" })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.me.informationProtection.dataLossPreventionPolicies.create
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -20,22 +21,28 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body:
-        Operation<"/me/informationProtection/dataLossPreventionPolicies",
-        "post">): EndpointRequest<IEndpoints["POST
-        /me/informationProtection/dataLossPreventionPolicies"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, name?: string | null } & {
+        @odata.type: "#microsoft.graph.dataLossPreventionPolicy" }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, name?: string | null } & {
+        @odata.type: "#microsoft.graph.dataLossPreventionPolicy" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/me/informationProtection/dataLossPreventionPolicies",
-            "post"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            name?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.dataLossPreventionPolicy" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /me/informationProtection/dataLossPreventionPolicies"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, name?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.dataLossPreventionPolicy" />" }&gt;
+  - name: 'del({ dataLossPreventionPolicy-id: string, If-Match?: string })'
     uid: >-
       @microsoft/teams.graph-endpoints-beta.me.informationProtection.dataLossPreventionPolicies.del
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -46,18 +53,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /me/informationProtection/dataLossPreventionPolicies/{dataLossPreventionPolicy-id}"]["response"]>
+        function del(params?: { dataLossPreventionPolicy-id: string, If-Match?:
+        string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ dataLossPreventionPolicy-id: string, If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /me/informationProtection/dataLossPreventionPolicies/{dataLossPreventionPolicy-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[], dataLossPreventionPolicy-id:
+      string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.me.informationProtection.dataLossPreventionPolicies.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -68,18 +75,28 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /me/informationProtection/dataLossPreventionPolicies/{dataLossPreventionPolicy-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        dataLossPreventionPolicy-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, name?: string | null } & { @odata.type:
+        "#microsoft.graph.dataLossPreventionPolicy" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[],
+            dataLossPreventionPolicy-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /me/informationProtection/dataLossPreventionPolicies/{dataLossPreventionPolicy-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, name?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.dataLossPreventionPolicy" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.me.informationProtection.dataLossPreventionPolicies.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -88,20 +105,34 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /me/informationProtection/dataLossPreventionPolicies"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, name?: string | null } & { @odata.type:
+        "#microsoft.graph.dataLossPreventionPolicy" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /me/informationProtection/dataLossPreventionPolicies"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          name?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.dataLossPreventionPolicy" />" })[] }&gt;
   - name: >-
-      update(Operation<"/me/informationProtection/dataLossPreventionPolicies/{dataLossPreventionPolicy-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, name?: string | null } & { @odata.type:
+      "#microsoft.graph.dataLossPreventionPolicy" }, {
+      dataLossPreventionPolicy-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.me.informationProtection.dataLossPreventionPolicies.update
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -112,24 +143,31 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/me/informationProtection/dataLossPreventionPolicies/{dataLossPreventionPolicy-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /me/informationProtection/dataLossPreventionPolicies/{dataLossPreventionPolicy-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, name?: string | null } & {
+        @odata.type: "#microsoft.graph.dataLossPreventionPolicy" }, params?: {
+        dataLossPreventionPolicy-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, name?: string | null } & { @odata.type:
+        "#microsoft.graph.dataLossPreventionPolicy" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/me/informationProtection/dataLossPreventionPolicies/{dataLossPreventionPolicy-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            name?: string | null } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.dataLossPreventionPolicy" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ dataLossPreventionPolicy-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /me/informationProtection/dataLossPreventionPolicies/{dataLossPreventionPolicy-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, name?: string | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.dataLossPreventionPolicy" />" }&gt;
 variables:
   - name: evaluate
     uid: >-

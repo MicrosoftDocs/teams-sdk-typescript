@@ -58,13 +58,32 @@ properties:
       return:
         description: ''
         type: string
+  - name: client
+    uid: '@microsoft/teams.apps.IBaseActivityContextOptions.client'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      the app's shared HTTP client, used for outbound calls that are not part of
+      the Teams API surface
+
+      (e.g. downloading an inbound file's bytes)
+
+      They inherit the app's User-Agent, middleware, and configuration.
+    fullName: client
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'client?: Client'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.common.Client" />
   - name: connectionName
     uid: '@microsoft/teams.apps.IBaseActivityContextOptions.connectionName'
     package: '@microsoft/teams.apps'
     summary: the default connection name to use for the app
     fullName: connectionName
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: Register and retain the required `OAuthFlow` explicitly.
     syntax:
       content: 'connectionName: string'
       return:
@@ -79,7 +98,8 @@ properties:
       via `api.user.*`
     fullName: isSignedIn
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: Use `app.getOAuthFlow(connectionName).isSignedIn(ctx)`.
     syntax:
       content: 'isSignedIn?: boolean'
       return:
@@ -109,25 +129,55 @@ properties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.api.ConversationReference" />
+  - name: state
+    uid: '@microsoft/teams.apps.IBaseActivityContextOptions.state'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Conversation and user state loaded for this activity turn.
+
+
+      This is undefined when state is disabled or the activity has no
+      conversation ID.
+
+      Do not retain the container after the handler completes; its scopes are
+      sealed.
+    fullName: state
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'state?: TurnStateContainer'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.TurnStateContainer" />
   - name: storage
     uid: '@microsoft/teams.apps.IBaseActivityContextOptions.storage'
     package: '@microsoft/teams.apps'
     summary: app storage instance
     fullName: storage
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: >-
+      Use `state` for conversation or user state. Applications that
+
+      need general persistence should own and use their storage provider
+      directly.
     syntax:
-      content: 'storage: IStorage<any, any>'
+      content: 'storage: IStorage'
       return:
         description: ''
-        type: <xref uid="@microsoft/teams.common.IStorage" />&lt;any, any&gt;
+        type: <xref uid="@microsoft/teams.common.IStorage" />
   - name: userGraph
     uid: '@microsoft/teams.apps.IBaseActivityContextOptions.userGraph'
     package: '@microsoft/teams.apps'
     summary: the user graph client
     fullName: userGraph
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: >-
+      Use a registered OAuth flow to acquire the token needed by the
+
+      Microsoft Graph operation. This property remains available for
+      compatibility.
     syntax:
       content: 'userGraph: Client'
       return:
@@ -139,7 +189,8 @@ properties:
     summary: the user token for the activity context
     fullName: userToken
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: Use `app.getOAuthFlow(connectionName).getToken(ctx)`.
     syntax:
       content: 'userToken?: string'
       return:

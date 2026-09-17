@@ -299,26 +299,22 @@ variables:
           /admin/configurationManagement/configurationSnapshots/{configurationBaseline-id}"]["response"]&gt;
           }
 functions:
-  - name: del(any)
+  - name: 'del({ If-Match?: string })'
     uid: '@microsoft/teams.graph-endpoints-beta.admin.configurationManagement.del'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`DELETE /admin/configurationManagement`'
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /admin/configurationManagement"]["response"]>
+      content: 'function del(params?: { If-Match?: string }): EndpointRequest<never>'
       parameters:
         - id: params
-          type: any
+          type: '{ If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /admin/configurationManagement"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: 'get({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints-beta.admin.configurationManagement.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`GET /admin/configurationManagement`'
@@ -326,18 +322,296 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /admin/configurationManagement"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, configurationApplications?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, appId?: string, appOwnerOrganizationId?: string |
+        null, clientCredentials?: { @odata.type: string, certificateName?:
+        string, keyVaultUri?: string }, createdBy?: { @odata.type: string,
+        application?: { @odata.type: ..., displayName?: ..., id?: ... } |
+        Record<..., ...> | null, device?: { @odata.type: ..., displayName?: ...,
+        id?: ... } | Record<..., ...> | null, user?: { @odata.type: ...,
+        displayName?: ..., id?: ... } | Record<..., ...> | null },
+        createdDateTime?: string, description?: string, displayName?: string,
+        lastModifiedBy?: { @odata.type: string, application?: { @odata.type:
+        ..., displayName?: ..., id?: ... } | Record<..., ...> | null, device?: {
+        @odata.type: ..., displayName?: ..., id?: ... } | Record<..., ...> |
+        null, user?: { @odata.type: ..., displayName?: ..., id?: ... } |
+        Record<..., ...> | null }, lastModifiedDateTime?: string, tenantId?:
+        string } & { @odata.type: "#microsoft.graph.configurationApplication"
+        })[], configurationDrifts?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, baselineResourceDisplayName?:
+        string, driftedProperties?: { @odata.type: string, currentValue?:
+        unknown, desiredValue?: unknown, propertyName?: function }[],
+        firstReportedDateTime?: string, monitorId?: string,
+        resourceInstanceIdentifier?: Omit<{ @odata.type: ... }, "@odata.type"> &
+        { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.openComplexDictionaryType" }, resourceType?: string,
+        status?: "active" | "fixed" | "unknownFutureValue", tenantId?: string }
+        & { @odata.type: "#microsoft.graph.configurationDrift" })[],
+        configurationMonitoringResults?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, driftsCount?: number,
+        driftsFixed?: number, errorDetails?: { @odata.type: string,
+        errorMessage?: function, resourceInstanceName?: function, resourceType?:
+        function }[], monitorId?: string, runCompletionDateTime?: string,
+        runInitiationDateTime?: string, runStatus?: "unknownFutureValue" |
+        "successful" | "partiallySuccessful" | "failed", runType?:
+        "unknownFutureValue" | "monitor" | "apply", tenantId?: string } & {
+        @odata.type: "#microsoft.graph.configurationMonitoringResult" })[],
+        configurationMonitors?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, baseline?: Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & { @odata.type: string, description?:
+        function, displayName?: function, parameters?: function, resources?:
+        function } & { @odata.type: "#microsoft.graph.configurationBaseline" },
+        createdBy?: { @odata.type: string, application?: { @odata.type: ...,
+        displayName?: ..., id?: ... } | Record<..., ...> | null, device?: {
+        @odata.type: ..., displayName?: ..., id?: ... } | Record<..., ...> |
+        null, user?: { @odata.type: ..., displayName?: ..., id?: ... } |
+        Record<..., ...> | null }, createdDateTime?: string, description?:
+        string, displayName?: string, inactivationReason?: string | null,
+        lastModifiedBy?: { @odata.type: string, application?: { @odata.type:
+        ..., displayName?: ..., id?: ... } | Record<..., ...> | null, device?: {
+        @odata.type: ..., displayName?: ..., id?: ... } | Record<..., ...> |
+        null, user?: { @odata.type: ..., displayName?: ..., id?: ... } |
+        Record<..., ...> | null }, lastModifiedDateTime?: string, mode?:
+        "unknownFutureValue" | "monitorOnce" | "monitorOnly" |
+        "applyOnceAndMonitorContinuous" | "applyOnce" | "applyContinuous",
+        monitorRunFrequencyInHours?: number, parameters?: Record<string, never>
+        | (Omit<{ @odata.type: ... }, "@odata.type"> & { @odata.type: string } &
+        { @odata.type: "#microsoft.graph.openComplexDictionaryType" }) | null,
+        runAsUTCMServicePrincipal?: boolean, runningOnBehalfOf?: { @odata.type:
+        string, application?: { @odata.type: ..., displayName?: ..., id?: ... }
+        | Record<..., ...> | null, device?: { @odata.type: ..., displayName?:
+        ..., id?: ... } | Record<..., ...> | null, user?: { @odata.type: ...,
+        displayName?: ..., id?: ... } | Record<..., ...> | null }, status?:
+        "active" | "unknownFutureValue" | "inactive", tenantId?: string } & {
+        @odata.type: "#microsoft.graph.configurationMonitor" })[],
+        configurationSnapshotJobs?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, completedDateTime?: string,
+        createdBy?: { @odata.type: string, application?: { @odata.type: ...,
+        displayName?: ..., id?: ... } | Record<..., ...> | null, device?: {
+        @odata.type: ..., displayName?: ..., id?: ... } | Record<..., ...> |
+        null, user?: { @odata.type: ..., displayName?: ..., id?: ... } |
+        Record<..., ...> | null }, createdDateTime?: string, description?:
+        string, displayName?: string, errorDetails?: string[],
+        resourceLocation?: string, resources?: string[], status?:
+        "unknownFutureValue" | "partiallySuccessful" | "failed" | "notStarted" |
+        "running" | "succeeded", tenantId?: string } & { @odata.type:
+        "#microsoft.graph.configurationSnapshotJob" })[],
+        configurationSnapshots?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, description?: string,
+        displayName?: string, parameters?: { @odata.type: string, description?:
+        function, displayName?: function, parameterType?: function }[],
+        resources?: { @odata.type: string, displayName?: function, properties?:
+        function, resourceType?: function }[] } & { @odata.type:
+        "#microsoft.graph.configurationBaseline" })[] } & { @odata.type:
+        "#microsoft.graph.configurationManagement" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /admin/configurationManagement"]["response"]&gt;
-  - name: update(Operation<"/admin/configurationManagement", "patch">)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, configurationApplications?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, appId?: string,
+          appOwnerOrganizationId?: string | null, clientCredentials?: { <xref
+          uid="@odata.type" />: string, certificateName?: string, keyVaultUri?:
+          string }, createdBy?: { <xref uid="@odata.type" />: string,
+          application?: { <xref uid="@odata.type" />: ..., displayName?: ...,
+          id?: ... } | Record&lt;..., ...&gt; | null, device?: { <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          Record&lt;..., ...&gt; | null, user?: { <xref uid="@odata.type" />:
+          ..., displayName?: ..., id?: ... } | Record&lt;..., ...&gt; | null },
+          createdDateTime?: string, description?: string, displayName?: string,
+          lastModifiedBy?: { <xref uid="@odata.type" />: string, application?: {
+          <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          Record&lt;..., ...&gt; | null, device?: { <xref uid="@odata.type" />:
+          ..., displayName?: ..., id?: ... } | Record&lt;..., ...&gt; | null,
+          user?: { <xref uid="@odata.type" />: ..., displayName?: ..., id?: ...
+          } | Record&lt;..., ...&gt; | null }, lastModifiedDateTime?: string,
+          tenantId?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationApplication" />" })[],
+          configurationDrifts?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, baselineResourceDisplayName?: string,
+          driftedProperties?: { <xref uid="@odata.type" />: string,
+          currentValue?: unknown, desiredValue?: unknown, propertyName?:
+          function }[], firstReportedDateTime?: string, monitorId?: string,
+          resourceInstanceIdentifier?: Omit&lt;{ <xref uid="@odata.type" />: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.openComplexDictionaryType" />" }, resourceType?:
+          string, status?: "active" | "fixed" | "unknownFutureValue", tenantId?:
+          string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationDrift" />" })[],
+          configurationMonitoringResults?: (Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, driftsCount?: number, driftsFixed?:
+          number, errorDetails?: { <xref uid="@odata.type" />: string,
+          errorMessage?: function, resourceInstanceName?: function,
+          resourceType?: function }[], monitorId?: string,
+          runCompletionDateTime?: string, runInitiationDateTime?: string,
+          runStatus?: "unknownFutureValue" | "successful" |
+          "partiallySuccessful" | "failed", runType?: "unknownFutureValue" |
+          "monitor" | "apply", tenantId?: string } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.configurationMonitoringResult" />"
+          })[], configurationMonitors?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, baseline?: Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, description?:
+          function, displayName?: function, parameters?: function, resources?:
+          function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationBaseline" />" }, createdBy?: { <xref
+          uid="@odata.type" />: string, application?: { <xref uid="@odata.type"
+          />: ..., displayName?: ..., id?: ... } | Record&lt;..., ...&gt; |
+          null, device?: { <xref uid="@odata.type" />: ..., displayName?: ...,
+          id?: ... } | Record&lt;..., ...&gt; | null, user?: { <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          Record&lt;..., ...&gt; | null }, createdDateTime?: string,
+          description?: string, displayName?: string, inactivationReason?:
+          string | null, lastModifiedBy?: { <xref uid="@odata.type" />: string,
+          application?: { <xref uid="@odata.type" />: ..., displayName?: ...,
+          id?: ... } | Record&lt;..., ...&gt; | null, device?: { <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          Record&lt;..., ...&gt; | null, user?: { <xref uid="@odata.type" />:
+          ..., displayName?: ..., id?: ... } | Record&lt;..., ...&gt; | null },
+          lastModifiedDateTime?: string, mode?: "unknownFutureValue" |
+          "monitorOnce" | "monitorOnly" | "applyOnceAndMonitorContinuous" |
+          "applyOnce" | "applyContinuous", monitorRunFrequencyInHours?: number,
+          parameters?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.openComplexDictionaryType" />" }) | null,
+          runAsUTCMServicePrincipal?: boolean, runningOnBehalfOf?: { <xref
+          uid="@odata.type" />: string, application?: { <xref uid="@odata.type"
+          />: ..., displayName?: ..., id?: ... } | Record&lt;..., ...&gt; |
+          null, device?: { <xref uid="@odata.type" />: ..., displayName?: ...,
+          id?: ... } | Record&lt;..., ...&gt; | null, user?: { <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          Record&lt;..., ...&gt; | null }, status?: "active" |
+          "unknownFutureValue" | "inactive", tenantId?: string } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationMonitor" />" })[],
+          configurationSnapshotJobs?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, completedDateTime?: string, createdBy?:
+          { <xref uid="@odata.type" />: string, application?: { <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          Record&lt;..., ...&gt; | null, device?: { <xref uid="@odata.type" />:
+          ..., displayName?: ..., id?: ... } | Record&lt;..., ...&gt; | null,
+          user?: { <xref uid="@odata.type" />: ..., displayName?: ..., id?: ...
+          } | Record&lt;..., ...&gt; | null }, createdDateTime?: string,
+          description?: string, displayName?: string, errorDetails?: string[],
+          resourceLocation?: string, resources?: string[], status?:
+          "unknownFutureValue" | "partiallySuccessful" | "failed" | "notStarted"
+          | "running" | "succeeded", tenantId?: string } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationSnapshotJob" />" })[],
+          configurationSnapshots?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, description?: string, displayName?:
+          string, parameters?: { <xref uid="@odata.type" />: string,
+          description?: function, displayName?: function, parameterType?:
+          function }[], resources?: { <xref uid="@odata.type" />: string,
+          displayName?: function, properties?: function, resourceType?: function
+          }[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationBaseline" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationManagement" />" }&gt;
+  - name: >-
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, configurationApplications?: (Omit<{ @odata.type:
+      string, id?: string }, "@odata.type"> & { @odata.type: string, appId?:
+      string, appOwnerOrganizationId?: string | null, clientCredentials?: {
+      @odata.type: string, certificateName?: string, keyVaultUri?: string },
+      createdBy?: { @odata.type: string, application?: { @odata.type: string,
+      displayName?: function, id?: function } | Record<string, never> | null,
+      device?: { @odata.type: string, displayName?: function, id?: function } |
+      Record<string, never> | null, user?: { @odata.type: string, displayName?:
+      function, id?: function } | Record<string, never> | null },
+      createdDateTime?: string, description?: string, displayName?: string,
+      lastModifiedBy?: { @odata.type: string, application?: { @odata.type:
+      string, displayName?: function, id?: function } | Record<string, never> |
+      null, device?: { @odata.type: string, displayName?: function, id?:
+      function } | Record<string, never> | null, user?: { @odata.type: string,
+      displayName?: function, id?: function } | Record<string, never> | null },
+      lastModifiedDateTime?: string, tenantId?: string } & { @odata.type:
+      "#microsoft.graph.configurationApplication" })[], configurationDrifts?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, baselineResourceDisplayName?: string,
+      driftedProperties?: { @odata.type: string, currentValue?: unknown,
+      desiredValue?: unknown, propertyName?: string }[], firstReportedDateTime?:
+      string, monitorId?: string, resourceInstanceIdentifier?: Omit<{
+      @odata.type: string }, "@odata.type"> & { @odata.type: string } & {
+      @odata.type: "#microsoft.graph.openComplexDictionaryType" },
+      resourceType?: string, status?: "active" | "fixed" | "unknownFutureValue",
+      tenantId?: string } & { @odata.type: "#microsoft.graph.configurationDrift"
+      })[], configurationMonitoringResults?: (Omit<{ @odata.type: string, id?:
+      string }, "@odata.type"> & { @odata.type: string, driftsCount?: number,
+      driftsFixed?: number, errorDetails?: { @odata.type: string, errorMessage?:
+      string, resourceInstanceName?: string, resourceType?: string }[],
+      monitorId?: string, runCompletionDateTime?: string,
+      runInitiationDateTime?: string, runStatus?: "unknownFutureValue" |
+      "successful" | "partiallySuccessful" | "failed", runType?:
+      "unknownFutureValue" | "monitor" | "apply", tenantId?: string } & {
+      @odata.type: "#microsoft.graph.configurationMonitoringResult" })[],
+      configurationMonitors?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, baseline?: Omit<{ @odata.type:
+      string, id?: function }, "@odata.type"> & { @odata.type: string,
+      description?: string, displayName?: string, parameters?: ...[],
+      resources?: ...[] } & { @odata.type:
+      "#microsoft.graph.configurationBaseline" }, createdBy?: { @odata.type:
+      string, application?: { @odata.type: string, displayName?: function, id?:
+      function } | Record<string, never> | null, device?: { @odata.type: string,
+      displayName?: function, id?: function } | Record<string, never> | null,
+      user?: { @odata.type: string, displayName?: function, id?: function } |
+      Record<string, never> | null }, createdDateTime?: string, description?:
+      string, displayName?: string, inactivationReason?: string | null,
+      lastModifiedBy?: { @odata.type: string, application?: { @odata.type:
+      string, displayName?: function, id?: function } | Record<string, never> |
+      null, device?: { @odata.type: string, displayName?: function, id?:
+      function } | Record<string, never> | null, user?: { @odata.type: string,
+      displayName?: function, id?: function } | Record<string, never> | null },
+      lastModifiedDateTime?: string, mode?: "unknownFutureValue" | "monitorOnce"
+      | "monitorOnly" | "applyOnceAndMonitorContinuous" | "applyOnce" |
+      "applyContinuous", monitorRunFrequencyInHours?: number, parameters?:
+      Record<string, never> | (Omit<{ @odata.type: string }, "@odata.type"> & {
+      @odata.type: string } & { @odata.type:
+      "#microsoft.graph.openComplexDictionaryType" }) | null,
+      runAsUTCMServicePrincipal?: boolean, runningOnBehalfOf?: { @odata.type:
+      string, application?: { @odata.type: string, displayName?: function, id?:
+      function } | Record<string, never> | null, device?: { @odata.type: string,
+      displayName?: function, id?: function } | Record<string, never> | null,
+      user?: { @odata.type: string, displayName?: function, id?: function } |
+      Record<string, never> | null }, status?: "active" | "unknownFutureValue" |
+      "inactive", tenantId?: string } & { @odata.type:
+      "#microsoft.graph.configurationMonitor" })[], configurationSnapshotJobs?:
+      (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, completedDateTime?: string, createdBy?: {
+      @odata.type: string, application?: { @odata.type: string, displayName?:
+      function, id?: function } | Record<string, never> | null, device?: {
+      @odata.type: string, displayName?: function, id?: function } |
+      Record<string, never> | null, user?: { @odata.type: string, displayName?:
+      function, id?: function } | Record<string, never> | null },
+      createdDateTime?: string, description?: string, displayName?: string,
+      errorDetails?: string[], resourceLocation?: string, resources?: string[],
+      status?: "unknownFutureValue" | "partiallySuccessful" | "failed" |
+      "notStarted" | "running" | "succeeded", tenantId?: string } & {
+      @odata.type: "#microsoft.graph.configurationSnapshotJob" })[],
+      configurationSnapshots?: (Omit<{ @odata.type: string, id?: string },
+      "@odata.type"> & { @odata.type: string, description?: string,
+      displayName?: string, parameters?: { @odata.type: string, description?:
+      string | null, displayName?: string, parameterType?: "string" | "boolean"
+      | "unknownFutureValue" | "integer" }[], resources?: { @odata.type: string,
+      displayName?: string, properties?: ... & ... & ..., resourceType?: string
+      }[] } & { @odata.type: "#microsoft.graph.configurationBaseline" })[] } & {
+      @odata.type: "#microsoft.graph.configurationManagement" })
     uid: '@microsoft/teams.graph-endpoints-beta.admin.configurationManagement.update'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`PATCH /admin/configurationManagement`'
@@ -345,15 +619,414 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body: Operation<"/admin/configurationManagement",
-        "patch">): EndpointRequest<IEndpoints["PATCH
-        /admin/configurationManagement"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, configurationApplications?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, appId?: string, appOwnerOrganizationId?: string |
+        null, clientCredentials?: { @odata.type: string, certificateName?:
+        string, keyVaultUri?: string }, createdBy?: { @odata.type: string,
+        application?: { @odata.type: string, displayName?: function, id?:
+        function } | Record<string, never> | null, device?: { @odata.type:
+        string, displayName?: function, id?: function } | Record<string, never>
+        | null, user?: { @odata.type: string, displayName?: function, id?:
+        function } | Record<string, never> | null }, createdDateTime?: string,
+        description?: string, displayName?: string, lastModifiedBy?: {
+        @odata.type: string, application?: { @odata.type: string, displayName?:
+        function, id?: function } | Record<string, never> | null, device?: {
+        @odata.type: string, displayName?: function, id?: function } |
+        Record<string, never> | null, user?: { @odata.type: string,
+        displayName?: function, id?: function } | Record<string, never> | null
+        }, lastModifiedDateTime?: string, tenantId?: string } & { @odata.type:
+        "#microsoft.graph.configurationApplication" })[], configurationDrifts?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, baselineResourceDisplayName?: string,
+        driftedProperties?: { @odata.type: string, currentValue?: unknown,
+        desiredValue?: unknown, propertyName?: string }[],
+        firstReportedDateTime?: string, monitorId?: string,
+        resourceInstanceIdentifier?: Omit<{ @odata.type: string },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.openComplexDictionaryType" }, resourceType?: string,
+        status?: "active" | "fixed" | "unknownFutureValue", tenantId?: string }
+        & { @odata.type: "#microsoft.graph.configurationDrift" })[],
+        configurationMonitoringResults?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, driftsCount?: number,
+        driftsFixed?: number, errorDetails?: { @odata.type: string,
+        errorMessage?: string, resourceInstanceName?: string, resourceType?:
+        string }[], monitorId?: string, runCompletionDateTime?: string,
+        runInitiationDateTime?: string, runStatus?: "unknownFutureValue" |
+        "successful" | "partiallySuccessful" | "failed", runType?:
+        "unknownFutureValue" | "monitor" | "apply", tenantId?: string } & {
+        @odata.type: "#microsoft.graph.configurationMonitoringResult" })[],
+        configurationMonitors?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, baseline?: Omit<{ @odata.type:
+        string, id?: function }, "@odata.type"> & { @odata.type: string,
+        description?: string, displayName?: string, parameters?: ...[],
+        resources?: ...[] } & { @odata.type:
+        "#microsoft.graph.configurationBaseline" }, createdBy?: { @odata.type:
+        string, application?: { @odata.type: string, displayName?: function,
+        id?: function } | Record<string, never> | null, device?: { @odata.type:
+        string, displayName?: function, id?: function } | Record<string, never>
+        | null, user?: { @odata.type: string, displayName?: function, id?:
+        function } | Record<string, never> | null }, createdDateTime?: string,
+        description?: string, displayName?: string, inactivationReason?: string
+        | null, lastModifiedBy?: { @odata.type: string, application?: {
+        @odata.type: string, displayName?: function, id?: function } |
+        Record<string, never> | null, device?: { @odata.type: string,
+        displayName?: function, id?: function } | Record<string, never> | null,
+        user?: { @odata.type: string, displayName?: function, id?: function } |
+        Record<string, never> | null }, lastModifiedDateTime?: string, mode?:
+        "unknownFutureValue" | "monitorOnce" | "monitorOnly" |
+        "applyOnceAndMonitorContinuous" | "applyOnce" | "applyContinuous",
+        monitorRunFrequencyInHours?: number, parameters?: Record<string, never>
+        | (Omit<{ @odata.type: string }, "@odata.type"> & { @odata.type: string
+        } & { @odata.type: "#microsoft.graph.openComplexDictionaryType" }) |
+        null, runAsUTCMServicePrincipal?: boolean, runningOnBehalfOf?: {
+        @odata.type: string, application?: { @odata.type: string, displayName?:
+        function, id?: function } | Record<string, never> | null, device?: {
+        @odata.type: string, displayName?: function, id?: function } |
+        Record<string, never> | null, user?: { @odata.type: string,
+        displayName?: function, id?: function } | Record<string, never> | null
+        }, status?: "active" | "unknownFutureValue" | "inactive", tenantId?:
+        string } & { @odata.type: "#microsoft.graph.configurationMonitor" })[],
+        configurationSnapshotJobs?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, completedDateTime?: string,
+        createdBy?: { @odata.type: string, application?: { @odata.type: string,
+        displayName?: function, id?: function } | Record<string, never> | null,
+        device?: { @odata.type: string, displayName?: function, id?: function }
+        | Record<string, never> | null, user?: { @odata.type: string,
+        displayName?: function, id?: function } | Record<string, never> | null
+        }, createdDateTime?: string, description?: string, displayName?: string,
+        errorDetails?: string[], resourceLocation?: string, resources?:
+        string[], status?: "unknownFutureValue" | "partiallySuccessful" |
+        "failed" | "notStarted" | "running" | "succeeded", tenantId?: string } &
+        { @odata.type: "#microsoft.graph.configurationSnapshotJob" })[],
+        configurationSnapshots?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, description?: string,
+        displayName?: string, parameters?: { @odata.type: string, description?:
+        string | null, displayName?: string, parameterType?: "string" |
+        "boolean" | "unknownFutureValue" | "integer" }[], resources?: {
+        @odata.type: string, displayName?: string, properties?: ... & ... & ...,
+        resourceType?: string }[] } & { @odata.type:
+        "#microsoft.graph.configurationBaseline" })[] } & { @odata.type:
+        "#microsoft.graph.configurationManagement" }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, configurationApplications?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, appId?: string,
+        appOwnerOrganizationId?: string | null, clientCredentials?: {
+        @odata.type: string, certificateName?: string, keyVaultUri?: string },
+        createdBy?: { @odata.type: string, application?: { @odata.type: ...,
+        displayName?: ..., id?: ... } | Record<..., ...> | null, device?: {
+        @odata.type: ..., displayName?: ..., id?: ... } | Record<..., ...> |
+        null, user?: { @odata.type: ..., displayName?: ..., id?: ... } |
+        Record<..., ...> | null }, createdDateTime?: string, description?:
+        string, displayName?: string, lastModifiedBy?: { @odata.type: string,
+        application?: { @odata.type: ..., displayName?: ..., id?: ... } |
+        Record<..., ...> | null, device?: { @odata.type: ..., displayName?: ...,
+        id?: ... } | Record<..., ...> | null, user?: { @odata.type: ...,
+        displayName?: ..., id?: ... } | Record<..., ...> | null },
+        lastModifiedDateTime?: string, tenantId?: string } & { @odata.type:
+        "#microsoft.graph.configurationApplication" })[], configurationDrifts?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, baselineResourceDisplayName?: string,
+        driftedProperties?: { @odata.type: string, currentValue?: unknown,
+        desiredValue?: unknown, propertyName?: function }[],
+        firstReportedDateTime?: string, monitorId?: string,
+        resourceInstanceIdentifier?: Omit<{ @odata.type: ... }, "@odata.type"> &
+        { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.openComplexDictionaryType" }, resourceType?: string,
+        status?: "active" | "fixed" | "unknownFutureValue", tenantId?: string }
+        & { @odata.type: "#microsoft.graph.configurationDrift" })[],
+        configurationMonitoringResults?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & { @odata.type: string, driftsCount?: number,
+        driftsFixed?: number, errorDetails?: { @odata.type: string,
+        errorMessage?: function, resourceInstanceName?: function, resourceType?:
+        function }[], monitorId?: string, runCompletionDateTime?: string,
+        runInitiationDateTime?: string, runStatus?: "unknownFutureValue" |
+        "successful" | "partiallySuccessful" | "failed", runType?:
+        "unknownFutureValue" | "monitor" | "apply", tenantId?: string } & {
+        @odata.type: "#microsoft.graph.configurationMonitoringResult" })[],
+        configurationMonitors?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, baseline?: Omit<{ @odata.type:
+        ..., id?: ... }, "@odata.type"> & { @odata.type: string, description?:
+        function, displayName?: function, parameters?: function, resources?:
+        function } & { @odata.type: "#microsoft.graph.configurationBaseline" },
+        createdBy?: { @odata.type: string, application?: { @odata.type: ...,
+        displayName?: ..., id?: ... } | Record<..., ...> | null, device?: {
+        @odata.type: ..., displayName?: ..., id?: ... } | Record<..., ...> |
+        null, user?: { @odata.type: ..., displayName?: ..., id?: ... } |
+        Record<..., ...> | null }, createdDateTime?: string, description?:
+        string, displayName?: string, inactivationReason?: string | null,
+        lastModifiedBy?: { @odata.type: string, application?: { @odata.type:
+        ..., displayName?: ..., id?: ... } | Record<..., ...> | null, device?: {
+        @odata.type: ..., displayName?: ..., id?: ... } | Record<..., ...> |
+        null, user?: { @odata.type: ..., displayName?: ..., id?: ... } |
+        Record<..., ...> | null }, lastModifiedDateTime?: string, mode?:
+        "unknownFutureValue" | "monitorOnce" | "monitorOnly" |
+        "applyOnceAndMonitorContinuous" | "applyOnce" | "applyContinuous",
+        monitorRunFrequencyInHours?: number, parameters?: Record<string, never>
+        | (Omit<{ @odata.type: ... }, "@odata.type"> & { @odata.type: string } &
+        { @odata.type: "#microsoft.graph.openComplexDictionaryType" }) | null,
+        runAsUTCMServicePrincipal?: boolean, runningOnBehalfOf?: { @odata.type:
+        string, application?: { @odata.type: ..., displayName?: ..., id?: ... }
+        | Record<..., ...> | null, device?: { @odata.type: ..., displayName?:
+        ..., id?: ... } | Record<..., ...> | null, user?: { @odata.type: ...,
+        displayName?: ..., id?: ... } | Record<..., ...> | null }, status?:
+        "active" | "unknownFutureValue" | "inactive", tenantId?: string } & {
+        @odata.type: "#microsoft.graph.configurationMonitor" })[],
+        configurationSnapshotJobs?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, completedDateTime?: string,
+        createdBy?: { @odata.type: string, application?: { @odata.type: ...,
+        displayName?: ..., id?: ... } | Record<..., ...> | null, device?: {
+        @odata.type: ..., displayName?: ..., id?: ... } | Record<..., ...> |
+        null, user?: { @odata.type: ..., displayName?: ..., id?: ... } |
+        Record<..., ...> | null }, createdDateTime?: string, description?:
+        string, displayName?: string, errorDetails?: string[],
+        resourceLocation?: string, resources?: string[], status?:
+        "unknownFutureValue" | "partiallySuccessful" | "failed" | "notStarted" |
+        "running" | "succeeded", tenantId?: string } & { @odata.type:
+        "#microsoft.graph.configurationSnapshotJob" })[],
+        configurationSnapshots?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, description?: string,
+        displayName?: string, parameters?: { @odata.type: string, description?:
+        function, displayName?: function, parameterType?: function }[],
+        resources?: { @odata.type: string, displayName?: function, properties?:
+        function, resourceType?: function }[] } & { @odata.type:
+        "#microsoft.graph.configurationBaseline" })[] } & { @odata.type:
+        "#microsoft.graph.configurationManagement" }>
       parameters:
         - id: body
-          type: Operation&lt;"/admin/configurationManagement", "patch"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            configurationApplications?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, appId?: string,
+            appOwnerOrganizationId?: string | null, clientCredentials?: { <xref
+            uid="@odata.type" />: string, certificateName?: string,
+            keyVaultUri?: string }, createdBy?: { <xref uid="@odata.type" />:
+            string, application?: { <xref uid="@odata.type" />: string,
+            displayName?: function, id?: function } | Record&lt;string,
+            never&gt; | null, device?: { <xref uid="@odata.type" />: string,
+            displayName?: function, id?: function } | Record&lt;string,
+            never&gt; | null, user?: { <xref uid="@odata.type" />: string,
+            displayName?: function, id?: function } | Record&lt;string,
+            never&gt; | null }, createdDateTime?: string, description?: string,
+            displayName?: string, lastModifiedBy?: { <xref uid="@odata.type" />:
+            string, application?: { <xref uid="@odata.type" />: string,
+            displayName?: function, id?: function } | Record&lt;string,
+            never&gt; | null, device?: { <xref uid="@odata.type" />: string,
+            displayName?: function, id?: function } | Record&lt;string,
+            never&gt; | null, user?: { <xref uid="@odata.type" />: string,
+            displayName?: function, id?: function } | Record&lt;string,
+            never&gt; | null }, lastModifiedDateTime?: string, tenantId?: string
+            } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.configurationApplication" />" })[],
+            configurationDrifts?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+            id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, baselineResourceDisplayName?: string,
+            driftedProperties?: { <xref uid="@odata.type" />: string,
+            currentValue?: unknown, desiredValue?: unknown, propertyName?:
+            string }[], firstReportedDateTime?: string, monitorId?: string,
+            resourceInstanceIdentifier?: Omit&lt;{ <xref uid="@odata.type" />:
+            string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string } & { <xref uid="@odata.type" />:
+            "#<xref uid="microsoft.graph.openComplexDictionaryType" />" },
+            resourceType?: string, status?: "active" | "fixed" |
+            "unknownFutureValue", tenantId?: string } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.configurationDrift" />" })[],
+            configurationMonitoringResults?: (Omit&lt;{ <xref uid="@odata.type"
+            />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & {
+            <xref uid="@odata.type" />: string, driftsCount?: number,
+            driftsFixed?: number, errorDetails?: { <xref uid="@odata.type" />:
+            string, errorMessage?: string, resourceInstanceName?: string,
+            resourceType?: string }[], monitorId?: string,
+            runCompletionDateTime?: string, runInitiationDateTime?: string,
+            runStatus?: "unknownFutureValue" | "successful" |
+            "partiallySuccessful" | "failed", runType?: "unknownFutureValue" |
+            "monitor" | "apply", tenantId?: string } & { <xref uid="@odata.type"
+            />: "#<xref uid="microsoft.graph.configurationMonitoringResult" />"
+            })[], configurationMonitors?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, baseline?: Omit&lt;{ <xref
+            uid="@odata.type" />: string, id?: function }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            description?: string, displayName?: string, parameters?: ...[],
+            resources?: ...[] } & { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.configurationBaseline" />" }, createdBy?: {
+            <xref uid="@odata.type" />: string, application?: { <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            } | Record&lt;string, never&gt; | null, device?: { <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            } | Record&lt;string, never&gt; | null, user?: { <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            } | Record&lt;string, never&gt; | null }, createdDateTime?: string,
+            description?: string, displayName?: string, inactivationReason?:
+            string | null, lastModifiedBy?: { <xref uid="@odata.type" />:
+            string, application?: { <xref uid="@odata.type" />: string,
+            displayName?: function, id?: function } | Record&lt;string,
+            never&gt; | null, device?: { <xref uid="@odata.type" />: string,
+            displayName?: function, id?: function } | Record&lt;string,
+            never&gt; | null, user?: { <xref uid="@odata.type" />: string,
+            displayName?: function, id?: function } | Record&lt;string,
+            never&gt; | null }, lastModifiedDateTime?: string, mode?:
+            "unknownFutureValue" | "monitorOnce" | "monitorOnly" |
+            "applyOnceAndMonitorContinuous" | "applyOnce" | "applyContinuous",
+            monitorRunFrequencyInHours?: number, parameters?: Record&lt;string,
+            never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.openComplexDictionaryType" />" }) | null,
+            runAsUTCMServicePrincipal?: boolean, runningOnBehalfOf?: { <xref
+            uid="@odata.type" />: string, application?: { <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            } | Record&lt;string, never&gt; | null, device?: { <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            } | Record&lt;string, never&gt; | null, user?: { <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            } | Record&lt;string, never&gt; | null }, status?: "active" |
+            "unknownFutureValue" | "inactive", tenantId?: string } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.configurationMonitor" />" })[],
+            configurationSnapshotJobs?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, completedDateTime?: string,
+            createdBy?: { <xref uid="@odata.type" />: string, application?: {
+            <xref uid="@odata.type" />: string, displayName?: function, id?:
+            function } | Record&lt;string, never&gt; | null, device?: { <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            } | Record&lt;string, never&gt; | null, user?: { <xref
+            uid="@odata.type" />: string, displayName?: function, id?: function
+            } | Record&lt;string, never&gt; | null }, createdDateTime?: string,
+            description?: string, displayName?: string, errorDetails?: string[],
+            resourceLocation?: string, resources?: string[], status?:
+            "unknownFutureValue" | "partiallySuccessful" | "failed" |
+            "notStarted" | "running" | "succeeded", tenantId?: string } & {
+            <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.configurationSnapshotJob" />" })[],
+            configurationSnapshots?: (Omit&lt;{ <xref uid="@odata.type" />:
+            string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+            uid="@odata.type" />: string, description?: string, displayName?:
+            string, parameters?: { <xref uid="@odata.type" />: string,
+            description?: string | null, displayName?: string, parameterType?:
+            "string" | "boolean" | "unknownFutureValue" | "integer" }[],
+            resources?: { <xref uid="@odata.type" />: string, displayName?:
+            string, properties?: ... & ... & ..., resourceType?: string }[] } &
+            { <xref uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.configurationBaseline" />" })[] } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.configurationManagement" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /admin/configurationManagement"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, configurationApplications?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, appId?: string,
+          appOwnerOrganizationId?: string | null, clientCredentials?: { <xref
+          uid="@odata.type" />: string, certificateName?: string, keyVaultUri?:
+          string }, createdBy?: { <xref uid="@odata.type" />: string,
+          application?: { <xref uid="@odata.type" />: ..., displayName?: ...,
+          id?: ... } | Record&lt;..., ...&gt; | null, device?: { <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          Record&lt;..., ...&gt; | null, user?: { <xref uid="@odata.type" />:
+          ..., displayName?: ..., id?: ... } | Record&lt;..., ...&gt; | null },
+          createdDateTime?: string, description?: string, displayName?: string,
+          lastModifiedBy?: { <xref uid="@odata.type" />: string, application?: {
+          <xref uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          Record&lt;..., ...&gt; | null, device?: { <xref uid="@odata.type" />:
+          ..., displayName?: ..., id?: ... } | Record&lt;..., ...&gt; | null,
+          user?: { <xref uid="@odata.type" />: ..., displayName?: ..., id?: ...
+          } | Record&lt;..., ...&gt; | null }, lastModifiedDateTime?: string,
+          tenantId?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationApplication" />" })[],
+          configurationDrifts?: (Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, baselineResourceDisplayName?: string,
+          driftedProperties?: { <xref uid="@odata.type" />: string,
+          currentValue?: unknown, desiredValue?: unknown, propertyName?:
+          function }[], firstReportedDateTime?: string, monitorId?: string,
+          resourceInstanceIdentifier?: Omit&lt;{ <xref uid="@odata.type" />: ...
+          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.openComplexDictionaryType" />" }, resourceType?:
+          string, status?: "active" | "fixed" | "unknownFutureValue", tenantId?:
+          string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationDrift" />" })[],
+          configurationMonitoringResults?: (Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, driftsCount?: number, driftsFixed?:
+          number, errorDetails?: { <xref uid="@odata.type" />: string,
+          errorMessage?: function, resourceInstanceName?: function,
+          resourceType?: function }[], monitorId?: string,
+          runCompletionDateTime?: string, runInitiationDateTime?: string,
+          runStatus?: "unknownFutureValue" | "successful" |
+          "partiallySuccessful" | "failed", runType?: "unknownFutureValue" |
+          "monitor" | "apply", tenantId?: string } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.configurationMonitoringResult" />"
+          })[], configurationMonitors?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, baseline?: Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, description?:
+          function, displayName?: function, parameters?: function, resources?:
+          function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationBaseline" />" }, createdBy?: { <xref
+          uid="@odata.type" />: string, application?: { <xref uid="@odata.type"
+          />: ..., displayName?: ..., id?: ... } | Record&lt;..., ...&gt; |
+          null, device?: { <xref uid="@odata.type" />: ..., displayName?: ...,
+          id?: ... } | Record&lt;..., ...&gt; | null, user?: { <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          Record&lt;..., ...&gt; | null }, createdDateTime?: string,
+          description?: string, displayName?: string, inactivationReason?:
+          string | null, lastModifiedBy?: { <xref uid="@odata.type" />: string,
+          application?: { <xref uid="@odata.type" />: ..., displayName?: ...,
+          id?: ... } | Record&lt;..., ...&gt; | null, device?: { <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          Record&lt;..., ...&gt; | null, user?: { <xref uid="@odata.type" />:
+          ..., displayName?: ..., id?: ... } | Record&lt;..., ...&gt; | null },
+          lastModifiedDateTime?: string, mode?: "unknownFutureValue" |
+          "monitorOnce" | "monitorOnly" | "applyOnceAndMonitorContinuous" |
+          "applyOnce" | "applyContinuous", monitorRunFrequencyInHours?: number,
+          parameters?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: string } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.openComplexDictionaryType" />" }) | null,
+          runAsUTCMServicePrincipal?: boolean, runningOnBehalfOf?: { <xref
+          uid="@odata.type" />: string, application?: { <xref uid="@odata.type"
+          />: ..., displayName?: ..., id?: ... } | Record&lt;..., ...&gt; |
+          null, device?: { <xref uid="@odata.type" />: ..., displayName?: ...,
+          id?: ... } | Record&lt;..., ...&gt; | null, user?: { <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          Record&lt;..., ...&gt; | null }, status?: "active" |
+          "unknownFutureValue" | "inactive", tenantId?: string } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationMonitor" />" })[],
+          configurationSnapshotJobs?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, completedDateTime?: string, createdBy?:
+          { <xref uid="@odata.type" />: string, application?: { <xref
+          uid="@odata.type" />: ..., displayName?: ..., id?: ... } |
+          Record&lt;..., ...&gt; | null, device?: { <xref uid="@odata.type" />:
+          ..., displayName?: ..., id?: ... } | Record&lt;..., ...&gt; | null,
+          user?: { <xref uid="@odata.type" />: ..., displayName?: ..., id?: ...
+          } | Record&lt;..., ...&gt; | null }, createdDateTime?: string,
+          description?: string, displayName?: string, errorDetails?: string[],
+          resourceLocation?: string, resources?: string[], status?:
+          "unknownFutureValue" | "partiallySuccessful" | "failed" | "notStarted"
+          | "running" | "succeeded", tenantId?: string } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationSnapshotJob" />" })[],
+          configurationSnapshots?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, description?: string, displayName?:
+          string, parameters?: { <xref uid="@odata.type" />: string,
+          description?: function, displayName?: function, parameterType?:
+          function }[], resources?: { <xref uid="@odata.type" />: string,
+          displayName?: function, properties?: function, resourceType?: function
+          }[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationBaseline" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.configurationManagement" />" }&gt;

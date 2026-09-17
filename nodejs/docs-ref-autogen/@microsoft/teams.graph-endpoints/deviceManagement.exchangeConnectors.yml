@@ -8,7 +8,16 @@ interfaces:
     @microsoft/teams.graph-endpoints.deviceManagement.exchangeConnectors.IEndpoints
 package: '@microsoft/teams.graph-endpoints'
 functions:
-  - name: create(Operation<"/deviceManagement/exchangeConnectors", "post">)
+  - name: >-
+      create(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, connectorServerName?: string | null, exchangeAlias?:
+      string | null, exchangeConnectorType?: "unknownFutureValue" | "onPremises"
+      | "hosted" | "serviceToService" | "dedicated", exchangeOrganization?:
+      string | null, lastSyncDateTime?: string, primarySmtpAddress?: string |
+      null, serverName?: string | null, status?: "none" | "unknownFutureValue" |
+      "connectionPending" | "connected" | "disconnected", version?: string |
+      null } & { @odata.type:
+      "#microsoft.graph.deviceManagementExchangeConnector" })
     uid: >-
       @microsoft/teams.graph-endpoints.deviceManagement.exchangeConnectors.create
     package: '@microsoft/teams.graph-endpoints'
@@ -17,19 +26,54 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function create(body: Operation<"/deviceManagement/exchangeConnectors",
-        "post">): EndpointRequest<IEndpoints["POST
-        /deviceManagement/exchangeConnectors"]["response"]>
+        function create(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, connectorServerName?: string |
+        null, exchangeAlias?: string | null, exchangeConnectorType?:
+        "unknownFutureValue" | "onPremises" | "hosted" | "serviceToService" |
+        "dedicated", exchangeOrganization?: string | null, lastSyncDateTime?:
+        string, primarySmtpAddress?: string | null, serverName?: string | null,
+        status?: "none" | "unknownFutureValue" | "connectionPending" |
+        "connected" | "disconnected", version?: string | null } & { @odata.type:
+        "#microsoft.graph.deviceManagementExchangeConnector" }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, connectorServerName?: string |
+        null, exchangeAlias?: string | null, exchangeConnectorType?:
+        "unknownFutureValue" | "onPremises" | "hosted" | "serviceToService" |
+        "dedicated", exchangeOrganization?: string | null, lastSyncDateTime?:
+        string, primarySmtpAddress?: string | null, serverName?: string | null,
+        status?: "none" | "unknownFutureValue" | "connectionPending" |
+        "connected" | "disconnected", version?: string | null } & { @odata.type:
+        "#microsoft.graph.deviceManagementExchangeConnector" }>
       parameters:
         - id: body
-          type: Operation&lt;"/deviceManagement/exchangeConnectors", "post"&gt;
+          type: >-
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            connectorServerName?: string | null, exchangeAlias?: string | null,
+            exchangeConnectorType?: "unknownFutureValue" | "onPremises" |
+            "hosted" | "serviceToService" | "dedicated", exchangeOrganization?:
+            string | null, lastSyncDateTime?: string, primarySmtpAddress?:
+            string | null, serverName?: string | null, status?: "none" |
+            "unknownFutureValue" | "connectionPending" | "connected" |
+            "disconnected", version?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deviceManagementExchangeConnector" />" }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["POST
-          /deviceManagement/exchangeConnectors"]["response"]&gt;
-  - name: del(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, connectorServerName?: string | null, exchangeAlias?:
+          string | null, exchangeConnectorType?: "unknownFutureValue" |
+          "onPremises" | "hosted" | "serviceToService" | "dedicated",
+          exchangeOrganization?: string | null, lastSyncDateTime?: string,
+          primarySmtpAddress?: string | null, serverName?: string | null,
+          status?: "none" | "unknownFutureValue" | "connectionPending" |
+          "connected" | "disconnected", version?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementExchangeConnector" />" }&gt;
+  - name: 'del({ deviceManagementExchangeConnector-id: string, If-Match?: string })'
     uid: '@microsoft/teams.graph-endpoints.deviceManagement.exchangeConnectors.del'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -39,18 +83,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function del(params?: any): EndpointRequest<IEndpoints["DELETE
-        /deviceManagement/exchangeConnectors/{deviceManagementExchangeConnector-id}"]["response"]>
+        function del(params?: { deviceManagementExchangeConnector-id: string,
+        If-Match?: string }): EndpointRequest<never>
       parameters:
         - id: params
-          type: any
+          type: '{ deviceManagementExchangeConnector-id: string, If-Match?: string }'
           description: ''
       return:
         description: ''
-        type: >-
-          EndpointRequest&lt;IEndpoints["DELETE
-          /deviceManagement/exchangeConnectors/{deviceManagementExchangeConnector-id}"]["response"]&gt;
-  - name: get(any)
+        type: EndpointRequest&lt;never&gt;
+  - name: >-
+      get({ $expand?: string[], $select?: string[],
+      deviceManagementExchangeConnector-id: string })
     uid: '@microsoft/teams.graph-endpoints.deviceManagement.exchangeConnectors.get'
     package: '@microsoft/teams.graph-endpoints'
     summary: >-
@@ -63,18 +107,41 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/exchangeConnectors/{deviceManagementExchangeConnector-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        deviceManagementExchangeConnector-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, connectorServerName?: string | null, exchangeAlias?: string |
+        null, exchangeConnectorType?: "unknownFutureValue" | "onPremises" |
+        "hosted" | "serviceToService" | "dedicated", exchangeOrganization?:
+        string | null, lastSyncDateTime?: string, primarySmtpAddress?: string |
+        null, serverName?: string | null, status?: "none" | "unknownFutureValue"
+        | "connectionPending" | "connected" | "disconnected", version?: string |
+        null } & { @odata.type:
+        "#microsoft.graph.deviceManagementExchangeConnector" }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[],
+            deviceManagementExchangeConnector-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/exchangeConnectors/{deviceManagementExchangeConnector-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, connectorServerName?: string | null, exchangeAlias?:
+          string | null, exchangeConnectorType?: "unknownFutureValue" |
+          "onPremises" | "hosted" | "serviceToService" | "dedicated",
+          exchangeOrganization?: string | null, lastSyncDateTime?: string,
+          primarySmtpAddress?: string | null, serverName?: string | null,
+          status?: "none" | "unknownFutureValue" | "connectionPending" |
+          "connected" | "disconnected", version?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementExchangeConnector" />" }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number })
     uid: '@microsoft/teams.graph-endpoints.deviceManagement.exchangeConnectors.list'
     package: '@microsoft/teams.graph-endpoints'
     summary: |-
@@ -85,20 +152,52 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /deviceManagement/exchangeConnectors"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number }): EndpointRequest<{ @odata.count?:
+        number | null, @odata.nextLink?: string | null } & { value?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, connectorServerName?: string | null, exchangeAlias?: string |
+        null, exchangeConnectorType?: "unknownFutureValue" | "onPremises" |
+        "hosted" | "serviceToService" | "dedicated", exchangeOrganization?:
+        string | null, lastSyncDateTime?: string, primarySmtpAddress?: string |
+        null, serverName?: string | null, status?: "none" | "unknownFutureValue"
+        | "connectionPending" | "connected" | "disconnected", version?: string |
+        null } & { @odata.type:
+        "#microsoft.graph.deviceManagementExchangeConnector" })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /deviceManagement/exchangeConnectors"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          connectorServerName?: string | null, exchangeAlias?: string | null,
+          exchangeConnectorType?: "unknownFutureValue" | "onPremises" | "hosted"
+          | "serviceToService" | "dedicated", exchangeOrganization?: string |
+          null, lastSyncDateTime?: string, primarySmtpAddress?: string | null,
+          serverName?: string | null, status?: "none" | "unknownFutureValue" |
+          "connectionPending" | "connected" | "disconnected", version?: string |
+          null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementExchangeConnector" />" })[] }&gt;
   - name: >-
-      update(Operation<"/deviceManagement/exchangeConnectors/{deviceManagementExchangeConnector-id}",
-      "patch">, any)
+      update(Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+      @odata.type: string, connectorServerName?: string | null, exchangeAlias?:
+      string | null, exchangeConnectorType?: "unknownFutureValue" | "onPremises"
+      | "hosted" | "serviceToService" | "dedicated", exchangeOrganization?:
+      string | null, lastSyncDateTime?: string, primarySmtpAddress?: string |
+      null, serverName?: string | null, status?: "none" | "unknownFutureValue" |
+      "connectionPending" | "connected" | "disconnected", version?: string |
+      null } & { @odata.type:
+      "#microsoft.graph.deviceManagementExchangeConnector" }, {
+      deviceManagementExchangeConnector-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints.deviceManagement.exchangeConnectors.update
     package: '@microsoft/teams.graph-endpoints'
@@ -109,24 +208,57 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function update(body:
-        Operation<"/deviceManagement/exchangeConnectors/{deviceManagementExchangeConnector-id}",
-        "patch">, params?: any): EndpointRequest<IEndpoints["PATCH
-        /deviceManagement/exchangeConnectors/{deviceManagementExchangeConnector-id}"]["response"]>
+        function update(body: Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, connectorServerName?: string |
+        null, exchangeAlias?: string | null, exchangeConnectorType?:
+        "unknownFutureValue" | "onPremises" | "hosted" | "serviceToService" |
+        "dedicated", exchangeOrganization?: string | null, lastSyncDateTime?:
+        string, primarySmtpAddress?: string | null, serverName?: string | null,
+        status?: "none" | "unknownFutureValue" | "connectionPending" |
+        "connected" | "disconnected", version?: string | null } & { @odata.type:
+        "#microsoft.graph.deviceManagementExchangeConnector" }, params?: {
+        deviceManagementExchangeConnector-id: string }): EndpointRequest<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, connectorServerName?: string | null, exchangeAlias?: string |
+        null, exchangeConnectorType?: "unknownFutureValue" | "onPremises" |
+        "hosted" | "serviceToService" | "dedicated", exchangeOrganization?:
+        string | null, lastSyncDateTime?: string, primarySmtpAddress?: string |
+        null, serverName?: string | null, status?: "none" | "unknownFutureValue"
+        | "connectionPending" | "connected" | "disconnected", version?: string |
+        null } & { @odata.type:
+        "#microsoft.graph.deviceManagementExchangeConnector" }>
       parameters:
         - id: body
           type: >-
-            Operation&lt;"/deviceManagement/exchangeConnectors/{deviceManagementExchangeConnector-id}",
-            "patch"&gt;
+            Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+            uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+            connectorServerName?: string | null, exchangeAlias?: string | null,
+            exchangeConnectorType?: "unknownFutureValue" | "onPremises" |
+            "hosted" | "serviceToService" | "dedicated", exchangeOrganization?:
+            string | null, lastSyncDateTime?: string, primarySmtpAddress?:
+            string | null, serverName?: string | null, status?: "none" |
+            "unknownFutureValue" | "connectionPending" | "connected" |
+            "disconnected", version?: string | null } & { <xref
+            uid="@odata.type" />: "#<xref
+            uid="microsoft.graph.deviceManagementExchangeConnector" />" }
           description: ''
         - id: params
-          type: any
+          type: '{ deviceManagementExchangeConnector-id: string }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["PATCH
-          /deviceManagement/exchangeConnectors/{deviceManagementExchangeConnector-id}"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, connectorServerName?: string | null, exchangeAlias?:
+          string | null, exchangeConnectorType?: "unknownFutureValue" |
+          "onPremises" | "hosted" | "serviceToService" | "dedicated",
+          exchangeOrganization?: string | null, lastSyncDateTime?: string,
+          primarySmtpAddress?: string | null, serverName?: string | null,
+          status?: "none" | "unknownFutureValue" | "connectionPending" |
+          "connected" | "disconnected", version?: string | null } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.deviceManagementExchangeConnector" />" }&gt;
 variables:
   - name: sync
     uid: '@microsoft/teams.graph-endpoints.deviceManagement.exchangeConnectors.sync'

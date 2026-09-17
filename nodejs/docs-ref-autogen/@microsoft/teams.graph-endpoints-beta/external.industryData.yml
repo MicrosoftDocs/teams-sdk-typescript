@@ -7,7 +7,7 @@ interfaces:
   - '@microsoft/teams.graph-endpoints-beta.external.industryData.IEndpoints'
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: get(any)
+  - name: 'get({ $expand?: string[], $select?: string[] })'
     uid: '@microsoft/teams.graph-endpoints-beta.external.industryData.get'
     package: '@microsoft/teams.graph-endpoints-beta'
     summary: '`GET /external/industryData`'
@@ -15,17 +15,162 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /external/industryData"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[] }):
+        EndpointRequest<Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, dataConnectors?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, displayName?: string, sourceSystem?: Omit<..., ...> & {
+        @odata.type: ..., displayName?: ..., userMatchingSettings?: ...,
+        vendor?: ... } & { @odata.type: ... } }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.industryData.industryDataConnector" })[],
+        inboundFlows?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, displayName?: function,
+        readinessStatus?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.industryData.industryDataActivity" }, "@odata.type"> &
+        Omit<{ @odata.type: string, dataConnector?: Omit<..., ...> & Omit<...,
+        ...> & { @odata.type: ... }, dataDomain?: "unknownFutureValue" |
+        "educationRostering", effectiveDateTime?: string, expirationDateTime?:
+        string | null, year?: Omit<..., ...> & { @odata.type: ..., displayName?:
+        ..., endDate?: ..., startDate?: ..., year?: ... } & { @odata.type: ... }
+        }, "@odata.type">)[], operations?: (Omit<{ @odata.type: string, id?:
+        string }, "@odata.type"> & Omit<{ @odata.type: string, createdDateTime?:
+        string | null, lastActionDateTime?: string | null, resourceLocation?:
+        string | null, status?: Record<string, never> | "unknownFutureValue" |
+        "failed" | "notStarted" | "running" | "succeeded" | null, statusDetail?:
+        string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.longRunningOperation" })[],
+        outboundProvisioningFlowSets?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, createdDateTime?: string |
+        null, displayName?: string, filter?: Record<string, never> | {
+        @odata.type: string } | null, lastModifiedDateTime?: string | null,
+        provisioningFlows?: (Omit<..., ...> & Omit<..., ...> & { @odata.type:
+        ... })[] } & { @odata.type:
+        "#microsoft.graph.industryData.outboundProvisioningFlowSet" })[],
+        referenceDefinitions?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, code?: string, createdDateTime?:
+        string, displayName?: string | null, isDisabled?: boolean,
+        lastModifiedDateTime?: string, referenceType?: string, sortIndex?:
+        number, source?: string } & { @odata.type:
+        "#microsoft.graph.industryData.referenceDefinition" })[], roleGroups?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, displayName?: string, roles?: (Omit<..., ...> & {
+        @odata.type: ... } & { @odata.type: ... })[] } & { @odata.type:
+        "#microsoft.graph.industryData.roleGroup" })[], runs?: (Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & { @odata.type:
+        string, activities?: (Omit<..., ...> & Omit<..., ...> & { @odata.type:
+        ... })[], blockingError?: Record<string, never> | { @odata.type: string,
+        code?: string | null, details?: ...[], innerError?: Record<..., ...> | {
+        @odata.type: ..., code?: ..., details?: ..., message?: ..., target?: ...
+        } | null, message?: string | null, target?: string | null } | null,
+        displayName?: string, endDateTime?: string | null, startDateTime?:
+        string, status?: "unknownFutureValue" | "completed" | "failed" |
+        "running" | "completedWithErrors" | "completedWithWarnings" } & {
+        @odata.type: "#microsoft.graph.industryData.industryDataRun" })[],
+        sourceSystems?: (Omit<{ @odata.type: string, id?: string },
+        "@odata.type"> & { @odata.type: string, displayName?: string,
+        userMatchingSettings?: { @odata.type: string, matchTarget?: function,
+        priorityOrder?: function, roleGroup?: function, sourceIdentifier?:
+        function }[], vendor?: string | null } & { @odata.type:
+        "#microsoft.graph.industryData.sourceSystemDefinition" })[], years?:
+        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
+        @odata.type: string, displayName?: string, endDate?: string, startDate?:
+        string, year?: Omit<{ @odata.type: ..., code?: ..., value?: ... },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.industryData.yearReferenceValue" } } & { @odata.type:
+        "#microsoft.graph.industryData.yearTimePeriodDefinition" })[] } & {
+        @odata.type: "#microsoft.graph.industryData.industryDataRoot" }>
       parameters:
         - id: params
-          type: any
+          type: '{ $expand?: string[], $select?: string[] }'
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /external/industryData"]["response"]&gt;
+          EndpointRequest&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, dataConnectors?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, displayName?: string,
+          sourceSystem?: Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
+          ..., displayName?: ..., userMatchingSettings?: ..., vendor?: ... } & {
+          <xref uid="@odata.type" />: ... } }, "<xref uid="@odata.type" />"&gt;
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.industryData.industryDataConnector" />" })[],
+          inboundFlows?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string,
+          id?: function }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, displayName?: function,
+          readinessStatus?: function }, "<xref uid="@odata.type" />"&gt; & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.industryData.industryDataActivity" />" }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, dataConnector?: Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; &
+          { <xref uid="@odata.type" />: ... }, dataDomain?: "unknownFutureValue"
+          | "educationRostering", effectiveDateTime?: string,
+          expirationDateTime?: string | null, year?: Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ..., displayName?: ..., endDate?: ...,
+          startDate?: ..., year?: ... } & { <xref uid="@odata.type" />: ... } },
+          "<xref uid="@odata.type" />"&gt;)[], operations?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string,
+          createdDateTime?: string | null, lastActionDateTime?: string | null,
+          resourceLocation?: string | null, status?: Record&lt;string, never&gt;
+          | "unknownFutureValue" | "failed" | "notStarted" | "running" |
+          "succeeded" | null, statusDetail?: string | null }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.longRunningOperation" />" })[],
+          outboundProvisioningFlowSets?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, createdDateTime?: string | null,
+          displayName?: string, filter?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string } | null, lastModifiedDateTime?: string |
+          null, provisioningFlows?: (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt;
+          & { <xref uid="@odata.type" />: ... })[] } & { <xref uid="@odata.type"
+          />: "#<xref
+          uid="microsoft.graph.industryData.outboundProvisioningFlowSet" />"
+          })[], referenceDefinitions?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, code?: string, createdDateTime?: string,
+          displayName?: string | null, isDisabled?: boolean,
+          lastModifiedDateTime?: string, referenceType?: string, sortIndex?:
+          number, source?: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.industryData.referenceDefinition" />" })[],
+          roleGroups?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, displayName?: string, roles?: (Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ... } & { <xref uid="@odata.type" />: ...
+          })[] } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.industryData.roleGroup" />" })[], runs?:
+          (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          activities?: (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... })[], blockingError?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, code?: string |
+          null, details?: ...[], innerError?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., code?: ..., details?: ..., message?: ...,
+          target?: ... } | null, message?: string | null, target?: string | null
+          } | null, displayName?: string, endDateTime?: string | null,
+          startDateTime?: string, status?: "unknownFutureValue" | "completed" |
+          "failed" | "running" | "completedWithErrors" | "completedWithWarnings"
+          } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.industryData.industryDataRun" />" })[],
+          sourceSystems?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, displayName?: string, userMatchingSettings?: { <xref
+          uid="@odata.type" />: string, matchTarget?: function, priorityOrder?:
+          function, roleGroup?: function, sourceIdentifier?: function }[],
+          vendor?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.industryData.sourceSystemDefinition" />" })[],
+          years?: (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, displayName?: string, endDate?: string, startDate?: string,
+          year?: Omit&lt;{ <xref uid="@odata.type" />: ..., code?: ..., value?:
+          ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.industryData.yearReferenceValue" />" } } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.industryData.yearTimePeriodDefinition" />" })[] }
+          & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.industryData.industryDataRoot" />" }&gt;
 variables:
   - name: operations
     uid: '@microsoft/teams.graph-endpoints-beta.external.industryData.operations'

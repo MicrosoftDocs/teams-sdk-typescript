@@ -9,7 +9,9 @@ interfaces:
     @microsoft/teams.graph-endpoints-beta.onPremisesPublishingProfiles.connectorGroups.applications.IEndpoints
 package: '@microsoft/teams.graph-endpoints-beta'
 functions:
-  - name: get(any)
+  - name: >-
+      get({ $expand?: string[], $select?: string[], application-id: string,
+      connectorGroup-id: string, onPremisesPublishingProfile-id: string })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.onPremisesPublishingProfiles.connectorGroups.applications.get
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -20,18 +22,494 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function get(params?: any): EndpointRequest<IEndpoints["GET
-        /onPremisesPublishingProfiles/{onPremisesPublishingProfile-id}/connectorGroups/{connectorGroup-id}/applications/{application-id}"]["response"]>
+        function get(params?: { $expand?: string[], $select?: string[],
+        application-id: string, connectorGroup-id: string,
+        onPremisesPublishingProfile-id: string }): EndpointRequest<Omit<Omit<{
+        @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
+        string, deletedDateTime?: string | null }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.directoryObject" }, "@odata.type"> & {
+        @odata.type: string, api?: Record<string, never> | { @odata.type:
+        string, acceptMappedClaims?: boolean | null, knownClientApplications?:
+        (string | null)[], oauth2PermissionScopes?: { @odata.type: string,
+        adminConsentDescription?: string | null, adminConsentDisplayName?:
+        string | null, id?: string, isEnabled?: boolean, origin?: string | null,
+        type?: string | null, userConsentDescription?: string | null,
+        userConsentDisplayName?: string | null, value?: string | null }[],
+        preAuthorizedApplications?: { @odata.type: string, appId?: string,
+        permissionIds?: function[] }[], requestedAccessTokenVersion?: number |
+        null } | null, appId?: string | null, appManagementPolicies?:
+        (Omit<Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & Omit<{ @odata.type: string, description?: function,
+        displayName?: function }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.policyBase" }, "@odata.type"> & { @odata.type: string,
+        appliesTo?: (Omit<..., ...> & Omit<..., ...> & { @odata.type: ... })[],
+        isEnabled?: boolean, restrictions?: Record<string, never> | (Omit<{
+        @odata.type: ..., keyCredentials?: ..., passwordCredentials?: ... },
+        "@odata.type"> & { @odata.type: string, applicationRestrictions?:
+        function } & { @odata.type:
+        "#microsoft.graph.customAppManagementConfiguration" }) | null })[],
+        appRoles?: { @odata.type: string, allowedMemberTypes?: string[],
+        description?: string | null, displayName?: string | null, id?: string,
+        isEnabled?: boolean, origin?: string | null, value?: string | null }[],
+        authenticationBehaviors?: Record<string, never> | { @odata.type: string,
+        blockAzureADGraphAccess?: boolean | null, removeUnverifiedEmailClaim?:
+        boolean | null, requireClientServicePrincipal?: boolean | null } | null,
+        certification?: Record<string, never> | { @odata.type: string,
+        certificationDetailsUrl?: string | null,
+        certificationExpirationDateTime?: string | null,
+        isCertifiedByMicrosoft?: boolean | null, isPublisherAttested?: boolean |
+        null, lastCertificationDateTime?: string | null } | null,
+        connectorGroup?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, applications?:
+        Omit<Omit<{ id?: string | undefined; '@odata.type': string; },
+        "@odata.type"> & Omit<{ deletedDateTime?: string | null | undefined;
+        '@odata.type': string; }, "@odata.type"> & { ...; }, "@odata.type"> & {
+        ...; }[], connectorGroupType?: "applicationProxy", isDefault?: boolean,
+        members?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+        @odata.type: string, externalIp?: function, machineName?: function,
+        memberOf?: function, status?: function, version?: function } & {
+        @odata.type: "#microsoft.graph.connector" })[], name?: string, region?:
+        "unknownFutureValue" | Record<string, never> | "nam" | "eur" | "aus" |
+        "asia" | "ind" | null } & { @odata.type:
+        "#microsoft.graph.connectorGroup" }) | null, createdDateTime?: string |
+        null, createdOnBehalfOf?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        deletedDateTime?: string | null }, "@odata.type"> & { @odata.type:
+        "#microsoft.graph.directoryObject" }) | null, defaultRedirectUri?:
+        string | null, description?: string | null, disabledByMicrosoftStatus?:
+        string | null, displayName?: string | null, extensionProperties?:
+        (Omit<Omit<{ @odata.type: string, id?: function }, "@odata.type"> &
+        Omit<{ @odata.type: string, deletedDateTime?: function }, "@odata.type">
+        & { @odata.type: "#microsoft.graph.directoryObject" }, "@odata.type"> &
+        { @odata.type: string, appDisplayName?: string | null, dataType?:
+        string, isMultiValued?: boolean, isSyncedFromOnPremises?: boolean |
+        null, name?: string, targetObjects?: string[] } & { @odata.type:
+        "#microsoft.graph.extensionProperty" })[],
+        federatedIdentityCredentials?: (Omit<{ @odata.type: string, id?: string
+        }, "@odata.type"> & { @odata.type: string, audiences?: string[],
+        claimsMatchingExpression?: Record<string, never> | { @odata.type:
+        string, languageVersion?: number, value?: string } | null, description?:
+        string | null, issuer?: string, name?: string, subject?: string | null }
+        & { @odata.type: "#microsoft.graph.federatedIdentityCredential" })[],
+        groupMembershipClaims?: string | null, homeRealmDiscoveryPolicies?:
+        (Omit<Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & Omit<{ @odata.type: string, appliesTo?: function,
+        definition?: function, isOrganizationDefault?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.stsPolicy" },
+        "@odata.type"> & { @odata.type: string })[], identifierUris?: string[],
+        info?: Record<string, never> | { @odata.type: string, logoUrl?: string |
+        null, marketingUrl?: string | null, privacyStatementUrl?: string | null,
+        supportUrl?: string | null, termsOfServiceUrl?: string | null } | null,
+        isDeviceOnlyAuthSupported?: boolean | null, isFallbackPublicClient?:
+        boolean | null, keyCredentials?: { @odata.type: string,
+        customKeyIdentifier?: string | null, displayName?: string | null,
+        endDateTime?: string | null, key?: string | null, keyId?: string | null,
+        startDateTime?: string | null, type?: string | null, usage?: string |
+        null }[], logo?: string, nativeAuthenticationApisEnabled?:
+        "unknownFutureValue" | Record<string, never> | "all" | "none" | null,
+        notes?: string | null, onPremisesPublishing?: Record<string, never> | {
+        @odata.type: string, alternateUrl?: string | null,
+        applicationServerTimeout?: string | null, applicationType?: string |
+        null, externalAuthenticationType?: Record<string, never> | "passthru" |
+        "aadPreAuthentication" | null, externalUrl?: string | null,
+        internalUrl?: string | null, isAccessibleViaZTNAClient?: boolean | null,
+        isBackendCertificateValidationEnabled?: boolean | null,
+        isContinuousAccessEvaluationEnabled?: boolean | null,
+        isDnsResolutionEnabled?: boolean | null, isHttpOnlyCookieEnabled?:
+        boolean | null, isOnPremPublishingEnabled?: boolean | null,
+        isPersistentCookieEnabled?: boolean | null, isSecureCookieEnabled?:
+        boolean | null, isStateSessionEnabled?: boolean | null,
+        isTranslateHostHeaderEnabled?: boolean | null,
+        isTranslateLinksInBodyEnabled?: boolean | null,
+        onPremisesApplicationSegments?: { @odata.type: string, alternateUrl?:
+        string | null, corsConfigurations?: { @odata.type: ..., allowedHeaders?:
+        ..., allowedMethods?: ..., allowedOrigins?: ..., maxAgeInSeconds?: ...,
+        resource?: ... }[], externalUrl?: string | null, internalUrl?: string |
+        null }[], segmentsConfiguration?: Record<string, never> | { @odata.type:
+        string } | null, singleSignOnSettings?: Record<string, never> | {
+        @odata.type: string, kerberosSignOnSettings?: Record<string, never> | {
+        @odata.type: string, kerberosServicePrincipalName?: string | null,
+        kerberosSignOnMappingAttributeType?: Record<..., ...> |
+        "userPrincipalName" | "onPremisesUserPrincipalName" |
+        "userPrincipalUsername" | "onPremisesUserPrincipalUsername" |
+        "onPremisesSAMAccountName" | null } | null, singleSignOnMode?:
+        "unknownFutureValue" | Record<string, never> | "none" |
+        "onPremisesKerberos" | "saml" | "pingHeaderBased" | "aadHeaderBased" |
+        "oAuthToken" | null } | null, useAlternateUrlForTranslationAndRedirect?:
+        boolean | null, verifiedCustomDomainCertificatesMetadata?:
+        Record<string, never> | { @odata.type: string, expiryDate?: string |
+        null, issueDate?: string | null, issuerName?: string | null,
+        subjectName?: string | null, thumbprint?: string | null } | null,
+        verifiedCustomDomainKeyCredential?: Record<string, never> | {
+        @odata.type: string, customKeyIdentifier?: string | null, displayName?:
+        string | null, endDateTime?: string | null, key?: string | null, keyId?:
+        string | null, startDateTime?: string | null, type?: string | null,
+        usage?: string | null } | null, verifiedCustomDomainPasswordCredential?:
+        Record<string, never> | { @odata.type: string, customKeyIdentifier?:
+        string | null, displayName?: string | null, endDateTime?: string | null,
+        hint?: string | null, keyId?: string | null, secretText?: string | null,
+        startDateTime?: string | null } | null, wafAllowedHeaders?:
+        Record<string, never> | (Omit<{ @odata.type: string }, "@odata.type"> &
+        { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.wafAllowedHeadersDictionary" }) | null, wafIpRanges?:
+        { @odata.type: string }[], wafProvider?: string | null } | null,
+        optionalClaims?: Record<string, never> | { @odata.type: string,
+        accessToken?: { @odata.type: string, additionalProperties?: function[],
+        essential?: boolean, name?: string, source?: string | null }[],
+        idToken?: { @odata.type: string, additionalProperties?: function[],
+        essential?: boolean, name?: string, source?: string | null }[],
+        saml2Token?: { @odata.type: string, additionalProperties?: function[],
+        essential?: boolean, name?: string, source?: string | null }[] } | null,
+        owners?: (Omit<{ @odata.type: string, id?: string }, "@odata.type"> &
+        Omit<{ @odata.type: string, deletedDateTime?: string | null },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.directoryObject" })[],
+        parentalControlSettings?: Record<string, never> | { @odata.type: string,
+        countriesBlockedForMinors?: (string | null)[], legalAgeGroupRule?:
+        string | null } | null, passwordCredentials?: { @odata.type: string,
+        customKeyIdentifier?: string | null, displayName?: string | null,
+        endDateTime?: string | null, hint?: string | null, keyId?: string |
+        null, secretText?: string | null, startDateTime?: string | null }[],
+        publicClient?: Record<string, never> | { @odata.type: string,
+        redirectUris?: string[] } | null, publisherDomain?: string | null,
+        requestSignatureVerification?: Record<string, never> | { @odata.type:
+        string, allowedWeakAlgorithms?: "unknownFutureValue" | Record<string,
+        never> | "rsaSha1" | null, isSignedRequestRequired?: boolean } | null,
+        requiredResourceAccess?: { @odata.type: string, resourceAccess?: {
+        @odata.type: string, id?: string, type?: string | null }[],
+        resourceAppId?: string }[], samlMetadataUrl?: string | null,
+        serviceManagementReference?: string | null,
+        servicePrincipalLockConfiguration?: Record<string, never> | {
+        @odata.type: string, allProperties?: boolean | null,
+        credentialsWithUsageSign?: boolean | null, credentialsWithUsageVerify?:
+        boolean | null, isEnabled?: boolean, tokenEncryptionKeyId?: boolean |
+        null } | null, signInAudience?: string | null, spa?: Record<string,
+        never> | { @odata.type: string, redirectUris?: string[] } | null,
+        synchronization?: Record<string, never> | (Omit<{ @odata.type: string,
+        id?: string }, "@odata.type"> & { @odata.type: string, jobs?: (Omit<{
+        @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type: string,
+        bulkUpload?: function, schedule?: function, schema?: function, status?:
+        function, synchronizationJobSettings?: function, templateId?: function }
+        & { @odata.type: "#microsoft.graph.synchronizationJob" })[], secrets?: {
+        @odata.type: string, key?: "None" | "UserName" | "Password" |
+        "SecretToken" | "AppKey" | "BaseAddress" | "ClientIdentifier" |
+        "ClientSecret" | "SingleSignOnType" | "Sandbox" | "Url" | "Domain" |
+        "ConsumerKey" | "ConsumerSecret" | "TokenKey" | "TokenExpiration" |
+        "Oauth2AccessToken" | "Oauth2AccessTokenCreationTime" |
+        "Oauth2RefreshToken" | "SyncAll" | "InstanceName" | "Oauth2ClientId" |
+        "Oauth2ClientSecret" | "CompanyId" | "UpdateKeyOnSoftDelete" |
+        "SynchronizationSchedule" | "SystemOfRecord" | "SandboxName" |
+        "EnforceDomain" | "SyncNotificationSettings" | "SkipOutOfScopeDeletions"
+        | "Oauth2AuthorizationCode" | "Oauth2RedirectUri" |
+        "ApplicationTemplateIdentifier" | "Oauth2TokenExchangeUri" |
+        "Oauth2AuthorizationUri" | "AuthenticationType" | "Server" |
+        "PerformInboundEntitlementGrants" | "HardDeletesEnabled" |
+        "SyncAgentCompatibilityKey" | "SyncAgentADContainer" | "ValidateDomain"
+        | "TestReferences" | "ConnectionString", value?: string | null }[],
+        templates?: (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & {
+        @odata.type: string, applicationId?: function, default?: function,
+        description?: function, discoverable?: function, factoryTag?: function,
+        metadata?: function, schema?: function } & { @odata.type:
+        "#microsoft.graph.synchronizationTemplate" })[] } & { @odata.type:
+        "#microsoft.graph.synchronization" }) | null, tags?: string[],
+        tokenEncryptionKeyId?: string | null, tokenIssuancePolicies?:
+        (Omit<Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & Omit<{ @odata.type: string, appliesTo?: function,
+        definition?: function, isOrganizationDefault?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.stsPolicy" },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.tokenIssuancePolicy" })[], tokenLifetimePolicies?:
+        (Omit<Omit<Omit<..., ...> & Omit<..., ...> & { @odata.type: ... },
+        "@odata.type"> & Omit<{ @odata.type: string, appliesTo?: function,
+        definition?: function, isOrganizationDefault?: function },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.stsPolicy" },
+        "@odata.type"> & { @odata.type: string } & { @odata.type:
+        "#microsoft.graph.tokenLifetimePolicy" })[], uniqueName?: string | null,
+        verifiedPublisher?: Record<string, never> | { @odata.type: string,
+        addedDateTime?: string | null, displayName?: string | null,
+        verifiedPublisherId?: string | null } | null, web?: Record<string,
+        never> | { @odata.type: string, homePageUrl?: string | null,
+        implicitGrantSettings?: Record<string, never> | { @odata.type: string,
+        enableAccessTokenIssuance?: boolean | null, enableIdTokenIssuance?:
+        boolean | null } | null, logoutUrl?: string | null,
+        oauth2AllowImplicitFlow?: boolean | null, redirectUris?: string[],
+        redirectUriSettings?: { @odata.type: string, index?: number | null,
+        uri?: string | null }[] } | null, windows?: Record<string, never> | {
+        @odata.type: string, packageSid?: string | null, redirectUris?: string[]
+        } | null }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $expand?: string[], $select?: string[], application-id: string,
+            connectorGroup-id: string, onPremisesPublishingProfile-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /onPremisesPublishingProfiles/{onPremisesPublishingProfile-id}/connectorGroups/{connectorGroup-id}/applications/{application-id}"]["response"]&gt;
-  - name: list(any)
+          EndpointRequest&lt;Omit&lt;Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          <xref uid="@odata.type" />: string, deletedDateTime?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.directoryObject" />" }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          api?: Record&lt;string, never&gt; | { <xref uid="@odata.type" />:
+          string, acceptMappedClaims?: boolean | null, knownClientApplications?:
+          (string | null)[], oauth2PermissionScopes?: { <xref uid="@odata.type"
+          />: string, adminConsentDescription?: string | null,
+          adminConsentDisplayName?: string | null, id?: string, isEnabled?:
+          boolean, origin?: string | null, type?: string | null,
+          userConsentDescription?: string | null, userConsentDisplayName?:
+          string | null, value?: string | null }[], preAuthorizedApplications?:
+          { <xref uid="@odata.type" />: string, appId?: string, permissionIds?:
+          function[] }[], requestedAccessTokenVersion?: number | null } | null,
+          appId?: string | null, appManagementPolicies?:
+          (Omit&lt;Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; &
+          Omit&lt;{ <xref uid="@odata.type" />: string, description?: function,
+          displayName?: function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.policyBase" />" },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, appliesTo?: (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ... })[], isEnabled?: boolean,
+          restrictions?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., keyCredentials?: ..., passwordCredentials?:
+          ... }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, applicationRestrictions?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.customAppManagementConfiguration" />" }) | null
+          })[], appRoles?: { <xref uid="@odata.type" />: string,
+          allowedMemberTypes?: string[], description?: string | null,
+          displayName?: string | null, id?: string, isEnabled?: boolean,
+          origin?: string | null, value?: string | null }[],
+          authenticationBehaviors?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, blockAzureADGraphAccess?: boolean |
+          null, removeUnverifiedEmailClaim?: boolean | null,
+          requireClientServicePrincipal?: boolean | null } | null,
+          certification?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, certificationDetailsUrl?: string | null,
+          certificationExpirationDateTime?: string | null,
+          isCertifiedByMicrosoft?: boolean | null, isPublisherAttested?: boolean
+          | null, lastCertificationDateTime?: string | null } | null,
+          connectorGroup?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, applications?:
+          Omit&lt;Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type"
+          />': string; }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          deletedDateTime?: string | null | undefined; '<xref uid="@odata.type"
+          />': string; }, "<xref uid="@odata.type" />"&gt; & { ...; }, "<xref
+          uid="@odata.type" />"&gt; & { ...; }[], connectorGroupType?:
+          "applicationProxy", isDefault?: boolean, members?: (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, externalIp?: function,
+          machineName?: function, memberOf?: function, status?: function,
+          version?: function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.connector" />" })[], name?: string, region?:
+          "unknownFutureValue" | Record&lt;string, never&gt; | "nam" | "eur" |
+          "aus" | "asia" | "ind" | null } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.connectorGroup" />" }) | null,
+          createdDateTime?: string | null, createdOnBehalfOf?: Record&lt;string,
+          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, deletedDateTime?: string | null },
+          "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.directoryObject" />" }) | null,
+          defaultRedirectUri?: string | null, description?: string | null,
+          disabledByMicrosoftStatus?: string | null, displayName?: string |
+          null, extensionProperties?: (Omit&lt;Omit&lt;{ <xref uid="@odata.type"
+          />: string, id?: function }, "<xref uid="@odata.type" />"&gt; &
+          Omit&lt;{ <xref uid="@odata.type" />: string, deletedDateTime?:
+          function }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.directoryObject"
+          />" }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string, appDisplayName?: string | null, dataType?: string,
+          isMultiValued?: boolean, isSyncedFromOnPremises?: boolean | null,
+          name?: string, targetObjects?: string[] } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.extensionProperty" />" })[],
+          federatedIdentityCredentials?: (Omit&lt;{ <xref uid="@odata.type" />:
+          string, id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="@odata.type" />: string, audiences?: string[],
+          claimsMatchingExpression?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, languageVersion?: number, value?: string
+          } | null, description?: string | null, issuer?: string, name?: string,
+          subject?: string | null } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.federatedIdentityCredential" />" })[],
+          groupMembershipClaims?: string | null, homeRealmDiscoveryPolicies?:
+          (Omit&lt;Omit&lt;Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... }, "<xref uid="@odata.type" />"&gt; &
+          Omit&lt;{ <xref uid="@odata.type" />: string, appliesTo?: function,
+          definition?: function, isOrganizationDefault?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.stsPolicy" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string })[], identifierUris?:
+          string[], info?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, logoUrl?: string | null, marketingUrl?:
+          string | null, privacyStatementUrl?: string | null, supportUrl?:
+          string | null, termsOfServiceUrl?: string | null } | null,
+          isDeviceOnlyAuthSupported?: boolean | null, isFallbackPublicClient?:
+          boolean | null, keyCredentials?: { <xref uid="@odata.type" />: string,
+          customKeyIdentifier?: string | null, displayName?: string | null,
+          endDateTime?: string | null, key?: string | null, keyId?: string |
+          null, startDateTime?: string | null, type?: string | null, usage?:
+          string | null }[], logo?: string, nativeAuthenticationApisEnabled?:
+          "unknownFutureValue" | Record&lt;string, never&gt; | "all" | "none" |
+          null, notes?: string | null, onPremisesPublishing?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, alternateUrl?:
+          string | null, applicationServerTimeout?: string | null,
+          applicationType?: string | null, externalAuthenticationType?:
+          Record&lt;string, never&gt; | "passthru" | "aadPreAuthentication" |
+          null, externalUrl?: string | null, internalUrl?: string | null,
+          isAccessibleViaZTNAClient?: boolean | null,
+          isBackendCertificateValidationEnabled?: boolean | null,
+          isContinuousAccessEvaluationEnabled?: boolean | null,
+          isDnsResolutionEnabled?: boolean | null, isHttpOnlyCookieEnabled?:
+          boolean | null, isOnPremPublishingEnabled?: boolean | null,
+          isPersistentCookieEnabled?: boolean | null, isSecureCookieEnabled?:
+          boolean | null, isStateSessionEnabled?: boolean | null,
+          isTranslateHostHeaderEnabled?: boolean | null,
+          isTranslateLinksInBodyEnabled?: boolean | null,
+          onPremisesApplicationSegments?: { <xref uid="@odata.type" />: string,
+          alternateUrl?: string | null, corsConfigurations?: { <xref
+          uid="@odata.type" />: ..., allowedHeaders?: ..., allowedMethods?: ...,
+          allowedOrigins?: ..., maxAgeInSeconds?: ..., resource?: ... }[],
+          externalUrl?: string | null, internalUrl?: string | null }[],
+          segmentsConfiguration?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string } | null, singleSignOnSettings?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          kerberosSignOnSettings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, kerberosServicePrincipalName?: string |
+          null, kerberosSignOnMappingAttributeType?: Record&lt;..., ...&gt; |
+          "userPrincipalName" | "onPremisesUserPrincipalName" |
+          "userPrincipalUsername" | "onPremisesUserPrincipalUsername" |
+          "onPremisesSAMAccountName" | null } | null, singleSignOnMode?:
+          "unknownFutureValue" | Record&lt;string, never&gt; | "none" |
+          "onPremisesKerberos" | "saml" | "pingHeaderBased" | "aadHeaderBased" |
+          "oAuthToken" | null } | null,
+          useAlternateUrlForTranslationAndRedirect?: boolean | null,
+          verifiedCustomDomainCertificatesMetadata?: Record&lt;string, never&gt;
+          | { <xref uid="@odata.type" />: string, expiryDate?: string | null,
+          issueDate?: string | null, issuerName?: string | null, subjectName?:
+          string | null, thumbprint?: string | null } | null,
+          verifiedCustomDomainKeyCredential?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, customKeyIdentifier?: string |
+          null, displayName?: string | null, endDateTime?: string | null, key?:
+          string | null, keyId?: string | null, startDateTime?: string | null,
+          type?: string | null, usage?: string | null } | null,
+          verifiedCustomDomainPasswordCredential?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string, customKeyIdentifier?: string |
+          null, displayName?: string | null, endDateTime?: string | null, hint?:
+          string | null, keyId?: string | null, secretText?: string | null,
+          startDateTime?: string | null } | null, wafAllowedHeaders?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          string }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.wafAllowedHeadersDictionary" />" }) | null,
+          wafIpRanges?: { <xref uid="@odata.type" />: string }[], wafProvider?:
+          string | null } | null, optionalClaims?: Record&lt;string, never&gt; |
+          { <xref uid="@odata.type" />: string, accessToken?: { <xref
+          uid="@odata.type" />: string, additionalProperties?: function[],
+          essential?: boolean, name?: string, source?: string | null }[],
+          idToken?: { <xref uid="@odata.type" />: string, additionalProperties?:
+          function[], essential?: boolean, name?: string, source?: string | null
+          }[], saml2Token?: { <xref uid="@odata.type" />: string,
+          additionalProperties?: function[], essential?: boolean, name?: string,
+          source?: string | null }[] } | null, owners?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string,
+          deletedDateTime?: string | null }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryObject" />" })[],
+          parentalControlSettings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, countriesBlockedForMinors?: (string |
+          null)[], legalAgeGroupRule?: string | null } | null,
+          passwordCredentials?: { <xref uid="@odata.type" />: string,
+          customKeyIdentifier?: string | null, displayName?: string | null,
+          endDateTime?: string | null, hint?: string | null, keyId?: string |
+          null, secretText?: string | null, startDateTime?: string | null }[],
+          publicClient?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, redirectUris?: string[] } | null, publisherDomain?: string
+          | null, requestSignatureVerification?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, allowedWeakAlgorithms?:
+          "unknownFutureValue" | Record&lt;string, never&gt; | "rsaSha1" | null,
+          isSignedRequestRequired?: boolean } | null, requiredResourceAccess?: {
+          <xref uid="@odata.type" />: string, resourceAccess?: { <xref
+          uid="@odata.type" />: string, id?: string, type?: string | null }[],
+          resourceAppId?: string }[], samlMetadataUrl?: string | null,
+          serviceManagementReference?: string | null,
+          servicePrincipalLockConfiguration?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, allProperties?: boolean | null,
+          credentialsWithUsageSign?: boolean | null,
+          credentialsWithUsageVerify?: boolean | null, isEnabled?: boolean,
+          tokenEncryptionKeyId?: boolean | null } | null, signInAudience?:
+          string | null, spa?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, redirectUris?: string[] } | null,
+          synchronization?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, jobs?: (Omit&lt;{
+          <xref uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, bulkUpload?: function,
+          schedule?: function, schema?: function, status?: function,
+          synchronizationJobSettings?: function, templateId?: function } & {
+          <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.synchronizationJob" />" })[], secrets?: { <xref
+          uid="@odata.type" />: string, key?: "None" | "UserName" | "Password" |
+          "SecretToken" | "AppKey" | "BaseAddress" | "ClientIdentifier" |
+          "ClientSecret" | "SingleSignOnType" | "Sandbox" | "Url" | "Domain" |
+          "ConsumerKey" | "ConsumerSecret" | "TokenKey" | "TokenExpiration" |
+          "Oauth2AccessToken" | "Oauth2AccessTokenCreationTime" |
+          "Oauth2RefreshToken" | "SyncAll" | "InstanceName" | "Oauth2ClientId" |
+          "Oauth2ClientSecret" | "CompanyId" | "UpdateKeyOnSoftDelete" |
+          "SynchronizationSchedule" | "SystemOfRecord" | "SandboxName" |
+          "EnforceDomain" | "SyncNotificationSettings" |
+          "SkipOutOfScopeDeletions" | "Oauth2AuthorizationCode" |
+          "Oauth2RedirectUri" | "ApplicationTemplateIdentifier" |
+          "Oauth2TokenExchangeUri" | "Oauth2AuthorizationUri" |
+          "AuthenticationType" | "Server" | "PerformInboundEntitlementGrants" |
+          "HardDeletesEnabled" | "SyncAgentCompatibilityKey" |
+          "SyncAgentADContainer" | "ValidateDomain" | "TestReferences" |
+          "ConnectionString", value?: string | null }[], templates?: (Omit&lt;{
+          <xref uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, applicationId?:
+          function, default?: function, description?: function, discoverable?:
+          function, factoryTag?: function, metadata?: function, schema?:
+          function } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.synchronizationTemplate" />" })[] } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.synchronization"
+          />" }) | null, tags?: string[], tokenEncryptionKeyId?: string | null,
+          tokenIssuancePolicies?: (Omit&lt;Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, appliesTo?: function, definition?: function,
+          isOrganizationDefault?: function }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.stsPolicy"
+          />" }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.tokenIssuancePolicy" />" })[],
+          tokenLifetimePolicies?: (Omit&lt;Omit&lt;Omit&lt;..., ...&gt; &
+          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... }, "<xref
+          uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
+          string, appliesTo?: function, definition?: function,
+          isOrganizationDefault?: function }, "<xref uid="@odata.type" />"&gt; &
+          { <xref uid="@odata.type" />: "#<xref uid="microsoft.graph.stsPolicy"
+          />" }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type"
+          />: string } & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.tokenLifetimePolicy" />" })[], uniqueName?:
+          string | null, verifiedPublisher?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, addedDateTime?: string | null,
+          displayName?: string | null, verifiedPublisherId?: string | null } |
+          null, web?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string, homePageUrl?: string | null, implicitGrantSettings?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          enableAccessTokenIssuance?: boolean | null, enableIdTokenIssuance?:
+          boolean | null } | null, logoutUrl?: string | null,
+          oauth2AllowImplicitFlow?: boolean | null, redirectUris?: string[],
+          redirectUriSettings?: { <xref uid="@odata.type" />: string, index?:
+          number | null, uri?: string | null }[] } | null, windows?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          packageSid?: string | null, redirectUris?: string[] } | null }&gt;
+  - name: >-
+      list({ $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+      string[], $search?: string, $select?: string[], $skip?: number, $top?:
+      number, connectorGroup-id: string, onPremisesPublishingProfile-id: string
+      })
     uid: >-
       @microsoft/teams.graph-endpoints-beta.onPremisesPublishingProfiles.connectorGroups.applications.list
     package: '@microsoft/teams.graph-endpoints-beta'
@@ -42,17 +520,291 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function list(params?: any): EndpointRequest<IEndpoints["GET
-        /onPremisesPublishingProfiles/{onPremisesPublishingProfile-id}/connectorGroups/{connectorGroup-id}/applications"]["response"]>
+        function list(params?: { $count?: boolean, $expand?: string[], $filter?:
+        string, $orderby?: string[], $search?: string, $select?: string[],
+        $skip?: number, $top?: number, connectorGroup-id: string,
+        onPremisesPublishingProfile-id: string }): EndpointRequest<{
+        @odata.count?: number | null, @odata.nextLink?: string | null } & {
+        value?: (Omit<Omit<{ @odata.type: string, id?: function },
+        "@odata.type"> & Omit<{ @odata.type: string, deletedDateTime?: function
+        }, "@odata.type"> & { @odata.type: "#microsoft.graph.directoryObject" },
+        "@odata.type"> & { @odata.type: string, api?: Record<string, never> | {
+        @odata.type: string, acceptMappedClaims?: boolean | null,
+        knownClientApplications?: ...[], oauth2PermissionScopes?: ...[],
+        preAuthorizedApplications?: ...[], requestedAccessTokenVersion?: number
+        | null } | null, appId?: string | null, appManagementPolicies?:
+        (Omit<..., ...> & { @odata.type: ..., appliesTo?: ..., isEnabled?: ...,
+        restrictions?: ... })[], appRoles?: { @odata.type: string,
+        allowedMemberTypes?: function, description?: function, displayName?:
+        function, id?: function, isEnabled?: function, origin?: function,
+        value?: function }[], authenticationBehaviors?: Record<string, never> |
+        { @odata.type: string, blockAzureADGraphAccess?: boolean | null,
+        removeUnverifiedEmailClaim?: boolean | null,
+        requireClientServicePrincipal?: boolean | null } | null, certification?:
+        Record<string, never> | { @odata.type: string, certificationDetailsUrl?:
+        string | null, certificationExpirationDateTime?: string | null,
+        isCertifiedByMicrosoft?: boolean | null, isPublisherAttested?: boolean |
+        null, lastCertificationDateTime?: string | null } | null,
+        connectorGroup?: Record<string, never> | (Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & { @odata.type: string, applications?:
+        (Omit<Omit<{ id?: string | undefined; '@odata.type': string; },
+        "@odata.type"> & Omit<{ deletedDateTime?: string | null | undefined;
+        '@odata.type': string; }, "@odata.type"> & { ...; }, "@odata.type"> & {
+        ...; })[] | undefined, connectorGroupType?: function, isDefault?:
+        function, members?: function, name?: function, region?: function } & {
+        @odata.type: "#microsoft.graph.connectorGroup" }) | null,
+        createdDateTime?: string | null, createdOnBehalfOf?: Record<string,
+        never> | (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & Omit<{
+        @odata.type: ..., deletedDateTime?: ... }, "@odata.type"> & {
+        @odata.type: "#microsoft.graph.directoryObject" }) | null,
+        defaultRedirectUri?: string | null, description?: string | null,
+        disabledByMicrosoftStatus?: string | null, displayName?: string | null,
+        extensionProperties?: (Omit<..., ...> & { @odata.type: ...,
+        appDisplayName?: ..., dataType?: ..., isMultiValued?: ...,
+        isSyncedFromOnPremises?: ..., name?: ..., targetObjects?: ... } & {
+        @odata.type: ... })[], federatedIdentityCredentials?: (Omit<..., ...> &
+        { @odata.type: ..., audiences?: ..., claimsMatchingExpression?: ...,
+        description?: ..., issuer?: ..., name?: ..., subject?: ... } & {
+        @odata.type: ... })[], groupMembershipClaims?: string | null,
+        homeRealmDiscoveryPolicies?: (Omit<..., ...> & { @odata.type: ... })[],
+        identifierUris?: string[], info?: Record<string, never> | { @odata.type:
+        string, logoUrl?: string | null, marketingUrl?: string | null,
+        privacyStatementUrl?: string | null, supportUrl?: string | null,
+        termsOfServiceUrl?: string | null } | null, isDeviceOnlyAuthSupported?:
+        boolean | null, isFallbackPublicClient?: boolean | null,
+        keyCredentials?: { @odata.type: string, customKeyIdentifier?: function,
+        displayName?: function, endDateTime?: function, key?: function, keyId?:
+        function, startDateTime?: function, type?: function, usage?: function
+        }[], logo?: string, nativeAuthenticationApisEnabled?:
+        "unknownFutureValue" | Record<string, never> | "all" | "none" | null,
+        notes?: string | null, onPremisesPublishing?: Record<string, never> | {
+        @odata.type: string, alternateUrl?: string | null,
+        applicationServerTimeout?: string | null, applicationType?: string |
+        null, externalAuthenticationType?: Record<..., ...> | "passthru" |
+        "aadPreAuthentication" | null, externalUrl?: string | null,
+        internalUrl?: string | null, isAccessibleViaZTNAClient?: boolean | null,
+        isBackendCertificateValidationEnabled?: boolean | null,
+        isContinuousAccessEvaluationEnabled?: boolean | null,
+        isDnsResolutionEnabled?: boolean | null, isHttpOnlyCookieEnabled?:
+        boolean | null, isOnPremPublishingEnabled?: boolean | null,
+        isPersistentCookieEnabled?: boolean | null, isSecureCookieEnabled?:
+        boolean | null, isStateSessionEnabled?: boolean | null,
+        isTranslateHostHeaderEnabled?: boolean | null,
+        isTranslateLinksInBodyEnabled?: boolean | null,
+        onPremisesApplicationSegments?: ...[], segmentsConfiguration?:
+        Record<..., ...> | { @odata.type: ... } | null, singleSignOnSettings?:
+        Record<..., ...> | { @odata.type: ..., kerberosSignOnSettings?: ...,
+        singleSignOnMode?: ... } | null,
+        useAlternateUrlForTranslationAndRedirect?: boolean | null,
+        verifiedCustomDomainCertificatesMetadata?: Record<..., ...> | {
+        @odata.type: ..., expiryDate?: ..., issueDate?: ..., issuerName?: ...,
+        subjectName?: ..., thumbprint?: ... } | null,
+        verifiedCustomDomainKeyCredential?: Record<..., ...> | { @odata.type:
+        ..., customKeyIdentifier?: ..., displayName?: ..., endDateTime?: ...,
+        key?: ..., keyId?: ..., startDateTime?: ..., type?: ..., usage?: ... } |
+        null, verifiedCustomDomainPasswordCredential?: Record<..., ...> | {
+        @odata.type: ..., customKeyIdentifier?: ..., displayName?: ...,
+        endDateTime?: ..., hint?: ..., keyId?: ..., secretText?: ...,
+        startDateTime?: ... } | null, wafAllowedHeaders?: Record<..., ...> |
+        (... & ... & ...) | null, wafIpRanges?: ...[], wafProvider?: string |
+        null } | null, optionalClaims?: Record<string, never> | { @odata.type:
+        string, accessToken?: ...[], idToken?: ...[], saml2Token?: ...[] } |
+        null, owners?: (Omit<..., ...> & Omit<..., ...> & { @odata.type: ...
+        })[], parentalControlSettings?: Record<string, never> | { @odata.type:
+        string, countriesBlockedForMinors?: ...[], legalAgeGroupRule?: string |
+        null } | null, passwordCredentials?: { @odata.type: string,
+        customKeyIdentifier?: function, displayName?: function, endDateTime?:
+        function, hint?: function, keyId?: function, secretText?: function,
+        startDateTime?: function }[], publicClient?: Record<string, never> | {
+        @odata.type: string, redirectUris?: ...[] } | null, publisherDomain?:
+        string | null, requestSignatureVerification?: Record<string, never> | {
+        @odata.type: string, allowedWeakAlgorithms?: "unknownFutureValue" |
+        Record<..., ...> | "rsaSha1" | null, isSignedRequestRequired?: boolean }
+        | null, requiredResourceAccess?: { @odata.type: string, resourceAccess?:
+        function, resourceAppId?: function }[], samlMetadataUrl?: string | null,
+        serviceManagementReference?: string | null,
+        servicePrincipalLockConfiguration?: Record<string, never> | {
+        @odata.type: string, allProperties?: boolean | null,
+        credentialsWithUsageSign?: boolean | null, credentialsWithUsageVerify?:
+        boolean | null, isEnabled?: boolean, tokenEncryptionKeyId?: boolean |
+        null } | null, signInAudience?: string | null, spa?: Record<string,
+        never> | { @odata.type: string, redirectUris?: ...[] } | null,
+        synchronization?: Record<string, never> | (Omit<{ @odata.type: ..., id?:
+        ... }, "@odata.type"> & { @odata.type: string, jobs?: function,
+        secrets?: function, templates?: function } & { @odata.type:
+        "#microsoft.graph.synchronization" }) | null, tags?: string[],
+        tokenEncryptionKeyId?: string | null, tokenIssuancePolicies?: (Omit<...,
+        ...> & { @odata.type: ... } & { @odata.type: ... })[],
+        tokenLifetimePolicies?: (Omit<..., ...> & { @odata.type: ... } & {
+        @odata.type: ... })[], uniqueName?: string | null, verifiedPublisher?:
+        Record<string, never> | { @odata.type: string, addedDateTime?: string |
+        null, displayName?: string | null, verifiedPublisherId?: string | null }
+        | null, web?: Record<string, never> | { @odata.type: string,
+        homePageUrl?: string | null, implicitGrantSettings?: Record<..., ...> |
+        { @odata.type: ..., enableAccessTokenIssuance?: ...,
+        enableIdTokenIssuance?: ... } | null, logoutUrl?: string | null,
+        oauth2AllowImplicitFlow?: boolean | null, redirectUris?: ...[],
+        redirectUriSettings?: ...[] } | null, windows?: Record<string, never> |
+        { @odata.type: string, packageSid?: string | null, redirectUris?: ...[]
+        } | null })[] }>
       parameters:
         - id: params
-          type: any
+          type: >-
+            { $count?: boolean, $expand?: string[], $filter?: string, $orderby?:
+            string[], $search?: string, $select?: string[], $skip?: number,
+            $top?: number, connectorGroup-id: string,
+            onPremisesPublishingProfile-id: string }
           description: ''
       return:
         description: ''
         type: >-
-          EndpointRequest&lt;IEndpoints["GET
-          /onPremisesPublishingProfiles/{onPremisesPublishingProfile-id}/connectorGroups/{connectorGroup-id}/applications"]["response"]&gt;
+          EndpointRequest&lt;{ <xref uid="@odata.count" />?: number | null,
+          <xref uid="@odata.nextLink" />?: string | null } & { value?:
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: function
+          }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: string, deletedDateTime?: function }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryObject" />" }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, api?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          acceptMappedClaims?: boolean | null, knownClientApplications?: ...[],
+          oauth2PermissionScopes?: ...[], preAuthorizedApplications?: ...[],
+          requestedAccessTokenVersion?: number | null } | null, appId?: string |
+          null, appManagementPolicies?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., appliesTo?: ..., isEnabled?: ...,
+          restrictions?: ... })[], appRoles?: { <xref uid="@odata.type" />:
+          string, allowedMemberTypes?: function, description?: function,
+          displayName?: function, id?: function, isEnabled?: function, origin?:
+          function, value?: function }[], authenticationBehaviors?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          blockAzureADGraphAccess?: boolean | null, removeUnverifiedEmailClaim?:
+          boolean | null, requireClientServicePrincipal?: boolean | null } |
+          null, certification?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, certificationDetailsUrl?: string | null,
+          certificationExpirationDateTime?: string | null,
+          isCertifiedByMicrosoft?: boolean | null, isPublisherAttested?: boolean
+          | null, lastCertificationDateTime?: string | null } | null,
+          connectorGroup?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, applications?:
+          (Omit&lt;Omit&lt;{ id?: string | undefined; '<xref uid="@odata.type"
+          />': string; }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{
+          deletedDateTime?: string | null | undefined; '<xref uid="@odata.type"
+          />': string; }, "<xref uid="@odata.type" />"&gt; & { ...; }, "<xref
+          uid="@odata.type" />"&gt; & { ...; })[] | undefined,
+          connectorGroupType?: function, isDefault?: function, members?:
+          function, name?: function, region?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.connectorGroup" />"
+          }) | null, createdDateTime?: string | null, createdOnBehalfOf?:
+          Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
+          ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref
+          uid="@odata.type" />: ..., deletedDateTime?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.directoryObject" />" }) | null,
+          defaultRedirectUri?: string | null, description?: string | null,
+          disabledByMicrosoftStatus?: string | null, displayName?: string |
+          null, extensionProperties?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., appDisplayName?: ..., dataType?: ...,
+          isMultiValued?: ..., isSyncedFromOnPremises?: ..., name?: ...,
+          targetObjects?: ... } & { <xref uid="@odata.type" />: ... })[],
+          federatedIdentityCredentials?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ..., audiences?: ..., claimsMatchingExpression?:
+          ..., description?: ..., issuer?: ..., name?: ..., subject?: ... } & {
+          <xref uid="@odata.type" />: ... })[], groupMembershipClaims?: string |
+          null, homeRealmDiscoveryPolicies?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... })[], identifierUris?: string[], info?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          logoUrl?: string | null, marketingUrl?: string | null,
+          privacyStatementUrl?: string | null, supportUrl?: string | null,
+          termsOfServiceUrl?: string | null } | null,
+          isDeviceOnlyAuthSupported?: boolean | null, isFallbackPublicClient?:
+          boolean | null, keyCredentials?: { <xref uid="@odata.type" />: string,
+          customKeyIdentifier?: function, displayName?: function, endDateTime?:
+          function, key?: function, keyId?: function, startDateTime?: function,
+          type?: function, usage?: function }[], logo?: string,
+          nativeAuthenticationApisEnabled?: "unknownFutureValue" |
+          Record&lt;string, never&gt; | "all" | "none" | null, notes?: string |
+          null, onPremisesPublishing?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, alternateUrl?: string | null,
+          applicationServerTimeout?: string | null, applicationType?: string |
+          null, externalAuthenticationType?: Record&lt;..., ...&gt; | "passthru"
+          | "aadPreAuthentication" | null, externalUrl?: string | null,
+          internalUrl?: string | null, isAccessibleViaZTNAClient?: boolean |
+          null, isBackendCertificateValidationEnabled?: boolean | null,
+          isContinuousAccessEvaluationEnabled?: boolean | null,
+          isDnsResolutionEnabled?: boolean | null, isHttpOnlyCookieEnabled?:
+          boolean | null, isOnPremPublishingEnabled?: boolean | null,
+          isPersistentCookieEnabled?: boolean | null, isSecureCookieEnabled?:
+          boolean | null, isStateSessionEnabled?: boolean | null,
+          isTranslateHostHeaderEnabled?: boolean | null,
+          isTranslateLinksInBodyEnabled?: boolean | null,
+          onPremisesApplicationSegments?: ...[], segmentsConfiguration?:
+          Record&lt;..., ...&gt; | { <xref uid="@odata.type" />: ... } | null,
+          singleSignOnSettings?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., kerberosSignOnSettings?: ...,
+          singleSignOnMode?: ... } | null,
+          useAlternateUrlForTranslationAndRedirect?: boolean | null,
+          verifiedCustomDomainCertificatesMetadata?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., expiryDate?: ..., issueDate?: ...,
+          issuerName?: ..., subjectName?: ..., thumbprint?: ... } | null,
+          verifiedCustomDomainKeyCredential?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., customKeyIdentifier?: ..., displayName?:
+          ..., endDateTime?: ..., key?: ..., keyId?: ..., startDateTime?: ...,
+          type?: ..., usage?: ... } | null,
+          verifiedCustomDomainPasswordCredential?: Record&lt;..., ...&gt; | {
+          <xref uid="@odata.type" />: ..., customKeyIdentifier?: ...,
+          displayName?: ..., endDateTime?: ..., hint?: ..., keyId?: ...,
+          secretText?: ..., startDateTime?: ... } | null, wafAllowedHeaders?:
+          Record&lt;..., ...&gt; | (... & ... & ...) | null, wafIpRanges?:
+          ...[], wafProvider?: string | null } | null, optionalClaims?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          accessToken?: ...[], idToken?: ...[], saml2Token?: ...[] } | null,
+          owners?: (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... })[], parentalControlSettings?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          countriesBlockedForMinors?: ...[], legalAgeGroupRule?: string | null }
+          | null, passwordCredentials?: { <xref uid="@odata.type" />: string,
+          customKeyIdentifier?: function, displayName?: function, endDateTime?:
+          function, hint?: function, keyId?: function, secretText?: function,
+          startDateTime?: function }[], publicClient?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, redirectUris?: ...[]
+          } | null, publisherDomain?: string | null,
+          requestSignatureVerification?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, allowedWeakAlgorithms?:
+          "unknownFutureValue" | Record&lt;..., ...&gt; | "rsaSha1" | null,
+          isSignedRequestRequired?: boolean } | null, requiredResourceAccess?: {
+          <xref uid="@odata.type" />: string, resourceAccess?: function,
+          resourceAppId?: function }[], samlMetadataUrl?: string | null,
+          serviceManagementReference?: string | null,
+          servicePrincipalLockConfiguration?: Record&lt;string, never&gt; | {
+          <xref uid="@odata.type" />: string, allProperties?: boolean | null,
+          credentialsWithUsageSign?: boolean | null,
+          credentialsWithUsageVerify?: boolean | null, isEnabled?: boolean,
+          tokenEncryptionKeyId?: boolean | null } | null, signInAudience?:
+          string | null, spa?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, redirectUris?: ...[] } | null,
+          synchronization?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
+          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, jobs?: function,
+          secrets?: function, templates?: function } & { <xref uid="@odata.type"
+          />: "#<xref uid="microsoft.graph.synchronization" />" }) | null,
+          tags?: string[], tokenEncryptionKeyId?: string | null,
+          tokenIssuancePolicies?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... } & { <xref uid="@odata.type" />: ... })[],
+          tokenLifetimePolicies?: (Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... } & { <xref uid="@odata.type" />: ... })[],
+          uniqueName?: string | null, verifiedPublisher?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, addedDateTime?:
+          string | null, displayName?: string | null, verifiedPublisherId?:
+          string | null } | null, web?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, homePageUrl?: string | null,
+          implicitGrantSettings?: Record&lt;..., ...&gt; | { <xref
+          uid="@odata.type" />: ..., enableAccessTokenIssuance?: ...,
+          enableIdTokenIssuance?: ... } | null, logoutUrl?: string | null,
+          oauth2AllowImplicitFlow?: boolean | null, redirectUris?: ...[],
+          redirectUriSettings?: ...[] } | null, windows?: Record&lt;string,
+          never&gt; | { <xref uid="@odata.type" />: string, packageSid?: string
+          | null, redirectUris?: ...[] } | null })[] }&gt;
 variables:
   - name: logo
     uid: >-
