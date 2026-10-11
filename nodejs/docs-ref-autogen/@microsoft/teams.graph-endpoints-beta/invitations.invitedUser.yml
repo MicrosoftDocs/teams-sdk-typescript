@@ -207,12 +207,12 @@ functions:
         @odata.type: "#microsoft.graph.qrCodePinAuthenticationMethod" }) | null,
         requirements?: Record<string, never> | { @odata.type: string,
         perUserMfaState?: Record<string, never> | "unknownFutureValue" |
-        "enabled" | "disabled" | "enforced" | null } | null, signInPreferences?:
+        "disabled" | "enforced" | "enabled" | null } | null, signInPreferences?:
         Record<string, never> | { @odata.type: string,
         isSystemPreferredAuthenticationMethodEnabled?: boolean | null,
         userPreferredMethodForSecondaryAuthentication?: Record<string, never> |
-        "unknownFutureValue" | "sms" | "push" | "oath" | "voiceMobile" |
-        "voiceAlternateMobile" | "voiceOffice" | null } | null,
+        "unknownFutureValue" | "push" | "oath" | "voiceMobile" |
+        "voiceAlternateMobile" | "voiceOffice" | "sms" | null } | null,
         softwareOathMethods?: (Omit<... & ... & ..., "@odata.type"> & {
         @odata.type: string, secretKey?: function } & { @odata.type:
         "#microsoft.graph.softwareOathAuthenticationMethod" })[],
@@ -559,7 +559,7 @@ functions:
         time?: string | null } | null, lastModifiedDateTime?: string,
         lastRemoteActionResult?: Record<string, never> | { @odata.type: string,
         actionName?: string | null, actionState?: Record<..., ...> | "none" |
-        "done" | "canceled" | "failed" | "pending" | "active" | "notSupported" |
+        "pending" | "active" | "failed" | "canceled" | "done" | "notSupported" |
         null, cloudPcId?: string | null, lastUpdatedDateTime?: string | null,
         managedDeviceId?: string | null, startDateTime?: string | null,
         statusDetail?: Record<..., ...> | { @odata.type: ...,
@@ -690,9 +690,9 @@ functions:
         @odata.type: string, id?: string }, "@odata.type"> & Omit<{ @odata.type:
         string, assignments?: (... & ... & ...)[], createdDateTime?: string,
         description?: string | null, deviceEnrollmentConfigurationType?:
-        "unknownFutureValue" | "windowsHelloForBusiness" | "unknown" | "limit" |
-        "platformRestrictions" | "defaultLimit" | "defaultPlatformRestrictions"
-        | "defaultWindowsHelloForBusiness" |
+        "unknownFutureValue" | "unknown" | "limit" | "platformRestrictions" |
+        "windowsHelloForBusiness" | "defaultLimit" |
+        "defaultPlatformRestrictions" | "defaultWindowsHelloForBusiness" |
         "defaultWindows10EnrollmentCompletionPageConfiguration" |
         "windows10EnrollmentCompletionPageConfiguration" |
         "deviceComanagementAuthorityConfiguration" | "singlePlatformRestriction"
@@ -1203,13 +1203,13 @@ functions:
         ..., personOrGroup?: ..., propagateChanges?: ..., readOnly?: ...,
         required?: ..., sourceColumn?: ..., sourceContentType?: ..., term?: ...,
         text?: ..., thumbnail?: ..., type?: ..., validation?: ... } & {
-        @odata.type: ... })[], informationProtection?: Record<string, never> |
-        (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
-        string, bitlocker?: function, dataLossPreventionPolicies?: function,
-        policy?: function, sensitivityLabels?: function,
-        sensitivityPolicySettings?: function, threatAssessmentRequests?:
-        function } & { @odata.type: "#microsoft.graph.informationProtection" })
-        | null, isPersonalSite?: boolean | null, items?: (Omit<..., ...> &
+        @odata.type: ... })[], informationProtection?: (Omit<{ @odata.type: ...,
+        id?: ... }, "@odata.type"> & { @odata.type: string, bitlocker?:
+        function, dataLossPreventionPolicies?: function, policy?: function,
+        sensitivityLabels?: function, sensitivityPolicySettings?: function,
+        threatAssessmentRequests?: function } & { @odata.type:
+        "#microsoft.graph.informationProtection" }) | Record<string, never> |
+        null, isPersonalSite?: boolean | null, items?: (Omit<..., ...> &
         Omit<..., ...> & { @odata.type: ... })[], lists?: (Omit<..., ...> & {
         @odata.type: ..., activities?: ..., columns?: ..., contentTypes?: ...,
         displayName?: ..., drive?: ..., items?: ..., list?: ..., operations?:
@@ -1269,15 +1269,14 @@ functions:
         function, senderEmailAddress?: function } & { @odata.type:
         "#microsoft.graph.inferenceClassificationOverride" })[] } & {
         @odata.type: "#microsoft.graph.inferenceClassification" }) | null,
-        infoCatalogs?: string[], informationProtection?: Record<string, never> |
-        (Omit<{ @odata.type: string, id?: string }, "@odata.type"> & {
-        @odata.type: string, bitlocker?: Record<string, never> | (Omit<{
-        @odata.type: string, id?: function }, "@odata.type"> & { @odata.type:
-        string, recoveryKeys?: ...[] } & { @odata.type:
-        "#microsoft.graph.bitlocker" }) | null, dataLossPreventionPolicies?:
-        (Omit<{ @odata.type: ..., id?: ... }, "@odata.type"> & { @odata.type:
-        string, name?: function } & { @odata.type:
-        "#microsoft.graph.dataLossPreventionPolicy" })[], policy?:
+        infoCatalogs?: string[], informationProtection?: (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & { @odata.type: string,
+        bitlocker?: (Omit<{ @odata.type: string, id?: function }, "@odata.type">
+        & { @odata.type: string, recoveryKeys?: ...[] } & { @odata.type:
+        "#microsoft.graph.bitlocker" }) | Record<string, never> | null,
+        dataLossPreventionPolicies?: (Omit<{ @odata.type: ..., id?: ... },
+        "@odata.type"> & { @odata.type: string, name?: function } & {
+        @odata.type: "#microsoft.graph.dataLossPreventionPolicy" })[], policy?:
         Record<string, never> | (Omit<{ @odata.type: string, id?: function },
         "@odata.type"> & { @odata.type: string, labels?: ...[] } & {
         @odata.type: "#microsoft.graph.informationProtectionPolicy" }) | null,
@@ -1289,8 +1288,8 @@ functions:
         isScopedToUser?: function, locale?: function, name?: function,
         priority?: function, rights?: function, sublabels?: (Omit<{ id?: string
         | undefined; '@odata.type': string; }, "@odata.type"> & { actionSource?:
-        Record<string, never> | "unknownFutureValue" | "none" | "manual" |
-        "automatic" | "recommended" | null | undefined; ... 16 more ...;
+        Record<string, never> | "unknownFutureValue" | "manual" | "automatic" |
+        "recommended" | "none" | null | undefined; ... 16 more ...;
         '@odata.type': string; } & { ...; })[] | undefined, toolTip?: function }
         & { @odata.type: "#microsoft.graph.sensitivityLabel" })[],
         sensitivityPolicySettings?: Record<string, never> | (Omit<{ @odata.type:
@@ -1305,15 +1304,15 @@ functions:
         ..., createdBy?: ..., createdDateTime?: ..., expectedAssessment?: ...,
         requestSource?: ..., results?: ..., status?: ... }, "@odata.type"> & {
         @odata.type: "#microsoft.graph.threatAssessmentRequest" })[] } & {
-        @odata.type: "#microsoft.graph.informationProtection" }) | null,
-        insights?: Record<string, never> | (Omit<Omit<{ @odata.type: string,
-        id?: string }, "@odata.type"> & Omit<{ @odata.type: string, shared?:
-        ...[], trending?: ...[], used?: ...[] }, "@odata.type"> & { @odata.type:
-        "#microsoft.graph.officeGraphInsights" }, "@odata.type"> & {
-        @odata.type: string }) | null, interests?: (string | null)[],
-        invitedBy?: Record<string, never> | (Omit<{ @odata.type: string, id?:
-        string }, "@odata.type"> & Omit<{ @odata.type: string, deletedDateTime?:
-        string | null }, "@odata.type"> & { @odata.type:
+        @odata.type: "#microsoft.graph.informationProtection" }) |
+        Record<string, never> | null, insights?: Record<string, never> |
+        (Omit<Omit<{ @odata.type: string, id?: string }, "@odata.type"> & Omit<{
+        @odata.type: string, shared?: ...[], trending?: ...[], used?: ...[] },
+        "@odata.type"> & { @odata.type: "#microsoft.graph.officeGraphInsights"
+        }, "@odata.type"> & { @odata.type: string }) | null, interests?: (string
+        | null)[], invitedBy?: Record<string, never> | (Omit<{ @odata.type:
+        string, id?: string }, "@odata.type"> & Omit<{ @odata.type: string,
+        deletedDateTime?: string | null }, "@odata.type"> & { @odata.type:
         "#microsoft.graph.directoryObject" }) | null,
         isLicenseReconciliationNeeded?: boolean | null, isManagementRestricted?:
         boolean | null, isResourceAccount?: boolean | null, jobTitle?: string |
@@ -1509,7 +1508,7 @@ functions:
         funSettings?: Record<string, never> | { @odata.type: string,
         allowCustomMemes?: boolean | null, allowGiphy?: boolean | null,
         allowStickersAndMemes?: boolean | null, giphyContentRating?: Record<...,
-        ...> | "unknownFutureValue" | "moderate" | "strict" | null } | null,
+        ...> | "unknownFutureValue" | "strict" | "moderate" | null } | null,
         group?: Record<string, never> | (Omit<... & ... & ..., "@odata.type"> &
         { @odata.type: string, acceptedSenders?: function, accessType?:
         function, allowExternalSenders?: function, appRoleAssignments?:
@@ -1645,8 +1644,8 @@ functions:
         mail?: string | null, mailboxSettings?: Record<string, never> | {
         @odata.type: string, archiveFolder?: string | null,
         automaticRepliesSetting?: Record<string, never> | { @odata.type: string,
-        externalAudience?: Record<string, never> | "none" | "all" |
-        "contactsOnly" | null, externalReplyMessage?: string | null,
+        externalAudience?: Record<string, never> | "none" | "contactsOnly" |
+        "all" | null, externalReplyMessage?: string | null,
         internalReplyMessage?: string | null, scheduledEndDateTime?:
         Record<string, never> | { @odata.type: string, dateTime?: string,
         timeZone?: string | null } | null, scheduledStartDateTime?:
@@ -1659,9 +1658,9 @@ functions:
         Record<string, never> | { @odata.type: string, displayName?: string |
         null, locale?: string | null } | null, timeFormat?: string | null,
         timeZone?: string | null, userPurpose?: Record<string, never> |
-        "unknownFutureValue" | "user" | "unknown" | "shared" | "linked" | "room"
+        "unknownFutureValue" | "unknown" | "user" | "shared" | "linked" | "room"
         | "equipment" | "others" | null, userPurposeV2?: Record<string, never> |
-        "user" | "unknown" | "shared" | "linked" | "room" | "equipment" |
+        "unknown" | "user" | "shared" | "linked" | "room" | "equipment" |
         "others" | null, workingHours?: Record<string, never> | { @odata.type:
         string, daysOfWeek?: (Record<..., ...> | "sunday" | "monday" | "tuesday"
         | "wednesday" | "thursday" | "friday" | "saturday" | null)[], endTime?:
@@ -1718,8 +1717,8 @@ functions:
         ..., actionState?: ..., cloudPcId?: ..., lastUpdatedDateTime?: ...,
         managedDeviceId?: ..., startDateTime?: ..., statusDetail?: ...,
         statusDetails?: ... }[], complianceGracePeriodExpirationDateTime?:
-        string, complianceState?: "error" | "unknown" | "inGracePeriod" |
-        "compliant" | "noncompliant" | "conflict" | "configManager",
+        string, complianceState?: "unknown" | "inGracePeriod" | "compliant" |
+        "noncompliant" | "conflict" | "error" | "configManager",
         configurationManagerClientEnabledFeatures?: Record<string, never> | {
         @odata.type: string, compliancePolicy?: function, deviceConfiguration?:
         function, endpointProtection?: function, inventory?: function,
@@ -1780,8 +1779,8 @@ functions:
         preRemediationDetectionScriptError?: ...,
         preRemediationDetectionScriptOutput?: ..., remediationScriptError?: ...,
         remediationState?: ..., userName?: ... }[], deviceName?: string | null,
-        deviceRegistrationState?: "revoked" | "unknown" | "notRegistered" |
-        "registered" | "keyConflict" | "approvalPending" | "certificateReset" |
+        deviceRegistrationState?: "unknown" | "notRegistered" | "registered" |
+        "revoked" | "keyConflict" | "approvalPending" | "certificateReset" |
         "notRegisteredPendingEnrollment", deviceType?: "unknown" | "desktop" |
         "windowsRT" | "winMO6" | "nokia" | "windowsPhone" | "mac" | "winCE" |
         "winEmbedded" | "iPhone" | "iPad" | "iPod" | "android" | "iSocConsumer"
@@ -1793,7 +1792,7 @@ functions:
         enrolledByUserPrincipalName?: string | null, enrolledDateTime?: string,
         enrollmentProfileName?: string | null, ethernetMacAddress?: string |
         null, exchangeAccessState?: "none" | "unknown" | "allowed" | "blocked" |
-        "quarantined", exchangeAccessStateReason?: "none" | "other" | "unknown"
+        "quarantined", exchangeAccessStateReason?: "none" | "unknown" | "other"
         | "compliant" | "exchangeGlobalRule" | "exchangeIndividualRule" |
         "exchangeDeviceRule" | "exchangeUpgrade" | "exchangeMailboxPolicy" |
         "notCompliant" | "notEnrolled" | "unknownLocation" | "mfaRequired" |
@@ -1825,8 +1824,8 @@ functions:
         boolean, isSupervised?: boolean, jailBroken?: string | null, joinType?:
         "unknown" | "azureADRegistered" | "azureADJoined" |
         "hybridAzureADJoined", lastSyncDateTime?: string,
-        logCollectionRequests?: (... & ... & ...)[], lostModeState?: "enabled" |
-        "disabled", managedDeviceMobileAppConfigurationStates?: (... & ... &
+        logCollectionRequests?: (... & ... & ...)[], lostModeState?: "disabled"
+        | "enabled", managedDeviceMobileAppConfigurationStates?: (... & ... &
         ...)[], managedDeviceName?: string | null, managedDeviceOwnerType?:
         "unknownFutureValue" | "unknown" | "personal" | "company",
         managementAgent?: "unknownFutureValue" | "unknown" | "eas" | "mdm" |
@@ -2429,7 +2428,7 @@ functions:
         "#microsoft.graph.directoryObject" })[], usageLocation?: string | null,
         usageRights?: (Omit<{ @odata.type: string, id?: string }, "@odata.type">
         & { @odata.type: string, catalogId?: string, serviceIdentifier?: string,
-        state?: "unknownFutureValue" | "warning" | "active" | "inactive" |
+        state?: "unknownFutureValue" | "active" | "inactive" | "warning" |
         "suspended" } & { @odata.type: "#microsoft.graph.usageRight" })[],
         userPrincipalName?: string | null, userType?: string | null,
         virtualEvents?: Record<string, never> | (Omit<{ @odata.type: string,
@@ -2687,14 +2686,14 @@ functions:
           uid="microsoft.graph.qrCodePinAuthenticationMethod" />" }) | null,
           requirements?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
           />: string, perUserMfaState?: Record&lt;string, never&gt; |
-          "unknownFutureValue" | "enabled" | "disabled" | "enforced" | null } |
+          "unknownFutureValue" | "disabled" | "enforced" | "enabled" | null } |
           null, signInPreferences?: Record&lt;string, never&gt; | { <xref
           uid="@odata.type" />: string,
           isSystemPreferredAuthenticationMethodEnabled?: boolean | null,
           userPreferredMethodForSecondaryAuthentication?: Record&lt;string,
-          never&gt; | "unknownFutureValue" | "sms" | "push" | "oath" |
-          "voiceMobile" | "voiceAlternateMobile" | "voiceOffice" | null } |
-          null, softwareOathMethods?: (Omit&lt;... & ... & ..., "<xref
+          never&gt; | "unknownFutureValue" | "push" | "oath" | "voiceMobile" |
+          "voiceAlternateMobile" | "voiceOffice" | "sms" | null } | null,
+          softwareOathMethods?: (Omit&lt;... & ... & ..., "<xref
           uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
           secretKey?: function } & { <xref uid="@odata.type" />: "#<xref
           uid="microsoft.graph.softwareOathAuthenticationMethod" />" })[],
@@ -3104,7 +3103,7 @@ functions:
           } | null, lastModifiedDateTime?: string, lastRemoteActionResult?:
           Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
           actionName?: string | null, actionState?: Record&lt;..., ...&gt; |
-          "none" | "done" | "canceled" | "failed" | "pending" | "active" |
+          "none" | "pending" | "active" | "failed" | "canceled" | "done" |
           "notSupported" | null, cloudPcId?: string | null,
           lastUpdatedDateTime?: string | null, managedDeviceId?: string | null,
           startDateTime?: string | null, statusDetail?: Record&lt;..., ...&gt; |
@@ -3267,8 +3266,8 @@ functions:
           uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type" />:
           string, assignments?: (... & ... & ...)[], createdDateTime?: string,
           description?: string | null, deviceEnrollmentConfigurationType?:
-          "unknownFutureValue" | "windowsHelloForBusiness" | "unknown" | "limit"
-          | "platformRestrictions" | "defaultLimit" |
+          "unknownFutureValue" | "unknown" | "limit" | "platformRestrictions" |
+          "windowsHelloForBusiness" | "defaultLimit" |
           "defaultPlatformRestrictions" | "defaultWindowsHelloForBusiness" |
           "defaultWindows10EnrollmentCompletionPageConfiguration" |
           "windows10EnrollmentCompletionPageConfiguration" |
@@ -3883,49 +3882,49 @@ functions:
           ..., required?: ..., sourceColumn?: ..., sourceContentType?: ...,
           term?: ..., text?: ..., thumbnail?: ..., type?: ..., validation?: ...
           } & { <xref uid="@odata.type" />: ... })[], informationProtection?:
+          (Omit&lt;{ <xref uid="@odata.type" />: ..., id?: ... }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
+          bitlocker?: function, dataLossPreventionPolicies?: function, policy?:
+          function, sensitivityLabels?: function, sensitivityPolicySettings?:
+          function, threatAssessmentRequests?: function } & { <xref
+          uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.informationProtection" />" }) | Record&lt;string,
+          never&gt; | null, isPersonalSite?: boolean | null, items?:
+          (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & { <xref
+          uid="@odata.type" />: ... })[], lists?: (Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ..., activities?: ..., columns?: ...,
+          contentTypes?: ..., displayName?: ..., drive?: ..., items?: ...,
+          list?: ..., operations?: ..., permissions?: ..., sharepointIds?: ...,
+          subscriptions?: ..., system?: ... } & { <xref uid="@odata.type" />:
+          ... })[], locale?: string | null, lockState?: Record&lt;string,
+          never&gt; | "unknownFutureValue" | "unlocked" | "lockedReadOnly" |
+          "lockedNoAccess" | "lockedNoAdditions" | null, onenote?:
           Record&lt;string, never&gt; | (Omit&lt;{ <xref uid="@odata.type" />:
           ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
-          uid="@odata.type" />: string, bitlocker?: function,
-          dataLossPreventionPolicies?: function, policy?: function,
-          sensitivityLabels?: function, sensitivityPolicySettings?: function,
-          threatAssessmentRequests?: function } & { <xref uid="@odata.type" />:
-          "#<xref uid="microsoft.graph.informationProtection" />" }) | null,
-          isPersonalSite?: boolean | null, items?: (Omit&lt;..., ...&gt; &
-          Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... })[], lists?:
-          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ...,
-          activities?: ..., columns?: ..., contentTypes?: ..., displayName?:
-          ..., drive?: ..., items?: ..., list?: ..., operations?: ...,
-          permissions?: ..., sharepointIds?: ..., subscriptions?: ..., system?:
-          ... } & { <xref uid="@odata.type" />: ... })[], locale?: string |
-          null, lockState?: Record&lt;string, never&gt; | "unknownFutureValue" |
-          "unlocked" | "lockedReadOnly" | "lockedNoAccess" | "lockedNoAdditions"
-          | null, onenote?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
-          uid="@odata.type" />: ..., id?: ... }, "<xref uid="@odata.type"
-          />"&gt; & { <xref uid="@odata.type" />: string, notebooks?: function,
-          operations?: function, pages?: function, resources?: function,
-          sectionGroups?: function, sections?: function } & { <xref
-          uid="@odata.type" />: "#<xref uid="microsoft.graph.onenote" />" }) |
-          null, operations?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type"
-          />: ..., error?: ..., percentageComplete?: ..., resourceId?: ...,
-          type?: ... } & { <xref uid="@odata.type" />: ... })[],
-          ownerIdentityToResolve?: Record&lt;string, never&gt; | { <xref
-          uid="@odata.type" />: string, alias?: string | null, email?: string |
-          null, objectId?: string | null } | null, pages?: (Omit&lt;..., ...&gt;
-          & Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ... })[],
-          pageTemplates?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />:
-          ..., canvasLayout?: ..., titleArea?: ..., webParts?: ... } & { <xref
-          uid="@odata.type" />: ... })[], permissions?: (Omit&lt;..., ...&gt; &
-          { <xref uid="@odata.type" />: ..., expirationDateTime?: ...,
-          grantedTo?: ..., grantedToIdentities?: ..., grantedToIdentitiesV2?:
-          ..., grantedToV2?: ..., hasPassword?: ..., inheritedFrom?: ...,
-          invitation?: ..., link?: ..., roles?: ..., shareId?: ... } & { <xref
-          uid="@odata.type" />: ... })[], recycleBin?: Record&lt;string,
-          never&gt; | (Omit&lt;... & ... & ..., "<xref uid="@odata.type" />"&gt;
-          & { <xref uid="@odata.type" />: string, items?: function, settings?:
-          function } & { <xref uid="@odata.type" />: "#<xref
-          uid="microsoft.graph.recycleBin" />" }) | null, root?:
-          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string } |
-          null, settings?: Record&lt;string, never&gt; | { <xref
+          uid="@odata.type" />: string, notebooks?: function, operations?:
+          function, pages?: function, resources?: function, sectionGroups?:
+          function, sections?: function } & { <xref uid="@odata.type" />:
+          "#<xref uid="microsoft.graph.onenote" />" }) | null, operations?:
+          (Omit&lt;..., ...&gt; & { <xref uid="@odata.type" />: ..., error?:
+          ..., percentageComplete?: ..., resourceId?: ..., type?: ... } & {
+          <xref uid="@odata.type" />: ... })[], ownerIdentityToResolve?:
+          Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
+          alias?: string | null, email?: string | null, objectId?: string | null
+          } | null, pages?: (Omit&lt;..., ...&gt; & Omit&lt;..., ...&gt; & {
+          <xref uid="@odata.type" />: ... })[], pageTemplates?: (Omit&lt;...,
+          ...&gt; & { <xref uid="@odata.type" />: ..., canvasLayout?: ...,
+          titleArea?: ..., webParts?: ... } & { <xref uid="@odata.type" />: ...
+          })[], permissions?: (Omit&lt;..., ...&gt; & { <xref uid="@odata.type"
+          />: ..., expirationDateTime?: ..., grantedTo?: ...,
+          grantedToIdentities?: ..., grantedToIdentitiesV2?: ..., grantedToV2?:
+          ..., hasPassword?: ..., inheritedFrom?: ..., invitation?: ..., link?:
+          ..., roles?: ..., shareId?: ... } & { <xref uid="@odata.type" />: ...
+          })[], recycleBin?: Record&lt;string, never&gt; | (Omit&lt;... & ... &
+          ..., "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
+          string, items?: function, settings?: function } & { <xref
+          uid="@odata.type" />: "#<xref uid="microsoft.graph.recycleBin" />" })
+          | null, root?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
+          />: string } | null, settings?: Record&lt;string, never&gt; | { <xref
           uid="@odata.type" />: string, languageTag?: string | null, timeZone?:
           string | null } | null, shareByEmailEnabled?: boolean | null,
           sharepointIds?: Record&lt;string, never&gt; | { <xref
@@ -3966,16 +3965,15 @@ functions:
           "#<xref uid="microsoft.graph.inferenceClassificationOverride" />" })[]
           } & { <xref uid="@odata.type" />: "#<xref
           uid="microsoft.graph.inferenceClassification" />" }) | null,
-          infoCatalogs?: string[], informationProtection?: Record&lt;string,
-          never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
-          }, "<xref uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />:
-          string, bitlocker?: Record&lt;string, never&gt; | (Omit&lt;{ <xref
-          uid="@odata.type" />: string, id?: function }, "<xref
+          infoCatalogs?: string[], informationProtection?: (Omit&lt;{ <xref
+          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
+          />"&gt; & { <xref uid="@odata.type" />: string, bitlocker?: (Omit&lt;{
+          <xref uid="@odata.type" />: string, id?: function }, "<xref
           uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
           recoveryKeys?: ...[] } & { <xref uid="@odata.type" />: "#<xref
-          uid="microsoft.graph.bitlocker" />" }) | null,
-          dataLossPreventionPolicies?: (Omit&lt;{ <xref uid="@odata.type" />:
-          ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
+          uid="microsoft.graph.bitlocker" />" }) | Record&lt;string, never&gt; |
+          null, dataLossPreventionPolicies?: (Omit&lt;{ <xref uid="@odata.type"
+          />: ..., id?: ... }, "<xref uid="@odata.type" />"&gt; & { <xref
           uid="@odata.type" />: string, name?: function } & { <xref
           uid="@odata.type" />: "#<xref
           uid="microsoft.graph.dataLossPreventionPolicy" />" })[], policy?:
@@ -3994,8 +3992,8 @@ functions:
           priority?: function, rights?: function, sublabels?: (Omit&lt;{ id?:
           string | undefined; '<xref uid="@odata.type" />': string; }, "<xref
           uid="@odata.type" />"&gt; & { actionSource?: Record&lt;string,
-          never&gt; | "unknownFutureValue" | "none" | "manual" | "automatic" |
-          "recommended" | null | undefined; ... 16 more ...; '<xref
+          never&gt; | "unknownFutureValue" | "manual" | "automatic" |
+          "recommended" | "none" | null | undefined; ... 16 more ...; '<xref
           uid="@odata.type" />': string; } & { ...; })[] | undefined, toolTip?:
           function } & { <xref uid="@odata.type" />: "#<xref
           uid="microsoft.graph.sensitivityLabel" />" })[],
@@ -4016,12 +4014,12 @@ functions:
           uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
           uid="microsoft.graph.threatAssessmentRequest" />" })[] } & { <xref
           uid="@odata.type" />: "#<xref
-          uid="microsoft.graph.informationProtection" />" }) | null, insights?:
-          Record&lt;string, never&gt; | (Omit&lt;Omit&lt;{ <xref
-          uid="@odata.type" />: string, id?: string }, "<xref uid="@odata.type"
-          />"&gt; & Omit&lt;{ <xref uid="@odata.type" />: string, shared?:
-          ...[], trending?: ...[], used?: ...[] }, "<xref uid="@odata.type"
-          />"&gt; & { <xref uid="@odata.type" />: "#<xref
+          uid="microsoft.graph.informationProtection" />" }) | Record&lt;string,
+          never&gt; | null, insights?: Record&lt;string, never&gt; |
+          (Omit&lt;Omit&lt;{ <xref uid="@odata.type" />: string, id?: string },
+          "<xref uid="@odata.type" />"&gt; & Omit&lt;{ <xref uid="@odata.type"
+          />: string, shared?: ...[], trending?: ...[], used?: ...[] }, "<xref
+          uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: "#<xref
           uid="microsoft.graph.officeGraphInsights" />" }, "<xref
           uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string }) |
           null, interests?: (string | null)[], invitedBy?: Record&lt;string,
@@ -4261,7 +4259,7 @@ functions:
           never&gt; | { <xref uid="@odata.type" />: string, allowCustomMemes?:
           boolean | null, allowGiphy?: boolean | null, allowStickersAndMemes?:
           boolean | null, giphyContentRating?: Record&lt;..., ...&gt; |
-          "unknownFutureValue" | "moderate" | "strict" | null } | null, group?:
+          "unknownFutureValue" | "strict" | "moderate" | null } | null, group?:
           Record&lt;string, never&gt; | (Omit&lt;... & ... & ..., "<xref
           uid="@odata.type" />"&gt; & { <xref uid="@odata.type" />: string,
           acceptedSenders?: function, accessType?: function,
@@ -4420,7 +4418,7 @@ functions:
           uid="@odata.type" />: string, archiveFolder?: string | null,
           automaticRepliesSetting?: Record&lt;string, never&gt; | { <xref
           uid="@odata.type" />: string, externalAudience?: Record&lt;string,
-          never&gt; | "none" | "all" | "contactsOnly" | null,
+          never&gt; | "none" | "contactsOnly" | "all" | null,
           externalReplyMessage?: string | null, internalReplyMessage?: string |
           null, scheduledEndDateTime?: Record&lt;string, never&gt; | { <xref
           uid="@odata.type" />: string, dateTime?: string, timeZone?: string |
@@ -4435,10 +4433,10 @@ functions:
           Record&lt;string, never&gt; | { <xref uid="@odata.type" />: string,
           displayName?: string | null, locale?: string | null } | null,
           timeFormat?: string | null, timeZone?: string | null, userPurpose?:
-          Record&lt;string, never&gt; | "unknownFutureValue" | "user" |
-          "unknown" | "shared" | "linked" | "room" | "equipment" | "others" |
-          null, userPurposeV2?: Record&lt;string, never&gt; | "user" | "unknown"
-          | "shared" | "linked" | "room" | "equipment" | "others" | null,
+          Record&lt;string, never&gt; | "unknownFutureValue" | "unknown" |
+          "user" | "shared" | "linked" | "room" | "equipment" | "others" | null,
+          userPurposeV2?: Record&lt;string, never&gt; | "unknown" | "user" |
+          "shared" | "linked" | "room" | "equipment" | "others" | null,
           workingHours?: Record&lt;string, never&gt; | { <xref uid="@odata.type"
           />: string, daysOfWeek?: (Record&lt;..., ...&gt; | "sunday" | "monday"
           | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" |
@@ -4506,8 +4504,8 @@ functions:
           lastUpdatedDateTime?: ..., managedDeviceId?: ..., startDateTime?: ...,
           statusDetail?: ..., statusDetails?: ... }[],
           complianceGracePeriodExpirationDateTime?: string, complianceState?:
-          "error" | "unknown" | "inGracePeriod" | "compliant" | "noncompliant" |
-          "conflict" | "configManager",
+          "unknown" | "inGracePeriod" | "compliant" | "noncompliant" |
+          "conflict" | "error" | "configManager",
           configurationManagerClientEnabledFeatures?: Record&lt;string,
           never&gt; | { <xref uid="@odata.type" />: string, compliancePolicy?:
           function, deviceConfiguration?: function, endpointProtection?:
@@ -4573,8 +4571,8 @@ functions:
           preRemediationDetectionScriptError?: ...,
           preRemediationDetectionScriptOutput?: ..., remediationScriptError?:
           ..., remediationState?: ..., userName?: ... }[], deviceName?: string |
-          null, deviceRegistrationState?: "revoked" | "unknown" |
-          "notRegistered" | "registered" | "keyConflict" | "approvalPending" |
+          null, deviceRegistrationState?: "unknown" | "notRegistered" |
+          "registered" | "revoked" | "keyConflict" | "approvalPending" |
           "certificateReset" | "notRegisteredPendingEnrollment", deviceType?:
           "unknown" | "desktop" | "windowsRT" | "winMO6" | "nokia" |
           "windowsPhone" | "mac" | "winCE" | "winEmbedded" | "iPhone" | "iPad" |
@@ -4587,7 +4585,7 @@ functions:
           null, enrolledDateTime?: string, enrollmentProfileName?: string |
           null, ethernetMacAddress?: string | null, exchangeAccessState?: "none"
           | "unknown" | "allowed" | "blocked" | "quarantined",
-          exchangeAccessStateReason?: "none" | "other" | "unknown" | "compliant"
+          exchangeAccessStateReason?: "none" | "unknown" | "other" | "compliant"
           | "exchangeGlobalRule" | "exchangeIndividualRule" |
           "exchangeDeviceRule" | "exchangeUpgrade" | "exchangeMailboxPolicy" |
           "notCompliant" | "notEnrolled" | "unknownLocation" | "mfaRequired" |
@@ -4620,12 +4618,12 @@ functions:
           isEncrypted?: boolean, isSupervised?: boolean, jailBroken?: string |
           null, joinType?: "unknown" | "azureADRegistered" | "azureADJoined" |
           "hybridAzureADJoined", lastSyncDateTime?: string,
-          logCollectionRequests?: (... & ... & ...)[], lostModeState?: "enabled"
-          | "disabled", managedDeviceMobileAppConfigurationStates?: (... & ... &
-          ...)[], managedDeviceName?: string | null, managedDeviceOwnerType?:
-          "unknownFutureValue" | "unknown" | "personal" | "company",
-          managementAgent?: "unknownFutureValue" | "unknown" | "eas" | "mdm" |
-          "easMdm" | "intuneClient" | "easIntuneClient" |
+          logCollectionRequests?: (... & ... & ...)[], lostModeState?:
+          "disabled" | "enabled", managedDeviceMobileAppConfigurationStates?:
+          (... & ... & ...)[], managedDeviceName?: string | null,
+          managedDeviceOwnerType?: "unknownFutureValue" | "unknown" | "personal"
+          | "company", managementAgent?: "unknownFutureValue" | "unknown" |
+          "eas" | "mdm" | "easMdm" | "intuneClient" | "easIntuneClient" |
           "configurationManagerClient" | "configurationManagerClientMdm" |
           "configurationManagerClientMdmEas" | "jamf" |
           "googleCloudDevicePolicyController" | "microsoft365ManagedMdm" |
@@ -5378,8 +5376,8 @@ functions:
           | null, usageRights?: (Omit&lt;{ <xref uid="@odata.type" />: string,
           id?: string }, "<xref uid="@odata.type" />"&gt; & { <xref
           uid="@odata.type" />: string, catalogId?: string, serviceIdentifier?:
-          string, state?: "unknownFutureValue" | "warning" | "active" |
-          "inactive" | "suspended" } & { <xref uid="@odata.type" />: "#<xref
+          string, state?: "unknownFutureValue" | "active" | "inactive" |
+          "warning" | "suspended" } & { <xref uid="@odata.type" />: "#<xref
           uid="microsoft.graph.usageRight" />" })[], userPrincipalName?: string
           | null, userType?: string | null, virtualEvents?: Record&lt;string,
           never&gt; | (Omit&lt;{ <xref uid="@odata.type" />: string, id?: string
