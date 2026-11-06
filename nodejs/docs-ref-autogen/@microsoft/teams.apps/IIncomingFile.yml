@@ -18,18 +18,40 @@ remarks: ''
 isDeprecated: false
 type: interface
 properties:
+  - name: attachmentStyle
+    uid: '@microsoft/teams.apps.IIncomingFile.attachmentStyle'
+    package: '@microsoft/teams.apps'
+    summary: |-
+      How the file was attached: sent as a file, or pasted inline as an image.
+      See [AttachmentStyle](xref:@microsoft/teams.apps.AttachmentStyle).
+    fullName: attachmentStyle
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'attachmentStyle: AttachmentStyle'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.AttachmentStyle" />
   - name: contentType
     uid: '@microsoft/teams.apps.IIncomingFile.contentType'
     package: '@microsoft/teams.apps'
     summary: >-
       The file's MIME type when the source provides one. Always unset for
-      `botActivity` files: a `file.download.info` attachment carries no MIME
-      type, only the `fileType` extension surfaced as
+      `botActivity` file attachments: a `file.download.info` attachment carries
+      no MIME type, only the `fileType` extension surfaced as
       [extension](xref:@microsoft/teams.apps.IIncomingFile.extension). Populated
       for sources that do carry one, such as a `graph` drive item. To learn the
       type of the bytes you actually received, read
       [IDownloadedFile.contentType](xref:@microsoft/teams.apps.IDownloadedFile.contentType),
       which is resolved from the download response.
+
+
+      For an inline image, it is the type named by the format hint when that is
+      PNG, JPEG, GIF, or WebP, otherwise `application/octet-stream`.
+
+      Teams saves a pasted GIF as a static PNG, so the SDK cannot name or type
+      it with confidence: it is listed as `.gif` and `image/gif` but downloads
+      as a PNG.
     fullName: contentType
     remarks: ''
     isDeprecated: false
@@ -50,6 +72,8 @@ properties:
       [IIncomingFile.download](xref:@microsoft/teams.apps.IIncomingFile.download)
       or
       [IIncomingFile.stream](xref:@microsoft/teams.apps.IIncomingFile.stream).
+
+      For an inline image, it is the image's Bot API location instead.
     fullName: contentUrl
     remarks: ''
     isDeprecated: false
@@ -64,6 +88,10 @@ properties:
     summary: >-
       File extension without the dot (e.g. `pdf`), taken from the
       platform-supplied `fileType`. Absent when the wire omits it.
+
+      For an inline image, it is taken from
+      [name](xref:@microsoft/teams.apps.IIncomingFile.name) and is absent when
+      the name has none.
     fullName: extension
     remarks: ''
     isDeprecated: false
@@ -75,7 +103,16 @@ properties:
   - name: name
     uid: '@microsoft/teams.apps.IIncomingFile.name'
     package: '@microsoft/teams.apps'
-    summary: Display name including extension when known.
+    summary: >-
+      Display name including extension when known.
+
+      An inline image has no name, so it is named `image-<attachment id>`.
+
+      An extension is added only for PNG, JPEG, GIF, or WebP.
+
+      Teams saves a pasted GIF as a static PNG, so the SDK cannot name or type
+      it with confidence: it is listed as `.gif` and `image/gif` but downloads
+      as a PNG.
     fullName: name
     remarks: ''
     isDeprecated: false
@@ -87,7 +124,12 @@ properties:
   - name: raw
     uid: '@microsoft/teams.apps.IIncomingFile.raw'
     package: '@microsoft/teams.apps'
-    summary: The raw underlying attachment/graph object for escape-hatch access.
+    summary: >-
+      The raw underlying attachment/graph object for escape-hatch access.
+
+      For an inline image, only the image attachment is included; the HTML
+      attachment that supplies its format hint stays in
+      `ctx.activity.attachments`.
     fullName: raw
     remarks: ''
     isDeprecated: false
@@ -132,6 +174,9 @@ properties:
       `/shares`, and this value arrives as a GUID, which is a SharePoint
       `listItemUniqueId` shape rather than a Graph `driveItem.id`. Present only
       when the wire provided it.
+
+      Always unset for inline images, which are not stored in OneDrive or
+      SharePoint.
     fullName: uniqueId
     remarks: ''
     isDeprecated: false

@@ -7,6 +7,23 @@ fullName: EventEmitter<EventTypes>
 remarks: ''
 isDeprecated: false
 type: class
+constructors:
+  - name: EventEmitter<EventTypes>(ILogger)
+    uid: '@microsoft/teams.common.EventEmitter.constructor'
+    package: '@microsoft/teams.common'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'new EventEmitter(logger?: ILogger)'
+      parameters:
+        - id: logger
+          type: <xref uid="@microsoft/teams.common.ILogger" />
+          description: >-
+            Used to report handler failures from
+            [emitAsync](xref:@microsoft/teams.common.EventEmitter.emitAsync).
+
+            Defaults to `console` when omitted, so failures are never silent.
 methods:
   - name: emit<Event>(Event, EventTypes[Event])
     uid: '@microsoft/teams.common.EventEmitter.emit'
@@ -23,6 +40,36 @@ methods:
         - id: value
           type: EventTypes[Event]
           description: ''
+  - name: emitAsync<Event>(Event, EventTypes[Event])
+    uid: '@microsoft/teams.common.EventEmitter.emitAsync'
+    package: '@microsoft/teams.common'
+    summary: |-
+      Emit an event and wait for every subscribed handler to settle.
+
+      Handlers are started in subscription order and then awaited together, so
+      async handlers run concurrently. Use this instead of `emit` when the
+      emitter must not continue until async listeners have finished — for
+      example when those listeners touch resources that are torn down once the
+      emitting operation returns.
+
+      A handler that throws or rejects is logged and does not stop the other
+      handlers; this never rejects.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function emitAsync<Event>(event: Event, value: EventTypes[Event]):
+        Promise<void>
+      parameters:
+        - id: event
+          type: Event
+          description: ''
+        - id: value
+          type: EventTypes[Event]
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
   - name: off(number)
     uid: '@microsoft/teams.common.EventEmitter.off'
     package: '@microsoft/teams.common'

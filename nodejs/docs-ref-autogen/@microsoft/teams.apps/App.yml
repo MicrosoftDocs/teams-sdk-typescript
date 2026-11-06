@@ -186,6 +186,34 @@ properties:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.apps.HttpServer" />
+  - name: socketMode
+    uid: '@microsoft/teams.apps.App.socketMode'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      **Experimental.** The Socket Mode inbound transport, present only when the
+
+      app was constructed with `socketMode` enabled. It is the same
+
+      [IHttpServerAdapter](xref:@microsoft/teams.apps.IHttpServerAdapter)
+      instance [App.server](xref:@microsoft/teams.apps.App.server) runs on. Use
+      it to
+
+      observe the socket lifecycle
+
+      (`app.socketMode.status`, `app.socketMode.geoStatuses`,
+      `app.socketMode.events`).
+
+      WebSocket is only recommended for use when developing agents.
+
+       This API is in preview and may change in the future.
+    fullName: socketMode
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'socketMode?: SocketModeAdapter'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.SocketModeAdapter" />
   - name: storage
     uid: '@microsoft/teams.apps.App.storage'
     package: '@microsoft/teams.apps'
@@ -496,9 +524,16 @@ methods:
   - name: reply(string, ActivityLike, AppSendOptions)
     uid: '@microsoft/teams.apps.App.reply_4'
     package: '@microsoft/teams.apps'
-    summary: ''
+    summary: >-
+      send an activity proactively to a conversation, using the legacy
+      two-argument form.
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: >-
+      The two-argument form `reply(conversationId, activity)` is deprecated and
+      will be removed in a future release. Use `send(conversationId, activity,
+      options)` for a root message, or `reply(conversationId, messageId,
+      activity, options)` to reply in a reply chain (thread).
     syntax:
       content: >-
         function reply(conversationId: string, activity: ActivityLike, options?:
@@ -519,9 +554,16 @@ methods:
   - name: reply(string, DeprecatedInputActivity | ActivityLike, AppSendOptions)
     uid: '@microsoft/teams.apps.App.reply_5'
     package: '@microsoft/teams.apps'
-    summary: ''
+    summary: >-
+      send an activity proactively to a conversation, using the legacy
+      two-argument form.
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: >-
+      The two-argument form `reply(conversationId, activity)` is deprecated and
+      will be removed in a future release. Use `send(conversationId, activity,
+      options)` for a root message, or `reply(conversationId, messageId,
+      activity, options)` to reply in a reply chain (thread).
     syntax:
       content: >-
         function reply(conversationId: string, activity: DeprecatedInputActivity
@@ -544,10 +586,19 @@ methods:
   - name: reply(string, DeprecatedInputActivity, AppSendOptions)
     uid: '@microsoft/teams.apps.App.reply_3'
     package: '@microsoft/teams.apps'
-    summary: ''
+    summary: >-
+      send an activity proactively to a conversation, using the legacy
+      two-argument form.
     remarks: ''
     isDeprecated: true
-    customDeprecatedMessage: Use MessageActivityInput or TypingActivityInput instead.
+    customDeprecatedMessage: >-
+      The two-argument form `reply(conversationId, activity)` is deprecated and
+      will be removed in a future release. Use `send(conversationId, activity,
+      options)` for a root message, or `reply(conversationId, messageId,
+      activity, options)` to reply in a reply chain (thread).
+
+      Passing a `DeprecatedInputActivity` is also deprecated. Use
+      MessageActivityInput or TypingActivityInput instead.
     syntax:
       content: >-
         function reply(conversationId: string, activity:
@@ -568,7 +619,17 @@ methods:
   - name: reply(string, string, ActivityLike, AppSendOptions)
     uid: '@microsoft/teams.apps.App.reply_1'
     package: '@microsoft/teams.apps'
-    summary: ''
+    summary: >-
+      send an activity proactively as a reply in a reply chain (thread).
+
+
+      Posts to the reply chain of the message `messageId`, in the chat or
+      channel `conversationId`.
+
+      Any error from the service is thrown, and the activity is not sent
+      anywhere else.
+
+      The SDK does not state where a client shows the message in a group chat.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -578,13 +639,17 @@ methods:
       parameters:
         - id: conversationId
           type: string
-          description: ''
+          description: >-
+            the id of the chat or channel: `channelData.chat.id` or
+            `channelData.channel.id`, **not** `conversation.id`.
         - id: messageId
           type: string
-          description: ''
+          description: >-
+            the id of the message at the root of the reply chain:
+            `channelData.replyChain.id`
         - id: activity
           type: <xref uid="@microsoft/teams.api.ActivityLike" />
-          description: ''
+          description: the activity to send
         - id: options
           type: <xref uid="@microsoft/teams.apps.AppSendOptions" />
           description: ''
@@ -596,7 +661,17 @@ methods:
       AppSendOptions)
     uid: '@microsoft/teams.apps.App.reply_2'
     package: '@microsoft/teams.apps'
-    summary: ''
+    summary: >-
+      send an activity proactively as a reply in a reply chain (thread).
+
+
+      Posts to the reply chain of the message `messageId`, in the chat or
+      channel `conversationId`.
+
+      Any error from the service is thrown, and the activity is not sent
+      anywhere else.
+
+      The SDK does not state where a client shows the message in a group chat.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -607,15 +682,19 @@ methods:
       parameters:
         - id: conversationId
           type: string
-          description: ''
+          description: >-
+            the id of the chat or channel: `channelData.chat.id` or
+            `channelData.channel.id`, **not** `conversation.id`.
         - id: messageId
           type: string
-          description: ''
+          description: >-
+            the id of the message at the root of the reply chain:
+            `channelData.replyChain.id`
         - id: activity
           type: >-
             <xref uid="@microsoft/teams.api.DeprecatedInputActivity" /> | <xref
             uid="@microsoft/teams.api.ActivityLike" />
-          description: ''
+          description: the activity to send
         - id: options
           type: <xref uid="@microsoft/teams.apps.AppSendOptions" />
           description: ''
@@ -652,7 +731,14 @@ methods:
   - name: send(string, ActivityLike, AppSendOptions)
     uid: '@microsoft/teams.apps.App.send_1'
     package: '@microsoft/teams.apps'
-    summary: ''
+    summary: >-
+      send an activity proactively to a conversation.
+
+
+      Sends to the exact conversation ID provided.
+
+      To reply in a reply chain (thread), use
+      [reply](xref:@microsoft/teams.apps.App.reply_5).
     remarks: ''
     isDeprecated: false
     syntax:
@@ -662,10 +748,10 @@ methods:
       parameters:
         - id: conversationId
           type: string
-          description: ''
+          description: the conversation to send to
         - id: activity
           type: <xref uid="@microsoft/teams.api.ActivityLike" />
-          description: ''
+          description: the activity to send
         - id: options
           type: <xref uid="@microsoft/teams.apps.AppSendOptions" />
           description: ''
@@ -675,7 +761,14 @@ methods:
   - name: send(string, DeprecatedInputActivity | ActivityLike, AppSendOptions)
     uid: '@microsoft/teams.apps.App.send_2'
     package: '@microsoft/teams.apps'
-    summary: ''
+    summary: >-
+      send an activity proactively to a conversation.
+
+
+      Sends to the exact conversation ID provided.
+
+      To reply in a reply chain (thread), use
+      [reply](xref:@microsoft/teams.apps.App.reply_5).
     remarks: ''
     isDeprecated: false
     syntax:
@@ -685,12 +778,12 @@ methods:
       parameters:
         - id: conversationId
           type: string
-          description: ''
+          description: the conversation to send to
         - id: activity
           type: >-
             <xref uid="@microsoft/teams.api.DeprecatedInputActivity" /> | <xref
             uid="@microsoft/teams.api.ActivityLike" />
-          description: ''
+          description: the activity to send
         - id: options
           type: <xref uid="@microsoft/teams.apps.AppSendOptions" />
           description: ''

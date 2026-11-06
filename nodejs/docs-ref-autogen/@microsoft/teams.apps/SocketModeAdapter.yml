@@ -1,0 +1,249 @@
+### YamlMime:TSType
+name: SocketModeAdapter
+uid: '@microsoft/teams.apps.SocketModeAdapter'
+package: '@microsoft/teams.apps'
+summary: >-
+  Inbound Socket Mode transport, implemented as an
+  [IHttpServerAdapter](xref:@microsoft/teams.apps.IHttpServerAdapter).
+
+
+  With `new App({ socketMode: true })` the app receives activities over a
+
+  Teams backend service-negotiated Azure SignalR socket. Rather than being a
+
+  separate server, Socket Mode plugs in as the adapter *inside* the app's single
+
+  [HttpServer](xref:@microsoft/teams.apps.HttpServer). Inbound frames enter the
+  same app activity pipeline as
+
+  HTTP after the connection-authenticated transport creates their normalized
+
+  token. Only inbound delivery moves to the socket; outbound sends stay on HTTP
+
+  and handlers stay transport-agnostic.
+
+
+  No inbound HTTP adapter, listener, route, or public endpoint is started. The
+
+  socket is authenticated once at negotiate, so the adapter synthesizes the
+
+  <xref:IToken> the pipeline expects without exposing transport trust through
+
+  the public HTTP request interface. Invoke activities return a real invoke
+
+  response over SignalR client results; one-way activities return a post-handler
+
+  ack. Not usable until Teams backend service's `SocketReady` frame arrives.
+
+
+  Browser-oriented calls are no-ops: tabs, remote functions, OAuth callbacks,
+
+  and other non-messaging routes require an HTTP transport.
+
+  WebSocket is only recommended for use when developing agents.
+
+   This API is in preview and may change in the future.
+fullName: SocketModeAdapter
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: events
+    uid: '@microsoft/teams.apps.SocketModeAdapter.events'
+    package: '@microsoft/teams.apps'
+    summary: |-
+      Lifecycle event surface for observing the socket without reaching into the
+      transport. Emits `ready`, `disconnected`, and `reconnected`.
+    fullName: events
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'events: IEventEmitter<SocketModeEvents>'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@microsoft/teams.common.IEventEmitter" />&lt;<xref
+          uid="@microsoft/teams.apps.SocketModeEvents" />&gt;
+  - name: geoList
+    uid: '@microsoft/teams.apps.SocketModeAdapter.geoList'
+    package: '@microsoft/teams.apps'
+    summary: The geos this server connects to (resolved from options/defaults).
+    fullName: geoList
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: readonly string[] geoList
+      return:
+        description: ''
+        type: readonly string[]
+  - name: geoStatuses
+    uid: '@microsoft/teams.apps.SocketModeAdapter.geoStatuses'
+    package: '@microsoft/teams.apps'
+    summary: Per-geo status snapshot, for diagnostics/observability.
+    fullName: geoStatuses
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'readonly { geo: string, status: SocketModeStatus }[] geoStatuses'
+      return:
+        description: ''
+        type: 'readonly { geo: string, status: SocketModeStatus }[]'
+  - name: negotiateUrl
+    uid: '@microsoft/teams.apps.SocketModeAdapter.negotiateUrl'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Resolved negotiate URL for the first geo
+      (`{base}/{geo}/v3/websockets/connect`).
+
+      Primarily for diagnostics; each geo has its own URL.
+    fullName: negotiateUrl
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: string negotiateUrl
+      return:
+        description: ''
+        type: string
+  - name: options
+    uid: '@microsoft/teams.apps.SocketModeAdapter.options'
+    package: '@microsoft/teams.apps'
+    summary: ''
+    fullName: options
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'options: SocketModeOptions'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.SocketModeOptions" />
+  - name: status
+    uid: '@microsoft/teams.apps.SocketModeAdapter.status'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Aggregate lifecycle status across all geo connections. `ready` means every
+
+      geo is ready; `connecting` while any geo is still (re)connecting and none
+      is
+
+      mid-drop; `disconnected` when at least one geo has dropped and is
+      recovering,
+
+      or has stopped reconnecting after a 401/403 negotiate rejection.
+    fullName: status
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: SocketModeStatus status
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.SocketModeStatus" />
+methods:
+  - name: registerRoute("POST", string, HttpRouteHandler)
+    uid: '@microsoft/teams.apps.SocketModeAdapter.registerRoute'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      [IHttpServerAdapter](xref:@microsoft/teams.apps.IHttpServerAdapter) route
+      registration. The owning
+      [HttpServer](xref:@microsoft/teams.apps.HttpServer)
+
+      registers its inbound-activity route here as part of normal server
+
+      initialization. Socket Mode dispatches through its internal app callback,
+      so
+
+      the messaging route is accepted as a no-op. Any other path (e.g.
+
+      `app.function()` POST routes) is also a no-op, but is warned because the
+
+      corresponding HTTP-only feature is unavailable.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function registerRoute(method: "POST", path: string, _handler:
+        HttpRouteHandler)
+      parameters:
+        - id: method
+          type: '"POST"'
+          description: ''
+        - id: path
+          type: string
+          description: ''
+        - id: _handler
+          type: <xref uid="@microsoft/teams.apps.HttpRouteHandler" />
+          description: ''
+  - name: serveStatic(string, string)
+    uid: '@microsoft/teams.apps.SocketModeAdapter.serveStatic'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      [IHttpServerAdapter](xref:@microsoft/teams.apps.IHttpServerAdapter)
+      static-file serving. No-op for Socket Mode — tabs
+
+      and other static assets require an HTTP transport, so the ignored mount is
+
+      warned.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function serveStatic(path: string, _directory: string)'
+      parameters:
+        - id: path
+          type: string
+          description: ''
+        - id: _directory
+          type: string
+          description: ''
+  - name: start(string | number)
+    uid: '@microsoft/teams.apps.SocketModeAdapter.start'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      [IHttpServerAdapter](xref:@microsoft/teams.apps.IHttpServerAdapter)
+      lifecycle: open one socket per geo, resolving only
+
+      once every geo's readiness contract is satisfied. Called by
+      [App.start](xref:@microsoft/teams.apps.App.start)
+
+      via <xref:HttpServer.start>. The `port` argument is unused — Socket Mode
+
+      dials out rather than listening.
+
+
+      The initial connect for each geo is retried for up to 30 seconds before
+
+      `App.start()` rejects; once all geos are ready, each geo's supervisor
+      keeps
+
+      it alive across drops and token expiry independently until
+      [stop](xref:@microsoft/teams.apps.SocketModeAdapter.stop).
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function start(_port?: string | number): Promise<void>'
+      parameters:
+        - id: _port
+          type: string | number
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: stop()
+    uid: '@microsoft/teams.apps.SocketModeAdapter.stop'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      [IHttpServerAdapter](xref:@microsoft/teams.apps.IHttpServerAdapter)
+      lifecycle: stop admitting activities, abort any
+
+      reconnect/back-off in progress, then close every geo's socket. In-flight
+
+      handlers are not awaited: any activity whose reply doesn't make it out
+      before
+
+      shutdown is redelivered by the Teams backend to another
+      connection/instance.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function stop(): Promise<void>'
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
