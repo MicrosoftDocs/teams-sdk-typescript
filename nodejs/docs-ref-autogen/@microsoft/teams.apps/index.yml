@@ -14,7 +14,12 @@ classes:
   - '@microsoft/teams.apps.FileUrlExpiredError'
   - '@microsoft/teams.apps.FunctionContext'
   - '@microsoft/teams.apps.HttpPlugin'
+  - '@microsoft/teams.apps.InlineImageAccessError'
+  - '@microsoft/teams.apps.InlineImageTransformationError'
+  - '@microsoft/teams.apps.NegotiateError'
   - '@microsoft/teams.apps.OAuthFlow'
+  - '@microsoft/teams.apps.Plan'
+  - '@microsoft/teams.apps.PlanConflictStreamError'
   - '@microsoft/teams.apps.StreamCancelledError'
   - '@microsoft/teams.apps.StreamNotAllowedError'
   - '@microsoft/teams.apps.StreamTimedOutError'
@@ -42,6 +47,7 @@ interfaces:
   - '@microsoft/teams.apps.IDownloadedFile'
   - '@microsoft/teams.apps.IErrorEvent'
   - '@microsoft/teams.apps.IEvents'
+  - '@microsoft/teams.apps.IFileListOptions'
   - '@microsoft/teams.apps.IFileReadOptions'
   - '@microsoft/teams.apps.IFilesAccessor'
   - '@microsoft/teams.apps.IFunctionContext'
@@ -51,7 +57,6 @@ interfaces:
   - '@microsoft/teams.apps.IHttpServerRequest'
   - '@microsoft/teams.apps.IHttpServerResponse'
   - '@microsoft/teams.apps.IIncomingFile'
-  - '@microsoft/teams.apps.IInjectWidgetProtocolOptions'
   - '@microsoft/teams.apps.IPlugin'
   - '@microsoft/teams.apps.IPluginActivityEvent'
   - '@microsoft/teams.apps.IPluginActivityResponseEvent'
@@ -61,6 +66,7 @@ interfaces:
   - '@microsoft/teams.apps.ISecurityPolicyWarning'
   - '@microsoft/teams.apps.IStreamer'
   - '@microsoft/teams.apps.IStreamerEvents'
+  - '@microsoft/teams.apps.SocketModeAdapter'
 typeAliases:
   - '@microsoft/teams.apps.ActivitySenderOptions'
   - '@microsoft/teams.apps.Agent365BaggageEntries'
@@ -73,6 +79,7 @@ typeAliases:
   - '@microsoft/teams.apps.AppOptions'
   - '@microsoft/teams.apps.AppSendOptions'
   - '@microsoft/teams.apps.AppTelemetryOptions'
+  - '@microsoft/teams.apps.AttachmentStyle'
   - '@microsoft/teams.apps.DependencyOptions'
   - '@microsoft/teams.apps.EmitPluginEvent'
   - '@microsoft/teams.apps.EventHandler'
@@ -91,13 +98,19 @@ typeAliases:
   - '@microsoft/teams.apps.OAuthSignInOptions'
   - '@microsoft/teams.apps.OnActivityPluginEvent'
   - '@microsoft/teams.apps.OnErrorPluginEvent'
+  - '@microsoft/teams.apps.PlanOptions'
+  - '@microsoft/teams.apps.PlanReplyChain'
   - '@microsoft/teams.apps.PluginEvents'
   - '@microsoft/teams.apps.PluginName'
   - '@microsoft/teams.apps.PluginOptions'
   - '@microsoft/teams.apps.PluginWithEvents'
   - '@microsoft/teams.apps.Prefixed'
   - '@microsoft/teams.apps.RouteHandler'
+  - '@microsoft/teams.apps.SocketModeEvents'
+  - '@microsoft/teams.apps.SocketModeOptions'
+  - '@microsoft/teams.apps.SocketModeStatus'
   - '@microsoft/teams.apps.StateOptions'
+  - '@microsoft/teams.apps.StreamOptions'
   - '@microsoft/teams.apps.Suffixed'
   - '@microsoft/teams.apps.UnionToIntersection'
 variables:
@@ -181,9 +194,17 @@ functions:
       IHtmlWidgetMarkdownOptions)
     uid: '@microsoft/teams.apps.buildHtmlWidgetMarkdown'
     package: '@microsoft/teams.apps'
-    summary: |-
+    summary: >-
       Wraps an HTML widget payload in the ` ```html-widget ` markdown code fence
+
       format required by Teams to render the widget in a message.
+
+      The widget HTML is sent as authored.
+
+      The widget owns the `ui/initialize` handshake and the
+      `ui/notifications/size-changed` reporting.
+
+      Without a size reporter, Teams renders the widget at about 150px tall.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -209,7 +230,12 @@ functions:
       IHtmlWidgetMarkdownOptions)
     uid: '@microsoft/teams.apps.buildHtmlWidgetMessage'
     package: '@microsoft/teams.apps'
-    summary: Builds a message activity containing an HTML widget, ready to be sent.
+    summary: >-
+      Builds a message activity containing an HTML widget, ready to be sent.
+
+      The widget HTML is sent as authored, so the widget owns the
+      `ui/initialize` handshake and the `ui/notifications/size-changed`
+      reporting.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -355,51 +381,6 @@ functions:
         type: >-
           (target: any, propertyKey: string | ClassFieldDecoratorContext) =&gt;
           void
-  - name: injectWidgetProtocol(string, IInjectWidgetProtocolOptions)
-    uid: '@microsoft/teams.apps.injectWidgetProtocol'
-    package: '@microsoft/teams.apps'
-    summary: >-
-      Injects the MCP Apps protocol script into widget HTML.
-
-
-      This is a convenience helper - widgets that implement the protocol
-      themselves do not need to use it.
-
-      [buildHtmlWidgetMarkdown](xref:@microsoft/teams.apps.buildHtmlWidgetMarkdown)
-      calls this internally, so most developers won't call it directly.
-
-
-      This sets up:
-
-      - The ui/initialize handshake (required for rendering)
-
-      - Size reporting via ui/notifications/size-changed
-
-      - Optional notification hooks (opt-in via `notifications` option)
-
-
-      If the HTML already contains the protocol (detected by the presence of
-      `ui/initialize`), it is returned unchanged.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function injectWidgetProtocol(html: string, options?:
-        IInjectWidgetProtocolOptions): string
-      parameters:
-        - id: html
-          type: string
-          description: The raw HTML content for the widget.
-        - id: options
-          type: <xref uid="@microsoft/teams.apps.IInjectWidgetProtocolOptions" />
-          description: Optional configuration for the protocol setup.
-      return:
-        description: |-
-          The HTML with the protocol script injected.
-
-           This API is in preview and may change in the future.
-          Diagnostic: ExperimentalTeamsHtmlWidget
-        type: string
   - name: Logger()
     uid: '@microsoft/teams.apps.Logger'
     package: '@microsoft/teams.apps'
@@ -454,10 +435,14 @@ functions:
       Constructs a threaded conversation ID by appending
       `;messageid={messageId}`
 
-      to the conversation ID. This is the format the Teams service uses to route
-      messages
+      to the conversation ID.
 
-      to a specific thread.
+
+      In a channel, sending to the result posts a thread reply to the message
+      `messageId`.
+
+      `App.reply()` does not use this form: it posts through the `replyChains`
+      endpoint and throws when the service rejects it.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -531,11 +516,10 @@ functions:
 
       This is a static analysis tool - it cannot catch dynamically constructed
 
-      URLs (e.g. `fetch('https://' + domain)`). Use the `debugCspViolations`
+      URLs (e.g. `fetch('https://' + domain)`). A `securitypolicyviolation`
+      listener in the widget
 
-      option on
-      [injectWidgetProtocol](xref:@microsoft/teams.apps.injectWidgetProtocol)
-      for runtime detection.
+      reports those at runtime.
 
 
       Note: The CSP keyword `'self'` cannot be validated statically because it

@@ -42,6 +42,7 @@ interfaces:
   - '@microsoft/teams.api.IFileConsentInvokeActivity'
   - '@microsoft/teams.api.IHandoffActionInvokeActivity'
   - '@microsoft/teams.api.IHandoffActivity'
+  - '@microsoft/teams.api.IHtmlWidgetCallToolContext'
   - '@microsoft/teams.api.IHtmlWidgetCallToolInvokeActivity'
   - '@microsoft/teams.api.IHtmlWidgetCallToolResponse'
   - '@microsoft/teams.api.IHtmlWidgetPayload'
@@ -150,6 +151,7 @@ typeAliases:
   - '@microsoft/teams.api.ChannelDataSettings'
   - '@microsoft/teams.api.ChannelID'
   - '@microsoft/teams.api.ChannelInfo'
+  - '@microsoft/teams.api.ChatInfo'
   - '@microsoft/teams.api.CitationAppearance'
   - '@microsoft/teams.api.CitationEntity'
   - '@microsoft/teams.api.CitationIconName'
@@ -174,6 +176,7 @@ typeAliases:
   - '@microsoft/teams.api.Credentials'
   - '@microsoft/teams.api.DeliveryMode'
   - '@microsoft/teams.api.DeprecatedInputActivity'
+  - '@microsoft/teams.api.EncryptedChatInfo'
   - '@microsoft/teams.api.EndOfConversationCode'
   - '@microsoft/teams.api.Entity'
   - '@microsoft/teams.api.ErrorResponse'
@@ -257,9 +260,12 @@ typeAliases:
   - '@microsoft/teams.api.OAuthCard'
   - '@microsoft/teams.api.OnBehalfOf'
   - '@microsoft/teams.api.PagedMembersResult'
+  - '@microsoft/teams.api.PlanInfoEntity'
+  - '@microsoft/teams.api.PlanType'
   - '@microsoft/teams.api.ProductInfoEntity'
   - '@microsoft/teams.api.QuotedReplyData'
   - '@microsoft/teams.api.QuotedReplyEntity'
+  - '@microsoft/teams.api.ReplyChainInfo'
   - '@microsoft/teams.api.Resource'
   - '@microsoft/teams.api.Role'
   - '@microsoft/teams.api.SearchInvokeOptions'
@@ -270,6 +276,7 @@ typeAliases:
   - '@microsoft/teams.api.SearchInvokeValue'
   - '@microsoft/teams.api.SensitiveUsage'
   - '@microsoft/teams.api.SensitiveUsageEntity'
+  - '@microsoft/teams.api.SensitivityUsageInfo'
   - '@microsoft/teams.api.SentActivity'
   - '@microsoft/teams.api.SignInExchangeToken'
   - '@microsoft/teams.api.SignInFailure'
@@ -278,6 +285,10 @@ typeAliases:
   - '@microsoft/teams.api.SignOutUserParams'
   - '@microsoft/teams.api.SigninCard'
   - '@microsoft/teams.api.SigninStateVerifyQuery'
+  - '@microsoft/teams.api.SourceInfo'
+  - '@microsoft/teams.api.Step'
+  - '@microsoft/teams.api.StepSource'
+  - '@microsoft/teams.api.StepStatus'
   - '@microsoft/teams.api.StreamInfoEntity'
   - '@microsoft/teams.api.StripMentionsTextOptions'
   - '@microsoft/teams.api.SuggestedActions'
@@ -449,6 +460,56 @@ variables:
           { EXCHANGE: string, GET_AAD_TOKENS: string, GET_STATUS: string,
           GET_TOKEN: string, SIGN_OUT: string }
 functions:
+  - name: buildCallToolResponse(IMcpUiCallToolResult)
+    uid: '@microsoft/teams.api.buildCallToolResponse'
+    package: '@microsoft/teams.api'
+    summary: >-
+      Builds the `htmlwidget/calltool` invoke response body, applying the
+      defaults of
+      [buildCallToolResult](xref:@microsoft/teams.api.buildCallToolResult).
+
+       This API is in preview and may change in the future.
+      Diagnostic: ExperimentalTeamsHtmlWidget
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function buildCallToolResponse(result?: IMcpUiCallToolResult):
+        IHtmlWidgetCallToolResponse
+      parameters:
+        - id: result
+          type: <xref uid="@microsoft/teams.api.IMcpUiCallToolResult" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.api.IHtmlWidgetCallToolResponse" />
+  - name: buildCallToolResult(IMcpUiCallToolResult)
+    uid: '@microsoft/teams.api.buildCallToolResult'
+    package: '@microsoft/teams.api'
+    summary: >-
+      Builds a complete tool result.
+
+      `content`, `structuredContent` and `isError` are always present,
+      defaulting to `[]`, `{}` and `false`, because an omitted field can reach
+      the widget as `null`.
+
+       This API is in preview and may change in the future.
+      Diagnostic: ExperimentalTeamsHtmlWidget
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function buildCallToolResult(result?: IMcpUiCallToolResult):
+        Required<IMcpUiCallToolResult>
+      parameters:
+        - id: result
+          type: <xref uid="@microsoft/teams.api.IMcpUiCallToolResult" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Required&lt;<xref uid="@microsoft/teams.api.IMcpUiCallToolResult"
+          />&gt;
   - name: cardAttachment<T>(T, CardAttachmentTypes[T]["content"])
     uid: '@microsoft/teams.api.cardAttachment'
     package: '@microsoft/teams.api'
@@ -507,6 +568,27 @@ functions:
       return:
         description: ''
         type: <xref uid="@microsoft/teams.api.AgenticIdentity" /> | undefined
+  - name: 'getPlanInfo({ entities?: readonly Entity[] })'
+    uid: '@microsoft/teams.api.getPlanInfo'
+    package: '@microsoft/teams.api'
+    summary: |-
+      Read the first Plan entity from an activity, if present.
+
+       This API is in preview and may change in the future.
+      Diagnostic: ExperimentalTeamsPlan
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getPlanInfo(activity: { entities?: readonly Entity[] }):
+        PlanInfoEntity | undefined
+      parameters:
+        - id: activity
+          type: '{ entities?: readonly Entity[] }'
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.api.PlanInfoEntity" /> | undefined
   - name: isUserBackedAgenticIdentity(AgenticIdentity)
     uid: '@microsoft/teams.api.isUserBackedAgenticIdentity'
     package: '@microsoft/teams.api'

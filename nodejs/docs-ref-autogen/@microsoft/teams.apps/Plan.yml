@@ -1,0 +1,209 @@
+### YamlMime:TSType
+name: Plan
+uid: '@microsoft/teams.apps.Plan'
+package: '@microsoft/teams.apps'
+summary: >-
+  Sends prompt-bound Plan activities; the application owns ordering and
+  concurrency.
+
+  Serialize the IDs with JSON.stringify() and inject a client when
+  reconstructing.
+
+
+  Targeted Plan scenarios are not supported.
+
+  Plans use ordinary create routing, and completion() does not inherit
+
+  targeting from the originating context.
+
+
+  In a chat thread, complete() is posted to the reply chain like `ctx.send`.
+
+  Typing updates (start, update, stop, error) are sent to the conversation, as
+  `ctx.send` does for typing activities.
+
+   This API is in preview and may change in the future.
+  Diagnostic: ExperimentalTeamsPlan
+fullName: Plan
+remarks: ''
+isDeprecated: false
+type: class
+constructors:
+  - name: Plan(PlanOptions)
+    uid: '@microsoft/teams.apps.Plan.constructor'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Create a Plan from saved IDs and a configured client; no request or client
+      cloning occurs.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'new Plan(options: PlanOptions)'
+      parameters:
+        - id: options
+          type: <xref uid="@microsoft/teams.apps.PlanOptions" />
+          description: ''
+properties:
+  - name: conversationId
+    uid: '@microsoft/teams.apps.Plan.conversationId'
+    package: '@microsoft/teams.apps'
+    summary: Conversation ID to which this Plan is bound.
+    fullName: conversationId
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'conversationId: string'
+      return:
+        description: ''
+        type: string
+  - name: events
+    uid: '@microsoft/teams.apps.Plan.events'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Emits the SentActivity once after a successful send, before the method
+      returns.
+
+      Listeners are runtime-only and are not serialized.
+    fullName: events
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'events: EventEmitter<{ sent: SentActivity }>'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@microsoft/teams.common.EventEmitter" />&lt;{ sent:
+          SentActivity }&gt;
+  - name: replyChain
+    uid: '@microsoft/teams.apps.Plan.replyChain'
+    package: '@microsoft/teams.apps'
+    summary: Reply chain (thread) to which the completion is posted, if any.
+    fullName: replyChain
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'replyChain?: PlanReplyChain'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.PlanReplyChain" />
+  - name: replyToId
+    uid: '@microsoft/teams.apps.Plan.replyToId'
+    package: '@microsoft/teams.apps'
+    summary: Original prompt ID to which all Plan activities reply.
+    fullName: replyToId
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'replyToId: string'
+      return:
+        description: ''
+        type: string
+methods:
+  - name: complete(string | IMessageActivityInput)
+    uid: '@microsoft/teams.apps.Plan.complete'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Complete with an answer, preserving metadata and rejecting non-complete
+      Plan operations.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function complete(message: string | IMessageActivityInput):
+        Promise<SentActivity>
+      parameters:
+        - id: message
+          type: string | <xref uid="@microsoft/teams.api.IMessageActivityInput" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;
+  - name: completion()
+    uid: '@microsoft/teams.apps.Plan.completion'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Build a fresh completion message without sending or changing this Plan.
+
+      Emit it last on a stream for the same conversation, then explicitly close
+      the stream.
+
+      The original prompt ID is preserved; use the returned builder to add final
+      metadata.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function completion(): MessageActivityInput'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.api.MessageActivityInput" />
+  - name: error()
+    uid: '@microsoft/teams.apps.Plan.error'
+    package: '@microsoft/teams.apps'
+    summary: Report a failed Plan without canceling application-owned work.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function error(): Promise<void>'
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: start(readonly Step[])
+    uid: '@microsoft/teams.apps.Plan.start'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Start the bound Plan with the supplied ordered steps; API failures
+      propagate.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function start(steps: readonly Step[]): Promise<void>'
+      parameters:
+        - id: steps
+          type: readonly Step[]
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: stop()
+    uid: '@microsoft/teams.apps.Plan.stop'
+    package: '@microsoft/teams.apps'
+    summary: Stop the displayed Plan without canceling application-owned work.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function stop(): Promise<void>'
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: toJSON()
+    uid: '@microsoft/teams.apps.Plan.toJSON'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Serialize only the prompt binding and its placement, excluding the client,
+      credentials, and listeners.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function toJSON(): Pick<PlanOptions, "conversationId" | "replyToId" |
+        "replyChain">
+      return:
+        description: ''
+        type: >-
+          Pick&lt;<xref uid="@microsoft/teams.apps.PlanOptions" />,
+          "conversationId" | "replyToId" | "replyChain"&gt;
+  - name: update(readonly Step[])
+    uid: '@microsoft/teams.apps.Plan.update'
+    package: '@microsoft/teams.apps'
+    summary: Send new or changed steps, with versions incremented by the application.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function update(steps: readonly Step[]): Promise<void>'
+      parameters:
+        - id: steps
+          type: readonly Step[]
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
