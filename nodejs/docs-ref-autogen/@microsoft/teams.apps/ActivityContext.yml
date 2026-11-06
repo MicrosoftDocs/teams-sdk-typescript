@@ -96,8 +96,8 @@ properties:
     package: '@microsoft/teams.apps'
     summary: >-
       the uploaded files on the current inbound activity, i.e. `contentType:
-      file.download.info` subset of `activity.attachments`, mapped to
-      `IncomingFile`. See
+      file.download.info` subset of `activity.attachments`, plus images pasted
+      inline, mapped to `IncomingFile`. See
       [IFilesAccessor](xref:@microsoft/teams.apps.IFilesAccessor).
     fullName: files
     remarks: ''
@@ -200,7 +200,23 @@ properties:
   - name: stream
     uid: '@microsoft/teams.apps.ActivityContext.stream'
     package: '@microsoft/teams.apps'
-    summary: a stream that can emit activity chunks
+    summary: >-
+      a stream that can emit activity chunks
+
+
+      The first message of the stream goes to the reply chain (thread) where
+      `send` would place a response.
+
+      In a chat the stream starts in the thread when the inbound activity is in
+      a thread, and at top level otherwise.
+
+      In a channel the stream starts in the reply chain of the inbound message.
+
+      In a channel, when the service answers HTTP 404, the first message of the
+      stream is created in the inbound conversation instead.
+
+      Without `channelData.replyChain.id` the stream is not placed in a reply
+      chain.
     fullName: stream
     remarks: ''
     isDeprecated: false
@@ -244,6 +260,28 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@microsoft/teams.api.TokenStatus" />[]&gt;
+  - name: plan()
+    uid: '@microsoft/teams.apps.ActivityContext.plan'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      Get the Plan bound to this inbound activity, scoping its client on first
+      access.
+
+      In a chat thread, a standalone `complete()` is posted to the reply chain,
+      as `ctx.send` does.
+
+      Typing updates, completions in a channel, and prompts outside a thread use
+      the conversation.
+
+       This API is in preview and may change in the future.
+      Diagnostic: ExperimentalTeamsPlan
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function plan(): Plan'
+      return:
+        description: ''
+        type: <xref uid="@microsoft/teams.apps.Plan" />
   - name: quote(string, ActivityLike)
     uid: '@microsoft/teams.apps.ActivityContext.quote_1'
     package: '@microsoft/teams.apps'
@@ -310,7 +348,39 @@ methods:
   - name: reply(ActivityLike)
     uid: '@microsoft/teams.apps.ActivityContext.reply_1'
     package: '@microsoft/teams.apps'
-    summary: ''
+    summary: >-
+      send an activity in the current conversation with a visual quote
+
+      of the inbound message.
+
+
+      In a chat, sends into the reply chain (thread) when the inbound activity
+      is inside one, and at top level otherwise.
+
+      The inbound activity can be a message, a card action, an invoke, a
+      reaction, an edit or a delete.
+
+      In a channel, sends into the reply chain of the inbound message.
+
+      In a channel, when the service answers HTTP 404, sends to the inbound
+      conversation instead.
+
+      Inbound activities without `channelData.replyChain.id`, and other inbound
+      activities, are not placed, and the activity is sent to the inbound
+      conversation.
+
+      The response is automatically quoted only when the inbound activity id is
+      a plain numeric message id.
+
+      Otherwise (for example an invoke or a card action with a service-generated
+      `f:` id) the activity is sent without a quote, exactly like
+      [send](xref:@microsoft/teams.apps.ActivityContext.send_5).
+
+      Explicit quotes through
+      [quote](xref:@microsoft/teams.apps.ActivityContext.quote_2) are unchanged.
+
+      To send without quoting, use
+      [send](xref:@microsoft/teams.apps.ActivityContext.send_5).
     remarks: ''
     isDeprecated: false
     syntax:
@@ -318,14 +388,46 @@ methods:
       parameters:
         - id: activity
           type: <xref uid="@microsoft/teams.api.ActivityLike" />
-          description: ''
+          description: the activity to send
       return:
         description: ''
         type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;
   - name: reply(DeprecatedInputActivity | ActivityLike)
     uid: '@microsoft/teams.apps.ActivityContext.reply_2'
     package: '@microsoft/teams.apps'
-    summary: ''
+    summary: >-
+      send an activity in the current conversation with a visual quote
+
+      of the inbound message.
+
+
+      In a chat, sends into the reply chain (thread) when the inbound activity
+      is inside one, and at top level otherwise.
+
+      The inbound activity can be a message, a card action, an invoke, a
+      reaction, an edit or a delete.
+
+      In a channel, sends into the reply chain of the inbound message.
+
+      In a channel, when the service answers HTTP 404, sends to the inbound
+      conversation instead.
+
+      Inbound activities without `channelData.replyChain.id`, and other inbound
+      activities, are not placed, and the activity is sent to the inbound
+      conversation.
+
+      The response is automatically quoted only when the inbound activity id is
+      a plain numeric message id.
+
+      Otherwise (for example an invoke or a card action with a service-generated
+      `f:` id) the activity is sent without a quote, exactly like
+      [send](xref:@microsoft/teams.apps.ActivityContext.send_5).
+
+      Explicit quotes through
+      [quote](xref:@microsoft/teams.apps.ActivityContext.quote_2) are unchanged.
+
+      To send without quoting, use
+      [send](xref:@microsoft/teams.apps.ActivityContext.send_5).
     remarks: ''
     isDeprecated: false
     syntax:
@@ -337,7 +439,7 @@ methods:
           type: >-
             <xref uid="@microsoft/teams.api.DeprecatedInputActivity" /> | <xref
             uid="@microsoft/teams.api.ActivityLike" />
-          description: ''
+          description: the activity to send
       return:
         description: ''
         type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;
@@ -357,12 +459,54 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;
-  - name: send(ActivityLike, ConversationReference)
+  - name: send(ActivityLike)
     uid: '@microsoft/teams.apps.ActivityContext.send_1'
     package: '@microsoft/teams.apps'
-    summary: ''
+    summary: >-
+      send an activity in the current conversation without quoting.
+
+
+      In a chat, sends into the reply chain (thread) when the inbound activity
+      is inside one, and at top level otherwise.
+
+      The inbound activity can be a message, a card action, an invoke, a
+      reaction, an edit or a delete.
+
+      In a channel, sends into the reply chain of the inbound message.
+
+      In a channel, when the service answers HTTP 404, sends to the inbound
+      conversation instead.
+
+      Inbound activities without `channelData.replyChain.id`, and other inbound
+      activities, are not placed, and the activity is sent to the inbound
+      conversation.
+
+      To send with a visual quote of the inbound message, use
+      [reply](xref:@microsoft/teams.apps.ActivityContext.reply_2).
     remarks: ''
     isDeprecated: false
+    syntax:
+      content: 'function send(activity: ActivityLike): Promise<SentActivity>'
+      parameters:
+        - id: activity
+          type: <xref uid="@microsoft/teams.api.ActivityLike" />
+          description: the activity to send
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;
+  - name: send(ActivityLike, ConversationReference)
+    uid: '@microsoft/teams.apps.ActivityContext.send_4'
+    package: '@microsoft/teams.apps'
+    summary: send an activity to the conversation referenced by `conversationRef`.
+    remarks: ''
+    isDeprecated: true
+    customDeprecatedMessage: >-
+      Passing a conversation reference is deprecated and will be removed in a
+      future release. Use `App.send()` to send to a different conversation.
+
+      `App.send()` sends through the `serviceUrl` the app is configured with,
+      unlike the context methods, which use the `serviceUrl` of the conversation
+      reference (by default, the inbound activity's).
     syntax:
       content: >-
         function send(activity: ActivityLike, conversationRef?:
@@ -370,19 +514,65 @@ methods:
       parameters:
         - id: activity
           type: <xref uid="@microsoft/teams.api.ActivityLike" />
-          description: ''
+          description: the activity to send
         - id: conversationRef
           type: <xref uid="@microsoft/teams.api.ConversationReference" />
-          description: ''
+          description: conversation reference to send to
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;
+  - name: send(DeprecatedInputActivity | ActivityLike)
+    uid: '@microsoft/teams.apps.ActivityContext.send_2'
+    package: '@microsoft/teams.apps'
+    summary: >-
+      send an activity in the current conversation without quoting.
+
+
+      In a chat, sends into the reply chain (thread) when the inbound activity
+      is inside one, and at top level otherwise.
+
+      The inbound activity can be a message, a card action, an invoke, a
+      reaction, an edit or a delete.
+
+      In a channel, sends into the reply chain of the inbound message.
+
+      In a channel, when the service answers HTTP 404, sends to the inbound
+      conversation instead.
+
+      Inbound activities without `channelData.replyChain.id`, and other inbound
+      activities, are not placed, and the activity is sent to the inbound
+      conversation.
+
+      To send with a visual quote of the inbound message, use
+      [reply](xref:@microsoft/teams.apps.ActivityContext.reply_2).
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function send(activity: DeprecatedInputActivity | ActivityLike):
+        Promise<SentActivity>
+      parameters:
+        - id: activity
+          type: >-
+            <xref uid="@microsoft/teams.api.DeprecatedInputActivity" /> | <xref
+            uid="@microsoft/teams.api.ActivityLike" />
+          description: the activity to send
       return:
         description: ''
         type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;
   - name: send(DeprecatedInputActivity | ActivityLike, ConversationReference)
-    uid: '@microsoft/teams.apps.ActivityContext.send_2'
+    uid: '@microsoft/teams.apps.ActivityContext.send_5'
     package: '@microsoft/teams.apps'
-    summary: ''
+    summary: send an activity to the conversation referenced by `conversationRef`.
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: >-
+      Passing a conversation reference is deprecated and will be removed in a
+      future release. Use `App.send()` to send to a different conversation.
+
+      `App.send()` sends through the `serviceUrl` the app is configured with,
+      unlike the context methods, which use the `serviceUrl` of the conversation
+      reference (by default, the inbound activity's).
     syntax:
       content: >-
         function send(activity: DeprecatedInputActivity | ActivityLike,
@@ -392,20 +582,45 @@ methods:
           type: >-
             <xref uid="@microsoft/teams.api.DeprecatedInputActivity" /> | <xref
             uid="@microsoft/teams.api.ActivityLike" />
-          description: ''
+          description: the activity to send
         - id: conversationRef
           type: <xref uid="@microsoft/teams.api.ConversationReference" />
-          description: ''
+          description: conversation reference to send to
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;
+  - name: send(DeprecatedInputActivity)
+    uid: '@microsoft/teams.apps.ActivityContext.send'
+    package: '@microsoft/teams.apps'
+    summary: send an activity in the current conversation without quoting.
+    remarks: ''
+    isDeprecated: true
+    customDeprecatedMessage: Use MessageActivityInput or TypingActivityInput instead.
+    syntax:
+      content: 'function send(activity: DeprecatedInputActivity): Promise<SentActivity>'
+      parameters:
+        - id: activity
+          type: <xref uid="@microsoft/teams.api.DeprecatedInputActivity" />
+          description: the activity to send
       return:
         description: ''
         type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;
   - name: send(DeprecatedInputActivity, ConversationReference)
-    uid: '@microsoft/teams.apps.ActivityContext.send'
+    uid: '@microsoft/teams.apps.ActivityContext.send_3'
     package: '@microsoft/teams.apps'
-    summary: ''
+    summary: send an activity to the conversation referenced by `conversationRef`.
     remarks: ''
     isDeprecated: true
-    customDeprecatedMessage: Use MessageActivityInput or TypingActivityInput instead.
+    customDeprecatedMessage: >-
+      Passing a `DeprecatedInputActivity` is deprecated. Use
+      MessageActivityInput or TypingActivityInput instead.
+
+      Passing a conversation reference is also deprecated and will be removed in
+      a future release. Use `App.send()` to send to a different conversation.
+
+      `App.send()` sends through the `serviceUrl` the app is configured with,
+      unlike the context methods, which use the `serviceUrl` of the conversation
+      reference (by default, the inbound activity's).
     syntax:
       content: >-
         function send(activity: DeprecatedInputActivity, conversationRef?:
@@ -413,10 +628,10 @@ methods:
       parameters:
         - id: activity
           type: <xref uid="@microsoft/teams.api.DeprecatedInputActivity" />
-          description: ''
+          description: the activity to send
         - id: conversationRef
           type: <xref uid="@microsoft/teams.api.ConversationReference" />
-          description: ''
+          description: conversation reference to send to
       return:
         description: ''
         type: Promise&lt;<xref uid="@microsoft/teams.api.SentActivity" />&gt;

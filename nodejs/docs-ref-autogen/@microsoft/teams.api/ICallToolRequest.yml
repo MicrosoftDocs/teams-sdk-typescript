@@ -2,9 +2,20 @@
 name: ICallToolRequest
 uid: '@microsoft/teams.api.ICallToolRequest'
 package: '@microsoft/teams.api'
-summary: |-
+summary: >-
   A request from a widget to call a tool on the bot.
+
   Sent as the value of an `htmlwidget/calltool` invoke activity.
+
+
+  The Teams client adds `arguments.__msteams__` (see
+  [IHtmlWidgetCallToolContext](xref:@microsoft/teams.api.IHtmlWidgetCallToolContext))
+  to every request and overwrites any bot-supplied value.
+
+  The SDK passes `arguments` to handlers untouched.
+
+  Handlers should ignore `__msteams__`, validate `arguments` as untrusted input,
+  never throw, and not authorize from `activity.from`.
 fullName: ICallToolRequest
 remarks: ''
 isDeprecated: false
@@ -13,7 +24,9 @@ properties:
   - name: arguments
     uid: '@microsoft/teams.api.ICallToolRequest.arguments'
     package: '@microsoft/teams.api'
-    summary: The arguments to pass to the tool.
+    summary: |-
+      The arguments to pass to the tool.
+      Includes the client-added `__msteams__` entry.
     fullName: arguments
     remarks: ''
     isDeprecated: false

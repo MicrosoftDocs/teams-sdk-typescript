@@ -36,9 +36,16 @@ properties:
     package: '@microsoft/teams.apps'
     summary: >-
       MIME type resolved from the download response header, or the incoming
-      file's metadata type if the response omits one. Falls back to
-      `application/octet-stream` when neither provides a type, so this is never
-      empty.
+      file's metadata type if the response omits one.
+
+      Falls back to `application/octet-stream` when neither provides a type, so
+      this is never empty.
+
+      For an inline image, the response header is ignored and the type is
+      detected from the bytes.
+
+      If the bytes are not PNG, JPEG, GIF, or WebP, it falls back to
+      [IIncomingFile.contentType](xref:@microsoft/teams.apps.IIncomingFile.contentType).
     fullName: contentType
     remarks: ''
     isDeprecated: false
@@ -50,7 +57,17 @@ properties:
   - name: filename
     uid: '@microsoft/teams.apps.IDownloadedFile.filename'
     package: '@microsoft/teams.apps'
-    summary: Resolved filename.
+    summary: >-
+      Resolved filename.
+
+      For an inline image, the extension follows
+      [contentType](xref:@microsoft/teams.apps.IDownloadedFile.contentType),
+      meaning the filename can differ from
+      [IIncomingFile.name](xref:@microsoft/teams.apps.IIncomingFile.name).
+
+      For an uploaded file, the name comes from the sender and can contain path
+      separators, so reduce it to its last segment (for example with
+      `path.win32.basename`) before using it in a local path.
     fullName: filename
     remarks: ''
     isDeprecated: false
